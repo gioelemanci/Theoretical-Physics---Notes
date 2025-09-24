@@ -17,15 +17,12 @@ Special relativity, on the other hand, does not incorporate quantum principles:
 
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[scale=1, font=\small]
+\begin{minipage}{0.5\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.8, font=\small]
 
 \draw[->] (0,0) -- (6.1,0) node[anchor=north] {Distance};
 \draw[->] (0,0) -- (0,6.1) node[anchor=east] {Velocity};
-
-\node at (5.8,-0.3) {};
-\node at (0.8,-0.3) {};
-\node[rotate=90] at (-0.3,5.8) {};
-\node[rotate=90] at (-0.3,0.8) {};
 
 \fill[blue!15] (3,0) rectangle (6,3);
 \node at (4.5,1.5) {CM};
@@ -43,10 +40,12 @@ Special relativity, on the other hand, does not incorporate quantum principles:
 \draw[dashed] (0,3)--(6,3);
 
 \end{tikzpicture}
-\caption{Schematic diagram of the four fundamental regimes of physics.}
-\end{figure}
-
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
 We need a new framework to describe the regime of small distances and high velocities, where both quantum and relativistic effects are significant. The idea to overcome the shown limitations is to use expressions from SR and incorporate them into a quantum framework: a \textbf{relativistic quantum mechanics} theory.
+\end{minipage}
+\end{figure}
 
 \section{Relativistic Quantum Mechanics and its Limitations}
 
@@ -89,8 +88,10 @@ To start, let's consider a free particle in the position eigenstate \(\ket{\math
     A_{\mathbf{x} \to \mathbf{y}}(t) = \bra{\mathbf{y}}e^{-\frac{i}{\hbar}Ht}\ket{\mathbf{x}}.
 \]
 We will show that this amplitude is non-zero even when the distance \(|\mathbf{y} - \mathbf{x}|\) is greater than \(ct\), which implies that the particle can be found outside the light cone, violating causality. This is true using QM as well as RQM, in the latter case the effect being less pronounced but still non-zero.
-
-\begin{center}
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+\centering
 \begin{tikzpicture}[scale=2]
 
     % Shaded regions (light cone)
@@ -98,7 +99,7 @@ We will show that this amplitude is non-zero even when the distance \(|\mathbf{y
     \fill[blue!10] (-1.2,-1.2) -- (1.2,-1.2) -- (0,0) -- cycle; % past
 
     % Axes
-    \draw[->] (0,-1.2) -- (0,1.5) node[above] {$ct$};
+    \draw[->] (0,-1.5) -- (0,1.5) node[above] {$ct$};
     \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
 
     % Light cone lines
@@ -120,7 +121,12 @@ We will show that this amplitude is non-zero even when the distance \(|\mathbf{y
     \draw[->,blue, thick] (0,0) -- (0.8,0.6) node[midway,right] {$|\mathbf{z}-\mathbf{x}| > ct$};
 
 \end{tikzpicture}
-\end{center}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\caption{Spacetime diagram showing the light cone structure. The blue shaded regions represent the future and past light cones, while the orange lines indicate the paths of light rays. The red arrow represents a time-like separation, where causality is preserved, while the blue arrow represents a space-like separation, where causality is violated.}
+\end{minipage}
+\end{figure}
 
 \subsubsection*{QM framework}
 
@@ -199,7 +205,7 @@ Thus we promote \(p\) to be a complex variable \(z\) and use the \textit{residue
 \end{minipage}
 \hfill
 \begin{minipage}{0.5\textwidth}
-\small
+
 We have to consider the square root of a complex number $\sqrt{z}$, which is a multi-valued function:
 \[
     \sqrt{z_1} = \sqrt{\rho} e^{i\phi/2}, \quad \sqrt{z_2} = \sqrt{\rho} e^{i(\phi/2 + \pi)} = -\sqrt{z_1},
@@ -207,9 +213,10 @@ We have to consider the square root of a complex number $\sqrt{z}$, which is a m
 \[
     z_1 = \rho e^{i\phi}, \quad z_2 = \rho e^{i(2\pi-\phi)}.
 \]
-To ensure the function is single-valued, we introduce a branch cut along the positive real axis (indicated by red stars). The two roots \(z_1\) and \(z_2\) take on different values in the limits \(\phi \to 0\) and \(\phi \to 2\pi\), with \(z_2\) having a real part of opposite to that of \(z_1\):
+To ensure the function is single-valued, we introduce a branch cut along the positive real axis (indicated by red stars).
 \end{minipage}
 \end{figure}
+The two roots \(z_1\) and \(z_2\) take on different values in the limits \(\phi \to 0\) and \(\phi \to 2\pi\), with \(z_2\) having a real part of opposite to that of \(z_1\):
 \[
     \sqrt{z_1} = \sqrt{\rho} \left[ \cos \frac{\phi}{2} + i \sin \frac{\phi}{2} \right], \quad \sqrt{z_2} = \sqrt{\rho} \left[ -\cos \frac{\phi}{2} + i \sin \frac{\phi}{2} \right].
 \]
@@ -238,7 +245,6 @@ Thus we can express our integral in a complex variable \(p\), where we write \(p
 \end{minipage}
 \hfill
 \begin{minipage}{0.5\textwidth}
-\small
 We have to consider the branch cuts starting from the branch points \(z = \pm im\) since both \(\sqrt{p + im}\) and \(\sqrt{p - im}\) are multi-valued functions with branch cuts defined along the imaginary axis (this time the discontinuities of the functions take place while crossing the imaginary axis). The branch cuts are indicated by red stars. We can now close the integration contour in the upper half-plane (the integrand vanishes in the limit \(|p| \to \infty\) in this half-plane).
 \end{minipage}
 \end{figure}
@@ -250,11 +256,7 @@ since there are no poles inside the contour. The integral along the real axis is
 \begin{figure}[H]
 \centering
 \begin{minipage}{0.5\textwidth}
-\small
 Let's denote the contour integral along the curve \(C\) as \(\oint_C f(p) \mathrm{d}p\). The contour \(C\) consists of three parts: the integral along the real axis from \(-\infty\) to \(\infty\), the integral along the two arcs at infinity in the upper half-plane (left and right of the branch cut), the integrals along the branch cut and the infinitesimal circulation around \(im\):
-\[
-    \int_{C_L} = -( \int_{C_1} + \int_{C_2} + \int_{C_{\epsilon}} + \int_{C_3} + \int_{C_4} ).
-\]
 \end{minipage}
 \hfill
 \begin{minipage}{0.45\textwidth}
@@ -294,6 +296,9 @@ Let's denote the contour integral along the curve \(C\) as \(\oint_C f(p) \mathr
 \end{tikzpicture}
 \end{minipage}
 \end{figure}
+\[
+    \int_{C_L} = -( \int_{C_1} + \int_{C_2} + \int_{C_{\epsilon}} + \int_{C_3} + \int_{C_4} ).
+\]
 
 We can now take the limit \(L \to \infty\) and \(\epsilon \to 0\). The integrals along the arcs at infinity vanish, and the integral around the infinitesimal circle \(C_{\epsilon}\) also vanishes.
 \begin{enumerate}[label=(\roman*),align=left,itemsep=1.0\baselineskip]
