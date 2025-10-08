@@ -1,15 +1,15 @@
 \section{Mechanical Model of a Quantum Field}
 
-To build intuition for quantum fields, it is useful to begin with a simple mechanical system: a chain of coupled elastic strings. This model arises as the \textit{continuum limit} of a one-dimensional lattice of \(N\) atoms, and already captures many of the essential features of field theories.  
+To build intuition for quantum fields, it is useful to begin with a simple mechanical system: a chain of coupled elastic strings. This model arises as the \textit{continuum limit} of a one-dimensional lattice of \(N\) atoms, and already captures many of the essential features of field theories.
 
-We consider a \textbf{meta-stable} system, meaning that its configuration does not change drastically under the action of a small perturbing force.\footnote{In fact, every physical system is meta-stable in this sense: if a small perturbation could radically alter its configuration, it could not persist in a stable state.} Thus, there must exist a restoring force that drives the system back toward equilibrium.  
+We consider a \textbf{meta-stable} system, meaning that its configuration does not change drastically under the action of a small perturbing force.\footnote{In fact, every physical system is meta-stable in this sense: if a small perturbation could radically alter its configuration, it could not persist in a stable state.} Thus, there must exist a restoring force that drives the system back toward equilibrium.
 
 For a small displacement \(y\) from equilibrium, the restoring force can be expanded in a Taylor series:
 \[
-  F(y) = F(0) + \left.\frac{dF}{dy}\right|_{y=0} y + \dots 
-       = -|\kappa|\, y + \mathcal{O}(y^2),
+  F(y) = F(0) + \left.\frac{dF}{dy}\right|_{y=0} y + \dots
+  = -|\kappa|\, y + \mathcal{O}(y^2),
 \]
-where we set \(F(0) = 0\) (no force at equilibrium) and require \(\left.\tfrac{dF}{dy}\right|_{y=0} = -|\kappa| < 0\) (restoring behavior). The linear term dominates for sufficiently small displacements, showing that any meta-stable system can be modeled, to first approximation, as a collection of coupled harmonic oscillators.  
+where we set \(F(0) = 0\) (no force at equilibrium) and require \(\left.\tfrac{dF}{dy}\right|_{y=0} = -|\kappa| < 0\) (restoring behavior). The linear term dominates for sufficiently small displacements, showing that any meta-stable system can be modeled, to first approximation, as a collection of coupled harmonic oscillators.
 
 The simplest realization is a chain of \(N\) identical atoms, each of mass \(m\), connected by springs with spring constant \(\kappa\) and arranged along a line with equilibrium spacing \(\Delta\). The total length of the chain is
 \[
@@ -18,91 +18,91 @@ The simplest realization is a chain of \(N\) identical atoms, each of mass \(m\)
 The displacement of the \(i\)-th atom from its equilibrium position will be denoted by \(y_i(t)\). For simplicity, we restrict ourselves to transverse displacements along the \(y\)-axis, keeping the equilibrium positions along the \(x\)-axis fixed.
 
 \begin{figure}[H]
-\begin{minipage}{0.45\textwidth}
-\centering
-\begin{tikzpicture}[scale=1.1,>=stealth]
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=1.1,>=stealth]
 
-  % Horizontal spacing between masses
-  \def\Deltax{1.4}
+      % Horizontal spacing between masses
+      \def\Deltax{1.4}
 
-  % Random vertical positions (displacements)
-  \def\yA{0.5}
-  \def\yB{-0.2}
-  \def\yC{1.0}
-  \def\yD{-0.4}
-  \def\yE{0.3}
+      % Random vertical positions (displacements)
+      \def\yA{0.5}
+      \def\yB{-0.2}
+      \def\yC{1.0}
+      \def\yD{-0.4}
+      \def\yE{0.3}
 
-  % Reference axes
-  \draw[->] (-0.5,-1.2) -- (-0.5,1.5) node[anchor=south]{$y$};
-  \draw[->] (-0.8,-1.0) -- (5*\Deltax-1.1,-1.0) node[anchor=west]{$x$};
+      % Reference axes
+      \draw[->] (-0.5,-1.2) -- (-0.5,1.5) node[anchor=south]{$y$};
+      \draw[->] (-0.8,-1.0) -- (5*\Deltax-1.1,-1.0) node[anchor=west]{$x$};
 
-  % --- Upper part: masses at different y ---
-  % Mass vertical positions
-  \coordinate (m1) at (0,\yA);
-  \coordinate (m2) at (\Deltax,\yB);
-  \coordinate (m3) at (2*\Deltax,\yC);
-  \coordinate (m4) at (3*\Deltax,\yD);
-  \coordinate (m5) at (4*\Deltax,\yE);
+      % --- Upper part: masses at different y ---
+      % Mass vertical positions
+      \coordinate (m1) at (0,\yA);
+      \coordinate (m2) at (\Deltax,\yB);
+      \coordinate (m3) at (2*\Deltax,\yC);
+      \coordinate (m4) at (3*\Deltax,\yD);
+      \coordinate (m5) at (4*\Deltax,\yE);
 
-  % Springs (zigzag lines)
-  \draw[decorate,decoration={zigzag,segment length=4pt,amplitude=2pt}] (m1) -- (m2);
-  \draw[decorate,decoration={zigzag,segment length=4pt,amplitude=2pt}] (m2) -- (m3);
-  \draw[decorate,decoration={zigzag,segment length=4pt,amplitude=2pt}] (m3) -- (m4);
-  \draw[decorate,decoration={zigzag,segment length=4pt,amplitude=2pt}] (m4) -- (m5);
+      % Springs (zigzag lines)
+      \draw[decorate,decoration={zigzag,segment length=4pt,amplitude=2pt}] (m1) -- (m2);
+      \draw[decorate,decoration={zigzag,segment length=4pt,amplitude=2pt}] (m2) -- (m3);
+      \draw[decorate,decoration={zigzag,segment length=4pt,amplitude=2pt}] (m3) -- (m4);
+      \draw[decorate,decoration={zigzag,segment length=4pt,amplitude=2pt}] (m4) -- (m5);
 
-  % Segments and spacings
-  \foreach \i/\y in {1/\yA, 2/\yB, 3/\yC, 4/\yD, 5/\yE} {
-    \draw[dashed] (\i*\Deltax-\Deltax,-1) -- (\i*\Deltax-\Deltax,\y) node[midway,right] {$y_{\i}$};
-  }
-  \draw[<->] (0,-1.1) -- (\Deltax,-1.1) node[midway,below] {$\Delta$};
+      % Segments and spacings
+      \foreach \i/\y in {1/\yA, 2/\yB, 3/\yC, 4/\yD, 5/\yE} {
+          \draw[dashed] (\i*\Deltax-\Deltax,-1) -- (\i*\Deltax-\Deltax,\y) node[midway,right] {$y_{\i}$};
+        }
+      \draw[<->] (0,-1.1) -- (\Deltax,-1.1) node[midway,below] {$\Delta$};
 
-  % Masses (blue circles)
-  \foreach \m in {m1,m2,m3,m4,m5}{
-    \fill[blue!70] (\m) circle (4pt);
-  }
+      % Masses (blue circles)
+      \foreach \m in {m1,m2,m3,m4,m5}{
+          \fill[blue!70] (\m) circle (4pt);
+        }
 
-  % --- Lower part: horizontal chain ---
-  \begin{scope}[yshift=-2cm]
-    % Horizontal positions
-    \coordinate (n1) at (0,0);
-    \coordinate (n2) at (\Deltax,0);
-    \coordinate (n3) at (2*\Deltax,0);
-    \coordinate (n4) at (3*\Deltax,0);
-    \coordinate (n5) at (4*\Deltax,0);
+      % --- Lower part: horizontal chain ---
+      \begin{scope}[yshift=-2cm]
+        % Horizontal positions
+        \coordinate (n1) at (0,0);
+        \coordinate (n2) at (\Deltax,0);
+        \coordinate (n3) at (2*\Deltax,0);
+        \coordinate (n4) at (3*\Deltax,0);
+        \coordinate (n5) at (4*\Deltax,0);
 
-    % Springs
-    \draw[decorate,decoration={zigzag,segment length=4pt,amplitude=2pt}] (n1) -- (n2);
-    \draw[decorate,decoration={zigzag,segment length=4pt,amplitude=2pt}] (n2) -- (n3);
-    \draw[decorate,decoration={zigzag,segment length=4pt,amplitude=2pt}] (n3) -- (n4);
-    \draw[decorate,decoration={zigzag,segment length=4pt,amplitude=2pt}] (n4) -- (n5);
+        % Springs
+        \draw[decorate,decoration={zigzag,segment length=4pt,amplitude=2pt}] (n1) -- (n2);
+        \draw[decorate,decoration={zigzag,segment length=4pt,amplitude=2pt}] (n2) -- (n3);
+        \draw[decorate,decoration={zigzag,segment length=4pt,amplitude=2pt}] (n3) -- (n4);
+        \draw[decorate,decoration={zigzag,segment length=4pt,amplitude=2pt}] (n4) -- (n5);
 
-    % Masses (red circles)
-    \foreach \n in {n1,n2,n3,n4,n5}{
-      \fill[red!70] (\n) circle (4pt);
-      \node[red!70,below=3pt] at (\n) {$m$};
-    }
-  \end{scope}
+        % Masses (red circles)
+        \foreach \n in {n1,n2,n3,n4,n5}{
+            \fill[red!70] (\n) circle (4pt);
+            \node[red!70,below=3pt] at (\n) {$m$};
+          }
+      \end{scope}
 
-\end{tikzpicture}
-\end{minipage}
-\hfill
-\begin{minipage}{0.45\textwidth}
-\(y_i=0\) is the equilibrium position of the \(i\)-th atom. The springs exert restoring forces proportional to the relative displacements of neighboring atoms: each atom is under the influence of the neighboring springs, describing a local interaction.
+    \end{tikzpicture}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.45\textwidth}
+    \(y_i=0\) is the equilibrium position of the \(i\)-th atom. The springs exert restoring forces proportional to the relative displacements of neighboring atoms: each atom is under the influence of the neighboring springs, describing a local interaction.
 
-\(y_i\neq0\) describes the small oscillations around the equilibrium position: transverse \textbf{excitations} of the lattice.
-\end{minipage}
+    \(y_i\neq0\) describes the small oscillations around the equilibrium position: transverse \textbf{excitations} of the lattice.
+  \end{minipage}
 \end{figure}
 
 In the limit \(N\to\infty\) and \(\Delta \to 0\) with \(L\) fixed, the discrete index \(i\) becomes a continuous spatial coordinate and the displacements \(y_i(t)\) become a continuous field \(\phi(x,t)\). This \textbf{continuum limit} transforms the system of coupled oscillators into a continuous field, allowing us to understand the dynamics of fields in terms of familiar mechanical concepts.
 
 \subsection*{Dynamical Analysis}
 
-To study the dynamics of the chain we employ the Euler--Lagrange equations.  
+To study the dynamics of the chain we employ the Euler--Lagrange equations.
 The Lagrangian of the system is constructed as the difference between the kinetic and potential energy contributions of each atom:
 \[
   L = \sum_{j=1}^N \left[ \frac{1}{2} m \dot{y}_j^2 - \frac{1}{2} \kappa \left(\frac{y_j - y_{j+1}}{\Delta}\right)^2 \right],
 \]
-where we impose periodic boundary conditions \(j \to j+N\).\footnote{In other words, the first and the last atoms in the chain interact with each other.}  
+where we impose periodic boundary conditions \(j \to j+N\).\footnote{In other words, the first and the last atoms in the chain interact with each other.}
 
 We are assuming small oscillations around the equilibrium configuration, such that the relative displacement between neighboring atoms is small compared to the natural lattice spacing \(\Delta\):
 \[
@@ -115,233 +115,233 @@ It is worth noting that the coupling constant \(\kappa\) has the dimension of an
 \]
 where \(v\) is a characteristic velocity associated with the propagation of disturbances along the chain. With this identification, the Lagrangian becomes
 \[
-  L = \frac{1}{2}m \sum_{j=1}^{N} \left[ \dot{y}_j^2(t) 
-  - v^2\left(\frac{y_j - y_{j+1}}{\Delta}\right)^2  \right],
+  L = \frac{1}{2}m \sum_{j=1}^{N} \left[ \dot{y}_j^2(t)
+    - v^2\left(\frac{y_j - y_{j+1}}{\Delta}\right)^2  \right],
 \]
-where the first term corresponds to the kinetic energy of the atoms, while the second encodes the elastic potential energy due to the coupling between neighbors.  
+where the first term corresponds to the kinetic energy of the atoms, while the second encodes the elastic potential energy due to the coupling between neighbors.
 
-The time evolution of the system is obtained by applying the principle of least action: 
+The time evolution of the system is obtained by applying the principle of least action:
 the motion is such that the variation of the action vanishes,
 \[
   S = \int L \, \mathrm{d}t, \qquad \delta S = 0,
 \]
-which leads to the Euler--Lagrange equations governing the dynamics of the chain. 
+which leads to the Euler--Lagrange equations governing the dynamics of the chain.
 Recalling the general form
 \[
-  \frac{\mathrm{d}}{\mathrm{d} t} \frac{\partial L}{\partial \dot{y}_j} 
-  = \frac{\partial L}{\partial {y}_j}, 
+  \frac{\mathrm{d}}{\mathrm{d} t} \frac{\partial L}{\partial \dot{y}_j}
+  = \frac{\partial L}{\partial {y}_j},
   \qquad j = 1, \dots , N,
 \]
 we obtain the governing equations of motion:
 \[
-  \ddot{y}_j (t) 
+  \ddot{y}_j (t)
   = -\,v^2 \left(\frac{2y_j - y_{j+1} - y_{j-1}}{\Delta^2}\right).
 \]
-This result clearly describes a system of coupled harmonic oscillators: the displacement of the \(j\)-th atom is influenced not only by its own position but also by the relative positions of its nearest neighbors, \((j+1)\) and \((j-1)\). 
+This result clearly describes a system of coupled harmonic oscillators: the displacement of the \(j\)-th atom is influenced not only by its own position but also by the relative positions of its nearest neighbors, \((j+1)\) and \((j-1)\).
 In other words, each atom is bound to oscillate around equilibrium under the restoring force arising from the springs that connect it to its neighbors.
 
 Solving such a system directly is not convenient, since the equations are not independent. However, there is a natural way to simplify the problem by exploiting the translational symmetry of the lattice. The key idea is to perform a \textit{discrete Fourier transform} of the displacements, which allows us to rewrite the dynamics in terms of normal modes of oscillation. Since \(y_j(t)\) has to be periodic (\(y_j(t) = y_{j+N}(t)\)), we can write:
 \[
   y_j(t) = \frac{1}{\sqrt{N}} \sum_{\sigma=1}^{N} e^{i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma}(t).
-\] 
+\]
 In this new representation, each mode corresponds to a collective oscillation of the entire chain with a definite wavelength. From a mathematical perspective, this amounts to diagonalizing the interaction matrix: the coupling between neighbors is replaced by a set of independent equations for the Fourier modes. In physical terms, the Fourier transform identifies the proper "coordinates" in which the energy of the system can be expressed as a sum of independent contributions, one for each mode.\footnote{In other words, instead of tracking the motion of individual atoms, which are strongly coupled, we describe the system in terms of delocalized excitations (the normal modes), each evolving independently. This step paves the way to the field interpretation: in the continuum limit, these modes will be interpreted as excitations of a quantum field.}
 
 Now, by substituting in the equation of motion, we can decouple the system:
 \[
-\begin{aligned}
-  \frac{1}{\sqrt{N}} \sum_{\sigma=1}^{N} e^{i\frac{2\pi}{N}\sigma j} \ddot{\tilde{y}}_{\sigma} &= \frac{-1}{\sqrt{N}} \left(\frac{v}{\Delta}\right)^2 \left[ 2 \sum_{\sigma=1}^{N} e^{i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma} - \sum_{\sigma=1}^{N} e^{i\frac{2\pi}{N}\sigma (j-1)} \tilde{y}_{\sigma} - \sum_{\sigma=1}^{N} e^{i\frac{2\pi}{N}\sigma (j+1)} \tilde{y}_{\sigma}\right]\\
-  &= \frac{-1}{\sqrt{N}} \left(\frac{v}{\Delta}\right)^2 \sum_{\sigma=1}^{N} e^{i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma} \left[ 2 - e^{-i\frac{2\pi}{N}\sigma} - e^{i\frac{2\pi}{N}\sigma}\right]\\
-  &= \frac{-1}{\sqrt{N}} \left(\frac{v}{\Delta}\right)^2 \sum_{\sigma=1}^{N} e^{i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma} \left[ 2 - 2 \cos(\frac{2\pi}{N}\sigma)\right]\\
-  \iff \ddot{\tilde{y}}_{\sigma}(t) &= - 2 \frac{v^2}{\Delta^2} \left[ 1 - \cos(\frac{2\pi}{N}\sigma)\right] \tilde{y}_{\sigma}(t) = - \left( \frac{2v}{\Delta} \sin(\frac{\pi\sigma}{N}) \right)^2 \tilde{y}_{\sigma}(t),
-\end{aligned}
+  \begin{aligned}
+    \frac{1}{\sqrt{N}} \sum_{\sigma=1}^{N} e^{i\frac{2\pi}{N}\sigma j} \ddot{\tilde{y}}_{\sigma} & = \frac{-1}{\sqrt{N}} \left(\frac{v}{\Delta}\right)^2 \left[ 2 \sum_{\sigma=1}^{N} e^{i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma} - \sum_{\sigma=1}^{N} e^{i\frac{2\pi}{N}\sigma (j-1)} \tilde{y}_{\sigma} - \sum_{\sigma=1}^{N} e^{i\frac{2\pi}{N}\sigma (j+1)} \tilde{y}_{\sigma}\right] \\
+                                                                                                 & = \frac{-1}{\sqrt{N}} \left(\frac{v}{\Delta}\right)^2 \sum_{\sigma=1}^{N} e^{i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma} \left[ 2 - e^{-i\frac{2\pi}{N}\sigma} - e^{i\frac{2\pi}{N}\sigma}\right]                                                                                          \\
+                                                                                                 & = \frac{-1}{\sqrt{N}} \left(\frac{v}{\Delta}\right)^2 \sum_{\sigma=1}^{N} e^{i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma} \left[ 2 - 2 \cos(\frac{2\pi}{N}\sigma)\right]                                                                                                                    \\
+    \iff \ddot{\tilde{y}}_{\sigma}(t)                                                            & = - 2 \frac{v^2}{\Delta^2} \left[ 1 - \cos(\frac{2\pi}{N}\sigma)\right] \tilde{y}_{\sigma}(t) = - \left( \frac{2v}{\Delta} \sin(\frac{\pi\sigma}{N}) \right)^2 \tilde{y}_{\sigma}(t),
+  \end{aligned}
 \]
-where we have made use of the trigonometric identity 
+where we have made use of the trigonometric identity
 \((1 - \cos(2\theta)) = 2\sin^2(\theta)\). This leads to the following set of equations for the Fourier modes:
 \[
-\begin{aligned}
-  \ddot{\tilde{y}}_{\sigma}(t) &= - \omega^2_{\sigma}\, \tilde{y}_{\sigma}(t),
-  \quad && \forall \, \sigma = 1,2,\dots,N, \\
-  \omega_{\sigma} &= \frac{2v}{\Delta} \, \sin\!\left(\frac{\pi\sigma}{N}\right).
-\end{aligned}
+  \begin{aligned}
+    \ddot{\tilde{y}}_{\sigma}(t) & = - \omega^2_{\sigma}\, \tilde{y}_{\sigma}(t),
+    \quad                        &                                                                & \forall \, \sigma = 1,2,\dots,N, \\
+    \omega_{\sigma}              & = \frac{2v}{\Delta} \, \sin\!\left(\frac{\pi\sigma}{N}\right).
+  \end{aligned}
 \]
 %
-Each Fourier component \(\tilde{y}_{\sigma}(t)\) evolves independently and satisfies the equation of a simple harmonic oscillator with characteristic frequency \(\omega_{\sigma}\). 
-In other words, the original coupled system of atoms has been diagonalized into a set of \(N\) decoupled oscillators, each associated with a normal mode of vibration. 
+Each Fourier component \(\tilde{y}_{\sigma}(t)\) evolves independently and satisfies the equation of a simple harmonic oscillator with characteristic frequency \(\omega_{\sigma}\).
+In other words, the original coupled system of atoms has been diagonalized into a set of \(N\) decoupled oscillators, each associated with a normal mode of vibration.
 
 The general solution for each mode is therefore given by a linear combination of oscillatory functions:
 \[
-  \tilde{y}_{\sigma}(t) 
+  \tilde{y}_{\sigma}(t)
   = A_{\sigma} e^{-i \omega_{\sigma} t} + B_{\sigma} e^{+i \omega_{\sigma} t},
 \]
-where the constants \(A_{\sigma}\) and \(B_{\sigma}\) are determined by the initial conditions. 
+where the constants \(A_{\sigma}\) and \(B_{\sigma}\) are determined by the initial conditions.
 Physically, these modes correspond to standing waves propagating through the chain, each characterized by a discrete wave number and its corresponding frequency.
 
 In practice, we will keep only the negative exponential,
 \[
   \tilde{y}_{\sigma}(t) = A_{\sigma} e^{-i \omega_{\sigma} t},
 \]
-since the positive-frequency solution is automatically recovered as the complex conjugate. 
+since the positive-frequency solution is automatically recovered as the complex conjugate.
 This choice avoids redundancy and is particularly convenient when later quantizing the system, because creation and annihilation operators will naturally emerge from the decomposition into \(e^{-i\omega t}\) and its conjugate.
 
 Now we can plug the solution for the Fourier modes back into the inverse transform in order to recover the displacement of the \(j\)-th atom:
 \[
-\begin{aligned}
-    y_j(t) &= \frac{1}{\sqrt{N}} \sum_{\sigma=1}^{N} e^{i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma}(t) \\
-    &= \frac{1}{\sqrt{N}} \sum_{\sigma=1}^{N} A_{\sigma} e^{i \left( \frac{2\pi}{N}\sigma j - \omega_{\sigma} t \right)} \\
-    &= \frac{1}{\sqrt{N}} \sum_{\sigma=1}^{N} A_{\sigma} e^{i \left( \frac{2\pi}{N}\frac{\sigma}{\Delta} (\Delta j) - \omega_{\sigma} t \right)},
-\end{aligned}
+  \begin{aligned}
+    y_j(t) & = \frac{1}{\sqrt{N}} \sum_{\sigma=1}^{N} e^{i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma}(t)                                                   \\
+           & = \frac{1}{\sqrt{N}} \sum_{\sigma=1}^{N} A_{\sigma} e^{i \left( \frac{2\pi}{N}\sigma j - \omega_{\sigma} t \right)}                          \\
+           & = \frac{1}{\sqrt{N}} \sum_{\sigma=1}^{N} A_{\sigma} e^{i \left( \frac{2\pi}{N}\frac{\sigma}{\Delta} (\Delta j) - \omega_{\sigma} t \right)},
+  \end{aligned}
 \]
-Here we have reintroduced the lattice spacing \(\Delta\), so that the quantity \(\Delta j\) corresponds exactly to the physical position \(x\) of the \(j\)-th atom along the chain. 
+Here we have reintroduced the lattice spacing \(\Delta\), so that the quantity \(\Delta j\) corresponds exactly to the physical position \(x\) of the \(j\)-th atom along the chain.
 
 This expression shows that the displacement of each atom can be written as a linear superposition of plane waves (like \textit{sound waves}). In particular, the system supports \(N\) different wave numbers, each corresponding to one Fourier mode:
 \[
-    \kappa_{\sigma} = \frac{2\pi}{N} \frac{\sigma}{\Delta} = \frac{2\pi}{\lambda_{\sigma}}, \qquad \sigma = 1,2,\dots,N,
+  \kappa_{\sigma} = \frac{2\pi}{N} \frac{\sigma}{\Delta} = \frac{2\pi}{\lambda_{\sigma}}, \qquad \sigma = 1,2,\dots,N,
 \]
 with associated discrete wavelengths
 \[
-    \lambda_{\sigma} = \frac{N\Delta}{\sigma} = N\Delta, \, \frac{N\Delta}{2}, \dots, \Delta.
+  \lambda_{\sigma} = \frac{N\Delta}{\sigma} = N\Delta, \, \frac{N\Delta}{2}, \dots, \Delta.
 \]
 
 \begin{remark}
-    The propagation speed of each mode is obtained as the ratio between its frequency and its wave number:
-    \[
-        v_{\sigma} = \frac{\omega_{\sigma}}{\kappa_{\sigma}}
-        = \frac{\tfrac{2v}{\Delta}\,\sin\!\left(\tfrac{\pi\sigma}{N}\right)}{\tfrac{2\pi}{N}\tfrac{\sigma}{\Delta}}
-        = v \,\frac{N}{\pi\sigma} \,\sin\!\left(\tfrac{\pi\sigma}{N}\right).
-    \]
-    Introducing the parameter \(\theta_{\sigma} = \tfrac{\pi\sigma}{N}\), this can be written in the compact form
-    \[
-        v_{\sigma} = v\,\frac{\sin(\theta_{\sigma})}{\theta_{\sigma}}.
-    \]
-    This result shows that each Fourier mode propagates with a distinct phase velocity, depending on the ratio \(\sigma/N\). 
-    In the continuum limit \(N \to \infty\) with \(\sigma/N \to 0\), one has \(\theta_{\sigma} \to 0\) and therefore 
-    \[
-        \lim_{\theta_{\sigma}\to 0} \frac{\sin(\theta_{\sigma})}{\theta_{\sigma}} = 1,
-    \]
-    so all modes propagate with the same velocity \(v_{\sigma} \sim v\). This recovers the expected propagation speed of sound waves in the continuous chain.
+  The propagation speed of each mode is obtained as the ratio between its frequency and its wave number:
+  \[
+    v_{\sigma} = \frac{\omega_{\sigma}}{\kappa_{\sigma}}
+    = \frac{\tfrac{2v}{\Delta}\,\sin\!\left(\tfrac{\pi\sigma}{N}\right)}{\tfrac{2\pi}{N}\tfrac{\sigma}{\Delta}}
+    = v \,\frac{N}{\pi\sigma} \,\sin\!\left(\tfrac{\pi\sigma}{N}\right).
+  \]
+  Introducing the parameter \(\theta_{\sigma} = \tfrac{\pi\sigma}{N}\), this can be written in the compact form
+  \[
+    v_{\sigma} = v\,\frac{\sin(\theta_{\sigma})}{\theta_{\sigma}}.
+  \]
+  This result shows that each Fourier mode propagates with a distinct phase velocity, depending on the ratio \(\sigma/N\).
+  In the continuum limit \(N \to \infty\) with \(\sigma/N \to 0\), one has \(\theta_{\sigma} \to 0\) and therefore
+  \[
+    \lim_{\theta_{\sigma}\to 0} \frac{\sin(\theta_{\sigma})}{\theta_{\sigma}} = 1,
+  \]
+  so all modes propagate with the same velocity \(v_{\sigma} \sim v\). This recovers the expected propagation speed of sound waves in the continuous chain.
 \end{remark}
 
 \begin{remark}
-    The actual number of independent vibrational degrees of freedom is \(N-1\), since the \(N\)-th mode corresponds to a zero frequency:
-    \[
-        \omega_{\sigma=N} = \frac{2v}{\Delta}\,\sin\!\left(\pi \frac{N}{N}\right) = 0.
-    \]
-    This means that \(\tilde{y}_N(t)\) does not oscillate in time. Physically, this mode represents a uniform translation of the entire chain, where all atoms are displaced by the same amount. As such, it does not contribute to the internal vibrational dynamics, and the only genuine oscillatory modes are the first \(N-1\).
+  The actual number of independent vibrational degrees of freedom is \(N-1\), since the \(N\)-th mode corresponds to a zero frequency:
+  \[
+    \omega_{\sigma=N} = \frac{2v}{\Delta}\,\sin\!\left(\pi \frac{N}{N}\right) = 0.
+  \]
+  This means that \(\tilde{y}_N(t)\) does not oscillate in time. Physically, this mode represents a uniform translation of the entire chain, where all atoms are displaced by the same amount. As such, it does not contribute to the internal vibrational dynamics, and the only genuine oscillatory modes are the first \(N-1\).
 \end{remark}
 
 \begin{figure}[H]
-\begin{minipage}{0.5\textwidth}
-Moreover we can show that the waves with \(\sigma = s\) and \(\sigma = N-s\) in general have the same frequency \(\omega_s\), since:
-\[
-\begin{aligned}
-    \omega_{N-s} &= \frac{2v}{\Delta}\,\sin\!\left(\pi \frac{N-s}{N}\right)\\
-    &= \frac{2v}{\Delta}\,\sin\!\left(\pi -\frac{\pi s}{N}\right)\\ 
-    &= \frac{2v}{\Delta}\,\sin\!\left(\frac{\pi s}{N}\right) = \omega_s.
-\end{aligned}
-\]
-\end{minipage}
-\hfill
-\begin{minipage}{0.45\textwidth}
-\centering
-\begin{tikzpicture}[scale=2]
-    \draw[->] (-0.2,0) -- (2.2,0) node[right] {$\theta_{\sigma}$};
-    \draw[->] (-0.2,-0.5) -- (2.2,-0.5) node[right] {$\sigma$};
-    \draw[->] (0,-0.7) -- (0,1.2) node[above] {$\sin(\theta_{\sigma})$};
+  \begin{minipage}{0.5\textwidth}
+    Moreover we can show that the waves with \(\sigma = s\) and \(\sigma = N-s\) in general have the same frequency \(\omega_s\), since:
+    \[
+      \begin{aligned}
+        \omega_{N-s} & = \frac{2v}{\Delta}\,\sin\!\left(\pi \frac{N-s}{N}\right)           \\
+                     & = \frac{2v}{\Delta}\,\sin\!\left(\pi -\frac{\pi s}{N}\right)        \\
+                     & = \frac{2v}{\Delta}\,\sin\!\left(\frac{\pi s}{N}\right) = \omega_s.
+      \end{aligned}
+    \]
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=2]
+      \draw[->] (-0.2,0) -- (2.2,0) node[right] {$\theta_{\sigma}$};
+      \draw[->] (-0.2,-0.5) -- (2.2,-0.5) node[right] {$\sigma$};
+      \draw[->] (0,-0.7) -- (0,1.2) node[above] {$\sin(\theta_{\sigma})$};
 
-    \draw[thick, blue!60] (0,0) arc[start angle=180,end angle=0,radius=1];
+      \draw[thick, blue!60] (0,0) arc[start angle=180,end angle=0,radius=1];
 
-    \def\N{5}
-    \def\xone{pi/\N}
-    \def\xtwo{pi*(\N-1)/\N}
+      \def\N{5}
+      \def\xone{pi/\N}
+      \def\xtwo{pi*(\N-1)/\N}
 
-    \coordinate (A) at ({1+cos(180*\xone/pi)},{sin(180*\xone/pi)});
-    \coordinate (B) at ({1+cos(180*\xtwo/pi)},{sin(180*\xtwo/pi)});
-    \coordinate (-A) at ({1+cos(180*\xone/pi)},-0.5);
-    \coordinate (-B) at ({1+cos(180*\xtwo/pi)},-0.5);
+      \coordinate (A) at ({1+cos(180*\xone/pi)},{sin(180*\xone/pi)});
+      \coordinate (B) at ({1+cos(180*\xtwo/pi)},{sin(180*\xtwo/pi)});
+      \coordinate (-A) at ({1+cos(180*\xone/pi)},-0.5);
+      \coordinate (-B) at ({1+cos(180*\xtwo/pi)},-0.5);
 
-    \draw[dashed, red!60] (A|-0,0) -- (A);
-    \draw[dashed, red!60] (B|-0,0) -- (B);
-    \draw[dashed, red!60] (A|-0,0) -- (-A);
-    \draw[dashed, red!60] (B|-0,0) -- (-B);
-    \draw[dashed, red!60] (A) -- (B);
-    \draw[dashed, blue!60] (1,1) -- (1,-0.5);
+      \draw[dashed, red!60] (A|-0,0) -- (A);
+      \draw[dashed, red!60] (B|-0,0) -- (B);
+      \draw[dashed, red!60] (A|-0,0) -- (-A);
+      \draw[dashed, red!60] (B|-0,0) -- (-B);
+      \draw[dashed, red!60] (A) -- (B);
+      \draw[dashed, blue!60] (1,1) -- (1,-0.5);
 
-    \node[below left] at (A|-0,0) {$\frac{\pi(N-1)}{N}$};
-    \node[below right] at (B|-0,0) {$\frac{\pi}{N}$};    
-    \node[below] at (A|-0,-0.5) {$N-1$};
-    \node[below] at (B|-0,-0.5) {$N$};
-    \node[above left] at (1,0) {$\frac{\pi}{2}$};
-    \node[below] at (1,-0.5) {$\frac{N}{2}$};
+      \node[below left] at (A|-0,0) {$\frac{\pi(N-1)}{N}$};
+      \node[below right] at (B|-0,0) {$\frac{\pi}{N}$};
+      \node[below] at (A|-0,-0.5) {$N-1$};
+      \node[below] at (B|-0,-0.5) {$N$};
+      \node[above left] at (1,0) {$\frac{\pi}{2}$};
+      \node[below] at (1,-0.5) {$\frac{N}{2}$};
 
-    \fill[red!60] (A) circle (1pt);
-    \fill[red!60] (B) circle (1pt);
-    \fill[red!60] (A|-0,0) circle (1pt);
-    \fill[red!60] (B|-0,0) circle (1pt);
-    \fill[red!60] (A|-0,-0.5) circle (1pt);
-    \fill[red!60] (B|-0,-0.5) circle (1pt);
-    \fill[blue!60] (1,0) circle (1pt);
-    \fill[blue!60] (1,1) circle (1pt);
-    \fill[blue!60] (1,-0.5) circle (1pt);
-\end{tikzpicture}
-\end{minipage}
+      \fill[red!60] (A) circle (1pt);
+      \fill[red!60] (B) circle (1pt);
+      \fill[red!60] (A|-0,0) circle (1pt);
+      \fill[red!60] (B|-0,0) circle (1pt);
+      \fill[red!60] (A|-0,-0.5) circle (1pt);
+      \fill[red!60] (B|-0,-0.5) circle (1pt);
+      \fill[blue!60] (1,0) circle (1pt);
+      \fill[blue!60] (1,1) circle (1pt);
+      \fill[blue!60] (1,-0.5) circle (1pt);
+    \end{tikzpicture}
+  \end{minipage}
 \end{figure}
 
 We can interpret the two modes with the same frequency as forming a single complex degree of freedom. This interpretation is supported by the observation that the original variable \(y_j\) is real, even though it is expressed as a sum of complex exponentials:
 \[
   \begin{aligned}
-    y_j(t) &= \frac{1}{\sqrt{N}} \sum_{\sigma=1}^{N} e^{i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma}(t), \\
-    y_j^*(t) &= \frac{1}{\sqrt{N}} \sum_{\sigma=1}^{N} e^{-i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma}^*(t). \\
+    y_j(t)   & = \frac{1}{\sqrt{N}} \sum_{\sigma=1}^{N} e^{i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma}(t),    \\
+    y_j^*(t) & = \frac{1}{\sqrt{N}} \sum_{\sigma=1}^{N} e^{-i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma}^*(t). \\
   \end{aligned}
 \]
 Thus, by requiring that the two expressions coincide, we can compute:
 \[
-\begin{aligned}
-    \sum_{\sigma=1}^{N} e^{i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma}(t) &= \sum_{\sigma=1}^{N} e^{-i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma}^*(t),\\
-    \sum_{\sigma=N-1}^{0} e^{i\frac{2\pi}{N}(N-\sigma) j} \tilde{y}_{N-\sigma}(t) &= \sum_{\sigma=1}^{N} e^{-i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma}^*(t),\\
-    \sum_{\sigma=N-1}^{0} e^{i2\pi j} e^{-i\frac{2\pi}{N}\sigma j} \tilde{y}_{N-\sigma}(t) &= \sum_{\sigma=1}^{N} e^{-i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma}^*(t),\\
-    \sum_{\sigma=N-1}^{0} e^{-i\frac{2\pi}{N}\sigma j} \tilde{y}_{N-\sigma}(t) &= \sum_{\sigma=1}^{N} e^{-i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma}^*(t),\\
-    \sum_{\sigma=1}^{N} e^{-i\frac{2\pi}{N}\sigma j} \tilde{y}_{N-\sigma}(t) &= \sum_{\sigma=1}^{N} e^{-i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma}^*(t),\\
-    \sum_{\sigma=1}^{N} \left[ \tilde{y}_{N-\sigma}(t) - \tilde{y}_{\sigma}^*(t) \right] &= 0,
-\end{aligned}
+  \begin{aligned}
+    \sum_{\sigma=1}^{N} e^{i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma}(t)                  & = \sum_{\sigma=1}^{N} e^{-i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma}^*(t), \\
+    \sum_{\sigma=N-1}^{0} e^{i\frac{2\pi}{N}(N-\sigma) j} \tilde{y}_{N-\sigma}(t)          & = \sum_{\sigma=1}^{N} e^{-i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma}^*(t), \\
+    \sum_{\sigma=N-1}^{0} e^{i2\pi j} e^{-i\frac{2\pi}{N}\sigma j} \tilde{y}_{N-\sigma}(t) & = \sum_{\sigma=1}^{N} e^{-i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma}^*(t), \\
+    \sum_{\sigma=N-1}^{0} e^{-i\frac{2\pi}{N}\sigma j} \tilde{y}_{N-\sigma}(t)             & = \sum_{\sigma=1}^{N} e^{-i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma}^*(t), \\
+    \sum_{\sigma=1}^{N} e^{-i\frac{2\pi}{N}\sigma j} \tilde{y}_{N-\sigma}(t)               & = \sum_{\sigma=1}^{N} e^{-i\frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma}^*(t), \\
+    \sum_{\sigma=1}^{N} \left[ \tilde{y}_{N-\sigma}(t) - \tilde{y}_{\sigma}^*(t) \right]   & = 0,
+  \end{aligned}
 \]
 which lead us to conclude that \(\tilde{y}_{N-\sigma}(t) = \tilde{y}_{\sigma}^*(t)\).\footnote{In the first step, we rename the summation index on the right-hand side of the equation, replacing each \(\sigma\) with \(N - \sigma\). We then use the periodicity condition \(e^{i 2\pi j} = 1\) to simplify the exponential factor. Next, we reverse the order of summation and, since the terms corresponding to \(\sigma = 0\) and \(\sigma = N\) are identical, we can safely rewrite the sum over the range \(1 \leq \sigma \leq N\).}
 
-Now we are in a position to compute the total number of independent vibrational degrees of freedom. To do so, we must distinguish two cases:  
-\begin{itemize}  
-  \item \textbf{If \(N\) is even (\(N = 2l\))}, the total number of pairs of harmonic oscillators with the same frequency (denoted by \(m\)) is  
-  \[
-    m = \frac{2l - 2}{2} = l - 1 .
-  \]  
-  In this case we have to exclude the modes \(\sigma = N\) and \(\sigma = \frac{N}{2}\). The reason is that, when \(N\) is even, the mode with index \(\sigma = \frac{N}{2}\) is self-conjugate, since it coincides with its complementary mode \(\sigma = N - \frac{N}{2} = \frac{N}{2}\).  
+Now we are in a position to compute the total number of independent vibrational degrees of freedom. To do so, we must distinguish two cases:
+\begin{itemize}
+  \item \textbf{If \(N\) is even (\(N = 2l\))}, the total number of pairs of harmonic oscillators with the same frequency (denoted by \(m\)) is
+        \[
+          m = \frac{2l - 2}{2} = l - 1 .
+        \]
+        In this case we have to exclude the modes \(\sigma = N\) and \(\sigma = \frac{N}{2}\). The reason is that, when \(N\) is even, the mode with index \(\sigma = \frac{N}{2}\) is self-conjugate, since it coincides with its complementary mode \(\sigma = N - \frac{N}{2} = \frac{N}{2}\).
 
-  \item \textbf{If \(N\) is odd (\(N = 2l+1\))}, the total number of such oscillator pairs is  
-  \[
-    m = \frac{(2l+1) - 1}{2} = l .
-  \]  
-  Here the only index that must be removed is \(\sigma = N\), since \(\frac{N}{2}\) is not an integer and therefore does not correspond to any mode index.  
-\end{itemize}  
+  \item \textbf{If \(N\) is odd (\(N = 2l+1\))}, the total number of such oscillator pairs is
+        \[
+          m = \frac{(2l+1) - 1}{2} = l .
+        \]
+        Here the only index that must be removed is \(\sigma = N\), since \(\frac{N}{2}\) is not an integer and therefore does not correspond to any mode index.
+\end{itemize}
 The two oscillators associated with the same frequency can be regarded as components of a single complex degree of freedom. In this representation, the physical displacement corresponds to the real part of the complex variable, while the imaginary part encodes the redundant conjugate mode.
 
 We can now exploit the solutions obtained in the new basis to diagonalize the Hamiltonian, since the transformation allows us to rewrite it in terms of independent normal modes, each of which behaves as an uncoupled harmonic oscillator. Let us temporarily neglect the contributions from the modes $\sigma = \frac{N}{2}, N$. Then the kinetic energy can be rewritten as
 \[
-\begin{aligned}
-    T &= \frac{1}{2}m \sum_{j=1}^N \dot{y}_j^2 \\
-    &= \frac{1}{2}m \sum_{j=1}^N \frac{1}{N} \sum_{\sigma=1}^{\frac{N}{2}-1} \left( e^{i \frac{2\pi}{N}\sigma j} \dot{\tilde{y}}_{\sigma} + e^{-i \frac{2\pi}{N}\sigma j} \dot{\tilde{y}}_{N-\sigma} \right) \sum_{\xi=1}^{\frac{N}{2}-1} \left( e^{i \frac{2\pi}{N}\xi j} \dot{\tilde{y}}_{\xi} + e^{-i \frac{2\pi}{N}\xi j} \dot{\tilde{y}}_{N-\xi} \right)\\
-    &= \frac{1}{2}m \sum_{\sigma,\xi=1}^{\frac{N}{2}-1} \left[ \dot{\tilde{y}}_{\sigma} \dot{\tilde{y}}_{\xi} \left( \frac{1}{N} \sum_{j=1}^N e^{i \frac{2\pi}{N}(\sigma+\xi) j} \right) + \dot{\tilde{y}}_{N-\sigma} \dot{\tilde{y}}_{\xi} \left( \frac{1}{N} \sum_{j=1}^N e^{i \frac{2\pi}{N}(\xi-\sigma) j} \right) \right.\\
-    & \qquad\qquad\qquad+ \left. \dot{\tilde{y}}_{\sigma} \dot{\tilde{y}}_{N-\xi} \left( \frac{1}{N} \sum_{j=1}^N e^{i \frac{2\pi}{N}(\sigma-\xi) j} \right) + \dot{\tilde{y}}_{N-\sigma} \dot{\tilde{y}}_{N-\xi} \left( \frac{1}{N} \sum_{j=1}^N e^{-i \frac{2\pi}{N}(\sigma+\xi) j} \right) \right] \\
-    &= \frac{1}{2}m \sum_{\sigma,\xi=1}^{\frac{N}{2}-1} \left( \dot{\tilde{y}}_{\sigma} \dot{\tilde{y}}_{\xi} \, \delta_{\sigma+\xi, 0} + \dot{\tilde{y}}_{N-\sigma} \dot{\tilde{y}}_{\xi} \, \delta_{\sigma,\xi} + \dot{\tilde{y}}_{\sigma} \dot{\tilde{y}}_{N-\xi} \, \delta_{\sigma,\xi} + \dot{\tilde{y}}_{N-\sigma} \dot{\tilde{y}}_{N-\xi} \, \delta_{\sigma+\xi, 0} \right) \\
-    &= \frac{1}{2}m \sum_{\sigma=1}^{\frac{N}{2}-1} \left( 2 \dot{\tilde{y}}_{\sigma} \dot{\tilde{y}}_{N-\sigma} \right) = m \sum_{\sigma=1}^{\frac{N}{2}-1} \dot{\tilde{y}}_{\sigma} \dot{\tilde{y}}_{\sigma}^* = m \sum_{\sigma=1}^{\frac{N}{2}-1} \vert \dot{\tilde{y}}_{\sigma} \vert ^2. 
-\end{aligned}
+  \begin{aligned}
+    T & = \frac{1}{2}m \sum_{j=1}^N \dot{y}_j^2                                                                                                                                                                                                                                                                                                                                       \\
+      & = \frac{1}{2}m \sum_{j=1}^N \frac{1}{N} \sum_{\sigma=1}^{\frac{N}{2}-1} \left( e^{i \frac{2\pi}{N}\sigma j} \dot{\tilde{y}}_{\sigma} + e^{-i \frac{2\pi}{N}\sigma j} \dot{\tilde{y}}_{N-\sigma} \right) \sum_{\xi=1}^{\frac{N}{2}-1} \left( e^{i \frac{2\pi}{N}\xi j} \dot{\tilde{y}}_{\xi} + e^{-i \frac{2\pi}{N}\xi j} \dot{\tilde{y}}_{N-\xi} \right)                      \\
+      & = \frac{1}{2}m \sum_{\sigma,\xi=1}^{\frac{N}{2}-1} \left[ \dot{\tilde{y}}_{\sigma} \dot{\tilde{y}}_{\xi} \left( \frac{1}{N} \sum_{j=1}^N e^{i \frac{2\pi}{N}(\sigma+\xi) j} \right) + \dot{\tilde{y}}_{N-\sigma} \dot{\tilde{y}}_{\xi} \left( \frac{1}{N} \sum_{j=1}^N e^{i \frac{2\pi}{N}(\xi-\sigma) j} \right) \right.                                                     \\
+      & \qquad\qquad\qquad+ \left. \dot{\tilde{y}}_{\sigma} \dot{\tilde{y}}_{N-\xi} \left( \frac{1}{N} \sum_{j=1}^N e^{i \frac{2\pi}{N}(\sigma-\xi) j} \right) + \dot{\tilde{y}}_{N-\sigma} \dot{\tilde{y}}_{N-\xi} \left( \frac{1}{N} \sum_{j=1}^N e^{-i \frac{2\pi}{N}(\sigma+\xi) j} \right) \right]                                                                               \\
+      & = \frac{1}{2}m \sum_{\sigma,\xi=1}^{\frac{N}{2}-1} \left( \dot{\tilde{y}}_{\sigma} \dot{\tilde{y}}_{\xi} \, \delta_{\sigma+\xi, 0} + \dot{\tilde{y}}_{N-\sigma} \dot{\tilde{y}}_{\xi} \, \delta_{\sigma,\xi} + \dot{\tilde{y}}_{\sigma} \dot{\tilde{y}}_{N-\xi} \, \delta_{\sigma,\xi} + \dot{\tilde{y}}_{N-\sigma} \dot{\tilde{y}}_{N-\xi} \, \delta_{\sigma+\xi, 0} \right) \\
+      & = \frac{1}{2}m \sum_{\sigma=1}^{\frac{N}{2}-1} \left( 2 \dot{\tilde{y}}_{\sigma} \dot{\tilde{y}}_{N-\sigma} \right) = m \sum_{\sigma=1}^{\frac{N}{2}-1} \dot{\tilde{y}}_{\sigma} \dot{\tilde{y}}_{\sigma}^* = m \sum_{\sigma=1}^{\frac{N}{2}-1} \vert \dot{\tilde{y}}_{\sigma} \vert ^2.
+  \end{aligned}
 \]
 The sum over $j$ enforce orthogonality, which manifests as Kronecker deltas. These deltas select only the diagonal terms, pairing each mode $\sigma$ with its complex conjugate $N-\sigma$. The final expression is a sum over independent Fourier modes, where the kinetic energy is simply the mass times the squared modulus of the time derivative of each mode amplitude. Now for the potential energy:
 \[
-\begin{aligned}
-  V &= \frac{1}{2} m \left( \frac{v}{\Delta} \right)^2 \sum_{j=1}^N \left( y_j - y_{j+1} \right)^2 = \\
-  &= \frac{1}{2} m \left( \frac{v}{\Delta} \right)^2 \sum_{j=1}^N \left[\sum_{\sigma=1}^{\frac{N}{2}-1} \left[ \left( e^{i \frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma} + e^{-i \frac{2\pi}{N}\sigma j} \tilde{y}_{N-\sigma} \right) \right.\right. \\
-  & \qquad\qquad\qquad\qquad \left.\left.- \left( e^{i \frac{2\pi}{N}\sigma (j+1)} \tilde{y}_{\sigma} + e^{-i \frac{2\pi}{N}\sigma (j+1)} \tilde{y}_{N-\sigma} \right) \right] \right]^2 \\
-  &= \frac{1}{2} m \left( \frac{v}{\Delta} \right)^2 \sum_{j=1}^N \left[\sum_{\sigma=1}^{\frac{N}{2}-1} \left[ \tilde{y}_{\sigma} e^{i \alpha_{\sigma}  j} \left( 1 - e^{i \alpha_{\sigma}} \right) + \tilde{y}_{N-\sigma} e^{-i \alpha_{\sigma}  j} \left( 1 - e^{-i \alpha_{\sigma}} \right) \right] \right]^2 \\
-  &= \frac{1}{2} m \left( \frac{v}{\Delta} \right)^2 \sum_{j=1}^N \left[\sum_{\sigma=1}^{\frac{N}{2}-1} 2i \sin(\frac{\alpha_{\sigma}}{2}) \left( - \tilde{y}_{\sigma} e^{i \alpha_{\sigma} (j+\tfrac12)} + \tilde{y}_{N-\sigma} e^{-i \alpha_{\sigma} (j+\tfrac12)} \right) \right]^2,
-\end{aligned}
+  \begin{aligned}
+    V & = \frac{1}{2} m \left( \frac{v}{\Delta} \right)^2 \sum_{j=1}^N \left( y_j - y_{j+1} \right)^2 =                                                                                                                                                                                                               \\
+      & = \frac{1}{2} m \left( \frac{v}{\Delta} \right)^2 \sum_{j=1}^N \left[\sum_{\sigma=1}^{\frac{N}{2}-1} \left[ \left( e^{i \frac{2\pi}{N}\sigma j} \tilde{y}_{\sigma} + e^{-i \frac{2\pi}{N}\sigma j} \tilde{y}_{N-\sigma} \right) \right.\right.                                                                \\
+      & \qquad\qquad\qquad\qquad \left.\left.- \left( e^{i \frac{2\pi}{N}\sigma (j+1)} \tilde{y}_{\sigma} + e^{-i \frac{2\pi}{N}\sigma (j+1)} \tilde{y}_{N-\sigma} \right) \right] \right]^2                                                                                                                          \\
+      & = \frac{1}{2} m \left( \frac{v}{\Delta} \right)^2 \sum_{j=1}^N \left[\sum_{\sigma=1}^{\frac{N}{2}-1} \left[ \tilde{y}_{\sigma} e^{i \alpha_{\sigma}  j} \left( 1 - e^{i \alpha_{\sigma}} \right) + \tilde{y}_{N-\sigma} e^{-i \alpha_{\sigma}  j} \left( 1 - e^{-i \alpha_{\sigma}} \right) \right] \right]^2 \\
+      & = \frac{1}{2} m \left( \frac{v}{\Delta} \right)^2 \sum_{j=1}^N \left[\sum_{\sigma=1}^{\frac{N}{2}-1} 2i \sin(\frac{\alpha_{\sigma}}{2}) \left( - \tilde{y}_{\sigma} e^{i \alpha_{\sigma} (j+\tfrac12)} + \tilde{y}_{N-\sigma} e^{-i \alpha_{\sigma} (j+\tfrac12)} \right) \right]^2,
+  \end{aligned}
 \]
 where \(\alpha_{\sigma} = \frac{2\pi}{N}\sigma\). Now, using again the sum over \(j\) to enforce orthogonality (noting that the term \(j+\tfrac12\) on the exponential does not influence the result since it is canceled in cross-terms, while diagonal terms are zeroed by \(\delta_{\sigma+\xi,0}\)) and recalling the expression for \(\omega_{\sigma}\), we arrive to the diagonal form of the potential:
 \[
@@ -349,7 +349,7 @@ where \(\alpha_{\sigma} = \frac{2\pi}{N}\sigma\). Now, using again the sum over 
 \]
 Finally, by adding the contributions from the modes $\sigma = \frac{N}{2}, N$, we arrive to the diagonal form of our Lagrangian:
 \[
-  L = m \sum_{\sigma=1}^{\frac{N}{2}-1} \left( \vert \dot{\tilde{y}}_{\sigma} \vert ^2 + \omega_{\sigma}^2 \vert \tilde{y}_{\sigma} \vert^2 \right) + \frac{m}{2} \left( \dot{\tilde{y}}_{\frac{N}{2}}^2 + \dot{\tilde{y}}_{N}^2 + \omega_{\frac{N}{2}}^2 \tilde{y}_{\frac{N}{2}}^2 \right),
+  L = m \sum_{\sigma=1}^{\frac{N}{2}-1} \left( \vert \dot{\tilde{y}}_{\sigma} \vert ^2 - \omega_{\sigma}^2 \vert \tilde{y}_{\sigma} \vert^2 \right) + \frac{m}{2} \left( \dot{\tilde{y}}_{\frac{N}{2}}^2 + \dot{\tilde{y}}_{N}^2 - \omega_{\frac{N}{2}}^2 \tilde{y}_{\frac{N}{2}}^2 \right),
 \]
 since \(\omega_N = 0\).\footnote{Let us remember that the \(\frac{N}{2}\)-th mode is absent when \(N\) is odd.} Thus, in the end, we have \(\tfrac{N-2}{2}\) complex degrees of freedom from the first term, which become \(N-2\) real degrees of freedom with \(\tfrac{N-2}{2}\) different frequencies, while the second term contributes with 2 real degrees of freedom.
 
@@ -357,33 +357,33 @@ In practice, the diagonalization procedure eliminates the cross-terms that mix d
 
 \subsection*{Quantization}
 
-In order to proceed with the quantization of the system, it is useful to briefly recall the main ingredients of the quantum harmonic oscillator.  
+In order to proceed with the quantization of the system, it is useful to briefly recall the main ingredients of the quantum harmonic oscillator.
 
-We start from the Hamiltonian operator expressed in terms of the position and momentum operators \(\hat y\) and \(\hat p\):  
+We start from the Hamiltonian operator expressed in terms of the position and momentum operators \(\hat y\) and \(\hat p\):
 \[
   \hat{H} = \frac{\hat{p}^2}{2m} + \frac{1}{2} m \omega^2 \hat{y}^2 .
-\] 
+\]
 
-The canonical quantization rule imposes the commutation relation between \(\hat y\) and \(\hat p\):  
+The canonical quantization rule imposes the commutation relation between \(\hat y\) and \(\hat p\):
 \[
   [\hat{y}, \hat{p}] = i \hbar .
-\]  
-It is then convenient to introduce the so--called ladder (or creation/annihilation) operators:  
+\]
+It is then convenient to introduce the so--called ladder (or creation/annihilation) operators:
 \[
-  \hat{a} = \sqrt{\frac{m\omega}{2\hbar}} \, \hat{y} + \frac{i}{\sqrt{2m\hbar\omega}} \, \hat{p}, 
+  \hat{a} = \sqrt{\frac{m\omega}{2\hbar}} \, \hat{y} + \frac{i}{\sqrt{2m\hbar\omega}} \, \hat{p},
   \qquad
   \hat{a}^\dagger = \sqrt{\frac{m\omega}{2\hbar}} \, \hat{y} - \frac{i}{\sqrt{2m\hbar\omega}} \, \hat{p}.
-\]  
+\]
 These operators satisfy the commutation relation \( [\hat{a}, \hat{a}^\dagger] = 1 \). In terms of \(\hat{a}\) and \(\hat{a}^\dagger\), the Hamiltonian takes the following simple form:
 \[
   \hat{H} = \hbar \omega \left(\hat{a}^\dagger \hat{a} + \tfrac{1}{2}\right).
-\]  
-Finally, the position and momentum operators can be expressed back in terms of the ladder operators as  
+\]
+Finally, the position and momentum operators can be expressed back in terms of the ladder operators as
 \[
-  \hat{y} = \sqrt{\frac{\hbar}{2m\omega}} \, \big(\hat{a} + \hat{a}^\dagger \big), 
+  \hat{y} = \sqrt{\frac{\hbar}{2m\omega}} \, \big(\hat{a} + \hat{a}^\dagger \big),
   \qquad
   \hat{p} = i \sqrt{\frac{m\hbar\omega}{2}} \, \big(\hat{a}^\dagger - \hat{a}\big).
-\]  
+\]
 We now examine the action of the ladder operators by considering their commutators with the Hamiltonian. To understand how the operators affect the energy states, let us compute the commutator with the annihilation operator $\hat a$:
 \[
   [\hat H, \hat a] = \hbar \omega \, [\hat a^\dagger \hat a, \hat a].
@@ -442,22 +442,22 @@ so that the kinetic term can be written as
 \]
 For the real normal modes (e.g. the special indices \(\sigma=\frac{N}{2},N\)) we introduce the usual ladder operators \(\hat a_r,\hat a_r^\dagger\) and have
 \[
-  \hat{\tilde{y}}_{\sigma}^{(\mathrm{R})} = \sqrt{\frac{\hbar}{2 m \omega_{\sigma}}}\;(\hat a_{\sigma}^{(\mathrm{R})} + \hat a_{\sigma}^{\dagger(\mathrm{R})}), 
+  \hat{\tilde{y}}_{\sigma}^{(\mathrm{R})} = \sqrt{\frac{\hbar}{2 m \omega_{\sigma}}}\;(\hat a_{\sigma}^{(\mathrm{R})} + \hat a_{\sigma}^{\dagger(\mathrm{R})}),
   \qquad
   \hat{p}_{\sigma}^{(\mathrm{R})} = i\sqrt{\frac{m\hbar\omega_{\sigma}}{2}}\;(\hat a_{\sigma}^{(\mathrm{R})} - \hat a_{\sigma}^{\dagger(\mathrm{R})}),
 \]
 \[
-  \hat{\tilde{y}}_{\sigma}^{(\mathrm{I})} = \sqrt{\frac{\hbar}{2 m \omega_{\sigma}}}\;(\hat a_{\sigma}^{(\mathrm{I})} + \hat a_{\sigma}^{\dagger(\mathrm{I})}), 
+  \hat{\tilde{y}}_{\sigma}^{(\mathrm{I})} = \sqrt{\frac{\hbar}{2 m \omega_{\sigma}}}\;(\hat a_{\sigma}^{(\mathrm{I})} + \hat a_{\sigma}^{\dagger(\mathrm{I})}),
   \qquad
   \hat{p}_{\sigma}^{(\mathrm{I})} = i\sqrt{\frac{m\hbar\omega_{\sigma}}{2}}\;(\hat a_{\sigma}^{(\mathrm{I})} - \hat a_{\sigma}^{\dagger(\mathrm{I})}),
 \]
 \[
-  \hat{\tilde{y}}_{\frac{N}{2}} = \sqrt{\frac{\hbar}{2 m \omega_{\frac{N}{2}}}}\;(\hat a_{\frac{N}{2}} + \hat a_{\frac{N}{2}}^{\dagger}), 
+  \hat{\tilde{y}}_{\frac{N}{2}} = \sqrt{\frac{\hbar}{2 m \omega_{\frac{N}{2}}}}\;(\hat a_{\frac{N}{2}} + \hat a_{\frac{N}{2}}^{\dagger}),
   \qquad
   \hat{p}_{\frac{N}{2}} = i\sqrt{\frac{m\hbar\omega_{\frac{N}{2}}}{2}}\;(\hat a_{\frac{N}{2}} - \hat a_{\frac{N}{2}}^{\dagger}),
 \]
 
-The natural framework to describe our quantized mechanical string is the \textbf{Fock space}, which allows us to account for an arbitrary number of excitations in each mode. 
+The natural framework to describe our quantized mechanical string is the \textbf{Fock space}, which allows us to account for an arbitrary number of excitations in each mode.
 
 Formally, the Fock space is constructed as the direct sum of $n$-particle Hilbert spaces:
 \[
@@ -474,21 +474,21 @@ Here, $\mathcal{H}^{(1)}$ is the Hilbert space of a single phonon, $\mathcal{H}^
 The Fock space $\mathcal{F}$ as a whole thus contains all possible states with any number of phonons. This construction is crucial because in a quantum harmonic system the number of excitations is not fixed: the system can fluctuate between states with zero, one, or arbitrarily many phonons. Using the Fock space, we can systematically describe the action of creation and annihilation operators, build eigenstates of the total Hamiltonian, and keep track of the occupation numbers of all modes simultaneously.
 \begin{itemize}
   \item \(\mathcal{H}^{(1)}\) is spanned by:
-  \[
-    \hat a_{\sigma}^{\dagger(\mathrm{R})} \ket{0}, \quad \hat a_{\sigma}^{\dagger(\mathrm{I})} \ket{0}, \quad \hat a_{\frac{N}{2}}^{\dagger} \ket{0}, \quad \sigma = 1, \dots, \frac{N}{2}-1,
-  \]
-  which we can denote more compactly as \(\hat a_{i}^{\dagger} \ket{0}\).
+        \[
+          \hat a_{\sigma}^{\dagger(\mathrm{R})} \ket{0}, \quad \hat a_{\sigma}^{\dagger(\mathrm{I})} \ket{0}, \quad \hat a_{\frac{N}{2}}^{\dagger} \ket{0}, \quad \sigma = 1, \dots, \frac{N}{2}-1,
+        \]
+        which we can denote more compactly as \(\hat a_{i}^{\dagger} \ket{0}\).
   \item \(\mathcal{H}^{(2)}\) is spanned by all two-phonon states, obtained by applying any two creation operators to the vacuum:
-  \[
-    \hat a_i^\dagger \hat a_j^\dagger \ket{0}, \qquad i,j = 1,2,\dots, N-1,
-  \]
-  including the possibility \(i=j\) (two phonons in the same mode).\footnote{One should properly symmetrize the two-phonon states, for instance:  \(\frac{1}{\sqrt{2}} \big( \hat a_i^\dagger \hat a_j^\dagger \ket{0} \pm \hat a_j^\dagger \hat a_i^\dagger \ket{0} \big)\), to ensure the correct bosonic/fermionic symmetry.}
+        \[
+          \hat a_i^\dagger \hat a_j^\dagger \ket{0}, \qquad i,j = 1,2,\dots, N-1,
+        \]
+        including the possibility \(i=j\) (two phonons in the same mode).\footnote{One should properly symmetrize the two-phonon states, for instance:  \(\frac{1}{\sqrt{2}} \big( \hat a_i^\dagger \hat a_j^\dagger \ket{0} \pm \hat a_j^\dagger \hat a_i^\dagger \ket{0} \big)\), to ensure the correct bosonic/fermionic symmetry.}
 
   \item In general, \(\mathcal{H}^{(n)}\) is spanned by all $n$-phonon states:
-  \[
-    (\hat a_{i_1}^\dagger)^{n_1} (\hat a_{i_2}^\dagger)^{n_2} \dots (\hat a_{i_l}^\dagger)^{n_l} \ket{0}, \qquad \text{with } n_1 + n_2 + \dots + n_l = n,
-  \]
-  which include all possible distributions of $n$ phonons among the modes. Each \(\mathcal{H}^{(n)}\) is thus the subspace of the Fock space with exactly $n$ excitations.
+        \[
+          (\hat a_{i_1}^\dagger)^{n_1} (\hat a_{i_2}^\dagger)^{n_2} \dots (\hat a_{i_l}^\dagger)^{n_l} \ket{0}, \qquad \text{with } n_1 + n_2 + \dots + n_l = n,
+        \]
+        which include all possible distributions of $n$ phonons among the modes. Each \(\mathcal{H}^{(n)}\) is thus the subspace of the Fock space with exactly $n$ excitations.
 \end{itemize}
 Thus, we can define the vacuum more rigorously as
 \[
@@ -496,11 +496,11 @@ Thus, we can define the vacuum more rigorously as
 \]
 so that the action of the creation operators gives
 \[
-  \hat a_{1}^{\dagger(\mathrm{R})} \ket{0} = \ket{1,0,\dots,0}, 
-  \qquad 
+  \hat a_{1}^{\dagger(\mathrm{R})} \ket{0} = \ket{1,0,\dots,0},
+  \qquad
   \hat a_{1}^{\dagger(\mathrm{I})} \ket{0} = \ket{0,1,\dots,0},
 \]
-meaning that we now have a single phonon with frequency \(\omega_1\) in either the real or imaginary part of the mode.  
+meaning that we now have a single phonon with frequency \(\omega_1\) in either the real or imaginary part of the mode.
 
 We can now express an arbitrary \textbf{base element} of our Fock space as
 \[
@@ -509,11 +509,11 @@ We can now express an arbitrary \textbf{base element} of our Fock space as
 that is, by explicitly specifying the number of phonons in each independent mode of the system. Equivalently, such a state can be written in terms of creation operators as
 \[
   C \, \left(\hat a_{1}^{\dagger(\mathrm{R})}\right)^{n_1^{(\mathrm{R})}}
-     \left(\hat a_{1}^{\dagger(\mathrm{I})}\right)^{n_1^{(\mathrm{I})}}
-     \dots
-     \left(\hat a_{N/2}^{\dagger}\right)^{n_{N/2}} \ket{0},
+  \left(\hat a_{1}^{\dagger(\mathrm{I})}\right)^{n_1^{(\mathrm{I})}}
+  \dots
+  \left(\hat a_{N/2}^{\dagger}\right)^{n_{N/2}} \ket{0},
 \]
-where the constant \(C\) ensures the correct normalization of the state. The integers \(n_i^{(\mathrm{R})}\) and \(n_i^{(\mathrm{I})}\) represent the occupation numbers of the real and imaginary components of the mode with frequency \(\omega_i\), their sum gives the total number of phonons in the mode \(\omega_i\).  
+where the constant \(C\) ensures the correct normalization of the state. The integers \(n_i^{(\mathrm{R})}\) and \(n_i^{(\mathrm{I})}\) represent the occupation numbers of the real and imaginary components of the mode with frequency \(\omega_i\), their sum gives the total number of phonons in the mode \(\omega_i\).
 
 Therefore, a \textbf{generic Fock state} encodes the excitation content of the string: although the total number of phonons in the system is finite for each specific state, every mode can host an arbitrarily large number of excitations, which makes the Fock space infinite-dimensional. It can be expressed as:
 \[
@@ -524,7 +524,7 @@ where \(\vert C_{n_1^{(\mathrm{R})} n_1^{(\mathrm{I})} \dots n_{N/2}} \vert^2 \)
   \lVert \Psi \rVert^2 = \langle \Psi | \Psi \rangle = \sum_{n_1^{(\mathrm{R})}}^{\infty}\sum_{n_1^{(\mathrm{I})}}^{\infty} \cdots \sum_{n_{N/2}}^{\infty} \vert C_{n_1^{(\mathrm{R})} n_1^{(\mathrm{I})} \dots n_{N/2}} \vert^2 = 1.
 \]
 
-Now that we have obtained the explicit form of the energy eigenstates, the last step is to express the Hamiltonian in terms of the ladder operators. In this way, the full quantum description of the system becomes transparent: each mode of the string behaves as an independent quantum harmonic oscillator, whose excitations correspond to phonons.  
+Now that we have obtained the explicit form of the energy eigenstates, the last step is to express the Hamiltonian in terms of the ladder operators. In this way, the full quantum description of the system becomes transparent: each mode of the string behaves as an independent quantum harmonic oscillator, whose excitations correspond to phonons.
 \[
   \hat{H} = \sum_{\sigma=1}^{\frac{N}{2}-1} \left[ \omega_{\sigma} \left( \hat a_{\sigma}^{\dagger(\mathrm{R})} \hat a_{\sigma}^{(\mathrm{R})} + \hat a_{\sigma}^{\dagger(\mathrm{I})} \hat a_{\sigma}^{(\mathrm{I})} + 1 \right) \right] + \omega_{\frac{N}{2}}\left( \hat a_{\frac{N}{2}}^{\dagger} \hat a_{\frac{N}{2}} + \frac{1}{2} \right),
 \]
@@ -544,10 +544,10 @@ We now consider the continuum limit of our discrete system. This is achieved by 
 
 In this limit, the discrete indices $j$ and $\sigma$ transition into continuous variables. As a result, quantities that were previously discrete—such as the wavelength $\lambda_{\sigma}$ and the wave number $\kappa_{\sigma}$—become continuous:
 \[
-\begin{aligned}
-  \kappa_{\sigma} &= \frac{2\pi \sigma}{N \Delta} = \frac{2\pi \sigma}{L}, \quad \kappa_{\sigma} \in \left[\frac{2\pi}{L},\, \infty \right),\\
-  \lambda_{\sigma} &= \frac{N \Delta}{\sigma} = \frac{L}{\sigma}, \quad \lambda_{\sigma} \in (0,\, L].
-\end{aligned}
+  \begin{aligned}
+    \kappa_{\sigma}  & = \frac{2\pi \sigma}{N \Delta} = \frac{2\pi \sigma}{L}, \quad \kappa_{\sigma} \in \left[\frac{2\pi}{L},\, \infty \right), \\
+    \lambda_{\sigma} & = \frac{N \Delta}{\sigma} = \frac{L}{\sigma}, \quad \lambda_{\sigma} \in (0,\, L].
+  \end{aligned}
 \]
 As $N \to \infty$ and $\Delta \to 0$, both $\kappa_{\sigma}$ and $\lambda_{\sigma}$ sweep out continuous ranges: $\kappa_{\sigma},\,\lambda_{\sigma} \in [0,\,\infty)$.
 

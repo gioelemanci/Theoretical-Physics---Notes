@@ -1,0 +1,100 @@
+\chapter{Classical Canonical Ensamble}
+
+\section*{Canonical System in Thermal Bath}
+
+At equilibrium, the temperature of the system and the environment is equal:
+\[
+    T_1 = T_2 = T.
+\]
+The macroscopic state of the system is characterized by fixed values of:
+\[
+    T, \quad V, \quad N.
+\]
+The system is described by the phase space:
+\[
+    \mathcal{S} = \{ (q_i, p_i) \},
+\]
+where energy can be exchanged with the environment, but the total energy is conserved:
+\[
+    E = E_1 + E_2 = \text{const}.
+\]
+Thus, the universe (system + environment) is described by a microcanonical ensemble.
+
+To obtain the canonical probability distribution for the system alone, we integrate out the degrees of freedom of the environment:
+\[
+    P_c(q_i, p_i) = \frac{1}{Z_N} e^{-\beta H(q_i, p_i)},
+\]
+where the partition function is defined as:
+\[
+    Z_N[T, V] = \int \dd \Gamma \, e^{-\beta H}.
+\]
+Alternatively, using the density of states:
+\[
+    Z_N = \int \dd E \, \omega(E) \, e^{-\beta E}.
+\]
+
+\subsection*{Remarks}
+
+For multiple distinguishable and independent species \(A, B, \dots\), the partition function factorizes:
+\[
+    Z_T = \int \dd \Gamma_A \dd \Gamma_B \cdots \, e^{-\beta(H_A + H_B + \cdots)} = Z_{NA} Z_{NB} \cdots.
+\]
+\subsection*{Canonical Averages}
+
+The canonical average of an observable \(f(q_i, p_i)\) is given by:
+\[
+    \langle f \rangle_c = \int \dd \Gamma \, P_c(q_i, p_i) \, f(q_i, p_i) = \frac{1}{Z_N} \int \dd \Gamma \, e^{-\beta H(q_i, p_i)} f(q_i, p_i).
+\]
+
+\section*{Thermodynamic Quantities}
+
+We define the Helmholtz free energy:
+\[
+    F(T, V, N) = -k_B T \log Z_N \quad \Rightarrow \quad Z_N = e^{-\beta F}.
+\]
+The internal energy is:
+\[
+    E = \langle H \rangle_c = -\frac{\partial}{\partial \beta} \log Z_N.
+\]
+The entropy is:
+\[
+    S_c = -k_B \langle \log P_c \rangle_c.
+\]
+Using Boltzmann's universal formula and thermodynamic identities, we obtain:
+\[
+    S_c = \frac{E - F}{T} = -\left( \frac{\partial F}{\partial T} \right)_{V,N}.
+\]
+Hence, in the thermodynamic limit:
+\[
+    S_c = S_{mc} = S_{th}.
+\]
+
+\section*{Equipartition Theorem}
+
+Let \(x_j \in [a, b]\) be one of the canonical coordinates or momenta. Suppose the Hamiltonian \(H\) depends quadratically on \(x_j\), and the following condition holds:
+
+\[
+    \left\langle x_j \frac{\partial H}{\partial x_j} \right\rangle = k_B T.
+\]
+
+\subsection*{Corollary (Standard Equipartition Theorem)}
+
+If a coordinate appears quadratically in the Hamiltonian, then it contributes to the internal energy with an additive term of:
+\[
+    \frac{1}{2} k_B T.
+\]
+
+\subsection*{Examples}
+
+\begin{itemize}
+    \item \textbf{Free non-relativistic gas in \(d\)-dimensions:} The Hamiltonian depends quadratically only on the \(dN\) components of the momenta. Hence:
+          \[
+              E = \frac{dN}{2} k_B T.
+          \]
+    \item \textbf{Gas of harmonic oscillators in \(d\)-dimensions:} The Hamiltonian depends quadratically on both the \(dN\) components of momenta and positions. Hence:
+          \[
+              E = dN k_B T.
+          \]
+\end{itemize}
+Other applications will be explored in the exercises.
+\end{document}
