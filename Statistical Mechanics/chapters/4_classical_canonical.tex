@@ -1,100 +1,261 @@
-\chapter{Classical Canonical Ensamble}
+\chapter{Classical Canonical Ensemble}
 
-\section*{Canonical System in Thermal Bath}
+In many physical situations, a system cannot be regarded as completely isolated, but rather as being in thermal contact with a large reservoir that can exchange energy with it. While the total energy of the combined system (the system plus its environment) is conserved, the energy of the subsystem of interest fluctuates around an equilibrium value determined by the temperature of the reservoir.
 
-At equilibrium, the temperature of the system and the environment is equal:
+The statistical description appropriate for such conditions is the \textit{canonical ensemble}.
+In this ensemble, the macroscopic state of the system is specified by fixing the temperature \(T\), the volume \(V\), and the number of particles \(N\), while the energy is allowed to vary according to a well-defined probability distribution.
+The fundamental quantity that characterizes the canonical ensemble is the \textit{partition function}, which encodes the statistical weight of all accessible microstates.
+
+From the partition function, all thermodynamic quantities—such as the internal energy, entropy, and Helmholtz free energy—can be derived. The canonical ensemble thus provides a natural bridge between microscopic mechanics and macroscopic thermodynamics, allowing us to compute equilibrium properties of systems in contact with a thermal bath.
+
+\section{Canonical System in a Thermal Bath}
+
+Let us consider a system \(\mathcal{S}\) in thermal contact with a large reservoir \(\mathcal{E}\), which we may refer to as the \textit{environment} or \textit{thermal bath}.
+From a macroscopic point of view, the system is characterized by fixed values of temperature, volume, and number of particles \((T, V, N)\).
+Microscopically, however, its state is determined by a point in its phase space,
 \[
-    T_1 = T_2 = T.
+    \mathcal{M}_{\mathcal{S}} = \{ (q_i, p_i) \}, \quad i = 1, \dots, N,
 \]
-The macroscopic state of the system is characterized by fixed values of:
+where each pair \((q_i, p_i)\) specifies the coordinates and momenta of the particles that constitute the system.
+
+At thermal equilibrium, both the system and the reservoir share the same temperature,
 \[
-    T, \quad V, \quad N.
+    T_1 = T_2 = T,
 \]
-The system is described by the phase space:
-\[
-    \mathcal{S} = \{ (q_i, p_i) \},
-\]
-where energy can be exchanged with the environment, but the total energy is conserved:
+and are free to exchange energy through microscopic interactions.
+Nevertheless, the total energy of the composite system, which we may call the \textit{universe} \(\mathcal{U} = \mathcal{S} + \mathcal{E}\), remains constant:
 \[
     E = E_1 + E_2 = \text{const}.
 \]
-Thus, the universe (system + environment) is described by a microcanonical ensemble.
+Therefore, while the subsystem \(\mathcal{S}\) and its environment fluctuate in energy, the complete system \(\mathcal{U}\) as a whole is described by a \textbf{microcanonical ensemble}, since its total energy is fixed.
 
-To obtain the canonical probability distribution for the system alone, we integrate out the degrees of freedom of the environment:
+The goal is to determine the probability distribution describing the microscopic states of the subsystem \(\mathcal{S}\), when it is in contact with the thermal bath.
+Starting from the microcanonical distribution of the total system, we write
 \[
-    P_c(q_i, p_i) = \frac{1}{Z_N} e^{-\beta H(q_i, p_i)},
+    \rho_{mc}(q_i^{(1)}, p_i^{(1)}, q_i^{(2)}, p_i^{(2)}) = \frac{1}{\omega(E)} \, \delta\!\left(\mathcal{H}(q_i^{(1)}, p_i^{(1)}, q_i^{(2)}, p_i^{(2)}) - E\right),
 \]
-where the partition function is defined as:
+where \(\omega(E)\) is the density of states of the entire universe at total energy \(E\).
+To obtain the effective probability density for the subsystem, we integrate out the environmental degrees of freedom:
 \[
-    Z_N[T, V] = \int \dd \Gamma \, e^{-\beta H}.
+    \rho_c^{(1)}(q_i^{(1)}, p_i^{(1)}) = \int_{\mathcal{M}_2} \mathrm{d}\Omega_2 \, \rho_{mc}(q_i^{(1)}, p_i^{(1)}, q_i^{(2)}, p_i^{(2)}).
 \]
-Alternatively, using the density of states:
+By recalling the expression for the microcanonical probability distribution, we get
 \[
-    Z_N = \int \dd E \, \omega(E) \, e^{-\beta E}.
+    \rho_c^{(1)} = \frac{1}{\omega(E)} \int_{\mathcal{M}_2} \mathrm{d}\Omega_2 \, \delta(E_1 + E_2 - E) = \frac{1}{\omega(E)} \, \omega_2(E - E_1),
+\]
+where \(\omega_2(E_2)\) denotes the density of states of the reservoir evaluated at energy \(E_2 = E - E_1\).
+The probability of finding the subsystem in a state of energy \(E_1\) is therefore proportional to the number of accessible microstates of the environment compatible with energy \(E_2 = E - E_1\).
+
+To proceed, it is convenient to express the density of states of the environment in terms of its entropy:
+\[
+    S_2(E_2) = k_B \ln \omega_2(E_2).
+\]
+Since the environment is assumed to be much larger than the subsystem, its energy variations \(\Delta E_2 = -E_1\) are extremely small compared with its total energy.
+This allows us to expand \(S_2(E_2)\) in a Taylor series around the point \(E_2 = E\):
+\[
+    S_2(E - E_1) \approx S_2(E) - E_1 \left(\frac{\partial S_2}{\partial E_2}\right)_{E_2 = E} + \frac{E_1^2}{2} \left(\frac{\partial^2 S_2}{\partial E_2^2}\right)_{E_2 = E} + \dots
+\]
+For a large reservoir, the higher-order terms can be neglected, since its temperature is essentially unaffected by the small energy exchanges.
+From thermodynamics we know that
+\[
+    \frac{\partial S}{\partial E} = \frac{1}{T},\, \text{ from }\, \mathrm{d}E = T \mathrm{d}S -p \mathrm{d}V + \mu \mathrm{d}N,
+\]
+so that
+\[
+    S_2(E - E_1) \approx S_2(E) - \frac{E_1}{T}.
+\]
+By exponentiating this relation, we recover the corresponding expression for the density of states:
+\[
+    \omega_2(E - E_1) = e^{S_2(E - E_1)/k_B} \approx e^{S_2(E)/k_B} e^{-E_1 / (k_B T)}.
+\]
+The first factor \(e^{S_2(E)/k_B}\) is constant because the total energy \(E\) of the universe is fixed.
+Consequently, the probability of finding the subsystem in a microstate of energy \(E_1\) is proportional to
+\[
+    \rho_c^{(1)} \propto e^{-\beta E_1}, \qquad \beta = \frac{1}{k_B T}.
 \]
 
-\subsection*{Remarks}
+This exponential dependence on the subsystem energy defines the canonical ensemble.
+Physically, it reflects the fact that configurations of the subsystem with higher energy correspond to fewer available microstates for the environment, and are thus less probable.
+The term with the opposite sign in the exponent, \(e^{+\beta E_1}\), would imply an increasing probability for higher energies and would make normalization impossible, so only the decaying exponential form is physically acceptable.
 
-For multiple distinguishable and independent species \(A, B, \dots\), the partition function factorizes:
+Hence, the canonical probability distribution for a system in thermal equilibrium with a heat bath is given by
 \[
-    Z_T = \int \dd \Gamma_A \dd \Gamma_B \cdots \, e^{-\beta(H_A + H_B + \cdots)} = Z_{NA} Z_{NB} \cdots.
+    \rho_c(q_i, p_i) = \frac{1}{Z} e^{-\beta \mathcal{H}(q_i, p_i)},
 \]
-\subsection*{Canonical Averages}
+where the normalization factor \(Z\) is known as the \textbf{canonical partition function}.
+It is obtained by requiring that the total probability over phase space be one:
+\[
+    Z = \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, e^{-\beta \mathcal{H}(q_i, p_i)}.
+\]
+For a system of \(N\) particles in \(d\) dimensions this becomes
+\[
+    Z = \frac{1}{\xi_N} \int \prod_{i=1}^{N} \frac{\mathrm{d}^d q_i \, \mathrm{d}^d p_i}{h^d} \, e^{-\beta \mathcal{H}(q_i, p_i)} = \frac{1}{\xi_N} \int_0^{\infty} \mathrm{d}E \, e^{-\beta E} \, \omega(E).
+\]
+The partition function plays a central role in statistical mechanics, as it contains all the thermodynamic information about the system.
+Once \(Z\) is known, quantities such as the internal energy, entropy, and free energy can be derived from it through standard thermodynamic relations.
 
-The canonical average of an observable \(f(q_i, p_i)\) is given by:
+Finally, let us define the notion of an average quantity within this ensemble.
+\begin{definition}{Canonical average.}
+    If \(f(q_i, p_i)\) is any observable function defined on the phase space of the system, its average over the canonical ensemble is given by
+    \[
+        \langle f \rangle_c = \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, \rho_c(q_i, p_i) f(q_i, p_i) = \frac{1}{Z} \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, e^{-\beta \mathcal{H}(q_i, p_i)} f(q_i, p_i).
+    \]
+    This operation, often called the \textit{canonical average}, provides the bridge between the microscopic description of the system and the macroscopic quantities that can be experimentally measured.
+\end{definition}
+In equilibrium statistical mechanics, macroscopic observables are nothing but ensemble averages of microscopic functions evaluated with the canonical distribution.
+
+\section{Partition Function and Thermodynamic Quantities}
+
+Recalling the expression found for the partition function, we can now analyze its physical dependencies:
 \[
-    \langle f \rangle_c = \int \dd \Gamma \, P_c(q_i, p_i) \, f(q_i, p_i) = \frac{1}{Z_N} \int \dd \Gamma \, e^{-\beta H(q_i, p_i)} f(q_i, p_i).
+    Z = \int_{\textcolor{blue}{\mathcal{M}_{\mathcal{S}}}} \mathrm{d}\Omega \,
+    e^{-\textcolor{green}{\beta} \textcolor{orange}{\mathcal{H}}}
+    = Z(\textcolor{blue}{V}, \textcolor{green}{T}, \textcolor{orange}{N}),
+\]
+that is, the partition function depends on the thermodynamic variables characterizing the canonical ensemble: the volume \(V\), the temperature \(T\), and the number of particles \(N\).
+In this sense, \(Z\) plays the role of a thermodynamic potential from which all equilibrium properties can be derived.
+
+A particularly useful relation expresses the Helmholtz free energy in terms of the partition function, providing a bridge between thermodynamics and statistical mechanics:
+\[
+    F(T, V, N) = E - T S = -\frac{1}{\beta} \log Z.
+\]
+The logarithm is essential in this definition, since it restores the correct \textit{extensivity} of the thermodynamic potential. Indeed, while the partition function \(Z\) scales exponentially with the system size (\(Z \propto V^N\)), its logarithm grows linearly with \(V\), \(N\), and \(T\):
+\[
+    \log Z \propto N \log V \quad \Rightarrow \quad F \propto V,\, N,\, T.
+\]
+Hence, by taking the logarithm we recover a quantity that behaves properly under a rescaling of the system. Let's demonstrate the relation between \(F\) and \(Z\).
+
+From the definition of \(F\) we can write:
+\[
+    Z = e^{-\beta F} = \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, e^{-\beta \mathcal{H}}.
+\]
+This identity can be rearranged as:
+\[
+    \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, e^{\beta (F - \mathcal{H})} = 1.
+\]
+Differentiating both sides with respect to \(\beta\) gives:
+\[
+    \frac{\partial}{\partial \beta} \int_{\mathcal{M}_{\mathcal{S}}}
+    \mathrm{d}\Omega \, e^{\beta (F - \mathcal{H})} = 0,
+\]
+from which it follows:
+\[
+    \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \,
+    e^{\beta (F - \mathcal{H})}
+    \left[(F - \mathcal{H}) - \beta \frac{\partial F}{\partial \beta}\right] = 0.
+\]
+Since the integrand is weighted by the canonical probability density
+\[
+    \frac{e^{-\beta \mathcal{H}}}{Z},
+\]
+we can rewrite the previous expression in the form:\footnote{We have also used \(\beta \frac{\partial}{\partial \beta} = T \frac{\partial}{\partial T}\).}
+\[
+    F \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, \frac{e^{-\beta \mathcal{H}}}{Z}
+    = \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, \frac{e^{-\beta \mathcal{H}}}{Z} \, \mathcal{H}
+    + T \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, \frac{e^{-\beta \mathcal{H}}}{Z} \, \frac{\partial F}{\partial T}.
+\]
+Recognizing the expression for the canonical average, we obtain:
+\[
+    F = \langle \mathcal{H} \rangle_c + T \frac{\partial F}{\partial T}.
+\]
+Finally, recalling that \(\langle \mathcal{H} \rangle_c = E\) and \(S=-\frac{\partial F}{\partial T}\), we recover the thermodynamic definition of the Helmholtz free energy:
+\[
+    F = E - T S.
 \]
 
-\section*{Thermodynamic Quantities}
+\begin{remark}
+    The Helmholtz free energy \(F(T,V,N)\) is therefore the natural thermodynamic potential of the canonical ensemble. Its differential form,
+    \[
+        \mathrm{d}F = -S\,\mathrm{d}T - p\,\mathrm{d}V + \mu\,\mathrm{d}N,
+    \]
+    directly provides the equilibrium relations between macroscopic observables and serves as the starting point for the derivation of all other state functions.
+\end{remark}
 
-We define the Helmholtz free energy:
+Another useful relation connects the internal energy to the partition function:
 \[
-    F(T, V, N) = -k_B T \log Z_N \quad \Rightarrow \quad Z_N = e^{-\beta F}.
+    E = \langle \mathcal{H} \rangle_c
+    = \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, \frac{e^{-\beta \mathcal{H}}}{Z} \, \mathcal{H}
+    = \frac{1}{Z} \left( -\frac{\partial Z}{\partial \beta} \right)
+    = -\frac{\partial}{\partial \beta} \log Z.
 \]
-The internal energy is:
+This expression highlights how the mean energy of the system can be derived directly from the temperature dependence of the partition function.
+Once the partition function \(Z\) is known, all macroscopic thermodynamic quantities follow systematically:
+the Helmholtz free energy from \(F = -k_B T \log Z\),
+the internal energy from \(E = -\partial_\beta \log Z\),
+and finally the entropy from the thermodynamic identity \(S = (E - F)/T\).
+In summary,
 \[
-    E = \langle H \rangle_c = -\frac{\partial}{\partial \beta} \log Z_N.
+    Z \;\Rightarrow\; F,\, E,\, S,
 \]
-The entropy is:
+showing that the knowledge of the partition function completely determines the equilibrium thermodynamics.
+
+\paragraph{Entropy.} Let us recall the result obtained for the microcanonical ensemble, where the statistical and thermodynamic definitions of entropy coincide,
 \[
-    S_c = -k_B \langle \log P_c \rangle_c.
+    S_{mc} = -k_B \langle \log \rho_{mc} \rangle_{mc} = S_{th}.
 \]
-Using Boltzmann's universal formula and thermodynamic identities, we obtain:
+We now aim to demonstrate the corresponding relation in the canonical ensemble:
 \[
-    S_c = \frac{E - F}{T} = -\left( \frac{\partial F}{\partial T} \right)_{V,N}.
+    \begin{aligned}
+        S_{c} & = -k_B \langle \log \rho_{c} \rangle_{c} = -k_B \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, \rho_c \log \rho_c                                                    \\
+              & = -k_B \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, \rho_c \left(\log(e^{-\beta \mathcal{H}}) - \log(Z)\right)                                                     \\
+              & = k_B \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, \rho_c \left(\beta \mathcal{H}\right) + k_B \log(Z) \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, \rho_c \\
+              & =\frac{k_B}{k_B T} \langle \mathcal{H} \rangle_c + k_B \log(Z)                                                                                                             \\
+              & = \frac{E-F}{T} = S_{th} = S_c,
+    \end{aligned}
 \]
-Hence, in the thermodynamic limit:
+practically proving \textit{Boltzmann's universal formula}.
+
+
+
+
+
+
+
+\subsection*{distinguishable or indistinguishable systems}
+
+For a system composed of multiple independent and distinguishable species \(A, B, \dots\), the partition function factorizes:
 \[
-    S_c = S_{mc} = S_{th}.
+    Z_T = \int \dd \Gamma_A \dd \Gamma_B \cdots \, e^{-\beta (H_A + H_B + \cdots)}
+    = Z_{N_A} Z_{N_B} \cdots.
 \]
+This property follows directly from the statistical independence of subsystems.
+
+
+
+
+
+
+
 
 \section*{Equipartition Theorem}
 
-Let \(x_j \in [a, b]\) be one of the canonical coordinates or momenta. Suppose the Hamiltonian \(H\) depends quadratically on \(x_j\), and the following condition holds:
-
+Let \(x_j\) be one of the canonical coordinates or momenta, defined in an interval \([a,b]\).
+If the Hamiltonian depends quadratically on \(x_j\), then:
 \[
     \left\langle x_j \frac{\partial H}{\partial x_j} \right\rangle = k_B T.
 \]
+This relation expresses the \textbf{equipartition of energy} among the independent quadratic degrees of freedom.
 
 \subsection*{Corollary (Standard Equipartition Theorem)}
 
-If a coordinate appears quadratically in the Hamiltonian, then it contributes to the internal energy with an additive term of:
+Every quadratic term in the Hamiltonian contributes, on average, an amount
 \[
-    \frac{1}{2} k_B T.
+    \frac{1}{2} k_B T
 \]
+to the total internal energy.
 
 \subsection*{Examples}
 
 \begin{itemize}
-    \item \textbf{Free non-relativistic gas in \(d\)-dimensions:} The Hamiltonian depends quadratically only on the \(dN\) components of the momenta. Hence:
+    \item \textbf{Free non-relativistic gas in \(d\)-dimensions.}
+          The Hamiltonian depends quadratically only on the \(dN\) momentum components:
           \[
               E = \frac{dN}{2} k_B T.
           \]
-    \item \textbf{Gas of harmonic oscillators in \(d\)-dimensions:} The Hamiltonian depends quadratically on both the \(dN\) components of momenta and positions. Hence:
+
+    \item \textbf{Gas of harmonic oscillators in \(d\)-dimensions.}
+          The Hamiltonian depends quadratically on both positions and momenta (\(2dN\) degrees of freedom):
           \[
               E = dN k_B T.
           \]
 \end{itemize}
-Other applications will be explored in the exercises.
-\end{document}
