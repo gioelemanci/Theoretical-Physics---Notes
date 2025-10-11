@@ -203,59 +203,163 @@ We now aim to demonstrate the corresponding relation in the canonical ensemble:
               & = \frac{E-F}{T} = S_{th} = S_c,
     \end{aligned}
 \]
-practically proving \textit{Boltzmann's universal formula}.
+practically proving \textit{Boltzmann's universal formula}. Hence, in the thermodynamic limit we have \(s_{mc} = s_c = s_{th}\).
 
+\subsection*{Distinguishable and Indistinguishable Systems}
 
-
-
-
-
-
-\subsection*{distinguishable or indistinguishable systems}
-
-For a system composed of multiple independent and distinguishable species \(A, B, \dots\), the partition function factorizes:
+Consider a system composed of multiple independent and distinguishable subsystems.
+If we denote by \(A\) and \(B\) two such subsystems, the total system can be expressed as:
 \[
-    Z_T = \int \dd \Gamma_A \dd \Gamma_B \cdots \, e^{-\beta (H_A + H_B + \cdots)}
-    = Z_{N_A} Z_{N_B} \cdots.
+    \mathcal{S} = A \cup B,
+    \quad \mathcal{H} = \mathcal{H}_A + \mathcal{H}_B,
+    \quad \mathcal{M} = \mathcal{M}_A \otimes \mathcal{M}_B,
+    \quad \mathrm{d}\Omega = \mathrm{d}\Omega_A \, \mathrm{d}\Omega_B.
 \]
-This property follows directly from the statistical independence of subsystems.
-
-
-
-
-
-
-
-
-\section*{Equipartition Theorem}
-
-Let \(x_j\) be one of the canonical coordinates or momenta, defined in an interval \([a,b]\).
-If the Hamiltonian depends quadratically on \(x_j\), then:
+The statistical independence of the two parts implies that the total partition function factorizes as:
 \[
-    \left\langle x_j \frac{\partial H}{\partial x_j} \right\rangle = k_B T.
+    Z = \int_{\mathcal{M}_A \otimes \mathcal{M}_B}
+    \mathrm{d}\Omega_A \, \mathrm{d}\Omega_B \,
+    e^{-\beta (\mathcal{H}_A + \mathcal{H}_B)}
+    = Z_A Z_B.
 \]
-This relation expresses the \textbf{equipartition of energy} among the independent quadratic degrees of freedom.
-
-\subsection*{Corollary (Standard Equipartition Theorem)}
-
-Every quadratic term in the Hamiltonian contributes, on average, an amount
+More generally, for a system composed of \(N\) independent, distinguishable subsystems, we obtain the product rule:
 \[
-    \frac{1}{2} k_B T
+    Z = \prod_{i=1}^{N} Z_i.
 \]
-to the total internal energy.
+This property reflects the fact that, for independent subsystems, the total probability measure in phase space factorizes, and so does the corresponding statistical weight.
 
-\subsection*{Examples}
+\begin{example}[Identical particles]
+    Consider a system of \(N\) non-interacting, non-relativistic, identical but \textit{distinguishable} free particles in one dimension.
+    The Hamiltonian is additive:
+    \[
+        \mathcal{H} = \sum_{i=1}^{N} \frac{p_i^2}{2m},
+    \]
+    and the total partition function follows immediately:
+    \[
+        Z^{(\mathrm{dist})} = \int e^{-\beta \mathcal{H}} \, \mathrm{d}\Omega
+        = (Z_1)^N,
+    \]
+    where \(Z_1\) is the single-particle partition function.
 
-\begin{itemize}
-    \item \textbf{Free non-relativistic gas in \(d\)-dimensions.}
-          The Hamiltonian depends quadratically only on the \(dN\) momentum components:
-          \[
-              E = \frac{dN}{2} k_B T.
-          \]
+    However, if the particles are \textit{indistinguishable}, the situation changes.
+    Since any permutation of the \(N\) particles represents the same microscopic state, we must divide by the number of equivalent configurations, namely \(N!\).
+    The correct expression for the canonical partition function is therefore:
+    \[
+        Z^{(\mathrm{ind})} = \frac{(Z_1)^N}{N!}.
+    \]
+    This correction accounts for the overcounting of identical configurations in phase space and ensures the proper extensivity of thermodynamic quantities such as entropy and free energy.
+\end{example}
 
-    \item \textbf{Gas of harmonic oscillators in \(d\)-dimensions.}
-          The Hamiltonian depends quadratically on both positions and momenta (\(2dN\) degrees of freedom):
-          \[
-              E = dN k_B T.
-          \]
-\end{itemize}
+\subsection*{Generalized Equipartition Theorem}
+
+The equipartition theorem provides a fundamental link between the microscopic degrees of freedom of a system and its macroscopic thermal properties. In its generalized form, it states that each parameter \(\xi_i\), coordinate or its conjugate momentum for \(i=1,\dots,2dN\), contribute to the mean energy according to their appearance in the Hamiltonian. This result extends the classical formulation beyond the simple quadratic case, offering a deeper understanding of how thermal energy is distributed among different types of degrees of freedom.
+
+\begin{theorem}[Generalized Equipartition Theorem]
+    For a canonical ensemble described by the Hamiltonian \(\mathcal{H}(\{\xi_i\})\), the following relation holds for each generalized coordinate or momentum \(\xi_j \in [a,\,b]\):
+    \[
+        k_B T = \left\langle \xi_j \frac{\partial \mathcal{H}}{\partial \xi_j} \right\rangle _c,
+    \]
+    provided that the boundary term vanishes:
+    \[
+        \xi_j e^{-\beta \mathcal{H}} \Big|_{\xi_j=a}^{\xi_j=b} = 0,
+    \]
+    where \(a\) and \(b\) are typically extended to \(\pm\infty\).
+\end{theorem}
+
+
+\begin{proof}
+    Consider the canonical measure on phase space:
+    \[
+        \mathrm{d}\Omega \, e^{-\beta \mathcal{H}} = \left( \prod_{i=1}^{2dN} \mathrm{d}\xi_i \right) e^{-\beta \mathcal{H}}.
+    \]
+    We can isolate the differential with respect to one variable \(\xi_j\):
+    \[
+        \mathrm{d}\Omega \, e^{-\beta \mathcal{H}}
+        = \left( \prod_{i \neq j} \mathrm{d}\xi_i \right) \mathrm{d}\xi_j \, e^{-\beta \mathcal{H}}
+        = \left( \prod_{i \neq j} \mathrm{d}\xi_i \right)
+        \left[
+            \mathrm{d}\!\left( \xi_j e^{-\beta \mathcal{H}} \right)
+            - \xi_j e^{-\beta \mathcal{H}} \left( -\beta \frac{\partial \mathcal{H}}{\partial \xi_j} \right) \mathrm{d}\xi_j
+            \right].
+    \]
+    Simplifying, we obtain:
+    \[
+        \mathrm{d}\Omega \, e^{-\beta \mathcal{H}}
+        = \left( \prod_{i \neq j} \mathrm{d}\xi_i \right) \mathrm{d}\!\left( \xi_j e^{-\beta \mathcal{H}} \right)
+        + \mathrm{d}\Omega \, \beta \, \xi_j \frac{\partial \mathcal{H}}{\partial \xi_j} e^{-\beta \mathcal{H}}.
+    \]
+    Using the normalization condition of the canonical ensemble,
+    \[
+        1 = \frac{1}{Z} \int \mathrm{d}\Omega \, e^{-\beta \mathcal{H}},
+    \]
+    and substituting the expression above, we get:
+    \[
+        1 = \frac{1}{Z h^{dN} N!} \left[
+            \int \left( \prod_{i \neq j} \mathrm{d}\xi_i \right)
+            \int_a^b \mathrm{d}\!\left( \xi_j e^{-\beta \mathcal{H}} \right)
+            + \beta \int \mathrm{d}\Omega \, \xi_j \frac{\partial \mathcal{H}}{\partial \xi_j} e^{-\beta \mathcal{H}}
+            \right].
+    \]
+    Requiring the boundary term to vanish,
+    \[
+        \xi_j e^{-\beta \mathcal{H}} \Big|_{\xi_j=a}^{\xi_j=b} = 0,
+    \]
+    with \(a,b \to \pm\infty\), the first term disappears and we obtain:
+    \[
+        \frac{1}{\beta} = k_B T = \left\langle \xi_j \frac{\partial \mathcal{H}}{\partial \xi_j} \right\rangle _c.
+    \]
+\end{proof}
+
+\begin{corollary}[Classical Equipartition Theorem]
+    If the Hamiltonian depends quadratically on one of its canonical variables, namely
+    \[
+        \mathcal{H} = A\,\xi_j^2 + \tilde{\mathcal{H}}(\xi_{i \neq j}),
+    \]
+    with \(A\) constant and \(\xi_j \in (-\infty, \infty)\), the boundary term
+    \[
+        \xi_j e^{-\beta \mathcal{H}} \Big|_{-\infty}^{\infty} \sim \xi_j e^{-\beta A \xi_j^2} \Big|_{-\infty}^{\infty} = 0
+    \]
+    automatically vanishes,\footnote{The integrand is Gaussian and centered at \(\xi_j = 0\), so the product decays exponentially at infinity.}
+    and the generalized equipartition theorem yields:
+    \[
+        \left\langle \xi_j \frac{\partial \mathcal{H}}{\partial \xi_j} \right\rangle _c
+        = \left\langle 2A\,\xi_j^2 \right\rangle _c = k_B T.
+    \]
+    Hence, the mean energy associated with each quadratic degree of freedom is
+    \[
+        E_{\xi_j} = \langle A\,\xi_j^2 \rangle_c = \frac{1}{2}k_B T.
+    \]
+    Therefore, every quadratic canonical variable — whether a coordinate or a conjugate momentum — contributes an average energy of \(\tfrac{1}{2}k_B T\) to the total internal energy of the system.
+\end{corollary}
+
+The equipartition theorem thus provides a direct and general rule for distributing the thermal energy among the accessible microscopic degrees of freedom.
+Its consequences become particularly clear when applied to systems with quadratic Hamiltonians, as illustrated in the following examples.
+
+\begin{example}[Ideal Gas]
+    For a gas of \(N\) non-interacting, non-relativistic particles in \(d\) spatial dimensions,
+    the Hamiltonian depends quadratically only on the \(dN\) momentum components:
+    \[
+        \mathcal{H} = \sum_{i=1}^{N} \frac{|p_i|^2}{2m}.
+    \]
+    Each quadratic term contributes an average energy of \(\tfrac{1}{2}k_B T\), hence:
+    \[
+        E = \frac{dN}{2}k_B T.
+    \]
+    This result shows that the internal energy of a classical ideal gas is entirely kinetic and
+    depends only on the number of degrees of freedom, not on the nature of the particles or their interactions.
+\end{example}
+
+\begin{example}[Harmonic Oscillators]
+    For a system of \(N\) independent harmonic oscillators in \(d\) dimensions,
+    the Hamiltonian is quadratic in both momenta and coordinates:
+    \[
+        \mathcal{H} = \sum_{i=1}^{N} \left( \frac{|p_i|^2}{2m} + \frac{1}{2}m\omega^2 |q_i|^2 \right).
+    \]
+    Since each oscillator contributes two quadratic terms (one kinetic, one potential),
+    the total internal energy becomes:
+    \[
+        E = dN k_B T.
+    \]
+    Thus, the equipartition theorem immediately provides the temperature dependence of the mean energy
+    and, consequently, of the heat capacity for harmonic systems.
+\end{example}
