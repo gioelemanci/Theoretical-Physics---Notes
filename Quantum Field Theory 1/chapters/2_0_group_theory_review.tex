@@ -13,11 +13,41 @@ A \textit{group} is a set \(G\) equipped with a binary operation, denoted by \(\
 \end{enumerate}
 
 If the operation \(\circ\) is commutative, i.e.\ \(a \circ b = b \circ a\) for all \(a,b \in G\), the group is called \textit{Abelian}.
-Typical examples include:
+
+Typical important groups in physics can be classified as follows:
+
 \begin{itemize}
-    \item \((\mathbb{R}, +)\), the additive group of real numbers,
-    \item \((\mathbb{C}^\times, \cdot)\), the multiplicative group of nonzero complex numbers,
-    \item the rotation group \(\mathrm{SO}(3)\), consisting of all orthogonal \(3\times3\) matrices with determinant \(+1\).
+    \item \textbf{Abelian groups:} groups with commutative operations, often associated with conserved quantities via Noether's theorem.
+          \begin{itemize}
+              \item \((\mathbb{R}, +)\): additive group of real numbers, e.g., translations in one dimension.
+              \item \((\mathbb{C}^\times, \cdot)\): multiplicative group of nonzero complex numbers.
+              \item \(\mathrm{U}(1)\): phase rotations, fundamental in electromagnetism and quantum mechanics.
+          \end{itemize}
+
+    \item \textbf{Rotation groups:} describe symmetries under rotations in space.
+          \begin{itemize}
+              \item \(\mathrm{SO}(2)\): rotations in a plane.
+              \item \(\mathrm{SO}(3)\): rotations in three-dimensional space, relevant for angular momentum.
+              \item \(\mathrm{SU}(2)\times\mathrm{SU}(2)\): cover of \(\mathrm{SO}(3)\), used for spin-$\frac{1}{2}$ particles.
+          \end{itemize}
+
+    \item \textbf{Lorentz and Poincaré groups:} spacetime symmetries in relativity.
+          \begin{itemize}
+              \item \(\mathrm{SO}(1,3)\): Lorentz transformations preserving the Minkowski metric.
+              \item \(\mathrm{ISO}(1,3)\) or Poincaré group: Lorentz transformations plus translations, fundamental in field theory.
+          \end{itemize}
+
+    \item \textbf{Internal symmetry groups:} act on internal degrees of freedom of fields.
+          \begin{itemize}
+              \item \(\mathrm{SU(3)}\): color symmetry in quantum chromodynamics.
+              \item \(\mathrm{SU(2)} \times \mathrm{U(1)}\): electroweak symmetry in the Standard Model.
+          \end{itemize}
+
+    \item \textbf{Discrete groups:} describe symmetries with a finite number of elements.
+          \begin{itemize}
+              \item Permutation groups \(S_n\), relevant for identical particles and statistics.
+              \item Point groups in crystallography and molecular physics.
+          \end{itemize}
 \end{itemize}
 
 In physics, continuous groups — those depending smoothly on continuous parameters — play a central role, as they describe symmetries of space, time, and dynamical systems. These are known as \textit{Lie groups}.
@@ -37,11 +67,11 @@ which satisfies the Jacobi identity:
     [X,[Y,Z]] + [Y,[Z,X]] + [Z,[X,Y]] = 0, \qquad \forall X,Y,Z \in \mathfrak{g}.
 \]
 
-In a neighborhood of the identity, an element of the group can be expressed as an exponential of an element of the Lie algebra:
+In a neighborhood of the identity, an element of the group is mapped by an exponential map from an element of the Lie algebra:
 \[
     g(\epsilon) = e^{i \epsilon^a T_a},
 \]
-where \(\{T_a\}\) are the \textbf{generators} of the Lie algebra, and \(\epsilon^a\) are real infinitesimal parameters labeling the transformation.
+where \(\{T_a\}\) are the \textbf{generators} of the Lie group, and \(\epsilon^a\) are real infinitesimal parameters labeling the transformation.
 The commutation relations among generators define the algebraic structure:
 \[
     [T_a, T_b] = i f_{ab}{}^{c} \, T_c,
@@ -78,7 +108,7 @@ The dimension of a Lie algebra equals the number of independent generators — t
     \hfill
     \begin{minipage}{0.4\textwidth}
         \centering
-        \begin{tikzpicture}[scale=1.1,every node/.style={font=\small}]
+        \begin{tikzpicture}[scale=1,every node/.style={font=\small}]
             \draw[->] (-2.2,0) -- (3,0) node[below right] {$x_1$};
             \draw[->] (0,-2.2) -- (0,2.2) node[above] {$x_2$};
 
@@ -98,14 +128,23 @@ The dimension of a Lie algebra equals the number of independent generators — t
     \end{minipage}
 \end{figure}
 
+\textbf{Common Lie groups:}
+\begin{itemize}
+    \item $\mathbf{O(n)} = \{ R \in \mathbb{R}^{n \times n} \mid R^T R = I \}$: orthogonal group, preserves Euclidean lengths.
+    \item $\mathbf{SO(n)} = \{ R \in O(n) \mid \det R = +1 \}$: special orthogonal group, proper rotations in $n$ dimensions.
+    \item $\mathbf{U(n)} = \{ U \in \mathbb{C}^{n \times n} \mid U^\dagger U = I \}$: unitary group, preserves complex inner products.
+    \item $\mathbf{SU(n)} = \{ U \in U(n) \mid \det U = 1 \}$: special unitary group, important for internal symmetries in particle physics.
+          % \item $\mathbf{Sp(2n)} = \{ M \in \mathbb{R}^{2n \times 2n} \mid M^T \Omega M = \Omega \}$: symplectic group, preserves a symplectic form $\Omega$ in classical and quantum mechanics.
+\end{itemize}
+
 \subsection{Representations}
 
 A \textbf{representation} of a Lie group or Lie algebra provides a concrete realization of its abstract elements as linear operators acting on a vector space.
-Mathematically, a representation of a Lie group \(G\) is a homomorphism
+Mathematically, a representation of a Lie group \(G\) is a homomorphism, for example
 \[
     D : G \to \mathrm{GL}(V),
 \]
-where \(V\) is a vector space and \(\mathrm{GL}(V)\) denotes the group of invertible linear transformations on \(V\).
+where \(V\) is the vector space on which our representation is acting and \(\mathrm{GL}(V)\) denotes the group of invertible linear transformations on \(V\).
 This means that the group law is preserved:
 \[
     D(g_1 g_2) = D(g_1) D(g_2), \qquad \forall g_1,g_2 \in G.
@@ -136,16 +175,34 @@ The dimension of the representation thus reflects the number of independent degr
 The most fundamental symmetry group in relativistic field theory is the \textbf{Lorentz group}, denoted by \(\mathrm{O}(1,3)\).
 It consists of all linear transformations \(\Lambda: \mathbb{R}^{1,3} \to \mathbb{R}^{1,3}\) that leave the Minkowski metric invariant:
 \[
-    \eta_{\mu\nu} = \mathrm{diag}(1,-1,-1,-1).
+    \eta_{\mu\nu} = \mathrm{diag}(1,-1,-1,-1),
 \]
-That is, \(\Lambda\) satisfies
+i.e.
 \[
     \eta_{\mu\nu} \, \Lambda^{\mu}{}_{\rho} \Lambda^{\nu}{}_{\sigma} = \eta_{\rho\sigma}.
 \]
-Such transformations preserve the spacetime interval
+
+These transformations preserve the spacetime interval
 \[
-    s^2 = \eta_{\mu\nu} x^{\mu} x^{\nu} = (x^0)^2 - \vec{x}^{\,2}.
+    s^2 = \eta_{\mu\nu} x^\mu x^\nu = (x^0)^2 - \vec{x}^{\,2},
 \]
+or, infinitesimally,
+\[
+    \mathrm{d}s^2 = \eta_{\mu\nu} \, \mathrm{d}x^\mu \mathrm{d}x^\nu.
+\]
+
+Indeed, under a Lorentz transformation \(x^\mu \mapsto x'^\mu = \Lambda^\mu{}_\rho x^\rho\), we have
+\[
+    \begin{aligned}
+        \mathrm{d}s'^2 & = \eta_{\mu\nu} \, \mathrm{d}x'^\mu \mathrm{d}x'^\nu
+        = \eta_{\mu\nu} \, \Lambda^\mu{}_\rho \mathrm{d}x^\rho \, \Lambda^\nu{}_\sigma \mathrm{d}x^\sigma                     \\
+                       & = \Lambda^\mu{}_\rho \, \eta_{\mu\nu} \, \Lambda^\nu{}_\sigma \, \mathrm{d}x^\rho \mathrm{d}x^\sigma
+        = \eta_{\rho\sigma} \, \mathrm{d}x^\rho \mathrm{d}x^\sigma
+        = \mathrm{d}s^2,
+    \end{aligned}
+\]
+confirming that Lorentz transformations leave the Minkowski interval invariant.
+
 
 The determinant of a Lorentz transformation can be either \(+1\) or \(-1\), and \(\Lambda^0{}_0\) can be greater or smaller than \(1\).
 The subgroup with \(\det \Lambda = +1\) and \(\Lambda^0{}_0 \ge 1\) is called the \textbf{proper orthochronous Lorentz group}, denoted by \(\mathrm{SO}^+(1,3)\).
@@ -167,8 +224,17 @@ Hence, \(\omega_{\mu\nu}\) is an antisymmetric tensor containing six independent
 
 We can introduce a set of generators \(M_{\mu\nu}\) (antisymmetric in their indices) such that a general infinitesimal transformation acts on a four-vector \(x^\rho\) as:
 \[
-    x'^\rho = \left( \delta^\rho{}_\sigma + \frac{i}{2}\,\omega^{\mu\nu} (M_{\mu\nu})^\rho{}_\sigma \right) x^\sigma.
+    x'^\rho = \left( \delta^\rho{}_\sigma + \frac{i}{2}\,\omega^{\mu\nu} (M_{\mu\nu})^\rho{}_\sigma \right) x^\sigma,
 \]
+as taylor expansion of
+\[
+    \Lambda^{\rho}{}_{\sigma} =  e^{\frac{i}{2}\,\omega^{\mu\nu} (M_{\mu\nu})^\rho{}_\sigma},
+\]
+where the generators of the group are
+\[
+    (M_{\mu\nu})^\rho_{\ \sigma} = -i \left( \eta_{\mu\sigma} \, \delta^\rho_{\ \nu} - \eta_{\nu\sigma} \, \delta^\rho_{\ \mu} \right),
+\]
+
 The commutation relations among the generators define the \textbf{Lorentz algebra} \(\mathfrak{so}(1,3)\):
 \[
     [M_{\mu\nu}, M_{\rho\sigma}] = i \left(
@@ -179,7 +245,7 @@ The commutation relations among the generators define the \textbf{Lorentz algebr
     \right).
 \]
 
-\subsection{Rotations and Boosts}
+\subsection{Generators: Rotations and Boosts}
 
 The six generators can be naturally separated into:
 \[
@@ -194,47 +260,85 @@ In terms of these generators, the Lorentz algebra decomposes as:
     [J_i, K_j] = i \epsilon_{ijk} K_k, \qquad
     [K_i, K_j] = -i \epsilon_{ijk} J_k.
 \]
-This structure reveals the non-compact nature of the Lorentz group: unlike spatial rotations, boosts do not form a compact subgroup, as rapidities are unbounded.
+This structure reveals the non-compact nature of the Lorentz group: unlike spatial rotations, boosts do not form a compact subgroup, as rapidities are unbounded.\footnote{When we later discuss the relation between \(\mathrm{SO}^+(1,3)\) and \(\mathrm{SU}(2) \times \mathrm{SU}(2)\), this distinction will be important: \(\mathrm{SU}(2) \times \mathrm{SU}(2)\) is compact, whereas the proper orthochronous Lorentz group is not.}
+
 
 For finite transformations, one can write:
 \[
-    R(\boldsymbol{\theta}) = e^{-i \boldsymbol{\theta}\cdot \mathbf{J}},
+    R(\bs{\theta}) = e^{-i \bs{\theta}\cdot \mathbf{J}},
     \qquad
-    B(\boldsymbol{\zeta}) = e^{-i \boldsymbol{\zeta}\cdot \mathbf{K}},
+    B(\bs{\beta}) = e^{-i \bs{\beta}\cdot \mathbf{K}},
 \]
-where \(\boldsymbol{\theta}\) are the rotation angles and \(\boldsymbol{\zeta}\) the rapidity parameters.
+where \(\bs{\theta} = \left( \theta_1,\,\theta_2,\,\theta_3 \right)\) are the rotation angles and \(\bs{\beta} = \left( \beta_1,\,\beta_2,\,\beta_3\right) \) the boost parameters. We can ultimately reconstruct the expression for \(\omega_{\mu\nu}\):
+\[
+    \begin{aligned}
+        \omega_{ij} & = \epsilon_{ijk}\bs{\theta}^k, \\
+        \omega_{0i} & = \bs{\beta}_i.
+    \end{aligned}
+\]
 Together, they parametrize any proper orthochronous Lorentz transformation as a combination of a boost and a rotation:
 \[
-    \Lambda = B(\boldsymbol{\zeta}) \, R(\boldsymbol{\theta}).
+    \Lambda = B(\bs{\beta}) \, R(\bs{\theta}).
 \]
 
-\subsection{Remarks on Representations}
+\subsection{Representations}
 
-The Lorentz algebra \(\mathfrak{so}(1,3)\) is locally isomorphic to the direct sum \(\mathfrak{su}(2) \oplus \mathfrak{su}(2)\).
+The Lorentz algebra \(\mathfrak{so}(1,3)\) is locally isomorphic to the direct sum \(\mathfrak{su}(2) \oplus \mathfrak{su}(2)\) (algebra of $SU(2) \times SU(2)$, equivalent up to different hermiticity relations arising because of compactess).
 This correspondence allows the classification of all finite-dimensional representations of the Lorentz group in terms of pairs \((j_+, j_-)\) of \(\mathrm{SU}(2)\) spins.
-For instance:
 
-\begin{table}[h!]
+One can then construct the combinations
+\[
+    \mathbf{A} = \frac{1}{2} (\mathbf{J} + i \mathbf{K}), \qquad
+    \mathbf{B} = \frac{1}{2} (\mathbf{J} - i \mathbf{K}),
+\]
+which satisfy independent \(\mathfrak{su}(2)\) algebras:
+\[
+    [A_i, A_j] = i \epsilon_{ijk} A_k, \quad
+    [B_i, B_j] = i \epsilon_{ijk} B_k, \quad
+    [A_i, B_j] = 0.
+\]
+
+This shows explicitly the algebra decompiìosition into a direct sum of two commuting algebras.
+A concrete realization of the Lorentz algebra generators can be constructed using \textbf{spinor spaces}.
+Consider spin-$\tfrac{1}{2}$ representations, and let \(\sigma_i\) denote the Pauli matrices.
+Define the combinations
+\[
+    \mathbf{A} = \frac{1}{2} \boldsymbol{\sigma} \otimes \mathbf{1}, \qquad
+    \mathbf{B} = \frac{1}{2} \mathbf{1} \otimes \boldsymbol{\sigma},
+\]
+which act on the four-dimensional space \(\mathbb{C}^2 \otimes \mathbb{C}^2\).
+
+In this language, the \textbf{left-handed} (LH) \textbf{spinors} transform under the \((\tfrac{1}{2},0)\) representation, corresponding to the action of \(\mathbf{A}\) on the first factor, while the \textbf{right-handed} (RH) \textbf{spinors} transform under the \((0,\tfrac{1}{2})\) representation, corresponding to the action of \(\mathbf{B}\) on the second factor.
+
+The Dirac spinor arises as the direct sum \(\psi = \psi_L \oplus \psi_R \in \mathbb{C}^2 \oplus \mathbb{C}^2\), and higher-dimensional representations of the Lorentz group can be constructed by taking tensor products of these spinor spaces, yielding \((j_+, j_-)\) representations with arbitrary spins.
+
+\paragraph{Trivial representation.}
+In addition to the nontrivial representations, every Lie group admits a trivial representation, denoted by $(0,0)$ in the $\mathrm{SU}(2)\times\mathrm{SU}(2)$ classification. In this representation, the group acts identically on the vector space: for any group element $g \in G$ and any vector $v$ in the representation space,
+\[
+    g \cdot v = v.
+\]
+The trivial representation is one-dimensional and corresponds to \textit{scalars} under the symmetry: objects that remain invariant under all group transformations, such as the Higgs field under Lorentz transformations.
+
+Although the underlying representation space $\mathbb{C}^2 \otimes \mathbb{C}^2$ is the same, different choices of the $(j_+,j_-)$ representation allow us to classify distinct particles and fields according to their transformation properties under the Lorentz group, as shown in the following table.
+
+\begin{table}[H]
     \centering
-    \begin{tabular}{lll}
+    \begin{tabular}{clc}
         \toprule
-        Representation $(j_+,j_-)$               & Field / Particle type    & Total spin $s$ \\
+        Representation $(j_+,j_-)$               & Field / Particle type   & Total spin $s$ \\
         \midrule
-        $(0,0)$                                  & Scalar                   & $0$            \\
-        $\left(\tfrac{1}{2},0\right)$            & Left-handed Weyl spinor  & $\tfrac{1}{2}$ \\
-        $\left(0,\tfrac{1}{2}\right)$            & Right-handed Weyl spinor & $\tfrac{1}{2}$ \\
+        $(0,0)$                                  & Scalar                  & $0$            \\
+        $\left(\tfrac{1}{2},0\right)$            & LH Weyl spinor          & $\tfrac{1}{2}$ \\
+        $\left(0,\tfrac{1}{2}\right)$            & RH Weyl spinor          & $\tfrac{1}{2}$ \\
         $\left(\tfrac{1}{2},0\right)\oplus\left(0,\tfrac{1}{2}\right)$
-                                                 & Dirac spinor             & $\tfrac{1}{2}$ \\
-        $\left(\tfrac{1}{2},\tfrac{1}{2}\right)$ & Vector                   & $1$            \\
+                                                 & Dirac spinor            & $\tfrac{1}{2}$ \\
+        $\left(\tfrac{1}{2},\tfrac{1}{2}\right)$ & Vector                  & $1$            \\
         $\left(1,\tfrac{1}{2}\right)\oplus\left(\tfrac{1}{2},1\right)$
-                                                 & Rarita--Schwinger field  & $\tfrac{3}{2}$ \\
-        $(1,1)$                                  & Graviton                 & $2$            \\
+                                                 & Rarita--Schwinger field & $\tfrac{3}{2}$ \\
+        $(1,1)$                                  & Graviton                & $2$            \\
         \bottomrule
     \end{tabular}
 \end{table}
-
-\begin{remark}
-    The representations listed above correspond to the basic field types used in relativistic quantum field theory. Scalars describe spinless particles such as the Higgs boson. Weyl spinors transform under chiral representations of the Lorentz group, and their direct sum forms the Dirac spinor, which accounts for massive spin-$\tfrac{1}{2}$ fermions like the electron. The vector representation corresponds to spin-1 gauge bosons, such as the photon or gluons. The Rarita--Schwinger field describes spin-$\tfrac{3}{2}$ particles, notably the gravitino in supersymmetric theories, while the symmetric rank-2 tensor representation corresponds to the graviton, a hypothetical spin-2 quantum of the gravitational field.
-\end{remark}
+The representations listed above correspond to the basic field types used in relativistic quantum field theory. Scalars describe spinless particles such as the Higgs boson. Weyl spinors transform under chiral representations of the Lorentz group, and their direct sum forms the Dirac spinor, which accounts for massive spin-$\tfrac{1}{2}$ fermions like the electron. The vector representation corresponds to spin-1 gauge bosons, such as the photon or gluons. The Rarita--Schwinger field describes spin-$\tfrac{3}{2}$ particles, notably the gravitino in supersymmetric theories, while the symmetric rank-2 tensor representation corresponds to the graviton, a hypothetical spin-2 quantum of the gravitational field.
 
 This representation theory is the foundation for classifying relativistic fields and particles by their transformation properties under the Lorentz group.
