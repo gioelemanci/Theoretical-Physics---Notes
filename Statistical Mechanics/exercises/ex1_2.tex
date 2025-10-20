@@ -26,42 +26,65 @@ In this exercise we will derive the thermodynamics of an ideal gas from its micr
 
 \begin{enumerate}
     \item Prove that:
-    \[
-    \log \Gamma(E) = \log \omega(E) + \log \Delta E = \log \Sigma(E) + \log(3N/(2E)) + \log \Delta E
-    \]
-    Divide the obtained expressions by the total number of particles $N$, to obtain the entropy per particle $s_{mc}$, showing that they all coincide, in the thermodynamic limit.   
-    
+          \[
+              \log \Gamma(E) = \log \omega(E) + \log \Delta E = \log \Sigma(E) + \log(3N/(2E)) + \log \Delta E
+          \]
+          Divide the obtained expressions by the total number of particles $N$, to obtain the entropy per particle $s_{mc}$, showing that they all coincide, in the thermodynamic limit.
+
     \item Starting from the result obtained in Ex. 2 of Set 1:
-    \[
-    \Sigma(E) = \frac{V 4\pi (2m)^{3/2}}{3h^3} E^{3/2}
-    \]
-    show that the entropy $S = k_B \log \Sigma(E)$, in the thermodynamic limit (i.e. neglecting terms that increase slower than $N$), is given by:
-    \[
-    S = k_B \left\{
-    \begin{array}{ll}
-    \frac{3}{2}N + N\log\left[V\left(\frac{4\pi mE}{3Nh^2}\right)^{3/2}\right] & \textit{distinguishable particles} \\
-    \\
-    \frac{5}{2}N + N\log\left[\frac{V}{N}\left(\frac{4\pi mE}{3Nh^2}\right)^{3/2}\right] & \textit{indistinguishable particles}
-    \end{array}
-    \right.
-    \]
-    \textit{Remark. You need to use Stirling formulas: $\log N! = N\log N - N$ for $N$ large and similarly $\log \Gamma(x) \simeq x\log x - x$ for $x$ large.}
-    
-    Are the obtained expressions of $S$ extensive? Discuss the result.
-    
+          \[
+              \Sigma(E) = \frac{V 4\pi (2m)^{3/2}}{3h^3} E^{3/2}
+          \]
+          show that the entropy $S = k_B \log \Sigma(E)$, in the thermodynamic limit (i.e. neglecting terms that increase slower than $N$), is given by:
+          \[
+              S = k_B \left\{
+              \begin{array}{ll}
+                  \frac{3}{2}N + N\log\left[V\left(\frac{4\pi mE}{3Nh^2}\right)^{3/2}\right]           & \textit{distinguishable particles}   \\
+                  \\
+                  \frac{5}{2}N + N\log\left[\frac{V}{N}\left(\frac{4\pi mE}{3Nh^2}\right)^{3/2}\right] & \textit{indistinguishable particles}
+              \end{array}
+              \right.
+          \]
+          \textit{Remark. You need to use Stirling formulas: $\log N! = N\log N - N$ for $N$ large and similarly $\log \Gamma(x) \simeq x\log x - x$ for $x$ large.}
+
+          Are the obtained expressions of $S$ extensive? Discuss the result.
+
     \item Recalling that $TdS = dE + pdV$, calculate:
-    \begin{itemize}
-        \item $\left.\frac{\partial S}{\partial E}\right|_V$ and derive the expression for the internal energy:
-        \[E = \frac{3}{2} N k_B T\]
-        
-        \item $\left.\frac{\partial S}{\partial V}\right|_E$ and derive the expression for the equation of state:
-        \[pV = N k_B T\]
-    \end{itemize}
-    
+          \begin{itemize}
+              \item $\left.\frac{\partial S}{\partial E}\right|_V$ and derive the expression for the internal energy:
+                    \[E = \frac{3}{2} N k_B T\]
+
+              \item $\left.\frac{\partial S}{\partial V}\right|_E$ and derive the expression for the equation of state:
+                    \[pV = N k_B T\]
+          \end{itemize}
+
 \end{enumerate}
 
 \vspace{2cm}
 \textbf{Solution:}
+
+\paragraph{1)} The first equality simply follows from $\Gamma(E) = \omega(E)\Delta E$. The second equality can be easily derived from the expressions of $\Sigma(E)$ and $\omega(E) = \frac{d\Sigma(E)}{dE}$. We see that the expressions of $\log \Gamma(E)$, $\log \omega(E)$, $\log \Sigma(E)$ differ by terms such as $\log \Delta E$ and $\log(3N/2)$, which scale sublinearly as $N \to \infty$. Thus they go to zero when divided by $N$, in the thermodynamic limit.
+
+\paragraph{2)} Starting from $S_{mc} = k_B \log \Sigma(E)$, we get the following.
+
+For distinguishable particles we have to take $\mathcal{N} = 1$, hence
+\begin{equation}
+    S_{\text{dist}} = k_B \left[ N \log \left( V \left( \frac{2\pi m E}{h^2} \right)^{3/2} \right) - \log\left( \frac{3N}{2} \right) - \log \Gamma\left( \frac{3N}{2} \right) \right]
+\end{equation}
+For indistinguishable particles we have to take $\mathcal{N} = N!$, hence
+\begin{equation}
+    S_{\text{ind}} = k_B \left[ N \log \left( \frac{V}{N} \left( \frac{2\pi m E}{h^2} \right)^{3/2} \right) - \log\left( \frac{3N}{2} \right) - \log \Gamma\left( \frac{3N}{2} \right) - \log N! \right]
+\end{equation}
+The final expressions are recovered by taking into account that, for large $N$, we can neglect the second term because it does not contribute to the thermodynamic limit, while:
+\[
+    \log N! \approx N \log N - N, \quad \log \Gamma(x) \approx x \log x - x \quad \text{for large } x.
+\]
+We can notice that the expression for distinguishable particles is not extensive: if we double the volume $V$ the expression for $S$ changes also by an additional addend $2N \log 2$, while the one for indistinguishable particles is extensive. This is related to the so-called Gibbs paradox, that can be resolved by noticing that in the case of distinguishable particles, we actually have two situations that are not the same from a physical point of view: on one hand, we have two systems of $N$ particles, each in a volume $V$ with particles in one volume that can be distinguished from the ones in the other volume; on the other hand we have $2N$ particles that can all occupy a volume $2V$. If particles are indistinguishable, we cannot say which particle is in which volume and therefore these two situations coincide.
+
+\paragraph{3)} The calculation is straightforward, since $\frac{\partial S}{\partial E}$ and $\frac{\partial S}{\partial V}$ give the expressions for the internal energy and the equation of state:
+\[
+    E = \frac{3}{2} Nk_B T, \quad pV = Nk_B T.
+\]
 
 \newpage
 
@@ -103,41 +126,112 @@ In this exercise we will derive the thermodynamics of an ideal gas from its cano
 
 \begin{enumerate}
     \item Recalling that, for a gas of free non-relativistic particles, we have:
-    \[
-    \mathcal{M}_N = V^N \times \mathbb{R}^{3N}, \quad \mathcal{H} = \sum_i \frac{p_i^2}{2m}
-    \]
-    show that the canonical partition function $Z$ is given by:
-    \[
-    Z = \frac{V^N}{N! \lambda_T^{3N}}
-    \]
-    having defined the thermal wavelength
-    \[
-    \lambda_T \equiv \sqrt{\frac{h^2}{2\pi m k_B T}}
-    \]
-    Derive an expression for $\ln Z$ in the large $N$ limit.
-    
-    \textit{Remark. Recall Stirling formula and the formula for Gaussian integral:}
-    \[
-    \int_{-\infty}^{\infty} dx\, e^{-\alpha x^2} = \sqrt{\frac{\pi}{\alpha}}
-    \]
-    
-    \item Derive the internal energy $E$ and the free energy $F$. 
-    
+          \[
+              \mathcal{M}_N = V^N \times \mathbb{R}^{3N}, \quad \mathcal{H} = \sum_i \frac{p_i^2}{2m}
+          \]
+          show that the canonical partition function $Z$ is given by:
+          \[
+              Z = \frac{V^N}{N! \lambda_T^{3N}}
+          \]
+          having defined the thermal wavelength
+          \[
+              \lambda_T \equiv \sqrt{\frac{h^2}{2\pi m k_B T}}
+          \]
+          Derive an expression for $\ln Z$ in the large $N$ limit.
+
+          \textit{Remark. Recall Stirling formula and the formula for Gaussian integral:}
+          \[
+              \int_{-\infty}^{\infty} dx\, e^{-\alpha x^2} = \sqrt{\frac{\pi}{\alpha}}
+          \]
+
+    \item Derive the internal energy $E$ and the free energy $F$.
+
     \item Derive the entropy $S$, for both the case of distinguishable and indistinguishable particles.
-    
-    Calculate the value $T_*$ of the temperature at which $S$ becomes negative. How can you interpret this result?
-        
+
+          Calculate the value $T_*$ of the temperature at which $S$ becomes negative. How can you interpret this result?
+
     \item Calculate the pressure $p$, and derive the equation of state.
-    
-    How does an isothermal curve look like in the $p-V$ plane?
-     
+
+          How does an isothermal curve look like in the $p-V$ plane?
+
     \item Calculate the chemical potential $\mu$ and draw a graph of it as function of temperature T, at a fixed density of particles $n$.
-        
+
     \item Calculate the specific heats per particle: $c_v = C_v/N$ and $c_p = C_p/N$.
 
 \end{enumerate}
 
 \vspace{2cm}
 \textbf{Solution:}
+
+\paragraph{1)}
+
+\[
+    Z = \frac{1}{h^{3N} N!} \int \prod_{i=1}^N d^3 q_i \int \prod_{i=1}^N d^3 p_i \, e^{-\beta \sum_i \frac{p_i^2}{2m}} = \frac{V^N}{h^{3N} N!} \left( \int d^3 p \, e^{-\beta \frac{p^2}{2m}} \right)^N
+\]
+Since we have a Gaussian integral for each component of the three-dimensional momentum $p_i$ of each of the $N$ particles:
+\[
+    \int_{-\infty}^{\infty} dx \, e^{-\alpha x^2} = \sqrt{\frac{\pi}{\alpha}} \Rightarrow \int d^3 p \, e^{-\beta \frac{p^2}{2m}} = \left( \frac{2\pi m}{\beta} \right)^{3/2}
+\]
+Thus, setting $n = N/V$ and defining the thermal wavelength $\lambda_T = \sqrt{\frac{h^2}{2\pi m k_B T}}$:
+\[
+    Z = \frac{V^N}{N! \lambda_T^{3N}} \Rightarrow \ln Z = N \ln \left( \frac{V}{N \lambda_T^3} \right) + N
+\]
+
+\paragraph{2)}
+
+\[
+    F = -k_B T \ln Z = -Nk_B T \left[ \ln \left( \frac{V}{N \lambda_T^3} \right) + 1 \right]
+\]
+\[
+    E = -\frac{\partial \ln Z}{\partial \beta} = \frac{3}{2} Nk_B T
+\]
+The latter result coincides with the one obtained from the equipartition theorem, that gives a factor of $k_B T/2$ for each degree of freedom that appears quadratically in the Hamiltonian: here we have $3N$ momenta.
+
+\paragraph{3)}
+
+\[
+    S = \frac{E - F}{T} = Nk_B \left[ \frac{5}{2} + \ln \left( \frac{V}{N \lambda_T^3} \right) \right]
+\]
+The entropy becomes negative for temperatures $T < T_x$, with $T_x$ fixed by the condition:
+\[
+    n \lambda_T^3 = e^{5/2} \Rightarrow T_x = \frac{h^2}{2\pi m k_B} \left( \frac{n}{e^{5/2}} \right)^{2/3}
+\]
+This is of course absurd, signalling that this model is not suited to describe the low temperature limit.
+
+\paragraph{4)}
+
+\[
+    p = -\left( \frac{\partial F}{\partial V} \right)_{T,N} = \frac{Nk_B T}{V} \Rightarrow pV = Nk_B T
+\]
+Note that isothermal curves in the $p$–$V$ plane are hyperbolas, as shown in the figure below.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{img/es1_4-img1.png}
+    \caption{Isothermal curves in the $p$–$V$ plane for different temperatures.}
+    \label{fig:es1_4-img1}
+\end{figure}
+
+\paragraph{5)}
+
+\[
+    \mu = \left( \frac{\partial F}{\partial N} \right)_{T,V} = -k_B T \left[ \ln \left( \frac{V}{N \lambda_T^3} \right) + 1 \right] = k_B T \ln(n \lambda_T^3) - k_B T
+\]
+As $T \to 0$, $\mu \to -\infty$; as $T \to \infty$, $\mu \to +\infty$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{img/es1_4-img2.png}
+    \caption{The chemical potential \(\mu\) as function of \(T\), for fixed density \(n\).}
+    \label{fig:es1_4-img2}
+\end{figure}
+
+\paragraph{6)}
+
+\[
+    c_v = \left( \frac{\partial E}{\partial T} \right)_{V,N} = \frac{3}{2} k_B
+\]
+\[
+    c_p = c_v + \frac{p}{N} \left( \frac{\partial V}{\partial T} \right)_{p,N} = \frac{3}{2} k_B + k_B = \frac{5}{2} k_B
+\]
+Notice that $c_v$ is constant: this is in contradiction with thermodynamic identities that require $c_v \to 0$ as $T \to 0$. Again this shows that this model is not suited to describe the low temperature limit.
 
 \newpage
