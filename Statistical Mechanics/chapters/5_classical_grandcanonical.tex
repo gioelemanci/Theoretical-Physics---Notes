@@ -1,0 +1,334 @@
+\chapter{Classical Grandcanonical Ensemble}
+
+In many physical situations, the number of particles in a system is not strictly fixed, but can fluctuate due to exchange with a surrounding reservoir. This occurs, for example, in open systems that allow particle transfer—such as chemical reactions, adsorption processes, or systems in contact with a particle bath. While the total energy and total particle number of the combined system (system plus reservoir) remain conserved, the subsystem of interest exhibits fluctuations in both energy and particle number.
+
+The appropriate statistical framework for describing such systems is the \textit{grandcanonical ensemble}.
+In this ensemble, the macroscopic state of the system is specified by fixing the temperature \(T\), the volume \(V\), and the chemical potential \(\mu\), while both energy and particle number are allowed to fluctuate according to a well-defined probability distribution.
+
+The central quantity that characterizes the grandcanonical ensemble is the \textit{grand partition function}, which encodes the statistical weight of all accessible microstates across different particle numbers. It plays a role analogous to the canonical partition function, but extended to include particle exchange.
+
+From the grand partition function, one can derive all relevant thermodynamic quantities—such as the average energy, average particle number, entropy, and the grand potential \(\Phi = -k_B T \log \mathcal{Z}\). The grandcanonical ensemble thus provides a powerful bridge between microscopic dynamics and macroscopic thermodynamics for open systems, allowing us to compute equilibrium properties in the presence of both thermal and particle exchange.
+
+\section{System in a Particle and Thermal Bath}
+
+Let us now consider a system \(\mathcal{S}\) that is not only in thermal contact with a reservoir \(\mathcal{E}\), but also able to exchange particles with it. This situation arises naturally in open systems, such as chemical reactions, adsorption processes, or quantum gases in contact with a particle bath.
+
+From a macroscopic perspective, the state of the system is specified by fixed values of temperature, volume, and chemical potential \((T, V, \mu)\), while both energy and particle number are allowed to fluctuate. Microscopically, the system is described by its phase space, now extended to include configurations with varying particle number:
+\[
+    \mathcal{M}_{\mathcal{S}} = \bigcup_{N} \{ (q_i, p_i) \}_{i=1}^{N}.
+\]
+
+At equilibrium, the system and the reservoir share the same temperature and chemical potential:
+\[
+    T_1 = T_2 = T, \qquad \mu_1 = \mu_2 = \mu.
+\]
+Energy and particles can be exchanged freely, but the total energy and total particle number of the composite system — the \textit{universe} \(\mathcal{U} = \mathcal{S} + \mathcal{E}\) — remain conserved:
+\[
+    E = E_1 + E_2 = \text{const}, \qquad N = N_1 + N_2 = \text{const}.
+\]
+Thus, the full system \(\mathcal{U}\) is described by a microcanonical ensemble in the extended space of energy and particle number.
+
+Our goal is to derive the probability distribution that governs the microscopic states of the subsystem \(\mathcal{S}\), when it is allowed to exchange both energy and particles with the reservoir. As in the canonical case, we start from the microcanonical distribution of the universe and integrate out the environmental degrees of freedom.
+
+The resulting marginal distribution for the subsystem will depend on both its energy \(E_1\) and particle number \(N_1\), and will be proportional to the number of microstates available to the reservoir with energy \(E_2 = E - E_1\) and particle number \(N_2 = N - N_1\):
+\[
+    \rho_{gc}^{(1)}(E_1, N_1) \propto \omega_2(E - E_1, N - N_1).
+\]
+
+To proceed, we express the reservoir's density of states in terms of its entropy:\footnote{This derivation is similar to the one presented for the canonical ensemble. However, we will later introduce an alternative method that is physically instructive for different reasons.}
+\[
+    S_2(E_2, N_2) = k_B \ln \omega_2(E_2, N_2),
+\]
+and expand it around the equilibrium point \((E, N)\), assuming the reservoir is much larger than the system. Neglecting higher-order terms, we obtain:
+\[
+    S_2(E - E_1, N - N_1) \approx S_2(E, N) - \frac{E_1}{T} + \frac{\mu N_1}{T}.
+\]
+Exponentiating this expression yields:
+\[
+    \omega_2(E - E_1, N - N_1) \propto e^{-\beta(E_1 - \mu N_1)}.
+\]
+Hence, the grandcanonical probability distribution for the subsystem takes the form:
+\[
+    \rho_{gc}(q_i, p_i, N) = \frac{1}{\mathcal{Z}} e^{-\beta(\mathcal{H}(q_i, p_i) - \mu N)},
+\]
+where \(\mathcal{Z}\) is the \textbf{grand partition function}, defined by the normalization condition:
+\[
+    \mathcal{Z} = \sum_{N=0}^{\infty} \frac{1}{\xi_N} \int_{\mathcal{M}_{\mathcal{S}}} \prod_{i=1}^{N} \frac{\mathrm{d}^d q_i \, \mathrm{d}^d p_i}{h^d} \, e^{-\beta(\mathcal{H}(q_i, p_i) - \mu N)}.
+\]
+
+---
+
+We can obtain the same results for the grandcanonical ensemble by integrating the \textit{canonical probability distribution of the universe}\footnote{Although the universe as a whole is strictly microcanonical, it is common to derive the grandcanonical ensemble by starting from a canonical distribution and integrating out the environmental degrees of freedom. This procedure, though approximate, becomes exact in the thermodynamic limit, where ensemble equivalence guarantees that the subsystem distribution coincides with the correct marginal of the global microcanonical ensemble.} with respect to the environment variables:
+\[
+    \rho_{gc}^{(1)}(q_i^{(1)},\,p_i^{(1)},\,N_1)
+    = \int_{\mathcal{M}_2} \d{\Omega_2}\,
+    \rho_{c}(q_i^{(1)},\,p_i^{(1)},\,q_j^{(2)},\,p_j^{(2)})
+    = \frac{e^{-\beta \mathcal{H}_1}}{Z(T,\,V,\,N)}
+    \int_{\mathcal{M}_2} \d{\Omega_2}\, e^{-\beta \mathcal{H}_2},
+\]
+where \(\d{\Omega_2} = \frac{1}{h^{dN_2}\,\xi_{N_2}} \prod_{j=1}^{N_2} \mathrm{d}^d q_j^{(2)}\, \mathrm{d}^d p_j^{(2)}\) is the measure on the phase space of the environment.
+
+Because the subsystem can exchange both energy and particles with the environment, the normalization condition for the total probability requires integrating over all subsystem variables and summing over all possible particle numbers \(N_1\):
+\[
+    \sum_{N_1=0}^{\infty}
+    \int_{\mathcal{M}_1} \d{\Omega_1}\,
+    \rho_{gc}^{(1)}(q_i^{(1)},\,p_i^{(1)},\,N_1)
+    = 1.
+\]
+Let us check that this normalization indeed holds. Substituting the explicit form of \(\rho_{gc}^{(1)}\), we have:
+\[
+    \begin{aligned}
+        \sum_{N_1=0}^{\infty}\int_{\mathcal{M}_1} \d{\Omega_1}\,
+        \rho_{gc}^{(1)}(q_i^{(1)},\,p_i^{(1)},\,N_1)
+         & = \sum_{N_1=0}^{\infty}
+        \int_{\mathcal{M}_1} \d{\Omega_1}\,
+        \frac{e^{-\beta\mathcal{H}_1}}{Z(T,\,V,\,N)}
+        \int_{\mathcal{M}_2} \d{\Omega_2}\, e^{-\beta\mathcal{H}_2} \\
+         & = \sum_{N_1=0}^{\infty}
+        \frac{\int_{\mathcal{M}_1} \d{\Omega_1}\, e^{-\beta\mathcal{H}_1}
+            \int_{\mathcal{M}_2} \d{\Omega_2}\, e^{-\beta\mathcal{H}_2}}
+        {\int_{\mathcal{M}} \d{\Omega}\, e^{-\beta(\mathcal{H}_1+\mathcal{H}_2)}}.
+    \end{aligned}
+\]
+Introducing the explicit expressions for the phase-space measures, we can rewrite this ratio as:
+\[
+    \sum_{N_1=0}^{\infty}
+    \frac{\xi_N}{\xi_{N_1}\xi_{N_2}}
+    \frac{\int_{V_1}\!\!\prod_{i=1}^{N_1}\!\mathrm{d}^d q_i^{(1)}
+        \int_{V_2}\!\!\prod_{j=1}^{N_2}\!\mathrm{d}^d q_j^{(2)}\,\Phi_1 \Phi_2}
+    {\int_{V}\!\!\prod_{i=1}^{N_1}\!\mathrm{d}^d q_i^{(1)}
+        \int_{V}\!\!\prod_{j=1}^{N_2}\!\mathrm{d}^d q_j^{(2)}\,\Phi},
+\]
+where we have defined:
+\[
+    \begin{aligned}
+        \Phi_1 & = \int_{\mathbb{R}^{dN_1}} \prod_{i=1}^{N_1}\! \mathrm{d}^d p_i^{(1)}\, e^{-\beta\mathcal{H}_1}, \\[2mm]
+        \Phi_2 & = \int_{\mathbb{R}^{dN_2}} \prod_{j=1}^{N_2}\! \mathrm{d}^d p_j^{(2)}\, e^{-\beta\mathcal{H}_2}, \\[2mm]
+        \Phi   & = \int_{\mathbb{R}^{dN}} \prod_{i=1}^{N_1}\! \mathrm{d}^d p_i^{(1)}
+        \prod_{j=1}^{N_2}\! \mathrm{d}^d p_j^{(2)}\,
+        e^{-\beta(\mathcal{H}_1+\mathcal{H}_2)}
+        = \Phi_1 \Phi_2,
+    \end{aligned}
+\]
+where the last equality follows from the statistical independence of subsystem and environment.
+
+To simplify the spatial integrations, let us introduce the notation for the average of a function over a $dN$-dimensional configuration space of volume \(V\):
+\[
+    \langle \Phi \rangle_V \coloneqq \frac{1}{V^N}
+    \int_V \prod_{i=1}^{N} \mathrm{d}^d q_i\, \Phi.
+\]
+In the thermodynamic limit (\(V \to \infty\) at fixed density), we assume that such averages become independent of the specific integration domain, provided its surface-to-volume ratio vanishes.\footnote{A rigorous justification of this statement would require ergodicity assumptions and a detailed measure-theoretic analysis, which are beyond our present scope.}
+Hence,
+\[
+    \sum_{N_1=0}^{\infty}
+    \int_{\mathcal{M}_1} \d{\Omega_1}\,
+    \rho_{gc}^{(1)}(q_i^{(1)},\,p_i^{(1)},\,N_1)
+    = \sum_{N_1=0}^{\infty}
+    \frac{\xi_N}{\xi_{N_1}\xi_{N_2}}
+    \frac{\langle \Phi_1 \rangle_{V_1}\langle \Phi_2 \rangle_{V_2}}
+    {\langle \Phi \rangle_{V}}
+    \frac{V_1^{N_1}V_2^{N_2}}{V^N}.
+\]
+For indistinguishable particles, this becomes:
+\[
+    \sum_{N_1=0}^{\infty}
+    \frac{N!}{N_1!(N-N_1)!}
+    \left(\frac{V_1}{V}\right)^{N_1}
+    \left(\frac{V - V_1}{V}\right)^{N-N_1},
+\]
+which is a binomial probability distribution.
+In the thermodynamic limit, using \((V_1+V_2)/V \to 1\), the sum converges to unity, proving the normalization of the derived distribution.
+
+We can thus write the \textbf{grandcanonical probability density} for the subsystem as:
+\[
+    \rho_{gc}^{(1)}(q_i^{(1)},\,p_i^{(1)},\,N_1)
+    = e^{-\beta \mathcal{H}_1}
+    \frac{Z^{(2)}(T,\,V - V_1,\,N - N_1)}
+    {Z(T,\,V,\,N)}.
+\]
+To make this expression explicit, we note that the ratio of the two partition functions can be Taylor-expanded around the equilibrium values of the environment variables.
+Using \(Z = e^{-\beta F}\) and expanding the free energy \(F(T,V,N)\) for small variations of \(V_1\) and \(N_1\), we find:
+\[
+    \begin{aligned}
+        \frac{Z^{(2)}(T,\,V - V_1,\,N - N_1)}{Z(T,\,V,\,N)}
+         & = e^{-\beta \left[F(T,\,V - V_1,\,N - N_1) - F(T,\,V,\,N)\right]}            \\
+         & \simeq e^{-\beta \left[-\left(\frac{\partial F}{\partial N}\right)_{V,T} N_1
+        -\left(\frac{\partial F}{\partial V}\right)_{N,T} V_1\right]}                   \\
+         & = e^{-\beta(-\mu N_1 + pV_1)},
+    \end{aligned}
+\]
+where we have identified the thermodynamic relations
+\(\mu = (\partial F/\partial N)_{V,T}\) and
+\(p = -(\partial F/\partial V)_{N,T}\).
+
+Substituting this back, we obtain the final expression for the \textbf{grandcanonical probability density function}:\footnote{At this point we rename subsystem variables as global ones, since all explicit dependence on the environmental quantities has been eliminated.}
+\[
+    \rho_{gc}(q_i,\,p_i,\,N)
+    = e^{-\beta \mathcal{H}(q_i,\,p_i)}
+    e^{-\beta(-\mu N + pV)},
+\]
+with the normalization condition:
+\[
+    \sum_{N=0}^{\infty}
+    \int_{\mathcal{M}_N} \d{\Omega}\,
+    e^{-\beta \mathcal{H}} e^{-\beta(-\mu N + pV)} = 1.
+\]
+
+We can now identify the corresponding \textbf{grandcanonical partition function}.
+Introducing the \textit{fugacity} \(z = e^{\beta \mu}\), the normalization condition reads:
+\[
+    e^{-\beta pV} \sum_{N=0}^{\infty} z^N
+    \int_{\mathcal{M}_N} \d{\Omega}\, e^{-\beta \mathcal{H}} = 1.
+\]
+Recognizing the canonical partition function in the integral, we find:
+\[
+    e^{-\beta pV} \sum_{N=0}^{\infty} z^N Z_N = 1
+    \quad\Rightarrow\quad
+    \mathcal{Z} = \sum_{N=0}^{\infty} z^N Z_N
+    = e^{\beta pV} = e^{-\beta \Omega},
+\]
+where \(\Omega = -pV\) is the \textit{grand potential}.
+Finally, the normalized probability density becomes:
+\[
+    \boxed{
+        \rho_{gc}(q_i,\,p_i,\,N)
+        = e^{-\beta \mathcal{H}(q_i,\,p_i)}
+        \frac{z^N}{\mathcal{Z}}.
+    }
+\]
+
+Finally, we define the ensemble average of an observable in the grandcanonical ensemble.
+\begin{definition}{Grandcanonical average.}
+    Let \(f(q_i, p_i, N)\) be an observable defined on the extended phase space of the system. Its average over the grandcanonical ensemble is given by
+    \[
+        \begin{aligned}
+            \langle f(q_i, p_i, N) \rangle_{gc} & = \frac{1}{\mathcal{Z}} \sum_{N=0}^{\infty} \frac{1}{\xi_N} \int \prod_{i=1}^{N} \frac{\mathrm{d}^d q_i \, \mathrm{d}^d p_i}{h^d} \, e^{-\beta(\mathcal{H}(q_i, p_i) - \mu N)} f(q_i, p_i, N) \\
+                                                & = \frac{1}{\mathcal{Z}} \sum_{N=0}^{\infty} z^N Z_N \langle f(q_i, p_i, N) \rangle_{c}.
+        \end{aligned}
+    \]
+    This defines the connection between microscopic dynamics and macroscopic observables in open systems.
+\end{definition}
+
+\section{Partition Function and Thermodynamic Quantities}
+
+As in the canonical ensemble, the \textbf{grand partition function} contains all the thermodynamic information about the system.
+Once $\mathcal{Z}$ is known, all macroscopic quantities can be derived from it.
+The central thermodynamic potential of the grandcanonical ensemble is the \textbf{grand potential}:
+\[
+    \Omega(T, V, \mu) = -k_B T \log \mathcal{Z}.
+\]
+It plays a role analogous to the Helmholtz free energy in the canonical ensemble, with natural variables $(T, V, \mu)$ instead of $(T, V, N)$.
+
+From $\Omega$ we can obtain all other quantities of interest through the relations:
+\[
+    p = -\left(\frac{\partial \Omega}{\partial V}\right)_{T,\mu},
+    \qquad
+    \mathcal{N} = -\left(\frac{\partial \Omega}{\partial \mu}\right)_{T,V},
+    \qquad
+    S = -\left(\frac{\partial \Omega}{\partial T}\right)_{V,\mu}.
+\]
+However, it is instructive to re-derive these expressions directly from statistical averages, to make explicit the connection between ensemble averages and thermodynamic observables.
+
+The average energy is the grandcanonical expectation value of the Hamiltonian.
+Formally, this is analogous to the canonical ensemble, except that the sum runs over all possible particle numbers:
+\[
+    \begin{aligned}
+        E = \langle \mathcal{H}(q_i, p_i, N) \rangle_{gc}
+         & = \frac{1}{\mathcal{Z}} \sum_{N=0}^{\infty} z^N
+        \int \mathrm{d}\Omega\, e^{-\beta \mathcal{H}} \mathcal{H}.
+    \end{aligned}
+\]
+To evaluate this, notice that the Hamiltonian appears only in the exponential.
+We can therefore express it as a derivative with respect to $\beta$:
+\[
+    \mathcal{H}\, e^{-\beta \mathcal{H}} = -\frac{\partial}{\partial \beta}\left( e^{-\beta \mathcal{H}} \right),
+\]
+which yields:
+\[
+    \begin{aligned}
+        E & = \frac{1}{\mathcal{Z}} \sum_{N=0}^{\infty} z^N
+        \left( - \frac{\partial}{\partial \beta} \right)
+        \int \mathrm{d}\Omega\, e^{-\beta \mathcal{H}}                                   \\
+          & = \frac{1}{\mathcal{Z}}
+        \left( - \frac{\partial}{\partial \beta} \right)
+        \sum_{N=0}^{\infty} z^N \int \mathrm{d}\Omega\, e^{-\beta \mathcal{H}} \Big|_{z} \\
+          & = -\frac{1}{\mathcal{Z}}
+        \left( \frac{\partial \mathcal{Z}}{\partial \beta} \right)_{z}
+        = -\left( \frac{\partial \ln \mathcal{Z}}{\partial \beta} \right)_{z}.
+    \end{aligned}
+\]
+The derivative is taken at fixed fugacity \(z = e^{\beta \mu}\).
+This means that when $\beta$ varies, the chemical potential $\mu$ must adjust so as to keep $z$ constant.
+Physically, this corresponds to varying the temperature while maintaining the same average particle number.
+
+The average number of particles $\mathcal{N} = \langle N \rangle_{gc}$ can be derived in a completely analogous manner:
+\[
+    \begin{aligned}
+        \mathcal{N}
+         & = \frac{1}{\mathcal{Z}}
+        \sum_{N=0}^{\infty} z^N
+        \int \mathrm{d}\Omega\, e^{-\beta \mathcal{H}} N
+        = \frac{1}{\mathcal{Z}} \sum_{N=0}^{\infty} N z^N Z_N.
+    \end{aligned}
+\]
+Recognizing that differentiation with respect to $z$ brings down a factor of $N$, we obtain:
+\[
+    \mathcal{N}
+    = \frac{1}{\mathcal{Z}}
+    \left( z \frac{\partial}{\partial z}
+    \sum_{N=0}^{\infty} z^N Z_N \right)_{\beta}
+    = z \left( \frac{\partial \ln \mathcal{Z}}{\partial z} \right)_{\beta}.
+\]
+This formula explicitly relates the average number of particles to the dependence of the partition function on the fugacity, emphasizing that $\mu$ controls the probability distribution over different particle numbers.
+
+\paragraph{Entropy.} Finally, we show that the statistical entropy in the grandcanonical ensemble coincides with the thermodynamic entropy, as it did for the microcanonical and canonical ensembles in the thermodynamic limit.
+
+Using Boltzmann’s universal definition of entropy:
+\[
+    S_{gc} = -k_B \langle \log \rho_{gc} \rangle_{gc},
+\]
+and substituting the expression for the grandcanonical probability density
+\(\rho_{gc} = e^{-\beta(\mathcal{H} - \mu N)}/\mathcal{Z}\), we find:
+\[
+    \begin{aligned}
+        S_{gc}
+         & = - \frac{k_B}{\mathcal{Z}}
+        \sum_{N=0}^{\infty} z^N
+        \int \mathrm{d}\Omega\, e^{-\beta \mathcal{H}}
+        \log \left( \frac{e^{-\beta(\mathcal{H} - \mu N)}}{\mathcal{Z}} \right) \\
+         & = - \frac{k_B}{\mathcal{Z}}
+        \sum_{N=0}^{\infty} z^N
+        \left[
+            \int \mathrm{d}\Omega\, (-\beta \mathcal{H})
+            + \int \mathrm{d}\Omega\, (\beta \mu N)
+            + \int \mathrm{d}\Omega\, (-\log \mathcal{Z})
+            \right].
+    \end{aligned}
+\]
+Performing the integrations and recognizing the ensemble averages, this becomes:
+\[
+    S_{gc}
+    = -k_B \left[ -\beta E + \beta \mu \mathcal{N} - \log \mathcal{Z} \right].
+\]
+Recalling that \(\Omega = -k_B T \log \mathcal{Z}\), we can rewrite this as:
+\[
+    S_{gc}
+    = \frac{1}{T} \left( E - \mu \mathcal{N} - \Omega \right).
+\]
+This is precisely the \textbf{thermodynamic identity} linking entropy, energy, chemical potential, and the grand potential:
+\[
+    S_{th} = \frac{E - \mu \mathcal{N} - \Omega}{T}.
+\]
+Hence, we have proven that:
+\[
+    S_{gc} = S_{th},
+\]
+that is, in the thermodynamic limit, the entropy computed from the grandcanonical ensemble coincides with the macroscopic thermodynamic entropy.
+
+\begin{remark}
+    This result completes the chain of equivalences among ensembles:
+    \[
+        S_{mc} \longrightarrow S_{c} \longrightarrow S_{gc} = S_{th}.
+    \]
+    It confirms that all three statistical ensembles yield the same thermodynamics when extensive variables are large and fluctuations are negligible.
+\end{remark}
