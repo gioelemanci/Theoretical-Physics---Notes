@@ -1,52 +1,92 @@
-\subsection{Finite dimensional representations}
+\subsection{Finite-dimensional representations}
 
-Finite-dimensional representations of the Lorentz group play a central role in quantum field theory, as they determine how physical fields transform under Lorentz transformations. These representations describe the intrinsic angular momentum (or \textit{spin}) content of fields. The Lorentz group itself is non-compact, and therefore it admits only non-unitary finite-dimensional representations. Such representations are classified according to the group isomorphism:
+Finite-dimensional representations of the Lorentz group play a central role in relativistic field theory, as they determine how different types of physical fields transform under Lorentz transformations.
+These representations encode the intrinsic angular momentum (or \textit{spin}) of the fields and thus classify the fundamental particles in a relativistic framework.
+
+The Lorentz group \(\mathrm{SO}^+(1,3)\) is non-compact, which implies that all its non-trivial finite-dimensional representations are necessarily \textit{non-unitary}.
+This is not a problem in classical or quantum field theory, since these representations act on field components rather than on the Hilbert space of physical states (where unitarity is instead required to preserve probabilities).
+
+A key fact is that the proper orthochronous Lorentz group is locally isomorphic to the complex special linear group:
 \[
-    \mathrm{SO}^+(1,3) \simeq \mathrm{SL}(2,\mathbb{C})/\mathbb{Z}_2,
+    \mathrm{SO}^+(1,3) \simeq \mathrm{SL}(2,\mathbb{C}) / \mathbb{Z}_2.
 \]
-and labeled by two half-integer indices \((j_L, j_R)\), corresponding respectively to the two \(\mathrm{SU}(2)\) factors in the decomposition
+Because \(\mathrm{SL}(2,\mathbb{C})\) can be viewed as the complexification of \(\mathrm{SU}(2)\), one can decompose its Lie algebra into two commuting copies of the \(\mathfrak{su}(2)\) algebra:
+\[
+    \mathfrak{so}(1,3)_\mathbb{C} \simeq \mathfrak{su}(2)_L \oplus \mathfrak{su}(2)_R.
+\]
+Consequently, finite-dimensional irreducible representations of the Lorentz group are labeled by a pair of half-integers \((j_L, j_R)\), which specify the dimensions of the two \(\mathrm{SU}(2)\) factors:
 \[
     \mathrm{SL}(2,\mathbb{C}) \sim \mathrm{SU}(2)_L \times \mathrm{SU}(2)_R.
 \]
-We now review the most important finite-dimensional representations, relevant for relativistic field theory.
+
+Each field then transforms according to one such representation:
+\begin{itemize}
+    \item Scalars correspond to \((0,0)\);
+    \item Left-handed Weyl spinors to \((\tfrac{1}{2},0)\);
+    \item Right-handed Weyl spinors to \((0,\tfrac{1}{2})\);
+    \item Four-vectors to \((\tfrac{1}{2}, \tfrac{1}{2})\).
+\end{itemize}
+These representations can be combined to construct higher-spin fields and their tensor products.
+In this sense, finite-dimensional representations capture the internal (non-spacetime) transformation properties of fields and form the mathematical foundation for understanding spin in relativistic theories.
 
 \subsubsection{Trivial representation}
 
-The simplest representation is the \textbf{trivial representation}, in which all Lorentz generators vanish:
+The simplest Lorentz representation is the \textbf{trivial representation}, in which all generators vanish identically:
 \[
-    M^{\mu \nu} = 0 \implies \Lambda = e^{-\frac{i}{2}\omega_{\mu \nu}M^{\mu \nu}} = \mathbb{I}.
+    M^{\mu \nu} = 0 \quad \Longrightarrow \quad
+    \Lambda = e^{-\frac{i}{2}\omega_{\mu \nu} M^{\mu \nu}} = \mathbb{I}.
 \]
-It is a one-dimensional (\(1D\)) representation acting on scalar fields \(\phi\):
+It is a one-dimensional (\(1D\)) representation acting on scalar fields \(\phi(x)\):
 \[
-    \phi \to \phi' = \Lambda \phi = \phi.
+    \phi(x) \ \longrightarrow \ \phi'(x') = \phi(x),
 \]
-Such a field is invariant under Lorentz transformations and is thus denoted by the label \((0,0)\). It represents a \textbf{spinless particle}, such as the Higgs boson or the pion field, when regarded as a function defined on spacetime. This representation captures fields that do not transform under spatial rotations or boosts.
+where the argument \(x\) transforms as usual, but the field value itself remains invariant.
+Such fields are therefore completely unchanged under Lorentz transformations—they possess no internal structure and no preferred direction in spacetime.
+
+This representation is labeled by \((0,0)\) in the \((j_L, j_R)\) classification. It corresponds to \textbf{spinless} particles, whose states are invariant under spatial rotations and boosts. Examples include the Higgs field in the Standard Model or the pion field in low-energy effective theories.
+
+Physically, the trivial representation captures the idea of a \textit{scalar quantity} that is the same for all inertial observers: the field value at a spacetime point does not depend on the reference frame, even though its argument \(x^\mu\) does. Such fields are often the simplest starting point for constructing Lorentz-invariant Lagrangians.
 
 \subsubsection{Vectorial representation}
 
-The next non-trivial case is the \textbf{vectorial representation}, in which the Lorentz generators act on four-vectors \(V^\mu\) according to:
+The next non-trivial case is the \textbf{vectorial representation}, where the Lorentz generators act on four-vectors \(V^\mu\) according to:
 \[
-    (M^{\rho \sigma})^{\mu}_{\ \nu} = -i \left( \eta^{\mu \sigma} \delta^{\rho}_{\ \nu} - \eta^{\rho \mu} \delta^{\sigma}_{\ \nu} \right).
+    (M^{\rho \sigma})^{\mu}_{\ \nu} = -i \left( \eta^{\mu \sigma} \delta^{\rho}_{\ \nu} - \eta^{\mu \rho} \delta^{\sigma}_{\ \nu} \right).
 \]
-These are \(4 \times 4\) matrices generating transformations of the form:
+These are \(4\times4\) matrices generating infinitesimal transformations of the form:
 \[
-    V^{\mu} \to V'^{\mu} = \Lambda^{\mu}_{\ \nu} V^{\nu} = e^{-\frac{i}{2} \omega_{\rho \sigma} (M^{\rho \sigma})^{\mu}_{\ \nu}} V^{\nu}.
+    V^{\mu} \ \longrightarrow \ V'^{\mu} =
+    \Lambda^{\mu}_{\ \nu} V^{\nu} =
+    \left( e^{-\frac{i}{2}\omega_{\rho \sigma} (M^{\rho \sigma})} \right)^{\mu}_{\ \nu} V^{\nu}.
 \]
-This is the \((\tfrac{1}{2}, \tfrac{1}{2})\) representation, often referred to as the \textit{fundamental vector representation}. It describes spin–1 particles, such as gauge bosons (photon, gluon, \(W^\pm\), and \(Z\) bosons), whose classical fields transform as four-vectors under Lorentz transformations.
+This representation acts on the components of a Lorentz four-vector and mixes them under rotations and boosts.
+
+The vectorial representation corresponds to \((\tfrac{1}{2}, \tfrac{1}{2})\) in the \((j_L, j_R)\) classification. It describes \textbf{spin–1 fields}, which carry one unit of intrinsic angular momentum. Such fields appear naturally in the description of gauge bosons (photon, gluons, and the weak vector bosons \(W^\pm\) and \(Z^0\)), whose classical field components \(A^\mu(x)\) transform as four-vectors.
+
+Geometrically, this representation encodes how spacetime directions themselves transform under Lorentz transformations: the components of \(V^\mu\) are projections of a geometric vector onto the observer’s axes, and thus change when the observer is boosted or rotated.
+This is the fundamental representation used to describe tensors of rank one, from which higher-rank tensor representations can be built through tensor products.
 
 \subsubsection{Spinorial representation}
 
-The \textbf{spinorial representations} of the Lorentz group are more subtle. The proper orthochronous Lorentz group \(\mathrm{SO}^+(1,3)\) is not simply connected, and its double cover is the group \(\mathrm{SL}(2,\mathbb{C})\):
+The \textbf{spinorial representations} of the Lorentz group are more subtle and conceptually richer than the scalar or vector ones.
+This is because the proper orthochronous Lorentz group \(\mathrm{SO}^+(1,3)\) is not simply connected: it contains closed paths that cannot be continuously deformed to the identity.
+As a result, certain representations—such as those describing spin–\(\tfrac{1}{2}\) particles—cannot be defined consistently on \(\mathrm{SO}^+(1,3)\) itself: after a \(2\pi\) rotation, a spinor changes sign, and only after a full \(4\pi\) rotation does it return to its original state. To obtain single-valued representations that can describe spin–\(\tfrac{1}{2}\) particles, one must therefore pass to its universal covering group:
 \[
-    Spin^+(1,3) \equiv \mathrm{SL}(2,\mathbb{C}), \qquad \mathrm{SO}^+(1,3) \simeq \mathrm{SL}(2,\mathbb{C})/\mathbb{Z}_2.
+    \mathrm{Spin}^+(1,3) \equiv \mathrm{SL}(2,\mathbb{C}),
+    \qquad
+    \mathrm{SO}^+(1,3) \simeq \mathrm{SL}(2,\mathbb{C})/\mathbb{Z}_2.
 \]
-This means that for every Lorentz transformation \(\Lambda \in \mathrm{SO}^+(1,3)\) there exist two elements \(\pm A \in \mathrm{SL}(2,\mathbb{C})\) corresponding to it, establishing a two-to-one homomorphism:
+This means that for each Lorentz transformation \(\Lambda \in \mathrm{SO}^+(1,3)\) there exist two corresponding elements \(\pm A \in \mathrm{SL}(2,\mathbb{C})\), related by a two-to-one homomorphism:
 \[
-    A, B \in \mathrm{SL}(2,\mathbb{C}) \quad \longrightarrow \quad \Lambda \in \mathrm{SO}^+(1,3), \qquad \Lambda(A)\Lambda(B) = \Lambda(AB).
+    A,\, B \in \mathrm{SL}(2,\mathbb{C})
+    \quad \longrightarrow \quad
+    \Lambda \in \mathrm{SO}^+(1,3),
+    \qquad
+    \Lambda(A)\Lambda(B) = \Lambda(AB).
 \]
-The spinorial representations of \(\mathrm{SL}(2,\mathbb{C})\) correspond to the half-integer spin representations of the Lorentz group.
+The representations of \(\mathrm{SL}(2,\mathbb{C})\) thus provide a natural way to construct the \textbf{half-integer spin representations} of the Lorentz group, which have no analogue in purely vectorial transformations.
 
-We introduce the Hermitian matrices
+To make this correspondence explicit, we introduce the Hermitian matrices
 \[
     \sigma^{\mu} = (\mathbb{I}, \boldsymbol{\sigma}),
 \]
@@ -64,49 +104,57 @@ A spacetime point \(x^{\mu}\) can then be represented by a \(2\times2\) Hermitia
         x_1 + i x_2 & x_0 - x_3
     \end{pmatrix}.
 \]
-Under a Lorentz transformation, this object transforms as
+Under the action of an element \(N \in \mathrm{SL}(2,\mathbb{C})\), this object transforms as
 \[
-    X \longrightarrow X' = N X N^{\dagger}, \qquad N \in \mathrm{SL}(2,\mathbb{C}),
+    X \longrightarrow X' = N X N^{\dagger},
 \]
 which preserves the Minkowski norm, since
 \[
-    \det X' = \det N \det X \det N^{\dagger} = \det X = x_{\mu} x^{\mu} = x_0^2 - |\mathbf{x}|^2.
+    \det X' = \det N \, \det X \, \det N^{\dagger} = \det X = x_{\mu}x^{\mu} = x_0^2 - |\mathbf{x}|^2.
 \]
-Thus, \(N\) and \(-N\) generate the same Lorentz transformation, explaining the double-cover structure:
+Hence, \(N\) and \(-N\) correspond to the same Lorentz transformation, illustrating the double-cover structure:
 \[
-    N = \pm \mathbb{I}_2 \quad \longrightarrow \quad \Lambda = \mathbb{I}_4.
+    N = \pm \mathbb{I}_2
+    \quad \longrightarrow \quad
+    \Lambda = \mathbb{I}_4.
 \]
+
+This construction shows that spinors are mathematical objects transforming under the fundamental representation of \(\mathrm{SL}(2,\mathbb{C})\), rather than under the vector representation of \(\mathrm{SO}^+(1,3)\).
+Physically, this explains why a \(2\pi\) rotation changes the sign of a spinor, while only a full \(4\pi\) rotation brings it back to itself — a key feature distinguishing half-integer spin fields from bosonic ones.
 
 \paragraph{Representations of \(\mathrm{SL}(2,\mathbb{C})\).}
 
-We can now define two inequivalent fundamental spinor representations:
+We can now define two inequivalent fundamental spinor representations, corresponding to the two possible chiralities of spin-\(\tfrac{1}{2}\) particles. These are the building blocks of relativistic fermionic fields.
 
 \begin{enumerate}
     \item \textbf{Left-handed Weyl spinors} (fundamental representation \((\tfrac{1}{2},0)\)):
+          These are two-component complex spinors transforming under the fundamental representation of \(\mathrm{SL}(2,\mathbb{C})\):
           \[
               \psi_{\alpha} =
               \begin{pmatrix}
                   \psi_1 \\ \psi_2
               \end{pmatrix}
-              \to
-              \psi'_{\alpha} = N_{\alpha}^{\ \beta} \psi_{\beta}, \quad \alpha,\beta = 1,2.
+              \longrightarrow
+              \psi'_{\alpha} = N_{\alpha}^{\ \beta} \psi_{\beta}, \qquad N \in \mathrm{SL}(2,\mathbb{C}), \quad \alpha,\beta = 1,2.
           \]
-          These two-component spinors transform under the left-handed subgroup \(\mathrm{SU}(2)_L\).
+          Under spatial rotations they behave as left-handed objects, hence the name. They form the representation usually denoted by \(\mathrm{SU}(2)_L\) when restricted to rotations.
 
     \item \textbf{Right-handed Weyl spinors} (complex conjugate representation \((0,\tfrac{1}{2})\)):
+          Their complex conjugates transform under the conjugate representation:
           \[
               \bar{\chi}_{\dot{\alpha}} =
               \begin{pmatrix}
                   \bar{\chi}_{\dot{1}} \\ \bar{\chi}_{\dot{2}}
               \end{pmatrix}
-              \to
-              \bar{\chi}'_{\dot{\alpha}} = N_{\dot{\alpha}}^{* \dot{\beta}} \bar{\chi}_{\dot{\beta}}, \quad \dot{\alpha},\dot{\beta} = 1,2.
+              \longrightarrow
+              \bar{\chi}'_{\dot{\alpha}} = N_{\dot{\alpha}}^{* \dot{\beta}} \bar{\chi}_{\dot{\beta}}, \qquad \dot{\alpha},\dot{\beta} = 1,2.
           \]
-          These transform under the right-handed subgroup \(\mathrm{SU}(2)_R\).
+          These spinors transform as right-handed under spatial rotations and form the representation \(\mathrm{SU}(2)_R\).
 \end{enumerate}
 
 \begin{remark}
-    In the Lorentz group \(\mathrm{SO}^+(1,3)\), indices are raised and lowered using the Minkowski metric \(\eta_{\mu\nu}\). In contrast, within \(\mathrm{SL}(2,\mathbb{C})\) spinor indices are manipulated using the antisymmetric invariant tensors \(\epsilon^{\alpha\beta}\) and \(\epsilon^{\dot{\alpha}\dot{\beta}}\):
+    In the Lorentz group \(\mathrm{SO}^+(1,3)\), indices are raised and lowered using the Minkowski metric \(\eta_{\mu\nu}\).
+    In contrast, within \(\mathrm{SL}(2,\mathbb{C})\) spinor indices are manipulated using the antisymmetric invariant tensors \(\epsilon^{\alpha\beta}\) and \(\epsilon^{\dot{\alpha}\dot{\beta}}\):
     \[
         \epsilon^{\alpha \beta} = \epsilon^{\dot{\alpha}\dot{\beta}} =
         \begin{pmatrix}
@@ -114,11 +162,11 @@ We can now define two inequivalent fundamental spinor representations:
             -1 & 0
         \end{pmatrix}.
     \]
-    These are invariant under \(\mathrm{SL}(2,\mathbb{C})\) transformations:
+    These tensors are invariant under \(\mathrm{SL}(2,\mathbb{C})\) transformations, as
     \[
         \epsilon^{\alpha \beta} = \epsilon^{\gamma \delta} N^{\ \alpha}_{\gamma} N^{\ \beta}_{\delta} = \epsilon^{\alpha \beta} \det N = \epsilon^{\alpha \beta},
     \]
-    allowing the relations
+    and they allow one to raise and lower spinor indices as follows:
     \[
         \psi^{\alpha} = \epsilon^{\alpha \beta} \psi_{\beta}, \qquad
         \bar{\chi}^{\dot{\alpha}} = \epsilon^{\dot{\alpha}\dot{\beta}} \bar{\chi}_{\dot{\beta}}.
@@ -126,7 +174,7 @@ We can now define two inequivalent fundamental spinor representations:
 \end{remark}
 
 \paragraph{Generators.}
-The infinitesimal generators of \(\mathrm{SL}(2,\mathbb{C})\) are given by:
+The infinitesimal generators of \(\mathrm{SL}(2,\mathbb{C})\) correspond to those of the Lorentz algebra and are represented as
 \[
     \left\{
     \begin{aligned}
@@ -135,16 +183,17 @@ The infinitesimal generators of \(\mathrm{SL}(2,\mathbb{C})\) are given by:
     \end{aligned}
     \right.
 \]
-Thus,
+Thus, under an infinitesimal Lorentz transformation parameterized by \(\omega_{\mu\nu}\), the spinors transform as
 \[
     \begin{aligned}
-        \psi_{\alpha}             & \to e^{-\frac{i}{2}\omega_{\mu\nu}(\sigma^{\mu\nu})_{\alpha}^{\ \beta}}\psi_{\beta}, \quad                               & \text{(LH Weyl spinor)} \\
-        \bar{\chi}^{\dot{\alpha}} & \to e^{-\frac{i}{2}\omega_{\mu\nu}(\bar{\sigma}^{\mu\nu})^{\dot{\alpha}}_{\ \dot{\beta}}}\bar{\chi}^{\dot{\beta}}, \quad & \text{(RH Weyl spinor)}
+        \psi_{\alpha}             & \longrightarrow e^{-\frac{i}{2}\omega_{\mu\nu}(\sigma^{\mu\nu})_{\alpha}^{\ \beta}}\psi_{\beta}, \qquad                               & \text{(Left-handed Weyl spinor)},  \\
+        \bar{\chi}^{\dot{\alpha}} & \longrightarrow e^{-\frac{i}{2}\omega_{\mu\nu}(\bar{\sigma}^{\mu\nu})^{\dot{\alpha}}_{\ \dot{\beta}}}\bar{\chi}^{\dot{\beta}}, \qquad & \text{(Right-handed Weyl spinor)}.
     \end{aligned}
 \]
+These two representations are inequivalent but related by complex conjugation, and together they form the building blocks of a Dirac spinor.
 
 \paragraph{Dirac spinors.}
-A \textbf{Dirac spinor} is a four-component object obtained as the direct sum of a left-handed and a right-handed Weyl spinor:
+A four-component spinor obtained as the direct sum of a left-handed and a right-handed Weyl spinor is called a \textbf{Dirac spinor}:
 \[
     \Psi =
     \begin{pmatrix}
@@ -152,11 +201,11 @@ A \textbf{Dirac spinor} is a four-component object obtained as the direct sum of
         \bar{\chi}^{\dot{\alpha}}
     \end{pmatrix}.
 \]
-This reducible representation contains four complex (or eight real) components and transforms as:
+This is a reducible representation of the Lorentz group, containing four complex components (or equivalently eight real components, hence eight degrees of freedom). Under a Lorentz transformation, it transforms as
 \[
-    \Psi \to \Psi' = e^{-\frac{i}{2} \omega_{\mu \nu} \Sigma^{\mu \nu}} \Psi,
+    \Psi \longrightarrow \Psi' = e^{-\frac{i}{2} \omega_{\mu \nu} \Sigma^{\mu \nu}} \Psi,
 \]
-where the generators in the \textit{Weyl basis} are
+where the generators in the \textit{Weyl basis} are block-diagonal:
 \[
     \Sigma^{\mu \nu} = \frac{i}{4} [\gamma^{\mu}, \gamma^{\nu}] =
     \begin{pmatrix}
@@ -164,7 +213,7 @@ where the generators in the \textit{Weyl basis} are
         0                & \bar{\sigma}^{\mu \nu}
     \end{pmatrix},
 \]
-and the gamma matrices are defined as
+and the Dirac gamma matrices are defined as
 \[
     \gamma^{\mu} =
     \begin{pmatrix}
@@ -172,6 +221,7 @@ and the gamma matrices are defined as
         \bar{\sigma}^{\mu} & 0
     \end{pmatrix}.
 \]
+This construction allows one to describe spin-\(\tfrac{1}{2}\) particles with both chiralities in a single relativistic framework, suitable for the Dirac equation.
 
 \paragraph{Chirality operator.}
 The \textbf{chirality operator} is defined as
@@ -180,25 +230,26 @@ The \textbf{chirality operator} is defined as
     \begin{pmatrix}
         -\mathbb{I}_2 & 0            \\
         0             & \mathbb{I}_2
-    \end{pmatrix}, \quad (\gamma^5)^2 = \mathbb{I}.
+    \end{pmatrix}, \qquad (\gamma^5)^2 = \mathbb{I}.
 \]
-It distinguishes the two Weyl components through its eigenvalues:
+It allows one to separate the Dirac spinor into its left- and right-handed components:
 \[
     \gamma^5 \Psi =
     \begin{pmatrix}
         -\psi_{\alpha} \\
         \bar{\chi}^{\dot{\alpha}}
-    \end{pmatrix},
+    \end{pmatrix}.
 \]
-so that left-handed spinors have eigenvalue \(-1\), and right-handed ones \(+1\). For massless fermions, chirality coincides with helicity, i.e., the projection of spin along the direction of motion.
+The eigenvalues of \(\gamma^5\) identify the chirality: \(-1\) for left-handed spinors and \(+1\) for right-handed spinors.
+For massless fermions, chirality coincides with \textbf{helicity}, the projection of the spin along the direction of motion, making \(\gamma^5\) a useful operator in the description of Weyl and Dirac fermions.
 
 \paragraph{Chiral projectors.}
-The corresponding projectors are:
+The left- and right-handed components of a Dirac spinor can be isolated using the \textbf{chiral projection operators}:
 \[
     P_L = \frac{\mathbb{I}_4 - \gamma^5}{2}, \qquad
-    P_R = \frac{\mathbb{I}_4 + \gamma^5}{2},
+    P_R = \frac{\mathbb{I}_4 + \gamma^5}{2}.
 \]
-which isolate the left- and right-handed components:
+Applied to a Dirac spinor, they give
 \[
     P_L \Psi =
     \begin{pmatrix}
@@ -207,21 +258,22 @@ which isolate the left- and right-handed components:
     P_R \Psi =
     \begin{pmatrix}
         0 \\ \bar{\chi}^{\dot{\alpha}}
-    \end{pmatrix}.
+    \end{pmatrix},
 \]
+corresponding to the left- and right-handed Weyl components, respectively.
 
 \paragraph{Dirac conjugate.}
-The Dirac conjugate spinor is defined by
+The Dirac conjugate spinor is defined as
 \[
     \bar{\Psi} = \Psi^{\dagger} \gamma^0 =
     \begin{pmatrix}
         \chi^{\alpha} & \bar{\psi}^*_{\dot{\alpha}}
-    \end{pmatrix},
+    \end{pmatrix}.
 \]
-so that the complex conjugate of a left-handed spinor transforms as a right-handed one and vice versa.
+This definition ensures that the complex conjugate of a left-handed spinor behaves as a right-handed spinor under Lorentz transformations, and vice versa, which is essential for constructing Lorentz-invariant bilinear forms in quantum field theory.
 
 \paragraph{Charge conjugation.}
-Charge conjugation exchanges particles with their antiparticles. Using the charge conjugation matrix \(C\),
+Charge conjugation exchanges particles with their antiparticles. Using the charge conjugation matrix \(C\), a Dirac spinor transforms as
 \[
     \Psi^c = C \bar{\Psi}^T =
     \begin{pmatrix}
@@ -232,14 +284,14 @@ Charge conjugation exchanges particles with their antiparticles. Using the charg
         0                       & \epsilon^{\dot{\alpha}\dot{\beta}}
     \end{pmatrix}.
 \]
-Under \(C\), a left-handed particle becomes a right-handed antiparticle, and vice versa.
+Under this operation, a left-handed particle becomes a right-handed antiparticle, and vice versa, which is crucial for defining CPT transformations in relativistic quantum field theory.
 
 \paragraph{Majorana spinors.}
-A \textbf{Majorana spinor} is defined by the condition of being its own charge conjugate:
+A spinor that is its own charge conjugate (e.g. particle is its own antiparticle) is called a \textbf{Majorana spinor}:
 \[
-    \Psi_M^c = \Psi_M \iff \psi_{\alpha} = \chi_{\alpha}.
+    \Psi_M^c = \Psi_M \quad \Longleftrightarrow \quad \psi_{\alpha} = \chi_{\alpha}.
 \]
-In this case,
+Explicitly, a Majorana spinor can be written as
 \[
     \Psi_M =
     \begin{pmatrix}
@@ -250,17 +302,112 @@ In this case,
         \psi_1 \\ \psi_2 \\ \psi^{*1} \\ \psi^{*2}
     \end{pmatrix}.
 \]
-A generic Dirac spinor can be expressed as a combination of two real Majorana spinors:
+Any Dirac spinor can be decomposed into two real Majorana spinors:
 \[
-    \Psi = \Psi_{M_1} + i\Psi_{M_2}, \quad \Psi^c = \Psi_{M_1} - i\Psi_{M_2}.
+    \Psi = \Psi_{M_1} + i \Psi_{M_2}, \quad \Psi^c = \Psi_{M_1} - i \Psi_{M_2}.
 \]
-No experimental evidence for fundamental Majorana fermions has been found so far, although neutrinos, being electrically neutral, are prime candidates for Majorana particles.
+Although no fundamental Majorana fermions have been experimentally confirmed, electrically neutral particles such as neutrinos are prime candidates, making Majorana spinors important in theoretical particle physics and models of neutrino masses.
 
-\subsection{Infinite dimensional representations}
-\lipsum[1]
+
+\subsection{Infinite-dimensional representations}
+
+Infinite-dimensional representations of the Lorentz group are required when the objects being transformed are not just internal components, but \textit{functions of spacetime points} — namely, fields \(\Phi(x)\) themselves.
+In this case, the transformation acts simultaneously on the field’s internal indices and on its spacetime dependence. The representation thus involves both the finite-dimensional matrices acting internally and the differential operators which generate coordinate transformations.
 
 \subsubsection{Field representations}
-\lipsum[1]
 
-\subsubsection{One particle Hilbert space representation}
-\lipsum[1]
+When a field \(\Phi_a(x)\) is subjected to a Lorentz transformation, it transforms both through its internal indices and through its spacetime dependence. Each of these two aspects corresponds to a distinct representation of the Lorentz algebra:
+\[
+    \Phi_a (x) \xrightarrow{\mathrm{SO}^+(1,3)}
+    \left( e^{-\frac{i}{2}\omega_{\mu\nu} S^{\mu\nu}} \right)_a^{\ b}
+    \left( e^{-\frac{i}{2}\omega_{\mu\nu} L^{\mu\nu}} \right)
+    \Phi_b(x)
+    = \left( e^{-\frac{i}{2}\omega_{\mu\nu} J^{\mu\nu}} \right)_a^{\ b}
+    \Phi_b(x).
+\]
+
+Here:
+\begin{itemize}
+    \item \(S^{\mu\nu}\) generates transformations on the \textbf{internal indices} of the field (a finite-dimensional representation);
+    \item \(L^{\mu\nu} = i(x^\mu \partial^\nu - x^\nu \partial^\mu)\) generates transformations on the \textbf{spacetime argument} \(x^\mu\) (an infinite-dimensional representation);
+    \item \(J^{\mu\nu} = S^{\mu\nu} + L^{\mu\nu}\) generates the full transformation on the field.
+\end{itemize}
+
+Depending on the nature of the field, the representation \(S^{\mu\nu}\) takes different explicit forms:
+\[
+    \begin{aligned}
+        S^{\mu\nu} & = 0, \qquad\quad\;\;\;\text{for scalar fields},                                                \\
+        S^{\mu\nu} & = (M^{\mu\nu})^{\rho}_{\ \sigma}, \quad \text{for vector fields},                              \\
+        S^{\mu\nu} & = \sigma^{\mu\nu},\, \bar{\sigma}^{\mu\nu},\, \Sigma^{\mu\nu}, \quad \text{for spinor fields}.
+    \end{aligned}
+\]
+The second exponential acts on the field’s spacetime dependence, implementing the transformation \(x^{\mu} \to \Lambda^{\mu}_{\ \nu}x^{\nu}\).
+Thus, field representations combine both finite- and infinite-dimensional actions, reflecting the double nature of fields: they carry internal degrees of freedom and are defined over spacetime.
+
+\subsubsection{One-particle Hilbert space representation}
+
+The above discussion applies to \textit{classical fields}.
+Once the theory is quantized, fields become \textit{operator-valued distributions} acting on a Fock space.\footnote{In quantum field theory, fields are not ordinary operator functions of spacetime points, since products like $\hat{\phi}(x)^2$ would be ill-defined at coincident points. Instead, they are interpreted as \textit{operator-valued distributions}: they only acquire a definite meaning when integrated (or ``smeared'') against smooth test functions $f(x)$, forming well-defined operators $\hat{\phi}(f) = \int \! \mathrm{d}^4x\, f(x)\, \hat{\phi}(x)$. This formulation ensures the mathematical consistency of field operators and reflects the fact that physical measurements always involve finite spacetime regions.}
+The Fock space \(\mathcal{F}\) is constructed as a direct sum of multi-particle Hilbert spaces:
+\[
+    \mathcal{F} = \mathcal{H}_0 \oplus \mathcal{H}_1 \oplus \mathcal{H}_2 \oplus \cdots,
+\]
+where \(\mathcal{H}_1\) is the Hilbert space describing a single particle of the field.
+
+The Lorentz group now acts as a unitary representation on the one-particle space \(\mathcal{H}_1\).
+By \textbf{Wigner’s theorem}, any symmetry preserving transition probabilities must be represented by a unitary (or antiunitary) operator on the Hilbert space:
+\begin{theorem}[Wigner's theorem]
+    Let $\mathcal{H}$ be a complex Hilbert space, and let $\mathcal{S}(\mathcal{H})$ denote the set of rays (one-dimensional subspaces) of $\mathcal{H}$.
+    Suppose that a transformation
+    \[
+        T : \mathcal{S}(\mathcal{H}) \to \mathcal{S}(\mathcal{H})
+    \]
+    preserves transition probabilities, i.e.
+    \[
+        \big|\langle \psi | \phi \rangle \big|^2 =
+        \big|\langle T\psi | T\phi \rangle \big|^2,
+        \qquad \forall\, |\psi\rangle, |\phi\rangle \in \mathcal{H}.
+    \]
+    Then there exists a bijective map
+    \[
+        U : \mathcal{H} \to \mathcal{H}
+    \]
+    such that $U$ is either \textbf{unitary} or \textbf{antiunitary}, and
+    \[
+        T(|\psi\rangle) = \lambda_\psi\, U|\psi\rangle,
+    \]
+    where $\lambda_\psi$ is a phase factor with $|\lambda_\psi| = 1$.
+    In particular, every symmetry transformation preserving quantum transition probabilities is represented on the Hilbert space by a unitary or antiunitary operator.
+\end{theorem}
+Hence, Lorentz transformations are implemented by unitary operators \(U(\Lambda)\) whose infinitesimal form involves Hermitian generators:
+\[
+    U(\Lambda) = e^{-\frac{i}{2}\omega_{\mu\nu} \hat{J}^{\mu\nu}}, \qquad
+    \hat{J}^{\mu\nu} = \text{Hermitian generators of the Lorentz algebra.}
+\]
+
+Let us now see how this acts on one-particle states of a free field.
+The normalized one-particle state with momentum \(\mathbf{p}\) and spin \(s\) is
+\[
+    \ket{\mathbf{p}, s} = \sqrt{2E_{\mathbf{p}}}\, \hat{a}_{\mathbf{p}}^{\dagger\,s}\ket{0},
+\]
+where \(\hat{a}_{\mathbf{p}}^{\dagger\,s}\) creates a particle of momentum \(\mathbf{p}\) and spin projection \(s\) from the vacuum.
+
+Under a Lorentz transformation, this state transforms as
+\[
+    U(\Lambda)\ket{\mathbf{p}, s}
+    = \ket{\Lambda \mathbf{p}, s'}
+    = \sqrt{2E_{\Lambda \mathbf{p}}}\, \hat{a}_{\Lambda\mathbf{p}}^{\dagger\,s'}\ket{0},
+\]
+where the spin index \(s'\) may mix with others according to the representation of the little group associated with the particle’s momentum.
+
+In this way, the Lorentz group acts unitarily on the quantum states of the theory, providing an infinite-dimensional representation on the Fock space, built from the transformation properties of single-particle states.
+
+\begin{remark}
+    Finite-dimensional representations of the Lorentz group (such as those acting on spinor or tensor indices) suffice to describe how classical fields transform under Lorentz transformations.
+    When quantizing the theory, however, one must consider infinite-dimensional representations:
+    \begin{enumerate}
+        \item \textbf{Field representation:} acts on the fields themselves as functions of spacetime points, allowing us to construct Lagrangians, field equations, and interactions in a relativistically covariant way.
+        \item \textbf{One-particle Hilbert space representation:} acts on the quantum states of single particles in Fock space via unitary operators \(U(\Lambda)\), ensuring probability conservation and the relativistic invariance of the quantum theory.
+    \end{enumerate}
+    Both are essential for a consistent relativistic quantum field theory, but they serve complementary roles: one for describing fields, the other for describing particle states.
+\end{remark}
