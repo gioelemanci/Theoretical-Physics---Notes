@@ -6,6 +6,33 @@
 \newcommand{\course}{Theoretical Physics}
 \newcommand{\academicyear}{yy/yy}
 
+% === TODOs management ===
+\newif\ifshowtodo
+\showtodotrue
+%\showtodofalse
+
+\newwrite\todofile
+\immediate\openout\todofile=\jobname.todos
+
+\newcommand{\TODO}[1]{%
+  \ifshowtodo
+    \textcolor{red}{\textbf{[TODO: #1]}}%
+    \immediate\write\todofile{Page \number\value{page}: #1}%
+  \fi
+}
+
+\newcommand{\listoftodos}{%
+  \ifshowtodo
+    \chapter*{List of TODOs}%
+    \addcontentsline{toc}{chapter}{List of TODOs}%
+    \verbatiminput{\jobname.todos}%
+  \else
+    \chapter*{List of TODOs}%
+    \addcontentsline{toc}{chapter}{List of TODOs}%
+    (No TODOs remaining.)%
+  \fi
+}
+
 % === Custom macros ===
 \renewcommand{\dd}{\mathrm{d}}
 \newcommand{\ee}{\mathrm{e}}
