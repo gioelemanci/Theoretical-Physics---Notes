@@ -6,6 +6,21 @@
 \newcommand{\course}{Theoretical Physics}
 \newcommand{\academicyear}{2025/2026}
 
+% === TODOs management ===
+\newif\ifshowtodo
+\showtodotrue
+%\showtodofalse
+
+\newwrite\todofile
+\immediate\openout\todofile=\jobname.todos
+
+\newcommand{\TODO}[1]{%
+    \ifshowtodo
+        \textcolor{red}{\textbf{[TODO: #1]}}%
+        \immediate\write\todofile{Page \number\value{page}: #1}%
+    \fi
+}
+
 % === Custom macros ===
 \renewcommand{\dd}{\mathrm{d}}
 \newcommand{\ee}{\mathrm{e}}
