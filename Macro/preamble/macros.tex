@@ -7,19 +7,52 @@
 \newcommand{\academicyear}{yy/yy}
 
 % === TODOs management ===
+\renewcommand*{\marginfont}{\footnotesize\sffamily}
+
+\newwrite\todofile
 \newif\ifshowtodo
 \showtodotrue
 %\showtodofalse
 
-\newwrite\todofile
-\immediate\openout\todofile=\jobname.todos
-
 \newcommand{\TODO}[1]{%
   \ifshowtodo
-    \textcolor{red}{\textbf{[TODO: #1]}}%
+    \ifx\todofileopen\undefined
+      \immediate\openout\todofile=todo.txt
+      \global\let\todofileopen\relax
+    \fi
+    \marginnote{\color{red!70!black}\footnotesize
+      \begin{minipage}[t]{2.5cm}
+        \raggedright\textbf{TODO:} #1
+      \end{minipage}%
+    }%
     \immediate\write\todofile{Page \number\value{page}: #1}%
   \fi
 }
+
+\AtEndDocument{\ifx\todofileopen\undefined\else\immediate\closeout\todofile\fi}
+
+% === QUESTIONs management ===
+\newwrite\questionfile
+\newif\ifshowquestions
+\showquestionstrue
+%\showquestionsfalse
+
+\newcommand{\QUESTION}[1]{%
+  \ifshowquestions
+    \ifx\questionfileopen\undefined
+      \immediate\openout\questionfile=questions.txt
+      \global\let\questionfileopen\relax
+    \fi
+    \marginnote{\color{blue!70!black}\footnotesize
+      \begin{minipage}[t]{2.5cm}
+        \raggedright\textbf{(?)} #1
+      \end{minipage}%
+    }%
+    \immediate\write\questionfile{Page \number\value{page}: #1}%
+  \fi
+}
+
+\AtEndDocument{\ifx\questionfileopen\undefined\else\immediate\closeout\questionfile\fi}
 
 % === Custom macros ===
 \renewcommand{\dd}{\mathrm{d}}
