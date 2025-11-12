@@ -175,69 +175,89 @@ The first two are the \textit{homogeneous} equations (no sources) and are kinema
 
 \subsection{Four-potential and homogeneous Maxwell equations}
 
-Introduce the electromagnetic four-potential
+We introduce the electromagnetic four-potential as
 \[
     A^{\mu}(x) = (\phi(t,\mathbf{x}),\, \mathbf{A}(t,\mathbf{x})),
 \]
-where \(\phi\) is the scalar potential and \(\mathbf{A}\) the vector potential. The electric and magnetic fields are obtained from \(A^\mu\) as
+where \(\phi\) denotes the scalar potential and \(\mathbf{A}\) the vector potential.
+The electric and magnetic fields can be expressed in terms of \(A^{\mu}\) as
 \[
-    \mathbf{E} = -\nabla\phi - \frac{\partial\mathbf{A}}{\partial t}, \qquad
+    \mathbf{E} = -\nabla\phi - \frac{\partial\mathbf{A}}{\partial t},
+    \qquad
     \mathbf{B} = \nabla\times\mathbf{A}.
 \]
+This representation makes it clear that both fields originate from derivatives of the same underlying potential, a fact that has deep geometrical meaning and automatically enforces part of Maxwell’s equations.
 
-In this formulation the homogeneous Maxwell equations \eqref{eq:Maxwell_equations}\(_{1,2}\) are automatically verified, since:
+In particular, the homogeneous Maxwell equations \eqref{eq:Maxwell_equations}\(_{1,2}\) are identically satisfied. Indeed, the magnetic field is divergenceless:
 \[
-    \nabla \cdot \mathbf{B} = \nabla \cdot (\nabla \times \mathbf{A}) = \partial_i \epsilon_{ijk} \partial_j A_k = \epsilon_{ijk} \partial_i \partial_j A_k = 0,
+    \nabla \cdot \mathbf{B}
+    = \nabla \cdot (\nabla \times \mathbf{A})
+    = \partial_i \epsilon_{ijk} \partial_j A_k
+    = \epsilon_{ijk} \partial_i \partial_j A_k
+    = 0,
 \]
-which is the contraction of a symmetric term for a totally antisimmetric one (the \textit{Levi-Civita tensor}), and
+because the contraction between the totally antisymmetric Levi-Civita tensor \(\epsilon_{ijk}\) and the symmetric derivatives \(\partial_i \partial_j\) vanishes identically.
+Similarly, the second homogeneous equation follows:
 \[
     \begin{aligned}
-        \nabla\times\mathbf{E} + \frac{\partial\mathbf{B}}{\partial t} = \nabla \times \left(-\nabla\phi - \frac{\partial\mathbf{A}}{\partial t}\right) + \frac{\partial}{\partial t}(\nabla \times \mathbf{A}) \\
-        = \epsilon_{ijk} \partial_j (- \partial_k \phi - \partial_0 A_k) + \partial_0 \epsilon_{ijk} \partial_j A_k = - \epsilon_{ijk} \partial_j \partial_k \phi = 0.
+        \nabla\times\mathbf{E} + \frac{\partial\mathbf{B}}{\partial t}
+         & = \nabla \times \left(-\nabla\phi - \frac{\partial\mathbf{A}}{\partial t}\right)
+        + \frac{\partial}{\partial t}(\nabla \times \mathbf{A})                             \\
+         & = \epsilon_{ijk} \partial_j (- \partial_k \phi - \partial_0 A_k)
+        + \partial_0 \epsilon_{ijk} \partial_j A_k
+        = - \epsilon_{ijk} \partial_j \partial_k \phi
+        = 0.
     \end{aligned}
 \]
-
-Following this formalism we can combine charge and current into the four-current
+This result shows that the potential formulation automatically encodes the structure of the electromagnetic field so that the homogeneous Maxwell equations
 \[
-    J^{\mu}(x) = (\rho,\; \mathbf{j}),
+    \nabla \cdot \mathbf{B} = 0,
+    \qquad
+    \nabla \times \mathbf{E} + \frac{\partial \mathbf{B}}{\partial t} = 0
 \]
-which obeys local charge conservation (continuity equation)
+are identically fulfilled, independently of the specific field configuration.
+
+Following this formalism, it is also convenient to collect the charge and current densities into a single four-vector known as the \textit{four-current}:
 \[
-    \partial_{\mu} J^{\mu} = 0,
+    J^{\mu}(x) = (\rho,\, \mathbf{j}),
 \]
-and groups the sorces of our fields in a unified mathematical tool.
+which satisfies the local charge conservation law, or \textit{continuity equation},
+\[
+    \partial_{\mu} J^{\mu} = 0.
+\]
+This compact relation expresses the conservation of electric charge in covariant form, showing that the temporal and spatial components of \(J^{\mu}\) are intrinsically linked as parts of a single relativistic entity that sources the electromagnetic field.
 
-\subsection{Lagrangian and inhomogeneous Maxwell equations}
+\subsection{Lagrangian and inhomogeneous Maxwell equations} \label{sec:free_em_field_lagrangian}
 
-The standard gauge-invariant Lagrangian density for the free electromagnetic field coupled to an external four-current \(J^\mu\) is
+The standard gauge-invariant Lagrangian density for the free electromagnetic field coupled to an external four-current \(J^\mu\) reads
 \begin{equation}
     \mathcal{L} = -\frac{1}{2}(\partial_{\mu} A_{\nu})(\partial^{\mu}A^{\nu}) + \frac{1}{2}(\partial_\mu A^{\mu})^2 - A_{\mu}J^{\mu}.
     \label{eq:EM_free_lagrangian}
 \end{equation}
-The quadratic terms contain the kinetic terms for the gauge field while the second term is the minimal coupling to sources. This Lagrangian is invariant under the gauge transformation
+The quadratic terms contain the kinetic terms for the gauge field while the second term is the minimal coupling to sources. This Lagrangian remain invariant under the gauge transformation
 \[
     A_{\mu}(x) \mapsto A_{\mu}(x) + \partial_{\mu}\Lambda(x),
 \]
-provided \(\Lambda\) vanishes suitably at the boundary.
+provided the scalar function \(\Lambda\) vanishes suitably at the boundary, ensuring that no surface terms arise in the variation.
 
 Let us do some observations:
 \begin{itemize}
-    \item Since we know the mass dimensions of \(\mathcal{L}\) to be \([\mathcal{L}]=4\) and \([\partial_\mu]=1\) we can deduce
+    \item The mass dimension of the Lagrangian density is \([\mathcal{L}]=4\), while that of the derivative operator is \([\partial_\mu]=1\). From these we infer the dimensions of the potential and the current:
           \[
               [A^{\mu}] = 1, \quad [J^{\mu}] = 3.
           \]
-    \item The component \(A_0\) of the four potential is not a dynamical quantity, since there is no quadratic term in \(\dot{A}_0\): \(\tfrac12(\partial_0 A_0)(\partial^0 A^0)\) from the first term gets canceled out by \(\tfrac12(\partial_0 A^0)^2\) from the second term.
-    \item Since \(A_i = -A^i\), the minus sign on the first kinetic term ensures the correct plus sign on the kinetics terms for the vector potential \(\dot{\mathbf{A}}\):
+    \item The temporal component \(A_0\) of the four potential is not a dynamical variable, as the Lagrangian contains no quadratic term in its time derivative \(\dot{A}_0\). In fact, the term \(\tfrac12(\partial_0 A_0)(\partial^0 A^0)\) in the first kinetic contribution cancels exactly with \(\tfrac12(\partial_0 A^0)^2\) from the second one.
+    \item Since \(A_i = -A^i\), the overall minus sign in the first kinetic term guarantees the correct positive sign for the kinetic energy of the vector potential:
           \[
               -\tfrac12 (\partial_0 A_i)(\partial^0 A^i) = \tfrac12 (\dot{A}_i)^2 = \tfrac12 (\dot{A}^{i})^2.
           \]
 \end{itemize}
-If \(A^0\) is not a dynamical variable we are left with three indipendent degrees of freedom of the fields, but we will see how we can remove another one with \textit{gauge symmetries} and remain with the two true degrees of freedom: the \textbf{two transversal polarizations} of the electromagnetic waves.
+Hence, if \(A^0\) is non-dynamical, the field initially possesses three independent components, but \textit{gauge symmetry} will allow us to eliminate one more degree of freedom, leaving only two physical ones — corresponding to the \textbf{two transverse polarizations} of electromagnetic waves.
 
-Treating \(A_\sigma\) as the dynamical field and applying the Euler–Lagrange equations
+Treating \(A_\sigma\) as the dynamical field, we apply the Euler–Lagrange equations:
 \[
     \partial_{\rho}\!\left(\frac{\partial\mathcal{L}}{\partial(\partial_\rho A_\sigma)}\right)
-    - \frac{\partial\mathcal{L}}{\partial A_\sigma} = 0
+    - \frac{\partial\mathcal{L}}{\partial A_\sigma} = 0.
 \]
 one easily computes
 \[
@@ -247,7 +267,7 @@ For the other term we should write the Lagrangian explicitly with respect to \(\
 \[
     \mathcal{L} = -\frac{1}{2}\underbrace{(\partial_{\mu} A_{\nu})\eta^{\mu \alpha}\eta^{\nu \beta}(\partial_{\alpha}A_{\beta})}_{(\partial_{\mu} A_{\nu})(\partial^{\mu}A^{\nu})} + \frac{1}{2}\underbrace{\eta^{\mu \alpha}(\partial_\mu A_{\alpha})\eta^{\nu \beta} (\partial_{\nu}A_{\beta})}_{(\partial_\mu A^{\mu})(\partial_\nu A^{\nu})}- A_{\mu}J^{\mu},
 \]
-so that now it's easier to compute the derivative with respect to \(\partial_\mu A_\nu\) knowing that \(\frac{\partial x^{\nu}}{\partial x^{\mu}}=\delta^{\mu}_{\nu}\), so that
+so that now it's easier to compute the derivative with respect to \(\partial_\mu A_\nu\) (knowing that \(\frac{\partial x^{\nu}}{\partial x^{\mu}}=\delta^{\mu}_{\nu}\)), so that
 \[
     \begin{aligned}
         \frac{\partial\mathcal{L}}{\partial(\partial_\rho A_\sigma)} & = -\frac{1}{2}\eta^{\mu \alpha}\eta^{\nu \beta}\left[\delta^{\rho}_{\ \mu}\delta^{\sigma}_{\ \nu} (\partial_{\alpha}A_{\beta})+(\partial_{\mu} A_{\nu})\delta^{\rho}_{\ \alpha}\delta^{\sigma}_{\ \beta}\right]      \\
@@ -257,7 +277,7 @@ so that now it's easier to compute the derivative with respect to \(\partial_\mu
                                                                      & = - (\partial^{\rho}A^{\sigma}) + \eta^{\rho \sigma}\left(\partial_{\alpha}A^{\alpha} \right),                                                                                                                       \\
     \end{aligned}
 \]
-but since EL has the derivative \(\partial_{\rho}\) of the term computed, we develop
+and applying now the derivative \(\partial_{\rho}\) from EL equations, we get to:
 \[
     \begin{aligned}
         \partial_{\rho} \left(\frac{\partial\mathcal{L}}{\partial(\partial_\rho A_\sigma)}\right) & = \partial_\rho \left[- (\partial^{\rho}A^{\sigma}) + \eta^{\rho \sigma}\left(\partial_{\alpha}A^{\alpha} \right)\right]                                                                    \\
@@ -269,34 +289,37 @@ Thus the equation of motion reads:
 \[
     J^{\sigma} = \partial_{\rho} (\partial^{\rho} A^{\sigma}-\partial^{\sigma} A^{\rho}).
 \]
-As we will now see, this is the compact version of the inhomogeneous Maxwell's equations.
+This compact relation, as we will now see, is equivalent to the inhomogeneous Maxwell equations.
 
-\paragraph{Field strenght tensor.}
-If we now introduce the field strength tensor
+\paragraph{Field strength tensor.}
+Introducing the \emph{field strength tensor}
 \[
     F_{\mu\nu} \equiv \partial_{\mu}A_{\nu} - \partial_{\nu}A_{\mu},
 \]
-we will notice how the motion equation start to resemble similar physical laws and it is way easier to understand what we are really computing. The field strength tensor components, indeed, encode \( \mathbf{E} \) and \( \mathbf{B} \); in particular (with our signature),
+the equation of motion simplifies and acquires a direct physical interpretation.
+Its components naturally contain the electric and magnetic fields:
 \[
-    F^{i0} = - F^{0i} = \partial^i A^0 - \partial^0 A^i = \left(-\nabla \phi - \partial_t \mathbf{A}\right)^i = E^i,\QUESTION{Where does the first minus sign come from?}
+    F^{i0} = - F^{0i}
+    = \partial^i A^0 - \partial^0 A^i
+    = (-\nabla \phi - \partial_t \mathbf{A})^i = E^i,
 \]
 and
 \[
     F^{ij} = -F^{ji} = \partial^i A^j - \partial^j A^i = - \epsilon^{ijk} B^k,
 \]
-whit the diagonal zeroed out since \(F^{00} = F^{ii} = 0\).
+with diagonal components \(F^{00} = F^{ii} = 0\).
 
-We can now recast the Lagrangian \eqref{eq:EM_free_lagrangian} as follows:\TODO{Compute it.}
+Using \(F_{\mu\nu}\), the Lagrangian \eqref{eq:EM_free_lagrangian} can be rewritten in the elegant and manifestly Lorentz-invariant form (see Appendix~\ref{app:computations} for the detailed derivation):
 \[
-    \mathcal{L} = -\frac{1}{4} F_{\mu \nu}F^{\mu \nu} - J_\mu A^{\mu},\QUESTION{Is it JA or AJ? And the indices?}
+    \mathcal{L} = -\frac{1}{4} F_{\mu \nu}F^{\mu \nu} - J_\mu A^{\mu},
 \]
-and the equation of motion:
+and the equations of motion become
 \[
     \partial_\mu F^{\mu\nu} = J^{\nu}.
 \]
-Let us show that the equation of motion group exactly the inhomogeneous Maxwell equations:
+This equation compactly represents the \textit{inhomogeneous} Maxwell equations. Let us show this explicitly:
 \begin{itemize}
-    \item \((\nu = 0)\): we have
+    \item \((\nu = 0)\) \textbf{Gauss’s law}
           \[
               \begin{aligned}
                   \partial_\mu F^{\mu 0} = \rho, \\
@@ -307,7 +330,7 @@ Let us show that the equation of motion group exactly the inhomogeneous Maxwell 
           \[
               \partial_i E^i = \nabla \cdot \mathbf{E} = \rho.
           \]
-    \item \((\nu = i)\): we have
+    \item \((\nu = i)\) \textbf{Ampère–Maxwell’s law}
           \[
               \begin{aligned}
                   \partial_\mu F^{\mu i} = J^i, \\
@@ -323,44 +346,65 @@ Let us show that the equation of motion group exactly the inhomogeneous Maxwell 
               - \frac{\partial \mathbf{E}}{\partial t} + \nabla \times \mathbf{B} = \mathbf{j}.
           \]
 \end{itemize}
-These are exactly the \textit{inhomogeneous} Maxwell equations for a free field coupled with a source \(J^{\mu}\) in covariant form. Together with the \textit{Bianchi identity} \(\partial_{[\lambda}F_{\mu\nu]} = \epsilon^{\lambda \mu \nu}\partial_{\lambda}F_{\mu\nu} = 0\) (equivalent to the homogeneous Maxwell equations, since developing the tensor contraction we obtain the same expressions of the previous subsection) they form the full set of Maxwell's equations.
+These are exactly the \textit{inhomogeneous} Maxwell equations for a free field coupled with a source \(J^{\mu}\) in covariant form.
+
+\paragraph{Bianchi identity.}
+Together with the antisymmetric definition of \(F_{\mu\nu}\), the cyclic identity
+\[
+    \partial_{[\lambda}F_{\mu\nu]} \equiv
+    \partial_\lambda F_{\mu\nu} +
+    \partial_\mu F_{\nu\lambda} +
+    \partial_\nu F_{\lambda\mu} = 0
+\]
+is automatically satisfied.
+This is known as the \textit{Bianchi identity}, and when expanded in components it reproduces the homogeneous Maxwell equations in \eqref{eq:Maxwell_equations}\(_{1,2}\).
+Hence, the Lagrangian formalism not only yields the inhomogeneous equations of motion but also encodes the homogeneous ones as geometric identities following from the antisymmetry of \(F_{\mu\nu}\).
 
 \paragraph{Gauge fixing and wave equation.}
-If one imposes the Lorenz gauge condition \(\partial_{\mu}A^{\mu}=0\), the inhomogeneous equations reduce to a set of decoupled wave equations for the components of the potential: if we \textit{gauge away} the second term in \(\partial_{\rho} \left(\frac{\partial\mathcal{L}}{\partial(\partial_\rho A_\sigma)}\right)\), we are left with
+If one imposes the Lorenz gauge condition \(\partial_{\mu}A^{\mu}=0\), the inhomogeneous equations simplify because the term proportional to \(\partial^{\sigma}\partial_{\rho}A^{\rho}\) vanishes. In this gauge the equations of motion reduce to the manifestly relativistic, decoupled wave equations for the components of the potential:
 \[
-    \square A^{\nu} \equiv \partial_{\mu}\partial^{\mu}A^{\nu} = J^{\nu},
+    \square A^{\nu} \equiv \partial_{\mu}\partial^{\mu}A^{\nu} = J^{\nu}.
 \]
-which is a set of manifestly relativistic decoupled wave equations. This form is convenient for quantization and for solving classical radiation problems; furthermore we are left with the last two degrees of freedom of the \textbf{transversal polarizations} of light.\QUESTION{Did I really remove the degree of freedom?}
+This form is convenient both for solving classical radiation problems and for quantization, since each component \(A^\nu\) satisfies a standard sourced wave equation. Gauge fixing removes the redundancy associated with gauge transformations and therefore eliminates non-physical degrees of freedom; after imposing the Lorenz condition and using the residual gauge freedom one can remove further unphysical components and isolate the two transverse physical polarizations of the photon. \QUESTION{Did I really remove the degree of freedom?}
 
-\subsection{Energy-momentum tensor}
+\subsection{Energy--momentum tensor}
 
-We can now compute the energy-momentum tensor for a free field without couplings with external sources, hence the condition \(J^{\mu} = 0\) on the Lagrangian
+For the free electromagnetic field (no external sources), the Lagrangian becomes
 \[
     \mathcal{L} = -\frac{1}{4} F_{\mu \nu}F^{\mu \nu}.
 \]
-Then, using equation \eqref{eq:energy_momentum_tensor} with \(A^{\mu}\) as the dynamical field, we can compute
+Using the canonical expression \eqref{eq:energy_momentum_tensor} with \(A^{\mu}\) as the dynamical variable, we compute the canonical energy--momentum tensor:
 \[
     \begin{aligned}
-        T^{\mu \nu} & = \frac{\partial \mathcal{L}}{\partial (\partial_{\mu}A_{\rho})}\,\partial^{\nu}A_\rho - \eta^{\mu \nu}\mathcal{L}                                                                                                                     \\
-                    & = - \partial^{\mu}A^{\rho}\partial^{\nu} A_{\rho} + \eta^{\mu \rho}(\partial_\sigma A^{\sigma})\partial^{\nu}A_{\rho} + \eta^{\mu \nu}\frac{1}{4} F_{\lambda \sigma}F^{\lambda \sigma}                                                 \\
-                    & = - \partial^{\mu}A^{\rho}\partial^{\nu} A_{\rho} + \underbrace{\partial^{\nu}A^{\mu}(\partial_\sigma A^{\sigma})}_{\text{not symmetric in } \mu \leftrightarrow \nu} + \frac{1}{4}\eta^{\mu \nu}F_{\lambda \sigma}F^{\lambda \sigma}.
+        T^{\mu \nu}
+         & = \frac{\partial \mathcal{L}}{\partial (\partial_{\mu}A_{\rho})}\,\partial^{\nu}A_\rho - \eta^{\mu \nu}\mathcal{L} \\
+         & = - \partial^{\mu}A^{\rho}\,\partial^{\nu} A_{\rho}
+        + \eta^{\mu \rho}(\partial_\sigma A^{\sigma})\,\partial^{\nu}A_{\rho}
+        + \eta^{\mu \nu}\frac{1}{4} F_{\lambda \sigma}F^{\lambda \sigma}                                                      \\
+         & = - \partial^{\mu}A^{\rho}\,\partial^{\nu} A_{\rho}
+        + \underbrace{\partial^{\nu}A^{\mu}(\partial_\sigma A^{\sigma})}_{\text{not symmetric under } \mu\leftrightarrow\nu}
+        + \frac{1}{4}\eta^{\mu \nu}F_{\lambda \sigma}F^{\lambda \sigma}.
     \end{aligned}
 \]
 So the energy-momentum tensor is not symmetric for exchange of \(\mu\) and \(\nu\), but is that a problem?
 
-\paragraph{Einstein field equation.} In general relativity there is a bridge equation among gravitational physics and particle physics, where the energy-momentum tensor sits on the right side: we are speaking of the famous \textit{Einstein field equation}
+\paragraph{Einstein field equation.}
+In general relativity the dynamics of spacetime itself are determined by the distribution of energy and momentum of matter and fields through the celebrated \textit{Einstein field equation}:
 \begin{equation}
-    R_{\mu \nu} + \frac{1}{2} R g_{\mu \nu} + \Lambda g_{\mu \nu} = \frac{8 \pi G}{c^4} T_{\mu \nu},
+    R_{\mu \nu} - \frac{1}{2} R\, g_{\mu \nu} + \Lambda g_{\mu \nu}
+    = \frac{8 \pi G}{c^4}\, T_{\mu \nu},
     \label{eq:einstein_field_equation}
 \end{equation}
 where:
 \begin{itemize}
-    \item \(R_{\mu \nu}\) is the \textit{Ricci tensor}: it is symmetric in \(\mu \leftrightarrow \nu\) and \dots
-    \item \(R g_{\mu \nu}\) is the \textit{Ricci scalar} multiplied by a generic metric of a generic curved spacetime \dots
-    \item \(\Lambda\) is the \textit{cosmological constant}: introduce by Einstein to force the universe to be static\dots
-    \item constants\dots
+    \item \(R_{\mu \nu}\) is the \textit{Ricci tensor}, obtained by contracting the Riemann curvature tensor, and it is symmetric under the exchange \(\mu \leftrightarrow \nu\);
+    \item \(R = g^{\rho \sigma} R_{\rho \sigma}\) is the \textit{Ricci scalar}, which measures the curvature of spacetime as a whole;
+    \item \(g_{\mu \nu}\) is the metric tensor of the curved spacetime, encoding its geometric structure;
+    \item \(\Lambda\) is the \textit{cosmological constant}, originally introduced by Einstein to allow for a static universe, now interpreted as the energy density of the vacuum;
+    \item \(G\) is Newton’s gravitational constant and \(c\) the speed of light in vacuum.
 \end{itemize}
-For consistency the energy-momentum tensor has to be symmetric for exchange of \(\mu\) and \(\nu\), i.e. \(T^{\mu \nu}=T^{\nu \mu}\).
+The left-hand side represents the purely geometric content of spacetime curvature, while the right-hand side contains the \textit{energy--momentum tensor} \(T_{\mu\nu}\), describing the distribution of matter and energy that act as the source of gravity.
+For consistency, since the Einstein tensor \(G_{\mu\nu} = R_{\mu\nu} - \tfrac{1}{2}R\,g_{\mu\nu}\) is symmetric, the energy--momentum tensor must also satisfy \(T_{\mu\nu} = T_{\nu\mu}\).
 
 \paragraph{Belinfante-Rosenfeld tensor.} In order to make \(T^{\mu \nu}\) symmetric for exchange of indices, the idea is to redefine it as a sum of two contributions:
 \[
@@ -377,14 +421,59 @@ so that we can preserve the condition \(\partial_{\mu}T^{\mu \nu} = 0\) even for
 since the first term is already zero, and the second is the product of a symmetric quantity for an antisymmetric one in \(\mu \leftrightarrow \nu\).
 In the EM case, this function can be defined as
 \[
-    \Xi^{\lambda \mu \nu} = F^{\lambda \mu}A^{\nu},
+    \Xi^{\lambda \mu \nu} = F^{\mu \lambda}A^{\nu},
 \]
-since \( F^{\lambda \mu} = - F^{\mu \lambda} \), thus
+since \( F^{\mu \lambda} = - F^{\lambda \mu} \), thus
 \[
-    \partial_{\lambda} F^{\lambda \mu} A^{\nu} = (\partial_{\lambda} F^{\lambda \mu})A^{\nu} + F^{\lambda \mu} (\partial_{\lambda}A^{\nu}),
+    \partial_{\lambda} F^{\mu \lambda} A^{\nu} = (\partial_{\lambda} F^{\mu \lambda})A^{\nu} + F^{\mu \lambda} (\partial_{\lambda}A^{\nu}),
 \]
-but since \(J^{\mu} = 0 = \partial_\nu F^{\nu \mu}\), then only the second term survives.
-We should now recast the expression of the energy-momentum tensor in the new form
+but since \(J^{\mu} = 0 = \partial_\lambda F^{\mu \lambda}\), then only the second term survives.
+We should now recast the expression of the energy-momentum tensor in the new form (full computation in appendix \ref{app:computations})
 \[
-    T^{\mu \nu} =
+    T^{\mu \nu} =-F^{\mu \lambda} (\partial^{\nu}A_{\lambda}) + \frac{1}{4} \eta^{\mu\nu}\left(F_{\rho \sigma}F^{\rho \sigma}\right),
 \]
+so that the new tensor take the following form:
+\[
+    \begin{aligned}
+        \tilde{T}^{\mu \nu} & =-F^{\mu \lambda} (\partial^{\nu}A_{\lambda}) +\frac{1}{4} \eta^{\mu\nu}\left(F_{\rho \sigma}F^{\rho \sigma}\right) + F^{\mu \lambda} (\partial_{\lambda}A^{\nu}) \\
+                            & = F^{\mu \lambda} \left(\partial_{\lambda}A^{\nu} - \partial^{\nu}A_{\lambda}\right) +\frac{1}{4} \eta^{\mu\nu}\left(F_{\rho \sigma}F^{\rho \sigma}\right)        \\
+                            & = F^{\mu \lambda} F_{\lambda}^{\ \nu} +\frac{1}{4} \eta^{\mu\nu}\left(F_{\rho \sigma}F^{\rho \sigma}\right),
+    \end{aligned}
+\]
+which is now symmetric under exchange \(\mu \leftrightarrow \nu\). We notice indeed how \(\eta^{\mu \nu}\) is symmetric, while
+\[
+    F^{\mu \lambda} F_{\lambda}^{\ \nu} = F^{\mu}_{\ \alpha} F^{\beta \nu} \eta^{\lambda \alpha} \eta_{\lambda \beta} = F^{\mu}_{\ \lambda} F^{\lambda \nu} = F^{\lambda \nu} F^{\mu}_{\ \lambda} = \underbrace{F^{\nu \lambda}}_{-F^{\lambda \nu}} \underbrace{F_{\lambda}^{\ \mu}}_{-F^{\mu}_{\ \lambda}}.
+\]
+This is the true form of the energy-momentum tensor which appears in Einstein's field equation, and it is called the \textbf{Belinfante-Rosenfeld tensor}:
+\begin{equation}
+    \tilde{T}^{\mu \nu} = F^{\mu \lambda} F_{\lambda}^{\ \nu} +\frac{1}{4} \eta^{\mu\nu}\left(F_{\rho \sigma}F^{\rho \sigma}\right).
+    \label{eq:Belinfante-Rosenfeld_tensor}
+\end{equation}
+
+\paragraph{Noether current and charges.}
+Since we can identify our Belinfante-Rosenfeld tensor as the Noether current, we know it contains 4 conserved charges. We expect the \textit{energy density} \(\mathcal{H}\) to be the first consered quantity:
+\[
+    \mathcal{H} = \tilde{T}^{00}, \quad H = \int \mathrm{d}^3 \mathbf{x} \, \mathcal{H} = \int \mathrm{d}^3 \mathbf{x} \, \tilde{T}^{00};
+\]
+we can compute the anergy density by computing the right term of \eqref{eq:Belinfante-Rosenfeld_tensor}:
+\[
+    \begin{aligned}
+        \mathcal{H} & = \tilde{T}^{00} = F^{0 i} F_{i}^{\ 0} +\frac{1}{4} \eta^{00}\left(F_{0i}F^{0i} + F_{i0}F^{i0} + F_{ij}F^{ij}\right)                    \\
+                    & = F^{0 i} F_{i}^{\ 0} + \frac{1}{2} F_{0i}F^{0i} + \frac{1}{4}F_{ij}F^{ij}                                                              \\
+                    & = \eta_{i j}F^{0 i}F^{j0} + \frac{1}{2}\eta_{ij}F^{0j}F^{0i} +\frac{1}{4} \eta_{ia} \eta_{jb} F^{ab}F^{ij}                              \\
+                    & = \eta_{i j} \left(\frac{1}{2}F^{0j}F^{0i} - F^{0 i}F^{0j}\right) + \frac{1}{4} \eta_{ia} \eta_{jb} F^{ab}F^{ij}                        \\
+                    & = -\frac{1}{2} F^{0i}F^{0i} + \frac{1}{4} F^{ij}F^{ij} = \frac{1}{2}\left(\vert \mathbf{E} \vert^2 + \vert \mathbf{B} \vert^2  \right),
+    \end{aligned}
+\]
+where we have used the fact that for raising or lowering time-like indices the sign does not change, while \(\eta^{ij} = -\delta^{ij}\) on the space-like indices. We have therefore found the energy density. For the \textit{momentum density} \(\mathcal{P}\) we have:
+\[
+    \mathcal{P}^i = \tilde{T}^{0i}, \quad P^i = \int \mathrm{d}^3 \mathbf{x} \, \mathcal{P}^i = \int \mathrm{d}^3 \mathbf{x} \, \tilde{T}^{0i};
+\]
+we can compute it again from \eqref{eq:Belinfante-Rosenfeld_tensor} as follows
+\[
+    \begin{aligned}
+        \mathcal{P}^i & = \tilde{T}^{0i} = F^{0 j} F_{j}^{\ i} +\frac{1}{4} \eta^{0i}\left(---\right)          \\
+                      & = F^{0 j} F_{j}^{\ i} = (-E^i)(\epsilon^{ijk} B^k) = (\mathbf{E} \times \mathbf{B})^i,
+    \end{aligned}
+\]
+since \(\eta^{0i}=0\) and \(F_j^{\ i} = - F^{ji}\). Therefore we found the momentum density.
