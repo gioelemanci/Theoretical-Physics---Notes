@@ -334,7 +334,7 @@ Hence, the second Lee--Yang theorem provides a qualitative explanation for the o
     As a consequence, the derivatives of \(\log \mathcal{Z}_N\) can vary very rapidly near those quasi--singular points, producing an abrupt but smooth crossover that is experimentally indistinguishable from a genuine discontinuity.
 \end{remark}
 
-\section{Heisemberg and Ising Model}
+\section{Heisemberg Model}
 
 The Ising model represents one of the simplest yet most profound models in statistical mechanics.
 It captures the essential mechanism behind magnetic ordering, spontaneous symmetry breaking, and the appearance of phase transitions in systems composed of many interacting constituents.
@@ -423,7 +423,7 @@ where \(\phi_i \in [0, 2\pi)\) is the azimuthal angle and \(\theta_i \in [0, \pi
             % Coordinate axes
             \draw[->] (0,0) -- (2.5,0) node[below] {$y$};
             \draw[->] (0,0) -- (0,2.5) node[left] {$z$};
-            \draw[->] (0,0) -- (-1.2,-1.2) node[below left] {$x$};
+            \draw[->] (0,0) -- (-1.2,-1.2) node[below] {$x$};
 
             % Sphere
             \draw[blue!60] (0,0) circle (2cm);
@@ -432,20 +432,20 @@ where \(\phi_i \in [0, 2\pi)\) is the azimuthal angle and \(\theta_i \in [0, \pi
             \draw[blue!60] (0,2) arc (90:-90:-0.5 and 2);
             \node[blue!60] at (1,2.1) {$S_2$};
 
+            % Theta angle in xy-plane
+            \draw[-, purple] (-0.4,-0.4) arc (-120:-31:.75);
+            \node[purple] at (0.8,-0.3) {$\phi$};
+
+            % Phi angle from z-axis
+            \draw[-, green!70!black] (0,1.0) arc (90:40:1.0);
+            \node[green!70!black] at (0.3,1.1) {$\theta$};
+
             % Magnetic moment vector
             \draw[->,thick,orange] (0,0) -- (1.3,1.1) node[midway, below right] {$\bs{\mu}$};
 
             % Projection onto xy-plane
             \draw[dashed,gray] (1.3,1.1) -- (1.3,-0.3); % vertical drop
             \draw[->,gray] (0,0) -- (1.3,-0.3);     % projection vector
-
-            % Theta angle in xy-plane
-            \draw[->, purple] (-0.4,-0.4) arc (-120:-31:.75);
-            \node[purple] at (0.8,-0.3) {$\phi$};
-
-            % Phi angle from z-axis
-            \draw[->, green] (0,1.0) arc (90:40:1.0);
-            \node[green] at (0.3,1.1) {$\theta$};
 
             % Origin dot
             \filldraw[black] (0,0) circle (1pt);
@@ -573,7 +573,7 @@ because in this regime we find that
 
 \subsection{Interacting Magnetic Spins}
 
-To understand the emergence of phase transitions, it is essential to include \textit{interactions} among the magnetic moments of the lattice. In real materials, atomic magnetic moments do not behave independently: the orientation of each spin tends to influence its nearest neighbours through short-range exchange interactions of quantum origin.
+To understand the emergence of phase transitions, it is essential to include \textit{interactions} among the magnetic moments of the lattice. In real materials, atomic magnetic moments do not behave independently: the orientation of each spin tends to influence its nearest neighbours through short-range exchange interactions.
 
 If we consider such local couplings, the magnetic Hamiltonian can be written as
 \[
@@ -661,3 +661,377 @@ Despite its simplicity, this model captures the essential physics of cooperative
 \end{remark}
 
 Notice that, in this discrete formulation, the system no longer possesses a continuous phase space. Instead, its microstates form a finite ensemble of configurations given by all possible combinations of up and down spins on the lattice.
+
+\section{Ising Model}
+
+Consider a hypercubic lattice whose sites carry discrete variables
+\(\sigma_i = \pm 1\). The Ising Hamiltonian is
+\begin{equation}
+    \mathcal{H}_{\mathrm{Ising}}
+    = -\mu H \sum_i \sigma_i
+    - J \sum_{\langle ij \rangle} \sigma_i \sigma_j,
+    \label{eq:Ising_Hamiltonian}
+\end{equation}
+where \(J>0\) favors configurations in which nearest--neighbor spins are aligned, while the external field \(H\) tends to align the spins along its direction.
+
+To determine the equilibrium state, we minimize the free energy
+\[
+    F = E - TS = \langle \mathcal{H} \rangle
+    - T \bigl(k_B \log \Gamma(E)\bigr),
+\]
+which makes explicit the competition between the internal energy \(E\) and the entropy \(S\). Energetically favorable states have aligned spins (low \(E\)), whereas entropy favors disordered configurations (high \(S\)). These two contributions typically push the system in opposite directions, and the temperature controls the relative weight of the entropic term.
+
+Thus, \(T\) emerges as the key parameter that determines which term dominates in the minimization of the free energy, and consequently which phase---ordered or disordered—the system will adopt.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1.1]
+
+        \draw[->] (-4,0) -- (4,0) node[right] {$T$};
+
+        \draw[thick] (0,0) -- (0,0.2);
+        \node[below] at (0,-0.05) {$T_c$};
+
+        \node[below] at (-2.2, 1.5) {Ferromagnetic};
+        \node[below] at ( 2.2, 1.5) {Paramagnetic};
+
+        \node[below] at ( 2.2, -0.1) {\small high \(E\) and \(S\)};
+        \node[below] at ( 2.2, -0.4) {\small low \(F\) at high \(T\)};
+        \node[below] at (-2.2, -0.1) {\small low \(E\) and \(S\)};
+        \node[below] at (-2.2, -0.4) {\small low \(F\) at low \(T\)};
+
+        \foreach \x in {-3.7,-3.2,-2.7,-2.2,-1.7,-1.2,-0.7} {
+                \draw[->,>=stealth,thick, green!70!black] (\x,0.2) -- (\x,0.8);
+            }
+
+        \draw[->,>=stealth,thick, red!70!black] (0.7,0.2) -- +(0,0.6);   % up
+        \draw[->,>=stealth,thick, red!70!black] (1.2,0.2) -- +(0,0.6);   % up
+        \draw[->,>=stealth,thick, red!70!black] (1.7,.8) -- +(0,-0.6);  % down
+        \draw[->,>=stealth,thick, red!70!black] (2.2,0.2) -- +(0,0.6);   % up
+        \draw[->,>=stealth,thick, red!70!black] (2.7,.8) -- +(0,-0.6);  % down
+        \draw[->,>=stealth,thick, red!70!black] (3.2,.8) -- +(0,-0.6);  % down
+        \draw[->,>=stealth,thick, red!70!black] (3.7,0.2) -- +(0,0.6);   % up
+    \end{tikzpicture}
+\end{figure}
+
+If we inspect the phase diagram\TODO{Add phase diagrams}, we immediately recognize the typical signature of a phase transition: a thermodynamic quantity develops a discontinuity at a specific value of the control parameters. Whenever such a non-analytic behaviour appears, a phase transition takes place.
+
+To distinguish the different phases, we introduce a quantity whose expectation value can indicate the degree of order in the system: the \textbf{order parameter}. For the Ising model---as well as for the Heisenberg model—the natural choice is the \textit{magnetization}. Its behaviour clearly displays a discontinuity near the critical temperature, separating the ferromagnetic and paramagnetic regimes. Above \(T_c\) the magnetization vanishes, while below \(T_c\) it acquires two opposite non-zero values (corresponding to the two possible orientations of the ferromagnetic phase):
+\[
+    M =
+    \begin{dcases}
+        0,             & \text{if } T \geq T_c, \\
+        M_0(T) \neq 0, & \text{if } T < T_c.
+    \end{dcases}
+\]
+Thus the magnetization not only signals the phase transition but also encodes the ordering properties of the system.
+
+If we look at the \(M\)-\(H\) diagram, we can also observe the appearance of the \textit{hysteresis loop} in the ferromagnetic phase. When a ferromagnet is magnetized and the external field is subsequently removed, the magnetization does not relax back to zero but to a finite residual value—an effect absent in the paramagnetic phase.
+
+Another key feature of phase transitions is the rate at which the order parameter changes as the system approaches the critical point. Close to \(T_c\), the magnetization exhibits a power-law behaviour:
+\[
+    M(T \to T_c) \sim |T - T_c|^{\beta},
+\]
+where \(\beta\) is the \textbf{critical exponent} of the magnetization, characterizing how sharply the transition occurs.
+
+Finally, it is useful to anticipate how symmetries enter the description of phase transitions. When the external field is turned off (\(H=0\)) and the temperature is above the critical value (\(T > T_c\)), the Hamiltonian is invariant under a global \(\mathbb{Z}_2\) transformation (flipping all spins). Below \(T_c\), however, the system develops a non-zero magnetization \(M \neq 0\), and the symmetry is no longer reflected in the equilibrium state: it is \textit{spontaneously broken}, without the need for any explicit symmetry-breaking term.
+
+\subsection{Mean-Field Treatment}
+
+The mean-field approach is a powerful approximation scheme that allows us to decouple interacting degrees of freedom by replacing the effect of all neighbours with an average, or \textbf{mean field}. Since the Ising model is exactly solvable only in \(1D\) (and in \(2D\) only for \(H=0\)), while for \(3D\) and higher dimensions no closed-form solution exists, we need an approximation scheme to obtain a tractable and physically meaningful solution.
+
+We start from the partition function:
+\[
+    Z_N = \sum_{\{\sigma_i\}} e^{-\beta \mathcal{H}},
+    \qquad
+    \mathcal{H} = -J \sum_{\langle ij \rangle} \sigma_i \sigma_j - H \sum_{i} \sigma_i,
+\]
+and we immediately observe that the Hamiltonian cannot be written as a sum of independent single-spin contributions because of the nearest–neighbour interaction term.
+The key idea of the mean-field approximation is to replace the interaction \(\sigma_i \sigma_j\) with an approximate expression depending only on the average magnetization. With this replacement, the Hamiltonian becomes effectively decoupled and takes the form
+\[
+    Z_N^{(\mathrm{mf})} \simeq \sum_{\{\sigma_i\}}
+    e^{-\beta \mathcal{H}^{(\mathrm{mf})}},
+    \qquad
+    \mathcal{H}^{(\mathrm{mf})} =
+    N \frac{J z m^2}{2} - (J z m + H)\sum_i \sigma_i,
+\]
+where \(z\) is the coordination number of the lattice. In this form, the Hamiltonian is fully factorized into single-spin contributions.
+
+Before carrying out the explicit computation, it is useful to summarize the logic of the procedure. We will first approximate the interaction term \(\sigma_i \sigma_j\) up to a suitable order in fluctuations around the average magnetization. We then reorganize the Hamiltonian until it becomes factorized. Finally, we compute the single-spin partition function, from which the full partition function follows as its \(N\)-th power.
+
+\paragraph{Magnetization \(m\).}
+We introduce here the quantity that will play a central role in the mean-field construction: the \textit{average magnetization per spin}. It measures the degree of alignment of the system and will serve as the parameter around which we expand the interaction term:
+\[
+    \begin{aligned}
+        m
+         & = \frac{M}{N}
+        = \frac{\left\langle \sum_{i} \sigma_i \right\rangle}{N}
+        = \frac{1}{N}
+        \sum_{\{\sigma_i\}}
+        \left( \sum_{i} \sigma_i \right)
+        \frac{e^{-\beta \mathcal{H}(\{\sigma_i\})}}{Z_N}            \\
+         & = \frac{1}{Z_N \beta N}
+        \sum_{\{\sigma_i\}}
+        \frac{\partial}{\partial H}
+        \left[
+            e^{-\beta \left(
+                    -H\sum_i \sigma_i
+                    - J \sum_{\langle ij \rangle} \sigma_i \sigma_j
+                    \right)}
+        \right]                                                     \\
+         & = \frac{1}{\beta N} \frac{\partial}{\partial H} \log Z_N
+        = -\frac{1}{N}\frac{\partial F}{\partial H}.
+    \end{aligned}
+\]
+This expression shows that the magnetization is the thermodynamic conjugate variable to the external field \(H\), and it will naturally emerge as the self-consistent order parameter in the mean-field approximation.
+
+\paragraph{Mean field and partition function.}
+We are now ready to apply the mean-field approximation. The idea is the following: instead of treating the interaction of each spin \(\sigma_i\) with its nearest neighbours exactly, we replace the surrounding spins by an average field, effectively producing a new \textbf{mean magnetization field}. In practice, we rewrite each spin as
+\[
+    \sigma_i \to \sigma_i + m - m = m + (\sigma_i - m),
+\]
+so that fluctuations appear only through the deviation \(\sigma_i - m\).
+A preliminary approximation follows from the definition of the magnetization:
+\[
+    m = \frac{\langle \sum_{i} \sigma_i \rangle}{N}
+    \sim \frac{\sum_{i} \langle \sigma_i \rangle}{N}
+    = \langle \sigma_i \rangle,
+\]
+where we have exploited translational invariance.
+We now expand the interaction term and neglect contributions of higher order in the fluctuations:
+\[
+    \begin{aligned}
+        \sigma_i \sigma_j
+         & = [m + (\sigma_i - m)][m + (\sigma_j - m)]                               \\
+         & = m^2 + m(\sigma_i - m) + m(\sigma_j - m) + (\sigma_i - m)(\sigma_j - m) \\
+         & \sim m^2 + m(\sigma_i + \sigma_j) - 2m^2
+        = m(\sigma_i + \sigma_j) - m^2,
+    \end{aligned}
+\]
+which corresponds to assuming that the fluctuations \(\sigma_i - m\) are small with respect to \(m\).
+With this approximation the Hamiltonian becomes decoupled:
+\[
+    \begin{aligned}
+        \mathcal{H}(\{\sigma_i\})
+         & = -J \sum_{\langle ij \rangle} \sigma_i \sigma_j - H \sum_{i} \sigma_i               \\
+         & \sim -J \sum_{\langle ij \rangle} (m(\sigma_i + \sigma_j)-m^2) - H \sum_{i} \sigma_i \\
+         & = J \frac{Nz}{2} m^2 -J\sum_{\langle ij \rangle} 2m\sigma_i - H \sum_{i} \sigma_i,
+    \end{aligned}
+\]
+where we used that the number of nearest--neighbour pairs is \(\frac{Nz}{2}\).
+We also used that each \(\sigma_i\) appears twice in the sum over pairs, hence
+\(\sum_{\langle ij \rangle} (\sigma_i + \sigma_j) = \sum_{\langle ij \rangle} 2\sigma_i\).
+Continuing the computation:
+\[
+    \begin{aligned}
+        \mathcal{H}(\{\sigma_i\})
+         & = J \frac{Nz}{2} m^2 -J\sum_{\langle ij \rangle} 2m\sigma_i - H \sum_{i} \sigma_i \\
+         & = J \frac{Nz}{2} m^2
+        + \sum_{i} \left( -J \frac{z}{2} 2m \sigma_i -H \sigma_i\right)                      \\
+         & =  \sum_{i} \left[ J \frac{z}{2} m^2 - \left( Jzm + H \right)\sigma_i \right],
+    \end{aligned}
+\]
+since each \(\sigma_i\) is counted \(\frac{z}{2}\) times among the nearest--neighbour pairs.
+At this stage the Hamiltonian is explicitly factorized into single-spin contributions, and we may therefore introduce the single-spin mean-field Hamiltonian
+\[
+    \mathcal{H}^{(mf)}(\sigma_i) = J \frac{z}{2} m^2 - \left( Jzm + H \right)\sigma_i.
+\]
+The canonical partition function now follows straightforwardly:
+\[
+    \begin{aligned}
+        Z_N & = (Z_1)^N = (e^{-\beta \mathcal{H}^{(mf)}(\sigma_i)})^N
+        = e^{-\beta J \frac{Nz}{2} m^2}
+        \left[ e^{\beta \sum_{\sigma_i = \pm 1} \left( Jzm + H \right)\sigma_i}\right]^N \\
+            & = e^{-\beta J \frac{Nz}{2} m^2}
+        \prod_{\sigma_i = \pm 1}
+        \left[ e^{\beta \left( Jzm + H \right)\sigma_i}\right]^N
+        = e^{-\beta J \frac{Nz}{2} m^2} (2 \cosh(\beta(H+Jzm)))^N.
+    \end{aligned}
+\]
+We have thus obtained the mean-field expression for the partition function.
+It is worth noting that, although the approximation fails in \(d=1\) and is only qualitatively accurate in \(d=2\), it becomes exact for \(d \geq 4\). This behaviour is consistent with the Mermin--Wagner theorem, which forbids spontaneous symmetry breaking in low spatial dimensions.
+
+\paragraph{Magnetization and self–consistency.}
+We now aim to obtain an explicit expression for the order parameter of the system. Using the relation between the magnetization \(m\) and the Helmholtz free energy, we begin by computing the latter:
+\[
+    \begin{aligned}
+        F & = -\frac{1}{\beta}\log Z_N
+        = -\frac{1}{\beta}\left[-\beta J\frac{Nz}{2}m^2 + N\log\!\left(2\cosh(\beta(H+Jzm))\right)\right] \\
+          & = J\frac{Nz}{2}m^2 - \frac{N}{\beta}\log\!\left(2\cosh(\beta(H+Jzm))\right).
+    \end{aligned}
+\]
+Taking the derivative with respect to the magnetic field, we obtain the magnetization:
+\[
+    \begin{aligned}
+        m & = -\frac{1}{N}\frac{\partial F}{\partial H}
+        = -\frac{1}{\beta}\frac{\partial}{\partial H}
+        \log(2\cosh(\beta(H+Jzm)))                                           \\
+          & = -\frac{2\sinh(\beta(H+Jzm))\,\beta}{2\beta\cosh(\beta(H+Jzm))}
+        = \tanh(\beta(H+Jzm)).
+    \end{aligned}
+\]
+This equation contains \(m\) on both sides and therefore constitutes a \textit{self–consistency relation}. Such relations are typical of mean–field treatments and express the fact that the order parameter must be compatible with the field it generates.
+
+Although the equation cannot be solved analytically, it already reveals important physical information. Since the right–hand side is monotonic, for \(H>0\) we find \(m>0\), and for \(H<0\) we find \(m<0\). Let us therefore focus on the case \(H=0\):
+\[
+    \begin{aligned}
+        m & = \tanh(\beta J z m) = \tanh\!\left(\frac{T_c}{T} m\right) = \tanh(x), \\
+        y & = \frac{T}{T_c} x = m = \tanh(x), \qquad T_c = \frac{J z}{k_B}.
+    \end{aligned}
+\]
+This form makes the role of temperature explicit: it controls the slope of the straight line that must intersect the curve \(y=\tanh(x)\).
+\begin{figure}[H]
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=1.3]
+
+            \draw[->] (-3.2,0) -- (3.2,0) node[right] {$x$};
+            \draw[->] (0,-2) -- (0,2) node[above] {$y$};
+
+            \draw[thick,red,domain=-3:3,samples=200]
+            plot (\x,{tanh(\x)}) node[below] {$\tanh(x)$};
+
+            \draw[gray] (1.6,1.6) -- (-1.6,-1.6)
+            node[below] {\small $y=x$};
+
+            \draw[blue,thick,dashed] (-1,-1.6) -- (1,1.6)
+            node[above] {\small $T>T_c$};
+
+            \draw[green!60!black,thick,dashed] (-3,-1.6) -- (3,1.6)
+            node[above] {\small $T<T_c$};
+
+            \draw[dashed] (1.8,0) -- (1.8,0.859);
+            \draw[dashed] (-1.8,0) -- (-1.8,-0.859);
+
+            \filldraw[green!60!black] (1.8,0) circle (1.5pt) node[below] {\small $m_0$};
+            \filldraw[green!60!black] (-1.8,-0) circle (1.5pt) node[above] {\small $-m_0$};
+            \filldraw[green!60!black] (1.8,0.95) circle (1.5pt);
+            \filldraw[green!60!black] (-1.8,-0.95) circle (1.5pt);
+
+            \filldraw[blue] (0,0) circle (1.5pt) node[above left] {\small $m=0$};
+        \end{tikzpicture}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.35\textwidth}
+        The graphical solution shows that for \(T > T_c\) the only intersection is at the origin, yielding \(m=0\): this corresponds to the \textbf{paramagnetic phase}. For \(T < T_c\), instead, the line intersects the curve at two symmetric non-zero points, corresponding to two stable ordered states with opposite magnetization: this is the \textbf{ferromagnetic phase}.
+    \end{minipage}
+\end{figure}
+
+\subsection{Spontaneous Symmetry Breaking}
+
+As we have established, the Ising Hamiltonian is symmetric under a global \(\mathbb{Z}_2 = \{\mathbb{I}, g\}\) transformation. However, this invariance of the Hamiltonian does not imply that the thermodynamic state of the system remains symmetric. We have observed that in the paramagnetic phase, the magnetization transforms as:
+\[
+    M \xrightarrow{\sigma_i \to -\sigma_i} -M, \quad \text{with } M=-M=0.
+\]
+Here, the symmetry is respected. In contrast, in the ferromagnetic state, the net magnetization is non-zero and thus is not invariant under \(\mathbb{Z}_2\). This phenomenon is known as \textit{spontaneous symmetry breaking} (SSB).
+
+At lower temperatures, the system enters an ordered phase, and the effective symmetries are reduced to a subgroup \(G_0 \subset G\) of the original symmetry group. Let the order parameter depend on an observable \(\phi\) that is not invariant under the transformations of \(G\). If the thermal average behaves as follows:
+\[
+    \Phi = \langle \phi \rangle =
+    \begin{dcases}
+        0,                & \text{if } T \geq T_c, \\
+        \Phi_0(T) \neq 0, & \text{if } T < T_c,
+    \end{dcases}
+\]
+then we say \textit{the symmetry is spontaneously broken}. The magnetization serves as a perfect example of such an order parameter. It is important to note that while every instance of SSB implies the existence of a Phase Transition (PT), not all Phase Transitions are accompanied by SSB.
+
+\paragraph{Correlation.}
+Another quantity worthy of analysis is the \textit{correlation} (or covariance), which describes how spins influence each other over large distances. Intuitively, we expect the correlation to decrease as the distance increases, but the specific mode of this decay offers deep physical insights. The correlation function between two spins is defined as:
+\[
+    G_{ij} = \langle \sigma_i \sigma_j \rangle - \langle \sigma_i \rangle \langle \sigma_j \rangle = \langle \sigma_i \sigma_j \rangle -m^2,
+\]
+assuming translational invariance where \(\langle \sigma_i \rangle = \langle \sigma_j \rangle = m\). Letting \(r = \vert i-j \vert \) be the distance, the asymptotic behavior for large \(r\) is given by:\TODO{plot the correlation}
+\[
+    G(r) = \begin{dcases}
+        e^{-\tfrac{r}{\xi}},              & \text{ if }  T\neq T_c; \\
+        \left( r^{d-2-\eta} \right)^{-1}, & \text{ if }  T=T_c.     \\
+    \end{dcases}
+\]
+For \(T \neq T_c\), the correlation \(G(r)\) remains significantly large only for \(r < \xi\) and becomes negligible for \(r > \xi\). The parameter \(\xi\) is called the \textbf{correlation length}, representing the typical scale of fluctuations or the size of the regions within which spins are strongly correlated.
+
+Crucially, we observe that \(\xi \to \infty\) as \(T \to T_c\). Physically, this means that as the critical temperature is approached, distant spins become increasingly correlated. Exactly at \(T=T_c\), the correlation length diverges, and the system exhibits long-range order, resulting in a power-law decay for \(G(r)\) rather than an exponential one.
+
+\subsection{Critical Exponents}
+
+We now investigate the behavior of the system as \(T \to T_c\) to characterize the properties of the Phase Transition. The strategy is to perform a Taylor expansion of \(\tanh(x)\). First, let us define a reduced temperature variable \(t\) (representing an infinitesimal deviation):
+\[
+    t = \frac{T_c - T}{T_c} = 1-\frac{T}{T_c} \ll 1.
+\]
+From this, we can write the inverse temperature ratio as:
+\[
+    \frac{T_c}{T} = (1-t)^{-1} \sim 1 + t.
+\]
+Recall the mean-field equation involving the magnetization \(m\). We can make \(m\) explicit inside the argument of the hyperbolic tangent, or equivalently work with the inverse. Using the relation \(\tanh^{-1}(m) = \frac{T_c}{T} m\), and substituting our expression for \(T_c/T\):
+\[
+    \tanh^{-1}(m) = (1+t)m.
+\]
+Next, we Taylor expand the inverse hyperbolic tangent in powers of \(m\) (since \(m\) is small near \(T_c\)):
+\[
+    \tanh^{-1}(m) \sim m + \frac{m^3}{3} = (1+t)m \implies \frac{m^3}{3} \approx tm \implies m^2 = 3t.
+\]
+We have thus found how the magnetization scales in proximity to the Phase Transition:
+\[
+    m(T \to T_c) \sim t^{\tfrac12}, \quad \implies \beta=\frac{1}{2}.
+\]
+The reduced temperature \(t\) allows us to quantify the rapidity of the transition. In terms of the absolute temperature difference, we found:
+\[
+    m(T \to T_c) \sim \vert T - T_c \vert^{\beta = \tfrac12}.
+\]
+
+This exponent is one of several universal parameters defined to monitor the rate of change (scaling) of thermodynamic variables near a phase transition. These are called \textbf{critical exponents}. Formally, a critical exponent \(\lambda\) is associated with a variable \(f(t)\) as follows:
+\[
+    \lambda = \lim_{t \to 0} \frac{\log(f(t))}{\log(t)} \longrightarrow f(t \to 0) = g(t)\vert t \vert^{\lambda}, \quad \text{where } g(0) \neq 0.
+\]
+
+We typically consider six of these standard exponents:
+\begin{itemize}
+    \item \(\alpha\) for \textbf{specific heat}: \(C_{H=0} \sim \vert t \vert^{-\alpha}\);
+    \item \(\beta\) for \textbf{order parameter} (magnetization): \(\phi \sim \vert t \vert^{\beta}\);
+    \item \(\gamma\) for \textbf{susceptibility}: \(\chi_{H=0} \sim \vert t \vert^{-\gamma}\);
+    \item \(\delta\) for \textbf{external field} (at the critical isotherm \(T=T_c\)): \(H \sim \mathrm{sgn}(\phi)\vert \phi \vert^{\delta}\);
+    \item \(\nu\) for \textbf{correlation length}: \(\xi \sim \vert t \vert^{-\nu}\);
+    \item \(d-2+\eta\) for \textbf{anomalous dimension} (at \(T=T_c\)): \(G(r) \sim \frac{1}{r^{d-2+\eta}}\).
+\end{itemize}
+
+\paragraph{Scaling Hypothesis.}
+When the system undergoes a Phase Transition (PT), correlations spread throughout the nodes. Once the PT is completed, the system settles into a single thermodynamic phase. However, approaching the critical point, one can recognize fluctuations where different local states effectively coexist. During a continuous PT, the \textbf{correlation length} (or \textit{scale length}) diverges to infinity, until the entire system becomes correlated (in the Ising model, this corresponds to macroscopic magnetic ordering). At this precise moment, the system is said to be \textbf{scale invariant}. Conversely, as long as \(T \neq T_c\), the system is said to be \textit{holding a scale} (characterized by finite \(\xi\)), allowing us to distinguish the thermodynamic phases.
+
+\begin{theorem}
+    At a critical point during a PT, the system becomes scale invariant (this forms the basis of \textbf{Widom's hypothesis}). Consequently, the singular part of the free energy must be a homogeneous function of the reduced temperature \(t\) and the external field \(H\), respecting the scaling relation:
+    \[
+        F(\lambda^a t,\, \lambda^b H) = \lambda F(t,\,H).
+    \]
+\end{theorem}
+
+From this hypothesis, we can compute the relations connecting the scaling parameters \(a\) and \(b\) with our critical exponents:
+\[
+    \begin{aligned}
+        \alpha & = 2 - \frac{1}{a},\quad &  & \beta = \frac{1-b}{a},  \\
+        \gamma & = \frac{2b-1}{a},\quad  &  & \delta = \frac{b}{1-b}, \\
+        \nu    & = \frac{1}{da},\quad    &  & \eta = 2-d(2b-1).
+    \end{aligned}
+\]
+Finally, it is useful to derive the \textit{scaling laws} (identities connecting the critical exponents), which act as a consistency check:
+\[
+    \begin{aligned}
+        (2 -\eta) \nu = \gamma,         \\
+        \alpha + \beta(1 + \delta) = 2, \\
+        d \nu = 2 - \alpha,             \\
+        \alpha + 2\beta + \gamma = 2.
+    \end{aligned}
+\]
+
+\paragraph{Universality Classes.}
+Due to scale invariance at the critical point, systems with different Hamiltonians and distinct microscopic descriptions might display the exact same type of PT. Microscopically, these systems may appear completely unrelated; however, as they approach the PT, their macroscopic behavior coincides. This implies that the numerical values of the six exponents \(\alpha,\,\beta,\,\gamma,\,\delta,\,\nu,\,\eta\) are identical across these systems.
+
+We can thus classify PTs into \textbf{universality classes}. Membership in a class does not depend on the explicit form of the Hamiltonian or the specific details of the interactions, but only upon:
+\begin{itemize}
+    \item the \textit{dimension} of the physical space \(d=1,\,2,\,3\dots\);
+    \item the \textit{symmetry group} \(G\) of the Hamiltonian;
+    \item the \textit{residual symmetry subgroup} \(G_0\) in the \textit{broken phase} after the Spontaneous Symmetry Breaking (SSB).
+\end{itemize}
+If these three factors coincide, the Hamiltonians exhibit the same phase transition behavior and belong to the same universality class, characterized by a unique set of critical exponents.
+
+\begin{remark}
+    In \(d=1\) there is no finite-temperature PT because \(T_c \to 0\). Approaching \(T_c\) from above implies \(T \to 0\), and "crossing" it would physically imply negative temperatures (which are not accessible in equilibrium). Thus, the standard critical exponents are not well-defined for the 1D case.
+\end{remark}
