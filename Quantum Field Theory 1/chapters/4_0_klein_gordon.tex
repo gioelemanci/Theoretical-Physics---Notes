@@ -164,20 +164,264 @@ similarly:
 \[
     \begin{aligned}
         [\,\hat{\pi}(\mathbf{x}),\hat{\pi}(\mathbf{y})\,] & = \int \frac{\mathrm{d}^3 \mathbf{p}\mathrm{d}^3 \mathbf{q}}{(2\pi)^6} \, \frac{(-i)^2}{2}\sqrt{\omega_{\mathbf{q}}\omega_{\mathbf{p}}} \left[ \,\hat{a}_{\mathbf{p}} e^{i \mathbf{p}\cdot \mathbf{x}} - \hat{a}_{\mathbf{p}}^\dagger e^{-i \mathbf{p}\cdot \mathbf{x}}\, , \,\hat{a}_{\mathbf{q}} e^{i \mathbf{q}\cdot \mathbf{y}} - \hat{a}_{\mathbf{q}}^\dagger e^{-i \mathbf{q}\cdot \mathbf{y}} \, \right] \\
-                                                          & = \int \frac{\mathrm{d}^3 \mathbf{p}\mathrm{d}^3 \mathbf{q}}{(2\pi)^6} \, \frac{-1}{2}\sqrt{\omega_{\mathbf{q}}\omega_{\mathbf{p}}} \left[ - [\,\hat{a}_{\mathbf{p}}, \hat{a}_{\mathbf{q}}^\dagger\,] e^{i (\mathbf{p} \cdot \mathbf{x} - \mathbf{q} \cdot \mathbf{y})} - [\,\hat{a}^\dagger_{\mathbf{p}}, \hat{a}_{\mathbf{q}}\,] e^{-i (\mathbf{p} \cdot \mathbf{x} - \mathbf{q} \cdot \mathbf{y})}\right]    \\
+                                                          & = \int \frac{\mathrm{d}^3 \mathbf{p}\mathrm{d}^3 \mathbf{q}}{(2\pi)^6} \, \frac{(-1)}{2}\sqrt{\omega_{\mathbf{q}}\omega_{\mathbf{p}}} \left[ - [\,\hat{a}_{\mathbf{p}}, \hat{a}_{\mathbf{q}}^\dagger\,] e^{i (\mathbf{p} \cdot \mathbf{x} - \mathbf{q} \cdot \mathbf{y})} - [\,\hat{a}^\dagger_{\mathbf{p}}, \hat{a}_{\mathbf{q}}\,] e^{-i (\mathbf{p} \cdot \mathbf{x} - \mathbf{q} \cdot \mathbf{y})}\right]  \\
                                                           & = \frac{1}{2} \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \omega_{\mathbf{p}} \left( e^{i \mathbf{p} \cdot (\mathbf{x} - \mathbf{y})} - e^{-i \mathbf{p} \cdot (\mathbf{x} - \mathbf{y})}\right) \propto \delta^3(\mathbf{x} - \mathbf{y}) - \delta^3(\mathbf{y} - \mathbf{x}) = 0.
     \end{aligned}
 \]
 
 \subsection{Hamiltonian and Ladder Operators}
 
-Let us take a look at the Klein-Gordon Hamiltonian:
+Let us examine the classical Klein-Gordon Hamiltonian:
 \[
-    H = \int \mathrm{d}^3 \mathbf{x} T^{00} = \int \mathrm{d}^{3}\mathbf{x} (\pi \dot{\psi} - \mathcal{L})
+    H = \int \mathrm{d}^3 \mathbf{x}\, T^{00} = \int \mathrm{d}^{3}\mathbf{x}\, (\pi \dot{\psi} - \mathcal{L}),
 \]
+where we have used the \textit{Legendre} transform to express the Hamiltonian density $T^{00}$. Here, \(\pi\) is the conjugate momentum of the field, and we recall that the Lagrangian density \(\mathcal{L}\) for a real scalar field is:
+\[
+    \mathcal{L} = \frac{1}{2} \partial_\mu \psi \partial^\mu \psi -\frac{1}{2} m^2 \psi^2 = \frac{1}{2}\left( \dot{\psi}^2 - \vert \nabla \psi \vert^2 - m^2 \psi^2 \right).
+\]
+Proceeding with the computation, and utilizing the relationship \(\pi = \frac{\partial \mathcal{L}}{\partial \dot{\psi}} = \dot{\psi}\), we simplify the total Hamiltonian to:
+\[
+    \begin{aligned}
+        H & = \int \mathrm{d}^3 \mathbf{x}\, \left( \pi^2 -\frac{1}{2}\pi^2 + \frac{1}{2}\vert \nabla \psi \vert^2 + \frac{m^2}{2} \psi^2 \right) \\
+          & = \frac{1}{2} \int \mathrm{d}^3 \mathbf{x}\, \left( \pi^2 + \vert \nabla \psi \vert^2 + m^2 \psi^2 \right) .
+    \end{aligned}
+\]
+
+Now, to quantize the system, we promote the classical fields \(\psi\) and \(\pi\) to operators acting on a Fock Space within the \textbf{Schrödinger picture} (where operators have no explicit time dependence). We quantize via Fourier transform, which introduces the convenient definitions of the ladder operators:
+\[
+    \hat{\psi} (x) = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3}\,\frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left[ \hat{a}_{\mathbf{p}}e^{i \mathbf{p} \cdot \mathbf{x}} + \hat{a}^{\dagger}_{\mathbf{p}} e^{-i \mathbf{p} \cdot \mathbf{x}} \right],
+\]
+where \(\omega_{\mathbf{p}} = \sqrt{\vert \mathbf{p} \vert^2 + m^2}\), and
+\[
+    \hat{\pi} (x) = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3}\,(-i)\sqrt{\frac{\omega_{\mathbf{p}}}{2}} \left[ \hat{a}_{\mathbf{p}}e^{i \mathbf{p} \cdot \mathbf{x}} - \hat{a}^{\dagger}_{\mathbf{p}} e^{-i \mathbf{p} \cdot \mathbf{x}} \right].
+\]
+The promoted Hamiltonian operator now takes the form:
+\[
+    \hat{H} = \frac{1}{2} \int \mathrm{d}^3 \mathbf{x} \left( \hat{\pi}^2 + \vert \nabla \hat{\psi} \vert^2 + m^2 \hat{\psi}^2 \right).
+\]
+We compute the integrands of the individual squared terms (implicitly involving a double momentum integral $\int d^3\mathbf{p} d^3\mathbf{q}$):
+\[
+    \begin{aligned}
+        \hat{\pi}^2                     & = - \frac{\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}}{2}\left[ \hat{a}_{\mathbf{p}}e^{i \mathbf{p} \cdot \mathbf{x}} - \hat{a}^{\dagger}_{\mathbf{p}} e^{-i \mathbf{p} \cdot \mathbf{x}} \right]\left[ \hat{a}_{\mathbf{q}}e^{i \mathbf{q} \cdot \mathbf{x}} - \hat{a}^{\dagger}_{\mathbf{q}} e^{-i \mathbf{q} \cdot \mathbf{x}} \right],                         \\
+        \vert \nabla \hat{\psi} \vert^2 & = \frac{1}{2 \sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}} i \mathbf{p}\left[ \hat{a}_{\mathbf{p}}e^{i \mathbf{p} \cdot \mathbf{x}} - \hat{a}^{\dagger}_{\mathbf{p}} e^{-i \mathbf{p} \cdot \mathbf{x}} \right]i\mathbf{q}\left[ \hat{a}_{\mathbf{q}}e^{i \mathbf{q} \cdot \mathbf{x}} - \hat{a}^{\dagger}_{\mathbf{q}} e^{-i \mathbf{q} \cdot \mathbf{x}} \right], \\
+        m^2 \hat{\psi}^2                & = \frac{m^2}{2 \sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}}\left[ \hat{a}_{\mathbf{p}}e^{i \mathbf{p} \cdot \mathbf{x}} + \hat{a}^{\dagger}_{\mathbf{p}} e^{-i \mathbf{p} \cdot \mathbf{x}} \right]\left[ \hat{a}_{\mathbf{q}}e^{i \mathbf{q} \cdot \mathbf{x}} + \hat{a}^{\dagger}_{\mathbf{q}} e^{-i \mathbf{q} \cdot \mathbf{x}} \right] .
+    \end{aligned}
+\]
+By substituting these expressions into the Hamiltonian, performing the spatial integration, and simplifying (full computation detailed in Appendix \ref{app:computations}), we arrive at the final form:
+\[
+    \hat{H} = \frac{1}{2} \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \omega_{\mathbf{p}}\left( \hat{a}_{\mathbf{p}} \hat{a}^{\dagger}_{\mathbf{p}} + \hat{a}^{\dagger}_{\mathbf{p}} \hat{a}_{\mathbf{p}} \right),
+\]
+which depends solely on the ladder operators. Manipulating this expression slightly by recalling the canonical commutation relation for the operators:
+\[
+    [\,\hat{a}_{\mathbf{p}}, \hat{a}_{\mathbf{q}}^\dagger\,] = (2\pi)^3 \delta^3(\mathbf{p} - \mathbf{q}),
+\]
+we find that the Hamiltonian contains a fundamental divergence:
+\[
+    \hat{H} = \frac{1}{2} \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \omega_{\mathbf{p}}\left( 2 \hat{a}^{\dagger}_{\mathbf{p}} \hat{a}_{\mathbf{p}} + [\,\hat{a}_{\mathbf{p}}, \hat{a}_{\mathbf{p}}^\dagger\,] \right) = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \omega_{\mathbf{p}} \hat{a}^{\dagger}_{\mathbf{p}} \hat{a}_{\mathbf{p}} + \frac{1}{2}\int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \omega_{\mathbf{p}}\delta^3(0).
+\]
+This Hamiltonian diverges for two principal reasons, corresponding to the limits of high and low momentum integration:
+\begin{itemize}
+    \item \textbf{Ultraviolet (UV) Divergence} \\
+          This results from the high-momentum (short-distance) contribution. When we integrate \(\omega_{\mathbf{p}}\) over \(\mathrm{d}^3 \mathbf{p}\), the contributions from infinitely many harmonic oscillators with arbitrarily large momenta cause the integral to diverge. Since for large \(\vert \mathbf{p} \vert\) the dispersion relation is \(\omega_{\mathbf{p}} \sim \vert \mathbf{p} \vert\), it is expected that \(\int \mathrm{d}^3 \mathbf{p} \, \omega_{\mathbf{p}} \to \infty\).
+    \item \textbf{Infrared (IR) / Volume Divergence} \\
+          This divergence is mathematically due to the Dirac delta function: \(\delta^3(0) \to \infty\). Physically, this provides insight into the nature of the problem: we are summing the \textbf{zero-point energy} of each of our harmonic oscillators. Since there are infinitely many oscillators filling a virtually infinite volume of space, the total energy is infinite.
+\end{itemize}
+
+\paragraph{Vacuum Structure and Regularization.}
+In order to fully comprehend this infinity, we must study the structure of the \textbf{vacuum state} \(\ket{0}\), which by definition is annihilated by all annihilation operators:
+\[
+    \hat{a}_{\mathbf{p}} \ket{0} = 0 \quad \forall \mathbf{p}.
+\]
+Its energy can be computed by applying the Hamiltonian operator to this state:
+\[
+    \hat{H} \ket{0} = E_0 \ket{0} = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \omega_{\mathbf{p}} \hat{a}^{\dagger}_{\mathbf{p}} \hat{a}_{\mathbf{p}} \ket{0} + \frac{1}{2}\int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \omega_{\mathbf{p}}\delta^3(0) \ket{0}.
+\]
+Since the first term vanishes due to the action of the annihilation operator, the vacuum energy is entirely given by the second term:
+\[
+    E_0 = \frac{1}{2}\int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \omega_{\mathbf{p}}\delta^3(0) \to \infty.
+\]
+As discussed, the energy of the vacuum diverges due to the \textbf{IR/Volume divergence}. The connection to the infinite volume $V$ is explicit in the definition:
+\[
+    (2\pi)^3 \delta^3(0) = \lim_{L \to \infty} \int_{-\tfrac{L}{2}}^{\tfrac{L}{2}} \mathrm{d}^3 \mathbf{x} e^{i \mathbf{p}\cdot \mathbf{x}} \Vert_{\mathbf{p} = 0} = \lim_{L \to \infty} \int_{-\tfrac{L}{2}}^{\tfrac{L}{2}} \mathrm{d}^3 \mathbf{x} = V \to \infty.
+\]
+We typically resolve this volume dependence by shifting our focus from pure energy $E_0$ to the energy density $\mathcal{E}_0$. By renormalizing properly by the volume, the dependence on $\delta^3(0)$ is removed:
+\[
+    \mathcal{E}_0 = \frac{E_0}{V} = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \frac{\omega_{\mathbf{p}}}{2}.
+\]
+This quantity still diverges to infinity because of the \textbf{Ultraviolet divergence}. This remaining problem implies we have implicitly considered our theory to be valid at all energy scales. To proceed, we must introduce a momentum \textit{cut-off} \(\Lambda\) to regularize the integral. This cut-off restricts the available momenta, acknowledging that our model breaks down above the Planck scale ($M_p$), where gravitational effects become non-negligible (as cited in section \ref{sec:units_scales}). The consequent \textbf{UV cutoff} imposes the restriction:
+\[
+    \vert \mathbf{p} \vert \leq \Lambda \leq M_p \sim \SI{e18}{\giga\electronvolt}.
+\]
+
+\paragraph{Normal Ordering.}
+We've established that the system's absolute energy value is problematic. Since we are typically interested only in \textit{relative energy values} (such as differences between energy levels or energies measured relative to the vacuum), the simplest physical choice is to define the vacuum energy as zero: \(E_0 = 0\). We achieve this formally by introducing the **Normal Ordering** of an operator $\hat{O}$:
+\[
+    :\hat{O}: = \hat{O} - \bra{0}\hat{O}\ket{0}.
+\]
+Applying this definition to the Hamiltonian $\hat{H}$ immediately ensures a null vacuum energy:
+\[
+    :\hat{H}: \ket{0} = \hat{H} \ket{0} - E_0 \ket{0} = 0.
+\]
+The difference between the original Hamiltonian $\hat{H}$ and the normal ordered version $:\hat{H}:$ is solely due to the \textbf{ordering ambiguity} that arises when transitioning from a classical theory to a quantum field theory. Consider the classical Hamiltonian for a single harmonic oscillator, which can be expressed in two classically equivalent forms:
+\[
+    H = \frac{1}{2} p^2 + \frac{\omega^2}{2} q^2 \quad \text{or} \quad H = \frac{1}{2}(\omega q - ip)(\omega q + ip).
+\]
+These expressions become non-equivalent when promoted to operators $\hat{q}$ and $\hat{p}$ due to non-zero commutators. The first expression yields the familiar quantum Hamiltonian:
+\[
+    \begin{aligned}
+        \hat{H} & = \frac{1}{2} \hat{p}^2 + \frac{\omega^2}{2} \hat{q}^2 = \frac{\omega}{2}(\hat{a}\hat{a}^{\dagger} + \hat{a}^{\dagger}\hat{a}) = \frac{\omega}{2}([\hat{a},\,\hat{a}^{\dagger}] + 2\hat{a}^{\dagger}\hat{a}) \\
+                & = \frac{\omega}{2}(1 + 2\hat{a}^{\dagger}\hat{a}) = \omega \hat{N} + \frac{\omega}{2},
+    \end{aligned}
+\]
+where the final term $\omega/2$ accounts for the non-zero vacuum energy. The term $\omega \hat{N}$ multiplies the number of excitations $\hat{N}$ by the energy of a single oscillator (the same principle applies to counting particles in QFT).
+If we compute the second, factorized expression, we find:
+\[
+    \begin{aligned}
+        \hat{H}' & = \frac{1}{2}(\omega \hat{q} - i\hat{p})(\omega \hat{q} + i\hat{p})                                                                                                                                                                                                                                                    \\
+                 & = \frac{1}{2} \left[ \omega \frac{1}{\sqrt{2\omega}}(\hat{a} + \hat{a}^{\dagger}) - i \left(-i \sqrt{\frac{\omega}{2}}(\hat{a} - \hat{a}^{\dagger})\right) \right]\left[ \omega \frac{1}{\sqrt{2\omega}}(\hat{a} + \hat{a}^{\dagger}) + i \left(-i \sqrt{\frac{\omega}{2}}(\hat{a} - \hat{a}^{\dagger})\right) \right] \\
+                 & = \frac{\omega}{4}\left(\hat{a} + \hat{a}^{\dagger} - \hat{a} + \hat{a}^{\dagger}\right)\left(\hat{a} + \hat{a}^{\dagger} + \hat{a} - \hat{a}^{\dagger}\right) = \frac{\omega}{4}(2\hat{a}^{\dagger})(2\hat{a}) = \omega \hat{a}^{\dagger}\hat{a} = \omega \hat{N},
+    \end{aligned}
+\]
+where the vacuum energy term is naturally absent.
+
+This demonstrates the core rule of normal ordering: in any product of creation and annihilation operators, all annihilation operators ($\hat{a}$) must be placed to the right of all creation operators ($\hat{a}^{\dagger}$).
+
+Applying normal ordering to the full Klein-Gordon Hamiltonian we found previously:
+\[
+    \hat{H} = \frac{1}{2} \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \omega_{\mathbf{p}}\left( \hat{a}_{\mathbf{p}} \hat{a}^{\dagger}_{\mathbf{p}} + \hat{a}^{\dagger}_{\mathbf{p}} \hat{a}_{\mathbf{p}} \right),
+\]
+the normal ordered version, $:\hat{H}:$, is directly obtained by moving $\hat{a}_{\mathbf{p}}$ to the right of $\hat{a}^{\dagger}_{\mathbf{p}}$ in the first term:
+\[
+    :\hat{H}: = \frac{1}{2} \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \omega_{\mathbf{p}}\left( \hat{a}^{\dagger}_{\mathbf{p}} \hat{a}_{\mathbf{p}} + \hat{a}^{\dagger}_{\mathbf{p}} \hat{a}_{\mathbf{p}} \right) = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \omega_{\mathbf{p}}\hat{a}^{\dagger}_{\mathbf{p}} \hat{a}_{\mathbf{p}}.
+\]
+From now on, we will safely set the vacuum energy to zero by implicitly using the normal ordering convention and dropping the cumbersome notation $:\hat{O}:$.
+\begin{remark}
+    Although we set the vacuum energy to zero here, it is not always negligible. When introducing interactions or considering gravity, the absolute value of the vacuum energy density (the cosmological constant) becomes physically crucial.
+\end{remark}
+
 \subsection{Particle States}
 
+For a single harmonic oscillator, the commutation relations between the Hamiltonian and the ladder operators define how the operators shift the energy levels:
+\[
+    [\hat{H},\,\hat{a}] = -\omega \hat{a}, \quad [\hat{H},\,\hat{a}^{\dagger}] = \omega \hat{a}^{\dagger}.
+\]
+Similarly, in Klein-Gordon (KG) theory, the creation and annihilation operators $\hat{a}_{\mathbf{p}}^\dagger$ and $\hat{a}_{\mathbf{p}}$ shift the total energy by the energy of a single momentum mode, $\omega_{\mathbf{p}}$:
+\[
+    [\hat{H},\,\hat{a}_{\mathbf{p}}] = -\omega_{\mathbf{p}} \hat{a}_{\mathbf{p}}, \quad [\hat{H},\,\hat{a}^{\dagger}_{\mathbf{p}}] = \omega_{\mathbf{p}} \hat{a}^{\dagger}_{\mathbf{p}}.
+\]
+The derivation of these relations uses the normal ordered Hamiltonian and the fact that \(\hat{a}_{\mathbf{p}}\) commutes with \(\hat{a}_{\mathbf{q}}\) (the same also for the creation operator):
+\[
+    \begin{aligned}
+        [\hat{H},\,\hat{a}_{\mathbf{p}}]           & = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \omega_{\mathbf{q}}\left(\hat{a}^{\dagger}_{\mathbf{q}} \hat{a}_{\mathbf{q}} \hat{a}_{\mathbf{p}} - \hat{a}_{\mathbf{p}}\hat{a}^{\dagger}_{\mathbf{q}} \hat{a}_{\mathbf{q}}\right) = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \omega_{\mathbf{q}}[\hat{a}^{\dagger}_{\mathbf{q}},\,\hat{a}_{\mathbf{p}}]\hat{a}_{\mathbf{q}}                                \\
+                                                   & = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \omega_{\mathbf{q}} [-(2\pi)^3 \delta^3(\mathbf{p}-\mathbf{q})]\hat{a}_{\mathbf{q}} = - \omega_{\mathbf{p}} \hat{a}_{\mathbf{p}};                                                                                                                                                                                                                                   \\
+        [\hat{H},\,\hat{a}^{\dagger}_{\mathbf{p}}] & = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \omega_{\mathbf{q}}\left(\hat{a}^{\dagger}_{\mathbf{q}} \hat{a}_{\mathbf{q}} \hat{a}^{\dagger}_{\mathbf{p}} - \hat{a}^{\dagger}_{\mathbf{p}}\hat{a}^{\dagger}_{\mathbf{q}} \hat{a}_{\mathbf{q}}\right) = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \omega_{\mathbf{q}}\hat{a}^{\dagger}_{\mathbf{q}} [\hat{a}_{\mathbf{q}},\,\hat{a}^{\dagger}_{\mathbf{p}}] \\
+                                                   & = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \omega_{\mathbf{q}}\hat{a}^{\dagger}_{\mathbf{q}} [(2\pi)^3 \delta^3(\mathbf{p}-\mathbf{q})] = \omega_{\mathbf{p}} \hat{a}^{\dagger}_{\mathbf{p}}.                                                                                                                                                                                                                  \\
+    \end{aligned}
+\]
+We can build one particle \textbf{energy eigenstates} by acting on the vacuum state with a creation operator \(\hat{a}^{\dagger}_{\mathbf{p}}\):
+\[
+    \begin{aligned}
+        \hat{a}^{\dagger}_{\mathbf{p}}\ket{0} & = \ket{\mathbf{p}},                                                       \\
+        \hat{H} \ket{\mathbf{p}}              & = E_{\mathbf{p}} \ket{\mathbf{p}} = \omega_{\mathbf{p}} \ket{\mathbf{p}}, \\
+        \text{with } \omega_{\mathbf{p}}      & = \sqrt{\vert \mathbf{p} \vert^2 + m^2}.
+    \end{aligned}
+\]
+The state $\ket{\mathbf{p}}$ represents a single scalar particle of mass $m$ with momentum $\mathbf{p}$. The momentum operator $\hat{\mathbf{P}}$ confirms this. Classically, the momentum operator is given by the spatial components of the energy-momentum tensor integral:
+\[
+    P^i = \int \mathrm{d}^3 \mathbf{x} \, T^{0i} = - \int \mathrm{d}^3 \mathbf{x} \, \pi \partial_i \psi.
+\]
+The corresponding quantum operator, after substituting the field expansions and simplifying, yields (using the normal ordering convention):
+\[
+    \begin{aligned}                                                                                  \\
+        \hat{P}^i & = - \int \mathrm{d}^3 \mathbf{x} \, \hat{\pi} \nabla \hat{\psi}                                                                                                                                                                                                                                                                                                                               \\
+                  & = - \int \mathrm{d}^3 \mathbf{x} \, \frac{1}{2}\int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} (-i)\left[ \hat{a}_{\mathbf{p}}e^{i \mathbf{p} \cdot \mathbf{x}} - \hat{a}^{\dagger}_{\mathbf{p}} e^{-i \mathbf{p} \cdot \mathbf{x}} \right]\nabla\left[ \hat{a}_{\mathbf{p}}e^{i \mathbf{p} \cdot \mathbf{x}} + \hat{a}^{\dagger}_{\mathbf{p}} e^{-i \mathbf{p} \cdot \mathbf{x}} \right]       \\
+                  & =- \int \mathrm{d}^3 \mathbf{x} \, \frac{1}{2}\int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} (-i)\left[ \hat{a}_{\mathbf{p}}e^{i \mathbf{p} \cdot \mathbf{x}} - \hat{a}^{\dagger}_{\mathbf{p}} e^{-i \mathbf{p} \cdot \mathbf{x}} \right](i\mathbf{p})\left[ \hat{a}_{\mathbf{p}}e^{i \mathbf{p} \cdot \mathbf{x}} - \hat{a}^{\dagger}_{\mathbf{p}} e^{-i \mathbf{p} \cdot \mathbf{x}} \right] \\
+                  & = -\frac{1}{2} \int \mathrm{d}^3 \mathbf{x} \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \mathbf{p} \left[ \hat{a}_{\mathbf{p}}e^{i \mathbf{p} \cdot \mathbf{x}} - \hat{a}^{\dagger}_{\mathbf{p}} e^{-i \mathbf{p} \cdot \mathbf{x}} \right]^2                                                                                                                                                    \\
+                  & = [\dots] = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \mathbf{p}\, \hat{a}^{\dagger}_{\mathbf{p}} \hat{a}_{\mathbf{p}}.
+    \end{aligned}
+\]
+\TODO{finish computation} We verify that the state $\ket{\mathbf{p}}$ is an eigenstate of $\hat{\mathbf{P}}$ with eigenvalue $\mathbf{p}$:
+\[
+    \begin{aligned}
+        \hat{P} \ket{\mathbf{p}} & = \int \frac{\mathrm{d}^3 \mathbf{q}}{(2\pi)^3} \mathbf{q}\, \hat{a}^{\dagger}_{\mathbf{q}} \hat{a}_{\mathbf{q}} \hat{a}^{\dagger}_{\mathbf{p}} \ket{0}                                                                        \\
+                                 & = \int \frac{\mathrm{d}^3 \mathbf{q}}{(2\pi)^3} \mathbf{q}\, \hat{a}^{\dagger}_{\mathbf{q}} \left([\hat{a}_{\mathbf{q}} \hat{a}^{\dagger}_{\mathbf{p}}] + \hat{a}^{\dagger}_{\mathbf{p}}\hat{a}_{\mathbf{q}} \right) \ket{0}   \\
+                                 & = \int \frac{\mathrm{d}^3 \mathbf{q}}{(2\pi)^3} \mathbf{q}\, \hat{a}^{\dagger}_{\mathbf{q}} (2\pi)^3\delta^3(\mathbf{p}-\mathbf{q}) \ket{0} = \mathbf{p} \hat{a}^{\dagger}_{\mathbf{p}} \ket{0} = \mathbf{p} \ket{\mathbf{p}}.
+    \end{aligned}
+\]
+This confirms that the state $\ket{\mathbf{p}}$ correctly possesses a momentum of $\mathbf{p}$ and an energy of $E_{\mathbf{p}} = \omega_{\mathbf{p}} = \sqrt{\vert \mathbf{p} \vert^2 + m^2}$.
 
+\paragraph{Multiparticle States.}
+Since the commutator of creation operators associated with different momenta is null, i.e., $[\hat{a}^{\dagger}_{\mathbf{p}_1}, \,\hat{a}^{\dagger}_{\mathbf{p}_2}] = 0$, multiparticle states are constructed similarly to the single-particle state, by sequential application of creation operators onto the vacuum $\ket{0}$:
+\[
+    \ket{\mathbf{p}_1,\,\mathbf{p}_2,\,\dots,\,\mathbf{p}_n} = \hat{a}^{\dagger}_{\mathbf{p}_1}\,\hat{a}^{\dagger}_{\mathbf{p}_2}\,\dots\,\hat{a}^{\dagger}_{\mathbf{p}_n} \ket{0}.
+\]
+This definition immediately shows that the state $\ket{\mathbf{p}_1,\,\mathbf{p}_2,\,\dots,\,\mathbf{p}_n}$ is \textit{symmetric under the exchange of any two particles}. Explicitly, since creation operators commute:
+\[
+    \ket{\mathbf{p},\,\mathbf{q}} = \hat{a}^{\dagger}_{\mathbf{p}}\hat{a}^{\dagger}_{\mathbf{q}} \ket{0} = \hat{a}^{\dagger}_{\mathbf{q}}\hat{a}^{\dagger}_{\mathbf{p}} \ket{0} = \ket{\mathbf{q},\,\mathbf{p}}.
+\]
+Consequently, the particles described by the Klein-Gordon field are \textbf{Bosons}. The correct spin-statistics relationship is a direct consequence of the Quantum Field Theory framework, arising here from the imposition of canonical commutation relations during the quantization process.
+
+The Fock space $\mathcal{F}$, is defined as the direct sum of all $n$-particle Hilbert spaces ($\mathcal{H}_n$): $\mathcal{F} = \bigoplus_{n\geq 0} \mathcal{H}_n$. This space is spanned by the set of all possible combinations of creation operators acting on the vacuum:
+\[
+    \ket{0}, \quad \hat{a}^{\dagger}_{\mathbf{p}} \ket{0}, \quad \hat{a}^{\dagger}_{\mathbf{p}}\hat{a}^{\dagger}_{\mathbf{q}} \ket{0},\quad \hat{a}^{\dagger}_{\mathbf{p}}\hat{a}^{\dagger}_{\mathbf{q}}\hat{a}^{\dagger}_{\mathbf{r}} \ket{0} \dots
+\]
+
+The \textbf{number operator} $\hat{N}$ counts the total number of particles in a given state:
+\[
+    \hat{N} = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \hat{a}^{\dagger}_{\mathbf{p}} \hat{a}_{\mathbf{p}}, \quad \implies \quad \hat{N} \ket{\mathbf{p}_1,\,\mathbf{p}_2,\,\dots,\,\mathbf{p}_n} = n\ket{\mathbf{p}_1,\,\mathbf{p}_2,\,\dots,\,\mathbf{p}_n}.
+\]
+Crucially, the number operator commutes with the Hamiltonian, $[\hat{H},\,\hat{N}] = 0$, meaning that particle number is a conserved quantity in this free theory. If the system is prepared in an $n$-particle state, it will remain in that sector indefinitely. This conservation property is exclusive to free theories; the introduction of interactions allows for the creation and annihilation of particles, causing the system to transition between different sectors of the Fock space.
+
+\paragraph{Lorentz Invariance.}
+We now check that the quantized theory is Lorentz invariant. First, the vacuum state is normalized trivially:
+\[
+    \langle 0 | 0 \rangle = 1.
+\]
+The inner product of single-particle states is calculated using the canonical commutation relation (CCR) $[\hat{a}_{\mathbf{p}},\, \hat{a}^{\dagger}_{\mathbf{q}}] = (2\pi)^3 \delta^3(\mathbf{p}-\mathbf{q})$:
+\[
+    \begin{aligned}
+        \langle \mathbf{p} | \mathbf{q} \rangle & = \bra{0} \hat{a}_{\mathbf{p}} \hat{a}^{\dagger}_{\mathbf{q}} \ket{0} = \bra{0} [\hat{a}_{\mathbf{p}},\, \hat{a}^{\dagger}_{\mathbf{q}}] + \hat{a}^{\dagger}_{\mathbf{q}}\hat{a}_{\mathbf{p}} \ket{0} \\
+                                                & = \bra{0} (2\pi)^3 \delta^3(\mathbf{p}-\mathbf{q}) \ket{0} + 0 = (2\pi)^3 \delta^3(\mathbf{p}-\mathbf{q}).
+    \end{aligned}
+\]
+From this, we define the \textbf{Identity Operator} ($\hat{\mathbf{1}}$) on the one-particle Hilbert space via the \textit{completeness relation}:
+\[
+    \hat{\mathbf{1}} = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \ket{\mathbf{p}}\bra{\mathbf{p}}.
+\]
+This operator acts correctly on momentum states:
+\[
+    \hat{\mathbf{1}} \ket{\mathbf{q}} = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \ket{\mathbf{p}}\bra{\mathbf{p}}\ket{\mathbf{q}} = \int \mathrm{d}^3 \mathbf{p}\ket{\mathbf{p}} \delta^3(\mathbf{p}-\mathbf{q}) = \ket{\mathbf{q}}.
+\]
+While the full identity operator $\hat{\mathbf{1}}$ is Lorentz invariant, its components—the integration measure $\int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3}$ and the projection operator $\ket{\mathbf{p}}\bra{\mathbf{p}}$—are not Lorentz invariant when taken separately. To achieve \textit{manifest} invariance, we must re-normalize the states such that both the measure and the states transform correctly.
+
+We start by considering the manifestly Lorentz invariant measure in four-momentum space:
+\[
+    \int \mathrm{d}^4 p.
+\]
+To relate this to our three-momentum measure, we must enforce the on-shell condition $p^2 = m^2$ and select only positive energy states ($p_0 = E_{\mathbf{p}}$). This is done using a Dirac delta function and a Heaviside theta function:
+\[
+    \int \mathrm{d}^4 p\, \delta(p^2 - m^2) \Theta(p_0) = \int \mathrm{d}^4 p\, \delta(p_0^2 - (\vert \mathbf{p} \vert^2 + m^2)) \Theta(p_0).
+\]
+To proceed, we utilize the property of the delta function $\delta(f(x)) = \sum_{i} \frac{\delta(x-x_i)}{|f^{\prime}(x_i)|}$ where $x_i$ are the roots. Here, $f(p_0) = p_0^2 - E_{\mathbf{p}}^2$, with roots $p_0 = \pm E_{\mathbf{p}}$. Since $f'(p_0) = 2p_0$, and $\Theta(p_0)$ selects only the positive root ($p_0 = + E_{\mathbf{p}}$), the integral over $p_0$ yields:
+\[
+    \implies \int \mathrm{d}^{3}\mathbf{p} \int \mathrm{d}p_0\, \delta(p_0^2 - E_{\mathbf{p}}^2) = \int \mathrm{d}^{3}\mathbf{p}\, \frac{1}{|2p_0|} \Big\vert_{p_0 = E_{\mathbf{p}}} = \int \frac{\mathrm{d}^3 \mathbf{p}}{2E_{\mathbf{p}}}.
+\]
+We now use this result to reconstruct the manifestly Lorentz invariant completeness relation by manipulating the original identity operator $\hat{\mathbf{1}}$:
+\[
+    \begin{aligned}
+        \hat{\mathbf{1}} & = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \ket{\mathbf{p}}\bra{\mathbf{p}} = \int \frac{\mathrm{d}^3 \mathbf{p}}{2E_{\mathbf{p}}} \frac{2 E_{\mathbf{p}}}{(2\pi)^3} \ket{\mathbf{p}}\bra{\mathbf{p}} \\
+                         & = \int \frac{\mathrm{d}^4 p}{(2\pi)^3} \delta(p^2 - m^2) \Theta(p_0) \left( 2E_{\mathbf{p}} \ket{\mathbf{p}}\bra{\mathbf{p}} \right).
+    \end{aligned}
+\]
+This suggests a definition for a new, Lorentz-invariant state normalization:
+\[
+    \ket{p} = \sqrt{2E_{\mathbf{p}}}\ket{\mathbf{p}} = \sqrt{2E_{\mathbf{p}}}\,\hat{a}^{\dagger}_{\mathbf{p}} \ket{0}.
+\]
+With this new normalization, the inner product becomes:
+\[
+    \langle p | q \rangle = \langle \mathbf{p} | \sqrt{2E_{\mathbf{p}}} \sqrt{2E_{\mathbf{q}}} |\mathbf{q} \rangle = 2 E_{\mathbf{p}} (2\pi)^3 \delta^3(\mathbf{p} - \mathbf{q}),
+\]
+where the factor $2E_{\mathbf{p}}$ (or $2E_{\mathbf{q}}$) is known as the Lorentz boost factor, making the entire inner product behave correctly under Lorentz transformations.
 
 \section{Two Real Klein Gordon Fields}
 

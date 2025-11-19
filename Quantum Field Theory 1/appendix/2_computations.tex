@@ -103,3 +103,46 @@ So, restoring the latter term we obtain the wnated expression for the energy-mom
 \[
     T^{\mu \nu} = -F^{\mu \rho} \partial^{\nu}A_{\rho} +\frac{1}{4} \eta^{\mu\nu}\left(F_{\sigma \lambda}F^{\sigma \lambda}\right).
 \]
+
+\subsection*{Hamiltonian operator for KG as harmonic oscillators}
+Following the approach initiated in section \ref{sec:KG_Hamiltonian_ladder}, we substitute the mode expansions for the field and conjugate momenta into the Hamiltonian expression:
+\[
+    \hat{H} = \frac{1}{2} \int \mathrm{d}^3 \mathbf{x} \left( \hat{\pi}^2 + \vert \nabla \hat{\psi} \vert^2 + m^2 \hat{\psi}^2 \right).
+\]
+Recall the Fourier transform expressions in terms of creation and annihilation operators:
+\[
+    \begin{aligned}
+        \hat{\pi}^2                     & = - \frac{\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}}{2}\left[ \hat{a}_{\mathbf{p}}e^{i \mathbf{p} \cdot \mathbf{x}} - \hat{a}^{\dagger}_{\mathbf{p}} e^{-i \mathbf{p} \cdot \mathbf{x}} \right]\left[ \hat{a}_{\mathbf{q}}e^{i \mathbf{q} \cdot \mathbf{x}} - \hat{a}^{\dagger}_{\mathbf{q}} e^{-i \mathbf{q} \cdot \mathbf{x}} \right],                         \\
+        \vert \nabla \hat{\psi} \vert^2 & = \frac{1}{2 \sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}} i \mathbf{p}\left[ \hat{a}_{\mathbf{p}}e^{i \mathbf{p} \cdot \mathbf{x}} - \hat{a}^{\dagger}_{\mathbf{p}} e^{-i \mathbf{p} \cdot \mathbf{x}} \right]i\mathbf{q}\left[ \hat{a}_{\mathbf{q}}e^{i \mathbf{q} \cdot \mathbf{x}} - \hat{a}^{\dagger}_{\mathbf{q}} e^{-i \mathbf{q} \cdot \mathbf{x}} \right], \\
+        m^2 \hat{\psi}^2                & = \frac{m^2}{2 \sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}}\left[ \hat{a}_{\mathbf{p}}e^{i \mathbf{p} \cdot \mathbf{x}} + \hat{a}^{\dagger}_{\mathbf{p}} e^{-i \mathbf{p} \cdot \mathbf{x}} \right]\left[ \hat{a}_{\mathbf{q}}e^{i \mathbf{q} \cdot \mathbf{x}} + \hat{a}^{\dagger}_{\mathbf{q}} e^{-i \mathbf{q} \cdot \mathbf{x}} \right] .
+    \end{aligned}
+\]
+By substituting these terms into the Hamiltonian and regrouping, we obtain:
+\[
+    \begin{aligned}
+        \hat{H} = \frac{1}{2} \int \mathrm{d}^3 \mathbf{x}\frac{\mathrm{d}^3 \mathbf{p}\,\mathrm{d}^3 \mathbf{q}}{(2\pi)^6} \Bigg[
+         & e^{i(\mathbf{p} +\mathbf{q})\cdot \mathbf{x}} \left( -\frac{\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}}{2}    -\frac{\mathbf{p} \cdot \mathbf{q}}{2\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{q}}}} + \frac{m^2}{2\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}} \right) \hat{a}_{\mathbf{p}} \hat{a}_{\mathbf{q}}                       \\
+         & +e^{-i(\mathbf{p} +\mathbf{q})\cdot \mathbf{x}} \left( -\frac{\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}}{2}    -\frac{\mathbf{p} \cdot \mathbf{q}}{2\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{q}}}} + \frac{m^2}{2\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}} \right) \hat{a}^{\dagger}_{\mathbf{p}} \hat{a}^{\dagger}_{\mathbf{q}} \\
+         & +e^{i(\mathbf{p} -\mathbf{q})\cdot \mathbf{x}} \left(+\frac{\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}}{2}    +\frac{\mathbf{p} \cdot \mathbf{q}}{2\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{q}}}} + \frac{m^2}{2\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}}\right) \hat{a}_{\mathbf{p}} \hat{a}^{\dagger}_{\mathbf{q}}              \\
+         & +e^{-i(\mathbf{p} -\mathbf{q})\cdot \mathbf{x}} \left(+\frac{\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}}{2}    +\frac{\mathbf{p} \cdot \mathbf{q}}{2\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{q}}}} + \frac{m^2}{2\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}}\right) \hat{a}^{\dagger}_{\mathbf{p}} \hat{a}_{\mathbf{q}}
+            \Bigg].
+    \end{aligned}
+\]
+We proceed by integrating over \(\mathrm{d}^3 \mathbf{x}\). Using the integral representation of the Dirac delta, \(\int \tfrac{\mathrm{d}^3 \mathbf{x}}{(2\pi)^3} e^{\pm i (\mathbf{p} \pm \mathbf{q})\cdot \mathbf{x}}=\delta(\mathbf{p} \pm \mathbf{q})\), we isolate the terms proportional to \(\delta(\mathbf{p} + \mathbf{q})\) and \(\delta(\mathbf{p} -\mathbf{q})\):
+\[
+    \begin{aligned}
+        \hat{H} & = \frac{1}{2} \int \frac{\mathrm{d}^3 \mathbf{p}\,\mathrm{d}^3 \mathbf{q}}{(2\pi)^3} \, \delta(\mathbf{p} +\mathbf{q}) \left( \hat{a}_{\mathbf{p}} \hat{a}_{\mathbf{q}} + \hat{a}^{\dagger}_{\mathbf{p}} \hat{a}^{\dagger}_{\mathbf{q}} \right)\left( -\frac{\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}}{2}    -\frac{\mathbf{p} \cdot \mathbf{q}}{2\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{q}}}} + \frac{m^2}{2\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}} \right)  \\
+                & + \frac{1}{2} \int \frac{\mathrm{d}^3 \mathbf{p}\,\mathrm{d}^3 \mathbf{q}}{(2\pi)^3} \, \delta(\mathbf{p} -\mathbf{q}) \left( \hat{a}_{\mathbf{p}} \hat{a}^{\dagger}_{\mathbf{q}} + \hat{a}^{\dagger}_{\mathbf{p}} \hat{a}_{\mathbf{q}} \right)\left( +\frac{\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}}{2}    +\frac{\mathbf{p} \cdot \mathbf{q}}{2\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{q}}}} + \frac{m^2}{2\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}} \right).
+    \end{aligned}
+\]
+Evaluating the delta functions, which means integrating in \(\mathrm{d}^3 \mathbf{q}\), and noting the symmetry \(\omega_{\mathbf{p}} = \sqrt{\vert \mathbf{p} \vert^2 + m^2} = \omega_{-\mathbf{p}}\), the expression simplifies to:
+\[
+    \begin{aligned}
+        \hat{H} & = \frac{1}{2} \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \frac{1}{2 \omega_{\mathbf{p}}}\left( \hat{a}_{\mathbf{p}} \hat{a}_{(-\mathbf{p})} + \hat{a}^{\dagger}_{\mathbf{p}} \hat{a}^{\dagger}_{(-\mathbf{p})} \right)\left( -\omega_{\mathbf{p}}^2 + \vert \mathbf{p} \vert^2 + m^2 \right) \\
+                & + \frac{1}{2} \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \frac{1}{2 \omega_{\mathbf{p}}}\left( \hat{a}_{\mathbf{p}} \hat{a}^{\dagger}_{\mathbf{p}} + \hat{a}^{\dagger}_{\mathbf{p}} \hat{a}_{\mathbf{p}} \right)\left( \omega_{\mathbf{p}}^2 + \vert \mathbf{p} \vert^2 + m^2 \right),
+    \end{aligned}
+\]
+The first term vanishes identically because the factor \(-\omega_{\mathbf{p}}^2 + \vert \mathbf{p} \vert^2 + m^2\) is zero by definition of the dispersion relation. We are thus left with the final Hamiltonian in terms of ladder operators:
+\[
+    \hat{H} = \frac{1}{2} \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \omega_{\mathbf{p}}\left( \hat{a}_{\mathbf{p}} \hat{a}^{\dagger}_{\mathbf{p}} + \hat{a}^{\dagger}_{\mathbf{p}} \hat{a}_{\mathbf{p}} \right).
+\]
