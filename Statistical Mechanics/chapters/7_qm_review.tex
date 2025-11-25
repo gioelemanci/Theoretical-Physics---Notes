@@ -1,10 +1,78 @@
-\chapter{Quantum Mechanics and Statistics}
+\chapter{QM and Statistics}
 
-The starting point is a classical system with a finite number of degrees of freedom, from which we can either move to a classical field theory with infinite degrees of freedom (with the idea to quantize after it), or to a first quantization of our finite classical system (with the idea to extend observables to field later). It's not trivial that the result is the same taking both procedures, but it's true. \TODO{Add minipage with the scheme on one side and leave this as a description.}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.40\textwidth}
+        \vspace{0pt}
+        The starting point is a classical system with a finite number of degrees of freedom, from which we can either move to a classical field theory with infinite degrees of freedom (with the idea to quantize after it), or to a first quantization of our finite classical system (with the idea to extend observables to field later). It's not trivial that the result is the same taking both procedures, but it's true.
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.55\textwidth}
+        \resizebox{\textwidth}{!}{
+            \begin{tikzpicture}[
+                    % Node styles
+                    box/.style={
+                            draw, % Draw border
+                            fill=blue!10, % Light fill color
+                            rounded corners, % Rounded corners
+                            minimum height=1.2cm, % Minimum height
+                            minimum width=3.5cm, % Minimum width
+                            text width=3.2cm, % Text width
+                            align=center, % Text alignment
+                            font=\bfseries % Bold font
+                        },
+                    % Arrow style
+                    arrow/.style={
+                            ->, % Forward arrow
+                            >=stealth, % Tip style
+                            very thick, % Thickness
+                            draw=black!70 % Color
+                        },
+                    % Arrow label style
+                    label/.style={
+                            midway, % Midpoint of the line
+                            font=\footnotesize, % Small font
+                            fill=white, % White background
+                            text=red!80!black % Text color
+                        }
+                ]
+
+                % Node Definitions
+                % 1. Starting Point (Bottom Left)
+                \node[box, fill=green!20] (CM) {Classical Mechanics};
+
+                % 2. Intermediate Nodes (Two Paths)
+                % 2a. Field (Top Left)
+                \node[box, fill=yellow!20, above right=1.5cm and -0.5cm of CM] (CFT) {Classical Field Theory};
+                % 2b. Quantization (Bottom Right)
+                \node[box, fill=yellow!20, below right=1.5cm and -0.5cm of CM] (QM) {Quantum Mechanics};
+
+                % 3. Endpoint (Top Right)
+                \node[box, fill=blue!20, right=2.5cm of CM, yshift=0.0cm] (QFT) {Quantum Field Theory};
+
+                % Connections and Arrows
+
+                % Path 1: Classical Mechanics -> Classical Field Theory -> QFT
+                % CM -> CFT
+                \draw[arrow] (CM.north) -- (CFT.west) node[label, xshift=0.2cm] {Generalize to Fields}; % Modificato xshift
+                % CFT -> QFT
+                \draw[arrow] (CFT.east) -- (QFT.north) node[label, yshift=0.1cm] {Quantize (2\textsuperscript{nd} time)}; % Modificato yshift
+
+                % Path 2: Classical Mechanics -> Quantum Mechanics -> QFT
+                % CM -> QM
+                \draw[arrow] (CM.south) -- (QM.west) node[label, xshift=0.2cm] {Quantize (1\textsuperscript{st} time)}; % Modificato xshift
+                % QM -> QFT
+                \draw[arrow] (QM.east) -- (QFT.south) node[label, yshift=-0.1cm] {Generalize to Fields}; % Modificato yshift
+
+            \end{tikzpicture}
+        }
+    \end{minipage}
+    \label{fig:qft_paths}
+\end{figure}
 
 Let's briefly review quantum mechanics, in comparison with a classical system as a start.
 
-\begin{table}[h!]
+\begin{table}[H]
     \centering
     \label{tab:cm_qm_comparison_en}
     \begin{tabular}{l c l}
@@ -17,7 +85,7 @@ Let's briefly review quantum mechanics, in comparison with a classical system as
                                           & \textbf{State}          &
         \begin{minipage}{5cm}
             A normalized state vector $\ket{\psi} \in \mathcal{H}$ (Hilbert Space), defined up to a global phase: equivalence classes called \textbf{rays}.
-        \end{minipage}                                                                                                                                                                                                                                                                                      \\
+        \end{minipage}                                                                                                                                                                                                                                                                                    \\
         \midrule
         \begin{minipage}{5cm}
             Functions defined on the phase space, e.g. $f(\mathbf{q}, \mathbf{p}) \in \mathbb{R}$.
@@ -25,7 +93,7 @@ Let's briefly review quantum mechanics, in comparison with a classical system as
                                           & \textbf{Observables}    &
         \begin{minipage}{5cm}
             Linear, self-adjoint (Hermitian) operators $\hat{A} = \hat{A}^{\dagger}$ acting on the Hilbert space.
-        \end{minipage}                                                                                                                                                                                                                                                                                                                                  \\
+        \end{minipage}                                                                                                                                                                                                                                                                                                                                 \\
         \midrule
         \begin{minipage}{5cm}
             Direct and simultaneous. The act of measurement does not alter the system's state. We can measure a value of the observable \(f(\mathbf{q}^o, \mathbf{p}^o)\) at a specific point \((\mathbf{q}^o, \mathbf{p}^o)\).
@@ -405,10 +473,153 @@ there mey be different combinations of \((\alpha_1,\,\alpha_2,\,\dots ,\,\alpha_
 \]
 It can be shown that the generators of the permutation group satisfy the following properties:
 \begin{enumerate}
-    \item prop1;
-    \item prop2;
-    \item prop3.
+    \item \(\sigma_i \sigma_j = \sigma_j \sigma_i\), \(\forall \vert i-j \vert \geq 2\);\footnote{The condition on the indexes is due to the fact that if \(\vert i-j \vert = 1\) then we are consequently applying the transposition on the same element: \(\sigma_i \sigma_{i+1}\) puts the \(i\)-th element in \(i+2\) slot and the \(i+2\)-th in the \(i+1\), while \(\sigma_{i+1}\sigma_i\) does the opposite \(i \to i+1\) and \(i+2 \to i\), clearly different transpositions.}
+    \item \(\sigma_i \sigma_{i+1} \sigma_i = \sigma_{i+1} \sigma_i \sigma_{i+1}\);
+    \item \(\sigma_i^2 = \mathbb{I}\).
 \end{enumerate}
 
-
 \section{Quantum Statistics}
+
+If we consider a generic state \(\psi(1,2,\dots ,N) \in \mathcal{H}^{\otimes N}\), invariant under permutation up to a phase (which we assume permutation dependent)
+\[
+    \psi(1,2,\dots ,N) \to \psi(P(1,2,\dots ,N)) = e^{i \phi_P} \psi(1,2,\dots ,N).
+\]
+We know that any oermutation can be decomposed into a composition of transpositions
+\[
+    P = \sigma_{\alpha_1} \sigma_{\alpha_2} \dots \sigma_{\alpha_k},
+\]
+then the action of \(P\) on \(\psi\) is the same as the consequent application of the corresponding transpositions on \(\psi\):
+\[
+    \psi \to P \psi = \sigma_{\alpha_1} \sigma_{\alpha_2} \dots \sigma_{\alpha_k} \psi = e^{i\phi_1} e^{i\phi_2} \dots e^{i\phi_k} \psi = e^{i \phi_P} \psi
+\]
+since we can write the action of the \(j-\)th transposition on \(\psi\) as
+\[
+    \sigma_{\alpha_j} \psi = e^{i \phi_j} \psi.
+\]
+Thus if a permutation is decomposed into its transpositions, the phase of the permutation is given by the sum of the phases of the transpositions, i.e.
+\[
+    \phi_P = \phi_1 + \phi_2 + \dots + \phi_k.
+\]
+We can now use the properties of the generators to exploit some properties of the phases of the transpositions:
+\begin{enumerate}
+    \item \(\sigma_i \sigma_j = \sigma_j \sigma_i \iff \phi_P = \phi_i + \phi_j = \phi_j + \phi_i\) clearly;
+    \item \(\sigma_i \sigma_{i+1} \sigma_i = \sigma_{i+1} \sigma_i \sigma_{i+1} \iff  \phi_P = \phi_i + \phi_{i+1} + \phi_i = \phi_{i+1} + \phi_i + \phi_{i+1},\, \implies \phi_i = \phi_{i+1}\), so that every transposition has the same effect on the phase of the permutation invariant vector: \(\sigma_i \psi = e^{i \phi} \psi \forall i\);
+    \item \(\sigma_i^2 = \mathbb{I} \iff (e^{i\phi})^2 = 1\), which is true for two values of \(\phi\): \(\phi = 0,\, \phi = \pi\).
+\end{enumerate}
+The last observation is the most important, giving powerful insights into the system's symmetry: \((e^{i \phi})^2 = 1 \implies e^{i \phi} = \pm 1\), so that each transposition gives a factor of 1 \((\phi = 0)\) or -1 \((\phi = \pi)\). But since the phase is the same for all transposition, then we have two fixed case:
+\begin{itemize}
+    \item \(\phi=0\) in which every transposition leaves the state totally invariant: it is a completely symmetric system made of \textbf{Bosons}:
+          \[
+              \begin{dcases}
+                  \sigma_i \, \colon \, \psi \to \psi; \\
+                  P \, \colon \, \psi \to \psi.
+              \end{dcases}
+          \]
+    \item \(\phi=\pi\) in which every transposition changes the sign of the state: it is a completely antisymmetric system made of \textbf{Fermions}:
+          \[
+              \begin{dcases}
+                  \sigma_i \, \colon \, \psi \to -\psi; \\
+                  P \, \colon \, \psi \to \mathrm{sgn}(P)\psi.
+              \end{dcases}
+          \]
+\end{itemize}
+
+\subsection{Two Particle State}
+
+If we consider \(N\) identical particles living in their generical \(d\)-dimensional Hilbert space, the total space is given by
+\[
+    \mathcal{H} = \mathcal{H}_1^{\otimes N} = \mathcal{L}^2(\mathbb{R}^{dN}).
+\]
+Let us restrict the case to \(N=2\), then \(\mathcal{H} = \mathcal{H}_1^{\otimes 2} = \mathcal{L}^2(\mathbb{R}^{2d})\). So we can consider states composed by the singular substates of the two partcles such that, if they are \textbf{distinguishable}
+\[
+    \psi_1(x_1),\, \psi_2(x_2) \implies \psi = \psi_1(x_1) \psi_2(x_2) \neq \psi_1(x_2)\psi_2(x_1) \in \mathcal{H}^{\otimes 2}.
+\]
+In general the last equation does not hold, they are different states, but if we consider \textbf{undistinguishable} paticles then we have \textit{total symmetry} or \textit{total antisymmetry} depending on the particles' nature.
+
+We can introduce two operators, \(S\) and \(A\) which project our state onto the totally antisymmetric or symmetric subspaces as follows:
+\[
+    \begin{aligned}
+        S \psi & = \psi_S (x_1,\,x_2) = \frac{\psi(x_1,\,x_2) + \psi(x_2,\,x_1)}{2} = \frac{\psi_1(x_1)\psi_2(x_2) + \psi_1(x_2)\psi_2(x_1)}{2} = \psi_S(x_2,\,\psi_1);   \\
+        A \psi & = \psi_A (x_1,\,x_2) = \frac{\psi(x_1,\,x_2) - \psi(x_2,\,x_1)}{2} = \frac{\psi_1(x_1)\psi_2(x_2) - \psi_1(x_2)\psi_2(x_1)}{2} = - \psi_A(x_2,\,\psi_1).
+    \end{aligned}
+\]
+Thus any state can be symmetrized or antisymmetrized with the action of these operators. Notice how, being projectors, these operators respect
+\[
+    \begin{aligned}
+        S & = S^{\dagger},\quad S^2 = S; \\
+        A & = A^{\dagger},\quad A^2 = A.
+    \end{aligned}
+\]
+Another very important property is the orthogonality of these operators: they commute and any consequent application of both of them on a state is projected in the null space:
+\[
+    SA = AS = 0,\quad \bra{\psi_S}\ket{\psi_A} = \bra{\psi_A}\ket{\psi_S} = 0.
+\]
+Thus we can decompose our general Hilbert space into two direct sum subspaces:
+\[
+    \mathcal{H} = \mathcal{H}_S \oplus_{\bot} \mathcal{H}_A, \quad \implies \quad \psi = \psi_S + \psi_A.
+\]
+Thus the two subspaces are orthogonal and they share only the null vector.
+
+\paragraph{Pauli exclusion principle.}
+It's interesting to notice how the important \textbf{Pauli exclusion principle} arise from here, only by applying statistical prescription: if we consider two fermions in the same state
+\[
+    \psi(x_1,x_2) = \psi_1(x_1)\psi_1(x_2),
+\]
+we know this state to be antisymmetric, so if we apply the \(A\) operators we are not changing the state nor projecting it into a subspace, it's the same; then by applying it we notice how the wavefunction vanishes:
+\[
+    A \psi(x_1,\,x_2) = \frac{\psi_1(x_1)\psi_1(x_2) - \psi_1(x_2)\psi_1(x_1)}{2} = 0.
+\]
+Thus the principle: \textit{two fermions cannot occupy the same phyisical state}.
+
+\subsection{N Particle State}
+
+For a generic number of indistinguishable particle, we had \(\mathcal{H} = \mathcal{H}_1^{\otimes N}\), with states of the form \(\psi(x_1,\,\dots,\,x_N) = \psi_1(x_1)\psi_2(x_2)\dots\psi_N(x_N)\), which can be written in a more convenient form
+\[
+    \ket{\psi} = \ket{\psi_1}_1 \ket{\psi_2}_2 \dots \ket{\psi_N}_N \in \mathcal{H}.
+\]
+The index \(\psi_j\) refers to a particle state, a set of quantum numbers defining it, while the index on \(\ket{}_j\) refers to the particle itself. Thus we can express the action of the symmetry projectors as:
+\[
+    \begin{aligned}
+        S \colon \ket{\psi} & = \frac{1}{N!} \sum_{\sigma} \ket{\psi_{\sigma(1)}}_1\ket{\psi_{\sigma(2)}}_2\dots\ket{\psi_{\sigma(N)}}_N \in \mathcal{H}_S;                      \\
+        A \colon \ket{\psi} & = \frac{1}{N!} \sum_{\sigma} \mathrm{sgn}(\sigma) \ket{\psi_{\sigma(1)}}_1\ket{\psi_{\sigma(2)}}_2\dots\ket{\psi_{\sigma(N)}}_N \in \mathcal{H}_A.
+    \end{aligned}
+\]
+These operators still respects the properties of projectors and they still commute: we can decompose the Hilbert space in:
+\[
+    \mathcal{H} = \mathcal{H}_S \oplus_{\bot} \mathcal{H}_A \oplus_{\bot} \mathcal{H}^{\prime},
+\]
+where the last subspace \(\mathcal{H}^{\prime}\) contains non phyisical states and solutions: we can think and write of a neither symmetric nor antisymmetric state, but it is non phyisical as all particles are fermions or bosons.
+
+We will work in a space where we consider a variable number of particles, as we will describe in detail in the next chapter, direct sum of the spaces for every possible number of particle:
+\[
+    \mathcal{H}_{S / A} = \bigoplus_{N=0}^{\infty} \mathcal{H}_{S / A}^{(N)},
+\]
+aiming now to the intrinsic description of each hilbert space for a fixed \(N\): \(\mathcal{H}_{S / A}^{(N)} = \mathcal{H}_1^{\otimes N}\). We need an arbitrary ON basis, which we will construct from the basis of the single particle space:
+\[
+    \mathcal{H}_1 \colon \{\ket{\psi_n}\}_{n=1}^{\infty}.
+\]
+Thus if we combine \(N\) of this spaces (and basis), we find a basis which spans the whole \(N\) particle space \(\mathcal{H}^{\otimes N} = \mathcal{H}_{S / A}^{(N)}\):
+\[
+    \mathcal{H}_{S / A}^{(N)} \colon \{\ket{\psi_{\alpha_1} }\ket{\psi_{\alpha_2}}\dots\ket{\psi_{\alpha_N}}\}_{\alpha_1,\,\alpha_2,\,\dots,\,\alpha_N=1}^{\infty}.
+\]
+
+Remembering that we are speaking of undistinguishable particles, we can now expose a new description of our states: since we are not interested in the position and state of each particle, we consider just the states and their population, using the \textbf{occupation number} \(n_k\): we have an infinite amount of occupation numbers (infinite dimensionality of Hilbert space for one particle), each of whose can assume a value between 0 and \(N\):
+\[
+    0 < n_1,\,\dots,\,n_k,\,\dots < N, \quad n_1 + \dots + n_k + \dots = N,
+\]
+their sum has to be equal to the number of particles.
+
+We can express a state
+\[
+    \psi_{n_1,\,\dots,\,n_k,\,\dots}(x_1,\,x_2,\,\dots,\,x_N)
+\]
+in the base \(\{\ket{\psi_{\alpha_1} }\ket{\psi_{\alpha_2}}\dots\ket{\psi_{\alpha_N}}\}_{\alpha_1,\,\alpha_2,\,\dots,\,\alpha_N=1}^{\infty}\) by setting accordingly the pedices, such that \(n_1\) pedices will be equal to one (\(\alpha_j = 1\)), \(n_k\) pedices will be equal to \(k\) (\(\alpha_j = k\)) eccetera.
+
+This occupation numbers behave differently with respect to the particles' nature:
+\[
+    \begin{aligned}
+        \text{Bosons: }   & n_k = 0,\,1,\,2,\,dots,\,\infty; \\
+        \text{Fermions: } & n_k = 0,\,1;
+    \end{aligned}
+\]
+this is due to the Pauli exclusion principle: there cannot exist two fermions in the same state, while bosons do not have such kind of restrictions over occupation numbers.
