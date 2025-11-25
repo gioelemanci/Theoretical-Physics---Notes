@@ -119,7 +119,17 @@ where the classical dynamical variables \(z^a\) are elevated to linear operators
 
 \section{Canonical Quantization}
 
- [...] sofo [...] pdf [...]
+Canonical quantization is constructed starting from the hamiltonian formulation of a classical system. It is obtained by lifting its phase space coordinates, the generalized coordinates \(x^i\) and conjugate momenta \(p_i\), to linear operators \(\hat{x}^i\) and \(\hat{p}_i\) that act on a linear space endowed with a positive definite norm, the Hilbert space of physical states \(\mathcal{H}\). The basic operators must satisfy commutation relations required to be equal \(i\hbar\) times the value of the corresponding classical Poisson brackets
+\[
+    pdf
+\]
+All classical observables \(A(x,p)\), which are functions on phase space, become linear operators \(\hat{A} (\hat{x} ,\hat{p})\) acting on the Hilbert space \(\mathcal{H}\). The most important example is given by the hamiltonian function \(H(x,p)\), which upon quantization becomes the hamiltonian operator \(\hat{H} (\hat{x} ,\hat{p})\). The latter generates the time evolution of any state \(\ket{\psi} \in \mathcal{H}\) through the Schrodinger equation
+\[
+    i\hbar \frac{\partial}{\partial t} \ket{\psi} = \hat{H} \ket{\psi}.
+\]
+The corresponding solution is a time-dependent state \(\ket{\psi}(t)\) that describes the evolution of the quantum system. This setup is known as the Schrodinger picture of quantum mechanics. It is a formal quantization procedure that becomes operative once one finds an irreducible unitary representation of the operator algebra in eq. (1). A mathematical result, known as the Stonevon Neumann theorem, states that in quantum mechanics all irreducible representations of (1) are unitarily equivalent, so that there is a unique procedure of quantizing a classical system.\footnote{Up to the problem of resolving ordering ambiguities, often present when one tries to relate the classical hamiltonian \(H(x,p)\) to its quantum counterpart \(\hat{H} (\hat{x} ,\hat{p})\).} Historically, this theorem made it clear that the Schr¨odinger formulation of quantum mechanics was equivalent to the one proposed by Heisenberg with its matrix mechanics (known as the Heisenberg picture). Let us consider, more specifically, the motion of a nonrelativistic particle in one dimension in the presence of an external potential \(V(x)\). The classical dynamics is fixed by the action
+
+    [...] sofo [...] pdf [...]
 So now we can study the transition amplitude
 \[
     A = \bra{\psi_f} e^{-\frac{i}{\hbar} \hat{H} T} \ket{\psi_i} \implies i \hbar \frac{\partial}{\partial T} A = \bra{\psi_f} \hat{H} e^{-\frac{i}{\hbar} \hat{H} T} \ket{\psi_i}.
@@ -198,3 +208,106 @@ where \(t_f - t_i = T = N\epsilon\) is the total propagation time, with the path
 The last way of writing the amplitude in (22) is symbolic but suggestive: it indicates the sum over all paths in phase space weighted by the exponential of \(\frac{i}{\hbar}\) times the classical action. It depends implicitely on the boundary conditions assigned to the paths \(x(t)\).
 
 \section{Path Integrals in Configuration Space}
+
+The path integral in configurations space is easily derived by integrating over the momenta. The dependence on momenta in the exponent of (22) is at most quadratic and can be eliminated by gaussian integration
+\[
+    pdf
+\]
+which is valid for \(\alpha >0\), and extended analytically to include complex values of \(\alpha\) (see section 4.1 for details).\TODO{Put reference.} In particular, we consider gaussian integrals of the type
+\[
+    pdf
+\]
+obtained by square completion. Note that the final exponential is the original exponential inside the integral with argument evaluated at the minimum in \(p\) (saddle point).
+Returning to the path integral, and considering the hamiltonian \(H(x, p) = \frac{p^2}{2m} + V(x)\), one completes the squares
+\[
+    footnote
+\]
+and performs the gaussian integrations over the momenta
+\[
+    A = \lim_{N \to \infty} \int \left(\prod_{k=1}^{N-1} \d{x_k}\right) \left(\frac{m}{2\pi i \hbar \epsilon}\right)^{\frac{N}{2}} e^{\frac{i\epsilon}{\hbar}\sum_{k=1}^N \left[\frac{m}{2}\frac{(x_k - x_{k-1})^2}{\epsilon^2} - V(x_{k-1})\right]} = \int \mathrm{D} x \, e^{\frac{i}{\hbar}S[x]}.
+\]
+Our exponent is complex, so the function keeps oscillating; by analytic continuation we can use this results also in the complex case.
+This is the path integral in configuration space. It contains in the exponent the configuration space action suitably discretized
+\[
+    S[x] = \int_{t_i}^{t_f} \d{t} \left( \frac{m}{2} \dot{x}^2 - V(x) \right) \longrightarrow \sum_{k=1}^N \epsilon \left[\frac{m}{2}\frac{(x_k - x_{k-1})^2}{\epsilon^2} - V(x_{k-1})\right].
+\]
+Again, the last way of writing the path integral in (27) is symbolic and indicates the formal sum over paths in configuration space, weighted by the exponential of \(i\hbar\) times the classical action. The space of paths is given by the space of functions \(x(t)\) with boundary values \(x(t_i)=x_i\) and \(x(t_f) = x_f\). It is an infinite dimensional space. How to perform concretely the path integral over this functional space is defined precisely by the discretization, that approximates a function \(x(t)\) by its \(N+1\) values \(x_k = x(t_i + \epsilon k)\) at \(k = 0, 1, 2, ..., N\), as shown in fig.\TODO{Add figure.}
+
+Thus, we have constructed the path integral that computes quantum mechanical amplitudes
+\[
+    A = \int \mathrm{D} x(t) \, e^{\frac{i}{\hbar}S[x(t)]},
+\]
+by the sum of all histories of paths weighted by a phase given by the action, with all paths contributing, as in fig. 2.
+
+\subsection{Free Particle}
+
+For a free particle (\(V(x)=0\)) one may use repeatedly gaussian integration and calculate from eq. (27) the exact transition amplitude\TODO{Add image.}
+\[
+    A(x_i,\,x_f,\,T) = \bra{x_f} e^{-\frac{i}{\hbar} \hat{H}T} \ket{x_i} = \sqrt{\frac{m}{2 \pi i \hbar T}} e^{\frac{i}{\hbar} \frac{m (x_f - x_i)^2}{2T}}.
+\]
+It satisfies the free Schrodinger equation
+\[
+    i\hbar \frac{\partial}{\partial T} A(x_i,\,x_f,\,T) = - \frac{\hbar^2}{2m}\frac{\partial^2}{\partial x_f^2} A(x_i,\,x_f,\,T)
+\]
+with initial condition \(A(x_i,\,x_i,\,0) = \delta(x_f - x_i)\).
+This way, the path integral has produced a solution of the Schrodinger equation. The result is very suggestive: up to a prefactor, it is given by the exponential of \(i\hbar\) times the classical action evaluated on the classical path, i.e., the path that satisfies the classical equations of motion. This is typical for those cases in which the semiclassical approximation is exact. One may interpret the prefactor as due to quantum (“one-loop”) corrections to the classical (“tree-level”) result. The free particle case is also quite special: the exact final result is valid for any
+\(N\), and there is no need to take the limit \(N \to  \infty\). The case \(N=1\), which carries no integration at all, is already exact.
+A formal but useful way of calculating gaussian path integrals is achieved by working directly in the continuum limit. One does not need the precise definition of the path integral measure but uses only its formal properties, in particular, its translational invariance. The calculation is formal in the sense that one assumes properties of the path integral measure (that eventually must be proven by an explicit regularization and construction, as the one given earlier). The calculation goes as follows. The action is \(S[x]= \int_0^T \d{t} \frac{m}{2}\dot{x}^2\), and the classical equations of motion with the boundary conditions are solved by
+\[
+    x_{cl} (t) = x_i + (x_f - x_i)\frac{t}{T}.
+\]
+One can represent a generic path \(x(t)\) as the classical path \(x_{cl}(t)\) plus quantum fluctuations \(q(t)\)
+\[
+    x(t) = x_{cl}(t) + q(t),
+\]
+where the fluctuations q(t) must vanish at \(t=0\) and \(t=T\) to preserve the boundary conditions. One may interpret \(x_{cl}(t)\) as the origin in the space of functions. Then, one computes the path integral as follows
+\[
+    \begin{aligned}
+        A(x_i,\,x_f,\,T) & = \int \mathrm{D} x \, e^{\frac{i}{\hbar}S[x]} = \int \mathrm{D} (x_{cl} + q) \, e^{\frac{i}{\hbar} S[x_{cl} + q]}                                                \\
+                         & = e^{\frac{i}{\hbar} S[x_{cl}]} \int \mathrm{D} q \, e^{\frac{i}{\hbar} S[q]} = N e^{\frac{i}{\hbar} S[x_{cl}]} = N e^{\frac{i}{\hbar}\frac{m(x_{f-x_i})^2}{2T}},
+    \end{aligned}
+\]
+where translational invariance of the path integral measure has been used in the form \(\mathrm{D}x = \mathrm{D}(x_{cl}+q) = \mathrm{D}q\). There is no linear term in \(q(t)\) in the action because the function \(x_{cl}(t)\) solves the classical equations of motion: for quadratic actions one has \(S[x_{cl} + q] = S[x_{cl}] + S[q]\). The normalization factor \(N = \int \mathrm{D} q\, e^ {\frac{i}{\hbar} S[q]}\) is undetermined by this method, but it is a constant that does not depend on \(x_i\) and \(x_f\). Very often, its precise value is not needed, but one can fix it by requiring that the final result satisfies the Schrodinger equation, finding \(N = \sqrt{\frac{m}{2\pi i \hbar T}}\).
+
+\subsection{Euclidean Time and Statistical Mechanics}
+
+Quantum mechanics can be related to statistical mechanics by an analytic continuation. We introduce this relation by considering the free particle.
+Continuing analytically the time parameter to purely imaginary values by \(T \to  i \beta\) with real \(\beta\), and setting \(\hbar = 1\), the free Schrodinger equation (31) turns into the heat equation
+\[
+    \frac{\partial}{\partial \beta} A = \frac{1}{2m} \frac{\partial^2}{\partial x_f^2} A.
+\]
+Its fundamental solution, i.e. the solution with boundary condition \(A \xrightarrow{\beta \to 0} \delta(x_f - x_i)\) is
+\[
+    A = \sqrt{\frac{m}{2 \pi \beta}} e^{-\frac{m(x_f - x_i)^2}{2\beta}},
+\]
+and can be obtained from (30) by the same analytic continuation. This continuation is called “\textbf{Wick rotation}”, see fig. 3.\TODO{Add figure.}
+The Wick rotation can be performed directly on the path integral to obtain euclidean path integrals. Analytically continuing the time variable \(t \to -i \tau\) , one finds that the action with “minkowskian” time (i.e. with a real time \(t\)) turns into an “euclidean” action \(S_E\) defined by
+\[
+    i S[x] = \dots
+\]
+where in the euclidean action one defines \(\dot{x} = \frac{\mathrm{d}}{\mathrm{d} \tau} x\), with \(\tau\) usually called “euclidean time” (or imaginary time). The euclidean action thus defined is positive definite. It appears in the path integral so that
+\[
+    \bra{x_f} e^{-\beta \hat{H}} \ket{x_i} = \int \mathrm{D} x \, e^{-S_E[x]}.
+\]
+The operator on the left-hand side is called the “heat kernel” and the path integrals computes its matrix elements. For a free theory, the path integral is truly gaussian, with exponential damping rather than with increasingly rapid phase oscillations. In this form, it coincides with the functional integral introduced by Wiener in the 1920's to study brownian motion and the heat equation (that explains why eq. (39) is called the heat kernel). Such euclidean path integrals are useful in statistical mechanics, where \(\beta\) is related to the inverse temperature \(\Theta\) by \(\beta = \frac{1}{k \Theta}\) , where \(k\) is the Boltzmann’s constant. To see this, let us consider the trace of the evolution operator \(e^{-\frac{i}{\hbar} \hat{H} T}\). It can be written using energy eigenstates (labeled by \(n\) if the spectrum is discrete) or equivalently using position eigenstates (which are continuous and labeled by \(x\))
+\[
+    Z \equiv \Tr(e^{-\frac{i}{\hbar}\hat{H}T}) = \sum_{n} e^{-\frac{i}{\hbar}E_n T} = \int \d{x} \bra{x} e^{-\frac{i}{\hbar} \hat{H} T} \ket{x}.
+\]
+It can be Wick rotated \(Z \to  Z_E\) (with \(T \to - i \beta\)) to obtain the statistical partition function \(Z_E\) of the quantum system with hamiltonian \(\hat{H}\). Setting \(\hbar=1\), it reads
+\[
+    Z_E = \Tr(e^{-\beta \hat{H}}) = \sum_{n} e^{- \beta E_n} = \int \d{x} \bra{x} e^{-\beta \hat{H}} \ket{x}.
+\]
+Again, it is immediate to find a path integral representation of the statistical partition function: one performs a Wick rotation of the path integral action, sets the initial state (at euclidean time \(\tau = 0\)) equal to the final state (at euclidean time \(\tau = \beta\)), and sums over all possible states, as indicated in (41). The paths become closed, as \(x(\beta)=x(0)\), and the partition function becomes
+\[
+    Z_E = \Tr(e^{-\beta \hat{H}}) = \int_{PBC} \mathrm{D} x\, e^{-S_E[x]},
+\]
+where \(PBC\) stands for “periodic boundary conditions”, indicating the sum over all paths that close onto themselves in an euclidean time \(\beta\).
+Introduced here for the free theory, the Wick rotation is supposed to be of more general value, relating quantum mechanics to statistical mechanics in the interacting case as well. Even if one is interested in the theory with a real time, nowadays, one often works in the euclidean version of the theory, where factors of the imaginary unit \(i\) are absent, and path integral convergence is more easily kept under control. Only at the very end one performs the inverse Wick rotation to read off the result for the theory in real time.
+
+The Wick rotation procedure is better appreciated by first considering the usual time as corresponding to the real line of a complex plane. Then, defining \(t_{\theta} = t e^{-i\theta} \), the usual real time appears at \(\theta=0\), while the euclidean time \(\tau\) appears at \(\theta = \frac{\pi}{2}\)  as \(t_{\frac{\pi}{2}} = -i \tau\). The analytical continuation of all physical quantities is achieved by continually increasing \(\theta\) form 0 to \(\frac{\pi}{2}\), a clockwise rotation of the real axis into the imaginary one. The generalized partition function
+\[
+    Z_{\theta} = \Tr(e^{-\frac{i}{\hbar} \hat{H} t_{\theta}})
+\]
+with a complex time \(t_{\theta} = t e^{-i\theta}\) with positive \(t\) has a damping factor for all \(0 < \theta < \frac{\pi}{2}\) and for all hamiltonians that are bounded from below (up to an inessential overall factor due to the value of the ground state energy, if that happens to be negative).
+
+Similar considerations can be made for path integrals in minkowskian and euclidean times with other boundary conditions. Path integrals in euclidean times are mathematically better defined (one may develop a mathematically well-defined measure theory on the space of functions), at least for quadratic actions and perturbations thereof. Path integral with a minkowskian time are more delicate, and physicists usually use the argument of rapid phase oscillations to deduce that unwanted terms vanish. The Wick rotation suggests a way of defining the path integral in real time starting from the euclidean time one. These points of mathematical rigor are not needed for the applications that we are going to consider, and the derivation of path integrals described previously is enough for our purposes.
