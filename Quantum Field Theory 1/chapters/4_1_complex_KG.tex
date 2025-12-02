@@ -170,7 +170,7 @@ It can be shown (full computation in appendix \ref{app:computations}) that the f
         [\hat{Q},\, \hat{a}_{\pm,\,\mathbf{p}}]           & = \mp \hat{a}_{\pm,\,\mathbf{p}},           \\
         [\hat{Q},\, \hat{a}_{\pm,\,\mathbf{p}}^{\dagger}] & = \pm \hat{a}_{\pm,\,\mathbf{p}}^{\dagger},
     \end{aligned}
-\]\TODO{Compute the commutators.}
+\]
 
 Let us now consider the state \(\ket{s}\) with charge \(q_s \longrightarrow \hat{Q}\ket{s} = q_s \ket{s}\), then:
 \[
@@ -355,7 +355,7 @@ which is clearly time independent, due to the definition of the ladder operators
 If we recall the commutators between the ladder operators and the Hamiltonian, we can compute:\footnote{Since \(\hat{H}\ket{0} = 0 = \hat{H} \hat{a}_{\mathbf{p}}\ket{\mathbf{p}} = \left([\hat{H} ,\, \hat{a}_{\mathbf{p}}] + \hat{a}_{\mathbf{p}}\hat{H}\right)\ket{\mathbf{p}}\) leads to \([\hat{H},\, \hat{a}_{\mathbf{p}}]\ket{\mathbf{p}} = -\hat{a}_{\mathbf{p}}\hat{H} \ket{\mathbf{p}} = -\hat{a}_{\mathbf{p}} \omega_{\mathbf{p}} \ket{\mathbf{p}}\), and similarly for the creation operator \(\hat{H} \hat{a}^{\dagger}_{\mathbf{p}} \ket{0} = \left([\hat{H},\,\hat{a}^{\dagger}_{\mathbf{p}}] + \hat{a}^{\dagger}_{\mathbf{p}} \hat{H} \right) \ket{0}\) leads to \([\hat{H},\,\hat{a}^{\dagger}_{\mathbf{p}}] \ket{0} = \hat{H} \hat{a}^{\dagger}_{\mathbf{p}} \ket{0} = \omega_{\mathbf{p}} \hat{a}^{\dagger}_{\mathbf{p}} \ket{0}\).}
 \[
     [\hat{H},\, \hat{a}_{\mathbf{p}}] = - \omega_{\mathbf{p}} \hat{a}_{\mathbf{p}}, \quad [\hat{H},\, \hat{a}^{\dagger}_{\mathbf{p}}] = + \omega_{\mathbf{p}} \hat{a}^{\dagger}_{\mathbf{p}},
-\]\QUESTION{Probably stupid question, but why?}
+\]
 thus if we apply the Hamiltonian multiple times we get:
 \[
     \begin{aligned}
@@ -474,11 +474,14 @@ Let us first compute the propagator, which phisically describes the amplitude fo
         \Delta(x-y) & = \left[\hat{\psi}(x),\, \hat{\psi}(y)\right] = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \int \frac{\mathrm{d}^3 \mathbf{q}}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{q}}}}                                                                                                                                                 \\
                     & \quad \times \left[ \hat{a}_{\mathbf{p}} e^{-i p_{\mu} x^{\mu}} + \hat{a}^{\dagger}_{\mathbf{p}} e^{i p_{\mu} x^{\mu}},\, \hat{a}_{\mathbf{q}} e^{-i q_{\mu} y^{\mu}} + \hat{a}^{\dagger}_{\mathbf{q}} e^{i q_{\mu} y^{\mu}} \right]                                                                                                                                    \\
                     & = \int \frac{\mathrm{d}^3 \mathbf{p}\mathrm{d}^3 \mathbf{q}}{(2\pi)^6} \frac{1}{2\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}} \left\{ [\hat{a}_\mathbf{p} ,\, \hat{a}^{\dagger}_\mathbf{q}]\left( e^{-i(p_{\mu}x^{\mu} - q_{\mu}y^{\mu})}\right) + [\hat{a}^{\dagger}_\mathbf{p} ,\, \hat{a}_\mathbf{q}]\left( e^{i(p_{\mu}x^{\mu} - q_{\mu}y^{\mu})}\right)\right\} \\
-                    & = \int \frac{\mathrm{d}^3 \mathbf{p}\mathrm{d}^3 \mathbf{q}}{(2\pi)^3} \frac{1}{2\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}} \delta^{(3)}(\mathbf{p}-\mathbf{q}) \left(e^{-i(p_{\mu}x^{\mu} - q_{\mu}y^{\mu})} - e^{i(p_{\mu}x^{\mu} - q_{\mu}y^{\mu})}\right)                                                                                                      \\
-                    & = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{2\omega_{\mathbf{p}}} \left( e^{-i p_{\mu} (x^{\mu}-y^{\mu})} - e^{i p_{\mu} (x^{\mu}-y^{\mu})} \right),
+                    & = \int \frac{\mathrm{d}^3 \mathbf{p}\mathrm{d}^3 \mathbf{q}}{(2\pi)^3} \frac{1}{2\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}} \delta^{(3)}(\mathbf{p}-\mathbf{q}) \left(e^{-i(p_{\mu}x^{\mu} - q_{\mu}y^{\mu})} - e^{i(p_{\mu}x^{\mu} - q_{\mu}y^{\mu})}\right),
     \end{aligned}
 \]
-
+thus integrating over \(\mathbf{q}\) we get the final expression for the KG propagator:
+\begin{equation}
+    \Delta(x-y) = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{2\omega_{\mathbf{p}}} \left( e^{-i p_{\mu} (x^{\mu}-y^{\mu})} - e^{i p_{\mu} (x^{\mu}-y^{\mu})} \right),
+    \label{eq:KG_propagator}
+\end{equation}
 Now we can check the three considerations:
 \begin{enumerate}
     \item \textbf{Lorentz invariance}: the exponentials \(e^{\pm i p_{\mu} (x^{\mu}-y^{\mu})}\) are manifestly Lorentz invariant since they depend on the contraction of two four-vectors; the measure \(\mathrm{d}^3 \mathbf{p}/(2\pi)^3 2\omega_{\mathbf{p}}\) is Lorentz invariant, as we have previously shown at the very end of section \ref{sec:KG_particle_states}; thus the whole expression is Lorentz invariant. This means that if we compute \(\Delta(x-y)\) in a reference frame where \(x\) and \(y\) are simultaneous, the result will hold for any other spacetime events which is related to \(y\) by a Lorentz transformation. But since we cannot relate events inside and outside the light cone with a Lorentz transformation, we can chack that the commutator vanishes for only one value of \(y\) outside of \(x\) light-cone, then it will be true for events throughout the whole region.
@@ -532,7 +535,7 @@ We have proven that KG theory mathematically preserve causality (remember that i
 
 \section{Klein Gordon Correlators}
 
-Let us consider  particle at a spectime point \(y = (t,\,\mathbf{y})\); how do we describe it in QFT? It is an exhited state of the vacuum \(\ket{0}\), there is some kind of exhitation localized in our quantum field at the point \(y\), like a localized and quantized wave; we recreate it with a creation operator, like \(\hat a_{\mathbf{p}} \ket{0}\), but if we create a particle with definite momentum we could not possibly now its position, so we imagine a linear combination of all possible creation operators with all possible momenta: we apply the \textbf{field operator} on the vacuum
+Let us consider  particle at a spectime point \(y = (t,\,\mathbf{y})\); how do we describe it in QFT? It is an exhited state of the vacuum \(\ket{0}\), i.e. there is some kind of exhitation localized in our quantum field at the point \(y\), like a localized and quantized wave; we recreate it with a creation operator, like \(\hat a_{\mathbf{p}} \ket{0}\), but if we create a particle with definite momentum we could not possibly now its position, so we imagine a linear combination of all possible creation operators with all possible momenta: we apply the \textbf{field operator} on the vacuum
 \[
     \hat \psi(y) \ket{0}.
 \]
@@ -543,27 +546,41 @@ Then let's look at the probability amplitude (with a scalar product) to find it 
 Note that it is different from RQM, where we computed \(\bra{\mathbf{x}} e^{-i \hat H t} \ket{\mathbf{y}}\) with \(\hat H = \sqrt{\vert \mathbf{p} \vert^2 + m^2}\). Lets compute the amplitude:
 \[
     \begin{aligned}
-        blablabla \quad pdf \quad blablabla
+        D(x-y) & = \bra{0} \hat \psi (x) \hat \psi (y) \ket{0} = \left(\hat{\psi} (x) \ket{0}\right)^{\dagger} \hat{\psi} (y) \ket{0} \qquad \left[ \text{ KG scalar field: } \hat{\psi}^\dagger  (x)= \hat{\psi} (x) \right],                                                                                                                                                                          \\
+               & = \int \frac{\mathrm{d}^3 \mathbf{p}\mathrm{d}^3 \mathbf{q}}{(2\pi)^6} \frac{1}{2\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{q}}}}\, \bra{0} \left( \hat{a}_{\mathbf{p}} e^{-i p_{\mu} x^{\mu}} + \hat{a}^{\dagger}_{\mathbf{p}} e^{i p_{\mu} x^{\mu}} \right) \left(  \hat{a}_{\mathbf{q}} e^{-i q_{\mu} y^{\mu}} + \hat{a}^{\dagger}_{\mathbf{q}} e^{i q_{\mu} y^{\mu}} \right) \ket{0} \\
+               & \qquad \bra{0} \hat{a}_{\mathbf{p}} \hat{a}_{\mathbf{q}} \ket{0} = 0, \quad \bra{0} \hat{a}_{\mathbf{p}} \hat{a}^{\dagger}_{\mathbf{q}} \ket{0} \neq 0, \quad \bra{0} \hat{a}^{\dagger}_{\mathbf{p}} \hat{a}_{\mathbf{q}} \ket{0} = 0, \quad  \bra{0} \hat{a}^{\dagger}_{\mathbf{p}} \hat{a}^{\dagger}_{\mathbf{q}} \ket{0} = 0,                                                       \\
+               & = \int \frac{\mathrm{d}^3 \mathbf{p}\mathrm{d}^3 \mathbf{q}}{(2\pi)^6} \frac{1}{2\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}} \bra{0} \hat{a}_{\mathbf{p}} \hat{a}^{\dagger}_{\mathbf{q}} \ket{0} e^{-i p_{\mu} x^{\mu}} e^{i q_{\mu} y^{\mu}}                                                                                                                                      \\
+               & = \int \frac{\mathrm{d}^3 \mathbf{p}\mathrm{d}^3 \mathbf{q}}{(2\pi)^6} \frac{1}{2\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}} \left( \bra{0} \left[\hat{a}_{\mathbf{p}} ,\, \hat{a}^{\dagger}_{\mathbf{q}}\right] \ket{0} + \bra{0} \hat{a}^{\dagger}_{\mathbf{q}} \hat{a}_{\mathbf{p}} \ket{0} \right) e^{-i p_{\mu} x^{\mu}} e^{i q_{\mu} y^{\mu}}                                \\
+               & = \int \frac{\mathrm{d}^3 \mathbf{p}\mathrm{d}^3 \mathbf{q}}{(2\pi)^3} \frac{1}{2\sqrt{\omega_{\mathbf{p}} \omega_{\mathbf{q}}}} \delta^{(3)}(\mathbf{p}-\mathbf{q}) e^{-i p_{\mu} x^{\mu}} e^{i q_{\mu} y^{\mu}} = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{2\omega_{\mathbf{p}}} e^{-i p_{\mu} (x^{\mu}-y^{\mu})},
     \end{aligned}
 \]
-\(\hat a_{\mathbf{q}}\) acting on the vacuum \(\ket{0}\) is zero, but is the same to \(\hat a^{\dagger}_{\mathbf{q}}\) acting on \(\bra{0}\) (it's just the conjugate of the other); when we see a product of operators, the idea is to use commutators \(\hat a_{\mathbf{p}} \hat a^{\dagger}_{\mathbf{q}} = \left[\hat a_{\mathbf{p}}\, ,\, \hat a^{\dagger}_{\mathbf{q}}\right] + \hat a^{\dagger}_{\mathbf{q}} \hat a_{\mathbf{p}}\); thus we found this amplitude proportional of the \textbf{propagator} (the square modulus of the amplitude gives us the probability of the propagation of the particle from \(\mathbf{y}\) to \(\mathbf{x}\)).
+where we have used the fact that \(\hat a_{\mathbf{q}}\) acting on the vacuum \(\ket{0}\) is zero, which is the same to the application of \(\hat a^{\dagger}_{\mathbf{q}}\) on \(\bra{0}\) (it is only the conjugate of the previous expression); furthermore, when we see a product of operators, the idea is to use commutators \(\hat a_{\mathbf{p}} \hat a^{\dagger}_{\mathbf{q}} = \left[\hat a_{\mathbf{p}}\, ,\, \hat a^{\dagger}_{\mathbf{q}}\right] + \hat a^{\dagger}_{\mathbf{q}} \hat a_{\mathbf{p}}\) to simplify the expression, since the commutator is known while the second term acting on the vacuum is zero.
 
-If we evaluate this propagator for propagations outside the light cone (spacelike separation between \(x\) and \(y\), where we consider no time separation and a space separation: \(x-y = (0, \mathbf{r})\), and \(r = \vert \mathbf{r} \vert\)) this should become zero:
+Thus we have found that this amplitude, the KG correlator, is proportional to the KG propagator in \eqref{eq:KG_propagator} (called like that since the square modulus of this amplitude gives us the probability of the propagation of the particle from \(\mathbf{y}\) to \(\mathbf{x}\)):
+\begin{equation}
+    D(x-y) = \bra{0} \hat \psi (x) \hat \psi (y) \ket{0} = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{2\omega_{\mathbf{p}}} e^{-i p_{\mu} (x^{\mu}-y^{\mu})},
+    \label{eq:KG_correlator}
+\end{equation}
+which, as we have seen before, is Lorentz invariant.
+
+If we now evaluate this amplitude for propagations outside the light cone (among spacelike separated events \(x\) and \(y\), happening at the same time in different places: \(x-y = (0, \mathbf{r})\), and \(r = \vert \mathbf{r} \vert\)) it should be zero to preserve causality: using spherical coordinates in momentum space with the polar axis along \(\mathbf{r}\) we have
 \[
     \begin{aligned}
-        D(x-y) & =     \\
-               & = pdf
+        D(x-y) & = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{2\omega_{\mathbf{p}}} e^{-i p_{\mu} (x^{\mu}-y^{\mu})} = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{2\omega_{\mathbf{p}}} e^{-i \mathbf{p} \cdot \mathbf{r}} \\
+               & = \frac{2\pi}{(2\pi)^3} \int_0^{\infty} \mathrm{d} \vert \mathbf{p} \vert \frac{\vert \mathbf{p} \vert^2}{2E_{\mathbf{p}}} \int_{-1}^{1} \mathrm{d}(\cos \theta) e^{-i \vert \mathbf{p} \vert r \cos \theta},                     \\
     \end{aligned}
 \]
-if we compute the integral in \(\mathrm{d}(\cos \theta)\) we get to
+since \(\mathrm{d}^3 \mathbf{p} = 2\pi \vert \mathbf{p} \vert^2 \mathrm{d} \vert \mathbf{p} \vert \mathrm{d}(\cos \theta)\), and by computing the integral in \(\mathrm{d}(\cos \theta)\) we get to
 \[
-    D(x-y) = -\frac{i}{2(2\pi)^2 r} \left( \int_0^{\infty} \mathrm{d} \vert \mathbf{p} \vert \dots - \dots \right)
+    \begin{aligned}
+        D(x-y) & = \frac{-1}{(2\pi)^2} \int_0^{\infty} \mathrm{d} \vert \mathbf{p} \vert \frac{\vert \mathbf{p} \vert^2}{2E_{\mathbf{p}}} \left[\frac{e^{i \vert \mathbf{p} \vert r }-e^{-i \vert \mathbf{p} \vert r }}{-i \vert \mathbf{p} \vert r} \right]                                            \\
+               & = -\frac{i}{2(2\pi)^2 r} \left( \int_0^{\infty} \mathrm{d} \vert \mathbf{p} \vert\, \frac{\vert \mathbf{p} \vert }{E_{\mathbf{p}} }e^{i \mathbf{p} r} - \int_0^{\infty} \mathrm{d} \vert \mathbf{p} \vert\, \frac{\vert \mathbf{p} \vert }{E_{\mathbf{p}}}e^{-i \mathbf{p} r} \right),
+    \end{aligned}
 \]
-we can compose the integral since we realize it's the same but with different integral domains, so
+with \(E_{\mathbf{p}} = \sqrt{\vert \mathbf{p} \vert^2 + m^2}\). Notice how the two integrals are identical except for the sign in the exponential, so we can combine them into a single integral from \(-\infty\) to \(\infty\) of a single exponential term:
 \[
-    D(x-y) = -\frac{i}{2(2\pi)^2 r} \left( \int_{-\infty}^{\infty} \mathrm{d} \vert \mathbf{p} \vert \dots \right)
+    D(x-y) = -\frac{i}{2(2\pi)^2 r} \left( \int_{-\infty}^{\infty} \mathrm{d} \vert \mathbf{p} \vert \frac{\vert \mathbf{p} \vert }{E_{\mathbf{p}} }e^{i \mathbf{p} r} \right).
 \]
-
 \begin{figure}[H]
     \centering
     \begin{minipage}{0.45\textwidth}
@@ -572,29 +589,29 @@ we can compose the integral since we realize it's the same but with different in
             \draw[->] (-2.2,0) -- (2.2,0) node[right] {$\Re(p)$};
             \draw[->] (0,-2.2) -- (0,2.2) node[above] {$\Im(p)$};
 
-            \draw[thick,blue] (0,0) circle (1.5);
+            \draw[thick,green!70!black] (0,0) circle (1.5);
 
-            \fill[red] (0.0,0.8) circle (2pt) node[right] {$im$};
-            \fill[red] (0.0,-0.8) circle (2pt) node[right] {$-im$};
+            \fill[orange!90!black] (0.0,0.8) circle (2pt) node[right] {$im$};
+            \fill[orange!90!black] (0.0,-0.8) circle (2pt) node[right] {$-im$};
 
             \foreach \x in {1.0,1.2,1.4,1.6,1.8,2.0}{
-                    \node[red] at (0,\x) {$\ast$};
-                    \node[red] at (0,-\x) {$\ast$};
+                    \node[orange!90!black] at (0,\x) {$\ast$};
+                    \node[orange!90!black] at (0,-\x) {$\ast$};
                 }
         \end{tikzpicture}
     \end{minipage}
     \hfill
     \begin{minipage}{0.5\textwidth}
-        we can now promote module \(\mathbf{p}\) to a complex variable and perform the integral with the couchy theorem; the branch cuts are as shown in figure the same as we have seen in section \ref{sec:RQM_framework}, the ones of a complex square root. We want to get the integral on the real axis, so we compute the path as an integral from \(-L\) to \(L\) on \(\mathbb{R}\) and then we take \(L \to \infty\), then we look at the contributions from the rest of the closed path
+        The idea is now to promote \(\vert \mathbf{p} \vert\) to a complex variable and perform the integral with Cauchy theorem; the branch cuts are as shown in figure, and we recognize them to be the same as we have seen in section \ref{sec:RQM_framework}, having a complex square root. We want to get the integral on the real axis, so we compute the path as an integral from \(-L\) to \(L\) on \(\mathbb{R}\) and then we take \(L \to \infty\), then we look at the contributions from the rest of the closed path (excluding the singularities) and put their sum to zero.
     \end{minipage}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \begin{minipage}{0.5\textwidth}
-        We have then to compute the integrals on the imaginary axis as \(\vert \mathbf{p} \vert \mathrm{d} \vert \mathbf{p} \vert = -y \mathrm{d} y\) and
+        We have then to compute the integrals on the imaginary axis, with \(\vert \mathbf{p} \vert = i y\) (and so \(\vert \mathbf{p} \vert \mathrm{d} \vert \mathbf{p} \vert = -y \mathrm{d} y\)) such that
         \[
-            D(x-y) = \dots = -\frac{1}{2 (2\pi)^2}r 2 \int_{m}^{\infty} \mathrm{d}y \, \frac{y e^{-yr}}{\sqrt{y^{2-m^2}}}.
+            D(x-y) = -\frac{1}{2 (2\pi)^2 r} \int_{m}^{\infty} \mathrm{d}y \, \frac{y e^{-yr}}{\sqrt{y^{2}-m^2}}.
         \]
         Now this integral is all real without problems, but is it zero?
     \end{minipage}
@@ -607,29 +624,29 @@ we can compose the integral since we realize it's the same but with different in
             \draw[->] (0,-0.5) -- (0,2.5) node[above] {$\Im(p)$};
 
             \foreach \y in {1.0,1.2,1.4,1.6,1.8,2.0, 2.2}{
-                    \node[red] at (0,\y) {$\ast$};
+                    \node[red!80!black] at (0,\y) {$\ast$};
                 }
 
-            \draw[thick,red,<-] (0.2,0.8) arc[start angle=0,end angle=360,radius=0.2] node[right] {$C_{\epsilon}$};
+            \draw[thick,red!80!black,<-] (0.2,0.8) arc[start angle=0,end angle=360,radius=0.2] node[right] {$C_{\epsilon}$};
 
-            \draw[thick,->,green] (-2.2,0) -- (-1,0);
-            \draw[thick,->,green] (-1,0) -- (1,0) node[below] {$C_L$};
-            \draw[thick,green] (1,0) -- (2.2,0);
+            \draw[thick,->,green!70!black] (-2.2,0) -- (-1,0);
+            \draw[thick,->,green!70!black] (-1,0) -- (1,0) node[below] {$C_L$};
+            \draw[thick,green!70!black] (1,0) -- (2.2,0);
 
-            \draw[thick,orange,
+            \draw[thick,orange!90!black,
                 postaction={decorate},
                 decoration={markings, mark=at position 0.5 with {\arrow{<}}}
             ] (-2.2,0) arc[start angle=180,end angle=90,radius=2.2] node[above right] {$C_1$};
 
-            \draw[thick,orange,
+            \draw[thick,orange!90!black,
                 postaction={decorate},
                 decoration={markings, mark=at position 0.5 with {\arrow{>}}}
             ] (2.2,0) arc[start angle=0,end angle=90,radius=2.2] node[above left] {$C_4$};
 
-            \draw[thick,->,blue] (0.1,2.2) -- (0.1,1.0) node[above right] {$C_2$};
-            \draw[thick,<-,blue] (-0.1,2.2) -- (-0.1,1.0) node[above left] {$C_3$};
+            \draw[thick,->,blue!80] (0.1,2.2) -- (0.1,1.0) node[above right] {$C_2$};
+            \draw[thick,<-,blue!80] (-0.1,2.2) -- (-0.1,1.0) node[above left] {$C_3$};
 
-            \fill[red] (0,0.8) circle (2pt) node[right] {};
+            \fill[red!80!black] (0,0.8) circle (2pt) node[right] {};
             \fill[black] (-2.2,0) circle (2pt) node[below] {$-L$};
             \fill[black] (2.2,0) circle (2pt) node[below] {$L$};
 
@@ -637,28 +654,250 @@ we can compose the integral since we realize it's the same but with different in
     \end{minipage}
 \end{figure}
 
-No, the exat solution is given in terms of modified bessel functions, and in the limit for \(r \sim \infty\) then \(D(x-y) \sim e^{-mr} \neq 0\) even if \(r\) is really big. but we can arrive at the same solution with approximated considerations.
-This seems similar to what we obtained in RQM, but it is not: indeed if we consider the previous result
+No, the exact solution is given in terms of \textit{modified Bessel functions}, and in the limit for \(r \sim \infty\) then \(D(x-y) \sim e^{-mr} \neq 0\); but we can arrive at the same solution with approximated considerations: all the terms inside the integral are positive, so the integral cannot be zero; furthermore, the exponential term \(e^{-yr}\) suppresses the contributions for large \(y\), so the main contribution comes from \(y \sim m\), but they are nonetheless different from zero, so the whole integral is different from zero.
+
+This seems similar to what we obtained in RQM, but it is not: if we indeed consider the previous result
 \[
     \Delta(x-y) = \left[\hat \psi(x),\, \hat \psi(y)\right] = 0
 \]
 for spacelike separations, so we can write
 \[
     \begin{aligned}
-        \Delta(x-y) & = \bra{0}\Delta(x-y)\ket{0} = \bra{0} \left[\hat \psi(x),\, \hat \psi(y)\right] \ket{0}                  \\
-                    & = \bra{0} \hat \psi(x) \hat \psi(y)\ket{0} - \bra{0} \hat \psi(y) \hat \psi(x)\ket{0} = D(x-y) - D(y-x);
+        \Delta(x-y) & = \bra{0}\Delta(x-y)\ket{0} = \bra{0} \left[\hat \psi(x),\, \hat \psi(y)\right] \ket{0}                      \\
+                    & = \bra{0} \hat \psi(x) \hat \psi(y)\ket{0} - \bra{0} \hat \psi(y) \hat \psi(x)\ket{0} = D(x-y) - D(y-x) = 0;
     \end{aligned}
 \]
-Note that KG theory cannot distinguish particles from antiparticles, since it does not account for charge degrees of freedom, so we can interpret this result as the probability amplitude for a particle to go from y to x minus the probability of the antiparticle going from x to y, which is an interpratation of antiparticles going backward in time to preserve the causality outside the light cone.
+Note that KG theory cannot distinguish particles from antiparticles, since it does not account for charge degrees of freedom; but if we \textbf{consider the complex KG field} we can interpret this result as the \textit{probability amplitude for a particle to go from y to x minus the probability of the antiparticle going from x to y}, which is an interpratation of antiparticles going backward in time to preserve the causality outside the light cone.
 
-If we want a state in which we have a particle in the past and then in the future, we can also read this as a particle in the past, then the creation of a couple of part antipart in the future, the new particle stays in the future while the antiparticle travels backwards in time to annihilate with the initial particel. We were compiting just one half of the amplitude. All this comes from intrepretation of the athematical results of our equations. We are looking at one individual phenomenon made up by two distinct contributions.
-
+If we consider the expressions of the field operators for complex KG fields:
 \[
-    DRAWS \, FROM \, PDF
+    \begin{aligned}
+        \hat{\psi}^{\dagger} (y) & \propto \hat{a}_{-} + \hat{a}^{\dagger}_{+}, \\
+        \hat{\psi} (x)           & \propto \hat{a}_{+} + \hat{a}^{\dagger}_{-},
+    \end{aligned}
 \]
-We are summing diagrams where before \(y\) and after \(x\) we have the same phenomenon, but between \(x\) and \(y\) we have in a case the particle propagating faster than light, in the other the produced antiparticle traveling backward in time faster than light only to annihilate with the other old particle in \(y\). This physical intuistion is mostly due to Feynman and his diagrams.
+where \(\hat{a}_{+}\) and \(\hat{a}^{\dagger}_{+}\) are the annihilation and creation operators for particles, while \(\hat{a}_{-}\) and \(\hat{a}^{\dagger}_{-}\) are the annihilation and creation operators for antiparticles, then we can understand the two terms in the previous expression for the propagator outside the light cone: the first term \(D(x-y)\) is the amplitude for a particle created in \(y\) to be annihilated in \(x\), while the second term \(D(y-x)\) is the amplitude for an antiparticle created in \(x\) to be annihilated in \(y\), which we can read as an antiparticle created in \(y\) propagating backwards in time to be annihilated in \(x\) (this because if we apply consequently the operators we see that states of particle created in \(y\) and antiparticle created in \(x\) and viceversa are canceled in the final product with \(\bra{0}\)).
 
-This kind of phenomena are called \textit{virtual phenomena}, since they cannot be measured observed, but mathematic tells us that this happens and saves our theory; even in Feynman diagrams, the virtual particle does not respect an equation of motion, there is its existence for a really brief moment, and due to uncertainty in energy etc we can justify its existence and our computing methods and interpretations.
+We do not need the amplitude of this event to be null, since we \textbf{cannot measure it} anyway: the propagator is the quantity we need to be zero, since it is proportional to the commutator of the fields, which has to vanish to preserve causality. We need measurements at spacelike separated events to be independent, not the individual amplitudes of particles and antiparticles propagating outside the light cone.
+
+If we want a state in which we have a particle in the past and then in the future, we can also read this as a particle in \(y\) with a non zero probability of propagating outside its light cone, which is annihilated before this can happen from the creation of a couple of particle / antiparticle in \(x\), where the new particle can propagate in the future while the antiparticle travels backwards in time to annihilate with the initial particle. We were computing just one half of the amplitude. All this comes from intrepretation of the mathematical results of our equations. We are looking at one individual phenomenon made up by two distinct contributions.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1]
+
+        % Style for arrows at the middle of the line
+        \tikzset{
+            midarrow/.style={
+                    decoration={markings, mark=at position 0.55 with {\arrow[scale=1.5, >=stealth]{>}}},
+                    postaction={decorate}
+                },
+            % Simplified light cone style
+            lightcone/.style={dashed, gray, thin}
+        }
+
+        % ==========================================
+        % DIAGRAM 1: Particle y -> x
+        % ==========================================
+        \begin{scope}
+            % Define coordinates INSIDE this scope to avoid overlaps
+            \coordinate (Y) at (0,0);
+            \coordinate (X) at (3,0.8);
+
+            % Title
+            \node[font=\bfseries] at (1.5, 2) {1. Particle ($y \to x$)};
+            \node[font=\small, blue] at (1.5, 1.6) {$\langle 0 | \phi(x)\phi^\dagger(y) | 0 \rangle$};
+
+            % Light Cones
+            \draw[lightcone] (Y) -- ++(-1,1);
+            \draw[lightcone] (Y) -- ++(1,1);
+            \draw[lightcone] (Y) -- ++(-1,-1);
+            \draw[lightcone] (Y) -- ++(1,-1);
+
+            \draw[lightcone] (X) -- ++(-1,1);
+            \draw[lightcone] (X) -- ++(1,1);
+            \draw[lightcone] (X) -- ++(-1,-1);
+            \draw[lightcone] (X) -- ++(1,-1);
+
+            % Propagator (Blue Line)
+            \draw[midarrow, very thick, blue!80!cyan] (Y) -- (X);
+
+            % Points
+            \filldraw (Y) circle (2pt) node[below] {$y$};
+            \filldraw (X) circle (2pt) node[below] {$x$};
+
+        \end{scope}
+
+        % ==========================================
+        % MINUS SIGN (Positioned between the two scopes)
+        % ==========================================
+        \node[font=\Huge\bfseries] at (4.5, 0.4) {$-$};
+
+        % ==========================================
+        % DIAGRAM 2: Antiparticle x -> y
+        % ==========================================
+        \begin{scope}[xshift=6cm]
+            % Redefine coordinates relative to THIS shifted scope
+            \coordinate (Y) at (0,0);
+            \coordinate (X) at (3,0.8);
+
+            % Title
+            \node[font=\bfseries] at (1.5, 2) {2. Antiparticle ($x \to y$)};
+            \node[font=\small, red!80!black] at (1.5, 1.6) {$\langle 0 | \phi^\dagger(y)\phi(x) | 0 \rangle$};
+
+            % Light Cones
+            \draw[lightcone] (Y) -- ++(-1,1);
+            \draw[lightcone] (Y) -- ++(1,1);
+            \draw[lightcone] (Y) -- ++(-1,-1);
+            \draw[lightcone] (Y) -- ++(1,-1);
+
+            \draw[lightcone] (X) -- ++(-1,1);
+            \draw[lightcone] (X) -- ++(1,1);
+            \draw[lightcone] (X) -- ++(-1,-1);
+            \draw[lightcone] (X) -- ++(1,-1);
+
+            % Propagator (Red Line - Opposite Direction)
+            \draw[midarrow, very thick, red!80!orange] (X) -- (Y);
+
+            % Points
+            \filldraw (Y) circle (2pt) node[below] {$y$};
+            \filldraw (X) circle (2pt) node[below] {$x$};
+
+        \end{scope}
+
+        % ==========================================
+        % RESULT
+        % ==========================================
+        \begin{scope}[xshift=2cm]
+            \node[font=\Huge\bfseries] at (9, 0.8) {$= 0$};
+            \node[font=\bfseries, gray, align=center] at (9, 0) {(Causality)};
+        \end{scope}
+
+    \end{tikzpicture}
+\end{figure}
+
+If we imagine, for example, a measurement of a particle arriving in \(y\) and another measurement telling us that \textit{the same particle} is propagating then in the future cone of \(x\), we are indeed summing diagrams where before \(y\) and after \(x\) we have the same phenomenon (a particle of \textit{the same type} propagating), but between \(x\) and \(y\) we have in a case the particle propagating faster than light, in the other the produced antiparticle (we can imagine a particle antiparticle pair created in \(x\)) traveling backward in time faster than light only to annihilate with the other old particle in \(y\). This physical intuition is mostly due to Feynman and his diagrams.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=0.7]
+
+        % Style for arrows at the middle of the line
+        \tikzset{
+            midarrow/.style={
+                    decoration={markings, mark=at position 0.55 with {\arrow[scale=1, >=stealth]{>}}},
+                    postaction={decorate}
+                },
+            % Simplified light cone style
+            lightcone/.style={dashed, gray, thin}
+        }
+
+        % ==========================================
+        % DIAGRAM 1: Particle y -> x
+        % ==========================================
+        \begin{scope}
+            % Define coordinates INSIDE this scope to avoid overlaps
+            \coordinate (Y) at (0,0);
+            \coordinate (X) at (3,0.8);
+            \coordinate (W) at (-0.5,-1);
+
+            % Light Cones
+            \draw[lightcone] (Y) -- ++(-1,1);
+            \draw[lightcone] (Y) -- ++(1,1);
+            \draw[lightcone] (Y) -- ++(-1,-1);
+            \draw[lightcone] (Y) -- ++(1,-1);
+
+            \draw[lightcone] (X) -- ++(-1,1);
+            \draw[lightcone] (X) -- ++(1,1);
+            \draw[lightcone] (X) -- ++(-1,-1);
+            \draw[lightcone] (X) -- ++(1,-1);
+
+            % Propagator (Blue Line)
+            \draw[midarrow, thick, blue!80!cyan] (Y) -- (X);
+            \draw[midarrow, thick, blue!80!cyan] (W) -- (Y);
+
+            % Points
+            \filldraw (Y) circle (2pt) node[below] {$y$};
+            \filldraw (X) circle (2pt) node[below] {$x$};
+
+        \end{scope}
+
+        % ==========================================
+        % MINUS SIGN (Positioned between the two scopes)
+        % ==========================================
+        \node[font=\Huge\bfseries] at (4.5, 0.4) {$-$};
+
+        % ==========================================
+        % DIAGRAM 2: Antiparticle x -> y
+        % ==========================================
+        \begin{scope}[xshift=6cm]
+            % Redefine coordinates relative to THIS shifted scope
+            \coordinate (Y) at (0,0);
+            \coordinate (X) at (3,0.8);
+            \coordinate (Z) at (3.4,1.8);
+
+
+            % Light Cones
+            \draw[lightcone] (Y) -- ++(-1,1);
+            \draw[lightcone] (Y) -- ++(1,1);
+            \draw[lightcone] (Y) -- ++(-1,-1);
+            \draw[lightcone] (Y) -- ++(1,-1);
+
+            \draw[lightcone] (X) -- ++(-1,1);
+            \draw[lightcone] (X) -- ++(1,1);
+            \draw[lightcone] (X) -- ++(-1,-1);
+            \draw[lightcone] (X) -- ++(1,-1);
+
+            % Propagator (Red Line - Opposite Direction)
+            \draw[midarrow, thick, red!80!orange] (X) -- (Y);
+            \draw[midarrow, thick, red!80!orange] (X) -- (Z);
+
+            % Points
+            \filldraw (Y) circle (2pt) node[below] {$y$};
+            \filldraw (X) circle (2pt) node[below] {$x$};
+
+        \end{scope}
+
+        % ==========================================
+        % EQUAL SIGN (Positioned between the two scopes)
+        % ==========================================
+        \node[font=\Huge\bfseries] at (10.5, 0.4) {$=$};
+
+        % ==========================================
+        % RESULT
+        % ==========================================
+        \begin{scope}[xshift=12cm]
+            \coordinate (Y) at (0,0);
+            \coordinate (X) at (3,0.8);
+            \coordinate (W) at (-0.5,-1);
+            \coordinate (Z) at (3.4,1.8);
+
+
+            % Light Cones
+            \draw[lightcone] (Y) -- ++(-1,1);
+            \draw[lightcone] (Y) -- ++(1,1);
+            \draw[lightcone] (Y) -- ++(-1,-1);
+            \draw[lightcone] (Y) -- ++(1,-1);
+
+            \draw[lightcone] (X) -- ++(-1,1);
+            \draw[lightcone] (X) -- ++(1,1);
+            \draw[lightcone] (X) -- ++(-1,-1);
+            \draw[lightcone] (X) -- ++(1,-1);
+
+            \draw[midarrow, thick, red!80!orange] (X) -- (Z);
+            \draw[midarrow, thick, blue!80!cyan] (W) -- (Y);
+            \draw[dashed, thick, yellow!80!black] (X) -- (Y);
+
+            % Points
+            \filldraw (Y) circle (2pt) node[below] {$y$};
+            \filldraw (X) circle (2pt) node[below] {$x$};
+        \end{scope}
+
+    \end{tikzpicture}
+\end{figure}
+
+
+This kind of phenomena are called \textit{virtual phenomena}, since they cannot be measured observed, but mathematic tells us that this happens and saves our theory; even in Feynman diagrams, the virtual particle does not respect an equation of motion, there is its existence for a really brief moment, and due to uncertainty in energy we can justify its existence and our computing methods and interpretations.
 
 \subsection{Green Functions}
 
