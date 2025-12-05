@@ -404,21 +404,21 @@ We can study the absolute convergence of the series expansion (for both the Bose
 \[
     \sum_{l=0}^{\infty} \left\vert (\pm 1)^{l}\frac{z^{l+1}}{(l+1)^{\nu}} \right\vert = \sum_{l=0}^{\infty} \frac{\vert z \vert^{l+1}}{(l+1)^{\nu}}.
 \]
-Applying the standard ratio test, this series converges absolutely if and only if:
+Applying the standard ratio test,\footnote{The standard ratio test consists in taking the limit of the absolute value of the fraction \(a_{n+1}/a_n\), and then checking if this limit is less than 1 for convergence.} this series converges absolutely if and only if:
 \[
-    \vert z \vert < 1.
+    \lim_{l \to \infty} \left| \frac{z^{l+2}}{z^{l+1}} \left(\frac{l+1}{l+2}\right)^{\nu} \right| \sim \vert z \vert < 1.
 \]
-This convergence condition highlights an important distinction between the mathematical series and the physical system. While Bosons always satisfy $z \le 1$ (since $\mu \le 0$), Fermions at low temperatures exhibit a chemical potential $\mu \approx \epsilon_F > 0$ (we will look into it better lately), leading to a fugacity $z \gg 1$. Consequently, this series expansion is valid for Fermions \textit{only} in the high-temperature limit (classical regime). For the quantum regime ($z > 1$), the function $f_\nu(z)$ remains well-defined but must be evaluated using its integral representation (analytic continuation) rather than this power series.\QUESTION{SPARARE ALLA ERCOLESSI}
+While for Bosons this series is always convergent (they always satisfy $\vert z \vert < 1$, since $\mu \le 0$), for Fermions the fugacity \(z\) can take any positive value, including values greater than 1 when the chemical potential \(\mu\) is positive. Therefore, we have absolute convergence only for \(\vert z \vert < 1\). For \(z > 1\), the series may or may not be \textit{simply convergent}, and it can be necessary to evaluate the functions \(f_{\nu}(z)\) using the integral representation (analytic continuation) rather than this power series.
 
 Thus, for fermions in the classical regime the series converges absolutely for all physically relevant values of \(z\).
 \begin{figure}[H]
     \begin{minipage}[c]{0.5\textwidth}
         \centering
-        \includegraphics[width=0.7\textwidth]{img/fermions_power_series.jpg}
+        \includegraphics[width=0.8\textwidth]{img/fermions_power_series.jpg}
     \end{minipage}
     \hfill
     \begin{minipage}[c]{0.45\textwidth}
-        \caption{Plot of the Fermi-Dirac power series \(f_{\nu}(z)\) for different values of \(\nu\) in the classical limit. The series is well defined for all \(z \geq 0\), positive and continuous and monotonically increasing. For \(z\) near 0 the series assumes a linear behavior, while for large \(z\) it grows more slowly.}
+        \caption{Plot of the Fermi-Dirac power series \(f_{\nu}(z)\) for different values of \(\nu\) in the classical limit. If the series is well defined and convergent for all \(z \geq 0\), then it is positive, continuous and monotonically increasing. For \(z\) near 0 the series assumes a linear behavior, while for large \(z\) it grows more slowly.}
         \label{fig:figure-fermi-dirac-series}
     \end{minipage}
 \end{figure}
@@ -464,7 +464,7 @@ We can also find an explicit expression for the Fermi energy \(\epsilon_F\) in t
 \[
     \epsilon_F = \left( \frac{3n}{2A} \right)^{2/3},
 \]
-so that we can control the behavior of the system at zero temperature based on the density of particles.
+so that we can control the behavior of the system at zero temperature acting on the density of particles.
 \begin{figure}[H]
     \begin{minipage}[c]{0.60\textwidth}
         \centering
@@ -489,12 +489,12 @@ We can study how metals behave under these conditions, since the conduction elec
 
 We can also compute the grand potential \(\Omega_F\) at zero temperature using the relation \(\Omega_F = - \frac{2}{3} E_F\) with the intent to find the pressure of the Fermi gas at absolute zero:
 \[
-    \Omega_F = - \frac{2}{3} V \epsilon = - pV, \quad p = \frac{2}{5} n \epsilon_F > 0.
+    \Omega_F = - \frac{2}{3} V \epsilon = - pV, \quad p = \frac{2}{3}\epsilon = \frac{2}{3} \left(\frac{3}{5}n \epsilon_F\right) = \frac{2}{5} n \epsilon_F > 0.
 \]
 For any perfect classical gas we have a zero pressure at zero temperature, while here we have a finite pressure due to the Pauli exclusion principle, which prevents all fermions from occupying the lowest energy state. This leads to a degeneracy pressure that supports the system against collapse, which is particularly important in astrophysical contexts such as white dwarf stars: the electron degeneracy pressure arising from the Fermi gas of electrons counteracts gravitational collapse, stabilizing the star.
 
-With an augment in temperature, the sharp occupation of energy levels at the Fermi energy smooths out, leading to thermal excitations around \(k_B T\) of electrons near the Fermi level, affecting the electronic properties of the material.
-We can also define a \textbf{Fermi temperature} \(T_F\) associated with the Fermi energy:
+\paragraph{Fermi temperature.}
+With an augment in temperature, the sharp occupation of energy levels at the Fermi energy smooths out, leading to thermal excitations around \(k_B T\) of electrons near the Fermi level, affecting the electronic properties of the material. It is thus really useful to define a Fermi temperature \(T_F\) associated to the Fermi energy:
 \[
     k_B T_F = \epsilon_F \implies T_F = \frac{\epsilon_F}{k_B},
 \]
@@ -502,6 +502,12 @@ which provides a temperature scale below which quantum effects become significan
 \[
     T_F = \frac{1}{k_B}\left(\frac{6\pi^2}{g}\right)\frac{\hbar^2}{2m}n^{2/3}.
 \]
+This fact is not arbitrary: it comes from the comparison between the thermal energy \(k_B T\) and the Fermi energy \(\epsilon_F\), in the denominator of the Fermi-Dirac distribution. When \(k_B T \ll \epsilon_F\), the thermal excitations are small compared to the energy scale set by the Fermi energy, leading to quantum behavior. Conversely, when \(k_B T \gg \epsilon_F\), thermal excitations dominate, and the gas behaves more classically (i.e. the occupation of energy levels follows the Maxwell-Boltzmann distribution):
+\[
+    \frac{1}{e^{\beta(\epsilon - \mu)} + 1} \xrightarrow{k_B T \gg \epsilon_F} e^{-\beta(\epsilon - \mu)},
+\]
+considering \(\epsilon\) near the Fermi energy.
+
 We can derive an approximate value for a metal with \(n \sim 10^{22 / 23} \text{ electron}/\text{cm}^3\), \(g=2\) (for spin degeneracy) and \(m\) equal to the electron mass:
 \[
     T_F \sim 10^{4-5} K,
