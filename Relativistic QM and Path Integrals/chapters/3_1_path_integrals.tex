@@ -4,146 +4,154 @@ Quantization can be introduced in two equivalent ways:
 - operator formalism (canonical quantization, Hilbert space, linear operators, etc ..)
 - path integrals (functional integrals).
 
-Path integrals were introduced in quantum mechanics by Feynman in 1948, but until about 1970 they did not meet with much success, and the operatorial methods of canonical quantization were still the most widespread. In 1970, the success of gauge theories in developing the Standard Model of particle physics gave a strong impulse to path integral methods. Quantization of gauge theories is much more clear and elegant if performed with path integrals. Furthermore, path integrals indicate a way of relating a quantum field theory in D spacetime dimensions (\(D-1\) spaces and 1 time) to the statistical mechanics of a system in D space dimensions. This link has given rise to a way of thinking and defining field theories using statistical mechanics and renormalization group ideas, as introduced by Wilson and others (lattice theories). Nowadays,it is convenient to master both methods: according to the problem at hand, one may find one formalism more convenient than the other, even though they are supposed to be equivalent. To introduce path integrals, let us follow Feynman and consider the two-slit experiment for the electron. The standard treatment used to explain the behavior of an electron which passes through the two slits of a barrier and creates a figure of interference on a screen employs the wave nature of the electron together with the Huygens principle for calculating the interference pattern from the elementary waves that originate from the slits. Feynman proposes an alternative description. He suggests to keep thinking of the electron as a particle that however can accomplish both trajectories, each one with a certain “amplitude”. The total amplitude Atot is defined as the sum of the single amplitudes, and its square is related to the probability that the electron is revealed at a given point on the screen. Moreover, the elementary amplitude for each possible trajectory is related in a simple way to the classical action evaluated on the trajectory itself: Feynman, inspired by previous considerations of Dirac, associates to each trajectory an amplitude of unit norm (so that all trajectories “weigh” democratically the same way) and with phase equal to the value of the action \(S\) in units of \(\hbar\).
+Path integrals were introduced in quantum mechanics by Feynman in 1948, but until about 1970 they did not meet with much success, and the operatorial methods of canonical quantization were still the most widespread. In 1970, the success of gauge theories in developing the Standard Model of particle physics gave a strong impulse to path integral methods. Quantization of gauge theories is much more clear and elegant if performed with path integrals. Furthermore, path integrals indicate a way of relating a quantum field theory in D spacetime dimensions (\(D-1\) spaces and 1 time) to the statistical mechanics of a system in D space dimensions. This link has given rise to a way of thinking and defining field theories using statistical mechanics and renormalization group ideas, as introduced by Wilson and others (lattice theories). Nowadays,it is convenient to master both methods: according to the problem at hand, one may find one formalism more convenient than the other, even though they are supposed to be equivalent.
+
+To introduce path integrals, let us follow Feynman and consider the two-slit experiment for the electron. The standard treatment used to explain the behavior of an electron which passes through the two slits of a barrier and creates a figure of interference on a screen employs the wave nature of the electron together with the Huygens principle for calculating the interference pattern from the elementary waves that originate from the slits. Feynman proposes an alternative description. He suggests to keep thinking of the electron as a particle that however can accomplish both trajectories, each one with a certain “amplitude”. The total amplitude \(A_{tot}\) is defined as the sum of the single amplitudes, and its square is related to the probability that the electron is revealed at a given point on the screen. Moreover, the elementary amplitude for each possible trajectory is related in a simple way to the classical action evaluated on the trajectory itself: Feynman, inspired by previous considerations of Dirac, associates to each trajectory an amplitude of unit norm (so that all trajectories “weigh” democratically the same way) and with phase equal to the value of the action \(S\) in units of \(\hbar\).
 
 Thus we can write
 \[
     A_{tot} = A(c_1) + A(c_2) + \dots + A(c_n), \quad A(c_n) = e^{\frac{i}{\hbar}S(c_n)}.
 \]
-thus we linked the total amplitude, which let us study probabilities in our experiments, to a sum of single aplitudes with the same module (1) but different phases, dfined by the action
+thus we linked the total amplitude, which let us study probabilities in our experiments, to a sum of single aplitudes with the same module but different phases
 \[
-    S[x] = \int_0^{T} \d{t} \frac{1}{2}m \dot{x}^2.
+    A_{tot} = \sum_{n} e^{\frac{i}{\hbar}S(c_n)}, \quad \implies \quad P \propto |A_{tot}|^2,
 \]
-So for a path where we assume \(D \gg d\)\TODO{Insert drawing of slit.} we can write the action for the path
+and defined by the action (the integral of the lagrangian along the path, for a free particle we have just the kinetic contribution)
 \[
-    \begin{aligned}
-        S(c_1) & =                                         \\
-        S(c_2) & = \frac{m}{2} \frac{(D+d)^2}{T} = \dots .
-    \end{aligned}
-\]
-where \(p = \frac{mD}{T}\) is the momentum of the electron. Therefore we can no study the total amplitude
-\[
-    A_{tot} = e^{\frac{i}{\hbar}S(c_1)} + e^{\frac{i}{\hbar}S(c_2)} = \dots
+    S[q] = \int_0^{T} \d{t} \frac{1}{2}m \dot{q}^2.
 \]
 
-It is easy to notice that the maximum probability, associated to the maximum ampliutude, of revealiing the electron on the screen is
+So for a path where we assume \(D \gg d\) and simplifying the problem with a constant velocity along the two trajectories,\TODO{Insert drawing of slit.} we can write the action for each path as
+\[
+    \begin{aligned}
+        S(c_1) & = \int_0^T \d{t} \frac{1}{2}m \dot{q}^2 = \int_0^T \d{t} \frac{1}{2}m \left(\frac{D}{T}\right)^2 = \frac{m}{2} \frac{D^2}{T},      \\
+        S(c_2) & = \int_0^T \d{t} \frac{1}{2}m \dot{q}^2 = \int_0^T \d{t} \frac{1}{2}m \left(\frac{D+d}{T}\right)^2 = \frac{m}{2} \frac{(D+d)^2}{T} \\
+               & = \frac{mD^2}{2T} + \frac{md^2}{2T} + \frac{mDd}{T} \sim \frac{mD^2}{2T} + \frac{md^2}{2T} + pd + O(d^2) = S(c_1) + pd + O(d^2),
+    \end{aligned}
+\]
+where in the last term \(p = \frac{mD}{T}\) is the momentum of the electron (we have simplified the term \(\propto d^2\) since \(d \to 0\)). Therefore we can now study the total amplitude
+\[
+    A_{tot} = e^{\frac{i}{\hbar}S(c_1)} + e^{\frac{i}{\hbar}S(c_2)} = e^{\frac{i}{\hbar}S(c_1)} \left(1 + e^{\frac{i}{\hbar} pd} \right) = A(c_1) \left(1 + e^{\frac{i}{\hbar} pd} \right),
+\]
+which is associated to a total probability proportional to
+\[
+    P \propto |A_{tot}|^2 = |A(c_1)|^2 \left|1 + e^{\frac{i}{\hbar} pd} \right|^2 = \left|1 + e^{\frac{i}{\hbar} pd} \right|^2,
+\]
+since \(|A(c_1)|^2=1\). It is easy to notice that the maximum probability, associated to the maximum amplitude, of revealing the electron on the screen is obtained when the two contributions add up constructively, thus
 \[
     e^{\frac{i}{\hbar} pd} = 1, \quad \implies \quad \frac{pd}{\hbar} = 2\pi n , \text{ with } n \in \mathbb{N},
 \]
-One can interpret this condition as defining a wavelength \(\lambda = \frac{h}{p}\) so that when d contains an integer number of times such wavelengths there is constructive interference. The de Broglie relation is obtained by this rudimentary “path integral” and suggests that it contains the essential elements of quantum mechanics. The number of slits can be increased, as well as the number of intermediate screens, to have the particle performing all possible paths from the initial point to the final point of observation, thus creating a path integral for the total amplitude.\TODO{Insert drawing of multiple paths.}
+One can interpret this condition as defining a wavelength \(\lambda = \frac{h}{p}\) so that when d contains an integer number of times such wavelengths there is constructive interference. The de Broglie relation is obtained by this rudimentary “path integral” and suggests that it contains the essential elements of quantum mechanics.
+
+The number of slits can be increased, as well as the number of intermediate screens, to have the particle performing all possible paths from the initial point to the final point of observation, thus creating a path integral for the total amplitude.
+\begin{figure}[H]
+    \begin{minipage}{0.4\textwidth}
+        \centering
+        \includegraphics[width=0.75\textwidth]{img/rudimental_path_integral.png}
+        \label{fig:rudimental_path_integral}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.55\textwidth}
+        \caption{Scheme for a rudimental and discretized path integral. The electron can follow all possible paths from the source to the screen, passing ideally through multiple intermediate screens. Each path contributes with an amplitude of unit norm and phase given by the action evaluated on the path itself. The total amplitude is obtained by summing all contributions.}
+    \end{minipage}
+\end{figure}
 
 The action is used in an essential way
 \[
-    S[q(t)] = \int \d{t} \mathrm{L} (q(t),\,\dot{q}(t)).
+    S[q(t)] = \int \d{t} \mathrm{L} (q(t),\,\dot{q}(t)),
 \]
-The classic path is the one that minimizes the action
+where the classic path is the one that minimizes the action
 \[
-    \delta S = 0, \quad \implies \quad
+    \delta S = 0, \quad \implies \quad \frac{\partial \mathrm{L}}{\partial q} - \frac{\mathrm{d}}{\mathrm{d} t} \frac{\partial \mathrm{L}}{\partial \dot{q}} = 0.
 \]
-In quantum mechanics, the transition amplitude is obtained by using the action \(S[q]\) for any possible path
+In quantum mechanics there is a crucial difference: the transition amplitude is obtained by using the action \(S[q]\) \textbf{for any possible path}
 \[
-    A = \sum_{c_n} e^{\frac{i}{\hbar}S(c_n)} \equiv \int \mathrm{D} q(t) \, e^{\frac{i}{\hbar}S[q(t)]}
+    A = \sum_{c_n} e^{\frac{i}{\hbar}S(c_n)} \equiv \int \mathrm{D} q(t) \, e^{\frac{i}{\hbar}S[q(t)]}.
 \]
 
-The final notation introduced here is that of the \textbf{path integral} or \textbf{functional integral}: $S[q]$ is a functional, i.e., a function of the functions $q(t)$, that indicate the possible ``paths'' of the system, and the symbol $\int \mathcal{D}q$ indicates the formal integration over the space of paths $\{q(t)\}$. Various mathematical subtleties on how to define exactly the path integration are still open. Nevertheless, path integrals have become one of the main tools to study quantum systems.
-In this formulation, the classic limit is intuitive: macroscopic systems have large values of the action $S$ in units of $\hbar$, the quantum of action. Small variations of a path induce phase variations $i\frac{1}{\hbar} \delta S[q]$ much bigger with respect to $i\pi$ (recall that for such a phase $e^{i\pi} = -1$) and the amplitudes of nearby paths cancel by destructive interference. This happens except at the point in which the action has a minimum, $\delta S = 0$, which identifies the classic trajectory. Trajectories close to the classical one have amplitudes that add up coherently since the phase does not vary: the functional integral is dominated by the classic path!
+Here we introduce the final notation of the \textbf{path integral} or \textbf{functional integral}: $S[q]$ is a functional, i.e., a function of the functions $q(t)$, that indicate the possible ``paths'' of the system, and the symbol $\int \mathrm{D}q$ indicates the formal integration over the space of paths $\{q(t)\}$. Various mathematical subtleties on how to define exactly the path integration are still open. Nevertheless, path integrals have become one of the main tools to study quantum systems.
 
-\section{Action Principle}
-
-Let us briefly review the action principle in mechanics and field theories, considering the case of a particle. The main purpose is to underline its relation to canonical quantization and to stress the relevance of symmetries. As anticipated, the action is essential for the path integral quantization.
-
-Consider a non-relativistic particle of mass \(m\) that moves in a single dimension with coordinate \(q\) and subject to a conservative force \(F = -\frac{\partial}{\partial q}V\). Newton’s equations of motion reads
+In this formulation, the classic limit is intuitive: macroscopic systems have large values of the action $S$ in units of $\hbar$, the quantum of action. Small variations of a path
 \[
-    F = m \ddot{q},
+    q(t) \to q(t) + \delta q(t),
 \]
-and can be derived from an action principle. The action is a functional of the trajectory of the particle \(q(t)\) (the dynamical variable of the system) and associates a real number to each function \(q(t)\). In general, physical systems are described by an action of the type
+induce a variation of the action
 \[
-    S[q(t)] = \int \d{t} \mathrm{L} (q(t),\,\dot{q}(t)), \quad \mathrm{L}(q(t),\,\dot{q}(t)) =
+    S[q] \to S[q + \delta q] = S[q] + \delta S[q],
 \]
-
-
-[...]
-
-\subsection{Hamiltonian formalism}
-
-The basic idea of the hamiltonian formalism is to have equations of motion that are first order in time. To review it, we follow a simple example: a non-relativistic particle of coordinates \(q^i\) and configuration space lagrangian
-\[
-    pdf
-\]
-where indices are lowered with the metric \(\delta_{ij}\) (and are thus equivalent to upper indices in our model, the distinction of upper and lower indices is, however, useful in more general contexts). Transition to the hamiltonian formalism takes place as follows:
-\begin{enumerate}
-    \item The dynamical variables are doubled by introducing conjugate momentum \(p^i\) to each coordinate \(q_i\)
-          \[
-              pdf
-          \]
-          The set \((q_i,\,p^i)\) constitutes the coordinates of phase space.
-    \item The hamiltonian \(H(q,\,p)\) is defined as the Legendre transform of the lagrangian \(\mathrm{L}\)
-          \[
-              pdf
-          \]
-          It is a function on phase space.
-    \item The \textbf{Poisson brackets} are defined as follows. For any two functions A and B of phase space, their Poisson brackets are defined by
-          \[
-              pdf
-          \]
-          where we have used the summation convention for repeated indices. In particular,
-          \[
-              pdf
-          \]
-    \item The hamiltonian equations of motion can be written as
-          \[
-              pdf
-          \]
-          and are of the first order in time. In our example, they become
-          \[
-              pdf
-          \]
-          and are evidently equivalent to the lagrangian equations \([\dots]\) . The hamiltonian \(H\) is interpreted as the generator of time translations, and moves the initial conditions (a point in phase space) over time by an infinitesimal amount \(\mathrm{d} t\). The generator of these canonical transformations is given by \(H \mathrm{d} t\), and acts through the Poisson brackets (\([\dots ]\)).
-\end{enumerate}
-
-These equations can be obtained from an action. In phase space, the action takes the form
-\[
-    pdf
-\]
-and minimizing it, one finds
-\[
-    pdf
-\]
-from which one recognizes Hamilton’s equations of motion. Note that in this formulation one needs \(2n\) integration constants, which are given by specifying the coordinates \(q^i\) at initial and final times.
-
-The hamiltonian structure is the starting point of canonical quantization:
-\[
-    pdf
-\]
-where the classical dynamical variables \(z^a\) are elevated to linear operators \(\hat{z}^a\) acting on a Hilbert space. The quantum commutation relations are fixed by the values of the classical Poisson bracket. The vectors of the Hilbert space describe the possible quantum states of the system, whose evolution is governed by the Schr¨odinger equation.
+which translates in phase variations $i\frac{1}{\hbar} \delta S[q]$ much bigger with respect to $i\pi$ (recall that for such a phase $e^{i\pi} = -1$) and the amplitudes of nearby paths cancel by destructive interference. This happens except at the point in which the action has a minimum, $\delta S = 0$, which identifies the classic trajectory. Trajectories close to the classical one have amplitudes that add up coherently since the phase does not vary: the functional integral, in the end, is dominated by the classic path.
 
 \section{Canonical Quantization}
 
 Canonical quantization is constructed starting from the hamiltonian formulation of a classical system. It is obtained by lifting its phase space coordinates, the generalized coordinates \(x^i\) and conjugate momenta \(p_i\), to linear operators \(\hat{x}^i\) and \(\hat{p}_i\) that act on a linear space endowed with a positive definite norm, the Hilbert space of physical states \(\mathcal{H}\). The basic operators must satisfy commutation relations required to be equal \(i\hbar\) times the value of the corresponding classical Poisson brackets
-\[
-    pdf
-\]
-All classical observables \(A(x,p)\), which are functions on phase space, become linear operators \(\hat{A} (\hat{x} ,\hat{p})\) acting on the Hilbert space \(\mathcal{H}\). The most important example is given by the hamiltonian function \(H(x,p)\), which upon quantization becomes the hamiltonian operator \(\hat{H} (\hat{x} ,\hat{p})\). The latter generates the time evolution of any state \(\ket{\psi} \in \mathcal{H}\) through the Schrodinger equation
-\[
-    i\hbar \frac{\partial}{\partial t} \ket{\psi} = \hat{H} \ket{\psi}.
-\]
-The corresponding solution is a time-dependent state \(\ket{\psi}(t)\) that describes the evolution of the quantum system. This setup is known as the Schrodinger picture of quantum mechanics. It is a formal quantization procedure that becomes operative once one finds an irreducible unitary representation of the operator algebra in eq. (1). A mathematical result, known as the Stonevon Neumann theorem, states that in quantum mechanics all irreducible representations of (1) are unitarily equivalent, so that there is a unique procedure of quantizing a classical system.\footnote{Up to the problem of resolving ordering ambiguities, often present when one tries to relate the classical hamiltonian \(H(x,p)\) to its quantum counterpart \(\hat{H} (\hat{x} ,\hat{p})\).} Historically, this theorem made it clear that the Schr¨odinger formulation of quantum mechanics was equivalent to the one proposed by Heisenberg with its matrix mechanics (known as the Heisenberg picture). Let us consider, more specifically, the motion of a nonrelativistic particle in one dimension in the presence of an external potential \(V(x)\). The classical dynamics is fixed by the action
+\begin{equation}
+    \begin{aligned}
+        \left[\hat{x}^i,\, \hat{x}^j \right] & = \left[\hat{p}_i,\, \hat{p}_j \right] = 0, \\
+        \left[\hat{x}^i,\, \hat{p}_j \right] & = i \hbar \delta^i_j.
+    \end{aligned}
+    \label{eq:Quantization_commutation_relations}
+\end{equation}
+All classical observables \(A(x,p)\), which are functions on phase space, become linear operators \(\hat{A} (\hat{x} ,\hat{p})\) acting on the Hilbert space \(\mathcal{H}\).
 
-    [...] sofo [...] pdf [...]
-So now we can study the transition amplitude
+The most important example is given by the hamiltonian function \(H(x,p)\), which upon quantization becomes the hamiltonian operator \(\hat{H} (\hat{x} ,\hat{p})\). The latter generates the time evolution of any state \(\ket{\psi} \in \mathcal{H}\) through the Schrodinger equation
+\begin{equation}
+    i\hbar \frac{\partial}{\partial t} \ket{\psi} = \hat{H} \ket{\psi}.
+    \label{eq:Schrödinger_equation}
+\end{equation}
+The corresponding solution is a time-dependent state \(\ket{\psi}(t)\) that describes the evolution of the quantum system. This setup is known as the Schrodinger picture of quantum mechanics. It is a formal quantization procedure that becomes operative once one finds an irreducible unitary representation of the operator algebra in eq. \eqref{eq:Quantization_commutation_relations}.
+
+A mathematical result, known as the Stonevon Neumann theorem, states that in quantum mechanics all irreducible representations of \eqref{eq:Quantization_commutation_relations} are unitarily equivalent, so that there is a unique procedure of quantizing a classical system.\footnote{Up to the problem of resolving ordering ambiguities, often present when one tries to relate the classical hamiltonian \(H(x,p)\) to its quantum counterpart \(\hat{H} (\hat{x} ,\hat{p})\).}
+Historically, this theorem made it clear that the Schrodinger formulation of quantum mechanics was equivalent to the one proposed by Heisenberg with its matrix mechanics (known as the Heisenberg picture).
+
+Let us consider, more specifically, the motion of a nonrelativistic particle in one dimension in the presence of an external potential \(V(x)\). The classical dynamics is fixed by the action
 \[
-    A = \bra{\psi_f} e^{-\frac{i}{\hbar} \hat{H} T} \ket{\psi_i} \implies i \hbar \frac{\partial}{\partial T} A = \bra{\psi_f} \hat{H} e^{-\frac{i}{\hbar} \hat{H} T} \ket{\psi_i}.
+    S[x] = \int \d{t} \left( \frac{m}{2} \dot{x}^2 - V(x) \right).
 \]
+The quantum theory is recognized by first developing the hamiltonian formulation, defined in the phase space with the Poisson bracket structure and phase space action
+\[
+    S[x,p] = \int \d{t} \left( p \dot{x} - H(x,p) \right), \quad H(x,p) = \frac{p^2}{2m} + V(x),
+\]
+with \(\{x,\,p\}=1\) and \(\{x,\,x\}=\{p,\,p\}=0\).
+
+Now, as prescribed by canonical quantization, the phase space coordinates \(x\) and \(p\) become foundamental operators \(\hat{x}\) and \(\hat{p}\) acting on the Hilbert space of physical states \(\mathcal{H}\), satisfying the commutation relations presented by the algebra in eq. \eqref{eq:Quantization_commutation_relations} (in this setting there is only one coordinate and one momentum). The hamiltonian function \(H(x,p)\) becomes the hamiltonian operator \(\hat{H} (\hat{x} ,\hat{p})\) acting on \(\mathcal{H}\), responsible for the time evolution of any state \(\ket{\psi} \in \mathcal{H}\) through the Schrödinger equation \eqref{eq:Schrödinger_equation}.
+
+Using the coordinate representation, obtained by considering the eigenstates |x〉 of the position operator \(\hat{x}\), that satisfy \(\hat{x}\ket{x} = x\ket{x}\) with real eigenvalues \(x\), and projecting the various states of the Hilbert space onto them to identify the wave functions, one finds the familiar way of realizing quantum mechanics as wave mechanics
+\[
+    \begin{aligned}
+        \ket{\psi} & \longrightarrow \psi(x) = \bra{x}\ket{\psi},                                                                                                          \\
+        \hat{x}    & \longrightarrow x, \quad \bra{x}\hat{x}\ket{x^{\prime}} = x \delta(x-x^{\prime}),                                                                     \\
+        \hat{p}    & \longrightarrow -i\hbar \frac{\partial}{\partial x}, \quad \bra{x}\hat{p}\ket{x^{\prime}} = -i\hbar \frac{\partial}{\partial x} \delta(x-x^{\prime}), \\
+        \hat{H}    & \longrightarrow -\frac{\hbar^2}{2m} \frac{\partial^2}{\partial x^2} + V(x).
+    \end{aligned}
+\]
+Thus the Schrodinger equation \eqref{eq:Schrödinger_equation} becomes the familiar differential equation for the wave function \(\psi(x,t)\)
+\[
+    i\hbar \frac{\partial}{\partial t} \psi(x,t) = \left(-\frac{\hbar^2}{2m} \frac{\partial^2}{\partial x^2} + V(x)\right) \psi(x,t).
+\]
+
+Returning to the Dirac bra and ket notation, let us consider the solution of the Schrödinger equation. Given a ket \(\ket{\psi_i}\) that describes the system at initial time \(t_i\), the solution of the Schrödinger equation for time-independent hamiltonians can be written as
+\[
+    \ket{\psi(t)} = e^{-\frac{i}{\hbar} \hat{H} (t - t_i)} \ket{\psi_i},
+\]
+satisfying boundary condition \(\ket{\psi(t_i)} = \ket{\psi_i}\). The operator \(e^{-\frac{i}{\hbar} \hat{H} (t - t_i)}\) is called the evolution operator. The transition amplitude between an initial state \(\ket{\psi_i}\) at time \(t_i\) and a final state \(\ket{\psi_f}\) at time \(t_f\) is defined as
+\[
+    A = \bra{\psi_f} e^{-\frac{i}{\hbar} \hat{H} (t_f - t_i)} \ket{\psi_i} = \bra{\psi_f}\ket{\psi_i},
+\]
+where the matrix element of the evolution operator are shown to be those transition amplitudes indeed. The transition amplitude contains all the physical information about the quantum system, as it allows one to compute probabilities and expectation values of physical observables.
 
 \section{Path Integrals in Phase Space}
 
 To derive a path integral expression for the transition amplitudes, we start by inserting twice the identity operator \(\mathbb{I}\), expressed using the eigenstates of the position operator
 \[
-    pdf
+    \mathbb{I} = \int \d{x} \ket{x} \bra{x}, \quad \text{with } \bra{x}\ket{x^{\prime}} = \delta(x-x^{\prime}),
 \]
 then we can rewrite the transition amplitude derived previously by insterting two of this identityoperators
 \[
-    A = \bra{\psi_f} e^{-\frac{i}{\hbar} \hat{H} T} \ket{\psi_i} = \dots
+    \begin{aligned}
+        A & = \bra{\psi_f} e^{-\frac{i}{\hbar} \hat{H} (t_f - t_i)} \ket{\psi_i} = \bra{\psi_f} \mathbb{I} e^{-\frac{i}{\hbar} \hat{H} (t_f - t_i)} \mathbb{I} \ket{\psi_i} \\
+          & = \int \d{x_i} \int \d{x_f} \bra{\psi_f}\ket{x_f} \bra{x_f} e^{-\frac{i}{\hbar} \hat{H} (t_f - t_i)} \ket{x_i} \bra{x_i}\ket{\psi_i}                            \\
+          & = \int \d{x_i} \int \d{x_f} \psi_f^*(x_f) A(x_i,\,x_f,\,T) \psi_i(x_i),
+    \end{aligned}
 \]
 where \(\psi_i(x_i) = \bra{x}\ket{\psi_i}\) and \(\psi_f(x_f) = \bra{x}\ket{\psi_f}\) are the wave functions for the initial and final
 states. This rewriting shows that it is enough to consider the matrix element of the evolution operator between position eigenstates
@@ -152,50 +160,57 @@ states. This rewriting shows that it is enough to consider the matrix element of
 \]
 where \(T = t_f - t_i\) is the total propagation time. It satisfies the Schrodinger equation
 \[
-    pdf
+    i\hbar \frac{\partial}{\partial T} A(x_i,\,x_f,\,T) = \bra{x_f} \hat{H}(\hat{x},\,\hat{p}) e^{-\frac{i}{\hbar} \hat{H} T} \ket{x_i} = \hat{H}(x_f,\,\hat{p}_f= -i\hbar \partial_{x_f}) A(x_i,\,x_f,\,T),
 \]
-with initial condition \([\dots ]\).
+with initial condition \(A(x_i,\,x_f,\,0) = \delta(x_i - x_f)\).
 
-We are going to consider quantum hamiltonians of a paarticle interacting with a generc potential \(\hat{V}(\hat{x})\):
-\[
-    pdf
-\]
-The derivation of the path integral proceeds now as follows. One splits the transition amplitude \(A(x_i,\,x_f,\,T)\) as the product of \(N\) factors, and inserts the completeness relation \(N-1\) times in between the factors
+We are going to consider quantum hamiltonians of a particle interacting with a generic potential \(\hat{V}(\hat{x})\), of the familiar form \(\hat{H}(\hat{x} ,\,\hat{p}) = \frac{\hat{p}^2}{2m} + \hat{V}(\hat{x})\). The derivation can be extended to more general hamiltonians, but this case is enough to illustrate the main ideas.
+
+We can now proceed to derive the path integral formalism as follows. One can split the transition amplitude \(A(x_i,\,x_f,\,T)\) in the product of \(N\) factors, and insert the completeness relation \(N-1\) times in between the factors
 \[
     \begin{aligned}
-        A(x_i,\,x_f,\,T) & = \bra{x_f} e^{-\frac{i}{\hbar} \hat{H} T} \ket{x_i} = \bra{x_f} \left(e^{-\frac{i}{\hbar} \hat{H} \frac{T}{N}}\right)^N \ket{x_i} \\
-                         & = \dots
+        A(x_i,\,x_f,\,T) & = \bra{x_f} e^{-\frac{i}{\hbar} \hat{H} T} \ket{x_i} = \bra{x_f} \left(e^{-\frac{i}{\hbar} \hat{H} \frac{T}{N}}\right)^N \ket{x_i}                                                                                    \\
+                         & = \bra{x_f} e^{-\frac{i}{\hbar} \hat{H} \epsilon} \mathbb{I} e^{-\frac{i}{\hbar} \hat{H} \epsilon} \mathbb{I} \cdots e^{-\frac{i}{\hbar} \hat{H} \epsilon} \mathbb{I} e^{-\frac{i}{\hbar} \hat{H} \epsilon} \ket{x_i} \\
+                         & = \int \left(\prod_{k=1}^{N-1} \d{x_k}\right) \bra{x_f} e^{-\frac{i\epsilon}{\hbar}\hat{H}} \ket{x_{N-1}} \bra{x_{N-1}} e^{-\frac{i\epsilon}{\hbar}\hat{H}} \ket{x_{N-2}} \cdots                                      \\
+                         & = \int \left(\prod_{k=1}^{N-1} \d{x_k}\right) \prod_{k=1}^{N} \bra{x_k} e^{-\frac{i\epsilon}{\hbar}\hat{H}} \ket{x_{k-1}},
     \end{aligned}
 \]
-where for convenience we have denoted \(x_0 = x_i\), \(x_n = x_f\), and \(\epsilon = \frac{T}{N}\). To evaluate this expression better, it is convenient to use the resolution of the identity N more times, now expressed in terms of the momentum eigenstates
+where for convenience we have denoted \(x_0 = x_i\), \(x_N = x_f\), and \(\epsilon = \frac{T}{N}\). To evaluate this expression better, it is convenient to use the completeness relation \(N\) more times, now expressed in terms of the momentum eigenstates
 \[
     \mathbb{I} = \int \frac{\d{p}}{2\pi \hbar} \ket{p} \bra{p}, \quad \text{with } \bra{p}\ket{p^{\prime}} = 2\pi\hbar \delta(p-p^{\prime}),
 \]
 to obtain
 \[
-    A = \int \left(\prod_{k=1}^{N-1} \d{x_k}\right) \dots
-\]
-This is an exact expression. Note that there is one more integration over momenta than integrations over coordinates, a consequence of choosing coordinate eigenstates as initial and final states in the transition amplitude. Now, one can manipulate this expression further by making approximations that are valid in the limit \(N \to \infty\) (i.e., \(\epsilon \to  0\)). The crucial point is the evaluation of the following matrix element
-\[
     \begin{aligned}
-        \bra{p} e^{-\frac{i\epsilon}{\hbar}\hat{H}(\hat{x},\,\hat{p})}\ket{x} & = \\
-                                                                              & = \\
+        A(x_i,\,x_f,\,T) & = \int \left(\prod_{k=1}^{N-1} \d{x_k}\right) \prod_{k=1}^{N} \bra{x_k} \mathbb{I} e^{-\frac{i\epsilon}{\hbar}\hat{H}} \ket{x_{k-1}}                                                                         \\
+                         & = \int \left(\prod_{k=1}^{N-1} \d{x_k}\right) \prod_{k=1}^{N} \int \frac{\mathrm{d} p_k}{2\pi \hbar}\bra{x_k}\ket{p_k} \bra{p_k} e^{-\frac{i\epsilon}{\hbar}\hat{H}} \ket{x_{k-1}}                           \\
+                         & = \int \left(\prod_{k=1}^{N-1} \d{x_k}\right) \left(\prod_{k=1}^{N} \frac{\mathrm{d} p_k}{2\pi \hbar}\right) \prod_{k=1}^{N} \bra{x_k}\ket{p_k} \bra{p_k} e^{-\frac{i\epsilon}{\hbar}\hat{H}} \ket{x_{k-1}},
     \end{aligned}
 \]
-These approximations are all valid in the limit of small \(\epsilon\). The substitution \(\bra{p}\hat{H}(\hat{x},\,\hat{p})\ket{x} = \bra{p}\ket{x}H(x,p)\) follows from the simple structure of the considered hamiltonian (15), that allows one to act with the momentum operator on the left, and with the position operator on the right, to have the operators replaced by the corresponding eigenvalues. Notice that there is no need for commuting operators inside the hamiltonian, because of the simplicity of the hamiltonian
-we have considered. The final result is that all operators are simply replaced by eigenvalues. This way the quantum hamiltonian \(\hat{H}(\hat{x} ,\, \hat{p})\) gets replaced by the classical function \(H(x,p) = \frac{p^2}{2m} + V(x)\). There exists a mathematically rigorous proof that these manipulations are correct for a wide class of physically interesting potentials \(V(x)\) (the “Trotter formula”). We do not review these subtleties, as the physically intuitive derivation given above is enough for our purposes.
+which is an exact expression. Note that there is one more integration over momenta than integrations over coordinates, a consequence of choosing coordinate eigenstates as initial and final states in the transition amplitude. Now, one can manipulate this expression further by making approximations that are valid in the limit \(N \to \infty\) (i.e., \(\epsilon \to  0\)). The crucial point is the evaluation of the following matrix element in this limit, where we can Taylor expand the exponential in \(\epsilon\) to obtain
+\[
+    \begin{aligned}
+        \bra{p} e^{-\frac{i\epsilon}{\hbar}\hat{H}(\hat{x},\,\hat{p})}\ket{x} & = \bra{p} \left(\mathbb{I} + \frac{i \epsilon}{\hbar} \hat{H}(\hat{x},\,\hat{p}) + \cdots \right) \ket{x}
+                                                                              & = \bra{p} \left(\mathbb{I} + \frac{i \epsilon}{\hbar} H(x,\,p) + \cdots \right) \ket{x}                   \\
+                                                                              & = \bra{p}\ket{x} e^{-\frac{i \epsilon}{\hbar} H(x,\,p)},
+    \end{aligned}
+\]
+thus recovering the exponential form with the eigenvalues of the hamiltonian, letting us extract it from the matrix element. These approximations are all valid in the limit of small \(\epsilon\). The substitution \(\bra{p}\hat{H}(\hat{x},\,\hat{p})\ket{x} = \bra{p}\ket{x}H(x,p)\) follows from the simple structure of the considered hamiltonian, that allows one to act with the momentum operator on the left, and with the position operator on the right, to have the operators replaced by the corresponding eigenvalues. Notice that there is no need for commuting operators inside the hamiltonian, because of the simplicity of the hamiltonian
+we have considered.
 
-Using now eq. (19), and remembering that the wave functions of the momentum eigenstates (the plane waves) are normalized as
+The final result is that all operators are simply replaced by eigenvalues. This way the quantum hamiltonian \(\hat{H}(\hat{x} ,\, \hat{p})\) gets replaced by the classical function \(H(x,p) = \frac{p^2}{2m} + V(x)\). There exists a mathematically rigorous proof that these manipulations are correct for a wide class of physically interesting potentials \(V(x)\) (the “Trotter formula”). We do not review these subtleties, as the physically intuitive derivation given above is enough for our purposes.
+
+and remembering that the wave functions of the momentum eigenstates (the plane waves) are normalized as
 \[
-    \bra{x}\ket{p} = e^{\frac{i}{\hbar}px}, \quad \bra{p}\ket{x} = (\bra{x}\ket{p})^* = e^{-\frac{i}{\hbar}px}
+    \bra{x}\ket{p} = e^{\frac{i}{\hbar}px}, \quad \bra{p}\ket{x} = (\bra{x}\ket{p})^* = e^{-\frac{i}{\hbar}px},
 \]
-that follows from the normalization chosen in (11) and (17), one obtains
+following from the normalizations chosen with the two completeness relations, one obtains
 \[
-    pdf
+    \bra{x_k}\ket{p_k}\bra{p_k}e^{-\frac{i\epsilon}{\hbar}\hat{H}}\ket{x_{k-1}} = e^{\frac{i}{\hbar}p_k x_k} e^{-\frac{i\epsilon}{\hbar} H(x_{k-1},\,p_k)} e^{-\frac{i}{\hbar}p_k x_{k-1}} = e^{\frac{i\epsilon}{\hbar} \left[p_k \frac{x_k - x_{k-1}}{\epsilon} - H(x_{k-1},\,p_k)\right]}.
 \]
-up to terms that vanish for \(\epsilon \to 0\). This expression can now be inserted in (18). At this stage, the transition amplitude does not contain any more operators, bra and kets. It contains just integrations, though a big number of them, of ordinary functions
+up to terms that vanish for \(\epsilon \to 0\). This expression can now be inserted in the last expression for the elements of \(A(x_i,\,x_f,\,T)\); at this stage, the transition amplitude does not contain any more operators, bras and kets, containing just integrations, though a big number of them, of ordinary functions
 \[
-    A = \lim_{N \to \infty} \int \left(\prod_{k=1}^{N-1} \d{x_k}\right) \left(\prod_{k=1}^{N} \frac{\mathrm{d} p_k}{2\pi \hbar}\right)e^{\frac{i\epsilon}{\hbar}\sum_{k=1}^N \left[p_k \frac{x_k - x_{k-1}}{\epsilon} - H(x_{k-1},\,p_k)\right] } = \int \mathrm{D} x \mathrm{D} p \, e^{\frac{i}{\hbar}S[x,\,p]}.
+    A(x_i,\,x_f,\,T) = \lim_{N \to \infty} \int \left(\prod_{k=1}^{N-1} \d{x_k}\right) \left(\prod_{k=1}^{N} \frac{\mathrm{d} p_k}{2\pi \hbar}\right)e^{\frac{i\epsilon}{\hbar}\sum_{k=1}^N \left[p_k \frac{x_k - x_{k-1}}{\epsilon} - H(x_{k-1},\,p_k)\right] } = \int \mathrm{D} x \mathrm{D} p \, e^{\frac{i}{\hbar}S[x,\,p]}.
 \]
 This is the \textbf{path integral in phase space}. One recognizes in the exponent a discretization of the classical phase space action
 \[
@@ -203,108 +218,180 @@ This is the \textbf{path integral in phase space}. One recognizes in the exponen
 \]
 where \(t_f - t_i = T = N\epsilon\) is the total propagation time, with the paths in phase space discretized as
 \[
-    x(t),\,p(t) \longrightarrow x_k = x(t_i + k \epsilon),\, p_k = (t_i + k \epsilon).
+    \begin{aligned}
+        x(t) & \longrightarrow x_k = x(t_i + k \epsilon), \\
+        p(t) & \longrightarrow p_k = p(t_i + k \epsilon).
+    \end{aligned}
 \]
-The last way of writing the amplitude in (22) is symbolic but suggestive: it indicates the sum over all paths in phase space weighted by the exponential of \(\frac{i}{\hbar}\) times the classical action. It depends implicitely on the boundary conditions assigned to the paths \(x(t)\).
+The last way of writing the amplitude is symbolic but suggestive: it indicates the sum over all paths in phase space weighted by the exponential of \(\frac{i}{\hbar}\) times the classical action. It depends implicitely on the boundary conditions assigned to the paths \(x(t)\). We can compact the notation by writing
+\begin{equation}
+    A(x_i,\,x_f,\,T) = \int \mathrm{D} x(t) \mathrm{D} p(t) \, e^{\frac{i}{\hbar}S[x(t),\,p(t)]},
+    \label{eq:Path_integral_phase_space}
+\end{equation}
+where the symbol \(\int \mathrm{D} x(t) \mathrm{D} p(t)\) indicates the formal integration over the space of paths in phase space \(\{x(t),\,p(t)\}\). Various mathematical subtleties on how to define exactly the path integration are still open. Nevertheless, path integrals have become one of the main tools to study quantum systems.
 
 \section{Path Integrals in Configuration Space}
 
-The path integral in configurations space is easily derived by integrating over the momenta. The dependence on momenta in the exponent of (22) is at most quadratic and can be eliminated by gaussian integration
+The path integral in configurations space is easily derived by integrating over the momenta. The dependence on momenta in the exponent of \(A\) is at most quadratic and can be eliminated by gaussian integration: if we consider the previous expression for the transition amplitude in phase space
 \[
-    pdf
+    A(x_i,\,x_f,\,T) = \lim_{N \to \infty} \int \left(\prod_{k=1}^{N-1} \d{x_k}\right) \left(\prod_{k=1}^{N} \frac{\mathrm{d} p_k}{2\pi \hbar}\right)e^{\frac{i\epsilon}{\hbar}\sum_{k=1}^N \left[p_k \frac{x_k - x_{k-1}}{\epsilon} - \frac{p_k^2}{2m} - V(x_{k-1})    \right] }
 \]
-which is valid for \(\alpha >0\), and extended analytically to include complex values of \(\alpha\) (see section 4.1 for details).\TODO{Put reference.} In particular, we consider gaussian integrals of the type
+we can explicitly perform the gaussian integrations over the momenta \(p_k\) with
 \[
-    pdf
+    \int_{-\infty}^{\infty} \d{p} \, e^{-\frac{\alpha}{2} p^2} = \sqrt{\frac{2\pi}{\alpha}},
 \]
-obtained by square completion. Note that the final exponential is the original exponential inside the integral with argument evaluated at the minimum in \(p\) (saddle point).
+which is valid for \(\alpha >0\) and can be generalized by \textbf{square completion} to exponents of the type \(-\frac{\alpha}{2}p^2 + \beta p\) as follows
+\[
+    \begin{aligned}
+        \int_{-\infty}^{\infty} \d{p} \, e^{-\frac{\alpha}{2} p^2 + \beta p} & = \int_{-\infty}^{\infty} \d{p} \, e^{-\frac{\alpha}{2} \left(p^2 - \frac{2\beta}{\alpha} p\right)}  = \int_{-\infty}^{\infty} \d{p} \, e^{-\frac{\alpha}{2} \left[\left(p - \frac{\beta}{\alpha}\right)^2 - \left(\frac{\beta}{\alpha}\right)^2\right]} \\
+                                                                             & = e^{\frac{\beta^2}{2\alpha}} \int_{-\infty}^{\infty} \d{p} \, e^{-\frac{\alpha}{2} \left(p - \frac{\beta}{\alpha}\right)^2} = e^{\frac{\beta^2}{2\alpha}} \sqrt{\frac{2\pi}{\alpha}},
+    \end{aligned}
+\]
+performed by shifting the integration variable \(p \to p - \frac{\beta}{\alpha}\) (do not change the differential). Now, extending analytically this expression, we can include complex values of \(\alpha\) (see section 4.1 for details).\TODO{Put reference.} Note that the final exponential is the original exponential inside the integral with argument evaluated at the minimum in \(p\) (saddle point).
+
 Returning to the path integral, and considering the hamiltonian \(H(x, p) = \frac{p^2}{2m} + V(x)\), one completes the squares
 \[
-    footnote
+    \begin{aligned}
+        A & = \lim_{N \to \infty} \int \left(\prod_{k=1}^{N-1} \d{x_k}\right) \frac{1}{(2\pi\hbar)^N} \prod_{k=1}^{N} \int \d{p_k} \, e^{\frac{i\epsilon}{\hbar} \sum_{k=1}^N \left[p_k \frac{x_k - x_{k-1}}{\epsilon} - \frac{p_k^2}{2m} - V(x_{k-1})\right]} \\
+          & \quad \begin{dcases}
+                      \alpha = \frac{i \epsilon}{2m \hbar}              & \longrightarrow \left(\frac{2 \pi \hbar m}{i \epsilon}\right)^\frac{N}{2};                                         \\
+                      \beta = \frac{i}{\hbar}\left(x_k - x_{k-1}\right) & \longrightarrow e^{\frac{\beta^2}{2\alpha}} = e^{\frac{im}{2 \hbar \epsilon}(x_k - x_{k-1})^2} \text{ inside sum}; \\
+                      \frac{i\epsilon}{\hbar}V(x_{k-1})                 & \longrightarrow \text{remains unchanged inside sum};
+                  \end{dcases}                                                                       \\
+          & = \lim_{N \to \infty} \int \left(\prod_{k=1}^{N-1} \d{x_k}\right) \left(\frac{m}{2\pi i \hbar \epsilon}\right)^{\frac{N}{2}} e^{\frac{i\epsilon}{\hbar}\sum_{k=1}^N \left[\frac{m}{2}\frac{(x_k - x_{k-1})^2}{\epsilon^2} - V(x_{k-1})\right]}.
+    \end{aligned}
 \]
-and performs the gaussian integrations over the momenta
+where we have implicitly performed the gaussian integrations \(N\) times over the momenta. Thus is now possible to write the transition amplitude as
 \[
-    A = \lim_{N \to \infty} \int \left(\prod_{k=1}^{N-1} \d{x_k}\right) \left(\frac{m}{2\pi i \hbar \epsilon}\right)^{\frac{N}{2}} e^{\frac{i\epsilon}{\hbar}\sum_{k=1}^N \left[\frac{m}{2}\frac{(x_k - x_{k-1})^2}{\epsilon^2} - V(x_{k-1})\right]} = \int \mathrm{D} x \, e^{\frac{i}{\hbar}S[x]}.
+    A = \lim_{N \to \infty} \int \left(\prod_{k=1}^{N-1} \d{x_k}\right) \left(\frac{m}{2\pi i \hbar \epsilon}\right)^{\frac{N}{2}} e^{\frac{i\epsilon}{\hbar}\sum_{k=1}^N \left[\frac{m}{2}\frac{(x_k - x_{k-1})^2}{\epsilon^2} - V(x_{k-1})\right]} = \int \mathrm{D} x(t) \, e^{\frac{i}{\hbar}S[x(t)]}.
 \]
 Our exponent is complex, so the function keeps oscillating; by analytic continuation we can use this results also in the complex case.
 This is the path integral in configuration space. It contains in the exponent the configuration space action suitably discretized
 \[
     S[x] = \int_{t_i}^{t_f} \d{t} \left( \frac{m}{2} \dot{x}^2 - V(x) \right) \longrightarrow \sum_{k=1}^N \epsilon \left[\frac{m}{2}\frac{(x_k - x_{k-1})^2}{\epsilon^2} - V(x_{k-1})\right].
 \]
-Again, the last way of writing the path integral in (27) is symbolic and indicates the formal sum over paths in configuration space, weighted by the exponential of \(i\hbar\) times the classical action. The space of paths is given by the space of functions \(x(t)\) with boundary values \(x(t_i)=x_i\) and \(x(t_f) = x_f\). It is an infinite dimensional space. How to perform concretely the path integral over this functional space is defined precisely by the discretization, that approximates a function \(x(t)\) by its \(N+1\) values \(x_k = x(t_i + \epsilon k)\) at \(k = 0, 1, 2, ..., N\), as shown in fig.\TODO{Add figure.}
+Again, the last way of writing the path integral in \eqref{eq:Path_integral_configuration_space} is symbolic and indicates the formal sum over paths in configuration space, weighted by the exponential of \(i\hbar\) times the classical action. The space of paths is given by the space of functions \(x(t)\) with boundary values \(x(t_i)=x_i\) and \(x(t_f) = x_f\). It is an infinite dimensional space. How to perform concretely the path integral over this functional space is defined precisely by the discretization, that approximates a function \(x(t)\) by its \(N+1\) values \(x_k = x(t_i + \epsilon k)\) at \(k = 0, 1, 2, ..., N\), as shown in fig. \ref{fig:rudimental_path_integral}.
 
 Thus, we have constructed the path integral that computes quantum mechanical amplitudes
-\[
+\begin{equation}
     A = \int \mathrm{D} x(t) \, e^{\frac{i}{\hbar}S[x(t)]},
-\]
-by the sum of all histories of paths weighted by a phase given by the action, with all paths contributing, as in fig. 2.
+    \label{eq:Path_integral_configuration_space}
+\end{equation}
+by the sum of all histories of paths weighted by a phase given by the action, with all paths contributing.
 
 \subsection{Free Particle}
 
-For a free particle (\(V(x)=0\)) one may use repeatedly gaussian integration and calculate from eq. (27) the exact transition amplitude\TODO{Add image.}
+For a free particle (\(V(x)=0\)) one may use repeatedly gaussian integration and calculate from eq. \eqref{eq:Path_integral_configuration_space} the exact transition amplitude\TODO{Add image.} as
 \[
-    A(x_i,\,x_f,\,T) = \bra{x_f} e^{-\frac{i}{\hbar} \hat{H}T} \ket{x_i} = \sqrt{\frac{m}{2 \pi i \hbar T}} e^{\frac{i}{\hbar} \frac{m (x_f - x_i)^2}{2T}}.
+    \begin{aligned}
+        A(x_i,\,x_f,\,T) & = \lim_{N \to \infty} \int \left(\prod_{k=1}^{N-1} \d{x_k}\right) \left(\frac{m}{2\pi i \hbar \epsilon}\right)^{\frac{N}{2}} e^{\frac{i\epsilon}{\hbar}\sum_{k=1}^N \left[\frac{m}{2}\frac{(x_k - x_{k-1})^2}{\epsilon^2}\right]} \\
+                         & = \lim_{N \to \infty} \left(\frac{m}{2\pi i \hbar \epsilon}\right)^{\frac{N}{2}} \left(\frac{2\pi i \hbar \epsilon}{m}\right)^{\frac{N-1}{2}} \frac{1}{\sqrt{N}} e^{\frac{i}{\hbar} \frac{m (x_f - x_i)^2}{2T}}                   \\
+                         & = \sqrt{\frac{m}{2 \pi i \hbar T}} e^{\frac{i}{\hbar} \frac{m (x_f - x_i)^2}{2T}} = \bra{x_f} e^{-\frac{i}{\hbar} \hat{H}T} \ket{x_i}.
+    \end{aligned}
 \]
 It satisfies the free Schrodinger equation
 \[
-    i\hbar \frac{\partial}{\partial T} A(x_i,\,x_f,\,T) = - \frac{\hbar^2}{2m}\frac{\partial^2}{\partial x_f^2} A(x_i,\,x_f,\,T)
+    i\hbar \frac{\partial}{\partial T} A(x_i,\,x_f,\,T) = - \frac{\hbar^2}{2m}\frac{\partial^2}{\partial x_f^2} A(x_i,\,x_f,\,T),
 \]
-with initial condition \(A(x_i,\,x_i,\,0) = \delta(x_f - x_i)\).
-This way, the path integral has produced a solution of the Schrodinger equation. The result is very suggestive: up to a prefactor, it is given by the exponential of \(i\hbar\) times the classical action evaluated on the classical path, i.e., the path that satisfies the classical equations of motion. This is typical for those cases in which the semiclassical approximation is exact. One may interpret the prefactor as due to quantum (“one-loop”) corrections to the classical (“tree-level”) result. The free particle case is also quite special: the exact final result is valid for any
-\(N\), and there is no need to take the limit \(N \to  \infty\). The case \(N=1\), which carries no integration at all, is already exact.
+with initial condition \(A(x_i,\,x_i,\,0) = \delta(x_f - x_i)\), since we can compute
+\[
+    - \frac{\hbar^2}{2m}\frac{\partial^2}{\partial x_f^2} \sqrt{\frac{m}{2 \pi i \hbar T}} e^{\frac{i}{\hbar} \frac{m (x_f - x_i)^2}{2T}} = \frac{m}{2T^2} (x_f - x_i)^2 A(x_i,\,x_f,\,T) = i\hbar \frac{\partial}{\partial T} A(x_i,\,x_f,\,T).
+\]
+This way, the path integral has produced a solution of the Schrodinger equation. The result is very suggestive: up to a prefactor, the solution is given by the exponential of \(\tfrac{i}{\hbar}\) times the classical action evaluated on the classical path \(S[x]\), i.e., the path that satisfies the classical equations of motion.
+The free particle case is also quite special: the exact final result is valid for any \(N\), and there is no need to take the limit \(N \to  \infty\). The case \(N=1\), which carries no integration at all, is already exact.
+
 A formal but useful way of calculating gaussian path integrals is achieved by working directly in the continuum limit. One does not need the precise definition of the path integral measure but uses only its formal properties, in particular, its translational invariance. The calculation is formal in the sense that one assumes properties of the path integral measure (that eventually must be proven by an explicit regularization and construction, as the one given earlier). The calculation goes as follows. The action is \(S[x]= \int_0^T \d{t} \frac{m}{2}\dot{x}^2\), and the classical equations of motion with the boundary conditions are solved by
 \[
-    x_{cl} (t) = x_i + (x_f - x_i)\frac{t}{T}.
+    x_{cl} (t) = x_i + \frac{x_f - x_i}{T}t.
 \]
 One can represent a generic path \(x(t)\) as the classical path \(x_{cl}(t)\) plus quantum fluctuations \(q(t)\)
 \[
     x(t) = x_{cl}(t) + q(t),
 \]
-where the fluctuations q(t) must vanish at \(t=0\) and \(t=T\) to preserve the boundary conditions. One may interpret \(x_{cl}(t)\) as the origin in the space of functions. Then, one computes the path integral as follows
+where the fluctuations \(q(t)\) must vanish at \(t=0\) and \(t=T\) to preserve the boundary conditions. One may interpret \(x_{cl}(t)\) as the origin in the space of functions. Then, one computes the path integral as follows
 \[
     \begin{aligned}
         A(x_i,\,x_f,\,T) & = \int \mathrm{D} x \, e^{\frac{i}{\hbar}S[x]} = \int \mathrm{D} (x_{cl} + q) \, e^{\frac{i}{\hbar} S[x_{cl} + q]}                                                \\
                          & = e^{\frac{i}{\hbar} S[x_{cl}]} \int \mathrm{D} q \, e^{\frac{i}{\hbar} S[q]} = N e^{\frac{i}{\hbar} S[x_{cl}]} = N e^{\frac{i}{\hbar}\frac{m(x_{f-x_i})^2}{2T}},
     \end{aligned}
 \]
-where translational invariance of the path integral measure has been used in the form \(\mathrm{D}x = \mathrm{D}(x_{cl}+q) = \mathrm{D}q\). There is no linear term in \(q(t)\) in the action because the function \(x_{cl}(t)\) solves the classical equations of motion: for quadratic actions one has \(S[x_{cl} + q] = S[x_{cl}] + S[q]\). The normalization factor \(N = \int \mathrm{D} q\, e^ {\frac{i}{\hbar} S[q]}\) is undetermined by this method, but it is a constant that does not depend on \(x_i\) and \(x_f\). Very often, its precise value is not needed, but one can fix it by requiring that the final result satisfies the Schrodinger equation, finding \(N = \sqrt{\frac{m}{2\pi i \hbar T}}\).
+where we have used different inputs to solve it:
+\begin{itemize}
+    \item The translational invariance of the path integral measure has been used in the form \(\mathrm{D}x = \mathrm{D}(x_{cl}+q) = \mathrm{D}q\).
+    \item The normalization factor \(N = \int \mathrm{D} q\, e^ {\frac{i}{\hbar} S[q]}\) is undetermined by this method, but it is a constant that does not depend on \(x_i\) and \(x_f\). Very often, its precise value is not needed, but one can fix it by requiring that the final result satisfies the Schrodinger equation, finding \(N = \sqrt{\frac{m}{2\pi i \hbar T}}\).
+    \item The action splits into a classical part plus a quantum part:
+          \[
+              S[x_{cl} + q] = S[x_{cl}] + S[q] + \text{(linear terms in } q\text{)}.
+          \]
+          There is no linear term in \(q(t)\) in the action because the function \(x_{cl}(t)\) solves the classical equations of motion: for quadratic actions one has \(S[x_{cl} + q] = S[x_{cl}] + S[q]\); we can integrate non quadratic terms by parts indeed:
+          \[
+              \int \d{t} \, \dot{x}_{cl} \dot{q} = \left. \dot{x}_{cl} q \right|_0^T - \int \d{t} \, \ddot{x}_{cl} q = 0,
+          \]
+          where the first term vanishes because \(q(0) = q(T) = 0\), while the second term vanishes because \(\ddot{x}_{cl} = 0\) for the free particle (it solves the classical equations of motion).
+\end{itemize}
+This method of calculation is very powerful and can be extended to more general cases, as we will see later.
 
 \subsection{Euclidean Time and Statistical Mechanics}
 
-Quantum mechanics can be related to statistical mechanics by an analytic continuation. We introduce this relation by considering the free particle.
-Continuing analytically the time parameter to purely imaginary values by \(T \to  i \beta\) with real \(\beta\), and setting \(\hbar = 1\), the free Schrodinger equation (31) turns into the heat equation
+Quantum mechanics can be related to statistical mechanics by an analytic continuation. We introduce this relation by considering the free particle, with
+\[
+    A(x_i,\,x_f,\,T) = \int \mathrm{D}x \, e^{\frac{i}{\hbar} S[x]} = \sqrt{\frac{m}{2 \pi i \hbar T}} e^{\frac{i}{\hbar} \frac{m (x_f - x_i)^2}{2T}}.
+\]
+Continuing analytically the time parameter to purely imaginary values by \(T \to - i \beta\) with real \(\beta\), and setting \(\hbar = 1\), the free Schrodinger equation turns into the \textbf{heat equation} (or diffusion equation)
 \[
     \frac{\partial}{\partial \beta} A = \frac{1}{2m} \frac{\partial^2}{\partial x_f^2} A.
 \]
-Its fundamental solution, i.e. the solution with boundary condition \(A \xrightarrow{\beta \to 0} \delta(x_f - x_i)\) is
+Its fundamental solution, i.e. the solution with boundary condition \(A \xrightarrow{\beta \to 0} \delta(x_f - x_i)\), is given by
 \[
     A = \sqrt{\frac{m}{2 \pi \beta}} e^{-\frac{m(x_f - x_i)^2}{2\beta}},
 \]
-and can be obtained from (30) by the same analytic continuation. This continuation is called “\textbf{Wick rotation}”, see fig. 3.\TODO{Add figure.}
-The Wick rotation can be performed directly on the path integral to obtain euclidean path integrals. Analytically continuing the time variable \(t \to -i \tau\) , one finds that the action with “minkowskian” time (i.e. with a real time \(t\)) turns into an “euclidean” action \(S_E\) defined by
+and can be obtained from the original expression by the same analytic continuation. This continuation is called “\textbf{Wick rotation}”, see figure below.
+\begin{figure}[H]
+    \begin{minipage}{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.75\textwidth]{img/wick-rotation.png}
+        \label{fig:wick_rotation}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.65\textwidth}
+        The Wick rotation can be performed directly on the path integral to obtain euclidean path integrals. Analytically continuing the time variable \(t \to -i \tau\) , one finds that the action with “minkowskian” time (i.e. with a real time \(t\)) turns into an “euclidean” action \(S_E\) defined by\QUESTION{Why integration limits change without imaginary unit?}
+        \[
+            i S[x] = i \int_{0}^{T} \d{t} \frac{m}{2} \dot{x}^2 \xrightarrow[\d{t} \to -i \d{\tau}]{T \to -i \beta} - S_E[x] = - \int_{0}^{\beta} \d{\tau} \frac{m}{2} \dot{x}^2.
+        \]
+    \end{minipage}
+\end{figure}
+In the euclidean action we have defined \(\dot{x} = \frac{\mathrm{d}}{\mathrm{d} \tau} x\), with \(\tau\) usually called “euclidean time” (or imaginary time). The euclidean action thus defined is positive definite and it appears in the path integral as follows
+\begin{equation}
+    \bra{x_f} e^{-\beta \hat{H}} \ket{x_i} = \int \mathrm{D} x \, e^{-S_E[x]},
+    \label{eq:heat_kernel_path_integral}
+\end{equation}
+where the crucial difference with respect to the original path integral is \textit{the absence of the imaginary unit} \(i\) \textit{in the exponent}. The operator on the left-hand side is called the “heat kernel” and the path integrals computes its matrix elements. For a free theory, the path integral is truly gaussian, with exponential damping rather than increasingly rapid phase oscillations (now the phase is real). In this form, it coincides with the integral functional introduced by Wiener in the 1920's to study brownian motion and the heat equation (that explains why eq. \eqref{eq:heat_kernel_path_integral} is called the heat kernel).
+
+Such euclidean path integrals are useful in \textbf{statistical mechanics}, where \(\beta\) is related to the absolute temperature \(\Theta\) as \(\beta = \frac{1}{k \Theta}\), where \(k\) is the Boltzmann’s constant. To see this, let us consider the trace of the evolution operator
 \[
-    i S[x] = \dots
+    e^{-\frac{i}{\hbar} \hat{H} T}, \quad e^{-\frac{i}{\hbar} \hat{H} T} \ket{n} = e^{-\frac{i}{\hbar} E_n T} \ket{n},
 \]
-where in the euclidean action one defines \(\dot{x} = \frac{\mathrm{d}}{\mathrm{d} \tau} x\), with \(\tau\) usually called “euclidean time” (or imaginary time). The euclidean action thus defined is positive definite. It appears in the path integral so that
-\[
-    \bra{x_f} e^{-\beta \hat{H}} \ket{x_i} = \int \mathrm{D} x \, e^{-S_E[x]}.
-\]
-The operator on the left-hand side is called the “heat kernel” and the path integrals computes its matrix elements. For a free theory, the path integral is truly gaussian, with exponential damping rather than with increasingly rapid phase oscillations. In this form, it coincides with the functional integral introduced by Wiener in the 1920's to study brownian motion and the heat equation (that explains why eq. (39) is called the heat kernel). Such euclidean path integrals are useful in statistical mechanics, where \(\beta\) is related to the inverse temperature \(\Theta\) by \(\beta = \frac{1}{k \Theta}\) , where \(k\) is the Boltzmann’s constant. To see this, let us consider the trace of the evolution operator \(e^{-\frac{i}{\hbar} \hat{H} T}\). It can be written using energy eigenstates (labeled by \(n\) if the spectrum is discrete) or equivalently using position eigenstates (which are continuous and labeled by \(x\))
+where we have written it using energy eigenstates (labeled by \(n\) if the spectrum is discrete), or equivalently we could use position eigenstates (which are continuous and labeled by \(x\)). Since these are two complete bases of the Hilbert space, and its eigenvalues identify the diagonal elements, we can write the trace in either way:
 \[
     Z \equiv \Tr(e^{-\frac{i}{\hbar}\hat{H}T}) = \sum_{n} e^{-\frac{i}{\hbar}E_n T} = \int \d{x} \bra{x} e^{-\frac{i}{\hbar} \hat{H} T} \ket{x}.
 \]
-It can be Wick rotated \(Z \to  Z_E\) (with \(T \to - i \beta\)) to obtain the statistical partition function \(Z_E\) of the quantum system with hamiltonian \(\hat{H}\). Setting \(\hbar=1\), it reads
-\[
+This can be Wick rotated \(Z \to  Z_E\) (with \(T \to - i \beta\)) to obtain the statistical partition function \(Z_E\) of the quantum system with hamiltonian \(\hat{H}\). Setting \(\hbar=1\), it reads
+\begin{equation}
     Z_E = \Tr(e^{-\beta \hat{H}}) = \sum_{n} e^{- \beta E_n} = \int \d{x} \bra{x} e^{-\beta \hat{H}} \ket{x}.
-\]
-Again, it is immediate to find a path integral representation of the statistical partition function: one performs a Wick rotation of the path integral action, sets the initial state (at euclidean time \(\tau = 0\)) equal to the final state (at euclidean time \(\tau = \beta\)), and sums over all possible states, as indicated in (41). The paths become closed, as \(x(\beta)=x(0)\), and the partition function becomes
+    \label{eq:statistical_partition_function}
+\end{equation}
+Again, it is immediate to find a path integral representation of the statistical partition function: one performs a Wick rotation of the path integral action, sets the initial state (at euclidean time \(\tau = 0\)) equal to the final state (at euclidean time \(\tau = \beta\)), and sums over all possible states, as indicated in \eqref{eq:statistical_partition_function}. The paths become closed, as \(x(\beta)=x(0)\), and the partition function becomes
 \[
     Z_E = \Tr(e^{-\beta \hat{H}}) = \int_{PBC} \mathrm{D} x\, e^{-S_E[x]},
 \]
 where \(PBC\) stands for “periodic boundary conditions”, indicating the sum over all paths that close onto themselves in an euclidean time \(\beta\).
 Introduced here for the free theory, the Wick rotation is supposed to be of more general value, relating quantum mechanics to statistical mechanics in the interacting case as well. Even if one is interested in the theory with a real time, nowadays, one often works in the euclidean version of the theory, where factors of the imaginary unit \(i\) are absent, and path integral convergence is more easily kept under control. Only at the very end one performs the inverse Wick rotation to read off the result for the theory in real time.
 
-The Wick rotation procedure is better appreciated by first considering the usual time as corresponding to the real line of a complex plane. Then, defining \(t_{\theta} = t e^{-i\theta} \), the usual real time appears at \(\theta=0\), while the euclidean time \(\tau\) appears at \(\theta = \frac{\pi}{2}\)  as \(t_{\frac{\pi}{2}} = -i \tau\). The analytical continuation of all physical quantities is achieved by continually increasing \(\theta\) form 0 to \(\frac{\pi}{2}\), a clockwise rotation of the real axis into the imaginary one. The generalized partition function
+The Wick rotation procedure is better appreciated by first considering the usual time as corresponding to the real line of a complex plane. Then, defining
+\[
+    t_{\theta} = t e^{-i\theta},
+\]
+the usual real time appears at \(\theta=0\), while the euclidean time \(\tau\) appears at \(\theta = \frac{\pi}{2}\)  as \(t_{\frac{\pi}{2}} = -i \tau\). The analytical continuation of all physical quantities is achieved by continually increasing \(\theta\) form 0 to \(\frac{\pi}{2}\), a clockwise rotation of the real axis into the imaginary one. The generalized partition function
 \[
     Z_{\theta} = \Tr(e^{-\frac{i}{\hbar} \hat{H} t_{\theta}})
 \]
@@ -312,365 +399,3 @@ with a complex time \(t_{\theta} = t e^{-i\theta}\) with positive \(t\) has a da
 
 Similar considerations can be made for path integrals in minkowskian and euclidean times with other boundary conditions. Path integrals in euclidean times are mathematically better defined (one may develop a mathematically well-defined measure theory on the space of functions), at least for quadratic actions and perturbations thereof. Path integral with a minkowskian time are more delicate, and physicists usually use the argument of rapid phase oscillations to deduce that unwanted terms vanish. The Wick rotation suggests a way of defining the path integral in real time starting from the euclidean time one. These points of mathematical rigor are not needed for the applications that we are going to consider, and the derivation of path integrals described previously is enough for our purposes.
 
-\section{Correlation Functions}
-
-Correlation functions are quantities used to describe several physical observables in the quantum theory. They are also useful to develop the perturbative expansion around the solvable gaussian path integral that corresponds to a “free” theory (we include the harmonic oscillator in this class, as it is recognized as the quantum mechanical equivalent of a free Klein-Gordon QFT).
-Correlation functions are normalized averages of the product of \(n\) dynamical variables, evaluated at different times and weighted by \(e^{\frac{i}{\hbar}S}\). In our one-dimensional example, the normalized “\(n\)-point correlation function” is defined by
-\[
-    \langle x(t_1)x(t_2)\cdots x(t_n) \rangle = \frac{1}{Z} \int \mathrm{D} x \, x(t_1)x(t_2)\cdots x(t_n) e^{\frac{i}{\hbar}S[x]},
-\]
-where \(Z = \int \mathrm{D} x \, e^{\frac{i}{\hbar}S[x]}\) is the normalization factor, also known as the partition function, providing \(\langle 1 \rangle = 1\).
-
-    [...]
-
-It is often useful to introduce a generating functional \(Z[J]\) defined by
-\[
-    Z[J] = \int \mathrm{D} x \, e^{\frac{i}{\hbar}S[x] + \int \d{t} J(t) x(t)},
-\]
-where \(J(t)\) is an auxiliary external function, known as a \textbf{source}.
-Visually, when we compute the equations of motion, we are adding a source that "pushes" the particle around
-\[
-    E(x) = J(x),
-\]
-substantially being a mathematical trick to compute all correlation functions by functional differentiation with respect to the source \(J(t)\).
-
-Let's consider a differentation with respect to the source at time \(t_1\):
-\[
-    \frac{\delta}{\delta J(t_1)} Z[J] = \int \mathrm{D} x \, x(t_1) e^{\frac{i}{\hbar}S[x] + \int \d{t} J(t) x(t)},
-\]
-where we have to pay attention to the functional derivative, which acts as a delta function
-\[
-    \frac{\delta}{\delta J(t_1)} \int \d{t} J(t) x(t) = x(t_1).
-\]
-Continuing this process iterating the functional differentiation \(n\) times, we obtain
-\[
-    \frac{\delta}{\delta J(t_n)} \cdots \frac{\delta}{\delta J(t_2)} \frac{\delta}{\delta J(t_1)} \to \left(\frac{i}{\hbar}\right)^n x(t_1)x(t_2)\cdots x(t_n),
-\]
-and then if we apply this to the generating functional and set the source to zero at the end, we obtain
-\[
-    \langle x(t_1)x(t_2)\cdots x(t_n) \rangle = \left. \frac{1}{Z} \left(\frac{\hbar}{i}\right)^n \frac{\delta}{\delta J(t_n)} \cdots \frac{\delta}{\delta J(t_2)} \frac{\delta}{\delta J(t_1)} Z[J] \right|_{J=0}.
-\]
-Alternatively, if we expand the generating functional in powers of the source \(J(t)\), we can read off all correlation functions of the theory
-\[
-    Z[J] = \sum_{n=0}^{\infty} \frac{1}{n!} \left(\frac{i}{\hbar}\right)^n \int \d{t_1} \d{t_2} \cdots \d{t_n} J(t_1) J(t_2) \cdots J(t_n) \langle x(t_1)x(t_2)\cdots x(t_n) \rangle,
-\]
-where this n-point correlation function is non normalized.
-Thus our definition of path intergrals is given by the normalized n point correlation functions
-\[
-    \langle x(t_1)x(t_2)\cdots x(t_n) \rangle = \frac{1}{Z} \int \mathrm{D} x \, x(t_1)x(t_2)\cdots x(t_n) e^{\frac{i}{\hbar}S[x]},
-\]
-which can be computed by functional differentiation of the generating functional with respect to the source \(J(t)\).
-
-\subsection{Schrodinger Picture}
-
-It is useful to compare with the corresponding definition of correlation functions given in canonical quantization. We have employed the Schrödinger picture to evaluate the transition amplitude. In this picture operators are time-independent, and states acquire the time dependence by the Schrödinger equation. To state the equivalent definition of the n-point correlation function, given the n times which we have to oredr
-\[
-    t_1,\,t_2,\, \dots,\, t_n \xrightarrow{T} \ t_{T(1)} ,\, t_{T(2)} ,\, \dots,\, t_{T(n)},
-\]
-which respects the ordering \(t_{T(1)} \leq t_{T(2)} \leq \cdots \leq t_{T(n)}\), using the time ordering permutations \(T\), we define the time-ordered n-point correlation function as
-\[
-    \langle x(t_1)x(t_2)\cdots x(t_n) \rangle = \frac{1}{Z} \bra{x_f} e^{-\frac{i}{\hbar}\hat{H}(t_f - t_{T(n)})} \hat{x} e^{-\frac{i}{\hbar}\hat{H}(t_{T(n)} - t_{T(n-1)})} \cdots e^{-\frac{i}{\hbar}\hat{H}(t_{T(2)} - t_{T(1)})} \hat{x} e^{-\frac{i}{\hbar}\hat{H}(t_{T(1)} - t_i)} \ket{x_i},
-\]
-where the normalization factor \(Z = \bra{x_f} e^{-\frac{i}{\hbar}\hat{H}(t_f - t_i)} \ket{x_i}\) is the transition amplitude. The time ordering is necessary because operators at different times do not commute in general. One can verify that this definition coincides with the one given in the path integral formalism.
-
-We have to change paradigm to the Heisenberg picture to see the equivalence more clearly. In this picture, states are time-independent, and operators acquire the time dependence through the Heisenberg equation of motion
-\[
-    \hat{O}_H (t) = e^{\frac{i}{\hbar}\hat{H} t} \hat{O} e^{-\frac{i}{\hbar}\hat{H} t}.
-\]
-Then, the n-point correlation function can be rewritten as
-\[
-    \langle x(t_1)x(t_2)\cdots x(t_n) \rangle = \frac{1}{Z} \bra{x_f} T \left[ \hat{x}_H (t_1) \hat{x}_H (t_2) \cdots \hat{x}_H (t_n) \right] \ket{x_i},
-\]
-where \(T\) is the time-ordering operator that rearranges the operators in order of increasing time arguments from right to left. This expression is evidently equivalent to the previous one, and coincides with the path integral definition of the n-point correlation function.
-
-The simplest boundary conditions to consider for correlation functions are given by setting the initial and final states equal to states at infinite past and future times, i.e., \(\ket{x_i} = \ket{x(t=-\infty)}\) and \(\ket{x_f} = \ket{x(t=+\infty)}\). In this case, one usually assumes that the system is in its ground state at \(t=-\infty\), and that the initial and final states coincide with the ground state \(\ket{0}\) of the system. In the Schrödinger picture we were more general, since the boundary states were arbitrary position eigenstates computed in the integral.
-
-\subsection{Digression on Gaussian Integrals}
-
-Gaussian integrals are integrals of exponential functions with quadratic exponents. They are very important in physics, as they appear in the evaluation of path integrals for free theories, and in perturbation theory around free theories. Here we review some basic results on gaussian integrals that will be useful in the following.
-
-The simplest gaussian integral is the one-dimensional integral
-\[
-    \int_{-\infty}^{+\infty}  \frac{\mathrm{d} \phi}{(2\pi)^{\tfrac{1}{2}}}\, e^{-\frac{1}{2} K \phi^2} = \frac{1}{\sqrt{K}}, \quad \text{for } K > 0.
-\]
-If we include a linear term in the exponent, we can complete the square \(\dots\) to obtain
-\[
-    \int_{-\infty}^{+\infty} \frac{\mathrm{d} \phi}{(2\pi)^{\tfrac{1}{2}}} \, e^{-\frac{1}{2} K \phi^2 + J \phi} = \frac{1}{\sqrt{K}} e^{\frac{J^2}{2K}}, \quad \text{for } K > 0.
-\]
-We used the letters \(K\) and \(J\) to indicate a “kinetic” term and a “source”, in analogy with the notation used in path integrals. The integral can be generalized to \(n\) dimensions as
-\[
-    \int \frac{\mathrm{d}^n \phi}{(2\pi)^{\tfrac{n}{2}}} \, e^{-\frac{1}{2} \phi^i K_{ij} \phi^j} = \det(K_{ij})^{-\frac{1}{2}}
-\]
-and if we include a linear term in the exponent, we have
-\[
-    \int \frac{\mathrm{d}^n \phi}{(2\pi)^{\tfrac{n}{2}}} \, e^{-\frac{1}{2} \phi^i K_{ij} \phi^j + J_i \phi^i} = \det(K_{ij})^{-\frac{1}{2}} e^{\frac{1}{2} J_i (K^{-1})^{ij} J_j},
-\]
-where \(K_{ij}\) is a symmetric positive definite matrix, and \((K^{-1})^{ij}\) is its inverse. Repeated indices are summed over from 1 to \(n\) (Einstein summation convention).
-
-The first integral is immediate if \(K_{ij} \) is diagonal and valid in full generality by noting that \(K_{ij}\) is diagonalizable by an orthogonal transformation, which leaves the measure invariant. The last integral is obtained again by square completion. These gaussian integrals are suitable for euclidean path integrals. Moreover, in a hypercondensed notation to be explained shortly, path integrals look very much like ordinary integrals. Of course, the definition of determinants for infinite dimensional matrices is delicate and requires a regularization procedure.
-
-By analytical extension, one obtains gaussian integrals suitable for quantum mechanics
-\[
-    \int \frac{\mathrm{d}^n \phi}{(-2\pi i)^{\tfrac{n}{2}}} \, e^{\frac{i}{2} \phi^i K_{ij} \phi^j + i J_i \phi^i} = \det(K_{ij})^{-\frac{1}{2}} e^{-\frac{i}{2} J_i (K^{-1})^{ij} J_j}, \quad \text{for } \Im(K_{ij}) > 0,
-\]
-where the condition on the imaginary part of \(K_{ij}\) ensures convergence of the integral. This condition is usually satisfied in physical applications by adding a small imaginary part to the kinetic term, known as “\(i\epsilon\) prescription” or “Feynman prescription”: we replace \(K_{ij} \to K_{ij} + i \epsilon \delta_{ij}\) with \(\epsilon > 0\) infinitesimal, which ensures a gaussian dumping for \(\vert \phi \vert \to \infty \).
-
-In a hypercondensed notation, to be explained shortly, these formulae give the formal solution of path integrals of free theories (meaning theories with quadratic actions, in this context) without gauge invariances, in either quantum mechanics or quantum field theory. Gauge invariance would produce a vanishing \(\det(K_{ij})\), and one must apply a gauge fixing procedure to obtain a finite answer.
-
-\subsection{Hypercondensed Notation and Generating Functionals}
-
-To proceed swiftly, it is useful to introduce a hypercondensed notation. It allows us to treat path integrals, including those for field theories, formally as ordinary integrals. The hypercondensed notation is defined by lumping together discrete and continuous indices into a single index, so that a variable \(\phi_i\) can be used as a shorthand notation for the position \(x(t)\) of the particle, identifying
-\[
-    x(t) \to \phi^i \implies \begin{dcases}
-        x \to \phi, \\
-        t \to i.
-    \end{dcases}
-\]
-
-SimilSimilarly, for fields, as the vector quadripotential \(A_\mu(x^{\nu})\), the hypercondensed notation is obtained by denoting
-\[
-    A_\mu (x^{\nu}) \to \phi^i \implies \begin{dcases}
-        A_\mu \to \phi, \\
-        \mu,\, x^{\nu} \to i.
-    \end{dcases}
-\]
-where now the index i contains a discrete part (the discrete index \(\mu = 0, 1, 2, 3\)) and a continuous part (the spacetime coordinates \(x^{\nu} = (x^0,\,x^1,\,x^2,\,x^3) \in \mathbb{R}^4\)). Indices may be lowered and raised with a metric (given by the identity matrix in many cases, though one may consider more general situations). Repeated indices are understood to be summed over (the Einstein summation convention). Thus, the notation \(\phi^i \phi_i\) stands in the above cases for \(\int \d{t} x(t)x(t)\) and \(\int \mathrm{d}^4 x A_\mu(x) A^\mu(x)\), respectively. Or equivalently, to make explicit the presence of a metric, as \(\int \d{t}\int \d{t^{\prime}} x(t)\delta(t-t^{\prime})x(t^{\prime})\) and \(\int \mathrm{d}^4 x \mathrm{d}^4 y A_\mu(x) \eta^{\mu\nu} \delta^4(x-y) A_\nu(y)\), respectively (the metric would be \(\delta(t-t^{\prime})\) and \(\eta^{\mu \nu}\delta^4(x-y)\), respectively, so that one could also write \(\phi^i \phi_i = \phi^i g_{ij} \phi^j\))
-\[
-    \phi^i \phi_i \implies \begin{dcases}
-        \int \d{t} x(t)x(t)                   & = \int \d{t} \int \d{t^{\prime}} x(t)\delta(t-t^{\prime})x(t^{\prime}),             \\
-        \int \mathrm{d}^4 x A_\mu(x) A^\mu(x) & = \int \mathrm{d}^4 x \mathrm{d}^4 y A_\mu(x) \eta^{\mu\nu} \delta^4(x-y) A_\nu(y).
-    \end{dcases}
-\]
-
-One must pay attention to simple-looking expressions, as they include integrations or infinite sums, and might not converge. With such a notation at hand, we are ready to review quickly the definition of correlation functions, introduce generating functionals, and present gaussian path integration formulae. We will also describe the Wick’s theorem, which gives a simple way of computing all correlation functions in a free theory in terms of the 2-point function only (the propagator).
-
-The path integrals in (27) and (44), after denoting the variables in a hypercondensed notation by \(\phi^i\), can be written as
-\[
-    Z = \int \mathrm{D} \phi \, e^{\frac{i}{\hbar} S[\phi]}
-\]
-and the correlation functions reads
-\[
-    \langle \phi^{i_1} \phi^{i_2} \cdots \phi^{i_n} \rangle = \frac{1}{Z} \int \mathrm{D} \phi \, \phi^{i_1} \phi^{i_2} \cdots \phi^{i_n} e^{\frac{i}{\hbar} S[\phi]},
-\]
-and the generating functional is
-\[
-    Z[J] = \int \mathrm{D} \phi \, e^{\frac{i}{\hbar} S[\phi] + J_i \phi^i},
-\]
-and generates all correlation functions by differentiation (in hypercondensed notation, functional derivatives look like usual derivatives, but we keep using the symbol \(\delta\) of functional derivative)
-\[
-    \langle \phi^{i_1} \phi^{i_2} \cdots \phi^{i_n} \rangle = \left. \frac{1}{Z} \left(\frac{\hbar}{i}\right)^n \frac{\delta}{\delta J_{i_n}} \cdots \frac{\delta}{\delta J_{i_2}} \frac{\delta}{\delta J_{i_1}} Z[J] \right|_{J=0}.
-\]
-
-We can now define the generating functional of \textbf{connected correlation functions} \(W[J]\) by
-\[
-    Z[J] = e^{\frac{i}{\hbar} W[J]}, \quad \implies \quad W[J] = - i \hbar \ln(Z[J]).
-\]
-One can prove that it generates “connected” correlation functions by differentiation
-\[
-    \langle \phi^{i_1} \phi^{i_2} \cdots \phi^{i_n} \rangle_{c} = \left. \left(\frac{\hbar}{i}\right)^{n-1} \frac{\delta}{\delta J_{i_n}} \cdots \frac{\delta}{\delta J_{i_2}} \frac{\delta}{\delta J_{i_1}} W[J] \right|_{J=0}.
-\]
-We will check this statement and its meaning in the free theory. It is also useful to define the effective action \(\Gamma[\varphi]\) as the Legendre transform of \(W[J]\)
-\[
-    \Gamma[\varphi] = \min_{J} \{W[J] - J_i \varphi^i\}, \quad \text{where } \varphi^i = \frac{\delta W[J]}{\delta J_i}.
-\]
-which is considered as a classical action that includes all quantum corrections. It generates the so-called one-particle irreducible (1PI) correlation functions, though we will not investigate further this particular property. The minimum in \(J\) is obtained at \(\varphi^i = \frac{\delta W[J]}{\delta J_i}\), furnishing a relation \(\varphi^i = \varphi^i(J)\) that must be inverted to obtain \(J_i = J_i(\varphi)\) and inserted back into the right-hand side of (66) to obtain the effective action indeed as a functional of the variable \(\varphi^i\) only. The last two functionals, \(W [J]\) and \(\Gamma[\varphi]\), find their main applications in quantum field theory. Equivalent definitions can be given for euclidean path integrals.
-
-\subsection{Free Theories}
-
-It is useful to study free theories, here meaning theories that have a quadratic action. They provide a simple application of the previous formulae, giving at the same time additional intuition. A free theory is described by a quadratic action
-\[
-    S[\phi] = - \frac{1}{2} \phi^i K_{ij} \phi^j,
-\]
-which produces the linear equations of motion \(K_{ij} \phi^j = 0\). We assume \(K_{ij}\) invertible, which translates to the fact that there are no gauge symmetries in our model.
-
-As an example, consider the harmonic oscillator, whose action is
-\[
-    \begin{aligned}
-        S[x] & = \int_{-\infty}^{\infty}\d{t} \left(\frac{\dot{x}^2}{2} - \frac{\omega^2 x^2}{2}\right) = -\frac{1}{2} \int_{-\infty}^{\infty} \d{t} \, x(t) \left(\frac{\mathrm{d}^2}{\mathrm{d} t^2} + \omega^2 \right) x(t) \\
-             & = -\frac{1}{2} \int \d{t} \int \d{t^{\prime}} \, x(t) \left[ \left(\frac{\mathrm{d}^2}{\mathrm{d} t^2} + \omega^2 \right) \delta(t - t^{\prime}) \right] x(t^{\prime})                                          \\
-             & = -\frac{1}{2} \int \mathrm{d}t \mathrm{d}t^{\prime} \, x(t) K(t, t^{\prime}) x(t^{\prime}),
-    \end{aligned}
-\]
-where we integrated by parts and introduced the Dirac delta function \(\delta(t-t^{\prime})\) to expose the “kinetic matrix” \(K(t,t^{\prime}) = \left(\frac{\mathrm{d}^2}{\mathrm{d} t^2} + \omega^2 \right) \delta(t - t^{\prime})\), thus we can write the action in hypercondensed notation as
-\[
-    S[\phi] = - \frac{1}{2} \phi^i K_{ij} \phi^j,
-\]
-general for any free theory. Denoting \(\mathrm{D}\phi = \frac{\mathrm{d}^n \phi}{(-i2\pi)^{\tfrac{n}{2}}}\), setting \(\hbar = 1\) for simplicity, and using the gaussian result in eq.(57), one calculates formally the path integral with sources
-\[
-    Z[J] = \int \mathrm{D} \phi \, e^{\frac{i}{2} \phi^i K_{ij} \phi^j + i J_i \phi^i} = \det(K_{ij})^{-\frac{1}{2}} e^{-\frac{i}{2} J_i (K^{-1})^{ij} J_j},
-\]
-where the inverse kinetic matrix \((K^{-1})^{ij} = G^{ij}\) is the \textbf{Green's function} of the theory, satisfying
-\[
-    K_{ij} G^{jk} = \delta_i^k.
-\]
-We can now compute all correlation functions by differentiating with respect to the source \(J_i\)
-\[
-    \langle \phi^{i_1} \phi^{i_2} \cdots \phi^{i_n} \rangle = \left. \frac{1}{Z} \left(i\right)^n \frac{\delta}{\delta J_{i_n}} \cdots \frac{\delta}{\delta J_{i_2}} \frac{\delta}{\delta J_{i_1}} Z[J] \right|_{J=0},
-\]
-obtaining
-\[
-    \begin{aligned}
-        \langle 1 \rangle                     & = 1,                                    \\
-        \langle \phi^{i_1} \rangle            & = 0,                                    \\
-        \langle \phi^{i_1} \phi^{i_2} \rangle & = -i(K^{-1})^{i_1 i_2} = -iG^{i_1 i_2}.
-    \end{aligned}
-\]
-The first one is a consequence of the normalization, the second one reflects the symmetry \(\phi^i \to -\phi^i\), and the third one is known as the propagator, which we find proportional to the inverse of the kinetic matrix \(K_{ij}\).
-
-Continuing with the calculation of higher point functions, we see that all correlation functions with an odd number of points vanish, again a consequence of the symmetry \(\phi^i \to -\phi^i\). Those ones with an even number \(n\) factorize into a sum of \((n-1)!!\) terms, given by the product of the 2-point functions which connect any two points in all possible ways. This fact is known as the Wick’s theorem.
-
-\begin{theorem}[Wick’s theorem]
-    \dots
-\end{theorem}
-
-For example, the 4-point correlation function is given by
-\[
-    \langle \phi^{i_1} \phi^{i_2} \phi^{i_3} \phi^{i_4} \rangle = \langle \phi^1 \phi^2 \rangle \langle \phi^3 \phi^4 \rangle + \langle \phi^1 \phi^3 \rangle \langle \phi^2 \phi^4 \rangle + \langle \phi^1 \phi^4 \rangle \langle \phi^2 \phi^3 \rangle,
-\]
-that indeed contains the sum of \(3!!\) terms. This correlation function is not connected, as each term is the product of correlation functions of lower order (it disconnects into products of lower order correlation functions). This is true for all higher point correlation functions of the free theory. The generating functional of connected correlation functions \(W[J]\) is obtained from eq. (69) using the definition (64)
-\[
-    W[J] = \frac{1}{2} J_i G_{ij} J_j - \Lambda, \quad \Lambda = -\frac{i}{2} \ln(\det(K_{ij})) = -\frac{i}{2}\Tr (\ln(K_{ij})),
-\]
-where the constant \(\Lambda\) is an infinite constant that can be regularized and interpreted as the vacuum energy of the free theory. One verifies that it generates a 2-point correlation functions that is connected.\footnote{It also generates a 0-point function, given by \(-\Lambda\), that can be shown to be connected as well.}
-
-Let us also calculate the effective action. The minimum in \(J\) of eq. (66) is achieved for
-\[
-    \varphi^i = \frac{\delta W}{\delta J_i} = G^{ij} J_j \implies J_i = K_{ij} \varphi^j,
-\]
-so that the effective action reads
-\[
-    \Gamma[\varphi] = W[J] - J_i \varphi^i = -\frac{1}{2} \varphi^i K_{ij} \varphi^j + \Lambda,
-\]
-We see that for a free theory, the effective action \(\Gamma[\phi]\) reproduces the original action \(S[\phi]\) with an additive constant \(-\Lambda\), which could be interpreted as minus a vacuum energy, which is of quantum origin. The latter can be disregarded if gravitational interactions are neglected. In general, the effective action is considered as a classical action that contains the effects of quantization in its couplings (and thus, the effective actions should not be quantized again). Reinserting \(\hbar\) by a simple rescaling, we collect here the formulae for a free (gaussian) theory
-\[
-    \begin{aligned}
-        S[\phi]      & = - \frac{1}{2} \phi^i K_{ij} \phi^j,                                                                 \\
-        Z[J]         & = \det(K_{ij})^{-\frac{1}{2}} e^{-\frac{i}{2\hbar} J_i G^{ij} J_j},                                   \\
-        W[J]         & = \frac{1}{2} J_i G^{ij} J_j - \hbar\Lambda, \quad \Lambda = -\frac{i}{2} \ln(\det(K_{ij})),          \\
-        \Gamma[\phi] & = -\frac{1}{2} \varphi^i K_{ij} \varphi^j - \hbar\Lambda = S[\varphi] + \hbar [\text{ corrections }],
-    \end{aligned}
-\]
-with a propagator given by the two point correlation function
-\[
-    \langle \phi^{i} \phi^{j} \rangle = -i \hbar (K^{-1})^{ij} = -i \hbar G^{ij}.
-\]
-\subsubsection{Harmonic Oscillator}
-
-Let us work out in more explicit terms the case of a harmonic oscillator with unit mass and frequency \(\omega\). The action is
-\[
-    S[x] = \int_{-\infty}^{\infty} \d{t} \left(\frac{\dot{x}^2}{2} - \frac{\omega^2 x^2}{2}\right), \quad Z[J] = \int \mathrm{D} x \, e^{i S[x] + i \int \d{t} J(t) x(t)},
-\]
-where we have computed the path integral to obtain \(Z[J]\). We repeat the deduction without using the hypercondensed notation. We consider an infinite propagation time and a transition amplitude between the ground state, classically achieved for \(x=0\). The action in the exponent can be manipulated with an integration by parts without producing boundary terms (imposing that \(x(t)\) is in its classical vacuum at initial and final times gives a vanishing boundary term, another justification will be given later on when treating the euclidean version of the problem). Thus, the action takes the form we already computed
-\[
-    S[x] = -\frac{1}{2} \int_{-\infty}^{\infty} \d{t} \, x(t) \left(\frac{\mathrm{d}^2}{\mathrm{d} t^2} + \omega^2 \right) \delta(t-t^{\prime}) x(t) = \int \int \d{t} \d{t^{\prime}} \, x(t) K(t, t^{\prime}) x(t^{\prime}),
-\]
-where \(K(t, t^{\prime}) = \left(\frac{\mathrm{d}^2}{\mathrm{d} t^2} + \omega^2 \right) \delta(t - t^{\prime})\) is the differential “kinetic” operator of the harmonic oscillator. We can compute the two point correlation function (the propagator) by
-\[
-    \langle x(t) x(t^{\prime}) \rangle = \left. \frac{1}{Z} \left(i\right)^2 \frac{\delta}{\delta J(t^{\prime})} \frac{\delta}{\delta J(t)} Z[J] \right|_{J=0} = -i (K^{-1})(t, t^{\prime}) = -i G(t, t^{\prime}),
-\]
-where the inverse of \(K\) is recognized as the Green function of the differential operator, and it can be conveniently written in a Fourier transform
-\[
-    G(t,t^{\prime}) = \int_{-\infty}^{\infty} \frac{\mathrm{d}p}{2\pi} \, \frac{e^{-ip(t-t^{\prime})}}{-p^2 +\omega^2},
-\]
-which can be verified to satisfy the equation
-\[
-    \int \d{t^{\prime \prime}} K(t, t^{\prime \prime}) G(t^{\prime \prime}, t^{\prime}) = \delta(t - t^{\prime}).
-\]
-that in a hypercondensed notation would have been written as \(K_{ij} G^{jl} = \delta_i^l\). Adding the Feynman \(i\epsilon\) prescription\footnote{Mathematically, it is seen to arise from requiring that the path integral has a small damping factor \(e^{-\tfrac{i}{\hbar} \int \d{t} x^2(t)}\), obtained by the shift \(\omega^2 \to \omega^2 - i \epsilon\) with \(\epsilon \to 0^+\). Recall the comments made under eq. (57).} for specifying how to integrate around the poles \(p=\pm \omega\), one computes
-\[
-    G(t,t^{\prime}) = \int_{-\infty}^{\infty} \frac{\mathrm{d}p}{2\pi} \, \frac{e^{-ip(t-t^{\prime})}}{-p^2 +\omega^2 - i \epsilon} = -\frac{i}{2\omega} \left[ \theta(t-t^{\prime}) e^{-i\omega (t-t^{\prime})} + \theta(t^{\prime}-t) e^{i\omega (t-t^{\prime})} \right] = -\frac{i}{2\omega} e^{-i\omega \vert t-t^{\prime} \vert}.
-\]
-
-\subsubsection{Klein Gordon Field}
-
-The quantum field theory of a free Klein-Gordon scalar field can be viewed as a higher-dimensional analog of the harmonic oscillator. The action of a real scalar field \(\phi(x)\) is given by
-\[
-    S[\phi] = \int \mathrm{d}^4 x \left( -\frac{1}{2} \partial_\mu \phi \partial^\mu \phi - \frac{1}{2} m^2 \phi^2 \right),
-\]
-where \(m\) is the mass of the scalar particle. Integrating by parts and neglecting boundary terms, the action can be rewritten as
-\[
-    S[\phi] = -\frac{1}{2} \int \mathrm{d}^4 x \, \phi(x) \left( \Box + m^2 \right) \phi(x) = -\frac{1}{2} \int \mathrm{d}^4 x \mathrm{d}^4 y \, \phi(x) K(x,y) \phi(y),
-\]
-where \(K(x,y) = \left( \Box + m^2 \right) \delta^4(x-y)\) is the kinetic operator of the Klein-Gordon field, and \(\Box = \partial_\mu \partial^\mu\) is the d'Alembertian operator.
-
-We can compute the path integral with sources
-\[
-    Z[J] = \int \mathrm{D} \phi \, e^{i S[\phi] + i \int \mathrm{d}^4 x \, J(x) \phi(x)} = N e^{\frac{i}{2} \int \mathrm{d}^4 x \mathrm{d}^4 y \, J(x) G(x,y) J(y)},
-\]
-where \(N = \det(K_{ij})^{-\frac{1}{2}}\) is a normalization constant. The inverse of the kinetic operator \(K\) is the Green's function \(G(x,y)\) of the Klein-Gordon operator.
-
-We are in \((3+1)\) spacetime dimensions, but if we imagine to be in a \((0+1)\) spacetime dimension, meaning that there is only one time coordinate and no spatial coordinates, the Klein-Gordon field theory reduces to the harmonic oscillator treated previously. Indeed, in this case the action reduces to
-\[
-    S[\phi] = \int \mathrm{d}t \left( \frac{1}{2} \dot{\phi}^2 - \frac{1}{2} m^2 \phi^2 \right),
-\]
-which is the action of a harmonic oscillator with frequency \(\omega = m\).
-
-If we compute the exponential in the path integral, we obtain
-\[
-    \int \mathrm{d}^4 z \, K(x,z) G(z,y) = \delta^4(x-y),
-\]
-where we have indeed \(\left(\Box_x + m^2 \right) G(x-y) = \delta^4(x-y)\) as the usual equation for the Green's function of the Klein-Gordon operator.
-
-We can now compute the two-point correlation function (the propagator) by
-\[
-    \langle \phi(x) \phi(y) \rangle = \left. \frac{1}{Z} \left(i\right)^2 \frac{\delta}{\delta J(y)} \frac{\delta}{\delta J(x)} Z[J] \right|_{J=0} = -i G(x,y),
-\]
-where the Green's function can be conveniently written in a Fourier transform
-\[
-    G(x,y) = \int \frac{\mathrm{d}^4 p}{(2\pi)^4} \, \frac{e^{-ip_\mu (x^{\mu} - y^{\mu})}}{p^2 + m^2 - i \epsilon},
-\]
-where \(\mathrm{d}^4 p = \d{p_0}\mathrm{d}^3 \mathbf{p}\) and \(p^2 = p_\mu p^{\mu} = -(p_0)^2 + \mathbf{p}^2\). There are poles corresponding to the solutions of the mass shell condition, \(p_0 = \sqrt{\mathbf{p}^2 + m^2}\) (positive energies) and \(p_0 = -\sqrt{\mathbf{p}^2 + m^2}\) (negative energies). The Feynman \(i \epsilon\) prescription sends positive energies forward in time and negative energies backward in time. It corresponds to the physical interpretation of particles and antiparticles with positive energies and always propagating forward in time. Setting \(E_p = \sqrt{\mathbf{p}^2 + m^2}\) one finds
-\[
-    \begin{aligned}
-        \langle \phi(x) \phi(y) \rangle & =       \\
-                                        & = \dots
-    \end{aligned}
-\]
-
-\subsubsection{Harmonic Oscillator in Euclidean Time}
-
-The statistical partition function in the limit of vanishing temperature (\(\Theta \to  0\)), corresponding to an infinite euclidean propagation time (\(\beta = \frac{1}{k \Theta} \to  \infty\)), takes a simple form
-\[
-    Z_E = \Tr e^{-\beta \hat{H}} = \sum_{n=0}^{\infty} \bra{n} e^{-\beta \hat{H}} \ket{n} = e^{-\beta E_0} + \text{ subleading terms as } \beta \to \infty.
-\]
-This is true even in the presence of a source \(J\) if one assumes that the source is nonvanishing for a finite interval of time only: the remaining infinite time is sufficient to project the operator \(e^{-\beta \hat{H}}\) onto the ground state. This allows to rewrite the generating functional \(Z[J]\) in the euclidean case in a simpler way, justifying the dropping of boundary terms in the integration by parts in the classical action. The statistical partition function is obtained by using periodic boundary conditions, and for large \(\beta\) one gets the projection onto the ground state
-\[
-    Z_E[J] = \int \mathrm{D} x \, e^{-S_E[x] + \int_{-\tfrac{\beta}{2}}^{\tfrac{\beta}{2}} \d{\tau} J(\tau) x(\tau)} \xrightarrow{\beta \to  \infty} \lim_{\beta \to \infty} e^{- \beta E_0(J)},
-\]
-where the euclidean action is
-\[
-    S_E[x] = \int_{-\infty}^{\infty} \d{\tau} \left( \frac{1}{2} \left(\frac{\mathrm{d} x}{\mathrm{d} \tau}\right)^2 + \frac{1}{2} \omega^2 x^2 \right).
-\]
-where \(E_0(J)\) is the ground state energy in the presence of the source \(J\). We can now repeat the previous calculation in the present context. We integrate by parts without encountering boundary terms, as the paths are closed, and the path integral is strictly gaussian
-\[
-    Z_E[J] = \dots
-\]
-from which we get the Green's function in euclidean time, which can be computed as
-\[
-    G_E(\tau - \tau^{\prime}) = \int_{-\infty}^{\infty} \frac{\mathrm{d}p_E}{2\pi} \, \frac{e^{-ip_E(\tau - \tau^{\prime})}}{p_E^2 + \omega^2} = \frac{1}{2\omega} e^{-\omega \vert \tau - \tau^{\prime} \vert}.
-\]
-Using it for the computation of the two-point correlation function
-\[
-    \langle x(\tau) x(\tau^{\prime}) \rangle = G_E(\tau - \tau^{\prime}) = \int \frac{\mathrm{d}p_E}{2\pi} \, \frac{e^{-ip_E(\tau - \tau^{\prime})}}{p_E^2 + \omega^2}
-\]
-We now verify again the relation between quantum mechanics and statistical mechanics, realized by the analytic continuation in time, the Wick rotation. The inverse Wick rotation implies \(\tau = t_E \to i t_M = it\) and \(p_E \to -ip_M = -ip\), with the latter arising from the requirement that the correct Fourier transform is kept during the analytic deformation. Thus the two-point correlation function becomes
-\[
-    \langle x(\tau) x(\tau^{\prime}) \rangle \to \langle x(t) x(t^{\prime}) \rangle = -i G_M (t-t^{\prime}) = -i \int \frac{\mathrm{d}p_M}{2\pi} \, \frac{e^{-ip_M(t-t^{\prime})}}{-p_M^2 + \omega^2},
-\]
-which is the Feynman propagator of the harmonic oscillator computed previously
-\[
-    \frac{1}{2 \omega} e^{-\omega \vert \tau - \tau^{\prime} \vert} \to -\frac{i}{2\omega} e^{-i\omega \vert t - t^{\prime} \vert}.
-\]
-We recognize that the Feynman propagator is the unique analytical extension of the euclidean two-point function. All other Green functions, such as the retarded or advanced ones, correspond to different boundary conditions implemented with different prescriptions for performing the integration around the poles. They cannot be Wick rotated, as one would encounter poles in the analytic continuation.
-
-This is the end for free path integrals and bosonic theories. We can now proceed to interacting theories with perturbative expansions, and later on to fermionic theories.
-
-\section{Perturbative Expansion}
-
-\subsection{Vacuum Diagrams}
-
-\subsection{Other Correlators and Feynman Diagrams}
-
-
-
-\section{Path Integrals for Fermions}
