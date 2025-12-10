@@ -309,23 +309,41 @@ It is worth to notice some features of this lagrangian:
 
 The Dirac Lagrangian is
 \[
-    \dots
+    \mathcal{L} = \overline{\psi} \left(i \gamma^{\mu} \partial_{\mu} - m\right) \psi,
 \]
-where \(\overline{\psi} = \psi^{\dagger} \gamma^0\)  is the Dirac conjugate. We can find the equations of motion using the Euler-Lagrange equations for fields:
+where \(\overline{\psi} = \psi^{\dagger} \gamma^0\) is the Dirac conjugate. We can find the equations of motion using the Euler-Lagrange equations for fields \eqref{eq:euler_lagrange_fields}, treating \(\psi\) and \(\overline{\psi}\) as independent fields:
 \[
-    \dots
+    \frac{\partial \mathcal{L}}{\partial \psi} = \partial_{\mu} \left(\frac{\partial \mathcal{L}}{\partial (\partial_{\mu} \psi)}\right), \quad \frac{\partial \mathcal{L}}{\partial \overline{\psi}} = \partial_{\mu} \left(\frac{\partial \mathcal{L}}{\partial (\partial_{\mu} \overline{\psi})}\right);
 \]
-notice that \(\frac{\partial}{\partial \overline{\psi}} \mathcal{L} = 0\), in fact \(\dots \) and so \(\dots \) too. Meanwhile the derivatives with respect to \(\psi\) are
+in the second equation we have to notice that \(\frac{\partial}{\partial \overline{\psi}} \mathcal{L} = 0\), since \(\partial (\partial_\mu \overline{\psi}) = 0 \) and so \( \frac{\partial}{\partial (\partial_\mu \overline{\psi})} \mathcal{L} = 0 \) too. This implies that if we differentiate the lagrangian with respect to \(\overline{\psi}\) we get
 \[
-    \dots
+    \frac{\partial \mathcal{L}}{\partial \overline{\psi}} = \left(i \gamma^{\mu} \partial_{\mu} - m\right) \psi = 0,
 \]
-Hence we get the Dirac equation
-\[
-    \dots
-\]
+which is the \textbf{Dirac equation}:
+\begin{equation}
+    \left(i \gamma^{\mu} \partial_{\mu} - m\right) \psi = 0,
+    \label{eq:Dirac_equation}
+\end{equation}
 where the arrow on the derivatives tells us it is to be applied to the left. This is a first order partial differential equation for the spinor field \(\psi(x)\).
 
-We can build such an equation of motion just thatks to the presence of \(\gamma^{\mu}\) which grants lorentz invariance. Dirac equation si a first order differential equation, while for KG we could only get a second order one. Furthermore KG is a scalar equation, while Dirac is a spinor equation (vectorial in spinor space, with 4 components).
+We can also derive the equation of motion by considering the derivatives with respect to \(\psi\), in order to get the conjugate equation:
+\[
+    \frac{\partial \mathcal{L}}{\partial \psi} = - m \overline{\psi}, \quad \frac{\partial \mathcal{L}}{\partial (\partial_{\mu} \psi)} = i \overline{\psi} \gamma^{\mu} \implies \partial_{\mu} \left(\frac{\partial \mathcal{L}}{\partial (\partial_{\mu} \psi)}\right) = i (\partial_{\mu} \overline{\psi}) \gamma^{\mu},
+\]
+so that the Euler-Lagrange equation gives
+\[
+    - m \overline{\psi} = i (\partial_{\mu} \overline{\psi}) \gamma^{\mu} \implies \overline{\psi} ( - i \overleftarrow{\partial}_{\mu} \gamma^{\mu} - m) = 0,
+\]
+which is the \textbf{conjugate Dirac equation}:
+\begin{equation}
+    \overline{\psi} ( - i \overleftarrow{\partial}_{\mu} \gamma^{\mu} - m) = 0.
+    \label{eq:conjugate_Dirac_equation}
+\end{equation}
+
+We can build such an equation of motion just thanks to the presence of \(\gamma^{\mu}\) which grants lorentz invariance. Dirac equation is a \textbf{first order differential equation}, while for KG we could only get a second order one. Furthermore KG is a scalar equation, while Dirac is a spinor equation (vectorial in spinor space, with 4 components).
+The presence of gamma matrices in Dirac equation is crucial: they ensure lorentz invariance with their transformation properties, and they allow to have a first order equation, since they contract with the derivative index \(\mu\) in \(\partial_\mu \psi\).
+
+\textbf{Lorentz invariance} determines the form of Dirac equation: if we want to describe a scalar particle, we need a second order equation (KG), while if we want to describe a spin \(\tfrac12\) particle (spinor) we need a first order equation (Dirac).
 
 Notice that dirac equation mixes components of the spinor, since \(\gamma^{\mu}\) are \(4\times 4\) matrices:
 \[
@@ -354,21 +372,42 @@ So in components in the spinor space, Dirac equations reads:
         \partial_x \psi_3  \\
         -\partial_x \psi_2 \\
         -\partial_x \psi_1
-    \end{pmatrix} \dots
+    \end{pmatrix} + i \begin{pmatrix}
+        -\partial_y \psi_4 \\
+        \partial_y \psi_3  \\
+        \partial_y \psi_2  \\
+        -\partial_y \psi_1
+    \end{pmatrix} + i \begin{pmatrix}
+        \partial_z \psi_3  \\
+        -\partial_z \psi_4 \\
+        -\partial_z \psi_1 \\
+        \partial_z \psi_2
+    \end{pmatrix} - m \begin{pmatrix}
+        \psi_1 \\
+        \psi_2 \\
+        \psi_3 \\
+        \psi_4
+    \end{pmatrix} = 0.
 \]
-in general it becomes a system of four coupled first order differential equations, mixing the four components of the spinor.
+In general it becomes a system of four coupled first order differential equations, mixing the four components of the spinor: for example the first equation is
+\[
+    i \partial_t \psi_3 + i \partial_x \psi_4 - i \partial_y \psi_4 + i \partial_z \psi_3 - m \psi_1 = 0.
+\]
 
-However each component \(\psi_{\alpha}(x)\) satosfy the KG equation, since in effect each components describe a dof of a relativistic particle with mass \(m\): if we multiply Dirac equation by \((i \gamma^{\mu} \partial_{\mu} + m)\) from the left (it is still valid since zero multiplied by anything remains xero), we get
+However each component \(\psi_{\alpha}(x)\) satosfy the KG equation, since in effect each components describe a dof of a relativistic particle with mass \(m\): if we multiply Dirac equation by \((i \gamma^{\mu} \partial_{\mu} + m)\) from the left (it is still valid since zero multiplied by anything remains zero), we get
 \[
     \begin{aligned}
-        (i \gamma^{\mu} \partial_{\mu} + m)(i \gamma^{\nu} \partial_{\nu} - m) \psi(x) = 0                                \\
-        \implies \left(-\gamma^{\mu} \gamma^{\nu} \partial_{\mu} \partial_{\nu} - m^2\right) \psi(x) = 0                  \\
-        \implies \left(-\frac{1}{2}\{\gamma^{\mu},\,\gamma^{\nu}\} \partial_{\mu} \partial_{\nu} - m^2\right) \psi(x) = 0 \\
-        \implies \left(-\eta^{\mu \nu} \partial_{\mu} \partial_{\nu} - m^2\right) \psi(x) = 0                             \\
+        (i \gamma^{\mu} \partial_{\mu} + m)(i \gamma^{\nu} \partial_{\nu} - m) \psi(x) = 0,                       \\
+        \left(-\gamma^{\mu} \gamma^{\nu} \partial_{\mu} \partial_{\nu} - m^2\right) \psi(x) = 0,                  \\
+        \left(-\frac{1}{2}\{\gamma^{\mu},\,\gamma^{\nu}\} \partial_{\mu} \partial_{\nu} - m^2\right) \psi(x) = 0, \\
+        \left(-\eta^{\mu \nu} \partial_{\mu} \partial_{\nu} - m^2\right) \psi(x) = 0,                             \\
         \implies (\Box + m^2) \psi(x) = 0.
     \end{aligned}
 \]
-In terms of matrices we have used the clifford algebra to simplify the product of gamma matrices. So each component of the dirac spinor satisfies the KG equation, thus \((\Box + m^2) \psi_{\alpha} (x) = 0\) \(\forall \alpha = 1,\,2,\,3,\,4\).
+In terms of matrices we have used the \textbf{clifford algebra} to simplify the product of gamma matrices. So each component of the dirac spinor satisfies the KG equation, thus
+\[
+    (\Box + m^2) \psi_{\alpha} (x) = 0 \quad \forall \alpha = 1,\,2,\,3,\,4.
+\]
 
 \subsection{Chiral Spinors}
 
@@ -388,109 +427,175 @@ We can write the Dirac spinor as a combination of two weyl spinors:
 
 \paragraph{Chirality operator.} In order to project out the two chiral components from a Dirac spinor we can introduce the chirality operator
 \[
-    \gamma^5 = \dots
+    \gamma^5 = i \gamma^0 \gamma^1 \gamma^2 \gamma^3 = \begin{pmatrix}
+        -\mathbb{I}_2 & 0            \\
+        0             & \mathbb{I}_2
+    \end{pmatrix}, \quad (\gamma^5)^2 = \mathbb{I}_4,
 \]
 using which we can define projectors able to select the desired chiral component from the Dirac spinor:
 \[
     \begin{aligned}
-        \psi_L = \\
-        \psi_R =.
+        \mathbb{P}_L \psi = \frac{1 - \gamma^5}{2} \psi = \psi_L = \begin{pmatrix}
+                                                                       \psi_L^{(w)} \\
+                                                                       0
+                                                                   \end{pmatrix}, \\
+        \mathbb{P}_R \psi = \frac{1 + \gamma^5}{2} \psi = \psi_R = \begin{pmatrix}
+                                                                       0 \\
+                                                                       \psi_R^{(w)}
+                                                                   \end{pmatrix}.
     \end{aligned}
 \]
 Thus the dirac spinor is the sum of the two chiral components \(\psi_D = \psi_L + \psi_R\) and the projectors satisfy the usual properties:
 \[
     \begin{dcases}
-        P_L^2 = P_L \\
-        P_L^{\dagger} = P_L
-    \end{dcases} \quad \dots
+        \mathbb{P}_L^2 = \mathbb{P}_L, \\
+        \mathbb{P}_L^{\dagger} = \mathbb{P}_L,
+    \end{dcases} \quad \begin{dcases}
+        \mathbb{P}_R^2 = \mathbb{P}_R, \\
+        \mathbb{P}_R^{\dagger} = \mathbb{P}_R,
+    \end{dcases} \quad \begin{dcases}
+        \mathbb{P}_L \mathbb{P}_R = \mathbb{P}_R \mathbb{P}_L = 0, \\
+        \mathbb{P}_L + \mathbb{P}_R = \mathbb{I}_4.
+    \end{dcases}
 \]
 Note that the eigenvalues of \(\gamma^5\) are \(\pm 1\), so the chirality operator measures the chirality of a spinor:
 \[
-    \dots
+    \begin{dcases}
+        \gamma^5 \psi_L = (-1) \psi_L, \\
+        \gamma^5 \psi_R = (+1) \psi_R.
+    \end{dcases}
 \]
 We will see how chirality is related to helicity in the massless limit.
+This decomposition is very useful in the standard model, since weak interactions only involve LH particles and RH antiparticles; so we can use chiral projectors to select the interacting components.
 
-\paragraph{Lagrangian and Chirality.}To understand better, let's write the dirac lagrangian in terms of chiral components (which is very useful for statistical field theory and the standard model, also for understanding the massless limit):
+\subsubsection{Lagrangian and Chirality}
+
+To understand better, let's write the Dirac lagrangian
+\[
+    \mathcal{L} = \overline{\psi} \left(i \gamma^{\mu} \partial_{\mu} - m\right) \psi,
+\]
+in terms of chiral components (which is very useful for \textit{statistical field theory} and the \textit{standard model}, also for understanding the \textit{massless limit}):
 \begin{enumerate}
-    \item aa
+    \item Starting from the \textbf{vector current} which is contracted with the derivative in the kinetic term:
           \[
               \begin{aligned}
-                  \overline{\psi} \gamma^{\mu} \psi = \psi^{\dagger} \gamma^0 \gamma^{\mu} \left(\psi_L + \psi_R\right) = \dots
+                  \overline{\psi} \gamma^{\mu} \psi & = \psi^{\dagger} \gamma^0 \gamma^{\mu} \left(\psi_L + \psi_R\right) = \psi^{\dagger} \gamma^0 \gamma^{\mu} \left(\mathbb{P}_{L}^2  + \mathbb{P}_R^2\right) \psi      \\
+                                                    & = \psi^{\dagger} \gamma^0 \gamma^{\mu} \left(\frac{1 - \gamma^5}{2}\right)^2 \psi + \psi^{\dagger} \gamma^0 \gamma^{\mu} \left(\frac{1 + \gamma^5}{2}\right)^2 \psi, \\
               \end{aligned}
           \]
-
-          Now exploiting hermitianity of the gamma matrices we can write
+          where, since the chirality matrix \(\gamma^5\) anticommutes with all gamma matrices \(\{\gamma^5,\, \gamma^{\mu}\} = 0\), we can use the identity \(\gamma^0 \gamma^{\mu}  \gamma^5 = - \gamma^{0} \gamma^5 \gamma^{\mu} = \gamma^5 \gamma^0 \gamma^{\mu}\) to obtain:
           \[
-              \overline{\psi} \gamma^{\mu} \psi = \overline{\psi}_R \gamma^{\mu} \psi_R + \overline{\psi}_L \gamma^{\mu} \psi_L.
+              \overline{\psi} \gamma^{\mu} \psi = \psi^{\dagger} \left(\frac{1 - \gamma^5}{2}\right) \gamma^0 \gamma^{\mu} \left(\frac{1 - \gamma^5}{2}\right) \psi + \psi^{\dagger} \left(\frac{1 + \gamma^5}{2}\right) \gamma^0 \gamma^{\mu} \left(\frac{1 + \gamma^5}{2}\right) \psi.
           \]
-          This found vector current does not mix chiral components, its parity invariant; this is not good for electroweak interactions and interpretation \(\mathrm{SU}(2)_L\).
-
-    \item aa
+          Now exploiting hermitianity of the gamma matrices we can rewrite the projectors acting on \(\psi^{\dagger}\) as \(\psi^{\dagger} \mathbb{P}_{R/L} = \left(\mathbb{P}_{R/L} \psi\right)^{\dagger}\) to finally get (after reapplying \(\gamma^0\) matrices for the definition of \(\overline{\psi}\)):
           \[
-              \overline{\psi} \gamma^{\mu} \gamma^{5} \psi = \dots
+              \overline{\psi} \gamma^{\mu} \psi = \overline{\psi}_L \gamma^{\mu} \psi_L + \overline{\psi}_R \gamma^{\mu} \psi_R.
           \]
-          same steps as before, but now we find another current, called \textbf{axial vector current}: it changes sign under parity and not good again for EW interpretation.
+          This found vector current does not mix chiral components, its parity invariant; this is not good for electroweak interactions and interpretation of \(\mathrm{SU}(2)_L\) interactions: electroweak currents violate parity, this vector current is invariant.
 
-    \item aa
+    \item Moving on, we can try to insert a \(\gamma^5\) in the vector current: in this way maybe we can get a parity violation
           \[
-              \frac{1}{2} (V-A) = \overline{\psi} \dots
+              \overline{\psi} \gamma^{\mu} \gamma^{5} \psi = \psi^{\dagger} \gamma^0 \gamma^{\mu} \gamma^5 \left(\psi_L + \psi_R\right) = \psi^{\dagger} \gamma^0 \gamma^{\mu} \gamma^5 \left(\mathbb{P}_L^2 + \mathbb{P}_R^2\right) \psi.
           \]
-          V-A current violates parity, and only LH components enter the interarction: it is a good candidate for EW interactions.
+          We can easily compute that \(\gamma^5 \mathbb{P}_{L/R} = \mp \mathbb{P}_{L/R}\) (the first sign is for the left projector, the second for the right), so that we can write
+          \[
+              \overline{\psi} \gamma^{\mu} \gamma^5 \psi = \psi^{\dagger} \gamma^0 \gamma^{\mu} \left(- \frac{1 - \gamma^5}{2}\right) \psi_L + \psi^{\dagger} \gamma^0 \gamma^{\mu} \left(\frac{1 + \gamma^5}{2}\right) \psi_R = \overline{\psi}_R \gamma^{\mu} \psi_R - \overline{\psi}_L \gamma^{\mu} \psi_L,
+          \]
+          which now, following the same steps as before, bring us to the expression for another current, called \textbf{axial vector current}: it changes sign under parity, but experiments show that weak interactions \textit{violate parity maximally}, so this is not enough.
 
-    \item mass term
+    \item Now we can combine the two previous currents to get the \textbf{V-A current}:
           \[
-              \overline{\psi} \psi 0 = \psi^{\dagger} \gamma^0 (P_R^2 + P_L^2) \psi = \dots =
+              \frac{1}{2} (V-A) = \overline{\psi} \gamma^{\mu} \frac{1 - \gamma^5}{2} \psi = \overline{\psi}_L \gamma^{\mu} \psi_L,
           \]
-          with respect to before we dont have \(\gamma^{\mu}\), so we have to put a minus while writing in terms of chiral components: mass term mixes LH and RH components:
+          V-A current violates parity, and make explicit the fact that only LH components enter the interaction: it is a good candidate for EW interactions.
+
+    \item Expanding the \textbf{mass term} instead:
           \[
-              \dots
+              \begin{aligned}
+                  \overline{\psi} \psi & = \psi^{\dagger} \gamma^0 (P_R^2 + P_L^2) \psi = \psi^{\dagger} \gamma^0 \left(\frac{1 + \gamma^5}{2}\right) \psi_L + \psi^{\dagger} \gamma^0 \left( \frac{1 - \gamma^5}{2} \right) \psi_R \\
+                                       & = \overline{\psi} \left(\frac{1 + \gamma^5}{2}\right) \psi + \overline{\psi} \left(\frac{1 - \gamma^5}{2}\right) \psi = \overline{\psi}_R \psi_R + \overline{\psi}_L \psi_L,
+              \end{aligned}
+          \]
+          where now we can use the identity \(\gamma^0 \mathbb{P}_{L/R} = \mathbb{P}_{R/L} \gamma^0\) to find that the mass term mixes chiral components:
+          \[
+              \overline{\psi} \psi = \overline{\psi}^{\dagger}_L \gamma^0 \psi_R + \overline{\psi}^{\dagger}_R \gamma^0 \psi_L = \overline{\psi}_L \psi_R + \overline{\psi}_R \psi_L.
           \]
 \end{enumerate}
-
-Now we have everything to write the dirac lagrangian in terms of chiral components:
+Now we have everything to write the Dirac lagrangian in terms of chiral components:
 \[
     \mathcal{L} = \overline{\psi}_L i \gamma^{\mu} \partial_{\mu} \psi_L + \overline{\psi}_R i \gamma^{\mu} \partial_{\mu} \psi_R - m \left(\overline{\psi}_L \psi_R + \overline{\psi}_R \psi_L\right).
 \]
-We can see that in the massless limit the two chiral components decouple, and we get two independent Weyl equations for each chiral component: this is important, since kinetic terms evolves independently the two chiral components, while the mass term allow us to perform a boost and mix the two chiralities: since the particle is massive there will be frames where the particle is RH and others where it is seen as LH.
+We can see that \textit{in the massless limit the two chiral components decouple}, and we get two independent Weyl equations for each chiral component: this is important, since kinetic terms evolves independently the two chiral components, while the mass term allow us to perform a boost and mix the two chiralities: since the particle is massive there will be frames where the particle is RH and others where it is seen as LH.
 
 If you take an electron whith both the chiral components, only the LH component will interact weakly, while the RH will not; but since the electron is massive you can always boost to a frame where the electron appears as RH, so both components are needed to describe a massive fermion. When we see only the RH component, the electron will not seem to interact weakly.
 
-\paragraph{Dirac in Weyl components.}
+\subsubsection{Dirac Equation in Weyl Components}
+
 If we write the Dirac equation in terms of chiral components we get:
 \[
-    \dots
+    i \left( \gamma^0 \partial_0 + \gamma^i \partial_i - m \right) \psi = 0, \quad \gamma^0 = \begin{pmatrix}
+        0            & \mathbb{I}_2 \\
+        \mathbb{I}_2 & 0
+    \end{pmatrix}, \quad \gamma^i = \begin{pmatrix}
+        0         & \sigma^i \\
+        -\sigma^i & 0
+    \end{pmatrix},
+\]
+which reads
+\[
+    i \begin{pmatrix}
+        0                                     & \partial_t + \bs{\sigma} \cdot \nabla \\
+        \partial_t - \bs{\sigma} \cdot \nabla & 0                                     \\
+    \end{pmatrix} \begin{pmatrix}
+        \psi_L^{(w)} \\
+        \psi_R^{(w)}
+    \end{pmatrix} - m \begin{pmatrix}
+        \psi_L^{(w)} \\
+        \psi_R^{(w)}
+    \end{pmatrix} = 0,
 \]
 which is a system of two coupled first order coupled differential equations
 \[
     \begin{dcases}
-        \dots \\
-        \dots \\
+        i (\partial_t + \bs{\sigma} \cdot \nabla) \psi_R^{(w)} - m \psi_L^{(w)} = 0, \\
+        i (\partial_t - \bs{\sigma} \cdot \nabla) \psi_L^{(w)} - m \psi_R^{(w)} = 0. \\
     \end{dcases}
 \]
 In the massless limit the two equations decouple and we get two Weyl equations:
-\[
+\begin{equation}
     \begin{dcases}
-        \dots \\
-        \dots \\
+        i (\partial_t + \bs{\sigma} \cdot \nabla) \psi_R^{(w)} = 0, \\
+        i (\partial_t - \bs{\sigma} \cdot \nabla) \psi_L^{(w)} = 0, \\
     \end{dcases}
-\]
+    \label{eq:weyl_equations}
+\end{equation}
 and we call this last set of equations the \textbf{Weyl equations} for massless fermions.
-Now it is clearer the meaning of Left and Right-Handed Weyl spinors: in terms of operators we have
+Now it is clearer the meaning of Left and Right-Handed Weyl spinors: in terms of operators (in natural units) we have
 \[
     i \partial_t = \hat{H},\quad -i \nabla = \hat{\mathbf{p}}, \quad \bs{\sigma} = \hat{\mathbf{S}},
 \]
 so that we can see the last two equations as
 \[
-    \dots
-\]
-Now, dropping the hat notation for operators (so that we can use it to indicate versors), we find clearly that the weyl components are eigenstate of the \textbf{helicity}:
-\[
     \begin{dcases}
-        \dots \\
-        \dots
+        (\hat{H} - \hat{\mathbf{S}} \cdot \hat{\mathbf{p}}) \psi_R^{(w)} = 0, \\
+        (\hat{H} + \hat{\mathbf{S}} \cdot \hat{\mathbf{p}}) \psi_L^{(w)} = 0. \\
     \end{dcases}
 \]
-where helicity operator is defined as \(\mathbf{S} \cdot \mathbf{p}\); since the eigenvalues are \(\pm 1\), we can affirm that in the massless limit chirality and helicity coincide: they have same eigenstates and eigenvalues.
+Now, dropping the hat notation for operators (so that we can use it to indicate versors), we find clearly that the weyl components are eigenstate of the \textbf{helicity}: for massless particles indeed \(E = \vert \mathbf{p} \vert\) so that
+\[
+    \begin{dcases}
+        \vert \mathbf{p} \vert \psi_R^{(w)} = \mathbf{S} \cdot \mathbf{p} \, \psi_R^{(w)}, \\
+        \vert \mathbf{p} \vert \psi_L^{(w)} = - \mathbf{S} \cdot \mathbf{p} \, \psi_L^{(w)},
+    \end{dcases} \iff \begin{dcases}
+        \mathbf{S} \cdot \hat{\mathbf{p}} \, \psi_R^{(w)} = (+1) \psi_R^{(w)}, \\
+        \mathbf{S} \cdot \hat{\mathbf{p}} \, \psi_L^{(w)} = (-1) \psi_L^{(w)},
+    \end{dcases}
+\]
+where the helicity operator is defined as
+\[
+    \mathbf{S} \cdot \hat{\mathbf{p}}.
+\]
+Since the eigenvalues are \(\pm 1\), we can affirm that in the massless limit chirality and helicity coincide: they have same eigenstates and eigenvalues.
 
 If the neutrinos were massless, only the LH component would exist, since only that interacts weakly; but since neutrinos have a small mass, both chiral components exist, even if the RH component has never been observed (it interacts only gravitationally, so it is very difficult to detect it).
 
@@ -501,35 +606,47 @@ We now want to prove that under parity we can pass from one weyl component to th
 Let's start from the Dirac equation:
 \[
     \begin{aligned}
-        \dots
+        \left(i \gamma^{\mu}\partial_{\mu} - m\right) \psi(x) = 0, \\
+        \left(i \gamma^{0} \partial_{0} + i \gamma^{i} \partial_{i} - m\right) \psi(t,\,\mathbf{x}) = 0,
     \end{aligned}
 \]
 which, given the action of the parity:
 \[
-    \dots
+    \partial_t \xrightarrow{\text{Parity}} \partial_t, \quad \nabla \xrightarrow{\text{Parity}} - \nabla,
 \]
 then transforms the Dirac equation as
 \[
-    \dots
+    \left(i \gamma^{0} \partial_{0} - i \gamma^{i} \partial_{i} - m\right) \psi^{\prime}(t,\,\mathbf{x}^{\prime}) = 0, \quad \mathbf{x}^{\prime} = - \mathbf{x}.
 \]
-But how does \(\psi\) transform under parity?
+But how does \(\psi\) transform under parity? We want to write the transformed spinor \(\psi^{\prime}(t,\,\mathbf{x}^{\prime})\) in terms of the original one \(\psi(t,\,\mathbf{x})\). Since gamma matrices satisfy
 \[
-    \dots
+    (\gamma^0)^2 = \mathbb{I}_4, \quad \{\gamma^0,\,\gamma^i\} = 0,
 \]
-but gamma matrices satisfy
+we can insert \((\gamma^0)^2\) in the transformed Dirac equation to get
 \[
-    \dots
+    \left(i \gamma^{0} \partial_{0} - i \gamma^{0} \gamma^{0} \gamma^{i} \partial_{i} - \gamma^{0} \gamma^{0}m\right) \psi^{\prime}(t,\,\mathbf{x}^{\prime})= 0,
 \]
-so we gave
+which we can rewrite as
 \[
-    \dots
+    \gamma^{0} \left(i \partial_{0} + i \gamma^{i} \gamma^{0} \partial_{i} - \gamma^{0} m\right) \psi^{\prime}(t,\,\mathbf{x}^{\prime}) = 0.
 \]
-[...] sofi [...]
-
-and we find finally that
+where we have grouped \(\gamma^0\) on the left and changed the sign of the second term swapping \(\gamma^0\) and \(\gamma^i\). Now, inserting \((\gamma^0)^2\) one last time in the first term, we can group another \(\gamma^0\) on the right:
 \[
+    \gamma^{0} \left(i \gamma^{0} \partial_{0} + i \gamma^{i} \partial_{i} - m\right) \gamma^{0} \psi^{\prime}(t,\,\mathbf{x}^{\prime}) = 0,
+\]
+which, simplifying \(\gamma^0\) on the left, and comparing with the original Dirac equation, tells us that the transformed spinor must respect
+\[
+    \psi^{\prime}(t,\,\mathbf{x}^{\prime}) = \gamma^{0} \psi(t,\,\mathbf{x}).
+\]
+Thus under parity the Dirac spinor transforms as
+\[
+    \psi =\begin{pmatrix}
+        \psi_L^{(w)} \\
+        \psi_R^{(w)}
+    \end{pmatrix} \xrightarrow{\text{Parity}}
     \psi^{\prime} = \begin{pmatrix}
-        \dots
+        \psi_L^{\prime (w)} \\
+        \psi_R^{\prime (w)}
     \end{pmatrix} = \begin{pmatrix}
         0            & \mathbb{I}_2 \\
         \mathbb{I}_2 & 0
@@ -546,7 +663,10 @@ so that
     \end{dcases}
 \]
 
-------
+As we wanted to prove, under parity the two weyl components are indeed exchanged:
+\[
+    \psi_L^{(w)} \xleftrightarrow{\text{Parity}} \psi_R^{(w)}.
+\]
 
 \subsection{Solutions of the Dirac Equation}
 
