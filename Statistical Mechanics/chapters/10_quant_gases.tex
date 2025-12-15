@@ -622,12 +622,12 @@ We now intend to study the dependence of the \textbf{chemical potential} \(\mu\)
           \[
               \frac{\partial \mu}{\partial T} \leq 0,
           \]
-          approaching 0 from below as \(T\) approaches a critical temperature \(T_c\).
+          approaching 0 from below as \(T\) approaches a critical temperature \(T_c\); this is true because a thermodynamic potential is expressed like that and verifies this property.
 \end{itemize}
 \TODO{insert plot of mu vs T for Bose gas.}
 Thus we can define the critical temperature \(T_c\) for Bose-Einstein condensation as the temperature at which the chemical potential \(\mu\) reaches 0, leading to \(z = 1\); there are two possible cases:
 \begin{itemize}
-    \item \(T_c = 0\) so that \(\mu(T_c)=0\) \(\implies\) we are in the \(2D\)-Bose gas case, where no condensation occurs at finite temperature (we will show this later);
+    \item \(T_c = 0\) so that \(\mu(T_c)=0\) \(\implies\) we are in the \(2D\)-Bose gas case, where no condensation occurs at finite temperature (we will show this later in the exercises, as well as the case of \(2D\) Bose gas trapped in a harmonic potential, which instead shows condensation at finite temperature);
     \item \(T_c \neq 0\) so that \(\mu(T_c)=0\) \(\implies\) we are in the \(3D\)-Bose gas case, where condensation occurs at a finite temperature (below \(T_c\)).
 \end{itemize}
 Setting our analysis in the \(3D\) case, we can find an expression for the critical temperature \(T_c\) by setting \(\mu = 0\) (thus \(z=1\)) in the expression for the particle density:
@@ -684,3 +684,100 @@ indicating that not all particles can be accommodated in excited states, leading
 This expression shows that as the temperature decreases below \(T_{BEC}\), the number of particles in the ground state \(N_0\) increases, reaching a maximum of \(N\) at absolute zero. This phenomenon is the hallmark of Bose-Einstein condensation, where a significant fraction of bosons occupy the lowest energy state, leading to unique macroscopic quantum phenomena such as superfluidity and coherence.
 
 ------
+
+Thus our refined expression for the density of particles in a Bose gas becomes
+\[
+    n = n_0(T) + n_{n}(T).
+\]
+Now we can compute the two components separately for the two regimes of temperature:
+\begin{itemize}
+    \item For \(T > T_{BEC}\), there is no condensation, so all particles are in excited states:
+          \[
+              n_0(T) = 0, \quad n_{n}(T) = \frac{g}{\lambda_{T}^3} g_{3/2}(z).
+          \]
+    \item For \(T < T_{BEC}\), condensation occurs, so we have a macroscopic occupation of the ground state:
+          \[
+              n_0(T) = n \left[ 1 - \left( \frac{T}{T_{BEC}} \right)^{3/2} \right], \quad n_{n}(T) = \frac{g}{\lambda_{T}^3} \zeta(3/2) = n \left( \frac{T}{T_{BEC}} \right)^{3/2}.
+          \]
+\end{itemize}
+Thus we can consider \(n_0(T)\) as an order parameter for the \textbf{Bose-Einstein condensation phase transition}, which is zero above \(T_{BEC}\) and non-zero below it, indicating the onset of macroscopic quantum coherence in the system. There will be a SSB of the gauge symmetry associated to the phase of the condensate wavefunction, leading to unique physical properties such as superfluidity and coherence.
+
+Now we can compute the pressure of the Bose gas and relate it to the energy through the grand potential \(\Omega_B\). Recalling the expression for the pressure
+\[
+    p = \frac{g}{\beta \lambda_{T}^3} g_{5/2}(z),
+\]
+and since the grand potential is related to the pressure by \(\Omega = - pV\) and to the energy by \(\Omega = - \frac{2}{3} E\), we can write
+\[
+    E = \frac{3}{2} pV = \frac{3}{2} \frac{gV}{\beta \lambda_{T}^3} g_{5/2}(z).
+\]
+Notably, the energy expression does not explicitly depend on the condensate fraction \(n_0(T)\), since the ground state does not contribute to the energy in this idealized model. The energy is determined solely by the particles in excited states, which follow the Bose-Einstein distribution.
+
+We can now compute the energy per particle \(E/N\) in the two temperature regimes:
+\begin{itemize}
+    \item For \(T > T_{BEC}\):
+          \[
+              u = \frac{E}{N} = \frac{3}{2} k_B T \frac{g_{5/2}(z)}{g_{3/2}(z)}.
+          \]
+    \item For \(T < T_{BEC}\):
+          \[
+              u = \frac{E}{N} = \frac{3}{2} k_B T \frac{\zeta(5/2)}{\zeta(3/2)} \left( \frac{T}{T_{BEC}} \right)^{3/2}.
+          \]
+\end{itemize}
+Note that we have used the expression for the normal component \(n_{n}(T)\) to relate the energy to the total number of particles \(N\): for \(T < T_{BEC}\), only the normal component contributes to the energy
+\[
+    N_n(T) = N \left( \frac{T}{T_{BEC}} \right)^{3/2} = \frac{gV}{\lambda_{T}^3} \zeta(3/2),
+\]
+and we are computing the expression for \(u=\frac{E}{N}\frac{V}{V}\) accordingly.
+
+If we consider the expression for the specific heat at constant volume \(c_V\), we can derive it from the energy expression by differentiating with respect to temperature:
+\[
+    c_V = \left( \frac{\partial u}{\partial T} \right)_V.
+\]
+Calculating \(c_V\) in the two temperature regimes, we find that it exhibits a discontinuity at the critical temperature \(T_{BEC}\), characteristic of a second-order phase transition, and it goes to zero as \(T\) approaches absolute zero, in accordance with the third law of thermodynamics (fixing the problem we had before with the classical ideal gas).\TODO{insert plot of cV vs T for Bose gas.}
+[... CV approximated computation ...]
+
+Finally, the \textbf{entropy} \(S\) of the Bose gas can be computed using the thermodynamic relation
+\[
+    S = \frac{E - \Omega - \mu N}{T}.
+\]
+So we can compute the three terms separately:
+\begin{itemize}
+    \item The energy \(E\) is given by the expressions derived above for the two temperature regimes.
+    \item The grand potential \(\Omega\) is related to the pressure by \(\Omega = - pV\), with \(p\) given by the earlier expression.
+    \item The chemical potential \(\mu\) is zero for \(T < T_{BEC}\) and negative for \(T > T_{BEC}\), approaching zero as \(T\) approaches \(T_{BEC}\) from above, while \(N\) is the total number of particles in the system.
+\end{itemize}
+Substituting these expressions into the entropy formula, we can derive the entropy per particle \(S/N\) in both temperature regimes, revealing how the entropy behaves across the Bose-Einstein condensation transition:
+\[
+    \begin{dcases}
+        \frac{S}{N} & = \frac{5}{2} k_B \frac{g_{5/2}(z)}{g_{3/2}(z)} - k_B \log z, \quad T > T_{BEC},                           \\
+        \frac{S}{N} & = \frac{5}{2} k_B \frac{\zeta(5/2)}{\zeta(3/2)} \left( \frac{T}{T_{BEC}} \right)^{3/2}, \quad T < T_{BEC}.
+    \end{dcases}
+\]\QUESTION{check expressions.}
+We can also compute it precisely at the critical temperature \(T = T_{BEC}\):
+\[
+    \frac{S}{N}\Big\vert_{T=T_{BEC}} = \frac{5}{2} k_B \frac{\zeta(5/2)}{\zeta(3/2)},
+\]
+while at the critic temperature we have zero particles in the ground state, so all particles contribute to the entropy. As temperature decreases below \(T_{BEC}\), the entropy decreases due to the increasing occupation of the ground state, in which particles stop to contribute to the system entropy, reflecting the onset of macroscopic quantum coherence in the system.
+\[
+    \Delta s = s(T_{BEC}) - s(0) = \frac{5}{2} k_B \frac{\zeta(5/2)}{\zeta(3/2)} = \frac{\delta Q}{T_c} \neq 0.
+\]
+Usually PT are induced by interactions among particles, while here we have a PT in an ideal gas: this is possible because of the SSB of the gauge symmetry associated to the phase of the condensate wavefunction, which leads to a new ordered phase with lower entropy. This is a peculiar feature of Bose-Einstein condensation, where the transition is driven by quantum statistics rather than interactions. It is a strange PT indeed, since we have a specific heat discontinuity at \(T_{BEC}\) (typical of second-order PT), but we also have a finite entropy change at the transition (typical of first-order PT). This is a unique characteristic of the Bose-Einstein condensation phenomenon. \QUESTION{is this right?}
+
+\subsection{Supersymmetry Breaking in BE Condensation}
+
+The hamiltonian of a non-interacting Bose gas is invariant under a global \(U(1)\) gauge transformation, which corresponds to multiplying the bosonic field operators by a phase factor \(e^{i\theta}\):
+\[
+    \hat{\psi}(\mathbf{r}) \to e^{i\theta} \hat{\psi}(\mathbf{r}), \quad \hat{\psi}^{\dagger}(\mathbf{r}) \to e^{-i\theta} \hat{\psi}^{\dagger}(\mathbf{r}).
+\]
+This symmetry reflects the conservation of particle number in the system, since it is originated from the number operator \(\hat{N} = \sum_{\mathbf{k}}  \hat{a}^{\dagger}(\mathbf{k}) \hat{a}(\mathbf{k})\).
+\[
+    U(\theta) = e^{i \theta \hat{N}} \implies \begin{dcases}
+        U(\theta) \hat{a}(\mathbf{k}) U^{\dagger}(\theta) = e^{i\theta} \hat{a}(\mathbf{k}), \\
+        U(\theta) \hat{a}^{\dagger}(\mathbf{k}) U^{\dagger}(\theta) = e^{-i\theta} \hat{a}^{\dagger}(\mathbf{k}).
+    \end{dcases}
+\]
+When Bose-Einstein condensation occurs below the critical temperature \(T_{BEC}\), a macroscopic number of bosons occupy the ground state, where
+\[
+    n_0 = \langle \hat{a}_0^{\dagger} \hat{a}_0 \rangle \neq 0 \implies \langle \hat{a}_0 \rangle \neq 0 \text{ for } T < T_{BEC}.
+\]
+This non-zero expectation value of the annihilation operator \(\hat{a}_0\) indicates that the ground state has a well-defined phase, breaking the global \(U(1)\) gauge symmetry of the hamiltonian. The system chooses a specific phase for the condensate wavefunction, leading to spontaneous symmetry breaking (SSB). This SSB has profound implications for the physical properties of the Bose-Einstein condensate, including the emergence of superfluidity and coherence.\QUESTION{CHECK EVERYTHING}
