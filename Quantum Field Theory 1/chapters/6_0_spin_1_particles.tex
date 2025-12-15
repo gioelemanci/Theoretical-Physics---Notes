@@ -1,0 +1,148 @@
+\chapter{Spin 1 Particles}
+
+We are going to describe the Electromagnetic field as a quantum field theory of spin 1 particles, the photons. We will see that the photon is \textbf{massless} and has only \textbf{two polarization states}, which makes it different from the massive spin 1 particles we will study later, such as the W and Z bosons.
+
+\section{The Classical Electromagnetic Field}
+
+The lagrangian density for the classical electromagnetic field is given by
+\begin{equation}
+    \mathcal{L} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu},
+\end{equation}
+where the field strength tensor is defined as
+\[
+    F^{\mu \nu} = \partial^\mu A^\nu - \partial^\nu A^\mu, \quad A^\mu = ( \phi, \mathbf{A} ).
+\]
+We can study the equations of motion using the Euler-Lagrange equations:
+\[
+    \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu A_\nu)} \right) - \frac{\partial \mathcal{L}}{\partial A_\nu} = 0.
+\]
+
+--- [...] ---
+
+\subsection{Popular Gauge Fixing Choices}
+
+\begin{enumerate}
+    \item \textbf{Lorentz Gauge}: The Lorentz gauge condition is given by
+          \[
+              \partial_\mu A^\mu = 0 = \partial_0 A^0 + \nabla \cdot \mathbf{A}.
+          \]
+          This gauge is Lorentz invariant, making it convenient for relativistic calculations. In this gauge, the independent degrees of freedom are reduced down to two, corresponding to the two physical polarization states of the photon.
+          But \(A^{\mu} \) does not necessarily satisfy the wave equation:
+          \[
+              \partial_\mu A^\nu(x) = f(x) \neq 0,
+          \]
+          but we can always perform a gauge transformation to ensure that it does: if there exists a function \(\alpha(x)\) such that \(\Box \alpha(x) = - f(x)\), then the gauge transformed field
+          \[
+              A'^{\mu}(x) = A^{\mu}(x) + \partial^{\mu} \alpha(x)
+          \]
+          will satisfy the Gauge condition; but note that this does not completely fix the gauge, since we can still perform gauge transformations and obtain new fields that satisfy the Lorentz gauge condition: if \(\Box \beta(x) = 0\), then
+          \[
+              A''^{\mu}(x) = A'^{\mu}(x) + \partial^{\mu} \beta(x)
+          \]
+          will also satisfy the Lorentz gauge condition \(\partial_\mu A''^\mu = 0\).
+
+          But in this gauge, we have still some residual gauge freedom, since we can perform gauge transformations with functions \(\beta(x)\) (called harmonic functions) that satisfy the homogeneous wave equation \(\Box \beta(x) = 0\). Furthermore, this gauge fixing has the advantage of being manifestly Lorentz invariant, making it suitable for relativistic calculations.
+
+    \item \textbf{Coulomb Gauge}: The Coulomb gauge condition is given by
+          \[
+              \nabla \cdot \mathbf{A} = 0,
+          \]
+          which focuses on the spatial components of the vector potential. In this gauge, the scalar potential \(\phi\) is determined by the charge distribution, while the vector potential \(\mathbf{A}\) describes the transverse electromagnetic waves. This gauge is particularly useful in non-relativistic quantum mechanics and in problems involving static charges, since it is not manifestly Lorentz invariant.
+
+          One can use the residual gauge freedom in the Lorentz gauge to reach the Coulomb gauge by choosing a suitable gauge function \(\alpha(x)\) that satisfies the appropriate conditions:
+
+          [...]
+\end{enumerate}
+
+\section{Gauge Fixing of the Electromagnetic Field}
+
+Before starting the quantization procedure, we need to find the conjugate momenta associated with the fields \(A^{\mu}\): we will use it to find the expression for the Hamiltonian (via Legendre transform) and impose the canonical commutation relations.
+
+The \textbf{conjugate momenta} are defined as
+\[
+    \pi^{\mu} = \frac{\partial \mathcal{L}}{\partial (\partial_0 A_{\mu})} = \begin{dcases}
+        \pi^0 = \frac{\partial \mathcal{L}}{\partial (\partial_0 A_{0})} = 0, \text{ since } A_0 \text{ is not a dynamical field;} \\
+        \pi^i = \frac{\partial \mathcal{L}}{\partial (\partial_0 A_{i})} = F^{i0} = \dots = E^i.
+    \end{dcases}
+\]
+
+[...]
+
+So that the Hamiltonian takes the form
+\[
+    H = \int \mathrm{d}^3 \mathbf{x} \left( \frac{1}{2} \vert \mathbf{E} \vert^2 + \frac{1}{2} \vert \mathbf{B} \vert^2 - A_0 (\nabla \cdot \mathbf{E}) \right).
+\]
+In this expression, the term involving \(A_0\) (found after an integration by parts) does not act as a physical variable, but as a Lagrange multiplier enforcing Gauss's law \(\nabla \cdot \mathbf{E} = 0\) in the absence of charges:
+\[
+    \frac{\partial \mathcal{H}}{\partial A_0} = -\nabla \cdot \mathbf{E} = 0 \implies \nabla \cdot \mathbf{E} = 0.
+\]
+We have still to fix a gauge in order to proceed with the quantization, so the field has still some redundant degrees of freedom, and this is a constraint on the physical states of the theory (on the elements of \(A^{\mu}\)).
+
+\paragraph{Gauge fixing.}
+Lastly, before starting the quantization procedure, we have to impose the \textbf{Lorentz gauge} condition \(\partial_\mu A^{\mu} = 0\), since its Lorentz invariance makes it suitable for relativistic quantum field theory. From this choice, we get the equations of motion
+\[
+    \partial_\mu F^{\mu \nu} = \partial_\mu \partial^\mu A^\nu - \partial^\nu (\partial_\mu A^\mu) = \partial_\mu \partial^\mu A^\nu = \Box A^{\nu} = 0.
+\]
+Since \(\Box A^{\nu} = 0\), each component of the vector potential \(A^{\mu}\) satisfies the wave equation, particularly the massless KG scalar equation: the field \(A^{\mu}\) will describe massless particles, the photons, with energy \(E_{\mathbf{p}} = \sqrt{\vert \mathbf{p} \vert^2} = \vert \mathbf{p} \vert \).
+
+Instead of imposing the gauge condition \(\partial_\mu A^{\mu} = 0\) by hand, we can modify the lagrangian density slightly by adding a gauge-fixing term:
+\[
+    \mathcal{L} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} - \frac{1}{2} (\partial_\mu A^{\mu})^2.
+\]
+This modification does not change the equations of motion for physical fields, but it allows us to derive the Lorentz gauge condition from the equations of motion themselves. The new equations of motion become
+\[
+    \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu A_\nu)} \right) - \frac{\partial \mathcal{L}}{\partial A_\nu} = 0 \implies \partial_\mu F^{\mu \nu} + \partial_\mu \eta^{\mu \nu} (\partial_\sigma A^{\sigma}),
+\]
+which simplifies to
+\[
+    \partial_\mu \partial^\mu A^\nu - \partial_\mu \partial^\nu A^\mu + \partial^\nu (\partial_\mu A^\mu) = \Box A^{\nu} = 0.
+\]
+We reached the same equations as before, but now the gauge condition \(\partial_\mu A^{\mu} = 0\) is automatically satisfied by the solutions of the equations of motion. If we proceed to find the conjugate momenta, we get
+\[
+    \begin{dcases}
+        \pi^0 = \frac{\partial \mathcal{L}}{\partial (\partial_0 A_{0})} = -\partial_\mu A^{\mu}; \\
+        \pi^i = \frac{\partial \mathcal{L}}{\partial (\partial_0 A_{i})} = \partial^i A^{0} - \partial_0 A^{i} = F^{i0};
+    \end{dcases} \quad \iff \quad \pi^{\mu} = F^{\mu 0} - \eta^{\mu 0} (\partial_\nu A^{\nu}),
+\]
+different from the previous case where \(\pi^0 = 0\), since now the Lagrangian has a dependence on \(\partial_0 A_0\) in the new gauge-fixing term.
+
+\section{Quantization of the Electromagnetic Field}
+
+The classical fields \(A_{\mu}(x)\) and \(\pi^{\mu}(x)\) are going to be promoted to operators acting on a Hilbert space. We impose the \textbf{canonical commutation relations} at equal times:\footnote{Since we know that integer spin particles are bosons and the correct spin-statistics relations are imposed via commutation.}
+\[
+    \begin{aligned}
+        \left[A_{\mu}(\mathbf{x}, t), \pi^{\nu}(\mathbf{y}, t)\right] = i \delta_{\mu}^{\ \nu} \delta^{(3)}(\mathbf{x} - \mathbf{y}), \\
+        \left[A_{\mu}(\mathbf{x}, t), A_{\nu}(\mathbf{y}, t)\right] = 0,                                                              \\
+        \left[\pi^{\mu}(\mathbf{x}, t), \pi^{\nu}(\mathbf{y}, t)\right] = 0.
+    \end{aligned}
+\]
+This relations will ensure the correct quantization of the electromagnetic field, with symmetric multiparticle states corresponding to the bosonic nature of photons.
+
+The general solution to the equations of motion \(\Box A^{\mu} = 0\) can be expressed as a Fourier expansion in terms of plane waves whose coefficients should operate as creation and annihilation operators for photons. We can write:
+\[
+    A_{\mu}(x) = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{p}}}} \left( \hat{\xi}_{\mu}(\mathbf{p}) e^{i p \cdot x} + \hat{\xi}_{\mu}^{\dagger}(\mathbf{p}) e^{-i p \cdot x} \right),
+\]
+where \(p^{\mu} = (E_{\mathbf{p}}, \mathbf{p})\) with \(E_{\mathbf{p}} = \vert \mathbf{p} \vert\) for massless particles.
+
+The operators \(\hat{\xi}_{\mu}(\mathbf{p})\) and \(\hat{\xi}_{\mu}^{\dagger}(\mathbf{p})\) will be identified as annihilation and creation operators for photons with momentum \(\mathbf{p}\) and polarization indexed by \(\mu\). To explicitly see this, we can decompose these operators in terms of a polarization basis: we introduce polarization vectors \(\epsilon_{\mu}^{(\lambda)}(\mathbf{p})\) with \(\lambda = 0, 1, 2, 3\) labeling the four possible polarization states of the photon
+\[
+    \epsilon_\mu^{(\lambda)}(\mathbf{p}), \quad \lambda = 0, 1, 2, 3,
+\]
+which satisfy the orthonormality and completeness relations
+\[
+    \epsilon^{(\lambda)}_{\mu}(\mathbf{p}) \epsilon^{(\lambda') \mu}(\mathbf{p}) = \eta^{\lambda \lambda'}, \quad \sum_{\lambda=0}^{3} \epsilon_{\mu}^{(\lambda)}(\mathbf{p}) \epsilon_{\nu}^{(\lambda)}(\mathbf{p}) = \eta_{\mu \nu}.
+\]
+We can then express the operators \(\hat{\xi}_{\mu}(\mathbf{p})\) and \(\hat{\xi}_{\mu}^{\dagger}(\mathbf{p})\) in terms of creation and annihilation operators \(a^{(\lambda)}_{\mathbf{p}}\) and \(a^{(\lambda)\,\dagger}_{\mathbf{p}}\) for photons with definite polarization:
+\[
+    \hat{\xi}_{\mu}(\mathbf{p}) = \sum_{\lambda=0}^{3} \epsilon_{\mu}^{(\lambda)}(\mathbf{p}) a^{(\lambda)}_{\mathbf{p}}, \quad \hat{\xi}_{\mu}^{\dagger}(\mathbf{p}) = \sum_{\lambda=0}^{3} \epsilon_{\mu}^{(\lambda)}(\mathbf{p}) a^{(\lambda)\,\dagger}_{\mathbf{p}}.
+\]
+We can now write the final expression for the quantized electromagnetic field and its conjugate momenta:\footnote{In the expression for the conjugate momenta, we have a term \((+i)\) changing sign with respect to the scalar field case, due to the different definition of \(\pi^{\mu}\) in terms of the fields \(A^{\mu}\): for KG we had \(\pi = \partial_0 \phi\), while here we have \(\pi^{\mu} = - \dot{A}^{\mu} + \dots\), so that in the end this sign changes.}
+\[
+    \begin{dcases}
+        \hat{A}_\mu(\mathbf{x})   & = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{p}}}} \sum_{\lambda=0}^{3} \epsilon_{\mu}^{(\lambda)}(\mathbf{p}) \left( a^{(\lambda)}_{\mathbf{p}} e^{i \mathbf{p} \cdot \mathbf{x}} + a^{(\lambda)\,\dagger}_{\mathbf{p}} e^{-i \mathbf{p} \cdot \mathbf{x}} \right),   \\
+        \hat{\pi}^\mu(\mathbf{x}) & = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} (+i) \sqrt{\frac{E_{\mathbf{p}}}{2}} \sum_{\lambda=0}^{3} \epsilon^{\mu\,(\lambda)}(\mathbf{p}) \left( a^{(\lambda)}_{\mathbf{p}} e^{i \mathbf{p} \cdot \mathbf{x}} - a^{(\lambda)\,\dagger}_{\mathbf{p}} e^{-i \mathbf{p} \cdot \mathbf{x}} \right).
+    \end{dcases}
+\]
+We have the four vector polarization depending on the four momentum \(p^{\mu} = \left(\vert \mathbf{p} \vert, \mathbf{p} \right)\), but we know that the photon has only two physical polarization states. This discrepancy arises because we have not yet fully fixed the gauge: the presence of unphysical polarization states (longitudinal and timelike) is a consequence of the gauge redundancy in the electromagnetic field. To make contact with the two physical polarization states of the photon, we choose \(\epsilon^{(1)}_{\mu}\) and \(\epsilon^{(2)}_{\mu}\) as the two transverse polarization vectors (perpendicular to the direction of the momentum), while \(\epsilon^{(0)}_{\mu}\) and \(\epsilon^{(3)}_{\mu}\) correspond to the unphysical timelike and longitudinal polarizations, respectively
+\dots
+------------
