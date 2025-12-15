@@ -525,3 +525,162 @@ so that at room temperature (\(\sim 300 K\)) the electron gas in metals can be t
 For stars like white dwarfs, where the electron density is extremely high (\(n \sim 10^{30} \text{ electron}/\text{cm}^3\)), the Fermi temperature can reach values on the order of \(10^{11} K\) or higher (where the star temperature is much lower, around \(10^7\) Kelvin), indicating that the electron gas remains degenerate even at very high temperatures.
 
 \section{Bose-Einstein Gas}
+
+We can now analyze the behavior of a Bose gas at low temperatures, where quantum effects become significant and lead to phenomena such as Bose-Einstein condensation. Starting from the expressions for the particle density and the pressure:
+\[
+    \begin{aligned}
+        n & = \frac{g}{\lambda_{T}^3} g_{3/2}(z),       \\
+        p & = \frac{g}{\beta \lambda_{T}^3} g_{5/2}(z),
+    \end{aligned}
+\]
+where again we have defined the Bose-Einstein functions \(g_{\nu}(z)\) as a power series in the fugacity \(z\):
+\[
+    g_{\nu}(z) = \sum_{l=0}^{\infty} \frac{z^{l+1}}{(l+1)^{\nu}}.
+\]
+We can study the behavior of these functions as \(z\) approaches 1 (low temperatures) and as \(z\) is very small compared to 1 (high temperatures). These are the two regimes of interest for the Bose gas: the quantum degenerate regime and the classical limit. We will start with the classical limit, which we have already analyzed in general terms, and then we will focus on the quantum degenerate regime where characteristic effects of bosons emerge.
+
+\subsection{Classical and Semiclassical Limits}
+
+In the classical limit, where \(z = e^{\beta \mu} \ll 1\) since the temperature is high, we can approximate the Bose-Einstein functions by considering only the first term in the power series:
+\[
+    g_{\nu}(z) \approx z \quad \text{for } z \ll 1.
+\]
+Substituting this approximation into the expressions for the particle density and pressure, we recover the classical ideal gas law:
+\[
+    \begin{aligned}
+        n & \approx \frac{g}{\lambda_{T}^3} z,       \\
+        p & \approx \frac{g}{\beta \lambda_{T}^3} z.
+    \end{aligned}
+\]
+Solving for \(z\) in terms of \(n\), we find
+\[
+    z \approx \frac{n \lambda_{T}^3}{g},
+\]
+which can be substituted back into the expression for the pressure to obtain
+\[
+    p \approx n k_B T,
+\]
+recovering the classical ideal gas law \(pV = N k_B T\).
+
+We can also find an expression for the chemical potential in the classical limit:
+\[
+    z = e^{\beta \mu} \approx \frac{n \lambda_{T}^3}{g} \implies \mu \approx k_B T \log \left( \frac{n \lambda_{T}^3}{g} \right) = - \frac{3}{2} k_B T \log \left( \frac{m k_B T}{2 \pi \hbar^2} \left(\frac{g}{n}\right)^{\tfrac{2}{3}} \right) \xrightarrow{T \to \infty} -\infty.
+\]
+This shows that in the classical limit the chemical potential diverges to negative infinity as the temperature increases.
+Finally, if we consider the Bose-Einstein distribution for the average occupation number of a single-particle state:
+\[
+    \langle n_{\alpha} \rangle^{B}_{gc} = \frac{1}{e^{\beta (\epsilon_{\alpha} - \mu)} - 1} \sim e^{-\beta (\epsilon_{\alpha}-\mu)} \quad \text{for } z \ll 1,
+\]
+we recover the Maxwell-Boltzmann distribution for classical particles.
+
+If we now consider the next order in the power series expansion for the Bose-Einstein functions, we can derive semiclassical corrections to the ideal gas law that account for quantum effects. Practically, we are working in the regime in which particles are behaving almost classically but small quantum corrections are needed to be taken into account: we are approaching the quantum degenerate regime. Including the second term (\(l=1\)) in the series, we have
+\[
+    \begin{aligned}
+        n & \approx \frac{g}{\lambda_{T}^3} \left( z + \frac{z^2}{2^{3/2}} \right),       \\
+        p & \approx \frac{g}{\beta \lambda_{T}^3} \left( z + \frac{z^2}{2^{5/2}} \right).
+    \end{aligned}
+\]
+Solving for \(z\) in terms of \(n\), and substituting this expression for \(z\) back into the pressure (keeping terms up to second order in \(n \lambda_{T}^3/g\)) we find the same expression derived previously for the general quantum gas, but now specified for bosons:
+\[
+    p = n k_B T \left[ 1 + \frac{n}{4\sqrt{2}}\frac{\lambda_{T}^3}{g} \right].
+\]
+This expression represents the semiclassical expansion of the equation of state for a Bose gas, showing how quantum statistics modify the ideal gas law. The correction term \(+ \frac{n}{4\sqrt{2}}\frac{\lambda_{T}^3}{g}\) indicates that for bosons, the pressure is increased compared to the classical ideal gas, reflecting the tendency of bosons to cluster together in the same quantum state. These corrections become significant at low temperatures or high densities, where quantum effects dominate the behavior of the gas.
+
+\subsection{Quantum Regime}
+
+To analyze the behavior of the Bose gas in the quantum degenerate regime, we need to consider the full power series expansion for the Bose-Einstein functions \(g_{\nu}(z)\): we need to check convergence of the series as \(z\) approaches 1 (low temperatures). The series converges for all \(z < 1\), but as \(z\) approaches 1, the terms in the series become larger and larger, leading to a divergence at \(z = 1\).
+
+We will consider both the particle density and pressure expressions, so we need the series expansion for both \(g_{3/2}(z)\) and \(g_{5/2}(z)\). Starting from the general expression
+\[
+    g_{\nu}(z) = \sum_{l=0}^{\infty} \frac{z^{l+1}}{(l+1)^{\nu}},
+\]
+we have to analyze \(\nu=3/2\) and \(\nu=5/2\):
+\begin{enumerate}
+    \item For \(\nu = 3/2\):
+          \[
+              g_{3/2}(z) = \sum_{l=0}^{\infty} \frac{z^{l+1}}{(l+1)^{3/2}}.
+          \]
+          As \(z\) approaches 1, the series diverges, indicating that the particle density \(n\) also diverges. In particular
+          \begin{itemize}
+              \item For \(\vert z \vert < 1\), the series is \textbf{absolutely convergent};
+              \item For \(\vert z \vert = 1\), the series is \textbf{simply convergent};
+              \item For \(\vert z \vert > 1\), the series is \textbf{divergent}.
+          \end{itemize}
+          These properties should not surprise us, since bosons can have \(\mu(T) \leq 0\) and thus \(z \leq 1\): the only physically relevant case is the first one, where the series converges absolutely.
+    \item For \(\nu = 5/2\):
+          \[
+              g_{5/2}(z) = \sum_{l=0}^{\infty} \frac{z^{l+1}}{(l+1)^{5/2}}.
+          \]
+          Similar considerations apply here: as \(z\) approaches 1, the series diverges, indicating that the pressure \(p\) also diverges. The series diverges as \(\vert z \vert\) grows, but it is defined for all values of the fugacity, even for \(\vert z \vert > 1\).
+\end{enumerate}
+
+We now intend to study the dependence of the \textbf{chemical potential} \(\mu\) on the temperature \(T\) in this quantum degenerate regime.
+\begin{itemize}
+    \item At high temperatures, we are in the classical limit where \(\mu \to -\infty\) as \(T \to \infty\), leading to \(z \ll 1\).
+    \item As the temperature decreases, \(\mu\) increases towards 0, leading to an increase in the fugacity \(z\) towards 1.
+    \item The chemical potential is a monotonically decreasing function of temperature
+          \[
+              \frac{\partial \mu}{\partial T} \leq 0,
+          \]
+          approaching 0 from below as \(T\) approaches a critical temperature \(T_c\).
+\end{itemize}
+\TODO{insert plot of mu vs T for Bose gas.}
+Thus we can define the critical temperature \(T_c\) for Bose-Einstein condensation as the temperature at which the chemical potential \(\mu\) reaches 0, leading to \(z = 1\); there are two possible cases:
+\begin{itemize}
+    \item \(T_c = 0\) so that \(\mu(T_c)=0\) \(\implies\) we are in the \(2D\)-Bose gas case, where no condensation occurs at finite temperature (we will show this later);
+    \item \(T_c \neq 0\) so that \(\mu(T_c)=0\) \(\implies\) we are in the \(3D\)-Bose gas case, where condensation occurs at a finite temperature (below \(T_c\)).
+\end{itemize}
+Setting our analysis in the \(3D\) case, we can find an expression for the critical temperature \(T_c\) by setting \(\mu = 0\) (thus \(z=1\)) in the expression for the particle density:
+\[
+    n = \frac{g}{\lambda_{T_c}^3} g_{3/2}(1) = \frac{g}{\lambda_{T_c}^3} \zeta(3/2),
+\]
+where we have used the Riemann zeta function \(\zeta(\nu) = \sum_{l=0}^{\infty} \frac{1}{(l+1)^{\nu}}=g_{\nu}(1)\) to express \(g_{3/2}(1)\). Solving for \(T_c\), we find
+\[
+    T_{BEC} = \frac{2 \pi \hbar^2}{m k_B} \left( \frac{n}{g \zeta(3/2)} \right)^{2/3}.
+\]
+This expression shows that the critical temperature for \textbf{Bose-Einstein condensation} depends on the particle density \(n\), the mass of the bosons \(m\), and the internal degeneracy \(g\). Below this temperature, a macroscopic number of bosons occupy the ground state, leading to the phenomenon of Bose-Einstein condensation, which has been observed experimentally in systems such as ultracold atomic gases. This happens at temperatures comprised in the range of nanoKelvins to microKelvins, since the chemical potential remains equal to zero in this whole range of temperatures below \(T_{BEC}\).
+
+So the occupation number for temperatures below \(T_{BEC}\) can be expressed as
+\[
+    n(T<T_{BEC}) = \frac{g}{\lambda_{T}^3} \zeta(3/2).
+\]
+We have to pay attention reading the consequences of this result: as temperature decreases below \(T_{BEC}\) and approaches absolute zero, \(\lambda_T = \left(\frac{2\pi\hbar^2}{m k_B T}\right)^{1/2}\xrightarrow{T \to 0} \infty\) diverges, leading to a decrease in the particle density \(n\) until the absolute zero is reached:
+\[
+    n \xrightarrow{\lambda_T \to \infty} 0.
+\]
+Particles cannot disappear as temperature decreases, so we have to conclude that the expression for the particle density above only accounts for particles in excited states (with \(\epsilon > 0\)), while a macroscopic number of particles condense into the ground state (with \(\epsilon = 0\)). If we consider, indeed, the number of particles in the ground state for \(\epsilon = 0\), we can write
+\[
+    \langle n_0 \rangle_{gc}^{B} = \frac{1}{e^{\beta(0 - \mu)} - 1} = \frac{1}{e^{-\beta \mu} - 1} = \frac{z}{1 - z} \xrightarrow{z \to 1} \infty,
+\]
+indicating that as \(\mu\) approaches 0 (i.e., as \(z\) approaches 1), the occupation number of the ground state diverges, leading to a macroscopic occupation of this state. But we can be more precise: the total number of particles \(N\) in the system can be expressed as the sum of particles in the ground state \(N_0\) and particles in excited states \(N_{exc}\): starting again from the number of states in the momentum space
+\[
+    N = \sum_{\mathbf{k}} n(\epsilon_{\mathbf{k}}), \quad \epsilon_{\mathbf{k}} = \frac{\hbar^2 \mathbf{k}}{2m}, \quad \mathbf{k} = \frac{2\pi}{L} (n_x,\, n_y,\, n_z),
+\]
+if we compute the TD limit the number of particles becomes
+\[
+    N = \int_0^{\infty} \d{\epsilon} g(\epsilon) \langle n(\epsilon) \rangle_{gc}^{B} = N_0 + \int_{\epsilon > 0} \d{\epsilon} g(\epsilon) \langle n(\epsilon) \rangle_{gc}^{B} = N_0 + N_{exc}.
+\]
+This is the crucial point: since \(\langle n(0) \rangle_{gc}^{B}\Big\vert_{\mu=0} \to \infty\) we formally need to separate the contribution of the ground state (with \(\epsilon = 0\)) from the contributions of all excited states (with \(\epsilon > 0\)), even if the integral over all energies wasn't seeing the divergence: it is only one point and computing the integral does not capture the divergence. Thus, we can express the number of particles as
+\[
+    N = N_0 + \sum_{\mathbf{k}} \epsilon_{\mathbf{k}},
+\]
+\(N_0\) being the number of particles in the ground state, and the sum being over all excited states. In the TD limit, the number of particles divided by the volume becomes
+\[
+    n = n_0(T) + \frac{1}{V} \int_0^{\infty} \d{\epsilon} g(\epsilon) \langle n(\epsilon) \rangle_{gc}^{B},
+\]
+and if we now take the limit \(\mu \to 0\) (thus \(z \to 1\)) we find
+\[
+    n = n_0(T) + \frac{g}{\lambda_{T}^3} \zeta(3/2) = n_0(T) + n_{n}(T),
+\]
+since we call the number of particles in excited states \(n_{n}(T)\), the "\textbf{normal}" component of the gas.
+If we compute the normal density for temperatures below \(T_{BEC}\), the number of particles in excited states is given by
+\[
+    n_{n}(T < T_{BEC}) = \frac{g}{\lambda_{T}^3} \zeta(3/2) = \frac{g}{\lambda_{T_{BEC}}^3} \frac{n \lambda_T^3}{g} = n \left( \frac{T}{T_{BEC}} \right)^{3/2},
+\]
+indicating that not all particles can be accommodated in excited states, leading to a macroscopic occupation of the ground state:
+\[
+    n_0 = n - n_{n} = n \left[ 1 - \left( \frac{T}{T_{BEC}} \right)^{3/2} \right].
+\]
+This expression shows that as the temperature decreases below \(T_{BEC}\), the number of particles in the ground state \(N_0\) increases, reaching a maximum of \(N\) at absolute zero. This phenomenon is the hallmark of Bose-Einstein condensation, where a significant fraction of bosons occupy the lowest energy state, leading to unique macroscopic quantum phenomena such as superfluidity and coherence.
+
+------
