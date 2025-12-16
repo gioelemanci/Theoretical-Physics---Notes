@@ -758,7 +758,71 @@ The two-point function is then found to be
 \[
     \langle \psi^{i} \psi^{j} \rangle = -i G^{ij},
 \]
-which lead us to identify \(G^{ij}\) as the fermionic propagator of the theory, the Green function in quantum mechanical applications. To check the overall normalization, one must be careful with signs arising from the anticommuting character of the Grassmann variables and from the antisymmetric properties of \(K_{ij}\) and \(G^{ij}\). Similar formulae may be written down for complex fermions (they are contained in the above formula as well, for example setting \(\psi^i \equiv (\psi^a, \overline{\psi}^a)\)). As they apply to the case of a Dirac fermion, let us write down the main formulae for the variables \(\psi^i\) with complex conjugates \(\overline{\psi}_i\)
+which lead us to identify \(G^{ij}\) as the fermionic propagator of the theory, the Green function in quantum mechanical applications. To check the overall normalization, one must be careful with signs arising from the anticommuting character of the Grassmann variables and from the antisymmetric properties of \(K_{ij}\) and \(G^{ij}\). Similar formulae may be written down for complex fermions (they are contained in the above formula as well, for example setting \(\psi^i \equiv (\psi^a, \overline{\psi}_a)\)). As they apply to the case of a Dirac fermion, let us write down the main formulae for the variables \(\psi^i\) with complex conjugates \(\overline{\psi}_i\)
+\[
+    \begin{aligned}
+        Z[\eta,\,\overline{\eta}]                  & = \int \mathrm{D} \psi \mathrm{D} \overline{\psi} \, e^{i \left( S[\psi,\,\overline{\psi}] + \overline{\eta}_i \psi^i + \overline{\psi}_i \eta^i \right)} = \det K^i_{j} \, e^{i \overline{\eta}_i G^{i}_j \eta^j}, \\
+        \langle \psi^{i} \overline{\psi}_j \rangle & = \frac{1}{Z[0,\,0]} \left. \left(\frac{1}{i}\right)^2\frac{\delta^2 Z[\eta,\,\overline{\eta}]}{\delta \overline{\eta}_i \delta \eta^j} \right|_{\eta=\overline{\eta}=0} = -i G^{i}_j,
+    \end{aligned}
+\]
+where the results are obtained for a free theory with quadratic action
+\[
+    S[\psi,\,\overline{\psi}] = \overline{\psi}_i K^i_{j} \psi^j,
+\]
+and \(Z[\eta, \overline{\eta}]\) has been computed completing the squares in the path integral (using \(G^i_j\), the inverse of the kinetic operator \(K^i_j\)). Suitable boundary conditions are implicit in the path integral and Green functions \(G^i_j\). The entire set of generating functionals discussed in the bosonic case can similarly be introduced here.\TODO{compute it if you want} Let us consider the examples of the fermionic oscillator and Dirac field. The fermionic oscillator has classical action (see eq. \eqref{eq:fermionic_oscillator_action})
+\[
+    S[\psi,\,\overline{\psi}] = \int \mathrm{d}t \overline{\psi}(t) \left[ i \frac{\partial}{\partial t} - \omega \right] \psi(t),
+\]
+and the path integral with sources is computed by completing squares
+\[
+    \begin{aligned}
+        Z[\eta,\,\overline{\eta}] & = \int \mathrm{D} \psi \mathrm{D} \overline{\psi} \, e^{i \left( S[\psi,\,\overline{\psi}] + \int \mathrm{d}t \left[ \overline{\eta}(t) \psi(t) + \overline{\psi}(t) \eta(t) \right] \right)} \\
+                                  & = N \exp{i \int \int \mathrm{d}t \mathrm{d}t' \overline{\eta}(t) G(t - t') \eta(t')},
+    \end{aligned}
+\]
+where \(G(t-t^{\prime})\) is the Green function of the operator \(K = -i \partial_t + \omega\), with
+\[
+    \left(-i\partial_t + \omega\right) G(t - t') = \delta(t - t'),
+\]
+and reads:
+\[
+    G(t-t^{\prime}) = \int \frac{\d{p}}{2\pi} \frac{e^{-i p (t - t')}}{-p + \omega} = \int \frac{\d{p}}{2\pi} e^{-i p (t - t')} \frac{p+\omega}{-p^2 + \omega^2 - i\epsilon} = i \theta(t - t') e^{-i \omega (t - t')}.
+\]
+As usual, the \(i\epsilon\) prescription has been introduced to define the propagator properly. The two-point function is then found to be
+\[
+    \langle \psi(t) \overline{\psi}(t') \rangle = -i G(t - t') = \theta(t - t') e^{-i \omega (t - t')}.
+\]
 
+Similar considerations apply to the \textbf{Dirac field}, with classical action
+\[
+    S[\psi,\,\overline{\psi}] = \int \mathrm{d}^4 x \, \overline{\psi}(x) \left( i \gamma^\mu \partial_\mu - m \right) \psi(x),
+\]
+and path integral with sources
+\[
+    \begin{aligned}
+        Z[\eta,\,\overline{\eta}] & = \int \mathrm{D} \psi \mathrm{D} \overline{\psi} \, e^{i \left( S[\psi,\,\overline{\psi}] + \int \mathrm{d}^4 x \left[ \overline{\eta}(x) \psi(x) + \overline{\psi}(x) \eta(x) \right] \right)} \\
+                                  & = N \exp{i \int \int \mathrm{d}^4 x \mathrm{d}^4 y \overline{\eta}(x) G(x - y) \eta(y)},
+    \end{aligned}
+\]
+where \(G(x-y)\) is the Green function of the operator \(K = i \gamma^\mu \partial_\mu + m = \slashed{\partial} + m\), with
+\[
+    \left( i \gamma^\mu \partial_\mu + m \right) G(x - y) = \delta^{(4)}(x - y),
+\]
+and reads:
+\[
+    G(x-y) = \int \frac{\mathrm{d}^4 p}{(2\pi)^4} e^{i p^{\mu} (x^{\mu} - y^{\mu})} \frac{(-i\slashed{p} + m)}{p^2 + m^2 - i\epsilon}.
+\]
+It is often indicated also by \(S(x-y)\) (S for spinor). The two-point function (propagator) then becomes
+\[
+    \langle \psi(x) \overline{\psi}(y) \rangle = -i G(x - y) = -\int \frac{\mathrm{d}^4 p}{(2\pi)^4} e^{i p^{\mu} (x^{\mu} - y^{\mu})} \frac{(\slashed{p} + im)}{p^2 + m^2 - i\epsilon}.
+\]
+which is interpreted as describing a particle propagating from \(y^{\mu}\)  to \(x^{\mu}\) if \(x^0 > y^0\), or an antiparticle propagating from \(x^{\mu}\) to \(y^{\mu}\) if \(y^0 > x^0\).
 
-[...]
+Wick's theorem and perturbation theory for fermionic systems can be developed similarly to the bosonic case, with suitable signs arising from the anticommuting nature of the Grassmann variables.To conclude, a last remark: a well-known property of perturbation theory written in terms of Feynman diagram (and related Feynman rules that translate them into equations) states that fermionic loops carry a minus sign. This is easily seen as arising for the Grassmann character of the fermionic variables. In a hypercondensed notation, the free propagator is denoted by
+\[
+    \langle \psi^i \overline{\psi}_j \rangle = \feynLine,
+\]
+and considering an interaction of the form \(S_{int} = \lambda \overline{\psi}_i \psi^i\), one finds in diagrams arising from the expansion of the Dyson formula \(\langle e^{i S_{int}} \rangle\)  terms of the form
+\[
+    \langle S_{int}^2 \rangle_c = \lambda^2 \langle \overline{\psi}_i \psi^i \overline{\psi}_j \psi^j \rangle_c = - \lambda^2 \langle \psi^j \overline{\psi}_i \rangle \langle \psi^j \overline{\psi}_i \rangle = \feynLoop.
+\]
