@@ -2,25 +2,106 @@
 
 We are going to describe the Electromagnetic field as a quantum field theory of spin 1 particles, the photons. We will see that the photon is \textbf{massless} and has only \textbf{two polarization states}, which makes it different from the massive spin 1 particles we will study later, such as the W and Z bosons.
 
+We have alredy gone through the quantization procedure for scalar fields (spin 0 particles) and spin \(\frac{1}{2}\) fields (fermions), so we will focus here on the peculiarities of spin 1 fields, which arise mainly due to the gauge invariance of the electromagnetic field.
+
 \section{The Classical Electromagnetic Field}
 
 The lagrangian density for the classical electromagnetic field is given by
-\begin{equation}
+\[
     \mathcal{L} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu},
-\end{equation}
+\]
 where the field strength tensor is defined as
 \[
     F^{\mu \nu} = \partial^\mu A^\nu - \partial^\nu A^\mu, \quad A^\mu = ( \phi, \mathbf{A} ).
 \]
 We can study the equations of motion using the Euler-Lagrange equations:
 \[
-    \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu A_\nu)} \right) - \frac{\partial \mathcal{L}}{\partial A_\nu} = 0.
+    \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu A_\nu)} \right) - \frac{\partial \mathcal{L}}{\partial A_\nu} = 0, \implies \partial_\mu F^{\mu \nu} = 0.
+\]
+It can be shown that the field strength tensor \(F^{\mu \nu}\) respects the \textbf{Bianchi identity} (as we have already seen in section \ref{sec:free_em_field_lagrangian}):
+\[
+    \partial_{[\lambda}F_{\mu\nu]} \equiv
+    \partial_\lambda F_{\mu\nu} +
+    \partial_\mu F_{\nu\lambda} +
+    \partial_\nu F_{\lambda\mu} = 0
+\]
+The electric and magnetic fields can be expressed in terms of the potentials as
+\[
+    \mathbf{E} = -\nabla \phi - \frac{\partial \mathbf{A}}{\partial t}, \quad \mathbf{B} = \nabla \times \mathbf{A},
+\]
+as the spatial and temporal components of the field strength tensor:
+\[
+    F = \begin{pmatrix}
+        0    & E_x  & E_y  & E_z  \\
+        -E_x & 0    & -B_z & B_y  \\
+        -E_y & B_z  & 0    & -B_x \\
+        -E_z & -B_y & B_x  & 0
+    \end{pmatrix}.
+\]
+Finally we can see how the Maxwell equations are encapsulated in this formalism, since they arise from the equations of motion and the Bianchi identity:
+\[
+    \begin{dcases}
+        \nabla \cdot \mathbf{E} = 0, \\
+        \nabla \times \mathbf{B} - \frac{\partial \mathbf{E}}{\partial t} = 0,
+    \end{dcases} \quad
+    \begin{dcases}
+        \nabla \cdot \mathbf{B} = 0, \\
+        \nabla \times \mathbf{E} + \frac{\partial \mathbf{B}}{\partial t} = 0,
+    \end{dcases}
+\]
+where the first two equations come from \(\partial_\mu F^{\mu \nu} = 0\) and need further terms when sources are present, while the last two come from the Bianchi identity, after recognizing the definitions of the electric and magnetic fields, and are true even in the presence of sources.
+
+If we now expand the lagrangian density in terms of the potentials, we can exploit the fact that not every component of the vector potential \(A^{\mu}\) is physical, since the EM field is known to have only two physical degrees of freedom (the two polarization states of the photon). Thus the lagrangian density can be rewritten as
+\[
+    \mathcal{L} = -\frac{1}{4} \left(\partial_\mu A_\nu - \partial_\nu A_\mu\right)\left(\partial^{\mu}A^{\nu}-\partial^{\nu}A^{\mu}\right) = -\frac{1}{2} \left( F_{0i}F^{0i} + F_{ij}F^{ij} \right).
+\]
+Thus we understand that the lagrangian density depends only on the spatial components of the vector potential \(A^i\) and their time derivatives, while the time component \(A^0\) does not have a kinetic term (no dependence on \(\frac{1}{2}(\partial_0 A^0)^2\))
+\[
+    \mathcal{L} \supset \sum_{i} \frac{1}{2}(\dot{A}^{i})^2, \quad \text{ but } \quad \mathcal{L} \not\supset \frac{1}{2}(\dot{A}^{0})^2.
+\]
+This indicates that \(A^0\) is not a dynamical propagating degree of freedom, but rather acts as a Lagrange multiplier enforcing a constraint on the physical states of the theory.
+
+Thus if we were to solve the equations of motion directly for \(A_\mu\), we would find that only \(A_i\) and \(\dot{A}_i\) are necessary as initial conditions \((A_i(t_0, \mathbf{x}),\,\dot{A}_i(t_0, \mathbf{x}))\) to determine the evolution of the field, while \(A_0\) is determined by the equation \(\nabla\cdot \mathbf{E}=0\) and does not represent an independent degree of freedom. We have indeed
+\[
+    - \nabla\cdot \mathbf{E} = \nabla\cdot\nabla A_0 + \nabla\cdot \dot{\mathbf{A}} = 0 \implies \nabla^2 A_0 = - \nabla\cdot \dot{\mathbf{A}},
+\]
+so that \(A_0\) is fixed by the spatial components \(A_i\) and their time derivatives. We could compute a solution for \(A_0\) using Green's functions of the Laplacian operator:
+\[
+    \begin{dcases}
+        \nabla^2 A_0(t_0, \mathbf{x}) = - \nabla \cdot \dot{\mathbf{A}}(t_0, \mathbf{x}), \\
+        \nabla^2 G(\mathbf{x}, \mathbf{y}) = \delta^{(3)}(\mathbf{x} - \mathbf{y}) \iff G(\mathbf{x}, \mathbf{y}) = \frac{-1}{4\pi \vert \mathbf{x} - \mathbf{y} \vert},
+    \end{dcases}
+\]
+so that
+\[
+    A_0(t_0, \mathbf{x}) = \int \mathrm{d}^3 \mathbf{y} \, G(\mathbf{x}, \mathbf{y}) \left(- \nabla \cdot \dot{\mathbf{A}}(t_0, \mathbf{y})\right) = - \int \mathrm{d}^3 \mathbf{y} \frac{\nabla \cdot \dot{\mathbf{A}}(t_0, \mathbf{y})}{4\pi \vert \mathbf{x} - \mathbf{y} \vert}.
 \]
 
---- [...] ---
+In the end , we have only three independent degrees of freedom in the vector potential \(A^{\mu}\) (the three spatial components \(A^i\)), but we know that the photon has only two physical polarization states. This discrepancy arises because the electromagnetic field is invariant under \textbf{gauge transformations} of the form
+\[
+    A_\mu(x) \to A'_\mu(x) = A_\mu(x) + \partial_\mu \alpha(x),
+\]
+where \(\alpha(x)\) is an arbitrary scalar function of the spacetime whose derivative has to vanish at infinity. This gauge invariance implies that not all configurations of \(A_\mu\) correspond to physically distinct states: different choices of \(\alpha(x)\) can lead to the same physical electromagnetic fields \(\mathbf{E}\) and \(\mathbf{B}\). The field strength tensor \(F_{\mu\nu}\) is invariant under these gauge transformations:
+\[
+    F'_{\mu\nu} = \partial_\mu A'_\nu - \partial_\nu A'_\mu = \partial_\mu (A_\nu + \partial_\nu \alpha) - \partial_\nu (A_\mu + \partial_\mu \alpha) = F_{\mu\nu}.
+\]
+\(A_\mu\) and \(A'_\mu\) describe the same physical situation, they need to be identified, since this is a physical equivalence class. This is very different from global transformations: \(\psi(x) \to \psi^{\prime}(x) = e^{i\theta} \psi(x)\) is a transformation that changes the field configuration, but does not identify different configurations as physically equivalent, since the phase factor \(e^{i\theta}\) is constant and does not depend on spacetime. Here we have just a redundancy in the description of the electromagnetic field.
+
+We can do another example of gauge transformation: consider a solution for the vector potential \(A_\mu(x)\). After performing a gauge transformation with a function \(\alpha(x)\):\TODO{insert picture of gauge orbit}
+\[
+    A_\mu(x) \to A'_\mu(x) = A_\mu(x) + \partial_\mu \alpha(x),
+\]
+we could repeat the gauge transformation with a different function \(\beta(x)\):
+\[
+    A^{\prime}_\mu(x) \to A^{\prime\prime}_\mu(x) = A'_\mu(x) + \partial_\mu \beta(x) = A_\mu(x) + \partial_\mu (\alpha(x) + \beta(x)).
+\]
+Each of these configurations describes the same physical electromagnetic field, since the field strength tensor remains unchanged. This shows that there is an infinite number of gauge equivalent configurations of \(A_\mu\) that correspond to the same physical situation.
 
 \subsection{Popular Gauge Fixing Choices}
 
+We need to \textit{choose a representative} for each equivalence class of gauge equivalent configurations in order to uniquely describe the physical electromagnetic field. This process is called \textbf{gauge fixing}: we fix some condition on the vector potential \(A_\mu\) to eliminate the redundancy and select a unique element on the \textbf{gauge orbit} for each physical configuration. Some physiscal properties, such as the number of physical degrees of freedom, may become clearer after gauge fixing.
+
+There are several popular choices for gauge fixing in electromagnetism, each with its own advantages and disadvantages. Two of the most common gauges are:
 \begin{enumerate}
     \item \textbf{Lorentz Gauge}: The Lorentz gauge condition is given by
           \[
@@ -41,7 +122,7 @@ We can study the equations of motion using the Euler-Lagrange equations:
           \]
           will also satisfy the Lorentz gauge condition \(\partial_\mu A''^\mu = 0\).
 
-          But in this gauge, we have still some residual gauge freedom, since we can perform gauge transformations with functions \(\beta(x)\) (called harmonic functions) that satisfy the homogeneous wave equation \(\Box \beta(x) = 0\). Furthermore, this gauge fixing has the advantage of being manifestly Lorentz invariant, making it suitable for relativistic calculations.
+          But in this gauge, we have still some residual gauge freedom, since we can perform gauge transformations with functions \(\beta(x)\) (called harmonic functions) that satisfy the homogeneous wave equation \(\Box \beta(x) = 0\). Furthermore, this gauge fixing has the advantage of being \textbf{manifestly Lorentz invariant}, making it suitable for relativistic calculations.
 
     \item \textbf{Coulomb Gauge}: The Coulomb gauge condition is given by
           \[
@@ -50,8 +131,18 @@ We can study the equations of motion using the Euler-Lagrange equations:
           which focuses on the spatial components of the vector potential. In this gauge, the scalar potential \(\phi\) is determined by the charge distribution, while the vector potential \(\mathbf{A}\) describes the transverse electromagnetic waves. This gauge is particularly useful in non-relativistic quantum mechanics and in problems involving static charges, since it is not manifestly Lorentz invariant.
 
           One can use the residual gauge freedom in the Lorentz gauge to reach the Coulomb gauge by choosing a suitable gauge function \(\alpha(x)\) that satisfies the appropriate conditions:
-
-          [...]
+          \[
+              \nabla \cdot \mathbf{A} = \partial_i A^i = 0 \implies \partial_\mu A^{\mu} = \partial_0 A^0 + \nabla \cdot \mathbf{A} = \partial_0 A^0,
+          \]
+          so that \(A_0\) is constant in time, since \(\partial_\mu A^{\mu}=\partial_0 A^0 = 0\) from the Lorentz gauge. However, the temporal component \(A^0\)
+          \[
+              A_0(t_0,\,\mathbf{x}) = \int \mathrm{d}^3 \mathbf{y} \frac{\partial_t \left(\nabla \cdot \mathbf{A}(t_0, \mathbf{y})\right)}{4\pi \vert \mathbf{x} - \mathbf{y} \vert} = 0,
+          \]
+          since \(\nabla \cdot \mathbf{A} = 0\). Thus, in the Coulomb gauge, the scalar potential is fixed to zero
+          \[
+              A_0(\mathbf{x}) = 0,
+          \]
+          and the vector potential \(\mathbf{A}\) describes the two transverse polarization states of the photon: since we have imposed \(\nabla \cdot \mathbf{A} = 0\), only the components of \(\mathbf{A}\) perpendicular to the direction of propagation remain as physical degrees of freedom.
 \end{enumerate}
 
 \section{Gauge Fixing of the Electromagnetic Field}
@@ -61,76 +152,99 @@ Before starting the quantization procedure, we need to find the conjugate moment
 The \textbf{conjugate momenta} are defined as
 \[
     \pi^{\mu} = \frac{\partial \mathcal{L}}{\partial (\partial_0 A_{\mu})} = \begin{dcases}
-        \pi^0 = \frac{\partial \mathcal{L}}{\partial (\partial_0 A_{0})} = 0, \text{ since } A_0 \text{ is not a dynamical field;} \\
-        \pi^i = \frac{\partial \mathcal{L}}{\partial (\partial_0 A_{i})} = F^{i0} = \dots = E^i.
+        \pi^0 = \frac{\partial \mathcal{L}}{\partial (\partial_0 A_{0})} = 0, \text{ since } A_0 \text{ is not a dynamical field,} \\
+        \pi^i = \frac{\partial \mathcal{L}}{\partial (\partial_0 A_{i})} = \frac{\partial}{\partial (\dot{A}_{i})} \left[-\frac{1}{2}\left(\dot{A}_j - \partial_j A_0\right)\left(\dot{A}^j - \partial^j A^0\right)\right] = E^i,
     \end{dcases}
 \]
-
-[...]
-
+since, for the spatial component, we can compute
+\[
+    \frac{\partial}{\partial (\dot{A}_{i})} \left[-\frac{1}{2}\left(\dot{A}_j - \partial_j A_0\right)\left(\dot{A}^j - \partial^j A^0\right)\right] = -\frac{1}{2} F^{0i} -\frac{1}{2}F_{0j}\eta^{ji} = -F^{0i} = E^i.
+\]
+Thus we have \(\pi = (0, \mathbf{E})\) and the Hamiltonian density of the system can be computed via Legendre transform as
+\[
+    \mathcal{H} = \pi^{\mu} \partial_0 A_{\mu} - \mathcal{L} = \pi^{i} \partial_0 A_{i} - \mathcal{L},
+\]
+since \(\pi^0 = 0\). Recalling the expressions for \(\pi^i\) and \(\mathcal{L}\), we get
+\[
+    \begin{aligned}
+        \pi^{i} \partial_0 A_{i} & = E^{i} \partial_0 A_{i} = E^{i} \left( F_{0i} + \partial_i A_0 \right) = E^{i} F_{0i} + E^{i} \partial_i A_0,                                                                                                                 \\
+        \mathcal{L}              & = -\frac{1}{2} \left( F_{0i}F^{0i} + F_{ij}F^{ij} \right) = -\frac{1}{2} \left( -\vert \mathbf{E} \vert^2 + \vert \mathbf{B} \vert^2 \right) = \frac{1}{2} \left( \vert \mathbf{E} \vert^2 - \vert \mathbf{B} \vert^2 \right),
+    \end{aligned}
+\]
+we get to an hamiltonian density of
+\[
+    \mathcal{H} = E^{i} F_{0i} + E^{i} \partial_i A_0 - \frac{1}{2} \left( \vert \mathbf{E} \vert^2 - \vert \mathbf{B} \vert^2 \right) = \frac{1}{2} \left( \vert \mathbf{E} \vert^2 + \vert \mathbf{B} \vert^2 \right) + (\mathbf{E} \cdot \nabla) A_0.
+\]
 So that the Hamiltonian takes the form
 \[
-    H = \int \mathrm{d}^3 \mathbf{x} \left( \frac{1}{2} \vert \mathbf{E} \vert^2 + \frac{1}{2} \vert \mathbf{B} \vert^2 - A_0 (\nabla \cdot \mathbf{E}) \right).
+    H = \int \mathrm{d}^3 \mathbf{x} \left( \frac{1}{2} \left( \vert \mathbf{E} \vert^2 + \vert \mathbf{B} \vert^2 \right) - A_0 (\nabla \cdot \mathbf{E}) \right).
 \]
-In this expression, the term involving \(A_0\) (found after an integration by parts) does not act as a physical variable, but as a Lagrange multiplier enforcing Gauss's law \(\nabla \cdot \mathbf{E} = 0\) in the absence of charges:
+In this expression, the term involving \(A_0\) (found after an integration by parts) does not act as a physical variable, but as a \textit{Lagrange multiplier} enforcing Gauss's law \(\nabla \cdot \mathbf{E} = 0\) in the absence of charges:
 \[
     \frac{\partial \mathcal{H}}{\partial A_0} = -\nabla \cdot \mathbf{E} = 0 \implies \nabla \cdot \mathbf{E} = 0.
 \]
 We have still to fix a gauge in order to proceed with the quantization, so the field has still some redundant degrees of freedom, and this is a constraint on the physical states of the theory (on the elements of \(A^{\mu}\)).
 
-\paragraph{Gauge fixing.}
-Lastly, before starting the quantization procedure, we have to impose the \textbf{Lorentz gauge} condition \(\partial_\mu A^{\mu} = 0\), since its Lorentz invariance makes it suitable for relativistic quantum field theory. From this choice, we get the equations of motion
+\paragraph{Lorentz gauge fixing.}
+Lastly, before starting the quantization procedure, we have to impose the Lorentz gauge condition \(\partial_\mu A^{\mu} = 0\), since its Lorentz invariance makes it suitable for relativistic quantum field theory. From this choice, we get the equations of motion
 \[
-    \partial_\mu F^{\mu \nu} = \partial_\mu \partial^\mu A^\nu - \partial^\nu (\partial_\mu A^\mu) = \partial_\mu \partial^\mu A^\nu = \Box A^{\nu} = 0.
+    \partial_\mu F^{\mu \nu} = 0 = \partial_\mu \partial^\mu A^\nu - \partial^\nu (\partial_\mu A^\mu) = \partial_\mu \partial^\mu A^\nu = \Box A^{\nu}.
 \]
-Since \(\Box A^{\nu} = 0\), each component of the vector potential \(A^{\mu}\) satisfies the wave equation, particularly the massless KG scalar equation: the field \(A^{\mu}\) will describe massless particles, the photons, with energy \(E_{\mathbf{p}} = \sqrt{\vert \mathbf{p} \vert^2} = \vert \mathbf{p} \vert \).
+Since \(\Box A^{\nu} = 0\), each component of the vector potential \(A^{\mu}\) satisfies the wave equation, particularly the massless KG scalar equation: at the quantum level, the field \(A^{\mu}\) will describe massless particles, the \textbf{photons}, with energy \(E_{\mathbf{p}} = \sqrt{\vert \mathbf{p} \vert^2} = \vert \mathbf{p} \vert \).
 
+\paragraph{Feynman gauge fixing.}
 Instead of imposing the gauge condition \(\partial_\mu A^{\mu} = 0\) by hand, we can modify the lagrangian density slightly by adding a gauge-fixing term:
+\[
+    \mathcal{L} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} - \frac{1}{2\xi} (\partial_\mu A^{\mu})^2,
+\]
+where \(\xi\) let us choose different gauges: \(\xi = 1\) corresponds to the \textbf{Feynman gauge}, while \(\xi \to 0\) (computed after quantization) corresponds to the Landau gauge. Here we will choose \(\xi = 1\) for simplicity, so
 \[
     \mathcal{L} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} - \frac{1}{2} (\partial_\mu A^{\mu})^2.
 \]
-This modification does not change the equations of motion for physical fields, but it allows us to derive the Lorentz gauge condition from the equations of motion themselves. The new equations of motion become
+This modification does not change the equations of motion for physical fields (since we have redundancy in the description, we are just fixing a gauge implicitly from the Lagrangian), but it allows us to derive the Lorentz gauge condition from the equations of motion themselves. The new equations of motion become
 \[
-    \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu A_\nu)} \right) - \frac{\partial \mathcal{L}}{\partial A_\nu} = 0 \implies \partial_\mu F^{\mu \nu} + \partial_\mu \eta^{\mu \nu} (\partial_\sigma A^{\sigma}),
+    \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu A_\nu)} \right) - \frac{\partial \mathcal{L}}{\partial A_\nu} = 0 \implies \partial_\mu F^{\mu \nu} + \partial_\mu \eta^{\mu \nu} (\partial_\sigma A^{\sigma}) = 0,
 \]
 which simplifies to
 \[
     \partial_\mu \partial^\mu A^\nu - \partial_\mu \partial^\nu A^\mu + \partial^\nu (\partial_\mu A^\mu) = \Box A^{\nu} = 0.
 \]
-We reached the same equations as before, but now the gauge condition \(\partial_\mu A^{\mu} = 0\) is automatically satisfied by the solutions of the equations of motion. If we proceed to find the conjugate momenta, we get
+We reached the same equations as before, but now the gauge condition \(\partial_\mu A^{\mu} = 0\) is automatically satisfied by the solutions of the equations of motion.
+
+Proceeding to find the conjugate momenta, we get
 \[
     \begin{dcases}
         \pi^0 = \frac{\partial \mathcal{L}}{\partial (\partial_0 A_{0})} = -\partial_\mu A^{\mu}; \\
-        \pi^i = \frac{\partial \mathcal{L}}{\partial (\partial_0 A_{i})} = \partial^i A^{0} - \partial_0 A^{i} = F^{i0};
+        \pi^i = \frac{\partial \mathcal{L}}{\partial (\partial_0 A_{i})} = \partial^i A^{0} - \partial^0 A^{i} = F^{i0};
     \end{dcases} \quad \iff \quad \pi^{\mu} = F^{\mu 0} - \eta^{\mu 0} (\partial_\nu A^{\nu}),
 \]
 different from the previous case where \(\pi^0 = 0\), since now the Lagrangian has a dependence on \(\partial_0 A_0\) in the new gauge-fixing term.
 
 \section{Quantization of the Electromagnetic Field}
 
-The classical fields \(A_{\mu}(x)\) and \(\pi^{\mu}(x)\) are going to be promoted to operators acting on a Hilbert space. We impose the \textbf{canonical commutation relations} at equal times:\footnote{Since we know that integer spin particles are bosons and the correct spin-statistics relations are imposed via commutation.}
+Sticking to the Feynman gauge, we can finally proceed to the quantization for the electromagnetic field. The classical fields \(A_{\mu}(x)\) and \(\pi^{\mu}(x)\) are going to be promoted to operators acting on a Hilbert space. We impose the \textbf{canonical commutation relations} at equal times:\footnote{Since we know that integer spin particles are bosons and the correct spin-statistics relations are imposed via commutation.}
 \[
     \begin{aligned}
-        \left[A_{\mu}(\mathbf{x}, t), \pi^{\nu}(\mathbf{y}, t)\right] = i \delta_{\mu}^{\ \nu} \delta^{(3)}(\mathbf{x} - \mathbf{y}), \\
-        \left[A_{\mu}(\mathbf{x}, t), A_{\nu}(\mathbf{y}, t)\right] = 0,                                                              \\
-        \left[\pi^{\mu}(\mathbf{x}, t), \pi^{\nu}(\mathbf{y}, t)\right] = 0.
+        \left[A_{\mu}(\mathbf{x}, t), \pi^{\nu}(\mathbf{y}, t)\right]   & = i \delta_{\mu}^{\ \nu} \delta^{(3)}(\mathbf{x} - \mathbf{y}), \\
+        \left[A_{\mu}(\mathbf{x}, t), A_{\nu}(\mathbf{y}, t)\right]     & = 0,                                                            \\
+        \left[\pi^{\mu}(\mathbf{x}, t), \pi^{\nu}(\mathbf{y}, t)\right] & = 0.
     \end{aligned}
 \]
-This relations will ensure the correct quantization of the electromagnetic field, with symmetric multiparticle states corresponding to the bosonic nature of photons.
+This relations will ensure the correct quantization of the electromagnetic field, with symmetric multiparticle states corresponding to the bosonic nature of photons, while the use of anticommutation relations would lead to inconsistencies with the spin-statistics theorem.
 
 The general solution to the equations of motion \(\Box A^{\mu} = 0\) can be expressed as a Fourier expansion in terms of plane waves whose coefficients should operate as creation and annihilation operators for photons. We can write:
 \[
-    A_{\mu}(x) = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{p}}}} \left( \hat{\xi}_{\mu}(\mathbf{p}) e^{i p \cdot x} + \hat{\xi}_{\mu}^{\dagger}(\mathbf{p}) e^{-i p \cdot x} \right),
+    \hat{A}_{\mu}(x) = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{p}}}} \left( \hat{\xi}_{\mu}(\mathbf{p}) e^{i \mathbf{p} \cdot \mathbf{x}} + \hat{\xi}_{\mu}^{\dagger}(\mathbf{p}) e^{-i \mathbf{p} \cdot \mathbf{x}} \right),
 \]
 where \(p^{\mu} = (E_{\mathbf{p}}, \mathbf{p})\) with \(E_{\mathbf{p}} = \vert \mathbf{p} \vert\) for massless particles.
 
-The operators \(\hat{\xi}_{\mu}(\mathbf{p})\) and \(\hat{\xi}_{\mu}^{\dagger}(\mathbf{p})\) will be identified as annihilation and creation operators for photons with momentum \(\mathbf{p}\) and polarization indexed by \(\mu\). To explicitly see this, we can decompose these operators in terms of a polarization basis: we introduce polarization vectors \(\epsilon_{\mu}^{(\lambda)}(\mathbf{p})\) with \(\lambda = 0, 1, 2, 3\) labeling the four possible polarization states of the photon
+The operators \(\hat{\xi}_{\mu}(\mathbf{p})\) and \(\hat{\xi}_{\mu}^{\dagger}(\mathbf{p})\) will be identified as annihilation and creation operators for photons with momentum \(\mathbf{p}\) and polarization indexed by \(\mu\). To explicitly see this, we can decompose these operators in terms of a \textbf{polarization basis}: we introduce polarization vectors \(\epsilon_{\mu}^{(\lambda)}(\mathbf{p})\) with \(\lambda = 0, 1, 2, 3\) labeling the four possible polarization states of the photon
 \[
     \epsilon_\mu^{(\lambda)}(\mathbf{p}), \quad \lambda = 0, 1, 2, 3,
 \]
-which satisfy the orthonormality and completeness relations
+which satisfy the orthonormality with respect to the Minkowski metric \(\eta_{\mu \nu}\):
 \[
-    \epsilon^{(\lambda)}_{\mu}(\mathbf{p}) \epsilon^{(\lambda') \mu}(\mathbf{p}) = \eta^{\lambda \lambda'}, \quad \sum_{\lambda=0}^{3} \epsilon_{\mu}^{(\lambda)}(\mathbf{p}) \epsilon_{\nu}^{(\lambda)}(\mathbf{p}) = \eta_{\mu \nu}.
+    \epsilon^{(\lambda)}_{\mu}(\mathbf{p}) \epsilon^{(\lambda') \mu}(\mathbf{p}) = \eta^{\lambda \lambda'}, \quad \epsilon_{\mu}^{(\lambda)}(\mathbf{p}) \epsilon_{\nu}^{(\lambda^{\prime})}(\mathbf{p}) \eta_{\lambda \lambda'} = \eta_{\mu \nu}.
 \]
 We can then express the operators \(\hat{\xi}_{\mu}(\mathbf{p})\) and \(\hat{\xi}_{\mu}^{\dagger}(\mathbf{p})\) in terms of creation and annihilation operators \(a^{(\lambda)}_{\mathbf{p}}\) and \(a^{(\lambda)\,\dagger}_{\mathbf{p}}\) for photons with definite polarization:
 \[
@@ -143,6 +257,42 @@ We can now write the final expression for the quantized electromagnetic field an
         \hat{\pi}^\mu(\mathbf{x}) & = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} (+i) \sqrt{\frac{E_{\mathbf{p}}}{2}} \sum_{\lambda=0}^{3} \epsilon^{\mu\,(\lambda)}(\mathbf{p}) \left( a^{(\lambda)}_{\mathbf{p}} e^{i \mathbf{p} \cdot \mathbf{x}} - a^{(\lambda)\,\dagger}_{\mathbf{p}} e^{-i \mathbf{p} \cdot \mathbf{x}} \right).
     \end{dcases}
 \]
-We have the four vector polarization depending on the four momentum \(p^{\mu} = \left(\vert \mathbf{p} \vert, \mathbf{p} \right)\), but we know that the photon has only two physical polarization states. This discrepancy arises because we have not yet fully fixed the gauge: the presence of unphysical polarization states (longitudinal and timelike) is a consequence of the gauge redundancy in the electromagnetic field. To make contact with the two physical polarization states of the photon, we choose \(\epsilon^{(1)}_{\mu}\) and \(\epsilon^{(2)}_{\mu}\) as the two transverse polarization vectors (perpendicular to the direction of the momentum), while \(\epsilon^{(0)}_{\mu}\) and \(\epsilon^{(3)}_{\mu}\) correspond to the unphysical timelike and longitudinal polarizations, respectively
-\dots
-------------
+We have the four vector polarization depending on the four momentum \(p^{\mu} = \left(\vert \mathbf{p} \vert, \mathbf{p} \right)\), but we know that the photon has only two physical polarization states. This discrepancy arises because we have not yet fully fixed the gauge: the presence of unphysical polarization states (longitudinal and timelike) is a consequence of the gauge redundancy in the electromagnetic field. To make contact with the two physical polarization states of the photon, we choose \(\epsilon^{(1)}_{\mu}\) and \(\epsilon^{(2)}_{\mu}\) as the two transverse polarization vectors
+\[
+    \epsilon^{(1)}_{\mu} p^{\mu} = \epsilon^{(2)}_{\mu} p^{\mu} = 0,\quad \text{ Lorentz invariant condition,}
+\]
+thus they are perpendicular to the direction of the momentum, while \(\epsilon^{(0)}_{\mu}\) and \(\epsilon^{(3)}_{\mu}\) correspond to the unphysical timelike and longitudinal polarizations, respectively.
+
+\begin{example}[Momentum along the z-axis]
+    Consider a photon with momentum along the z-axis:
+    \[
+        p^{\mu} = (E, 0, 0, E).
+    \]
+    A possible choice for the polarization vectors is:
+    \[
+        \begin{aligned}
+            \epsilon^{(0)}_{\mu} & = (1, 0, 0, 0) \quad \text{(timelike)},     \\
+            \epsilon^{(1)}_{\mu} & = (0, 1, 0, 0) \quad \text{(transverse)},   \\
+            \epsilon^{(2)}_{\mu} & = (0, 0, 1, 0) \quad \text{(transverse)},   \\
+            \epsilon^{(3)}_{\mu} & = (0, 0, 0, 1) \quad \text{(longitudinal)}.
+        \end{aligned}
+    \]
+    This choice satisfies the orthonormality conditions, since clearly
+    \[
+        \epsilon^{(1)}_{\mu} p^{\mu} = E \left(\epsilon^{(1)}_{0} + \epsilon^{(1)}_{3}\right) = 0, \quad \epsilon^{(2)}_{\mu} p^{\mu} = E \left(\epsilon^{(2)}_{0} + \epsilon^{(2)}_{3}\right) = 0,
+    \]
+    we have then \(\epsilon^{(1)}_0 = \epsilon^{(1)}_3 = 0\) and \(\epsilon^{(2)}_0 = \epsilon^{(2)}_3 = 0\). We need to choose the transverse polarization vectors to be orthogonal to each other and normalized:
+    \[
+        \epsilon^{(1)}_{\mu} \epsilon^{(2)\,\mu} = 0 = \epsilon^{(1)}_1 \epsilon^{(2)}_1 + \epsilon^{(1)}_2 \epsilon^{(2)}_2 = 0,
+    \]
+    so now it is justified the initial choice of \(\epsilon^{(1)}_{\mu} = (0, 1, 0, 0)\) and \(\epsilon^{(2)}_{\mu} = (0, 0, 1, 0)\), which clearly satisfies the orthonormality conditions with respect to the Minkowski metric.
+\end{example}
+
+The creation and annihilation operators \(a^{(\lambda)}_{\mathbf{p}}\) and \(a^{(\lambda)\,\dagger}_{\mathbf{p}}\) satisfy the commutation relations\TODO{expliciit derivation of commutation relations.}
+\[
+    \begin{aligned}
+        \left[a^{(\lambda)}_{\mathbf{p}}, a^{(\lambda')\,\dagger}_{\mathbf{q}}\right] & = - \eta^{\lambda \lambda'} (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q}),                   \\
+        \left[a^{(\lambda)}_{\mathbf{p}}, a^{(\lambda')}_{\mathbf{q}}\right]          & = \left[a^{(\lambda)\,\dagger}_{\mathbf{p}}, a^{(\lambda')\,\dagger}_{\mathbf{q}}\right] = 0,
+    \end{aligned}
+\]
+which can be derived from the canonical commutation relations for the fields \(A_{\mu}\) and \(\pi^{\mu}\). Note the minus sign in the first commutation relation, which arises from the Minkowski metric \(\eta^{\lambda \lambda'}\) and reflects the indefinite metric of the space of states due to the presence of unphysical polarization states.
