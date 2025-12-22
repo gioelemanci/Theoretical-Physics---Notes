@@ -255,12 +255,13 @@ We can then express the operators \(\hat{\xi}_{\mu}(\mathbf{p})\) and \(\hat{\xi
     \hat{\xi}_{\mu}(\mathbf{p}) = \sum_{\lambda=0}^{3} \epsilon_{\mu}^{(\lambda)}(\mathbf{p}) a^{(\lambda)}_{\mathbf{p}}, \quad \hat{\xi}_{\mu}^{\dagger}(\mathbf{p}) = \sum_{\lambda=0}^{3} \epsilon_{\mu}^{(\lambda)}(\mathbf{p}) a^{(\lambda)\,\dagger}_{\mathbf{p}}.
 \]
 We can now write the final expression for the quantized electromagnetic field and its conjugate momenta:\footnote{In the expression for the conjugate momenta, we have a term \((+i)\) changing sign with respect to the scalar field case, due to the different definition of \(\pi^{\mu}\) in terms of the fields \(A^{\mu}\): for KG we had \(\pi = \partial_0 \phi\), while here we have \(\pi^{\mu} = - \dot{A}^{\mu} + \dots\), so that in the end this sign changes.}
-\[
+\begin{equation}
     \begin{dcases}
         \hat{A}_\mu(\mathbf{x})   & = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{p}}}} \sum_{\lambda=0}^{3} \epsilon_{\mu}^{(\lambda)}(\mathbf{p}) \left( a^{(\lambda)}_{\mathbf{p}} e^{i \mathbf{p} \cdot \mathbf{x}} + a^{(\lambda)\,\dagger}_{\mathbf{p}} e^{-i \mathbf{p} \cdot \mathbf{x}} \right),   \\
         \hat{\pi}^\mu(\mathbf{x}) & = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} (+i) \sqrt{\frac{E_{\mathbf{p}}}{2}} \sum_{\lambda=0}^{3} \epsilon^{\mu\,(\lambda)}(\mathbf{p}) \left( a^{(\lambda)}_{\mathbf{p}} e^{i \mathbf{p} \cdot \mathbf{x}} - a^{(\lambda)\,\dagger}_{\mathbf{p}} e^{-i \mathbf{p} \cdot \mathbf{x}} \right).
     \end{dcases}
-\]
+    \label{eq:field_expansion_ladder_em}
+\end{equation}
 We have the four vector polarization depending on the four momentum \(p^{\mu} = \left(\vert \mathbf{p} \vert, \mathbf{p} \right)\), but we know that the photon has only two physical polarization states. This discrepancy arises because we have not yet fully fixed the gauge: the presence of unphysical polarization states (longitudinal and timelike) is a consequence of the gauge redundancy in the electromagnetic field. To make contact with the two physical polarization states of the photon, we choose \(\epsilon^{(1)}_{\mu}\) and \(\epsilon^{(2)}_{\mu}\) as the two transverse polarization vectors
 \[
     \epsilon^{(1)}_{\mu} p^{\mu} = \epsilon^{(2)}_{\mu} p^{\mu} = 0,\quad \text{ Lorentz invariant condition,}
@@ -285,11 +286,15 @@ thus they are perpendicular to the direction of the momentum, while \(\epsilon^{
     \[
         \epsilon^{(1)}_{\mu} p^{\mu} = E \left(\epsilon^{(1)}_{0} + \epsilon^{(1)}_{3}\right) = 0, \quad \epsilon^{(2)}_{\mu} p^{\mu} = E \left(\epsilon^{(2)}_{0} + \epsilon^{(2)}_{3}\right) = 0,
     \]
-    we have then \(\epsilon^{(1)}_0 = \epsilon^{(1)}_3 = 0\) and \(\epsilon^{(2)}_0 = \epsilon^{(2)}_3 = 0\).\footnote{We have to choose zero for both the components from this condition applied along the properties of the } We need to choose the transverse polarization vectors to be orthogonal to each other and normalized:
+    we have then
+    \[
+        \epsilon^{(1)}_0 = \epsilon^{(1)}_3 = 0, \quad \epsilon^{(2)}_0 = \epsilon^{(2)}_3 = 0,
+    \]
+    since the transverse polarization vectors have zero time and longitudinal components. We need to choose the transverse polarization vectors to be orthogonal to each other and normalized:
     \[
         \epsilon^{(1)}_{\mu} \epsilon^{(2)\,\mu} = 0 = \epsilon^{(1)}_1 \epsilon^{(2)}_1 + \epsilon^{(1)}_2 \epsilon^{(2)}_2 = 0,
     \]
-    so now it is justified the initial choice of \(\epsilon^{(1)}_{\mu} = (0, 1, 0, 0)\) and \(\epsilon^{(2)}_{\mu} = (0, 0, 1, 0)\), which clearly satisfies the orthonormality conditions with respect to the Minkowski metric. To clarify, we can write
+    so now it is justified the initial choice of \(\epsilon^{(1)}_{\mu} = (0, 1, 0, 0)\) and \(\epsilon^{(2)}_{\mu} = (0, 0, 1, 0)\),\footnote{We could have chosen the opposite identification, it would have been the same.} which clearly satisfies the orthonormality conditions with respect to the Minkowski metric. To clarify, we can write
     \[
         \epsilon^{(1)\,\mu} = \begin{pmatrix}
             0 \\
@@ -313,34 +318,55 @@ The creation and annihilation operators \(a^{(\lambda)}_{\mathbf{p}}\) and \(a^{
         \left[a^{(\lambda)}_{\mathbf{p}}, a^{(\lambda')}_{\mathbf{q}}\right]          & = \left[a^{(\lambda)\,\dagger}_{\mathbf{p}}, a^{(\lambda')\,\dagger}_{\mathbf{q}}\right] = 0,
     \end{aligned}
 \]
-which can be derived from the canonical commutation relations for the fields \(A_{\mu}\) and \(\pi^{\mu}\). Note the minus sign in the first commutation relation, which arises from the Minkowski metric \(\eta^{\lambda \lambda'}\) and reflects the indefinite metric of the space of states due to the presence of unphysical polarization states.
+which can be derived from the canonical commutation relations for the fields \(A_{\mu}\) and \(\pi^{\mu}\). Note the minus sign in the first commutation relation, which arises from the Minkowski metric \(\eta^{\lambda \lambda'}\) and reflects the presence of unphysical polarization states.
 
-    [...]
-
-The lagrangian constains terms like
+If we indeed check the norm of the states created by the creation operators acting on the vacuum \(\ket{0}\), defined by \(a^{(\lambda)}_{\mathbf{p}} \ket{0} = 0\) for all \(\lambda\) and \(\mathbf{p}\), we find that for spacelike polarizations \(\lambda = 1, 2, 3\) we have positive norm states:
 \[
     \begin{aligned}
-        \mathcal{L}  = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} -\frac{1}{2} (\partial_\mu A^{\mu})^2, \\
-         & \supset \dots
+        \braket{\mathbf{p}, \lambda \vert \mathbf{q}, \lambda'} & = \bra{0} a^{(\lambda)}_{\mathbf{p}} a^{(\lambda')\,\dagger}_{\mathbf{q}} \ket{0} = -\eta^{\lambda \lambda'} (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q}), \\
+                                                                & \implies \braket{\mathbf{p}, \lambda \vert \mathbf{p}, \lambda} = + (2\pi)^3 \delta^{(3)}(0) > 0, \quad \text{for } \lambda = 1, 2, 3,
     \end{aligned}
 \]
-where the minus sign in front of the gauge-fixing term leads to negative norm states for the unphysical polarizations (timelike). This is a manifestation of the indefinite metric in the space of states, which is a common feature in gauge theories before imposing physical state conditions.
+while for the timelike polarization \(\lambda = 0\) we have negative norm states:
+\[
+    \braket{\mathbf{p}, 0 \vert \mathbf{q}, 0} = \bra{0} a^{(0)}_{\mathbf{p}} a^{(0)\,\dagger}_{\mathbf{q}} \ket{0} = -\eta^{00} (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q}) = - (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q}) <0.
+\]
+This comes from the commutator relations
+\[
+    \begin{aligned}
+        \left[a^{(0)}_{\mathbf{p}}, a^{(0)\,\dagger}_{\mathbf{q}}\right] & = - \eta^{00} (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q}) = - (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q}),                    \\
+        \left[a^{(i)}_{\mathbf{p}}, a^{(i)\,\dagger}_{\mathbf{q}}\right] & = - \eta^{ii} (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q}) = + (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q}), \quad i = 1, 2, 3,
+    \end{aligned}
+\]
+which in turn arise from the switching of the operators in the calculation of the norm.
 
-The solution is to impose the gauge condition at the quantum level, directly on the Fock space of states.
+This is the same problem we encountered when trying to quantize the Dirac field with commutator instead of anticommutators:\footnote{The only difference being that we cannot try to use \(\hat{a}^{\dagger}_{\mathbf{p}}\) as an annihilation operator, since timelike polarized states would still have a negative norm: this time the problem is of gauge nature, but instead of redundancies in the description of the system this time it may create bigger problems in the physical interpretation.} the presence of \textbf{negative norm states} indicates that our Hilbert space has an indefinite metric, which is unphysical since it usually leads to \textbf{negative probabilities} and \textbf{negative energies}. This states ended up being named \textbf{ghost states}.
 
-If we want to make the spin 1 particle massive, we need an additional degree of freedom, since a massive spin 1 particle has three polarization states, while a massless spin 1 particle has only two physical polarization states. We have seen that from the representations of the little group, a massive particle has the little group \(SO(3)\) with three generators corresponding to the three spatial rotations, while a massless particle has the little group \(ISO(2)\) with only one generator corresponding to rotations around the direction of motion, leading to only two physical polarization states.\TODO{check}
+\subsection{Imposing the Gauge Condition on the Fock Space}
 
-Going now to Heisemberg picture, then we will need to understand how to impose the gauge condition at the quantum level, and what does that condition imply for the physical states of the theory. Thus now
+One can trace back the origin of these negative norm states to the gauge-fixing term in the lagrangian:
+\[
+    \begin{aligned}
+        \mathcal{L} & = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} -\frac{1}{2} (\partial_\mu A^{\mu})^2,                       \\
+        \mathcal{L} & \supset \frac{1}{2} \left( (\dot{A}^1)^2 + (\dot{A}^2)^2 + (\dot{A}^3)^2 - (\dot{A}^0)^2 \right),
+    \end{aligned}
+\]
+where the positive time derivatives are contained in the original lagrangian \(F_{\mu\nu}F^{\mu \nu}\) while the minus sign in front of the gauge-fixing term leads to negative time derivatives \(\dot{A}_0^2\), thus to negative norm states for the unphysical polarizations (timelike). This is a manifestation of the indefinite metric in the space of states, which is a common feature in gauge theories before imposing physical state conditions.
+The solution is to \textit{impose the gauge condition at the quantum level}, directly on the Fock space of states.\footnote{We did not already impose the gauge conditions indeed. The term in the Lagrangian was added to impose implicitly the Lorentz gauge condition via the equations of motion, but when quantizing we have to take care of the unphysical states, which classically would be eliminated, but quantum mechanically they still appear in the Hilbert space.}\QUESTION{do not quite understand, ask}
+
+If we want to make the spin 1 particle massive, we need an additional degree of freedom, since a massive spin 1 particle has three polarization states, while a massless spin 1 particle has only two physical polarization states. We have seen that from the representations of the little group, a massive particle has the little group \(SO(3)\) with three generators corresponding to the three spatial rotations, while a massless particle has the little group \(ISO(2)\) with only one generator corresponding to rotations around the direction of motion, leading to only two physical polarization states (one rotation which implies two transverse polarizations). We are dealing with a massless spin 1 particle, the photon, so in the end we aim to describe its behavior with only two physical polarization states.
+
+Moving now to Heisemberg picture, we will need to understand how to impose the gauge condition at the quantum level, and what does that condition imply for the physical states of the theory. Thus we promote the fields to operators
 \[
     \hat{A}^{\mu} = \hat{A}^{\mu}(x) = \hat{A}^{\mu}(\mathbf{x}, t),
 \]
-so that our gauge condition
+which has a time dependence in Heisemberg picture. We chose the gauge condition
 \[
     \partial_\mu \hat{A}^{\mu} = 0,
 \]
-makes sense only as an operator equation acting on the Hilbert space of states. However, we have at least three ways of imposing this condition:
+since it should lead us towards Lorentz invariant solution while removing the negative time derivative in the Lagrangian. This condition makes sense only as an operator equation acting on the Hilbert space of states. However, we have at least three ways of imposing this condition:
 \begin{itemize}
-    \item \(\partial_\mu \hat{A}^{\mu} = 0\) as a strong operator equation, imposing that the matrix has to vanish identically. This approach is too restrictive and leads to inconsistencies, since it would eliminate all physical states from the theory.
+    \item \(\partial_\mu \hat{A}^{\mu} = 0\) as a strong operator equation, imposing that the matrix has to vanish identically. This approach is too restrictive and leads to inconsistencies in our theory.
           If we go back to the expression of the conjugate momenta
           \[
               \hat{\pi}^\mu = \hat{F}^{\mu 0} - \eta^{\mu 0} (\partial_\nu \hat{A}^{\nu}),
@@ -352,14 +378,14 @@ makes sense only as an operator equation acting on the Hilbert space of states. 
           which would imply that \(\hat{\pi}^0 = 0\) as an operator equation. But this is in contradiction with the canonical commutation relations imposed before:
           \[
               \left[\hat{A}_{\mu}(\mathbf{x}, t), \hat{\pi}_{\nu}(\mathbf{y}, t)\right] = i \delta^{(3)}(\mathbf{x} - \mathbf{y}) \eta_{\mu \nu}, \\
-              \implies \left[\hat{A}_{0}(\mathbf{x}, t), \hat{\pi}_{0}(\mathbf{y}, t)\right] = i \delta^{(3)}(\mathbf{x} - \mathbf{y}) \eta_{00} = \neq 0,
+              \implies \left[\hat{A}_{0}(\mathbf{x}, t), \hat{\pi}_{0}(\mathbf{y}, t)\right] = i \delta^{(3)}(\mathbf{x} - \mathbf{y}) \eta_{00} \neq 0,
           \]
           so we have a contradiction requesting that all the entries of the operator \(\partial_\mu \hat{A}^{\mu}\) vanish identically.
-    \item An alternative is to impose the gauge condition in a weak sense, meaning that we require that the expectation value of the operator \(\partial_\mu \hat{A}^{\mu}\) vanishes when applied on physical states \(\ket{\psi}\):
+    \item An alternative is to impose the gauge condition in a weak sense, meaning that we require that the expectation value of the operator \(\partial_\mu \hat{A}^{\mu}\) vanishes when applied on physical states \(\ket{\psi}\): We are \textit{applying the gauge condition directly on the Fock space}, with the idea to consider unphysical all the states which do not respect
           \[
               (\partial_\mu \hat{A}^{\mu}) \ket{\psi} = 0.
           \]
-          This approach allows for a larger space of physical states, but it still does not fully eliminate the unphysical polarization states from the theory, since the vacuum state \(\ket{0}\) would not be physical: in Heisemberg picture
+          This approach is less restrictive, but it still does not fully work in the recognition of physical and unphysical polarization states, since the vacuum state \(\ket{0}\) would be recognized as unphysical: in Heisemberg picture indeed
           \[
               \hat{A}_\mu(x) = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{p}}}} \sum_{\lambda=0}^{3} \epsilon_{\mu}^{(\lambda)}(\mathbf{p}) \left( a^{(\lambda)}_{\mathbf{p}} e^{i p_\mu x^{\mu}} + a^{(\lambda)\,\dagger}_{\mathbf{p}} e^{-i p_\mu x^{\mu}} \right) = \hat{A}_\mu^{+}(x) + \hat{A}_\mu^{-}(x),
           \]
@@ -367,11 +393,12 @@ makes sense only as an operator equation acting on the Hilbert space of states. 
           \[
               \partial_\mu \hat{A}^{\mu} \ket{0} = \partial_\mu \hat{A}^{\mu +} \ket{0} + \partial_\mu \hat{A}^{\mu -} \ket{0} = \partial_\mu \hat{A}^{\mu +} \ket{0} \neq 0,
           \]
-          since when we act on the vacuum with the negative frequency part \(\hat{A}^{\mu -}\), we get zero, but the positive frequency part \(\hat{A}^{\mu +}\) acting on the vacuum does not vanish, leading to a non-zero result. Thus the vacuum state is not physical in this approach, it does not satisfy \(\partial_\mu \hat{A}^{\mu} \ket{0} = 0\).
-    \item The most common and effective approach is the \textbf{Gupta-Bleuler formalism}, where we impose the gauge condition only on the positive frequency part of the field operator: in this way the vacuum remains a physical state, and we can consistently define the physical subspace of the Hilbert space. The Gupta-Bleuler condition is given by
-          \[
-              \partial_\mu \hat{A}^{\mu +} \ket{\psi} = 0,
-          \]
+          since when we act on the vacuum with the negative frequency part \(\hat{A}^{\mu -}\), we get zero, but the positive frequency part \(\hat{A}^{\mu +}\) acting on the vacuum does not vanish, leading to a non-zero result. Thus the vacuum state is not physical in this approach, it does not satisfy the gauge condition imposed on the Fock space \(\partial_\mu \hat{A}^{\mu} \ket{0} = 0\).
+    \item The most common and effective approach is the \textbf{Gupta-Bleuler formalism}, where we impose the gauge condition only on the positive frequency part of the field operator: in this way the vacuum remains a physical state, and we can consistently define the subspace of physical states in the Hilbert space. The Gupta-Bleuler condition is given by
+          \begin{equation}
+              \partial_\mu \hat{A}^{\mu +} \ket{\psi} = 0, \iff \bra{\psi} \partial_\mu \hat{A}^{\mu -} = 0,
+              \label{eq:gupta-bleuler-condition}
+          \end{equation}
           for physical states \(\ket{\psi}\). This condition effectively eliminates the unphysical polarization states from the theory, while still allowing for a consistent quantization of the electromagnetic field. The physical states are then defined as those that satisfy this condition, leading to a well-defined physical subspace of the full Hilbert space.
 
           We could note that the negative frequency part \(\partial_\mu \hat{A}^{\mu -}\) functioning on physical states only when applied to the left:
@@ -384,12 +411,15 @@ makes sense only as an operator equation acting on the Hilbert space of states. 
           \]
 \end{itemize}
 
+\subsection{Physical Implications of the Gupta-Bleuler Condition}
+
 Now that we found a consistent way to impose the gauge condition at the quantum level, we can analyze the implications of this condition on the physical states of the theory. The Gupta-Bleuler condition effectively removes the unphysical polarization states from the theory, leaving only the two transverse polarization states as physical degrees of freedom.
-Let us check that, starting from
+
+We can check that starting from
 \[
-    \partial^{\mu} \hat{A}_{\mu}^{+} \ket{\psi} = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{p}}}} \sum_{\lambda=0}^{3} \left( -i \epsilon_{\mu}^{(\lambda)}(\mathbf{p}) p^{\mu} \right) a^{(\lambda)}_{\mathbf{p}} e^{-i p_\mu x^{\mu}} \ket{\psi} = 0.
+    \partial^{\mu} \hat{A}_{\mu}^{+} \ket{\psi} = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{p}}}} \sum_{\lambda=0}^{3} \left( -i \epsilon_{\mu}^{(\lambda)}(\mathbf{p}) p^{\mu} \right) a^{(\lambda)}_{\mathbf{p}} e^{-i p_\mu x^{\mu}} \ket{\psi} = 0,
 \]
-Now we can notice how the contraction \(\epsilon_{\mu}^{(\lambda)}(\mathbf{p}) p^{\mu}\) vanishes for the transverse polarizations \(\lambda = 1, 2\), since they are orthogonal to the momentum \(p^{\mu}\): choosing the momentum along the z-axis as before, we have
+since one can notice how the contraction \(\epsilon_{\mu}^{(\lambda)}(\mathbf{p}) p^{\mu}\) vanishes for the transverse polarizations \(\lambda = 1, 2\), orthogonal to the momentum \(p^{\mu}\): choosing the momentum along the z-axis as before, we have
 \[
     \epsilon^{(1)}_{\mu} p^{\mu} = 0, \quad \epsilon^{(2)}_{\mu} p^{\mu} = 0,
 \]
@@ -397,24 +427,25 @@ so that only the the condition becomes
 \[
     \partial^{\mu} \hat{A}_{\mu}^{+} \ket{\psi} = 0 \iff \left( \epsilon_{\mu}^{(0)}(\mathbf{p}) p^{\mu} \hat{a}^{(0)}_{\mathbf{p}} + \epsilon_{\mu}^{(3)}(\mathbf{p}) p^{\mu} \hat{a}^{(3)}_{\mathbf{p}} \right) \ket{\psi} = 0.
 \]
-This implies a relation between the creation and annihilation operators for the unphysical polarization states:
+This implies a relation between the creation and annihilation operators for the unphysical polarization states
 \[
     E \left( \epsilon_{\mu}^{(0)}(\mathbf{p}) \hat{a}^{(0)}_{\mathbf{p}} + \epsilon_{\mu}^{(3)}(\mathbf{p}) \hat{a}^{(3)}_{\mathbf{p}} \right) \ket{\psi} = 0,
 \]
-that becomes
-\[
-    \begin{aligned}
+which leads to a series of implications useful to understand the nature of physical states:
+\begin{equation}
+    \begin{dcases}
         \left( \hat{a}^{(0)}_{\mathbf{p}} - \hat{a}^{(3)}_{\mathbf{p}} \right) \ket{\psi} = 0,                               \\
         \hat{a}^{(0)}_{\mathbf{p}} \ket{\psi}                           = \hat{a}^{(3)}_{\mathbf{p}} \ket{\psi},             \\
         \bra{\psi} \hat{a}^{(0)\,\dagger}_{\mathbf{p}}                     = \bra{\psi} \hat{a}^{(3)\,\dagger}_{\mathbf{p}}, \\
         \bra{\psi} \hat{a}^{(0)\,\dagger}_{\mathbf{p}} \hat{a}^{(0)}_{\mathbf{p}} \ket{\psi} = \bra{\psi} \hat{a}^{(3)\,\dagger}_{\mathbf{p}} \hat{a}^{(3)}_{\mathbf{p}} \ket{\psi}.
-    \end{aligned}
-\]
+    \end{dcases}
+    \label{eq:gupta-bleuler-implications}
+\end{equation}
 This last relation shows that the number of timelike photons is equal to the number of longitudinal photons in physical states (since we are computing the expectation value of the number operators of the two unphysical polarizations photons on both sides), leading to a cancellation of their contributions to physical observables. Thus, only the two transverse polarization states remain as physical degrees of freedom, consistent with the known properties of photons (negative norm timelike photons are not physical).
 
-Since \(\ket{\mathbf{p},\, \lambda=0} = \hat{a}^{(0)\,\dagger}_{\mathbf{p}} \ket{0}\), thus
+To check this, we can consider \(\ket{\mathbf{p},\, \lambda=0} = \hat{a}^{(0)\,\dagger}_{\mathbf{p}} \ket{0}\) the state with timelike polarization, which if our condition is correct should be unphysical:
 \[
-    \implies \left( \hat{a}^{(0)}_{\mathbf{p}} -  \hat{a}^{(3)}_{\mathbf{p}} \right) \ket{\mathbf{p},\, \lambda=0} = 0,
+    \implies \left( \hat{a}^{(0)}_{\mathbf{p}} -  \hat{a}^{(3)}_{\mathbf{p}} \right) \ket{\mathbf{p},\, \lambda=0} \neq 0,
 \]
 but let us compute that explicitly:
 \[
@@ -422,12 +453,14 @@ but let us compute that explicitly:
         \left( \hat{a}^{(0)}_{\mathbf{p}} -  \hat{a}^{(3)}_{\mathbf{p}} \right) \ket{\mathbf{q},\, 0} & = \hat{a}^{(0)}_{\mathbf{p}} \hat{a}^{(0)\,\dagger}_{\mathbf{q}} \ket{0} - \hat{a}^{(3)}_{\mathbf{p}} \hat{a}^{(0)\,\dagger}_{\mathbf{p}} \ket{0} = \hat{a}^{(0)}_{\mathbf{p}} \hat{a}^{(0)\,\dagger}_{\mathbf{q}} \ket{0} \\
                                                                                                       & = \left[ \hat{a}^{(0)}_{\mathbf{p}}, \hat{a}^{(0)\,\dagger}_{\mathbf{q}} \right] \ket{0} + \hat{a}^{(0)\,\dagger}_{\mathbf{p}} \hat{a}^{(0)}_{\mathbf{q}} \ket{0}                                                          \\
                                                                                                       & = \left[ \hat{a}^{(0)}_{\mathbf{p}}, \hat{a}^{(0)\,\dagger}_{\mathbf{q}} \right] \ket{0}                                                                                                                                   \\
-                                                                                                      & = - (2\pi)^3 \delta^{(3)}(0) \ket{0} \neq 0,
+                                                                                                      & = - (2\pi)^3 \delta^{(3)}(0) \ket{0} \neq 0.
     \end{aligned}
 \]
-which is good news, since it showa that a state of only a timelike photon is not physical (negative norm); but the Hilbert space defined by \(\left( \hat{a}^{(0)}_{\mathbf{p}} -  \hat{a}^{(3)}_{\mathbf{p}} \right) \ket{\psi} = 0\) contains also \textbf{zero norm states}. To see this clearly, we have to perform a change of basis on the Fock space:
+This is good news: a state of only a timelike photon (which has negative norm) is not physical; but the Hilbert space defined by \(\left( \hat{a}^{(0)}_{\mathbf{p}} -  \hat{a}^{(3)}_{\mathbf{p}} \right) \ket{\psi} = 0\) contains also \textbf{zero norm states}. This comes as good news, since zero norm states do not contribute to physical observables, so they can be present in the physical Hilbert space without causing any issues: we need only two polarization states to describe the photon, so the presence of \(\ket{S}-\ket{L}\) polarization (scalar minus longitudinal, the states created by \(\hat{a}^{(0)\,\dagger}_{\mathbf{p}} - \hat{a}^{(3)\,\dagger}_{\mathbf{p}}\)) could be a problem, but if they are zero norm states they do not contribute to physical observables, so they can be safely included in the physical Hilbert space.
+
+To see this clearly, we have to perform a change of basis on the Fock space:
 \[
-    \hat{a}^{(\lambda)}_{\mathbf{p}} \longrightarrow \hat{a}^{(1)}_{\mathbf{p}}, \hat{a}^{(2)}_{\mathbf{p}}, \hat{b}^{(\pm)}_{\mathbf{p}} = \frac{1}{\sqrt{2}} \left( \hat{a}^{(0)}_{\mathbf{p}} \pm \hat{a}^{(3)}_{\mathbf{p}} \right).
+    \hat{a}^{(\lambda)}_{\mathbf{p}} \quad \longrightarrow \quad \hat{a}^{(1)}_{\mathbf{p}}, \hat{a}^{(2)}_{\mathbf{p}}, \hat{b}^{(\pm)}_{\mathbf{p}} = \frac{1}{\sqrt{2}} \left( \hat{a}^{(0)}_{\mathbf{p}} \pm \hat{a}^{(3)}_{\mathbf{p}} \right).
 \]
 In this new basis, we should be able to create states with definite numbers of transverse photons and definite combinations of timelike and longitudinal photons:
 \[
@@ -438,66 +471,93 @@ In this new basis, we should be able to create states with definite numbers of t
         \hat{b}^{(-)\,\dagger}_{\mathbf{p}} \ket{0} & = \frac{1}{\sqrt{2}} \left( \ket{\mathbf{p},\, 0} - \ket{\mathbf{p},\, 3} \right).
     \end{aligned}
 \]
-Thus the Gupta-Bleuler condition \(\left( \hat{a}^{(0)}_{\mathbf{p}} -  \hat{a}^{(3)}_{\mathbf{p}} \right) \ket{\psi} = 0\) can be rewritten as
+so that we can create states with only transverse photons, or states with definite combinations of timelike and longitudinal photons (and combinations of these). Thus the Gupta-Bleuler condition \(\left( \hat{a}^{(0)}_{\mathbf{p}} -  \hat{a}^{(3)}_{\mathbf{p}} \right) \ket{\psi} = 0\) can be rewritten as
 \[
     \hat{b}^{(-)}_{\mathbf{p}} \ket{\psi} = 0,
 \]
-which means that physical states \(\ket{\psi}\) cannot contain any \(\hat{b}^{(-)\,\dagger}_{\mathbf{p}}\) excitations. indeed
-\[
-    \hat{b}^{(-)}_{\mathbf{p}} \hat{a}^{(1/2)\,\dagger}_{\mathbf{p}} \ket{0} = \dots
-\]
-so that states with only transverse photons are physical. However, states created by \(\hat{b}^{(+)\,\dagger}_{\mathbf{p}}\) are also physical.
+which means that physical states \(\ket{\psi}\) cannot contain any \(\hat{b}^{(-)\,\dagger}_{\mathbf{p}}\) excitations.
 
-Now we can check the norm of states created by \(\hat{a}^{(0)\,\dagger}_{\mathbf{q}}\):\TODO{this computation plus commutation relations derivation}
+We can now check explicitly that states with only transverse photons are physical states applying the Gupta-Bleuler condition through the operator \(\hat{b}^{(-)}_{\mathbf{p}}\). To do so we will need the commutation relations for the new operators \(\hat{b}^{(\pm)}_{\mathbf{p}}\):
 \[
     \begin{aligned}
-        \hat{b}^{(-)\,\dagger}_{\mathbf{p}} \ket{\mathbf{q},\,0} & = \dots              \\
-                                                                 & = \dots              \\
-                                                                 & = somethinhg \neq 0.
+        \left[\hat{b}^{(\pm)}_{\mathbf{p}},\, \hat{b}^{(\pm)\,\dagger}_{\mathbf{q}}\right] & = \left[ \hat{a}^{(0)}_{\mathbf{p}},\, \hat{a}^{(0)\,\dagger}_{\mathbf{q}} \right] + \left[ \hat{a}^{(3)}_{\mathbf{p}},\, \hat{a}^{(3)\,\dagger}_{\mathbf{q}} \right] \\
+                                                                                           & = - (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q}) + (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q}) = 0,                                                              \\
+        \left[\hat{b}^{(\pm)}_{\mathbf{p}},\, \hat{b}^{(\mp)\,\dagger}_{\mathbf{q}}\right] & = \left[ \hat{a}^{(0)}_{\mathbf{p}},\, \hat{a}^{(0)\,\dagger}_{\mathbf{q}} \right] - \left[ \hat{a}^{(3)}_{\mathbf{p}},\, \hat{a}^{(3)\,\dagger}_{\mathbf{q}} \right] \\
+                                                                                           & = - 2 (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q}) \neq 0,
     \end{aligned}
 \]
-This shows that timelike photons alone do not form physical states, since they appear to have negative norm. If we now compute the norm of longitudinal photons alone:
+so that we can now compute the action of \(\hat{b}^{(-)}_{\mathbf{p}}\) on states with:
+\begin{enumerate}
+    \item \textbf{only transverse photons}, created by \(\hat{a}^{(1/2)\,\dagger}_{\mathbf{q}}\):
+          \[
+              \hat{b}^{(-)}_{\mathbf{p}} \left( \hat{a}^{(1/2)\,\dagger}_{\mathbf{q}} \ket{0} \right) = 0,
+          \]
+          since the commutators \(\left[\hat{b}^{(-)}_{\mathbf{p}}, \hat{a}^{(1/2)\,\dagger}_{\mathbf{q}}\right]\) are proportional to the null commutators among \(\hat{a}^{(1/2)}_{\mathbf{q}}\) and \(\hat{a}^{(0/3)}_{\mathbf{p}}\). So the states with only transverse photons \textbf{are physical}.
+    \item \textbf{only timelike photons}, created by \(\hat{a}^{(0)\,\dagger}_{\mathbf{q}} = \frac{1}{2}\left(\hat{b}^{(+)\,\dagger}_{\mathbf{q}} + \hat{b}^{(-)\,\dagger}_{\mathbf{q}}\right)\):
+          \[
+              \begin{aligned}
+                  \hat{b}^{(-)\,\dagger}_{\mathbf{p}} \left( \hat{a}^{(0)\,\dagger}_{\mathbf{q}} \ket{0} \right) & = \frac{1}{2}\hat{b}^{(-)\,\dagger}_{\mathbf{p}} \left(\hat{b}^{(+)\,\dagger}_{\mathbf{q}} \ket{0} +  \hat{b}^{(-)\,\dagger}_{\mathbf{q}} \ket{0}\right)                                                         \\
+                                                                                                                 & = \frac{1}{2}\left[ \hat{b}^{(-)\,\dagger}_{\mathbf{p}} ,\, \hat{b}^{(+)\,\dagger}_{\mathbf{p}}  \right] +\frac{1}{2} \left[ \hat{b}^{(-)\,\dagger}_{\mathbf{p}} ,\, \hat{b}^{(-)\,\dagger}_{\mathbf{p}} \right] \\
+                                                                                                                 & = \frac{1}{2}\left[ \hat{b}^{(-)\,\dagger}_{\mathbf{p}} ,\, \hat{b}^{(+)\,\dagger}_{\mathbf{p}}  \right] \neq 0.
+              \end{aligned}
+          \]
+          This shows that timelike photons alone \textbf{form unphysical states}, since they do not satisfy the Gupta-Bleuler condition. This is expected, since timelike photons have negative norm.
+    \item \textbf{only longitudinal photons}, created by \(\hat{a}^{(3)\,\dagger}_{\mathbf{q}} = \frac{1}{2}\left(\hat{b}^{(+)\,\dagger}_{\mathbf{q}} - \hat{b}^{(-)\,\dagger}_{\mathbf{q}}\right)\):
+          \[
+              \begin{aligned}
+                  \hat{b}^{(-)\,\dagger}_{\mathbf{p}} \left( \hat{a}^{(0)\,\dagger}_{\mathbf{q}} \ket{0} \right) & = \frac{1}{2}\hat{b}^{(-)\,\dagger}_{\mathbf{p}} \left(\hat{b}^{(+)\,\dagger}_{\mathbf{q}} \ket{0} -  \hat{b}^{(-)\,\dagger}_{\mathbf{q}} \ket{0}\right)                                                         \\
+                                                                                                                 & = \frac{1}{2}\left[ \hat{b}^{(-)\,\dagger}_{\mathbf{p}} ,\, \hat{b}^{(+)\,\dagger}_{\mathbf{p}}  \right] -\frac{1}{2} \left[ \hat{b}^{(-)\,\dagger}_{\mathbf{p}} ,\, \hat{b}^{(-)\,\dagger}_{\mathbf{p}} \right] \\
+                                                                                                                 & = \frac{1}{2}\left[ \hat{b}^{(-)\,\dagger}_{\mathbf{p}} ,\, \hat{b}^{(+)\,\dagger}_{\mathbf{p}}  \right] \neq 0.
+              \end{aligned}
+          \]
+          This shows that longitudinal photons alone \textbf{form unphysical states}, since they do not satisfy the Gupta-Bleuler condition. This is expected, since longitudinal photons have negative norm.
+    \item \textbf{combination of timelike and longitudinal photons}, created by \(\hat{b}^{(+)\,\dagger}_{\mathbf{q}}\) and \(\hat{b}^{(-)\,\dagger}_{\mathbf{q}}\):
+          \begin{itemize}
+              \item For the combination created by \(\hat{b}^{(+)\,\dagger}_{\mathbf{q}}\):
+                    \[
+                        \hat{b}^{(-)}_{\mathbf{p}} \left( \hat{b}^{(+)\,\dagger}_{\mathbf{q}} \ket{0} \right) = \left[ \hat{b}^{(-)}_{\mathbf{p}}, \hat{b}^{(+)\,\dagger}_{\mathbf{q}} \right] \ket{0} \neq 0,
+                    \]
+                    so that states with one timelike and one longitudinal photon in the combination \(\ket{S}+\ket{L}\)\footnote{We call it \(\ket{S} + \ket{L}\) since for timelike states we would have \(\ket{T}\), but then it creates confusion with the transversal polarizations: transversal polarizations remain \(\ket{T}\), while timelike ones will be addressed as \textit{scalar}, or \(\ket{S}\).} \textbf{are unphysical}, since they do not satisfy the Gupta-Bleuler condition (even if they have zero norm).
+              \item For the combination created by \(\hat{b}^{(-)\,\dagger}_{\mathbf{q}}\):
+                    \[
+                        \hat{b}^{(-)}_{\mathbf{p}} \left( \hat{b}^{(-)\,\dagger}_{\mathbf{q}} \ket{0} \right) = \left[ \hat{b}^{(-)}_{\mathbf{p}}, \hat{b}^{(-)\,\dagger}_{\mathbf{q}} \right] \ket{0} = 0,
+                    \]
+                    so that states with one timelike and one longitudinal photon in the combination \(\ket{S}-\ket{L}\) \textbf{are physical}, since they satisfy the Gupta-Bleuler condition.
+          \end{itemize}
+\end{enumerate}
+
+It seems that we have found a physical state which is a combination of timelike and longitudinal photons, which is unexpected since both these polarization states have negative norm. However, if we compute the norm of the state created by \(\hat{b}^{(-)\,\dagger}_{\mathbf{p}}\):
 \[
     \begin{aligned}
-        \hat{b}^{(-)}_{\mathbf{p}} \ket{\mathbf{p},\,3} & = \dots             \\
-                                                        & = \dots             \\
-                                                        & = something \neq 0,
+        \bra{0} \hat{b}^{(-)}_{\mathbf{p}} \hat{b}^{(-)\,\dagger}_{\mathbf{p}} \ket{0} & = \bra{0} \left[ \hat{b}^{(-)}_{\mathbf{p}}, \hat{b}^{(-)\,\dagger}_{\mathbf{p}} \right] \ket{0} + \bra{0} \hat{b}^{(-)\,\dagger}_{\mathbf{p}} \hat{b}^{(-)}_{\mathbf{p}} \ket{0} \\
+                                                                                       & = \bra{0} \left[ \hat{b}^{(-)}_{\mathbf{p}}, \hat{b}^{(-)\,\dagger}_{\mathbf{p}} \right] \ket{0} + 0 = 0,
     \end{aligned}
 \]
-so that longitudinal photons alone also are not physical states, since they also have negative norm. However, if we compute the combination of timelike and longitudinal states:
+we find that this linear combination (and its multiples) of timelike and longitudinal photons is the only physical one, but its norm is zero. This property indicates that it is a null state in the physical subspace, hence it does not contribute to physical observables: this linear combination is physical but cannot be measured (observed).
+
+Computing the norm of the transverse polarization states, we find that they have positive norm:
 \[
     \begin{aligned}
-        \hat{b}^{(-)}_{\mathbf{p}} \left( \hat{b}^{(+)\,\dagger}_{\mathbf{p}} \ket{0} \right) & = \left[ \right]\dots \\
-                                                                                              & = \dots               \\
-                                                                                              & = something \neq 0,
+        \bra{\mathbf{p}, \lambda=(1/2)} \ket{\mathbf{p}, \lambda=(1/2) } & = \bra{0} \hat{a}^{(1/2)}_{\mathbf{p}} \hat{a}^{(1/2)\,\dagger}_{\mathbf{p}} \ket{0}                                                                                                      \\
+                                                                         & = \bra{0} \left[ \hat{a}^{(1/2)}_{\mathbf{p}}, \hat{a}^{(1/2)\,\dagger}_{\mathbf{p}} \right] \ket{0} + \bra{0} \hat{a}^{(1/2)\,\dagger}_{\mathbf{p}} \hat{a}^{(1/2)}_{\mathbf{p}} \ket{0} \\
+                                                                         & = (2\pi)^3 \delta^{(3)}(\mathbf{0}) > 0.
     \end{aligned}
 \]
-So even the combination of timelike and longitudinal photons does not yield a physical state with a positive sign. However, if we compute the norm of the state created by \(\hat{b}^{(-)\,\dagger}_{\mathbf{p}}\):
-\[
-    \begin{aligned}
-        \hat{b}^{(-)}_{\mathbf{p}} \hat{b}^{(-)\,\dagger}_{\mathbf{p}} \ket{0} & = \left[ \hat{b}^{(-)}_{\mathbf{p}}, \hat{b}^{(-)\,\dagger}_{\mathbf{p}} \right] \ket{0} + \hat{b}^{(-)\,\dagger}_{\mathbf{p}} \hat{b}^{(-)}_{\mathbf{p}} \ket{0} \\
-                                                                               & = \left[ \hat{b}^{(-)}_{\mathbf{p}}, \hat{b}^{(-)\,\dagger}_{\mathbf{p}} \right] \ket{0} + 0 = 0,
-    \end{aligned}
-\]
-we find that this state is the only physical one, but lastly we need to compute its norm
-\[
-    \bra{0} \hat{b}^{(-)}_{\mathbf{p}} \hat{b}^{(-)\,\dagger}_{\mathbf{p}} \ket{0} = \bra{0} \left[ \hat{b}^{(-)}_{\mathbf{p}}, \hat{b}^{(-)\,\dagger}_{\mathbf{p}} \right] \ket{0} = 0,
-\]
-has zero norm, indicating that it is a null state in the physical subspace. Computing the norm of the transverse polarization states, we find that they have positive norm:
-\[
-    \bra{\mathbf{p}, \lambda=(1/2)} \ket{\mathbf{p}, \lambda=(1/2) } = \dots > 0.
-\]
-Thus, the Gupta-Bleuler condition effectively removes the unphysical polarization states from the theory, leaving only the two transverse polarization states as physical degrees of freedom, while the timelike and longitudinal combinations lead to zero norm states that do not contribute to physical observables.
+Thus, the Gupta-Bleuler condition effectively removes the unphysical polarization states from the theory, leaving only the two transverse polarization states as physical degrees of freedom, while the timelike and longitudinal combinations which survived still lead to zero norm states that do not contribute to physical observables.
 
 Now if we consider a state with two photons, one with transverse polarization \(\ket{T}\) and one with \(\ket{S}-\ket{L}\) polarization (scalar minus longitudinal, the zero norm states):
 \[
+    \hat{b}^{(-)\,\dagger}_{\mathbf{q}} \ket{\mathbf{p} ,\,T}                                                          = \ket{\mathbf{p},\,T;\; \mathbf{q},\,S-L},
+\]
+and if we compute its norm:
+\[
     \begin{aligned}
-        \hat{b}^{(-)\,\dagger}_{\mathbf{p}} \ket{T}                                                          & = \ket{\mathbf{p},\,T;\; \mathbf{p},\,S-L},                                                                                                                       \\
-        \bra{\mathbf{p^{\prime} },\,T;\; \mathbf{q^{\prime} },\,S-L}\ket{\mathbf{p},\,T;\; \mathbf{q},\,S-L} & = \bra{0} \hat{a}^{(T)}_{\mathbf{p^{\prime}}} \hat{b}^{(-)}_{\mathbf{q^{\prime}}} \hat{b}^{(-)\,\dagger}_{\mathbf{q}} \hat{a}^{(T)\,\dagger}_{\mathbf{p}} \ket{0} \\
-                                                                                                             & = \dots = 0,
+        \bra{\mathbf{p^{\prime} },\,T;\; \mathbf{q^{\prime} },\,S-L}\ket{\mathbf{p},\,T;\; \mathbf{q},\,S-L} & = \bra{0} \hat{a}^{(T)}_{\mathbf{p^{\prime}}} \hat{b}^{(-)}_{\mathbf{q^{\prime}}} \hat{b}^{(-)\,\dagger}_{\mathbf{q}} \hat{a}^{(T)\,\dagger}_{\mathbf{p}} \ket{0}                      \\
+                                                                                                             & = \bra{0} \hat{b}^{(-)}_{\mathbf{q^{\prime}}}\hat{b}^{(-)\,\dagger}_{\mathbf{q}}\left[ \hat{a}^{(T)}_{\mathbf{p^{\prime}}} ,\, \hat{a}^{(T)\,\dagger}_{\mathbf{p}} \right] \ket{0} + 0 \\
+                                                                                                             & = (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{p^{\prime}}) \bra{0} \left[ \hat{b}^{(-)}_{\mathbf{q^{\prime}}} ,\, \hat{b}^{(-)\,\dagger}_{\mathbf{q}} \right] \ket{0} + 0 = 0.          \\
     \end{aligned}
 \]
-So that we can generalize this result to any state with any transverse photon and any number of zero norm states (scalar minus longitudinal), leads to a total zero norm for the entire state (one photon in \(\ket{S}-\ket{L}\) state is sufficient to zero out the norm of the state). Thus, the physical subspace of the Hilbert space is spanned only by states with transverse photons, while any state containing timelike or longitudinal photons leads to zero norm states that do not contribute to physical observables.
+So in the end we can generalize this result to any state with any number of transverse photons and zero norm states (scalar minus longitudinal), leads to a total zero norm for the entire state (one photon in \(\ket{S}-\ket{L}\) state is sufficient to zero out the norm of the state). Thus, the physical subspace of the Hilbert space is spanned only by states with transverse photons, while any state containing timelike or longitudinal photons leads to zero norm states that do not contribute to physical observables.
 
 We are interested in th system's observables indeed, which are represented by operators acting on the Hilbert space. Physical observables do not mix physical and unphysical states, since due to the zero norm, any matrix element involving unphysical states vanishes. Thus, physical observables are effectively restricted to the physical subspace spanned by transverse photon states. Furthermore, if we were to compute the energy (or any other observable) of a state containing any number of transverse photons and any number of zero norm states, we would find that the contribution from the zero norm states vanishes always, leaving only the contribution from the transverse photons. This ensures that physical observables are well-defined and consistent with the known properties of photons.
 
@@ -507,3 +567,58 @@ We can look at the total Fock space \(\mathcal{F}\), which will contain all the 
 Inside \(\mathcal{F}_{\text{phys}}\) we will have both positive norm states (transverse photons) and zero norm states (combinations of timelike and longitudinal photons satisfying Gupta-Bleuler condition): transverse states and mixtures of the same number of trannsverse photons plus scalar-longitudinal combinations are gauge equivalent, since they differ by zero norm states. This gauge orbits are equivalence classes of states (states with the same physical observables) in \(\mathcal{F}_{\text{phys}}\) that differ only by zero norm states, representing the same physical configuration.
 
 Thus, the physical content of the theory is captured by the equivalence classes of states in \(\mathcal{F}_{\text{phys}}\), while the unphysical states in \(\mathcal{F}_{\text{unphys}}\) do not contribute to physical observables.
+
+\subsection{Energy States}
+
+Finally, we can check that the energy operator (hamiltonian) acting on physical states gives positive energy eigenvalues, ensuring the stability of the vacuum and the consistency of the theory. The hamiltonian for the quantized electromagnetic field can be expressed in terms of the creation and annihilation operators as
+\begin{equation}
+    \hat{H} = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} E_{\mathbf{p}} \left( \sum_{\lambda = 1}^3  \hat{a}^{(\lambda)\,\dagger}_{\mathbf{p}}  \hat{a}^{(\lambda)}_{\mathbf{p}} - \hat{a}^{(0)\,\dagger}_{\mathbf{p}}\hat{a}^{(0)}_{\mathbf{p}} \right),
+    \label{eq:hamiltonian_em_field}
+\end{equation}
+after normal ordering, where \(E_{\mathbf{p}} = |\mathbf{p}|\) for massless photons. In order to derive this expression, we have used the Legendre transformation of the Lagrangian density for the electromagnetic field, so we need to compute the conjugate momenta and the lagrangian density. Starting from the latter:
+\[
+    \mathcal{L} = - \frac{1}{4} F_{\mu \nu} F^{\mu \nu} - \frac{1}{2} (\partial_\mu A^{\mu})^2 = - \frac{1}{2} \partial_{\mu} A_{\nu} \partial^{\mu} A^{\nu} = - \frac{1}{2} \left( \partial_0 A_{\mu} \partial^0 A^{\mu} - \partial_i A_{\mu} \partial^i A^{\mu} \right),
+\]
+since the mixed terms in the first part cancel out with the gauge fixing term. We can then compute the conjugate momenta as:
+\[
+    \pi^{\mu} = \frac{\partial \mathcal{L}}{\partial (\partial_0 A_{\mu})} = -\frac{1}{2} \frac{\partial}{\partial \dot{A}_{\mu}} \eta^{\mu \nu} \dot{A}_{\mu} \dot{A}_{\nu} = - \partial^0 A^{\mu} = - \dot{A}^{\mu},
+\]
+leading to the hamiltonian:
+\[
+    H = \int \mathrm{d}^3 \mathbf{x} \left( \pi^{\mu} \partial_0 A_{\mu} - \mathcal{L} \right) = \frac{1}{2} \int \mathrm{d}^3 \mathbf{x} \left( \partial_i A_{\mu} \partial^i A^{\mu} - \pi_\mu \pi^{\mu} \right),
+\]
+where we used \(\pi^{\mu}\dot{A}_\mu = \pi_{\mu}\dot{A}^\mu = - \pi_{\mu}\pi^{\mu}\). Let us compute terms separately: starting from the spatial derivative of the fields and substituting the field expansion \eqref{eq:field_expansion_ladder_em}
+\[
+    \partial_i \hat{A}_{\mu}(\mathbf{x}) = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{-i \mathbf{p}}{\sqrt{2 \vert \mathbf{p} \vert}} \sum_{\lambda=0}^{3} \epsilon_{\mu}^{(\lambda)}(\mathbf{p}) \left( \hat{a}^{(\lambda)}_{\mathbf{p}} e^{i p^j x^j} - \hat{a}^{(\lambda)\,\dagger}_{\mathbf{p}} e^{-i p^j x^j} \right),
+\]
+since \(\partial_i e^{i p^j x^j} = \frac{\partial}{\partial x^i} e^{i p^j x^j} = i p^i e^{i p^j x^j} = -i p_i e^{i p^j x^j}\).\footnote{When computing the contraction \(\partial_i \hat{A}_{\mu}\partial^i \hat{A}^{\mu}\), we have to pay attention to the other derivative, since \(\partial^i e^{i p^j x^j} = \frac{\partial}{\partial x_i} e^{i p^j x^j} = i p^i \eta_{ij} e^{i p^j x^j} = i p_i e^{i p^j x^j}\); thus in the product we have a minus sign.} Thus, after integrating in \(\mathrm{d}^3 \mathbf{x}\) and \(\mathrm{d}^3 \mathbf{q}\) in order to resolve the delta functions, we find
+\[
+    \begin{aligned}
+        \frac{1}{2} \int \mathrm{d}^3 \mathbf{x} \, \partial_i A_{\mu} \partial^i A^{\mu} & = \frac{1}{4} \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \vert \mathbf{p} \vert \sum_{\lambda \lambda^{\prime}} \eta_{\lambda \lambda^{\prime}} \left[ \hat{a}^{(\lambda)}_{\mathbf{p}} \hat{a}^{(\lambda^{\prime})}_{-\mathbf{p}} + \hat{a}^{(\lambda)\,\dagger}_{\mathbf{p}} \hat{a}^{(\lambda^{\prime})\,\dagger}_{-\mathbf{p}} - \left( \hat{a}^{(\lambda)}_{\mathbf{p}} \hat{a}^{(\lambda^{\prime})\,\dagger}_{\mathbf{p}} + \hat{a}^{(\lambda)\,\dagger}_{\mathbf{p}} \hat{a}^{(\lambda^{\prime})}_{\mathbf{p}} \right) \right], \\
+        -\frac{1}{2} \int \mathrm{d}^3 \mathbf{x} \, \pi_{\mu} \pi^{\mu}                  & = \frac{1}{4} \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \vert \mathbf{p} \vert \sum_{\lambda \lambda^{\prime}} \eta_{\lambda \lambda^{\prime}} \left[ \hat{a}^{(\lambda)}_{\mathbf{p}} \hat{a}^{(\lambda^{\prime})}_{-\mathbf{p}} + \hat{a}^{(\lambda)\,\dagger}_{\mathbf{p}} \hat{a}^{(\lambda^{\prime})\,\dagger}_{-\mathbf{p}} - \left( \hat{a}^{(\lambda)}_{\mathbf{p}} \hat{a}^{(\lambda^{\prime})\,\dagger}_{\mathbf{p}} + \hat{a}^{(\lambda)\,\dagger}_{\mathbf{p}} \hat{a}^{(\lambda^{\prime})}_{\mathbf{p}} \right) \right],
+    \end{aligned}
+\]
+where we used the orthogonality relation for the polarization vectors:
+\[
+    \epsilon_{\mu}^{(\lambda)}(\mathbf{p}) \epsilon^{(\lambda^{\prime})\,\mu}(\mathbf{p}) = \eta_{\lambda \lambda^{\prime}}.
+\]
+Summing these two contributions, we find that the terms with two creation or two annihilation operators cancel out since the opposite sign in the momentum leads to ... (?).\QUESTION{Why do they cancel out?} Thus, after normal ordering the expression (we will not us the explicit notation), we find
+\[
+    \begin{aligned}
+        H & = - \frac{1}{2} \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} E_{\mathbf{p}} \sum_{\lambda \lambda^{\prime}} \eta_{\lambda \lambda^{\prime}} \left( \hat{a}^{(\lambda^{\prime})\,\dagger}_{\mathbf{p}} \hat{a}^{(\lambda)}_{\mathbf{p}} + \hat{a}^{(\lambda)\,\dagger}_{\mathbf{p}} \hat{a}^{(\lambda^{\prime})}_{\mathbf{p}} \right) \\
+          & = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} E_{\mathbf{p}} \left( \sum_{\lambda = 1}^3  \hat{a}^{(\lambda)\,\dagger}_{\mathbf{p}}  \hat{a}^{(\lambda)}_{\mathbf{p}} - \hat{a}^{(0)\,\dagger}_{\mathbf{p}}\hat{a}^{(0)}_{\mathbf{p}} \right),
+    \end{aligned}
+\]
+where in the last step we used the metric signature \(-\eta_{\lambda \lambda^{\prime}} = \text{diag}(-1, 1, 1, 1)\) to separate the contributions from the different polarizations.
+
+When acting on physical states \(\ket{\psi} \in \mathcal{F}_{\text{phys}}\), which contain only transverse photons, the expected energy eigenvalues are positive, since each transverse photon contributes positively to the total energy:
+\[
+    \bra{\psi} \hat{H} \ket{\psi} = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} E_{\mathbf{p}} \left[ \bra{\psi}\left( \hat{a}^{(1)\,\dagger}_{\mathbf{p}}  \hat{a}^{(1)}_{\mathbf{p}} + \hat{a}^{(2)\,\dagger}_{\mathbf{p}}  \hat{a}^{(2)}_{\mathbf{p}} \right)\ket{\psi} + \bra{\psi} \hat{a}^{(3)\,\dagger}_{\mathbf{p}}\hat{a}^{(3)}_{\mathbf{p}}\ket{\psi} - \bra{\psi} \hat{a}^{(0)\,\dagger}_{\mathbf{p}}\hat{a}^{(0)}_{\mathbf{p}}\ket{\psi} \right],
+\]
+but since the Gupta-Bleuler condition ensures that the contributions from the timelike and longitudinal photons cancel out in physical states (as shown in \cref{eq:gupta-bleuler-implications}), we have
+\[
+    \bra{\psi} \hat{H} \ket{\psi} = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} E_{\mathbf{p}} \bra{\psi}\left( \hat{a}^{(1)\,\dagger}_{\mathbf{p}}  \hat{a}^{(1)}_{\mathbf{p}} + \hat{a}^{(2)\,\dagger}_{\mathbf{p}}  \hat{a}^{(2)}_{\mathbf{p}} \right)\ket{\psi} \geq 0,
+\]
+confirming that the energy eigenvalues for physical states are indeed positive. This result is crucial for the stability of the vacuum and the overall consistency of the quantum theory of the electromagnetic field.
+
+Notice that the vacuum state \(\ket{0}\) has zero energy, as expected, but so do all the zero norm states created by combinations of timelike and longitudinal photons satisfying the Gupta-Bleuler condition. Thus, the vacuum and all zero norm states have the same eigenvalues when acting with operators on the Fock space, while physical states with transverse photons carry the information about the actual physical excitations of the electromagnetic field. We could say that the vacuum is degenerate, since there are multiple states (the vacuum and all zero norm states) that share the same energy eigenvalue of zero. However, only the vacuum state itself is physically relevant, while the zero norm states do not contribute to physical observables; they could be treated as gauge artifacts or unphysical configurations that do not affect measurable quantities in the theory.
