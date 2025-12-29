@@ -82,8 +82,8 @@ we have
     (J^{\mu})_{\nu}
     = \frac{\partial \mathcal{L}}{\partial (\partial_{\mu}\psi_i)}\,\delta\psi_i
     - K^{\mu}(\psi_i)
-    = \frac{\partial \mathcal{L}}{\partial (\partial_{\mu}\psi_i)}\,\partial_{\nu}\psi_i
-    - \epsilon^{\nu}\delta^{\mu}_{\ \nu}\mathcal{L}.
+    = \frac{\partial \mathcal{L}}{\partial (\partial_{\mu}\psi_i)}\, \epsilon^{\nu}\partial_{\nu}\psi_i
+    - \epsilon^{\nu}\delta^{\mu}_{\ \nu}\mathcal{L} = \epsilon^{\nu} T^{\mu}_{\ \nu}.
 \]
 Factoring out the infinitesimal \(\epsilon^{\nu}\),
 we recognize the expression of the \textbf{energy--momentum tensor} (also called the \textit{stress--energy tensor}):
@@ -126,7 +126,7 @@ Let us compute its components explicitly:
 \]
 where \(\pi^i = \partial\mathcal{L}/\partial\dot{\psi}_i\) are the canonical momenta,
 and \(\mathcal{H}\) is the Hamiltonian density.
-Hence, the temporal component of the four-momentum is the system’s total energy.\TODO{Notation consistency: Hcal for density and H for hamiltonian.}
+Hence, the temporal component of the four-momentum is the system’s total energy.
 
 For the spatial components we obtain:
 \[
@@ -176,9 +176,10 @@ The first two are the \textit{homogeneous} equations (no sources) and are kinema
 \subsection{Four-potential and homogeneous Maxwell equations}
 
 We introduce the electromagnetic four-potential as
-\[
+\begin{equation}
     A^{\mu}(x) = (\phi(t,\mathbf{x}),\, \mathbf{A}(t,\mathbf{x})),
-\]
+    \label{eq:EM_four_potential}
+\end{equation}
 where \(\phi\) denotes the scalar potential and \(\mathbf{A}\) the vector potential.
 The electric and magnetic fields can be expressed in terms of \(A^{\mu}\) as
 \[
@@ -307,7 +308,7 @@ and
 \[
     F^{ij} = -F^{ji} = \partial^i A^j - \partial^j A^i = - \epsilon^{ijk} B^k,
 \]
-with diagonal components \(F^{00} = F^{ii} = 0\).
+with diagonal components \(F^{00} = F^{ii} = 0\).\footnote{When computing the magnetic terms, note that \(-\partial_i A^j + \partial_j A^i = -\epsilon^{ijk} \partial_i A^j = -(\nabla \times \mathbf{A})^k = -B^k\), thus the Levi-Civita tensor is put in to explicit the relation \(F^{ji} = - F^{ij}\) and the antisymmetry of the field strength tensor (the minus sign comes from the lowered indices for nabla definition).}
 
 Using \(F_{\mu\nu}\), the Lagrangian \eqref{eq:EM_free_lagrangian} can be rewritten in the elegant and manifestly Lorentz-invariant form (see Appendix~\ref{app:computations} for the detailed derivation):
 \[
@@ -365,7 +366,7 @@ If one imposes the Lorenz gauge condition \(\partial_{\mu}A^{\mu}=0\), the inhom
 \[
     \square A^{\nu} \equiv \partial_{\mu}\partial^{\mu}A^{\nu} = J^{\nu}.
 \]
-This form is convenient both for solving classical radiation problems and for quantization, since each component \(A^\nu\) satisfies a standard sourced wave equation. Gauge fixing removes the redundancy associated with gauge transformations and therefore eliminates non-physical degrees of freedom; after imposing the Lorenz condition and using the residual gauge freedom one can remove further unphysical components and isolate the two transverse physical polarizations of the photon. \QUESTION{Did I really remove the degree of freedom?}
+This form is convenient both for solving classical radiation problems and for quantization, since each component \(A^\nu\) satisfies a standard sourced wave equation. Gauge fixing removes some redundancies associated with gauge transformations among descriptions of equivalent systems, therefore eliminating non-physical degrees of freedom. We will see in section \ref{sec:gauge_fixing_em_field} that after imposing the Lorentz gauge condition on the EM field, considerations can be made on the system in order to add restriction on the residual gauge freedom, removing effectively further unphysical components to isolate the two transverse physical polarizations of the photon.
 
 \subsection{Energy--momentum tensor}
 
@@ -442,7 +443,7 @@ so that the new tensor take the following form:
 \]
 which is now symmetric under exchange \(\mu \leftrightarrow \nu\). We notice indeed how \(\eta^{\mu \nu}\) is symmetric, while
 \[
-    F^{\mu \lambda} F_{\lambda}^{\ \nu} = F^{\mu}_{\ \alpha} F^{\beta \nu} \eta^{\lambda \alpha} \eta_{\lambda \beta} = F^{\mu}_{\ \lambda} F^{\lambda \nu} = F^{\lambda \nu} F^{\mu}_{\ \lambda} = \underbrace{F^{\nu \lambda}}_{-F^{\lambda \nu}} \underbrace{F_{\lambda}^{\ \mu}}_{-F^{\mu}_{\ \lambda}}.
+    F^{\mu \lambda} F_{\lambda}^{\ \nu} = F^{\mu}_{\ \lambda} F^{\lambda \nu} = (- F^{\ \mu}_{\lambda}) (- F^{\nu \lambda}) = F^{\nu \lambda} F^{\ \mu}_{\lambda}.
 \]
 This is the true form of the energy-momentum tensor which appears in Einstein's field equation, and it is called the \textbf{Belinfante-Rosenfeld tensor}:
 \begin{equation}
@@ -458,11 +459,11 @@ Since we can identify our Belinfante-Rosenfeld tensor as the Noether current, we
 we can compute the anergy density by computing the right term of \eqref{eq:Belinfante-Rosenfeld_tensor}:
 \[
     \begin{aligned}
-        \mathcal{H} & = \tilde{T}^{00} = F^{0 i} F_{i}^{\ 0} +\frac{1}{4} \eta^{00}\left(F_{0i}F^{0i} + F_{i0}F^{i0} + F_{ij}F^{ij}\right)                    \\
-                    & = F^{0 i} F_{i}^{\ 0} + \frac{1}{2} F_{0i}F^{0i} + \frac{1}{4}F_{ij}F^{ij}                                                              \\
-                    & = \eta_{i j}F^{0 i}F^{j0} + \frac{1}{2}\eta_{ij}F^{0j}F^{0i} +\frac{1}{4} \eta_{ia} \eta_{jb} F^{ab}F^{ij}                              \\
-                    & = \eta_{i j} \left(\frac{1}{2}F^{0j}F^{0i} - F^{0 i}F^{0j}\right) + \frac{1}{4} \eta_{ia} \eta_{jb} F^{ab}F^{ij}                        \\
-                    & = -\frac{1}{2} F^{0i}F^{0i} + \frac{1}{4} F^{ij}F^{ij} = \frac{1}{2}\left(\vert \mathbf{E} \vert^2 + \vert \mathbf{B} \vert^2  \right),
+        \mathcal{H} & = \tilde{T}^{00} = F^{0 i} F_{i}^{\ 0} +\frac{1}{4} \eta^{00}\left(F_{0i}F^{0i} + F_{i0}F^{i0} + F_{ij}F^{ij}\right)                   \\
+                    & = F^{0 i} F_{i}^{\ 0} + \frac{1}{2} F_{0i}F^{0i} + \frac{1}{4}F_{ij}F^{ij}                                                             \\
+                    & = \eta_{i j}F^{0 i}F^{j0} + \frac{1}{2}\eta_{ij}F^{0j}F^{0i} +\frac{1}{4} \eta_{ia} \eta_{jb} F^{ab}F^{ij}                             \\
+                    & = \eta_{i j} \left(\frac{1}{2}F^{0j}F^{0i} - F^{0 i}F^{0j}\right) + \frac{1}{4} \eta_{ia} \eta_{jb} F^{ab}F^{ij}                       \\
+                    & = \frac{1}{2} F^{0i}F^{0i} + \frac{1}{4} F^{ij}F^{ij} = \frac{1}{2}\left(\vert \mathbf{E} \vert^2 + \vert \mathbf{B} \vert^2  \right),
     \end{aligned}
 \]
 where we have used the fact that for raising or lowering time-like indices the sign does not change, while \(\eta^{ij} = -\delta^{ij}\) on the space-like indices. We have therefore found the energy density. For the \textit{momentum density} \(\mathcal{P}\) we have:
@@ -472,8 +473,8 @@ where we have used the fact that for raising or lowering time-like indices the s
 we can compute it again from \eqref{eq:Belinfante-Rosenfeld_tensor} as follows
 \[
     \begin{aligned}
-        \mathcal{P}^i & = \tilde{T}^{0i} = F^{0 j} F_{j}^{\ i} +\frac{1}{4} \eta^{0i}\left(---\right)          \\
-                      & = F^{0 j} F_{j}^{\ i} = (-E^i)(\epsilon^{ijk} B^k) = (\mathbf{E} \times \mathbf{B})^i,
+        \mathcal{P}^i & = \tilde{T}^{0i} = F^{0 j} F_{j}^{\ i} +\frac{1}{4} \eta^{0i}\left(F_{\mu \nu} F^{\mu \nu}\right) = F^{0 j} F_{j}^{\ i} \\
+                      & = - F^{j 0} (- F^{ji}) = (-E^j)(- \epsilon^{ijk} B^k) = (\mathbf{E} \times \mathbf{B})^i,
     \end{aligned}
 \]
 since \(\eta^{0i}=0\) and \(F_j^{\ i} = - F^{ji}\). Therefore we found the momentum density.
