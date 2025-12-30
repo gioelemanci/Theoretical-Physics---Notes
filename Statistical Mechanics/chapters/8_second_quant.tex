@@ -1,12 +1,242 @@
 \chapter{Second Quantization}
 
+In this chapter, we introduce the formalism of second quantization, which provides a powerful framework for describing many-particle quantum systems. This approach is particularly useful for systems of identical particles, such as bosons and fermions, where the symmetrization or antisymmetrization of the wavefunction plays a crucial role.
+
+We will begin by defining creation and annihilation operators, which allow us to add or remove particles from specific quantum states. We will then construct the Fock space, which is the Hilbert space that accommodates varying numbers of particles. Following this, we will introduce field operators that enable us to describe particle fields in a continuous manner.
+
+Finally, we will discuss observable operators in the context of second quantization and provide several examples, including the density operator, number operator, and the free Hamiltonian for non-interacting particles.
+
 \section{Creation and Annihilation Operators}
+
+When dealing with many-particle systems, it is often convenient to use creation and annihilation operators. These operators facilitate the addition and removal of particles from specific quantum states. They obey different commutation or anticommutation relations depending on the nature of particles. We will discuss both bosonic and fermionic cases.
 
 \subsection{Bosonic Case}
 
+We will first consider bosons, which are particles that obey Bose-Einstein statistics. The \textbf{creation operator} \( \hat{a}^\dagger \) adds a particle to the quantum state, while the \textbf{annihilation operator} \( \hat{a} \) removes a particle from that state: they add or remove a quantum of energy when applied to the wavefunction. These operators satisfy the following commutation relations:
+\begin{equation}
+    [\hat{a}, \hat{a}^\dagger] = \mathbb{I}, \quad [\hat{a}, \hat{a}] = [\hat{a}^\dagger, \hat{a}^\dagger] = 0,
+    \label{eq:commutation_relations_bosons}
+\end{equation}
+where \( \mathbb{I} \) is the identity operator. These relations reflect the indistinguishable nature of bosons and their ability to occupy the same quantum state. Note that these operators are not Hermitian, as they do not correspond to observable quantities directly.
+
+\begin{figure}[H]
+    \begin{minipage}{0.4\textwidth}
+        \includegraphics[width=\textwidth]{img/bosons_ladder.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.55\textwidth}
+        Before showing how these operators act on states, we use them to define the \textbf{number operator} \( \hat{N} \):
+        \begin{equation}
+            \hat{N} = \hat{a}^\dagger \hat{a},
+            \label{eq:number_operator_bosons}
+        \end{equation}
+        which counts the number of particles in a given quantum state. The action of the creation and annihilation operators on the number states \( \ket{n} \) is given by:
+        \[
+            \begin{aligned}
+                \hat{N} \ket{n} = n \ket{n},          \\
+                \hat{a} \ket{n} = \sqrt{n} \ket{n-1}, \\
+                \hat{a}^\dagger \ket{n} = \sqrt{n+1} \ket{n+1}.
+            \end{aligned}
+        \]
+    \end{minipage}
+\end{figure}
+We also have the following useful commutation relations involving the number operator:
+\[
+    [\hat{N}, \hat{a}] = -\hat{a}, \quad [\hat{N}, \hat{a}^\dagger] = \hat{a}^\dagger.
+\]
+
+\begin{example}
+    Consider a simple harmonic oscillator, which can be described using bosonic creation and annihilation operators since the excitations of the oscillator correspond to quanta of energy, thus scalar particles. When considering the Hilbert space \(\mathcal{H} = \mathcal{L}^2(\mathbb{R})\) of a quantum harmonic oscillator, the creation and annihilation operators can be expressed in terms of the position \( \hat{x} \) and momentum \( \hat{p} \) operators as:
+    \[
+        \hat{a} = \frac{1}{\sqrt{2}}\left(\hat{x} + i\hat{p}\right), \quad \hat{a}^\dagger = \frac{1}{\sqrt{2}}\left(\hat{x} - i\hat{p}\right).
+    \]
+    from \(\left[\hat{x},\,\hat{p}\right] = i\hbar\). Then we could also write the hamiltonian operator as:
+    \[
+        \hat{H} = \hbar \omega \left(\hat{a}^\dagger \hat{a} + \frac{1}{2}\right) = \hbar \omega \left(\hat{N} + \frac{1}{2}\right).
+    \]
+    The energy eigenvalues of the harmonic oscillator are then given by:
+    \[
+        E_n = \hbar \omega \left(n + \frac{1}{2}\right), \quad n = 0, 1, 2, \ldots
+    \]
+    since the number operator \( \hat{N} \) has eigenvalues \( n \).
+\end{example}
+
+This example starts to illustrate how creation and annihilation operators can be used to describe quantum systems in terms of quantized energy levels. This formalism is particularly powerful when extended to many-particle systems, where the number of particles can vary. We will soon use the ladder operators to build the Fock space representation of many-particle states from an orthonormal basis.
+
 \subsection{Fermionic Case}
 
+Next, we consider fermions, which are particles that obey Fermi-Dirac statistics. The creation operator \( \hat{a}^\dagger \) adds a fermion to a quantum state, while the annihilation operator \( \hat{a} \) removes a fermion from that state. These operators satisfy the following anticommutation relations:
+\begin{equation}
+    \{\hat{a}, \hat{a}^\dagger\} = \mathbb{I}, \quad \{\hat{a}, \hat{a}\} = \{\hat{a}^\dagger, \hat{a}^\dagger\} = 0,
+    \label{eq:anticommutation_relations_fermions}
+\end{equation}
+where \( \mathbb{I} \) is the identity operator. These relations reflect the Pauli exclusion principle, which states that no two fermions can occupy the same quantum state simultaneously.
+
+Similar to the bosonic case, we define the number operator \( \hat{N} \) for fermions:
+\begin{equation}
+    \hat{N} = \hat{a}^\dagger \hat{a},
+    \label{eq:number_operator_fermions}
+\end{equation}
+which counts the number of fermions in a given quantum state.
+\begin{figure}[H]
+    \begin{minipage}{0.35\textwidth}
+        The action of the creation and annihilation operators on the number states \( \ket{n} \) (where \( n = 0 \) or \( 1 \) due to the Pauli exclusion principle) is given by:
+        \[    \begin{aligned}
+                \hat{N} \ket{n} = n \ket{n},                          \\
+                \hat{a} \ket{1} = \ket{0}, \quad \hat{a} \ket{0} = 0, \\
+                \hat{a}^\dagger \ket{0} = \ket{1}, \quad \hat{a}^\dagger \ket{1} = 0,
+            \end{aligned}
+        \]
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.6\textwidth}
+        \includegraphics[width=\textwidth]{img/fermions_ladder.png}
+    \end{minipage}
+\end{figure}
+since a fermionic state can either be unoccupied (\( n = 0 \)) or occupied by a single fermion (\( n = 1 \)): from the null anticommutation relations among creation operators we have
+\[
+    \{\hat{a}^\dagger, \hat{a}^\dagger\} = 0 \implies (\hat{a}^\dagger)^2 = 0,
+\]
+We also have the same commutation relations involving the number operator:
+\[
+    [\hat{N}, \hat{a}] = -\hat{a}, \quad [\hat{N}, \hat{a}^\dagger] = \hat{a}^\dagger.
+\]
+\begin{example}
+    If we consider a system of spin-\(\frac{1}{2}\) fermions in \(\mathcal{H} = \mathbb{C}^2\), such as electrons, the creation and annihilation operators can be defined with Pauli spin matrices
+    \[
+        \sigma_x = \begin{pmatrix}
+            0 & 1 \\
+            1 & 0
+        \end{pmatrix}, \quad
+        \sigma_y = \begin{pmatrix}
+            0 & -i \\
+            i & 0
+        \end{pmatrix}, \quad
+        \sigma_z = \begin{pmatrix}
+            1 & 0  \\
+            0 & -1
+        \end{pmatrix},
+    \]
+    respecting \([\sigma^i,\,\sigma^j] = \epsilon_{ijk}\sigma^k\).
+
+    For example, the ladder operators for an electron with spin up can be expressed as \(\sigma^{(\pm)} = \frac{1}{2}(\sigma_x \pm i\sigma_y)\), such that
+    \[
+        \begin{aligned}
+            \sigma^{(+)}                   & = (\sigma^{(-)})^\dagger,             \\
+            (\sigma^{(+)})^2               & = (\sigma^{(-)})^2 = 0,               \\
+            \{\sigma^{(+)}, \sigma^{(-)}\} & = \mathbb{I},                         \\
+            \{\sigma^{(+)}, \sigma^{(+)}\} & = \{\sigma^{(-)}, \sigma^{(-)}\} = 0.
+        \end{aligned}
+    \]
+    Thus the creation operator \( \sigma^{(+)} \) adds an electron with spin up to the state, while the annihilation operator \( \sigma^{(-)} \) removes an electron with spin up from the state. The number operator \( \hat{N} = \sigma^{(+)}\sigma^{(-)} \) counts the number of electrons with spin up in the state, which can be either 0 or 1 due to the Pauli exclusion principle.
+\end{example}
+
+Thus, we have established the fundamental properties of creation and annihilation operators for both bosons and fermions. These operators form the basis for constructing the Fock space, which we will explore in the next section.
+
 \section{Fock Space}
+
+The Fock space is a Hilbert space that accommodates states with varying numbers of particles. It is constructed as the direct sum of tensor products of single-particle Hilbert spaces. For a single-particle Hilbert space \( \mathcal{H}^{(1)} \), the Fock space \( \mathcal{F}(\mathcal{H}) \) is defined as:
+\begin{equation}
+    \mathcal{F}(\mathcal{H}) = \bigoplus_{N=0}^{\infty} \mathcal{H}^{(N)},
+    \label{eq:fock_space_definition}
+\end{equation}
+
+If we describe a system of identical particles, the \( N \)-particle Hilbert space \( \mathcal{H}^{(N)} \) is constructed as the symmetric (for bosons) or antisymmetric (for fermions) tensor product of \( N \) copies of the single-particle Hilbert space:
+\[
+    \mathcal{H}^{(N)}_{S/A} = {\ket{n_1,\,n_2, \ldots, n_N}}, \text{ where } \begin{cases}
+        S: & \text{Symmetric for bosons}, \quad n_k = 0, 1, 2, \ldots \\
+        A: & \text{Antisymmetric for fermions}, \quad n_k = 0, 1,
+    \end{cases}
+\]
+where \( n_k \) represents the occupation number of the \( k \)-th quantum state and \(\mathcal{H} = \mathcal{H}_A \oplus_{\bot} \mathcal{H}_S \). These results are a direct consequence of the \textbf{canonical commutation and anticommutation relations} satisfied by the creation and annihilation operators, and they are encoded in the structure of the Fock space itself.
+
+If we denote the occupation number basis states in Fock space as \( \{\ket{n_1,\, n_2,\, \ldots \, n_k,\, \ldots}\}_{n_1, n_2, \ldots} \), where \( n_k \) is the number of particles in the \( k \)-th single-particle state, we can define a couple of creation and annihilation operators \(\hat{a}_n^{\dagger}\) \(\hat{a}_n\) for each single-particle state \( n \) (which in the single particle Hilbert space corresponds to the \( n \)-th vector of the basis \(\{\ket{e_n}\}_n\)). As we said, these operators induce the statistical nature of the particles, so they satisfy either the commutation relations \eqref{eq:commutation_relations_bosons} for bosons or the anticommutation relations \eqref{eq:anticommutation_relations_fermions} for fermions:
+\[
+    \begin{dcases}
+        \text{Bosons:}   & [\hat{a}_m, \hat{a}_n^\dagger] = \delta_{mn} \mathbb{I}, \quad [\hat{a}_m, \hat{a}_n] = [\hat{a}_m^\dagger, \hat{a}_n^\dagger] = 0,       \\
+        \text{Fermions:} & \{\hat{a}_m, \hat{a}_n^\dagger\} = \delta_{mn} \mathbb{I}, \quad \{\hat{a}_m, \hat{a}_n\} = \{\hat{a}_m^\dagger, \hat{a}_n^\dagger\} = 0,
+    \end{dcases}
+\]
+which can be compacted into the single relation
+\begin{equation}
+    [\hat{a}_n , \hat{a}_m^\dagger]_{\pm} = \delta_{mn} \mathbb{I}, \quad [\hat{a}_n , \hat{a}_m]_{\pm} = [\hat{a}_n^\dagger , \hat{a}_m^\dagger]_{\pm} = 0,
+    \label{eq:CCR_fock}
+\end{equation}
+where the \( + \) sign corresponds to fermions (anticommutator) and the \( - \) sign corresponds to bosons (commutator).
+
+The algebra generated by the fermionic CCR encodes the Pauli exclusion principle, while the bosonic CCR allows for multiple occupancy of the same state. The vacuum state \( \ket{0} \) in Fock space is defined as the state with no particles, satisfying:
+\[
+    \hat{a}_n \ket{0} = 0, \quad \forall n.
+\]
+The action of the creation and annihilation operators on the occupation number basis states can be used to build up or reduce the number of particles in each state: we can create from the vacuum state any occupation number state by applying the creation operators the appropriate number of times
+\[
+    \begin{aligned}
+        \mathcal{H}^{(0)}_{S/A} & = \left\{ \lambda \ket{0} \quad \lambda \in \mathbb{C}\right\},                                                                                                                   \\
+        \mathcal{H}^{(1)}_{S/A} & = \left\{ \ket{0,\,\ldots\, n_k = 1,\, 0,\,\ldots} = \hat{a}_k^{\dagger} \ket{0} \right\} \sim \ket{e_k},                                                                         \\
+        \mathcal{H}^{(2)}_{S/A} & = \left\{ \ket{0,\,\ldots\, n_i = 1,\, \ldots, n_j = 1,\, 0,\,\ldots} = \hat{a}_i^{\dagger} \hat{a}_j^{\dagger} \ket{0} \right\} \sim \ket{e_i} \otimes_{S/A} \ket{e_j},          \\
+                                & \vdots                                                                                                                                                                            \\
+        \mathcal{H}^{(N)}_{S/A} & = \left\{ \ket{n_1,\, n_2,\, \ldots,\, n_k,\, \ldots} = \prod_k \frac{(\hat{a}_k^{\dagger})^{n_k}}{\sqrt{n_k!}} \ket{0} \right\}\sim \Psi_{n_1,\, n_2,\, \ldots\, n_k,\, \ldots},
+    \end{aligned}
+\]
+where the last line represents a general \( N \)-particle state with occupation numbers \( n_k \) for each single-particle state \( k \), thus has to respect \(\sum_{k} n_k = N \) and the normalization factor \( \frac{1}{\sqrt{n_k!}} \) is included for bosons to account for multiple occupancy (it is omitted for fermions since \( n_k \) can only be 0 or 1) since we are treating indistinguishable particles.\footnote{But this factor comes out algebraically from the action of the creation operator, in order to simplify its eigenvalues which would be multiplying the state.}
+
+\paragraph{Two particle state.}
+If we focus for a moment on the two particle case, we can see how the symmetrization or antisymmetrization of the states arises naturally from the commutation or anticommutation relations of the creation operators. For two particles in states \( i \) and \( j \), we have:
+\[
+    \mathcal{H}^{(2)}_{S/A} = \left\{ \hat{a}_i^{\dagger} \hat{a}_j^{\dagger} \ket{0}, \quad \forall i,j \right\} \sim \mathcal{H} \otimes_{S/A} \mathcal{H}.
+\]
+We are considering expliicitly:
+\begin{itemize}
+    \item one particle in state \(\ket{e_i}\), so that \(n_i = 1\);
+    \item one particle in state \(\ket{e_j}\), so that \(n_j = 1\);
+    \item all other states unoccupied, so that \(n_k = 0\) for \(k \neq i,j\).
+\end{itemize}
+Thus, we have to write the two-particle states in a symmetrized or antisymmetrized form, depending on whether we are dealing with bosons or fermions:
+\[
+    \begin{aligned}
+        \ket{1_i, 1_j}_{S} & = \hat{a}_i^{\dagger} \hat{a}_j^{\dagger} \ket{0} = \hat{a}_j^{\dagger} \hat{a}_i^{\dagger} \ket{0} = \ket{1_j, 1_i}_{S},   \\
+        \ket{1_i, 1_j}_{A} & = \hat{a}_i^{\dagger} \hat{a}_j^{\dagger} \ket{0} = -\hat{a}_j^{\dagger} \hat{a}_i^{\dagger} \ket{0} = -\ket{1_j, 1_i}_{A},
+    \end{aligned}
+\]
+which shows that the bosonic state is symmetric under particle exchange, while the fermionic state is antisymmetric. This construction can be extended to any number of particles, since the symmetrization or antisymmetrization arises naturally from the commutation or anticommutation relations of the creation operators, leading to the full Fock space representation of many-particle quantum systems.
+
+\subsection{Properties of Fock Space}
+
+We can summarize some important properties of Fock space, which were already hinted at in the previous discussion:
+\begin{enumerate}
+    \item \textbf{Occupation Number Basis:} The occupation number basis states \( \ket{n_1, n_2, \ldots} \) form a complete orthonormal basis for Fock space:
+          \[
+              \left\{\ket{n_1, n_2, \ldots}\right\}_{n_1, n_2, \ldots} \implies \bra{n_1^{\prime}, n_2^{\prime}, \ldots} \ket{n_1, n_2, \ldots} = \delta_{n_1^{\prime} n_1} \delta_{n_2^{\prime} n_2} \ldots
+          \]
+    \item \textbf{Annihilation:} The annihilation operator \( \hat{a}_k \) acting on an occupation number state \( \ket{n_1, n_2, \ldots, n_k, \ldots} \) decreases the occupation number of the \( k \)-th state by one, such that \(\hat{a}_k : \mathcal{H}^{(N)}_{S/A} \to \mathcal{H}^{(N-1)}_{S/A}\)
+          \[
+              \begin{aligned}
+                  B) & \quad \hat{a}_k \ket{n_1, n_2, \ldots, n_k, \ldots} = \sqrt{n_k} \ket{n_1, n_2, \ldots, n_k - 1, \ldots},        \\
+                  F) & \quad \hat{a}_k \ket{n_1, n_2, \ldots, n_k, \ldots} = \eta_k \sqrt{n_k} \ket{n_1, n_2, \ldots, n_k - 1, \ldots},
+              \end{aligned}
+          \]
+          where \( \eta_k = (-1)^{\sum_{j<k} n_j} \) accounts for the sign change due to the antisymmetry of fermionic states.
+    \item \textbf{Creation:} The creation operator \( \hat{a}_k^\dagger \) acting on an occupation number state \( \ket{n_1, n_2, \ldots, n_k, \ldots} \) increases the occupation number of the \( k \)-th state by one, such that \(\hat{a}_k^\dagger : \mathcal{H}^{(N)}_{S/A} \to \mathcal{H}^{(N+1)}_{S/A}\)
+          \[
+              \begin{aligned}
+                  B) & \quad \hat{a}_k^\dagger \ket{n_1, n_2, \ldots, n_k, \ldots} = \sqrt{n_k + 1} \ket{n_1, n_2, \ldots, n_k + 1, \ldots},        \\
+                  F) & \quad \hat{a}_k^\dagger \ket{n_1, n_2, \ldots, n_k, \ldots} = \eta_k \sqrt{n_k + 1} \ket{n_1, n_2, \ldots, n_k + 1, \ldots}.
+              \end{aligned}
+          \]
+    \item \textbf{Particle Number Operator:} The total particle number operator \( \hat{N} = \sum_{k} \hat{n}_k = \sum_k \hat{a}_k^\dagger \hat{a}_k \) counts the total number of particles in the system:
+          \[
+              \hat{N} \ket{n_1, n_2, \ldots} = \left( \sum_k n_k \right) \ket{n_1, n_2, \ldots} = N \ket{n_1, n_2, \ldots}.
+          \]
+\end{enumerate}
+
+To build a generic state \(\ket{f}\) in Fock space, we can take linear combinations of the occupation number basis states:
+\[
+    \ket{f} = \sum_{n_1, n_2, \ldots} f(n_1, n_2, \ldots) \ket{n_1, n_2, \ldots},
+\]
+where \( f(n_1, n_2, \ldots) \) are complex coefficients that determine the contribution of each occupation number state to the overall state \( \ket{f} \). But since any state in Fock space can be constructed by applying creation operators to the vacuum state, we can also express \( \ket{f} \) as:
+\[
+    \ket{f} = \sum_{N=0}^{\infty} \sum_{k_1, k_2, \ldots, k_N} f(k_1, k_2, \ldots, k_N) \hat{a}_{k_1}^\dagger \hat{a}_{k_2}^\dagger \ldots \hat{a}_{k_N}^\dagger \ket{0}.
+\]
 
 \section{Field Operators}
 
