@@ -9,10 +9,15 @@ i.e.
 \[
     \eta_{\mu\nu} \, \Lambda^{\mu}{}_{\rho} \Lambda^{\nu}{}_{\sigma} = \eta_{\rho\sigma}.
 \]
+We can write the Lorentz group as
+\begin{equation}
+    \mathrm{O}(1,3) = \left\{ \Lambda \in \mathrm{GL}(4, \mathbb{R}) \mid \eta_{\mu\nu} \, \Lambda^{\mu}{}_{\rho} \Lambda^{\nu}{}_{\sigma} = \eta_{\rho\sigma} \right\}.
+    \label{eq:lorentz_group_definition}
+\end{equation}
 
 These transformations preserve the spacetime interval
 \[
-    s^2 = \eta_{\mu\nu} x^\mu x^\nu = (x^0)^2 - \vec{x}^{\,2},
+    s^2 = \eta_{\mu\nu} x^\mu x^\nu = (x^0)^2 - \mathbf{x}^{2},
 \]
 or, infinitesimally,
 \[
@@ -32,9 +37,8 @@ Indeed, under a Lorentz transformation \(x^\mu \mapsto x'^\mu = \Lambda^\mu{}_\r
 confirming that Lorentz transformations leave the Minkowski interval invariant.
 
 
-The determinant of a Lorentz transformation can be either \(+1\) or \(-1\), and \(\Lambda^0{}_0\) can be greater or smaller than \(1\).
-The subgroup with \(\det \Lambda = +1\) and \(\Lambda^0{}_0 \ge 1\) is called the \textbf{proper orthochronous Lorentz group}, denoted by \(\mathrm{SO}^+(1,3)\).
-It is this connected component that is continuously connected to the identity and relevant for most applications in physics.
+The determinant of a Lorentz transformation can be either \(+1\) or \(-1\), and \(\Lambda^0{}_0\) can be greater or smaller than \(1\), corresponding to whether the transformation preserves or reverses spatial orientation and the direction of time: thus, the Lorentz group has four disconnected components.
+The subgroup with \(\det \Lambda = +1\) and \(\Lambda^0{}_0 \ge 1\) is called the \textbf{proper orthochronous Lorentz group}, denoted by \(\mathrm{SO}^+(1,3)\): it includes transformations that preserve both spatial orientation and the direction of time and is connected to the identity (i.e. any element can be continuously deformed to the identity transformation).
 
 \subsection{Infinitesimal Transformations and Generators}
 
@@ -51,45 +55,50 @@ with the condition
 Hence, \(\omega_{\mu\nu}\) is an antisymmetric tensor containing six independent parameters, corresponding to the six generators of the Lorentz algebra.
 
 We can introduce a set of generators \(M_{\mu\nu}\) (antisymmetric in their indices) such that a general infinitesimal transformation acts on a four-vector \(x^\rho\) as:
-\[
+\begin{equation}
     x'^\rho = \left( \delta^\rho{}_\sigma + \frac{i}{2}\,\omega^{\mu\nu} (M_{\mu\nu})^\rho{}_\sigma \right) x^\sigma,
-\]
+    \label{eq:infinitesimal_lorentz_transformation}
+\end{equation}
 as taylor expansion of
 \[
     \Lambda^{\rho}{}_{\sigma} =  e^{\frac{i}{2}\,\omega^{\mu\nu} (M_{\mu\nu})^\rho{}_\sigma},
 \]
 where the generators of the group are
-\[
+\begin{equation}
     (M_{\mu\nu})^\rho_{\ \sigma} = -i \left( \eta_{\mu\sigma} \, \delta^\rho_{\ \nu} - \eta_{\nu\sigma} \, \delta^\rho_{\ \mu} \right),
-\]
+    \label{eq:lorentz_generators_definition}
+\end{equation}
+satisfying the antisymmetry property \(M_{\mu\nu} = -M_{\nu\mu}\).
 
 The commutation relations among the generators define the \textbf{Lorentz algebra} \(\mathfrak{so}(1,3)\):
-\[
+\begin{equation}
     [M_{\mu\nu}, M_{\rho\sigma}] = i \left(
     \eta_{\nu\rho} M_{\mu\sigma}
     - \eta_{\mu\rho} M_{\nu\sigma}
     + \eta_{\mu\sigma} M_{\nu\rho}
     - \eta_{\nu\sigma} M_{\mu\rho}
     \right).
-\]
+    \label{eq:lorentz_algebra}
+\end{equation}
 
 \subsection{Generators: Rotations and Boosts}
 
 The six generators can be naturally separated into:
-\[
-    \begin{aligned}
-        J_i & \equiv \frac{1}{2} \epsilon_{ijk} M_{jk} \quad &  & \text{(spatial rotations)}, \\
-        K_i & \equiv M_{0i} \quad                            &  & \text{(Lorentz boosts)}.
-    \end{aligned}
-\]
+\begin{equation}
+    \begin{dcases}
+        J_i & = \frac{1}{2} \epsilon_{ijk} M_{jk} \quad \text{(spatial rotations)}, \\
+        K_i & = M_{0i} \quad \text{(Lorentz boosts)}.
+    \end{dcases}
+    \label{eq:lorentz_generators_rotations_boosts}
+\end{equation}
 In terms of these generators, the Lorentz algebra decomposes as:
-\[
+\begin{equation}
     [J_i, J_j] = i \epsilon_{ijk} J_k, \qquad
     [J_i, K_j] = i \epsilon_{ijk} K_k, \qquad
     [K_i, K_j] = -i \epsilon_{ijk} J_k.
-\]
-This structure reveals the non-compact nature of the Lorentz group: unlike spatial rotations, boosts do not form a compact subgroup, as rapidities are unbounded.\footnote{When we later discuss the relation between \(\mathrm{SO}^+(1,3)\) and \(\mathrm{SU}(2) \times \mathrm{SU}(2)\), this distinction will be important: \(\mathrm{SU}(2) \times \mathrm{SU}(2)\) is compact, whereas the proper orthochronous Lorentz group is not.}
-
+    \label{eq:lorentz_algebra_rotations_boosts}
+\end{equation}
+This structure reveals the non-compact nature of the Lorentz group: unlike spatial rotations, boosts do not form a compact subgroup, as rapidities are unbounded.\footnote{When we later discuss the relation between \(\mathrm{SO}^+(1,3)\) and \(\mathrm{SU}(2) \times \mathrm{SU}(2)\), this distinction will be important: \(\mathrm{SU}(2) \times \mathrm{SU}(2)\) is compact, whereas the proper orthochronous Lorentz group is not.} Furthermore, the commutation relations indicate that boosts and rotations do not commute, reflecting the intricate structure of spacetime symmetries: boosts in different directions generate rotations for example; but we will later see how to pass to a basis where the algebra decomposes into two commuting \(\mathfrak{su}(2)\) algebras.
 
 For finite transformations, one can write:
 \[
@@ -98,12 +107,13 @@ For finite transformations, one can write:
     B(\bs{\beta}) = e^{-i \bs{\beta}\cdot \mathbf{K}},
 \]
 where \(\bs{\theta} = \left( \theta_1,\,\theta_2,\,\theta_3 \right)\) are the rotation angles and \(\bs{\beta} = \left( \beta_1,\,\beta_2,\,\beta_3\right) \) the boost parameters. We can ultimately reconstruct the expression for \(\omega_{\mu\nu}\):
-\[
-    \begin{aligned}
+\begin{equation}
+    \begin{dcases}
         \omega_{ij} & = \epsilon_{ijk}\theta^k, \\
         \omega_{0i} & = \beta_i.
-    \end{aligned}
-\]
+    \end{dcases}
+    \label{eq:lorentz_parameters_rotations_boosts}
+\end{equation}
 Together, they parametrize any proper orthochronous Lorentz transformation as a combination of a boost and a rotation:
 \[
     \Lambda = B(\bs{\beta}) \, R(\bs{\theta}).
@@ -112,14 +122,17 @@ Thus we have six independent generators and six indipendent and continuous param
 
 \subsection{Representations}
 
-The Lorentz algebra \(\mathfrak{so}(1,3)\) is locally isomorphic to the direct sum \(\mathfrak{su}(2) \oplus \mathfrak{su}(2)\) (algebra of $SU(2) \times SU(2)$, equivalent up to different hermiticity relations arising because of compactess).
+We are going to discuss now the representations of the Lorentz group, which are crucial for understanding how different physical fields transform under Lorentz transformations: we will see how scalars, spinors, and vectors arise naturally from these representations, and we will classify them as finite or infinite-dimensional. Let us start by introducing the concept of the double cover of the Lorentz group and some examples, then we will summarize the main representations used in QFT.
+
+\paragraph{Double cover of Lorentz group.} The Lorentz algebra \(\mathfrak{so}(1,3)\) is locally isomorphic to the direct sum \(\mathfrak{su}(2) \oplus \mathfrak{su}(2)\) (algebra of $SU(2) \times SU(2)$, equivalent up to different hermiticity relations arising because of compactess).
 This correspondence allows the classification of all finite-dimensional representations of the Lorentz group in terms of pairs \((j_+, j_-)\) of \(\mathrm{SU}(2)\) spins.
 
 One can then construct the combinations
-\[
+\begin{equation}
     \mathbf{A} = \frac{1}{2} (\mathbf{J} + i \mathbf{K}), \qquad
     \mathbf{B} = \frac{1}{2} (\mathbf{J} - i \mathbf{K}),
-\]
+    \label{eq:lorentz_algebra_su2_decomposition}
+\end{equation}
 which satisfy independent \(\mathfrak{su}(2)\) algebras:
 \[
     [A_i, A_j] = i \epsilon_{ijk} A_k, \quad
@@ -128,13 +141,33 @@ which satisfy independent \(\mathfrak{su}(2)\) algebras:
 \]
 This shows explicitly the \textbf{algebra decomposition into a direct sum of two commuting algebras}.
 A concrete realization of the Lorentz algebra generators can be constructed using \textbf{spinor spaces}.
-Consider spin-$\tfrac{1}{2}$ representations, and let \(\sigma_i\) denote the Pauli matrices.
-Define the combinations
+Consider spin-$\tfrac{1}{2}$ representations, and let \(\sigma_i\) denote the Pauli matrices
+\begin{equation}
+    \sigma_1 =
+    \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{pmatrix},
+    \quad
+    \sigma_2 =
+    \begin{pmatrix}
+        0 & -i \\
+        i & 0
+    \end{pmatrix},
+    \quad
+    \sigma_3 =
+    \begin{pmatrix}
+        1 & 0  \\
+        0 & -1
+    \end{pmatrix}.
+    \label{eq:Pauli_matrices}
+\end{equation}
+We can define the following operators:
 \[
     \mathbf{A} = \frac{1}{2} \boldsymbol{\sigma} \otimes \mathbf{1}, \qquad
     \mathbf{B} = \frac{1}{2} \mathbf{1} \otimes \boldsymbol{\sigma},
 \]
-which act on the four-dimensional space \(\mathbb{C}^2 \otimes \mathbb{C}^2\).
+which act on the four-dimensional space \(\mathbb{C}^2 \otimes \mathbb{C}^2\), since each \(\boldsymbol{\sigma}\) acts on a two-dimensional complex vector space where it respects its \(\mathfrak{su}(2)\) algebra (the same algebra satisfied by the angular momentum operators in quantum mechanics).
 
 In this language, the \textbf{left-handed} (LH) \textbf{spinors} transform under the \((\tfrac{1}{2},0)\) representation, corresponding to the action of \(\bs{\sigma}\) (through \(\mathbf{A}\)) on the first factor, while the \textbf{right-handed} (RH) \textbf{spinors} transform under the \((0,\tfrac{1}{2})\) representation, corresponding to the action of \(\bs{\sigma}\) (through \(\mathbf{B}\)) on the second factor.
 

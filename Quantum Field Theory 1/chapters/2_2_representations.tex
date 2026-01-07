@@ -1,4 +1,4 @@
-\subsection{Finite-dimensional representations}
+\subsection{Finite-dimensional representations} \label{sec:finite_dimensional_representations}
 
 Finite-dimensional representations of the Lorentz group play a central role in relativistic field theory, as they determine how different types of physical fields transform under Lorentz transformations.
 These representations encode the intrinsic angular momentum (or \textit{spin}) of the fields and thus classify the fundamental particles in a relativistic framework.
@@ -50,16 +50,17 @@ Physically, the trivial representation captures the idea of a \textit{scalar qua
 \subsubsection{Vectorial representation}
 
 The next non-trivial case is the \textbf{vectorial representation}, where the Lorentz generators act on four-vectors \(V^\mu\) according to:
-\[
+\begin{equation}
     (M^{\rho \sigma})^{\mu}_{\ \nu} = -i \left( \eta^{\mu \sigma} \delta^{\rho}_{\ \nu} - \eta^{\mu \rho} \delta^{\sigma}_{\ \nu} \right).
-\]
+    \label{eq:vectorial_representation_generators}
+\end{equation}
 These are \(4\times4\) matrices generating infinitesimal transformations of the form:
 \[
     V^{\mu} \ \longrightarrow \ V'^{\mu} =
     \Lambda^{\mu}_{\ \nu} V^{\nu} =
     \left( e^{-\frac{i}{2}\omega_{\rho \sigma} (M^{\rho \sigma})} \right)^{\mu}_{\ \nu} V^{\nu}.
 \]
-This representation acts on the components of a Lorentz four-vector and mixes them under rotations and boosts.
+This representation acts on four-vectors and mixes their components under rotations and boosts.
 
 The vectorial representation corresponds to \((\tfrac{1}{2}, \tfrac{1}{2})\) in the \((j_L, j_R)\) classification. It describes \textbf{spin–1 fields}, which carry one unit of intrinsic angular momentum. Such fields appear naturally in the description of gauge bosons (photon, gluons, and the weak vector bosons \(W^\pm\) and \(Z^0\)), whose classical field components \(A^\mu(x)\) transform as four-vectors.
 
@@ -86,16 +87,12 @@ This means that for each Lorentz transformation \(\Lambda \in \mathrm{SO}^+(1,3)
 \]
 The representations of \(\mathrm{SL}(2,\mathbb{C})\) thus provide a natural way to construct the \textbf{half-integer spin representations} of the Lorentz group, which have no analogue in purely vectorial transformations.
 
-To make this correspondence explicit, we introduce the Hermitian matrices
-\[
-    \sigma^{\mu} = (\mathbb{I}, \boldsymbol{\sigma}),
-\]
-where \(\boldsymbol{\sigma} = (\sigma^1, \sigma^2, \sigma^3)\) are the \textbf{Pauli matrices}:
-\[
-    \sigma^1 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \quad
-    \sigma^2 = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}, \quad
-    \sigma^3 = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}.
-\]
+To make this correspondence explicit, we introduce the hermitian matrices
+\begin{equation}
+    \sigma^{\mu} = (\mathbb{I}, \boldsymbol{\sigma}), \quad \overline{\sigma}^{\mu} = (\mathbb{I}, -\boldsymbol{\sigma}),
+    \label{eq:sigma_matrices}
+\end{equation}
+where \(\boldsymbol{\sigma} = (\sigma^1, \sigma^2, \sigma^3)\) are the \textbf{Pauli matrices} in \eqref{eq:Pauli_matrices}.
 A spacetime point \(x^{\mu}\) can then be represented by a \(2\times2\) Hermitian matrix:
 \[
     X = x_{\mu}\sigma^{\mu} =
@@ -129,27 +126,29 @@ We can now define two inequivalent fundamental spinor representations, correspon
 \begin{enumerate}
     \item \textbf{Left-handed Weyl spinors} (fundamental representation \((\tfrac{1}{2},0)\)):
           These are two-component complex spinors transforming under the fundamental representation of \(\mathrm{SL}(2,\mathbb{C})\):
-          \[
+          \begin{equation}
               \psi_{\alpha} =
               \begin{pmatrix}
                   \psi_1 \\ \psi_2
               \end{pmatrix}
               \longrightarrow
               \psi'_{\alpha} = N_{\alpha}^{\ \beta} \psi_{\beta}, \qquad N \in \mathrm{SL}(2,\mathbb{C}), \quad \alpha,\beta = 1,2.
-          \]
+              \label{eq:LH_Weyl_spinor_transformation}
+          \end{equation}
           Under spatial rotations they behave as left-handed objects, hence the name. They form the representation usually denoted by \(\mathrm{SU}(2)_L\) when restricted to rotations.
 
     \item \textbf{Right-handed Weyl spinors} (complex conjugate representation \((0,\tfrac{1}{2})\)):
           Their complex conjugates transform under the conjugate representation:
-          \[
-              \bar{\chi}_{\dot{\alpha}} =
+          \begin{equation}
+              \bar{\chi}^{\dot{\alpha}} =
               \begin{pmatrix}
-                  \bar{\chi}_{\dot{1}} \\ \bar{\chi}_{\dot{2}}
+                  \bar{\chi}^{\dot{1}} \\ \bar{\chi}^{\dot{2}}
               \end{pmatrix}
               \longrightarrow
-              \bar{\chi}'_{\dot{\alpha}} = N_{\dot{\alpha}}^{* \dot{\beta}} \bar{\chi}_{\dot{\beta}}, \qquad \dot{\alpha},\dot{\beta} = 1,2.
-          \]
-          These spinors transform as right-handed under spatial rotations and form the representation \(\mathrm{SU}(2)_R\).
+              \bar{\chi}'^{\dot{\alpha}} = N^{* \dot{\alpha}}_{\ \ \dot{\beta}} \bar{\chi}^{\dot{\beta}}, \qquad \dot{\alpha},\dot{\beta} = 1,2.
+              \label{eq:RH_Weyl_spinor_transformation}
+          \end{equation}
+          These spinors transform as right-handed under spatial rotations and so thay form the representation \(\mathrm{SU}(2)_R\).
 \end{enumerate}
 
 \begin{remark}
@@ -174,7 +173,7 @@ We can now define two inequivalent fundamental spinor representations, correspon
 \end{remark}
 
 \paragraph{Generators.}
-The infinitesimal generators of \(\mathrm{SL}(2,\mathbb{C})\) correspond to those of the Lorentz algebra and are represented as\footnote{Where \(\overline{\sigma}^{\mu} = \left(\mathbb{I}, -\bs{\sigma} \right)\).}
+The infinitesimal generators of \(\mathrm{SL}(2,\mathbb{C})\) correspond to those of the Lorentz algebra and are represented as\footnote{Where \(\overline{\sigma}^{\mu} = \left(\mathbb{I}, -\bs{\sigma} \right)\), as defined in eq. \eqref{eq:sigma_matrices}.}
 \[
     \left\{
     \begin{aligned}
@@ -206,32 +205,35 @@ This is a reducible representation of the Lorentz group, containing four complex
     \Psi \longrightarrow \Psi' = e^{-\frac{i}{2} \omega_{\mu \nu} \Sigma^{\mu \nu}} \Psi,
 \]
 where the generators in the \textit{Weyl basis} are block-diagonal:
-\[
+\begin{equation}
     \Sigma^{\mu \nu} = \frac{i}{4} [\gamma^{\mu}, \gamma^{\nu}] =
     \begin{pmatrix}
         \sigma^{\mu \nu} & 0                      \\
         0                & \bar{\sigma}^{\mu \nu}
     \end{pmatrix},
-\]
+    \label{eq:Dirac_representation_generators}
+\end{equation}
 and the Dirac gamma matrices are defined as
-\[
+\begin{equation}
     \gamma^{\mu} =
     \begin{pmatrix}
         0                  & \sigma^{\mu} \\
         \bar{\sigma}^{\mu} & 0
     \end{pmatrix}.
-\]
+    \label{eq:Dirac_gamma_matrices}
+\end{equation}
 This construction allows one to describe spin-\(\tfrac{1}{2}\) particles with both chiralities in a single relativistic framework, suitable for the Dirac equation.
 
 \paragraph{Chirality operator.}
 The \textbf{chirality operator} is defined as
-\[
+\begin{equation}
     \gamma^5 = i \gamma^0 \gamma^1 \gamma^2 \gamma^3 =
     \begin{pmatrix}
         -\mathbb{I}_2 & 0            \\
         0             & \mathbb{I}_2
     \end{pmatrix}, \qquad (\gamma^5)^2 = \mathbb{I}.
-\]
+    \label{eq:chirality_operator}
+\end{equation}
 It allows one to separate the Dirac spinor into its left- and right-handed components:
 \[
     \gamma^5 \Psi =
@@ -245,10 +247,11 @@ For massless fermions, chirality coincides with \textbf{helicity}, the projectio
 
 \paragraph{Chiral projectors.}
 The left- and right-handed components of a Dirac spinor can be isolated using the \textbf{chiral projection operators}:
-\[
+\begin{equation}
     P_L = \frac{\mathbb{I}_4 - \gamma^5}{2}, \qquad
     P_R = \frac{\mathbb{I}_4 + \gamma^5}{2}.
-\]
+    \label{eq:chiral_projectors}
+\end{equation}
 Applied to a Dirac spinor, they give
 \[
     P_L \Psi =
@@ -263,13 +266,16 @@ Applied to a Dirac spinor, they give
 corresponding to the left- and right-handed Weyl components, respectively.
 
 \paragraph{Dirac conjugate.}
-The Dirac conjugate spinor is defined as
-\[
+The Dirac conjugate spinor is defined as\footnote{The \textit{bar} and the \textit{dotted index} are distinct concepts exploiting the same property of the Weyl spinor: the bar denotes the conjugate Weyl representation (\(\psi \in \mathrm{SU}(2)_L\), while \(\overline{\psi} \in \mathrm{SU}(2)_R\)), while the dotted index indicates transformation under the conjugate representation: when we are operating the complex conjugate of a left-handed spinor, we need to introduce dotted index and bar, while for the conjugation of a RH spinor we need the opposite.}
+\begin{equation}
     \bar{\Psi} = \Psi^{\dagger} \gamma^0 =
     \begin{pmatrix}
-        \chi^{\alpha} & \bar{\psi}^*_{\dot{\alpha}}
+        \overline{\chi}^{*\dot{\alpha}} & \psi^*_{\alpha}
+    \end{pmatrix} = \begin{pmatrix}
+        \chi^{\alpha} & \overline{\psi}_{\dot{\alpha}}
     \end{pmatrix}.
-\]
+    \label{eq:Dirac_conjugate}
+\end{equation}
 This definition ensures that the complex conjugate of a left-handed spinor behaves as a right-handed spinor under Lorentz transformations, and vice versa, which is essential for constructing Lorentz-invariant bilinear forms in quantum field theory.
 
 \paragraph{Charge conjugation.}
@@ -277,7 +283,7 @@ Charge conjugation exchanges particles with their antiparticles. Using the charg
 \[
     \Psi^c = C \bar{\Psi}^T =
     \begin{pmatrix}
-        \chi^{\alpha} \\ \bar{\psi}^*_{\dot{\alpha}}
+        \chi_{\alpha} \\ \bar{\psi}^{\dot{\alpha}}
     \end{pmatrix}, \quad
     C = \begin{pmatrix}
         \epsilon_{\alpha \beta} & 0                                  \\

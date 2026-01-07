@@ -33,7 +33,7 @@ Typical important groups in physics can be classified as follows:
 
     \item \textbf{Lorentz and Poincaré groups:} spacetime symmetries in relativity.
           \begin{itemize}
-              \item \(\mathrm{SO}(1,3)\): Lorentz transformations preserving the Minkowski metric.
+              \item \(\mathrm{O}(1,3)\): Lorentz transformations preserving the Minkowski metric.
               \item \(\mathrm{ISO}(1,3)\) or Poincaré group: Lorentz transformations plus translations, fundamental in field theory.
           \end{itemize}
 
@@ -54,7 +54,7 @@ In physics, continuous groups — those depending smoothly on continuous paramet
 
 \section{Lie Groups and Lie Algebras}
 
-A \textbf{Lie group} is a group that is also a smooth differentiable manifold, such that the group operations (multiplication and inversion) are smooth maps.
+A \textbf{Lie group}, a group which is also a smooth differentiable manifold, has to be continuous, i.e. labelled by continuous indices, such that the group operations (multiplication and inversion) are smooth maps.
 Lie groups combine the structure of a continuous symmetry with the differentiability properties of manifolds, enabling the use of calculus to study symmetry transformations.
 
 Each Lie group \(G\) is associated with a corresponding \textbf{Lie algebra} \(\mathfrak{g}\), which captures its local (infinitesimal) structure.
@@ -68,42 +68,44 @@ which satisfies the Jacobi identity:
 \]
 
 In a neighborhood of the identity, an element of the group is mapped by an exponential map from an element of the Lie algebra:
-\[
+\begin{equation}
     g(\epsilon) = e^{i \epsilon^a T_a},
-\]
+    \label{eq:Lie_algebra_exponential_map}
+\end{equation}
 where \(\{T_a\}\) are the \textbf{generators} of the Lie group, and \(\epsilon^a\) are real infinitesimal parameters labeling the transformation.
 The commutation relations among generators define the algebraic structure:
-\[
+\begin{equation}
     [T_a, T_b] = i f_{ab}{}^{c} \, T_c,
-\]
+    \label{eq:commutators_algebraic_structure}
+\end{equation}
 where the real coefficients \(f_{ab}{}^{c}\) are the \textbf{structure constants} of the algebra.
 
 The dimension of a Lie algebra equals the number of independent generators — that is, the number of continuous parameters of the corresponding Lie group.
 
-\textbf{Example:} $SO(2)$ and $\mathfrak{so}(2)$.
-
 \begin{figure}[H]
     \begin{minipage}{0.55\textwidth}
-        The group $SO(2)$ represents planar rotations:
-        \[
-            R(\theta) =
-            \begin{pmatrix}
-                \cos\theta & -\sin\theta \\
-                \sin\theta & \cos\theta
-            \end{pmatrix},
-            \qquad \theta \in [0,2\pi).
-        \]
-        Its Lie algebra $\mathfrak{so}(2)$ is the tangent space at the identity, spanned by the generator $J \equiv T_1$:
-        \[
-            J =
-            \begin{pmatrix}
-                0 & -1 \\
-                1 & 0
-            \end{pmatrix},
-            \qquad
-            R(\theta) = e^{\,\theta J}.
-        \]
-        The exponential map $\exp: \mathfrak{so}(2) \to SO(2)$ thus identifies each tangent vector $\theta J$ with a rotation of angle $\theta$ on the unit circle.
+        \begin{example}[$SO(2)$ and $\mathfrak{so}(2)$]
+            The group $SO(2)$ represents planar rotations:
+            \[
+                R(\theta) =
+                \begin{pmatrix}
+                    \cos\theta & -\sin\theta \\
+                    \sin\theta & \cos\theta
+                \end{pmatrix},
+                \qquad \theta \in [0,2\pi).
+            \]
+            Its Lie algebra $\mathfrak{so}(2)$ is the tangent space at the identity, spanned by the generator $J \equiv T_1$:
+            \[
+                J =
+                \begin{pmatrix}
+                    0 & -1 \\
+                    1 & 0
+                \end{pmatrix},
+                \qquad
+                R(\theta) = e^{\,\theta J}.
+            \]
+            The exponential map $\exp: \mathfrak{so}(2) \to SO(2)$ thus identifies each tangent vector $\theta J$ with a rotation of angle $\theta$ on the unit circle.
+        \end{example}
     \end{minipage}
     \hfill
     \begin{minipage}{0.4\textwidth}
