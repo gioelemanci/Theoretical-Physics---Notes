@@ -102,7 +102,7 @@ which would be equal to \(- S^{\mu \nu}\) only if
 \[
     (S^{\mu \nu})^{\dagger} = - \frac{1}{4} \left[(\gamma^{\mu})^{\dagger},\, (\gamma^{\nu})^{\dagger}\right] = - \frac{1}{4} \left[\gamma^{\mu},\, \gamma^{\nu}\right] = - S^{\mu \nu}.
 \]
-Thus \((\gamma^{\mu})^{\dagger} = \pm \gamma^{\mu}\) \(\iff\) the gamma matrices are hermitian or anti-hermitian; we can check from the Clifford algebra \eqref{eq:clifford_algebra} that this is not possible for all \(\mu\):
+Thus the representation is unitary \(\iff\) \((\gamma^{\mu})^{\dagger} = \pm \gamma^{\mu}\), i.e. the gamma matrices are all hermitian or all anti-hermitian; we can check from the Clifford algebra \eqref{eq:clifford_algebra} that this is not possible for all \(\mu\):
 \[
     \{\gamma^{\mu} ,\, \gamma^{\nu}\} = 2 \eta^{\mu \nu} \mathbb{I}_4 \implies (\gamma^0)^2 = \mathbb{I}_4 \quad (\gamma^i)^2 = -\mathbb{I}_4,
 \]
@@ -143,7 +143,7 @@ Let's factor \(\gamma^0\) out again, Taylor expanding the exponential:
         S^{\dagger} & \sim \mathbb{I}_{4} - \frac{1}{2}\omega_{\mu \nu} \gamma^0 S^{\mu \nu} \gamma^0  + \frac{1}{4}\omega_{\mu \nu}\omega_{\rho \sigma} \gamma^0 S^{\mu \nu} \gamma^0\gamma^0 S^{\rho \sigma} \gamma^0 - \frac{1}{8}\cdots \\
                     & = \gamma^0 \gamma^0 - \frac{1}{2}\omega_{\mu \nu} \gamma^0 S^{\mu \nu} \gamma^0  + \frac{1}{4}\omega_{\mu \nu}\omega_{\rho \sigma} \gamma^0 S^{\mu \nu} \mathbb{I}_4 S^{\rho \sigma} \gamma^0 - \frac{1}{8}\cdots     \\
                     & = \gamma^0 \left(\mathbb{I}_{4} - \frac{1}{2}\omega_{\mu \nu} S^{\mu \nu} + \frac{1}{4}\omega_{\mu \nu}\omega_{\rho \sigma} S^{\mu \nu} S^{\rho \sigma} - \frac{1}{8}\cdots \right) \gamma^0                          \\
-                    & = \gamma^0 e^{-\frac{1}{2}\omega_{\mu \nu}S^{\mu \nu}} \gamma^0 = \gamma^0 S^{\mu \nu} \gamma^0.
+                    & = \gamma^0 e^{-\frac{1}{2}\omega_{\mu \nu}S^{\mu \nu}} \gamma^0 = \gamma^0 S^{-1}\gamma^0.
     \end{aligned}
 \]
 Now we have definitive proof that the right expression for \(S^{\dagger}\) is
@@ -201,7 +201,7 @@ So, summarizing, if we verify that \(\overline{\psi} \gamma^{\mu} \psi\) transfo
 \[
     \overline{\psi} \gamma^{\mu} \psi \to \overline{\psi}^{\prime} \gamma^{\mu} \psi^{\prime} = \overline{\psi} S^{-1}\gamma^{\mu} S \psi,
 \]
-where we have used the results of the previous section to write the expression for the adjoint Dirac spinor transformation of eq. \eqref{eq:adjoint_spinor_transformation}. Thus if we now use the infinitesimal form of the Lorentz transformation in the foundamental representation of the Lorentz group \(\mathrm{SO}(1,3)\)
+where we have used the results of the previous section to write the expression for the adjoint Dirac spinor transformation of eq. \eqref{eq:adjoint_spinor_transformation}. Thus if we now use the infinitesimal form of the Lorentz transformation in the foundamental representation (meaning vectorial representation, which generators are given by \eqref{eq:vectorial_representation_generators}, since with foundamental is usually addressed the scalar transformations representation) of the Lorentz group \(\mathrm{SO}(1,3)\)
 \[
     \Lambda = e^{-\frac{i}{2} \omega_{\mu \nu} M^{\mu \nu}},
 \]
@@ -417,10 +417,10 @@ However each component \(\psi_{\alpha}(x)\) satosfy the KG equation, since in ef
         \left(-\gamma^{\mu} \gamma^{\nu} \partial_{\mu} \partial_{\nu} - m^2\right) \psi(x) = 0,                  \\
         \left(-\frac{1}{2}\{\gamma^{\mu},\,\gamma^{\nu}\} \partial_{\mu} \partial_{\nu} - m^2\right) \psi(x) = 0, \\
         \left(-\eta^{\mu \nu} \partial_{\mu} \partial_{\nu} - m^2\right) \psi(x) = 0,                             \\
-        \implies (\Box + m^2) \psi(x) = 0.
+        \implies (\Box + m^2) \psi(x) = 0,
     \end{aligned}
 \]
-In terms of matrices we have used the \textbf{clifford algebra} to simplify the product of gamma matrices, since we can insert the anticommutator for symmetry of \(\partial_\mu \partial_\nu\):
+where we have used the \textbf{clifford algebra} to simplify the product of gamma matrices, since we can insert the anticommutator for symmetry of \(\partial_\mu \partial_\nu\):
 \[
     \gamma^{\mu} \gamma^{\nu} \partial_{\mu} \partial_{\nu} = \frac{1}{2} \gamma^{\mu} \gamma^{\nu} \left\{\partial_{\mu}, \partial_{\nu}\right\} = \frac{1}{2} \{\gamma^{\mu},\, \gamma^{\nu}\} \partial_{\mu} \partial_{\nu} = \eta^{\mu \nu} \partial_{\mu} \partial_{\nu},
 \]
@@ -431,7 +431,7 @@ just renaming indces. Thus each component of the Dirac spinor satisfies the KG e
 
 \subsection{Chiral Spinors}
 
-Chirality means that Dirac representation \((\tfrac12,\,0) \oplus (0,\,\tfrac12)\) can be decomposed into two irreducible representations, \textbf{Weyl representation}, of the Lorentz group (for more information on the representations see section \ref{sec:finite_dimensional_representations}). Weyl or Chiral spinors are two-component objects (complex dof) with different transformation properties:
+Chirality means that Dirac representation  can be decomposed into two irreducible representations, \textbf{Weyl representation} \((\tfrac12,\,0) \oplus (0,\,\tfrac12)\), of the Lorentz group (for more information on the representations see section \ref{sec:finite_dimensional_representations}). Weyl or Chiral spinors are two-component objects (complex dof) with different transformation properties:
 \begin{itemize}
     \item \textbf{Left-Handed} weyl spinors: \(\psi_L \sim (\tfrac12,\,0)\), transform under \(S_L\) only (as in eq. \eqref{eq:LH_Weyl_spinor_transformation});
     \item \textbf{Right-Handed} weyl spinors: \(\psi_R \sim (0,\,\tfrac12)\), transform under \(S_R\) only (as in eq. \eqref{eq:RH_Weyl_spinor_transformation}).
@@ -532,7 +532,7 @@ in terms of chiral components (which is very useful for \textit{statistical fiel
     \item Expanding the \textbf{mass term} instead:
           \[
               \begin{aligned}
-                  \overline{\psi} \psi & = \psi^{\dagger} \gamma^0 (P_R^2 + P_L^2) \psi = \psi^{\dagger} \gamma^0 \left(\frac{1 + \gamma^5}{2}\right)^2 \psi_L + \psi^{\dagger} \gamma^0 \left( \frac{1 - \gamma^5}{2} \right)^2 \psi_R                \\
+                  \overline{\psi} \psi & = \psi^{\dagger} \gamma^0 (P_R^2 + P_L^2) \psi = \psi^{\dagger} \gamma^0 \left(\frac{1 + \gamma^5}{2}\right)^2 \psi + \psi^{\dagger} \gamma^0 \left( \frac{1 - \gamma^5}{2} \right)^2 \psi                    \\
                                        & = \psi^{\dagger}\left(\frac{1 - \gamma^5}{2}\right) \gamma^0 \left(\frac{1 + \gamma^5}{2}\right) \psi + \psi^{\dagger}\left(\frac{1 + \gamma^5}{2}\right) \gamma^0  \left(\frac{1 - \gamma^5}{2}\right) \psi,
               \end{aligned}
           \]
@@ -554,7 +554,7 @@ If you take an electron whith both the chiral components, only the LH component 
 
 If we write the Dirac equation in terms of chiral components we get:
 \[
-    i \left( \gamma^0 \partial_0 + \gamma^i \partial_i - m \right) \psi = 0, \quad \gamma^0 = \begin{pmatrix}
+    \left( i \gamma^0 \partial_0 + i \gamma^i \partial_i - m \right) \psi = 0, \quad \gamma^0 = \begin{pmatrix}
         0            & \mathbb{I}_2 \\
         \mathbb{I}_2 & 0
     \end{pmatrix}, \quad \gamma^i = \begin{pmatrix}
