@@ -1,260 +1,303 @@
 \subsection{Representations of \texorpdfstring{$SO(N)$}{SO(N)}}
 
-We describe here the simplest representations of \(SO(N)\), the special orthogonal group of real \(N \times N\) matrices:
+We describe here the simplest representations of \(SO(N)\), the \textbf{special orthogonal group} of real \(N \times N\) matrices:
 \[
-SO(N) = \left\{ \text{real } N \times N \text{ matrices } R \mid R^T R = \mathbb{I}, \det R = 1 \right\}.
+    SO(N) = \left\{ \text{real } N \times N \text{ matrices } R \mid R^T R = \mathbb{I}, \, \det R = 1 \right\}.
 \]
 This is the group that leaves invariant the scalar product of vectors \(\vec{v}, \vec{w} \in \mathbb{R}^N\), defined by \(\vec{v} \cdot \vec{w} = \delta_{ab} v^a w^b\), where the metric \(\delta_{ab}\) is recognized to be an invariant tensor (indices up and down are equivalent for \(SO(N)\), so that \(\delta_{ab} = \delta^a_{\ b}\), and we already know that \(\delta^a_{\ b}\) is an invariant tensor).
 
-\textbf{Invariance of the Scalar Product}
+Remember that the group \(SO(N)\) describes rotations in an \(N\)-dimensional real vector space. The condition \(\det R = 1\) ensures that we are considering only proper rotations (excluding reflections).
 
+Since this is a real and orthogonal group, upper and lower, dotted and undotted indices are equivalent, thus we have four equivalent ways of representing a vector:
+\[
+    v^a \sim v_a \sim v^{\dot{a}} \sim v_{\dot{a}}.
+\]
+
+\paragraph{Invariance of the scalar product.}
 More directly, using matrix notation, we compute:
 \[
-\begin{aligned}
-v' &= R v, \quad w' = R w \\
-\vec{v} \cdot \vec{w} &= v^T w \quad \rightarrow \quad v'^T w' = (R v)^T R w = v^T R^T R w = v^T w.
-\end{aligned}
+    \begin{aligned}
+        v'                    & = R v, \quad w' = R w                                                        \\
+        \vec{v} \cdot \vec{w} & = v^T w \quad \rightarrow \quad v'^T w' = (R v)^T R w = v^T R^T R w = v^T w.
+    \end{aligned}
 \]
 Equivalently, using components:
 \[
-\begin{aligned}
-v'_a &= R_{ab} v_b, \quad w'_a = R_{ab} w_b \\
-\vec{v} \cdot \vec{w} &= v_a w_a \quad \rightarrow \quad v'_a w'_a = R_{ab} v_b R_{ac} w_c = v_b R_{ab} R_{ac} w_c = v_b \underbrace{R^T_{ba} R_{ac}}_{\delta_{bc}} w_c = v_b w_b = v_a w_a,
-\end{aligned}
+    \begin{aligned}
+        v'_a                  & = R_{ab} v_b, \quad w'_a = R_{ab} w_b                                                                                                                                 \\
+        \vec{v} \cdot \vec{w} & = v_a w_a \quad \rightarrow \quad v'_a w'_a = R_{ab} v_b R_{ac} w_c = v_b R_{ab} R_{ac} w_c = v_b \underbrace{R^T_{ba} R_{ac}}_{\delta_{bc}} w_c = v_b w_b = v_a w_a,
+    \end{aligned}
 \]
 where we used again the fact that upper and lower indices are equivalent.
 
-\textbf{Defining Representation and Tensor Products}
-
+\paragraph{Defining representation.}
 Thus, the defining representation (also called vector representation) acts on the vectors \(v^a\). As already described, the four basic representations are all equivalent as \(v^a \sim v_a \sim v^{\dot{a}} \sim v_{\dot{a}}\). We denote this representation by \(N\), i.e., by its dimension.
 
 The tensor product \(N \otimes N\) identifies the tensor representation that acts on tensors with two indices \(T^{ab}\) and thus corresponds to a representation of dimension \(N^2\). It is a reducible representation. To extract the irreducible representations that it contains, we proceed as follows.
 
-\textbf{Decomposing the Tensor Representation}
-
+\paragraph{Decomposing the tensor representation.}
 We have already seen that the tensor \(T^{ab}\) can be separated into the symmetric part \(S^{ab}\) (of dimension \(\frac{N(N+1)}{2}\)) and the antisymmetric part \(A^{ab}\) (of dimension \(\frac{N(N-1)}{2}\)).
 
 The symmetric part is still reducible because one can construct a scalar (an invariant under the group transformations) by taking its trace:
 \[
-S \equiv \delta_{ab} S^{ab} = S^a_{\ a}.
+    S \equiv \delta_{ab} S^{ab} = S^a_{\ a}.
 \]
 It is easily seen that this is a scalar, as we already know that the contraction of an upper index with a lower index produces a scalar:
 \[
-S \quad \xrightarrow{g \in SO(N)} \quad S' = S
+    S \quad \xrightarrow{g \in SO(N)} \quad S' = S
 \]
 It identifies a trivial one-dimensional representation: \(R_{\text{scal}}(g) = 1\). We can separate the trace from the symmetric tensor \(S^{ab}\) in the following way:
 \[
-S^{ab} = \underbrace{S^{ab} - \frac{1}{N} \delta^{ab} S}_{\hat{S}^{ab}} + \frac{1}{N} \delta^{ab} S
+    S^{ab} = \underbrace{S^{ab} - \frac{1}{N} \delta^{ab} S}_{\hat{S}^{ab}} + \frac{1}{N} \delta^{ab} S
 \]
-where we have defined the traceless symmetric tensor \(\hat{S}^{ab}\) (which satisfies \(\hat{S}^a_{\ a} = 0\)). Thus, collecting all pieces, we have succeeded in separating the tensor \(T^{ab}\) into its irreducible parts:
+where we have defined the traceless symmetric tensor \(\hat{S}^{ab}\) (which satisfies \(\hat{S}^a_{\ a} = 0\)).\footnote{We have divided by \(N\) since the trace involves summing over \(N\) components, and for the delta in particular, \(\delta^a_{\ a} = N\).} Thus, collecting all pieces, we have succeeded in separating the tensor \(T^{ab}\) into its irreducible parts:
 \[
-T^{ab} = \frac{1}{N} \delta^{ab} S + A^{ab} + \hat{S}^{ab}
+    T^{ab} = \frac{\delta^{ab}}{N} S + A^{ab} + \hat{S}^{ab}
 \]
 They transform independently without ever mixing. Indicating the irreducible representations with their respective dimensions, the above translates into the following expression:
 \[
-N \otimes N = 1 \oplus \frac{N(N-1)}{2} \oplus \left( \frac{N(N+1)}{2} - 1 \right)
+    N \otimes N = 1 \oplus \frac{N(N-1)}{2} \oplus \left( \frac{N(N+1)}{2} - 1 \right)
 \]
-It can be shown that there are no further reductions. The representation acting on antisymmetric tensors with two indices \(A^{ab}\), the \(\frac{N(N-1)}{2}\), is also called the adjoint representation: its dimension corresponds to the number of independent parameters of the group, given by the angles describing the rotations in the \(a\)-\(b\) planes (with \(a \neq b\)).
+It can be shown that there are no further reductions. The representation acting on antisymmetric tensors with two indices \(A^{ab}\), the \(\frac{N(N-1)}{2}\), is also called the \textbf{adjoint representation}: its dimension corresponds to the number of independent parameters of the group, given by the angles describing the rotations in the \(a\)-\(b\) planes (with \(a \neq b\)).
 
-
-In summary, for \(SO(N)\), we understand that there exist the following irreducible representations, indicated by their dimension:
+In summary, for \(\mathrm{SO}(N)\), we understand that there exist the following irreducible representations, indicated by their dimension:
 \[
-1, \quad N, \quad \frac{N(N-1)}{2}, \quad \left( \frac{N(N+1)}{2} - 1 \right), \quad \ldots
+    1, \quad N, \quad \frac{N(N-1)}{2}, \quad \left( \frac{N(N+1)}{2} - 1 \right), \quad \ldots
 \]
 where 1 is the trivial representation (the scalar), \(N\) is the vector representation (also called defining or fundamental), the \(\frac{N(N-1)}{2}\) is the adjoint representation, the \(\frac{N(N+1)}{2} - 1\) is the traceless symmetric representation, etc.
 
-\textbf{\(SO(3)\) Case and Quantum Mechanics}
+\begin{example}[\(\mathrm{SO}(3)\) case and quantum mechanics]
+    In the specific case of \(\mathrm{SO}(3)\), the irreducible tensor decomposition becomes:
+    \[
+        3 \otimes 3 = 1 \oplus 3 \oplus 5.
+    \]
 
-In the specific case of \(SO(3)\), the irreducible tensor decomposition becomes:
+    We see that in this special case, the adjoint representation coincides with the vector representation (the defining representation): the dimensions are the same, and a full proof is simple to produce. Translated into the language of quantum mechanics, this formula tells us that combining spin 1 (the vector representation "3") with another spin 1 yields spin 0 (the "1" representation, the scalar), spin 1 (again the "3" representation), and spin 2 (the "5" representation).
+
+    Equivalently, defining the quantum numbers \(l\) by setting \(n = 2l + 1\) for \(n = 1, 3, 5\), this relation can be written as:
+    \[
+        (l = 1) \otimes (l = 1) = (l = 0) \oplus (l = 1) \oplus (l = 2)
+    \]
+    which is the formula for adding quantum angular momenta. In quantum mechanics, orbital angular momentum is quantized and is fixed by an integer quantum number \(l = 0, 1, 2, 3, \ldots\), indicating that the projection of the angular momentum along a fixed axis can only take \(2l + 1\) values. The \((2l + 1)\)-representation is the one acting on the traceless, symmetric tensor with \(l\) indices, \(\hat{S}^{a_1 a_2 \ldots a_l}\).
+
+    The electron orbiting the nucleus can have angular momentum with \(l = 0\) (S orbital), angular momentum with \(l = 1\) (P orbital), angular momentum with \(l = 2\) (D orbital), etc. Continuing with the study of angular momentum in quantum mechanics, one discovers that intrinsic angular momenta (spins) are characterized by integer and half-integer values of the quantum number, i.e., \(s = 0, \frac{1}{2}, 1, \frac{3}{2}, 2, \ldots\). The rules for composing angular momentum in quantum mechanics correspond precisely to the decomposition of a tensor product into irreducible representations mentioned above.
+
+    Strictly speaking, the representations with half-integer spin (spinors) are not truly representations of the \(\mathrm{SO}(N)\) group, as they are double valued (a rotation of \(2\pi\) is not the identity but minus the identity). They are representations of the covering group as well as of the \(\mathrm{SO}(N)\) Lie algebra, a concept that we shall introduce shortly.
+\end{example}
+
+\begin{example}[\(\mathrm{SO}(4)\) and Lorentz group \(\mathrm{SO}(3,1)\)]
+
+    In the case of \(\mathrm{SO}(4)\), or the Lorentz group \(\mathrm{SO}(3,1)\), the irreducible tensor decomposition becomes:
+    \[
+        4 \otimes 4 = 1 \oplus 6 \oplus 9 .
+    \]
+    The 6-dimensional representation is the adjoint representation. It is the one that acts on the electromagnetic field, which indeed has six independent components that are mixed under Lorentz transformations. The electromagnetic field is described by an antisymmetric tensor with two indices \(F^{\mu\nu}\).
+
+    In the case of the Lorentz group, upper and lower indices are equivalent, and the Minkowski metric is used to pass from one to the other (the metric describes the similarity transformation that connects the two representations).
+\end{example}
+
+\subsection{Representations of \texorpdfstring{\(\mathrm{SU}(N)\)}{SU(N)}}
+
+Consider now \(\mathrm{SU}(N)\), the special unitary group of \(N\times N\) matrices:
 \[
-3 \otimes 3 = 1 \oplus 3 \oplus 5.
+    \mathrm{SU}(N) = \left\{ \text{complex } N \times N \text{ matrices } U \mid U^\dagger U = \mathbb{I}, \det U = 1 \right\}.
 \]
 
-We see that in this special case, the adjoint representation coincides with the vector representation: the dimensions are the same, and a full proof is simple to produce. Translated into the language of quantum mechanics, this formula tells us that combining spin 1 (the vector representation "3") with another spin 1 yields spin 0 (the "1" representation, the scalar), spin 1 (again the "3" representation), and spin 2 (the "5" representation).
+This is the group that preserves the inner product of vectors \(\vec{v}, \vec{w} \in \mathbb{C}^N\) defined by\footnote{Remember that, since the representation is unitary we have \(R(g)^{-1T} \cong R(g)^*\), thus \(v^{\dot{a}} \sim v_a\) (the adjoint is equivalent to the inverse).} \(\vec{v}^* \cdot \vec{w} = v^*_a w^a = \delta^a_{\ b} v^*_a w^b\), where \(^*\) denotes the complex conjugate. The metric \(\delta^a_{\ b}\) is an invariant tensor, as we have seen in eq. \eqref{eq:delta_invariant_tensor}.
 
-Equivalently, defining the quantum numbers \(l\) by setting \(n = 2l + 1\) for \(n = 1, 3, 5\), this relation can be written as:
+Starting from the fundamental representation, \(N\) (corresponding to the vectors \(v^a\)), we immediately obtain another representation, the \textbf{antifundamental representation} (or complex conjugate of the fundamental, transforming the vectors \(v^{\dot{a}} \sim v_a\)), which is denoted by \(\overline{N}\). Note that, unlike the case of \(\mathrm{SO}(N)\), here not all indices are equivalent: the representation is unitary (\(U^{\dagger} U = \mathbb{I}\)), thus we have \(v^{a} \sim v_{\dot{a}}\) transforming in \(N\), while \(v^{\dot{a}} \sim v_a\) transforming in \(\overline{N}\).
+
+\paragraph{Invariance of the scalar product.}
+Using matrix notation, we compute:
 \[
-(l = 1) \otimes (l = 1) = (l = 0) \oplus (l = 1) \oplus (l = 2)
+    \begin{aligned}
+        v'                      & = U v, \quad w' = U w                                                                                            \\
+        \vec{v}^* \cdot \vec{w} & = v^\dagger w \quad \rightarrow \quad v'^\dagger w' = (U v)^\dagger U w = v^\dagger U^\dagger U w = v^\dagger w.
+    \end{aligned}
 \]
-which is the formula for adding quantum angular momenta. In quantum mechanics, orbital angular momentum is quantized and is fixed by an integer quantum number \(l = 0, 1, 2, 3, \ldots\), indicating that the projection of the angular momentum along a fixed axis can only take \(2l + 1\) values. The \((2l + 1)\)-representation is the one acting on the traceless, symmetric tensor with \(l\) indices, \(\hat{S}^{a_1 a_2 \ldots a_l}\).
-
-The electron orbiting the nucleus can have angular momentum with \(l = 0\) (S orbital), angular momentum with \(l = 1\) (P orbital), angular momentum with \(l = 2\) (D orbital), etc. Continuing with the study of angular momentum in quantum mechanics, one discovers that intrinsic angular momenta (spins) are characterized by integer and half-integer values of the quantum number, i.e., \(s = 0, \frac{1}{2}, 1, \frac{3}{2}, 2, \ldots\). The rules for composing angular momentum in quantum mechanics correspond precisely to the decomposition of a tensor product into irreducible representations mentioned above.
-
-Strictly speaking, the representations with half-integer spin (spinors) are not truly representations of the \(SO(N)\) group, as they are double valued (a rotation of \(2\pi\) is not the identity but minus the identity). They are representations of the covering group as well as of the \(SO(N)\) Lie algebra, a concept that we shall introduce shortly.
-
-\textbf{\(SO(4)\) and Lorentz Group \(SO(3,1)\)}
-
-In the case of \(SO(4)\), or the Lorentz group \(SO(3,1)\), the irreducible tensor decomposition becomes:
+Equivalently, using components:
 \[
-4 \otimes 4 = 1 \oplus 6 \oplus 9 .
+    \begin{aligned}
+        v'^a                    & = U^a_{\ b} v^b, \quad w'^a = U^a_{\ b} w^b                                                                                                                                          \\
+        \vec{v}^* \cdot \vec{w} & = v_a w^a \quad \rightarrow \quad v'_a w'^a = (U^a_{\ b} v^b)^* U^a_{\ c} w^c = v_b U^{\ b}_{a} U^a_{\ c} w^c = v_b \underbrace{U^b_{\ a} U^a_{\ c}}_{\delta^b_{\ c}} w^c = v_a w^a,
+    \end{aligned}
 \]
+where we used \(U^b_{\ a} = (U^a_{\ b})^\dagger\), thus we have seen that this representation preserves the scalar product among daggered and undaggered vectors.
 
-The 6-dimensional representation is the adjoint representation. It is the one that acts on the electromagnetic field, which indeed has six independent components that are mixed under Lorentz transformations. The electromagnetic field is described by an antisymmetric tensor with two indices \(F^{\mu\nu}\). 
-
-In the case of the Lorentz group, upper and lower indices are equivalent, and the Minkowski metric is used to pass from one to the other (the metric describes the similarity transformation that connects the two representations).
-
-\subsection{Representations of \texorpdfstring{$SU(N)$}{SU(N)}}
-
-Consider now \(SU(N)\), the special unitary group of \(N\times N\) matrices:
-\[
-SU(N) = \left\{ \text{complex } N \times N \text{ matrices } U \mid U^\dagger U = \mathbb{I}, \det U = 1 \right\}.
-\]
-
-This is the group that preserves the inner product of vectors \(\vec{v}, \vec{w} \in \mathbb{C}^N\) defined by \(\vec{v}^* \cdot \vec{w} = v^*_a w^a = \delta^a_{\ b} v^*_a w^b\), where \(^*\) denotes the complex conjugate. The metric \(\delta^a_{\ b}\) is an invariant tensor (see eq. (58)).
-
-Starting from the fundamental representation, \(N\) (corresponding to the vectors \(v^a\)), we immediately obtain another representation, the complex conjugate representation (transforming the vectors \(v^a \sim v_a\)). It is denoted by \(\overline{N}\).
-
+\paragraph{Decomposing the tensor representation.}
 Now, let's find other irreducible representations by considering the tensor product:
 \[
-N \otimes N = \frac{N(N+1)}{2} \oplus \frac{N(N-1)}{2}
+    N \otimes N = \frac{N(N+1)}{2} \oplus \frac{N(N-1)}{2},
 \]
-which corresponds to the decomposition of the tensor \(T^{ab}\) into its symmetric and antisymmetric parts, \(T^{ab} = S^{ab} + A^{ab}\). This decomposition is exhaustive (note that it is not possible to take traces to form scalars on these tensors because \(\delta_{ab}\) is not an invariant tensor for \(SU(N)\): to see this, simply transform the tensor \(\delta_{ab}\) as dictated by the structure of its indices and see that it is not invariant). Hence, we have discovered the existence of two new representations and know their dimensions.
+which corresponds to the decomposition of the tensor \(T^{ab}\) into its symmetric and antisymmetric parts, \(T^{ab} = S^{ab} + A^{ab}\), now an exhaustive decomposition.\footnote{Note that it is not possible to take traces to form scalars on these tensors because \(\delta_{ab}\) is not an invariant tensor for \(\mathrm{SU}(N)\): to see this, simply transform the tensor \(\delta_{ab}\) as dictated by the structure of its indices and see that it is not invariant. The invariant tensors would be \(\delta^a_{\ b}\) and \(\delta_a^{\ b}\): \(\delta_a^{\prime \, b} = U^{\dagger}U \delta_a^{\ b} = \delta_a^{\ b}\).} Hence, we have discovered the existence of two new representations and know their dimensions.
 
 Consider now:
 \[
-N \otimes \overline{N} = 1 \oplus (N^2 - 1)
+    N \otimes \overline{N} = 1 \oplus (N^2 - 1),
 \]
 which corresponds to the decomposition of the tensor \(T^a_{\ b}\) into its trace part (the scalar) and its traceless part. This is possible because we know that contracting a raised index with a lowered index produces a scalar. In formulas, this separation is written as:
 \[
-T^a_{\ b} = \frac{1}{N} \delta^a_{\ b} T + \hat{T}^a_{\ b}
+    T^a_{\ b} = \frac{\delta^a_{\ b}}{N} T + \hat{T}^a_{\ b},
 \]
-where \(T \equiv T^a_{\ a}\) and \(\hat{T}^a_{\ b} \equiv T^a_{\ b} - \frac{1}{N} \delta^a_{\ b} T\). Note that the tensor \(\delta^a_{\ b}\) is an invariant tensor (it corresponds to the metric of the complex vector space \(\mathbb{C}^N\)). Thus, we have discovered the existence of the representation of dimension \(N^2 - 1\), the so-called \textit{adjoint representation}.
+where \(T \equiv T^a_{\ a}\) and \(\hat{T}^a_{\ b} \equiv T^a_{\ b} - \frac{1}{N} \delta^a_{\ b} T\). Note that the tensor \(\delta^a_{\ b}\) is an invariant tensor (it corresponds to the metric of the complex vector space \(\mathbb{C}^N\)). Thus, we have discovered the existence of the representation of dimension \(N^2 - 1\), the so-called \textbf{adjoint representation}.
 
-Other invariant tensors of \(SU(N)\) are the completely antisymmetric tensors with \(N\) indices, \(\epsilon_{a_1 a_2 \ldots a_N}\) and \(\epsilon^{a_1 a_2 \ldots a_N}\) (this can be demonstrated using the fact that the group matrices have determinants equal to one). They can be used to study the reduction (or equivalence) of other tensorial representations.
+One can consider other invariant tensors of \(\mathrm{SU}(N)\), such as the completely antisymmetric tensors with \(N\) indices, \(\epsilon_{a_1 a_2 \ldots a_N}\) and \(\epsilon^{a_1 a_2 \ldots a_N}\) (this can be demonstrated using the fact that the group matrices have determinants equal to one), which can be used to study the reduction (or equivalence) of other tensorial representations.
 
 In summary, for \(SU(N)\), we have seen that there exist the following irreducible representations:
 \[
-1, \quad N, \quad \bar{N}, \quad N^2 - 1, \quad \frac{N(N-1)}{2}, \quad \frac{N(N+1)}{2}, \quad \frac{\overline{N(N-1)}}{2}, \quad \frac{\overline{N(N+1)}}{2},
+    1, \quad N, \quad \bar{N}, \quad N^2 - 1, \quad \frac{N(N-1)}{2}, \quad \frac{N(N+1)}{2}, \quad \frac{\overline{N(N-1)}}{2}, \quad \frac{\overline{N(N+1)}}{2},
 \]
-where \(1\) is the trivial representation (the scalar), \(N\) is the fundamental representation (or defining), \(\bar{N}\) is the antifundamental (complex conjugate of the fundamental), and \(N^2 - 1\) is the adjoint representation, which is real, etc.
+where \(1\) is the trivial representation (the scalar), \(N\) is the fundamental representation (or defining), \(\bar{N}\) is the antifundamental (complex conjugate of the fundamental), and \(N^2 - 1\) is the adjoint representation (which is real) etc.
 
-\textbf{\(SU(2)\) Case and Quantum Mechanics}
+\begin{example}[\(\mathrm{SU}(2)\) case and quantum mechanics]
+    Let's make this explicit for the case of \(\mathrm{SU}(2)\). We have:
+    \begin{equation}
+        2 \otimes 2 = 1 \oplus 3, \qquad 2 \otimes \bar{2} = 1 \oplus 3,
+        \label{eq:SU2_tensor_decompositions}
+    \end{equation}
+    where \(2\) is the fundamental representation (acting on vectors \(v^a\)), \(\bar{2}\) is the antifundamental representation (acting on vectors \(v^{\dot{a}} \sim v_a\)), \(1\) is the scalar representation, and \(3\) is the adjoint representation (acting on traceless tensors \(T^a_{\ b}\)).
 
-Let's make this explicit for the case of \(SU(2)\). We have:
+    These formulas suggest that perhaps \(2\) and \(\bar{2}\) are \textit{equivalent representations}, i.e. \(\bar{2} \sim 2\). This is indeed the case: using the invariant tensor \(\epsilon_{ab}\) we may relate the two representations by setting \(w_a = \epsilon_{ab} v^b\), then under a group transformation we see that:
+    \[
+        w'_a = \epsilon'_{ab} v'^b = \epsilon_{ab} v'^b
+    \]
+    which indicates that, up to a change of basis given by the \(\epsilon_{ab}\) tensor, the vectors \(v^a\) and \(w_a\) transform in the same way. Here, we used the fact that \(\epsilon_{ab}\) is an invariant tensor. The explicit proof is as follows: if \(R \in SU(2)\) then:
+    \[
+        \epsilon'^{ab} = R^a_{\ c} R^b_{\ d} \epsilon^{cd} = k \epsilon^{ab}, \quad \epsilon^{ab} = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix},
+    \]
+    for some coefficient \(k\). This follows from the fact that an antisymmetric tensor transforms into another antisymmetric one, and from antisymmetric \(2 \times 2\) matrix having only one independent component (otherwise the coefficient \(k\) would have been a vector or a matrix). To determine \(k\), we calculate:
+    \[
+        \epsilon'^{12} = U^1_{\ c} U^2_{\ d} \epsilon^{cd} = U^1_{\ 1} U^2_{\ 2} - U^1_{\ 2} U^2_{\ 1} = \det U = 1, \quad U \in SU(2).
+    \]
+    So \(k = 1\) and \(\epsilon'^{ab} = \epsilon^{ab}\), and thus \(w_a\) transforms in the same way as \(v^a\) (up to a change of basis), confirming that \(\bar{2} \sim 2\).
+
+    Translating \eqref{eq:SU2_tensor_decompositions} into the language of quantum mechanics, it means that combining spin \(\frac{1}{2}\) (the representation "\(2\)") with itself yields spin 0 (the representation "\(1\)", the scalar) and spin 1 (the representation "\(3\)"). Indeed, defining \(j = 2s + 1\) for \(s = 0, \frac{1}{2}, 1\), this relation can be equivalently written as:
+    \[
+        (j = \tfrac{1}{2}) \otimes (j = \tfrac{1}{2}) = (j = 0) \oplus (j = 1).
+    \]
+
+    The group \(\mathrm{SU}(2)\) describes space rotations, including the possibility of having half-integer spins associated with fermionic particles. In mathematical terms, one says that the group \(\mathrm{SU}(2)\) is the universal cover of the group \(\mathrm{SO}(3)\).
+\end{example}
+
+\begin{example}[\(\mathrm{SU}(3)\) case and quark model]
+    Now, let us make explicit also the case of \(\mathrm{SU}(3)\). It has physical applications both as the \textbf{flavor symmetry group} \(\mathrm{SU}(3)_{\text{flavor}}\) which mixes the three "flavors" of quarks (up, down, strange), and as \textbf{color symmetry group} \(\mathrm{SU}(3)_{\text{color}}\) which mixes the three colors of each quark (conventionally red, green, blue). We have:
+    \begin{equation}
+        3 \otimes \bar{3} = 1 \oplus 8
+        \label{eq:SU3_tensor_decomposition}
+    \end{equation}
+    where \(3\) is the fundamental representation (acting on vectors \(v^a\)), \(\bar{3}\) is the antifundamental representation (acting on vectors \(v^{\dot{a}} \sim v_a\)), \(1\) is the scalar representation, and \(8\) is the adjoint representation (acting on traceless tensors \(T^a_{\ b}\)).
+
+    In \(\mathrm{SU}(3)_{\text{flavor}}\), 3 and \(\bar{3}\) correspond to the up, down, and strange quarks and their antiquarks:
+    \[
+        q^a = \begin{pmatrix} u \\ d \\ s \end{pmatrix} \sim 3, \qquad \bar{q}_a = \begin{pmatrix} \bar{u} \\ \bar{d} \\ \bar{s} \end{pmatrix} \sim \bar{3}.
+    \]
+
+    Flavor symmetry means that we can redefine flavors through \(\mathrm{SU}(3)\) group transformations without changing anything in the description of physical phenomena: \(\mathrm{SU}(3)_{\text{flavor}}\). In the static quark model of mesons, which are hadrons composed of bound states of quark-antiquark (\(q\bar{q}\)), the symmetry implies that only singlets or octets of flavor can emerge. The \textit{mesonic octet} containing the pions is the main example: there are eight mesons with identical properties, and one could not distinguish them from each other if the symmetry were exact (same masses, same spin, etc.). In reality, the symmetry is only approximate, so there are some small differences (e.g., they have slightly different mass, also they have different charges and electromagnetism violates this symmetry).
+
+    Another application concerns the color of quarks and is associated with another \(\mathrm{SU}(3)\) group, called \(\mathrm{SU}(3)_{\text{color}}\). Each quark flavor has three colors (red, green, blue); for example, for the up quark, we can group them in a vector:
+    \[
+        u^a = \begin{pmatrix} u^{\text{red}} \\ u^{\text{green}} \\ u^{\text{blue}} \end{pmatrix} \sim 3, \quad \bar{u}_a = \begin{pmatrix} \bar{u}^{\text{red}} \\ \bar{u}^{\text{green}} \\ \bar{u}^{\text{blue}} \end{pmatrix} \sim \bar{3},
+    \]
+    where the colors associated with the antiquarks are called anticolors (antired, antigreen, antiblue).
+
+    Color symmetry means that we can redefine colors through \(\mathrm{SU}(3)\) group transformations without changing anything (color symmetry is exact). The information contained in the relation \eqref{eq:SU3_tensor_decomposition} is that it is possible to combine the colors of a quark with the colors of an antiquark (the anticolors) to form a colorless state (the scalar) or states with eight possible different color combinations: indeed, quark/antiquark of the same flavor can combine into a photon (the scalar, or singlet, of color) or into a gluon (there are eight different possibilities, so that one says that the gluons form an octet of color).
+
+    Moreover:
+    \[
+        3 \otimes 3 = 6 \oplus \bar{3}.
+    \]
+
+    The possible ambiguity in understanding whether the tensor \(A^{ab}\), which has three components, corresponds to 3 or \(\bar{3}\) is resolved in favor of the latter option considering that \(A^{ab} \sim A^{ab} \epsilon_{abc} \sim V_c\) (since \(\epsilon_{abc}\) is an invariant tensor for \(\mathrm{SU}(3)\)). This relation in \(\mathrm{SU}(3)_{\text{color}}\) tells us that combining the colors of two quarks is not possible to obtain a colorless state (the scalar).
+
+    With a bit more effort, one can also deduce (considering the symmetries of the tensor \(T^{abc}\)) that:
+    \begin{equation}
+        3 \otimes 3 \otimes 3 = 1 \oplus 8 \oplus 8 \oplus 10
+        \label{eq:SU3_three_tensor_decompositions}
+    \end{equation}
+    where the 1 corresponds to the completely antisymmetric part of \(T^{abc}\), the 10 to the completely symmetric part of \(T^{abc}\), and the two 8s to parts of the tensor with mixed symmetry. In applications in the static quark model of \textbf{baryons}, hadrons composed of bound states of three quarks (\(qqq\)), the symmetry \(\mathrm{SU}(3)_{\text{flavor}}\) predicts that families of similar particles can only exist with 1, 8, or 10 components (not all need to exist: some combinations might not appear for other reasons). There are several octets (the 8), like the eight baryons, which have similar properties concerning the strong interactions (a particular octet contains the proton and the neutron). Their antiparticles also form octets. There is also a famous decuplet of baryons, whose wave functions are symmetric in the flavors of the three constituent quarks. These wave functions transform into the 10 of \(\mathrm{SU}(3)\) under flavor symmetry transformations (the corresponding anti-baryons group into \(\overline{10}\)). Applying the relation \eqref{eq:SU3_three_tensor_decompositions} to color, the fact that the 1 appears on the right side is interpreted as the possibility of combining the colors of three quarks to form a colorless state (e.g., the proton is made of three quarks; in general mesons and baryons must be color scalars due to a dynamical process called \textit{color confinement}).
+\end{example}
+
+\subsection{Representations of \texorpdfstring{$\mathrm{U}(1)$}{U(1)}}
+
+Let us also consider the case of representations of the group \(\mathrm{U}(1)\), which also plays a significant role in physics. The group \(\mathrm{U}(1)\) is the group of phases:
 \[
-2 \otimes 2 = 1 \oplus 3, \qquad 2 \otimes \bar{2} = 1 \oplus 3
+    \mathrm{U}(1) = \{e^{i\theta} \mid \theta \in [0, 2\pi]\}.
 \]
-
-These formulas suggest that perhaps \(2\) and \(\bar{2}\) are equivalent representations, i.e. \(\bar{2} \sim 2\). This is indeed the case: using the invariant tensor \(\epsilon_{ab}\) we may relate the two representations by setting \(w_a = \epsilon_{ab} v^b\), then under a group transformation we see that:
+It can be shown that all its irreducible unitary representations are one-dimensional complex representations which are characterized by an integer number, positive or negative, called the "charge". The defining representation represents an element of the group \(\mathrm{U}(1)\) with the phase \(e^{i\theta}\) which "rotates" naturally a complex one-dimensional vector \(v\) (\(v \in \mathbb{C}\), where \(\mathbb{C}\) denotes the field of complex numbers, which we interpret here as a one-dimensional complex vector space):
 \[
-w'_a = \epsilon'_{ab} v'^b = \epsilon_{ab} v'^b
-\]
-which indicates that, up to a change of basis given by the \(\epsilon_{ab}\) tensor, the vectors \(v^a\) and \(w_a\) transform in the same way. Here, we used the fact that \(\epsilon_{ab}\) is an invariant tensor. The explicit proof is as follows: if \(R \in SU(2)\) then:
-\[
-\epsilon'^{ab} = R^a_{\ c} R^b_{\ d} \epsilon^{cd} = k \epsilon^{ab}
-\]
-for some coefficient \(k\). This follows from the fact that an antisymmetric \(2 \times 2\) matrix has only one independent component. To determine \(k\), we calculate:
-\[
-\epsilon'^{12} = R^1_{\ c} R^2_{\ d} \epsilon^{cd} = R^1_{\ 1} R^2_{\ 2} - R^1_{\ 2} R^2_{\ 1} = \det R = 1.
-\]
-So \(k = 1\) and \(\epsilon'^{ab} = \epsilon^{ab}\).
-
-Translating (75) into the language of quantum mechanics, it means that combining spin \(\frac{1}{2}\) (the representation "\(2\)") with itself yields spin 0 (the representation "\(1\)", the scalar) and spin 1 (the representation "\(3\)"). Indeed, defining \(j = 2s + 1\) for \(s = 0, \frac{1}{2}, 1\), this relation can be equivalently written as:
-\[
-(j = \tfrac{1}{2}) \otimes (j = \tfrac{1}{2}) = (j = 0) \oplus (j = 1).
-\]
-
-The group \(SU(2)\) describes space rotations, including the possibility of having half-integer spins associated with fermionic particles. In mathematical terms, one says that the group \(SU(2)\) is the universal cover of the group \(SO(3)\).
-
-\textbf{\(SU(3)\) Case and Quark Model}
-
-Now, let us make explicit also the case of \(SU(3)\). It has physical applications both as the flavor symmetry group \(SU(3)_{\text{flavor}}\) which mixes the three "flavors" of quarks (up, down, strange), and as color symmetry group \(SU(3)_{\text{color}}\) which mixes the three colors of each quark (conventionally red, green, blue). We have:
-\[
-3 \otimes \bar{3} = 1 \oplus 8
-\]
-
-In \(SU(3)_{\text{flavor}}\), 3 and \(\bar{3}\) correspond to the up, down, and strange quarks and their antiquarks:
-\[
-q^a = \begin{pmatrix} u \\ d \\ s \end{pmatrix} \sim 3, \qquad \bar{q}_a = \begin{pmatrix} \bar{u} \\ \bar{d} \\ \bar{s} \end{pmatrix} \sim \bar{3}.
-\]
-
-Flavor symmetry means that we can redefine flavors through \(SU(3)\) group transformations without changing anything in the description of physical phenomena. In the static quark model of mesons, which are hadrons composed of bound states of quark-antiquark (\(q\bar{q}\)), the symmetry implies that only singlets or octets of flavor can emerge. The mesonic octet containing the pions is the main example: there are eight mesons with identical properties, and one could not distinguish them from each other if the symmetry were exact (same masses, same spin, etc.). In reality, the symmetry is only approximate, so there are some small differences (e.g., they have slightly different mass, also they have different charges and electromagnetism violates this symmetry).
-
-Another application concerns the color of quarks and is associated with another \(SU(3)\) group, called \(SU(3)_{\text{color}}\). Each quark flavor has three colors (red, green, blue); for example, for the up quark, we can group them in a vector:
-\[
-u^a = \begin{pmatrix} u^{\text{red}} \\ u^{\text{green}} \\ u^{\text{blue}} \end{pmatrix} \sim 3.
-\]
-
-Color symmetry means that we can redefine colors through \(SU(3)\) group transformations without changing anything (color symmetry is exact). The information contained in the relation (79) is that it is possible to combine the colors of a quark with the colors of an antiquark (the anticolors) to form a colorless state (the scalar) or states with eight possible different color combinations: indeed, quark/antiquark of the same flavor can combine into a photon (the scalar, or singlet, of color) or into a gluon (there are eight different possibilities, so that one says that the gluons form an octet of color).
-
-Moreover:
-\[
-3 \otimes 3 = 6 \oplus \bar{3}.
-\]
-
-The possible ambiguity in understanding whether the tensor \(A^{ab}\), which has three components, corresponds to 3 or \(\bar{3}\) is resolved in favor of the latter option considering that \(A^{ab} \sim A^{ab} \epsilon_{abc} \sim V_c\) (since \(\epsilon_{abc}\) is an invariant tensor for \(SU(3)\)). This relation in \(SU(3)_{\text{color}}\) tells us that combining the colors of two quarks is not possible to obtain a colorless state (the scalar).
-
-With a bit more effort, one can also deduce (considering the symmetries of the tensor \(T^{abc}\)) that:
-\[
-3 \otimes 3 \otimes 3 = 1 \oplus 8 \oplus 8 \oplus 10
-\]
-where the 1 corresponds to the completely antisymmetric part of \(T^{abc}\), the 10 to the completely symmetric part of \(T^{abc}\), and the two 8s to parts of the tensor with mixed symmetry. In applications in the static quark model of baryons, hadrons composed of bound states of three quarks (\(qqq\)), the symmetry \(SU(3)_{\text{flavor}}\) predicts that families of similar particles can only exist with 1, 8, or 10 components (not all need to exist: some combinations might not appear for other reasons). There are several octets (the 8), like the eight baryons, which have similar properties concerning the strong interactions (a particular octet contains the proton and the neutron). Their antiparticles also form octets. There is also a famous decuplet of baryons, whose wave functions are symmetric in the flavors of the three constituent quarks. These wave functions transform into the 10 of SU(3) under flavor symmetry transformations. The corresponding anti-baryons group into \(\overline{10}\). Applying the relation (83) to color, the fact that the 1 appears on the right side is interpreted as the possibility of combining the colors of three quarks to form a colorless state (e.g., the proton is made of three quarks; in general mesons and baryons must be color scalars due to a dynamical process called \textit{color confinement}).
-
-\subsection{Representations of \texorpdfstring{$U(1)$}{U(1)}}
-
-Let us also consider the case of representations of the group \(U(1)\), which also plays a significant role in physics. The group \(U(1) = \{e^{i\theta} \mid \theta \in [0, 2\pi]\}\) is the group of phases. It can be shown that all its irreducible unitary representations are one-dimensional complex representations which are characterized by an integer number, positive or negative, called the "charge". The defining representation represents an element of the group \(U(1)\) with the phase \(e^{i\theta}\) which "rotates" naturally a complex one-dimensional vector \(v\) (\(v \in \mathbb{C}\), where \(\mathbb{C}\) denotes the field of complex numbers, which we interpret here as a one-dimensional complex vector space):
-\[
-v \quad \xrightarrow{g \in U(1)} \quad v' = e^{i\theta} v, \qquad v \in \mathbb{C}.
+    v \quad \xrightarrow{g \in \mathrm{U}(1)} \quad v' = e^{i\theta} v, \qquad v \in \mathbb{C}.
 \]
 Thus, the vector space of the defining representation is one-dimensional and complex, and the matrices of the representation are complex \(1 \times 1\) matrices (i.e., complex numbers).
 
 Objects that transform as tensor products of the defining representation:
 \[
-v_{(q)} \sim \underbrace{v v \cdots v}_{q \text{ times}} = v^q
+    v_{(q)} \sim \underbrace{v v \cdots v}_{q \text{ times}} = v^q
 \]
 with \(q\) an integer give rise to the \textit{representation of charge} \(q\):
 \[
-v_{(q)} \quad \xrightarrow{g \in U(1)} \quad v'_{(q)} = e^{iq\theta} v_{(q)}.
+    v_{(q)} \quad \xrightarrow{g \in U(1)} \quad v'_{(q)} = e^{iq\theta} v_{(q)}.
 \]
-The number \(q\) can also be negative, as seen by tensoring the antifundamental representation acting on \(\bar{v}\).
+The number \(q\) can also be negative, as seen by tensoring the antifundamental representation acting on \(\bar{v}\), but it remains an integer. Thus, all irreducible representations of \(\mathrm{U}(1)\) are one-dimensional and characterized by an integer \(q\), called the \textbf{charge of the representation}.\footnote{Not to be confused with the dimension of the representation, which is always 1.}
 
-The tensor product of a representation with charge \(q_1\) with a representation with charge \(q_2\) yields the representation with charge \(q_1 + q_2\). The symmetry group \(U(1)\) is used in physics when there are \textit{quantized additive quantum numbers}. Since all its representations are one-dimensional, to distinguish the various inequivalent representations, one indicates the charge \(q\) of the representation rather than its dimension.
+The tensor product of a representation with charge \(q_1\) with a representation with charge \(q_2\) yields the representation with charge \(q_1 + q_2\). The symmetry group \(\mathrm{U}(1)\) is used in physics when there are \textit{quantized additive quantum numbers}. Since all its representations are one-dimensional, to distinguish the various inequivalent representations, one indicates the charge \(q\) of the representation rather than its dimension.
 
-What has been analyzed so far also allows us to interpret the possible charges (generalized charges, such as electric charge, color charge, etc.) of particles and associate them with a representation of the corresponding symmetry group. For example, the Standard Model of elementary particles contains the symmetry group \(SU(3) \times SU(2) \times U(1)\) (called the gauge symmetry group). The fermions of the Standard Model have generalized charges under these groups. Let us describe them. We can indicate these charges using a notation of the form \((SU(3), SU(2))_{U(1)}\), where for the non-abelian groups we specify the representation by its corresponding dimension, while for the abelian part we use the \(U(1)\) charge, called hypercharge. Anticipating that fermions can be decomposed into right-handed (\(R\)) and left-handed (\(L\)) fermions, with possibly different charges, one has so far discovered in Nature elementary fermions with the following charges:
+What has been analyzed so far also allows us to interpret the possible charges (\textbf{generalized charges}, such as electric charge, color charge, etc.) of particles and associate them with a representation of the corresponding symmetry group. For example, the Standard Model of elementary particles contains the symmetry group \(\mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1)\), called the \textbf{gauge symmetry group}. The fermions of the Standard Model have generalized charges under these groups.
+
+We can indicate these charges using a notation of the form \((\mathrm{SU}(3), \mathrm{SU}(2))_{\mathrm{U}(1)}\), where for the non-abelian groups (\(\mathrm{SU}(N)\)) we specify the representation by its corresponding dimension, while for the abelian part we use the \(\mathrm{U}(1)\) charge, called \textbf{hypercharge} \(Y\). Anticipating that fermions can be decomposed into right-handed (\(R\)) and left-handed (\(L\)) fermions, with possibly different charges, one has so far discovered in nature elementary fermions with the following charges:
 
 \begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.2}
+    \centering
+    \renewcommand{\arraystretch}{1.2}
 
-\begin{minipage}{0.47\textwidth}
-\centering
-\begin{tabular}{ccc}
-\toprule
-\(\begin{pmatrix}
-    \nu_{e}^L \\ e^L
-\end{pmatrix}\) & \(\nu_{e}^R\) & \(e^R\) \\
-\(\begin{pmatrix}
-    \nu_{\mu}^L \\ \mu^L
-\end{pmatrix}\) & \(\nu_{\mu}^R\) & \(\mu^R\) \\
-\(\begin{pmatrix}
-    \nu_{\tau}^L \\ \tau^L
-\end{pmatrix}\) & \(\nu_{\tau}^R\) & \(\tau^R\) \\
-\midrule
-\((1,\,2)_{-\frac{1}{2}}\)  & \((1,\,1)_{0}\) & \((1,\,1)_{-1}\) \\
-\bottomrule
-\end{tabular}
-\end{minipage}
-\hfill
-\begin{minipage}{0.47\textwidth}
-\centering
-\begin{tabular}{ccc}
-\toprule
-\(\begin{pmatrix}
-    u^L \\ d^L
-\end{pmatrix}\) & \(u^R\) & \(d^R\) \\
-\(\begin{pmatrix}
-    c^L \\ s^L
-\end{pmatrix}\) & \(c^R\) & \(s^R\) \\
-\(\begin{pmatrix}
-    t^L \\ b^L
-\end{pmatrix}\) & \(t^R\) & \(b^R\) \\
-\midrule
-\((3,\,2)_{\frac{1}{6}}\)  & \((3,\,1)_{\frac{2}{3}}\) & \((3,\,1)_{-\frac{1}{3}}\) \\
-\bottomrule
-\end{tabular}
-\end{minipage}
-
+    \begin{minipage}{0.47\textwidth}
+        \centering
+        \begin{tabular}{ccc}
+            \toprule
+            \(\begin{pmatrix}
+                  \nu_{e}^L \\ e^L
+              \end{pmatrix}\)          & \(\nu_{e}^R\)    & \(e^R\)          \\
+            \(\begin{pmatrix}
+                  \nu_{\mu}^L \\ \mu^L
+              \end{pmatrix}\)       & \(\nu_{\mu}^R\)  & \(\mu^R\)           \\
+            \(\begin{pmatrix}
+                  \nu_{\tau}^L \\ \tau^L
+              \end{pmatrix}\)     & \(\nu_{\tau}^R\) & \(\tau^R\)            \\
+            \midrule
+            \((1,\,2)_{-\frac{1}{2}}\) & \((1,\,1)_{0}\)  & \((1,\,1)_{-1}\) \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.47\textwidth}
+        \centering
+        \begin{tabular}{ccc}
+            \toprule
+            \(\begin{pmatrix}
+                  u^L \\ d^L
+              \end{pmatrix}\)         & \(u^R\)                   & \(d^R\)                    \\
+            \(\begin{pmatrix}
+                  c^L \\ s^L
+              \end{pmatrix}\)         & \(c^R\)                   & \(s^R\)                    \\
+            \(\begin{pmatrix}
+                  t^L \\ b^L
+              \end{pmatrix}\)         & \(t^R\)                   & \(b^R\)                    \\
+            \midrule
+            \((3,\,2)_{\frac{1}{6}}\) & \((3,\,1)_{\frac{2}{3}}\) & \((3,\,1)_{-\frac{1}{3}}\) \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
+    \caption{From this classification we can deduce the properties of the elementary fermions of the Standard Model under the gauge symmetry group \(\mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1)\). The left table contains the leptons (electron, muon, tau, and their corresponding neutrinos), while the right table contains the quarks (up, down, charm, strange, top, bottom).
+        The left-handed fermions are grouped into doublets of \(\mathrm{SU}(2) = 2\), since the can interact weakly, while the right-handed ones are singlets, scalars of the weak interaction (\(\mathrm{SU}(2) = 1\)).
+        Leptons do not feel the strong interaction, so they are singlets of \(\mathrm{SU}(3) = 1\) (and thus colorless), while quarks transform in the fundamental representation of \(\mathrm{SU}(3) = 3\), since they feel the strong interaction.
+        The hypercharge \(Y\) under \(\mathrm{U}(1)\) is indicated as a subscript, and it is related to the electric charge as explained in the text.}
 \end{table}
 
-The group \(SU(3)\) is called the color group, and the quarks transform in the fundamental representation, the 3, and thus have three "colors", while the corresponding antiparticles, the antiquarks, transform in the complex conjugate representation, the \(\bar{3}\), and thus have three "anticolors". Leptons do not feel the strong force and, therefore, are singlets under the color group. 
-The group \(SU(2)\) is called the weak isospin group, and the \(SU(2)\) doublets have been written above in the form of column vectors: they transform in the two-dimensional representation, the 2, and thus have weak isospin \(I = \frac{1}{2}\), with the third component \(I_3 = \frac{1}{2}\) for the upper element of the vector and \(I_3 = -\frac{1}{2}\) for the lower one. Note that the 2 is equivalent to the \(\bar{2}\), both identifying the same representation with weak isospin equal to \(\frac{1}{2}\). \(U(1)\) is the hypercharge group. If we denote by \(Y\) the hypercharge of a particle, the corresponding electric charge \(Q\) is given by \(Q = I_3 + Y\), where \(I_3\) denotes the third component of the weak isospin. From the above table, one may extract which are the electric charges of these elementary particles.
+The group \(\mathrm{SU}(3)\) is called the \textbf{color group}, and the quarks transform in the fundamental representation (3), and thus have three "colors", while the corresponding antiparticles, the antiquarks, transform in the complex conjugate representation (\(\bar{3}\)), and thus have three "anticolors". Leptons do not feel the strong force and, therefore, are singlets under the color group.
+
+The group \(\mathrm{SU}(2)\) is called the \textbf{weak isospin group}, and the \(\mathrm{SU}(2)\) doublets have been written above in the form of column vectors: they transform in the two-dimensional representation (2), and thus have weak isospin \(I = \frac{1}{2}\), with the third component \(I_3 = \frac{1}{2}\) for the upper element of the vector and \(I_3 = -\frac{1}{2}\) for the lower one. Note that the 2 is equivalent to the \(\bar{2}\), both identifying the same representation with weak isospin equal to \(\frac{1}{2}\).
+
+\(\mathrm{U}(1)\) is the \textbf{hypercharge group}. If we denote by \(Y\) the hypercharge of a particle, the corresponding electric charge \(Q\) is given by
+\[
+    Q = I_3 + Y
+\]
+where \(I_3\) denotes the third component of the weak isospin. From the above table, one may extract which are the electric charges of these elementary particles.

@@ -3,21 +3,21 @@
 
 Group theory is a powerful mathematical language that describes the invariance properties of physical systems. These notes provide a concise introduction to group theory, focusing on developing the tensorial language used by physicists. The main concepts of Lie groups are introduced, which are essential for following many courses in the master's program in physics.
 
-\section{Preliminaries: Review of Linear Algebra}
+\section{Review of Linear Algebra}
 
 Consider a vector space \(V\) with a basis of vectors \(\ket{e_i}\), so that an arbitrary vector \(\ket{v} \in V\) can be expressed as:
 \[
     \ket{v} = v^i \ket{e_i},
 \]
-where repeated indices are summed over (Einstein summation convention), with \(i = 1, 2, \ldots, \dim V\). We assume \(V\) to be finite-dimensional and use Dirac's bra-ket notation.
+where repeated indices are summed over (Einstein summation convention), with \(i = 1, 2, \ldots, \dim V\); assuming the basis to exist, we can denote the vector \(\ket{v}\) just by its components \(v^i\), i.e. its projection on the basis vectors. We assume \(V\) to be finite-dimensional and use Dirac's bra-ket notation.
 
 \subsection{Linear Operators}
 
 A linear operator \(A\) maps vectors to vectors:
 \begin{equation}
     \begin{aligned}
-        A:\, & V \longrightarrow V,                         \\
-             & \ket{v} \longrightarrow \ket{v'} = A\ket{v}.
+        A:\, V  & \longrightarrow V,                   \\
+        \ket{v} & \longrightarrow \ket{v'} = A\ket{v}.
     \end{aligned}
 \end{equation}
 Using linearity, the transformed vector becomes:
@@ -29,14 +29,14 @@ where we have set \(\ket{e_i'} = A\ket{e_i} = A^j_{\ i} \ket{e_j}\), since the t
     v'^i = A^i_{\ j} v^j.
 \]
 
-\subsection{Physicist's Notation}
+\subsubsection{Physicist's Notation}
 
-Physicists often use only the components \(v^i\) to indicate the vector \(\ket{v}\), assuming that a basis (or reference frame) has been chosen. Thus, the linear transformation above is often written in the form
+Physicists often use only the components \(v^i\) to indicate the vector \(\ket{v}\), assuming that a basis (or reference frame) has been chosen. Thus, the \textbf{linear transformation} above is often written in the form
 \begin{equation}
     \boxed{v'^i = A^i_{\ j} v^j}.
 \end{equation}
 where \(A^i_{\ j}\) are the matrix entries that perform the linear transformation on the column vector with components \(v^j\). Note that the second index of the matrix is summed over with the index of the vector components (summation convention on repeated indices).
-This linear transformation can be expressed in matrix language using column vectors and matrices. Considering the example of a two-dimensional vector space, where indices can take only two values, we write:
+This linear transformation can be expressed in matrix language using column vectors and matrices. Considering the example of a two-dimensional vector space \(V\) (\(\ket{v} \in V\), \(\dim V = 2\)), where indices can take only two values, we write:
 \[
     v = \begin{pmatrix} v^1 \\ v^2 \end{pmatrix}, \quad A = \begin{pmatrix} A^1_{\ 1} & A^1_{\ 2} \\ A^2_{\ 1} & A^2_{\ 2} \end{pmatrix}, \quad \boxed{v' = A v}
 \]
@@ -60,9 +60,9 @@ Each matrix entry can be written more compactly as:
     C^i_{\ j} = \sum_{k=1}^{2} A^i_{\ k} B^k_{\ j},
 \]
 or using Einstein's convention as:
-\[
+\begin{equation}
     C^i_{\ j} = A^i_{\ k} B^k_{\ j}.
-\]
+\end{equation}
 Note that matrix multiplication is non-commutative: \(A^i_{\ k} B^k_{\ j} \neq B^i_{\ k} A^k_{\ j}\), meaning \(AB \neq BA\). However, \(A^i_{\ k} B^k_{\ j} = B^k_{\ j} A^i_{\ k}\) since numbers commute.
 
 Matrix product is associative:
@@ -74,12 +74,12 @@ so brackets may be omitted without ambiguity.
 \subsection{Dual Space}
 
 The dual space \(\tilde{V}\) of a vector space \(V\) is defined as the space of linear maps that produce a number from any vector \(\ket{v} \in V\). An element of the dual space \(\bra{w} \in \tilde{V}\) is defined by its action on the vectors \(\ket{v} \in V\):
-\[
+\begin{equation}
     \begin{aligned}
         \bra{w}:\, V & \longrightarrow \mathbb{R},                           \\
         \ket{v}      & \longrightarrow \langle w | v \rangle \in \mathbb{R},
     \end{aligned}
-\]
+\end{equation}
 where we use Dirac's bra-ket notation. (Although we use \(\mathbb{R}\) here, similar definitions apply to complex numbers \(\mathbb{C}\) used in quantum mechanics.) The set of all such elements defines the dual space \(\tilde{V}\), which is itself a vector space.
 
 Expanding a dual vector using a dual basis \(\bra{\tilde{e}^i}\):
@@ -88,13 +88,9 @@ Expanding a dual vector using a dual basis \(\bra{\tilde{e}^i}\):
 \]
 where the dual basis is chosen such that:
 \[
-    \langle\tilde{e}^i|e_j\rangle = \delta^i_j,
+    \langle\tilde{e}^i|e_j\rangle = \delta^i_{\ j} = \begin{cases} 1 & \text{if } i = j, \\ 0 & \text{otherwise}, \end{cases}
 \]
-with \(\delta^i_j\) being the Kronecker delta:
-\[
-    \delta^i_j = \begin{cases} 1 & \text{if } i = j \\ 0 & \text{otherwise} \end{cases}
-\]
-The action on a vector becomes:
+with \(\delta^i_j\) being the Kronecker delta. The action on a vector becomes:
 \[
     \langle w|v \rangle = (w_i \bra{\tilde{e}^i})(v^j \ket{e_j}) = w_i v^j \langle \tilde{e}^i |e_j \rangle = w_i v^j \delta^i_j = w_i v^i,
 \]
@@ -102,9 +98,9 @@ that is:
 \[
     \langle w|v \rangle = w_i v^i.
 \]
-In component notation, the index position indicates whether we are considering a vector (upper indices, e.g., \(v^i\)) or a dual vector (lower indices, e.g., \(w_i\)). In general relativity, vectors with upper indices are called \textit{contravariant}, while dual vectors with lower indices are called \textit{covariant}.
+In component notation, the index position indicates whether we are considering a vector (upper indices, e.g., \(v^i\)) or a dual vector (lower indices, e.g., \(w_i\)). In general relativity, vectors with upper indices are called \textbf{contravariant}, while dual vectors with lower indices are called \textbf{covariant}. Note how the basis vectors and dual basis vectors have opposite index positions with respect to the components of vectors and dual vectors: \(\ket{e_i}\) has a lower index, while \(\bra{\tilde{e}^i}\) has an upper index.
 
-The scalar quantity \(w_i v^i\) obtained by contracting a dual vector with a vector is invariant under changes of basis, as vectors are independent of the basis in which they are expanded. Let us consider a change of basis in \(V\):
+The \textbf{scalar} quantity \(w_i v^i\) obtained by contracting a dual vector with a vector is invariant under changes of basis, as vectors are independent of the basis in which they are expanded. Let us consider a change of basis in \(V\):
 \[
     \ket{e_i} \to \ket{e_i'} = B_{i}^{\ j} \ket{e_j},
 \]
@@ -118,43 +114,45 @@ The new components \(v'^i\) are related to the old components \(v^i\) by:
 \]
 where the transformation matrix \(A\) satisfies:
 \[
-    A^i_{\ j} B_i^{\ k} = \delta^k_j.
+    A^i_{\ j} B_i^{\ k} = \delta^{\ k}_j.
 \]
-In matrix notation, this corresponds to \(A^T B = \mathbb{I}\), and thus \(A = B^{-1T}\).
+In matrix notation, this corresponds to \(A^T B = \mathbb{I}\), and thus \(A = (B^{-1})^T\).
 
 Similarly, the dual basis vectors transform as:
 \[
     \bra{\tilde{e}'^i} = A^i_{\ j} \bra{\tilde{e}^j},
 \]
-to maintain the orthonormality condition \(\langle \tilde{e}'^i|e'_j \rangle = \delta^i_j\), while the components of dual vectors transform as:
+to maintain the orthonormality condition \(\langle \tilde{e}'^i|e'_j \rangle = \delta^i_{\ j}\), while the components of dual vectors transform as:
 \[
     w'_i = B_i^{\ j} w_j.
 \]
 
 One can now verify the invariance of the scalar product:
-\[
+\begin{equation}
     \langle w|v \rangle = w_i v^i = w'_i v'^i.
-\]
+\end{equation}
 This shows that the scalar product can be computed independently using either the primed or unprimed components. In detail:
 \[
-    w'_i v'^i = (B_i^{\ k} w_k)(A^i_{\ l} v^l) = B_i^{\ k} A^i_{\ l} w_k v^l = (B^T A)^k_{\ l} w_k v^l = \delta^k_l w_k v^l = w_k v^k = w_i v^i,
+    \begin{aligned}
+        w'_i v'^i & = (B_i^{\ k} w_k)(A^i_{\ l} v^l) = B_i^{\ k} A^i_{\ l} w_k v^l          \\
+                  & = (B^T A)^k_{\ l} w_k v^l = \delta^k_{\ l} w_k v^l = w_k v^k = w_i v^i,
+    \end{aligned}
 \]
 where we used \(B^T = A^{-1}\) and renamed summed indices.
 
-The vector spaces \(V\) and \(\tilde{V}\) are isomorphic, being of the same dimensions. However, this isomorphism is not unique. A canonical isomorphism, relating a vector of \(V\) to a vector of the dual space \(\tilde{V}\) in a unique way, can be established if there is a metric defined on the original
-vector space \(V\).
+The vector spaces \(V\) and \(\tilde{V}\) are isomorphic, being of the same dimensions. However, this isomorphism is not unique: a \textit{canonical isomorphism}, relating a vector of \(V\) to a vector of the dual space \(\tilde{V}\) in a unique way, can be established if there is a metric defined on the original vector space \(V\).
+
+Without a metric, there is no preferred way to relate vectors and dual vectors. Let us explore this important concept in the next section.
 
 \subsection{Metric and Canonical Isomorphism}
 
-The vector spaces \(V\) and \(\tilde{V}\) are isomorphic, being of the same dimension. However, this isomorphism is not unique. A canonical isomorphism can be established if there is a metric defined on \(V\).
-
-We define a metric \(g\) (which need not be positive definite, as in the case of the Minkowski metric in spacetime) as a bilinear function mapping two vectors to a real number:
-\[
+The vector spaces \(V\) and \(\tilde{V}\) are isomorphic, being of the same dimension. However, this isomorphism is not unique. A canonical isomorphism can be established if there is a metric defined on \(V\): We define a metric \(g\) as a bilinear function mapping two vectors to a real number:\footnote{The metric does not need to be \textit{positive definite}, as in the case of the Minkowski metric in spacetime, since it can have an indefinite signature.}
+\begin{equation}
     \begin{aligned}
         g: V \times V    & \longrightarrow \mathbb{R},          \\
         \ket{w}, \ket{v} & \longrightarrow g(\ket{w}, \ket{v}),
     \end{aligned}
-\]
+\end{equation}
 so that \(g(\ket{w}, \ket{v}) \in \mathbb{R}\). The metric is linear in both entries:
 \[
     g(\ket{w}, \ket{v}) = g(w^i \ket{e_i}, v^j \ket{e_j}) = w^i v^j g(\ket{e_i}, \ket{e_j}) \equiv w^i v^j g_{ij},
@@ -181,35 +179,39 @@ When the metric is positive definite, one often considers an orthonormal basis w
 \]
 Note that \(g_{ij}\) can be written as a matrix, but its index structure shows it cannot be interpreted as a linear operator on \(V\). Rather, it acts on the product \(V \times V\) and may be interpreted as a tensor belonging to the space \(\tilde{V} \otimes \tilde{V}\).
 
-To summarize, in physicist's notation, the vector \(w^i\) is related to the dual vector \(w_i\) by lowering its index with the metric:
+To summarize, in physicist's notation, the vector \(w^i\) (the covector \(v_i\)) is related to the dual vector \(w_i\) (to the vector \(v^i\)) by lowering (raising) its index with the metric:
+\begin{equation}
+    \boxed{w_i = g_{ij} w^j, \quad v^i = g^{ij} v_j}.
+\end{equation}
+The inverse relation for indices raising uses the inverse metric \(g^{ij} = (g^{-1})^{ij}\), which satisfies:
 \[
-    w_i = g_{ij} w^j.
+    g^{ij} g_{jk} = \delta^i_{\ k},
 \]
-The inverse relation uses the inverse metric \(g^{ij} \equiv (g^{-1})^{ij}\), which satisfies:
-\[
-    g^{ij} g_{jk} = \delta^i_k,
-\]
-so that \(w^i = g^{ij} w_j\). The canonical isomorphism between \(V\) and \(\tilde{V}\) depends on the introduction of a metric, a fact heavily utilized in general relativity.
+so that \(w^i = g^{ij} w_j\).
 
-\subsubsection{Examples}
+The canonical isomorphism between \(V\) and \(\tilde{V}\) depends on the introduction of a metric, a fact heavily utilized in general relativity since the metric tensor \(g_{\mu\nu}\) allows raising and lowering indices of tensors defined on spacetime and encodes its geometric properties (such as its curvature).
 
-The Euclidean space \(E_N\) of \(N\) dimensions can be considered as a vector space with coordinates \(x \in \mathbb{R}^N\) if we pick an origin. It is endowed with a scalar product that defines a metric:
-\[
-    s^2 = x^T x = x^T \mathbb{I} x = \delta_{ij} x^i x^j,
-\]
-which exposes the Euclidean metric tensor \(\delta_{ij}\). This metric relates the vector \(x^i\) to its dual vector \(x_i\) by \(x_i = \delta_{ij} x^j\). In this case, vectors and dual vectors can be identified numerically.
+\begin{example}[Euclidean space]
+    The Euclidean space \(E_N\) of \(N\) dimensions can be considered as a vector space with coordinates \(x \in \mathbb{R}^N\) if we pick an origin. It is endowed with a scalar product that defines a metric:
+    \[
+        s^2 = x^T x = x^T \mathbb{I} x = \delta_{ij} x^i x^j,
+    \]
+    which exposes the Euclidean metric tensor \(\delta_{ij}\). This metric relates the vector \(x^i\) to its dual vector \(x_i\) by \(x_i = \delta_{ij} x^j\). In this case, vectors and dual vectors can be identified numerically.
+\end{example}
 
-The Minkowski space \(M_4\) of 4 dimensions with coordinates \(x \in \mathbb{R}^4\) has a scalar product:
-\[
-    s^2 = x^T \eta x = \eta_{\mu\nu} x^\mu x^\nu = -(x^0)^2 + (x^1)^2 + (x^2)^2 + (x^3)^2,
-\]
-where the metric \(\eta_{\mu\nu}\) has components \(\eta_{00} = -1\), and \(\eta_{11} = \eta_{22} = \eta_{33} = 1\):
-\[
-    \eta = \begin{pmatrix} -1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix} \leftrightarrow \eta_{\mu\nu}.
-\]
-We use Greek indices \(\mu = 0, 1, 2, 3\), with \(0\) indicating the time-like direction. The Minkowski metric is not positive definite but allows mapping vectors \(x^\mu\) to dual vectors \(x_\mu = \eta_{\mu\nu} x^\nu\), so the scalar product becomes \(s^2 = x^\mu x_\mu\). Note that \(x^\mu \neq x_\mu\) in this case.
+\begin{example}[Minkowski space]
+    The Minkowski space \(M_4\) of 4 dimensions with coordinates \(x \in \mathbb{R}^4\) has a scalar product:
+    \[
+        s^2 = x^T \eta x = \eta_{\mu\nu} x^\mu x^\nu = -(x^0)^2 + (x^1)^2 + (x^2)^2 + (x^3)^2,
+    \]
+    where the metric \(\eta_{\mu\nu}\) has components \(\eta_{00} = -1\), and \(\eta_{11} = \eta_{22} = \eta_{33} = 1\):
+    \[
+        \eta = \begin{pmatrix} -1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix} \leftrightarrow \eta_{\mu\nu}.
+    \]
+    We use Greek indices \(\mu = 0, 1, 2, 3\), with \(0\) indicating the time-like direction (for space-like directions we will use \(i = 1, 2, 3\)). The Minkowski metric is not positive definite but allows mapping vectors \(x^\mu\) to dual vectors \(x_\mu = \eta_{\mu\nu} x^\nu\), so the scalar product becomes \(s^2 = x^\mu x_\mu\). Note that \(x^\mu \neq x_\mu\) in this case, but \(x_\mu x^{\mu} = x^{\mu} x_{\mu}\).
+\end{example}
 
-Similar definitions extend to complex vector spaces like the Hilbert space of quantum mechanics, with \(\mathbb{R}\) replaced by \(\mathbb{C}\). Let us describe \(\mathbb{C}^N\), considered as a complex vector space of \(N\) complex dimensions. Its dual space, denoted \(\tilde{\mathbb{C}}^N\), is defined as the space of linear maps \(\bra{w}\) from \(\mathbb{C}^N\) to \(\mathbb{C}\):
+\paragraph{Complex spaces.} Similar definitions extend to complex vector spaces like the Hilbert space of quantum mechanics, with \(\mathbb{R}\) replaced by \(\mathbb{C}\). Let us describe \(\mathbb{C}^N\), considered as a complex vector space of \(N\) complex dimensions. Its dual space, denoted \(\tilde{\mathbb{C}}^N\), is defined as the space of linear maps \(\bra{w}\) from \(\mathbb{C}^N\) to \(\mathbb{C}\):
 \[
     \begin{aligned}
         \bra{w}: \mathbb{C}^N & \longrightarrow \mathbb{C}                                    \\
@@ -240,13 +242,13 @@ i.e.,
 which means precisely exchanging rows with columns.
 
 For products of matrices, we have the important properties:
-\[
-    \begin{aligned}
+\begin{equation}
+    \begin{dcases}
         (AB)^T    & = B^T A^T        \\
         (AB)^{-1} & = B^{-1} A^{-1}  \\
         \det(AB)  & = \det A \det B,
-    \end{aligned}
-\]
+    \end{dcases}
+\end{equation}
 where we recall that the inverse of a matrix exists only if its determinant is nonvanishing.
 
 To familiarize ourselves with index notation, consider how the product \(A = B^T C\) is written with indices:
@@ -259,4 +261,6 @@ Similarly, we define the transpose of an operator \(A\) with index structure \(A
 \[
     (A^T)_i^{\ j} = A^j_{\ i}.
 \]
-This shows that \(A^T\) cannot be interpreted as a linear operator on the original vector space \(V\), but rather as an operator acting on the dual space \(\tilde{V}\). The index structure of \(A^T\) precisely reflects this fact.
+This shows that \(A^T\) cannot be interpreted as a linear operator on the original vector space \(V\), but rather as an operator acting on the dual space \(\tilde{V}\). The index structure of \(A^T\) precisely reflects this.
+
+In Euclidean space (with metric \(\delta_{ij}\)), one often identifies \(A\) and \(A^T\) numerically, but this is not generally correct in spaces with nontrivial metrics (the trivial metric \(\delta_{ij}\) let us identify higher and lower indices objects, since it acts as the identity).

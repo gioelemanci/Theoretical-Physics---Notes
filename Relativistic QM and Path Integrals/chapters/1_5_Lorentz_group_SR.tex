@@ -1,5 +1,5 @@
 \section{Special relativity and the Lorentz group}
-
+Let us review the main points of special relativity, keeping in mind group theory applied to the Lorentz group \(\mathrm{SO}(3,1)\).
 The standard Lorentz transformation that relates the spacetime coordinates of two inertial frames in relative motion with constant velocity $v$ along the $x$ axis are given by
 \[
     \begin{pmatrix}
@@ -21,9 +21,8 @@ The standard Lorentz transformation that relates the spacetime coordinates of tw
         y  \\
         z
     \end{pmatrix}
-    \tag{132}
 \]
-where $\beta = \frac{v}{c}$ and $\gamma = \frac{1}{\sqrt{1 - \beta^2}}$. Taking the relative velocity $v$ to be positive, we see that $0 < \beta < 1$ and $1 < \gamma < \infty$. Denoting by $x$ the column 4-vector with components $x^\mu$,
+where $\beta = \frac{v}{c}$ and $\gamma = \frac{1}{\sqrt{1 - \beta^2}}$. Taking the relative velocity $v$ to be positive, we see that $0 < \beta < 1$ and $1 < \gamma < \infty$. Denoting by $x$ the column 4-vector with components $x^\mu$
 \[
     x^\mu =
     \begin{pmatrix}
@@ -31,173 +30,186 @@ where $\beta = \frac{v}{c}$ and $\gamma = \frac{1}{\sqrt{1 - \beta^2}}$. Taking 
         x  \\
         y  \\
         z
-    \end{pmatrix}
-    \tag{133}
+    \end{pmatrix} = \begin{pmatrix}
+        x^0 \\
+        x^1 \\
+        x^2 \\
+        x^3
+    \end{pmatrix},
 \]
-we write more compactly the Lorentz transformation in the equivalent forms as
+we can write more compactly the Lorentz transformation in the equivalent forms as
 \[
-    x'^\mu = \Lambda^\mu_{\ \nu} x^\nu, \quad x^\nu = (\Lambda^{-1})^\nu_{\ \mu} x'^\mu
-    \tag{134}
+    x' = \Lambda x, \quad x^{\prime\,\mu} = (\Lambda)^\mu_{\ \nu} x^\nu.
 \]
 This transformation is seen to leave invariant the light cone at the origin. More generally, it leaves invariant the modulus square of the 4-vector $x^\mu$, which is defined in the following way
 \[
-    s^2 = -c^2 t^2 + x^2 + y^2 + z^2 = x^\mu \eta_{\mu \nu} x^\nu = x^T \eta x
-    \tag{135}
+    s^2 = -c^2 t^2 + x^2 + y^2 + z^2 = x^T \eta x = \eta_{\mu \nu} x^\mu x^\nu = x^\mu x_\mu,
 \]
-where $\eta$ is the Minkowski metric. It is also used to lower indices on vectors and tensors.
+where $\eta$ is the Minkowski metric
+\begin{equation}
+    \eta = \begin{pmatrix}
+        -1 & 0 & 0 & 0 \\
+        0  & 1 & 0 & 0 \\
+        0  & 0 & 1 & 0 \\
+        0  & 0 & 0 & 1
+    \end{pmatrix}.
+    \label{eq:Minkowski_metric}
+\end{equation}
+It is also used to lower indices on vectors and tensors.
 
 The general Lorentz group is defined as the group of linear transformations that leave invariant the scalar $s^2$:
 \[
-    s'^2 = x'^\mu \eta_{\mu \nu} x'^\nu = x^\alpha \Lambda^\mu_{\ \alpha} \eta_{\mu \nu} \Lambda^\nu_{\ \beta} x^\beta = x^\alpha \eta_{\alpha \beta} x^\beta
+    s^{\prime 2} = x^{\prime\,T} \eta x' = x^T \Lambda^T \eta \Lambda x = x^T \eta x \implies \Lambda^T \eta \Lambda = \eta,
 \]
-
-This invariance allows us to define the group of Lorentz transformations as
+or equivalently, in components
 \[
+    s'^2 = \eta_{\mu \nu} x'^\mu x'^\nu = \eta_{\mu \nu} \Lambda^\mu_{\ \rho} \Lambda^\nu_{\ \sigma} x^\rho x^\sigma = \eta_{\mu \nu} x^\mu x^\nu \implies \eta_{\mu \nu} \Lambda^\mu_{\ \rho} \Lambda^\nu_{\ \sigma} = \eta_{\rho \sigma}.
+\]
+This invariance allows us to define the \textit{group of Lorentz transformations} as
+\begin{equation}
     O(3,1) = \{ \text{real } 4 \times 4 \text{ matrices } \Lambda \mid \Lambda^T \eta \Lambda = \eta \}
-    \tag{136}
-\]
+    \label{eq:Lorentz_group_definition}
+\end{equation}
 
-This group contains the space-inversion (the parity transformation $P$) as well as time-inversion (the time reversal $T$), which can be eliminated from the group by defining the proper orthochronous Lorentz group
-\[
-    SO^+(3,1) = \{ \text{real } 4 \times 4 \text{ matrices } \Lambda \mid \Lambda^T \eta \Lambda = \eta, \ \det \Lambda = 1, \ \Lambda^0_{\ 0} \geq 1 \}
-    \tag{137}
-\]
+This group contains the space-inversion (the parity transformation $P$) as well as time-inversion (the time reversal $T$), which can be eliminated from the group by defining the \textbf{proper orthochronous Lorentz group}
+\begin{equation}
+    SO^+(3,1) = \{ \text{real } 4 \times 4 \text{ matrices } \Lambda \mid \Lambda^T \eta \Lambda = \eta, \ \det \Lambda = 1, \ \Lambda^0_{\ 0} \geq 1 \},
+    \label{eq:proper_orthochronous_Lorentz_group_definition}
+\end{equation}
 also called the restricted Lorentz group. By relativistic invariance, one generically refers to an invariance under the latter as parity and time reversal are usually treated separately.
 
 Tensors are defined as usual for the Lorentz group. They are used to describe physical quantities and their transformation properties under changes of inertial frames. An example is
 the 4-momentum $p^\mu$:
 \[
-    p^\mu = (p^0, \vec{p}) = \left( \frac{E}{c}, \vec{p} \right) = \left( \frac{mc}{\sqrt{1 - \beta^2}}, \frac{m \vec{v}}{\sqrt{1 - \beta^2}} \right)
-    \tag{138}
+    p^\mu = (p^0, \vec{p}) = \left( \frac{E}{c}, \vec{p} \right) = \left( \frac{mc}{\sqrt{1 - \beta^2}}, \frac{m \vec{v}}{\sqrt{1 - \beta^2}} \right),
 \]
 that transforms as a 4-vector and whose modulus square satisfies
 \[
-    p^\mu p_\mu = -m^2 c^2
-    \tag{139}
+    p^\mu p_\mu = -m^2 c^2.
 \]
 This last relation states that
 \[
-    E^2 = p^2 c^2 + m^2 c^4
-    \tag{140}
+    E^2 = p^2 c^2 + m^2 c^4,
 \]
+the well-known relativistic energy-momentum relation.
 
 Similarly, the electric and magnetic fields $\vec{E}$ and $\vec{B}$ are recognized to be the components of an antisymmetric tensor field $F_{\mu\nu}$:
 \[
-    F_{\mu\nu} =
+    F^{\mu\nu} =
     \begin{pmatrix}
-        0   & -E_x & -E_y & -E_z \\
-        E_x & 0    & B_z  & -B_y \\
-        E_y & -B_z & 0    & B_x  \\
-        E_z & B_y  & -B_x & 0
-    \end{pmatrix}
-    \tag{141}
+        0    & E_x  & E_y  & E_z  \\
+        -E_x & 0    & B_z  & -B_y \\
+        -E_y & -B_z & 0    & B_x  \\
+        -E_z & B_y  & -B_x & 0
+    \end{pmatrix},
 \]
 here written using Gaussian or Heaviside-Lorentz units. Under a Lorentz transformation, the electromagnetic tensor transforms according to the tensor laws as
 \[
-    F'_{\mu\nu} = \Lambda^\alpha_{\ \mu} \Lambda^\beta_{\ \nu} F_{\alpha\beta}
-    \tag{142}
+    F'^{\mu\nu} = \Lambda^\mu_{\ \alpha} \Lambda^\nu_{\ \beta} F^{\alpha\beta}.
 \]
 
 From it, one can construct the scalar
 \[
-    F^{\mu\nu} F_{\mu\nu} = 2 (B^2 - E^2)
-    \tag{143}
+    F^{\mu\nu} F_{\mu\nu} = 2 (B^2 - E^2),
 \]
 which is proportional to the free Lagrangian of the electromagnetic field.
 
-The space-time derivatives naturally form a vector with a lower index
+The \textit{space-time derivatives} naturally form a vector with a lower index
 \[
-    \partial_\mu = \left( \frac{1}{c} \frac{\partial}{\partial t}, \nabla \right)
-    \tag{144}
+    \partial_\mu = \left( \frac{1}{c} \frac{\partial}{\partial t}, \nabla \right) \equiv \frac{\partial}{\partial x^\mu},
 \]
-so that $\partial_\mu x^\mu$ is a scalar (i.e., $\partial^\mu x_\mu = 4$).
+so that $\partial_\mu x^\mu$ is a scalar (i.e., $\partial^\mu x_\mu = \partial^{\prime}_\mu x^{\prime \mu} = 4$).
 
 Then, the inhomogeneous Maxwell's equations are written in a covariant form as
 \[
-    \partial_\mu F^{\mu\nu} = \frac{1}{c} J^\nu
-    \tag{145}
+    \partial_\mu F^{\mu\nu} = -\frac{1}{c} J^\nu,
 \]
-where $J^\mu = (J^0, \vec{J}) = (c \rho, \vec{J})$ is the 4-vector charge-current density. The homogeneous Maxwell's
-equations take instead the following covariant form
+where $J^\mu = (J^0, \vec{J}) = (c \rho, \vec{J})$ is the 4-vector charge-current density. The homogeneous Maxwell's equations take instead the following covariant form
+\begin{equation}
+    \partial_\lambda F_{\mu\nu} + \partial_\mu F_{\nu\lambda} + \partial_\nu F_{\lambda\mu} = 0.
+    \label{eq:Bianchi_identity}
+\end{equation}
+The last equation can be integrated by introducing a four-potential \(A^{\mu} \) and setting
 \[
-    \partial_\lambda F_{\mu\nu} + \partial_\mu F_{\nu\lambda} + \partial_\nu F_{\lambda\mu} = 0
-    \tag{146}
+    F^{\mu \nu} = \partial^\mu A^\nu - \partial^\nu A^\mu.
 \]
+It solves automatically eq. \eqref{eq:Bianchi_identity}, as all terms cancel two by two. For this reason, using the last equation as a definition of the electromagnetic field, equation \eqref{eq:Bianchi_identity} becomes an identity often called Bianchi identity. The integration is not unique, since the potential \(A^{\mu}\) can be transformed by a \textbf{gauge transformation} to a new potential \(A^{\prime \mu}\):
+\[
+    A^{\prime}_\mu (x) = A_\mu (x) + \partial_\mu \alpha(x),
+\]
+without changing the electromagnetic field tensor \(F^{\mu \nu}\), as the gauge symmetry keeps the electromagnetic field invariant. Here \(\alpha(x)\) is an arbitrary scalar function vanishing at infinity.
 
 \subsection{Finite Dimensional Representations of the Lorentz Group}
 
 First, it is useful to derive the Lie algebra of the Lorentz group. For infinitesimal transformations, we can write
-\[
-    \Lambda^\mu_{\ \nu} = \delta^\mu_{\ \nu} + \omega^\mu_{\ \nu}, \quad |\omega^\mu_{\ \nu}| \ll 1
-    \tag{147}
-\]
+\begin{equation}
+    \Lambda^\mu_{\ \nu} = \delta^\mu_{\ \nu} + \omega^\mu_{\ \nu}, \quad |\omega^\mu_{\ \nu}| \ll 1,
+    \label{eq:infinitesimal_Lorentz_transformation_components}
+\end{equation}
 and imposing the condition that defines Lorentz transformations ($\eta_{\rho\sigma} = \eta_{\mu\nu} \Lambda^\mu_{\ \rho} \Lambda^\nu_{\ \sigma}$), we obtain that $\omega_{\mu\nu}$ must satisfy the antisymmetric condition
 \[
-    \omega_{\mu\nu} = -\omega_{\nu\mu}
-    \tag{148}
+    \omega_{\mu\nu} = -\omega_{\nu\mu},
 \]
 (indices are lowered as usual, $\omega_{\mu\nu} = \eta_{\mu\rho} \omega^\rho_{\ \nu}$). Thus, they contain six independent parameters identified with the $\omega_{\mu\nu}$ with fixed indices $\mu < \nu$.
 
 Then, in matrix notation, we can re-write an arbitrary infinitesimal Lorentz transformation by making explicit the infinitesimal parameters that multiply the corresponding generators
-\[
-    \Lambda = 1 + \frac{1}{2} \omega^{\mu\nu} M_{\mu\nu}
-    \tag{149}
-\]
+\begin{equation}
+    \Lambda = 1 + \frac{1}{2} \omega_{\mu\nu} M^{\mu\nu}.
+    \label{eq:infinitesimal_Lorentz_transformation}
+\end{equation}
 
-The six matrices $M_{\mu\nu}$ with $\mu < \nu$ are the independent generators of the Lorentz group. In the defining representation (the "four-vector" representation), they are given by
+The six matrices $M^{\mu\nu}$ with $\mu < \nu$ are the independent generators of the Lorentz group. In the defining representation (the "four-vector" representation), they are given by
+\begin{equation}
+    (M^{\mu\nu})^\rho_{\ \sigma} = -i (\eta^{\mu\rho} \delta^\nu_{\ \sigma} - \eta^{\nu\rho} \delta^\mu_{\ \sigma}),
+    \label{eq:Lorentz_generators_defining_representation}
+\end{equation}
+so that eq. \eqref{eq:infinitesimal_Lorentz_transformation} reproduces eq. \eqref{eq:infinitesimal_Lorentz_transformation_components}. For example, some of these generators can be written explicitly as
 \[
-    (M_{\mu\nu})^\rho_{\ \sigma} = -i (\eta_{\mu\sigma} \delta^\rho_{\ \nu} - \eta_{\nu\sigma} \delta^\rho_{\ \mu})
-    \tag{150}
-\]
-so that eq. (149) reproduces eq. (147). For example, some of these generators can be written explicitly as
-\[
-    M_{12} =
+    M^{12} =
     \begin{pmatrix}
         0 & 0 & 0  & 0 \\
         0 & 0 & -i & 0 \\
         0 & i & 0  & 0 \\
         0 & 0 & 0  & 0
     \end{pmatrix}, \quad
-    M_{01} =
+    M^{01} =
     \begin{pmatrix}
         0 & i & 0 & 0 \\
         i & 0 & 0 & 0 \\
         0 & 0 & 0 & 0 \\
         0 & 0 & 0 & 0
-    \end{pmatrix}
-    \tag{151}
+    \end{pmatrix},
 \]
-where $M_{12}$ generates infinitesimal rotations about the $z$-axis, while $M_{01}$ generates a boost along the $x$-axis.
+where $M_{12}$ generates infinitesimal rotations around the $z$-axis, while $M_{01}$ generates a boost along the $x$-axis.
 
 Although it might seem tedious, it is straightforward to calculate the Lie algebra
-\[
-    [M_{\mu\nu}, M_{\rho\sigma}] = -i (\eta_{\mu\rho} M_{\nu\sigma} - \eta_{\nu\rho} M_{\mu\sigma} + \eta_{\nu\sigma} M_{\mu\rho} - \eta_{\mu\sigma} M_{\nu\rho})
-    \tag{152}
-\]
+\begin{equation}
+    [M^{\mu\nu}, M^{\rho\sigma}] = -i (\eta^{\mu\rho} M^{\nu\sigma} - \eta^{\nu\rho} M^{\mu\sigma} + \eta^{\nu\sigma} M^{\mu\rho} - \eta^{\mu\sigma} M^{\nu\rho}).
+    \label{eq:Lorentz_Lie_algebra}
+\end{equation}
 
-This is also valid for any generic group $SO(N, M)$ if one identifies $\eta_{\mu\nu}$ with the corresponding metric: in particular, to obtain $SO(3)$ one sets $\eta_{\mu\nu} \rightarrow \delta_{ij}$ and defining $J_i = \epsilon_{ijk} M_{jk}$ one recovers the form of the $SO(3)$ Lie algebra given in eq. (98) with $T_i = J_i$.
+This is also valid for any generic group $\mathrm{SO}(N, M)$ if one identifies $\eta_{\mu\nu}$ with the corresponding metric: in particular, to obtain $\mathrm{SO}(3)$ one sets $\eta_{\mu\nu} \rightarrow \delta_{ij}$ and defining $J^i = \epsilon^{ijk} M^{jk}$ one recovers the form of the $\mathrm{SO}(3)$ Lie algebra given in eq.\eqref{eq:SO3_Lie_algebra} with $T^i = J^i$.
 
-Returning to the specific case of $SO(3,1)$, one can rewrite the algebra in a more useful form that allows us to deduce immediately its finite-dimensional representations. Separating the indices into time and space parts $\mu = (0,i)$, and defining the following basis for the generators of the Lorentz group
+Returning to the specific case of $\mathrm{SO}(3,1)$, one can rewrite the algebra in a more useful form that allows us to deduce immediately its finite-dimensional representations. Separating the indices into time and space parts $\mu = (0,i)$, and defining the following basis for the generators of the Lorentz group
 \[
-    J_i = \frac{1}{2} \epsilon_{ijk} M_{jk}, \quad K_i = M_{i0}
-    \tag{153}
+    J^i = \frac{1}{2} \epsilon^{ijk} M^{jk}, \quad K^i = M^{i0},
 \]
-the Lie algebra (152) can be rewritten as
-\[
-    [J_i, J_j] = i \epsilon_{ijk} J_k, \quad [J_i, K_j] = i \epsilon_{ijk} K_k, \quad [K_i, K_j] = -i \epsilon_{ijk} J_k
-    \tag{154}
-\]
-where the generators $J_i$ generate the spatial rotation subgroup $SO(3)$. Finally, defining the complex linear combinations
-\[
-    N_i = \frac{1}{2}(J_i - i K_i), \quad \bar{N}_i = \frac{1}{2}(J_i + i K_i)
-    \tag{155}
-\]
+the Lie algebra \eqref{eq:Lorentz_Lie_algebra} can be rewritten as
+\begin{equation}
+    [J^i, J^j] = i \epsilon^{ijk} J^k, \quad [J^i, K^j] = i \epsilon^{ijk} K^k, \quad [K^i, K^j] = -i \epsilon^{ijk} J^k,
+    \label{eq:Lorentz_Lie_algebra_JK}
+\end{equation}
+where the generators $J^i$ generate the spatial rotation subgroup $\mathrm{SO}(3)$, while \(K^i\) generate boosts. Finally, defining the complex linear combinations
+\begin{equation}
+    N^i = \frac{1}{2}(J^i - i K^i), \quad \bar{N}^i = \frac{1}{2}(J^i + i K^i)
+    \label{eq:Lorentz_generators_N}
+\end{equation}
 the algebra can be rewritten as
-\[
-    [N_i, N_j] = i \epsilon_{ijk} N_k, \quad [\bar{N}_i, \bar{N}_j] = i \epsilon_{ijk} \bar{N}_k, \quad [N_i, \bar{N}_j] = 0
-    \tag{156}
-\]
-which shows that the algebra of $SO(3,1)$ is equivalent to that of $SU(2) \times SU(2)$, up to different hermiticity relations (arising because $SO(3,1)$ is not compact, while $SU(2)$ is). Since $SO(3,1)$ reduces to two independent copies of $SU(2)$, the well-known finite-dimensional representations of the latter can be used to find the finite-dimensional representations of $SO(3,1)$: they are classified by two integer or half-integer numbers $(j_1, j_2)$ corresponding to the representations of the two subgroups $SU(2)$ generated by $N_i$ and $\bar{N}_i$. Furthermore, recalling (155), the spin operator corresponds to $J_i = N_i + \bar{N}_i$, so that the highest spin content of the representation is given by $j = j_1 + j_2$. These representations are finite-dimensional but are not unitary due to the necessity of taking complex combinations of the generators in (155).
+\begin{equation}
+    [N^i, N^j] = i \epsilon^{ijk} N^k, \quad [\bar{N}^i, \bar{N}^j] = i \epsilon^{ijk} \bar{N}^k, \quad [N^i, \bar{N}^j] = 0,
+    \label{eq:Lorentz_Lie_algebra_N}
+\end{equation}
+which shows that the algebra of $\mathrm{SO}(3,1)$ is equivalent to that of $\mathrm{SU}(2) \times \mathrm{SU}(2)$, up to different hermiticity relations (arising because $\mathrm{SO}(3,1)$ is not compact, while $\mathrm{SU}(2)$ is). Since $\mathrm{SO}(3,1)$ reduces to two independent copies of $\mathrm{SU}(2)$, the well-known finite-dimensional representations of the latter can be used to find the finite-dimensional representations of $\mathrm{SO}(3,1)$: they are classified by two integer or half-integer numbers $(j_1, j_2)$ corresponding to the representations of the two subgroups $\mathrm{SU}(2)$ generated by $N^i$ and $\bar{N}^i$. Furthermore, recalling \eqref{eq:Lorentz_generators_N}, the spin operator corresponds to $J^i = N^i + \bar{N}^i$, so that the highest spin content of the representation is given by $j = j_1 + j_2$. These representations are finite-dimensional but are not unitary due to the necessity of taking complex combinations of the generators in \eqref{eq:Lorentz_generators_N}.
 
 In quantum field theory, fields with these Lorentz representations are used to describe particles with fixed spin, for example
 \[
@@ -208,30 +220,32 @@ In quantum field theory, fields with these Lorentz representations are used to d
         \left(\tfrac{1}{2}, 0\right) \oplus \left(0, \tfrac{1}{2}\right) & \longrightarrow \text{Dirac fermion } \psi \sim \psi^\alpha                        \\
         \left(\tfrac{1}{2}, \tfrac{1}{2}\right)                          & \longrightarrow \text{spin-1 field } A^\mu
     \end{aligned}
-    \tag{157}
 \]
-Just as $SO(3) \rightarrow SU(2)$ allows to view the spinorial representations of $SO(3)$ as single-valued representations of $SU(2)$, a similar phenomenon happens for $SO(3,1) \rightarrow SL(2,\mathbb{C})$: the Lie algebras of $SO(3,1)$ and $SL(2,\mathbb{C})$ coincide and the latter group is the covering group of the former.
+Just as $\mathrm{SO}(3) \rightarrow \mathrm{SU}(2)$ allows to view the spinorial representations of $\mathrm{SO}(3)$ as single-valued representations of $\mathrm{SU}(2)$, a similar phenomenon happens for $\mathrm{SO}(3,1) \rightarrow \mathrm{SL}(2,\mathbb{C})$: the Lie algebras of $\mathrm{SO}(3,1)$ and $\mathrm{SL}(2,\mathbb{C})$ coincide and the latter is the covering group of the former.
 
 \subsection{Unitary Representations of the Poincaré Group}
 
 The Poincaré group extends the Lorentz group with spacetime translations. It transforms the position four-vector as follows
 \[
     x^\mu \rightarrow x'^\mu = \Lambda^\mu_{\ \nu} x^\nu + a^\mu
-    \tag{158}
 \]
-where $\Lambda^\mu_{\ \nu}$ describes a Lorentz transformation and $a^\mu$ a spacetime translation. This group is sometimes referred to as the $ISO(3,1)$ group, the inhomogeneous special orthogonal group, where the inhomogeneity refers to the translations.
+where $\Lambda^\mu_{\ \nu}$ describes a Lorentz transformation and $a^\mu$ a spacetime translation. This group is sometimes referred to as the $\mathrm{ISO}(3,1)$ group, the inhomogeneous special orthogonal group, where the inhomogeneity refers to the translations.
 
 The Lie algebra of the Poincaré group can be written as
-\[
-    [P^a, P^b] = 0, \quad [M^{\mu\nu}, P^\alpha] = -i (\eta^{\mu\alpha} P^\nu - \eta^{\nu\alpha} P^\mu)
-    \tag{159}
-\]
-\[
-    [M^{\mu\nu}, M^{\rho\sigma}] = -i (\eta^{\mu\rho} M^{\nu\sigma} - \eta^{\nu\rho} M^{\mu\sigma} + \eta^{\nu\sigma} M^{\mu\rho} - \eta^{\mu\sigma} M^{\nu\rho})
-\]
-where $P^\mu$ are the generators of the translations and $M^{\mu\nu}$ are the generators of the Lorentz transformations\footnote{The Lorentz part of this algebra was found previously using the defining representation of the Lorentz group. The Poincaré group, as given above, is not defined in terms of matrices only. A way of finding its Lie algebra is to consider its generators that perform the infinitesimal transformation in a quantum mechanical Hilbert space where $P^\mu = p^\mu$ and $M^{\mu\nu} = x^\mu p^\nu - x^\nu p^\mu$, with the elementary commutators given by $[x^\mu, p^\nu] = i \eta^{\mu\nu}$. This allows us to deduce the Lie algebra of the Poincaré group given above.}.
+\begin{equation}
+    \begin{aligned}
+        [P^\mu, P^\nu] = 0, \quad [M^{\mu\nu}, P^\alpha] = -i (\eta^{\nu\alpha} P^\mu - \eta^{\mu\alpha} P^\nu), \\
+        [M^{\mu\nu}, M^{\rho\sigma}] = -i (\eta^{\mu\rho} M^{\nu\sigma} - \eta^{\nu\rho} M^{\mu\sigma} + \eta^{\nu\sigma} M^{\mu\rho} - \eta^{\mu\sigma} M^{\nu\rho}),
+    \end{aligned}
+    \label{eq:Poincare_Lie_algebra}
+\end{equation}
+where $P^\mu$ are the generators of the translations and $M^{\mu\nu}$ are the generators of the Lorentz transformations\footnote{The Lorentz part of this algebra was found previously using the defining representation of the Lorentz group. The Poincaré group, as given above, is not defined in terms of matrices only. A way of finding its Lie algebra is to consider its generators that perform the infinitesimal transformation in a quantum mechanical Hilbert space where $P^\mu = \hat{p}^\mu$ and $M^{\mu\nu} = \hat{x}^\mu \hat{p}^\nu - \hat{x}^\nu \hat{p}^\mu$, with the elementary commutators given by $[\hat{x}^\mu, \hat{p}_\nu] = i \delta^{\mu}_{\nu}$. This allows us to deduce the Lie algebra of the Poincaré group given above.}.
 
-Its unitary irreducible representations are infinite-dimensional and have been classified by Wigner in 1939. They are classified according to the values of the so-called Casimir operators $P^2 = P^\mu P_\mu$ and $W^2 = W^\mu W_\mu$, where $W^\mu = \epsilon^{\mu\nu\rho\sigma} P_\nu M_{\rho\sigma}$ is the so-called Pauli–Lubanski vector. It is seen, using equations (159), that $P^2$ and $W^2$ commute with all elements of the Poincaré algebra: they are invariant under infinitesimal transformations of the Poincaré group. Thus, they take constant values inside an irreducible representation, just like $J^2$ takes a constant value inside a fixed representation of the rotation group with generators $J_i$. The unitary representations of the Poincaré group are classified by the following values of the Casimir operators:
+Its unitary irreducible representations are infinite-dimensional and have been classified by Wigner in 1939. They are classified according to the values of the so-called Casimir operators $P^2 = P^\mu P_\mu$ and $W^2 = W^\mu W_\mu$, where
+\[
+    W_\mu = \frac{1}{2}\epsilon_{\mu\nu\rho\sigma} P^\nu M^{\rho\sigma}
+\]
+is the so-called \textbf{Pauli-Lubanski vector}. It is seen, using equations \eqref{eq:Poincare_Lie_algebra}, that $P^2$ and $W^2$ commute with all elements of the Poincaré algebra: they are invariant under infinitesimal transformations of the Poincaré group. Thus, they take constant values inside an irreducible representation, just like $J^2$ takes a constant value inside a fixed representation of the rotation group with generators $J^i$. The unitary representations of the Poincaré group are classified by the following values of the Casimir operators:
 \begin{itemize}
     \item $P^2 = -m^2 < 0$, $W^2 = m^2 s(s + 1)$ with $s = 0, \frac{1}{2}, 1, \frac{3}{2}, 2, \dots$: it corresponds to quantum
           particles of mass $m$ and spin $s$. This unitary representation is associated with a Hilbert space
@@ -244,7 +258,7 @@ Its unitary irreducible representations are infinite-dimensional and have been c
           that can vary continuously: they do not seem to have any immediate application to field theory
           (at least at the perturbative level).
 
-    \item $P^2 = -m^2 > 0$: tachyonic representations, never used in physics (inconsistent with
+    \item $P^2 = \mu^2 > 0$: tachyonic representations, never used in physics (inconsistent with
           standard physical interpretations).
 
     \item $P^\mu = 0$, $W^\mu = 0$: trivial (scalar) representation $\rightarrow$ vacuum (no particles).
@@ -252,7 +266,6 @@ Its unitary irreducible representations are infinite-dimensional and have been c
 
 For example, the physical case of mass $m$ and spin $s$ (i.e. the case with $P^2 = -m^2 > 0$ and $W^2 = m^2 s(s + 1)$) corresponds to an infinite-dimensional vector space that is constructed as the Hilbert space spanned by vectors of the form
 \[
-    |p, s_3\rangle, \quad p \in \mathbb{R}^3, \quad s_3 = -s, \dots, +s
-    \tag{160}
+    \ket{\vec{p},\, s_3}, \quad \vec{p} \in \mathbb{R}^3, \quad s_3 = -s, \dots, +s,
 \]
-which are the eigenstates of the linear momentum operator $\vec{p}$ and of the component of the spin operator along the $z$-axis $S_3$. Unitary operators representing the Poincaré group transformations act on this infinite-dimensional Hilbert space.
+which are the eigenstates of the linear momentum operator $\vec{p}$ and of the component of the spin operator along the $z$-axis $\hat{S}_3$. Unitary operators representing the Poincaré group transformations act on this infinite-dimensional Hilbert space.
