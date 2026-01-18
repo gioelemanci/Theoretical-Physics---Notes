@@ -1,4 +1,4 @@
-\section{Klein-Gordon equation}
+\section{Klein Gordon Equation}
 
 As discussed previously, the Schrödinger equation arises from the quantization of a \textit{non-relativistic} particle.
 In complete analogy, the \textbf{Klein–Gordon equation} can be obtained by applying the same quantization procedure to a \textit{relativistic} particle (this is often referred to as \textit{first quantization} of the relativistic theory).
@@ -30,8 +30,8 @@ One could then try to promote this classical relation to a wave equation by usin
 \]
 If we apply this substitution directly to the relativistic energy expression \( E = \sqrt{\mathbf{p}^2 c^2 + m^2 c^4} \), we obtain
 \[
-    i\hbar \frac{\partial}{\partial t} \psi(\mathbf{x},t)
-    = \sqrt{-\hbar^2 c^2 \nabla^2 + m^2 c^4} \, \psi(\mathbf{x},t).
+    i\hbar \frac{\partial}{\partial t} \phi(\mathbf{x},t)
+    = \sqrt{-\hbar^2 c^2 \nabla^2 + m^2 c^4} \, \phi(\mathbf{x},t).
 \]
 However, this equation involves the \textit{square root of a differential operator}, whose precise meaning is not well defined.
 Such an operator would introduce \textbf{non-local effects}, implying that distant points in space could directly influence each other—an undesirable and physically obscure feature.
@@ -45,7 +45,7 @@ Instead of working with the square-root form, they started from the \textit{quad
 and replaced \( E \) and \( \mathbf{p} \) by their corresponding operators.
 This leads to the \textbf{Klein–Gordon equation}:
 \begin{equation}
-    \left( -\frac{1}{c^2} \frac{\partial^2}{\partial t^2} + \nabla^2 - \frac{m^2 c^2}{\hbar^2} \right) \psi(\mathbf{x},t) = 0.
+    \left( -\frac{1}{c^2} \frac{\partial^2}{\partial t^2} + \nabla^2 - \frac{m^2 c^2}{\hbar^2} \right) \phi(\mathbf{x},t) = 0.
 \end{equation}
 In a more compact and manifestly relativistic form, it can be written as
 \begin{equation}
@@ -90,15 +90,17 @@ This condition is satisfied if the four-momentum \( p^\mu \) lies on the \textbf
     E_p = \sqrt{\mathbf{p}^2 + m^2}.
 \]
 
-Hence, the Klein–Gordon equation admits both \textbf{positive-} and \textbf{negative-energy solutions}.
+Hence, the Klein–Gordon equation admits both \textbf{positive} and \textbf{negative energy solutions}.
 The positive-energy modes correspond to
-\[
-    \phi(x) = e^{-i E_p t + i \mathbf{p} \cdot \mathbf{x}},
-\]
+\begin{equation}
+    \phi^{(+)}_{\mathbf{p}}(x) = e^{-i E_p t + i \mathbf{p} \cdot \mathbf{x}},
+    \label{eq:KG_positive_energy_plane_wave}
+\end{equation}
 while the negative-energy modes are given by
-\[
-    \phi(x) = e^{i E_p t - i \mathbf{p} \cdot \mathbf{x}}.
-\]
+\begin{equation}
+    \phi^{(-)}_{\mathbf{p}}(x) = e^{i E_p t - i \mathbf{p} \cdot \mathbf{x}}.
+    \label{eq:KG_negative_energy_plane_wave}
+\end{equation}
 
 At first sight, the existence of solutions with \( p^0 = -E_p \) seems problematic: if negative-energy states exist, the system could in principle decay indefinitely into lower and lower energy levels, making the theory \textbf{unstable}.
 In the framework of relativistic quantum field theory, however, these modes acquire a consistent interpretation: they correspond to \textbf{antiparticles} carrying positive energy but opposite charge or quantum numbers.
@@ -110,6 +112,7 @@ The most general solution of the Klein–Gordon equation can therefore be expres
         a(\mathbf{p})\, e^{-i E_p t + i \mathbf{p} \cdot \mathbf{x}}
         + b^*(\mathbf{p})\, e^{i E_p t - i \mathbf{p} \cdot \mathbf{x}}
         \right],
+    \label{eq:KG_general_solution_fourier}
 \end{equation}
 and its complex conjugate as
 \[
@@ -134,10 +137,12 @@ A straightforward way to obtain the continuity equation is to multiply the Klein
 \[
     \begin{aligned}
         \phi^* (\Box - m^2) \phi - \phi (\Box - m^2) \phi^* & = \phi^*\Box\phi - m^2 \phi\phi^* - \phi\Box\phi^* + m^2 \phi\phi^* = \phi^* \partial_\mu \partial^{\mu} \phi - \phi \partial_\nu \partial^{\nu} \phi^*                                                        \\
-                                                            & = \partial_\mu \left(\phi^* \partial^{\mu} \phi\right) - \partial_\mu \phi^* \partial^{\mu} \phi - \left(\partial_\nu \left(\phi^* \partial^{\nu} \phi\right) - \partial_\nu \phi^* \partial^{\nu} \phi\right) \\
-                                                            & =\partial_\mu \left( \phi^* \partial^\mu \phi - \phi \partial^\mu \phi^* \right) = 0.
+                                                            & = \partial_\mu \left(\phi^* \partial^{\mu} \phi\right) - \partial_\mu \phi^* \partial^{\mu} \phi - \left(\partial_\nu \left(\phi \partial^{\nu} \phi^*\right) - \partial_\nu \phi \partial^{\nu} \phi^*\right) \\
+                                                            & =\partial_\mu \left( \phi^* \partial^\mu \phi - \phi \partial^\mu \phi^* \right) = 0,
     \end{aligned}
 \]
+which is zero because the starting expression vanishes identically (literally the KG equation \eqref{eq:Klein_Gordon_equation}, which is zero, multiplied by something).
+
 We can thus define the four-current
 \begin{equation}
     J^\mu = \frac{1}{2 i m} \big( \phi^* \partial^\mu \phi - \phi \partial^\mu \phi^* \big),
@@ -146,16 +151,19 @@ which satisfies the conservation law $\partial_\mu J^\mu = 0$.
 The normalization factor is chosen so that $J^\mu$ is real and, in the nonrelativistic limit, reproduces the form of the probability current in the Schrödinger theory.
 
 The temporal component reads
-\begin{equation}
+\[
     J^0 = \frac{1}{2 i m} \big( \phi^* \partial^0 \phi - \phi \partial^0 \phi^* \big),
-\end{equation}
+\]
 which, while real, is not positive definite. Indeed, both $\phi$ and its time derivative $\partial_0 \phi$ can be freely specified as initial conditions, since the Klein–Gordon equation is second order in time. Therefore, $J^0$ can take either positive or negative values depending on these data. Evaluating $J^0$ for plane-wave solutions explicitly yields
-\begin{equation}
+\[
     J^0 = \pm \frac{E_p}{m},
-\end{equation}
+\]
 confirming that its sign depends on the energy branch chosen.
 
-We thus conclude that the Klein–Gordon equation cannot sustain a probabilistic interpretation. This difficulty motivated Dirac to search for a different relativistic wave equation that would preserve a positive-definite probability density. He succeeded, but it later became clear that all relativistic wave equations should be reinterpreted as classical field equations to be quantized anew, describing particles of mass $m$ as the quanta of those fields—an idea reminiscent of Einstein’s interpretation of electromagnetic waves in the photoelectric effect.
+We thus conclude that the Klein–Gordon equation cannot sustain a probabilistic interpretation in terms of a positive-definite probability density: the quantity $J^0$ cannot be interpreted as a probability density \(\tfrac{\rho}{c}\).
+
+This difficulty motivated Dirac to search for a different relativistic wave equation that would preserve a positive-definite probability density. He succeeded, but it later became clear that all relativistic wave equations should be reinterpreted as classical field equations to be quantized anew, describing particles of mass $m$ as the quanta of those fields—an idea reminiscent of Einstein’s interpretation of electromagnetic waves in the photoelectric effect.
+
 Historically, this field interpretation was first successfully applied by Yukawa in 1935, who employed the Klein–Gordon field to model nuclear interactions mediated by short-range forces.
 
 \subsection{Yukawa potential}
@@ -242,16 +250,12 @@ Hence, we obtain:
     \begin{aligned}
         \phi(\mathbf{x}) & = -\frac{g}{(2\pi)^2 ir} (2\pi i)\sum_{i} \mathrm{Res} f(k) \Big|_{k^+}  \\
                          & = -\frac{g}{2\pi r} \lim_{k \to im} \frac{k e^{ikr}}{(k+im)(k-im)}(k-im) \\
-                         & = -\frac{g}{2\pi r} \frac{im e^{-mr}}{2im} = -\frac{g}{4\pi} e^{-mr}.
+                         & = -\frac{g}{2\pi r} \frac{im e^{-mr}}{2im} = -\frac{g}{4\pi r} e^{-mr}.
     \end{aligned}
 \]
 
-This potential describes an attractive interaction between sources of the same sign. Its range is finite and characterized by
-\[
-    \lambda \sim \frac{1}{m},
-\]
-corresponding to the \textbf{Compton wavelength} of a particle of mass $m$. Hence, the Yukawa potential models \textit{short-range forces}, such as the nuclear force.
-One can verify that \(\phi(\mathbf{x}) = -\tfrac{g}{4\pi} e^{-mr}\) satisfies equation \eqref{eq:Klein_Gordon_static_source} by direct substitution.
+This potential describes an attractive interaction between sources of the same sign. Its range is finite and characterized by \(\lambda \sim \tfrac{1}{m}\), corresponding to the \textbf{Compton wavelength} of a particle of mass $m$. Hence, the Yukawa potential models \textit{short-range forces}, such as the nuclear force.
+One can verify that \(\phi(\mathbf{x}) = -\tfrac{g}{4\pi r} e^{-mr}\) satisfies equation \eqref{eq:Klein_Gordon_static_source} by direct substitution.
 
 \paragraph{Feynman diagrams.} A pictorial representation of the interaction between two scalar charges $g_1$ and $g_2$ mediated by the exchange of a Klein–Gordon quantum can be represented by the following Feynman-like diagram:
 
@@ -282,18 +286,18 @@ One can verify that \(\phi(\mathbf{x}) = -\tfrac{g}{4\pi} e^{-mr}\) satisfies eq
         which is attractive for charges of the same sign.
     \end{minipage}
 \end{figure}
-The potential has a characteristic range
+As we have said, the potential has a characteristic range scaling inversely with the mass of the exchanged particle: the behaviour of a short-range force
 \[
     R \sim \frac{1}{m},
 \]
-and therefore describes short-range forces.
+which is soppresressed exponentially for distances \( r \gg R \).
 
 In 1935, Yukawa proposed that nuclear interactions arise from the exchange of a massive scalar particle, later identified as the \textit{meson}.
 By estimating a typical range $R \sim 1$~fm (comparable to the proton radius), one obtains a mass
 \[
     m \sim 197~\text{MeV},
 \]
-in remarkable agreement with the mass of the neutral pion, $m_{\pi^0} \approx 135~\text{MeV}$, discovered later in cosmic-ray experiments.
+in remarkable agreement (the same order of magnitude) with the mass of the neutral pion, $m_{\pi^0} \approx 135~\text{MeV}$, discovered later in cosmic-ray experiments.
 
 \subsection{Green functions and the propagator}
 
@@ -323,19 +327,19 @@ This representation can be easily verified by substituting it back into the diff
 \[
     \begin{aligned}
         (-\Box + m^2)\left( \phi_0(x) + \int \mathrm{d}^4 y \, G(x - y) J(y) \right) \\ =(-\Box + m^2)\phi_0(x) + (-\Box + m^2)\int \mathrm{d}^4 y \, G(x - y) J(y) \\
-        = \int \mathrm{d}^4 y \, (-\Box + m^2) G(x - y) J(y) = \int \mathrm{d}^4 y \, \delta^{(4)}(x - y) J(y) = J(y).
+        = \int \mathrm{d}^4 y \, (-\Box + m^2) G(x - y) J(y) = \int \mathrm{d}^4 y \, \delta^{(4)}(x - y) J(y) = J(x).
     \end{aligned}
 \]
-The Green function thus acts as a kernel that ``propagates'' the influence of the source \(J(y)\) from each spacetime point \(y\) to the observation point \(x\).
+The Green function thus acts as a \textit{kernel that ``propagates'' the influence of the source} \(J(y)\) from each spacetime point \(y\) to the observation point \(x\).
 
 \subsubsection{Feynman--Stueckelberg prescription}
 
 For hyperbolic differential equations such as the Klein--Gordon equation, the Green function is \textit{not unique}: its precise form depends on the boundary (or, equivalently, causality) conditions imposed at infinity.
 In quantum field theory, the physically meaningful choice is the \textit{causal Green function}, determined by the \textbf{Feynman--Stueckelberg} prescription.
-This prescription enforces that positive-frequency components (associated with particles of positive energy) propagate forward in time, while negative-frequency components (associated with antiparticles) propagate backward in time.
+This prescription enforces that positive-frequency components (associated with particles of positive energy) propagate forward in time, while negative-frequency components (associated with antiparticles with negative energy) propagate backward in time (changing the sign of their energy).
 Such a rule guarantees a consistent causal interpretation and unifies the propagation of particles and antiparticles within a single formalism.
 
-The corresponding \textit{Feynman propagator} can be expressed in momentum space as
+The corresponding \textit{Feynman propagator} can be expressed in momentum space as a fourier transform:
 \begin{equation}
     G(x) = \int \frac{\mathrm{d}^4 p}{(2\pi)^4} \, e^{i p_{\mu} x^{\mu}} \tilde{G}(p)
     = \int \frac{\mathrm{d}^4 p}{(2\pi)^4} \, \frac{e^{i p_{\mu} x^{\mu}}}{p^2 + m^2},
@@ -356,7 +360,7 @@ Since this expression contains two poles in the complex plane, one introduces a 
 \[
     G(x) = \int \frac{\mathrm{d}^4 p}{(2\pi)^4} \, \frac{e^{i p_{\mu} x^{\mu}}}{p^2 + m^2 - i\epsilon}.
 \]
-The infinitesimal term \(-i\epsilon\) (with \(\epsilon \to 0^+\)) determines the position of the poles in the complex \(p^0\)-plane and thus implements the causal boundary conditions described above.
+The infinitesimal term \(-i\epsilon\) (with \(\epsilon \to 0^+\)) determines the position of the poles in the complex \(p^0\)-plane and thus implements the causal boundary conditions (Feynman-Stueckelberg) described above.
 The \(i\epsilon\)-term dictates whether a given frequency component propagates forward or backward in time.
 
 More explicitly, the $i\epsilon$ prescription moves the poles of the integrand in a definite direction and therefore fixes the causal behavior of the Green function: positive-energy modes (\(p^0 = E_p\)) are propagated forward in time, while negative-energy modes (\(p^0 = -E_p\)) are propagated backward.
@@ -401,7 +405,7 @@ Without the \(i\epsilon\) displacement, the poles at \(p^0 = \pm E_p\) lie direc
 To specify how the contour avoids them, we introduce the Feynman prescription:
 \[
     \Delta(x - y) = \int \frac{\mathrm{d}^3\mathbf{p}}{(2\pi)^3} e^{i\mathbf{p} \cdot (\mathbf{x} - \mathbf{y})}
-    \int \frac{\mathrm{d}p^0}{2\pi} \frac{ie^{-ip^0(x^0 - y^0)}}{(p^0 - E_p - i\epsilon)(p^0 + E_p + i\epsilon)}.
+    \int \frac{\mathrm{d}p^0}{2\pi} \frac{ie^{-ip^0(x^0 - y^0)}}{(p^0 - E_p + i\epsilon)(p^0 + E_p - i\epsilon)}.
 \]
 
 \begin{figure}[H]
@@ -444,10 +448,10 @@ To specify how the contour avoids them, we introduce the Feynman prescription:
             \draw[dashed, gray]
             (\R/2,  0) -- (\R/2,  -\eps);
 
-            \fill[green!60!black] (-\R/2,  \eps) circle (1.5pt) node[above left] {$-E_p + i\epsilon$};
-            \fill[green!60!black] (\R/2,  -\eps) circle (1.5pt) node[below right] {$E_p - i\epsilon$};
-            \fill[green!60!black] (-\R/2, 0) circle (1.5pt) node[below] {$-E_p$};
-            \fill[green!60!black] (\R/2, 0) circle (1.5pt) node[above] {$E_p$};
+            \fill[green!60!black] (-\R/2,  \eps) circle (1.5pt) node[above] {\small $-E_p + i\epsilon$};
+            \fill[green!60!black] (\R/2,  -\eps) circle (1.5pt) node[below] {\small $E_p - i\epsilon$};
+            \fill[green!60!black] (-\R/2, 0) circle (1.5pt) node[below] {\small $-E_p$};
+            \fill[green!60!black] (\R/2, 0) circle (1.5pt) node[above] {\small $E_p$};
 
             \node[blue!70] at (\R,2) {$x^0 > y^0$};
             \node[red!70] at (\R,-2) {$x^0 < y^0$};
@@ -525,12 +529,15 @@ Since the step functions already encode the time ordering, the propagator can fi
     \end{minipage}
 \end{figure}
 
-Other prescriptions to displace the poles lead to different Green functions satisfying (\eqref{eq:GF_def}), which we now rewrite as
-\begin{equation}
+Other prescriptions to displace the poles lead to different Green functions satisfying \eqref{eq:GF_def}, which we now rewrite as
+\[
     (-\Box_x + m^2) G(x - y) = \delta^4(x - y),
-    \label{eq:41}
-\end{equation}
-with $y^\mu$ the spacetime point that supports the external source. The \textbf{retarded Green function} $G_R(x - y)$ is defined to propagate all frequencies excited by the source at the spacetime point $y^\mu$ forward in time, so that $G_R(x - y)$ vanishes for $x^0 < y^0$. It is fixed by displacing all the poles below the real $p^0$ axis. The \textbf{advanced Green function} $G_A(x - y)$ is defined to propagate all frequencies backward in time so that it vanishes for $x^0 > y^0$. It is obtained by displacing the poles above the real $p^0$ axis.
+\]
+with $y^\mu$ the spacetime point that supports the external source.
+
+The \textbf{retarded Green function} $G_R(x - y)$ is defined to propagate all frequencies excited by the source at the spacetime point $y^\mu$ forward in time, so that $G_R(x - y)$ vanishes for $x^0 < y^0$. It is fixed by displacing all the poles below the real $p^0$ axis.
+
+The \textbf{advanced Green function} $G_A(x - y)$ is defined to propagate all frequencies backward in time so that it vanishes for $x^0 > y^0$. It is obtained by displacing the poles above the real $p^0$ axis.
 
 In the massless case ($m = 0$), and setting again $y^\mu = 0$ for simplicity, one computes the integrals and obtains
 \begin{equation}
@@ -595,7 +602,7 @@ performing the momentum integrations.
 \paragraph{Exercise:} Derive the Yukawa potential by using the propagator and
 eq.~(\eqref{eq:KG_solution_GF}), setting $\phi_0 = 0$ and $J(x) = -g \, \delta^3(\mathbf{x})$.
 
-\subsubsection{Action}
+\subsection{Action and Lagrangian formalism}
 
 The \textit{action principle} provides a compact and elegant way to express the dynamics of a physical system.
 Rather than writing equations of motion directly, one defines a single functional quantity — the \textit{action} — whose stationary points correspond to the physical trajectories or field configurations that the system can take.
@@ -606,7 +613,7 @@ We can verify that the Klein--Gordon (KG) equation for a complex scalar field $\
 \begin{equation}
     S[\phi, \phi^{\ast}] = \int \mathrm{d}^4 x \, \mathcal{L},
     \qquad
-    \mathcal{L} = \left(- \partial_{\mu} \phi^{\ast} \partial^{\mu} \phi - m^2 \phi^{\ast} \phi \right),
+    \mathcal{L} = - \partial_{\mu} \phi^{\ast} \partial^{\mu} \phi - m^2 \phi^{\ast} \phi,
     \label{eq:KG_action_lagrangian}
 \end{equation}
 where $\mathcal{L}$ is the \textit{Lagrangian density}, a local function of the fields and their derivatives.
@@ -620,32 +627,34 @@ By varying $\phi$ and $\phi^{\ast}$ independently and taking the variation insid
 \[
     \begin{aligned}
         \delta S & = \int \mathrm{d}^4 x \left( - \partial_{\mu} \delta\phi^{\ast} \partial^{\mu} \phi- \partial_{\mu} \phi^{\ast} \partial^{\mu} \delta\phi -m^2 \delta \phi^{\ast} \phi -m^2 \phi^{\ast} \delta \phi \right) \\
-                 & = \int \mathrm{d}^4 x \left[\delta \phi \left( - \partial^{\mu} \partial_{\mu} \phi^{\ast} -m^2 \phi^{\ast}\right)+\delta \phi^{\ast}\left( - \partial_{\mu} \partial^{\mu} \phi -m^2 \phi \right)\right].
+                 & = \int \mathrm{d}^4 x \left[\delta \phi \left( \partial^{\mu} \partial_{\mu} \phi^{\ast} -m^2 \phi^{\ast}\right)+\delta \phi^{\ast}\left( \partial_{\mu} \partial^{\mu} \phi -m^2 \phi \right)\right],
     \end{aligned}
 \]
-Since the variations $\delta \phi$ and $\delta \phi^{\ast}$ are arbitrary, the integrand must vanish independently for each, leading to the Euler–Lagrange equations:
+where we have integrated by parts and discarded surface terms assuming that the variations $\delta \phi$ and $\delta \phi^{\ast}$ vanish at infinity.
+
+Since the variations $\delta \phi$ and $\delta \phi^{\ast}$ are arbitrary, the integrand must vanish independently for each, we obtain to the Euler–Lagrange equations:
 \[
-    \begin{aligned}
+    \begin{dcases}
         (\Box - m^2)\phi(x)        & = 0, \\
         (\Box - m^2)\phi(x)^{\ast} & = 0.
-    \end{aligned}
+    \end{dcases}
 \]
 These are exactly the Klein--Gordon equations for a complex scalar field and its complex conjugate.
 
 Alternatively, one can express the same result using \textit{functional derivatives}.
-Writing the variation of the action as\TODO{Compute everything and substitute S with L.}
+Writing the variation of the action as\TODO{Compute everything.}
 \[
     \delta S[\phi, \phi^{\ast}] =
     \int \mathrm{d}^4 x \left(
-    \frac{\delta S[\phi, \phi^{\ast}]}{\delta \phi(x)} \, \delta \phi(x)
-    + \frac{\delta S[\phi, \phi^{\ast}]}{\delta \phi^{\ast}(x)} \, \delta \phi^{\ast}(x)
+    \frac{\delta \mathcal{L}[\phi, \phi^{\ast}]}{\delta \phi(x)} \, \delta \phi(x)
+    + \frac{\delta \mathcal{L}[\phi, \phi^{\ast}]}{\delta \phi^{\ast}(x)} \, \delta \phi^{\ast}(x)
     \right) = 0,
 \]
 and imposing suitable boundary conditions (so that surface terms vanish), one obtains the field equations
 \[
-    \frac{\delta S[\phi, \phi^{\ast}]}{\delta \phi^{\ast}(x)} = (\Box - m^2)\phi(x) = 0,
+    \frac{\delta \mathcal{L}[\phi, \phi^{\ast}]}{\delta \phi^{\ast}(x)} = (\Box - m^2)\phi(x) = 0,
     \qquad
-    \frac{\delta S[\phi, \phi^{\ast}]}{\delta \phi(x)} = (\Box - m^2)\phi^{\ast}(x) = 0.
+    \frac{\delta \mathcal{L}[\phi, \phi^{\ast}]}{\delta \phi(x)} = (\Box - m^2)\phi^{\ast}(x) = 0.
 \]
 This formulation is particularly useful in quantum field theory, where the action functional plays the role of the “generator” of the dynamics and symmetries of the theory.
 
@@ -681,16 +690,17 @@ where $\varphi_1$ and $\varphi_2$ denote the real and imaginary parts of $\phi$,
 Hence, a complex scalar field is dynamically equivalent to two independent real Klein--Gordon fields with identical masses.
 This observation will be useful later when discussing internal symmetries and conserved currents.
 
-\subsubsection{Symmetries}
+\subsection{Symmetries}
 
 The action formalism provides a powerful framework to connect \textit{symmetries} of a theory—i.e.\ transformations that leave the action invariant—with corresponding \textit{conservation laws}.
 This fundamental relation is expressed by \textbf{Noether’s theorem}, reviewed in Appendix~\ref{app:Noether}.
 
 The free complex Klein--Gordon field possesses two main types of rigid (or \textit{global}) symmetries:
-1. **Space–time symmetries**, described by the \textit{Poincaré group}, and
-2. **Internal symmetries**, associated with the invariance under phase rotations belonging to the group \(\mathrm{U}(1)\).
-
-The term “rigid” (or equivalently “global”) indicates that these transformations do not depend on the spacetime point \(x\): the same transformation is applied everywhere, unlike in the case of \textit{gauge symmetries}, where the transformation parameters are local functions of \(x\).
+\begin{enumerate}
+    \item \textbf{Space–time symmetries}, described by the \textit{Poincaré group}.
+    \item \textbf{Internal symmetries}, associated with the invariance under phase rotations belonging to the group \(\mathrm{U}(1)\).
+\end{enumerate}
+The term “rigid” (or equivalently “global”) indicates that these transformations do not depend on the spacetime point \(x\): the same transformation is applied everywhere, unlike the case of \textit{gauge symmetries}, where the transformation parameters are local functions of \(x\).
 
 \paragraph{The global \(\mathrm{U}(1)\) symmetry.}
 The \(\mathrm{U}(1)\) symmetry corresponds to phase rotations of the field:
@@ -701,7 +711,7 @@ The \(\mathrm{U}(1)\) symmetry corresponds to phase rotations of the field:
     \label{eq:U1_symmetry}
 \end{equation}
 where \(\alpha\) is a real constant parameter.
-It is straightforward to verify that under this transformation the action in \eqref{eq:KG_action_lagrangian} remains invariant:
+It is straightforward to verify that under this transformation the action in \eqref{eq:KG_action_lagrangian} remains invariant:\footnote{Since we can always factorize the two exponentials out of the derivatives (\(\phi\) and \(\phi^{\ast}\) appear multiplied together in the Lagrangian), the invariance holds for any real value of \(\alpha\).}
 \[
     S[\phi', \phi'^{\ast}] = S[\phi, \phi^{\ast}].
 \]
@@ -718,7 +728,7 @@ which again leave the action invariant, \(\delta_{\alpha}S[\phi, \phi^{\ast}] = 
 
 \paragraph{From global to local transformations.}
 If we now generalize the transformation parameter to depend on spacetime, \(\alpha \to \alpha(x)\), we obtain \textit{local} \(\mathrm{U}(1)\) transformations.
-In this case, the action is no longer invariant, and the variation becomes
+In this case, the action is no longer invariant, and taking an infinitesimal transformation, the variation becomes
 \begin{equation}
     \delta_{\alpha(x)} S[\phi, \phi^{\ast}] =
     \int \mathrm{d}^4 x \, \partial_{\mu}\alpha
@@ -746,8 +756,8 @@ This is precisely the mechanism behind Noether’s theorem.
 
 The conserved \textbf{charge} associated with this current is
 \begin{equation}
-    Q \equiv \int d^3x \, J^0
-    = -i \int d^3x \, \phi^{\ast}
+    Q \equiv \int \mathrm{d}^3 \mathbf{x} \, J^0
+    = -i \int \mathrm{d}^3 \mathbf{x} \, \phi^{\ast}
     \!\stackrel{\leftrightarrow}{\partial_0}\!\phi,
     \label{eq:U1_Noether_charge}
 \end{equation}
@@ -757,7 +767,7 @@ However, \(Q\) is not positive definite: this is why, in the context of the Klei
 Still, this structure motivates the definition of a \textit{conserved scalar product} between any two solutions \(\chi\) and \(\phi\) of the Klein--Gordon equation:
 \[
     \langle \chi | \phi \rangle
-    \equiv \int d^3x \, i \chi^{\ast}
+    \equiv \int \mathrm{d}^3 \mathbf{x} \, i \chi^{\ast}
     \!\stackrel{\leftrightarrow}{\partial_0}\!\phi.
 \]
 Using the equations of motion, one can verify that this inner product is time-independent.
@@ -778,12 +788,12 @@ To extract the associated conserved quantities, it is convenient to study the \t
 For an infinitesimal translation \(a^{\mu}\)
 \[
     \begin{aligned}
-        \delta_a \phi(x) & = \phi^{\prime} (x) - \phi(x) = \phi^{\prime} (x) - \phi^{\prime} (x^{\prime})                                                    \\
-                         & = \delta_a \phi^{\prime} (x) = - \left(\phi^{\prime} (x+a) - \phi^{\prime} (x)\right)                                             \\
-                         & = - \left(\phi^{\prime} (x) + a^{\mu}\delta_\mu \phi^{\prime}(x) - \phi^{\prime} (x)\right) = -a^{\mu}\delta_\mu \phi^{\prime}(x)
+        \delta_a \phi(x) & = \phi^{\prime} (x) - \phi(x) = \phi^{\prime} (x) - \phi^{\prime} (x^{\prime})                                                        \\
+                         & = \delta_a \phi^{\prime} (x) = - \left(\phi^{\prime} (x+a) - \phi^{\prime} (x)\right)                                                 \\
+                         & = - \left(\phi^{\prime} (x) + a^{\mu}\partial_\mu \phi^{\prime}(x) - \phi^{\prime} (x)\right) = -a^{\mu}\partial_\mu \phi^{\prime}(x)
     \end{aligned}
-\]\TODO{check calculationss}
-where we have Taylor expanded, so that eq. \eqref{eq:Poincaré_symmetries} becomes
+\]
+where we have Taylor expanded, so that eq. \eqref{eq:Poincaré_symmetries} becomes\footnote{Since the field is multiplied by an infinitesimal displacement \(a^{\mu}\), we can replace \(\phi^{\prime}\) with \(\phi\) in the last step without affecting the result to first order in \(a^{\mu}\).}
 \begin{equation}
     \begin{aligned}
         \delta_a \phi(x)        & = -a^{\mu} \partial_{\mu} \phi(x),        \\
@@ -803,35 +813,68 @@ If we let the parameter \(a^{\mu}\) depend arbitrarily on \(x\), Noether’s the
         \right)
     }_{T^{\mu\nu}}.
 \]
-Here, total derivatives have been neglected, and \(\mathcal{L}\) denotes the Lagrangian density from eq.~\eqref{eq:KG_action_lagrangian}.
+Here, total derivatives have been neglected, and \(\mathcal{L}\) denotes the Lagrangian density from eq.~\eqref{eq:KG_action_lagrangian}: this result can be obtained considering linearity of the lagrangian, thus we can compute the variation of each term separately and directly in the lagrangian
+\[
+    \begin{aligned}
+        \delta_{a(x)} \mathcal{L}[\phi, \phi^{\ast}]
+         & = -(\partial_{\mu} \delta_{a(x)} \phi^{\ast}) \, (\partial^{\mu} \phi) - (\partial_{\mu} \phi^{\ast}) \, (\partial^{\mu} \delta_{a(x)} \phi) - m^2 \left(\delta_{a(x)} \phi^{\ast} \, \phi + \phi^{\ast} \, \delta_{a(x)} \phi\right)                                                                    \\
+         & = \partial_{\mu} (a^{\nu} \partial_{\nu} \phi^{\ast}) \, (\partial^{\mu} \phi) + (\partial_{\mu} \phi^{\ast}) \, \partial^{\mu} (a^{\nu} \partial_{\nu} \phi) + m^2 \left(a^{\nu} \partial_{\nu} \phi^{\ast} \, \phi + \phi^{\ast} \, a^{\nu} \partial_{\nu} \phi\right)                                 \\
+         & = \left[ (\partial_\mu a_{\nu})\partial^{\nu} \phi^{\ast} + a^{\nu} (\partial_\mu \partial^{\nu} \phi^*) \right] \partial^{\mu} \phi + \partial^{\mu} \phi^{\ast} \left[ (\partial_{\mu} a_{\nu}) \partial^{\nu} \phi + a_{\nu} (\partial_{\mu} \partial^{\nu} \phi) \right] + m^2 (\cdot)               \\
+         & = (\partial_{\mu} a_{\nu}) \left( \partial^{\mu} \phi^{\ast} \partial^{\nu} \phi + \partial^{\nu} \phi^{\ast} \partial^{\mu} \phi \right) + a_{\nu} \left[(\partial_\mu \partial^{\nu} \phi^*)\partial^{\mu} \phi + \partial^{\mu} \phi^{\ast} (\partial_{\mu} \partial^{\nu} \phi)\right] + m^2 (\cdot) \\
+         & = (\partial_{\mu} a_{\nu}) \left( \partial^{\mu} \phi^{\ast} \partial^{\nu} \phi + \partial^{\nu} \phi^{\ast} \partial^{\mu} \phi \right) - \eta^{\mu\nu} \partial_\mu a_\nu \left( \partial_\mu \phi^* \partial^{\mu} \phi \right) + m^2 (\cdot),
+    \end{aligned}
+\]
+where in the last step we have integrated by parts the second term, yielding a total derivative that can be neglected (in the end we are interested only in the action, and we assume boundary terms vanish)
+\[
+    a^{\nu} (\partial_\mu \partial^{\nu} \phi^*)\partial^{\mu} \phi = \partial_\nu (\cdot) - \eta^{\nu\lambda} \partial_\lambda a_\nu (\partial_\mu \phi^* \partial^{\mu} \phi) - a_\nu \partial^{\mu} \phi^{\ast} (\partial_{\mu} \partial^{\nu} \phi),
+\]
+from which the final expression follows. Now, rearranging the first mass term with the idea to construct the lagrangian density (multiplied by the Minkowski metric), and a deletion for the remaining mass term, we obtain
+\[
+    m^2 \left(a^{\nu} \partial_{\nu} \phi^{\ast} \, \phi\right) = m^2 \partial_\nu (\cdot) - m^2 \eta^{\nu \lambda} \partial_\lambda a_\nu (\phi^* \phi) - m^2 \phi^* a^\nu \partial_\nu \phi,
+\]
+where again the total derivative can be neglected, leading to the final form of the variation:
+\[
+    \delta_{a(x)} \mathcal{L}[\phi, \phi^{\ast}] = (\partial_{\mu} a_{\nu}) \left( \partial^{\mu}\phi^{\ast}\partial^{\nu}\phi + \partial^{\nu}\phi^{\ast}\partial^{\mu}\phi + \eta^{\mu\nu} \mathcal{L} \right),
+\]
+from which the variation of the action follows immediately and thus the identification of the energy-momentum tensor:
+\begin{equation}
+    T^{\mu\nu} = \partial^{\mu}\phi^{\ast}\partial^{\nu}\phi + \partial^{\nu}\phi^{\ast}\partial^{\mu}\phi + \eta^{\mu\nu}\mathcal{L}.
+    \label{eq:energy_momentum_tensor}
+\end{equation}
+
 This tensor is both symmetric and conserved,
 \[
     \partial_{\mu}T^{\mu\nu} = 0,
 \]
 which, according to Noether’s theorem, implies the existence of conserved quantities associated with spacetime translations.
 
-The corresponding conserved four-vector
+The corresponding conserved four-vector, the Noether charge associated with translations, is given by
 \[
-    P^{\mu} = \int d^3x \, T^{0\mu},
+    P^{\mu} = \int \mathrm{d}^3 \mathbf{x} \, T^{0\mu},
 \]
 represents the total \textbf{four-momentum} of the field.
 Each component of \(P^{\mu}\) is linked to a specific symmetry:
 \begin{itemize}
-    \item The temporal component \(P^{0}\) is conserved in \textbf{time translations} and represents the total \textit{energy};
-    \item The spatial components \(P^{i}\) (\(i = 1, 2, 3\)) is conserved in \textbf{spatial translations} and represent the components of the \textit{momentum vector}.
+    \item The temporal component \(P^{0}\) is conserved in \textbf{time translations} and represents the total \textit{energy} of the field.
+    \item The spatial components \(P^{i}\) (\(i = 1, 2, 3\)) are conserved in \textbf{spatial translations} and represent the components of the \textit{momentum vector}.
 \end{itemize}
 
-Explicitly, the \textit{local energy density} is given by\TODO{compute it}
+Explicitly, the \textbf{local energy density} is given by
 \[
-    T^{00} = \partial_0 \phi^{\ast}\partial_0 \phi
-    + \vec{\nabla}\phi^{\ast} \cdot \vec{\nabla}\phi
-    + m^2 \phi^{\ast}\phi,
+    \begin{aligned}
+        T^{00} & = 2\partial^0 \phi^{\ast} \partial^0 \phi - \eta^{00} \left(\partial_{\lambda} \phi^{\ast} \partial^{\lambda} \phi - m^2 \phi^{\ast} \phi\right) \\
+               & = 2\partial_0 \phi^{\ast}\partial_0 \phi +\partial_0 \phi^* \partial^0 \phi + (\nabla\phi^{\ast}) \cdot (\nabla\phi) + m^2 \phi^{\ast}\phi,
+    \end{aligned}
 \]
-so that the total conserved energy reads
+so that we can write
+\begin{equation}
+    \mathcal{E}(x) = \partial_0 \phi^{\ast} \partial_0 \phi + (\nabla\phi^{\ast}) \cdot (\nabla\phi) + m^2 \phi^{\ast}\phi.
+    \label{eq:energy_density_KG}
+\end{equation}
+The total energy of the field is therefore
 \[
-    P^{0} \equiv E = \int d^3x \, T^{00}.
+    P^{0} \equiv E = \int \mathrm{d}^3 \mathbf{x} \, T^{00}.
 \]
 This quantity is conserved in time and, for the Klein–Gordon field, it is manifestly \textit{positive definite}.
-The three remaining components \(P^{i} = \int d^3x \, T^{0i}\) form the total momentum of the field, conserved under spatial translations.
 
 These results illustrate how the action formalism and Noether’s theorem together provide a unified and systematic way to identify the conserved quantities associated with the fundamental symmetries of a field theory.

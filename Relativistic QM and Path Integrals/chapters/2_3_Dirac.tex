@@ -1,5 +1,20 @@
 \section{Dirac Equation}
-Dirac found the correct equation to describe particles of spin \(\tfrac{1}{2}\) by looking for a relativistic wave equation that could admit a probabilistic interpretation and thus be consistent with the principles of quantum mechanics. The Klein-Gordon equation did not have such an interpretation. Although a probabilistic interpretation will not be possible in the presence of interactions (eventually, Dirac’s wave function must be treated as a classical field to be quantized again in the second quantization), it is useful to retrace the line of thinking that brought Dirac to the formulation of an equation of first order in time.
+Dirac found the correct equation to describe particles of spin \(\tfrac{1}{2}\) by looking for a relativistic wave equation that could admit a probabilistic interpretation and thus be consistent with the principles of quantum mechanics, since the Klein-Gordon equation did not have such an interpretation due to the non positive-definite probability density.
+
+Although a probabilistic interpretation will not be possible in the presence of interactions (eventually, Dirac’s wave function must be treated as a classical field to be quantized again in the second quantization), it is useful to retrace the line of thinking that brought Dirac to the formulation of an equation of first order in time.
+
+The Dirac equation takes the form
+\begin{equation}
+    (\gamma^{\mu} \partial_{\mu} + m) \psi(x) = 0,
+    \label{eq:dirac_equation_intro}
+\end{equation}
+where the wave function \(\psi(x)\) has four complex components (it is a so-called Dirac spinor) and the \(\gamma^{\mu}\) are \(4\times 4\) matrices. Because the components of the Dirac spinor \(\psi(x)\) are not that of a four-vector (they mix differently under Lorentz transformations), it is necessary to use different indices to indicate their components without ambiguities. Here, we use greek indices \(\mu, \nu, .. = 0, 1, 2, 3\) to indicate the components of a four-vector and latin indices \(a, b, .. = 1, 2, 3, 4\) to indicate the components of a Dirac spinor. Equation \eqref{eq:dirac_equation_intro} is then written more explicitly as
+\[
+    \left[ \left(\gamma^{\mu}\right)_a^{\ b} \partial_{\mu} + m \delta_a^{\ b} \right] \psi_b(x) = 0,
+\]
+and consists of four distinct coupled equations (\(a=1, 2, 3, 4\)). Spinorial indices are usually left implicit, and a matrix notation is used instead: \(\gamma^\mu\) are matrices and \(\psi\) a column vector.
+
+\subsubsection{Derivation of the Dirac Equation}
 
 The relativistic relation between energy and momentum reads
 \[
@@ -7,7 +22,7 @@ The relativistic relation between energy and momentum reads
 \]
 thus, with the correspondence principle
 \[
-    E = cp^0 \to i \hbar \frac{\partial}{\partial t}, \quad \mathbf{p} \to -i \hbar \nabla \quad \implies p_\mu \to i \hbar \partial_\mu,
+    E = cp^0 \to i \hbar \frac{\partial}{\partial t}, \quad \mathbf{p} \to -i \hbar \nabla \quad \implies p_\mu \to - i \hbar \partial_\mu,
 \]
 which leads to the Klein-Gordon equation, second order in both time and space derivatives. As a consequence, the KG conserved current density is not positive definite, making difficult a probability density interpretation of the theory.
 
@@ -22,10 +37,10 @@ with \(\bs{\alpha} = (\alpha^1,\,\alpha^2,\,\alpha^3)\) and \(\beta\) hermitian 
         E^2 & = (c \mathbf{p} \cdot \bs{\alpha} + \beta m c^2)(c \mathbf{p} \cdot \bs{\alpha} + \beta m c^2)                                                                                                 \\
             & = c^2 (p^i \alpha^i)^2 + m^2 c^4 \beta^2 + mc^3 \left(p^i \alpha^i \beta + \beta p^j \alpha^j \right)                                                                                          \\
             & = m^2 c^4 \frac{1}{2} (\beta\beta + \beta\beta) + c^2 p^i p^j \alpha^i \alpha^j + m c^3 p^i \left(\alpha^i \beta + \beta \alpha^i \right)                                                      \\
-            & = m^2 c^4 \frac{1}{2} \{\beta,\,\beta\} + c^2 p_i p^j \frac{1}{2}\left(\alpha^i \alpha^j + \alpha^j \alpha^i + \alpha^i \alpha^j - \alpha^j \alpha^i \right) + m c^3 p^i \{\alpha^i,\,\beta\},
+            & = m^2 c^4 \frac{1}{2} \{\beta,\,\beta\} + c^2 p^i p^j \frac{1}{2}\left(\alpha^i \alpha^j + \alpha^j \alpha^i + \alpha^i \alpha^j - \alpha^j \alpha^i \right) + m c^3 p^i \{\alpha^i,\,\beta\},
     \end{aligned}
 \]
-where we have recognized the anticommutator \(\{\,,\,\}\) and decomposed the product of \(\alpha\) matrices into symmetric and antisymmetric parts. Since \(p^i p^j \to \hbar^2 \partial^i \partial^j\) is symmetric in the indices \(i\) and \(j\), the antisymmetric part of the product of \(\alpha\) matrices vanishes. Thus, we are able to recognize another commutator, before imposing the realativistic relation:
+where we have recognized the anticommutator \(\{\,,\,\}\) and decomposed the product of \(\alpha\) matrices into symmetric and antisymmetric parts. Since \(p^i p^j \to \hbar^2 \partial^i \partial^j\) is symmetric in the indices \(i\) and \(j\), the antisymmetric part of the product of \(\alpha\) matrices vanishes. Thus, we are able to recognize the last anticommutator, before imposing the realativistic relation:
 \[
     E^2 = m^2 c^4 \frac{1}{2}\{\beta,\,\beta\} + c^2 p^i p^j \frac{1}{2} \{\alpha^i,\,\alpha^j\} + m c^3 p^i \{\alpha^i,\,\beta\} = m^2 c^4 + c^2 p^2,
 \]
@@ -38,7 +53,7 @@ hence the relations that the matrices must satisfy:
     \end{aligned}
     \label{eq:clifford_relations}
 \end{equation}
-These relations define the \textbf{Clifford Algebra} and cannot be satisfied by numbers, as the first relation implies that \(\alpha^i\) cannot commute among themselves. The smallest matrices that can satisfy these relations (minimal solution) are \(4 \times 4\) \textbf{traceless} matrices, which can be constructed in terms of the Pauli matrices \(\sigma^i\):
+These relations define the \textbf{Clifford Algebra} and cannot be satisfied by numbers, as the first relation implies that \(\alpha^i\) cannot commute among themselves. The smallest matrices that can satisfy these relations (minimal solution) are \(4 \times 4\) \textbf{traceless} matrices, which can be constructed in terms of the Pauli matrices \(\sigma^i\) (in equation \eqref{eq:Pauli_matrices}) as:
 \begin{equation}
     \alpha^i = \begin{pmatrix}
         0        & \sigma^i \\
@@ -75,28 +90,35 @@ With the correspondence principle, we can now quantize the ansatz for the energy
     i \hbar \frac{\partial}{\partial t} \psi(\mathbf{x},\,t) = \left(-i \hbar c \bs{\alpha} \cdot \nabla + \beta m c^2 \right) \psi(\mathbf{x},\,t),
     \label{eq:dirac_equation_hamiltonian}
 \end{equation}
-where the operator acting on the right-hand side is the Dirac Hamiltonian, acting on the four-component spinor \(\psi(\mathbf{x},\,t)\); since \(\bs{\alpha}\) and \(\beta\) are hermitian matrices, the Hamiltonian is hermitian as well and the time evolution is unitary. The Dirac equation can be written in covariant form\TODO{Finish computation}
+where the operator acting on the right-hand side is the Dirac Hamiltonian, acting on the four-component spinor \(\psi(\mathbf{x},\,t)\); since \(\bs{\alpha}\) and \(\beta\) are hermitian matrices, the Hamiltonian is hermitian as well and the time evolution is unitary. The Dirac equation can be written in \textbf{covariant form}
 \[
     \begin{aligned}
-        \frac{-\beta}{\hbar c} \left(i \hbar \frac{\partial}{\partial t} - \beta m c^2 \right) \psi  = \frac{\beta}{\hbar c} \left(-i \hbar c \bs{\alpha} \cdot \nabla + \beta m c^2 \right) \psi \\
-        =  \dots,
+        \frac{-\beta}{\hbar c} \left(i \hbar \frac{\partial}{\partial t} \right) \psi  = \frac{-\beta}{\hbar c} \left(-i \hbar c \bs{\alpha} \cdot \nabla + \beta m c^2 \right) \psi, \\
+        -i \frac{\beta}{c} \partial_t \psi = \left(i \beta \bs{\alpha} \cdot \nabla - \frac{mc}{\hbar}\right) \psi,                                                                   \\
+        \left( -i \beta \partial_0 -i \beta \bs{\alpha} \partial_i + \frac{mc}{\hbar} \right) \psi = 0,
     \end{aligned}
 \]
 we can identify components of a scalar product between four-vectors if we define the gamma matrices as
 \begin{equation}
-    \gamma^0 = -i\beta, \quad \gamma^i = -i \beta \alpha^i,
-    \label{eq:gamma_matrices}
+    \gamma^0 = -i\beta = -i \begin{pmatrix}
+        \mathbb{I} & 0           \\
+        0          & -\mathbb{I}
+    \end{pmatrix}, \quad \gamma^i = -i \beta \alpha^i = \begin{pmatrix}
+        0          & -i \sigma^i \\
+        i \sigma^i & 0
+    \end{pmatrix}
+    \label{eq:gamma_matrices_dirac_rep}
 \end{equation}
 so that the Dirac equation takes the form
 \begin{equation}
-    (i \hbar \gamma^{\mu} \partial_{\mu} + \mu^2) \psi(x) = 0,
+    (\gamma^{\mu} \partial_{\mu} + \mu^2) \psi(x) = 0,
     \label{eq:dirac_equation_covariant}
 \end{equation}
-with \(\mu = \frac{m c}{\hbar}\) the inverse Compton wavelength of the particle. The gamma matrices satisfy the clifford algebra relations
+with \(\mu = \frac{m c}{\hbar}\) the \textit{inverse Compton wavelength} of the particle. The gamma matrices satisfy the clifford algebra relations
 \[
     \left\{ \gamma^\mu, \gamma^\nu \right\} = 2 \eta^{\mu \nu},
 \]
-where \(\eta^{\mu \nu} = \text{diag}(-1,\,1,\,1,\,1)\)\TODO{Check if notation is mostly plus or minus.} is the Minkowski metric tensor. In the Dirac representation, the gamma matrices read
+where \(\eta^{\mu \nu} = \text{diag}(-1,\,1,\,1,\,1)\) is the Minkowski metric tensor. In the Dirac representation, the gamma matrices read\footnote{Note that the minus in the first element of the secnd raw of \(\gamma^i\) does not appear in \(\bs{\alpha}\): it comes from the product among \(\bs{\alpha}\) and \(\beta\).}
 \[
     \gamma^0 = -i \begin{pmatrix}
         \mathbb{I} & 0           \\
@@ -108,11 +130,11 @@ where \(\eta^{\mu \nu} = \text{diag}(-1,\,1,\,1,\,1)\)\TODO{Check if notation is
 \]
 and we can adopt natural units and \textbf{Feynman slash notation}
 \[
-    \slashed{A} = \gamma^{\mu} A_{\mu} = - \gamma_{\mu} A^{\mu},
+    \slashed{A} = \gamma^{\mu} A_{\mu} = \gamma_{\mu} A^{\mu},
 \]
-so that \(\slashed{\partial} = \gamma^{\mu} \partial_{\mu}\) to write the Dirac equation in a more compact form:
+so that \(\slashed{\partial} = \gamma^{\mu} \partial_{\mu}\) to write the Dirac equation in a more compact form in natural units (\(\hbar = c = 1 \implies \mu=m\)):
 \[
-    \left(i \gamma^{\mu} \partial_{\mu} + \mu \right) \psi(x) = 0 \quad \Longleftrightarrow \quad (i \slashed{\partial} + m) \psi(x) = 0.
+    \left(\gamma^{\mu} \partial_{\mu} + \mu \right) \psi(x) = 0 \quad \Longleftrightarrow \quad (\slashed{\partial} + m) \psi(x) = 0.
 \]
 
 \subsection{Continuity Equation}
@@ -146,7 +168,7 @@ The free equation admits plane wave solutions which contain the phase \(e^{ip_\m
         \omega_4(p)
     \end{pmatrix},
 \]
-with \(p^{\mu}\) arbitrary four-momentum, one finds conditions on the spinor \(\omega(p)\) and on the four-momentum \(p^{\mu}\) such that the Dirac equation is satisfied. Plugging the ansatz in the Dirac equation, one finds
+with \(p^{\mu}\) arbitrary four-momentum, one finds conditions on the spinor \(\omega(p)\) and on the four-momentum \(p^{\mu}\) such that the Dirac equation is satisfied. Plugging the ansatz in the Dirac equation
 \[
     \left(\slashed{\partial} + m\right)\psi_p (x) = \left(\gamma^{\mu} p_{\mu} + m \right) \omega(p) e^{i p_\mu x^{\mu}} = 0,
 \]
@@ -158,11 +180,11 @@ which can be multiplied by \(\left(-i \gamma^{\nu} p_{\nu} + m \right)\) on the 
 \[
     \left(\slashed{p}^2 + m^2 \right) \omega(p) e^{i p_\mu x^{\mu}} = \left(p_{\mu} p^{\mu} + m^2 \right) \omega(p) = 0,
 \]
-since it is easy to show that \(\slashed{p}^2 = p^2\):
+since it is easy to show that \(\slashed{p}^2 = p^2\):\footnote{Here \(p^2\) is not the square of the spatial momentum norm, but the Minkowski norm \(p_{\mu} p^{\mu}\).}
 \[
     \begin{aligned}
         \slashed{p}^2 & = \gamma^{\mu} \gamma^{\nu} p_{\mu} p_{\nu} = \frac{1}{2} \left(\gamma^{\mu} \gamma^{\nu} + \gamma^{\nu} \gamma^{\mu} + \gamma^{\mu} \gamma^{\nu} - \gamma^{\nu} \gamma^{\mu}\right) p_{\mu} p_{\nu} \\
-                      & = \frac{1}{2} \{\gamma^{\mu},\,\gamma^{\nu}\} p_{\mu} p_{\nu} = \eta^{\mu \nu} p_{\mu} p_{\nu} = p^2,
+                      & = \frac{1}{2} \{\gamma^{\mu},\,\gamma^{\nu}\} p_{\mu} p_{\nu} = \eta^{\mu \nu} p_{\mu} p_{\nu} = p^2 = p_{\mu} p^{\mu},
     \end{aligned}
 \]
 since the antisymmetric part vanishes due to the symmetry of \(p_{\mu} p_{\nu}\). Thus, we find the mass-shell condition
@@ -179,19 +201,19 @@ which is satisfied by both positive and negative energy solutions \(E = \pm \sqr
 In order to understand the structure of the spinor \(\omega(p)\), let us first consider the case of a particle at rest, i.e., \(p^{\mu} = (E,\, 0,\, 0,\, 0)\). In this case, the Dirac equation \eqref{eq:dirac_equation_covariant} with the plane wave ansatz reduces to
 \[
     \begin{aligned}
-        \left(\gamma^0 p_0 + m \right) \omega(p) e^{-i p_0 x^0} = 0, \\
-        \left(-i (-i \beta) E + m\right) \omega(p) e^{-i Et} = 0,    \\
+        \left(i\gamma^0 p_0 + m \right) \omega(p) e^{-i p_0 x^0} = 0, \\
+        \left(-i (-i \beta) E + m\right) \omega(p) e^{-i Et} = 0,     \\
         \beta E \omega(p) = m \omega(p),
     \end{aligned}
 \]
 and by multiplting by beta (\(\beta^2 = \mathbb{I}\)) we get
 \[
-    E \omega(p) = \beta m \omega(P) \implies E \omega(p) = \begin{pmatrix}
+    E \omega(p) = \beta m \omega(p) \implies E \omega(p) = \begin{pmatrix}
         m & 0 & 0  & 0  \\
         0 & m & 0  & 0  \\
         0 & 0 & -m & 0  \\
         0 & 0 & 0  & -m
-    \end{pmatrix}
+    \end{pmatrix} \omega(p),
 \]
 which are the four solutions of the Dirac equation for a particle at rest. The first two solutions correspond to positive energy, while the last two correspond to negative energy. The spinor \(\omega(p)\) is thus a four-component object, with two independent components for each value of the energy:
 \[
@@ -220,7 +242,7 @@ which are the four solutions of the Dirac equation for a particle at rest. The f
                                                                                      \end{pmatrix} e^{imt}.
     \end{aligned}
 \]
-The general case with arbitrary momentum can be derived with similar calculations. Alternatively, they can be obtained from a Lorentz transformation applied to the solution above. To use the last method, it is necessary to study explicitly the covariance of the Dirac equation, which we postpone for a while. At this stage, Dirac seemed to have solved the issue regarding the probabilistic interpretation of relativistic quantum mechanics, but was confronted with the existence of apparently unphysical negative energy solutions. Nevertheless, he continued to explore the consequences of his equation, starting by looking at its non-relativistic limit.
+The general case with arbitrary momentum can be derived with similar calculations. Alternatively, they can be obtained from a Lorentz transformation applied to the solution above. To use the last method, it is necessary to study explicitly the covariance of the Dirac equation, which we postponed for a while. At this stage, Dirac seemed to have solved the issue regarding the probabilistic interpretation of relativistic quantum mechanics, but was confronted with the existence of apparently unphysical negative energy solutions. Nevertheless, he continued to explore the consequences of his equation, starting by looking at its non-relativistic limit.
 
 \subsection{Pauli Equation: Non-Relativistic Limit}
 
@@ -236,7 +258,7 @@ where \(\mathbf{p} = -i \hbar \nabla\). We separate the rest energy from the tot
     \end{pmatrix},
     \label{eq:dirac_spinor_split}
 \end{equation}
-factoring out an expected time dependence due to the rest energy \(E = mc^2\), and splitting the Dirac spinor into two two-component spinors \(\varphi\) and \(\chi\). Inserting this expression into the Dirac equation (and remembering the expressions for \(\alpha^i\) and \(\beta\) in \eqref{eq:dirac_representation}), we obtain two coupled equations for \(\varphi\) and \(\chi\):
+factoring out an expected time dependence due to the rest energy \(E = mc^2\), and splitting the Dirac spinor into two two-component spinors \(\varphi\) and \(\chi\) (choice enforced by the positive / negative energy solutions). Inserting this expression into the Dirac equation (and remembering the expressions for \(\alpha^i\) and \(\beta\) in \eqref{eq:dirac_representation}), we can manipulate it in order to obtain two coupled equations for \(\varphi\) and \(\chi\):
 \[
     i \hbar \frac{\partial}{\partial t} e^{-\tfrac{i}{\hbar} m c^2 t} \begin{pmatrix}
         \varphi(\mathbf{x},\,t) \\
@@ -258,14 +280,17 @@ whch computing terms individually gives
                                                                                                                                                                                 \end{pmatrix} + \begin{pmatrix}
                                                                                                                                                                                                     \partial_t \varphi(\mathbf{x},\,t) \\
                                                                                                                                                                                                     \partial_t \chi(\mathbf{x},\,t)
-                                                                                                                                                                                                \end{pmatrix}\right],  \\
+                                                                                                                                                                                                \end{pmatrix}\right], \\
         -i \hbar c \bs{\alpha} \cdot \nabla e^{-\tfrac{i}{\hbar} m c^2 t} \begin{pmatrix}
                                                                               \varphi(\mathbf{x},\,t) \\
                                                                               \chi(\mathbf{x},\,t)
                                                                           \end{pmatrix} = -i \hbar c\, e^{-\tfrac{i}{\hbar} m c^2 t} \begin{pmatrix}
-                                                                                                                                         0                                             & \bs{\sigma}\cdot\nabla\chi(\mathbf{x},\,t) \\
-                                                                                                                                         \bs{\sigma}\cdot\nabla\varphi(\mathbf{x},\,t) & 0
-                                                                                                                                     \end{pmatrix}, \\
+                                                                                                                                         0                      & \bs{\sigma}\cdot\nabla \\
+                                                                                                                                         \bs{\sigma}\cdot\nabla & 0
+                                                                                                                                     \end{pmatrix}\begin{pmatrix}
+                                                                                                                                                      \varphi(\mathbf{x},\,t) \\
+                                                                                                                                                      \chi(\mathbf{x},\,t)
+                                                                                                                                                  \end{pmatrix},                                           \\
         mc^2 \beta e^{-\tfrac{i}{\hbar} m c^2 t} \begin{pmatrix}
                                                      \varphi(\mathbf{x},\,t) \\
                                                      \chi(\mathbf{x},\,t)
@@ -275,28 +300,28 @@ whch computing terms individually gives
                                                                                                     \end{pmatrix}.
     \end{aligned}
 \]
-Finally we get
+Finally, simplifying the identical exponential factors, we get to
 \[
-    \left[-\frac{i}{\hbar} m c^2 \begin{pmatrix}
+    \left[ m c^2 \begin{pmatrix}
             \varphi(\mathbf{x},\,t) \\
             \chi(\mathbf{x},\,t)
-        \end{pmatrix} + \begin{pmatrix}
+        \end{pmatrix} + i\hbar \begin{pmatrix}
             \partial_t \varphi(\mathbf{x},\,t) \\
             \partial_t \chi(\mathbf{x},\,t)
-        \end{pmatrix}\right] = - \begin{pmatrix}
+        \end{pmatrix}\right] = - i \hbar \begin{pmatrix}
         0                                             & \bs{\sigma}\cdot\nabla\chi(\mathbf{x},\,t) \\
         \bs{\sigma}\cdot\nabla\varphi(\mathbf{x},\,t) & 0
-    \end{pmatrix} -\frac{i}{\hbar} mc^2 \begin{pmatrix}
+    \end{pmatrix} + mc^2 \begin{pmatrix}
         \varphi(\mathbf{x},\,t) \\
         -\chi(\mathbf{x},\,t)
     \end{pmatrix}, \\
 \]
 which can be separated into the two equations
 \[
-    \begin{aligned}
-        i \hbar \frac{\partial}{\partial t} \varphi(\mathbf{x},\,t) & = c \bs{\sigma} \cdot \mathbf{p} \chi(\mathbf{x},\,t),                                   \\
-        i \hbar \frac{\partial}{\partial t} \chi(\mathbf{x},\,t)    & = c \bs{\sigma} \cdot \mathbf{p} \varphi(\mathbf{x},\,t) - 2 m c^2 \chi(\mathbf{x},\,t).
-    \end{aligned}
+    \begin{dcases}
+        i \hbar \frac{\partial}{\partial t} \varphi(\mathbf{x},\,t) = c \bs{\sigma} \cdot \mathbf{p} \chi(\mathbf{x},\,t), \\
+        i \hbar \frac{\partial}{\partial t} \chi(\mathbf{x},\,t) = c \bs{\sigma} \cdot \mathbf{p} \varphi(\mathbf{x},\,t) - 2 m c^2 \chi(\mathbf{x},\,t).
+    \end{dcases}
 \]
 If we now take the non relativistic limit, where the kinetic energy is much smaller than the rest energy, we can neglect the time derivative in the second equation, obtaining
 \[
@@ -310,7 +335,7 @@ Using the identity
 \[
     (\bs{\sigma} \cdot \mathbf{p})^2 = \mathbf{p}^2 + i \epsilon^{ijk} \sigma^k p^i p^j = \mathbf{p}^2,
 \]
-from the algebra of the Pauli matrices \(\sigma^i \sigma^j = \delta^{ij} + i \epsilon^{ijk} \sigma^k\) and the null product of the symmetric momenta operators and the antisymmetric Levi-Civita symbol, we finally obtain the \textbf{Pauli equation} for a free particle:
+from the algebra of the Pauli matrices \(\sigma^i \sigma^j = \delta^{ij} + i \epsilon^{ijk} \sigma^k\) and the null product of the symmetric momenta operators and the antisymmetric Levi-Civita symbol, we finally obtain the \textbf{free Pauli equation} (for a free particle):
 \begin{equation}
     i \hbar \frac{\partial}{\partial t} \varphi(\mathbf{x},\,t) = \frac{\mathbf{p}^2}{2 m} \varphi(\mathbf{x},\,t).
     \label{eq:pauli_equation_free_particle}
@@ -357,12 +382,12 @@ If we repeat the previous analysis for the non-relativistic limit, splitting the
 \]
 This leads to the coupled equations
 \[
-    \begin{aligned}
-        i \hbar \frac{\partial}{\partial t} \varphi(\mathbf{x},\,t) & = c \bs{\sigma} \cdot \bs{\pi} \chi(\mathbf{x},\,t) + e \phi \varphi(\mathbf{x},\,t),                                \\
-        i \hbar \frac{\partial}{\partial t} \chi(\mathbf{x},\,t)    & = c \bs{\sigma} \cdot \bs{\pi} \varphi(\mathbf{x},\,t) - 2 m c^2 \chi(\mathbf{x},\,t) + e \phi \chi(\mathbf{x},\,t).
-    \end{aligned}
+    \begin{dcases}
+        i \hbar \frac{\partial}{\partial t} \varphi(\mathbf{x},\,t) = c \bs{\sigma} \cdot \bs{\pi} \chi(\mathbf{x},\,t) + e \phi \varphi(\mathbf{x},\,t), \\
+        i \hbar \frac{\partial}{\partial t} \chi(\mathbf{x},\,t) = c \bs{\sigma} \cdot \bs{\pi} \varphi(\mathbf{x},\,t) - 2 m c^2 \chi(\mathbf{x},\,t) + e \phi \chi(\mathbf{x},\,t).
+    \end{dcases}
 \]
-In the non-relativistic limit, we can neglect again the time derivative in the second equation, obtaining
+In the non-relativistic limit, we can neglect again the time derivative in the second equation, along with the term of EM coupling (small with respect to \(c^2\)), obtaining again
 \[
     \chi(\mathbf{x},\,t) \simeq \frac{\bs{\sigma} \cdot \bs{\pi}}{2 m c} \varphi(\mathbf{x},\,t),
 \]
@@ -373,10 +398,10 @@ which can be inserted into the first equation to obtain
 Using the algebra of the Pauli matrices, we can expand \((\bs{\sigma} \cdot \bs{\pi})^2\) as
 \[
     \begin{aligned}
-        (\bs{\sigma} \cdot \bs{\pi})^2 & = \sigma^i \sigma^j \pi_i \pi_j = \left(\delta^{ij} + i \epsilon^{ijk} \sigma_k\right) \pi_i \pi_j                       \\
-                                       & = \pi^2 + i \epsilon^{ijk} \sigma_k \pi_i \pi_j = \pi^2 + \frac{i}{2} \epsilon^{ijk} \sigma_k \left[\pi_i, \pi_j\right],
+        (\bs{\sigma} \cdot \bs{\pi})^2 & = \sigma^i \sigma^j \pi_i \pi_j = \left(\delta^{ij} + i \epsilon^{ijk} \sigma^k\right) \pi_i \pi_j                       \\
+                                       & = \pi^2 + i \epsilon^{ijk} \sigma_k \pi_i \pi_j = \pi^2 + \frac{i}{2} \epsilon^{ijk} \sigma^k \left[\pi_i, \pi_j\right],
     \end{aligned}
-\]\QUESTION{Is the index of sigma k lower? i think so but professor used upper index.}
+\]
 since only the antisymmetric part of \(\pi_i \pi_j\) contributes to the last term. The commutator of the kinetic momenta can be computed as
 \[
     \left[\pi_i, \pi_j\right] = \left[p_i - \frac{e}{c} A_i, p_j - \frac{e}{c} A_j\right] = -\frac{e}{c} \left([p_i, A_j] - [p_j, A_i]\right),
@@ -391,9 +416,9 @@ so that the commutator \(\left[p_i,\,A_j\right] = -i \hbar \partial_i A_j\) and 
 \]
 If we now insert this commutator into the previous expression for \((\bs{\sigma} \cdot \bs{\pi})^2\), we obtain
 \[
-    (\bs{\sigma}\cdot \bs{\pi})^2 = \bs{\pi}^2 - \frac{e \hbar}{2 c} \sigma_k \epsilon^{ijk} (\partial_i A_j - \partial_j A_i),
+    (\bs{\sigma}\cdot \bs{\pi})^2 = \bs{\pi}^2 - \frac{e \hbar}{2 c} \sigma^k \epsilon^{ijk} (\partial_i A_j - \partial_j A_i),
 \]
-where we can recgnize the electromagnetic strength tensor components \(F_{ij} = \partial_i A_j - \partial_j A_i\), which can be related to the magnetic field as \(B^k = \frac{1}{2} \epsilon^{ijk} F_{ij}\), indeed
+where we can recognize the electromagnetic strength tensor components \(F_{ij} = \partial_i A_j - \partial_j A_i\), which can be related to the magnetic field as \(B^k = \frac{1}{2} \epsilon^{ijk} F_{ij}\), indeed
 \[
     \epsilon^{ijk} F_{ij} = \epsilon^{ijk} (\partial_i A_j - \partial_j A_i) = B^k - \epsilon^{jik} \partial_j A_i = = B^k + \epsilon^{ijk} \partial_i A_j = 2 B^k.
 \]
@@ -451,28 +476,31 @@ The \(\Sigma^i\) matrices can be expressed in terms of the Pauli matrices as
         \sigma^i & 0
     \end{pmatrix}.
 \]
-Indeed we can compute \(\Sigma^1\) as
-\[
-    \Sigma^1 = -\frac{i}{2} \left(\epsilon^{123} \alpha^2 \alpha^3 + \epsilon^{132} \alpha^3 \alpha^2\right) = -\frac{i}{2} \left(\alpha^2 \alpha^3 - \alpha^3 \alpha^2\right),
-\]
-since \(\epsilon^{123} = 1\) and \(\epsilon^{132} = -1\). Now we can use the fact that the \(\alpha^i\) matrices anticommute, \(\{\alpha^i,\, \alpha^j\} = 0\), to write
-\[
-    \Sigma^1 = -\frac{i}{2} \left(2 \alpha^2 \alpha^3\right) = -i \alpha^2 \alpha^3 = \begin{pmatrix}
-        \sigma^1 & 0        \\
-        0        & \sigma^1
-    \end{pmatrix},
-\]
-since from the Pauli algebra \(\sigma^2 \sigma^3 = i \sigma^1\).
+\begin{example}
+    We can indeed compute \(\Sigma^1\) as
+    \[
+        \Sigma^1 = -\frac{i}{2} \left(\epsilon^{123} \alpha^2 \alpha^3 + \epsilon^{132} \alpha^3 \alpha^2\right) = -\frac{i}{2} \left(\alpha^2 \alpha^3 - \alpha^3 \alpha^2\right),
+    \]
+    since \(\epsilon^{123} = 1\) and \(\epsilon^{132} = -1\). Now we can use the fact that the \(\alpha^i\) matrices anticommute, \(\{\alpha^i,\, \alpha^j\} = 0\), to write
+    \[
+        \Sigma^1 = -\frac{i}{2} \left(2 \alpha^2 \alpha^3\right) = -i \alpha^2 \alpha^3 = \begin{pmatrix}
+            \sigma^1 & 0        \\
+            0        & \sigma^1
+        \end{pmatrix},
+    \]
+    since from the Pauli algebra \(\sigma^2 \sigma^3 = i \sigma^1\).
+
+\end{example}
 
 The orbital angular momentum operator is defined as usual as the operatoral version of the classical expression
 \[
-    \mathbf{L} = \mathbf{r}\times \mathbf{p} \longrightarrow L^i = \epsilon^{ijk} x^J p^k,
+    \mathbf{L} = \mathbf{r}\times \mathbf{p} \longrightarrow L^i = \epsilon^{ijk} x^j p^k,
 \]
 while the total angular momentum operator is given by
 \[
     \mathbf{J} = \mathbf{L} + \mathbf{S} \quad \Longrightarrow \quad J^i = L^i + S^i,
 \]
-which is conserved under rotational symmetry. It is possible to verify that the total angular momentum operator commutes with the Dirac Hamiltonian (appearing in r.h.s. of equation \eqref{eq:dirac_equation_hamiltonian}) in the free partile case:
+which is conserved under rotational symmetry. It is possible to verify that the total angular momentum operator commutes with the Dirac Hamiltonian (appearing in r.h.s. of equation \eqref{eq:dirac_equation_hamiltonian}) in the free particle case:
 \[
     \left[H_D,\, J^i\right] = 0, \quad \text{where} \quad H_D = p^i \alpha^i + \beta m.
 \]
@@ -526,25 +554,30 @@ which are \(4\times 4\) traceless matrices\footnote{We can reconstruct \(\alpha^
 with
 \[
     \begin{aligned}
-        \left(\gamma^0\right)^{\dagger} = - \gamma^0 \textit{ antihermitian}, \\
-        \left(\gamma^i\right)^{\dagger} = + \gamma^i \textit{ hermitian}.
+        \left(\gamma^0\right)^{\dagger} & = - \gamma^0 \textit{ antihermitian}, \\
+        \left(\gamma^i\right)^{\dagger} & = + \gamma^i \textit{ hermitian}.
     \end{aligned}
 \]
 We can compact the last two properties as
 \[
     \left(\gamma^{\mu}\right)^{\dagger} = \gamma^0 \gamma^{\mu} \gamma^0 = -\beta \gamma^{\mu} \beta,
 \]
-which can be verified separately for \(\mu = 0\) and \(\mu = i\).
+which can be verified separately for \(\mu = 0\) and \(\mu = i\). One can even prove that they are traceless, \(\mathrm{Tr}(\gamma^{\mu}) = 0\).
 
-We can now prove that they are traceless, \(\mathrm{Tr}(\gamma^{\mu}) = 0\). We will prove it only for \(\gamma^1\), the other cases being similar. Using the anticommutation relations we have \((\gamma^{\mu})^2 = \mathbb{I}\) for \(\mu = 0,\,1,\,2,\,3\). Thus,
-\[
-    \mathrm{Tr}(\gamma^1) = \mathrm{Tr}(\gamma^1 \gamma^2 \gamma^2) = \mathrm{Tr}(\gamma^2 \gamma^1 \gamma^2),
-\]
-where in the last step we used the cyclicity of the trace. If we instead use the anticommutation relation \(\{\gamma^1,\, \gamma^2\} = 0\), we have
-\[
-    \Tr(\gamma^2 \gamma^1 \gamma^2) = - \Tr(\gamma^1 \gamma^2 \gamma^2) = - \Tr(\gamma^1),
-\]
-so that \(\Tr(\gamma^1) = - \Tr(\gamma^1) \implies \Tr(\gamma^1) = 0\).
+\begin{example}
+    We will now prove that \(\gamma^1\) is traceless, the other cases are very similar. Using the anticommutation relations we have \((\gamma^{\mu})^2 = \mathbb{I}\) for \(\mu = 0,\,1,\,2,\,3\). Thus,
+    \[
+        \mathrm{Tr}(\gamma^1) = \mathrm{Tr}(\gamma^1 \gamma^2 \gamma^2) = \mathrm{Tr}(\gamma^2 \gamma^1 \gamma^2),
+    \]
+    where in the last step we used the cyclicity of the trace. If we instead use the anticommutation relation \(\{\gamma^1,\, \gamma^2\} = 0\), we have
+    \[
+        \Tr(\gamma^2 \gamma^1 \gamma^2) = - \Tr(\gamma^1 \gamma^2 \gamma^2) = - \Tr(\gamma^1),
+    \]
+    so that, comparing the results we obtain the tracelessness of gamm matrices:
+    \[
+        \Tr(\gamma^1) = - \Tr(\gamma^1) \implies \Tr(\gamma^1) = 0.
+    \]
+\end{example}
 
 \paragraph{Chirality matrix.}
 We have to introduce one last matrix, the \textbf{chirality matrix} or \textbf{gamma five}:
@@ -617,9 +650,9 @@ where the totally antisymmetric products of gamma matrices are defined as above,
 
 \subsection{Covariance Formulation}
 
-The Dirac equation, derived from relativistic considerations, is consistent with relativistic invariance. To prove it explicitly, it is necessary to show that the equation is invariant in form under a change of inertial frame of reference as generated by a proper and orthochronous Lorentz transformation.
+The Dirac equation, derived from relativistic considerations, is consistent with relativistic invariance. To prove this, it is necessary to show that the equation is invariant in form under a change of inertial frame of reference, generated by a proper and orthochronous Lorentz transformation.
 
-Recall that by Lorentz invariance, one generically refers to the transformations that are continuously connected to the identity, leaving out the discrete transformations of parity \(P\) and time reversal \(T\), which are treated separately. Thus, we need to construct the precise transformation of the Dirac spinor \(\psi(x)\) under a Lorentz transformation \(\Lambda\). One may conjecture it to be linear and of the form
+Recall that by Lorentz invariance, one generically refers to the transformations that are continuously connected to the identity, leaving out the discrete transformations of parity \(P\) and time reversal \(T\), which are treated separately. Thus, we need to construct the precise transformation of the Dirac spinor \(\psi(x)\) under a Lorentz transformation \(\Lambda\), which may be conjectured to be linear:
 \[
     \psi(x) \xrightarrow{\Lambda} \psi'(x') = S(\Lambda) \psi(x),
 \]
@@ -634,7 +667,7 @@ so that a Lorentz transformation acts as
 \]
 Relating the second reference frame to the first one through the transformation of coordinates, we have
 \[
-    \left(\gamma^{\mu} \partial_\mu^{\prime} + m \right) \psi^{\prime} (x^{\prime}) = 0 \longrightarrow (\Lambda) \left(\gamma^{\mu} \Lambda_{\mu}^{\ \nu} \partial_\nu + m \right) S(\Lambda) \psi(x) = 0,
+    \left(\gamma^{\mu} \partial_\mu^{\prime} + m \right) \psi^{\prime} (x^{\prime}) = 0 \longrightarrow \left(\gamma^{\mu} \Lambda_{\mu}^{\ \nu} \partial_\nu + m \right) S(\Lambda) \psi(x) = 0,
 \]
 which can be rewritten after multiplying by \(S^{-1}(\Lambda)\) from the left as
 \[
@@ -647,7 +680,7 @@ Comparing with the original Dirac equation, we see that they are equivalent if \
 or equivalently, after multiplying with \(\Lambda^{\rho}_{\ \nu}\), observing that \(\Lambda^{\rho}_{\ \nu} \Lambda_{\mu}^{\ \nu} = \delta^\rho_{\ \mu}\), and renaming indices,\footnote{Note that \(\Lambda_\mu^{\ \nu}\) acts on vectors with lower indices: it is obtained by raising/lowering indices on \(\Lambda^{\mu}_{\ \nu}\) so that it corresponds to the matrix \(\eta \Lambda \eta^{-1} = (\Lambda^{-1})^T\). The last relation follows from the defining property \(\Lambda^T \eta \Lambda = \eta\). Then, one may check that \(\Lambda^{\rho}_{\ \nu} \Lambda_{\mu}^{\ \nu} = \left[\Lambda (\eta \Lambda \eta^{-1})^T\right]^{\rho}_{\ \mu} = \left[\Lambda \Lambda^{-1}\right]^{\rho}_{\ \mu} = \delta^{\rho}_{\ \mu}\).}
 \begin{equation}
     S^{-1}(\Lambda) \gamma^{\mu} S(\Lambda) = \Lambda^{\mu}_{\ \nu} \gamma^{\nu}.
-    \label{eq:lorentz_transformation_spinor}
+    \label{eq:lorentz_transformation_gamma}
 \end{equation}
 This equation defines the spinorial representation of the Lorentz group. We have to show that such a representation exists. Thus we have to consider infinitesimal Lorentz transformations of the form
 \[
@@ -657,7 +690,7 @@ where the antisymmetry of \(\omega_{\mu \nu}\) follows from the defining propert
 \[
     S(\Lambda) = \mathbb{I} + \frac{i}{2} \omega_{\mu \nu} \Sigma^{\mu \nu}, \quad \text{with } \Sigma^{\mu \nu} = \frac{-i}{4} [\gamma^{\mu},\, \gamma^{\nu}] = -\Sigma^{\nu \mu},
 \]
-where \(\Sigma^{\mu \nu}\) are the six independent generators of the spinorial representation of the Lorentz group. Now we can plug these infinitesimal transformations into equation \eqref{eq:lorentz_transformation_spinor} and verify that it holds to first order in \(\omega\):
+where \(\Sigma^{\mu \nu}\) are the six independent generators of the spinorial representation of the Lorentz group. Now we can plug these infinitesimal transformations into equation \eqref{eq:lorentz_transformation_gamma} and verify that it holds to first order in \(\omega\):
 \[
     \begin{aligned}
         S^{-1}(\Lambda) \gamma^{\rho} S(\Lambda)                                                                                                                                & = \Lambda^{\rho}_{\ \sigma} \gamma^{\sigma},                                                                     \\
@@ -666,12 +699,12 @@ where \(\Sigma^{\mu \nu}\) are the six independent generators of the spinorial r
         \frac{i}{2} \omega _{\alpha \beta}[\gamma^{\rho},\, \Sigma^{\alpha \beta}]                                                                                              & = \omega_{\alpha \beta} \frac{\eta^{\alpha \rho} \gamma^{\beta} - \eta^{\beta \rho} \gamma^{\alpha}}{2},
     \end{aligned}
 \]
-where in the second step we expanded to first order in \(\omega\), in the second step we renamed (\(\mu \leftrightarrow \alpha\) and \(\sigma \leftrightarrow \beta\)) and rearranged indices and in the third step we used the antisymmetry of \(\omega_{\mu \nu}\) to rewrite the r.h.s. Finally, we have found that the relation \eqref{eq:lorentz_transformation_spinor} holds if the following commutation relation is satisfied:
+where in the second step we expanded to first order in \(\omega\), in the second step we renamed (\(\mu \leftrightarrow \alpha\) and \(\sigma \leftrightarrow \beta\)) and rearranged indices and in the third step we used the antisymmetry of \(\omega_{\mu \nu}\) to rewrite the r.h.s. Finally, we have found that the relation \eqref{eq:lorentz_transformation_gamma} holds if the following commutation relation is satisfied:
 \begin{equation}
     \left[ \Sigma^{\alpha \beta},\, \gamma^\rho \right] = i \left( \eta^{\alpha \rho} \gamma^{\beta} - \eta^{\beta \rho} \gamma^{\alpha} \right),
     \label{eq:commutation_Sigma_gamma}
 \end{equation}
-which can be verified using the definition of \(\Sigma^{\alpha \beta} = \frac{-i}{4} [\gamma^{\alpha},\, \gamma^{\beta}]\) in terms of gamma matrices and the Clifford algebra. Thus, we have shown that the spinorial representation of the Lorentz group exists.
+which can be verified using the definition of \(\Sigma^{\alpha \beta} = \frac{-i}{4} [\gamma^{\alpha},\, \gamma^{\beta}]\) in terms of gamma matrices and the Clifford algebra. Thus, we have shown that the spinorial representation of the Lorentz group is well defined and compatible with the transformation properties of the gamma matrices.
 
 To convince ourselves further, we may compute \eqref{eq:commutation_Sigma_gamma} explicitly for some values of the indices. For example, let us take \(\alpha = 1\), \(\beta = 2\), and \(\rho = 2\):
 \[
@@ -694,11 +727,11 @@ as expected; for the other combinations of indices, the verification is similar.
     \end{aligned}
 \]
 
-Now that we know that the spinorial representation of the Lorentz group exists, we can construct finite transformations by exponentiating the infinitesimal ones. Let us take the infinitesimal transformation of \(S(\Lambda)\)
+Now that we know that the spinorial representation of the Lorentz group exists, we can construct finite transformations by exponentiating the infinitesimal ones. Let us take the infinitesimal transformation of \(S(\Lambda)\):
 \[
     S(\Lambda) = \mathbb{I} + \frac{i}{2} \omega_{\mu \nu} \Sigma^{\mu \nu},
 \]
-Thus, the finite Lorentz transformation of a Dirac spinor is given by repeated application of the infinitesimal transformation, leading to the exponential form
+thus, the finite Lorentz transformation of a Dirac spinor is given by repeated application of the infinitesimal transformation, leading to the \textbf{exponential form}
 \begin{equation}
     S(\Lambda) = \exp{\frac{i}{2} \omega_{\mu \nu} \Sigma^{\mu \nu}} = \exp{\frac{1}{4} \omega_{\mu \nu} \gamma^{\mu} \gamma^{\nu}},
     \label{eq:finite_lorentz_transformation_spinor}
@@ -732,7 +765,7 @@ from antisymmetry of \(\omega_{\mu \nu}\).
     \]
     Thus the result obtained by exponentiating the matrix of Lie parameters is the rotation matrix (even and odd powers in the central diagonal block of \(\omega^{\mu}_\nu\)).
 
-    So we are looking at rotations around \(\hat{z}\). Let's find an expression for \(S(\Lambda)\): using the spinorial representation found in \eqref{eq:finite_lorentz_transformation_spinor} we have
+    So we are looking at rotations around \(\hat{z}\). Let's find an expression for \(S(\Lambda)\): using the \textbf{spinorial representation} found in \eqref{eq:finite_lorentz_transformation_spinor} we have
     \[
         \begin{aligned}
             S(\Lambda) & = \exp{\frac{i}{2} \omega_{\mu \nu} \Sigma^{\mu \nu}} = \exp{\frac{1}{4} \omega_{\mu \nu} \gamma^{\mu} \gamma^{\nu}} = \exp{\frac{1}{4}\omega_{12}\gamma^1 \gamma^2 + \frac{1}{4}\omega_{21}\gamma^2 \gamma^1} \\
@@ -740,27 +773,32 @@ from antisymmetry of \(\omega_{\mu \nu}\).
                                                                                                       \sigma^3 & 0        \\
                                                                                                       0        & \sigma^3
                                                                                                   \end{pmatrix}} = \begin{pmatrix}
-                                                                                                                   e^{i \frac{\varphi}{2}} & 0                        & 0                       & 0                       \\
-                                                                                                                   0                       & e^{i \frac{\varphi}{2} } & 0                       & 0                       \\
-                                                                                                                   0                       & 0                        & e^{i \frac{\varphi}{2}} & 0                       \\
-                                                                                                                   0                       & 0                        & 0                       & e^{i \frac{\varphi}{2}}
+                                                                                                                   e^{i \frac{\varphi}{2}} & 0                         & 0                       & 0                        \\
+                                                                                                                   0                       & e^{-i \frac{\varphi}{2} } & 0                       & 0                        \\
+                                                                                                                   0                       & 0                         & e^{i \frac{\varphi}{2}} & 0                        \\
+                                                                                                                   0                       & 0                         & 0                       & e^{-i \frac{\varphi}{2}}
                                                                                                                \end{pmatrix},
         \end{aligned}
     \]
-    where we used the Dirac representation of the gamma matrices and stopped the Taylor expansion of \(\exp{\begin{pmatrix}
+    where we used the Dirac representation of the gamma matrices
+    \[
+        \gamma^1 \gamma^2 = i \Sigma^3, \quad \text{with } \Sigma^3 = \begin{pmatrix}
             \sigma^3 & 0        \\
             0        & \sigma^3
-        \end{pmatrix}}\) at the first order since \((\sigma^3)^2 = \mathbb{I}\).
+        \end{pmatrix},
+    \]
+    and the fact that the exponential of a diagonal matrix is the diagonal matrix of the exponentials of the entries.\footnote{It is not difficult to understand why: if \(A = \mathrm{diag}(a_1,\, a_2,\, \dots,\, a_n)\) then \(A^2 = \mathrm{diag}(a_1^2,\, a_2^2,\, \dots,\, a_n^2)\) and so on for higher powers; thus the Taylor expansion of the exponential gives the desired result; this explains also where the ones on the diagonal of the exponential come from: \(e^0 = 1\).}
 
     The transformation is immediately recognized to be unitary, \(S^{\dagger} (\Lambda) = S^{-1}(\Lambda)\). It is also clear that it is a spinorial transformation\footnote{The \(\omega\) matrices are a four vector representation, here acting on a spinor.}, which is \textbf{double valued}: the rotation with \(\psi=2\pi\) (that coincides with the identity on vectors) is represented by \(-1\) on the spinors; it is thus necessary to make a rotation of \(4\pi\) to get back the identity. We should have a double cover of our \(\mathrm{SO}(3)\) representation.
 
     The rotation of an angle \(\phi\) around a generic axis \(\hat{\mathbf{n}}\) is represented by
-    \[
+    \begin{equation}
         S(\Lambda) = \begin{pmatrix}
             \exp{i \frac{\phi}{2} \hat{\mathbf{n}} \cdot \bs{\sigma}} & 0                                                         \\
             0                                                         & \exp{i \frac{\phi}{2} \hat{\mathbf{n}} \cdot \bs{\sigma}}
         \end{pmatrix},
-    \]
+        \label{eq:dirac_lorentz_rotation}
+    \end{equation}
     which is recognized to be unitary as well. Now going back to the non relativistic limit  and splitting the representation as in \eqref{eq:dirac_spinor_split}
     \[
         \psi(x) = e^{-\frac{i}{\hbar}mc^2 t} \begin{pmatrix}
@@ -770,7 +808,7 @@ from antisymmetry of \(\omega_{\mu \nu}\).
     \]
     we can see that the \(4D\) spinor representation reduces to two copies of the \(2D\) spinor representation of \(\mathrm{SU}(2)\) acting on non relativistic Pauli spinors, with the spin operator \(\mathbf{S} = \frac{1}{2} \bs{\sigma}\) acting on each \(2D\) subspace:
     \[
-        \mathbf{S} = \frac{1}{2} \bs{\Sigma} = \frac{1}{2} \begin{pmatrix}
+        \mathbf{S} = \frac{1}{2} \begin{pmatrix}
             \bs{\sigma} & 0           \\
             0           & \bs{\sigma}
         \end{pmatrix}.
@@ -821,30 +859,27 @@ from antisymmetry of \(\omega_{\mu \nu}\).
             0             & 0             & 0 & 1
         \end{pmatrix}.
     \]
-    If we call \(\eta\) the \textit{rapidity}, it is additive for boosts along the same direction, while velocities are added in a more complicated way. For a spinor reresentation we have to find \(S(\Lambda)\):
+    If we call \(\eta\) the \textit{rapidity}, it is additive for boosts along the same direction, while velocities are added in a more complicated way. For the \textbf{spinorial reresentation} we have to find \(S(\Lambda)\):
     \[
         \begin{aligned}
             S(\Lambda) & = \exp{\frac{i}{2} \omega_{\mu \nu} \Sigma^{\mu \nu}} = \exp{\frac{1}{4} \omega_{\mu \nu} \gamma^{\mu} \gamma^{\nu}} = \exp{\frac{1}{4}\omega_{01}\gamma^0 \gamma^1 + \frac{1}{4}\omega_{10}\gamma^1 \gamma^0} \\
-                       & = \exp{\frac{\eta}{2} \gamma^0 \gamma^1} = \exp{\frac{\eta}{2} \begin{pmatrix}
-                                                                                                0        & \sigma^1 \\
-                                                                                                \sigma^1 & 0
-                                                                                            \end{pmatrix}} = \exp{\frac{\eta}{2} \alpha^1},
+                       & = \exp{\frac{\eta}{4} \left[\gamma^0,\, \gamma^1\right]} = \exp{\frac{\eta}{4} \left[(-i \beta),\,(-i \beta \alpha^1)\right]} = \exp{-\frac{\eta}{2} \alpha^1},
         \end{aligned}
     \]
     where, if we now Taylor expand the expression, we find even powers giving the identity, while odd powers give \(\alpha^1\). Thus in the end we can recognize the hyperbolic functions again:
     \[
         \begin{aligned}
-            \exp{\frac{\eta}{2} \alpha^1} & = \sum_{n=0}^{\infty} \frac{\left(\frac{\eta}{2} \alpha^1\right)^n}{n!} = \mathbb{I} \left[1 + \frac{1}{2!}\left(\frac{\eta}{2}\right)^2 + \frac{1}{4!}\left(\frac{\eta}{2}\right)^4 + \dots \right]           \\
-                                          & + \alpha^1 \left[-\frac{\eta}{2} + \frac{1}{3!}\left(-\frac{\eta}{2}\right)^3 + \frac{1}{5!}\left(-\frac{\eta}{2}\right)^5 + \dots \right] = \mathbb{I}\cosh{\frac{\eta}{2}} - \alpha^1 \sinh{\frac{\eta}{2}},
+            \exp{-\frac{\eta}{2} \alpha^1} & = \sum_{n=0}^{\infty} \frac{\left(-\frac{\eta}{2} \alpha^1\right)^n}{n!} = \mathbb{I} \left[1 + \frac{1}{2!}\left(\frac{\eta}{2}\right)^2 + \frac{1}{4!}\left(\frac{\eta}{2}\right)^4 + \dots \right]          \\
+                                           & + \alpha^1 \left[-\frac{\eta}{2} + \frac{1}{3!}\left(-\frac{\eta}{2}\right)^3 + \frac{1}{5!}\left(-\frac{\eta}{2}\right)^5 + \dots \right] = \mathbb{I}\cosh{\frac{\eta}{2}} - \alpha^1 \sinh{\frac{\eta}{2}},
         \end{aligned}
     \]
     to find the final expression for the spinorial representation of a boost along \(\hat{x}\):
     \[
         S(\Lambda) = \mathbb{I}\cosh{\frac{\eta}{2}} - \alpha^1 \sinh{\frac{\eta}{2}} = \begin{pmatrix}
-            \cosh{\frac{\eta}{2}}  & 0                     & -\sinh{\frac{\eta}{2}} & 0                     \\
-            0                      & \cosh{\frac{\eta}{2}} & 0                      & \sinh{\frac{\eta}{2}} \\
-            -\sinh{\frac{\eta}{2}} & 0                     & \cosh{\frac{\eta}{2}}  & 0                     \\
-            0                      & \sinh{\frac{\eta}{2}} & 0                      & \cosh{\frac{\eta}{2}}
+            \cosh{\frac{\eta}{2}}  & 0                      & 0                      & -\sinh{\frac{\eta}{2}} \\
+            0                      & \cosh{\frac{\eta}{2}}  & -\sinh{\frac{\eta}{2}} & 0                      \\
+            0                      & -\sinh{\frac{\eta}{2}} & \cosh{\frac{\eta}{2}}  & 0                      \\
+            -\sinh{\frac{\eta}{2}} & 0                      & 0                      & \cosh{\frac{\eta}{2}}
         \end{pmatrix}.
     \]
 
@@ -853,15 +888,15 @@ from antisymmetry of \(\omega_{\mu \nu}\).
 
 \subsubsection{Plane Waves}
 
-We want to construct the plane wave solution wiuth the spinorial representation. The previous boost transformation can be written and generalized as follows to find the general plane wave solutions of the Dirac equation for a particle with arbitrary momentum \(\mathbf{p}\). Starting from the shell condition for a free particle
+We want to construct the plane wave solution wiuth the spinorial representation. The previous boost transformation can be written and generalized to find the general plane wave solutions of the Dirac equation for a particle with arbitrary momentum \(\mathbf{p}\). Starting from the shell condition for a free particle
 \[
-    E^2 - \mathbf{p}^2 = m^2,
+    E^2 - \mathbf{p}^2 = m^2, \quad p_\mu p^\mu + m^2 = 0,
 \]
-and considering that the four momentum can be written as
+since the four momentum can be written as
 \[
-    p^{\mu} = (E,\, \mathbf{p})= (m\gamma,\, m \bs{\beta} \gamma), \quad \text{with } p^{\prime\,\mu} = (m,\, \bs{0})
+    p^{\mu} = (E,\, \mathbf{p})= (m\gamma,\, m \bs{\beta} \gamma), \quad \text{with } p^{\prime\,\mu} = (m,\, \mathbf{0}),
 \]
-obtained from the rest frame, one can use hyperbolic trigonometric identities (plus the previous results \(\gamma = \cosh(\eta)\) and \(\beta \gamma = \sinh(\eta)\)) to find
+obtained from the rest frame. One can use hyperbolic trigonometric identities (plus the previous results \(\gamma = \cosh(\eta)\) and \(\beta \gamma = \sinh(\eta)\)) to find
 \[
     \begin{aligned}
         \tanh{\frac{\eta}{2}} & = \frac{\sinh{\eta}}{1 + \cosh{\eta}} = \frac{\beta \gamma}{1 + \gamma} = \frac{\vert \mathbf{p} \vert}{E + m}, \\
@@ -874,13 +909,27 @@ and if we plug them in the previous expression for the Lorentz boost transformat
 \]
 then generalize to a boost in an arbitrary direction \(\hat{v} = \frac{\mathbf{v}}{\vert \mathbf{v} \vert }\) by substituting \(\alpha^1\) with
 \[
-    \alpha^1 \to \frac{\bs{\alpha}^1\cdot \mathbf{v}}{\vert \mathbf{v} \vert } = \frac{\bs{\alpha}\cdot\bs{\beta}}{\vert \bs{\beta}\vert}
+    \alpha^1 \to \frac{\bs{\alpha}\cdot \mathbf{v}}{\vert \mathbf{v} \vert } = \frac{\bs{\alpha}\cdot\bs{\beta}}{\vert \bs{\beta}\vert}
 \]
 and finally change the direction of the boost \(\eta \to -\eta\)  so that by acting on a spinor at rest we get the spinor moving with velocity \(\mathbf{v}\) (and momentum \(\mathbf{p}\)). The final transformation takes the form
+\begin{equation}
+    S(\Lambda) = \sqrt{\frac{E + m}{2m}} \left( \mathbb{I} + \frac{\bs{\alpha} \cdot \mathbf{p}}{E + m} \right).
+    \label{eq:dirac_lorentz_boost}
+\end{equation}
+Before applying this transformation to the spinors at rest, we can exploit the product \(\bs{\alpha} \cdot \mathbf{p}\):
 \[
-    S(\Lambda) = \sqrt{\frac{E + m}{2m}} \left( \mathbb{I} + \frac{\bs{\alpha}^1 \cdot \mathbf{p}}{E + m} \right).
+    \bs{\alpha} \cdot \mathbf{p} = \begin{pmatrix}
+        0                            & \bs{\sigma} \cdot \mathbf{p} \\
+        \bs{\sigma} \cdot \mathbf{p} & 0
+    \end{pmatrix}, \quad \text{with } \bs{\sigma} \cdot \mathbf{p} = \begin{pmatrix}
+        p_3         & p_1 - i p_2 \\
+        p_1 + i p_2 & -p_3
+    \end{pmatrix} = \begin{pmatrix}
+        p_3     & p^{(-)} \\
+        p^{(+)} & -p_3
+    \end{pmatrix},
 \]
-and applied to the spinors
+so that the final expression for the spinorial representation of a boost in an arbitrary direction is given by the application to the spinors at rest:
 \[
     \psi_1 = \begin{pmatrix}
         1 \\
@@ -904,63 +953,149 @@ and applied to the spinors
         1
     \end{pmatrix} e^{+imt},
 \]
-produce the general plane wave solutions of the Dirac equation. We obtain the positive energy solutions (the columns of the matrix \(S(\Lambda)\) times the plane wave).
-
-    [pdf...]
+which produce the general plane wave solutions of the Dirac equation. We obtain the \textbf{positive energy solutions} (the columns of the matrix \(S(\Lambda)\) times the plane wave)
+\[
+    \psi_1 (x) = \sqrt{\frac{E + m}{2m}} \begin{pmatrix}
+        1                  \\
+        0                  \\
+        \tfrac{p_3}{E + m} \\
+        \tfrac{p^{(+)}}{E + m}
+    \end{pmatrix} e^{i p_{\mu} x^{\mu}}, \quad \psi_2 (x) = \sqrt{\frac{E + m}{2m}} \begin{pmatrix}
+        0                      \\
+        1                      \\
+        \tfrac{p^{(-)}}{E + m} \\
+        \tfrac{-p_3}{E + m}
+    \end{pmatrix} e^{i p_{\mu} x^{\mu}},
+\]
+and the \textbf{negative energy solutions}
+\[
+    \psi_3 (x) = \sqrt{\frac{E + m}{2m}} \begin{pmatrix}
+        \tfrac{p_3}{E + m}     \\
+        \tfrac{p^{(+)}}{E + m} \\
+        1                      \\
+        0
+    \end{pmatrix} e^{-i p_{\mu} x^{\mu}}, \quad \psi_4 (x) = \sqrt{\frac{E + m}{2m}} \begin{pmatrix}
+        \tfrac{p^{(-)}}{E + m} \\
+        \tfrac{-p_3}{E + m}    \\
+        0                      \\
+        1
+    \end{pmatrix} e^{-i p_{\mu} x^{\mu}}.
+\]
+It can be verified by direct substitution that these four spinors are indeed solutions of the Dirac equation \((i \gamma^{\mu} p_{\mu} + m) \omega(p) = 0\).
 
 \subsubsection{Pseudo Unitarity}
 
-The spinorial representation in (151) is not unitary, \(S^{\dagger}(\Lambda) \neq S^{-1}(\Lambda)\), as seen on the Lorentz boost. This is understandable in the light of a theorem according to which unitary irreducible representations of compact groups are finite-dimensional, while those of non-compact groups are infinite-dimensional. Lorentz’s group is non-compact because of the boosts. However, the spinorial representations are pseudo-unitary in the sense that
+The spinorial representation we found for a Lorentz transformation involving spatial rotations (eq. \eqref{eq:dirac_lorentz_rotation}) is not unitary, \(S^{\dagger}(\Lambda) \neq S^{-1}(\Lambda)\), as seen on the Lorentz boost (eq. \eqref{eq:dirac_lorentz_boost}). This is understandable in the light of a theorem according to which unitary irreducible representations of compact groups are finite-dimensional, while those of non-compact groups are infinite-dimensional (this result was expressed in the first chapter, with theorem \ref{thm:unitary_representations_compact_noncompact_groups}).
+
+Lorentz’s group is non-compact because of the boosts, however, the spinorial representations are pseudo-unitary in the sense that
+\begin{equation}
+    S^{\dagger}(\Lambda) = \beta S^{-1}(\Lambda)\beta.
+    \label{eq:pseudo_unitarity}
+\end{equation}
+
+To verify this property, we can start from the hermiticity properties of the gamma matrices:
 \[
-    S^{\dagger}(\Lambda) = \beta S^{-1}(\Lambda)\beta
+    (\gamma^{\mu})^{\dagger} = - \beta \gamma^{\mu} \beta,
 \]
-Computations.... (pdf and sofi)
+which can be verified directly using the Dirac representation of the gamma matrices. From this relation, we can find the hermitian conjugate of the generators of the spinorial representation of the Lorentz group:
+\[
+    \begin{aligned}
+        (\Sigma^{\mu \nu})^{\dagger} & = \left(-\frac{i}{4} \left[\gamma^{\mu},\, \gamma^{\nu}\right]\right)^{\dagger} = \frac{i}{4} \left[(\gamma^{\nu})^{\dagger},\, (\gamma^{\mu})^{\dagger}\right]                                     \\
+                                     & = \frac{i}{4} \left[-\beta \gamma^{\nu} \beta,\, -\beta \gamma^{\mu} \beta\right] = \beta \left(-\frac{i}{4} \left[\gamma^{\mu},\, \gamma^{\nu}\right]\right) \beta = \beta \Sigma^{\mu \nu} \beta,
+    \end{aligned}
+\]
+so that we can compute the hermitian conjugate of the finite transformation \eqref{eq:finite_lorentz_transformation_spinor}:
+\[
+    \begin{aligned}
+        S^{\dagger}(\Lambda) & = \left(\exp{\frac{i}{2} \omega_{\mu \nu} \Sigma^{\mu \nu}}\right)^{\dagger} = \exp{\left(\frac{i}{2} \omega_{\mu \nu} \Sigma^{\mu \nu}\right)^{\dagger}} = \exp{-\frac{i}{2} \omega_{\mu \nu} (\Sigma^{\mu \nu})^{\dagger}} \\
+                             & = \exp{-\frac{i}{2} \omega_{\mu \nu} \beta \Sigma^{\mu \nu} \beta} = \beta \exp{-\frac{i}{2} \omega_{\mu \nu} \Sigma^{\mu \nu}} \beta = \beta S^{-1}(\Lambda) \beta,
+    \end{aligned}
+\]
+where in the final steps we could factor out \(\beta\) from the exponentials since it is a diagonal matrix
+\[
+    e^{\beta} = \sum_{n=0}^{\infty} \frac{\beta^n}{n!} = \beta \sum_{n=0}^{\infty} \frac{1}{n!} = \beta e^{1},
+\]
+thus proving the pseudo-unitarity relation \eqref{eq:pseudo_unitarity}.
 
 \paragraph{Fermionic Bilinears.}
 We start from the Dirac spinor and we want to find the \textbf{Dirac conjugate} of the spinor:
-\[
+\begin{equation}
     \bar{\psi} (x) = \psi^{\dagger}(x) \beta,
-\]
+    \label{eq:dirac_conjugate_spinor}
+\end{equation}
 which transforms as
 \[
     \bar{\psi}(x) \to \bar{\psi^{\prime}}(x^{\prime}) = S^{-1}(\Lambda)\bar{\psi}(x).
 \]
 Let's show this result:
 \[
-    pdf
+    \begin{aligned}
+        \bar{\psi^{\prime}}(x^{\prime}) & = \psi^{\prime \dagger}(x^{\prime}) \beta = \left(S(\Lambda) \psi(x)\right)^{\dagger} \beta = \psi^{\dagger}(x) S^{\dagger}(\Lambda) \beta \\
+                                        & = \psi^{\dagger}(x) \beta S^{-1}(\Lambda) \beta \beta = \psi^{\dagger}(x) \beta S^{-1}(\Lambda) = \bar{\psi}(x) S^{-1}(\Lambda).
+    \end{aligned}
 \]
+Thus we have the transformation rules for the Dirac spinor, its hermitian conjugate and its Dirac conjugate:
+\begin{equation}
+    \begin{dcases}
+        \psi(x)           & \to \psi^{\prime}(x^{\prime}) = S(\Lambda) \psi(x),                             \\
+        \psi^{\dagger}(x) & \to \psi^{\prime \dagger}(x^{\prime}) = \psi^{\dagger}(x) S^{\dagger}(\Lambda), \\
+        \bar{\psi}(x)     & \to \bar{\psi^{\prime}}(x^{\prime}) = \bar{\psi}(x) S^{-1}(\Lambda).
+    \end{dcases}
+    \label{eq:dirac_spinor_transformation_rules}
+\end{equation}
 By looking at the transformation rules, one can notice that the bilinear \( \bar{\psi}(x) \psi(x)\) form a scalar:
 \[
-    \bar{\psi}(x) \psi(x) \to \bar{\psi^{\prime} }(x^{\prime} ) \psi^{\prime} (x^{\prime} ) = \bar{\psi}(x) S(\Lambda) S^{-1}(\Lambda) \psi(x) = \bar{\psi}(x) \psi(x).
+    \bar{\psi}(x) \psi(x) \to \bar{\psi^{\prime} }(x^{\prime} ) \psi^{\prime} (x^{\prime} ) = \bar{\psi}(x) S^{-1}(\Lambda) S(\Lambda) \psi(x) = \bar{\psi}(x) \psi(x).
 \]
-If we take \(\psi^{\dagger}\psi\) it's not a scalar, but it's the time component of the four vector which appeared in the continuity equation
-The quantity \(\psi^{\dagger}\psi\) instead is not a scalar but identifies the time component of the four-vector \(J^{\mu} = ...\)  which is the current that appears in the continuity equation (79). It is written in a manifestly covariant form as
+
+\begin{remark}
+    The quantity \(\psi^{\dagger}\psi\) instead is not a scalar but identifies the time component of the four-vector
+    \[
+        J^{\mu} = \left(J^0,\,\mathbf{J}\right) = \left( \psi^{\dagger} \psi,\, \psi^{\dagger} \bs{\alpha} \psi \right),
+    \]
+    which is the current that appears in the continuity equation \eqref{eq:dirac_continuity_equation}.
+\end{remark}
+
+Having introduced the Dirac conjugate, it is now natural to express the probability current in a manifestly covariant form as
+\begin{equation}
+    J^{\mu} = i \bar{\psi} \gamma^{\mu} \psi,
+    \label{eq:dirac_current_covariant}
+\end{equation}
+which ultimately transforms as a 4-vector:
 \[
-    J^{\mu} = i \bar{\psi} \gamma^{\mu} \psi
+    J^{\mu} \to J^{\prime \mu} = i \bar{\psi^{\prime}}(x^{\prime}) \gamma^{\mu} \psi^{\prime}(x^{\prime}) = i \bar{\psi}(x) S^{-1}(\Lambda) \gamma^{\mu} S(\Lambda) \psi(x) = \Lambda^{\mu}_{\ \nu} J^{\nu},
 \]
-transformation law [pdf]
-The quantities \(\bar{\psi}\psi\) and \(\bar{\psi} \gamma^{\mu} \psi\) are examples of fermionic bilinears, quantities that furnish useful expressions for describing the physical properties of the spin 1/2 relativistic particle. Quite generally, using the basis of the spinor space \(\Gamma^A = (\mathbb{I},\,\gamma^{\mu},\, \Sigma^{\mu \nu},\, \gamma^{\mu} \gamma^5,\, \gamma^5)\), one may define fermionic bilinears of the form
+where we used the transformation properties of the spinor and the Dirac conjugate, as well as the relation \eqref{eq:lorentz_transformation_gamma} for the gamma matrices transformations.
+
+The quantities \(\bar{\psi}\psi\) and \(\bar{\psi} \gamma^{\mu} \psi\) are examples of \textbf{fermionic bilinears}, quantities that furnish useful expressions for describing the physical properties of the spin 1/2 relativistic particle. Quite generally, using the basis of the spinor space \(\Gamma^A = (\mathbb{I},\,\gamma^{\mu},\, \Sigma^{\mu \nu},\, \gamma^{\mu} \gamma^5,\, \gamma^5)\), one may define fermionic bilinears of the form
 \[
     \bar{\psi} \Gamma^A \psi
 \]
-which transform as scalar, vector, antisymmetric tensor of rank 2, pseudovector, and pseu-doscalar, respectively. We have already discussed the first two cases. For the pseudoscalar (neglecting for notational simplicity the dependence on the spacetime point), we find
-\[
-    pdf
-\]
-that indeed we recognize to be a scalar under proper and orthochronous Lorentz transformations (the adjective “pseudo” refers to a different behavior under spatial reflection, i.e., under a parity transformation). As the last example, we consider the antisymmetric tensor
-\[
-    pdf
-\]
-where we have used...
+which transform as \textit{scalar}, \textit{vector}, \textit{antisymmetric tensor of rank 2}, \textit{pseudovector}, and \textit{pseudoscalar}, respectively.
 
-------------------------------------
+We have already discussed the first two cases, so for the pseudoscalar (neglecting for notational simplicity the dependence on the spacetime point), we find
+\[
+    (\overline{\psi} \gamma^5 \psi)^{\prime} = \bar{\psi} S^{-1}(\Lambda) \gamma^5 S(\Lambda) \psi = \bar{\psi} \gamma^5 \psi,
+\]
+that indeed we recognize to be a scalar under proper and orthochronous Lorentz transformations (the adjective “pseudo” refers to a different behavior under spatial reflection, i.e., under a parity transformation).
+
+As the last example, we consider the antisymmetric tensor
+\[
+    \begin{aligned}
+        (\overline{\psi} \Sigma^{\mu \nu} \psi)^{\prime} & = \bar{\psi} S^{-1}(\Lambda) \Sigma^{\mu \nu} S(\Lambda) \psi = \bar{\psi} S^{-1}(\Lambda) \left( -\frac{i}{4} \left[\gamma^{\mu},\,\gamma^{\nu}\right]\right) S(\Lambda) \psi                                               \\
+                                                         & = -\frac{i}{4} \bar{\psi} \left[ S^{-1}(\Lambda) \gamma^{\mu} S(\Lambda),\, S^{-1}(\Lambda) \gamma^{\nu} S(\Lambda)\right] \psi                                                                                              \\
+                                                         & = -\frac{i}{4} \bar{\psi} \left[ \Lambda^{\mu}_{\ \rho} \gamma^{\rho},\, \Lambda^{\nu}_{\ \sigma} \gamma^{\sigma}\right] \psi = \Lambda^{\mu}_{\ \rho} \Lambda^{\nu}_{\ \sigma} (\overline{\psi} \Sigma^{\rho \sigma} \psi),
+    \end{aligned}
+\]
+where we have used again the transformation properties of the gamma matrices in \eqref{eq:lorentz_transformation_gamma}. Thus, we saw that \(\overline{\psi} \Sigma^{\mu \nu} \psi\) transforms as an antisymmetric tensor of rank 2 indeed.
 
 \subsection{Discrete Symmetries}
 
 In addition to the Lorentz transformations connected to the identity, one can prove the invariance of the free Dirac equation under discrete transformations such as \textbf{parity} \(P\) (also known as spatial reflection), \textbf{time reversal} \(T\), and \textbf{charge conjugation} \(C\), which exchanges particles with antiparticles.
 
-\paragraph{Parity.}
-Our definition of the parity
+\subsubsection{Parity}
+
+Let us discuss the transformation that reverses the orientation of the spatial axes, i.e., parity
 \[
     \begin{aligned}
         \mathbf{x} \xrightarrow{P} \mathbf{x}^{\prime} = - \mathbf{x}, \\
@@ -968,143 +1103,308 @@ Our definition of the parity
     \end{aligned}
 \]
 which in tensorial notation becomes:
-\[
-    pdf
-\]
+\begin{equation}
+    x^{\mu} \xrightarrow{P} x^{\prime \mu} = P^{\mu}_{\ \nu} x^{\nu}, \quad \text{with } P^{\mu}_{\ \nu} = \begin{pmatrix}
+        1 & 0  & 0  & 0  \\
+        0 & -1 & 0  & 0  \\
+        0 & 0  & -1 & 0  \\
+        0 & 0  & 0  & -1
+    \end{pmatrix}.
+    \label{eq:parity_transformation}
+\end{equation}
 This is a discrete operation with \(\det P^{\mu}_{\ \nu} = -1\). It belongs to the Lorentz group O(3, 1) but is not connected to the identity. Together with the identity, it forms a subgroup isomorphic to \(\mathbb{Z}_2 = \{1,\,-1\}\). Invariance under parity can be studied by conjecturing an appropriate linear transformation of the spinor
 \[
-    pdf
+    \psi(x) \xrightarrow{P} \psi^{\prime}(x^{\prime}) = \mathcal{P} \psi(x),
 \]
 generated by a suitable matrix \(\mathcal{P} \). Requiring invariance in form of the Dirac equation
 \[
-    requiring \, invariance \, pdf and paper
+    \begin{aligned}
+        \left(\gamma^{\mu} \partial_\mu + m \right)\psi(x) = 0 & \quad \iff \quad \left(\gamma^{\mu} \partial_\mu^{\prime} + m \right) \psi^{\prime} (x^{\prime}) = 0, \\
+        x^{\mu}                                                & \quad \iff \quad x^{\prime \mu} = P^{\mu}_{\ \nu} x^{\nu},                                            \\
+        \partial_{\mu}                                         & \quad \iff \quad \partial_{\mu}^{\prime} = \left(P^{-1}\right)_{\mu}^{\ \nu} \partial_{\nu},          \\
+        \psi(x)                                                & \quad \iff \quad \psi^{\prime}(x^{\prime}) = \mathcal{P} \psi(x).
+    \end{aligned}
+\]
+the form of \(\mathcal{P}\) is determined. Proceeding as for the Lorentz transformations \(S(\Lambda)\) one finds
+\[
+    \mathcal{P}^{-1} \gamma^{\mu} \mathcal{P} P^{\ \nu}_{\mu} = \gamma^{\nu},
 \]
 or equivalently
 \[
-    pdf
+    \mathcal{P} \gamma^{\mu} \mathcal{P}^{-1} = P_{\ \nu}^{\mu} \gamma^{\nu} = \begin{pmatrix}
+        \gamma^0 \\
+        - \gamma^i
+    \end{pmatrix}.
 \]
-A matrix \(\mathcal{P}\) that commutes with \(\gamma^0\) and anticommutes with \(\gamma^i\) is \(\gamma^0\) itself, or equivalently, \(\beta = i \gamma^0\). Thus, one may choose \(\mathcal{P} = \eta_P \beta\)  with \(\eta_P\) a phase fixed by requiring that \(\mathcal{P}^4\) coincides with the identity on fermions (so that the possible choices are \(\eta_P = (\pm 1,\,\pm i)\)). For simplicity we choose \(\eta_P=1\), and use the parity transformations
+A matrix \(\mathcal{P}\) which respects:
+\begin{itemize}
+    \item[(\(\mu=0\))] commutes with \(\gamma^0\):
+          \[
+              \mathcal{P} \gamma^0 \mathcal{P}^{-1} = P^{0}_{\ \nu} \gamma^{\nu} =P^0_{\ 0}\gamma^0 = \gamma^0,
+          \]
+          which implies \(\mathcal{P} \gamma^0 \mathcal{P}^{-1} = \xi \mathcal{P} \mathcal{P}^{-1} \gamma^0 = \xi \gamma^0\) with \(\xi = +1\);
+    \item[(\(\mu=i\))] anticommutes with \(\gamma^i\):
+          \[
+              \mathcal{P} \gamma^i \mathcal{P}^{-1} = P^{i}_{\ \nu} \gamma^{\nu} = P^{i}_{\ j} \gamma^{j} = - \gamma^i,
+          \]
+          which implies \(\mathcal{P} \gamma^i \mathcal{P}^{-1} = \zeta \mathcal{P} \mathcal{P}^{-1} \gamma^i = \zeta \gamma^i\) with \(\zeta = -1\).
+\end{itemize}
+Thus \(\mathcal{P}\) commutes with \(\gamma^0\) and anticommutes with \(\gamma^i\); a matrix with these properties is \(\gamma^0\) itself, or equivalently, \(\beta = i \gamma^0\). Thus, one may choose
 \[
-    pdf
+    \mathcal{P} = \eta_P \beta
 \]
-From these basic rules, one deduces the transformations of the \textit{fermionic bilinears}
+with \(\eta_P\) a phase fixed by requiring that \(\mathcal{P}^4\) coincides with the identity on fermions (so that the possible choices are \(\eta_P = (\pm 1,\,\pm i)\)). For simplicity we choose \(\eta_P=1\), and use the parity transformations
 \[
+    \begin{dcases}
+        \psi(x)            \xrightarrow{P} \psi^{\prime}(x^{\prime}) = \beta \psi(x),                   \\
+        \psi^{\dagger}(x)  \xrightarrow{P} \psi^{\prime \dagger}(x^{\prime}) = \psi^{\dagger}(x) \beta, \\
+        \bar{\psi}(x)      \xrightarrow{P} \bar{\psi^{\prime}}(x^{\prime}) = \bar{\psi}(x) \beta,
+    \end{dcases}
+\]
+since
+\[
+    \overline{\psi}^{\prime}(x^{\prime}) = \psi^{\prime \dagger}(x^{\prime}) \beta = (\psi^{\dagger}(x) \beta) \beta = \bar{\psi}(x) \beta.
+\]
+From these basic rules, one deduces the transformations of the \textit{fermionic bilinears}:
+\begin{equation}
     \begin{aligned}
-        \bar{\psi}(x)\psi(x) & \xrightarrow{P} \bar{\psi}^{\prime} (x^{\prime}) \psi^{\prime} (x^{\prime}) = \bar{\psi}(x)\psi(x) \quad \text{scalar} \\
-        2                    & \xrightarrow{P}  \quad \text{pseudo-scalar}                                                                            \\
-        3                    & \xrightarrow{P}  \quad \text{(polar) vector}                                                                           \\
-        4                    & \xrightarrow{P}  \quad \text{(axial) vector}                                                                           \\
-        5                    & \xrightarrow{P}  \quad \text{tensor}.
+        \bar{\psi}(x)\psi(x)                           & \xrightarrow{P} \bar{\psi}^{\prime} (x^{\prime}) \psi^{\prime} (x^{\prime}) = \bar{\psi}(x)\psi(x) \quad                                                                                  &  & \text{scalar},         \\
+        \overline{\psi}(x) \gamma^5 \psi(x)            & \xrightarrow{P} \overline{\psi}^{\prime}(x^{\prime}) \gamma^5 \psi^{\prime}(x^{\prime}) = - \overline{\psi}(x) \gamma^5 \psi(x) \quad                                                     &  & \text{pseudo-scalar},  \\
+        \overline{\psi}(x) \gamma^\mu \psi(x)          & \xrightarrow{P} \overline{\psi^{\prime}}(x^{\prime}) \gamma^\mu \psi^{\prime}(x^{\prime}) = P^{\mu}_{\ \nu} \overline{\psi}(x) \gamma^\nu \psi(x) \quad                                   &  & \text{(polar) vector}, \\
+        \overline{\psi}(x) \gamma^\mu \gamma^5 \psi(x) & \xrightarrow{P} \overline{\psi^{\prime}}(x^{\prime}) \gamma^\mu \gamma^5 \psi^{\prime}(x^{\prime}) = - P^{\mu}_{\ \nu} \overline{\psi}(x) \gamma^\nu \gamma^5 \psi(x) \quad               &  & \text{(axial) vector}, \\
+        \overline{\psi}(x) \Sigma^{\mu\nu} \psi(x)     & \xrightarrow{P} \overline{\psi^{\prime}}(x^{\prime}) \Sigma^{\mu\nu} \psi^{\prime}(x^{\prime}) = P^{\mu}_{\ \rho} P^{\nu}_{\ \sigma} \overline{\psi}(x) \Sigma^{\rho\sigma} \psi(x) \quad &  & \text{tensor}.
     \end{aligned}
-\]
+    \label{eq:fermionic_bilinears_parity}
+\end{equation}
 
 \paragraph{Chiral properties of spinors.}
-Dirac spinors have four components, but under the group \(\mathrm{SO}^+(3,1)\) we know there this is  a reducible representation. We could introduce the projector operators
+Having understood how parity works, it is time to focus on the reducibility of a Dirac spinor under the restricted Lorentz group \(\mathrm{SO}^+(3,1)\). Using the projectors\footnote{Hermitian matrices that satisfy \(P_{L/R}^2 = P_{L/R}\), \(P_L + P_R = \mathbb{I}\), \(P_L P_R = 0\), as defined in \eqref{eq:chiral_projectors}.}
 \[
-    pdf
+    P_L = \frac{1 - \gamma^5}{2}, \quad P_R = \frac{1 + \gamma^5}{2},
 \]
-in order to separate the Dirac spinors in their \textit{left and right handed components}
+one can separate the Dirac spinors in their \textit{left and right handed components}
 \[
-    pdf
+    \psi = \psi_L + \psi_R, \quad \text{with } \psi_L = P_L \psi = \frac{1 - \gamma^5}{2} \psi, \quad \psi_R = P_R \psi = \frac{1 + \gamma^5}{2} \psi.
 \]
 They constitute the two irreducible spin \(\tfrac12\) representations of the Lorentz group contained inside the Dirac spinor. The irreducibility follows from the fact that the Lorentz generators \(\Sigma^{\mu \nu}\) commute with the projectors \(P_L\) and \(P_R\). Then, also finite transformations commute with the projectors. For example, considering \(P_L\) one calculates
 \[
-    pdf
+    \Sigma^{\mu \nu} P_L = \left(-\frac{i}{4} \left[\gamma^{\mu},\, \gamma^{\nu}\right]\right) \frac{1 - \gamma^5}{2} = \frac{1 - \gamma^5}{2}\left(-\frac{i}{4} \left[\gamma^{\mu},\, \gamma^{\nu}\right]\right),
 \]
 knowing that \(\Sigma^{\mu \nu}\) commutes with the projectors since \(\gamma^5\) commutes with an even number of gamma matrices, and likewise for \(P_R\). The interpretation of this commutativity is that operating with an infinitesimal Lorentz rotation on a chiral spinor of given chirality produces a chiral spinor of the same chirality.
-    [... pdf ...]
+
+More explicitly, considering infinitesimal transformations, one verifies that the transformed spinor \(\psi_L^{\prime}\) remains left-handed
+\[
+    \begin{aligned}
+        \psi_L & \xrightarrow{\mathrm{SO}^+(3,1)} \psi_L^{\prime} = \left(1 + \frac{i}{2} \omega_{\mu \nu}\Sigma^{\mu \nu}\right) \psi_L = \left(1 + \frac{i}{2} \omega_{\mu \nu}\Sigma^{\mu \nu}\right) P_L \psi_L \\
+               & = P_L \left(1 + \frac{i}{2} \omega_{\mu \nu}\Sigma^{\mu \nu}\right) \psi_L = P_L \psi_L^{\prime}.
+    \end{aligned}
+\]
+The same remains true for finite \(\mathrm{SO}^+(3,1)\) transformations. Left-handed and right-handed spinors are called Weyl spinors. They identify the two inequivalent, irreducible spinor representations of \(\mathrm{SO}^+(3,1)\).
 Now, let us consider parity. Including parity, the Dirac spinor is not reducible anymore. Parity transforms left-handed spinors into right-handed ones and vice versa. Recalling the form of the parity transformation of a Dirac spinor, \(\psi\xrightarrow{P}\psi^{\prime}=\beta \psi\), one finds that a left-handed spinor is transformed into a right-handed one
 \[
-    pdf
+    \begin{aligned}
+        \psi_L & \xrightarrow{P} \psi_L^{\prime} = \beta \psi_L = \beta \left(\frac{1 - \gamma^5}{2}\right) \psi = \left(\frac{1 + \gamma^5}{2}\right) \beta \psi = P_R \psi^{\prime}, \\
+        \psi_R & \xrightarrow{P} \psi_R^{\prime} = \beta \psi_R = \beta \left(\frac{1 + \gamma^5}{2}\right) \psi = \left(\frac{1 - \gamma^5}{2}\right) \beta \psi = P_L \psi^{\prime}.
+    \end{aligned}
 \]
-Both chiralities are needed to realize parity, as parity exchanges two opposite chiralities. Additional remarks: the representations of the Lorentz group are constructed systematically using the fact that its Lie algebra can be written in terms of two commuting [...]
-Chirality is a Lorentz invariant concept.
+
+Both chiralities are needed to realize parity, as parity exchanges two opposite chiralities. Additional remarks: the representations of the Lorentz group are constructed systematically using the fact that its Lie algebra can be written in terms of two commuting \(\mathrm{SU}(2)\) subalgebras, \(\mathrm{SO}^+(3,1) \sim  \mathrm{SU}(2) \times \mathrm{SU}(2)\). Knowing the \(\mathrm{SU}(2)\) representations that are familiar from quantum mechanics, one assigns two integer or semi-integer quantum numbers \((j,\,j^{\prime})\) to indicate an irreducible representation of the Lorentz group. The irreps \((\tfrac12,\,0)\) and \((0,\,\tfrac12)\) correspond to the two inequivalent chiral spinors described above (left-handed and right-handed Weyl spinors). The Dirac spinor forms a \textbf{reducible} representation of \(\mathrm{SO}^+(3,1)\) given by the direct sum \((\tfrac12,\,0) \oplus (0,\,\tfrac12)\). It becomes \textbf{irreducible} once considering the group \(\mathrm{O}(3,1)\) that includes parity. Chiral theories (theories that are non-invariant under parity) are constructed using Weyl fermions rather than Diracf fermions.
 
 \paragraph{Chiral representation.}
-When dealing with chiral fermions, it is often useful to employ a different representation of
-the gamma matrices, called the chiral representation. A chiral representation is identified by
-the fact that the chiral matrix \(\gamma^5\) is diagonal. A chiral representation is given by
+When dealing with chiral fermions, it is often useful to employ a different representation of the gamma matrices, called the \textit{chiral representation}. A chiral representation is identified by the fact that the chiral matrix \(\gamma^5\) is diagonal. A chiral representation is given by
 \[
-    \gamma matrices pdf
+    \gamma^5 = \begin{pmatrix}
+        -\mathbb{I} & 0          \\
+        0           & \mathbb{I}
+    \end{pmatrix}, \quad \gamma^{0} = i\begin{pmatrix}
+        0          & \mathbb{I} \\
+        \mathbb{I} & 0
+    \end{pmatrix}, \quad \gamma^{i} = -i \beta \alpha^i = \begin{pmatrix}
+        0         & -i \sigma^i \\
+        i\sigma^i & 0
+    \end{pmatrix},
 \]
-where is obtained from the Dirac representation by a similarity transformation (a change of basis) generated by a unitary matrix U \(\gamma^{\mu}_{\text{chiral}} = U \gamma^{\mu}_\text{Dirac} U^{-1}\) and
+where is obtained from the Dirac representation
 \[
-    pdf
+    \gamma^5 = \begin{pmatrix}
+        0           & -\mathbb{I} \\
+        -\mathbb{I} & 0
+    \end{pmatrix}, \quad \gamma^{0} = i\begin{pmatrix}
+        \mathbb{I} & 0           \\
+        0          & -\mathbb{I}
+    \end{pmatrix}, \quad \gamma^{i} = -i \beta \alpha^i = \begin{pmatrix}
+        0         & -i \sigma^i \\
+        i\sigma^i & 0
+    \end{pmatrix},
 \]
-In the chiral representation, the Lorentz generators are given by
+by a similarity transformation (a change of basis) generated by a unitary matrix \(U\) such that
 \[
-    pdf
+    \gamma^{\mu}_{\text{chiral}} = U \gamma^{\mu}_\text{Dirac} U^{-1}
+\]
+where
+\[
+    U = \frac{1}{\sqrt{2}} \begin{pmatrix}
+        \mathbb{I}  & \mathbb{I} \\
+        -\mathbb{I} & \mathbb{I}
+    \end{pmatrix}, \quad U^{-1} = \frac{1}{\sqrt{2}} \begin{pmatrix}
+        \mathbb{I} & -\mathbb{I} \\
+        \mathbb{I} & \mathbb{I}
+    \end{pmatrix}.
+\]
+In the chiral representation, the Lorentz generators \(\Sigma^{\mu \nu} = -\tfrac{i}{4} [\gamma^\mu, \gamma^\nu] = -\tfrac{i}{2} \gamma^{\mu \nu}\) are given by
+\[
+    \Sigma^{0i} = - \frac{i}{2} \gamma^{0i} = \frac{i}{2} \begin{pmatrix}
+        \sigma^i & 0          \\
+        0        & - \sigma^i
+    \end{pmatrix}, \quad \Sigma^{ij} = -\frac{i}{2}\gamma^{ij} = \frac{1}{2}\epsilon^{ijk} \begin{pmatrix}
+        \sigma^k & 0        \\
+        0        & \sigma^k
+    \end{pmatrix}.
 \]
 The block-diagonal form of the Lorentz generators makes evident that they act independently on the chiral parts of a Dirac spinor
 \[
-    pdf
+    \psi = \begin{pmatrix}
+        \tilde{\psi}_L \\
+        \tilde{\psi}_R
+    \end{pmatrix} = \begin{pmatrix}
+        (\tilde{\psi}_L)_a \\
+        (\tilde{\psi}_R)_{\dot{a}}
+    \end{pmatrix}, \quad a = 1,2, \; \dot{a} = \dot{1}, \dot{2},
 \]
 where the two-component chiral spinors (Weyl spinors) are identified by
 \[
-    pdf
+    \psi_L = P_L \psi = \begin{pmatrix}
+        \tilde{\psi}_L \\
+        0
+    \end{pmatrix}, \quad \psi_R = P_R \psi = \begin{pmatrix}
+        0 \\
+        \tilde{\psi}_R
+    \end{pmatrix}.
 \]
 
 \paragraph{Helicity.}
-For massless fermions, chirality is correlated to the concept of helicity, which we indicate by h. It is defined as the projection of the spin along the direction of motion
+For massless fermions, chirality is correlated to the concept of \textit{helicity}, which we indicate by h. It is defined as the projection of the spin along the direction of motion
+\begin{equation}
+    h = \frac{\mathbf{S} \cdot \mathbf{p}}{\vert \mathbf{p} \vert}.
+    \label{eq:helicity}
+\end{equation}
+Note that helicity is a Lorentz invariant concept only for massless particles. Let us consider a massless, left-handed fermion \(\psi_L = \frac{1-\gamma^5}{2}\psi\), which satisfies \(\gamma^5 \psi_L = -\psi_L\). Its Dirac equation would read
 \[
-    h = \frac{\mathbf{S} \cdot \mathbf{p}}{\vert \mathbf{p} \vert}
+    \slashed{\partial} \psi_L(x) = \gamma^{\mu} \partial_\mu \psi_L(x) = 0,
 \]
-Note that helicity is a Lorentz invariant concept only for massless particles. Let us consider a massless, left-handed fermion \(\psi_L = \frac{1-\gamma^5}{2}\psi\), which satisfies \(\gamma^5 \psi_L = -\psi_L\). Its Dirac equation in momentum space (i.e., after a Fourier transform) reads
+which in momentum space (i.e., after a Fourier transform) reads
 \[
-    pdf | paper
+    \slashed{p} \psi_L(p) = \gamma^{\mu}p_\mu \psi_L(p),
 \]
-with the mass-shell condition \(p_\mu p^{\mu} = 0\). Considering motion along the positive \(z\) direction, then \(p^0 = p^3\) and \(p^1 = p^2 = 0\) (for mass-shell it has the momentum on the \(z\) axis and the energy equal to it), so that
+with the mass-shell condition \(p_\mu p^{\mu} = 0\). Considering motion along the positive \(z\) direction, then \(p^0 = p^3\) and \(p^1 = p^2 = 0\) (for mass-shell it has the momentum on the \(z\) axis and the energy equal to it, \(p^{\mu} = (p,\, 0,\, 0,\, p)\)), so that
 \[
     0 = (\gamma^0 p_0 + \gamma^3 p_3) \psi_L(p) = p^0(\gamma^3 - \gamma^0) \psi_L(p) \longrightarrow \gamma^0 \psi_L(p) = \gamma^3 \psi_L (p).
 \]
-Now, the spin operator
+Now, the spin operator\footnote{We will use the substitution \(\alpha^i \alpha^j = \gamma^0 \gamma^i \gamma^0 \gamma^j = - \gamma^i (-\mathbb{I}) \gamma^j = \gamma^i \gamma^j\).}
 \[
-    pdf
+    S^i = \frac{1}{2} \Sigma^i = -\frac{i}{4} \epsilon^{ijk} \alpha^j \alpha^k = -\frac{i}{4} \epsilon^{ijk} \gamma^j \gamma^k = \frac{1}{2} \epsilon^{ijk} \Sigma^{jk},
 \]
 has a component along the \(z\) axis given by
 \[
-    pdf
+    S^3 = \frac{1}{2} (\Sigma^{12} - \Sigma^{21}) = \Sigma^{12} = -\frac{i}{4} [\gamma^1,\,\gamma^2] = -\frac{i}{2} \gamma^1 \gamma^2,
 \]
 and measures the helicity \(h\). One computes it as follows
 \[
     \begin{aligned}
-        h \psi_L (p) & =   \\
-                     & = .
+        h \psi_L (p) & = S^3 \psi_L (p) = -\frac{i}{2}\gamma^1 \gamma^2 \psi_L (p) = + \frac{i}{2}\gamma^0 \gamma^0 \gamma^1 \gamma^2 \psi_L (p) \\
+                     & = + \frac{i}{2}\gamma^0 \gamma^1 \gamma^2 \gamma^0 \psi_L (p) = \frac{i}{2}\gamma^0 \gamma^1 \gamma^2 \gamma^3 \psi_L (p) \\
+                     & = -\frac{1}{2} \gamma^5 \psi_L(p) = \frac{1}{2} \psi_L(p).
     \end{aligned}
 \]
-Thus, \(\psi_L\) describes a particle of helicity \(h=\tfrac12\). Its antiparticle is described by the charge conjugated field \(\psi_L,c\) that is right-handed and has helicity \(h=-\tfrac12\). This statement will become clear after the discussion on charge conjugation.
+Thus, \(\psi_L\) describes a particle of helicity \(h=\tfrac12\). Its antiparticle is described by the charge conjugated field \(\psi_L,c\) that is right-handed and has helicity \(h=-\tfrac12\).
+\[
+    \begin{dcases}
+        h \psi_L = +\frac{1}{2} \psi_L, \\
+        h \psi_{L,c} = -\frac{1}{2} \psi_{L,c},
+    \end{dcases} \quad \begin{dcases}
+        h \psi_R = -\frac{1}{2} \psi_R, \\
+        h \psi_{R,c} = +\frac{1}{2} \psi_{R,c}.
+    \end{dcases}
+\]
+This statement will become clear after the discussion on charge conjugation.
 
-\paragraph{Time reversal}
-Our definition of the time reversal
+\subsubsection{Time reversal}
+
+Let us discuss the transformation that reverses the direction of time, i.e., time reversal
 \[
     \begin{aligned}
-        \mathbf{x} \xrightarrow{P} \mathbf{x}^{\prime} = \mathbf{x}, \\
-        t \xrightarrow{P} t^{\prime} = -t,
+        \mathbf{x} \xrightarrow{T} \mathbf{x}^{\prime} = \mathbf{x}, \\
+        t \xrightarrow{T} t^{\prime} = -t,
     \end{aligned}
 \]
 which in tensorial notation becomes:
-\[
-    pdf
-\]
+\begin{equation}
+    x^{\mu} \xrightarrow{T} x^{\prime \mu} = T^{\mu}_{\ \nu} x^{\nu}, \quad \text{with } T^{\mu}_{\ \nu} = \begin{pmatrix}
+        -1 & 0 & 0 & 0 \\
+        0  & 1 & 0 & 0 \\
+        0  & 0 & 1 & 0 \\
+        0  & 0 & 0 & 1
+    \end{pmatrix}.
+    \label{eq:time_rehersal_transformation}
+\end{equation}
 It is a discrete symmetry with \(\det T^{\mu \nu} = -1\). It belongs to \(\mathrm{O}(3,1)\) but is not connected to the identity. Together with the identity it forms a subgroup isomorphic to \(\mathbb{Z}_2 = \{1,-1\}\). The way time reversal acts on spinors can be found by conjecturing a suitable anti-linear transformation on the spinor
 \[
-    pdf
+    \psi(x) \xrightarrow{T} \psi^{\prime}(x^{\prime}) = \mathcal{T} \psi^*(x),
 \]
-generated by a matrix \(\mathcal{T}\). The complex conjugate is suggested by the non-relativistic limit that links the Dirac equation to the Schr¨odinger equation. The Schr¨oedinger equation is known to have a time-reversal symmetry that acts by transforming the wave function to its complex conjugate one. Thus, requiring invariance implies the equivalence
+generated by a matrix \(\mathcal{T}\). The complex conjugate is suggested by the non-relativistic limit that links the Dirac equation to the Schrödinger equation. The Schrödinger equation is known to have a time-reversal symmetry that acts by transforming the wave function to its complex conjugate one. Thus, requiring invariance implies the equivalences
 \[
     \begin{aligned}
-        pdf \\
-        pdf
+        \left(\gamma^{\mu} \partial_\mu + m \right) \psi(x) = 0 & \quad \iff \quad \left(\gamma^{\mu} \partial_\mu^{\prime} + m \right) \psi^{\prime} (x^{\prime}) = 0, \\
+        x^{\mu}                                                 & \quad \iff \quad x^{\prime \mu} = T^{\mu}_{\ \nu} x^{\nu},                                            \\
+        \partial_{\mu}                                          & \quad \iff \quad \partial_{\mu}^{\prime} = \left(T^{-1}\right)_{\mu}^{\ \nu} \partial_{\nu},          \\
+        \psi(x)                                                 & \quad \iff \quad \psi^{\prime}(x^{\prime}) = \mathcal{T} \psi^*(x).
     \end{aligned}
 \]
-Comparing the latter with the complex conjugate of the former, namely \((\gamma^{\mu *}\partial_\mu + m)\psi^*(x) = 0\), one finds
+Comparing the first equation (transformed Dirac equation, which we multiply further by \(\mathcal{T}^{-1}\) from the left) with its complex conjugate, namely \((\gamma^{\mu *}\partial_\mu + m)\psi^*(x) = 0\), one finds
 \[
-    pdf
+    \mathcal{T}^{-1} \gamma^{\mu} \left(T^{-1}\right)_{\mu}^{\ \nu} \mathcal{T} = \gamma^{\nu\,*},
 \]
-The last equality is obtained using the explicit Dirac representation of gamma matrices (77).
-One needs to find a matrix \(\mathcal{T}\) that commutes with \(\gamma^0\) and \(\gamma^2\) and anticommutes with \(\gamma^1\) and \(\gamma^3\). This matrix is proportional to \(\gamma^1\gamma^3\). Adding an arbitrary phase \(\eta_T\) one finds
+or equivalently
 \[
-    pdf
+    \mathcal{T}^{-1} \gamma^{\mu} \mathcal{T} = T^{\mu}_{\ \nu} \gamma^{\nu\,*} = \begin{pmatrix}
+        -\gamma^{0\,*} \\
+        \gamma^{1\,*}  \\
+        \gamma^{2\, *} \\
+        \gamma^{3\, *}
+    \end{pmatrix} = \begin{pmatrix}
+        \gamma^0  \\
+        -\gamma^1 \\
+        \gamma^2  \\
+        -\gamma^3
+    \end{pmatrix}
+\]
+The last equality is obtained using the explicit Dirac representation of gamma matrices \eqref{eq:gamma_matrices_dirac_rep}.
+One needs to find a matrix \(\mathcal{T}\) that commutes with \(\gamma^0\) and \(\gamma^2\) and anticommutes with \(\gamma^1\) and \(\gamma^3\):
+\begin{itemize}
+    \item[(\(\mu=0\))] commutes with \(\gamma^0\):
+          \[
+              \mathcal{T}^{-1} \gamma^0 \mathcal{T} = T^0_{\ 0} \gamma^{0\,*} = -\gamma^{0\,*} = \gamma^0,
+          \]
+          which implies \(\left[\mathcal{T},\,\gamma^0\right] = 0\);
+    \item[(\(\mu=2\))] commutes with \(\gamma^2\):
+          \[
+              \mathcal{T}^{-1} \gamma^2 \mathcal{T} = T^2_{\ 2} \gamma^{2\,*} = \gamma^{2\,*} = \gamma^2,
+          \]
+          which implies \(\left[\mathcal{T},\,\gamma^2\right] = 0\);
+    \item[(\(\mu=1\))] anticommutes with \(\gamma^1\):
+          \[
+              \mathcal{T}^{-1} \gamma^1 \mathcal{T} = T^1_{\ 1} \gamma^{1\,*} = \gamma^{1\,*} = -\gamma^1,
+          \]
+          which implies \(\{\mathcal{T},\,\gamma^1\} = 0\);
+    \item[(\(\mu=3\))] anticommutes with \(\gamma^3\):
+          \[
+              \mathcal{T}^{-1} \gamma^3 \mathcal{T} = T^3_{\ 3} \gamma^{3\,*} = \gamma^{3\,*} = -\gamma^3,
+          \]
+          which implies \(\{\mathcal{T},\,\gamma^3\} = 0\).
+\end{itemize}
+This matrix is proportional to \(\gamma^1\gamma^3\): it commutes with an even number of gamma matrices with indices different from 1 and 3 (i.e. \(\gamma^0\) and \(\gamma^2\)). Adding an arbitrary phase \(\eta_T\) one finds
+\[
+    \mathcal{T} = \eta_T \gamma^1 \gamma^3.
 \]
 For simplicity, one can set \(\eta_T = 1\). Note that on spinors \(T^2 = -1\) and \(T^4=1\).
 
@@ -1115,164 +1415,364 @@ To overcome the problem of negative energy solutions, Dirac developed the theory
 \]
 The state with one physical electron consists of an occupied positive energy level on top of the filled Dirac sea
 \[
-    pdf
+    E_{(electron)} = E_p > 0, \quad Q_{(electron)} = e < 0,
 \]
 It has a charge \(e<0\) (by convention) and cannot jump to a negative energy level because the negative energy levels are all occupied, and the Pauli principle forbids the jump: the configuration is stable. In addition, one can also imagine a configuration in which a negative energy level lacks its electron: this is a hole in the Dirac sea. It is equivalent to a configuration in which a particle with positive energy and charge \(-e\) is present on top of the vacuum. In fact, filling the hole with an electron with negative energy \(-E_p\) and charge \(e\) gives back the vacuum state with vanishing energy and charge:
 \[
-    pdf
+    \begin{aligned}
+        E_{(hole)} + (-E_p) = E_{(vacuum)} = 0 \quad & \Longrightarrow \quad E_{(hole)} = +E_p > 0, \\
+        Q_{(hole)} + e = Q_{(vacuum)} = 0 \quad      & \Longrightarrow \quad Q_{(hole)} = -e > 0.
+    \end{aligned}
 \]
-These considerations led Dirac to predict the existence of the positron, the antiparticle of the electron. Moreover, it appears possible to imagine the phenomenon of pair creation: a photon that interacts with the vacuum can transfer its energy to an electron with negative energy sitting in the Dirac sea and brings it up to positive energy, thus creating an electron and a hole, i.e., an electron/positron pair. This interpretation provides useful physical intuition, though it is not directly applicable to bosonic systems (as Pauli’s principle is not valid for bosons). The correct realization of these ideas is implemented in QFT, both for fermions and bosons.
+These considerations led Dirac to predict the existence of the positron, the antiparticle of the electron. Moreover, it appears possible to imagine the phenomenon of pair creation: a photon that interacts with the vacuum can transfer its energy to an electron with negative energy sitting in the Dirac sea and brings it up to positive energy, thus creating an electron and a hole, i.e., an electron/positron pair.
+This interpretation provides useful physical intuition, though it is not directly applicable to bosonic systems (as Pauli’s principle is not valid for bosons). The correct realization of these ideas is implemented in QFT, both for fermions and bosons.
 
-\paragraph{Charge conjugation.}
+\subsubsection{Charge conjugation}
 
-The Dirac equation can be coupled to electromagnetism with the minimal substitution \(p_\mu \to p_\mu -eA_\mu\). It takes the form
+The Dirac equation can be coupled to electromagnetism with the minimal substitution
 \[
-    pdf
+    p_\mu \to p_\mu -eA_\mu.
 \]
-and describes particles with charge e and antiparticles with same mass but opposite charge \(-e\), as suggested by the hole theory of Dirac. It should be possible to describe the same physics in terms of a Dirac equation for the antiparticles, identifying the original particles as anti-antiparticles.
+It takes the form
+\begin{equation}
+    \left[\gamma^{\mu} (\partial_\mu - i e A_\mu) - m \right] \psi = 0,
+    \label{eq:dirac_equation_em_particles}
+\end{equation}
+and describes particles with charge \(e\) and antiparticles with same mass but opposite charge \(-e\), as suggested by the hole theory of Dirac. It should be possible to describe the same physics in terms of a Dirac equation for the antiparticles, identifying the original particles as anti-antiparticles.
 The new equation must take the form
-\[
-    pdf
-\]
+\begin{equation}
+    \left[\gamma^{\mu} (\partial_\mu + i e A_\mu) - m \right] \psi_c = 0,
+    \label{eq:dirac_equation_em_antiparticles}
+\end{equation}
 where \(\psi_c\) denotes the charge conjugation of \(\psi\). The existence of a discrete transformation that links \(\psi\) to \(\psi_c\) is expected on physical ground, as it describes the same physical situation.
-This transformation is called charge conjugation. It exchanges particles and antiparticles. To identify it, one proceeds as follows. One compares eq. (219) with the complex conjugate of (218), which becomes
+This transformation is called \textit{charge conjugation}: it exchanges particles and antiparticles. To identify it, one proceeds as follows, comparing eq. \eqref{eq:dirac_equation_em_antiparticles} with the complex conjugate of \eqref{eq:dirac_equation_em_particles}, which becomes
 \[
-    pdf
+    \left[\gamma^{\mu *} (\partial_\mu + i e A_\mu) - m \right] \psi^* = 0.
 \]
-[...]
-[sofi]
+so that the correct relative sign between \(\partial_\mu\) and \(ieA_\mu\) is achieved. Now, one searches for a matrix \(\mathcal{A}\) such that
+\begin{equation}
+    \mathcal{A} \gamma^{\mu *} \mathcal{A}^{-1} = \gamma^{\mu} \iff \mathcal{A}^{-1} \gamma^{\mu} \mathcal{A} = \gamma^{\mu *},
+    \label{eq:charge_conjugation_gamma_condition_A}
+\end{equation}
+so that the identification
+\begin{equation}
+    \psi_c = \mathcal{A} \psi^*
+    \label{eq:charge_conjugation_transformation_A}
+\end{equation}
+produces the desired equation. One usually defines
+\begin{equation}
+    \mathcal{A} = \mathcal{C} \beta
+    \label{eq:charge_conjugation_A_C_relation}
+\end{equation}
+with \(\mathcal{C}\) the \textbf{charge conjugation matrix}. Now it is possible to write equation \eqref{eq:charge_conjugation_transformation_A} in terms of the Dirac conjugate \(\overline{\psi} = \psi^{\dagger} \beta\) as follows:
+\begin{equation}
+    \psi_c = \mathcal{A} \psi^* = \mathcal{C} \beta \psi^*= \mathcal{C} (\psi^\dagger \beta)^T = \mathcal{C} \overline{\psi}^T,
+\end{equation}
+where we have used that \(\beta\) is real and symmetric in the Dirac representation. Then, the problem is to identify the charge conjugation matrix. Recalling that \(\gamma^{\mu\,\dagger} = -\beta \gamma^\mu \beta\) and taking the transpose, one finds \(\gamma^{\mu *} = -\beta \gamma^{\mu T} \beta\), i.e. \(\beta \gamma^{\mu\,*} \beta = - \gamma^{\mu\,T}\). This way eq. \eqref{eq:charge_conjugation_transformation_A} reduces to the requirement
+\begin{equation}
+    \mathcal{C} \gamma^{\mu T} \mathcal{C}^{-1} = - \gamma^{\mu},
+    \label{eq:charge_conjugation_gamma_condition_C}
+\end{equation}
+which assumes the form
+\[
+    \mathcal{C}^{-1} \gamma^{\mu} \mathcal{C} = - \gamma^{\mu T} = \begin{pmatrix}
+        -\gamma^{0} \\
+        \gamma^{1}  \\
+        -\gamma^{2} \\
+        \gamma^{3}
+    \end{pmatrix},
+\]
+where we have used the Dirac representation \eqref{eq:gamma_matrices_dirac_rep}, where \(\gamma^0\) and \(\gamma^2\) are symmetric, (\(\gamma^{0 T} = \gamma^0\)
+and \(\gamma^{2 T} = \gamma^2\)) while \(\gamma^1\) and \(\gamma^3\) are antisymmetric (\(\gamma^{1 T} = -\gamma^1\) and \(\gamma^{3 T} = -\gamma^3\)). Thus \(\mathcal{C}\) must anticommute with \(\gamma^0\) and \(\gamma^2\) while commuting with \(\gamma^1\) and \(\gamma^3\); then we may take
+\begin{equation}
+    \mathcal{C} = \gamma^0\gamma^2, \quad \mathcal{C}^T = -\mathcal{C} = - \mathcal{C}^{-1},
+    \label{eq:charge_conjugation_matrix_C}
+\end{equation}
+where we have highlighted that \(\mathcal{C}\) is antisymmetric and coincides with its inverse:
+\begin{enumerate}
+    \item \(\mathcal{C}\) is antisymmetric:
+          \[
+              \mathcal{C} = \gamma^0 \gamma^2 = (-i \beta)(-i \beta \alpha^2) = -\alpha^2 = \begin{pmatrix}
+                  0        & -\sigma^2 \\
+                  \sigma^2 & 0
+              \end{pmatrix},
+          \]
+          but \(\sigma^2\) is antisymmetric, so that \(\mathcal{C}^T = -\mathcal{C}\);
+    \item \(\mathcal{C}\) is its own inverse:
+          \[
+              \mathcal{C} \mathcal{C} = \gamma^0 \gamma^2 \gamma^0 \gamma^2 = \gamma^0 (-\gamma^0 \gamma^2) \gamma^2 = - (\gamma^0)^2 (\gamma^2)^2 = (-i \beta \alpha^2)^2 = \mathbb{I} \implies \mathcal{C}^{-1} = \mathcal{C}.
+          \]
+\end{enumerate}
+Inserting an arbitrary phase \(\eta_C\), one finds for the charge conjugation transformation of the Dirac spinor
+\[
+    \psi \to \psi_c = \eta_C \mathcal{A} \psi^* = \eta_C \mathcal{C} \overline{\psi}^T = \eta_C \gamma^0 \gamma^2 \overline{\psi}^T,
+\]
+here written in two equivalent ways. The arbitrary phase is usually set to 1 for simplicity. What we have described is not a true symmetry if one keeps the background \(A_\mu\) fixed. To achieve invariance, one should transform the background as well \(A_\mu \xrightarrow{C} A_\mu^c = -A_\mu\). One names this particular symmetry as \textbf{“background symmetry”}: it relates solutions in a given background to solutions in a transformed background. It becomes a true symmetry when also the field \(A_\mu\) is treated as a dynamical field, subject to its own equations of motion and to the transformation for \(A_\mu\) given above. This is the charge conjugation symmetry of QED.
 
-\(\mathcal{C}\) anticommutes with \(\gamma^0\) and \(\gamma^2\) and commutes with \(\gamma^1\) and \(\gamma^3\); then we may take
-\[
-    \mathcal{C} = \gamma^0\gamma^2
-\]
-Note that C is antisymmetric (\(\mathcal{C}^T = -\mathcal{C}\)) and coincides with its inverse (\(\mathcal{C}^{-1} = \mathcal{C}\)). Inserting an arbitrary phase \(\eta_C\), one finds for the charge conjugation transformation of the Dirac spinor
-\[
-    \psi \to \psi_c = \eta_C \mathcal{A} \psi^* = \dots
-\]
-here written in two equivalent ways. The arbitrary phase is usually set to 1 for simplicity. What we have described is not a true symmetry if one keeps the background \(A_\mu\) fixed. To achieve invariance, one should transform the background as well \(A_\mu \xrightarrow{C} A_\mu^c = -A_\mu\). One names this particular symmetry as “background symmetry”: it relates solutions in a given background to solutions in a transformed background. It becomes a true symmetry when also the field \(A_\mu\) is treated as a dynamical field, subject to its own equations of motion and to the transformation for \(A_\mu\) given above. This is the charge conjugation symmetry of QED.
 Finally, let us show that the charge conjugation of a left-handed spinor is right-handed and vice versa: considering that a left-handed spinor and its Dirac conjugate satisfy
 \[
-    \psi_L = P_L \psi_L \to \overline{\psi_L} = \overline{\psi_L} P_R
+    \psi_L = P_L \psi_L \to \overline{\psi_L} = \overline{\psi_L} P_R,
 \]
-one finds by a direct computation that \(\psi_L,c\) is right-handed
+one finds by a direct computation that \(\psi_{L,c}\) is right-handed
 \[
-    pdf
+    \psi_{L,c} = \mathcal{C} \overline{\psi_L}^T = \mathcal{C} ( \overline{\psi_L} P_R )^T = \mathcal{C} P_R^T \overline{\psi_L}^T = P_R \mathcal{C} \overline{\psi_L}^T = P_R \psi_{L,c},
 \]
-where we have used the Dirac basis \(\mathcal{C} = \gamma^0\gamma^2\) and \(gamma^{5,T} = gamma^5\), i.e. \(P_R^T = P_R\).
-    [sofi dappertutto]
+where we have used the Dirac basis \(\mathcal{C} = \gamma^0\gamma^2\) and \(\gamma^{5,T} = \gamma^5\), i.e. \(P_R^T = P_R\).
 
-\paragraph{CPT.} Although the discrete symmetries C, P, and T of the free theory can be broken by interactions (notably, by the weak interaction), the CPT combination is found to be always valid for theories which are Lorentz invariant (i.e., invariant under \(\mathrm{SO}^+(3,1)\)). The theorem that proves this statement is known as the “CPT theorem” and will not be proved in generality on these notes. In the case of a Dirac fermion, the CPT transformation takes the form
+\subsubsection{CPT}
+
+Although the discrete symmetries \(C\), \(P\), and \(T\) of the free theory can be broken by interactions (notably, by the weak interaction), the \(CPT\) combination is found to be always valid for theories which are Lorentz invariant (i.e., invariant under \(\mathrm{SO}^+(3,1)\)). The theorem that proves this statement is known as the \textbf{“CPT theorem”} and will not be proved in generality on these notes. In the case of a Dirac fermion, the CPT transformation takes the form
 \[
     \begin{aligned}
-        x^{\mu} & \to x^{\prime \mu} = - x^{\mu},                         \\
-        \psi(x) & \to \psi_{CPT}(x^{\prime}) = \eta_{CPT}gamma^5 \psi(x),
+        x^{\mu} & \to x^{\prime \mu} = - x^{\mu},                          \\
+        \psi(x) & \to \psi_{CPT}(x^{\prime}) = \eta_{CPT}\gamma^5 \psi(x),
     \end{aligned}
 \]
-with \(\eta_{cpt}\) an arbitrary phase and one verifies quite easily the invariance of the free Dirac equation. [sofi]
+with \(\eta_{CPT}\) an arbitrary phase and one verifies quite easily the invariance of the free Dirac equation.
 
-\subsection{Action}
+We can investigate further
+\[
+    \begin{aligned}
+        (\gamma^{\mu}\partial_\mu + m)\psi(x) \xrightarrow{CPT} & (\gamma^{\mu}\partial_\mu^{\prime} + m) \psi_{CPT}(x^{\prime}) = 0,  \\
+                                                                & [(\gamma^{\mu})(-\partial_\mu) + m] \eta_{CPT} \gamma^5 \psi(x) = 0, \\
+                                                                & \eta_{CPT} \gamma^5 [-\gamma^{\mu} \partial_\mu + m] \psi(x) = 0,
+    \end{aligned}
+\]
+thus we have found that
+\[
+    (\gamma^{\mu}\partial_\mu^{\prime} + m) \psi_{CPT}(x^{\prime}) = 0 \implies \gamma^5 (\gamma^{\mu}\partial_\mu + m) \psi(x) = 0.
+\]
+
+Now let us investigate the intermediate step of the CPT transformation:
+\[
+    \psi \xrightarrow{C} \psi_{C} \xrightarrow{P} \psi_{CP} \xrightarrow{T} \psi_{CPT}.
+\]
+We haev:
+\begin{enumerate}
+    \item Charge conjugation:
+          \[
+              \psi \xrightarrow{C} \psi_C = \mathcal{C} \overline{\psi}^T.
+          \]
+    \item Parity:
+          \[
+              \psi_C \xrightarrow{P} \psi_{CP} = \mathcal{C} (\overline{\psi} \gamma^0)^T = \mathcal{C} (i\beta) \overline{\psi}^T = i\mathcal{C} \beta (\psi^{\dagger} \beta)^T = i \mathcal{C} \beta \beta (\psi^{\dagger})^T = i \mathcal{C} \psi^*.
+          \]
+    \item Time reversal:
+          \[
+              \psi_{CP} \xrightarrow{T} \psi_{CPT} = i \mathcal{C} (\mathcal{T} \psi^*)^* = i \mathcal{C} (\gamma^1 \gamma^3) \psi = i (\gamma^0 \gamma^2)(\gamma^1 \gamma^3) \psi = \gamma^5 \psi.
+          \]
+\end{enumerate}
+Thus, we have found that the combination of the three discrete transformations produces
+\[
+    \psi \xrightarrow{CPT} \psi_{CPT} = \gamma^5 \psi,
+\]
+which coincides with the previous result up to an overall phase \(\eta_{CPT} = 1\).\TODO{check signs.}
+
+\subsection{Action and Symmetries}
+
 The action is of great value to study symmetries, interactions, and equations of motion. It is also the starting point for quantization, either canonical or through path integrals. To identify an action for the Dirac equation, one ensures Lorentz invariance by taking a scalar lagrangian density. The latter is constructed using the Dirac field \(\psi\) and its Dirac conjugate \(\overline{\psi} = \psi^{\dagger} \beta = \psi^{\dagger} i \gamma^0\), which has the property of transforming in such a way to make the product \(\overline{\psi} \psi\) a scalar. Then, one recognizes that a suitable action is given by
-\[
-    S[\psi,\,\overline{\psi}] = \int \mathrm{d}^4 x\,\mathcal{L}, \quad \mathcal{L} = -\overline{\psi}(\gamma^{\mu} \partial_\mu + m)\psi
-\]
-It is a Lorentz scalar, and varying \(\overline{\psi}\) and \(\psi\) independently, one finds that the least action principle indeed produces the Dirac equation and its conjugated one
+\begin{equation}
+    S[\psi,\,\overline{\psi}] = \int \mathrm{d}^4 x\,\mathcal{L}, \quad \mathcal{L} = -\overline{\psi}(\gamma^{\mu} \partial_\mu + m)\psi.
+    \label{eq:dirac_action_lagrangian}
+\end{equation}
+It is a Lorentz scalar, and varying \(\overline{\psi}\) and \(\psi\) independently, one finds that the least action principle indeed produces the Dirac equation and its conjugate
 \[
     \begin{aligned}
-        \delta \overline{\psi}) & \quad (\gamma^{\mu} \partial_\mu + m)\psi(x) = 0, \\
-        \delta \psi)            & \quad pdf
+        \delta \overline{\psi}) & \quad (\gamma^{\mu} \partial_\mu + m)\psi(x) = 0,                             \\
+        \delta \psi)            & \quad \overline{\psi}(x) (\overleftarrow{\partial}_\mu \gamma^{\mu} - m) = 0,
     \end{aligned}
+\]
+We could also work with more complex lagrangians, for instance adding interaction terms. An important example is the coupling to electromagnetism through minimal substitution
+\[
+    \mathcal{L} = - \overline{\psi} \left[\gamma^{\mu} (\partial_\mu - i e A_\mu) + m \right] \psi.
 \]
 
 \paragraph{Symmetries.}
 The symmetries under the Lorentz group have already been described. The symmetries under space-time translations are verified by taking the spinor \(\psi(x)\) transforming as a scalar (\(\psi(x) \to \psi^{\prime}(x^{\prime}) = \psi(x)\) under \(x^{\mu} \to x^{\prime \mu} = x^{\mu} + a^{\mu}\) with \(a^{\mu}\) constant). The related Noether current gives the energy-momentum tensor.
 Let us consider in more detail the internal symmetry generated by phase transformations
+\begin{equation}
+    \begin{dcases}
+        \psi(x) \longrightarrow \psi^{\prime}(x) = e^{i \alpha} \psi(x), \\
+        \overline{\psi}(x) \longrightarrow \overline{\psi}^{\prime}(x) = e^{-i \alpha} \overline{\psi}(x),
+    \end{dcases}
+    \label{eq:dirac_U1_transformation}
+\end{equation}
+forming the group \(\mathrm{U}(1)\). It is immediate to check that the action \eqref{eq:dirac_action_lagrangian} is invariant. The infinitesimal version reads
 \[
-    \begin{aligned}
-        pdf
-    \end{aligned}
-\]
-forming the group \(\mathrm{U}(1)\). It is immediate to check that the action (232) is invariant. The infinitesimal version reads
-\[
-    pdf
+    \begin{dcases}
+        \delta \psi(x) = i \alpha \psi(x), \\
+        \delta \overline{\psi}(x) = -i \alpha \overline{\psi}(x),
+    \end{dcases}
 \]
 and extending \(\alpha\) to an arbitrary function \(\alpha(x)\) we compute the variation of the action
 \[
-    pdf
+    \delta_{\alpha} S [\psi,\,\overline{\psi}] = - \int \mathrm{d}^4 x (\partial_\mu \alpha) \underbrace{i \overline{\psi} \gamma^{\mu} \psi}_{J^{\mu}} = \int \mathrm{d}^4 x \alpha(x) \partial_{\mu} J^{\mu},
 \]
-which verifies again the \(\mathrm{U}(1)\) symmetry (for constant \(\alpha\)), obtaining at the same time the Noether current
+which verifies again the \(\mathrm{U}(1)\) symmetry (for constant \(\alpha\)) (in the last step we performed an integration by parts neglecting the boundary term), obtaining at the same time the Noether current
+\begin{equation}
+    J^{\mu} = i \overline{\psi} \gamma^{\mu} \psi,
+    \label{eq:dirac_noether_current_u1}
+\end{equation}
+which is conserved on-shell (i.e., using the equations of motion: \(\partial_{\mu}J^{\mu}=0\)). This result is enforced by the variation of the lagrangian density, which can be computed as the subtraction of the transformed lagrangian density minus the original one:\footnote{The action is linear, thus only the terms proportional to the variations of the fields survive.}
 \[
-    pdf
+    \begin{aligned}
+        \delta_{\alpha} \mathcal{L} & = - \delta_{\alpha} \overline{\psi} (\gamma^{\mu} \partial_\mu + m) \psi - \overline{\psi} (\gamma^{\mu} \partial_\mu + m) \delta_{\alpha} \psi                                     \\
+                                    & = i \alpha \overline{\psi} (\gamma^{\mu} \partial_\mu) \psi - i \overline{\psi} \gamma^{\mu} (\partial_\mu \alpha \psi)                                                             \\
+                                    & = i \alpha \overline{\psi} \gamma^{\mu} (\partial_\mu \psi) - i \alpha \overline{\psi} \gamma^{\mu} (\partial_\mu \psi) - i (\partial_\mu \alpha) \overline{\psi} \gamma^{\mu} \psi \\
+                                    & = - i (\partial_\mu \alpha) \overline{\psi} \gamma^{\mu} \psi.
+    \end{aligned}
 \]
-which is conserved on-shell (i.e., using the equations of motion: \(\partial_{\mu}J^{\mu}=0\)). As already noticed, the conserved charge density is positive definite
+
+As already noticed, the conserved charge density is positive definite
+\begin{equation}
+    J^0 = i \overline{\psi} \gamma^{0} \psi = \psi^{\dagger} \psi = \vert \psi \vert^2 \geq 0,
+    \label{eq:dirac_charge_density_positive_definite}
+\end{equation}
+and led Dirac to interpret it as a probability density. In second quantization, it is reinterpreted as the symmetry related to the fermionic number (its charge will count the number of particles minus the number of antiparticles), and in that context, eq. \eqref{eq:dirac_charge_density_positive_definite} becomes an operator that is no longer positive definite. In the coupling to electromagnetism, it is related to the electric charge.
+More generally, a collection of \(N\) Dirac fermions with the same Dirac mass is invariant under the group \(\mathrm{U}(N) = \mathrm{U}(1)\times \mathrm{SU}(N) \). To see this, let us consider \(N\) fermions \(\psi^i\) transforming in the fundamental representation of \(\mathrm{U}(N)\), the N representation,
 \[
-    pdf
+    \psi^i \to \psi^{\prime i} = U^i_{\ j} \psi^j, \quad U \in \mathrm{U}(N).
 \]
-and led Dirac to interpret it as a probability density. In second quantization, it is reinterpreted as the symmetry related to the fermionic number (its charge will count the number of particles minus the number of antiparticles), and in that context, eq. (238) becomes an operator that is no longer positive definite. In the coupling to electromagnetism, it is related to the electric charge.
-More generally, a collection of N Dirac fermions with the same Dirac mass is invariant under the group \(\mathrm{U}(N) = \mathrm{U}(1)\times \mathrm{SU}(N) \). To see this, let us consider N fermions \(\psi^i\) transforming in the fundamental representation of \(\mathrm{U}(N)\), the N representation,
+The Dirac conjugates \(\overline{\psi}_i\) (that contains the complex conjugate fields) transform in the antifundamental representation of \(\mathrm{U}(N)\), the \(\overline{N}\) representation, which can be written as
 \[
-    pdf
-\]
-The Dirac conjugates \(\psi^i\) (that contains the complex conjugate fields) transform in the antifundamental representation of \(\mathrm{U}(N)\), the N representation, which can be written as
-\[
-    pdf
+    \overline{\psi}_i \to \overline{\psi}_i^{\prime} = \overline{\psi}_j (U^{-1})^j_{\ i}.
 \]
 Then, the lagrangian
 \[
-    pdf
+    \mathcal{L} = - \overline{\psi}_i (\gamma^{\mu} \partial_\mu + m) \psi^i,
 \]
-is manifestly invariant. The corresponding Noether currents
+is manifestly invariant under \(\mathrm{U}(N)\):
 \[
-    pdf
+    \mathcal{L}^{\prime} = - \overline{\psi}_j (U^{-1})^j_{\ i} (\gamma^{\mu} \partial_\mu + m) U^i_{\ k} \psi^k = - \overline{\psi}_j \delta^j_{\ k} (\gamma^{\mu} \partial_\mu + m) \psi^k = \mathcal{L}.
 \]
-are conserved \(\partial_\mu J^{\mu,\,a}=0\). They are derived by considering infinitesimal transformations \(U = e^{i \alpha^a T^a} = 1 + i \alpha^a T^a\) and extending the infinitesimal Lie parameters \(\alpha^a\) to be arbitrary functions, as usual.
-If the mass vanishes, the internal symmetry becomes larger, and given by the group \(\mathrm{U}(2N)\), as left and right-handed fermions transform independently. This fact may be better appreciated and proved keeping in mind the properties of chiral fermions and their charge conjugation.
+The infinitesimal variations, considering infinitesimal transformations \(U = e^{i \alpha^a T^a} = 1 + i \alpha^a T^a\), read
+\[
+    \begin{dcases}
+        \delta \psi^i = i \alpha_a (T^a)^i_{\ j} \psi^j, \\
+        \delta \overline{\psi}_i = - i \alpha_a \overline{\psi}_j (T^a)^j_{\ i},
+    \end{dcases}
+\]
+where \(T^a\), \(a=1, \ldots, N^2\) are the generators of \(\mathrm{U}(N)\) in the fundamental representation. Thus the variation of the action, after extending \(\alpha^a\) to arbitrary functions \(\alpha^a(x)\), gives
+\[
+    \begin{aligned}
+        \delta_{\alpha} S[\psi,\,\overline{\psi}] & = - \int \mathrm{d}^4 x \left[ - i \alpha_a \overline{\psi}_j (T^a)^j_{\ i} (\gamma^{\mu} \partial_\mu + m) \psi^i + \overline{\psi}_i (\gamma^{\mu} \partial_\mu + m) i \alpha_a (T^a)^i_{\ k} \psi^k \right]                              \\
+                                                  & = - \int \mathrm{d}^4 x (- i)(\partial_\mu \alpha_a) \overline{\psi}_i \gamma^{\mu} (T^a)^i_{\ j} \psi^j = \int \mathrm{d}^4 x \alpha_a(x) \partial_{\mu} \underbrace{i \overline{\psi}_i \gamma^{\mu} (T^a)^i_{\ j} \psi^j}_{J^{\mu,\,a}},
+    \end{aligned}
+\]
+The corresponding Noether currents
+\[
+    J^{\mu,\,a} = i \overline{\psi}_i \gamma^{\mu} (T^a)^i_{\ j} \psi^j, \quad a = 1, \ldots, N^2,
+\]
+are conserved \(\partial_\mu J^{\mu,\,a}=0\), and are also called \textbf{non-Abelian currents}. If the mass vanishes, the internal symmetry becomes larger, and given by the group \(\mathrm{U}(2N)\), as left and right-handed fermions transform independently. This fact may be better appreciated and proved keeping in mind the properties of chiral fermions and their charge conjugation.
 
-    [sofi computations diocane]
+\subsubsection{Action for Chiral Fermions}
 
-
-
-\paragraph{Chiral fermions.}
 Often, one analyzes the action rather than the equations of motion to derive general properties of the system. Thus, it is interesting to study the action written in terms of the irreducible chiral components \(\psi_L\) and \(\psi_R\) and their Dirac conjugates. It takes the form
 \[
-    pdf
+    S[\psi_L,\,\psi_R,\,\overline{\psi}_L,\,\overline{\psi}_R] = \int \mathrm{d}^4 x \left[- \overline{\psi}_L \gamma^{\mu} \partial_\mu \psi_L - \overline{\psi}_R \gamma^{\mu} \partial_\mu \psi_R - m (\overline{\psi}_L \psi_R + \overline{\psi}_R \psi_L) \right],
 \]
 which is verified by recalling the properties of the projectors \(\psi_{L/R} \), and in particular
 \[
     \begin{aligned}
-        pdf
+        \psi_L               & = P_L \psi = \frac{\mathbb{I} - \gamma^5}{2} \psi = \frac{\mathbb{I} - \gamma^5}{2} \psi_L,                                                                         \\
+        \overline{\psi}_L    & = \psi_L^{\dagger} \beta = \psi^{\dagger}_L \frac{\mathbb{I} - \gamma^5}{2} \beta = \psi^{\dagger}_L \beta \frac{\mathbb{I} + \gamma^5}{2} = \overline{\psi}_L P_R, \\
+        \gamma^{\mu} P_{L/R} & = P_{R/L} \gamma^{\mu}, \quad \gamma^{\mu} \frac{\mathbb{I} \pm \gamma^5}{2} = \frac{\mathbb{I} \mp \gamma^5}{2} \gamma^{\mu}.
     \end{aligned}
 \]
-This form of the action shows that the Dirac mass term m cannot be present for chiral fermions (i.e., in models where one keeps only \(\psi_L\) by setting \(\psi_R = 0\), or more generally where left-handed fermions are coupled differently to other particles than right-handed fermions). Recall that the Dirac mass term had the property of being invariant under the \(\mathrm{U}(1)\) phase transformations given in equation ???\footnote{In chiral models where parity is not conserved, there may be several right-handed and left-handed fermions with different charges and even different in numbers. The fermions entering the standard model are, in fact, chiral, in the sense that left-hand fermions have couplings different from their right-handed partners (i.e., different charges). They cannot have Dirac masses, which would not be gauge invariant: the transformation laws of \(\psi_L\) under the standard model symmetries (\(\mathrm{SU}(3)\times \mathrm{SU}(2)\times \mathrm{U}(1)\)) are different from those of \(\psi_R\). The Dirac masses of the standard model emerge as a consequence of the Higgs mechanism for the spontaneous breaking of the \(\mathrm{SU}(2)\times \mathrm{U}(1)\) gauge symmetry.}
+This form of the action shows that the Dirac mass term m cannot be present for chiral fermions (i.e., in models where one keeps only \(\psi_L\) by setting \(\psi_R = 0\), or more generally where left-handed fermions are coupled differently to other particles than right-handed fermions). Recall that the Dirac mass term had the property of being invariant under the \(\mathrm{U}(1)\) phase transformations given in equation \eqref{eq:dirac_U1_transformation}\footnote{In chiral models where parity is not conserved, there may be several right-handed and left-handed fermions with different charges and even different in numbers. The fermions entering the standard model are, in fact, chiral, in the sense that left-hand fermions have different couplings from their right-handed partners (i.e., different charges). They cannot have Dirac masses, which would not be gauge invariant: the transformation laws of \(\psi_L\) under the standard model symmetries (\(\mathrm{SU}(3)\times \mathrm{SU}(2)\times \mathrm{U}(1)\)) are different from those of \(\psi_R\). The Dirac masses of the standard model emerge as a consequence of the Higgs mechanism for the spontaneous breaking of the \(\mathrm{SU}(2)\times\mathrm{U}(1)\) gauge symmetry.}
 
-[Majorana mass and Majorana fermions]
+However, there is one more Lorentz invariant mass term that is possible: the \textbf{Majorana mass}. It breaks the U(1) symmetry related to the fermion number. It is used in extensions of the standard model that describe conjectured phenomena of neutrinos (such as the double beta decay without emission of neutrinos). It is of the form
+\[
+    \mathcal{L}_M = - \frac{M}{2} \psi^T \mathcal{C}^{-1} \psi + \text{h.c.} = - \frac{M}{2} (\psi_L^T \mathcal{C}^{-1} \psi_L + \psi_R^T \mathcal{C}^{-1} \psi_R) + \text{h.c.},
+\]
+where \(M\) is the Majorana mass, \(\mathcal{C} = \gamma^0 \gamma^2\) is the charge conjugation matrix introduced in eq. \eqref{eq:charge_conjugation_matrix_C}, and “h.c.” indicates hermitian conjugation. This term is Lorentz invariant and, therefore, admissible. However, it breaks the U(1) fermion number symmetry of \eqref{eq:dirac_U1_transformation}. Lorentz invariance is explicitly verified: under infinitesimal transformations of Lorentz, one has
+\[
+    \delta \psi = \frac{i}{2} \omega_{\mu \nu} \Sigma^{\mu \nu} \psi, \quad \delta \psi^T = - \frac{i}{2} \omega_{\mu \nu} \psi^T \Sigma^{\mu \nu T} = -\frac{i}{2} \omega_{\mu \nu} \psi^T \mathcal{C}^{-1} \Sigma^{\mu \nu} \mathcal{C},
+\]
+where the latter expression emerges by considering the properties \eqref{eq:charge_conjugation_gamma_condition_C} of the charge conjugation matrix:
+\[
+    \gamma^{\mu T} = - \mathcal{C}^{-1} \gamma^{\mu} \mathcal{C} \quad \Longrightarrow \quad \Sigma^{\mu \nu T} = - \mathcal{C}^{-1} \Sigma^{\mu \nu} \mathcal{C}.
+\]
+Thus we find that the Majorana mass term is invariant \(\delta \mathcal{L}_M = 0\), as expected. We have to highlight that the Majorana mass term is non-vanishing only for chiral fermions. In fact, using the properties of the projectors \(P_{L/R}\) and of the charge conjugation matrix \(\mathcal{C}\), one finds
+\[
+    \mathcal{L}_M = \frac{M}{2} \psi^T \mathcal{C}^{-1} \psi + \text{h.c.} = \frac{M}{2}(\psi_L^T \mathcal{C}^{-1} \psi_L + \psi_R^T \mathcal{C}^{-1} \psi_R) + \text{h.c.},
+\]
+and by setting for example \(\psi_R = 0\) one finds a non-vanishing mass term for \(\psi_L\).
 
+Finally, let us remember, without going into much detail, that a theory of chiral fermions can be equivalently described in terms of Majorana fermions \(\mu(x)\), that is Dirac spinors satisfying a reality condition of the form
+\[
+    \mu_c (x) = \mu(x).
+\]
+A Majorana fermion can be decomposed into a Weyl fermion and its charge conjugate:
+\[
+    \mu(x) = \psi_L (x) + \psi_{L,c} (x) = \psi_L (x) + \mathcal{C} \overline{\psi_L}^T (x).
+\]
+The Majorana fermion has only two independent degrees of freedom, as \(\psi_{L,c}\) is not independent from \(\psi_L\).
 
 \paragraph{Dirac and Majorana masses in scalar theories.}
-By definition, a Majorana fermion is described by a spinor field that satisfies a reality condition of the type \(\mu_c (x)=\mu(x)\), often interpret by saying that particles and antiparticles coincide. It describes an electrically uncharged fermion. Indeed the transformation (234) is no longer a symmetry: it cannot be applied to \(\mu\) as it does not respect the constraint \(\mu_c = \mu\), and the corresponding conserved charge no longer exists. A Majorana fermion possesses half the degrees of freedom of a Dirac fermion.
+By definition, a Majorana fermion is described by a spinor field that satisfies a reality condition of the type \(\mu_c (x)=\mu(x)\), often interpret by saying that particles and antiparticles coincide. It describes an electrically uncharged fermion. Indeed the transformation \eqref{eq:dirac_U1_transformation} is no longer a symmetry: it cannot be applied to \(\mu\) as it does not respect the constraint \(\mu_c = \mu\), and the corresponding conserved charge no longer exists. A Majorana fermion possesses half the degrees of freedom of a Dirac fermion.
 To better understand the physical meaning of Dirac and Majorana mass, it is useful to describe an analogy with scalar particles. As a complex scalar field can be thought of as the combination of two real scalars with the same mass, similarly, a Dirac fermion can be considered as composed of two Majorana fermions with identical masses.
-The analog of a Majorana fermion is a real scalar field \(\psi\), which satisfies \(\psi^* = \psi\) and a Klein-Gordon equation with mass \(\mu\), derivable from the lagrangian
+The analog of a Majorana fermion is a real scalar field \(\varphi\), which satisfies \(\varphi^* = \varphi\) and a Klein-Gordon equation with mass \(\mu\), derivable from the lagrangian
+\begin{equation}
+    \mathcal{L} = -\frac{1}{2} \left(\partial_\mu \varphi \partial^\mu \varphi + \mu^2 \varphi^2 \right).
+    \label{eq:dirac_real_scalar_field_lagrangian}
+\end{equation}
+Two free real scalar fields \(\varphi_1\) and \(\varphi_2\) with different masses \(\mu_1\) and \(\mu_2\), are described by the lagrangian
+\begin{equation}
+    \mathcal{L} = -\frac{1}{2} \left(\partial_\mu \varphi_1 \partial^\mu \varphi_1 + \mu_1^2 \varphi_1^2 \right) - \frac{1}{2} \left(\partial_\mu \varphi_2 \partial^\mu \varphi_2 + \mu_2^2 \varphi_2^2 \right).
+    \label{eq:dirac_two_real_scalar_fields_lagrangian}
+\end{equation}
+If the masses are identical, \(\mu_1 = \mu_2 = m\), the model acquires a \(\mathrm{SO}(2)\) symmetry that mixes the fields \(\varphi_1\) and \(\varphi_2\), and the lagrangian becomes
+\begin{equation}
+    \mathcal{L} = -\frac{1}{2} \left(\partial_\mu \varphi_1 \partial^\mu \varphi_1 + \partial_\mu \varphi_2 \partial^\mu \varphi_2 + m^2 (\varphi_1^2 + \varphi_2^2) \right).
+    \label{eq:dirac_two_real_scalar_fields_equal_mass_lagrangian}
+\end{equation}
+The term \(\varphi_1^2 + \varphi_2^2 \) is \(\mathrm{SO}(2)\) invariant, as is the kinetic term. The lagrangian can be written in terms of a complex field \(\phi\) defined by
+\begin{equation}
+    \phi = \frac{\varphi_1 + i \varphi_2}{\sqrt{2}}, \quad \phi^* = \frac{\varphi_1 - i \varphi_2}{\sqrt{2}},
+    \label{eq:dirac_complex_scalar_field_definition}
+\end{equation}
+with \(\varphi_1\) and \(\varphi_2\) the real and imaginary part of \(\phi\), respectively. In this basis, the previous lagrangian \eqref{eq:dirac_two_real_scalar_fields_equal_mass_lagrangian} takes the form
+\begin{equation}
+    \mathcal{L} = - \partial_\mu \phi^* \partial^\mu \phi - m^2 \phi^* \phi.
+    \label{eq:dirac_complex_scalar_field_lagrangian}
+\end{equation}
+The symmetry \(\mathrm{SO}(2) \equiv \mathrm{U}(1)\) becomes \(\phi^{\prime} = e^{i \alpha} \phi\) and \(\phi^{\prime *} = e^{-i \alpha} \phi^*\) , and the corresponding charge is often called “bosonic number” (it acts as the electric charge in a coupling to electromagnetism).
+Now, resuming what we found:
+\begin{itemize}
+    \item[(i)] A complex scalar field \(\phi\) describes a Dirac fermion, its mass \(m\) being the analog of a Dirac mass. It possesses a \(\mathrm{U}(1)\) symmetry related to the conservation of the bosonic number.
+    \item[(ii)] A real scalar field \(\varphi\) describes a Majorana fermion, its mass \(\mu\) being the analog of a Majorana mass. It does not possess any \(\mathrm{U}(1)\) symmetry.
+\end{itemize}
+Two Majorana fields with identical masses form a Dirac fermion, with their identical masses becoming the Dirac mass. A key property of the latter is that it respects the \(\mathrm{U}(1)\) invariance. We also understand that, by breaking the \(\mathrm{U}(1)\) invariance, it is possible to introduce a further mass term for \(\phi\) and \(\phi^*\), directly visible in the \(\varphi_1\) and \(\varphi_2\) basis, recall eq. \eqref{eq:eq:dirac_two_real_scalar_fields_lagrangian}. It can be written in the \(\phi\) and \(\phi^*\) basis as
+\begin{equation}
+    \mathcal{L} = -\partial_\mu \phi^* \partial^\mu \phi - m^2 \phi^* \phi - \frac{M^2}{2} (\phi \phi + \phi^{*} \phi^{*}).
+    \label{eq:dirac_complex_scalar_field_majorana_mass}
+\end{equation}
+The term with \(M^2\) is the analog of a Majorana mass term for a Dirac fermion: it is a mass term that breaks the U(1) invariance, but keeps the lagrangian real. The explicit relationships between the mass terms are given by
 \[
-    pdf
+    \begin{dcases}
+        \mu_1^2 = m^2 + M^2, \\
+        \mu_2^2 = m^2 - M^2,
+    \end{dcases}
 \]
-Two free real scalar fields \(\psi_1\) and \(\psi_2\) with different masses \(\mu_1\) and \(\mu_2\), are described by the lagrangian
-\[
-    pdf
-\]
-If the masses are identical, \(\mu_1 = \mu_2 = m\), the model acquires a \(\mathrm{SO}(2)\) symmetry that mixes the fields \(\psi_1\) and \(\psi_2\), and the lagrangian becomes
-\[
-    pdf
-\]
-The term \(\psi_1^2 + \psi_2^2 \) is \(\mathrm{SO}(2)\) invariant, as is the kinetic term. The lagrangian can be written in terms of a complex field \(\phi\) defined by
-\[
-    pdf
-\]
-with \(\psi_1\) and \(\psi_2\) the real and imaginary part of \(\phi\), respectively. In this basis, the lagrangian (252) takes the form
-\[
-    pdf.
-\]
-The symmetry \(\mathrm{SO}(2) = \mathrm{U}(1)\) becomes \(\phi^{\prime} = e^{i \alpha} \phi\) and \(\phi^{\prime *} = e^{-i \alpha} \phi^*\) , and the corresponding charge is often called “bosonic number” (it acts as the electric charge in a coupling to electromagnetism).
-
-    [...]
+Note that \(M^{2}\) does not have to be positive, while \(\mu_1^2\) and \(\mu_2^2\) must be positive to have a potential energy limited from below. The physical masses are \(\mu_1\) and \(\mu_2\), as they give the location of the poles in the propagators (they are the eigenvalues of the mass matrix). In this analogy, we can reinterpret eq. \eqref{eq:dirac_complex_scalar_field_definition} as saying that \(\phi\) is the analog of a Weyl fermion and \(\phi^*\) of its conjugate complex, remembering however that for the bosons there is no invariant concept of chirality.
 
 \paragraph{Green functions and propagator.}
+
+Let us briefly introduce also the Green function and related boundary conditions, for the Dirac equation. The Green function satisfies the equation
+\[
+    \left(\slashed{\partial}_x + m\right) S(x-y) = \delta^{(4)}(x-y),
+\]
+formally solved in Fourier transform by
+\[
+    S(x-y) = \int \frac{\mathrm{d}^4 p}{(2\pi)^4} e^{i p_\mu (x^{\mu}-y^{\mu})} \tilde{S}(p) = \int \frac{\mathrm{d}^4 p}{(2\pi)^4} \frac{e^{i p_\mu (x^{\mu}-y^{\mu})}}{i \slashed{p} + m} = \int \frac{\mathrm{d}^4 p}{(2\pi)^4} e^{i p_\mu (x^{\mu}-y^{\mu})} \frac{-i \slashed{p} + m}{p^2 + m^2}.
+\]
+Appropriate boundary conditions can be implemented by the prescription of how to integrate around the poles (points in momentum space where \(p^2 + m^2\) vanishes). The same discussion given for the Klein-Gordon equation applies to the present context. In particular, the propagator is obtained by using the Feynman \(i\epsilon\) prescription, and takes the form
+\[
+    S(x-y) = \int \frac{\mathrm{d}^4 p}{(2\pi)^4} e^{i p_\mu (x^{\mu}-y^{\mu})} \frac{-i \slashed{p} + m}{p^2 + m^2 - i \epsilon}.
+\]
+The prescription \( \epsilon \to 0^+ \) makes it consistent to interpret the quantum fluctuations as corresponding to particles or antiparticles with positive energies that propagate from the past to the future, just as in the case of scalar particles. In QFT, it emerges as the correlation function
+\[
+    \langle \psi(x)\overline{\psi}(x)\rangle = -i S(x-y),
+\]
+which propagates a particle from \(y\) to \(x\) if \(x^0 > y^0\), and an antiparticle from \(x\) to \(y\) if \(y^0 > x^0\).
