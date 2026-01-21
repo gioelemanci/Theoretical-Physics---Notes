@@ -12,9 +12,9 @@ Correlation functions are \textit{normalized averages of the product of n dynami
 \end{equation}
 where \(Z = \int \mathrm{D} x \, e^{\frac{i}{\hbar}S[x]}\) is the normalization factor, also known as the \textbf{partition function}, providing \(\langle 1 \rangle = 1\) (by definition).
 
-Of particular importance is the 2-point correlation function \(\langle x(t_1) x(t_2) \rangle\), often called the propagator. It is understood that correlation functions depend implicitly on the boundary conditions that specify the initial and final states. Very often, especially in quantum field theory, one chooses the initial and final states to be the vacuum state (the state with lowest energy) and considers an infinite propagation time (which also implements the projection onto the ground state). We have considered amplitudes between positions eigenstates, but one can insert any desired state as a boundary state when deffining the matrix elements of the evolution operator.
+Of particular importance is the 2-point correlation function \(\langle x(t_1) x(t_2) \rangle\), often called the propagator. It is understood that correlation functions depend implicitly on the boundary conditions that specify the initial and final states. Very often, especially in quantum field theory, one chooses the initial and final states to be the vacuum state (the state with lowest energy) and considers an infinite propagation time (which also implements the projection onto the ground state). We have considered amplitudes between positions eigenstates, but one can insert any desired state as a boundary state when defining the matrix elements of the evolution operator.
 
-It is often useful to introduce a generating functional \(Z[J]\) defined by
+It is often useful to introduce a \textbf{generating functional} \(Z[J]\) defined by
 \begin{equation}
     Z[J] = \int \mathrm{D} x \, e^{\frac{i}{\hbar} \left(S[x] + \int \d{t} J(t) x(t)\right)},
     \label{eq:generating_functional}
@@ -32,7 +32,7 @@ Let's consider a differentation with respect to the source at time \(t_1\):
 \]
 where we have to pay attention to the functional derivative, which acts as a delta function
 \begin{equation}
-    \frac{\delta}{\delta J(t_1)} \int \d{t} J(t) x(t) = x(t_1).
+    \int \d{t} \frac{\delta J(t)}{\delta J(t_i)} x(t) = \int \d{t} \delta(t - t_i) x(t) = x(t_i).
     \label{eq:functional_derivative}
 \end{equation}
 Continuing this process iterating the functional differentiation \(n\) times, we obtain
@@ -84,7 +84,7 @@ where \(T\) is the time-ordering operator that rearranges the operators in order
 
 The simplest boundary conditions to consider for correlation functions are given by setting the initial and final states equal to states at infinite past and future times, i.e., \(\ket{x_i,\, t_i} = \ket{x_i,\,-\infty}\) and \(\ket{x_f,\, t_f} = \ket{x_f,\, +\infty}\). In this case, one usually assumes that the system is in its ground state at \(t=-\infty\), and that the initial and final states coincide with the ground state \(\ket{0}\) of the system. In the Schrödinger picture we were more general, since the boundary states were arbitrary position eigenstates computed in the integral.
 
-\subsection{Digression on Gaussian Integrals}
+\subsection{Digression on Gaussian Integrals}\label{sec:gaussian_integrals}
 
 Gaussian integrals are integrals of exponential functions with quadratic exponents. They are very important in physics, as they appear in the evaluation of path integrals for free theories, and in perturbation theory around free theories. Here we review some basic results on gaussian integrals that will be useful in the following.
 
@@ -232,7 +232,7 @@ Denoting \(\mathrm{D}\phi = \frac{\mathrm{d}^n \phi}{(-i2\pi)^{n/2}}\), setting 
 \end{equation}
 where the inverse kinetic matrix \(G^{ij} = (K^{-1})^{ij}\) is the \textbf{Green's function} of the theory, satisfying
 \[
-    K_{ij} G^{jk} = \delta_i^k.
+    K_{ij} G^{jk} = \delta_i^{\ k}.
 \]
 We can now compute all correlation functions by differentiating with respect to the source \(J_i\)
 \[
@@ -267,7 +267,7 @@ where one recognizes a general pattern to derive all higher point correlation fu
 
 The \textbf{generating functional of connected correlation functions} \(W[J]\) is obtained from eq. \eqref{eq:generating_functional_free_theory} using the definition in eq. \eqref{eq:generating_functional_connected}:
 \[
-    W[J] = \frac{1}{2} J_i G_{ij} J_j - \Lambda, \quad \Lambda = -\frac{i}{2} \ln(\det(K_{ij})) = -\frac{i}{2}\Tr (\ln(K_{ij})),
+    W[J] = \frac{1}{2} J_i G^{ij} J_j - \Lambda, \quad \Lambda = -\frac{i}{2} \ln(\det(K_{ij})) = -\frac{i}{2}\Tr (\ln(K_{ij})),
 \]
 where the constant \(\Lambda\) is an infinite constant that can be regularized and interpreted as the vacuum energy of the free theory. One verifies that it generates a 2-point correlation functions that is connected from\footnote{It also generates a 0-point function, given by \(-\Lambda\), that can be shown to be connected as well.}
 \[
@@ -343,7 +343,7 @@ that in a hypercondensed notation would have been written as \(K_{il} G^{lj} = \
     \begin{minipage}{0.55\textwidth}
         The Feynman prescription sends positive frequencies forward in time and negative frequencies backward in time, corresponding to the physical interpretation of particles and antiparticles with positive energies and always propagating forward in time.
 
-        Having computed the Green's function, we can write the generatoring functional in \eqref{eq:generating_functional_free_theory} we can now complete the square (and reducing to the form in \eqref{eq:QM_gaussian_integral}) to obtain an explicit expression for \(Z[J]\), which will let us compute all correlation functions of the harmonic oscillator.
+        Having computed the Green's function, we can write the generating functional in \eqref{eq:generating_functional_free_theory} we can now complete the square (and reducing to the form in \eqref{eq:QM_gaussian_integral}) to obtain an explicit expression for \(Z[J]\), which will let us compute all correlation functions of the harmonic oscillator.
     \end{minipage}
 \end{figure}
 Thus defining \(\tilde{x}(t) = x(t) - \int \d{t^{\prime}} G(t, t^{\prime}) J(t^{\prime})\) to complete the square in the exponent of the path integral, we obtain
