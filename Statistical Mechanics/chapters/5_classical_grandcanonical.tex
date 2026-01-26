@@ -6,7 +6,6 @@ The appropriate statistical framework for describing such systems is the \textit
 In this ensemble, the macroscopic state of the system is specified by fixing the temperature \(T\), the volume \(V\), and the chemical potential \(\mu\), while both energy and particle number are allowed to fluctuate according to a well-defined probability distribution.
 
 The central quantity that characterizes the grandcanonical ensemble is the \textit{grand partition function}, which encodes the statistical weight of all accessible microstates across different particle numbers. It plays a role analogous to the canonical partition function, but extended to include particle exchange.
-
 From the grand partition function, one can derive all relevant thermodynamic quantities—such as the average energy, average particle number, entropy, and the grand potential \(\Phi = -k_B T \log \mathcal{Z}\). The grandcanonical ensemble thus provides a powerful bridge between microscopic dynamics and macroscopic thermodynamics for open systems, allowing us to compute equilibrium properties in the presence of both thermal and particle exchange.
 
 \section{System in a Particle and Thermal Bath}
@@ -22,7 +21,7 @@ At equilibrium, the system and the reservoir share the same temperature and chem
 \[
     T_1 = T_2 = T, \qquad \mu_1 = \mu_2 = \mu.
 \]
-Energy and particles can be exchanged freely, but the total energy and total particle number of the composite system — the \textit{universe} \(\mathcal{U} = \mathcal{S} + \mathcal{E}\) — remain conserved:
+Energy and particles can be exchanged freely, but the total energy and total particle number of the composite system, the \textit{universe} \(\mathcal{U} = \mathcal{S} + \mathcal{E}\), remain conserved:
 \[
     E = E_1 + E_2 = \text{const}, \qquad N = N_1 + N_2 = \text{const}.
 \]
@@ -41,8 +40,9 @@ To proceed, we express the reservoir's density of states in terms of its entropy
 \]
 and expand it around the equilibrium point \((E, N)\), assuming the reservoir is much larger than the system. Neglecting higher-order terms, we obtain:
 \[
-    S_2(E - E_1, N - N_1) \approx S_2(E, N) - \frac{E_1}{T} + \frac{\mu N_1}{T}.
+    S_2(E - E_1, N - N_1) \approx S_2(E, N) - \frac{E_1}{T} + \frac{\mu N_1}{T},
 \]
+where we have used the thermodynamic relations \(\left( \partial S/\partial E\right)_{N,V} = 1/T\), and \(\left( \partial S/\partial N\right)_{E,V} = -\mu/T\).
 Exponentiating this expression yields:
 \[
     \omega_2(E - E_1, N - N_1) \propto e^{-\beta(E_1 - \mu N_1)}.
@@ -52,9 +52,10 @@ Hence, the grandcanonical probability distribution for the subsystem takes the f
     \rho_{gc}(q_i, p_i, N) = \frac{1}{\mathcal{Z}} e^{-\beta(\mathcal{H}(q_i, p_i) - \mu N)},
 \]
 where \(\mathcal{Z}\) is the \textbf{grand partition function}, defined by the normalization condition:
-\[
-    \mathcal{Z} = \sum_{N=0}^{\infty} \frac{1}{\mathcal{Z}_N} \int_{\mathcal{M}_{\mathcal{S}}} \prod_{i=1}^{N} \frac{\mathrm{d}^d q_i \, \mathrm{d}^d p_i}{h^d} \, e^{-\beta(\mathcal{H}(q_i, p_i) - \mu N)}.
-\]
+\begin{equation}
+    \mathcal{Z} = \sum_{N=0}^{\infty} \int_{\mathcal{M}_{\mathcal{S}}} \d{\Omega} e^{-\beta(\mathcal{H}(q_i, p_i) - \mu N)}.
+    \label{eq:grandcanonical_partition_function}
+\end{equation}
 
 We can obtain the same results for the grandcanonical ensemble by integrating the \textit{canonical probability distribution of the universe}\footnote{Although the universe as a whole is strictly microcanonical, it is common to derive the grandcanonical ensemble by starting from a canonical distribution and integrating out the environmental degrees of freedom. This procedure, though approximate, becomes exact in the thermodynamic limit, where ensemble equivalence guarantees that the subsystem distribution coincides with the correct marginal of the global microcanonical ensemble.} with respect to the environment variables:
 \[
@@ -64,14 +65,11 @@ We can obtain the same results for the grandcanonical ensemble by integrating th
     = \frac{e^{-\beta \mathcal{H}_1}}{Z(T,\,V,\,N)}
     \int_{\mathcal{M}_2} \d{\Omega_2}\, e^{-\beta \mathcal{H}_2},
 \]
-where \(\d{\Omega_2} = \frac{1}{h^{dN_2}\,\mathcal{Z}_{N_2}} \prod_{j=1}^{N_2} \mathrm{d}^d q_j^{(2)}\, \mathrm{d}^d p_j^{(2)}\) is the measure on the phase space of the environment.
+where \(\d{\Omega_2} = \frac{1}{h^{dN_2}\,\xi_{N_2}} \prod_{j=1}^{N_2} \mathrm{d}^d q_j^{(2)}\, \mathrm{d}^d p_j^{(2)}\) is the measure on the phase space of the environment.
 
 Because the subsystem can exchange both energy and particles with the environment, the normalization condition for the total probability requires integrating over all subsystem variables and summing over all possible particle numbers \(N_1\):
 \[
-    \sum_{N_1=0}^{\infty}
-    \int_{\mathcal{M}_1} \d{\Omega_1}\,
-    \rho_{gc}^{(1)}(q_i^{(1)},\,p_i^{(1)},\,N_1)
-    = 1.
+    \sum_{N_1=0}^{\infty} \int_{\mathcal{M}_1} \d{\Omega_1}\, \rho_{gc}^{(1)}(q_i^{(1)},\,p_i^{(1)},\,N_1) = 1.
 \]
 Let us check that this normalization indeed holds. Substituting the explicit form of \(\rho_{gc}^{(1)}\), we have:
 \[
@@ -91,7 +89,7 @@ Let us check that this normalization indeed holds. Substituting the explicit for
 Introducing the explicit expressions for the phase-space measures, we can rewrite this ratio as:
 \[
     \sum_{N_1=0}^{\infty}
-    \frac{\mathcal{Z}_N}{\mathcal{Z}_{N_1}\mathcal{Z}_{N_2}}
+    \frac{\xi_N}{\xi_{N_1}\xi_{N_2}}
     \frac{\int_{V_1}\!\!\prod_{i=1}^{N_1}\!\mathrm{d}^d q_i^{(1)}
         \int_{V_2}\!\!\prod_{j=1}^{N_2}\!\mathrm{d}^d q_j^{(2)}\,\Phi_1 \Phi_2}
     {\int_{V}\!\!\prod_{i=1}^{N_1}\!\mathrm{d}^d q_i^{(1)}
@@ -122,7 +120,7 @@ Hence,
     \int_{\mathcal{M}_1} \d{\Omega_1}\,
     \rho_{gc}^{(1)}(q_i^{(1)},\,p_i^{(1)},\,N_1)
     = \sum_{N_1=0}^{\infty}
-    \frac{\mathcal{Z}_N}{\mathcal{Z}_{N_1}\mathcal{Z}_{N_2}}
+    \frac{\xi_N}{\xi_{N_1}\xi_{N_2}}
     \frac{\langle \Phi_1 \rangle_{V_1}\langle \Phi_2 \rangle_{V_2}}
     {\langle \Phi \rangle_{V}}
     \frac{V_1^{N_1}V_2^{N_2}}{V^N}.
@@ -187,23 +185,23 @@ Recognizing the canonical partition function in the integral, we find:
 \]
 where \(\Omega = -pV\) is the \textit{grand potential}.
 Finally, the normalized probability density becomes:
-\[
-    \boxed{
-        \rho_{gc}(q_i,\,p_i,\,N)
-        = e^{-\beta \mathcal{H}(q_i,\,p_i)}
-        \frac{z^N}{\mathcal{Z}}.
-    }
-\]
+\begin{equation}
+    \rho_{gc}(q_i,\,p_i,\,N)
+    = e^{-\beta \mathcal{H}(q_i,\,p_i)}
+    \frac{z^N}{\mathcal{Z}}.
+    \label{eq:grandcanonical_probability_density}
+\end{equation}
 
 Finally, we define the ensemble average of an observable in the grandcanonical ensemble.
 \begin{definition}{Grandcanonical average.}
     Let \(f(q_i, p_i, N)\) be an observable defined on the extended phase space of the system. Its average over the grandcanonical ensemble is given by
-    \[
+    \begin{equation}
         \begin{aligned}
-            \langle f(q_i, p_i, N) \rangle_{gc} & = \frac{1}{\mathcal{Z}} \sum_{N=0}^{\infty} \frac{1}{\mathcal{Z}_N} \int \prod_{i=1}^{N} \frac{\mathrm{d}^d q_i \, \mathrm{d}^d p_i}{h^d} \, e^{-\beta(\mathcal{H}(q_i, p_i) - \mu N)} f(q_i, p_i, N) \\
+            \langle f(q_i, p_i, N) \rangle_{gc} & = \frac{1}{\mathcal{Z}} \sum_{N=0}^{\infty} \frac{1}{\xi_N} \int \prod_{i=1}^{N} \frac{\mathrm{d}^d q_i \, \mathrm{d}^d p_i}{h^d} \, e^{-\beta(\mathcal{H}(q_i, p_i) - \mu N)} f(q_i, p_i, N) \\
                                                 & = \frac{1}{\mathcal{Z}} \sum_{N=0}^{\infty} z^N Z_N \langle f(q_i, p_i, N) \rangle_{c}.
         \end{aligned}
-    \]
+        \label{eq:grandcanonical_average}
+    \end{equation}
     This defines the connection between microscopic dynamics and macroscopic observables in open systems.
 \end{definition}
 
@@ -212,9 +210,10 @@ Finally, we define the ensemble average of an observable in the grandcanonical e
 As in the canonical ensemble, the \textbf{grand partition function} contains all the thermodynamic information about the system.
 Once $\mathcal{Z}$ is known, all macroscopic quantities can be derived from it.
 The central thermodynamic potential of the grandcanonical ensemble is the \textbf{grand potential}:
-\[
+\begin{equation}
     \Omega(T, V, \mu) = -k_B T \log \mathcal{Z}.
-\]
+    \label{eq:grand_potential_grandpartition}
+\end{equation}
 It plays a role analogous to the Helmholtz free energy in the canonical ensemble, with natural variables $(T, V, \mu)$ instead of $(T, V, N)$.
 
 From $\Omega$ we can obtain all other quantities of interest through the relations:
@@ -223,7 +222,11 @@ From $\Omega$ we can obtain all other quantities of interest through the relatio
     \qquad
     \mathcal{N} = -\left(\frac{\partial \Omega}{\partial \mu}\right)_{T,V},
     \qquad
-    S = -\left(\frac{\partial \Omega}{\partial T}\right)_{V,\mu}.
+    S = -\left(\frac{\partial \Omega}{\partial T}\right)_{V,\mu},
+\]
+which can easily be derived from the thermodynamic identity:
+\[
+    d\Omega = -S\,dT - p\,dV - \mathcal{N}\,d\mu.
 \]
 However, it is instructive to re-derive these expressions directly from statistical averages, to make explicit the connection between ensemble averages and thermodynamic observables.
 
@@ -243,44 +246,33 @@ We can therefore express it as a derivative with respect to $\beta$:
 \]
 which yields:
 \[
-    \begin{aligned}
-        E & = \frac{1}{\mathcal{Z}} \sum_{N=0}^{\infty} z^N
-        \left( - \frac{\partial}{\partial \beta} \right)
-        \int \mathrm{d}\Omega\, e^{-\beta \mathcal{H}}                                   \\
-          & = \frac{1}{\mathcal{Z}}
-        \left( - \frac{\partial}{\partial \beta} \right)
-        \sum_{N=0}^{\infty} z^N \int \mathrm{d}\Omega\, e^{-\beta \mathcal{H}} \Big|_{z} \\
-          & = -\frac{1}{\mathcal{Z}}
-        \left( \frac{\partial \mathcal{Z}}{\partial \beta} \right)_{z}
-        = -\left( \frac{\partial \ln \mathcal{Z}}{\partial \beta} \right)_{z}.
-    \end{aligned}
+    E = \frac{1}{\mathcal{Z}} \sum_{N=0}^{\infty} z^N
+    \left( - \frac{\partial}{\partial \beta} \right)
+    \int \mathrm{d}\Omega\, e^{-\beta \mathcal{H}} = \frac{1}{\mathcal{Z}}
+    \left( - \frac{\partial}{\partial \beta} \right)
+    \sum_{N=0}^{\infty} z^N \int \mathrm{d}\Omega\, e^{-\beta \mathcal{H}} \Big|_{z},
 \]
+thus leading to the final expression:
+\begin{equation}
+    E = -\frac{1}{\mathcal{Z}} \left( \frac{\partial \mathcal{Z}}{\partial \beta} \right)_{z} = -\left( \frac{\partial \ln \mathcal{Z}}{\partial \beta} \right)_{z}.
+    \label{eq:average_energy_grandpartition}
+\end{equation}
 The derivative is taken at fixed fugacity \(z = e^{\beta \mu}\).
 This means that when $\beta$ varies, the chemical potential $\mu$ must adjust so as to keep $z$ constant.
 Physically, this corresponds to varying the temperature while maintaining the same average particle number.
 
 The average number of particles $\mathcal{N} = \langle N \rangle_{gc}$ can be derived in a completely analogous manner:
 \[
-    \begin{aligned}
-        \mathcal{N}
-         & = \frac{1}{\mathcal{Z}}
-        \sum_{N=0}^{\infty} z^N
-        \int \mathrm{d}\Omega\, e^{-\beta \mathcal{H}} N
-        = \frac{1}{\mathcal{Z}} \sum_{N=0}^{\infty} N z^N Z_N.
-    \end{aligned}
+    \mathcal{N} = \frac{1}{\mathcal{Z}} \sum_{N=0}^{\infty} z^N \int \mathrm{d}\Omega\, e^{-\beta \mathcal{H}} N = \frac{1}{\mathcal{Z}} \sum_{N=0}^{\infty} N z^N Z_N.
 \]
 Recognizing that differentiation with respect to $z$ brings down a factor of $N$, we obtain:
-\[
-    \mathcal{N}
-    = \frac{1}{\mathcal{Z}}
-    \left( z \frac{\partial}{\partial z}
-    \sum_{N=0}^{\infty} z^N Z_N \right)_{\beta}
-    = z \left( \frac{\partial \ln \mathcal{Z}}{\partial z} \right)_{\beta}.
-\]
+\begin{equation}
+    \mathcal{N} = \frac{1}{\mathcal{Z}} \left( z \frac{\partial}{\partial z} \sum_{N=0}^{\infty} z^N Z_N \right)_{\beta} = z \left( \frac{\partial \ln \mathcal{Z}}{\partial z} \right)_{\beta}.
+    \label{eq:average_number_particles_grandpartition}
+\end{equation}
 This formula explicitly relates the average number of particles to the dependence of the partition function on the fugacity, textitasizing that $\mu$ controls the probability distribution over different particle numbers.
 
 \paragraph{Entropy.} Finally, we show that the statistical entropy in the grandcanonical ensemble coincides with the thermodynamic entropy, as it did for the microcanonical and canonical ensembles in the thermodynamic limit.
-
 Using Boltzmann’s universal definition of entropy:
 \[
     S_{gc} = -k_B \langle \log \rho_{gc} \rangle_{gc},
@@ -318,31 +310,39 @@ Hence, we have proven that:
     S_{gc} = S_{th},
 \]
 that is, in the thermodynamic limit, the entropy computed from the grandcanonical ensemble coincides with the macroscopic thermodynamic entropy.
-
 \begin{remark}
-    This result completes the chain of equivalences among ensembles:
+    This result completes the chain of equivalences among entropy ensembles.
+    It confirms that all three statistical ensembles yield the same thermodynamics when extensive variables are large and fluctuations are negligible.
+\end{remark}
+Now that we have demonstrated the entropy equivalence in all ensembles, we can state the universal Boltzmann relation between entropy and the averages of each ensamble:
+\begin{theorem}[Boltzmann universal relation.]
+    In the thermodynamic limit, the entropy of a system is the same in all statistical ensembles and is given by:
+    \begin{equation}
+        S = - k_B \langle \log \rho_{ens} \rangle_{ens},
+        \label{eq:Boltzmann_relation_general}
+    \end{equation}
+    where \(\rho_{ens}\) is the probability density function of the chosen ensemble (microcanonical, canonical, or grandcanonical), and \(\langle \cdot \rangle_{ens}\) denotes the corresponding ensemble average. The entropy computed via this relation coincides with the thermodynamic entropy \(S_{th}\):
     \[
         S_{mc} \longrightarrow S_{c} \longrightarrow S_{gc} = S_{th}.
     \]
-    It confirms that all three statistical ensembles yield the same thermodynamics when extensive variables are large and fluctuations are negligible.
-\end{remark}
+\end{theorem}
 
 \section{Virial Expansion}
 
 The virial expansion provides a systematic framework to describe the thermodynamic properties of real gases in terms of either their density or fugacity.
-It allows us to express quantities such as the pressure or the average particle number as power series that account for the effects of interparticle interactions.
+It allows us to express quantities such as the pressure or the average particle number as \textbf{power series} that account for the effects of interparticle interactions.
 
-In the dilute limit, the gas behaves as an ideal gas, while higher-order terms in the virial expansion capture corrections due to correlations among pairs, triplets, and larger groups of particles.
+In the \textbf{dilute limit}, the gas behaves as an ideal gas, while higher-order terms in the virial expansion capture \textit{corrections due to correlations} among pairs, triplets, and larger groups of particles.
 The basic idea is to expand thermodynamic quantities in powers of the density \( n = \mathcal{N}/V \) or the fugacity \( z = e^{\beta \mu} \), obtaining a series representation that systematically describes deviations from ideal gas behavior.
 
 In what follows, we will use this expansion to derive an equation of state for weakly interacting classical gases.
 We begin with the expansion in fugacity \(z\), and later we will recover the equivalent expansion in the density \(n\):
 \[
     \begin{aligned}
-        - \Omega = pV = \frac{1}{\beta} \log \mathcal{Z}
-         & \implies \frac{p}{k_B T}  = \frac{1}{V} \log \mathcal{Z},                        \\
-        n = \frac{\mathcal{N}}{V}
-         & = \frac{z}{V} \left(\frac{\partial \log \mathcal{Z}}{\partial z}\right)_{\beta}.
+        \Omega = -pV = -\frac{1}{\beta} \log \mathcal{Z}
+        \implies \frac{p}{k_B T}  = \frac{1}{V} \log \mathcal{Z}, \\
+        \mathcal{N} \implies n = \frac{\mathcal{N}}{V}
+        = \frac{z}{V} \left(\frac{\partial \log \mathcal{Z}}{\partial z}\right)_{\beta}.
     \end{aligned}
 \]
 
@@ -377,8 +377,7 @@ We can then compute the first few canonical partition functions:
         = \frac{V}{2 \lambda^6} \int_V \! \mathrm{d}^3 r \, e^{-\beta U(r)}.
     \end{aligned}
 \]
-Here, \(\mathcal{H}_1 = \frac{p_1^2}{2m}\) contains no interaction term, while \(\mathcal{H}_2 = \frac{p_1^2}{2m} + \frac{p_2^2}{2m} + U_{12}\).
-The phase space measure for \( N \) particles is
+Here, \(\mathcal{H}_1 = \frac{p_1^2}{2m}\) contains no interaction term, while \(\mathcal{H}_2 = \frac{p_1^2}{2m} + \frac{p_2^2}{2m} + U_{12}\), and recall the phase space measure for \( N \) particles, as defined in \eqref{eq:dimensionless_measure_phase_space}, is given by:
 \[
     \mathrm{d}\Omega_N = \frac{1}{h^{3N} N!} \prod_{i=1}^{N} \mathrm{d}^3 q_i \, \mathrm{d}^3 p_i.
 \]
@@ -427,9 +426,10 @@ where we have defined
 \]
 
 In general, the logarithm of the grand partition function can be written as a power series in \( z \):
-\[
+\begin{equation}
     \log \mathcal{Z} = V \sum_{\ell=1}^{\infty} b_\ell(T) z^\ell,
-\]
+    \label{eq:log_grandpartition_fugacity_expansion}
+\end{equation}
 where the coefficients \( b_\ell(T) \) are known as the \textbf{cluster integrals} or \textbf{virial coefficients in the fugacity expansion}.
 They depend only on the temperature and on the interparticle potential.
 
@@ -446,7 +446,7 @@ From the grand potential \(\Omega = -k_B T \log \mathcal{Z}\), the pressure is g
 
 The average number of particles follows from
 \[
-    \mathcal{N} = z \frac{\partial \log \mathcal{Z}}{\partial z}
+    \mathcal{N} = z \frac{\partial \log \mathcal{Z}}{\partial z} \Big|_{\beta}
     = V \sum_{\ell=1}^{\infty} \ell\, b_\ell(T)\, z^\ell
     = V \left[\frac{zV}{\lambda^3}
         + z^2 \frac{V}{\lambda^6} J_2(\beta)
@@ -455,10 +455,11 @@ The average number of particles follows from
 
 \paragraph{Density expansion.}
 We define the number density as
-\[
+\begin{equation}
     n = \frac{\langle N \rangle}{V}
     = \sum_{\ell=1}^{\infty} \ell\, b_\ell(T)\, z^\ell.
-\]
+    \label{eq:density_fugacity_expansion}
+\end{equation}
 Both pressure and density are therefore expressed as power series in the fugacity \( z \).
 Working in the limit of small \( z \) corresponds to a dilute gas regime, characterized by low density and low pressure.
 Let us recover the expression for \( n \) in the non-interacting case:
@@ -479,13 +480,14 @@ where the coefficients \( B_n(T) \) are the \textit{virial coefficients}.
 \begin{itemize}
     \item \( B_2(T) \) accounts for pairwise interactions and is directly related to the intermolecular potential \( u(r) \) through
           \[
-              B_2(T) = -\frac{1}{2} \int \!
+              B_2(T) = \frac{1}{2} \int \!
               \left( e^{-\beta u(r)} - 1 \right)
               \, \mathrm{d}^3r
-              = -\frac{1}{2} J_2(\beta).
+              = \frac{1}{2} J_2(\beta).
           \]
-          For repulsive interactions, \( B_2 > 0 \); for attractive interactions, \( B_2 < 0 \).
-    \item \( B_3(T) \) describes the effect of three-body correlations and is generally more involved to compute.
+          Thus , \( B_2(T) \) captures the leading-order correction to ideal gas behavior due to two-body correlations.
+    \item \( B_3(T) \) describes the effect of three-body correlations, involving integrals over triplets of particles and their mutual interactions, we are not deriving it here.
+    \item Higher-order coefficients \( B_n(T) \) for \( n \geq 4 \) involve increasingly complex integrals over \( n \)-particle configurations and account for many-body effects.
 \end{itemize}
 
 Higher-order virial coefficients describe increasingly subtle correlation effects and become significant at higher densities or for stronger interactions.
@@ -512,7 +514,7 @@ thus recovering the ideal gas equation of state.
 \end{remark}
 
 \paragraph{Fugacity expansion in the density.}
-To express the fugacity \( z \) as a function of the density \( n \), we can invert the series:
+Since we have expressions for both pressure and density as power series in fugacity \( z \), we can combine them to express pressure directly as a function of density: the idea is to invert the density expansion to express \( z \) in terms of \( n \), and then substitute this into the pressure expansion. To express the fugacity \( z \) as a function of the density \( n \), we can invert the series as follows:
 \[
     \begin{aligned}
         z & = A n + B n^2 + O(n^3),                                           \\[3pt]
@@ -526,7 +528,7 @@ To express the fugacity \( z \) as a function of the density \( n \), we can inv
 whose only consistent solution is \(A = \lambda^3\) and \(B = -J_2 \lambda^3\).
 Hence,
 \[
-    z = \lambda^3 n - J_2 \lambda^6 n^2 + O(n^3).
+    z = \lambda^3 n - J_2 \lambda^3 n^2 + O(n^3).
 \]
 Substituting this into the pressure expansion, we recover the virial equation of state for a weakly interacting classical gas:
 \[
@@ -540,46 +542,61 @@ which again reduces to the ideal gas law when \(U = 0\).
 
 \subsection{Van der Waals Equation of State}
 
-To connect the virial expansion with a more familiar and physically intuitive equation of state, we now consider a simple yet effective model for the intermolecular potential \( U(r) \).
-A convenient choice is the *hard-sphere potential* with an additional attractive tail. In this model, molecules are treated as rigid spheres of diameter \( d \), meaning they cannot overlap; this represents short-range repulsion due to the finite size of particles. At larger separations, an attractive potential \( f(r) < 0 \) is introduced to mimic cohesive forces such as van der Waals or dispersion interactions:
-\[
-    U(r) =
-    \begin{cases}
-        \infty & \text{if } r < d,                                 \\
-        f(r)   & \text{if } r \geq d, \quad \text{with } f(r) < 0.
-    \end{cases}
-\]
-
-This potential effectively separates the microscopic interaction into two competing contributions:
-\begin{itemize}
-    \item a \textbf{repulsive core}, enforcing an excluded volume around each particle;
-    \item an \textbf{attractive tail}, lowering the energy when particles are moderately close.
-\end{itemize}
-
+To connect the virial expansion with a more familiar and physically intuitive equation of state, we will now consider a simple yet effective model for the intermolecular potential \( U(r) \).
+A convenient choice is the \textbf{hard-sphere potential} with an additional attractive tail. In this model, molecules are treated as rigid spheres of diameter \( \sigma \), meaning they cannot overlap; this represents short-range repulsion force, due to the finite size of particles.
+\begin{figure}[H]
+    \begin{minipage}{0.4\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/hard_sphere_potential.png}
+        \caption{Hard-sphere potential with attractive tail, where particles cannot approach closer than a distance \( \sigma \).}
+        \label{fig:hard_sphere_potential}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.55\textwidth}
+        At larger separations, an attractive potential \( f(r) < 0 \) is introduced to mimic cohesive forces such as van der Waals or dispersion interactions:
+        \[
+            U(r) = \begin{cases}
+                \infty & \text{if } r < \sigma,                                 \\
+                f(r)   & \text{if } r \geq \sigma, \quad \text{with } f(r) < 0.
+            \end{cases}
+        \]
+        This potential effectively separates the microscopic interaction into two competing contributions:
+        \begin{itemize}
+            \item a \textbf{repulsive core}, enforcing an excluded volume around each particle;
+            \item an \textbf{attractive tail}, lowering the energy when particles are moderately close.
+        \end{itemize}
+    \end{minipage}
+\end{figure}
 Using this potential, we can compute the second cluster integral, \( J_2(\beta) \), which directly encodes the two-body correlations induced by the interaction:
 \[
     \begin{aligned}
-        J_2(\beta) & = 4\pi \int_0^{\infty} \! \mathrm{d}r\, r^2 \left(e^{-\beta U(r)} - 1\right)                                                            \\
-                   & = 4\pi \left[ \int_0^{d} \! \mathrm{d}r\, r^2 (0 - 1) + \int_{d}^{\infty} \! \mathrm{d}r\, r^2 \left(e^{-\beta f(r)} - 1\right) \right] \\
-                   & = -\frac{4\pi d^3}{3} + 4\pi \int_{d}^{\infty} \! \mathrm{d}r\, r^2 \left(e^{-\beta f(r)} - 1\right)                                    \\
+        J_2(\beta) & = 4\pi \int_0^{\infty} \! \mathrm{d}r\, r^2 \left(e^{-\beta U(r)} - 1\right)                                                                      \\
+                   & = 4\pi \left[ \int_0^{\sigma} \! \mathrm{d}r\, r^2 (0 - 1) + \int_{\sigma}^{\infty} \! \mathrm{d}r\, r^2 \left(e^{-\beta f(r)} - 1\right) \right] \\
+                   & = -\frac{4\pi \sigma^3}{3} + 4\pi \int_{\sigma}^{\infty} \! \mathrm{d}r\, r^2 \left(e^{-\beta f(r)} - 1\right)                                    \\
                    & \doteq -2b + 2\beta a,
     \end{aligned}
 \]
-where \( a,\, b > 0 \) are constants that characterize the potential.
-The first term represents the \emph{excluded volume} due to hard-sphere repulsion, while the second captures the \emph{attractive tail}.
+where \( a,\, b > 0 \) are constants that characterize the potential: after expanding the exponential for weak interactions (\( \beta |f(r)| \ll 1 \)), they are given by
+\[
+    b = \frac{2 \pi}{3} \sigma^3,
+    \qquad
+    a = 2\pi \int_{\sigma}^{\infty} \! \mathrm{d}r\, r^2 \vert f(r) \vert.
+\]
+The first term represents the \emph{excluded volume} due to hard-sphere repulsion being negative, while the second captures the \emph{attractive tail}, which is positive since \( f(r) < 0 \).
 At high temperatures, thermal motion dominates and the attractive contribution becomes negligible; at low temperatures, attractive interactions prevail.
 This competition explains why, at intermediate temperatures, the effective interaction can change sign.
 
 Substituting this result into the virial expansion of the pressure yields:
 \[
     \begin{aligned}
-        \frac{p}{k_B T} & = n + \left(-b + \beta a\right) n^2 + O(n^3)                                                     \\
-                        & = \frac{1}{v} + \left(-b + \frac{a}{k_B T}\right) \frac{1}{v^2} + O\!\left(\frac{1}{v^3}\right),
+        \frac{p}{k_B T} & = n - \left(-b + \beta a\right) n^2 + O(n^3)                                                    \\
+                        & = \frac{1}{v} + \left(b - \frac{a}{k_B T}\right) \frac{1}{v^2} + O\!\left(\frac{1}{v^3}\right),
     \end{aligned}
 \]
 from which we can rearrange to obtain the celebrated \textbf{Van der Waals equation of state}:
-\[
-    \boxed{\left(p + \frac{a}{v^2}\right)(v - b) = k_B T.}
-\]
+\begin{equation}
+    \left(p + \frac{a}{v^2}\right)(v - b) = k_B T.
+    \label{eq:van_der_Waals_equation}
+\end{equation}
 
 This equation provides a phenomenological correction to the ideal gas law, capturing finite particle size and intermolecular attractions within a simple yet remarkably accurate model for real gases.

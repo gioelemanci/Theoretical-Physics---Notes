@@ -49,13 +49,13 @@ The triple point thus defines a fundamental reference in thermodynamics, often u
 
 \paragraph{Critical point and superfluidity.}
 The \textit{critical point} marks the upper end of the liquid--vapor coexistence curve in the \(p\)--\(T\) diagram. At this point, the distinction between liquid and gas disappears: the densities of the two phases become equal, and the surface tension vanishes.
-Beyond the critical point, the substance forms a \textit{supercritical fluid}, a single homogeneous phase that exhibits properties intermediate between those of a liquid and a gas, such as high diffusivity combined with a relatively large density. The system does not dissipate energy from friction as a normal fluid would, allowing it to flow without viscosity.
+Beyond the critical point, the substance forms a \textbf{supercritical fluid}, a single homogeneous phase that exhibits properties intermediate between those of a liquid and a gas, such as high diffusivity combined with a relatively large density. The system does not dissipate energy from friction as a normal fluid would, allowing it to flow without viscosity.
 The critical point is characterized by continuous (second--order) phase transition behavior, where response functions such as compressibility and heat capacity diverge according to universal critical exponents.
 
 In certain quantum fluids, such as liquid helium--4, a different kind of continuous phase transition occurs at very low temperatures, leading to the onset of \textbf{superfluidity}.
 \begin{figure}[H]
     \begin{minipage}[b]{0.4\textwidth}
-        Below the so--called $\lambda$--point (at \(T_\lambda \approx 2.17~\mathrm{K}\) under saturated vapor pressure), helium--4 undergoes a transition from the normal liquid phase (He~I) to the superfluid phase (He~II).
+        Below the so called $\lambda$--point (at \(T_\lambda \approx 2.17~\mathrm{K}\) under saturated vapor pressure), helium--4 undergoes a transition from the normal liquid phase (He~I) to the superfluid phase (He~II).
         The superfluid phase exhibits remarkable macroscopic quantum phenomena, including the absence of viscosity, the ability to flow through extremely narrow capillaries, and the quantization of vorticity.
         Although both the critical point and the superfluid transition correspond to continuous changes in the state of the system, they originate from different microscopic mechanisms: the former arises from the disappearance of density fluctuations at large scales, while the latter emerges from Bose--Einstein condensation of helium atoms.
     \end{minipage}
@@ -63,16 +63,18 @@ In certain quantum fluids, such as liquid helium--4, a different kind of continu
     \begin{minipage}[b]{0.55\textwidth}
         \includegraphics[width=0.9\textwidth]{img/phase_diag_4He.png}
         \caption{Schematic phase diagram of liquid helium-4, showing solid, liquid, gas, and superfluid regions separated by phase boundaries. Coexistence curves are indicated where appropriate, while the boundary between the liquid and superfluid phases is shown for reference, even though this transition is continuous.}
+        \label{fig:phase_diag_4He}
     \end{minipage}
 \end{figure}
 
 \subsection{Clausius--Clapeyron Equation}
 
-Consider a system at equilibrium along a phase coexistence line between two phases, denoted \(\alpha\) and \(\beta\).
+Consider a system at equilibrium along a coexistence line between two phases, denoted \(\alpha\) and \(\beta\).
 The Gibbs free energy of the system is
-\[
+\begin{equation}
     G(T,p) = \mu N,
-\]
+    \label{eq:Gibbs_free_energy}
+\end{equation}
 where \(\mu\) is the chemical potential and \(N\) the number of particles.
 Per particle, the Gibbs free energy is
 \[
@@ -82,37 +84,36 @@ At equilibrium along the coexistence line, the chemical potentials of the two ph
 \[
     \mu_\alpha(T,p) = \mu_\beta(T,p) \quad \implies \quad g_\alpha(T,p) = g_\beta(T,p).
 \]
-
 Differentiating both sides along the coexistence line gives
 \[
-    d\mu_\alpha = d\mu_\beta.
+    \mathrm{d} \mu_\alpha = \mathrm{d} \mu_\beta,
 \]
-
-Using the thermodynamic identity for the Gibbs free energy per particle,
+which, using the thermodynamic identity for the Gibbs free energy per particle\footnote{\(\mathrm{d} g = \mathrm{d} \mu = -s\,\mathrm{d}T + v\,\mathrm{d}p\) since \(\mathrm{d} G = \mu \mathrm{d}N + N \mathrm{d}\mu\), leading to the deletions which yield \(\mathrm{d}g = \mathrm{d}\mu\).}
 \[
-    d\mu = -s \, dT + v \, dp,
+    \mathrm{d} \mu = -s \, \mathrm{d} T + v \, \mathrm{d} p,
 \]
 where \(s\) and \(v\) are the molar entropy and molar volume, respectively, we obtain
 \[
-    - s_\alpha \, dT + v_\alpha \, dp = - s_\beta \, dT + v_\beta \, dp.
+    - s_\alpha \, \mathrm{d} T + v_\alpha \, \mathrm{d} p = - s_\beta \, \mathrm{d} T + v_\beta \, \mathrm{d} p.
 \]
 Now we can differentiate with respect to temperature:
 \[
-    \frac{\d{\mu}}{\d{T}} = \left(\frac{\partial \mu}{\partial T}\right)_p + \left(\frac{\partial \mu}{\partial p}\right)_T \frac{\d{p}}{\d{T}} = -s + v \frac{dp}{dT},
+    \frac{\d{\mu}}{\d{T}} = \left(\frac{\partial \mu}{\partial T}\right)_p + \left(\frac{\partial \mu}{\partial p}\right)_T \frac{\d{p}}{\d{T}} = -s + v \frac{\mathrm{d} p}{\mathrm{d} T},
 \]
 and rewriting this, the slope of the coexistence curve in the \(p\)--\(T\) plane is
 \[
-    \frac{dp}{dT} = \frac{s_\beta - s_\alpha}{v_\beta - v_\alpha} = \frac{\Delta s}{\Delta v}.
+    \frac{\mathrm{d} p}{\mathrm{d} T} = \frac{s_\beta - s_\alpha}{v_\beta - v_\alpha} = \frac{\Delta s}{\Delta v}.
 \]
 Introducing the \textbf{latent heat} \(q\) per mole, which is the heat absorbed or released during the phase transition at constant temperature and pressure, we have
-\[
+\begin{equation}
     q = T \, \Delta s.
-\]
+    \label{eq:latent_heat}
+\end{equation}
 Substituting this relation into the previous expression, we obtain the \textbf{Clausius--Clapeyron equation}:
-\[
-    \frac{dp}{dT} = \frac{q}{T \, \Delta v}.
-\]
-
+\begin{equation}
+    \frac{\mathrm{d} p}{\mathrm{d} T} = \frac{q}{T \, \Delta v}.
+    \label{eq:Clausius_Clapeyron}
+\end{equation}
 This equation provides a fundamental link between measurable thermodynamic quantities along the coexistence line: the slope of the phase boundary is determined by the latent heat of the transition and the change in molar volume between the two phases.
 
 \section{Classification of Phase Transitions}
@@ -120,16 +121,16 @@ This equation provides a fundamental link between measurable thermodynamic quant
 Phase transitions can be broadly divided into two main categories: \textit{first--order} and \textit{continuous} (or \textit{second--order}) transitions, depending on the nature of the discontinuities that appear in the thermodynamic description of the system.
 
 Historically, phase transitions were classified according to the \textit{Ehrenfest scheme}, which identified the order of the transition with the lowest derivative of the Gibbs free energy that exhibits a discontinuity.
-Although this classification remains conceptually useful, it has been largely superseded by a more general framework developed in modern statistical mechanics, which textitasizes critical behavior and universality near continuous transitions.
+Although this classification remains conceptually useful, it has been largely superseded by a more general framework developed in modern statistical mechanics, which highlights critical behavior and universality near continuous transitions.
 
 \subsection{First--Order Phase Transitions}
 First--order phase transitions are characterized by a discontinuous change in the first derivatives of the free energy with respect to the thermodynamic variables.
 In particular, quantities such as volume or entropy experience finite jumps at the transition point.
 These discontinuities imply the exchange of a finite amount of heat at constant temperature and pressure, known as the \textit{latent heat} of the transition:
 \[
-    L = T \, \Delta s,
+    q = T \, \Delta s,
 \]
-where \(\Delta s\) is the entropy difference between the two coexisting phases.
+where \(\Delta s\) is the entropy difference between the two coexisting phases, as defined in \eqref{eq:latent_heat}.
 First--order transitions are accompanied by the coexistence of phases and occur along well-defined lines in the \(p\)--\(T\) plane.
 Typical examples include the melting of a solid, the vaporization of a liquid, and the sublimation of a solid into vapor.
 
@@ -155,20 +156,20 @@ This analytic mechanism was first formalized by Lee and Yang in a pair of theore
 \begin{theorem}[Lee--Yang I | Existence of the thermodynamic limit]
     Consider a system of \(N\) interacting particles with potential energy \(U_N\) satisfying the stability bound
     \[
-        U_N \geq - B N , \qquad B > 0,
+        U_N \geq - K N , \qquad K > 0,
     \]
     and contained in a volume \(V\) whose boundary increases no faster than \(V^{2/3}\).
     Then, for any complex fugacity \(z = e^{\beta \mu}\), the limit
     \[
-        \Psi(z,v,T) = \lim_{V \to \infty} \frac{1}{V} \log \mathcal{Z}(z,V,T)
+        \Psi(z,v,T) = \lim_{V \to \infty} \frac{1}{V} \log \mathcal{Z}(z,v,T)
     \]
     exists and defines a continuous, monotonically increasing function of \(z \in \mathbb{R}^+\).
 \end{theorem}
 
 \begin{theorem}[Lee--Yang II | Analyticity and distribution of zeros]
     Let \(R\) be an open subset of the complex \(z\)--plane containing a portion of the positive real axis.
-    If, for all finite \(V\) and \(T\), the grand partition function \( \mathcal{Z}(z,V,T) \) has no zeros in \(R\),
-    then the sequence \( (\log \mathcal{Z}(z,V,T))/V \) converges uniformly as \( V \to \infty \) in any closed subset of \(R\),
+    If, for all finite \(V\) and \(T\), the grand partition function \( \mathcal{Z}(z,v,T) \) has no zeros in \(R\),
+    then the sequence \( (\log \mathcal{Z}(z,v,T))/V \) converges uniformly as \( V \to \infty \) in any closed subset of \(R\),
     and therefore the thermodynamic potential \( \Psi(z,v,T) \) is analytic in \(R\).
 \end{theorem}
 
@@ -176,6 +177,7 @@ The two results together imply that a phase transition can only occur if, in the
 The point \(z_c\) where this accumulation occurs divides the real axis into distinct analytic regions, corresponding to different thermodynamic phases.
 At \(z = z_c\), the potential \( \Psi(z,v,T) \) remains continuous but becomes non--analytic:
 a cusp singularity corresponds to a first--order phase transition, while higher--order singularities describe continuous phase transitions.
+If we have regions where the zeroes of \(\mathcal{Z}\) do not accumulate near the real axis then there will ne no PT in that region.
 
 \begin{remark}
     The celebrated \textit{Lee--Yang circle theorem} is a special case of this general framework, proved for the ferromagnetic Ising model, where all zeros of the partition function in the complex fugacity plane \( z = e^{-2\beta h} \) lie on the unit circle \( |z| = 1 \).
@@ -188,10 +190,10 @@ To illustrate the qualitative content of the \textbf{first Lee--Yang theorem}, l
 \]
 we can integrate over the momenta and separate the purely configurational contribution:
 \[
-    Z_N = \int_V \! \mathrm{d}\Omega \, e^{-\beta \mathcal{H}}
+    Z_N(V,T) = \int_V \! \mathrm{d}\Omega \, e^{-\beta \mathcal{H}}
     = \frac{Q_N}{N!\,\lambda_{\mathrm{th}}^{3N}},
     \qquad
-    Q_N = \int \prod_i \mathrm{d}^3q_i \, e^{-\beta U_N(q_1,\dots,q_N)}.
+    Q_N(V,T) = \int \prod_i \mathrm{d}^3q_i \, e^{-\beta U_N(q_1,\dots,q_N)}.
 \]
 Here, \( Q_N \) encodes the interaction between particles, while the prefactor
 \( 1/(N!\lambda_{\mathrm{th}}^{3N}) \) represents the contribution of indistinguishability and kinetic energy.
@@ -244,7 +246,10 @@ for positive real fugacity and its thermodynamic limit is well defined.
 
 The \textbf{second Lee--Young theorem} help us understand how singularities can appear in the thermodynamic limit: we have to focus on the logarithm of the grand partition function. All thermodynamic quantities, such as pressure, density, or free energy, are obtained from derivatives of
 \[
-    \Phi = \log \mathcal{Z}.
+    \Phi = \log \mathcal{Z} \implies \begin{dcases}
+        p = k_B T \Psi(z,\,v,\,T), \\
+        n = \frac{1}{v} = z \frac{\partial}{\partial z} \Psi(z,\,v,\,T) \Big|_{\beta}.
+    \end{dcases}
 \]
 Therefore, the zeros of \( \mathcal{Z} \) correspond to singularities of \( \Phi \), and thus to possible singularities of thermodynamic observables. In other words, any non-analytic behaviour of macroscopic quantities must originate from points in the complex fugacity plane where \( \mathcal{Z} = 0 \).
 
@@ -257,7 +262,7 @@ is a polynomial with strictly positive coefficients.
     \begin{minipage}[b]{0.55\textwidth}
         \begin{center}
             \begin{tikzpicture}[scale=1.5]
-                \fill[orange!30] (0,-0.1) rectangle (1.9,0.1);
+                \fill[green!30] (0,-0.1) rectangle (1.9,0.1);
                 \node[right] at (0,-0.3) {Zeros-free region};
 
                 \draw[->, thick] (-2,0) -- (2,0) node[right] {Re$(z)$};
@@ -268,7 +273,7 @@ is a polynomial with strictly positive coefficients.
                         \filldraw[blue!70] (\x,\y) circle (1pt);
                     }
 
-                \node[blue!70] at (1.6,1.6) {$z^{(i)}$ (zeros of $P_{N}(z)$)};
+                \node[blue!70] at (1.6,1.6) {$z^{(i)}$ (zeros of $\mathcal{Z}_{N}(z)$)};
             \end{tikzpicture}
         \end{center}
     \end{minipage}
@@ -326,7 +331,7 @@ If such a line of zeros \(z^{(i)}\) approaches the positive real axis, then the 
 \]
 This non-analyticity is precisely what we interpret as a phase transition.
 
-Hence, the second Lee--Yang theorem provides a qualitative explanation for the origin of thermodynamic singularities: the partition function itself is always analytic for finite systems, but as the system size grows, its zeros in the complex fugacity plane can condense and ``pinch'' the real axis. The point where this happens marks the emergence of a macroscopic phase transition.
+Hence, the second Lee--Yang theorem provides a qualitative explanation for the origin of thermodynamic singularities: the partition function itself is always analytic for finite systems, but as the system size grows, its zeros in the complex fugacity plane can condense and ``pinch'' the real axis. The point where this happens marks the emergence of a macroscopic phase transition. If we can demonstrate that for an infinite volume the zeroes remain out of the considered region, then there will be no PT in this region.
 
 \begin{remark}
     In practice, even though the Lee--Yang theorems show that true non--analyticities can only appear strictly in the thermodynamic limit, real systems with a large but finite number of particles can still exhibit apparent phase transitions.
@@ -342,10 +347,10 @@ Although originally conceived to describe ferromagnetism, its conceptual framewo
 
 In this chapter, we will start by analyzing the simplest possible case: a system of magnetic moments embedded in a crystalline solid lattice, each associated with a magnetic moment, but \textit{without} any interaction between the spins. This will be done with the Heisemberg model, which accounts for \(3D\)-spins.
 This non-interacting model describes a collection of distinguishable atoms with magnetic moments oscillating in a thermal bath, where the total energy is determined solely by their coupling with an external magnetic field.
-Such a system corresponds to a \textit{paramagnet}, and its behavior can be completely understood within the framework of classical equilibrium statistical mechanics.
+Such a system corresponds to a \textbf{paramagnet}, and its behavior can be completely understood within the framework of classical equilibrium statistical mechanics.
 
 We will then introduce interactions between neighboring magnetic moments, which tend to align or anti-align depending on the sign of the coupling constant.
-It is precisely this introduction of spin--spin interaction that gives rise to the emergence of cooperative behavior and, eventually, to a \textit{phase transition} between the paramagnetic and ferromagnetic phases.
+It is precisely this introduction of \textit{spin--spin interaction} that gives rise to the emergence of cooperative behavior and, eventually, to a phase transition between the paramagnetic and \textbf{ferromagnetic} phases.
 Thus, the Ising model clearly illustrates how the collective properties of matter — such as magnetization and critical phenomena — arise from the interplay between microscopic interactions and thermal fluctuations.
 
 \subsection{Non-interacting Magnetic Spins}
@@ -412,7 +417,7 @@ where \(\phi_i \in [0, 2\pi)\) is the azimuthal angle and \(\theta_i \in [0, \pi
         Within this framework, the pair \((\phi_i, \cos\theta_i)\) can be regarded as a set of generalized canonical variables \((q_i, p_i)\) for the rotational degrees of freedom of each magnetic moment, since the conjugate momentum to the coordinate \(\phi_i\) is proportional to \(\cos\theta_i\).
         This representation allows for a compact and geometrically intuitive formulation of the magnetic phase space as a product of \(N\) spheres:
         \[
-            \Gamma_{\text{mag}} = \bigotimes^N(S_2).
+            \mathcal{M}_{\text{mag}} = \bigotimes^N(S_2).
         \]
     \end{minipage}
     \hfill
@@ -457,9 +462,10 @@ where \(\phi_i \in [0, 2\pi)\) is the azimuthal angle and \(\theta_i \in [0, \pi
 
 For a lattice of non-interacting magnetic moments, if we consider an external magnetic field
 $\mathbf{H} = H \hat{\mathbf{z}}$ applied to the system, the magnetic part of the Hamiltonian reads:
-\[
+\begin{equation}
     \mathcal{H}_{\mathrm{mag}}(\{\bs{\mu}_i\}) = - \sum_{i=1}^N \bs{\mu}_i \cdot \mathbf{H}.
-\]
+    \label{eq:Heisenberg_magnetic_hamiltonian}
+\end{equation}
 The negative sign ensures that the lowest energy configuration corresponds to spins aligned with the field.
 Since the spins do not interact, the partition function factorizes:
 \[
@@ -477,11 +483,12 @@ where the single-spin partition function is
     \end{aligned}
 \]
 Thus, the total partition function is
-\[
+\begin{equation}
     Z_N = \left( 4\pi \frac{\sinh(\beta H \mu)}{\beta H \mu} \right)^N,
     \quad \Rightarrow \quad
     \log Z_N = N \log\left( 4\pi \frac{\sinh(\beta H \mu)}{\beta H \mu} \right).
-\]
+    \label{eq:Heisenberg_partition_potential}
+\end{equation}
 From this, we can compute the thermodynamic quantities:
 \begin{itemize}
     \item Free energy:
@@ -515,7 +522,7 @@ This corresponds to all spins perfectly aligned with the external field, i.e., t
 \paragraph{High temperature limit ($T \to \infty$, $\beta \to 0$):}
 For $\beta \mu H \ll 1$, we expand $\coth(\beta \mu H) \simeq \frac{1}{\beta \mu H} + \frac{\beta \mu H}{3} + \dots$\footnote{The Taylor expansion of the hyperbolic cotangent around $x=0$ is \(\coth(x) = \frac{1}{x} \left(1 + \frac{x^2}{3} \right) + \mathcal{O}(x^2)\).}, giving
 \[
-    E(T \to \infty) \simeq - N \mu H \left( \frac{1}{\beta \mu H} + \frac{\beta \mu H}{3} - \frac{1}{\beta \mu H} \right) = 0.
+    E(T \to \infty) \simeq - N \mu H \left( \frac{1}{\beta \mu H} - \frac{\beta \mu H}{3} - \frac{1}{\beta \mu H} \right) = 0.
 \]
 In this limit, thermal fluctuations dominate and the spins are \textbf{randomly oriented}, leading to a vanishing average magnetic energy.
 
@@ -526,9 +533,10 @@ As it is easy to notice, our system will never undergo a phase transition, since
 \subsection{Magnetization}
 
 The total magnetization of the system is defined as the sum of the magnetic moments of all spins:
-\[
+\begin{equation}
     M = \langle \sum_{i=1}^N \bs{\mu}_i \rangle_c.
-\]
+    \label{eq:magnetization_definition}
+\end{equation}
 In the canonical ensemble, the thermal average is expressed as
 \[
     \begin{aligned}
@@ -555,17 +563,20 @@ giving
 \]
 but zero in the first order.
 Thermal fluctuations randomize the orientations of the spins, leading to a small net magnetization. The proportionality constant
-\[
-    C = \frac{N \mu^2}{3 k_B}
-\]
+\begin{equation}
+    C = \frac{N \mu^2}{3 k_B},
+    \label{eq:curie_coefficient}
+\end{equation}
 is called the \textbf{Curie coefficient}, and the relation
-\[
-    M \simeq \frac{C}{T} H
-\]
+\begin{equation}
+    M \simeq \frac{C}{T} H,
+    \label{eq:curie_law}
+\end{equation}
 is the classical \textbf{Curie law} for paramagnets. It highlights that in the high-temperature regime, the magnetization decreases inversely with temperature, reflecting the competition between thermal disorder and alignment with the field. This constant is connected to the \textit{magnetic susceptibility}:
-\[
+\begin{equation}
     \chi = \frac{\partial M}{\partial H},
-\]
+    \label{eq:magnetic_susceptibility_definition}
+\end{equation}
 because in this regime we find that
 \[
     \chi \xrightarrow{T \to \infty} \frac{M}{H} = \frac{C}{T}.
@@ -651,7 +662,7 @@ A powerful simplification is obtained by restricting each magnetic moment to tak
 \]
 This leads to the \textbf{Ising model}, where each spin is represented by a discrete variable \(\sigma_i = \pm 1\), and the Hamiltonian becomes
 \[
-    \mathcal{H}_{\mathrm{Ising}} = -\mu H \sum_i \sigma_i - J \sum_{\langle ij \rangle} \sigma_i \sigma_j.
+    \mathcal{H}_{\mathrm{Ising}} = -\mu H \sum_i \sigma_i - \mu^2 J \sum_{\langle ij \rangle} \sigma_i \sigma_j.
 \]
 Despite its simplicity, this model captures the essential physics of cooperative phenomena and phase transitions in magnetic systems.
 
@@ -665,14 +676,14 @@ Notice that, in this discrete formulation, the system no longer possesses a cont
 \section{Ising Model}
 
 Consider a hypercubic lattice whose sites carry discrete variables
-\(\sigma_i = \pm 1\). The Ising Hamiltonian is
+\(\sigma_i = \pm 1\). The Ising Hamiltonian
 \begin{equation}
     \mathcal{H}_{\mathrm{Ising}}
-    = -\mu H \sum_i \sigma_i
+    = - H \sum_i \sigma_i
     - J \sum_{\langle ij \rangle} \sigma_i \sigma_j,
     \label{eq:Ising_Hamiltonian}
 \end{equation}
-where \(J>0\) favors configurations in which nearest--neighbor spins are aligned, while the external field \(H\) tends to align the spins along its direction.
+where \(J>0\) favors configurations in which nearest--neighbor spins are aligned, while the external field \(H\) tends to align the spins along its direction; we are considering for simplicity \(\mu = 1\).
 
 To determine the equilibrium state, we minimize the free energy
 \[
@@ -680,9 +691,7 @@ To determine the equilibrium state, we minimize the free energy
     - T \bigl(k_B \log \Gamma(E)\bigr),
 \]
 which makes explicit the competition between the internal energy \(E\) and the entropy \(S\). Energetically favorable states have aligned spins (low \(E\)), whereas entropy favors disordered configurations (high \(S\)). These two contributions typically push the system in opposite directions, and the temperature controls the relative weight of the entropic term.
-
 Thus, \(T\) emerges as the key parameter that determines which term dominates in the minimization of the free energy, and consequently which phase---ordered or disordered—the system will adopt.
-
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}[scale=1.1]
@@ -713,10 +722,8 @@ Thus, \(T\) emerges as the key parameter that determines which term dominates in
         \draw[->,>=stealth,thick, red!70!black] (3.7,0.2) -- +(0,0.6);   % up
     \end{tikzpicture}
 \end{figure}
-
-If we inspect the phase diagram\TODO{Add phase diagrams}, we immediately recognize the typical signature of a phase transition: a thermodynamic quantity develops a discontinuity at a specific value of the control parameters. Whenever such a non-analytic behaviour appears, a phase transition takes place.
-
-To distinguish the different phases, we introduce a quantity whose expectation value can indicate the degree of order in the system: the \textbf{order parameter}. For the Ising model---as well as for the Heisenberg model—the natural choice is the \textit{magnetization}. Its behaviour clearly displays a discontinuity near the critical temperature, separating the ferromagnetic and paramagnetic regimes. Above \(T_c\) the magnetization vanishes, while below \(T_c\) it acquires two opposite non-zero values (corresponding to the two possible orientations of the ferromagnetic phase):
+If we inspect the Ising phase diagram (see figure~\ref{fig:Ising_phase_diagram}), we immediately recognize the typical signature of a phase transition: a thermodynamic quantity develops a discontinuity at a specific value of the control parameters. Whenever such a non-analytic behaviour appears, a phase transition takes place. To distinguish the different phases, we introduce a quantity whose expectation value can indicate the degree of order in the system: the \textbf{order parameter}. For the Ising model---as well as for the Heisenberg model—the natural choice is the \textit{magnetization}.
+Its behaviour clearly displays a discontinuity near the critical temperature, separating the ferromagnetic and paramagnetic regimes. Above \(T_c\) the magnetization vanishes, while below \(T_c\) it acquires two opposite non-zero values (corresponding to the two possible orientations of the ferromagnetic phase):
 \[
     M =
     \begin{dcases}
@@ -725,16 +732,26 @@ To distinguish the different phases, we introduce a quantity whose expectation v
     \end{dcases}
 \]
 Thus the magnetization not only signals the phase transition but also encodes the ordering properties of the system.
-
 If we look at the \(M\)-\(H\) diagram, we can also observe the appearance of the \textit{hysteresis loop} in the ferromagnetic phase. When a ferromagnet is magnetized and the external field is subsequently removed, the magnetization does not relax back to zero but to a finite residual value—an effect absent in the paramagnetic phase.
+\begin{figure}[H]
+    \begin{minipage}{0.55\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{img/Ising_phase_diagram.png}
+        \caption{Schematic phase diagram of the Ising model, showing the relationship between magnetization \(M\), external field \(H\), and temperature \(T\). The critical temperature \(T_c\) marks the boundary between the ferromagnetic (ordered) and paramagnetic (disordered) phases.}
+        \label{fig:Ising_phase_diagram}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.4\textwidth}
+        Another key feature of phase transitions is the rate at which the order parameter changes as the system approaches the critical point. Close to \(T_c\), the magnetization exhibits a power-law behaviour:
+        \[
+            M(T \to T_c) \sim |T - T_c|^{\beta},
+        \]
+        where \(\beta\) is the \textbf{critical exponent} of the magnetization, characterizing how sharply the transition occurs.
 
-Another key feature of phase transitions is the rate at which the order parameter changes as the system approaches the critical point. Close to \(T_c\), the magnetization exhibits a power-law behaviour:
-\[
-    M(T \to T_c) \sim |T - T_c|^{\beta},
-\]
-where \(\beta\) is the \textbf{critical exponent} of the magnetization, characterizing how sharply the transition occurs.
-
-Finally, it is useful to anticipate how symmetries enter the description of phase transitions. When the external field is turned off (\(H=0\)) and the temperature is above the critical value (\(T > T_c\)), the Hamiltonian is invariant under a global \(\mathbb{Z}_2\) transformation (flipping all spins). Below \(T_c\), however, the system develops a non-zero magnetization \(M \neq 0\), and the symmetry is no longer reflected in the equilibrium state: it is \textit{spontaneously broken}, without the need for any explicit symmetry-breaking term.
+        Finally, it is useful to anticipate how symmetries enter the description of phase transitions. When the external field is turned off (\(H=0\)) and the temperature is above the critical value (\(T > T_c\)), the Hamiltonian is invariant under a global \(\mathbb{Z}_2\) transformation (under flipping of all spins).
+    \end{minipage}
+\end{figure}
+Below \(T_c\), however, the system develops a non-zero magnetization \(M \neq 0\), and the symmetry is no longer reflected in the equilibrium state: it is \textit{spontaneously broken}, without the need for any explicit symmetry-breaking term.
 
 \subsection{Mean-Field Treatment}
 
@@ -747,7 +764,8 @@ We start from the partition function:
     \mathcal{H} = -J \sum_{\langle ij \rangle} \sigma_i \sigma_j - H \sum_{i} \sigma_i,
 \]
 and we immediately observe that the Hamiltonian cannot be written as a sum of independent single-spin contributions because of the nearest–neighbour interaction term.
-The key idea of the mean-field approximation is to replace the interaction \(\sigma_i \sigma_j\) with an approximate expression depending only on the average magnetization. With this replacement, the Hamiltonian becomes effectively decoupled and takes the form
+The key idea of the mean-field approximation is to replace the interaction \(\sigma_i \sigma_j\) with an approximate expression depending only on the average magnetization \(m\).
+With this replacement, the Hamiltonian becomes effectively decoupled and takes the form
 \[
     Z_N^{(\mathrm{mf})} \simeq \sum_{\{\sigma_i\}}
     e^{-\beta \mathcal{H}^{(\mathrm{mf})}},
@@ -759,7 +777,7 @@ where \(z\) is the coordination number of the lattice. In this form, the Hamilto
 
 Before carrying out the explicit computation, it is useful to summarize the logic of the procedure. We will first approximate the interaction term \(\sigma_i \sigma_j\) up to a suitable order in fluctuations around the average magnetization. We then reorganize the Hamiltonian until it becomes factorized. Finally, we compute the single-spin partition function, from which the full partition function follows as its \(N\)-th power.
 
-\paragraph{Magnetization \(m\).}
+\paragraph{Magnetization per spin \(m\).}
 We introduce here the quantity that will play a central role in the mean-field construction: the \textit{average magnetization per spin}. It measures the degree of alignment of the system and will serve as the parameter around which we expand the interaction term:
 \[
     \begin{aligned}
@@ -833,10 +851,11 @@ Continuing the computation:
 \]
 since each \(\sigma_i\) is counted \(\frac{z}{2}\) times among the nearest--neighbour pairs.
 At this stage the Hamiltonian is explicitly factorized into single-spin contributions, and we may therefore introduce the single-spin mean-field Hamiltonian
-\[
+\begin{equation}
     \mathcal{H}^{(mf)}(\sigma_i) = J \frac{z}{2} m^2 - \left( Jzm + H \right)\sigma_i.
-\]
-The canonical partition function now follows straightforwardly:
+    \label{eq:mean_field_Hamiltonian_single_spin}
+\end{equation}
+The canonical partition function now follows straightforwardly:\QUESTION{how do we get the cosh term? its not a sum of exponentials, its a product.}
 \[
     \begin{aligned}
         Z_N & = (Z_1)^N = (e^{-\beta \mathcal{H}^{(mf)}(\sigma_i)})^N
@@ -941,12 +960,13 @@ Another quantity worthy of analysis is the \textit{correlation} (or covariance),
     G_{ij} = \langle \sigma_i \sigma_j \rangle - \langle \sigma_i \rangle \langle \sigma_j \rangle = \langle \sigma_i \sigma_j \rangle -m^2,
 \]
 assuming translational invariance where \(\langle \sigma_i \rangle = \langle \sigma_j \rangle = m\). Letting \(r = \vert i-j \vert \) be the distance, the asymptotic behavior for large \(r\) is given by:\TODO{plot the correlation}
-\[
+\begin{equation}
     G(r) = \begin{dcases}
         e^{-\tfrac{r}{\xi}},              & \text{ if }  T\neq T_c; \\
         \left( r^{d-2-\eta} \right)^{-1}, & \text{ if }  T=T_c.     \\
     \end{dcases}
-\]
+    \label{eq:correlation_function}
+\end{equation}
 For \(T \neq T_c\), the correlation \(G(r)\) remains significantly large only for \(r < \xi\) and becomes negligible for \(r > \xi\). The parameter \(\xi\) is called the \textbf{correlation length}, representing the typical scale of fluctuations or the size of the regions within which spins are strongly correlated.
 
 Crucially, we observe that \(\xi \to \infty\) as \(T \to T_c\). Physically, this means that as the critical temperature is approached, distant spins become increasingly correlated. Exactly at \(T=T_c\), the correlation length diverges, and the system exhibits long-range order, resulting in a power-law decay for \(G(r)\) rather than an exponential one.
@@ -954,9 +974,10 @@ Crucially, we observe that \(\xi \to \infty\) as \(T \to T_c\). Physically, this
 \subsection{Critical Exponents}
 
 We now investigate the behavior of the system as \(T \to T_c\) to characterize the properties of the Phase Transition. The strategy is to perform a Taylor expansion of \(\tanh(x)\). First, let us define a reduced temperature variable \(t\) (representing an infinitesimal deviation):
-\[
+\begin{equation}
     t = \frac{T_c - T}{T_c} = 1-\frac{T}{T_c} \ll 1.
-\]
+    \label{eq:reduced_temperature}
+\end{equation}
 From this, we can write the inverse temperature ratio as:
 \[
     \frac{T_c}{T} = (1-t)^{-1} \sim 1 + t.
@@ -979,10 +1000,12 @@ The reduced temperature \(t\) allows us to quantify the rapidity of the transiti
 \]
 
 This exponent is one of several universal parameters defined to monitor the rate of change (scaling) of thermodynamic variables near a phase transition. These are called \textbf{critical exponents}. Formally, a critical exponent \(\lambda\) is associated with a variable \(f(t)\) as follows:
-\[
+\begin{equation}
     \lambda = \lim_{t \to 0} \frac{\log(f(t))}{\log(t)} \longrightarrow f(t \to 0) = g(t)\vert t \vert^{\lambda}, \quad \text{where } g(0) \neq 0.
-\]
+    \label{eq:critical_exponent_definition}
+\end{equation}
 
+These exponents characterize the singular behaviour of various thermodynamic quantities as the system approaches the critical point.
 We typically consider six of these standard exponents:
 \begin{itemize}
     \item \(\alpha\) for \textbf{specific heat}: \(C_{H=0} \sim \vert t \vert^{-\alpha}\);
@@ -990,7 +1013,7 @@ We typically consider six of these standard exponents:
     \item \(\gamma\) for \textbf{susceptibility}: \(\chi_{H=0} \sim \vert t \vert^{-\gamma}\);
     \item \(\delta\) for \textbf{external field} (at the critical isotherm \(T=T_c\)): \(H \sim \mathrm{sgn}(\phi)\vert \phi \vert^{\delta}\);
     \item \(\nu\) for \textbf{correlation length}: \(\xi \sim \vert t \vert^{-\nu}\);
-    \item \(d-2+\eta\) for \textbf{anomalous dimension} (at \(T=T_c\)): \(G(r) \sim \frac{1}{r^{d-2+\eta}}\).
+    \item \(\eta\) for \textbf{anomalous dimension} (at \(T=T_c\)): \(G(r) \sim \frac{1}{r^{d-2+\eta}}\).
 \end{itemize}
 
 \paragraph{Scaling Hypothesis.}
@@ -998,9 +1021,11 @@ When the system undergoes a Phase Transition (PT), correlations spread throughou
 
 \begin{theorem}
     At a critical point during a PT, the system becomes scale invariant (this forms the basis of \textbf{Widom's hypothesis}). Consequently, the singular part of the free energy must be a homogeneous function of the reduced temperature \(t\) and the external field \(H\), respecting the scaling relation:
-    \[
-        F(\lambda^a t,\, \lambda^b H) = \lambda F(t,\,H).
-    \]
+    \begin{equation}
+        F(\lambda^a t,\, \lambda^b H) = \lambda F(t,\,H),
+        \label{eq:scaling_hypothesis}
+    \end{equation}
+    for some scaling parameters \(a\) and \(b\).
 \end{theorem}
 
 From this hypothesis, we can compute the relations connecting the scaling parameters \(a\) and \(b\) with our critical exponents:
@@ -1012,14 +1037,15 @@ From this hypothesis, we can compute the relations connecting the scaling parame
     \end{aligned}
 \]
 Finally, it is useful to derive the \textit{scaling laws} (identities connecting the critical exponents), which act as a consistency check:
-\[
-    \begin{aligned}
+\begin{equation}
+    \begin{dcases}
         (2 -\eta) \nu = \gamma,         \\
         \alpha + \beta(1 + \delta) = 2, \\
         d \nu = 2 - \alpha,             \\
         \alpha + 2\beta + \gamma = 2.
-    \end{aligned}
-\]
+    \end{dcases}
+    \label{eq:scaling_relations}
+\end{equation}
 
 \paragraph{Universality Classes.}
 Due to scale invariance at the critical point, systems with different Hamiltonians and distinct microscopic descriptions might display the exact same type of PT. Microscopically, these systems may appear completely unrelated; however, as they approach the PT, their macroscopic behavior coincides. This implies that the numerical values of the six exponents \(\alpha,\,\beta,\,\gamma,\,\delta,\,\nu,\,\eta\) are identical across these systems.

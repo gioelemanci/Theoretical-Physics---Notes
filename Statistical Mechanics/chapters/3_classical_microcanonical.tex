@@ -8,7 +8,6 @@ The microcanonical ensemble provides a direct link between mechanics and thermod
 
 This ensemble is particularly useful for understanding the foundations of statistical mechanics, the emergence of equilibrium, and the behavior of isolated systems such as closed atomic clusters or idealized models in theoretical physics.
 
-
 \section{Isolated System}
 
 A \textbf{macroscopic state} of an isolated system is specified by fixing three thermodynamic parameters: the total energy \(E\), the volume \(V\), and the particle number \(N\). By definition, an isolated system does not exchange either energy or matter with the environment. As a consequence, the microscopic motion of the system is restricted to the constant-energy hypersurface
@@ -19,9 +18,10 @@ The Hamiltonian \(\mathcal{H}(q_i, p_i)\) is time independent, since \(E\) is co
 
 \begin{definition}[Microcanonical distribution]
   In the microcanonical ensemble we assume, \textit{a priori}, that all accessible microstates compatible with the macroscopic constraints are equally probable. This is expressed by the probability density function
-  \[
+  \begin{equation}
     \rho_{mc}(q_i, p_i) = \frac{1}{\omega(E)} \, \delta\!\left(\mathcal{H}(q_i, p_i) - E\right),
-  \]
+    \label{eq:microcanonical_distribution}
+  \end{equation}
   where \(\omega(E)\) is the density of states on the energy surface, ensuring proper normalization.\footnote{Since the integral over the phase space is equal to \(1\) for a properly normalized distribution, the normalization condition reads:
     \[\int_{\mathcal{M}} d\Omega \, \rho_{mc}(q_i, p_i) = 1 \implies \int_{\mathcal{M}} d\Omega \, \delta\!\left(\mathcal{H}(q_i, p_i) - E\right) = \frac{1}{C} = \omega(E). \]}
 \end{definition}
@@ -47,10 +47,11 @@ The central thermodynamic quantity associated with the microcanonical ensemble i
 
 \begin{definition}[Microcanonical entropy]
   For an isolated system with fixed energy \(E\), volume \(V\), and particle number \(N\), the microcanonical entropy is
-  \[
+  \begin{equation}
     S_{mc}(E, V, N) \equiv k_B \log \omega(E),
-  \]
-  where \(\omega(E)\) denotes the density of states at energy \(E\).
+    \label{eq:microcanonical_entropy}
+  \end{equation}
+  where \(\omega(E)\) denotes the density of states at energy \(E\) and \(k_B\) is the Boltzmann constant: \(k_B \simeq 1.38 \times 10^{-23} \, \text{J/K}\), the fundamental constant relating temperature to energy.
 \end{definition}
 The density of states \(\omega(E)\) practically takes into account the number of microstates accessible to the system at the specified energy. The Boltzmann constant \(k_B\) serves to convert the logarithmic measure of microstate multiplicity into physical units of entropy.
 
@@ -107,7 +108,6 @@ In the thermodynamic limit (denoted by \(\lim_{td}\), corresponding to \(N \to \
   \end{tikzpicture}
 
 \end{figure}
-\QUESTION{What is the meaning of defining entropy for Gamma and Sigma since E is fixed?}
 
 By exploiting the relations between \(\omega(E)\), \(\Gamma(E)\) and \(\Sigma(E)\), one can equivalently write:
 \[
@@ -125,13 +125,24 @@ At equilibrium, the properties of entropy satisfy the following key principles:
           S_{mc}^{(\text{tot})} = S_{mc}^{(1)} + S_{mc}^{(2)}.
         \]
         \begin{proof}
-          Consider two independent subsystems with energies \(E_1\) and \(E_2\), such that the total energy is conserved: \(E = E_1 + E_2\). Since the subsystems are independent, the total density of states at energy \(E\) is given by
+          Consider two independent subsystems with energies \(E_1\) and \(E_2\), such that the total energy is conserved: \(E = E_1 + E_2\). The two subsystems are independent:
           \[
-            \omega(E) = \int_{S_{\mathcal{H}=E}} \dd S_{\mathcal{H}}.
+            \mathcal{S}_1 : \begin{dcases}
+              \mathcal{H}_1(q_i^{(1)}, p_i^{(1)}) = E_1, \quad (q_i^{(1)}, p_i^{(1)}) \in \mathcal{M}_1, \\
+              \omega_1(E_1) = \int_{S_{\mathcal{H}_1=E_1}} \mathrm{d}  S_{\mathcal{H}_1} \implies S_{mc}^{(1)} = k_B \log \omega_1(E_1),
+            \end{dcases}
           \]
-          This quantity can be bounded above by the product of the densities of states of the subsystems, evaluated at the most probable energy partition:
+          and the same applies to the second subsystem \(\mathcal{S}_2\) such that \(\mathcal{M} = \mathcal{M}_1 \times \mathcal{M}_2\). The total system \(\mathcal{S} = \mathcal{S}_1 + \mathcal{S}_2\) has a total density of states given by
           \[
-            \omega(E) \leq E \, \omega_1(E_1^*) \, \omega_2(E_2^*),\QUESTION{Why?}
+            \omega(E) = \int_{\mathcal{M}} \d{\Omega} \delta(\mathcal{H} - E) = \int_{\mathcal{M}_1} \int_{\mathcal{M}_2} \d{\Omega_1} \d{\Omega_2} \, \delta(\mathcal{H}_1 + \mathcal{H}_2 - E).
+          \]
+          This integral can be decomposed by introducing an integral over the energy partition:
+          \[
+            \omega(E) = \int \d{\mathcal{H}_1} \int \d{\mathcal{H}_2} \int \d{S_{\mathcal{H}_1}} \int \d{S_{\mathcal{H}_2}} \delta(\mathcal{H}_2 - (E - \mathcal{H}_1)) = \int_0^E \d{\mathcal{H}_1} \, \omega_1(\mathcal{H}_1) \, \omega_2(E - \mathcal{H}_1).
+          \]
+          This quantity can be bounded above by the product of the densities of states of the subsystems, evaluated at the most probable energy partition (i.e. the one that maximizes the product) and multiplied by the total energy \(E\) (the upper bound of the integral):
+          \[
+            \omega(E) \leq E \, \omega_1(E_1^*) \, \omega_2(E_2^*),
           \]
           where \(E_1^*\) is the value that maximizes the product \(\omega_1(E_1) \omega_2(E - E_1)\), and \(E_2^* = E - E_1^*\).
           For a sufficiently small energy resolution \(\Delta E\), we can write the following bounds:
@@ -197,9 +208,10 @@ At equilibrium, the properties of entropy satisfy the following key principles:
 Finally, the microcanonical entropy can also be expressed in the form of Boltzmann’s universal formula, which relates entropy to the average of the logarithm of the distribution function:
 \begin{proposition}[Boltzmann’s formula]
   For the microcanonical ensemble one has
-  \[
+  \begin{equation}
     s_{mc} = -k_B \lim_{td} \frac{1}{N} \, \langle \log \rho_{mc} \rangle_{mc} = -k_B \lim_{td} \frac{1}{N} \int d\Omega \, \rho_{mc} \log \rho_{mc}.
-  \]
+    \label{eq:boltzmann_formula}
+  \end{equation}
 \end{proposition}
 This shows the direct connection between Boltzmann’s statistical definition of entropy and the Gibbs–Shannon entropy of probability distributions, when restricted to the microcanonical setting.
 
@@ -209,7 +221,7 @@ As an explicit example of the microcanonical formalism, let us consider a gas of
 
 The phase space of the system is
 \[
-  M = V^N \times \mathbb{R}^{3N} = \left\{ \{ (q_i, p_i) \}_{i=1}^N \; : \; q_i \in V, \, p_i \in \mathbb{R}^3 \right\},
+  \mathcal{M} = V^N \times \mathbb{R}^{3N} = \left\{ \{ (q_i, p_i) \}_{i=1}^N \; : \; q_i \in V, \, p_i \in \mathbb{R}^3 \right\},
 \]
 where each particle can move freely inside the container of volume \(V\), and the momentum space is unbounded.
 The Hamiltonian is purely kinetic:
@@ -218,13 +230,13 @@ The Hamiltonian is purely kinetic:
 \]
 
 \subsubsection{Volume and density of states}
-The accessible phase space volume at fixed energy \(E\) can be computed explicitly, yielding
+The accessible phase space volume at fixed energy \(E\) can be computed explicitly as the integral over the phase space constrained by the energy shell,\footnote{The integral over space will give the volume to the power of \(N\), while for the integral over momenta one can go to spherical coordinates and use the volume of a \(3N\)-dimensional sphere: \(\frac{\pi^{d/2}}{\Gamma(d/2 + 1)}R^d\).} yielding
 \[
   \Sigma(E) = \frac{2}{3} \left( \frac{V}{h^3} \right)^N \frac{(2\pi mE)^{3N/2}}{N \, \Gamma(3N/2)}.
 \]
 From this, the density of states follows:
 \[
-  \omega(E) = \frac{3N}{2E} \, \Sigma(E),
+  \omega(E) = \frac{\partial \Sigma(E)}{\partial E} = \frac{3N}{2E} \, \Sigma(E),
   \qquad
   \Gamma(E) = \frac{3N}{2E} \, \Sigma(E)\,\Delta E.
 \]
@@ -234,7 +246,11 @@ Hence, in the thermodynamic limit,
 \]
 
 \subsubsection{Entropy for distinguishable particles}
-For distinguishable particles, the entropy reads
+For distinguishable particles, the entropy can be computed in the thermodynamic limit as \(S = k_B \log(\Sigma(E))\), remembering that
+\[
+  \Gamma(x + 1) = x! = x \, \Gamma(x) \quad \Rightarrow \quad \Gamma(1/2) = \sqrt{\pi}.
+\]
+Thus, using Stirling's approximation for large \(N\), \(\log N! \approx N \log N - N\), one obtains
 \[
   S = \frac{3}{2} N k_B + N k_B \log \left[ V \left( \frac{4\pi mE}{3Nh^2} \right)^{3/2} \right].
 \]
@@ -243,10 +259,10 @@ From this expression one recovers the standard thermodynamic relations:
   \frac{1}{T} & = \left.\frac{\partial S}{\partial E}\right|_{V,N} \quad \Rightarrow \quad E = \frac{3}{2} N k_B T, \\[0.5em]
   \frac{p}{T} & = \left.\frac{\partial S}{\partial V}\right|_{E,N} \quad \Rightarrow \quad pV = N k_B T.
 \end{align*}
-However, this entropy is not extensive, as it grows faster than linearly with \(N\).
+However, this entropy is not extensive, as it grows faster than linearly with \(N\). Furthermore, we will interpret the result for the energy as the \textit{classical equipartition theorem}, assigning an average energy of \(\frac{1}{2} k_B T\) to each quadratic degree of freedom.
 
 \subsubsection{Entropy for indistinguishable particles}
-Correct extensivity is restored by taking into account the indistinguishability of identical particles, which introduces the Gibbs correction factor \(1/N!\). The resulting entropy is
+Correct extensivity is restored by taking into account the indistinguishability of identical particles, which introduces the Gibbs correction factor \(1/N!\).\footnote{This factor was naturally incorporated inside the measure of the phase space in \eqref{eq:dimensionless_measure_phase_space} in order to reach a rigorous treatment of the indistinguishable states (renormalizing accordingly) in the phase space.} The resulting entropy is
 \[
   S = \frac{5}{2} N k_B + 3N k_B \log \left( \frac{d}{\lambda_T} \right),
 \]

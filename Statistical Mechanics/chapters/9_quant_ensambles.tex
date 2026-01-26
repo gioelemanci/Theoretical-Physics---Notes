@@ -1,12 +1,10 @@
-\chapter{Quantum Ensambles} \TODO{PUT HAT ON EVERY OPERATOR}
+\chapter{Quantum Ensambles}
 
-In this chapter, we extend the concepts of statistical mechanics to quantum systems. We will explore the different quantum ensembles and their applications to various physical systems.
+In this chapter, we extend the concepts of statistical mechanics to quantum systems. We will explore the different quantum ensembles and their applications to various physical systems. We will consider only systems in thermal equilibrium, where the principles of quantum mechanics and statistical mechanics intersect; we will discuss the microcanonical, canonical, and grand canonical ensembles in the quantum context.
 
-We will consider only systems in thermal equilibrium, where the principles of quantum mechanics and statistical mechanics intersect; we will discuss the microcanonical, canonical, and grand canonical ensembles in the quantum context. Additionally, we will examine quantum gases, including Bose-Einstein and Fermi-Dirac statistics.
-
-The systems we are going to address are caracterized by discrete energy levels, and the state of the system \(\ket{\psi} in \mathcal{H}_N\) is described by a density matrix rather than a classical probability distribution
+The systems we are going to address are caracterized by discrete energy levels, and the state of the system \(\ket{\psi} \in \mathcal{H}_N\) is described by a density matrix rather than a classical probability distribution
 \[
-    \rho_{\psi} = \ket{\psi}\bra{\psi} \text{ or } \rho_{\psi} = \sum_{\alpha} p_{\alpha} \ket{\alpha}\bra{\alpha},
+    \hat{\rho}_{\psi} = \ket{\psi}\bra{\psi} \text{ or } \hat{\rho}_{\psi} = \sum_{\alpha} p_{\alpha} \ket{\alpha}\bra{\alpha},
 \]
 Operators are going to be assumed time independent and they will act on the proper Hilbert space of the system: if we are treating a system of $N$ particles, the Hilbert space will be the tensor product of the single-particle Hilbert spaces:
 \[
@@ -18,9 +16,7 @@ Operators are going to be assumed time independent and they will act on the prop
 \]
 and when we will need \(N\) to vary, we will work in the Fock space \(\mathcal{F} = \bigoplus_{N=0}^{\infty} \mathcal{H}^{(N)}_{S/A}\).
 
-The Hamiltonian operator \(\hat{H}_N\) will have discrete eigenvalues \(E_n\) with eigenstates \(\ket{n}\), and it will commute with other observables of the system, such as the number operator \(\hat{N}\)\footnote{Even in the GC ensamble the Hamiltonian will commute with the number operator, if we are using the Hamiltonian defined for a fixed number of particles \(\hat{H}_N\); when we will use the Hamiltonian acting on the Fock space for a variable number of particles \(\hat{H}\) things will be more complicated.}, to ensure conservation laws.
-
-To clarify the procedure, we will replace
+The Hamiltonian operator \(\hat{H}_N\) will have discrete eigenvalues \(E_n\) with eigenstates \(\ket{n}\), and it will commute with other observables of the system, such as the number operator \(\hat{N}\)\footnote{Even in the GC ensamble the Hamiltonian will commute with the number operator, if we are using the Hamiltonian defined for a fixed number of particles \(\hat{H}_N\); when we will use the Hamiltonian acting on the Fock space for a variable number of particles \(\hat{H}\) things will be more complicated.}, to ensure conservation laws. To clarify the procedure, we will replace
 \begin{itemize}
     \item the phase space with the appropriate Hilbert space,
     \item the Hamiltonian function with the Hamiltonian operator, self-adjoint and assumed time independent,
@@ -33,15 +29,15 @@ To clarify the procedure, we will replace
 
 As in the classical case, the microcanonical ensemble describes an isolated quantum system with fixed energy \(E\) (configurations on a costant energy surface), volume \(V\), and number of particles \(N\); most operators will have a descrete spectrum and a finite degeneracy \(g_n\) associated to each energy level \(E_n\), working at fixed volume and number of particles.
 
-Given an ON basis \(\{\ket{\psi_{j,\,\alpha}}\}_{j,\,\alpha}\), the generiv time independent Hamiltonian operator \(\hat{H}\) can be diagonalized as
+Given an ON basis \(\{\ket{\psi_{j,\,\alpha}}\}_{j,\,\alpha}\), the generic time independent Hamiltonian operator \(\hat{H}\) can be diagonalized as
 \[
     \hat{H} \ket{\psi_{j,\,\alpha}} = E_j \ket{\psi_{j,\,\alpha}}, \quad \alpha = 1, \ldots, g_j,
 \]
 where \(\alpha\) encodes the degeneracy \(g_j\) of each energy level \(E_j\) and we can express the Hamiltonian in terms of its spectral decomposition:
 \[
-    \hat{H} = \sum_{j} \sum_{\alpha=1}^{g_j} E_j \ket{\psi_{j,\,\alpha}}\bra{\psi_{j,\,\alpha}} = \sum_{j} E_j \mathbb{P}_j,
+    \hat{H} = \sum_{j} \sum_{\alpha=1}^{g_j} E_j \ket{\psi_{j,\,\alpha}}\bra{\psi_{j,\,\alpha}} = \sum_{j} E_j \hat{\mathbb{P}}_j,
 \]
-where \(\mathbb{P}_j = \sum_{\alpha=1}^{g_j} \ket{\psi_{j,\,\alpha}}\bra{\psi_{j,\,\alpha}}\) is the projector onto the eigenspace associated to the energy level \(E_j\). Since the system is isolated, the energy is constrained to lie within a small interval \([E, E + \delta E]\), and all accessible microstates within this energy range are equally probable: in the microcanonical ensamble we have \(E=E_{j_0}\), so that
+where \(\hat{\mathbb{P}}_j = \sum_{\alpha=1}^{g_j} \ket{\psi_{j,\,\alpha}}\bra{\psi_{j,\,\alpha}}\) is the projector onto the eigenspace associated to the energy level \(E_j\). Since the system is isolated, the energy is constrained to lie within a small interval \([E, E + \delta E]\), and all accessible microstates within this energy range are equally probable: in the microcanonical ensamble we have \(E=E_{j_0}\), so that
 \begin{itemize}
     \item \(\ket{\psi_{j,\,\alpha}}\) has zero probability for all \(j \neq j_0\),
     \item \(\ket{\psi_{j_0,\,\alpha}}\) has equal probability \(\frac{1}{g_{j_0}}\) for all \(\alpha = 1, \ldots, g_{j_0}\).
@@ -49,28 +45,28 @@ where \(\mathbb{P}_j = \sum_{\alpha=1}^{g_j} \ket{\psi_{j,\,\alpha}}\bra{\psi_{j
 
 Thus the density operator for a mixed state of the microcanonical ensemble is given by
 \[
-    \rho_{mc} = \sum_{j \neq j_0,\,\alpha} (p_{j \neq j_0,\,\alpha} = 0) \ket{\psi_{j,\,\alpha}}\bra{\psi_{j,\,\alpha}} + \sum_{\alpha=1}^{g_{j_0}} p_{j_0} \ket{\psi_{j_0,\,\alpha}}\bra{\psi_{j_0,\,\alpha}},
+    \hat{\rho}_{mc} = \sum_{j \neq j_0,\,\alpha} (p_{j \neq j_0,\,\alpha} = 0) \ket{\psi_{j,\,\alpha}}\bra{\psi_{j,\,\alpha}} + \sum_{\alpha=1}^{g_{j_0}} p_{j_0} \ket{\psi_{j_0,\,\alpha}}\bra{\psi_{j_0,\,\alpha}},
 \]
 with \(p_{j_0} = \frac{1}{g_{j_0}}\) since we have equal probabilities for all microstates at energy \(E_{j_0}\) and they must sum to one; therefore we can rewrite the density operator as
 \begin{equation}
-    \rho_{mc} = \frac{1}{g_{j_0}} \mathbb{P}_{j_0} = \frac{1}{g_{j_0}} \sum_{\alpha=1}^{g_{j_0}} \ket{\psi_{j_0,\,\alpha}}\bra{\psi_{j_0,\,\alpha}},
+    \hat{\rho}_{mc} = \frac{1}{g_{j_0}} \hat{\mathbb{P}}_{j_0} = \frac{1}{g_{j_0}} \sum_{\alpha=1}^{g_{j_0}} \ket{\psi_{j_0,\,\alpha}}\bra{\psi_{j_0,\,\alpha}},
     \label{eq:microcanonical_density_operator}
 \end{equation}
-Since the density operator is normalized, we have \(\text{Tr}(\rho_{mc}) = 1\). Let us drop the subscript \(j_0\) when there is no ambiguity, since we are working at fixed energy, after selecting a specific eigenspace of the Hamiltonian. We can look at the matrix elements of the density operator in the energy eigenbasis:
+Since the density operator is normalized, we have \(\text{Tr}(\hat{\rho}_{mc}) = 1\). Let us drop the subscript \(j_0\) when there is no ambiguity, since we are working at fixed energy, after selecting a specific eigenspace of the Hamiltonian. We can look at the matrix elements of the density operator in the energy eigenbasis:
 \[
-    \rho_{mc} = \begin{pmatrix}
+    \hat{\rho}_{mc} = \begin{pmatrix}
         0      & 0           & 0      & \cdots      & 0      \\
         0      & \frac{1}{g} & 0      & \cdots      & 0      \\
         0      & 0           & \ddots & \cdots      & 0      \\
         \vdots & \vdots      & \vdots & \frac{1}{g} & \vdots \\
         0      & 0           & 0      & \cdots      & 0
     \end{pmatrix},
-\]
+\]\QUESTION{explained badly or badly written matrix?}
 it is a block diagonal matrix with a block of size \(g \times g\) with all entries equal to \(\frac{1}{g}\) corresponding to the degenerate energy level \(E\), and zeros elsewhere.
 
-The expectation value of an observable \(A\) in the microcanonical ensemble is given by
+The expectation value of an observable \(\hat{A}\) in the microcanonical ensemble is given by
 \begin{equation}
-    \langle A \rangle_{mc}  = \text{Tr}(\rho_{mc} A) = \frac{1}{g} \sum_{\alpha=1}^{g} \bra{\alpha} A \ket{\alpha},
+    \langle \hat{A} \rangle_{mc}  = \text{Tr}(\hat{\rho}_{mc} \hat{A}) = \frac{1}{g} \sum_{\alpha=1}^{g} \bra{\alpha} \hat{A} \ket{\alpha},
     \label{eq:quantum_microcanonical_expectation_value}
 \end{equation}
 where \(\frac{1}{g}\) represents the equal probability of each microstate within the energy shell; we also used \(\ket{\alpha}\) to denote the eigenstates \(\ket{\psi_{j,\,\alpha}}\) for simplicity.
@@ -78,7 +74,7 @@ where \(\frac{1}{g}\) represents the equal probability of each microstate within
 We can also define the quantum analog of the entropy in the microcanonical ensemble, from the Boltzmann formula:
 \[
     \begin{aligned}
-        S & = - k_B \langle \log \rho_{mc} \rangle_{mc} = -k_B \text{Tr}(\rho_{mc} \log \rho_{mc})                                                                                  \\
+        S & = - k_B \langle \log \hat{\rho}_{mc} \rangle_{mc} = -k_B \text{Tr}(\hat{\rho}_{mc} \log \hat{\rho}_{mc})                                                                \\
           & = - k_B \sum_{\alpha} \bra{\alpha} \left[ \frac{1}{g} \sum_{\beta} \ket{\beta}\bra{\beta} \log(\frac{1}{g} \sum_{\gamma} \ket{\gamma}\bra{\gamma}) \right] \ket{\alpha} \\
           & = -k_B \sum_{\alpha} \frac{1}{g} \log(\frac{1}{g}) \bra{\alpha} \ket{\alpha} = - k_B \frac{g}{g} \log(\frac{1}{g}) = k_B \log g,
     \end{aligned}
@@ -94,36 +90,36 @@ Now we cannot restrict the system to a single energy level, as in the microcanon
 
 Now the density operator for the canonical ensemble is given by
 \begin{equation}
-    \rho_{c} = \frac{1}{Z_N} \sum_{j} e^{-\beta E_j} \mathbb{P}_j = \frac{1}{Z_N} e^{-\beta H_N},
+    \hat{\rho}_{c} = \frac{1}{Z_N} \sum_{j} e^{-\beta E_j} \hat{\mathbb{P}}_j = \frac{1}{Z_N} e^{-\beta \hat{H}_N},
     \label{eq:canonical_density_operator}
 \end{equation}
-where \(Z_N= \text{Tr}(e^{-\beta H_N})\) is the partition function, ensuring the normalization of the density operator. Let's compute this results explicitly:
+where \(Z_N= \text{Tr}_{\mathcal{H}_N}(e^{-\beta \hat{H}_N})\) is the partition function, ensuring the normalization of the density operator. Let's compute this results explicitly:
 \[
-    e^{-\beta H_N} = \sum_{n} \frac{(-\beta H_N)^n}{n!} = \sum_{n} \frac{(-\beta)^n}{n!} \left( \sum_{j} E_j \mathbb{P}_j \right)^n,
+    e^{-\beta \hat{H}_N} = \sum_{n} \frac{(-\beta \hat{H}_N)^n}{n!} = \sum_{n} \frac{(-\beta)^n}{n!} \left( \sum_{j} E_j \hat{\mathbb{P}}_j \right)^n,
 \]
 practically we need to compute the \(n\)-th power of the Hamiltonian:
 \[
-    H_N^2 = \left(\sum_{i} E_i \mathbb{P}_i \right)\left(\sum_{j} E_j \mathbb{P}_j \right) = \sum_{i,\,j} E_i E_j \mathbb{P}_i \mathbb{P}_j = \sum_{j} E_j^2 \mathbb{P}_j,
+    \hat{H}_N^2 = \left(\sum_{i} E_i \hat{\mathbb{P}}_i \right)\left(\sum_{j} E_j \hat{\mathbb{P}}_j \right) = \sum_{i,\,j} E_i E_j \hat{\mathbb{P}}_i \hat{\mathbb{P}}_j = \sum_{j} E_j^2 \hat{\mathbb{P}}_j,
 \]
-so we can generalize to \(H_N^{n} = \sum_{j} E_j^{n} \mathbb{P}_j\); thus we have
+so we can generalize to \(\hat{H}_N^{n} = \sum_{j} E_j^{n} \hat{\mathbb{P}}_j\); thus we have
 \[
-    e^{-\beta H_N} = \sum_{j} \left( \sum_{n} \frac{(-\beta E_j)^n}{n!} \right) \mathbb{P}_j = \sum_{j} e^{-\beta E_j} \mathbb{P}_j.
+    e^{-\beta \hat{H}_N} = \sum_{j} \left( \sum_{n} \frac{(-\beta E_j)^n}{n!} \right) \hat{\mathbb{P}}_j = \sum_{j} e^{-\beta E_j} \hat{\mathbb{P}}_j.
 \]
 
 We can find the partition function \(Z_N\) by requiring the normalization of the density operator:
 \[
-    \Tr_{H_N}(\rho_{c}) = 1 = \frac{1}{Z_N}\Tr(e^{-\beta H_N}) \implies Z_N = \text{Tr}_{H_N}(e^{-\beta H_N}).
+    \Tr_{\mathcal{H}_N}(\hat{\rho}_{c}) = 1 = \frac{1}{Z_N}\Tr(e^{-\beta \hat{H}_N}) \implies Z_N = \text{Tr}_{\mathcal{H}_N}(e^{-\beta \hat{H}_N}).
 \]
 We can also reduce the expression for the partition function to a more familiar one using the spectral decomposition of the Hamiltonian:
 \begin{equation}
-    Z_N = \text{Tr}_{H_N}(e^{-\beta H_N}) = \sum_{j} e^{-\beta E_j} \text{Tr}_{H_N}(\mathbb{P}_j) = \sum_{j} g_j e^{-\beta E_j},
+    Z_N = \text{Tr}_{\mathcal{H}_N}(e^{-\beta \hat{H}_N}) = \sum_{j} e^{-\beta E_j} \text{Tr}_{\mathcal{H}_N}(\hat{\mathbb{P}}_j) = \sum_{j} g_j e^{-\beta E_j},
     \label{eq:quantum_canonical_partition_function}
 \end{equation}
-where \(g_j = \text{Tr}_{H_N}(\mathbb{P}_j)\) is the degeneracy of the energy level \(E_j\).
+where \(g_j = \text{Tr}_{\mathcal{H}_N}(\hat{\mathbb{P}}_j)\) is the degeneracy of the energy level \(E_j\).
 
-The expectation value of an observable \(A\) in the canonical ensemble is given by
+The expectation value of an observable \(\hat{A}\) in the canonical ensemble is given by
 \begin{equation}
-    \langle A \rangle_{c} = \text{Tr}_{H_N}(\rho_{c} A) = \frac{1}{Z_N} \sum_{j} e^{-\beta E_j} \text{Tr}_{H_N}(\mathbb{P}_j A).
+    \langle \hat{A} \rangle_{c} = \text{Tr}_{\mathcal{H}_N}(\hat{\rho}_{c} \hat{A}) = \frac{1}{Z_N} \sum_{j} e^{-\beta E_j} \text{Tr}_{\mathcal{H}_N}(\hat{\mathbb{P}}_j \hat{A}).
     \label{eq:quantum_canonical_expectation_value}
 \end{equation}
 
@@ -131,23 +127,23 @@ Now we can compute the quantum analog of the Helmholtz free energy \(F\) in the 
 \[
     Z_N = e^{-\beta F} \implies F = - \frac{1}{\beta} \log Z_N.
 \]
-From the Helmholtz free energy, we can derive other thermodynamic quantities. For instance, the internal energy \(E\) is given by
+From the Helmholtz free energy, we can derive other thermodynamic quantities. The internal energy \(E\) instead, is given by
 \[
     \begin{aligned}
-        E = \langle H_N \rangle_{c} & = \text{Tr}_{H_N}(\rho_{c} H_N) = \frac{1}{Z_N} \text{Tr}_{H_N}(e^{-\beta H_N} H_N)                                            \\
-                                    & = \frac{-1}{Z_N} \frac{\partial}{\partial \beta} \text{Tr}_{H_N}(e^{-\beta H_N}) = - \frac{\partial}{\partial \beta} \log Z_N.
+        E = \langle \hat{H}_N \rangle_{c} & = \text{Tr}_{\mathcal{H}_N}(\hat{\rho}_{c} \hat{H}_N) = \frac{1}{Z_N} \text{Tr}_{\mathcal{H}_N}(e^{-\beta \hat{H}_N} \hat{H}_N)                \\
+                                          & = \frac{-1}{Z_N} \frac{\partial}{\partial \beta} \text{Tr}_{\mathcal{H}_N}(e^{-\beta \hat{H}_N}) = - \frac{\partial}{\partial \beta} \log Z_N.
     \end{aligned}
 \]
 
 The entropy \(S\) in the canonical ensemble can be computed using the relation
 \[
     \begin{aligned}
-        S & = -k_B \langle \log \rho_{c} \rangle_{c} = - k_B \text{Tr}_{H_N}(\rho_{c} \log \rho_{c}) = -k_B \text{Tr}_{H_N} \left( \frac{e^{-\beta H_N}}{Z_N} (- \beta H_N - \log Z_N) \right) \\
-          & = - k_B \left( -\beta \text{Tr}_{H_N}(\frac{H_N e^{-\beta H_N}}{Z_N}) + \frac{\beta F}{Z_N} \text{Tr}_{H_N}(e^{-\beta H_N}) \right)                                                \\
+        S & = -k_B \langle \log \hat{\rho}_{c} \rangle_{c} = - k_B \text{Tr}_{\mathcal{H}_N}(\hat{\rho}_{c} \log \hat{\rho}_{c}) = -k_B \text{Tr}_{\mathcal{H}_N} \left( \frac{e^{-\beta \hat{H}_N}}{Z_N} (- \beta \hat{H}_N - \log Z_N) \right) \\
+          & = - k_B \left( -\beta \text{Tr}_{\mathcal{H}_N}(\frac{\hat{H}_N e^{-\beta \hat{H}_N}}{Z_N}) + \frac{\beta F}{Z_N} \text{Tr}_{\mathcal{H}_N}(e^{-\beta \hat{H}_N}) \right)                                                            \\
           & = - k_B \left( - \beta E + \beta F \right) = \frac{E - F}{T},
     \end{aligned}
 \]
-since \(\log Z_N = -\beta F\) and \(\text{Tr}_{H_N}(e^{-\beta H_N}) = Z_N\). This result is consistent with the thermodynamic, confirming the validity of our quantum statistical mechanics framework.
+since \(\log Z_N = -\beta F\) and \(\text{Tr}_{\mathcal{H}_N}(e^{-\beta \hat{H}_N}) = Z_N\). This result is consistent with the thermodynamic, confirming the validity of our quantum statistical mechanics framework.
 
 \section{Grand Canonical Ensemble}
 
@@ -156,72 +152,69 @@ In the grand canonical ensemble, we consider a quantum system that can exchange 
     \mathcal{F} = \bigoplus_{N=0}^{\infty} \mathcal{H}^{(N)}_{S/A}.
 \]
 
-The Hamiltonian operator \(H\) in the grand canonical ensemble acts on the Fock space, and it is the combination of the Hamiltonians for different particle numbers acting on their respective Hilbert spaces; thus we have the number operator \(N\) that commutes with the Hamiltonian at fixed \(N\) (canonical Hamiltonian \(H_N\)), while the full Hamiltonian \(H\) will respect
+The Hamiltonian operator \(\hat{H}\) in the grand canonical ensemble acts on the Fock space, and it is the combination of the Hamiltonians for different particle numbers acting on their respective Hilbert spaces; thus we have the number operator \(\hat{N}\) that commutes with the Hamiltonian at fixed \(N\) (canonical Hamiltonian \(\hat{H}_N\)), while the full Hamiltonian \(\hat{H}\) will respect
 \[
-    H \ket{\psi_{j,\,\alpha}}^{(N)} = E_{j}^{(N)} \ket{\psi_{j,\,\alpha}}^{(N)},
+    \hat{H} \ket{\psi_{j,\,\alpha}}^{(N)} = E_{j}^{(N)} \ket{\psi_{j,\,\alpha}}^{(N)},
 \]
-where the ON base \(\{\ket{\psi_{j,\,\alpha}}^{(N)}\}_{j,\,\alpha,\,N}\) spans the Fock space, with \(\alpha\) indexing the degeneracy of each energy level \(E_{j}^{(N)}\) for a fixed number of particles \(N\). Thus we have projectors in the Fock space \(\mathbb{P}_{j}^{(N)} = \sum_{\alpha=1}^{g_{j}^{(N)}} \ket{\psi_{j,\,\alpha}}^{(N)} \bra{\psi_{j,\,\alpha}}^{(N)}\) which are \(N\) dipendent and orthogonal in each index. Finally we can express the Hamiltonian in terms of its spectral decomposition:
+where the ON base \(\{\ket{\psi_{j,\,\alpha}}^{(N)}\}_{j,\,\alpha,\,N}\) spans the Fock space, with \(\alpha\) indexing the degeneracy of each energy level \(E_{j}^{(N)}\) for a fixed number of particles \(N\). Thus we have projectors in the Fock space \(\hat{\mathbb{P}}_{j}^{(N)} = \sum_{\alpha=1}^{g_{j}^{(N)}} \ket{\psi_{j,\,\alpha}}^{(N)} \bra{\psi_{j,\,\alpha}}^{(N)}\) which are \(N\) dipendent and orthogonal in each index. Finally we can express the Hamiltonian in terms of its spectral decomposition:
 \[
-    H = \sum_{N}\sum_{j} E_j^{(N)} \mathbb{P}_j^{(N)}.
+    \hat{H} = \sum_{N}\sum_{j} E_j^{(N)} \hat{\mathbb{P}}_j^{(N)}.
 \]
 
 The density operator for a mixed state in the grand canonical ensemble is given by
 \[
-    \rho_{gc} = \sum_{N} \sum_{j} p_j^{(N)} \mathbb{P}_j^{(N)},
+    \hat{\rho}_{gc} = \sum_{N} \sum_{j} p_j^{(N)} \hat{\mathbb{P}}_j^{(N)},
 \]
 where, since we are mimicking the classical ensamble, the probabilities \(p_j^{(N)}\) are determined by the Boltzmann factors, taking into account both energy and particle number: \(p_j^{(N)} \propto e^{-\beta (E_j^{(N)} - \mu N)}\). Thus we can write the density operator as
 \begin{equation}
-    \rho_{gc} = \frac{1}{\mathcal{Z}} \sum_{N} \sum_{j} e^{-\beta (E_j^{(N)} - \mu N)} \mathbb{P}_j^{(N)} = \frac{1}{\mathcal{Z}} e^{-\beta (H - \mu N)},
+    \hat{\rho}_{gc} = \frac{1}{\mathcal{Z}} \sum_{N} \sum_{j} e^{-\beta (E_j^{(N)} - \mu N)} \hat{\mathbb{P}}_j^{(N)} = \frac{1}{\mathcal{Z}} e^{-\beta (\hat{H} - \mu \hat{N})},
     \label{eq:grand_canonical_density_operator}
 \end{equation}
 where we need to make some considerations:
 \begin{itemize}
-    \item \(\sum_{N} \left(\sum_{j} e^{-\beta (E_j^{(N)})} \mathbb{P}_j^{(N)}\right) = e^{-\beta H}\), since we are summing over all possible particle numbers and energy levels, reconstructing the full Hamiltonian operator acting on the Fock space (the computation is almost identical to the canonical case);
-    \item \(\sum_{N} \left(\sum_{j} e^{\beta \mu N} \mathbb{P}_j^{(N)}\right) = e^{\beta \mu N}\), since the number operator \(N\) acts on the Fock space and counts the number of particles in each state (again, it is the same computation as before);
+    \item \(\sum_{N} \left(\sum_{j} e^{-\beta (E_j^{(N)})} \hat{\mathbb{P}}_j^{(N)}\right) = e^{-\beta \hat{H}}\), since we are summing over all possible particle numbers and energy levels, reconstructing the full Hamiltonian operator acting on the Fock space (the computation is almost identical to the canonical case);
+    \item \(\sum_{N} \left(\sum_{j} e^{\beta \mu N} \hat{\mathbb{P}}_j^{(N)}\right) = e^{\beta \mu \hat{N}}\), since the number operator \(\hat{N}\) acts on the Fock space and counts the number of particles in each state (again, it is the same computation as before);
     \item the normalization factor \(\frac{1}{\mathcal{Z}}\) is the grand partition function, ensuring that the density operator is properly normalized.
 \end{itemize}
 
 We will spend some words on the computation of the grand partition function \(\mathcal{Z}\): it is defined by the unitary condition on the density operator trace
 \[
     \begin{aligned}
-        \Tr_{\mathcal{F}}(\rho_{gc}) & = \sum_{N=0}^{\infty} \Tr_{\mathcal{H}_N} \left( \frac{1}{\mathcal{Z}} e^{-\beta (H - \mu N)} \right) = \frac{1}{\mathcal{Z}} \sum_{N=0}^{\infty} e^{\beta \mu N} \Tr_{\mathcal{H}_N}(e^{-\beta H_N}) \\
-                                     & = \frac{1}{\mathcal{Z}} \sum_{N=0}^{\infty} z^N Z_N, = 1
+        \Tr_{\mathcal{F}}(\hat{\rho}_{gc}) & = \sum_{N=0}^{\infty} \Tr_{\mathcal{H}_N} \left( \frac{1}{\mathcal{Z}} e^{-\beta (\hat{H} - \mu \hat{N})} \right) = \frac{1}{\mathcal{Z}} \sum_{N=0}^{\infty} e^{\beta \mu N} \Tr_{\mathcal{H}_N}(e^{-\beta \hat{H}_N}) \\
+                                           & = \frac{1}{\mathcal{Z}} \sum_{N=0}^{\infty} z^N Z_N, = 1
     \end{aligned}
 \]
-where we used the fact that the trace over the Fock space can be decomposed into traces over the fixed particle number Hilbert spaces \(\mathcal{H}_N\), and we recognized the canonical partition function \(Z_N = \Tr_{\mathcal{H}_N}(e^{-\beta H_N})\) and the fugacity \(z = e^{\beta \mu}\). Therefore, we find that the grand partition function is given by
+where we used the fact that the trace over the Fock space can be decomposed into traces over the fixed particle number Hilbert spaces \(\mathcal{H}_N\), and we recognized the canonical partition function \(Z_N = \Tr_{\mathcal{H}_N}(e^{-\beta \hat{H}_N})\) and the fugacity \(z = e^{\beta \mu}\). Therefore, we find that the grand partition function is given by
 \begin{equation}
-    \mathcal{Z} = \sum_{N=0}^{\infty} z^N Z_N = \sum_{N=0}^{\infty} z^N \Tr_{\mathcal{H}_N}(e^{-\beta H_N}) = \Tr_{\mathcal{F}}(e^{-\beta (H - \mu N)}).
+    \mathcal{Z} = \sum_{N=0}^{\infty} z^N Z_N = \sum_{N=0}^{\infty} z^N \Tr_{\mathcal{H}_N}(e^{-\beta \hat{H}_N}) = \Tr_{\mathcal{F}}(e^{-\beta (\hat{H} - \mu \hat{N})}),
     \label{eq:grand_partition_function}
 \end{equation}
 
-The expectation value of an observable \(A\) in the grand canonical ensemble is given by
+The expectation value of an observable \(\hat{A}\) in the grand canonical ensemble is given by
 \begin{equation}
-    \langle A \rangle_{gc} = \Tr_{\mathcal{F}}(\rho_{gc} A) = \frac{1}{\mathcal{Z}} \sum_{N=0}^{\infty} z^N \Tr_{\mathcal{H}_N}(e^{-\beta H_N} A),
+    \langle \hat{A} \rangle_{gc} = \Tr_{\mathcal{F}}(\hat{\rho}_{gc} \hat{A}) = \frac{1}{\mathcal{Z}} \sum_{N=0}^{\infty} z^N \Tr_{\mathcal{H}_N}(e^{-\beta \hat{H}_N} \hat{A}),
     \label{eq:grand_canonical_expectation_value}
 \end{equation}
-where the observable considered must act on the Fock space and commute with the number operator \(N\) on each \(\mathcal{H}_N\).
+where the observable considered must act on the Fock space and commute with the number operator \(\hat{N}\) on each \(\mathcal{H}_N\).
 
 From all this tools, we can compute the quantum analog of the grand potential \(\Omega\) in the grand canonical ensemble:
 \[
     \mathcal{Z} = e^{-\beta \Omega} \implies \Omega = - \frac{1}{\beta} \log \mathcal{Z}.
 \]
-
 For the other thermodynamic quantities, we could derive them from the grand potential, but it is more instructive to show how to compute them directly from the grand partition function, at least for the internal energy \(E\) and the grand canonical entropy \(S\).
 
 The internal energy \(E\) in the grand canonical ensemble is given by
 \[
     \begin{aligned}
-        E - \mu N = \langle H - \mu N \rangle_{gc} & = \Tr_{\mathcal{F}}(\rho_{gc} (H - \mu N)) = \frac{1}{\mathcal{Z}} \Tr_{\mathcal{F}}(e^{-\beta (H - \mu N)} (H - \mu N))                                 \\
-                                                   & = \frac{-1}{\mathcal{Z}} \frac{\partial}{\partial \beta} \Tr_{\mathcal{F}}(e^{-\beta (H - \mu N)}) = - \frac{\partial}{\partial \beta} \log \mathcal{Z}.
+        E - \mu N = \langle \hat{H} - \mu \hat{N} \rangle_{gc} & = \Tr_{\mathcal{F}}(\hat{\rho}_{gc} (\hat{H} - \mu \hat{N})) = \frac{1}{\mathcal{Z}} \Tr_{\mathcal{F}}(e^{-\beta (\hat{H} - \mu \hat{N})} (\hat{H} - \mu \hat{N}))   \\
+                                                               & = \frac{-1}{\mathcal{Z}} \frac{\partial}{\partial \beta} \Tr_{\mathcal{F}}(e^{-\beta (\hat{H} - \mu \hat{N})}) = - \frac{\partial}{\partial \beta} \log \mathcal{Z}.
     \end{aligned}
 \]
-
 The entropy \(S\) in the grand canonical ensemble can be computed as
 \[
     \begin{aligned}
-        S & = - k_B \langle \log \rho_{gc} \rangle_{gc} = - k_B \Tr_{\mathcal{F}}(\rho_{gc} \log \rho_{gc}) = - k_B \Tr_{\mathcal{F}} \left( \frac{e^{-\beta (H - \mu N)}}{\mathcal{Z}} (-\beta (H - \mu N) - \log \mathcal{Z}) \right) \\
-          & = - k_B \left( -\beta \Tr_{\mathcal{F}} \left( \frac{(H - \mu N) e^{-\beta (H - \mu N)}}{\mathcal{Z}} \right) + \frac{\beta \Omega}{\mathcal{Z}} \Tr_{\mathcal{F}}(e^{-\beta (H - \mu N)}) \right)                          \\
+        S & = - k_B \langle \log \hat{\rho}_{gc} \rangle_{gc} = - k_B \Tr_{\mathcal{F}}(\hat{\rho}_{gc} \log \hat{\rho}_{gc}) = - k_B \Tr_{\mathcal{F}} \left( \frac{e^{-\beta (\hat{H} - \mu \hat{N})}}{\mathcal{Z}} (-\beta (\hat{H} - \mu \hat{N}) - \log \mathcal{Z}) \right) \\
+          & = - k_B \left( -\beta \Tr_{\mathcal{F}} \left( \frac{(\hat{H} - \mu \hat{N}) e^{-\beta (\hat{H} - \mu \hat{N})}}{\mathcal{Z}} \right) + \frac{\beta \Omega}{\mathcal{Z}} \Tr_{\mathcal{F}}(e^{-\beta (\hat{H} - \mu \hat{N})}) \right)                                \\
           & = - k_B \left( -\beta (E - \mu N) + \beta \Omega \right) = \frac{E - \mu N - \Omega}{T}.
     \end{aligned}
 \]
-

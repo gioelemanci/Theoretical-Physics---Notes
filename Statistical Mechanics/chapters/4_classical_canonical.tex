@@ -79,15 +79,17 @@ Physically, it reflects the fact that configurations of the subsystem with highe
 The term with the opposite sign in the exponent, \(e^{+\beta E_1}\), would imply an increasing probability for higher energies and would make normalization impossible, so only the decaying exponential form is physically acceptable.
 
 Hence, the canonical probability distribution for a system in thermal equilibrium with a heat bath is given by
-\[
+\begin{equation}
     \rho_c(q_i, p_i) = \frac{1}{Z} e^{-\beta \mathcal{H}(q_i, p_i)},
-\]
+    \label{eq:canonical_distribution}
+\end{equation}
 where the normalization factor \(Z\) is known as the \textbf{canonical partition function}.
 It is obtained by requiring that the total probability over phase space be one:
-\[
+\begin{equation}
     Z = \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, e^{-\beta \mathcal{H}(q_i, p_i)}.
-\]
-For a system of \(N\) particles in \(d\) dimensions this becomes
+    \label{eq:canonical_partition_function}
+\end{equation}
+For a system of \(N\) particles in \(d\) dimensions this becomes\footnote{Note the measure of the phase space: we have incorporated the \textit{indistinguishability factor} \(\xi_N\): \(\xi_N = N!\) for indistinguishable particles, and \(\xi_N = 1\) for distinguishable ones. Also, the factor \(h^{dN}\) ensures the correct dimensionality and connects classical and quantum descriptions. Now we have properly defined a general measure on phase space.}
 \[
     Z = \frac{1}{\xi_N} \int \prod_{i=1}^{N} \frac{\mathrm{d}^d q_i \, \mathrm{d}^d p_i}{h^d} \, e^{-\beta \mathcal{H}(q_i, p_i)} = \frac{1}{\xi_N} \int_0^{\infty} \mathrm{d}E \, e^{-\beta E} \, \omega(E).
 \]
@@ -97,9 +99,10 @@ Once \(Z\) is known, quantities such as the internal energy, entropy, and free e
 Finally, let us define the notion of an average quantity within this ensemble.
 \begin{definition}{Canonical average.}
     If \(f(q_i, p_i)\) is any observable function defined on the phase space of the system, its average over the canonical ensemble is given by
-    \[
+    \begin{equation}
         \langle f \rangle_c = \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, \rho_c(q_i, p_i) f(q_i, p_i) = \frac{1}{Z} \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, e^{-\beta \mathcal{H}(q_i, p_i)} f(q_i, p_i).
-    \]
+        \label{eq:canonical_average}
+    \end{equation}
     This operation, often called the \textit{canonical average}, provides the bridge between the microscopic description of the system and the macroscopic quantities that can be experimentally measured.
 \end{definition}
 In equilibrium statistical mechanics, macroscopic observables are nothing but ensemble averages of microscopic functions evaluated with the canonical distribution.
@@ -107,11 +110,12 @@ In equilibrium statistical mechanics, macroscopic observables are nothing but en
 \section{Partition Function and Thermodynamic Quantities}
 
 Recalling the expression found for the partition function, we can now analyze its physical dependencies:
-\[
+\begin{equation}
     Z = \int_{\textcolor{blue}{\mathcal{M}_{\mathcal{S}}}} \mathrm{d}\Omega \,
     e^{-\textcolor{green}{\beta} \textcolor{orange}{\mathcal{H}}}
     = Z(\textcolor{blue}{V}, \textcolor{green}{T}, \textcolor{orange}{N}),
-\]
+    \label{eq:Helmholtz_partition_function}
+\end{equation}
 that is, the partition function depends on the thermodynamic variables characterizing the canonical ensemble: the volume \(V\), the temperature \(T\), and the number of particles \(N\).
 In this sense, \(Z\) plays the role of a thermodynamic potential from which all equilibrium properties can be derived.
 
@@ -152,7 +156,7 @@ we can rewrite the previous expression in the form:\footnote{We have also used \
 \[
     F \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, \frac{e^{-\beta \mathcal{H}}}{Z}
     = \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, \frac{e^{-\beta \mathcal{H}}}{Z} \, \mathcal{H}
-    + T \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, \frac{e^{-\beta \mathcal{H}}}{Z} \, \frac{\partial F}{\partial T}.
+    + T \frac{\partial F}{\partial T} \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, \frac{e^{-\beta \mathcal{H}}}{Z}.
 \]
 Recognizing the expression for the canonical average, we obtain:
 \[
@@ -172,12 +176,13 @@ Finally, recalling that \(\langle \mathcal{H} \rangle_c = E\) and \(S=-\frac{\pa
 \end{remark}
 
 Another useful relation connects the internal energy to the partition function:
-\[
+\begin{equation}
     E = \langle \mathcal{H} \rangle_c
     = \int_{\mathcal{M}_{\mathcal{S}}} \mathrm{d}\Omega \, \frac{e^{-\beta \mathcal{H}}}{Z} \, \mathcal{H}
     = \frac{1}{Z} \left( -\frac{\partial Z}{\partial \beta} \right)
     = -\frac{\partial}{\partial \beta} \log Z.
-\]
+    \label{eq:internal_energy_partition_function}
+\end{equation}
 This expression highlights how the mean energy of the system can be derived directly from the temperature dependence of the partition function.
 Once the partition function \(Z\) is known, all macroscopic thermodynamic quantities follow systematically:
 the Helmholtz free energy from \(F = -k_B T \log Z\),
@@ -203,7 +208,10 @@ We now aim to demonstrate the corresponding relation in the canonical ensemble:
               & = \frac{E-F}{T} = S_{th} = S_c,
     \end{aligned}
 \]
-practically proving \textit{Boltzmann's universal formula}. Hence, in the thermodynamic limit we have \(s_{mc} = s_c = s_{th}\).
+practically proving \textit{Boltzmann's universal formula}. Hence, in the thermodynamic limit we have
+\[
+    s_{mc} = s_c = s_{th}.
+\]
 
 \subsection{Distinguishable and Indistinguishable Systems}
 
@@ -250,29 +258,31 @@ This property reflects the fact that, for independent subsystems, the total prob
     This correction accounts for the overcounting of identical configurations in phase space and ensures the proper extensivity of thermodynamic quantities such as entropy and free energy.
 \end{example}
 
-\subsection{Generalized Equipartition Theorem}
+\section{Generalized Equipartition Theorem}
 
 The equipartition theorem provides a fundamental link between the microscopic degrees of freedom of a system and its macroscopic thermal properties. In its generalized form, it states that each parameter \(\xi_i\), coordinate or its conjugate momentum for \(i=1,\dots,2dN\), contribute to the mean energy according to their appearance in the Hamiltonian. This result extends the classical formulation beyond the simple quadratic case, offering a deeper understanding of how thermal energy is distributed among different types of degrees of freedom.
 
 \begin{theorem}[Generalized Equipartition Theorem]
     For a canonical ensemble described by the Hamiltonian \(\mathcal{H}(\{\xi_i\})\), the following relation holds for each generalized coordinate or momentum \(\xi_j \in [a,\,b]\):
-    \[
+    \begin{equation}
         k_B T = \left\langle \xi_j \frac{\partial \mathcal{H}}{\partial \xi_j} \right\rangle _c,
-    \]
+        \label{eq:generalized_equipartition}
+    \end{equation}
     provided that the boundary term vanishes:
-    \[
+    \begin{equation}
         \xi_j e^{-\beta \mathcal{H}} \Big|_{\xi_j=a}^{\xi_j=b} = 0,
-    \]
+        \label{eq:equipartition_boundary_condition}
+    \end{equation}
     where \(a\) and \(b\) are typically extended to \(\pm\infty\).
 \end{theorem}
 
 
 \begin{proof}
-    Consider the canonical measure on phase space:
+    Consider the canonical measure on phase space:\footnote{Since we consider a dimensionless measure and we include the \(\xi_N\) factor in \(\mathrm{d} \Omega\), we will consider these contributions to have been absorbed in the definition of the generalized variables \(\xi_i\) (it also helps to avoid confusion between the ind. factor \(\xi_N\) with the generalized variables \(\xi_i\) in the computation).}
     \[
         \mathrm{d}\Omega \, e^{-\beta \mathcal{H}} = \left( \prod_{i=1}^{2dN} \mathrm{d}\xi_i \right) e^{-\beta \mathcal{H}}.
     \]
-    We can isolate the differential with respect to one variable \(\xi_j\):
+    We can isolate the differential with respect to one variable \(\xi_j\) and differentiate the product \(\xi_j e^{-\beta \mathcal{H}}\) to obtain
     \[
         \mathrm{d}\Omega \, e^{-\beta \mathcal{H}}
         = \left( \prod_{i \neq j} \mathrm{d}\xi_i \right) \mathrm{d}\xi_j \, e^{-\beta \mathcal{H}}
@@ -280,9 +290,9 @@ The equipartition theorem provides a fundamental link between the microscopic de
         \left[
             \mathrm{d}\!\left( \xi_j e^{-\beta \mathcal{H}} \right)
             - \xi_j e^{-\beta \mathcal{H}} \left( -\beta \frac{\partial \mathcal{H}}{\partial \xi_j} \right) \mathrm{d}\xi_j
-            \right].
+            \right],
     \]
-    Simplifying, we obtain:
+    which simplifies to
     \[
         \mathrm{d}\Omega \, e^{-\beta \mathcal{H}}
         = \left( \prod_{i \neq j} \mathrm{d}\xi_i \right) \mathrm{d}\!\left( \xi_j e^{-\beta \mathcal{H}} \right)
@@ -294,7 +304,7 @@ The equipartition theorem provides a fundamental link between the microscopic de
     \]
     and substituting the expression above, we get:
     \[
-        1 = \frac{1}{Z h^{dN} N!} \left[
+        1 = \frac{1}{Z} \left[
             \int \left( \prod_{i \neq j} \mathrm{d}\xi_i \right)
             \int_a^b \mathrm{d}\!\left( \xi_j e^{-\beta \mathcal{H}} \right)
             + \beta \int \mathrm{d}\Omega \, \xi_j \frac{\partial \mathcal{H}}{\partial \xi_j} e^{-\beta \mathcal{H}}
@@ -326,10 +336,11 @@ The equipartition theorem provides a fundamental link between the microscopic de
         = \left\langle 2A\,\xi_j^2 \right\rangle _c = k_B T.
     \]
     Hence, the mean energy associated with each quadratic degree of freedom is
-    \[
+    \begin{equation}
         E_{\xi_j} = \langle A\,\xi_j^2 \rangle_c = \frac{1}{2}k_B T.
-    \]
-    Therefore, every quadratic canonical variable — whether a coordinate or a conjugate momentum — contributes an average energy of \(\tfrac{1}{2}k_B T\) to the total internal energy of the system.
+        \label{eq:classical_equipartition}
+    \end{equation}
+    Therefore, every quadratic canonical variable, whether a coordinate or a conjugate momentum, contributes an average energy of \(\tfrac{1}{2}k_B T\) to the total internal energy of the system.
 \end{corollary}
 
 The equipartition theorem thus provides a direct and general rule for distributing the thermal energy among the accessible microscopic degrees of freedom.

@@ -233,12 +233,10 @@ To build a generic state \(\ket{f}\) in Fock space, we can take linear combinati
 \[
     \ket{f} = \sum_{n_1, n_2, \ldots} f(n_1, n_2, \ldots) \ket{n_1, n_2, \ldots},
 \]
-where \( f(n_1, n_2, \ldots) \) are complex coefficients that determine the contribution of each occupation number state to the overall state \( \ket{f} \). But since any state in Fock space can be constructed by applying creation operators to the vacuum state, we can also express \( \ket{f} \) as:\QUESTION{wtf is this state?}
+where \( f(n_1, n_2, \ldots) \) are complex coefficients that determine the contribution of each occupation number state to the overall state \( \ket{f} \). But since any state in Fock space can be constructed by applying creation operators to the vacuum state, we can also express \( \ket{f} \) as:
 \[
-    \ket{f} = \sum_{N=0}^{\infty} \sum_{k_1, k_2, \ldots, k_N} f(k_1, k_2, \ldots, k_N) \hat{a}_{k_1}^\dagger \hat{a}_{k_2}^\dagger \ldots \hat{a}_{k_N}^\dagger \ket{0}.
+    \ket{f} = \sum_{n_1, n_2, \ldots} f(n_1, n_2, \ldots) \left[(\hat{a}_1^\dagger)^{n_1} (\hat{a}_2^\dagger)^{n_2} \ldots\right] \ket{0}.
 \]
-
-
 
 \section{Field Operators}
 In the context of second quantization, field operators provide a way to describe particle fields in a continuous manner, rather than focusing on individual particles. These operators are constructed from the creation and annihilation operators defined in the Fock space framework.
@@ -314,10 +312,10 @@ We can derive the only non-vanishing relation as follows:
     \begin{aligned}
         \left[ \hat{\psi}(\mathbf{x}), \hat{\psi}^\dagger(\mathbf{y}) \right]_{\mp} & = \sum_{n,m} u_n(\mathbf{x}) u_m^*(\mathbf{y}) \left[ \hat{a}_n, \hat{a}_m^\dagger \right]_{\mp}        \\
                                                                                     & = \sum_{n,m} u_n(\mathbf{x}) u_m^*(\mathbf{y}) \delta_{nm} = \sum_{n} u_n(\mathbf{x}) u_n^*(\mathbf{y}) \\
-                                                                                    & = e^{i \mathbf{k}_n \cdot (\mathbf{x} - \mathbf{y})} = \delta(\mathbf{x} - \mathbf{y}),
+                                                                                    & = \sum_{n}  e^{i \mathbf{k}_n \cdot (\mathbf{x} - \mathbf{y})} = \delta(\mathbf{x} - \mathbf{y}),
     \end{aligned}
 \]
-but we can obtaoin the delta function even from another request:
+but we can obtain the delta function even from another request:
 \[
     \begin{aligned}
         \left[\hat{\psi}(f),\,\hat{\psi}^\dagger(g)\right]_{\mp} & = \int \mathrm{d}^d \mathbf{x} \int \mathrm{d}^d \mathbf{y} \, f^*(\mathbf{x}) g(\mathbf{y}) \left[\hat{\psi}(\mathbf{x}), \hat{\psi}^\dagger(\mathbf{y})\right]_{\mp} \\
@@ -409,7 +407,7 @@ This shows that the action of an operator \( \hat{O} \) on the many-particle sta
 \[
     \sum_{j=1}^N \epsilon(\mathbf{k}_{\alpha_j}) = \sum_{k} n_k \epsilon(\mathbf{k}_k),
 \]
-where \( n_k \) is the occupation number of the \( k \)-th single-particle state with eigenvalue \( \epsilon(\mathbf{k}_k) \). Thus, we can express the single-particle operator \( \hat{O} \) in Fock space as:
+where \( n_k \) is the occupation number of the \( k \)-th single-particle state with eigenvalue \( \epsilon(\mathbf{k}_k) \). Thus, we can express the operator \( \hat{O} \) in Fock space as:
 \begin{equation}
     \hat{O} = \sum_{k} \epsilon(\mathbf{k}_k) \hat{a}_k^\dagger \hat{a}_k = \sum_{k} \epsilon(\mathbf{k}_k) \hat{n}_k,
     \label{eq:general_fock_operator}
@@ -435,7 +433,7 @@ We can show that any operator \( \hat{O} \) can be expressed in terms of the fie
                                                                                                                                                        & = \sum_{\beta, \gamma} \xi_{\beta \gamma} \hat{b}_{\beta}^\dagger \hat{b}_{\gamma},
     \end{aligned}
 \]
-while, if we choose the basis in which the single-particle observable \( \hat{O}^{(1)} \) is diagonal (\(\hat{a}\) ), we would recover equation \eqref{eq:general_fock_operator}:
+while, if we choose the basis in which the single-particle observable \( \hat{O}^{(1)} \) is diagonal (\(\hat{a}\), \(\hat{a}^\dagger\)), we would recover equation \eqref{eq:general_fock_operator}:
 \[
     \begin{aligned}
         \int \mathrm{d}^d \mathbf{x} \, \hat{\psi}^{\dagger}(\mathbf{x}) \hat{O}^{(1)}(\mathbf{x},\,\mathbf{p}) \hat{\psi}(\mathbf{x}) & = \int \mathrm{d}^d \mathbf{x} \, \left( \sum_{n} u_{n}^*(\mathbf{x}) \hat{a}_{n}^\dagger \right) \hat{O}^{(1)}(\mathbf{x},\,\mathbf{p}) \left( \sum_{m} u_{m}(\mathbf{x}) \hat{a}_{m} \right) \\
@@ -461,7 +459,7 @@ Resuming these results, we have shown that an operator acting on single-particle
 \begin{itemize}
     \item \(\hat{O} = \sum_{n} \epsilon_n \hat{a}_{n}^\dagger \hat{a}_{n}\) in the diagonal basis \(u_n(\mathbf{x}) \iff \hat{a}_n, \hat{a}_n^\dagger\), with \(\epsilon_n = \bra{u_n} \hat{O}^{(1)} \ket{u_n}\) the eigenvalues of the single-particle operator;
     \item \(\hat{O} = \sum_{\alpha, \beta} \xi_{\alpha \beta} \hat{b}_{\alpha}^\dagger \hat{b}_{\beta}\) in a generic basis \(v_{\beta}(\mathbf{x}) \iff \hat{b}_{\beta}, \hat{b}_{\beta}^\dagger\), with \(\xi_{\alpha \beta} = \bra{v_{\alpha}} \hat{O}^{(1)} \ket{v_{\beta}}\) the matrix elements of the single-particle operator;
-    \item \(\hat{O} = \int \mathrm{d}^d \mathbf{x} \, \hat{\psi}^\dagger(\mathbf{x}) \hat{O}^{(1)}(\mathbf{x},\,\mathbf{p}) \hat{\psi}(\mathbf{x})\) in terms of the field operators, independent of the choice of basis.
+    \item \(\hat{O} = \int \mathrm{d}^d \mathbf{x} \, \hat{\psi}^\dagger(\mathbf{x}) \hat{O}^{(1)}(\mathbf{x},\,\mathbf{p}) \hat{\psi}(\mathbf{x})\) in terms of the field operators, independent from basis choice.
 \end{itemize}
 
 \subsection{Density and Number Operators}
@@ -471,7 +469,7 @@ Let us now consider the \textbf{density operator} \( \hat{\rho}(\mathbf{x}) \), 
     \hat{\rho}(\mathbf{x}) = \sum_{j=1}^N \delta(\mathbf{x} - \mathbf{x}_j),
     \label{eq:fock_density_operator}
 \end{equation}
-where \( \mathbf{x}_j \) is the eigenvalue of the position operator for the \( j \)-th particle. Looking at the action of the single-particle operators \(\hat{\rho}_j = \delta(\mathbf{x} - \mathbf{x}_j)\) , the delta functions, on a field operator, we can see that it picks out its contribution at the position \( \mathbf{x}_j \):
+where \( \mathbf{x}_j \) is the eigenvalue of the position operator for the \( j \)-th particle. Looking at the action of the single-particle operators \(\hat{\rho}_j = \delta(\mathbf{x} - \mathbf{x}_j)\) (the delta functions) on a field operator, we can see that it picks out its contribution at the position \( \mathbf{x}_j \):
 \[
     \psi(\mathbf{x}) \to \hat{\rho}_j \psi(\mathbf{x}) = \int \mathrm{d}^d \mathbf{y} \, \delta(\mathbf{y} - \mathbf{x}_j) \psi(\mathbf{y}) = \psi(\mathbf{x}_j).
 \]
