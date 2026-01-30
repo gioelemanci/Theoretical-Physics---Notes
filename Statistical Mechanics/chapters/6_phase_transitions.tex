@@ -88,7 +88,7 @@ Differentiating both sides along the coexistence line gives
 \[
     \mathrm{d} \mu_\alpha = \mathrm{d} \mu_\beta,
 \]
-which, using the thermodynamic identity for the Gibbs free energy per particle\footnote{\(\mathrm{d} g = \mathrm{d} \mu = -s\,\mathrm{d}T + v\,\mathrm{d}p\) since \(\mathrm{d} G = \mu \mathrm{d}N + N \mathrm{d}\mu\), leading to the deletions which yield \(\mathrm{d}g = \mathrm{d}\mu\).}
+which, using the thermodynamic identity for the Gibbs free energy per particle\footnote{\(\mathrm{d} g = \mathrm{d} \mu\) since \(\mathrm{d} G = \mu \mathrm{d}N + N \mathrm{d}\mu = -s\,\mathrm{d}T + v\,\mathrm{d}p + \mu\,\mathrm{d}N\), leading to the deletions which yield the result.}
 \[
     \mathrm{d} \mu = -s \, \mathrm{d} T + v \, \mathrm{d} p,
 \]
@@ -191,17 +191,17 @@ To illustrate the qualitative content of the \textbf{first Lee--Yang theorem}, l
 we can integrate over the momenta and separate the purely configurational contribution:
 \[
     Z_N(V,T) = \int_V \! \mathrm{d}\Omega \, e^{-\beta \mathcal{H}}
-    = \frac{Q_N}{N!\,\lambda_{\mathrm{th}}^{3N}},
+    = \frac{Q_N}{N!\,\lambda_{T}^{3N}},
     \qquad
     Q_N(V,T) = \int \prod_i \mathrm{d}^3q_i \, e^{-\beta U_N(q_1,\dots,q_N)}.
 \]
 Here, \( Q_N \) encodes the interaction between particles, while the prefactor
-\( 1/(N!\lambda_{\mathrm{th}}^{3N}) \) represents the contribution of indistinguishability and kinetic energy.
+\( 1/(N!\lambda_{T}^{3N}) \) represents the contribution of indistinguishability and kinetic energy.
 
 Hence, the grand partition function of the system reads
 \[
     \mathcal{Z}_N(z)
-    = \sum_{n=0}^N \frac{z^n Q_n}{n!\,\lambda_{\mathrm{th}}^{3n}}
+    = \sum_{n=0}^N \frac{z^n Q_n}{n!\,\lambda_{T}^{3n}}
     = \sum_{n=0}^N a_n z^n,
     \qquad a_n > 0 \ \forall n.
 \]
@@ -231,9 +231,9 @@ Substituting this estimate into the series for \( \mathcal{Z}_N(z) \), we find
     \mathcal{Z}_N(z)
     \le \sum_{n=0}^N
     \frac{1}{n!}
-    \left( \frac{z V e^{\beta K}}{\lambda_{\mathrm{th}}^{3}} \right)^n
+    \left( \frac{z V e^{\beta K}}{\lambda_{T}^{3}} \right)^n
     \xrightarrow{N\to\infty}
-    \exp\!\left( \frac{z V e^{\beta K}}{\lambda_{\mathrm{th}}^{3}} \right).
+    \exp\!\left( \frac{z V e^{\beta K}}{\lambda_{T}^{3}} \right).
 \]
 The thermodynamic limit is therefore well defined: the grand partition function
 approaches a continuous, positive, monotonically increasing function for all
@@ -325,7 +325,7 @@ is a polynomial with strictly positive coefficients.
     \end{minipage}
 \end{figure}
 
-If such a line of zeros \(z^{(i)}\) approaches the positive real axis, then the logarithm of the partition function, \( \Phi(z) = \log \mathcal{Z}(z)\), becomes non-analytic at the point \(z_c\) where the accumulation occurs:
+If such a line of zeros \(z^{(i)}\) approaches the positive real axis (exactly the condition violating the second Lee--Yang theorem), then the logarithm of the partition function, \( \Phi(z) = \log \mathcal{Z}(z)\), becomes non-analytic at the point \(z_c\) where the accumulation occurs:
 \[
     z^{(i)} \in \mathbb{C} - \mathbb{R}^+, \quad z^{(i)} \xrightarrow{N\to \infty} z_c \in \mathbb{R}^+.
 \]
@@ -855,15 +855,15 @@ At this stage the Hamiltonian is explicitly factorized into single-spin contribu
     \mathcal{H}^{(mf)}(\sigma_i) = J \frac{z}{2} m^2 - \left( Jzm + H \right)\sigma_i.
     \label{eq:mean_field_Hamiltonian_single_spin}
 \end{equation}
-The canonical partition function now follows straightforwardly:\QUESTION{how do we get the cosh term? its not a sum of exponentials, its a product.}
+The canonical partition function now follows straightforwardly:\footnote{In the final steps, we have exchanged the summation with the product, which is valid due to the factorization of the Hamiltonian into independent single-spin contributions.}
 \[
     \begin{aligned}
-        Z_N & = (Z_1)^N = (e^{-\beta \mathcal{H}^{(mf)}(\sigma_i)})^N
-        = e^{-\beta J \frac{Nz}{2} m^2}
-        \left[ e^{\beta \sum_{\sigma_i = \pm 1} \left( Jzm + H \right)\sigma_i}\right]^N \\
+        Z_N & = \sum_{\{\sigma_i\}} e^{-\beta \sum_{i=1}^N \mathcal{H}^{(mf)}(\sigma_i)}
+        = e^{-\beta J \frac{Nz}{2} m^2} \sum_{\{\sigma_i\}}
+        \prod_{i=1}^N e^{\beta \left( Jzm + H \right)\sigma_i}                           \\
             & = e^{-\beta J \frac{Nz}{2} m^2}
-        \prod_{\sigma_i = \pm 1}
-        \left[ e^{\beta \left( Jzm + H \right)\sigma_i}\right]^N
+        \prod_{i = 1}^N
+        \sum_{\sigma_i = \pm 1}  e^{\beta \left( Jzm + H \right)\sigma_i}
         = e^{-\beta J \frac{Nz}{2} m^2} (2 \cosh(\beta(H+Jzm)))^N.
     \end{aligned}
 \]

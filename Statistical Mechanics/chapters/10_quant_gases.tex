@@ -187,13 +187,16 @@ If we now consider the thermodynamic limit, where the volume \(V\) goes to infin
 \]
 In order to perform this substitution, we need to determine the density of states in momentum space. The strategy is to look at the volume element in \(\mathbf{k}\)-space corresponding to each quantum state
 \[
-    \Delta k_j = \frac{2\pi}{L} \left((n_j + 1) - n_j \right) = \frac{2\pi}{L} \implies \Delta k_x \Delta k_y \Delta k_z = \left( \frac{2\pi}{L} \right)^3 = \frac{(2\pi)^3}{V},
+    \begin{dcases}
+        \Delta k_j = \frac{2\pi}{L} \left((n_j + 1) - n_j \right) = \frac{2\pi}{L} \\
+        \Delta k_x \Delta k_y \Delta k_z = \left( \frac{2\pi}{L} \right)^3 \Delta n_x \Delta n_y \Delta n_z = \frac{(2\pi)^3}{V},
+    \end{dcases}
 \]
-which in the thermodynamic limit becomes infinitesimal \(L \to \infty \implies \Delta k_j \to 0\). Therefore, the number of states in a volume element \(\mathrm{d}^{3\mathbf{k}} \) in \(\mathbf{k}\)-space is given by
+which in the thermodynamic limit becomes infinitesimal \(L \to \infty \implies \Delta k_j \to 0\) (and we computed \(\Delta n_j = 1\)). Therefore, the number of states in a volume element \(\mathrm{d}^{3\mathbf{k}} \) in \(\mathbf{k}\)-space is given by
 \[
-    \sum_{\mathbf{n}} \frac{\hbar^2}{2m} \left(\frac{2\pi}{L}\right)^3 (\Delta n_x)(\Delta n_y)(\Delta n_z) \longrightarrow \sum_{\mathbf{k}} \frac{V}{(2\pi)^3} (\Delta k_x) (\Delta k_y) (\Delta k_z),
+    \sum_{\mathbf{n}} (\Delta n_x)(\Delta n_y)(\Delta n_z) \longrightarrow \sum_{\mathbf{k}} \frac{V}{(2\pi)^3} (\Delta k_x) (\Delta k_y) (\Delta k_z),
 \]
-where we know that \((\Delta n_x)(\Delta n_y)(\Delta n_z) = 1\) since we are counting each discrete state and \((\Delta k_x)\)\((\Delta k_y)\)\((\Delta k_z)\) is the infinitesimal volume \(\mathrm{d}^3\mathbf{k}\) element in \(\mathbf{k}\)-space. Thus we pass from the sum over discrete states to an integral over continuous momentum space as
+where we know that \((\Delta n_x)(\Delta n_y)(\Delta n_z) = 1\) since we are counting each discrete state and \((\Delta k_x)\) \((\Delta k_y)\) \((\Delta k_z)\) is the infinitesimal volume \(\mathrm{d}^3\mathbf{k}\) element in \(\mathbf{k}\)-space. Thus we pass from the sum over discrete states to an integral over continuous momentum space as
 \[
     \sum_{\mathbf{k}} \longrightarrow \frac{V}{(2\pi)^3} \int \mathrm{d}^3 \mathbf{k}.
 \]
@@ -436,14 +439,14 @@ Thus, for fermions in the classical regime the series converges absolutely for a
 We are looking at the limit for small temperatures \(T \to 0\), such that \(\beta \to \infty\) and thus \(z = e^{\beta \mu} \to \infty\) if \(\mu > 0\): recalling the integral expressions for the particle density and energy density (since they are valid for all temperatures in general)\footnote{Remember for the following computation that the discrete internal degeneracy is included in \(A\) or \(g(\epsilon)\).}
 \[
     \begin{aligned}
-        n  = \frac{N}{V}       & = A \int_0^{\mu} \d{\epsilon} \epsilon^{1/2} \frac{1}{e^{\beta(\epsilon-\mu)} + 1} = \int_0^{\infty} \d{\epsilon}g(\epsilon)\langle n(\epsilon) \rangle^{FD}_{gc},               \\
-        \epsilon = \frac{E}{V} & = A \int_0^{\mu} \d{\epsilon} \epsilon^{3/2} \frac{1}{e^{\beta(\epsilon-\mu)} + 1} = \int_0^{\infty} \d{\epsilon} \epsilon \, g(\epsilon) \langle n(\epsilon) \rangle^{FD}_{gc},
+        n  = \frac{N}{V}       & = A \int_0^{\infty} \d{\epsilon} \epsilon^{1/2} \frac{1}{e^{\beta(\epsilon-\mu)} + 1} = \int_0^{\infty} \d{\epsilon}g(\epsilon)\langle n(\epsilon) \rangle^{FD}_{gc},               \\
+        \epsilon = \frac{E}{V} & = A \int_0^{\infty} \d{\epsilon} \epsilon^{3/2} \frac{1}{e^{\beta(\epsilon-\mu)} + 1} = \int_0^{\infty} \d{\epsilon} \epsilon \, g(\epsilon) \langle n(\epsilon) \rangle^{FD}_{gc},
     \end{aligned}
 \]
 where it is crucial to know that the \textit{density of states} \(g(\epsilon)\) has unique definitions valid for the system under consideration (remember we are in the non-relativistic 3D quantum gas setting).
 Now it is of maximum interest to understand how \(\langle n(\epsilon) \rangle^{FD}_{gc}\) behaves in this limit: plotting the function for \(\beta \to \infty\), and we find that it behaves as a \textit{Heaviside step function}
 \[
-    \langle n(\epsilon) \rangle^{FD}_{gc} = \frac{1}{e^{\beta(\epsilon - \mu)} + 1} = \begin{dcases}
+    \langle n(\epsilon) \rangle^{FD}_{gc} = \frac{1}{e^{\beta(\epsilon - \mu)} + 1} \xrightarrow{\beta \to \infty} \begin{dcases}
         1,   & \epsilon < \mu; \\
         1/2, & \epsilon = \mu; \\
         0,   & \epsilon > \mu.
@@ -466,8 +469,8 @@ This is the famous \textbf{Fermi-Dirac distribution at zero temperature}, which 
 Thus, we can compute the integrals for \(n\) and \(\epsilon\) at zero temperature as
 \[
     \begin{aligned}
-        n        & = \int_0^{\mu=\epsilon_F} g(\epsilon) \cdot 1 \, \mathrm{d} \epsilon = A \int_0^{\mu} \epsilon^{1/2} \mathrm{d} \epsilon = \frac{2}{3} A \epsilon_F^{3/2},                                                                   \\
-        \epsilon & = \frac{1}{n} \int_0^{\mu=\epsilon_F} g(\epsilon) \epsilon \cdot 1 \, \mathrm{d} \epsilon = \frac{A}{n} \int_0^{\mu} \epsilon^{3/2} \mathrm{d} \epsilon = \frac{2}{5} \frac{A}{n} \epsilon_F^{5/2} = \frac{3}{5} \epsilon_F.
+        n        & = \int_0^{\mu=\epsilon_F} g(\epsilon) \cdot 1 \, \mathrm{d} \epsilon = A \int_0^{\epsilon_F} \epsilon^{1/2} \mathrm{d} \epsilon = \frac{2}{3} A \epsilon_F^{3/2},                                                                   \\
+        \epsilon & = \frac{1}{n} \int_0^{\mu=\epsilon_F} g(\epsilon) \epsilon \cdot 1 \, \mathrm{d} \epsilon = \frac{A}{n} \int_0^{\epsilon_F} \epsilon^{3/2} \mathrm{d} \epsilon = \frac{2}{5} \frac{A}{n} \epsilon_F^{5/2} = \frac{3}{5} \epsilon_F.
     \end{aligned}
 \]
 We can also find an explicit expression for the Fermi energy \(\epsilon_F\) in terms of the particle density \(n\):
@@ -723,7 +726,15 @@ Thus we have
     \end{dcases}
     \label{eq:BEC_energy_per_particle}
 \end{equation}
-Note that we have used the expression for the normal component \(n_{n}(T)\) to relate the energy to the total number of particles \(N\): only the normal component contributes to the energy and we are computing the expression for \(u=\frac{E}{N}\frac{V}{V}\) accordingly. We should also note that at the critical temperature \(T = T_{BEC}\), the energy per particle is continuous:
+Note that we have used the expression for the normal component \(n_{n}(T)\) to relate the energy to the total number of particles \(N\): only the normal component contributes to the energy and we are computing the expression for \(u=\frac{E}{V}\frac{V}{N}\) accordingly. If we were instead interested in the energy per total number of particles \(E/N\), which takes into account the condensate fraction, we would have to divide the energy \(E\) by the total number of particles \(N\), leading to
+\begin{equation}
+    u = \frac{E}{N} = \begin{dcases}
+        \frac{3}{2} k_B T \frac{g_{5/2}(z)}{g_{3/2}(z)}, \quad                                      & T > T_{BEC}, \\
+        \frac{3}{2} k_B T \frac{\zeta(5/2)}{\zeta(3/2)} \left(\frac{T}{T_{BEC}}\right)^{3/2}, \quad & T < T_{BEC},
+    \end{dcases}
+    \label{eq:BEC_energy_per_particle_total}
+\end{equation}
+which shows that the energy per total number of particles decreases more rapidly below \(T_{BEC}\) due to the increasing occupation of the ground state, not contributing to the energy. We should also note that at the critical temperature \(T = T_{BEC}\), the energy per particle is continuous:
 \[
     u\Big\vert_{T=T_{BEC}} = \frac{3}{2} k_B T_{BEC} \frac{\zeta(5/2)}{\zeta(3/2)},
 \]
@@ -776,7 +787,7 @@ We can also compute the entropy per particle precisely at the critical temperatu
 \]
 while at the critic temperature we have zero particles in the ground state, so all particles contribute to the entropy. As temperature decreases below \(T_{BEC}\), the entropy \(S(T<T_c)\) decreases due to the increasing occupation of the ground state, in which particles stop to contribute to the system entropy,\footnote{We would have not noticed this behaviour from the expression of the entropy per particle, which shows only the contribution of the normal component.} reflecting the onset of macroscopic quantum coherence in the system. If we compute the entropy change per particle at the transition temperature:
 \[
-    q = T_{BEC} \Delta s = T_{BEC} s(T_{BEC}) - s(0) = \frac{5}{2} k_B T_{BEC} \frac{\zeta(5/2)}{\zeta(3/2)} \neq 0,
+    q = T_{BEC} \Delta s = T_{BEC} \left[s(T_{BEC}) - s(0)\right] = \frac{5}{2} k_B T_{BEC} \frac{\zeta(5/2)}{\zeta(3/2)} \neq 0,
 \]
 since \(s(0)=0\); this indicates a \textit{finite entropy change} at the transition temperature \(T_{BEC}\) with non zero \textbf{latent heat}, characteristic of a first-order phase transition.
 
