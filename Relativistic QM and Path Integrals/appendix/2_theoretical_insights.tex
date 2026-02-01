@@ -1,22 +1,100 @@
 \section{Theoretical insights} \label{app:insights}
-\subsection*{Noether’s theorem and Action formalism}\label{app:Noether}
 
-\paragraph{Action Principle.}
-Let us briefly review the action principle in mechanics and field theories, considering the case of a particle. The main purpose is to underline its relation to canonical quantization and to stress the relevance of symmetries. As anticipated, the action is essential for the path integral quantization.
+\subsection*{Action Principle}\label{app:action_noether}
 
-Consider a non-relativistic particle of mass \(m\) that moves in a single dimension with coordinate \(q\) and subject to a conservative force \(F = -\frac{\partial}{\partial q}V\). Newton’s equations of motion reads
+We review the least action principle, tracing its application in mechanics and field theories. Consider a non-relativistic particle of mass \(m\) that moves in a single dimension with coordinate \(q\) and subject to a conservative force \(F = - \frac{\partial}{\partial q} V(q)\). Newton’s equation of motion reads
 \[
-    F = m \ddot{q},
+    m \ddot{q} = F = - \frac{\partial}{\partial q} V(q).
 \]
-and can be derived from an action principle. The action is a functional of the trajectory of the particle \(q(t)\) (the dynamical variable of the system) and associates a real number to each function \(q(t)\). In general, physical systems are described by an action of the type
+It can be derived from an action principle. The action S is a functional of the trajectory of the particle $q(t)$ (the dynamical variable of the system) and associates a real number to each function $q(t)$
 \[
-    S[q(t)] = \int \d{t} \mathrm{L} (q(t),\,\dot{q}(t)), \quad \mathrm{L}(q(t),\,\dot{q}(t)) =
+    \begin{aligned}
+        S \, : \, \{\text{space of trajectories } q(t)\} & \mapsto \mathbb{R}, \\
+        q(t)                                             & \mapsto S[q(t)].
+    \end{aligned}
+\]
+In general, physical systems are described by an action of the type
+\[
+    S[q(t)] = \int \d{t} \, \mathrm{L}(q(t),\,\dot{q}(t)), \quad \mathrm{L}(q,\,\dot{q}) = \frac{1}{2} m \dot{q}^2 - V(q),
+\]
+where \(\mathrm{L}(q,\,\dot{q})\) is the lagrangian of the system. The physical trajectory of the particle between two fixed points \(q(t_i) = q_i\) and \(q(t_f) = q_f\) is the one that makes the action stationary: let us enunciate the principle of least action.
+
+\begin{theorem}[Principle of least action]
+    The physical trajectory \(q(t)\) of a particle between two fixed points \(q(t_i) = q_i\) and \(q(t_f) = q_f\) is the one that makes the action stationary:
+    \[
+        \delta S[q(t)] = 0,
+    \]
+    where the variation is taken with respect to all trajectories \(q(t)\) such that \(q(t_i) = q_i\) and \(q(t_f) = q_f\).
+\end{theorem}
+To prove this principle, we first assume suitable boundary conditions by fixing the value of $q(t)$ at initial and final times. Then, varying the function $q(t)$ to a new one $q(t) + \delta q(t)$, where $\delta q(t)$ is an arbitrary infinitesimal variation (with $\delta q(t_i) = \delta q(t_f) = 0$ to keep the boundary conditions unchanged) and imposing that the action is minimized by the original trajectory $q(t)$ one finds
+\[
+    \begin{aligned}
+        0 & = \delta S[q(t)] = S[q(t) + \delta q(t)] - S[q(t)] = \int_{t_i}^{t_f} \d{t} \left[ \mathrm{L}(q + \delta q,\,\dot{q} + \delta \dot{q}) - \mathrm{L}(q,\,\dot{q}) \right]                                                                                                                                                 \\
+          & = \int_{t_i}^{t_f} \d{t} \left( \frac{\partial \mathrm{L}}{\partial q} \delta q + \frac{\partial \mathrm{L}}{\partial \dot{q}} \delta \dot{q} \right) = \int_{t_i}^{t_f} \d{t} \left( \frac{\partial \mathrm{L}}{\partial q} \delta q + \frac{\partial \mathrm{L}}{\partial \dot{q}} \frac{\d{}}{\d{t}} \delta q \right) \\
+          & = \left. \frac{\partial \mathrm{L}}{\partial \dot{q}} \delta q(t) \right|_{t_i}^{t_f}  + \int_{t_i}^{t_f} \d{t} \left( \frac{\partial \mathrm{L}}{\partial q} - \frac{\d{}}{\d{t}} \frac{\partial \mathrm{L}}{\partial \dot{q}} \right) \delta q(t)                                                                      \\
+          & = \int_{t_i}^{t_f} \d{t} \left( \frac{\partial \mathrm{L}}{\partial q} - \frac{\d{}}{\d{t}} \frac{\partial \mathrm{L}}{\partial \dot{q}} \right) \delta q(t),
+    \end{aligned}
+\]
+where in the last step we used the fact that \(\delta q(t_i) = \delta q(t_f) = 0\). Since \(\delta q(t)\) is arbitrary, the integrand must vanish, leading to the Euler-Lagrange equations of motion:
+\[
+    \frac{\partial \mathrm{L}}{\partial q} - \frac{\d{}}{\d{t}} \frac{\partial \mathrm{L}}{\partial \dot{q}} = 0.
+\]
+Let us make some observations:
+\begin{enumerate}
+    \item The action has dimensions of \([\text{energy}] \times [\text{time}] = [\hbar] = M L^2 T^{-1}\).
+    \item The lagrangian equations of motion are often equations of second order in time. Thus, one expects two “initial conditions” (or, more generally, boundary conditions), conveniently chosen by fixing the position at the initial and final times.
+    \item The equations of motion are expressible as the functional derivative of the action
+          \[
+              \frac{\delta S[q(t)]}{\delta q(t)} = 0,
+          \]
+          where the functional derivative is defined implicitly by \(\delta S[q(t)]= \int \frac{\delta S[q(t^{\prime})]}{\delta q(t^{\prime})} \delta q(t) \, \d{t^{\prime}}\), with \(\frac{\delta q(t)}{\delta q(t^{\prime})} = \delta(t - t^{\prime})\).
+    \item The equations of motion do not change if one adds a total derivative to the lagrangian \(L \to L^{\prime} = L + \frac{\d{}}{\d{t}} \Lambda(q,\,t)\).
+    \item The lagrangian formalism extends easily to systems with more than one degrees of freedom, and with a bit more attention to field theories (i.e. systems with an infinite number of degrees of freedom).
+\end{enumerate}
+To appreciate this last point, let us consider a set of dynamical fields \(\phi_i (x) = \phi_i (t,\,\mathbf{x})\), where $x$ indicates the spacetime point. By dynamics, one means the evolution along the time \(t\). For fixed $t$, the dynamical fields \(\phi_i(t, \mathbf{x})\) are indexed by \(i\) (which labels a discrete set of fields) and \(\mathbf{x} \in \mathbb{R}^3\), that labels points in space and tells us that at every point in space, there is a dynamical variable: thus, there are an infinite number of degrees of freedom. By discretizing the space and considering a finite volume, one can approximate a field theory by a mechanical model with a finite number of  degrees of freedom. Typically, when the latter are the true physical degrees of freedom (as in the atomic structure of matter) but very large in number, the continuum approximation is very useful. The lagrangian \(L\) is often expressed as an integral of a lagrangian density \(\mathcal{L}\)
+\[
+    L(t) = \int \mathrm{d}^3 \mathbf{x} \, \mathcal{L}(\phi_i (t,\,\mathbf{x}),\,\partial_{\mu} \phi_i (t,\,\mathbf{x})),
+\]
+so that the action takes the form
+\[
+    S[\phi_i] = \int \d{t} \, L(t) = \int \d{t} \, \mathrm{d}^3 \mathbf{x} \, \mathcal{L}(\phi_i (x),\,\partial_{\mu} \phi_i (x)) = \int \mathrm{d}^4x \, \mathcal{L}(\phi_i (x),\,\partial_{\mu} \phi_i (x)).
+\]
+Imposing the extremality condition \(\delta S = 0\), one finds the corresponding Euler-Lagrange equations
+\[
+    \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi_i)} \right) - \frac{\partial \mathcal{L}}{\partial \phi_i} = 0.
 \]
 
+\subsubsection{Symmetries and Noether’s theorem.}\label{app:Noether}
+The study of the symmetries of a physical system is useful in many ways, they help in finding the equations of motion governing the physical system and then solving them. We define the concept of symmetry by:
+\begin{definition}[Symmetry]
+    A symmetry of a physical system described by an action \(S[q(t),\,t]\) is a transformation of the dynamical variables that leaves the action invariant:
+    \[
+        \begin{dcases}
+            t \to t^{\prime} = f(t),                       \\
+            q(t) \to q^{\prime}(t^{\prime}) = F(q(t),\,t), \\
+        \end{dcases} \implies S[q(t),\,t] = S[q^{\prime}(t^{\prime}),\,t^{\prime}].
+    \]
+\end{definition}
 
-[...]
+Since the equations of motion are form invariant, they admit the same solutions, and one cannot determine if the motion takes place in the “old frame of reference” or the “new frame of reference”. These reference frames are to be treated on the same footing without any of them being identified as privileged (this is the principle of relativity already discussed by Galileo). A check to test if a transformation is a symmetry makes use of the action. If the action is invariant under the transformation we have just defined, up to boundary terms (which emerge as integrals of total derivatives and therefore do not modify the equations of motion, as recalled in point 4 above)
+\[
+    S[q^{\prime}] = S[q] + \text{boundary terms}
+\]
+then, the transformation is a symmetry: the equations obtained from the least action principle must be of the same form, being obtainable from identical actions, as the boundary terms can be dropped. Nowadays, one often defines symmetry as the invariance of the action.
 
-\paragraph{Hamiltonian formalism.}
+A physical system can present different types of symmetry: discrete symmetries, continuous symmetries (associated with Lie groups), and local symmetries (also called gauge symmetries). An even more general concept is that of “background symmetry”, a symmetry described by generalized transformations that also modify the parameters of the theory (e.g., the coupling constants or the functional form of the external potentials that might enter the action). They are not true symmetries in the technical sense defined above but relate solutions of a given theory with certain parameters to the solutions of another theory with different parameters.
+
+For Lie symmetries, i.e., symmetries that depend continuously on some parameters, one can prove the Noether’s theorem that states:
+\begin{theorem}[Noether’s theorem]
+    For every continuous parameter of the symmetry group, which transformations leave the action of a physical system invariant, there exists a corresponding conserved charge.
+\end{theorem}
+
+To prove this theorem, we consider an infinitesimal transformation of the dynamical variables \(q(t) \to q^{\prime}(t) = q(t) + \delta q(t)\) that leaves the action invariant (up to boundary terms). The variation of the action can be written as
+
+    [...]
+
+\subsubsection{Hamiltonian formalism}
+
 The basic idea of the hamiltonian formalism is to have equations of motion that are first order in time. To review it, we follow a simple example: a non-relativistic particle of coordinates \(q^i\) and configuration space lagrangian
 \[
     pdf
