@@ -50,6 +50,7 @@ This leads to the \textbf{Klein–Gordon equation}:
 In a more compact and manifestly relativistic form, it can be written as
 \begin{equation}
     (\Box - m^2) \, \phi(x) = 0,
+    \label{eq:Klein_Gordon_equation}
 \end{equation}
 where the \textbf{d'Alembertian operator} is defined as
 \[
@@ -149,7 +150,6 @@ We can thus define the four-current
 \end{equation}
 which satisfies the conservation law $\partial_\mu J^\mu = 0$.
 The normalization factor is chosen so that $J^\mu$ is real and, in the nonrelativistic limit, reproduces the form of the probability current in the Schrödinger theory.
-
 The temporal component reads
 \[
     J^0 = \frac{1}{2 i m} \big( \phi^* \partial^0 \phi - \phi \partial^0 \phi^* \big),
@@ -218,7 +218,7 @@ which is the integral of an even function, since the integrand can be expressed 
     \begin{minipage}{0.5\textwidth}
         It is convenient to study this expression in the complex plane: by closing the contour with an arc \(C\) in the upper half-plane, we can integrate on a closed curve and use \textbf{Cauchy’s residue theorem}:
         \[
-            \frac{k}{k^2 + m^2}e^{ikr} = \frac{k}{(k+im)(k-im)}e^{ikr},
+            \frac{ke^{ikr}}{k^2 + m^2} = \frac{ke^{ikr}}{(k+im)(k-im)},
         \]
         which has two poles \(\bar{k} = \pm im = k^{\pm}\).
     \end{minipage}
@@ -365,7 +365,7 @@ The \(i\epsilon\)-term dictates whether a given frequency component propagates f
 
 More explicitly, the $i\epsilon$ prescription moves the poles of the integrand in a definite direction and therefore fixes the causal behavior of the Green function: positive-energy modes (\(p^0 = E_p\)) are propagated forward in time, while negative-energy modes (\(p^0 = -E_p\)) are propagated backward.
 This is called the \textit{causal} prescription, as it forbids negative-energy states from propagating into the future.
-In this sense, negative-energy states are reinterpreted as antiparticles with positive energy propagating forward in time.
+In this sense, negative-energy states are reinterpreted as antiparticles with positive energy propagating backward in time.
 This correspondence follows from the phase relation
 \[
     e^{-i(-E_p)t} = e^{-iE_p(-t)},
@@ -453,8 +453,8 @@ To specify how the contour avoids them, we introduce the Feynman prescription:
             \fill[green!60!black] (-\R/2, 0) circle (1.5pt) node[below] {\small $-E_p$};
             \fill[green!60!black] (\R/2, 0) circle (1.5pt) node[above] {\small $E_p$};
 
-            \node[blue!70] at (\R,2) {$x^0 > y^0$};
-            \node[red!70] at (\R,-2) {$x^0 < y^0$};
+            \node[blue!70] at (\R,2) {$x^0 < y^0$};
+            \node[red!70] at (\R,-2) {$x^0 > y^0$};
         \end{tikzpicture}
     \end{minipage}
     \hfill
@@ -467,11 +467,10 @@ To specify how the contour avoids them, we introduce the Feynman prescription:
     \end{minipage}
 \end{figure}
 \[
-    (2\pi i) \lim_{p^0 \to E_p}  \frac{i}{2\pi} \frac{e^{-ip^0(x^0 - y^0)}}{(p^0 + E_p)} = \frac{e^{-i E_p(x^0 - y^0)}}{2 E_p}, \quad (2\pi i) \lim_{p^0 \to -E_p}  \frac{i}{2\pi} \frac{e^{-ip^0(x^0 - y^0)}}{(p^0 - E_p)} = \frac{e^{-i E_p(y^0 - x^0)}}{2 E_p}.
+    - (2\pi i) \lim_{p^0 \to E_p}  \frac{i}{2\pi} \frac{e^{-ip^0(x^0 - y^0)}}{(p^0 + E_p)} = \frac{e^{-i E_p(x^0 - y^0)}}{2 E_p}, \quad (2\pi i) \lim_{p^0 \to -E_p}  \frac{i}{2\pi} \frac{e^{-ip^0(x^0 - y^0)}}{(p^0 - E_p)} = \frac{e^{-i E_p(y^0 - x^0)}}{2 E_p}.
 \]
 We must now ensure convergence when \(|p^0| \to \infty\).
-This requires distinguishing two cases according to the sign of the exponential,
-and hence choosing whether to close the contour with \(\mathcal{C}_{\text{upper}}\) or \(\mathcal{C}_{\text{lower}}\), depending on the sign of \(x^0 - y^0\).
+This requires distinguishing two cases according to the sign of the exponential, and hence choosing whether to close the contour with \(\mathcal{C}_{\text{upper}}\) or \(\mathcal{C}_{\text{lower}}\), depending on the sign of \(x^0 - y^0\).
 Introducing the \textit{Heaviside} step function
 \[
     \theta(x) = \begin{dcases}
@@ -635,8 +634,8 @@ where we have integrated by parts and discarded surface terms assuming that the 
 Since the variations $\delta \phi$ and $\delta \phi^{\ast}$ are arbitrary, the integrand must vanish independently for each, we obtain to the Euler–Lagrange equations:
 \[
     \begin{dcases}
-        (\Box - m^2)\phi(x)        & = 0, \\
-        (\Box - m^2)\phi(x)^{\ast} & = 0.
+        (\Box - m^2)\phi(x)         = 0, \\
+        (\Box - m^2)\phi(x)^{\ast}  = 0.
     \end{dcases}
 \]
 These are exactly the Klein--Gordon equations for a complex scalar field and its complex conjugate.

@@ -31,7 +31,7 @@ where the polarization tensor \(\epsilon_{\mu_1,\,\dots ,\,\mu_s}(p)\) describes
           \[
               m \epsilon_{0,\,\mu_2,\,\dots,\,\mu_s}(\overline{p}) = 0 \implies \epsilon_{i_1,\,i_2,\,\dots,\,i_s}(\overline{p}) \neq 0.
           \]
-          where the index \(\mu = (0,i)\) is split into time and space components. This is due to the fact that
+          where the index \(\mu = (0,i)\) is split into time and space components. This is due to the fact that when contracting with the 4-momentum at rest, only the time component survives, and so the equation imposes that all components with at least one time index vanish.
           The remaining polarizations describe the possible orientations in space of the spin.
     \item The third equation (the vanishing trace condition) reduces the components of the polarization tensor to have only those components corresponding to the irreducible representation of spin s, which as known from quantum mechanics form a traceless, completely symmetric tensor of rank \(s\) of the rotation group \(\mathrm{SO}(3)\). It it has precisely \(2s+1\) independent components corresponding to the \(2s + 1\) possible spin projections along a quantization axis.
 \end{enumerate}
@@ -66,14 +66,14 @@ For this specific case, they are known as \textbf{Proca equations}. They can be 
     \label{eq:proca_action}
 \end{equation}
 where \(F_{\mu \nu} = \partial_{\mu} A_{\nu} - \partial_{\nu} A_{\mu}\) is the field strength tensor.
-Integration by parts brings the action in an alternative form
+If we expand the first term, we find
 \[
     \begin{aligned}
         S_P[A_\mu] & = \int \mathrm{d}^4 x -\frac{1}{4} \left( (\partial_\mu A_\nu - \partial_\nu A_\mu) (\partial^\mu A^\nu - \partial^\nu A^\mu) -\frac{1}{2} m^2 A_\mu A^{\mu} \right)                       \\
                    & = \int \mathrm{d}^4 x \left( -\frac{1}{2} (\partial_\mu A_\nu)(\partial^{\mu} A^{\nu}) + \frac{1}{2} (\partial_\mu A_\nu)(\partial^{\nu} A^{\mu}) - \frac{1}{2} m^2 A_\mu A^{\mu} \right),
     \end{aligned}
 \]
-since the we could integrate by parts the second term in the second step and neglect boundary terms
+and now we can integrate by parts the second term and neglect boundary terms two times:
 \[
     \frac{1}{2} (\partial_\mu A_\nu)(\partial^{\nu} A^{\mu}) = - \frac{1}{2} A_\nu \partial^{\nu} (\partial_\mu A^{\mu}) = \frac{1}{2} (\partial_\nu A^{\nu})(\partial_\mu A^{\mu}).
 \]
@@ -90,9 +90,10 @@ is similar to the action of four Klein-Gordon fields \(A_\mu\) (given by the fir
     \end{aligned}
 \]
 where in the last step we integrated by parts and neglected boundary terms. Renaming dummy indices, one finds the \textbf{Proca equations of motion}:
-\[
+\begin{equation}
     \frac{\delta S_P[A_\mu]}{\delta A^\nu(x)} = 0 = \partial^{\mu}F_{\mu \nu} - m^2 A_\nu.
-\]
+    \label{eq:proca_motion_equations}
+\end{equation}
 They are equivalent to the previous ones in \eqref{eq:proca_equations}. In fact, the identity \(\partial^{\mu} \partial^{\nu} F_{\mu \nu}\)  implies
 \[
     \partial^{\nu} \partial^{\mu} F_{\mu \nu} = \partial^{\nu}(m^2 A_\nu) = 0,
@@ -101,7 +102,7 @@ which is zero due to the antisymmetry of \(F_{\mu \nu}\) contracted with the sym
 \[
     \partial^{\mu} A_\mu = 0.
 \]
-Using this relationship, one rewrites Proca equations found estremizing the lagrangian as four Klein-Gordon equations plus the constraint, as in eq. \eqref{eq:proca_equations}:
+Using this relationship, one rewrites Proca equations found estremizing the lagrangian in \eqref{eq:proca_motion_equations} as four Klein-Gordon equations plus the constraint, as in eq. \eqref{eq:proca_equations}:
 \[
     \begin{aligned}
         \partial^{\mu} F_{\mu \nu} & = \Box A_\nu - \partial_\nu (\partial^{\mu} A_\mu) = \Box A_\nu = m^2 A_\nu, \\
@@ -201,9 +202,9 @@ For \(m \to 0\), the Proca action reduces to the Maxwell action
 \end{equation}
 that correctly describes the relativistic waves associated to massless particles of spin 1 (with helicities \(h=\pm 1\)): if we compute the variation of the action, we can find the homogeneous Maxwell as equations of motion
 \[
-    \delta S_M[A_\mu] = \int \mathrm{d}^4 x \left( -\frac{1}{2} F_{\mu \nu} \delta F^{\mu \nu} \right) = \int \mathrm{d}^4 x \left( -\frac{1}{2} F_{\mu \nu} (\partial^{\mu} \delta A^{\nu} - \partial^{\nu} \delta A^{\mu}) \right) [\dots ]
+    \delta S_M[A_\mu] = \int \mathrm{d}^4 x \left( -\frac{1}{2} F_{\mu \nu} \delta F^{\mu \nu} \right) = \int \mathrm{d}^4 x \left( -\frac{1}{2} F_{\mu \nu} (\partial^{\mu} \delta A^{\nu} - \partial^{\nu} \delta A^{\mu}) \right),
 \]
-so that integrating by parts and neglecting boundary terms one finds the equations of motion
+so that integrating by parts and neglecting boundary terms one finds the equations of motion\footnote{For the complete computation see the previous section and consider \(m=0\).}
 \[
     \partial^{\mu} F_{\mu \nu} = 0.
 \]
@@ -229,14 +230,14 @@ and the full action remains invariant. As we shall see, this fact implies that t
 \[
     \delta A_\mu(x) = \partial_\mu \alpha(x),
 \]
-with \(\alpha(x)\) taken now as an infinitesimal arbitrary function. We can think of this local symmetry as associated with the \(\mathrm{U}(1)\) group as one can write \eqref{eq:gauge_transformation} in the form
+with \(\alpha(x)\) taken now as an infinitesimal arbitrary function. We can think of this local symmetry as associated with the \(\mathrm{U}(1)\) group, since one can write \eqref{eq:gauge_transformation} in the form
 \[
     A'_\mu(x) = A_\mu(x) - i \left( e^{-i \alpha(x)} \partial_\mu e^{i \alpha(x)} \right),
 \]
 with \(e^{i \alpha(x)} \in \mathrm{U}(1)\) for any spacetime point.
 
 \paragraph{Plane wave solutions.}
-The equations of motion do not have a unique solution (even after fixing initial conditions) because of the gauge symmetry: there is a combination of the dynamical variables that does not have a unique evolution as its time evolution can be changed arbitrarily with a gauge transformation. Keeping this gauge redundancy is very useful to have Lorentz invariance manifest, which is instrumental for introducing interactions in a way consistent with relativistic invariance. The Standard Model is indeed a gauge theory with local symmetry group \(\mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1)\). Gauge invariance can be used to set auxiliary conditions (gauge-fixing conditions) that allow to find physical solutions by eliminating (sometimes only partially) equivalent configurations generated by the gauge symmetry. We choose to partially fix the gauge symmetry by imposing the covariant constraint (Lorenz gauge)
+The equations of motion do not have a unique solution (even after fixing initial conditions) because of the gauge symmetry: there is a combination of the dynamical variables that does not have a unique evolution as its time evolution can be changed arbitrarily with a gauge transformation. Keeping this gauge redundancy is very useful to have Lorentz invariance manifest, which is instrumental for introducing interactions in a way consistent with relativistic invariance. The Standard Model is indeed a gauge theory with local symmetry group \(\mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1)\). Gauge invariance can be used to set auxiliary conditions (gauge-fixing conditions) that allow to find physical solutions by eliminating (sometimes only partially) equivalent configurations generated by the gauge symmetry. We choose to partially fix the gauge symmetry by imposing the covariant \textbf{Lorenz gauge} (basically a constraint which uses the gauge freedom to eliminate one redundant degree of freedom):
 \begin{equation}
     \partial^{\mu} A_\mu(x) = 0.
     \label{eq:lorenz_gauge}

@@ -1,12 +1,13 @@
 \chapter{Path Integrals}
 
 Quantization can be introduced in two equivalent ways:
-- operator formalism (canonical quantization, Hilbert space, linear operators, etc ..)
-- path integrals (functional integrals).
-
+\begin{enumerate}
+    \item \textbf{Operator formalism} (canonical quantization, Hilbert space, linear operators, etc ...).
+    \item \textbf{Path integrals} (functional integrals).
+\end{enumerate}
 Path integrals were introduced in quantum mechanics by Feynman in 1948, but until about 1970 they did not meet with much success, and the operatorial methods of canonical quantization were still the most widespread. In 1970, the success of gauge theories in developing the Standard Model of particle physics gave a strong impulse to path integral methods.
 
-Quantization of gauge theories is much more clear and elegant if performed with path integrals. Furthermore, path integrals indicate a way of relating a quantum field theory in D spacetime dimensions (\(D-1\) spaces and 1 time) to the statistical mechanics of a system in D space dimensions. This link has given rise to a way of thinking and defining field theories using statistical mechanics and renormalization group ideas, as introduced by Wilson and others (lattice theories). Nowadays,it is convenient to master both methods: according to the problem at hand, one may find one formalism more convenient than the other, even though they are supposed to be equivalent.
+Quantization of gauge theories is much more clear and elegant if performed with path integrals. Furthermore, path integrals indicate a way of relating a quantum field theory in D spacetime dimensions (\(D-1\) spaces and 1 time) to the statistical mechanics of a system in D space dimensions. This link has given rise to a way of thinking and defining field theories using statistical mechanics and renormalization group ideas, as introduced by Wilson and others (lattice theories). Nowadays, it is convenient to master both methods: according to the problem at hand, one may find one formalism more convenient than the other, even though they are supposed to be equivalent.
 
 \paragraph{Two-slit experiment.} To introduce path integrals, let us follow Feynman and consider the \textit{two-slit experiment} for the electron. The standard treatment used to explain the behavior of an electron which passes through the two slits of a barrier and creates a figure of interference on a screen employs the wave nature of the electron together with the Huygens principle for calculating the interference pattern from the elementary waves that originate from the slits. Feynman proposes an \textit{alternative description}. He suggests to keep thinking of the electron as a particle that however can accomplish both trajectories, each one with a certain “amplitude”.
 The \textbf{total amplitude} \(A_{tot}\) is defined as the sum of the single amplitudes, and its square is related to the probability that the electron is revealed at a given point on the screen. Moreover, the \textbf{elementary amplitude} for each possible trajectory is related in a simple way to the classical action evaluated on the trajectory itself: Feynman, inspired by previous considerations of Dirac, associates to each trajectory an amplitude of unit norm (so that all trajectories “weigh” democratically the same way) and with phase equal to the value of the action \(S\) in units of \(\hbar\).
@@ -23,8 +24,18 @@ and defined by the action (the integral of the lagrangian along the path, for a 
 \[
     S[q] = \int_0^{T} \d{t} \frac{1}{2}m \dot{q}^2.
 \]
-
-So for a path where we assume \(D \gg d\) and simplifying the problem with a constant velocity along the two trajectories,\TODO{Insert drawing of slit.} we can write the action for each path as
+\begin{figure}[H]
+    \begin{minipage}{0.55\textwidth}
+        \caption{Scheme of the two-slit experiment for the electron. The electron can follow two possible trajectories, passing through slit 1 or slit 2 respectively. We distinguish the lenghts of the two paths as \(D\) and \(D+d\). The total amplitude is obtained as the sum of the two contributions, each one weighted with a phase given by the action evaluated on the corresponding path.}
+        \label{fig:two_slit_experiment}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/two_slits_Dd.png}
+    \end{minipage}
+\end{figure}
+So for a path where we assume \(D \gg d\) and simplifying the problem with a constant velocity along the two trajectories, we can write the action for each path as
 \[
     \begin{aligned}
         S(c_1) & = \int_0^T \d{t} \frac{1}{2}m \dot{q}^2 = \int_0^T \d{t} \frac{1}{2}m \left(\frac{D}{T}\right)^2 = \frac{m}{2} \frac{D^2}{T},      \\
@@ -46,16 +57,16 @@ since \(|A(c_1)|^2=1\). It is easy to notice that the maximum probability, assoc
 \]
 One can interpret this condition as defining a wavelength \(\lambda = \frac{h}{p}\) so that when \(d\) contains an integer number of times such wavelengths there is constructive interference. The de Broglie relation is obtained by this rudimentary “path integral” and suggests that it contains the essential elements of quantum mechanics.
 
-The number of slits can be increased, as well as the number of intermediate screens, to have the particle performing all possible paths from the initial point to the final point of observation, thus creating a path integral for the total amplitude.
+The number of slits can be increased, as well as the number of intermediate screens, to have the particle performing all possible paths from the initial point to the final point of observation, thus creating a path integral for the total amplitude of a generic propagation \(S \mapsto R\).
 \begin{figure}[H]
-    \begin{minipage}{0.4\textwidth}
+    \begin{minipage}{0.35\textwidth}
         \centering
-        \includegraphics[width=0.75\textwidth]{img/rudimental_path_integral.png}
+        \includegraphics[width=0.8\textwidth]{img/rudimental_path_integral.png}
         \label{fig:rudimental_path_integral}
     \end{minipage}
     \hfill
-    \begin{minipage}{0.55\textwidth}
-        \caption{Scheme for a rudimental and discretized path integral. The electron can follow all possible paths from the source to the screen, passing ideally through multiple intermediate screens. Each path contributes with an amplitude of unit norm and phase given by the action evaluated on the path itself. The total amplitude is obtained by summing all contributions.}
+    \begin{minipage}{0.6\textwidth}
+        \caption{Scheme for a rudimental and discretized path integral. The electron can follow all possible paths from the source to the screen, passing ideally through multiple intermediate screens. Each path contributes with an amplitude of unit norm and phase given by the action evaluated on the path itself. Finally, the total amplitude is obtained as a sum of all the contributions.}
     \end{minipage}
 \end{figure}
 
@@ -84,7 +95,7 @@ induce a variation of the action
 \]
 which translates in phase variations $i\frac{1}{\hbar} \delta S[q]$ much bigger with respect to $i\pi$ (recall that for such a phase $e^{i\pi} = -1$) and the amplitudes of nearby paths cancel by destructive interference. This happens except at the point in which the action has a minimum, $\delta S = 0$, which identifies the classic trajectory. Trajectories close to the classical one have amplitudes that add up coherently since the phase does not vary: the functional integral, in the end, is dominated by the classic path.
 
-\section{Canonical Quantization}
+\subsection*{Canonical Quantization}
 
 Canonical quantization is constructed starting from the hamiltonian formulation of a classical system. It is obtained by lifting its phase space coordinates, the generalized coordinates \(x^i\) and conjugate momenta \(p_i\), to linear operators \(\hat{x}^i\) and \(\hat{p}_i\) that act on a linear space endowed with a positive definite norm, the Hilbert space of physical states \(\mathcal{H}\). The basic operators must satisfy commutation relations required to be equal \(i\hbar\) times the value of the corresponding classical Poisson brackets
 \begin{equation}
