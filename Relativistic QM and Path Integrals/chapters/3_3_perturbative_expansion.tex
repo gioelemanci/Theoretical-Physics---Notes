@@ -6,13 +6,13 @@ We describe the perturbative expansion taking as a guiding example the \textbf{a
 \[
     S[x] = \int \d{t} \left( \frac{m}{2} \dot{x}^2 - \frac{m\omega^2}{2} x^2 -\frac{g}{3!} x^3 - \frac{\lambda}{4!} x^4 \right),
 \]
-where if the coupling constants \(g\) and \(\lambda\) vanish, the theory is exactly solvable. Thus, one may try to include perturbatively the corrections that arise when \(g\) and \(\lambda\) are small enough. It is convenient to split the action as the sum of two terms, a free part \(S_0\) which is exactly solvable and an interacting part \(S_{int}\)
+where if the coupling constants \(g\) and \(\lambda\) vanish, the theory is exactly solvable. Thus, one may try to include perturbatively the corrections that arise when \(g\) and \(\lambda\) are small enough. It is convenient to split the action as the sum of two terms, a free part \(S_0\) which is exactly solvable and an interacting part \(S_{int}\) which contains the interaction potentials:
 \[
-    \begin{aligned}
-        S[x]       & = S_0[x] + S_{int}[x],                                                       \\
-        S_0[x]     & = \int \d{t} \left( \frac{m}{2} \dot{x}^2 - \frac{m\omega^2}{2} x^2 \right), \\
-        S_{int}[x] & = \int \d{t} \left( -\frac{g}{3!} x^3 - \frac{\lambda}{4!} x^4 \right).
-    \end{aligned}
+    \begin{dcases}
+        S[x] = S_0[x] + S_{int}[x],                                                         \\
+        S_0[x] = \int \d{t} \left( \frac{m}{2} \dot{x}^2 - \frac{m\omega^2}{2} x^2 \right), \\
+        S_{int}[x] = \int \d{t} \left( -\frac{g}{3!} x^3 - \frac{\lambda}{4!} x^4 \right).
+    \end{dcases}
 \]
 The perturbative expansion is easily generated in the path integral setup. Including a source term, one expands in a Taylor series the exponential of the interaction term
 \[
@@ -38,7 +38,7 @@ where \(Z_0[J]\) is the generating functional of the free theory. This expressio
 \[
     Z[0] = \int \mathrm{D}x\, e^{\frac{i}{\hbar}S[x]} = \exp\left( \frac{i}{\hbar} S_{int}\left[ \frac{\hbar}{i} \frac{\delta}{\delta J} \right] \right) Z_0[J] \Big\vert_{J=0}.
 \]
-The perturbative expansion can be represented using Feynman diagrams. These are constructed by expanding the interaction term in the path integral and applying Wick’s theorem to compute the correlation functions within the free theory. In these diagrams, vertices, represented as dots, correspond to the interaction potentials and involve a coupling constant multiplied by quantum variables. These variables are paired in all possible combinations using free propagators, which are graphically depicted as lines.
+The perturbative expansion can be represented using \textit{Feynman diagrams}. These are constructed by expanding the interaction term in the path integral and applying \textit{Wick’s theorem} to compute the correlation functions within the free theory. In these diagrams, vertices, represented as dots, correspond to the interaction potentials and involve a coupling constant multiplied by quantum variables. These variables are paired in all possible combinations using free propagators, which are graphically depicted as lines.
 
 This construction is illustrated below through the example of vacuum diagrams for the anharmonic oscillator.
 
@@ -46,7 +46,7 @@ This construction is illustrated below through the example of vacuum diagrams fo
 
 As an example, we compute perturbatively the corrections to the ground state energy of the harmonic oscillator due to the \textbf{anharmonic potential} terms. It is often the case that one computes using the euclidean version of the theory and performs the inverse Wick rotation at the very end to obtain the final result in minkowskian time.
 
-Thus, let us consider the euclidean generating functional and action for the \textbf{anharmonic oscillator}
+Let us consider the euclidean generating functional and action for the \textbf{anharmonic oscillator}
 \[
     \begin{aligned}
         Z_E[J] & = \int \mathrm{D}x\, e^{-\frac{1}{\hbar}\left(S_E[x]-\int \d{\tau} J x\right)},                                                                                          \\
@@ -61,13 +61,13 @@ We want to compute corrections to the ground state energy, which can be obtained
 \]
 where the exact energy \(E_0\) of the ground state \(\ket{0}\) of the anharmonic oscillators differs from the ground state energy of the harmonic oscillator \(E_0^{(0)}\) by the term \(\Delta E_0\) due to the anharmonic potential (here we have the contributions from interaction terms). The correction \(\Delta E_0\) can be computed perturbatively, considering the first non-vanishing corrections to exemplify the perturbative expansion with path integrals and the use of Feynman diagrams.
 
-When we take \(\beta \to \infty\), we are projecting onto the ground state, since we assume that the spectrum of the Hamiltonian is bounded from below. Thus, the euclidean time evolution operator \(e^{-\beta \hat{H}}\) suppresses all contributions from excited states exponentially fast as \(\beta\) increases. Then we apply the perturbative expansion in the interaction term (as we did in Minkowskian time in the previous section), which gives us an unnormalized average in the free theory. Now we can recognize that this average corresponds to the vacuum amplitude of the free theory multiplied by corrections due to the interactions.
+When we take \(\beta \to \infty\), we are projecting onto the ground state, since we assume that the spectrum of the Hamiltonian is bounded from below. Thus, the euclidean time evolution operator \(e^{-\beta \hat{H}}\) suppresses all contributions from excited states exponentially fast as \(\beta\) increases. Then we apply the perturbative expansion in the interaction term (as we did in Minkowskian time in the previous section), which gives us an unnormalized average in the free theory. Now we can recognize that this average corresponds to the vacuum amplitude of the free theory multiplied by corrections due to the interactions: the idea is to compute these corrections perturbatively using Wick’s theorem (to decompose the pseudo n-point correlation function in products of simpler correlations) and Feynman diagrams.
 
-We can continue the computation for the interaction terms in the correlation function by considering separately the two terms (by setting each one to zero and effectively \textit{turning off} one interaction at a time). Let us look first at the case with \(g=0\) and focus on the first correction in \(\lambda\) for the \textbf{quartic interaction}:
+\paragraph{Quartic interaction.} We can continue the computation for the interaction terms in the correlation function by considering separately the two terms (by setting each one to zero and effectively \textit{turning off} one interaction at a time). Let us look first at the case with \(g=0\) and focus on the first correction in \(\lambda\) for the \textit{quartic interaction}:
 \[
     \begin{aligned}
         Z_E[0] & = \langle 1 \rangle_U = \langle e^{-S_{E,\,int}[x]} \rangle_{U,0} = \left\langle \sum_{n=0}^{\infty} \frac{(-S_{E,\,int}[x])^n}{n!} \right\rangle_{U,0} = \langle 1 \rangle_{U,0} -\frac{\lambda}{4!} \int_{-\beta/2}^{\beta/2} \d{\tau} \langle x^4(\tau) \rangle_{U,0} + \cdots \\
-               & = \langle 1 \rangle_{U,0} \left[ 1 -\frac{\lambda}{4!} \int_{-\beta/2}^{\beta/2} \d{\tau} \langle x^4(\tau) \rangle_{U,0} +\cdots \right] = \langle 1 \rangle_{U,0} \left[ 1 -\frac{\lambda}{4!} \left( 3\times \feynEight \right) + \cdots \right].
+               & = \langle 1 \rangle_{U,0} \left[ 1 -\frac{\lambda}{4!} \int_{-\beta/2}^{\beta/2} \d{\tau} \langle x^4(\tau) \rangle_{0} +\cdots \right] = \langle 1 \rangle_{U,0} \left[ 1 -\frac{\lambda}{4!} \left( 3\times \feynEight \right) + \cdots \right].
     \end{aligned}
 \]
 In the last line, we have used Wick contractions to calculate normalized correlation functions in the free theory, and then introduced a graphical representation in terms of \textbf{Feynman diagrams}. In this graphical representation, a line denotes a propagator that joins two points in time, while vertices arising from the interactions are denoted by dots. The term we obtained contains just one vertex where four lines can enter or exit, corresponding to the power four of the dynamical variable \(x(\tau)\) associated to the interaction under consideration.
@@ -93,12 +93,12 @@ so that we can read the correction to the ground state energy due to the quartic
     \Delta E_0 = \frac{1}{32} \frac{\lambda}{\omega^2}.
 \]
 
-Similarly, one may consider the case with \(g \neq 0\) and \(\lambda = 0\). The first non-vanishing correction in the \textbf{cubic interaction} arises from:
+\paragraph{Cubic interaction.} Similarly, one may consider the case with \(g \neq 0\) and \(\lambda = 0\). The first non-vanishing correction in the \textit{cubic interaction} arises from:
 \[
     \begin{aligned}
         Z_E[0] & = \langle 1 \rangle_U = \left\langle \left( 1- S_{E,\,int} + \frac{1}{2}S_{E,\,int}^2 + \cdots \right) \right\rangle_{U,0}                                                                                                                                                  \\
-               & = \langle 1 \rangle_{U,0} + \frac{g}{3!} \int_{-\beta/2}^{\beta/2} \d{\tau} \langle x^3(\tau)\rangle_{U,0} + \frac{g^2}{2(3!)^2} \int_{-\beta/2}^{\beta/2} \d{\tau} \int_{-\beta/2}^{\beta/2} \d{\tau^{\prime}} \langle x^3(\tau) x^3(\tau^{\prime}) \rangle_{U,0} + \cdots \\
-               & = \langle 1 \rangle_{U,0} \left[ 1 + 0 + \frac{g^2}{2(3!)^2}\left((3!)\times \feynSunset + (3^2)\times \feynDumbbell \right) + \cdots \right].
+               & = \langle 1 \rangle_{U,0} - \frac{g}{3!} \int_{-\beta/2}^{\beta/2} \d{\tau} \langle x^3(\tau)\rangle_{U,0} + \frac{g^2}{2(3!)^2} \int_{-\beta/2}^{\beta/2} \d{\tau} \int_{-\beta/2}^{\beta/2} \d{\tau^{\prime}} \langle x^3(\tau) x^3(\tau^{\prime}) \rangle_{U,0} + \cdots \\
+               & = \langle 1 \rangle_{U,0} \left[ 1 - 0 + \frac{g^2}{2(3!)^2}\left((3!)\times \feynSunset + (3^2)\times \feynDumbbell \right) + \cdots \right].
     \end{aligned}
 \]
 The first correction vanishes because there is no way to contract three fields at the same time in pairs (from Wick's theorem). The second correction is represented by a six-point correlation function, which gives two types of contributions: we have three fields at time \(\tau\) and three fields at time \(\tau^{\prime}\), which can be contracted in two different ways.
@@ -162,7 +162,7 @@ where one may keep in mind that setting \(t_1,\,t_2 \to -\infty\) describes inco
     \end{aligned}
 \]
 
-For the case of a cubic interaction, \(S_{int} = -\frac{g}{3!}\int\d{t}x(t)^3\), it leads to the following diagrammatic expansion which is obtained by the systematic use of Wick contractions:\TODO{Modify last diagram in first row, it needs 4 external points.}
+For the case of a cubic interaction, \(S_{int} = -\frac{g}{3!}\int\d{t}x(t)^3\), it leads to the following diagrammatic expansion which is obtained by the systematic use of Wick contractions:\TODO{In first row, there is a final missing diagram.}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/diagrammatic_expansion_cubic_interaction.png}
@@ -178,9 +178,9 @@ Here ends the treatment for the \textbf{bosonic path integral}: we saw that this
 
 \section{Path Integrals for Fermions}
 
-We now discuss how to extend the path integral method to fermionic systems. Fermions at the classical level can be described by \textbf{Grassmann variables}, also known as \textbf{anticommuting} numbers or fermionic variables. Grassmann variables allow us to define “classical” models whose quantization produces degrees of freedom that satisfy the Pauli exclusion principle.
+We now discuss how to extend the path integral method to fermionic systems. Fermions at the classical level can be described by \textbf{Grassmann variables}, also known as \textbf{anticommuting numbers} or fermionic variables. Grassmann variables allow us to define “classical” models whose quantization produces degrees of freedom that satisfy the Pauli exclusion principle.
 
-The question is: how can we define a path integral for fermionic systems? The main difficulty arises from the anticommuting nature of fermionic variables, which makes the standard definition of the path integral inapplicable. There is no classical trajectory for fermions in the usual sense, since the ferionic nature of the particles vanishes in the classical limit \(\hbar \to 0\). To overcome this issue, we introduce Grassmann variables to describe fermionic degrees of freedom at the classical level.
+How can we define a path integral for fermionic systems? The main difficulty arises from the anticommuting nature of fermionic variables, which makes the standard definition of the path integral inapplicable. There is no classical trajectory for fermions in the usual sense, since the fermionic nature of the particles vanishes in the classical limit \(\hbar \to 0\). To overcome this issue, we introduce Grassmann variables to describe fermionic degrees of freedom at the classical level.
 
 We need to introduce a suitable Hamiltonian theory to deal with fermionic degrees of freedom, which has symmetric Poisson Brackets, in order to quantize them canonically obtaining a quantum theory based on \textit{anticommutators}.
 This is why we call it a \textbf{pseudoclassical model}: it is not a classical model in the usual sense, but it is a formal construction that allows us to quantize fermionic degrees of freedom, and leads to the correct quantum theory based on Grassmann variables.
@@ -312,7 +312,7 @@ Similarly, one finds that gaussian integration over complex Grassmann variables 
 \[
     \int \mathrm{d}^n\overline{\eta} \mathrm{d}^n\eta e^{-\overline{\eta}_i A_{ij} \eta_j} = \det A,
 \]
-where the measure is now deifined as \(\mathrm{d}^n\overline{\eta} \mathrm{d}^n\eta = \d{\eta_1}\d{\overline{\eta}_1} \cdots \d{\eta_n} \d{\overline{\eta}_n}\).
+where the measure is now deifined as \(\mathrm{d}^n\overline{\eta} \mathrm{d}^n\eta = \d{\overline{\eta}_1}\d{\eta_1} \cdots \d{\overline{\eta}_n}\d{\eta_n}\).
 
 For applications to dynamical models and subsequent path integral quantization, it is useful to consider infinite dimensional Grassmann algebras (\(n \to \infty\)). Then, one may use Grassmann valued functions of time, i.e. \(\theta_i \to \theta(t)\). For different values of \(t\), one has different generators of the algebra, so that properties such as \(\theta^2(t) = 0\) and \(\theta(t) \theta(t') = - \theta(t') \theta(t)\) hold. They are used to introduce useful mechanical systems at the classical level, often named psudoclassical models, that upon quantization produce systems satisfying the Pauli exclusion principle and the Fermi-Dirac statistic.
 
@@ -344,7 +344,7 @@ To define the fermionic counterpart, we introduce two complex Grassmann-valued f
 \begin{equation}
     S[\psi,\,\overline{\psi}] = \int \d{t} \left( i \overline{\psi} \dot{\psi} - \omega \overline{\psi} \psi \right).
     \label{eq:fermionic_oscillator_action}
-\end{equation}
+\end{equation}\QUESTION{We used commuting properties to derive the bosonic action, why is it legit to use the same form?}
 This action is the fermionic counterpart of the bosonic harmonic oscillator action written in terms of complex variables. It is linear in time derivatives, as it must be for fermionic systems (if it were quadratic, the Grassmann property would imply that the action vanishes identically). As its bosonic counterpart, it is real.
 
 Now if we compute the variation of the action with respect to \(\overline{\psi}\) and \(\psi\), we find the equations of motion
@@ -365,7 +365,7 @@ where \(\psi_0\) and \(\overline{\psi}_0\) are Grassmann constants. This equatio
 
 To proceed with canonical quantization, we compute the conjugate momenta
 \begin{equation}
-    \pi = \frac{\partial_L \mathcal{L}}{\partial \dot{\psi}} = - i \overline{\psi}, \quad \overline{\pi} = \frac{\partial_L \mathcal{L}}{\partial \dot{\overline{\psi}}} = 0.
+    \pi = \frac{\partial_L \mathcal{L}}{\partial \dot{\psi}} = - i \overline{\psi}, \quad \overline{\pi} = \frac{\partial_L \mathcal{L}}{\partial \dot{\overline{\psi}}} = - i \psi.
     \label{eq:conjugate_momenta_fermionic_oscillator}
 \end{equation}
 which shows that the system is already in a hamiltonian form, the conjugate momenta being \(\overline{\psi}\) up to a factor. The classical Poisson bracket \(\{\pi,\,\psi\}_{PB} = -1\) is rewritten as \(\{\pi,\,\psi\}_{PB} = -i\), and has the property of being symmetric (this fact will be discussed in a short while).
@@ -450,7 +450,7 @@ Path integrals for fermions can be derived from the canonical formalism, just as
 \]
 The first term with derivatives (the \(p\dot{x}\) term) is called the symplectic term and fixes the Poisson bracket structure of phase space. Up to total derivatives, it can be written in a more symmetrical form, with the time derivatives shared equally by \(x\) and \(p\) as
 \[
-    S[x,\,p] = \int \d{t} \frac{1}{2} (p \dot{x} - \dot{p} x) - H(x,\,p) = \int \d{t} \frac{1}{2} z^a \Omega_{ab} \dot{z}^b - H(z),
+    S[x,\,p] = \int \d{t} \left[\frac{1}{2} (p \dot{x} - \dot{p} x) - H(x,\,p) \right] = \int \d{t} \left[\frac{1}{2} z^a \Omega_{ab} \dot{z}^b - H(z)\right],
 \]
 where we have introduced the phase space vector for a bosonic system
 \[
@@ -482,7 +482,7 @@ Thus the action for a bosonic system can be written in terms of the symplectic m
         \end{pmatrix} - H(x,\,p)\right] = \int \d{t} \left( \frac{1}{2} z^a \left(\Omega^{-1}\right)_{ab} \dot{z}^b  - H(z) \right).
     \label{eq:symplectic_action_bosonic}
 \end{equation}
-This action produces the correct equations of motion via Hamilton’s equations, which will be of the first order in time derivatives for fermionic systems (pay attention: we are still using bosonic variables). As we have said, the first term in the action is symplectic and involves an antisymmetric matrix, which is the reason why the Poisson brackets for bosonic systems are antisymmetric (in contrast to bosonic systems, where the symplectic form is given by a symmetric matrix and the Poisson brackets are symmetric too). The Poisson brackets for generic functions \(F(z)\) and \(G(z)\) of the phase space variables \(z^a\) are defined as
+This action produces the correct equations of motion via Hamilton’s equations, which will be of the first order in time derivatives for fermionic systems (pay attention: we are still using bosonic variables). As we have said, the first term in the action is symplectic and involves an antisymmetric matrix, which is the reason why the Poisson brackets for bosonic systems are antisymmetric (in contrast to fermionic systems, where the symplectic form is given by a symmetric matrix and the Poisson brackets are symmetric too). The Poisson brackets for generic functions \(F(z)\) and \(G(z)\) of the phase space variables \(z^a\) are defined as
 \begin{equation}
     \left\{ F,\,G \right\}_{PB} = \frac{\partial F}{\partial z^a} \Omega^{ab} \frac{\partial G}{\partial z^b},
     \label{eq:poisson_brackets_bosonic}
@@ -500,7 +500,7 @@ This coincides with the standard definition, thus Poisson bracket satisfies the 
     \end{aligned}
     \label{eq:poisson_brackets_properties}
 \end{equation}
-which are \textit{antisymmetry}, \textit{Leibniz rule}, and \textit{Jacobi identity} (c.p. stands for cyclic permutations), respectively. These properties make it consistent to adopt the canonical quantization rules of substituting the fundamental variables za by linear operators \(\hat{z}^a\) acting on a Hilbert space of physical states, with commutation relations fixed to be \(i\hbar\) times the value of the classical Poisson brackets
+which are \textbf{antisymmetry}, \textbf{Leibniz rule}, and \textbf{Jacobi identity} (c.p. stands for cyclic permutations), respectively. These properties make it consistent to adopt the canonical quantization rules of substituting the fundamental variables \(z^a\) by linear operators \(\hat{z}^a\) acting on a Hilbert space of physical states, with commutation relations fixed to be \(i\hbar\) times the value of the classical Poisson brackets
 \begin{equation}
     \left[ \hat{z}^a,\,\hat{z}^b \right] = i \hbar \left\{ z^a,\,z^b \right\}_{PB} = i \hbar \Omega^{ab}.
     \label{eq:canonical_quantization_bosonic}
@@ -516,9 +516,10 @@ so that the action takes the following general form
     S[Z^A] = \int \d{t} \left(\frac{1}{2}Z^A (\Omega^{-1})_{AB}\dot{Z}^B - H(Z)\right).
 \]
 Now the symplectic matrix helps into define the Poisson brackets
-\[
-    \left\{ F,\,G \right\}_{PB} = \frac{\partial_R F}{\partial Z^A} \Omega^{AB} \frac{\partial_L G}{\partial Z^B},
-\]
+\begin{equation}
+    \left\{F,\,G\right\}_{PB} = \frac{\partial_R F}{\partial Z^A} \Omega^{AB} \frac{\partial_L G}{\partial Z^B},
+    \label{eq:poisson_brackets_mixed_space}
+\end{equation}
 where \(F\) and \(G\) are generic functions of the phase space variables \(Z^A\). The Poisson brackets are symmetric when both \(F\) and \(G\) are Grassmann odd, and antisymmetric otherwise. This is the general structure of hamiltonian systems with both bosonic (\(z^a\) inside \(Z^A\)) and fermionic degrees of freedom (from the included Grassmann variables). Again, this term must be written splitting the time derivatives democratically between all variables, as in \eqref{eq:symplectic_action_bosonic}. The symplectic term and the hamiltonian are taken to be Grassmann even (i.e., commuting objects), so that the whole action is bosonic.
 
 Then, it is seen that the matrix \(\Omega^{AB}\) is antisymmetric in the sector related to the bosonic coordinates, and symmetric in the sector belonging to the Grassmann variables (other off-diagonal entries vanish as the action is taken to be commuting). Denoting the variables by \(Z^A = (z^a, \theta^{\alpha})\) with \(z^a\) bosonic and \(\theta^{\alpha}\) fermionic, the matrix \(\Omega^{AB}\) (as well as its inverse) has a block diagonal form
@@ -532,11 +533,10 @@ Then, it is seen that the matrix \(\Omega^{AB}\) is antisymmetric in the sector 
     \end{dcases}
     \label{eq:symplectic_matrix_block_diagonal}
 \end{equation}
-where \(\Omega^{ab}\) is the symplectic matrix for the bosonic sector (antisymmetric) and \(\Omega^{\alpha\beta}\) is the symplectic matrix for the fermionic sector (symmetric). The Poisson brackets for the whole phase space read
-\begin{equation}
-    \left\{F,\,G\right\}_{PB} = \frac{\partial_R F}{\partial Z^A} \Omega^{AB} \frac{\partial_L G}{\partial Z^B},
-    \label{eq:poisson_brackets_mixed_space}
-\end{equation}
+where \(\Omega^{ab}\) is the symplectic matrix for the bosonic sector (antisymmetric) and \(\Omega^{\alpha\beta}\) is the symplectic matrix for the fermionic sector (symmetric). That is why the Poisson brackets for the whole phase space (as in \eqref{eq:poisson_brackets_mixed_space}) read
+\[
+    \left\{ F,\,G \right\}_{PB} = \frac{\partial_R F}{\partial Z^A} \Omega^{AB} \frac{\partial_L G}{\partial Z^B},
+\]
 where both left and right derivatives are used to take into account the Grassmann parity of the variables. In particular we can find
 \[
     \left\{Z^A,\,Z^B\right\}_{PB} = \Omega^{AB}.
@@ -548,20 +548,26 @@ Phase space functions are usually restricted to have a definite \textbf{Grassman
     \begin{aligned}
         \left\{ F,\, G \right\}_{PB}                                                         = (-1)^{\epsilon_F \epsilon_G + 1} \left\{ G,\, F \right\}_{PB},                                \\
         \left\{ F,\, GH \right\}_{PB}                                                        = \left\{ F,\, G \right\}_{PB} H + (-1)^{\epsilon_F \epsilon_G} G \left\{ F,\, H \right\}_{PB}, \\
-        (-1)^{\epsilon_F (\epsilon_G + \epsilon_H)} \left\{ F,\, \left\{ G,\, H \right\}_{PB} \right\}_{PB} + \text{c.p.} = 0.
+        (-1)^{\epsilon_F \epsilon_H} \left\{ F,\, \left\{ G,\, H \right\}_{PB} \right\}_{PB} + \text{c.p.} = 0,
     \end{aligned}
     \label{eq:graded_poisson_brackets_properties}
 \end{equation}
+where the first line is the \textbf{graded antisymmetry}, the second line is the \textbf{graded Leibniz rule}, and the third line is the \textbf{graded Jacobi identity} (c.p. stands for cyclic permutations), respectively; the last one can be also written as
+\[
+    \left\{ F,\, \left\{ G,\, H \right\}_{PB} \right\}_{PB} + (-1)^{\epsilon_F (\epsilon_G + \epsilon_H)} \left\{ G,\, \left\{ H,\, F \right\}_{PB} \right\}_{PB} + (-1)^{\epsilon_H (\epsilon_F + \epsilon_G)} \left\{ H,\, \left\{ F,\, G \right\}_{PB} \right\}_{PB} = 0,
+\]
+where if we consider only bosonic functions (\(\epsilon_F = \epsilon_G = \epsilon_H = 0\)), we recover the standard Jacobi identity, and if we consider only fermionic functions (\(\epsilon_F = \epsilon_G = \epsilon_H = 1\)), we get the same identity again: the only case that differs is when we have a mix of bosonic and fermionic functions.
 
 The equations of motion are first order in time. They can be derived by minimizing the action and can be expressed in terms of the Poisson brackets as
-\[
+\begin{equation}
     \dot{Z}^A = \Omega^{AB} \frac{\partial_L H}{\partial Z^B} = \left\{ Z^A,\, H \right\}_{PB},
-\]
+    \label{eq:hamiltons_equations_mixed_space}
+\end{equation}
 which is the generalization of Hamilton’s equations to systems with both bosonic and fermionic degrees of freedom.
 
 These properties of the Poisson brackets make it consistent to adopt the canonical quantization rules, that consist in promoting the phase space coordinates \(Z^A\) to operators \(\hat{Z}^A\) with commutation/anticommutation relation fixed by their classical Poisson brackets
 \begin{equation}
-    \left[ \hat{Z}^A, \hat{Z}^B \right\} = i\hbar \left\{Z^{A},\,Z^{B} \right\}= i \hbar \Omega^{AB},
+    \left[ \hat{Z}^A, \hat{Z}^B \right\} = i\hbar \left\{Z^{A},\,Z^{B} \right\}_{PB}= i \hbar \Omega^{AB},
     \label{eq:canonical_quantization_mixed_space}
 \end{equation}
 where we have employed the compact notation
@@ -598,9 +604,9 @@ often called \textbf{“graded commutator”}. The graded commutator satisfies i
     \[
         L = \frac{i}{2} \psi^i \delta_{ij} \dot{\psi}^j - H(\psi),\quad i,j = 1,\,\dots,\,n,
     \]
-    which is formally real and produces equations of motion of the first order in time. One finds \((\Omega^{-1})_{ij} = i \delta_{ij}\) and \(\Omega^{ij} = -i \delta^{ij}\), and Poisson brackets at equal times
+    which is formally real and produces equations of motion of the first order in time. One finds the symplectic form and Poisson brackets at equal times to be
     \[
-        \left\{\psi^i,\,\psi^j\right\}_{PB} = -i \delta^{ij}.
+        (\Omega^{-1})_{ij} = i \delta_{ij} \text{ and } \Omega^{ij} = -i \delta^{ij}, \quad \left\{\psi^i,\,\psi^j\right\}_{PB} = -i \delta^{ij}.
     \]
     The model is quantized by introducing the hermitian operators \(\hat{\psi}^i\) with anticommutators
     \[
@@ -631,6 +637,8 @@ Adding an extra Majorana fermion corresponds to a Clifford algebra in odd dimens
 
 It is useful to introduce coherent states, an overcomplete basis of vectors for the fermionic Fock space described previously, for deriving a path integral for fermionic systems. They provide ket eigenstates of the fermionic operator \(\hat{\psi}\) with Grassmann-valued eigenvalues. Together with a resolution of the identity, they allow to convert the matrix elements of the quantum evolution operator (transition amplitudes) into a path integral where one sums over Grassmann valued functions.
 
+\subsubsection{Bosonic Coherent States}
+
 We first review the construction of bosonic coherent states, used in the theory of the harmonic oscillator, as a guide on the construction in the fermionic case. In the theory of the harmonic oscillator, one introduces coherent states defined as eigenstates of the annihilation operator \(\hat{a}\). Let us recall the algebra of the creation and annihilation operators \(\hat{a}^\dagger\) and \(\hat{a}\)
 \[
     \left[\hat{a}, \hat{a}^\dagger \right] = 1, \quad \left[\hat{a}, \hat{a} \right] = \left[\hat{a}^\dagger, \hat{a}^\dagger \right] = 0.
@@ -652,14 +660,25 @@ Normalizing the Fock vacuum to the unit norm, \(\bra{0}\ket{0} = 1\) where \(\br
 \]
 
 Now, choosing a complex number \(a\), one builds a coherent state \(\ket{a}\) as the eigenstate of the annihilation operator \(\hat{a}\) with eigenvalue \(a\)
-\[
-    e^{a \hat{a}^{\dagger}}, \quad \hat{a} \ket{a} = a \ket{a}.
-\]
+\begin{equation}
+    \ket{a} = e^{a \hat{a}^{\dagger}} \ket{0}, \quad \hat{a} \ket{a} = a \ket{a}.
+    \label{eq:bosonic_coherent_state_definition}
+\end{equation}
 A way of proving this is by expanding the exponential and viewing \(\ket{a}\) as an infinite sum with suitable coefficients of the basis vectors of the Fock space
-\[
+\begin{equation}
     \ket{a} = \left( 1 + a \hat{a}^\dagger + \frac{1}{2!} (a\hat{a}^\dagger)^2 + \cdots \right)\ket{0} = \sum_{n=0}^{\infty} \frac{a^n}{\sqrt{n!}} \ket{n}.
+    \label{eq:bosonic_coherent_state_expansion}
+\end{equation}
+One may verify explicitly that \(\hat{a} \ket{a} = a \ket{a}\) by acting with \(\hat{a}\) on the above expansion and using the action of \(\hat{a}\) on the basis states \(\ket{n}\):
+\[
+    \begin{aligned}
+        \hat{a} \ket{n} & = \sqrt{n} \ket{n-1}, \quad n = 1,\,2,\,\dots, \quad \hat{a} \ket{0} = 0, \text{ thus:}                              \\
+        \hat{a} \ket{a} & = \hat{a} \left( \ket{0} + a \ket{1} + \frac{a^2}{\sqrt{2!}}\ket{2} + \frac{a^3}{\sqrt{3!}} \ket{3} + \cdots \right) \\
+                        & = 0 + a \ket{0} + \frac{a^2}{\sqrt{2!}} \sqrt{2} \ket{1} + \frac{a^3}{\sqrt{3!}} \sqrt{3} \ket{2} + \cdots           \\
+                        & = a \left( \ket{0} + a \ket{1} + \frac{a}{\sqrt{2!}}\ket{2} + \cdots \right) = a \ket{a}.
+    \end{aligned}
 \]
-One may verify explicitly that \(\hat{a} \ket{a} = a \ket{a}\) by acting with \(\hat{a}\) on the above expansion and using the action of \(\hat{a}\) on the basis states \(\ket{n}\). We can also remember the ladder operators algebra to derive
+We can also remember the ladder operators algebra to derive
 \[
     \hat{a}^\dagger \rightarrow \overline{a}, \quad \hat{a} \rightarrow \frac{\partial}{\partial \overline{a}},
 \]
@@ -668,8 +687,13 @@ acting on the coherent states viewed as functions of the complex variable \(\ove
     \ket{a} \rightarrow \psi_a(\overline{a}) = \bra{\overline{a}} \ket{a} = e^{\overline{a} a},
 \]
 where we have introduced the dual coherent state
-\[
+\begin{equation}
     \bra{\overline{a}} = \bra{0} e^{\overline{a} \hat{a}}.
+    \label{eq:bosonic_dual_coherent_state_definition}
+\end{equation}
+This is the eigenstate of the creation operator \(\hat{a}^\dagger\) with eigenvalue \(\overline{a}\)
+\[
+    \bra{\overline{a}} \hat{a}^\dagger = \bra{\overline{a}} \overline{a}.
 \]
 
 A set of properties can be proven by direct computation:
@@ -698,7 +722,9 @@ Coherent states may be used to rederive a form of the path integral in phase spa
 
 \subsubsection{Fermionic Coherent States}
 
-We now turn to the construction of coherent states for fermionic systems, that is, for systems described in terms of fermionic creation/annihilation operators \(\hat{\psi}^\dagger\) and \(\hat{\psi}\) satisfying the algebra \eqref{eq:fermionic_creation_annihilation_algebra}. The construction is similar to the bosonic case, thus we arrive at a description of the space given by eigenstates of the fermionic field operators, but with Grassmann-valued eigenvalues this time. One introduces two Grassmann variables \(\psi\) and \(\overline{\psi}\), and defines the coherent state \(\ket{\psi}\) as
+We now turn to the construction of coherent states for fermionic systems, that is, for systems described in terms of fermionic creation/annihilation operators \(\hat{\psi}^\dagger\) and \(\hat{\psi}\) satisfying the algebra \eqref{eq:fermionic_creation_annihilation_algebra}. The construction is similar to the bosonic case, thus we arrive at a description of the space given by eigenstates of the fermionic field operators, but with Grassmann-valued eigenvalues this time. We can realize the algebra \eqref{eq:fermionic_creation_annihilation_algebra} in a two-dimensional Fock space, with basis states \(\ket{0}\) and \(\ket{1} = \hat{\psi}^\dagger \ket{0}\), where the Fock vacuum \(\ket{0}\) is defined by the condition \(\hat{\psi} \ket{0} = 0\).
+
+One introduces two Grassmann variables \(\psi\) and \(\overline{\psi}\), and defines the coherent state \(\ket{\psi}\) as
 \[
     \ket{\psi} = e^{\hat{\psi}^\dagger \psi} \ket{0}, \quad \hat{\psi} \ket{\psi} = \psi \ket{\psi},
 \]
@@ -731,75 +757,71 @@ The properties of fermionic coherent states can be summarized as follows:
           where \(\hat{F} = \hat{\psi}^\dagger \hat{\psi}\) is the fermion number operator, defined by its action on the Fock basis states as \(F \ket{0} = 0\) and \(F \ket{1} = 1\).
 \end{enumerate}
 We can now prove these properties by direct computation, using the definitions of the coherent states and the properties of Grassmann variables and fermionic operators.
-
-\paragraph{(0)} At first, the definitions of the coherent states imply immediately the eigenvalue equations for the annihilation and creation operators
-\[
-    \begin{aligned}
-        \ket{\psi}            & = e^{\hat{\psi}^\dagger \psi} \ket{0} = \left( 1 + \hat{\psi}^\dagger \psi \right) \ket{0}                                      \\
-                              & = \ket{0} + \psi \ket{1}, \implies \hat{\psi} \ket{\psi} = \psi \ket{\psi},                                                     \\
-        \bra{\overline{\psi}} & = \bra{0} e^{\overline{\psi} \hat{\psi}} = \bra{0} \left( 1 + \overline{\psi} \hat{\psi} \right)                                \\
-                              & = \bra{0} + \overline{\psi} \bra{1}, \implies \bra{\overline{\psi}} \hat{\psi}^\dagger = \bra{\overline{\psi}} \overline{\psi}.
-    \end{aligned}
-\]
-Note that terms proportional to \(\psi^2\) can be inserted or eliminated at wish, as they vanish due to the Grassmann property \(\psi^2 = 0\).
-
-\paragraph{(1)} The scalar product between two coherent states is computed as
-\[
-    \bra{\overline{\psi}} \ket{\psi} = \bra{0} (1 + \overline{\psi} \hat{\psi}) (1 + \hat{\psi}^\dagger \psi) \ket{0} = \left(\bra{0} - \bra{1}\overline{\psi}\right)\left( \ket{0} - \psi \ket{1}\right) = 1 + \overline{\psi} \psi = e^{\overline{\psi} \psi}.
-\]
-We point out that the Grassmann variables are here defined to commute with the Fock vacuum \(\ket{0}\), so that they commute with the coherent states, but anticommute with \(\ket{1} = \hat{\psi}^\dagger \ket{0}\) (as they anticommute with \(\hat{\psi}^\dagger\)).
-
-\paragraph{(2)} The resolution of the identity is proven by direct computation. Expanding the coherent states in terms of the Fock basis states, one has
-\[
-    \mathbb{I} = \int \mathrm{d} \overline{\psi} \mathrm{d} \psi e^{-\overline{\psi} \psi} \ket{\psi} \bra{\overline{\psi}} = \int \mathrm{d} \overline{\psi} \mathrm{d} \psi e^{-\overline{\psi} \psi} \left( \ket{0} + \psi \ket{1} \right) \left( \bra{0} + \overline{\psi} \bra{1} \right).
-\]
-Now we can compute the Berezin integrals remembering that \(\int \d{\psi} = \frac{\partial_L}{\partial \psi}\), with the idea to obtain the completeness relation \(\mathbb{I} = \ket{0}\bra{0} + \ket{1}\bra{1}\):
-\[
-    \frac{\partial_L}{\partial \overline{\psi}} \frac{\partial_L}{\partial \psi} \left( 1 - \overline{\psi} \psi \right) \left( \ket{0}\bra{0} + \overline{\psi} \ket{0}\bra{1} + \psi \ket{1}\bra{0} + \psi \overline{\psi} \ket{1}\bra{1} \right),
-\]
-from which, since grassmann variables square to zero and the terms without both of the variables cancels out when derived, only two terms survive the differentiation:
-\[
-    \mathbb{I} = \frac{\partial_L}{\partial \psi} \frac{\partial_L}{\partial \overline{\psi}} \left( \psi \overline{\psi} \ket{1}\bra{1} - \overline{\psi} \psi \ket{0}\bra{0} \right) = \ket{0}\bra{0} + \ket{1}\bra{1}.
-\]
-
-\paragraph{(3)} The trace of a bosonic operator \(\hat{O}\), which commutes with \(\psi\) and \(\overline{\psi}\), is computed as
-\[
-    \begin{aligned}
-        \Tr \hat{O} & = \int \mathrm{d} \overline{\psi} \mathrm{d} \psi e^{-\overline{\psi} \psi} \bra{-\overline{\psi}} \hat{O} \ket{\psi}                                                                                                                      \\
-                    & = \int \mathrm{d} \overline{\psi} \mathrm{d} \psi e^{-\overline{\psi} \psi} \left( \bra{0} - \bra{1} \overline{\psi} \right) \hat{O} \left( \ket{0} + \psi \ket{1} \right)                                                                 \\
-                    & = \int \mathrm{d} \overline{\psi} \mathrm{d} \psi e^{-\overline{\psi} \psi} \left( \bra{0} \hat{O} \ket{0} + \bra{0} \hat{O} \ket{1} \psi - \overline{\psi} \bra{1} \hat{O} \ket{0} - \overline{\psi} \bra{1} \hat{O} \ket{1} \psi \right) \\
-                    & = \int \mathrm{d} \overline{\psi} \mathrm{d} \psi e^{-\overline{\psi} \psi} \left( \bra{0} \hat{O} \ket{0} - \overline{\psi} \bra{1} \hat{O} \ket{1} \psi  \right)                                                                         \\
-                    & = \bra{0} \hat{O} \ket{0} + \bra{1} \hat{O} \ket{1} = \Tr\,\hat{O},
-    \end{aligned}
-\]
-recalling the steps of the resolution of the identity proof to compute the Berezin integrals.
-
-\paragraph{(4)} The supertrace of an operator \(\hat{O}\) can be computed similarly as:
-\[
-    \begin{aligned}
-        \mathrm{STr} \hat{O} & = \int \d{\overline{\psi}} \d{\psi} e^{-\overline{\psi} \psi} \bra{\overline{\psi}} \hat{O} \ket{\psi}                                                                                                                       \\
-                             & = \int \d{\overline{\psi}} \d{\psi} e^{-\overline{\psi} \psi} \left( \bra{0} + \bra{1} \overline{\psi} \right) \hat{O} \left( \ket{0} + \psi \ket{1} \right)                                                                 \\
-                             & = \int \d{\overline{\psi}} \d{\psi} e^{-\overline{\psi} \psi} \left( \bra{0} \hat{O} \ket{0} + \bra{0} \hat{O} \ket{1} \psi + \overline{\psi} \bra{1} \hat{O} \ket{0} + \overline{\psi} \bra{1} \hat{O} \ket{1} \psi \right) \\
-                             & = \int \d{\overline{\psi}} \d{\psi} e^{-\overline{\psi} \psi} \left( \bra{0} \hat{O} \ket{0} + \overline{\psi} \bra{1} \hat{O} \ket{1} \psi  \right)                                                                         \\
-                             & = \bra{0} \hat{O} \ket{0} - \bra{1} \hat{O} \ket{1} = \mathrm{STr}\, \hat{O},
-    \end{aligned}
-\]
-
+\begin{enumerate}[start=0]
+    \item At first, the definitions of the coherent states imply immediately the eigenvalue equations for the annihilation and creation operators
+          \[
+              \begin{aligned}
+                  \ket{\psi}            & = e^{\hat{\psi}^\dagger \psi} \ket{0} = \left( 1 + \hat{\psi}^\dagger \psi \right) \ket{0} = \ket{0} + \psi \ket{1},                  \\
+                                        & \implies \hat{\psi} \ket{\psi} = \psi \ket{\psi},                                                                                     \\
+                  \bra{\overline{\psi}} & = \bra{0} e^{\overline{\psi} \hat{\psi}} = \bra{0} \left( 1 + \overline{\psi} \hat{\psi} \right) = \bra{0} + \overline{\psi} \bra{1}, \\
+                                        & \implies \bra{\overline{\psi}} \hat{\psi}^\dagger = \bra{\overline{\psi}} \overline{\psi}.
+              \end{aligned}
+          \]
+          Note that terms proportional to \(\psi^2\) can be inserted or eliminated at wish, as they vanish due to the Grassmann property \(\psi^2 = 0\).
+    \item The scalar product between two coherent states is computed as
+          \[
+              \bra{\overline{\psi}} \ket{\psi} = \bra{0} (1 + \overline{\psi} \hat{\psi}) (1 + \hat{\psi}^\dagger \psi) \ket{0} = \left(\bra{0} - \bra{1}\overline{\psi}\right)\left( \ket{0} - \psi \ket{1}\right) = 1 + \overline{\psi} \psi = e^{\overline{\psi} \psi}.
+          \]
+          We point out that the Grassmann variables are here defined to commute with the Fock vacuum \(\ket{0}\), so that they commute with the coherent states, but anticommute with \(\ket{1} = \hat{\psi}^\dagger \ket{0}\) (as they anticommute with \(\hat{\psi}^\dagger\)).
+    \item The resolution of the identity is proven by direct computation. Expanding the coherent states in terms of the Fock basis states, one has
+          \[
+              \mathbb{I} = \int \mathrm{d} \overline{\psi} \mathrm{d} \psi e^{-\overline{\psi} \psi} \ket{\psi} \bra{\overline{\psi}} = \int \mathrm{d} \overline{\psi} \mathrm{d} \psi e^{-\overline{\psi} \psi} \left( \ket{0} + \psi \ket{1} \right) \left( \bra{0} + \overline{\psi} \bra{1} \right).
+          \]
+          Now we can compute the Berezin integrals remembering that \(\int \d{\psi} = \frac{\partial_L}{\partial \psi}\), with the idea to obtain the completeness relation \(\mathbb{I} = \ket{0}\bra{0} + \ket{1}\bra{1}\):
+          \[
+              \frac{\partial_L}{\partial \overline{\psi}} \frac{\partial_L}{\partial \psi} \left( 1 - \overline{\psi} \psi \right) \left( \ket{0}\bra{0} + \overline{\psi} \ket{0}\bra{1} + \psi \ket{1}\bra{0} + \psi \overline{\psi} \ket{1}\bra{1} \right),
+          \]
+          from which, since grassmann variables square to zero and the terms without both of the variables cancels out when derived, only two terms survive the differentiation:
+          \[
+              \mathbb{I} = \frac{\partial_L}{\partial \psi} \frac{\partial_L}{\partial \overline{\psi}} \left( \psi \overline{\psi} \ket{1}\bra{1} - \overline{\psi} \psi \ket{0}\bra{0} \right) = \ket{0}\bra{0} + \ket{1}\bra{1}.
+          \]
+    \item The trace of a bosonic operator \(\hat{O}\), which commutes with \(\psi\) and \(\overline{\psi}\), is computed as
+          \[
+              \begin{aligned}
+                  \Tr \hat{O} & = \int \mathrm{d} \overline{\psi} \mathrm{d} \psi e^{-\overline{\psi} \psi} \bra{-\overline{\psi}} \hat{O} \ket{\psi}                                                                                                                      \\
+                              & = \int \mathrm{d} \overline{\psi} \mathrm{d} \psi e^{-\overline{\psi} \psi} \left( \bra{0} - \bra{1} \overline{\psi} \right) \hat{O} \left( \ket{0} + \psi \ket{1} \right)                                                                 \\
+                              & = \int \mathrm{d} \overline{\psi} \mathrm{d} \psi e^{-\overline{\psi} \psi} \left( \bra{0} \hat{O} \ket{0} + \bra{0} \hat{O} \ket{1} \psi - \overline{\psi} \bra{1} \hat{O} \ket{0} - \overline{\psi} \bra{1} \hat{O} \ket{1} \psi \right) \\
+                              & = \int \mathrm{d} \overline{\psi} \mathrm{d} \psi e^{-\overline{\psi} \psi} \left( \bra{0} \hat{O} \ket{0} - \overline{\psi} \bra{1} \hat{O} \ket{1} \psi  \right)                                                                         \\
+                              & = \bra{0} \hat{O} \ket{0} + \bra{1} \hat{O} \ket{1} = \Tr\,\hat{O},
+              \end{aligned}
+          \]
+          recalling the steps of the resolution of the identity proof to compute the Berezin integrals.
+    \item The supertrace of an operator \(\hat{O}\) can be computed similarly as:
+          \[
+              \begin{aligned}
+                  \mathrm{STr} \hat{O} & = \int \d{\overline{\psi}} \d{\psi} e^{-\overline{\psi} \psi} \bra{\overline{\psi}} \hat{O} \ket{\psi}                                                                                                                       \\
+                                       & = \int \d{\overline{\psi}} \d{\psi} e^{-\overline{\psi} \psi} \left( \bra{0} + \bra{1} \overline{\psi} \right) \hat{O} \left( \ket{0} + \psi \ket{1} \right)                                                                 \\
+                                       & = \int \d{\overline{\psi}} \d{\psi} e^{-\overline{\psi} \psi} \left( \bra{0} \hat{O} \ket{0} + \bra{0} \hat{O} \ket{1} \psi + \overline{\psi} \bra{1} \hat{O} \ket{0} + \overline{\psi} \bra{1} \hat{O} \ket{1} \psi \right) \\
+                                       & = \int \d{\overline{\psi}} \d{\psi} e^{-\overline{\psi} \psi} \left( \bra{0} \hat{O} \ket{0} + \overline{\psi} \bra{1} \hat{O} \ket{1} \psi  \right)                                                                         \\
+                                       & = \bra{0} \hat{O} \ket{0} - \bra{1} \hat{O} \ket{1} = \mathrm{STr}\, \hat{O},
+              \end{aligned}
+          \]
+\end{enumerate}
 The generalization to more fermionic degrees of freedom is straightforward.
 
 \subsection{Fermionic Path Integrals}
 
 We now have all the tools to find a path integral representation of the transition amplitude between coherent states
 \[
-    \bra{\overline{\psi}_f} e^{-i \hat{H} T} \ket{\overline{\psi}_i},
+    \bra{\overline{\psi}_f} e^{-i \hat{H} T} \ket{\psi_i},
 \]
 where we set \(\hbar=1\) for notational simplicity. We consider an hamiltonian \(\hat{H}(\hat{\psi}^\dagger, \hat{\psi})\) written in such a way that all creation operators are on the left of the annihilation operators, something that is always possible to achieve using the fundamental anticommutation relations. Note also that for a single pair of fermionic creation/annihilation operators, the most general (bosonic) hamiltonian takes the simple form \(\hat{H} = \omega \hat{\psi}^\dagger \hat{\psi} + h_0\), with \(\omega\) and \(h_0\) real constants.
 
 To turn the transition amplitude into a path integral, one divides the total propagation time \(T\) into \(N\) steps of duration \(\epsilon = T / N\), so that \(T = N\epsilon\). Using \(N-1\) times the decomposition of the identity in terms of coherent states, one gets the following equalities
 \[
     \begin{aligned}
-        \bra{\overline{\psi}_f} e^{-i \hat{H} T} \ket{\overline{\psi}_i} & = \bra{\overline{\psi}_f} \left( e^{-i \hat{H} \epsilon} \right)^N \ket{\overline{\psi}_i} \quad N \text{ exponentials and } N-1 \text{ identities}                                       \\
-                                                                         & = \int \prod_{k=1}^{N-1} \mathrm{d} \overline{\psi}_k \mathrm{d} \psi_k e^{-\overline{\psi}_k \psi_k} \prod_{k=1}^{N} \bra{\overline{\psi}_{k}} e^{-i \hat{H} \epsilon} \ket{\psi_{k-1}}, \\
+        \bra{\overline{\psi}_f} e^{-i \hat{H} T} \ket{\psi_i} & = \bra{\overline{\psi}_f} \left( e^{-i \hat{H} \epsilon} \right)^N \ket{\psi_i} \quad N \text{ exponentials and } N-1 \text{ identities}                                                  \\
+                                                              & = \int \prod_{k=1}^{N-1} \mathrm{d} \overline{\psi}_k \mathrm{d} \psi_k e^{-\overline{\psi}_k \psi_k} \prod_{k=1}^{N} \bra{\overline{\psi}_{k}} e^{-i \hat{H} \epsilon} \ket{\psi_{k-1}}, \\
     \end{aligned}
 \]
 where we have defined \(\psi_0 \equiv \psi_i\) and \(\overline{\psi}_N \equiv \overline{\psi}_f\). For \(\epsilon \to 0\), one can approximate the elementary transition amplitudes as
@@ -808,21 +830,25 @@ where we have defined \(\psi_0 \equiv \psi_i\) and \(\overline{\psi}_N \equiv \o
 \]
 The substitution \(\hat{H}(\hat{\psi}^\dagger, \hat{\psi}) \to H(\overline{\psi}_k, \psi_{k-1})\) follows from the ordering of the hamiltonian specified previously (\(\hat{\psi}^\dagger\) on the left and \(\hat{\psi}\) on the right). This allows one to act with the creation operator on a bra eigenstate, and with the annihilation operator on a ket eigenstate, so that all operators in the hamiltonian get substituted by the respective eigenvalues, producing a function of these Grassmann numbers. This way, the hamiltonian operator \(\hat{H}(\hat{\psi}^\dagger, \hat{\psi})\) gets substituted by the hamiltonian function \(H(\overline{\psi}_k, \psi_{k-1})\). These approximations are valid for \(N \to \infty\), i.e. \(\epsilon \to 0\), so that we can write
 \[
-    \bra{\psi_{k}} e^{-i \hat{H} \epsilon} \ket{\psi_{k-1}} \approx e^{\overline{\psi}_k \psi_{k-1}} e^{- i \epsilon H(\overline{\psi}_k, \psi_{k-1})}.
+    \bra{\overline{\psi}_{k}} e^{-i \hat{H} \epsilon} \ket{\psi_{k-1}} \approx e^{\overline{\psi}_k \psi_{k-1}} e^{- i \epsilon H(\overline{\psi}_k, \psi_{k-1})}.
 \]
 Thus we can reinsert this expression into the previous formula for the transition amplitude, obtaining
-\[
+\begin{equation}
     \begin{aligned}
-        \bra{\overline{\psi}_f} e^{-i \hat{H} T} \ket{\overline{\psi}_i} & = \int \prod_{k=1}^{N-1} \mathrm{d} \overline{\psi}_k \mathrm{d} \psi_k \exp\left\{ \sum_{k=1}^{N} \left[ \overline{\psi}_k \psi_{k-1} - \overline{\psi}_k \psi_k - i \epsilon H(\overline{\psi}_k, \psi_{k-1}) \right] \right\}                                                        \\
-                                                                         & = \int \mathrm{D} \overline{\psi} \mathrm{D} \psi \exp\left\{ \int_0^T \mathrm{d}t \left[ \overline{\psi}(t) \frac{\partial}{\partial t} \psi(t) - i H(\overline{\psi}(t), \psi(t)) \right] \right\} = \int \mathrm{D} \overline{\psi} \mathrm{D} \psi e^{i S[\overline{\psi},\,\psi]}.
+        \bra{\overline{\psi}_f} e^{-i \hat{H} T} \ket{\psi_i} & = \int \prod_{k=1}^{N-1} \mathrm{d} \overline{\psi}_k \mathrm{d} \psi_k \exp\left\{ \sum_{k=1}^{N} \left[ \overline{\psi}_k \psi_{k-1} - \overline{\psi}_k \psi_k - i \epsilon H(\overline{\psi}_k, \psi_{k-1}) \right] \right\}                                                        \\
+                                                              & = \int \mathrm{D} \overline{\psi} \mathrm{D} \psi \exp\left\{ \int_0^T \mathrm{d}t \left[ \overline{\psi}(t) \frac{\partial}{\partial t} \psi(t) - i H(\overline{\psi}(t), \psi(t)) \right] \right\} = \int \mathrm{D} \overline{\psi} \mathrm{D} \psi e^{i S[\overline{\psi},\,\psi]}.
     \end{aligned}
-\]
+    \label{eq:fermionic_path_integral_transition_amplitude}
+\end{equation}
 This is the path integral for one complex fermionic degree of freedom. We recognize in the exponent the discretization of the classical action
 \[
-    S[\overline{\psi},\,\psi] = \int_0^T \mathrm{d}t \left[ i \overline{\psi}(t) \frac{\partial}{\partial t} \psi(t) - H(\overline{\psi}(t), \psi(t)) \right], \rightarrow S[\psi,\,\overline{\psi}] = \sum_{k=1}^N \epsilon \left[ i \overline{\psi}_k \frac{\psi_k - \psi_{k-1}}{\epsilon} - H(\overline{\psi}_{k}, \psi_{k-1}) \right] -i \overline{\psi}_N \psi_N,
+    \begin{aligned}
+        S[\overline{\psi},\,\psi] = \int_0^T \mathrm{d}t \left[ i \overline{\psi}(t) \frac{\partial}{\partial t} \psi(t) - H(\overline{\psi}(t), \psi(t)) \right], \\
+        \implies S[\psi,\,\overline{\psi}] = \sum_{k=1}^N \epsilon \left[ i \overline{\psi}_k \frac{\psi_k - \psi_{k-1}}{\epsilon} - H(\overline{\psi}_{k}, \psi_{k-1}) \right] -i \overline{\psi}_N \psi_N,
+    \end{aligned}
 \]
 
-where \(T = N \epsilon\) is the total propagation time. The discrete values \(\psi_k\) and \(\overline{\psi}_k\) are those corresponding to the values of the continuous functions evaluated at times \(t = k\epsilon\), i.e. \(\psi_k = \psi(k\epsilon)\) and \(\overline{\psi}_k = \overline{\psi}(k\epsilon)\). The last way of writing the amplitude in (197) is symbolic and indicates the formal sum over all paths \(\overline{\psi}(t), \psi(t)\) with boundary conditions \(\psi(0) = \psi_0 \equiv \psi_i\) and \(\overline{\psi}(T ) = \overline{\psi}_N \equiv \overline{\psi}_f\), weighed by the exponential of \(i\) times the classical action \(S[\overline{\psi}, \psi]\). Note that the action contains the boundary term \(-i \overline{\psi}(T) \psi(T)\). It is essential for formulating a variational principle where the boundary data are fixed by specifying the initial value of the function \(\psi(t)\) and the final value of the function \(\overline{\psi}(t)\) (i.e. \(\psi(0) = \psi_i\) and \(\overline{\psi}(T ) = \overline{\psi}_f\)).
+where \(T = N \epsilon\) is the total propagation time. The discrete values \(\psi_k\) and \(\overline{\psi}_k\) are those corresponding to the values of the continuous functions evaluated at times \(t = k\epsilon\), i.e. \(\psi_k = \psi(k\epsilon)\) and \(\overline{\psi}_k = \overline{\psi}(k\epsilon)\). The last way of writing the amplitude in \eqref{eq:fermionic_path_integral_transition_amplitude} is symbolic and indicates the formal sum over all paths \(\overline{\psi}(t), \psi(t)\) with boundary conditions \(\psi(0) = \psi_0 \equiv \psi_i\) and \(\overline{\psi}(T ) = \overline{\psi}_N \equiv \overline{\psi}_f\), weighed by the exponential of \(i\) times the classical action \(S[\overline{\psi}, \psi]\). Note that the action contains the boundary term \(-i \overline{\psi}(T) \psi(T)\). It is essential for formulating a variational principle where the boundary data are fixed by specifying the initial value of the function \(\psi(t)\) and the final value of the function \(\overline{\psi}(t)\) (i.e. \(\psi(0) = \psi_i\) and \(\overline{\psi}(T ) = \overline{\psi}_f\)).
 
 \paragraph{Trace.}
 One can now produce a path integral expression for the trace of the transition amplitude \(e^{-i\hat{H}T}\). Using the expression of the trace in the coherent state basis, and the path integral representation of the transition amplitude, one finds
@@ -886,7 +912,7 @@ where the results are obtained for a free theory with quadratic action
 \[
     S[\psi,\,\overline{\psi}] = \overline{\psi}_i K^i_{\ j} \psi^j,
 \]
-and \(Z[\eta, \overline{\eta}]\) has been computed completing the squares in the path integral (using \(G^i_{\ j}\), the inverse of the kinetic operator \(K^i_{\ j}\)). Suitable boundary conditions are implicit in the path integral and Green functions \(G^i_{\ j}\). The entire set of generating functionals discussed in the bosonic case can similarly be introduced here.\TODO{compute it if you want} Wick's theorem similarly goes through, and one need only keep track of the signs that emerge when commuting Grassmann numbers.
+and \(Z[\eta, \overline{\eta}]\) has been computed completing the squares in the path integral (using \(G^i_{\ j}\), the inverse of the kinetic operator \(K^i_{\ j}\)). Suitable boundary conditions are implicit in the path integral and Green functions \(G^i_{\ j}\). The entire set of generating functionals discussed in the bosonic case can similarly be introduced here. Wick's theorem similarly goes through, and one need only keep track of the signs that emerge when commuting Grassmann numbers.
 
 Let us consider the examples of the fermionic oscillator and Dirac field.
 
@@ -945,10 +971,10 @@ Let us consider the examples of the fermionic oscillator and Dirac field.
 
 Wick's theorem and perturbation theory for fermionic systems can be developed similarly to the bosonic case, with suitable signs arising from the anticommuting nature of the Grassmann variables. To conclude, a last remark: a well-known property of perturbation theory written in terms of Feynman diagram (and related Feynman rules that translate them into equations) states that fermionic loops carry a minus sign. This is easily seen as arising for the Grassmann character of the fermionic variables. In a hypercondensed notation, the free propagator is denoted by
 \[
-    \langle \psi^i \overline{\psi}_j \rangle = j\, \feynLine\, i,
+    \langle \psi^i \overline{\psi}_j \rangle = j\, \feynLineFermion\, i,
 \]
 and considering an interaction of the form \(S_{int} = \lambda \overline{\psi}_i \psi^i\), one finds in diagrams arising from the expansion of the Dyson formula \(\langle e^{i S_{int}} \rangle\)  terms of the form
 \[
-    \langle S_{int}^2 \rangle_c = \lambda^2 \langle \overline{\psi}_i \psi^i \overline{\psi}_j \psi^j \rangle_c = - \lambda^2 \langle \psi^j \overline{\psi}_i \rangle \langle \psi^j \overline{\psi}_i \rangle = j\, \feynLoop\, i,
+    \langle S_{int}^2 \rangle_c = \lambda^2 \langle \overline{\psi}_i \psi^i \overline{\psi}_j \psi^j \rangle_c = - \lambda^2 \langle \psi^i \overline{\psi}_j \rangle \langle \psi^j \overline{\psi}_i \rangle = j \, \feynLoopFermion \, i,
 \]
-where we recognize the propagators forming the loop and the explicit minus sign. The minus sign is due to the fact that the first term \(\psi^i\) must be moved past three Grassmann variables to reach the last position. Then, we see a propagator going from the first point to the second one and the second propagator bringing back to the firts point.
+where we recognize the propagators forming the loop and the explicit minus sign. The minus sign is due to the fact that the first term \(\psi^i\) must be moved past three Grassmann variables to reach the last position. Then, we see a propagator going from the first point to the second one and the second propagator bringing back to the first point (we have to make explicit the directions on the Feynamn diagram lines since fermions are described by complex Grassmann variables).

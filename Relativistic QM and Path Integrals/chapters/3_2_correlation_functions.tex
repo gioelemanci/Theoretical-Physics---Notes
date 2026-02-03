@@ -3,7 +3,7 @@
 Correlation functions are quantities used to describe several physical observables in the quantum theory. They are also useful to develop the perturbative expansion around the solvable gaussian path integral that corresponds to a “free” theory (we include the harmonic oscillator in this class, as it is recognized as the quantum mechanical equivalent of a free Klein-Gordon QFT).
 For our purposes, we will not spend time explaining the physical meaning of correlation functions, but rather focus on their definition in the path integral formalism and their computation in simple cases: they are powerful tools to extract physical information from the path integral formulation of quantum mechanics and quantum field theory.
 
-As we will see explicitly, this formalism is equivalent to the canonical quantization approach for scalar theories and thus bosonic fields, and we will compute explicitly correlation functions for the KG field. At the end of the chapter we will include the treatment of fermionic fields, which require some additional tools.
+As we will see explicitly, this formalism is equivalent to the canonical quantization approach for scalar theories and thus \textbf{bosonic fields}, and we will compute explicitly correlation functions for the KG field. At the end of the chapter we will include the treatment of fermionic fields, which require some additional tools.
 
 Correlation functions are \textit{normalized averages of the product of n dynamical variables, evaluated at different times and weighted by} \(e^{\frac{i}{\hbar}S}\), and they implement directly the computation of physical observables through the path integral formalism. In our one-dimensional example, the normalized “\(n\)-point correlation function” is defined by
 \begin{equation}
@@ -20,7 +20,7 @@ It is often useful to introduce a \textbf{generating functional} \(Z[J]\) define
     \label{eq:generating_functional}
 \end{equation}
 where \(J(t)\) is an auxiliary external function, known as a \textbf{source}.
-Visually, when we compute the equations of motion, we are adding a source that "pushes" the particle around
+Visually, when we compute the equations of motion, we are adding a source that ``pushes'' the particle around
 \[
     E(x) = J(x),
 \]
@@ -138,7 +138,7 @@ To proceed swiftly, it is useful to introduce a hypercondensed notation. It allo
 Similarly, for fields, as the vector quadripotential \(A_\mu(x^{\nu})\), the hypercondensed notation is obtained by denoting
 \[
     A_\mu (x^{\nu}) \to \phi^i \implies \begin{dcases}
-        A_\mu \to \phi, \\
+        A \to \phi, \\
         \mu,\, x^{\nu} \to i.
     \end{dcases}
 \]
@@ -290,7 +290,7 @@ Let us also calculate the \textbf{effective action}. The minimum in \(J\) of eq.
 \]
 so that the effective action reads
 \begin{equation}
-    \Gamma[\varphi] = W[J] - J_i \varphi^i = -\frac{1}{2} \varphi^i K_{ij} \varphi^j + \Lambda,
+    \Gamma[\varphi] = W[J] - J_i \varphi^i = -\frac{1}{2} \varphi^i K_{ij} \varphi^j - \Lambda,
     \label{eq:effective_action_free_theory}
 \end{equation}
 
@@ -316,7 +316,7 @@ Let us work out in more explicit terms the case of a harmonic oscillator with un
 \]
 where we have computed the path integral to obtain \(Z[J]\). We repeat the deduction without using the hypercondensed notation. We consider an infinite propagation time and a transition amplitude between the ground state, classically achieved for \(x=0\). The action in the exponent can be manipulated with an integration by parts without producing boundary terms (imposing that \(x(t)\) is in its classical vacuum at initial and final times gives a vanishing boundary term, another justification will be given later on when treating the euclidean version of the problem). Thus, the action takes the form we already computed
 \[
-    S[x] = -\frac{1}{2} \int_{-\infty}^{\infty} \d{t} \, x(t) \left(\frac{\mathrm{d}^2}{\mathrm{d} t^2} + \omega^2 \right) \delta(t-t^{\prime}) x(t) = \int \int \d{t} \d{t^{\prime}} \, x(t) K(t, t^{\prime}) x(t^{\prime}),
+    S[x] = -\frac{1}{2} \int_{-\infty}^{\infty} \d{t} \, x(t) \left(\frac{\mathrm{d}^2}{\mathrm{d} t^2} + \omega^2 \right) x(t) = -\frac{1}{2}\int \int \d{t} \d{t^{\prime}} \, x(t) K(t, t^{\prime}) x(t^{\prime}),
 \]
 where \(K(t, t^{\prime}) = \left(\frac{\mathrm{d}^2}{\mathrm{d} t^2} + \omega^2 \right) \delta(t - t^{\prime})\) is the differential “kinetic” operator of the harmonic oscillator. We can compute the two point correlation function (the propagator) by
 \[
@@ -343,7 +343,7 @@ that in a hypercondensed notation would have been written as \(K_{il} G^{lj} = \
     \begin{minipage}{0.55\textwidth}
         The Feynman prescription sends positive frequencies forward in time and negative frequencies backward in time, corresponding to the physical interpretation of particles and antiparticles with positive energies and always propagating forward in time.
 
-        Having computed the Green's function, we can write the generating functional in \eqref{eq:generating_functional_free_theory} we can now complete the square (and reducing to the form in \eqref{eq:QM_gaussian_integral}) to obtain an explicit expression for \(Z[J]\), which will let us compute all correlation functions of the harmonic oscillator.
+        Having computed the Green's function, we can write the generating functional in \eqref{eq:generating_functional_free_theory} and complete the square (reducing to the form in \eqref{eq:QM_gaussian_integral}) to obtain an explicit expression for \(Z[J]\), which will let us compute all correlation functions of the harmonic oscillator.
     \end{minipage}
 \end{figure}
 Thus defining \(\tilde{x}(t) = x(t) - \int \d{t^{\prime}} G(t, t^{\prime}) J(t^{\prime})\) to complete the square in the exponent of the path integral, we obtain
@@ -371,15 +371,15 @@ The quantum field theory of a free Klein-Gordon scalar field can be viewed as a 
 \]
 where \(m\) is the mass of the scalar particle. Integrating by parts and neglecting boundary terms, the action can be rewritten as
 \[
-    S[\phi] = -\frac{1}{2} \int \mathrm{d}^4 x \, \phi(x) \left( \Box + m^2 \right) \phi(x) = -\frac{1}{2} \int \mathrm{d}^4 x \mathrm{d}^4 y \, \phi(x) K(x,y) \phi(y),
+    S[\phi] = -\frac{1}{2} \int \mathrm{d}^4 x \, \phi(x) \left( -\Box + m^2 \right) \phi(x) = -\frac{1}{2} \int \mathrm{d}^4 x \mathrm{d}^4 y \, \phi(x) K(x,y) \phi(y),
 \]
-where \(K(x,y) = \left( \Box + m^2 \right) \delta^4(x-y)\) is the kinetic operator of the Klein-Gordon field, and \(\Box = \partial_\mu \partial^\mu\) is the d'Alembertian operator.
+where \(K(x,y) = \left( - \Box + m^2 \right) \delta^4(x-y)\) is the kinetic operator of the Klein-Gordon field, and \(\Box = \partial_\mu \partial^\mu\) is the d'Alembertian operator.
 
 We can compute the path integral with sources
 \[
     Z[J] = \int \mathrm{D} \phi \, e^{i S[\phi] + i \int \mathrm{d}^4 x \, J(x) \phi(x)} = N e^{\frac{i}{2} \int \mathrm{d}^4 x \mathrm{d}^4 y \, J(x) G(x,y) J(y)},
 \]
-where \(N = \det(K_{ij})^{-\frac{1}{2}}\) is a normalization constant. The inverse of the kinetic operator \(K\) is the Green's function \(G(x,y)\) of the Klein-Gordon operator.
+where \(N = \det(K_{ij})^{-\frac{1}{2}} = Z[0]\) is a normalization constant. The inverse of the kinetic operator \(K\) is the Green's function \(G(x,y)\) of the Klein-Gordon operator.
 
 We are in \((3+1)\) spacetime dimensions, but if we imagine to be in a \((0+1)\) spacetime dimension, meaning that there is only one time coordinate and no spatial coordinates, the Klein-Gordon field theory reduces to the harmonic oscillator treated previously. Indeed, in this case the action reduces to
 \[
@@ -391,7 +391,7 @@ If we complete the square in the exponential of the path integral (with the idea
 \[
     \int \mathrm{d}^4 z \, K(x,z) G(z,y) = \delta^4(x-y),
 \]
-where we have indeed \(\left(\Box_x + m^2 \right) G(x-y) = \delta^4(x-y)\) as the usual equation for the Green's function of the Klein-Gordon operator.
+where we have indeed \(\left(-\Box_x + m^2 \right) G(x-y) = \delta^4(x-y)\) as the usual equation for the Green's function of the Klein-Gordon operator.
 
 We can now compute the two-point correlation function (the propagator) by
 \[

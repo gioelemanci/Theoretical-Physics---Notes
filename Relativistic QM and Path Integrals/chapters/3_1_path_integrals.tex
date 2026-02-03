@@ -101,7 +101,7 @@ Canonical quantization is constructed starting from the hamiltonian formulation 
 \begin{equation}
     \begin{aligned}
         \left[\hat{x}^i,\, \hat{x}^j \right] & = \left[\hat{p}_i,\, \hat{p}_j \right] = 0, \\
-        \left[\hat{x}^i,\, \hat{p}_j \right] & = i \hbar \delta^i_j.
+        \left[\hat{x}^i,\, \hat{p}_j \right] & = i \hbar \delta^i_{\ j}.
     \end{aligned}
     \label{eq:Quantization_commutation_relations}
 \end{equation}
@@ -268,7 +268,7 @@ Returning to the path integral, and considering the hamiltonian \(H(x, p) = \fra
     \begin{aligned}
         A & = \lim_{N \to \infty} \int \left(\prod_{k=1}^{N-1} \d{x_k}\right) \frac{1}{(2\pi\hbar)^N} \prod_{k=1}^{N} \int \d{p_k} \, e^{\frac{i\epsilon}{\hbar} \sum_{k=1}^N \left[p_k \frac{x_k - x_{k-1}}{\epsilon} - \frac{p_k^2}{2m} - V(x_{k-1})\right]} \\
           & \quad \begin{dcases}
-                      \alpha = \frac{i \epsilon}{2m \hbar}              & \longrightarrow \left(\frac{2 \pi \hbar m}{i \epsilon}\right)^\frac{N}{2};                                         \\
+                      \alpha = \frac{i \epsilon}{m \hbar}               & \longrightarrow \left(\frac{2 \pi \hbar m}{i \epsilon}\right)^\frac{N}{2};                                         \\
                       \beta = \frac{i}{\hbar}\left(x_k - x_{k-1}\right) & \longrightarrow e^{\frac{\beta^2}{2\alpha}} = e^{\frac{im}{2 \hbar \epsilon}(x_k - x_{k-1})^2} \text{ inside sum}; \\
                       \frac{i\epsilon}{\hbar}V(x_{k-1})                 & \longrightarrow \text{remains unchanged inside sum};
                   \end{dcases}                                                                       \\
@@ -295,7 +295,7 @@ by the sum of all histories of paths weighted by a phase given by the action, wi
 
 \subsection{Free Particle}
 
-For a free particle (\(V(x)=0\)) one may use repeatedly gaussian integration and calculate from eq. \eqref{eq:Path_integral_configuration_space} the exact transition amplitude\TODO{Add image.} as
+For a free particle (\(V(x)=0\)) one may use repeatedly gaussian integration and calculate from eq. \eqref{eq:Path_integral_configuration_space} the exact transition amplitude as
 \[
     \begin{aligned}
         A(x_i,\,x_f,\,T) & = \lim_{N \to \infty} \int \left(\prod_{k=1}^{N-1} \d{x_k}\right) \left(\frac{m}{2\pi i \hbar \epsilon}\right)^{\frac{N}{2}} e^{\frac{i\epsilon}{\hbar}\sum_{k=1}^N \left[\frac{m}{2}\frac{(x_k - x_{k-1})^2}{\epsilon^2}\right]} \\
@@ -311,9 +311,17 @@ with initial condition \(A(x_i,\,x_i,\,0) = \delta(x_f - x_i)\), since we can co
 \[
     - \frac{\hbar^2}{2m}\frac{\partial^2}{\partial x_f^2} \sqrt{\frac{m}{2 \pi i \hbar T}} e^{\frac{i}{\hbar} \frac{m (x_f - x_i)^2}{2T}} = \frac{m}{2T^2} (x_f - x_i)^2 A(x_i,\,x_f,\,T) = i\hbar \frac{\partial}{\partial T} A(x_i,\,x_f,\,T).
 \]
-This way, the path integral has produced a solution of the Schrodinger equation. The result is very suggestive: up to a prefactor, the solution is given by the exponential of \(\tfrac{i}{\hbar}\) times the classical action evaluated on the classical path \(S[x]\), i.e., the path that satisfies the classical equations of motion.
-The free particle case is also quite special: the exact final result is valid for any \(N\), and there is no need to take the limit \(N \to  \infty\). The case \(N=1\), which carries no integration at all, is already exact.
-
+\begin{figure}[H]
+    \begin{minipage}{0.35\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/path_integral_propagation.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.6\textwidth}
+        This way, the path integral has produced a solution of the Schrodinger equation. The result is very suggestive: up to a prefactor, the solution is given by the exponential of \(\tfrac{i}{\hbar}\) times the classical action evaluated on the classical path \(S[x]\), i.e., the path that satisfies the classical equations of motion.
+        The free particle case is also quite special: the exact final result is valid for any \(N\), and there is no need to take the limit \(N \to  \infty\). The case \(N=1\), which carries no integration at all, is already exact.
+    \end{minipage}
+\end{figure}
 A formal but useful way of calculating gaussian path integrals is achieved by working directly in the continuum limit. One does not need the precise definition of the path integral measure but uses only its formal properties, in particular, its translational invariance. The calculation is formal in the sense that one assumes properties of the path integral measure (that eventually must be proven by an explicit regularization and construction, as the one given earlier). The calculation goes as follows. The action is \(S[x]= \int_0^T \d{t} \frac{m}{2}\dot{x}^2\), and the classical equations of motion with the boundary conditions are solved by
 \[
     x_{cl} (t) = x_i + \frac{x_f - x_i}{T}t.
@@ -368,7 +376,7 @@ and can be obtained from the original expression by the same analytic continuati
     \end{minipage}
     \hfill
     \begin{minipage}{0.65\textwidth}
-        The Wick rotation can be performed directly on the path integral to obtain euclidean path integrals. Analytically continuing the time variable \(t \to -i \tau\) , one finds that the action with “minkowskian” time (i.e. with a real time \(t\)) turns into an “euclidean” action \(S_E\) defined by\QUESTION{Why integration limits change without imaginary unit?}
+        The Wick rotation can be performed directly on the path integral to obtain euclidean path integrals. Analytically continuing the time variable \(t \to -i \tau\) , one finds that the action with “minkowskian” time (i.e. with a real time \(t\)) turns into an “euclidean” action \(S_E\) defined by
         \[
             i S[x] = i \int_{0}^{T} \d{t} \frac{m}{2} \dot{x}^2 \xrightarrow[\d{t} \to -i \d{\tau}]{T \to -i \beta} - S_E[x] = - \int_{0}^{\beta} \d{\tau} \frac{m}{2} \dot{x}^2.
         \]
@@ -423,17 +431,16 @@ The notation $\int Dx$ is symbolic and indicates the formal integration over the
 
 We started from canonical quantization and derived the above discretized form of the space of functions. This regularization is often called \textbf{Time Slicing (TS)}. Vice versa, one can start directly with the path integral, regulate it suitably, and use it to construct the quantum theory (Feynman originally started this way). The path integral is used to evaluate a transition amplitude that is seen to satisfy a Schrödinger wave equation. This can be viewed as an alternative approach to quantization. In the regularization procedure of the path integral, one must make several choices, and they may produce different transition amplitudes. For example, in a TS regularization one may discretize the potential term $V(x(t))$ in the action to $V(x_k)$ or $V(x_{k-1})$ or $V(\frac{1}{2}(x_k + x_{k-1}))$. In the present case, this makes no difference, and one obtains the same continuum limit.
 
-These ambiguities are the path integral counterparts of the \textit{ordering ambiguities} of canonical quantization. Ordering ambiguities arise when one must construct a quantum hamiltonian out of a classical one: as $\hat{x}$ and $\hat{p}$ do not commute, it may happen that one must choose an ordering to define the quantum hamiltonian. Different orderings produce different quantum hamiltonians, and thus different quantum theories. Examples of systems where ordering ambiguities arise are the case of a charged particle in a magnetic field and the motion of a particle in a curved space, where the respective hamiltonians are:
+These ambiguities are the path integral counterparts of the \textit{ordering ambiguities} of canonical quantization, which also arise when one has to construct a quantum hamiltonian out of a classical one: as $\hat{x}$ and $\hat{p}$ do not commute, it may happen that one must choose an ordering to define the quantum hamiltonian. Examples of systems where ordering ambiguities arise are the case of a charged particle in a magnetic field and the motion of a particle in a curved space, where the respective hamiltonians are:
 \[
-    H = \frac{(\vec{p} - \frac{e}{c}\vec{A}(x))^2}{2m} \,, \qquad H = \frac{1}{2m}g^{ij}(x)p_i p_j \,.
+    H = \frac{(\mathbf{p} - \frac{e}{c}\mathbf{A}(x))^2}{2m} \,, \qquad H = \frac{1}{2m}g^{ij}(x)p_i p_j \,.
 \]
-
 We have introduced path integrals by considering a single degree of freedom. Extension to a finite number of degrees of freedom is immediate, so that quantizing the motion of one or more particles in a finite dimensional space does not pose any new conceptual problem. For example, the motion of a nonrelativistic particle in $\mathbb{R}^3$ with cartesian coordinates $\vec{x}$, in the presence of a scalar potential $V(\vec{x})$, is quantized by the following discretized path integral:
 \[
-    \int Dx \, e^{\frac{i}{\hbar} S[x]} = \lim_{N \to \infty} \int \left( \prod_{k=1}^{N-1} d^3 x_k \right) \left( \frac{m}{2\pi i \hbar \epsilon} \right)^{\frac{3N}{2}} e^{\frac{i}{\hbar} \sum_{k=1}^N \epsilon \left[ \frac{m}{2} \frac{(\vec{x}_k - \vec{x}_{k-1})^2}{\epsilon^2} - V(\vec{x}_{k-1}) \right]},
+    \int \mathrm{D} \mathbf{x} \, e^{\frac{i}{\hbar} S[\mathbf{x}]} = \lim_{N \to \infty} \int \left( \prod_{k=1}^{N-1} \mathrm{d}^3 \mathbf{x}_k \right) \left( \frac{m}{2\pi i \hbar \epsilon} \right)^{\frac{3N}{2}} e^{\frac{i}{\hbar} \sum_{k=1}^N \epsilon \left[ \frac{m}{2} \frac{(\mathbf{x}_k - \mathbf{x}_{k-1})^2}{\epsilon^2} - V(\mathbf{x}_{k-1}) \right]},
 \]
 where, of course, the classical action is
 \[
-    S[x] = \int_0^T dt \left( \frac{m}{2} \dot{\vec{x}}^2 - V(\vec{x}) \right) = \lim_{N \to \infty} \sum_{k=1}^N \epsilon \left[ \frac{m}{2} \frac{(\vec{x}_k - \vec{x}_{k-1})^2}{\epsilon^2} - V(\vec{x}_{k-1}) \right] \,.
+    S[\mathbf{x}] = \int_0^T dt \left( \frac{m}{2} \dot{\mathbf{x}}^2 - V(\mathbf{x}) \right) = \lim_{N \to \infty} \sum_{k=1}^N \epsilon \left[ \frac{m}{2} \frac{(\mathbf{x}_k - \mathbf{x}_{k-1})^2}{\epsilon^2} - V(\mathbf{x}_{k-1}) \right] \,.
 \]
-Formally, one can also consider the case of an infinite number of degrees of freedom, as appropriate for a field theory. In this case, convergence is not guaranteed, and the removal of the regularization may lead to infinite results. In the class of theories called renormalizable, the infinities can be removed consistently by a \textit{renormalization} procedure that redefines the dynamical variables and the coupling constants, and allows to obtain finite results, at least at the level of perturbation theory.
+Formally, one can also consider the case of an infinite number of degrees of freedom, as appropriate for a field theory. In this case, convergence is not guaranteed, and the removal of the regularization may lead to infinite results. In the class of renormalizable theories, the infinities can be removed consistently by a \textit{renormalization} procedure that redefines the dynamical variables and the coupling constants, and allows to obtain finite results, at least at the level of perturbation theory.
