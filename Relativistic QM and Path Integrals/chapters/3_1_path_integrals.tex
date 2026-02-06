@@ -112,7 +112,7 @@ The most important example is given by the hamiltonian function \(H(x,p)\), whic
     i\hbar \frac{\partial}{\partial t} \ket{\psi} = \hat{H} \ket{\psi}.
     \label{eq:Schrödinger_equation}
 \end{equation}
-The corresponding solution is a time-dependent state \(\ket{\psi}(t)\) that describes the evolution of the quantum system. This setup is known as the Schrodinger picture of quantum mechanics. It is a formal quantization procedure that becomes operative once one finds an irreducible unitary representation of the operator algebra in eq. \eqref{eq:Quantization_commutation_relations}.
+The corresponding solution is a time-dependent state \(\ket{\psi(t)}\) that describes the evolution of the quantum system. This setup is known as the Schrodinger picture of quantum mechanics. It is a formal quantization procedure that becomes operative once one finds an irreducible unitary representation of the operator algebra in eq. \eqref{eq:Quantization_commutation_relations}.
 
 A mathematical result, known as the Stonevon Neumann theorem, states that in quantum mechanics all irreducible representations of \eqref{eq:Quantization_commutation_relations} are unitarily equivalent, so that there is a unique procedure of quantizing a classical system.\footnote{Up to the problem of resolving ordering ambiguities, often present when one tries to relate the classical hamiltonian \(H(x,p)\) to its quantum counterpart \(\hat{H} (\hat{x} ,\hat{p})\).}
 Historically, this theorem made it clear that the Schrodinger formulation of quantum mechanics was equivalent to the one proposed by Heisenberg with its matrix mechanics (known as the Heisenberg picture).
@@ -132,10 +132,10 @@ Now, as prescribed by canonical quantization, the phase space coordinates \(x\) 
 Using the coordinate representation, obtained by considering the eigenstates |x〉 of the position operator \(\hat{x}\), that satisfy \(\hat{x}\ket{x} = x\ket{x}\) with real eigenvalues \(x\), and projecting the various states of the Hilbert space onto them to identify the wave functions, one finds the familiar way of realizing quantum mechanics as wave mechanics
 \[
     \begin{aligned}
-        \ket{\psi} & \longrightarrow \psi(x) = \bra{x}\ket{\psi},                                                                                                          \\
-        \hat{x}    & \longrightarrow x, \quad \bra{x}\hat{x}\ket{x^{\prime}} = x \delta(x-x^{\prime}),                                                                     \\
-        \hat{p}    & \longrightarrow -i\hbar \frac{\partial}{\partial x}, \quad \bra{x}\hat{p}\ket{x^{\prime}} = -i\hbar \frac{\partial}{\partial x} \delta(x-x^{\prime}), \\
-        \hat{H}    & \longrightarrow -\frac{\hbar^2}{2m} \frac{\partial^2}{\partial x^2} + V(x).
+        \ket{\psi} & \longrightarrow \psi(x),                                                    &  & \psi(x) = \bra{x}\ket{\psi},                                                                                                   \\
+        \hat{x}    & \longrightarrow x,                                                          &  & \bra{x}\hat{x}\ket{x^{\prime}} = x \delta(x-x^{\prime}),                                                                       \\
+        \hat{p}    & \longrightarrow -i\hbar \frac{\partial}{\partial x},                        &  & \bra{x}\hat{p}\ket{x^{\prime}} = \left( -i\hbar \frac{\partial}{\partial x} \right) \delta(x-x^{\prime}),                      \\
+        \hat{H}    & \longrightarrow -\frac{\hbar^2}{2m} \frac{\partial^2}{\partial x^2} + V(x), &  & \bra{x}\hat{H}\ket{x^{\prime}} = \left(-\frac{\hbar^2}{2m} \frac{\partial^2}{\partial x^2} + V(x)\right) \delta(x-x^{\prime}).
     \end{aligned}
 \]
 Thus the Schrodinger equation \eqref{eq:Schrödinger_equation} becomes the familiar differential equation for the wave function \(\psi(x,t)\)
@@ -284,14 +284,14 @@ This is the path integral in configuration space. It contains in the exponent th
 \[
     S[x] = \int_{t_i}^{t_f} \d{t} \left( \frac{m}{2} \dot{x}^2 - V(x) \right) \longrightarrow \sum_{k=1}^N \epsilon \left[\frac{m}{2}\frac{(x_k - x_{k-1})^2}{\epsilon^2} - V(x_{k-1})\right].
 \]
-Again, the last way of writing the path integral in \eqref{eq:Path_integral_configuration_space} is symbolic and indicates the formal sum over paths in configuration space, weighted by the exponential of \(i\hbar\) times the classical action. The space of paths is given by the space of functions \(x(t)\) with boundary values \(x(t_i)=x_i\) and \(x(t_f) = x_f\). It is an infinite dimensional space. How to perform concretely the path integral over this functional space is defined precisely by the discretization, that approximates a function \(x(t)\) by its \(N+1\) values \(x_k = x(t_i + \epsilon k)\) at \(k = 0, 1, 2, ..., N\), as shown in fig. \ref{fig:rudimental_path_integral}.
+Again, the last way of writing the path integral in \eqref{eq:Path_integral_configuration_space} is symbolic and indicates the formal sum over paths in configuration space, weighted by the exponential of \(\tfrac{i}{\hbar}\) times the classical action. The space of paths is given by the space of functions \(x(t)\) with boundary values \(x(t_i)=x_i\) and \(x(t_f) = x_f\). It is an infinite dimensional space. How to perform concretely the path integral over this functional space is defined precisely by the discretization, that approximates a function \(x(t)\) by its \(N+1\) values \(x_k = x(t_i + \epsilon k)\) at \(k = 0, 1, 2, ..., N\), as shown in fig. \ref{fig:rudimental_path_integral}.
 
-Thus, we have constructed the path integral that computes quantum mechanical amplitudes
+Thus, we have constructed the path integral that computes quantum mechanical amplitude
 \begin{equation}
     A = \int \mathrm{D} x(t) \, e^{\frac{i}{\hbar}S[x(t)]},
     \label{eq:Path_integral_configuration_space}
 \end{equation}
-by the sum of all histories of paths weighted by a phase given by the action, with all paths contributing.
+by sum of the histories of all paths weighted by a phase given by the action, with the action given by the classical action functional of the system computed on each path. This is the main result of the path integral formulation of quantum mechanics, originally proposed by Richard Feynman in 1948.
 
 \subsection{Free Particle}
 
@@ -309,7 +309,7 @@ It satisfies the free Schrodinger equation
 \]
 with initial condition \(A(x_i,\,x_i,\,0) = \delta(x_f - x_i)\), since we can compute
 \[
-    - \frac{\hbar^2}{2m}\frac{\partial^2}{\partial x_f^2} \sqrt{\frac{m}{2 \pi i \hbar T}} e^{\frac{i}{\hbar} \frac{m (x_f - x_i)^2}{2T}} = \frac{m}{2T^2} (x_f - x_i)^2 A(x_i,\,x_f,\,T) = i\hbar \frac{\partial}{\partial T} A(x_i,\,x_f,\,T).
+    - \frac{\hbar^2}{2m}\frac{\partial^2}{\partial x_f^2} \sqrt{\frac{m}{2 \pi i \hbar T}} e^{\frac{i}{\hbar} \frac{m (x_f - x_i)^2}{2T}} = \left( \frac{m(\Delta x)^2}{2T^2} - \frac{i\hbar}{2T}\right) A(x_i,\,x_f,\,T) = i\hbar \frac{\partial}{\partial T} A(x_i,\,x_f,\,T).
 \]
 \begin{figure}[H]
     \begin{minipage}{0.35\textwidth}
@@ -333,8 +333,8 @@ One can represent a generic path \(x(t)\) as the classical path \(x_{cl}(t)\) pl
 where the fluctuations \(q(t)\) must vanish at \(t=0\) and \(t=T\) to preserve the boundary conditions. One may interpret \(x_{cl}(t)\) as the origin in the space of functions. Then, one computes the path integral as follows
 \[
     \begin{aligned}
-        A(x_i,\,x_f,\,T) & = \int \mathrm{D} x \, e^{\frac{i}{\hbar}S[x]} = \int \mathrm{D} (x_{cl} + q) \, e^{\frac{i}{\hbar} S[x_{cl} + q]}                                                \\
-                         & = e^{\frac{i}{\hbar} S[x_{cl}]} \int \mathrm{D} q \, e^{\frac{i}{\hbar} S[q]} = N e^{\frac{i}{\hbar} S[x_{cl}]} = N e^{\frac{i}{\hbar}\frac{m(x_{f-x_i})^2}{2T}},
+        A(x_i,\,x_f,\,T) & = \int \mathrm{D} x \, e^{\frac{i}{\hbar}S[x]} = \int \mathrm{D} (x_{cl} + q) \, e^{\frac{i}{\hbar} S[x_{cl} + q]}                                              \\
+                         & = e^{\frac{i}{\hbar} S[x_{cl}]} \int \mathrm{D} q \, e^{\frac{i}{\hbar} S[q]} = N e^{\frac{i}{\hbar} S[x_{cl}]} = N e^{\frac{i}{\hbar}\frac{m(x_f-x_i)^2}{2T}},
     \end{aligned}
 \]
 where we have used different inputs to solve it:
@@ -351,7 +351,7 @@ where we have used different inputs to solve it:
           \]
           where the first term vanishes because \(q(0) = q(T) = 0\), while the second term vanishes because \(\ddot{x}_{cl} = 0\) for the free particle (it solves the classical equations of motion).
 \end{itemize}
-This method of calculation is very powerful and can be extended to more general cases, as we will see later.
+This method of calculation is very powerful and it will be extended to more general cases later on.
 
 \subsection{Euclidean Time and Statistical Mechanics}
 

@@ -169,7 +169,7 @@ and the n point correlation function (in eq. \eqref{eq:n_point_correlation_funct
 \end{equation}
 The generating functional can be written as
 \begin{equation}
-    Z[J] = \int \mathrm{D} \phi \, e^{\frac{i}{\hbar} S[\phi] + J_i \phi^i},
+    Z[J] = \int \mathrm{D} \phi \, e^{\frac{i}{\hbar} \left( S[\phi] + J_i \phi^i \right)},
     \label{eq:generating_functional_hypercondensed}
 \end{equation}
 and generates all correlation functions by differentiation (in hypercondensed notation, functional derivatives look like usual derivatives, but we keep using the symbol \(\delta\) of functional derivative)
@@ -332,7 +332,7 @@ which can be verified to satisfy the equation
 \]
 that in a hypercondensed notation would have been written as \(K_{il} G^{lj} = \delta_i^{\ j}\). Adding the Feynman \(i\epsilon\) prescription\footnote{Mathematically, it is seen to arise from requiring that the path integral has a small damping factor \(e^{-\tfrac{i}{\hbar} \int \d{t} x^2(t)}\), obtained by the shift \(\omega^2 \to \omega^2 - i \epsilon\) with \(\epsilon \to 0^+\). Recall the comments made under eq. \eqref{eq:QM_gaussian_integral}} for specifying how to integrate around the poles \(p=\pm \omega\), one computes
 \[
-    G(t,t^{\prime}) = \int_{-\infty}^{\infty} \frac{\mathrm{d}p}{2\pi} \, \frac{e^{-ip(t-t^{\prime})}}{-p^2 +\omega^2 - i \epsilon} = -\frac{i}{2\omega} \left[ \theta(t-t^{\prime}) e^{-i\omega (t-t^{\prime})} + \theta(t^{\prime}-t) e^{i\omega (t-t^{\prime})} \right] = -\frac{i}{2\omega} e^{-i\omega \vert t-t^{\prime} \vert}.
+    G(t,t^{\prime}) = \int_{-\infty}^{\infty} \frac{\mathrm{d}p}{2\pi} \, \frac{e^{-ip(t-t^{\prime})}}{-p^2 +\omega^2 - i \epsilon} = \frac{i}{2\omega} \left[ \theta(t-t^{\prime}) e^{-i\omega (t-t^{\prime})} + \theta(t^{\prime}-t) e^{i\omega (t-t^{\prime})} \right] = \frac{i}{2\omega} e^{-i\omega \vert t-t^{\prime} \vert}.
 \]
 \begin{figure}[H]
     \begin{minipage}{0.4\textwidth}
@@ -399,18 +399,18 @@ We can now compute the two-point correlation function (the propagator) by
 \]
 where the Green's function can be conveniently written in a Fourier transform
 \[
-    G(x,y) = \int \frac{\mathrm{d}^4 p}{(2\pi)^4} \, \frac{e^{-ip_\mu (x^{\mu} - y^{\mu})}}{p^2 + m^2 - i \epsilon},
+    G(x,y) = \int \frac{\mathrm{d}^4 p}{(2\pi)^4} \, \frac{e^{ip_\mu (x^{\mu} - y^{\mu})}}{p^2 + m^2 - i \epsilon},
 \]
 where \(\mathrm{d}^4 p = \d{p_0}\mathrm{d}^3 \mathbf{p}\) and \(p^2 = p_\mu p^{\mu} = -(p_0)^2 + \mathbf{p}^2\). There are poles corresponding to the solutions of the mass shell condition, \(p_0 = \sqrt{\mathbf{p}^2 + m^2}\) (positive energies) and \(p_0 = -\sqrt{\mathbf{p}^2 + m^2}\) (negative energies). The Feynman \(i \epsilon\) prescription sends positive energies forward in time and negative energies backward in time. It corresponds to the physical interpretation of particles and antiparticles with positive energies and always propagating forward in time (thus propagating negative energies backward in time). Setting \(E_p = \sqrt{\mathbf{p}^2 + m^2}\) one finds
 \[
     \begin{aligned}
-        \langle \phi(x) \phi(y) \rangle & = -i G(x-y) = -i \int \frac{\mathrm{d}^4 p}{(2\pi)^4} \, \frac{e^{-ip_\mu (x^{\mu} - y^{\mu})}}{p^2 + m^2 - i \epsilon}                                                                                                                  \\
-                                        & = i \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, e^{i \mathbf{p} \cdot (\mathbf{x} - \mathbf{y})}\left[ \frac{\d{p^0}}{2\pi} \frac{e^{-ip^0 (x^0 - y^0)}}{(p^0 - E_p + i\epsilon^{\prime} )(p^0 + E_p - i\epsilon^{\prime})} \right] \\
-                                        & = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \frac{e^{i \mathbf{p} \cdot (\mathbf{x} - \mathbf{y})}}{2 E_p} \left[ \theta(x^0 - y^0) e^{-i E_p (x^0 - y^0)} + \theta(y^0 - x^0) e^{-i E_p (y^0 - x^0)} \right]                     \\
+        \langle \phi(x) \phi(y) \rangle & = -i G(x-y) = -i \int \frac{\mathrm{d}^4 p}{(2\pi)^4} \, \frac{e^{ip_\mu (x^{\mu} - y^{\mu})}}{p^2 + m^2 - i \epsilon} =  i \int \frac{\mathrm{d}^4 p}{(2\pi)^4} \, \frac{e^{ip_\mu (x^{\mu} - y^{\mu})}}{(p^0)^2 - (p^i)^2 - m^2 + i \epsilon} \\
+                                        & = i \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, e^{i \mathbf{p} \cdot (\mathbf{x} - \mathbf{y})}\left[ \frac{\d{p^0}}{2\pi} \frac{e^{-ip^0 (x^0 - y^0)}}{(p^0 - E_p + i\epsilon^{\prime} )(p^0 + E_p - i\epsilon^{\prime})} \right]        \\
+                                        & = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \frac{e^{i \mathbf{p} \cdot (\mathbf{x} - \mathbf{y})}}{2 E_p} \left[ \theta(x^0 - y^0) e^{-i E_p (x^0 - y^0)} + \theta(y^0 - x^0) e^{-i E_p (y^0 - x^0)} \right]                            \\
                                         & = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \, \frac{e^{i \mathbf{p} \cdot (\mathbf{x} - \mathbf{y})}}{2 E_p} e^{-i E_p \vert x^0 - y^0 \vert}.
     \end{aligned}
 \]
-Here again the Feynman prescription is crucial to obtain the correct time-ordering in the two-point correlation function as \(\epsilon \sim \epsilon^{\prime} \to 0\), abd by comparing this result with the harmonic oscillator case one sees that the Klein-Gordon field theory is indeed an infinite collection of harmonic oscillators, one for each momentum mode \(\mathbf{p}\), with frequency \(\omega = E_p = \sqrt{\mathbf{p}^2 + m^2}\).
+Here again the Feynman prescription is crucial to obtain the correct time-ordering in the two-point correlation function as \(\epsilon \sim \epsilon^{\prime} \to 0\), and by comparing this result with the harmonic oscillator case one sees that the Klein-Gordon field theory is indeed an infinite collection of harmonic oscillators, one for each momentum mode \(\mathbf{p}\), with frequency \(\omega = E_p = \sqrt{\mathbf{p}^2 + m^2}\).
 
 \subsubsection{Harmonic Oscillator in Euclidean Time}
 
