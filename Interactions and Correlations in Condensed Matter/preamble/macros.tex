@@ -1,0 +1,73 @@
+% === Meta ===
+\renewcommand{\title}{Interactions and Correlations\\in Condensed Matter}
+\renewcommand{\author}{Gioele Mancino}
+\newcommand{\professor}{Prof. Domenico Di Sante}
+\newcommand{\faculty}{Department of Physics and Astronomy "A. Righi"}
+\newcommand{\course}{Theoretical Physics}
+\newcommand{\academicyear}{2025/2026}
+
+% === TODOs management ===
+\renewcommand*{\marginfont}{\footnotesize\sffamily}
+
+\newwrite\todofile
+\newif\ifshowtodo
+\showtodotrue
+%\showtodofalse
+
+\newcommand{\TODO}[1]{%
+    \ifshowtodo
+        \ifx\todofileopen\undefined
+            \immediate\openout\todofile=todo.txt
+            \global\let\todofileopen\relax
+        \fi
+        \marginnote{\color{red!70!black}\footnotesize
+            \begin{minipage}[t]{2.5cm}
+                \raggedright\textbf{TODO:} #1
+            \end{minipage}%
+        }%
+        \immediate\write\todofile{Page \number\value{page}: #1}%
+    \fi
+}
+
+\AtEndDocument{\ifx\todofileopen\undefined\else\immediate\closeout\todofile\fi}
+
+% === QUESTIONs management ===
+\newwrite\questionfile
+\newif\ifshowquestions
+\showquestionstrue
+%\showquestionsfalse
+
+\newcommand{\QUESTION}[1]{%
+    \ifshowquestions
+        \ifx\questionfileopen\undefined
+            \immediate\openout\questionfile=questions.txt
+            \global\let\questionfileopen\relax
+        \fi
+        \marginnote{\color{blue!70!black}\footnotesize
+            \begin{minipage}[t]{2.5cm}
+                \raggedright\textbf{(?)} #1
+            \end{minipage}%
+        }%
+        \immediate\write\questionfile{Page \number\value{page}: #1}%
+    \fi
+}
+
+\AtEndDocument{\ifx\questionfileopen\undefined\else\immediate\closeout\questionfile\fi}
+
+% === Custom macros ===
+\renewcommand{\dd}{\mathrm{d}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+
+\renewcommand{\d}[1]{\mathrm{d}#1\,}
+
+\newcommand{\adot}[1]{\dot{\textbf{#1}}}
+\newcommand{\ddt}{\frac{\mathrm{d}}{\mathrm{d}t}}
+\newcommand{\bs}[1]{\boldsymbol{\mathcal{#1}}}
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle}
+
+\newcommand{\dvf}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand{\pdvT}[3]{\left(\frac{\partial #1}{\partial #2}\right)_[#3]}
