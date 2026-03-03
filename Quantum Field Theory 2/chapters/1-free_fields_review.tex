@@ -1,0 +1,82 @@
+\chapter{Free QFT Review}
+
+A free quantum field theory does not account for interactions between particles. It describes particles that do not interact with each other, and the fields that represent them evolve independently. Free QFTs are often used as a starting point for understanding more complex interacting theories, as they provide a simpler framework to study the properties of quantum fields and particles.
+
+The lagrangian for a free quantum field theory typically consists of kinetic terms and mass terms for the fields, without any interaction terms: it can only contain \textbf{quadratic terms} in the fields, without any higher-order interactions.
+Quanta of the free fields correspond to particles that do not interact with each other, and their dynamics are governed by the \textbf{free propagators} of the theory, which describe how particles propagate through spacetime without any interactions: propagators are the Green's functions of the free theory, and they determine how particles propagate from one point to another in spacetime with determined probability amplitudes.
+
+We will review the free quantum field theories for different types of particles, including scalar fields (spin 0), fermionic fields (spin 1/2), and gauge fields (spin 1). We will also discuss the symmetries of these theories and how they lead to conservation laws through Noether's theorem. This review will provide a foundation for understanding more complex interacting quantum field theories, and it will also highlight the differences between free and interacting theories, as well as the role of symmetries in quantum field theory.
+
+\section{Spin 0}
+
+For a real scalar field $\phi(x)$, the free Lagrangian is given by
+\begin{equation}
+    \mathcal{L} = \frac{1}{2} (\partial_\mu \phi)^2 - \frac{1}{2} m^2 \phi^2,
+    \label{eq:free_KG_lagrangian}
+\end{equation}
+where $m$ is the mass of the scalar particle. The equation of motion derived from this Lagrangian is the \textbf{Klein-Gordon equation}:
+\begin{equation}
+    (\Box + m^2) \phi = 0,
+    \label{eq:free_KG_equation}
+\end{equation}
+where $\Box = \partial_\mu \partial^\mu$ is the d'Alembertian operator. The solutions to this equation describe free scalar particles with mass $m$. This is a classical equation of motion, having the same role of Maxwell's equations in classical electromagnetism, but for a scalar field \(\phi(x)\) instead of a vector field \(A^{\mu}(x)\).
+
+The idea of quantum field theory is to promote the classical field \(\phi(x)\) to a quantum operator \(\hat{\phi}(x)\) that acts on a Hilbert space of states. The quantization procedure involves imposing commutation relations on the field operators, which leads to the creation and annihilation of particles. The free scalar field can be expanded in terms of creation and annihilation operators, which allows us to describe the particle content of the theory. Indeed, we can see how decomposing the field into its Fourier modes leads to the interpretation of the quanta of the field as particles with specific momenta and energies:
+\[
+    \phi(x) = \int \frac{\mathrm{d}^3 \mathbf{k}}{(2\pi)^3} \, e^{i \mathbf{k} \cdot \mathbf{x}} \tilde{\phi}(t, \mathbf{k}),
+\]
+where each mode can be computed by using this ansatz in the Klein-Gordon equation in momentum space, leading to the dispersion relation of an harmonic oscillator represented by on-shell particles with energy \(E_{\mathbf{k}} = \omega_{\mathbf{k}} = \sqrt{\mathbf{k}^2 + m^2}\):
+\[
+    \left( \partial_t^2 + \omega_{\mathbf{k}}^2 \right) \tilde{\phi}(t, \mathbf{k}) = 0,
+\]
+showing how the free scalar field can be interpreted as a collection of independent harmonic oscillators, each corresponding to a different momentum mode.
+
+In order to quantize the free scalar field, we have to promote the fields themselves to operators and impose the canonical commutation relations, which leads to the creation and annihilation of particles. Before showing how to do that, it is crucial to note that \(\hat{\phi}(x)\) depends on both space and time, enforcing the Heisenberg picture of quantum mechanics, where operators evolve in time while states remain fixed. The canonical commutation relations for the scalar field are given by
+\[
+    [\hat{\phi}(t, \mathbf{x}), \hat{\pi}(t, \mathbf{y})] = i \delta^3(\mathbf{x} - \mathbf{y}),
+\]
+where \(\hat{\pi}(x) = \frac{\partial \mathcal{L}}{\partial (\partial_0 \hat{\phi}(x))} = \partial_0 \hat{\phi}(x)\) is the conjugate momentum operator. This constraint along with reality of the field \(\hat{\phi}(x) = \hat{\phi}^\dagger(x)\) allows us to express the field operator in terms of \textbf{creation and annihilation operators}:
+\[
+    \hat{\phi}(x) = \int \frac{\mathrm{d}^3 \mathbf{k}}{(2\pi)^3} \frac{1}{\sqrt{2 \omega_{\mathbf{k}}}} \left( \hat{a}_{\mathbf{k}} e^{-i k \cdot x} + \hat{a}_{\mathbf{k}}^\dagger e^{i k \cdot x} \right),
+\]
+where \(k \cdot x = \omega_{\mathbf{k}} t - \mathbf{k} \cdot \mathbf{x} = k^{\mu} x_{\mu}\), and \(\omega_{\mathbf{k}} = k^0\). The creation and annihilation (ladder) operators satisfy the following commutation relations
+\[
+    \begin{dcases}
+        [\hat{a}_{\mathbf{k}}, \hat{a}_{\mathbf{k}'}^\dagger] = (2\pi)^3 \delta^3(\mathbf{k} - \mathbf{k}'), \\
+        [\hat{a}_{\mathbf{k}}, \hat{a}_{\mathbf{k}'}] = [\hat{a}_{\mathbf{k}}^\dagger, \hat{a}_{\mathbf{k}'}^\dagger] = 0.
+    \end{dcases}
+\]
+Note that while the field operator \(\hat{\phi}(x)\) is Hermitian and time dependent, the creation and annihilation operators are not, and they are responsible for creating and destroying particles in the quantum field theory. The \textbf{vacuum state} \(\ket{0}\) is defined as the state that is annihilated by all annihilation operators:
+\[
+    \hat{a}_{\mathbf{k}} \ket{0} = 0 \quad \forall \mathbf{k},
+\]
+while we can create one-particle states by acting with the creation operators on the vacuum, which adds one quanta of the field with momentum \(\mathbf{k}\):
+\[
+    \ket{\mathbf{k}} = \sqrt{2 \omega_{\mathbf{k}}} \hat{a}_{\mathbf{k}}^\dagger \ket{0},
+\]
+and more generally, we can create multi-particle states by acting with multiple creation operators on the vacuum, which leads to the \textbf{Fock space} of the theory. With this definition of single particle states, we can compute the inner product between two single particle states, which is given by
+\[
+    \bra{\mathbf{k}} \ket{\mathbf{k}'} = 2 \omega_{\mathbf{k}} \delta^3(\mathbf{k} - \mathbf{k}'),
+\]
+showing that the single particle states are orthogonal and normalized with respect to the relativistic normalization convention. The normalization \(\sqrt{2 \omega_{\mathbf{k}}}\) is arbitrary, but important for ensuring that the probabilities computed in the theory are consistent with relativistic invariance.
+
+\begin{remark}
+    To find a Lorent invariant measure, we can start from the Minkowski space measure \(\mathrm{d}^4 k\) and impose the on-shell condition \(k^2 = m^2\) using a delta function along with a step function to ensure that we only consider positive energy solutions:
+    \[
+        \int \mathrm{d}^4 k \, \delta(k^2 - m^2) \theta(k^0) = \int \frac{\mathrm{d}^3 \mathbf{k}}{2 \omega_{\mathbf{k}}}.
+    \]
+    We have then found the Lorentz invariant measure \(\frac{\mathrm{d}^3 \mathbf{k}}{2 \omega_{\mathbf{k}}}\) for integrating over the momentum space of on-shell particles, which is crucial for ensuring that the theory is consistent with special relativity. The previous normalization of the single particle states is consistent with this Lorentz invariant measure, since it ensures that the inner product between single particle states is Lorentz invariant, and it also allows us to compute probabilities and cross sections in a way that is consistent with relativistic invariance:
+    \[
+        \int \frac{\mathrm{d}^3 \mathbf{k}}{(2\pi)^3} \frac{1}{2 \omega_{\mathbf{k}}} \ket{\mathbf{k}} \bra{\mathbf{k}} = 1,
+    \]
+    which is the completeness relation for the single particle states in the theory. This ensures that we can express any state in the Fock space as a superposition of single particle states, and it also allows us to compute transition amplitudes and probabilities in a way that is consistent with relativistic invariance.
+\end{remark}
+
+\subsection{Feynman's Propagator}
+
+\subsection{Noether's Theorem}
+
+\section{Spin 1/2}
+
+\section{Spin 1}
+

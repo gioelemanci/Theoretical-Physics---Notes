@@ -1,2 +1,155 @@
 \section{Notation and Conventions} \label{app:notation}
 
+\subsection*{Conventions on Units and Natural Units}
+
+We are going to use natural units throughout these notes, where the speed of light \(c\) and the reduced Planck constant \(\hbar\) are set to 1:
+\[
+    c = 1, \quad \hbar = 1.
+\]
+In natural units, all physical quantities are expressed in terms of a single unit of energy (or mass) and measured in Electronvolts (\si{\electronvolt}) and multiples thereof, since the dimensions of length and time are related to energy through the relations \(E = mc^2\) and \(E = \hbar \omega\). This simplifies many equations in quantum field theory and allows us to focus on the essential physics without being distracted by factors of \(c\) and \(\hbar\). In these units, we have:
+\[
+    \begin{aligned}
+        [E]     & = [M] = [L]^{-1} = [T]^{-1}, \\
+        [\hbar] & = 1,                         \\
+        [c]     & = 1.
+    \end{aligned}
+\]
+
+We report some useful conversion factors between natural units and SI units:
+\[
+    \begin{aligned}
+        1 \, \text{GeV}      & \approx 1.602 \times 10^{-10} \, \text{J},  \\
+        1 \, \text{GeV}      & \approx 1.783 \times 10^{-27} \, \text{kg}, \\
+        1 \, \text{GeV}^{-1} & \approx 0.1975 \, \text{fm},                \\
+        1 \, \text{GeV}^{-1} & \approx 6.582 \times 10^{-25} \, \text{s},
+    \end{aligned}
+\]
+and also
+\[
+    \begin{aligned}
+        \hbar c              & \approx \SI{197.3}{\mega\electronvolt \cdot \femto\meter}, \\
+        \SI{1}{\femto\meter} & \approx \SI{e{-15}}{\meter},
+    \end{aligned}
+\]
+where the femtometer (\si{\femto\meter}) is a common unit of length in nuclear and particle physics, often called a Fermi: it is approximately the length of a proton or neutron radius:
+\[
+    r_p \sim \SI{0.8}{\femto\meter} = \frac{0.8}{197.3} \, \si{\mega\electronvolt}^{-1}.
+\]
+
+\subsection*{Conventions on Electromagnetism}
+
+In order to avoid confusion, we will use the \textbf{Heaviside-Lorentz} units for electromagnetism throughout these notes: in these units, the electric charge \(e\) is dimensionless and appears explicitly in the interaction terms of the Lagrangian, making it easier to identify the strength of electromagnetic interaction, while Maxwell equations take a more symmetric form.
+
+Explicitly, in Heaviside-Lorentz units, we have the following relations:
+\begin{itemize}
+    \item \(\epsilon_0 = \mu_0 = 1\), where \(\epsilon_0\) is the \textit{vacuum permittivity} and \(\mu_0\) is the \textit{vacuum permeability}: this means that the electric and magnetic fields have the same units and that the speed of light \(c\) is equal to 1 (these units are consistent with the natural units we are using).
+    \item The \textbf{electric charge} \(e\) is dimensionless and connected to the fine-structure constant \(\alpha\) by
+          \[
+              \alpha = \frac{e^2}{4\pi \epsilon_0 \hbar c} =  \frac{e^2}{4\pi} \approx \frac{1}{137}.
+          \]
+    \item The \textbf{electric potential} \(\Phi\) is defined as
+          \[
+              \Phi = \frac{Q}{4 \pi R},
+          \]
+          where \(Q\) is the charge and \(R\) is the distance from the charge: this means that the electric potential has the same units as the electric field \(E\) (which is consistent with the fact that in Heaviside-Lorentz units, \(\epsilon_0 = 1\)).
+    \item The \textbf{Maxwell equations} take the following form:
+          \[
+              \begin{aligned}
+                   & \nabla \cdot \mathbf{E} = \rho,                                                 \\
+                   & \nabla \cdot \mathbf{B} = 0,                                                    \\
+                   & \nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t},             \\
+                   & \nabla \times \mathbf{B} = \mathbf{J} + \frac{\partial \mathbf{E}}{\partial t},
+              \end{aligned}
+          \]
+          where \(\mathbf{E}\) is the electric field, \(\mathbf{B}\) is the magnetic field, \(\rho\) is the charge density, and \(\mathbf{J}\) is the current density: this symmetric form of Maxwell equations is one of the reasons why Heaviside-Lorentz units are often preferred in theoretical physics, especially in quantum field theory. Basically the Heaviside-Lorentz units are a rationalized version of the Gaussian units, where the factors of \(4\pi\) are absorbed into the definitions of the fields and charges, leading to simpler equations and making it easier to identify the physical constants that govern the interactions.
+\end{itemize}
+
+\subsection*{Conventions on the Metric and Spacetime}
+
+We will use the \textbf{mostly minus} convention for the metric tensor \(g_{\mu \nu}\) in Minkowski spacetime, which is defined as
+\[
+    g_{\mu \nu} = g^{\mu \nu} = \begin{pmatrix}
+        1 & 0  & 0  & 0  \\
+        0 & -1 & 0  & 0  \\
+        0 & 0  & -1 & 0  \\
+        0 & 0  & 0  & -1
+    \end{pmatrix}.
+\]
+This means that the time component of the metric is positive, while the spatial components are negative; using Einstein summation convention, we have the following relations among the components of the metric and \(v^{\mu},\,w^{\mu}\) four vectors:
+\[
+    \begin{aligned}
+        v \cdot w                   & = g_{\mu \nu} v^{\mu} w^{\nu} = v^0 w^0 - \mathbf{v} \cdot \mathbf{w}, \\
+        v^2                         & = v \cdot v = g_{\mu \nu} v^{\mu} v^{\nu} = (v^0)^2 - \mathbf{v}^2,    \\
+        v_\mu = g_{\mu \nu} v^{\nu} & \implies v_0 = v^0, \quad \mathbf{v} = v^i = -v_i.
+    \end{aligned}
+\]
+We will use greek letters \(\mu, \nu, \rho, \sigma\) to denote spacetime indices that run from 0 to 3, while Latin letters \(i, j, k\) will be used to denote spatial indices that run from 1 to 3:
+\[
+    \begin{aligned}
+        \mu, \nu, \rho, \sigma & \in \{ 0,\,1,\,2,\,3 \} = \{ t,\,x,\,y,\,z\}, \\
+        i, j, k                & \in \{ 1,\,2,\,3 \} = \{ x,\,y,\,z\}.
+    \end{aligned}
+\]
+
+\subsection*{Fourier Transforms}
+
+We will use the following conventions for Fourier transforms of a function \(f(x)\) in four-dimensional spacetime:
+\[
+    \begin{aligned}
+        f(x)         & = \int \frac{\mathrm{d}^4 p}{(2\pi)^4} e^{-i p \cdot x} \tilde{f}(p), \\
+        \tilde{f}(p) & = \int \mathrm{d}^4 x e^{i p \cdot x} f(x).
+    \end{aligned}
+\]
+We highlight that the Fourier transform of a function \(f(x)\) is denoted by \(\tilde{f}(p)\), and that the integration measure includes a factor of \((2\pi)^{-4}\) in the inverse Fourier transform, which is a common convention in quantum field theory: in the space of coordinates, we have the measure \(\mathrm{d}^4 x\), while in the momentum space, we have the measure \(\frac{\mathrm{d}^4 p}{(2\pi)^4}\). This convention ensures that the Fourier transform and its inverse are consistent and that the normalization of the fields and operators in quantum field theory is correct.
+
+\subsection*{Feynman Diagrams}
+
+In these notes, we will use Feynman diagrams as a graphical representation of the interactions between particles and fields in quantum field theory. We will use the following conventions for Feynman diagrams: \TODO{Check and change in the end}
+\begin{itemize}
+    \item Time will be represented on the horizontal axis, going from left to right, which is a common convention in quantum field theory; this means that the left side of the diagram will represent the initial state of the particles, while the right side will represent the final state after the interaction has occurred.
+    \item Solid lines will represent fermions (spin-1/2 particles), while dashed lines will represent bosons (spin-0 or spin-1 particles).
+    \item Arrows on the lines will indicate the direction of particle flow, with arrows pointing towards the interaction vertex for incoming particles and away from the vertex for outgoing particles.
+    \item Wavy lines will represent gauge bosons (spin-1 particles that mediate interactions), such as photons, W and Z bosons, and gluons.
+    \item The vertices in the diagrams will represent interaction points where particles interact according to the rules of the theory, with each vertex corresponding to a specific term in the Lagrangian of the quantum field theory.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \tikzset{
+        directed/.style={
+                postaction={decorate},
+                decoration={
+                        markings,
+                        mark=at position 0.6 with {\arrow{stealth}}
+                    }
+            },
+        blackbox/.style={
+                circle,
+                draw=black,
+                minimum size=1.5cm,
+                fill=white,
+                pattern=north east lines,
+                pattern color=black!60,
+                thick
+            }
+    }
+    \begin{tikzpicture}[scale=1, thick]
+
+        \node[blackbox] (blob) at (0,0) {};
+
+        \draw[directed, blue] (-3, 1.2) -- (blob.150);
+        \draw[directed, blue] (-3, 0)   -- (blob.180);
+        \draw[directed, blue] (-3, -1.2) -- (blob.210);
+
+        \draw[directed, red] (blob.30)  -- (3, 1.2);
+        \draw[directed, red] (blob.0)   -- (3, 0);
+        \draw[directed, red] (blob.330) -- (3, -1.2);
+
+        \node[blue, left] at (-3, 0) {State In};
+        \node[red, right] at (3, 0) {State Out};
+
+    \end{tikzpicture}
+
+    \caption{Generic Feynman diagram representing an interaction between particles, where the blue lines represent incoming particles (initial state) and the red lines represent outgoing particles (final state). The black box represents the interaction vertex, which corresponds to a specific term in the Lagrangian of the quantum field theory.}
+    \label{fig:feynman_generic}
+\end{figure}
