@@ -1,0 +1,49 @@
+\section{LSZ reduction and Green's functions}
+
+In this section we aim to show how the S-matrix elements can be computed from the Green's functions of the interacting theory. This is done by the LSZ reduction formula, which relates the S-matrix elements to the time-ordered correlation functions of the fields.
+\[
+    \bra{f} \hat{S} \ket{i} \to \bra{\Omega} T \{ \hat{\phi}(x_1) \hat{\phi}(x_2) \cdots \hat{\phi}(x_n) \} \ket{\Omega}
+\]
+where
+\[
+    \begin{dcases}
+        \hat{\phi} \text{ is the field operator of the interacting theory,} \\
+        \ket{\Omega} \text{ is the vacuum state of the interacting theory.}
+    \end{dcases}
+\]
+We now have to analyze the structure of the two point function of the interacting theory, investigating its physical content and how it relates to the S-matrix elements, and finally relate it to the LSZ reduction formula for connecting the scattering matrix elements to the n-point Green's functions. We will start from a \textbf{real scalar theory} before generalizing to more complicated theories.
+
+\subsection{Two Point Functions}
+
+To analyze the structure of the two point function, we start from the definition of the time-ordered two point function in the interacting theory:
+\[
+    \bra{\Omega} T \{ \hat{\phi}(x) \hat{\phi}(y) \} \ket{\Omega},
+\]
+we can now insert a complete set of states between the two field operators:
+\[
+    \mathbb{I} = \bra{\Omega}\ket{\Omega} + \sum_{\lambda \notin \ket{\Omega}} \ket{\lambda} \bra{\lambda},
+\]
+where $\ket{\lambda}$ are the eigenstates of [...?...] and $\ket{\Omega}$ is the vacuum state of the interacting theory.\footnote{The vacuum state has to be different from the free theory one, since ...}
+
+[...]
+
+If we now assume \(x^0 > y^0\), the time-ordering operator \(T\) does not change the order of the fields, and we can write:
+\[
+    \bra{\Omega} \hat{\phi}(x) \hat{\phi}(y) \ket{\Omega} = \bra{\Omega} \hat{\phi}(x) \left( \ket{\Omega}\bra{\Omega} + \sum_{\lambda \notin \ket{\Omega}} \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}(\lambda)} \ket{\lambda_{\mathbf{p}}} \bra{\lambda_{\mathbf{p}}} \right) \hat{\phi}(y) \ket{\Omega},
+\]
+and if we now relate \(\hat{\phi}(x)\) to \(\hat{\phi}(0)\) by a translation
+\[
+    \hat{U}_{\mathbf{p}} = e^{i \hat{P} \cdot x} \implies \hat{\phi}(x) = e^{i \hat{P} \cdot x} \hat{\phi}(0) e^{-i \hat{P} \cdot x} = \hat{U}_{\mathbf{p}} \hat{\phi}(0) \hat{U}_{\mathbf{p}}^{\dagger},
+\]
+we can compute the terms by assuming that the vacuum is translationally invariant, and that the states \(\ket{\lambda_{\mathbf{p}}}\) are eigenstates of the momentum operator \(\hat{P}\) with eigenvalue \(p\):
+\[
+    \bra{\Omega} \hat{\phi}(x) \ket{\lambda_{\mathbf{p}}} = \bra{\Omega} \hat{\phi}(0) \ket{\lambda_{\mathbf{p}}} e^{-ip \cdot x},
+\]
+from vacuum invariance and momentum eigenstate properties. We can now assume a Lorentz transformation \(\Lambda\) to exist such that \(\Lambda p = (m\lambda, \mathbf{0})\), and the corresponding unitary operator \(\hat{U}(\Lambda)\) to exist such that
+\[
+    \bra{\Omega} \hat{\phi}(0) \ket{\lambda_{\mathbf{p}}} = \bra{\Omega} \hat{U}(\Lambda)^{\dagger} \hat{U}(\Lambda) \hat{\phi}(0) \hat{U}(\Lambda)^{\dagger} \hat{U}(\Lambda) \ket{\lambda_{\mathbf{p}}} = \bra{\Omega} \hat{\phi}(0) \ket{\lambda_{\mathbf{0}}},
+\]
+since the vacuum is invariant under Lorentz transformations, and the field operator transforms trivially since \(\hat{\phi}(\Lambda 0) = \hat{\phi}(0)\). Hence
+\[
+    \bra{\Omega} \hat{\phi}(x) \ket{\lambda_{\mathbf{p}}} = \bra{\Omega} \hat{\phi}(0) \ket{\lambda_{\mathbf{0}}} e^{-ip \cdot x} = e^{-ip \cdot x} F(\lambda).
+\]
