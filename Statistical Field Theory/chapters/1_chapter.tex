@@ -1,0 +1,194 @@
+\chapter{Review}
+
+\section{Microcanonical Ensemble}
+
+ [...]
+
+\subsection{Entropy}
+
+[...]
+
+\subsection{Temperature}
+
+Let us consider two systems \(S_1\) and \(S_2\) in thermal contact such that
+\[
+    \begin{dcases}
+        N = N_1 + N_2, \\
+        V = V_1 + V_2, \\
+        E = E_1 + E_2.
+    \end{dcases}
+\]
+The total energy can now be computed from the Hamiltonian of the system, sum of the subsystems' Hamiltonians
+\[
+    H = H(\{q_f\},\,\{p_f\}) = H_1(\{q_{1f}\},\,\{p_{1f}\}) + H_2(\{q_{2f}\},\,\{p_{2f}\}) + \delta H_{12}(\{q_{1f}\},\,\{p_{1f}\},\,\{q_{2f}\},\,\{p_{2f}\}),
+\]
+where the last term accounts for the interaction between the two systems, which we will neglect in the following. The energy of the total system is fixed, but the energy of each subsystem can fluctuate. The probability of finding the system in a state with energy \(E_1\) is proportional to the number of states available to the second system with energy \(E_2 = E - E_1\), which is given by \(\Omega_2(E - E_1)\). If we fix an energy shell of width \(\Delta\), we can write
+\[
+    E_k^{(1)} = k \Delta, \qquad E_k^{(2)} = E - E_k^{(1)} = E - k \Delta.
+\]
+Thus we can count the number of states available to the total system at a fixed energy \(E\) as
+\[
+    \Gamma(E) = \sum_{k=0}^{E/\Delta} \Gamma_1(E_k^{(1)}) \Gamma_2(E-E_k^{(1)}),
+\]
+where \(\Gamma_k(E) = \int_{E_k < H_k < E_k + \Delta} \mathrm{d}\{q_{kf}\} \mathrm{d}\{p_{kf}\}\) is the number of states available to the \(k\)-th subsystem at energy \(E\). Thus we are saying that \textit{in order to count the number of microstates at energy} \(E\) \textit{we have to multiply the number of microstates of the subsystem} \(S_1\) \textit{with energy} \(\epsilon_1\) \textit{to the number of microstates of} \(S_2\) \textit{at energy} \(\epsilon_2 = E - \epsilon_1\), \textit{then sum over all possible values of} \(\epsilon_1\). The most probable configuration of the system is the one that maximizes the number of states available to the total system, which is equivalent to maximizing the entropy of the total system. Thus we can compute the entropy of the total system as
+\[
+    S(E) = k_B \log \left[ \sum_{k=0}^{E/\Delta} \Gamma_1(E_k^{(1)}) \Gamma_2(E-E_k^{(1)}) \right].
+\]
+
+Now we are interested in finding the most probable configuration of the system, which is the one that maximizes the entropy. We can do this by taking the derivative of the entropy with respect to \(E_1\) and setting it to zero: let us denote \(\overline{E}_1\) the energy of the subsystem \(S_1\) that maximizes the entropy, then \(\overline{E}_2 = E - \overline{E}_1\) is the energy of the subsystem \(S_2\) that maximizes the entropy. We have
+\[
+    \begin{aligned}
+        \Gamma(\overline{E}^{(1)})\Gamma(\overline{E}^{(2)}) \leq \Gamma(E) \leq \frac{E}{\Delta} \Gamma(\overline{E}^{(1)})\Gamma(\overline{E}^{(2)}), \\
+        \implies S(\overline{E}^{(1)}, V_1) + S(\overline{E}^{(2)}, V_2) \leq S(E, V) \leq S(\overline{E}^{(1)}, V_1) + S(\overline{E}^{(2)}, V_2) + k_B \log \left( \frac{E}{\Delta} \right),
+    \end{aligned}
+\]
+where both inequalities are saturated in the thermodynamic limit \(N \to \infty\): entropy and energy are extensive quantities, thus \(S(E, V) \sim N\) and \(E \sim N\), so the last term in the upper bound is negligible in the thermodynamic limit
+\[
+    k_B \log\left(\frac{E}{\Delta}\right) \sim k_B \log(N) \ll N \sim S(E, V).
+\]
+Thus we can write, in the thermodynamic limit, the entropy of the total system as the sum of the entropies of the subsystems
+\[
+    S(E,\,V) = S(\overline{E}^{(1)}, V_1) + S(\overline{E}^{(2)}, V_2).
+\]
+
+The first consequence of this result is that the entropy is an extensive quantity, since it scales with the number of particles \(N\) in the system. The second consequence is that the most probable configuration of the system is the one that maximizes the entropy, which is equivalent to maximizing the number of states available to the total system. Thus we can write
+\[
+    \Gamma(E) = \Gamma_1(\overline{E}^{(1)}) \Gamma_2(\overline{E}^{(2)}).
+\]
+Therefore terms with different values of \(E_1\) are negligible compared to the term with \(E_1 = \overline{E}_1\), which is the one that maximizes the number of states available to the total system. This is a consequence of the fact that the number of states available to the total system grows exponentially with the number of particles \(N\), thus even a small difference in energy between different configurations can lead to a huge difference in the number of states available to the total system. \(\overline{E}^{(1)}\) and \(\overline{E}^{(2)}\) are the most probable values of the energy of the subsystems, which are the ones that maximize the entropy of the total system: the \textit{equilibrium energy values}. Thus we can write
+\[
+    \begin{aligned}
+        \frac{\partial}{\partial \epsilon} \left[ \Gamma_1(\epsilon) \Gamma_2(E - \epsilon) \right]_{\epsilon = \overline{E}^{(1)}} = 0, \\
+        \implies \left[ \frac{\partial}{\partial \epsilon} \Gamma_1(\epsilon) \right]_{\epsilon = \overline{E}^{(1)}} \Gamma_2(E - \epsilon) + \Gamma_1(\epsilon) \left[ - \frac{\partial}{\partial \epsilon} \Gamma_2(E - \epsilon) \right]_{\epsilon = \overline{E}^{(2)}} = 0,
+    \end{aligned}
+\]
+which now, dividing by \(\Gamma_1(\overline{E}^{(1)}) \Gamma_2(\overline{E}^{(2)})\), and using the definition of entropy we arrive at
+
+\[
+    [\dots ]
+\]
+
+
+
+\section{Canonical Ensemble}
+
+We have
+\[
+    \begin{dcases}
+        N = N_1 + N_2, \\
+        V = V_1 + V_2, \\
+        E = E_1 + E_2,
+    \end{dcases} \quad \text{and} \quad
+    \begin{dcases}
+        N_2 \gg N_1, \\
+        V_2 \gg V_1, \\
+        E_2 \gg E_1.
+    \end{dcases}
+\]
+The second system \(S_2\) is called the \textit{heat bath}, and it is so large that it can exchange energy with the first system \(S_1\) without changing its thermodynamic properties. The total system is isolated, thus we can apply the microcanonical ensemble to it. The probability of finding the system in a state with energy \(E_1\) is proportional to the number of states available to the second system with energy \(E_2 = E - E_1\), which is given by \(\Omega_2(E - E_1)\).
+
+Technically speaking, we want to find the probability distribution of the subsystem \(S_1\) when it is in contact with a heat bath \(S_2\), knowing the total probability distribution: the total system is isolated, thus we can apply the microcanonical ensemble to it, and we know that it will be evolving with a trajectory in the phase space that is uniformly distributed on the energy shell defined by the total energy \(E\). This means that if we analyze the evolution of the subsystem \(S_1\) in its phase space, we will find that it will not be limited to fixed energy states, but it will be able to explore all the energy states available to it, with a probability that is proportional to the number of states available to the heat bath \(S_2\) at the corresponding energy. we are interested in finding the \textbf{induced probability distribution} of the subsystem \(S_1\).
+
+Let us visualize the phase space of the total system as a high-dimensional space, where each point represents a microstate of the total system. The energy shell defined by the total energy \(E\) is a hypersurface in this phase space, and the trajectory of the total system is uniformly distributed on this hypersurface. The subsystem \(S_1\) can be thought of as a projection of the total system onto a lower-dimensional subspace, where each point represents a microstate of the subsystem \(S_1\). The probability distribution of the subsystem \(S_1\) is then given by the projection of the uniform distribution on the energy shell onto this lower-dimensional subspace. Differents probabilities correspond to different energy states of the subsystem \(S_1\), and the probability of finding the subsystem \(S_1\) in a state with energy \(E_1\) is proportional to the number of states available to the heat bath \(S_2\) at energy \(E - E_1\).
+
+The idea is to fix a point in the phase space of the subsystem \(S_1\) with energy \(E_1\), and then count the number of points in the phase space of the heat bath \(S_2\) that are compatible with this point, i.e. that have energy \(E - E_1\). This will give us the number of states available to the heat bath \(S_2\) at energy \(E - E_1\), which is proportional to the probability of finding the subsystem \(S_1\) in a state with energy \(E_1\).
+
+So we fix an energy \(\epsilon\) for the subsystem \(S_1\), and we want to find the number of states available to the heat bath \(S_2\) at energy \(E - \epsilon\). \textit{The number of points in the phase space of} \(S\) \textit{that corresponds to} \(P\) \textit{is equal to the number of points in the phase space of} \(S_2\) \textit{that corresponds to} \(E - \epsilon\). Thus we can write
+\[
+    \rho(\{q_f\},\,\{p_f\}) \propto \frac{\Gamma_2(E - \epsilon)}{\Gamma(E)}.
+\]
+We know that the entropy of the heat bath \(S_2\) is related to the number of states available to it by the Boltzmann formula (we are using \(k_B=1\) for simplicity), such that
+\[
+    \Gamma_2(E - \epsilon) = e^{S_2(E - \epsilon)} \sim e^{S_2(E) - \epsilon \frac{\partial S_2}{\partial E} \epsilon},
+\]
+where we have used the fact that the entropy is an extensive quantity, thus we can write it as a function of the energy per particle, and we have expanded it around the total energy \(E\) of the heat bath \(S_2\). We can now recall the temperature as a thermodynamic quantity defined as the inverse of the derivative of the entropy with respect to the energy, while reinserting the Boltzmann constant \(k_B\) for clarity, we have
+\[
+    \rho(\{q_f\},\,\{p_f\}) \propto e^{-\beta \epsilon} = e^{- \frac{\epsilon}{k_B T}},
+\]
+where \(\beta = \frac{1}{k_B T}\) is the inverse temperature. Thus we have derived the Boltzmann distribution for the subsystem \(S_1\) in contact with a heat bath \(S_2\). The probability of finding the subsystem \(S_1\) in a state with energy \(\epsilon\) is proportional to the exponential of the negative of the energy divided by the temperature of the heat bath \(S_2\). This is the canonical ensemble, where the subsystem \(S_1\) is in thermal equilibrium with a heat bath \(S_2\) at temperature \(T\).
+
+We can now define the partition function \(Z\) as the normalization constant for the probability distribution of the subsystem \(S_1\), such that
+\[
+    Z = \int \frac{\mathrm{d}^{3N}q \, \mathrm{d}^{3N}p}{h^{3N}N!} \, e^{-\beta H(\{q\},\,\{p\})},
+\]
+which can be used as a generating function for the thermodynamic properties of the subsystem \(S_1\). For example, the free energy \(F\) can be computed from the partition function as
+\[
+    F = -k_B T \log Z = -\frac{1}{\beta} \log Z,
+\]
+and the internal energy \(U\) can be computed as
+\[
+    U = -\frac{\partial}{\partial \beta} \log Z,
+\]
+while the entropy \(S\) can be computed as
+\[
+    S = -\frac{\partial F}{\partial T} = k_B \beta^2 \frac{\partial F}{\partial \beta}.
+\]
+
+\subsubsection{Discrete System}
+
+A discrete system is a system that can only take a finite number of states, such as a spin system or a lattice gas. In this case, let us imagine a collection of \(N\) particles that can only occupy a finite number of states, let us imagine two values of spin, up and down, thus we have \(2^N\) possible configurations of the system. The phase space of the system is now a discrete set of points, configurations (a set of sets) \(\{c_j\}_{j=1}^N\), and the probability distribution of the system is defined on this discrete set of points. The partition function can be written as a sum over all possible configurations of the system, such that
+\[
+    Z = \sum_{\{c_j\}} e^{-\beta H(\{c_j\})}.
+\]
+
+\section{Quantum Statistical Mechanics}
+
+Considering a general quantum mechanical system, we can study it with different tools, such as the hamiltonian operator, the density matrix, the partition function, etc. The Hamiltonian operator \(H\) is a self-adjoint operator that acts on the Hilbert space of the system, and it encodes the energy of the system. The density matrix \(\rho\) is a positive semi-definite operator that acts on the Hilbert space of the system, and it encodes the state of the system. The partition function \(Z\) is a scalar quantity that encodes the thermodynamic properties of the system.
+\[
+    \begin{aligned}
+        \hat{H} \ket{n} = E_n \ket{n},                                                                                          \\
+        \ket{\psi} \in \mathcal{H},                                                                                             \\
+        \{\ket{E_n}\}_{n=1}^D \implies \ket{\psi} = \sum_{n=1}^D c_n \ket{E_n},                                                 \\
+        \bra{\psi} \hat{A} \ket{\psi} = \sum_{n,m} c_n^* c_m \bra{E_n} \hat{A} \ket{E_m},                                       \\
+        \ket{\psi(t)} = \sum_{n} c_n(t) \ket{E_n}, \quad c_n(t) = c_n e^{-i \frac{E_n}{\hbar} t}                                \\
+        \bra{\psi(t)} \hat{A} \ket{\psi(t)} = \sum_{n,m} c_n^* c_m e^{i \frac{E_n - E_m}{\hbar} t} \bra{E_n} \hat{A} \ket{E_m}, \\
+        \implies = \frac{1}{T} \int_0^T \mathrm{d}t \, \bra{\psi(t)} \hat{A} \ket{\psi(t)} = \sum_{n} |c_n|^2 \bra{E_n} \hat{A} \ket{E_n}.
+    \end{aligned}
+\]
+
+Let us report some postulates of quantum statistical mechanics:
+\begin{itemize}
+    \item Postulate of equal a priori probabilities: in an isolated system, all microstates are equally probable,
+          \[
+              \vert \overline{c_n} \vert^2 = \begin{dcases}
+                  \frac{1}{D}, & \text{if } E_n \in [E, E + \Delta], \\
+                  0,           & \text{otherwise}.
+              \end{dcases}
+          \]
+    \item postulate of random phases: the phases of the coefficients \(c_n\) are random variables uniformly distributed in the interval \([0, 2\pi]\), thus
+          \[
+              \frac{1}{T} \int_0^T \mathrm{d}t \, c_n^*(t) c_m(t) = \frac{1}{T}  \int_0^T \mathrm{d}t \, c_n^* c_m \, e^{i \frac{E_n - E_m}{\hbar} t} = \begin{dcases}
+                  \vert c_n \vert^2, & \text{if } n = m, \\
+                  0,                 & \text{otherwise}.
+              \end{dcases}
+          \]
+\end{itemize}
+
+The time average of an observable \(\hat{A}\) is given by
+\[
+    \begin{aligned}
+        \overline{\bra{\psi(t)} \hat{A} \ket{\psi(t)}} = \frac{1}{T} \int_0^T \mathrm{d}t \, \bra{\psi(t)} \hat{A} \ket{\psi(t)} = \sum_{n} |c_n|^2 \bra{E_n} \hat{A} \ket{E_n}.
+    \end{aligned}
+\]
+[...]
+
+We can define the density matrix \(\rho\) as
+\[
+    \rho = \frac{1}{Z} \sum_{E \leq E_n \leq E+\Delta} \ket{E_n} \bra{E_n},
+\]
+which is a positive semi-definite operator that encodes the state of the system. The expectation value of an observable \(\hat{A}\) can be then computed as
+\[
+    \langle \hat{A} \rangle = \mathrm{Tr}(\rho \hat{A}).
+\]
+
+
+
+We have to note that dealing with quantum statistical mechanics is more complicated than dealing with classical statistical mechanics, since we have to deal with operators instead of functions, and we have to deal with the non-commutativity of operators. However, the general principles of statistical mechanics still apply, and we can still define ensembles, partition functions, and thermodynamic quantities in the quantum case. The main difference is that we have to use the language of operators and Hilbert spaces instead of the language of functions and phase space.
+
+Defining an ensemble in quantum statistical mechanics automatically defines a density matrix, which encodes the state of the system, and from which we can compute the expectation values of observables and the thermodynamic properties of the system. We are governing our set of eigenstates with a probability distribution, which is encoded in the density matrix, and we can compute the expectation values of observables and the thermodynamic properties of the system from this density matrix.
+
+For a quantum system at thermal equilibrium, we have the following identification of the thermodynamic free energy \(F\) with the partition function \(Z\):
+\[
+    F = -k_B T \log Z,
+\]
+which is the same relation that we have in classical statistical mechanics. These postulates are like operational tools: justify them as they are can be rally difficult and it is an actual field of research with a lot of literature, but they are very useful for computing the thermodynamic properties of quantum systems at thermal equilibrium. For us, justifying why a precise postulate workd in the actual setting will be enough.
