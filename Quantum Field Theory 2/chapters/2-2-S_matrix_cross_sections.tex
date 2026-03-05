@@ -1,172 +1,443 @@
-\section{S-Matrix}
+\section{Scattering Processes}
 
+Scattering processes are currently the most important tool to probe the fundamental interactions of nature, and thus to test our theories of particle physics. They let us infer and understand the properties of particles and their interactions at a microscopic level by analyzing the outcomes of experiments and collisions at macroscopic distances.
 
- [...]
+We are forced to cite some of the most important results of scattering theory, as well as experiments, which is a vast and complex subject, in order to understand its importance in particle physics. Some of the most important results and experiments in scattering theory include:
+\begin{itemize}
+    \item \textbf{Rutherford scattering}, which was the first experiment to probe the structure of the atom and led to the discovery of the nucleus. Scattering alpha particles off a thin gold foil, Rutherford observed that most of the particles passed through the foil with little deflection, while a small fraction were scattered at large angles, leading to the conclusion that the atom has a small, dense nucleus at its center. This experiment lead to our modern understanding of the atomic structure of matter at a subatomic level, and it was a crucial step in the development of quantum mechanics and quantum field theory.
+    \item \textbf{Lowrence Berkeley National Laboratory}, which was the first particle accelerator and allowed for the discovery of many new particles and interactions: in 1931 Lowrence was the first to accelerate particles to relativistic energies, firstly only around \SI{80}{\kilo\electronvolt}, and then with Livingston he built the first cyclotron, which was able to accelerate protons to energies of about \SI{1.22}{\mega\electronvolt}, leading to the discovery of the neutron in 1932 by James Chadwick.
+    \item \textbf{Large Hadron Collider (LHC)}, which is the largest and most powerful particle accelerator in the world, located at CERN, and has been instrumental in the discovery of the Higgs boson in 2012, as well as in probing the properties of the Standard Model and searching for new physics beyond it. It has a circumference of about \SI{27}{\kilo\meter} and can accelerate protons to energies of up to \SI{7}{\tera\electronvolt} per beam, allowing for collisions at unprecedented energies and luminosities (actually around \(\SI{13}{\tera\electronvolt}\), with future upgrades planning further increases).
+    \item \textbf{Future colliders}, such as the proposed Future Circular Collider (FCC) at CERN, which aims to reach even higher energies and luminosities than the LHC, and could potentially discover new particles and interactions that are beyond the reach of current experiments. Basically all we know about particle physics and the fundamental interactions of nature has been inferred from the observations and measurements of scattering processes, either in natural phenomena (such as cosmic rays) or in controlled experiments.
+\end{itemize}
+Such great energies and luminosities allow us to probe the fundamental interactions of nature at a microscopic level, and to test our theories of particle physics with high precision: the \textbf{indetermination principle} allows us to probe smaller and smaller distances by increasing the energy of the particles, thus allowing us to explore the structure of matter and the fundamental forces at a deeper level. By analyzing the outcomes of scattering experiments, we can infer the properties of particles and their interactions, and test our theoretical models against experimental data.
 
+Also the \textbf{decay rate} of unstable particles is an important observable that can be measured in experiments and computed in theory, providing insights into the properties of the particles and their interactions. In these decay processes, an unstable particle decays into other smaller and lighter particles, and the decay rate quantifies the probability per unit time that this decay will occur. By studying the decay rates of particles, we can gain insights into their properties, such as their masses, lifetimes, and interaction strengths, and test our theoretical models against experimental data.
 
-We tipically use Heisemberg picture, so if we want to compute the amplitude of a determined process, we can write it as
+\subsection{S-Matrix}
+
+We prepare a state \(\ket{i,\,t_i}\) at an initial time \(t_i\) which will transition after some interaction (or decay, scatter...) into a state \(\ket{f,\,t_f}\), measured at a final time \(t_f\) with a probability given by the square of the amplitude \(|\bra{f,\,t_f} \ket{i,\,t_i}|^2\). Here we can make the following observations:
+\begin{itemize}
+    \item The initial and final states are defined in the limit of infinite past and future, where the particles are free and non-interacting. This is a common assumption in scattering theory, as it allows us to define \textbf{asymptotic states} that can be used to compute scattering amplitudes and cross sections.
+    \item The process happens on microscopic time and length scales, while being measured on macroscopic scales, thus we can treat the interaction as an instantaneous event, letting us ignore the detailed time dependencies of the process and focus on the transition between the initial and final states.
+    \item The transition from the initial to the final state can be described by a unitary operator called the \textbf{S-matrix}, which encodes the \textbf{transition amplitudes} between the asymptotic states.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+            wavy arrow/.style={
+                    ->,
+                    thick,
+                    draw=yellow!90!black,
+                    decorate,
+                    decoration={snake, amplitude=1.5pt, segment length=5pt, post length=3pt}
+                }
+        ]
+
+        \node[text=blue!60] (initial) at (0,0) {$\ket{i}$};
+        \node[text=red!60] (final) at (6,0) {$\ket{f}$};
+
+        \node[circle, draw, thick, minimum size=1cm,
+            pattern=north east lines, pattern color=black!70]
+        (box) at (3,0) {};
+
+        \draw[wavy arrow] (initial.east) -- (box.west);
+        \draw[wavy arrow] (box.east) -- (final.west);
+    \end{tikzpicture}
+    \caption{Schematic representation of a generic process, where an initial state \(\ket{i}\) evolves into a final state \(\ket{f}\) through some interaction described by the S-matrix. We are considering asymptotic states, which are defined in the limit of infinite past and future, where the particles are free and non-interacting. The S-matrix encodes the transition amplitudes between these asymptotic states describing the scattering process happening on microscopic time scales.}
+\end{figure}
+
+We tipically use \textbf{Heisemberg picture}, so if we want to compute the amplitude of a determined process, we can write it as
 \[
     \bra{f} \hat{S} \ket{i} = \bra{f, \infty} \ket{i, -\infty},
 \]
-where $\ket{i}$ and $\ket{f}$ are the initial and final states of the system (time independent), respectively. The S-matrix element $\bra{f} \hat{S} \ket{i}$ gives us the amplitude for the transition from the initial state $\ket{i}$ to the final state $\ket{f}$ due to the interaction described by the S-matrix.
+where $\ket{i}$ and $\ket{f}$ are the asymptotic states of the system (time independent and directly related to the free particle states), respectively. \textit{The S-matrix element} $\bra{f} \hat{S} \ket{i}$ \textit{gives us the amplitude for the transition} from the initial state $\ket{i}$ to the final state $\ket{f}$ due to the interaction described by the S-matrix itself. The S-matrix is a powerful tool in quantum field theory, as it allows us to compute \textbf{scattering amplitudes} and \textbf{cross sections} for a wide range of processes, and to make predictions that can be tested against experimental data. By analyzing the S-matrix elements for different processes, we can gain insights into the properties of particles and their interactions, testing our theoretical models against experimental observations.
 
 \section{Cross Sections}
 
-If we analyze a scattering process, such as the Rutherford scattering, we can see how a beam of particles is scattered by a target. We consider the nucleus as a still sphere, while the alpha particles are much smaller.\TODO{Add drawing} The geometric cross section of the target is given by
-\[
+If we analyze a scattering process, such as the Rutherford scattering, we can see how a beam of particles is scattered by a target; in the case of Rutherford scattering, it were alpha particles being scattered by a thin gold foil, where the alpha particles are much smaller than the nucleus of the gold atoms, thus we can treat the nucleus as a still sphere and the alpha particles as point-like particles. We will make the same assumption for the following scattering processes, thus treating the particles as point-like and the interactions as instantaneous events.
+
+In this case, we can define the \textbf{cross section} of the target, which quantifies the probability of a scattering event occurring when a particle from the beam interacts with the target. The cross section is an effective area that represents the likelihood of a scattering event, and it can be computed using the S-matrix elements for the process.
+
+The \textbf{geometric cross section} of the target, which encodes the effective area of the target for scattering, is given by
+\begin{equation}
     \sigma \equiv \pi R^2,
-\]
+    \label{eq:geometric_cross_section}
+\end{equation}
 where $R$ is the radius of the target. One can compute the number of particles that are scattered by the target, which is given by
 \[
     N = n_B \cdot \sigma, \quad n_B = \frac{N_B}{A},
 \]
-where $n_B$ is the number density of the beam, $N_B$ is the number of particles in the beam, and $A$ is the area of the target. The cross section $\sigma$ can be interpreted as an effective area that quantifies the likelihood of a scattering event occurring when a particle from the beam interacts with the target.
+where $n_B$ is the number density of the beam, $N_B$ is the number of particles in the beam, and $A$ is the area of the target. The cross section $\sigma$ can be interpreted as an effective area that quantifies the likelihood of a scattering event occurring when a particle from the beam interacts with the target. The power of this approach resides in its simplicity: with few assumptions it allows us to compute the probability of scattering events for a wide range of processes, while linking macroscopical observables, such as the number of scattered particles, to the microscopic dynamics of the interactions encoded in the S-matrix elements.
+\begin{figure}[H]
+    \begin{minipage}{0.3\textwidth}
+        \centering
+        \begin{tikzpicture}[>=stealth, thick, scale=0.65]
 
+            \foreach \y / \endx in {
+                    2.4 / 6,
+                    1.6 / 6,
+                    0.8 / 3.1,
+                    0   / 2.75,
+                    -0.8 / 3.1,
+                    -1.6 / 6,
+                    -2.4 / 6
+                } {
+                    \draw[orange!90!black,] (0,\y) -- (\endx,\y);
+
+                    \draw[->, orange!90!black] (0,\y) -- (\endx/2,\y);
+                }
+
+            \draw[->, orange!90!black] (3.1, 0.8) -- (1.5, 2.6);
+            \draw[->, orange!90!black] (2.75, 0) -- (0.1, 1.2);
+            \draw[->, orange!90!black] (3.1, -0.8) -- (1.5, -2.6);
+
+            \coordinate (target) at (4,0);
+            \node[circle, draw=blue!70, thick, minimum size=1.2cm,
+                pattern=north west lines, pattern color=blue!70]
+            (target) at (4,0) {};
+
+        \end{tikzpicture}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.65\textwidth}
+        \caption{Schematic representation of a scattering process, where a beam of particles (orange arrows) is scattered by a target (blue circle). The geometric cross section of the target is given by \(\sigma = \pi R^2\), with \(R\) being the radius of the target, while the number of scattered particles depends on the interaction probability. We are going to generalize this model to quantum field theory, computing the probability of scattering processes and expressing them in terms of the S-matrix elements.}
+    \end{minipage}
+\end{figure}
 Now we want to take this model and generalize it to quantum field theory, where we can compute the probability of scattering processes; we want to extend the model
 \begin{itemize}
     \item for any type of scattering process, or interaction;
     \item for a probability of scattering, not just a number of particles.
 \end{itemize}
 
-If we assume a beam of particles along the $z$-axis, we can define the \textbf{impact parameter} \(\mathbf{b}\), whixch represents the perpendicular distance from the trajectory of the incoming particle to the center of the target: the coordinates perpendicular to the plane of scattering:
+\subsection{Impact Parameter}
+
+If we assume a beam of particles along the $z$-axis, we can define the \textbf{impact parameter} \(\mathbf{b}\), which represents the perpendicular distance among the trajectory of the incoming particle and the center of the target:
 \[
     N = \int \mathrm{d}^2 \mathbf{b} \, n_B \, P(\mathbf{b}) = n_B \int \mathrm{d}^2 \mathbf{b} \, P(\mathbf{b}),
 \]
 thus we can now define the \textbf{cross section} as
-\[
+\begin{equation}
     \sigma = \int \mathrm{d}^2 \mathbf{b} \, P(\mathbf{b}),
-\]
-and its differential form as
-\[
+    \label{eq:cross_section_impact_parameter}
+\end{equation}
+where \(P(\mathbf{b})\) is the probability of scattering for a given impact parameter \(\mathbf{b}\), generalizing the concept of a geometric cross section. This expression allows us to compute the cross section for a scattering process by integrating the probability of scattering over all possible impact parameters, thus providing a more general and flexible framework for analyzing scattering processes in quantum field theory.
+\begin{figure}[H]
+    \begin{minipage}{0.5\textwidth}
+        \caption{Schematic representation of a scattering process in terms of the impact parameter \(\mathbf{b}\): the probability of scattering can be expressed as a function of the impact parameter, allowing us to compute the cross section by integrating the probability of scattering over all possible impact parameters.}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{img/impact_parameter_scattering.png}
+    \end{minipage}
+\end{figure}
+We can also express it in its \textbf{differential form}, which ideally counts only a subset of events, with respect to the \textbf{solid angle} \(\Omega\) as
+\begin{equation}
     \frac{\mathrm{d} \sigma}{\mathrm{d} \Omega} = \int \mathrm{d}^2 \mathbf{b} \, \frac{P(\mathbf{b})}{\mathrm{d} \Omega},
-\]
-or in the measure of the space of final states as
-\[
+    \label{eq:differential_cross_section_solid_angle}
+\end{equation}
+where we are considering only the events that are scattered in a specific direction defined by the solid angle \(\mathrm{d}\Omega\), thus providing a more detailed description of the scattering process. Alternatively, we can express it with respect to the measure of the space of \textbf{final states} \(\ket{f}\) as
+\begin{equation}
     \frac{\mathrm{d} \sigma}{\mathrm{d} f} = \int \mathrm{d}^2 \mathbf{b} \, \frac{P(\mathbf{b})}{\mathrm{d} f}.
-\]
+    \label{eq:differential_cross_section_final_states}
+\end{equation}
+The consequent step towards the computation of the cross section in QFT are:
+\begin{itemize}
+    \item Express the probability of scattering \(P(\mathbf{b})\) in terms of the S-matrix elements for the process
+          \[
+              \bra{f} \hat{S} \ket{i} = \bra{f, \infty} \ket{i, -\infty},
+          \]
+          which encode the transition amplitudes between the initial and final states.
+    \item Integrate the probability of scattering over all possible impact parameters \(\mathbf{b}\) to compute the cross section for the scattering process, using the expressions in equations \eqref{eq:cross_section_impact_parameter}, \eqref{eq:differential_cross_section_solid_angle}, or \eqref{eq:differential_cross_section_final_states}; then express the result in terms of observables that can be measured in experiments, such as the scattering angle or the energy or momenta of the scattered particles.
+\end{itemize}
 
-It makes sense to use eigenstates of the momentum operator as the initial and final states of the scattering process, since they are the natural basis for describing particles in quantum field theory (errors on p ... ...)
+\subsection{Wave Packets and Regularization}
 
-\[
-    \Delta p \Delta x \geq \frac{\hbar}{2}, \quad \Delta p = 0 \implies \Delta x \to \infty,
-\]
-We also know that the probability of scattering is given by the square of the amplitude \(\bra{f} \hat{S} \ket{i} \sim \delta^{(4)}(p_i - p_f)\), but then
-\[
-    P \sim |\bra{f} \hat{S} \ket{i}|^2 \sim |\delta^{(4)}(p_i - p_f)|^2 = \delta^{(4)}(p_i - p_f) \delta^{(4)}(0) \dots
-\]
+Now one of the natural questions that arises is: what are the initial and final states \(\ket{i}\) and \(\ket{f}\) that we should use to compute the S-matrix elements for the scattering process? In typical scattering processes, the quantum dispersion of the particle momenta \(\Delta p\) is smaller than the experimental resolution, thus it makes sense to use \textbf{eigenstates of the momentum operator}, such as plane wave states. However, there are some issues:
+\begin{itemize}
+    \item If the quantum dispersion of the particle momenta \(\Delta p\) is comparable to zero, for the Heisemberg uncertainty principle, the particle is completely delocalized in space
+          \[
+              \Delta p \Delta x \geq \frac{\hbar}{2}, \quad \Delta p = 0 \implies \Delta x \to \infty,
+          \]
+          thus it can interact with the target at any point in space, leading to divergences in the scattering amplitudes.
+    \item We will show that S-matrix elements for plane wave states are proportional to delta functions, which leads to divergences when we compute the probability of scattering by taking the square of the amplitude: the probability of scattering is given by the square of the amplitude \(\bra{f} \hat{S} \ket{i} \sim \delta^{(4)}(p_i - p_f)\), but then
+          \[
+              P \sim |\bra{f} \hat{S} \ket{i}|^2 \sim |\delta^{(4)}(p_i - p_f)|^2 = \delta^{(4)}(p_i - p_f) \delta^{(4)}(0).
+          \]
+          The term \(\delta^{(4)}(0)\) is divergent, and it arises from the fact that we are using plane wave states, which are not normalizable and lead to divergences in the scattering amplitudes. This is a common issue in quantum field theory, and it requires regularization techniques to handle these divergences and obtain finite results for physical observables.
+\end{itemize}
 
-one way to overcome this problem is to consider a finite volume \(V\) and a finite time \(T\), so that the delta function can be regularized and then take only at the end the limit \(V \to \infty\) and \(T \to \infty\). This is a common technique in quantum field theory to handle divergences and make sense of scattering amplitudes. By working in a finite volume and time, we can ensure that the calculations are well-defined and then take the appropriate limits to recover physical results.
+One\TODO{Add reference to book by schwarz.} way to overcome the last problem is to consider a finite volume \(V\) and a finite time \(T\), so that the delta function can be regularized and then take only at the end the limit \(V \to \infty\) and \(T \to \infty\). This is a common technique in quantum field theory to handle divergences and make sense of scattering amplitudes. By working in a finite volume and time, we can ensure that the calculations are well-defined and then take the appropriate limits to recover physical results. However, this approach can be obscure and cumbersome, and it can lead to complications in the calculations.
 
-We will instead follow the Peskin and Schroeder approach, which is to consider the states as wave packets in the momentum space, which are localized in both position and momentum space, thus avoiding the issues with the delta function. This approach allows us to compute scattering amplitudes and cross sections without encountering the divergences associated with plane wave states. By using wave packets, we can ensure that the initial and final states are well-defined and that the scattering probabilities are finite and physically meaningful.
+We will instead follow the Peskin and Schroeder approach,\TODO{add reference to Peskin and Schroeder.} which is to consider the states as \textbf{wave packets} in the momentum space, which are \textbf{localized in both position and momentum space}, thus avoiding the issues with the delta function. This approach allows us to compute scattering amplitudes and cross sections without encountering the divergences associated with plane wave states. By using wave packets, we can ensure that the initial and final states are well-defined and that the scattering probabilities are finite and physically meaningful.
 
-We can consider an initial state\TODO{Drawing} as a two particle state with momenta \(p_a\) and \(p_b\), and a final state as a N particle state:
-[...]
-For incoming states we replace \(\ket{p_i}\) with \(\ket{\phi_i}\), which is a wave packet centered around the momentum \(p_i\):
-\[
-    \ket{p_i} \to \ket{\phi_i} = \int {\mathrm{d}^3 \mathbf{k}}{(2 \pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{k}}}} \phi_i (\mathbf{k})\ket{\mathbf{k}},
-\]
-with
-\[
-    \bra{\phi_i} \ket{\phi_i} = \int \frac{\mathrm{d}^3 \mathbf{k}}{(2 \pi)^3} |\phi_i (\mathbf{k})|^2 = 1,
-\]
-remembering that \(\bra{\mathbf{k}}\ket{\mathbf{k}'} = 2 E_{\mathbf{k}} (2 \pi)^3 \delta^{(3)}(\mathbf{k} - \mathbf{k}')\); all of this indicates that \(\phi_i (\mathbf{k})\) is a very narrow normalized function centered around \(p_i\).\TODO{Add graph of the wave packet}
+We can consider a general process in which the initial state is a two particle state, with momenta \(p_a\) and \(p_b\), while the final state is a \(N\) particle state:
+
+\begin{figure}[H]
+    \centering
+    \tikzset{
+        directed/.style={
+                postaction={decorate},
+                decoration={
+                        markings,
+                        mark=at position 0.6 with {\arrow{stealth}}
+                    }
+            },
+        blackbox/.style={
+                circle,
+                draw=black,
+                minimum size=1cm,
+                fill=white,
+                pattern=north east lines,
+                pattern color=black!60,
+                thick
+            }
+    }
+    \begin{tikzpicture}[scale=1, thick]
+
+        \node[blackbox] (blob) at (0,0) {};
+
+        \coordinate (in_coords) at (-2.5, 0);
+
+        \draw[directed, orange!90!black] (in_coords |- 0, 1) -- (blob.160);
+        \node[orange!90!black, left, font=\mathstrut] at (in_coords |- 0, 1) {$p_a$};
+
+        \draw[directed, orange!90!black] (in_coords |- 0, -1) -- (blob.200);
+        \node[orange!90!black, left, font=\mathstrut] at (in_coords |- 0, -1) {$p_b$};
+
+
+        \coordinate (out_coords) at (2.5, 0);
+
+        \draw[directed, green!80!black] (blob.40) -- (out_coords |- 0, 1);
+        \node[green!80!black, right, font=\mathstrut] at (out_coords |- 0, 1) {$p_1$};
+
+        \draw[directed, green!80!black] (blob.20) -- (out_coords |- 0, 0.3);
+        \node[green!80!black, right, font=\mathstrut] at (out_coords |- 0, 0.3) {$p_2$};
+
+        \draw[directed, green!80!black] (blob.340) -- (out_coords |- 0, -0.3);
+        \node[green!80!black, text height=1ex, text depth=0.1ex] at (2.8, -0.5) {$\vdots$};
+
+        \draw[directed, green!80!black] (blob.320) -- (out_coords |- 0, -1);
+        \node[green!80!black, right, font=\mathstrut] at (out_coords |- 0, -1) {$p_n$};
+
+    \end{tikzpicture}
+\end{figure}
+
+
+
+\begin{figure}[H]
+    \begin{minipage}{0.6\textwidth}
+        For incoming states we replace \(\ket{p_i}\) with \(\ket{\phi_i}\), which is a \textbf{wave packet} centered around the momentum \(p_i\):
+        \[
+            \ket{p_i} \to \ket{\phi_i} = \int \frac{\mathrm{d}^3 \mathbf{k}}{(2 \pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{k}}}} \phi_i (\mathbf{k})\ket{\mathbf{k}},
+        \]
+        with
+        \[
+            \bra{\phi_i} \ket{\phi_i} = \int \frac{\mathrm{d}^3 \mathbf{k}}{(2 \pi)^3} |\phi_i (\mathbf{k})|^2 = 1,
+        \]
+        remembering that \(\bra{\mathbf{k}}\ket{\mathbf{k}'} = 2 E_{\mathbf{k}} \, (2 \pi)^3 \delta^{(3)}(\mathbf{k} - \mathbf{k}')\); all of this indicates that \(\phi_i (\mathbf{k})\) is a very narrow normalized function centered around \(p_i\).
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.35\textwidth}
+        \centering
+        \begin{tikzpicture}[>=stealth, thick, scale=0.6]
+
+            \draw[->] (-0.5, 0) -- (7, 0) node[below] {$k$};
+            \draw[->] (0, -0.5) -- (0, 4.5) node[left] {$\phi_i$};
+
+            \draw (3, 0.15) -- (3, -0.15) node[below, yshift=-2pt] {$p_i$};
+
+            \draw[orange!90!black, very thick, domain=0:6.7, samples=500]
+            plot (\x, {4 * exp(-40 * (\x - 3)^2)});
+
+            \draw[dashed, gray, thin] (3, 0) -- (3, 4);
+            %\node[orange!90!black, right] at (3.3, 2.5) {Narrow wave packet};
+
+        \end{tikzpicture}
+    \end{minipage}
+
+\end{figure}
 
 \begin{example}[LHC collider]
-    We can assume, very conservatively, that the LHC collider has \(\Delta p \sim  \SI{1}{\mega\electronvolt}\), such that ...
+    We can assume, very conservatively, that the LHC collider works with \(\Delta p \sim \SI{1}{\mega\electronvolt}\), which is unrealistic (since it would correspond to a resolution of about \(10^{-6}\), not realistic) and leads to a delocalization of the particles of about
+    \[
+        \Delta x \sim \frac{\hbar}{2 \Delta p} \sim \frac{1}{\SI{2}{\mega\electronvolt}} \sim \SI{100}{\femto\meter} = 10^{-13} \, \mathrm{m},
+    \]
+    which, compared to the size of the particles bunches in the LHC, which is of the order of \(\SI{1}{\micro\meter} = \SI{e-6}{\meter}\), is negligible, thus we can safely treat the particles as localized in space, and thus we can use wave packets to compute the scattering amplitudes and cross sections without encountering divergences.
+
+    This is a common assumption in high-energy physics, with typically well-localized particles and small quantum dispersion of their momenta compared to the experimental resolution; this allows us to use wave packets to describe the initial and final states in scattering processes.
 \end{example}
 
-\begin{example}[Gauussian wave packet]
+Now we are left with the task of computing the S-matrix elements for the scattering process using wave packets, and then integrating the probability of scattering over all possible impact parameters to compute the cross section for the scattering process. But how are we going to model the wave packets? We can consider different types of wave packets, such as \textbf{Gaussian wave packets}, which are commonly used in quantum mechanics and quantum field theory due to their nice mathematical properties and their ability to represent \textit{localized states in both position and momentum space}. By choosing appropriate wave packet profiles, we can ensure that the initial and final states are well-defined and that the scattering probabilities are finite and physically meaningful.
+
+\begin{example}[Gaussian wave packet]
     We can consider a Gaussian wave packet centered around \(p_i\) with a width \(\sigma\):
     \[
-        \phi (\mathbf{k}) = \dots
+        \phi (\mathbf{k}) = N \exp[ -\frac{1}{4} \left(\frac{(\mathbf{k} - \mathbf{p})^2}{\Delta p^2}\right)^2 -i \mathbf{k} \cdot \langle \mathbf{x} \rangle],
     \]
-    This wave packet is normalized and has a well-defined momentum distribution, allowing us to compute scattering amplitudes and cross sections without encountering divergences.
-        [...]
-    \[
-        \begin{aligned}
-            \ket{p_a} \sim \ket{\phi_a} = \\
-            \ket{p_b} \sim \ket{\phi_b} = \dots
-        \end{aligned}
-    \]
-    where we exploited the dependence of \(\phi_b(\mathbf{k})\) upon \(\mathbf{b}\) the impact parameter
-    \[
-        \dots
-    \]
+    where \(N\) is a normalization constant, \(\Delta p\) is the width of the wave packet in momentum space, and \(\langle \mathbf{x} \rangle\) is the average position of the wave packet in real space: using \(\hat{x}^{\mu} = i \frac{\partial}{\partial p_\mu}\), one can check that the uncertainty principle is satisfied with \(\Delta x \Delta p = \tfrac{1}{2}\).
+
+    Thus the wave packet is normalized and has a well-defined momentum distribution, with the properties of a momentum eigenstate while being relatively well localized in space for finite \(\Delta p\). By using Gaussian wave packets, we can compute the S-matrix elements for the scattering process without encountering divergences, and we can ensure that the initial and final states are well-defined and physically meaningful.
+
 \end{example}
 
+\paragraph{Initial states.} Sticking to the Gaussian wave packet example, we can write the initial states as the following superposition of momentum eigenstates:
+\[
+    \begin{aligned}
+        \ket{p_a} \to \ket{\phi_a} & = \int \frac{\mathrm{d}^3 \mathbf{k}}{(2 \pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{k}}}} \phi_a (\mathbf{k})\ket{\mathbf{k}},                                           \\
+        \ket{p_b} \to \ket{\phi_b} & = \int \frac{\mathrm{d}^3 \mathbf{k}}{(2 \pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{k}}}} \phi_b (\mathbf{k}) \, e^{-i \mathbf{k} \cdot \mathbf{b}} \, \ket{\mathbf{k}},
+    \end{aligned}
+\]
+where we exploited the dependence of \(\phi_b(\mathbf{k})\) upon \(\mathbf{b}\) the impact parameter as
+\[
+    \mathbf{b} = \bra{\phi_b} \hat{\mathbf{x}}^{\bot} \ket{\phi_b},
+\]
+with \(\hat{\mathbf{x}}^{\bot}\) being the position operator in the plane perpendicular to the beam axis.
 
-For the outgoing states we can consider just the momentum eigenstates, since the scattering has already happened, thus we can write
+\paragraph{Outgoing states.} For the outgoing states we can consider just the momentum eigenstates, since the scattering has already happened, thus we can write
 \[
     \ket{\phi_i} = \ket{p_i}, \quad \forall i = 1, \dots, N.
 \]
+Since the outgoing particles are detected at macroscopic distances, we can treat them as free particles and thus we can use momentum eigenstates to describe them: the scattering already happened, thus we can treat the outgoing particles as free particles.
 
-
-[...]
-
-We can consider the S-matrix element for the transition by rewriting it as
+Now we can compute the \textbf{S-matrix elements} for the scattering process using the initial and final states defined above. We can write the S-matrix elements for momentum eigenstates as
+\[
+    \bra{f,\,\infty} \ket{i,\,-\infty} = \bra{f} \hat{S} \ket{i} = \bra{p_1, \ldots,\,p_N} \hat{S} \ket{p_a, p_b},
+\]
+where we are considering the initial state as a two particle state with momenta \(p_a\) and \(p_b\), and the final state as a \(N\) particle state with momenta \(p_1, \ldots, p_N\). The S-matrix can be expressed as
 \[
     \hat{S} = \mathbb{I} + i \hat{T},
 \]
-where the identity term corresponds to the case where no scattering occurs, while the \(i \hat{T}\) term corresponds to the case some interactions among the fields, i.e. scattering, occur. Thus we can write
+where the identity term corresponds to the case where no scattering occurs, while the \(i \hat{T}\) term corresponds to the case some interactions among the fields, i.e. the scattering occurs. Thus we can write\footnote{Note that we evaluate the transition amplitude here using exact momentum eigenstates $\ket{p_a, p_b}$ rather than the initial wave packets $\ket{\phi_a, \phi_b}$. This is done to formally define the invariant scattering amplitude $\mathcal{M}$ and cleanly factor out the energy-momentum conserving Dirac delta $\delta^{(4)}$. The physical wave packets enter the calculation in the subsequent step: exploiting the linearity of the $\hat{T}$ operator, the realistic transition amplitude is obtained by integrating these exact-momentum matrix elements over the momentum distributions $\phi_a(\mathbf{k})$ and $\phi_b(\mathbf{k})$ of the incoming wave packets.}
 \[
-    \bra{p_1, \ldots,\,p_N} i \hat{T} \ket{\phi_a, \phi_b} = (2\pi)^4 \delta^{(4)}\left(p_a + p_b - \sum_{i=1}^N p_i\right) i \mathcal{M}(p_1, \ldots,\,p_N),
+    \bra{p_1, \ldots,\,p_N} i \hat{T} \ket{p_a, p_b} = (2\pi)^4 \delta^{(4)}(p_a + p_b - \sum_{i=1}^N p_i) i \mathcal{M},
 \]
-where the delta function ensures the conservation of energy and momentum, and \(\mathcal{M}(p_1, \ldots,\,p_N)\) is the \textbf{invariant matrix element} or \textbf{scattering amplitude} for the process, which encodes the dynamics of the interaction. The invariant amplitude can be computed using Feynman diagrams and the rules of quantum field theory, and it is a key quantity in determining the cross section for the scattering process.
+where the delta function ensures the conservation of energy and momentum, and \(\mathcal{M}\) is the \textbf{invariant matrix element} or \textbf{scattering amplitude} for the process, which encodes the dynamics of the interaction (we omitted its dependencies for simplicity, but it relies on the initial and final states, thus \(\mathcal{M} = \mathcal{M}(p_a, p_b \to p_1, \ldots, p_N)\)). The invariant amplitude can be computed using Feynman diagrams and the rules of quantum field theory, and it is a key quantity in determining the cross section for the scattering process.
 
-Thus we can now compute the differential cross section as \(\frac{\mathrm{d} \sigma}{\mathrm{d} f} = \int \mathrm{d}^2 \frac{\mathrm{d} P}{\mathrm{d} f}\), where the probability of scattering is given by
+Thus we can now compute the \textbf{differential cross section} in the space of final configurations as in \eqref{eq:differential_cross_section_final_states}:
+\[
+    \frac{\mathrm{d} \sigma}{\mathrm{d} f} = \int \mathrm{d}^2 \mathbf{b} \, \frac{\mathrm{d} P}{\mathrm{d} f},
+\]
+where the differential probability of scattering in the space of final states is given by
 \[
     \frac{\mathrm{d} P}{\mathrm{d} f} = \vert \bra{p_1,\,\ldots,\,p_N,\,+\infty} i \hat{T} \ket{\phi_a,\, \phi_b,\, -\infty} \vert^2,
 \]
-and the measure of the space of final states is normalized as\footnote{We can convince ourself with the resolution of the identity for 1 particle states as ...}
+and the measure of the space of final states for \(N\) particles is normalized as\footnote{We can convince ourself with the resolution of the identity for 1 particle states, which reads
+    \[
+        \mathbb{I} = \int \frac{\mathrm{d}^3 \mathbf{k}}{(2\pi)^3} \frac{1}{2 E_{\mathbf{k}}} \ket{\mathbf{k}}\bra{\mathbf{k}},
+    \]
+    where \(\mathrm{d} f = \frac{\mathrm{d}^3 \mathbf{k}}{(2\pi)^3} \frac{1}{2 E_{\mathbf{k}}}\) is the measure of the space of final states for 1 particle.}
 \[
     \mathrm{d} f = \prod_{i=1}^N \frac{\mathrm{d}^3 \mathbf{p}_i}{(2\pi)^3} \frac{1}{2 E_{p_i}}.
 \]
 
-Now we can put everything back together and write the final expression for the differential cross section after ......... conti
-
+Now we can put everything back together and after some algebra (full computation in Appendix \ref{app:differential_cross_section}\TODO{write it.}) we can write the final expression for the differential cross section
 \[
-    \Phi = 2 E_a 2 E_b \vert v_a - v_b \vert = 4 \vert E_b p_a^z - E_a p_b^z \vert.
+    \begin{aligned}
+        \mathrm{d} \sigma & = \frac{1}{\Phi} |\mathcal{M} (p_a, p_b \to p_1, \ldots, p_N)|^2 \mathrm{d} \Pi_N,                                                       \\
+        \mathrm{d} \Pi_N  & = \left[ \prod_{i=1}^N \frac{\mathrm{d}^3 \mathbf{p}_i}{(2\pi)^3 2 E_{p_i}} \right] (2\pi)^4 \delta^{(4)}(p_a + p_b - \sum_{i=1}^N p_i), \\
+        \Phi              & = 2 E_a 2 E_b \vert v_a - v_b \vert = 4 \vert E_b p_a^z - E_a p_b^z \vert,
+    \end{aligned}
 \]
+where:
+\begin{itemize}
+    \item \(\mathrm{d} \Pi_N\) is the Lorentz-invariant phase space measure for \(N\) final state particles, which accounts for the density of final states and the conservation of energy and momentum through the delta function.
+    \item \(\Phi\) is the flux factor, which accounts for the incoming particles and their relative velocity, ensuring that the cross section is properly normalized with respect to the initial state of the scattering process.
+    \item \(\mathcal{M}\) is again the invariant matrix element or scattering amplitude, which encodes the dynamics of the interaction and can be computed using Feynman diagrams and the rules of quantum field theory.
+\end{itemize}
 
-\(\Phi\) is invariant under boosts along the beam axis, and rotations around the beam axis, thus it can only depend on the Lorentz invariants of the process, and thus it transforms as the inverse of an area in the plane perpendicular to the beam axis, thus \dots
+\(\Phi\) is the only non Lorentz invariant term: we have indeed
+\[
+    \Phi = 4 \vert E_b p_a^z - E_a p_b^z \vert,
+\]
+where \(z\) is the beam axis, thus it is not invariant. But we can recognize its invariance under:
+\begin{enumerate}
+    \item boosts along the beam axis, since \(E_a\) and \(p_a^z\) transform in the same way, and \(E_b\) and \(p_b^z\) also transform in the same way, thus the combination \(E_b p_a^z - E_a p_b^z\) is invariant under boosts along the beam axis.
+    \item rotations around the beam axis (in the perpendicular plane), since \(E_a\), \(E_b\), \(p_a^z\) and \(p_b^z\) are scalars under rotations around the beam axis, thus the combination \(E_b p_a^z - E_a p_b^z\) is invariant under rotations around the beam axis.
+\end{enumerate}
+Thus the flux factor \(\Phi\) transforms as the inverse of an area in the plane perpendicular to the beam axis, behaving as a cross section (which is consistent with the interpretation of the cross section as an effective area that quantifies the likelihood of a scattering event occurring when a particle from the beam interacts with the target).
 
-We can also perform a change of reference frame in order to reverse the problem: we can consider the target as the beam and the beam as the target, it all depends on the symmetry of the problem, and the choice of the reference frame. This is a common technique in scattering theory, where we can choose a reference frame that simplifies the calculations (even center of mass, it depends) and makes it easier to analyze the scattering process. By considering different reference frames, we can gain insights into the dynamics of the interaction and compute cross sections more efficiently.
+Even if we focus on the case of a beam of particles scattering on a target, the computed expression for the differential cross section remains symmetric for exchange of beam and target, thus it can be applied to any scattering process, regardless of the specific roles of the particles involved. We can also imagine to use it for collisions of two beams of particles, as in \(e^+ e^-\) collisions in LEP, \(p \overline{p}\) collisions in the Tevatron, or more recently \(pp\) collisions in the LHC.
 
-\begin{example}[2 \(\to\) 2 scattering in center of mass frame]\TODO{Add drawing}
+We are basically performing a change of reference frame in order to reverse the problem: we can consider the target as the beam and the beam as the target, it all depends on the symmetries and the choice of the reference frame. This is a common technique in scattering theory, where we can choose a reference frame that simplifies the calculations (even center of mass, it depends) and makes it easier to analyze the scattering process. By considering different reference frames, we can gain insights into the dynamics of the interaction and compute cross sections more efficiently.
+
+\begin{example}[2 \(\to\) 2 scattering in center of mass frame]
     We can consider a simple scattering process where two particles collide and produce two particles in the final state. In the center of mass frame, the initial momenta of the particles are equal and opposite, and we can analyze the scattering process using the invariant amplitude \(\mathcal{M}\) and the phase space factor \(\Phi\) to compute the differential cross section for this process.
+    \begin{figure}[H]
+        \centering
+        \tikzset{
+            directed/.style={
+                    postaction={decorate},
+                    decoration={
+                            markings,
+                            mark=at position 0.6 with {\arrow{stealth}}
+                        }
+                },
+            blackbox/.style={
+                    circle,
+                    draw=black,
+                    minimum size=.8cm,
+                    fill=white,
+                    pattern=north east lines,
+                    pattern color=black!60,
+                    thick
+                }
+        }
+        \begin{tikzpicture}[scale=0.8, thick]
 
+            \node[blackbox] (blob) at (0,0) {};
+
+            \coordinate (in_coords) at (-2.5, 0);
+
+            \draw[directed, orange!90!black] (in_coords |- 0, 1) -- (blob.160);
+            \node[orange!90!black, left, font=\mathstrut] at (in_coords |- 0, 1) {$p_1$};
+
+            \draw[directed, orange!90!black] (in_coords |- 0, -1) -- (blob.200);
+            \node[orange!90!black, left, font=\mathstrut] at (in_coords |- 0, -1) {$p_2$};
+
+            \coordinate (out_coords) at (2.5, 0);
+
+            \draw[directed, green!80!black] (blob.20) -- (out_coords |- 0, 1);
+            \node[green!80!black, right, font=\mathstrut] at (out_coords |- 0, 1) {$p_3$};
+
+            \draw[directed, green!80!black] (blob.340) -- (out_coords |- 0, -1);
+            \node[green!80!black, right, font=\mathstrut] at (out_coords |- 0, -1) {$p_4$};
+
+        \end{tikzpicture}
+    \end{figure}
     The incoming particles have momenta \(p_1\) and \(p_2\), and the outgoing particles have momenta \(p_3\) and \(p_4\), and their spatial parts is conserved: \(\mathbf{p}_1 + \mathbf{p}_2 = \mathbf{p}_3 + \mathbf{p}_4 = 0\) (since we are in the center of mass frame). The energy of the particles is given by the energy momentum relation \(E_i = \sqrt{\mathbf{p}_i^2 + m_i^2}\), where \(m_i\) is the mass of the particle. We can write
     \[
-        \mathrm{d} \Pi_2 = \frac{\mathrm{d}^3 \mathbf{p}_3}{(2\pi)^3 2 E_3} \frac{\mathrm{d}^3 \mathbf{p}_4}{(2\pi)^3 2 E_4} \delta^{(4)}(p_1 + p_2 - p_3 - p_4),
+        \mathrm{d} \Pi_2 = \frac{\mathrm{d}^3 \mathbf{p}_3}{(2\pi)^3 2 E_3} \frac{\mathrm{d}^3 \mathbf{p}_4}{(2\pi)^3 2 E_4} (2\pi)^4 \delta^{(4)}(p_1 + p_2 - p_3 - p_4),
     \]
-    which, after integrating in \(\mathrm{d}^3 \mathbf{p}_4\) using the delta function, gives \(\mathbf{p}_4 = - \mathbf{p}_3\), and thus using then polar coordinates for \(\mathrm{d}^3 \mathbf{p}_3 = p^2 \mathrm{d} p \mathrm{d} \Omega\), we can write
+    which, after integrating in \(\mathrm{d}^3 \mathbf{p}_4\) using the delta function, gives \(\mathbf{p}_4 = - \mathbf{p}_3\); using then polar coordinates for \(\mathrm{d}^3 \mathbf{p}_3 = p^2\, \mathrm{d} p\, \mathrm{d} \Omega\), we can write
     \[
-        E_3 = \sqrt{p^2 + m_3^2}, \quad E_4 = \sqrt{p^2 + m_4^2},
+        E_3 = \sqrt{p^2 + m_3^2}, \quad E_4 = \sqrt{p^2 + m_4^2}, \quad p = \vert \mathbf{p}_3 \vert = \vert \mathbf{p}_4 \vert,
     \]
     and thus
     \[
-        \int \mathrm{d} p \delta(E_1 + E_2 - E_3 - E_4) = \frac{1}{\left\vert \frac{p}{E_3} + \frac{p}{E_4} \right\vert} = \frac{E_3 E_4}{p (E_3 + E_4)} = \frac{E_3 E_4}{p E},
+        \int \mathrm{d} p \, \delta(E_1 + E_2 - E_3 - E_4) = \left\vert \frac{p}{E_3} + \frac{p}{E_4} \right\vert^{-1} = \frac{E_3 E_4}{p (E_3 + E_4)} = \frac{E_3 E_4}{p E},
     \]
     where the last energy \(E\) is the total energy of the system in the center of mass frame, which is given by \(E = E_1 + E_2 = E_3 + E_4\). Thus we can write
     \[
         \mathrm{d} \Pi_2 = \mathrm{d} \Omega \frac{p}{16 \pi^2 E},
     \]
-    with a flux \(\Phi = 2 E_a 2 E_b \vert v_a - v_b \vert\), with now
+    with a flux \(\Phi = 2 E_1 2 E_2 \vert v_1 - v_2 \vert\), with now
     \[
-        \vert v_a - v_b \vert = \left\vert \frac{\vert \mathbf{p}_1 \vert }{E_1} + \frac{\vert \mathbf{p}_2 \vert }{E_2} \right\vert = p_{in} \frac{E}{E_1 \, E_2},
+        \vert v_1 - v_2 \vert = \left\vert \frac{\vert \mathbf{p}_1 \vert }{E_1} + \frac{\vert \mathbf{p}_2 \vert }{E_2} \right\vert = p_{in} \frac{E}{E_1 \, E_2},
     \]
     where \(p_{in}\) is the magnitude of the incoming momenta (which are equal in the center of mass frame) \(p_{in} = \vert \mathbf{p}_1 \vert = \vert \mathbf{p}_2 \vert \). Thus we can write the final expression for the differential cross section as
     \[
         \frac{\mathrm{d} \sigma}{\mathrm{d} \Omega} = \frac{1}{64 \pi^2 E^2} \frac{p}{p_{in}} |\mathcal{M}|^2,
     \]
-    where we used the fact that \(E_1 E_2 = \frac{E^2}{4}\) in the center of mass frame. This expression allows us to compute the differential cross section for the 2 \(\to\) 2 scattering process in the center of mass frame, given the invariant amplitude \(\mathcal{M}\) and the kinematic variables of the process.
+    where we used the fact that \(E_1 E_2 = \frac{E^2}{4}\) in the center of mass frame. This expression allows us to compute the \textit{differential cross section for the 2} \(\to\) \textit{2 scattering process only in the center of mass frame}, given the invariant amplitude \(\mathcal{M}\) and the kinematic variables of the process.
     \begin{remark}
         Most of the time this problem is independent of the azimuthal angle \(\phi\), thus we can integrate over it and write \(\mathrm{d}\Omega = 2\pi \mathrm{d} \cos \theta\), thus simplifying the expression for the differential cross section.
+
+        Furthermore \(\mathrm{d} \sigma\) is invariant under boosts along the beam axis, but the solid angle \(\mathrm{d} \Omega\) is not, thus the expression for the differential cross section \(\tfrac{\mathrm{d} \sigma}{\mathrm{d} \Omega}\) is not invariant.
     \end{remark}
 \end{example}
 
-
-\section{Decay Rates}
+\subsection{Decay Rates}
 
 We can similarly deal with \textbf{unstable particles}, which are particles that can decay into other particles. The decay rate of an unstable particle is given by the probability per unit time that the particle will decay, and it can be computed using the S-matrix formalism in a similar way to how we compute scattering amplitudes and cross sections for stable particles.\TODO{Add drawing.}
 By analyzing the transition amplitudes for the decay process, we can determine the decay rate and the branching ratios for different decay channels, which provide insights into the properties of the unstable particle and its interactions with other particles.
