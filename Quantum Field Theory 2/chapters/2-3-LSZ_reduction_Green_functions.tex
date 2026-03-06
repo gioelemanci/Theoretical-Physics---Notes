@@ -47,3 +47,199 @@ since the vacuum is invariant under Lorentz transformations, and the field opera
 \[
     \bra{\Omega} \hat{\phi}(x) \ket{\lambda_{\mathbf{p}}} = \bra{\Omega} \hat{\phi}(0) \ket{\lambda_{\mathbf{0}}} e^{-ip \cdot x} = e^{-ip \cdot x} F(\lambda).
 \]
+
+[...]
+
+Thus
+\[
+    \bra{\Omega} \hat{\phi}(x) \hat{\phi}(y) \ket{\Omega} = \sum_{\lambda} \vert F(\lambda) \vert^2 \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}(\lambda)} e^{-ip \cdot (x-y)},
+\]
+valid for \(x^0 > y^0\) and where the last term
+\[
+    D(x,\,y,\,m \lambda) = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}(\lambda)} e^{-ip \cdot (x-y)},
+\]
+is the free propagator of a particle with mass \(m_\lambda\):
+\[
+    D(x,\,y,\,m_\lambda) = \bra{0} \hat{\phi}_{0,\lambda}(x) \hat{\phi}_{0,\lambda}(y) \ket{0},
+\]
+with \(\hat{\phi}_{0,\lambda}\) the free field operator of a particle with mass \(m_\lambda\). We can now write the two point function as
+\[
+    \begin{aligned}
+        \bra{\Omega} T \{ \hat{\phi}(x) \hat{\phi}(y) \} \ket{\Omega} & = \Theta(x^0 - y^0) \bra{\Omega} \hat{\phi}(x) \hat{\phi}(y) \ket{\Omega} + \Theta(y^0 - x^0) \bra{\Omega} \hat{\phi}(y) \hat{\phi}(x) \ket{\Omega}                \\
+                                                                      & = \Theta(x^0 - y^0) \sum_{\lambda} \vert F(\lambda) \vert^2 D(x,\,y,\,m_\lambda) + \Theta(y^0 - x^0) \sum_{\lambda} \vert F(\lambda) \vert^2 D(y,\,x,\,m_\lambda).
+    \end{aligned}
+\]
+In this last expression we can recognize the Feynman propagator of a particle with mass \(m_\lambda\):
+\[
+    D_F(x-y,\,m_\lambda) = \Theta(x^0 - y^0) D(x,\,y,\,m_\lambda) + \Theta(y^0 - x^0) D(y,\,x,\,m_\lambda) = \int \frac{\mathrm{d}^4 p}{(2\pi)^4} \frac{i}{p^2 - m_\lambda^2 + i\epsilon} e^{-ip \cdot (x-y)},
+\]
+so that we can write the final expression for the two point function, \textbf{K\:allen-Lehman}:
+\[
+    \bra{\Omega} T \{ \hat{\phi}(x) \hat{\phi}(y) \} \ket{\Omega} = \int \frac{\mathrm{d} M}{2\pi} g(M^2) D_F(x,\,y,\,M),
+\]
+where we have defined the \textbf{spectral density} function \(g(M^2)\) as
+\[
+    g(M^2) = \sum_{\lambda} (2\pi) \vert F(\lambda) \vert^2 \delta(M^2 - m_\lambda^2).
+\]
+The spectral density function encodes the information about the spectrum of the theory, and it is a positive function since it is defined as a sum of positive terms. The K\:allen-Lehman representation of the two point function shows that the two point function can be written as a superposition of free propagators with different masses, weighted by the spectral density function. This representation is very useful for analyzing the properties of the theory, and it will be crucial for deriving the LSZ reduction formula in the next section.
+
+Let us make some observations about the K\:allen-Lehman representation of the two point function:
+\begin{itemize}
+    \item If \(M^2 = m^2\) with \(m\) the physical mass of a \textbf{one particle state}, then the spectral density function has a delta function contribution
+          \[
+              g(M^2) \Big|_{M^2=m^2} = (2\pi) Z \delta(M^2 - m^2),
+          \]
+          with \(Z = \vert F(\lambda = \text{1-part. state}) \vert^2 \) which represents the field strength renormalization constant of the one particle state. This means that the two point function has a pole at \(p^2 = m^2\) with residue \(Z\), which is a consequence of the presence of a one particle state in the spectrum of the theory.
+
+    \item For a \textbf{two particle bound state} we have two cases:
+          \begin{itemize}
+              \item If \(M^2 \leq (2m)^2\) then the spectral density function has a delta function contribution
+                    \[
+                        g(M^2) \Big|_{M^2 \leq (2m)^2} = \sum_{\lambda \in \text{2-part. states}} (2\pi) \delta(M^2 - m_\lambda^2) Z_B,
+                    \]
+                    with \(Z_B = \vert F(\lambda = \text{2-part. state}) \vert^2 \) which represents the field strength renormalization constant of the two particle bound state. This means that the two point function has a pole at \(p^2 = M_B^2\) with residue \(Z_B\), which is a consequence of the presence of a two particle bound state in the spectrum of the theory.
+              \item If \(M^2 > (2m)^2\) then the spectral density function has a continuous contribution given by the two particle continuum states, which represent the scattering states of two particles with mass \(m\)
+                    \[
+                        g(M^2) = \sum_{\lambda \in \text{2-part. cont. states}} (2\pi) \delta(M^2 - m_\lambda^2) Z_C,
+                    \]
+                    with \(Z_C = \vert F(\lambda = \text{2-part. cont. state}) \vert^2 \) which represents the field strength renormalization constant of the two particle continuum states. This means that the two point function has a branch cut starting at \(p^2 = (2m)^2\), which is a consequence of the presence of the two particle continuum states in the spectrum of the theory.
+          \end{itemize}
+    \item The spectral density function \(g(M^2)\) is a positive function of the \textbf{bare mass} \(M\), since it is defined as a sum of positive terms. This means that the two point function is a positive function, which is a consequence of the unitarity of the theory.
+    \item The physical mass \(m^2\) is the eigenvalue of \(\hat{P}^2\), so that it represents the mass of the one particle state in the spectrum of the theory. The physical mass is different from the bare mass \(M^2\) which appears in the Lagrangian of the theory, and it is related to the bare mass by a renormalization procedure.
+\end{itemize}
+
+We can now study again the two point function in momentum space, by performing a Fourier transform of the K\:allen-Lehman representation:
+\[
+    \begin{aligned}
+        \int \mathrm{d}^4 x \, e^{ip \cdot x} \bra{\Omega} T \{ \hat{\phi}(x) \hat{\phi}(0) \} \ket{\Omega} & = \int \mathrm{d}^4 x \, e^{ip \cdot x} \int \frac{\mathrm{d} M}{2\pi} g(M^2) D_F(x,\,0,\,M)                                 \\
+                                                                                                            & = \frac{iZ}{p^2 - m^2 + i 0^+} + \int_{<(2m)^2}^{\infty} \frac{\mathrm{d} M^2}{2\pi} \frac{i g(M^2)}{p^2 - M^2 + i\epsilon},
+    \end{aligned}
+\]
+where we have divided the integral over \(M^2\) into the contribution from the one particle state, which gives a pole at \(p^2 = m^2\) with residue \(iZ\), and the contribution from the two particle states, which gives a branch cut starting at \(p^2 = (2m)^2\). The contribution from the two particle bound states, if present, would give poles at \(p^2 = M_B^2 \leq (2m)^2\) with residue \(iZ_B\).
+
+In momentum space we expect to find
+\begin{enumerate}
+    \item A branch cut starting at \(p^2 = (2m)^2\) due to the presence of the two particle continuum states in the spectrum of the theory, which represent the scattering states of two particles with mass \(m\).
+    \item A pole at \(p^2 = m^2\) with residue \(iZ\), which is a consequence of the presence of a one particle state in the spectrum of the theory.
+    \item Poles at \(p^2 \leq (2m)^2\) for each two particle bound state in the spectrum of the theory, with residue \(iZ_B\), which is a consequence of the presence of the two particle bound states in the spectrum of the theory.
+\end{enumerate}
+
+For a free theory we would have only the one particle state in the spectrum of the theory, so that the K\:allen-Lehman representation of the two point function would reduce to
+\[
+    \int \mathrm{d}^4 x \, e^{ip \cdot x} \bra{0} T \{ \hat{\phi}_0(x) \hat{\phi}_0(0) \} \ket{0} = \frac{i}{p^2 - m^2 + i 0^+},
+\]
+with \(Z = 1\) since the field operator creates a one particle state with unit probability, and the physical mass \(m^2\) coincides with the bare mass \(M^2\) since there are no interactions in the theory.
+
+For an interacting theory we have
+\[
+    \begin{dcases}
+        m = m_{\lambda} + O(g), \\
+        Z = 1 + O(g),
+    \end{dcases}
+\]
+where \(g\) is the coupling constant of the theory, so that the physical mass \(m^2\) and the field strength renormalization constant \(Z\) receive corrections from the interactions in the theory.
+
+\begin{example}[Dirac Field]
+    If we compute these last results for a Dirac field, we would find
+    \[
+        \int \mathrm{d}^4 x \, e^{ip \cdot x} \bra{\Omega} T \{ \hat{\psi}(x) \hat{\bar{\psi}}(0) \} \ket{\Omega} = \frac{iZ (\slashed{p} + m)}{p^2 - m ^2+ i 0^+},
+    \]
+    such that
+    \[
+        \bra{\Omega} \hat{\psi}(0) \ket{\lambda_{\mathbf{p},\, s}} \Big|_{\lambda = \text{1-part}}= u_s(\mathbf{p} ) F(\lambda = \text{1-part}) = u_s(\mathbf{p} ) \sqrt{Z},
+    \]
+    [...]
+\end{example}
+
+\begin{example}[Unstable Particle State]
+    [...]
+    The decay rate has to remain very small, so that the unstable particle state can be treated as a stable particle state in the spectrum of the theory, approximating the ...
+        [...]
+    \[
+        m^2 = \Re\left[ \text{location 2-point function pole} \right]
+    \]
+    and then
+    \[
+        \int \mathrm{d}^4 x \, e^{ip \cdot x} \bra{\Omega} T \{ \hat{\phi}(x) \hat{\phi}(0) \} \ket{\Omega} = \frac{iZ}{p^2 - m^2 + i m \Gamma} + \text{regular closed 2-part. cont. contribution},
+    \]
+    [...]
+\end{example}
+
+\subsection{LSZ Reduction Formula}
+
+Let us start from the definition of the S-matrix elements in terms of the in and out states:
+\[
+    \bra{f} \hat{S} \ket{i},
+\]
+where \(\ket{i}\) and \(\ket{f}\) are the in and out states of the theory, which are defined as the asymptotic states of the theory at \(t \to -\infty\) and \(t \to +\infty\) respectively. Asymptotically, the interacting theory reduces to a free theory, so that the in and out states can be approximated by the free particle states of the free theory. This means that the field operators of the interacting theory can be approximated by the field operators of the free theory in the asymptotic limit, in which they act as creation and annihilation operators for the free particle states (or 1-particle):
+\[
+    \phi(x) \Big|_{t \to \pm \infty} \sim \sqrt{Z} \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{\sqrt{2E_{\mathbf{p}}}} \left( a_{\mathbf{p}} e^{-ip \cdot x} + a_{\mathbf{p}}^\dagger e^{ip \cdot x} \right),
+\]
+where \(Z\) is the field strength renormalization constant of the one particle state in the spectrum of the theory, and \(a_{\mathbf{p}}\) and \(a_{\mathbf{p}}^\dagger\) are the annihilation and creation operators for the free particle states of the free theory. The energy appearing in the denominator is the physical energy of the one particle state, which is related to the physical mass \(m\) by the relativistic dispersion relation \(E_{\mathbf{p}} = \sqrt{\mathbf{p}^2 + m^2} = p^0\).
+
+Note that the annihilation and creation operators \(a_{\mathbf{p}}\) and \(a_{\mathbf{p}}^\dagger\) are time independent, since they are defined as the asymptotic limits of the field operators, which are time dependent. The only assumption we are making is that the field operators of the interacting theory can be approximated by the field operators of the free theory in the asymptotic limit, which is a consequence of the fact that the interactions become negligible at large times. \TODO{check this last statement.}
+
+If we consider a scattering process with \(2\) incoming particles and \(n\) outgoing particles, we can write the in and out states as
+\[
+    \begin{aligned}
+        \ket{i} & = \sqrt{2E_a} \sqrt{2E_b} a^{\dagger}_{\mathbf{p}_a} a^{\dagger}_{\mathbf{p}_b} \ket{\Omega},                                                      \\
+        \ket{f} & = \sqrt{2E_1} \sqrt{2E_2} \cdots \sqrt{2E_n} a^{\dagger}_{\mathbf{p}_1} a^{\dagger}_{\mathbf{p}_2} \cdots a^{\dagger}_{\mathbf{p}_n} \ket{\Omega},
+    \end{aligned}
+\]
+where we have normalized the states by the factors of \(\sqrt{2E}\) to ensure that they are properly normalized according to the relativistic normalization convention. It is now time to compute the S-matrix element \(\bra{f} \hat{S} \ket{i}\) by inserting the expressions for the in and out states:
+\[
+    \bra{f} \hat{S} \ket{i} = \left[ \frac{i}{\sqrt{Z}} \int \mathrm{d}^4 x \, e^{ip \cdot x} (\partial^2 + m^2) \phi(x) \right]\dots \dots \dots \dots \dots
+\]
+a bunch of Fourier transforms of the field operators, where the only difference is in the phase sign: incoming particles have a negative phase sign, while outgoing particles have a positive phase sign. Thus the final LSZ reduction formula for the S-matrix element of a scattering process with \(2\) incoming particles and \(n\) outgoing particles is
+\[
+    \bra{f} \hat{S} \ket{i} = \left[ \frac{i}{\sqrt{Z}} \int \mathrm{d}^4 x \, e^{ip_a \cdot x} (\partial^2 + m^2) \phi(x) \right] \left[ \frac{i}{\sqrt{Z}} \int \mathrm{d}^4 y \, e^{ip_b \cdot y} (\partial^2 + m^2) \phi(y) \right] \dots
+    \dots \dots \dots \dots
+    \left[ -\frac{i}{\sqrt{Z}} \int \mathrm{d}^4 z_1 \, e^{-ip_1 \cdot z_1} (\partial^2 + m^2) \phi(z_1) \right]  \left[ -\frac{i}{\sqrt{Z}} \int \mathrm{d}^4 z_2 \, e^{-ip_2 \cdot z_2} (\partial^2 + m^2) \phi(z_2) 	\right] 	\dots 	\left[ -\frac{i}{\sqrt{Z}} \int \mathrm{d}^4 z_n \, e^{-ip_n \cdot z_n} (\partial^2 + m^2) 	\phi(z_n) 	\right] 	\bra{\Omega} T\{\phi(x)\phi(y)\dots\phi(z_1)\phi(z_2)\dots\phi(z_n)\}\ket{\Omega},
+\]
+which is a way to relate the S-matrix elements to the time-ordered correlation functions of the fields, which are the Green's functions of the theory. The LSZ reduction formula is a powerful tool for computing the S-matrix elements from the Green's functions, and it is widely used in quantum field theory to compute scattering amplitudes and cross sections for various processes.
+
+\TODO{All calculations wrong around here, check them carefully.}
+
+If we rewrite it in the momentum space, integrating by parts the derivatives so that they act on the left at the end, we can write the LSZ reduction formula as
+\[
+    \bra{f} \hat{S} \ket{i} = \prod_{i = a,b,1,\dots ,n} \left[ \frac{i}{\sqrt{Z}} \int \mathrm{d}^4 x_i \, e^{\pm ip_i \cdot x_i} (\partial^2 + m^2) \right] \bra{\Omega} T\{\phi(x_a)\phi(x_b)\dots\phi(x_1)\phi(x_2)\dots\phi(x_n)\}\ket{\Omega},
+\]
+
+We have assumed asymptotic particles as the final state, with on shell momenta \(p_i^2 = m^2\), so that the factors of \((\partial^2 + m^2)\) in the LSZ reduction formula will give zero when acting on the external legs of the Green's functions, which are the free propagators of the theory. This means that the only contribution to the S-matrix elements will come from the poles of the Green's functions, which correspond to the physical particles in the spectrum of the theory. The residues of these poles will give the field strength renormalization constants \(Z\) for each particle, which will cancel with the factors of \(1/\sqrt{Z}\) in the LSZ reduction formula, giving a finite result for the S-matrix elements.
+
+\subsection{Generalization to Other Fields}
+
+If we repeat the same analysis for different types of fields, such as Dirac fields or gauge fields, we will find similar results for the two point functions and the LSZ reduction formula, with some modifications due to the different spin and statistics of the fields:
+\begin{itemize}
+    \item For a \textbf{complex scalar field}, we would have two types of particles, the particle and the antiparticle, with different creation and annihilation operators, and the LSZ reduction formula would involve both types of operators for the in and out states:
+          \begin{itemize}
+              \item \(\phi^{\dagger}\) for incoming particles and outgoing antiparticles, with a positive phase sign in the Fourier transform.
+              \item \(\phi\) for outgoing particles and incoming antiparticles, with a negative phase sign in the Fourier transform.
+          \end{itemize}
+          This would lead to a more complicated LSZ reduction formula, but the general structure would be the same as for the real scalar field, and with this prescription we could also compute  the results for Dirac theory (\(\phi \to \psi\) and \(\phi^{\dagger} \to \bar{\psi}\)).
+    \item If we are considering a theory of several fields, then the Green function will contain all the different fields along with the different masses of the quanta, and the LSZ reduction formula will involve the corresponding field operators for each type of particle in the in and out states, with the appropriate phase signs in the Fourier transforms.
+    \item When considering particle with different spins, we have to take into account the different transformation properties of the fields under Lorentz transformations, which will affect the structure of the two point functions and the LSZ reduction formula. For example, for a Dirac field we would have the following field operators for the in and out states:
+          \begin{itemize}
+              \item \(\overline{u}_{s,\alpha}\) for outgoing particles;
+              \item \(u_{s,\alpha}\) for incoming particles;
+              \item \(v_{s,\alpha} \) for outgoing antiparticles;
+              \item \(\overline{v}_{s,\alpha} \) for incoming antiparticles.
+          \end{itemize}
+          If we instead consider a spin-1 gauge field, we would have the following field operators for the in and out states:
+          \begin{itemize}
+              \item \(\epsilon_{\mu}(p,\,\lambda)\) for outgoing particles;
+              \item \(\epsilon_{\mu}^*(p,\,\lambda)\) for incoming particles.
+          \end{itemize}
+          The spinorial/vectorial indices (\(\alpha\), \(\mu\) etc.) of the field operators will be contracted with the corresponding indices of the Green's functions in the LSZ reduction formula, and the final expression for the S-matrix elements will involve the appropriate spinor/vector structures for each type of particle in the in and out states:
+          \[
+              \bra{\Omega} T\{ \dots A^{\mu}(x) \dots \psi_{\alpha}(y) \dots \} \ket{\Omega}.
+          \]
+    \item For a Dirac fermion the ...
+\end{itemize}
+
+We have to make one final observation: we did not make any assumption on the behaviour of the field operators of the interacting theory, apart from the fact that they can be approximated by the field operators of the free theory in the asymptotic limit (as ladder operat), which is similar to the statement
+\[
+    \bra{\Omega} \hat{\phi}(x) \ket{\lambda_{\mathbf{p}}} = \sqrt{Z} e^{-i p \cdot x},
+\]
+[...]
+
