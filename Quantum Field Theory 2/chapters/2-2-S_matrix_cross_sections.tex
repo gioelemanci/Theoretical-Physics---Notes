@@ -439,35 +439,68 @@ We are basically performing a change of reference frame in order to reverse the 
 
 \subsection{Decay Rates}
 
-We can similarly deal with \textbf{unstable particles}, which are particles that can decay into other particles. The decay rate of an unstable particle is given by the probability per unit time that the particle will decay, and it can be computed using the S-matrix formalism in a similar way to how we compute scattering amplitudes and cross sections for stable particles.\TODO{Add drawing.}
+We can similarly deal with \textbf{unstable particles}, which after a certain lifetime can decay into other lighter particles. Systems composed by unstable particles can be analyzed using the S-matrix formalism in a similar way to how we compute scattering amplitudes and cross sections for stable particles.
 By analyzing the transition amplitudes for the decay process, we can determine the decay rate and the branching ratios for different decay channels, which provide insights into the properties of the unstable particle and its interactions with other particles.
 
-The decay rate \(\Gamma\) of an unstable particle can be computed as
-\[
-    \Gamma = \frac{\text{Number of decays per unit time}}{\text{Number of particles}},
-\]
-and we can define the lifetime \(\tau\) of the particle as the inverse of the decay rate:
-\[
-    \tau = \frac{1}{\Gamma}.
-\]
-The decay rate can be computed using the S-matrix element for the transition from the initial state (the unstable particle) to the final state (the decay products), and it is related to the invariant amplitude \(\mathcal{M}\) for the decay process. We cannot directly apply the limit for \(t_i \to -\infty\), since the particle is unstable and thus it cannot exist for an infinite amount of time, thus we need to consider a finite time interval for the decay process, but we can make a simplification: if we assume the particle to have a lifetime way longer than the time scale of the interaction, we can still apply the S-matrix formalism and compute the decay rate using the invariant amplitude for the decay process, while treating the unstable particle as if it were stable during the interaction.
+\begin{figure}[H]
+    \begin{minipage}{0.3\textwidth}
+        \centering
+        \begin{tikzpicture}[>=stealth, thick]
 
-Defining the differential decay rate as
-\[
+            \node[circle, draw=black, fill=orange!30, minimum size=1cm, inner sep=0pt] (A) at (0,0) {$A$};
+
+            \coordinate (P1) at (3, 1.5);
+            \coordinate (P2) at (3, 0.5);
+            \coordinate (Pn) at (3, -1.5);
+
+            \draw[->] (A) -- (P2) node[right] {$p_2$};
+            \draw[->] (A) -- (Pn) node[right] {$p_n$};
+            \draw[->] (A) -- (P1) node[right] {$p_1$};
+
+            \node at (3.25, -0.4) {$\vdots$};
+
+        \end{tikzpicture}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.65\textwidth}
+        The \textbf{decay rate} \(\Gamma\) of an unstable particle can be computed as
+        \[
+            \Gamma = \frac{\text{Number of decays per unit time}}{\text{Number of particles}},
+        \]
+        and we can define the \textbf{lifetime} \(\tau\) of the particle as the inverse of the decay rate:
+        \[
+            \tau = \frac{1}{\Gamma}.
+        \]
+        Decay rates and lifetimes are defined in the rest frame of the particle, where the particle is at rest and its energy is equal to its mass \(E = m\) and its momentum is zero \(\mathbf{p} = 0\).
+    \end{minipage}
+\end{figure}
+The decay rate can be computed using the S-matrix element for the transition from the initial state (the unstable particle) to the final state (the decay products), and it is related to the \textbf{invariant amplitude} \(\mathcal{M}\) for the decay process.
+We cannot directly apply the limit for \(t_i \to -\infty\), since the particle is unstable and it would have decayed before, it cannot exist for an infinite amount of time. We therefore need to consider a finite time interval for the decay process, but we can make a simplification: if we assume the particle to have a lifetime way longer than the time scale of the interaction (always true for most practical cases), we can still apply the S-matrix formalism and compute the decay rate using the invariant amplitude for the decay process, and we will have to take into account the instability of the particle only in one step of the calculation.\TODO{check footnote.}\footnote{We will consider a finite time interval for the decay process and then take the limit of large time intervals to recover the usual expression for the decay rate.}
+
+Defining the \textbf{differential decay rate} as
+\begin{equation}
     \frac{\mathrm{d} \Gamma}{\mathrm{d} f} = \frac{1}{T} \mathrm{d} P,
-\]
-where \(T\) is the time interval during which the decay process occurs \(T = t_f-t_i\), and \(\mathrm{d} P\) is the probability of the decay process occurring within that time interval, we can compute the total decay rate by integrating over the phase space of the final states; let us first write the expression for t delta function in the limit of finite and large \(T\):
+    \label{eq:differential_decay_rate}
+\end{equation}
+where \(T\) is the time interval during which the decay process occurs \(T = t_f-t_i\), and \(\mathrm{d} P\) is the probability of decaying from the initial state to the final state within that time interval; we can compute the total decay rate by integrating over the phase space of the final states; let us first write the expression for the delta function in the limit of finite and large \(T\):
 \[
     \delta(0) = \int_{t_i}^{t_f} \mathrm{d} t \, e^{i (E_i - E_f) t} |_{t_f \to \infty, t_i \to -\infty},
 \]
+which is the critical step in the calculation, since it allows us to regularize the delta function and make sense of the transition amplitude for the decay process; the complete calculation is shown in Appendix \ref{app:decay_rate}.\TODO{write it.}
+Having solved the subtleties of defining the asymptotic states for unstable particles, the final expression for the decay rate after integrating over the phase space of the final states is
+\begin{equation}
+    \mathrm{d} \Gamma = \frac{1}{2 m} |\mathcal{M}_{p_i \to p_f}|^2 \mathrm{d} \Pi_N,
+    \label{eq:decay_rate_final_state_phase_space}
+\end{equation}
+where \(m\) is the mass of the unstable particle, \(\mathcal{M}_{p_i \to p_f}\) is the invariant amplitude for the decay process, and \(\mathrm{d} \Pi_N\) is the phase space factor for the N-particle final state, which accounts for the kinematics of the decay products and ensures that energy and momentum are conserved in the decay process.
+It is very similar to the expression for the differential cross section, with some differences concerning the flux factor term \(\Phi = 2E_a 2E_b \vert v_a - v_b \vert\):
+\begin{itemize}
+    \item \(2E_a \to 2m\) since we are in the rest frame of the unstable particle, thus \(E_a = m\);
+    \item \(2E_b \vert v_a - v_b \vert \) is not present since we are not dealing with a scattering process, but rather with a decay process, thus there is no incoming particle \(b\) and no relative velocity to consider.
+\end{itemize}
+This expression allows us to compute the decay rate for an unstable particle given the invariant amplitude and the kinematic variables of the decay process.
 
-After surpassing the subtleties of defining the asymptotic states for unstable particles, we can write the expression for the decay rate after integrating over the phase space of the final states as
-\[
-    \mathrm{d} \Gamma = \frac{1}{2 m} |\mathcal{M}|^2 \mathrm{d} \Pi_N,
-\]
-where \(m\) is the mass of the unstable particle, \(\mathcal{M}\) is the invariant amplitude for the decay process, and \(\mathrm{d} \Pi_N\) is the phase space factor for the N-particle final state, which accounts for the kinematics of the decay products and ensures that energy and momentum are conserved in the decay process. This expression allows us to compute the decay rate for an unstable particle given the invariant amplitude and the kinematic variables of the decay process.
-
-\paragraph{Identical particles.} When dealing with identical particles among the decay products, we need to take into account the symmetrization (for bosons) or antisymmetrization (for fermions) of the wave function. This means that the scattering amplitude must be modified to include the appropriate symmetry factors, which can affect the calculation of cross sections and decay rates in order to consider the spin statistics theorem
+\paragraph{Identical particles.} When dealing with identical particles among the decay products, the previous formula are still valid, with the appropriate modifications to take into account the symmetrization (for bosons) or antisymmetrization (for fermions) of the wave function. This means that the scattering amplitude must be modified to include the appropriate symmetry factors, which can affect the calculation of cross sections and decay rates in order to consider the spin statistics theorem
 \[
     \ket{p_3,\,p_4} = \pm \ket{p_4,\,p_3}.
 \]

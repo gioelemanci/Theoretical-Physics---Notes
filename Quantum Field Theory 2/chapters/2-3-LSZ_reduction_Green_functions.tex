@@ -1,136 +1,187 @@
 \section{LSZ reduction and Green's functions}
 
 In this section we aim to show how the S-matrix elements can be computed from the Green's functions of the interacting theory. This is done by the LSZ reduction formula, which relates the S-matrix elements to the time-ordered correlation functions of the fields.
-\[
-    \bra{f} \hat{S} \ket{i} \to \bra{\Omega} T \{ \hat{\phi}(x_1) \hat{\phi}(x_2) \cdots \hat{\phi}(x_n) \} \ket{\Omega}
-\]
-where
-\[
-    \begin{dcases}
-        \hat{\phi} \text{ is the field operator of the interacting theory,} \\
-        \ket{\Omega} \text{ is the vacuum state of the interacting theory.}
-    \end{dcases}
-\]
-We now have to analyze the structure of the two point function of the interacting theory, investigating its physical content and how it relates to the S-matrix elements, and finally relate it to the LSZ reduction formula for connecting the scattering matrix elements to the n-point Green's functions. We will start from a \textbf{real scalar theory} before generalizing to more complicated theories.
 
-\subsection{Two Point Functions}
+The Green's functions of the interacting theory are defined as the time-ordered correlation functions of the field operators in the interacting theory, evaluated in the vacuum state of the interacting theory:
+\begin{equation}
+    \bra{f} \hat{S} \ket{i} \to \bra{\Omega} T \{ \hat{\phi}(x_1) \hat{\phi}(x_2) \cdots \hat{\phi}(x_n) \} \ket{\Omega}
+    \label{eq:green_function_interacting}
+\end{equation}
+where
+\begin{itemize}
+    \item \(\hat{\phi}\) is the field operator of the interacting theory,
+    \item \(\ket{\Omega}\) is the vacuum state of the interacting theory,
+\end{itemize}
+where we highlighted the difference among the vacuum state of the interacting theory and the free theory one: interactions can modify the structure of the vacuum and the Green's functions of the interacting theory encode all the information about its dynamics; they are the building blocks for computing physical observables such as scattering amplitudes and cross sections.
+
+We now start from the structure analysis of the two point functions \(\bra{\Omega} \hat{T} \{ \hat{\phi}(x) \hat{\phi}(y) \} \ket{\Omega}\) in an interacting theory, investigating its physical content and how it relates to the S-matrix elements \( \bra{f} \hat{S} \ket{i} \), finally relating it to the LSZ reduction formula for connecting the scattering matrix elements to the n-point Green's functions. We will start from a \textbf{real scalar theory} before generalizing to more complicated theories.
+
+\subsection{Two Point Functions}\TODO{Add reference to Peskin 7.1}
 
 To analyze the structure of the two point function, we start from the definition of the time-ordered two point function in the interacting theory:
 \[
     \bra{\Omega} T \{ \hat{\phi}(x) \hat{\phi}(y) \} \ket{\Omega},
 \]
-we can now insert a complete set of states between the two field operators:
+the idea is now to insert a complete set of physical states \(\bra{\lambda}\)\footnote{Here we can interpret \(\lambda\) as the set of quantum numbers characterizing the different states of our theory.} as a resolution of the identity \(\mathbb{I} = \sum_{\lambda} \ket{\lambda} \bra{\lambda}\) between the two field operators; but we have to be more precise, since the vacuum state \(\ket{\Omega}\) is a physical state of the theory, we have to separate it from the other states in the spectrum of the theory, so that we can write the resolution of the identity as
 \[
-    \mathbb{I} = \bra{\Omega}\ket{\Omega} + \sum_{\lambda \notin \ket{\Omega}} \ket{\lambda} \bra{\lambda},
+    \mathbb{I} = \ket{\Omega}\bra{\Omega} + \sum_{\lambda \neq \Omega} \ket{\lambda} \bra{\lambda},
 \]
-where $\ket{\lambda}$ are the eigenstates of [...?...] and $\ket{\Omega}$ is the vacuum state of the interacting theory.\footnote{The vacuum state has to be different from the free theory one, since ...}
+where $\ket{\lambda}$ are seen as eigenstates of the momentum operator \(\hat{\mathbf{P}}\) plus other quantum numbers, so that we can write them as \(\ket{\lambda_{\mathbf{p}}}\) to make the momentum dependence explicit. They are normalized according to the relativistic normalization convention, so that we have
+\[
+    \bra{\lambda_{\mathbf{p}}} \ket{\lambda'_{\mathbf{p}'}} = (2\pi)^3 2E_{\mathbf{p}}(\lambda) \delta^{(3)}(\mathbf{p} - \mathbf{p}') \delta_{\lambda,\,\lambda'},
+\]
+where \(E_{\mathbf{p}}(\lambda) = \sqrt{\mathbf{p}^2 + m_\lambda^2}\) is the energy of the state \(\ket{\lambda_{\mathbf{p}}}\) with momentum \(\mathbf{p}\) and mass \(m_\lambda\). The sum over \(\lambda\) includes all the physical states of the theory, such as the one particle states, the two particle states, the bound states, etc.
 
-[...]
+We cited the mass \(m_\lambda\) of the state \(\ket{\lambda_{\mathbf{p}}}\) as a label for the state, but it is important to note that the mass \(m_\lambda\) is not a free parameter, but it is determined by the dynamics of the theory and it is related to the eigenvalue of the momentum operator \(\hat{P}^\mu\) on the state \(\ket{\lambda_{\mathbf{p}}}\) by the relativistic dispersion relation:
+\[
+    \hat{P}^\mu \ket{\lambda_{\mathbf{p}}} = p^\mu \ket{\lambda_{\mathbf{p}}}, \quad p^2 = p_\mu p^\mu = m_\lambda^2,
+\]
+so that the mass \(m_\lambda\) is determined by the eigenvalue of \(\hat{P}^2\) on the state \(\ket{\lambda_{\mathbf{p}}}\):
+\[
+    \hat{P}^2 \ket{\lambda_{\mathbf{p}}} = m_\lambda^2 \ket{\lambda_{\mathbf{p}}}.
+\]
+Putting everything together, we can write the resolution of the identity as
+\[
+    \mathbb{I} = \ket{\Omega}\bra{\Omega} + \sum_{\lambda \neq \Omega} \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}(\lambda)} \ket{\lambda_{\mathbf{p}}} \bra{\lambda_{\mathbf{p}}},
+\]
+with the factor of \(1/(2E_{\mathbf{p}}(\lambda))\) coming from the relativistic normalization of the states \(\ket{\lambda_{\mathbf{p}}}\).
 
-If we now assume \(x^0 > y^0\), the time-ordering operator \(T\) does not change the order of the fields, and we can write:
+If we now assume \(x^0 > y^0\), the time-ordering operator \(T\) does not change the order of the fields, and we can neglect it in order to write the two point function as:
 \[
-    \bra{\Omega} \hat{\phi}(x) \hat{\phi}(y) \ket{\Omega} = \bra{\Omega} \hat{\phi}(x) \left( \ket{\Omega}\bra{\Omega} + \sum_{\lambda \notin \ket{\Omega}} \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}(\lambda)} \ket{\lambda_{\mathbf{p}}} \bra{\lambda_{\mathbf{p}}} \right) \hat{\phi}(y) \ket{\Omega},
+    \begin{aligned}
+        \bra{\Omega} \hat{\phi}(x) \hat{\phi}(y) \ket{\Omega} & = \bra{\Omega} \hat{\phi}(x) \left( \ket{\Omega}\bra{\Omega} + \sum_{\lambda \neq \Omega} \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}(\lambda)} \ket{\lambda_{\mathbf{p}}} \bra{\lambda_{\mathbf{p}}} \right) \hat{\phi}(y) \ket{\Omega}                                          \\
+                                                              & = \bra{\Omega} \hat{\phi}(x) \ket{\Omega} \bra{\Omega} \hat{\phi}(y) \ket{\Omega} + \sum_{\lambda \neq \Omega} \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}(\lambda)} \bra{\Omega} \hat{\phi}(x) \ket{\lambda_{\mathbf{p}}} \bra{\lambda_{\mathbf{p}}} \hat{\phi}(y) \ket{\Omega},
+    \end{aligned}
 \]
-and if we now relate \(\hat{\phi}(x)\) to \(\hat{\phi}(0)\) by a translation
+and if we now relate \(\hat{\phi}(x)\) to \(\hat{\phi}(0)\) by a spacetime translation, using the unitary operator \(\hat{U}_{\mathbf{p}} = e^{i \hat{P} \cdot x}\) that implements the translation, so that
 \[
-    \hat{U}_{\mathbf{p}} = e^{i \hat{P} \cdot x} \implies \hat{\phi}(x) = e^{i \hat{P} \cdot x} \hat{\phi}(0) e^{-i \hat{P} \cdot x} = \hat{U}_{\mathbf{p}} \hat{\phi}(0) \hat{U}_{\mathbf{p}}^{\dagger},
+    \hat{U}_{\mathbf{p}} = e^{i \hat{P} \cdot x} \implies \hat{\phi}(x) = e^{i \hat{P} \cdot x} \,\hat{\phi}(0)\, e^{-i \hat{P} \cdot x} = \hat{U}_{\mathbf{p}} \, \hat{\phi}(0) \, \hat{U}_{\mathbf{p}}^{\dagger},
 \]
-we can compute the terms by assuming that the vacuum is translationally invariant, and that the states \(\ket{\lambda_{\mathbf{p}}}\) are eigenstates of the momentum operator \(\hat{P}\) with eigenvalue \(p\):
+we can compute the terms by assuming that the vacuum is \textit{translationally invariant}, and since we said that \(\ket{\lambda_{\mathbf{p}}}\) are eigenstates of the momentum operator \(\hat{P}\) with eigenvalue \(p\), we can write:
 \[
-    \bra{\Omega} \hat{\phi}(x) \ket{\lambda_{\mathbf{p}}} = \bra{\Omega} \hat{\phi}(0) \ket{\lambda_{\mathbf{p}}} e^{-ip \cdot x},
+    \begin{aligned}
+        \bra{\Omega} \hat{\phi}(x) \ket{\lambda_{\mathbf{p}}} & = \bra{\Omega} e^{i \hat{P} \cdot x} \hat{\phi}(0) e^{-i \hat{P} \cdot x} \ket{\lambda_{\mathbf{p}}} \\
+                                                              & = e^{-ip \cdot x}\bra{\Omega} \hat{\phi}(0) \ket{\lambda_{\mathbf{p}}},
+    \end{aligned}
 \]
-from vacuum invariance and momentum eigenstate properties. We can now assume a Lorentz transformation \(\Lambda\) to exist such that \(\Lambda p = (m\lambda, \mathbf{0})\), and the corresponding unitary operator \(\hat{U}(\Lambda)\) to exist such that
+from vacuum invariance and momentum eigenstate properties. We can now assume a Lorentz transformation \(\Lambda\) and the corresponding unitary operator \(\hat{U}(\Lambda)\) to exist such that \(\Lambda p = (m_\lambda, \mathbf{0})\) and \(\hat{U}(\Lambda) \ket{\lambda_{\mathbf{p}}} = \ket{\lambda_{\mathbf{0}}}\). Hence\QUESTION{why the physical states can be transformed to the rest frame?}
 \[
-    \bra{\Omega} \hat{\phi}(0) \ket{\lambda_{\mathbf{p}}} = \bra{\Omega} \hat{U}(\Lambda)^{\dagger} \hat{U}(\Lambda) \hat{\phi}(0) \hat{U}(\Lambda)^{\dagger} \hat{U}(\Lambda) \ket{\lambda_{\mathbf{p}}} = \bra{\Omega} \hat{\phi}(0) \ket{\lambda_{\mathbf{0}}},
+    \bra{\Omega} \hat{\phi}(0) \ket{\lambda_{\mathbf{p}}} = \left(\bra{\Omega} \hat{U}(\Lambda)^{\dagger}\right) \left(\hat{U}(\Lambda) \hat{\phi}(0) \hat{U}(\Lambda)^{\dagger}\right) \left(\hat{U}(\Lambda) \ket{\lambda_{\mathbf{p}}}\right) = \bra{\Omega} \hat{\phi}(0) \ket{\lambda_{\mathbf{0}}},
 \]
-since the vacuum is invariant under Lorentz transformations, and the field operator transforms trivially since \(\hat{\phi}(\Lambda 0) = \hat{\phi}(0)\). Hence
+since the vacuum is invariant under Lorentz transformations, and the field operator transforms trivially: \(\hat{\phi}(\Lambda 0) = \hat{\phi}(0)\). Thus we can write
 \[
-    \bra{\Omega} \hat{\phi}(x) \ket{\lambda_{\mathbf{p}}} = \bra{\Omega} \hat{\phi}(0) \ket{\lambda_{\mathbf{0}}} e^{-ip \cdot x} = e^{-ip \cdot x} F(\lambda).
+    \bra{\Omega} \hat{\phi}(x) \ket{\lambda_{\mathbf{p}}} = \bra{\Omega} \hat{\phi}(0) \ket{\lambda_{\mathbf{0}}} e^{-ip \cdot x} = e^{-ip \cdot x} F(\lambda),
 \]
-
-[...]
-
-Thus
+where we have defined the function \(F(\lambda) = \bra{\Omega} \hat{\phi}(0) \ket{\lambda_{\mathbf{0}}}\) which encodes the information about the coupling of the field operator to the state \(\ket{\lambda}\). In the particular case of \(\ket{\lambda_{\mathbf{p}}} = \ket{\Omega}\), we get
+\[
+    \bra{\Omega} \hat{\phi}(x) \ket{\Omega} = v = \text{constant},
+\]
+which is a consequence of the translational invariance of the vacuum state and represents the vacuum expectation value of the field operator. We can then always redefine the field operator by subtracting the vacuum expectation value
+\[
+    \phi(x) = v + \tilde{\phi}(x), \quad \bra{\Omega} \tilde{\phi}(x) \ket{\Omega} = 0,
+\]
+since the vacuum expectation value of the field operator does not affect the dynamics of the theory, and it can be absorbed into a redefinition of the field operator. This means that we can always choose a field operator such that its vacuum expectation value is zero, which simplifies the analysis of the two point function and the LSZ reduction formula.
+Thus the two point (after the redefinition of the field operator) function can be written as
 \[
     \bra{\Omega} \hat{\phi}(x) \hat{\phi}(y) \ket{\Omega} = \sum_{\lambda} \vert F(\lambda) \vert^2 \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}(\lambda)} e^{-ip \cdot (x-y)},
 \]
 valid for \(x^0 > y^0\) and where the last term
-\[
-    D(x,\,y,\,m \lambda) = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}(\lambda)} e^{-ip \cdot (x-y)},
-\]
-is the free propagator of a particle with mass \(m_\lambda\):
-\[
-    D(x,\,y,\,m_\lambda) = \bra{0} \hat{\phi}_{0,\lambda}(x) \hat{\phi}_{0,\lambda}(y) \ket{0},
-\]
-with \(\hat{\phi}_{0,\lambda}\) the free field operator of a particle with mass \(m_\lambda\). We can now write the two point function as
+\begin{equation}
+    D(x,\,y,\,m_\lambda) = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}(\lambda)} e^{-ip \cdot (x-y)} = \bra{0} \hat{\phi}_{0,\lambda}(x) \hat{\phi}_{0,\lambda}(y) \ket{0},
+    \label{eq:free_propagator}
+\end{equation}
+is the \textbf{free propagator} of a particle with mass \(m_\lambda\), with \(\hat{\phi}_{0,\lambda}\) the free field operator of a particle with mass \(m_\lambda\): it is the amplitude for a free scalar particle to propagate from point \(y\) to point \(x\). We can now reintroduce the time-ordering to write the two point function in a more general form
 \[
     \begin{aligned}
         \bra{\Omega} T \{ \hat{\phi}(x) \hat{\phi}(y) \} \ket{\Omega} & = \Theta(x^0 - y^0) \bra{\Omega} \hat{\phi}(x) \hat{\phi}(y) \ket{\Omega} + \Theta(y^0 - x^0) \bra{\Omega} \hat{\phi}(y) \hat{\phi}(x) \ket{\Omega}                \\
                                                                       & = \Theta(x^0 - y^0) \sum_{\lambda} \vert F(\lambda) \vert^2 D(x,\,y,\,m_\lambda) + \Theta(y^0 - x^0) \sum_{\lambda} \vert F(\lambda) \vert^2 D(y,\,x,\,m_\lambda).
     \end{aligned}
 \]
-In this last expression we can recognize the Feynman propagator of a particle with mass \(m_\lambda\):
-\[
-    D_F(x-y,\,m_\lambda) = \Theta(x^0 - y^0) D(x,\,y,\,m_\lambda) + \Theta(y^0 - x^0) D(y,\,x,\,m_\lambda) = \int \frac{\mathrm{d}^4 p}{(2\pi)^4} \frac{i}{p^2 - m_\lambda^2 + i\epsilon} e^{-ip \cdot (x-y)},
-\]
-so that we can write the final expression for the two point function, \textbf{K\:allen-Lehman}:
-\[
-    \bra{\Omega} T \{ \hat{\phi}(x) \hat{\phi}(y) \} \ket{\Omega} = \int \frac{\mathrm{d} M}{2\pi} g(M^2) D_F(x,\,y,\,M),
-\]
-where we have defined the \textbf{spectral density} function \(g(M^2)\) as
-\[
-    g(M^2) = \sum_{\lambda} (2\pi) \vert F(\lambda) \vert^2 \delta(M^2 - m_\lambda^2).
-\]
-The spectral density function encodes the information about the spectrum of the theory, and it is a positive function since it is defined as a sum of positive terms. The K\:allen-Lehman representation of the two point function shows that the two point function can be written as a superposition of free propagators with different masses, weighted by the spectral density function. This representation is very useful for analyzing the properties of the theory, and it will be crucial for deriving the LSZ reduction formula in the next section.
+In this last expression we can recognize the \textbf{Feynman propagator} of a particle with mass \(m_\lambda\):
+\begin{equation}
+    \begin{aligned}
+        D_F(x-y,\,m_\lambda) & = \Theta(x^0 - y^0) D(x,\,y,\,m_\lambda) + \Theta(y^0 - x^0) D(y,\,x,\,m_\lambda)                                                                                                    \\
+                             & = \bra{0} \hat{T}\{\hat{\phi}_{0,\lambda}(x) \hat{\phi}_{0,\lambda}(y)\} \ket{0} = \int \frac{\mathrm{d}^4 p}{(2\pi)^4} \frac{i}{p^2 - m_\lambda^2 + i\epsilon} e^{-ip \cdot (x-y)},
+    \end{aligned}
+    \label{eq:Feynman_propagator}
+\end{equation}
+which is the amplitude for a free scalar particle to propagate from point \(y\) to point \(x\) in a time-ordered manner, and it is given by the Fourier transform of the free propagator with the appropriate \(i\epsilon = i0^{+}\) prescription to ensure causality.
 
-Let us make some observations about the K\:allen-Lehman representation of the two point function:
+With this last definition, we can now write the final expression, the \textbf{Källén-Lehmann spectral representation} of the two point function, as:
+\begin{equation}
+    \bra{\Omega} T \{ \hat{\phi}(x) \hat{\phi}(y) \} \ket{\Omega} = \int \frac{\mathrm{d} M}{2\pi} g(M^2) D_F(x,\,y,\,M),
+    \label{eq:Kallen_Lehmann_representation}
+\end{equation}
+where we have defined the \textbf{spectral density} function \(g(M^2)\) as
+\begin{equation}
+    g(M^2) = \sum_{\lambda} (2\pi) \vert F(\lambda) \vert^2 \delta(M^2 - m_\lambda^2).
+    \label{eq:spectral_density_function}
+\end{equation}
+The spectral density function encodes the information about the spectrum of the theory,\footnote{The spectral density function is a measure of the number of states with a given mass: the spectrum of the theory is the set of all possible masses of physical particles.} and it is a positive function since it is defined as a sum of positive terms. The Källén-Lehmann representation of the two point function shows that the two point function can be written as a superposition of free propagators with different masses, weighted by the spectral density function.
+
+This spectral representation is very useful for analyzing the properties of the theory, and it will be crucial for deriving the LSZ reduction formula in the next section: it will allow us to relate the S-matrix elements to the poles of the two point function (which correspond to the physical particles in the spectrum of the theory) and to the residues of these poles (which correspond to the field strength renormalization constants of these particles).
+
+Let us make some observations about the Källén-Lehmann representation to understand better the look and physical meaning of the spectral density function \(g(M^2)\):
 \begin{itemize}
-    \item If \(M^2 = m^2\) with \(m\) the physical mass of a \textbf{one particle state}, then the spectral density function has a delta function contribution
+    \item If \(M^2 = m^2\) with \(m\) the physical mass of a \textbf{one particle state} (i.e. \(m^2\) eigenvalue of \(\hat{P}^2\)), then the spectral density function has a delta function contribution
           \[
-              g(M^2) \Big|_{M^2=m^2} = (2\pi) Z \delta(M^2 - m^2),
+              g(M^2) \Big|_{M^2=m^2} = Z (2\pi) \delta(M^2 - m^2),
           \]
-          with \(Z = \vert F(\lambda = \text{1-part. state}) \vert^2 \) which represents the field strength renormalization constant of the one particle state. This means that the two point function has a pole at \(p^2 = m^2\) with residue \(Z\), which is a consequence of the presence of a one particle state in the spectrum of the theory.
+          with \(Z = \vert F(\lambda = \text{1-part. state}) \vert^2 \) which represents the \textit{field strength renormalization constant} of the one particle state. This means that the two point function has a pole at \(p^2 = m^2\) with residue \(Z\), which is a consequence of the presence of a one particle state in the spectrum of the theory.
 
     \item For a \textbf{two particle bound state} we have two cases:
           \begin{itemize}
               \item If \(M^2 \leq (2m)^2\) then the spectral density function has a delta function contribution
                     \[
-                        g(M^2) \Big|_{M^2 \leq (2m)^2} = \sum_{\lambda \in \text{2-part. states}} (2\pi) \delta(M^2 - m_\lambda^2) Z_B,
+                        g(M^2) \Big|_{M^2 \leq (2m)^2} = \sum_{\lambda \in \text{2-part. states}} Z_B (2\pi) \delta(M^2 - m_\lambda^2),
                     \]
-                    with \(Z_B = \vert F(\lambda = \text{2-part. state}) \vert^2 \) which represents the field strength renormalization constant of the two particle bound state. This means that the two point function has a pole at \(p^2 = M_B^2\) with residue \(Z_B\), which is a consequence of the presence of a two particle bound state in the spectrum of the theory.
+                    with \(Z_B = \vert F(\lambda = \text{2-part. state}) \vert^2 \) which represents the \textit{field strength renormalization constant} of the two particle bound state. This means that the two point function has a pole at \(p^2 = M_B^2\) with residue \(Z_B\), which is a consequence of the presence of a two particle bound state in the spectrum of the theory.
               \item If \(M^2 > (2m)^2\) then the spectral density function has a continuous contribution given by the two particle continuum states, which represent the scattering states of two particles with mass \(m\)
                     \[
-                        g(M^2) = \sum_{\lambda \in \text{2-part. cont. states}} (2\pi) \delta(M^2 - m_\lambda^2) Z_C,
+                        g(M^2) = Z_C \sum_{\lambda \in \text{2-part. cont. states}} (2\pi) \delta(M^2 - m_\lambda^2),
                     \]
-                    with \(Z_C = \vert F(\lambda = \text{2-part. cont. state}) \vert^2 \) which represents the field strength renormalization constant of the two particle continuum states. This means that the two point function has a branch cut starting at \(p^2 = (2m)^2\), which is a consequence of the presence of the two particle continuum states in the spectrum of the theory.
+                    with \(Z_C = \vert F(\lambda = \text{2-part. cont. state}) \vert^2 \) which represents the \textit{field strength renormalization constant} of the two particle continuum states. This means that the two point function has a branch cut starting at \(p^2 = (2m)^2\), which is a consequence of the presence of the two particle continuum states in the spectrum of the theory.
           \end{itemize}
     \item The spectral density function \(g(M^2)\) is a positive function of the \textbf{bare mass} \(M\), since it is defined as a sum of positive terms. This means that the two point function is a positive function, which is a consequence of the unitarity of the theory.
     \item The physical mass \(m^2\) is the eigenvalue of \(\hat{P}^2\), so that it represents the mass of the one particle state in the spectrum of the theory. The physical mass is different from the bare mass \(M^2\) which appears in the Lagrangian of the theory, and it is related to the bare mass by a renormalization procedure.
 \end{itemize}
 
-We can now study again the two point function in momentum space, by performing a Fourier transform of the K\:allen-Lehman representation:
+Thus we can now understand a typical look of the spectral density function \(g(M^2)\) for a theory with a one particle state, some two particle bound states and a two particle continuum states:
+\begin{figure}[H]
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/spectral_density_function.jpg}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/analytic_structure_2pt_func_fourier_p2.png}
+    \end{minipage}
+    \centering
+    \caption{On the left image we can see the spectral density function for a theory with a one particle state and a two particle bound and continuum states, with the delta function contributions and the continuous part. On the right image we can see the analytic structure in the complex \(p^2\)-plane of the two point function Fourier transform, with the pole at \(p^2 = m^2\) corresponding to the one particle state, the poles at \(p^2 = M_B^2 \leq (2m)^2\) corresponding to the two particle bound states, and the branch cut starting at \(p^2 = (2m)^2\) corresponding to the two particle continuum states.}
+\end{figure}
+
+We can now study again the two point function in momentum space, by performing a Fourier transform of the Källén-Lehmann representation:
 \[
     \begin{aligned}
-        \int \mathrm{d}^4 x \, e^{ip \cdot x} \bra{\Omega} T \{ \hat{\phi}(x) \hat{\phi}(0) \} \ket{\Omega} & = \int \mathrm{d}^4 x \, e^{ip \cdot x} \int \frac{\mathrm{d} M}{2\pi} g(M^2) D_F(x,\,0,\,M)                                 \\
-                                                                                                            & = \frac{iZ}{p^2 - m^2 + i 0^+} + \int_{<(2m)^2}^{\infty} \frac{\mathrm{d} M^2}{2\pi} \frac{i g(M^2)}{p^2 - M^2 + i\epsilon},
+        \int \mathrm{d}^4 x \, e^{ip \cdot x} \bra{\Omega} T \{ \hat{\phi}(x) \hat{\phi}(0) \} \ket{\Omega} & = \int \mathrm{d}^4 x \, e^{ip \cdot x} \int \frac{\mathrm{d} M}{2\pi} g(M^2) D_F(x,\,0,\,M)                                     \\
+                                                                                                            & = \frac{iZ}{p^2 - m^2 + i 0^+} + \int_{\sim (2m)^2}^{\infty} \frac{\mathrm{d} M^2}{2\pi} \frac{i g(M^2)}{p^2 - M^2 + i\epsilon},
     \end{aligned}
 \]
-where we have divided the integral over \(M^2\) into the contribution from the one particle state, which gives a pole at \(p^2 = m^2\) with residue \(iZ\), and the contribution from the two particle states, which gives a branch cut starting at \(p^2 = (2m)^2\). The contribution from the two particle bound states, if present, would give poles at \(p^2 = M_B^2 \leq (2m)^2\) with residue \(iZ_B\).
-
-In momentum space we expect to find
+where we have divided the integral over \(M^2\) into the contribution from the one particle state, which gives a pole at \(p^2 = m^2\) with residue \(iZ\), and the contribution from the two particle states, which gives a branch cut starting at \(p^2 = (2m)^2\) (these are regular terms for \(p^2 \sim m^2\)). The contribution from the two particle bound states, if present, would give poles at \(p^2 = M_B^2 \leq (2m)^2\) with residue \(iZ_B\) (as shown in the above figure), but we have not explicitly written them in the last expression for simplicity. To sum up, in momentum space the two point function has the following analytic structure in the complex \(p^2\)-plane:
 \begin{enumerate}
     \item A branch cut starting at \(p^2 = (2m)^2\) due to the presence of the two particle continuum states in the spectrum of the theory, which represent the scattering states of two particles with mass \(m\).
     \item A pole at \(p^2 = m^2\) with residue \(iZ\), which is a consequence of the presence of a one particle state in the spectrum of the theory.
     \item Poles at \(p^2 \leq (2m)^2\) for each two particle bound state in the spectrum of the theory, with residue \(iZ_B\), which is a consequence of the presence of the two particle bound states in the spectrum of the theory.
 \end{enumerate}
 
-For a free theory we would have only the one particle state in the spectrum of the theory, so that the K\:allen-Lehman representation of the two point function would reduce to
+\textbf{For a free theory} we would have only the one particle state in the spectrum of the theory, so that the Källén-Lehmann representation of the two point function would reduce to
 \[
     \int \mathrm{d}^4 x \, e^{ip \cdot x} \bra{0} T \{ \hat{\phi}_0(x) \hat{\phi}_0(0) \} \ket{0} = \frac{i}{p^2 - m^2 + i 0^+},
 \]
 with \(Z = 1\) since the field operator creates a one particle state with unit probability, and the physical mass \(m^2\) coincides with the bare mass \(M^2\) since there are no interactions in the theory.
 
-For an interacting theory we have
+\textbf{For an interacting theory} we will have corrections to the physical mass and to the field strength renormalization constant, so that we can write
 \[
     \begin{dcases}
         m = m_{\lambda} + O(g), \\
@@ -140,29 +191,44 @@ For an interacting theory we have
 where \(g\) is the coupling constant of the theory, so that the physical mass \(m^2\) and the field strength renormalization constant \(Z\) receive corrections from the interactions in the theory.
 
 \begin{example}[Dirac Field]
-    If we compute these last results for a Dirac field, we would find
+    In the end we will give rules for the generalization of the LSZ reduction formula to more complicated theories, such as theories with fermions and gauge fields, but let us first analyze the structure of the two point function for a Dirac field. If we compute these last results for a Dirac field, we would find
     \[
-        \int \mathrm{d}^4 x \, e^{ip \cdot x} \bra{\Omega} T \{ \hat{\psi}(x) \hat{\bar{\psi}}(0) \} \ket{\Omega} = \frac{iZ (\slashed{p} + m)}{p^2 - m ^2+ i 0^+},
+        \int \mathrm{d}^4 x \, e^{ip \cdot x} \bra{\Omega} \hat{T} \{ \hat{\psi}(x) \hat{\bar{\psi}}(0) \} \ket{\Omega} = \frac{iZ (\slashed{p} + m)}{p^2 - m ^2+ i \epsilon},
     \]
     such that
     \[
-        \bra{\Omega} \hat{\psi}(0) \ket{\lambda_{\mathbf{p},\, s}} \Big|_{\lambda = \text{1-part}}= u_s(\mathbf{p} ) F(\lambda = \text{1-part}) = u_s(\mathbf{p} ) \sqrt{Z},
+        \bra{\Omega} \hat{\psi}(0) \ket{\lambda_{\mathbf{p}, s}} \Big|_{\lambda = \text{1-part}}= u_s(\mathbf{p} ) F(\lambda = \text{1-part}) = u_s(\mathbf{p}) \sqrt{Z},
     \]
-    [...]
+    where \(u_s(\mathbf{p})\) is the Dirac spinor for a particle with momentum \(\mathbf{p}\) and spin \(s\), with
+    \[
+        (\slashed{p} + m) = \sum_{s} u_s(\mathbf{p}) \overline{u}_s(\mathbf{p}),
+    \]
+    which is the completeness relation for the Dirac spinors. The spectral density function for the Dirac field would have a delta function contribution at \(M^2 = m^2\) with residue \(Z\), which corresponds to the one particle state in the spectrum of the theory, and a branch cut starting at \(M^2 = (2m)^2\) due to the presence of the two particle continuum states in the spectrum of the theory, which represent the scattering states of two particles with mass \(m\). We would not \QUESTION{Is this last statement true?} have two particle bound states in the spectrum of the theory, since the Dirac field does not have self-interactions, so that the spectral density function would not have delta function contributions at \(M^2 \leq (2m)^2\) corresponding to two particle bound states.
 \end{example}
 
 \begin{example}[Unstable Particle State]
-    [...]
-    The decay rate has to remain very small, so that the unstable particle state can be treated as a stable particle state in the spectrum of the theory, approximating the ...
-        [...]
+    If we are considering unstable particles, i.e particles with a decay rate \(\Gamma \neq 0\), then the last results are not valid anymore, since we adopted eigenvalues of the momentum operator \(\hat{P}^\mu\), and in particular of \(\hat{H}\), which cannot be defined for unstable particles:
     \[
-        m^2 = \Re\left[ \text{location 2-point function pole} \right]
+        \hat{H} \ket{\psi} = E \ket{\psi}, \hat{S}(t,\,t_0) \ket{\psi} = e^{i \hat{H} (t-t_0)} \ket{\psi} = e^{i E (t-t_0)} \ket{\psi},
     \]
-    and then
+    since an eigenstate by itself can only get a phase and does not decay, while an unstable particle state has to decay in order to be unstable.
+
+    Thus a rigorous definition of the physical mass for an unstable particle is rather non-trivial; however the decay rate \(\Gamma\) of the unstable particle state is usually very small compared to its lifetime, so that we can consider those as approximated eigenstates of the Hamiltonian.
+
+    We have to take into account the next facts:
+    \begin{itemize}
+        \item If \(\Gamma \neq 0\) the pole of the two point function is not anymore on the real axis, but it is shifted in the complex plane, so that it acquires an imaginary part proportional to the decay rate \(\Gamma\) of the unstable particle state.
+        \item If \(\Gamma \ll m\), we may still define the physical mass \(m\) of the unstable particle state as the real part of the location of the pole of the two point function, since the imaginary part is small compared to the real part, and it represents a small correction to the physical mass of the unstable particle state.
+    \end{itemize}
+    Thus in the end we can define the physical mass \(m\) of the unstable particle state as
     \[
-        \int \mathrm{d}^4 x \, e^{ip \cdot x} \bra{\Omega} T \{ \hat{\phi}(x) \hat{\phi}(0) \} \ket{\Omega} = \frac{iZ}{p^2 - m^2 + i m \Gamma} + \text{regular closed 2-part. cont. contribution},
+        m^2 = \Re\left[ \text{propagator pole} \right],
     \]
-    [...]
+    which gives us a well-defined physical mass for the unstable particle state, and we can write the two point function in momentum space as
+    \[
+        \int \mathrm{d}^4 x \, e^{ip \cdot x} \bra{\Omega} T \{ \hat{\phi}(x) \hat{\phi}(0) \} \ket{\Omega} = \frac{iZ}{p^2 - m^2 + i m \Gamma} + \Lambda(p^2),
+    \]
+    where \(\Lambda(p^2)\) is a regular function for \(p^2 \sim m^2\) which encodes the regular contributions from the other states in the spectrum of the theory.
 \end{example}
 
 \subsection{LSZ Reduction Formula}
