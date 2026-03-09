@@ -1,34 +1,39 @@
-\chapter{Definitions}
+\section{Planarity and Homomorphism}
 
-In this chapter, we will introduce some basic definitions and concepts related to complex networks. We will start by defining what a graph is, what a network is and then discuss different types of networks, ...
+Planarity and homomorphism are important concepts in graph theory that help us understand the structure and properties of networks. They provide insights into how networks can be represented and analyzed.
 
+\subsection{Planarity and Genus}
+A graph is defined as \textbf{planar} if it can be drawn on a two-dimensional plane without any of its links (edges) crossing each other.
 
+In topological terms, a planar graph has a \textbf{genus} of 0. The genus of a graph represents the minimum number of ``holes'' (or handles on a mathematical manifold, like a torus or a donut) that a surface must have so that the graph can be drawn on it without any intersecting links.
 
-\subsubsection{Star Network}
+Because links cannot cross, planar graphs face strict structural limitations and must be relatively sparse. Specifically, there is a rigid upper bound: a planar graph with $N$ nodes can have at most $3N-6$ links, meaning the number of links scales linearly, $O(N)$.
 
-The star network is a simple network topology where one central node is connected to all other nodes, which are not connected to each other. This structure resembles a star, with the central node acting as the hub and the other nodes as the spokes. The star network is often used in communication systems and computer networks due to its simplicity and ease of management. However, it has a single point of failure, as the central node's failure can disrupt the entire network.
+To determine if a graph is planar, we rely on \textbf{Kuratowski's Theorem}. This theorem states that a graph is planar if and only if it does not contain any subgraphs that are homomorphic (topologically equivalent) to $K_5$ (the complete graph on 5 nodes) or $K_{3,3}$ (the complete bipartite graph with two sets of 3 nodes).
 
-\subsubsection{Tree Network}
+\subsection{Graph Homomorphism}
+A \textbf{graph homomorphism} is a mathematical mapping $f$ from a network $G$ (with $N$ nodes) to a smaller network $G'$ (with $M < N$ nodes) that rigorously preserves node adjacency.
 
-A tree network is a hierarchical structure that consists of nodes connected in a parent-child relationship. It is a type of acyclic graph where each node has one parent and can have multiple children. The topmost node is called the root, and the nodes at the bottom are called leaves. Tree networks are commonly used in organizational structures, file systems, and decision-making processes. They allow for efficient data organization and retrieval but can become inefficient if the tree becomes too deep or unbalanced.
+Algebraically, if two nodes $u$ and $v$ are connected in the original graph ($u \sim v$), their mapped counterparts must be connected in the new graph ($f(u) \sim f(v)$):
+\[
+    G^{\prime} = f(G) \quad \text{with} \quad f: G \rightarrow G^{\prime} \quad \big| \quad u \sim v \implies f(u) \sim f(v).
+\]
 
-It is characterized by its branching structure, where each node can have multiple child nodes, but only one parent node. This structure allows for a single path between any two nodes, making it easy to navigate and manage, there  is no redundancy in the connections, which can lead to efficient communication and data transfer. However, it can also lead to bottlenecks if the root node or any intermediate nodes fail, as it can disrupt the entire network. With multiple tree networks, it is possible to create a more complex structure, such as a \textbf{forest}, which consists of multiple trees that are not connected to each other. This can provide redundancy and improve the overall resilience of the network.
+Practically, a homomorphism acts as a \textbf{dimensionality reduction} for a graph. It simplifies the network by drastically reducing the number of nodes while retaining its essential connectivity patterns and macroscopic characteristics. A classic example is mapping a large network of individual nodes into a smaller homomorphic network of \textbf{communities}: in this new graph, each super-node represents an entire community, and the links show how different communities interact with one another.
 
-\paragraph{Fractal as a Regular Tree}
+\section{Network Reduction and Filtering}
 
-[...]
+We are often interested in reducing the complexity of a network by filtering out less important links, which can help us to focus on the most relevant connections and to analyze the structure of the network more effectively. This process can be done using various methods, such as minimum spanning trees (MST) or link selection rules based on global or local criteria.
 
-\subsection{Directed Acyclic Graph (DAG)}
+\subsection{Minimum Spanning Tree (MST)}
 
-A directed acyclic graph (DAG) is a type of graph that consists of nodes connected by directed edges, where there are no cycles. In a DAG, each edge has a direction, indicating the flow of information or dependencies between nodes. DAGs are commonly used in various applications, such as scheduling tasks, representing dependencies in software development, and modeling hierarchical relationships. It can be used to represent complex systems where there are multiple levels of dependencies, without the risk of creating cycles that can lead to infinite loops or deadlocks.
+Let us define a spanning tree as a subgraph of a connected graph that includes all the vertices of the original graph and is a tree (i.e., it is connected and has no cycles) with a special property.
 
-With DAGs we can represent more complex relationships than trees, as they allow for multiple paths between nodes, establishing an effective hierarchy. However, they can also be more difficult to manage and navigate, especially as the number of nodes and edges increases. DAGs are often used in scenarios where there are multiple dependencies or relationships between entities, such as in project management, data processing pipelines, and knowledge representation.
+\begin{definition}[Min/Max Spanning Tree]
+    A minimum/maximum spanning tree (MST) is a subset of the edges of a connected, weighted graph that connects all the vertices together without any cycles and with the minimum/maximum possible total edge weight. It is a method for finding the most efficient way to connect all the nodes in a graph while minimizing/maximizing the total cost: it finds the backbone of the network.
+\end{definition}
 
-For networks with these properties, the \textbf{adjacency matrix} is upper triangular, which means that all the entries below the main diagonal are zero. This is because in a DAG, there are no cycles, and therefore, there can be no edges that point back to previous nodes. The upper triangular structure of the adjacency matrix reflects the hierarchical nature of the DAG, where nodes can only have edges pointing to nodes that come after them in the hierarchy. Through this matrix, we can represent the structure of the DAG and analyze its properties as a linear algebra problem, such as finding the longest path or determining the reachability of nodes.
-
-\subsubsection{Min/Max Spanning tree MST}
-
-A minimum spanning tree (MST) is a subset of the edges of a connected, weighted graph that connects all the vertices together without any cycles and with the minimum possible total edge weight. It is a method for finding the most efficient way to connect all the nodes in a graph while minimizing the total cost: it finds the backbone of the network. The MST can be used in various applications, such as designing efficient communication networks, clustering data, and solving optimization problems. There are several algorithms for finding the MST, including Prim's algorithm and Kruskal's algorithm, which are based on greedy strategies to build the tree incrementally by selecting the edges with the smallest weights.
+The MST can be used in various applications, such as designing efficient communication networks, clustering data, and solving optimization problems. There are several algorithms for finding the MST, including Prim's algorithm and Kruskal's algorithm, which are based on greedy strategies to build the tree incrementally by selecting the edges with the smallest weights.
 
 \paragraph{Kruskal's Algorithm}
 Kruskal's algorithm is a popular method for finding the minimum spanning tree (MST) of a connected, weighted graph. The algorithm works by sorting all the edges of the graph in non-decreasing order of their weights and then adding edges to the MST one by one, as long as they do not form a cycle. The process continues until there are \(V-1\) edges in the MST, where \(V\) is the number of vertices in the graph. To resume:
@@ -55,7 +60,10 @@ Kruskal's algorithm is efficient and can be implemented using a disjoint-set dat
     ALL cycles are removed: very drastic transformation
 \end{example}
 
-\paragraph{Global rules for link selection}
+\subsection{Link Selection Rules}
+
+\subsubsection{Global rules for link selection}
+
 We can also consider other global rules for link selection, which involve setting a threshold to determine which links to keep in the network. For example:
 \begin{itemize}
     \item consider the total distribution of link weights \(W\) and define a cutoff threshold \(C\) to keep only \(W_{ij} > C\);
@@ -66,7 +74,7 @@ But this approach has some limitations, as it can lead to the loss of important 
     \item Global thresholding methods miss the local relevance of low link values (different weight distribution as a function of local node features such as their degree).
 \end{itemize}
 
-\paragraph{Local rules for link selection}
+\subsubsection{Local rules for link selection}
 
 Local methods analyze weights in node neighborhoods
 Link selection based on single-node null model (pdf)
@@ -78,10 +86,11 @@ Node of degree \(K\) with positive weighted links \(W_{ij}\) (normalized to 1, c
 Hypothesis: weights are extracted from a random split of unit segment [0:1] in \(K\) parts (geometric distribution \(G(K)\))
 Keep only links for which \(G(W_{ij} ) < p_0\) (global threshold but applied to local node-dependent distribution)
 
-\section{Spectral Network Analysis}
+\section{Spectral Analysis of Networks}
 
 Through the analysis of the eigenvalues and eigenvectors of matrices associated with a network, such as the adjacency matrix or the Laplacian matrix, we can gain insights into the structural properties of the network. Spectral analysis can reveal important information about the connectivity, community structure, and dynamics of the network. For example, the largest eigenvalue of the adjacency matrix can indicate the presence of hubs in the network, while the second smallest eigenvalue of the Laplacian matrix can provide information about the connectivity and robustness of the network. Spectral methods are widely used in various applications, including clustering, dimensionality reduction, and network visualization.
 
+\subsection{The Eigenvalue Spectrum}
 We can read the problem as an \textbf{eigenvalue problem}:
 \[
     A \cdot \mathbf{x} = \lambda \cdot \mathbf{x},
@@ -98,7 +107,7 @@ We can also imply the \textbf{characteristic polynomial} of the adjacency matrix
 \]
 where \(I\) is the identity matrix. The roots of this polynomial are the eigenvalues of \(A\), and analyzing them can provide further insights into the structural properties of the network.
 
-\subsection{Power of A and Shortest Path}
+\subsection{Powers of the Adjacency Matrix}
 
 Let us start by defining the powers of the adjacency matrix \(A\). The \(n\)-th power of the adjacency matrix, denoted as \(A^n\), can be computed using matrix multiplication. The entry \((A^n)_{ij}\) represents the number of paths of length \(n\) from node \(i\) to node \(j\) in the network:
 \[
@@ -115,6 +124,8 @@ This is because each multiplication of the adjacency matrix counts the number of
     \item If the graph is directed, certain paths/walks may not exist.
     \item If no paths exist between two nodes in a symmetric graph, then the network is disconnected.
 \end{itemize}
+
+\subsection{Spectra of Specific Graphs}
 
 \paragraph{Cycles}
 A \textit{directed cycle} is a path that starts and ends at the same node, following the direction of the edges
@@ -170,8 +181,7 @@ Thus the presence of cycles is an indicator of a particular network design (that
 
 What happens to the spectrum of these matrices if we perturb slightly the network structure? For example, if we add or remove a few edges or loops (ciclicity, bipartition, all-ones...), how does this affect the eigenvalues and eigenvectors of the adjacency matrix? This question is important for understanding the stability and robustness of the network, as well as for analyzing the dynamics of processes that occur on the network. Perturbations can lead to changes in the spectral properties of the network, which can in turn affect its overall behavior and functionality. They can be studied by analyzing the sensitivity of the eigenvalues and eigenvectors to changes in the adjacency matrix, generating random matrices and analyzing their spectra, or by using perturbation theory to understand how small changes in the network structure can lead to changes in its spectral properties (like adding random links or random weights to the adjacency matrix). This analysis can provide insights into the resilience of the network to perturbations and its ability to maintain its functionality under changing conditions.
 
-
-\subsection{Isomorphism - Spectra}
+\subsection{Isomorphism and Co-spectrality}
 
 Two graphs are isomorphic if they are equal up to node permutation (transformation of similitude in matrix algebra)
 \[
@@ -202,7 +212,7 @@ Let us resume some of the key points about the spectrum of a graph:
 
 \paragraph{Co-spectrality}
 
-\subsection{Graph Spectral Distance}
+\subsection{Graph Distances}
 
 Once the eigenvalues have been sorted (with the addition of zeros for networks with different number of nodes, corresponding to isolated nodes that do not contribute to spectrum calculation)
 \[
@@ -214,7 +224,7 @@ Once the eigenvalues have been sorted (with the addition of zeros for networks w
 \]
 we can define a spectral distance between two graphs \(G_1\) and \(G_2\) as the Euclidean distance between their sorted eigenvalue spectra. This distance provides a measure of how similar or different the two graphs are in terms of their spectral properties. A smaller distance indicates that the graphs have more similar spectral characteristics, while a larger distance indicates that they are more different. This spectral distance can be used for various applications, such as clustering graphs, comparing network structures, and analyzing the evolution of networks over time. However, it is important to note that this distance is not a complete invariant for graph isomorphism, as two non-isomorphic graphs can have the same spectrum (co-spectral graphs). Therefore, while the spectral distance can provide useful insights into the similarity of graphs, it should be used in conjunction with other methods for a more comprehensive analysis of graph structure and properties.
 
-\subsection{Similar Graphs and Their Spectra}
+\subsubsection{Similar Graphs and Their Spectra}
 
 To define similar graphs we have to define a distance between graphs, which can be done using the spectral distance defined above. Similar graphs are those that have a small spectral distance, indicating that their eigenvalue spectra are close to each other. This means that the structural properties of the graphs are similar, as reflected in their spectra. Similar graphs may have similar connectivity patterns, community structures, or other structural features that contribute to their spectral similarity. However, it is important to note that similar graphs may not necessarily be isomorphic, as they can have different arrangements of nodes and edges while still having similar spectral properties. Therefore, while the spectral distance can provide insights into the similarity of graphs, it should be used in conjunction with other methods for a more comprehensive analysis of graph structure and properties.
 
