@@ -1,0 +1,113 @@
+\chapter{Random Graph Ensembles}
+
+In this chapter, we will explore the concept of random graph ensembles, which are fundamental in understanding the properties and behaviors of complex networks. We will start with the simplest model, the Erdős-Rényi random graph, and then move on to more complex models such as the Stochastic Block Model (SBM). We will also discuss the thermodynamic limit, degree distribution, phase transitions, and other properties of these random graph ensembles.
+
+\section{Erdős-Rényi Random Graphs}
+
+We are going to start with the simplest model of random graphs, which is the Erdős-Rényi (E-R) model. This model serves as a fundamental null model for understanding the properties of complex networks.
+
+\begin{definition}[Erdős-Rényi Random Graphs]
+    Networks whose interactions (links) between nodes are chosen randomly, without a priori correlations or rules. In statistical mechanics terms, it is comparable to a ``perfect gas'' with molecules (nodes) experiencing random ``sparse'' impacts (links).
+\end{definition}
+It can be seen as a \textbf{null model} for complex networks, as it represents a system with no structure or correlations.
+
+If we expect to find a certain property in a real network, we can compare it to the expected value of that property in an E-R random graph. If the observed value significantly deviates from the expected value, we can infer that there is some underlying structure or correlation in the real network that is not captured by the E-R model. It can also be used to confront different systems, such as comparing the structure of a social network to that of a biological network, to identify unique features and commonalities.
+
+If we make the statistical analogy with a gas, the E-R model represents a perfect gas, where the nodes are like molecules that interact randomly without any specific rules or correlations. The edges, which are generated randomly, represent some average quantities of the system, not the distance between nodes or the strength of interactions. The E-R model is a useful starting point for understanding the properties of complex networks, but it is important to note that real-world networks often exhibit more complex structures and correlations that are not captured by this simple model.
+
+\section{Statistical Ensembles of Networks}
+
+\subsection{Microcanonical Ensemble $G_{N,M}$}
+
+\begin{definition}[Microcanonical Ensemble]
+    An ensemble of networks with $N$ nodes, representing a fixed system size, and $M$ links, representing the system energy. The links are randomly selected from the possible $N(N-1)/2$ for a symmetric network or $N(N-1)$ for a direct graph.
+\end{definition}
+
+\begin{remark}[Construction Rule]
+    The construction rule of one instance of the ensemble is:
+    \begin{enumerate}
+        \item Take $N$ nodes.
+        \item Repeat $M$ times: choose 2 nodes randomly and connect them, checking for loops or existing links.
+    \end{enumerate}
+    The probability of generating ``bad'' links, such as loops and multilinks, is about $1/N$. The effect of this selection becomes negligible for large $N$.
+\end{remark}
+
+\subsection{Canonical Ensemble $G_{N,P}$}
+
+\begin{definition}[Canonical Ensemble]
+    An ensemble of networks with $N$ nodes (fixed system size) and a fixed probability $P$ to have a link between them, representing a fixed average energy or temperature.
+\end{definition}
+
+\begin{remark}[Binomial Distribution and Construction]
+    The probability of having a graph with $m$ links and $N$ nodes is governed by the binomial distribution.
+    To construct an undirected graph:
+    \begin{itemize}
+        \item Take $N(N-1)/2$ values $A_{ij}$ uniformly distributed between 0 and 1.
+        \item If $A_{ij} > 1-P$ then $A_{ij}=1$, else $A_{ij}=0$.
+        \item Apply symmetrization using logic ``OR'': $A \vee A^T$ .
+    \end{itemize}
+\end{remark}
+
+% --------------------------------------------------------
+\section{Thermodynamic Limit and Degree Distribution}
+% --------------------------------------------------------
+
+\subsection{Equivalence of Ensembles}
+For $N \gg 1$, the canonical link distribution tends to a Dirac's delta function. All instances of the canonical ensemble tend to have a number of links equal to the average link number, thus recovering the microcanonical property.
+
+\subsection{Degree Probability Density Function (pdf)}
+The probability of having a node with $k$ links is the probability of randomly choosing $k$ links among $N-1$:
+$$ p(k) = \binom{N-1}{k} P^k (1-P)^{N-1-k} $$
+
+\begin{remark}[Bernoulli to Poisson to Delta]
+    In the thermodynamic limit ($N \to \infty$, $P \to 0$) with $P \cdot N = \lambda$ kept constant, the distribution becomes a Poisson distribution:
+    $$ p(k) \approx \frac{\lambda^k}{k!} e^{-\lambda} $$
+    In this limit, a random Bernoulli graph tends to a regular graph with equal connectivity for all nodes, even if node proximity is not regular as in a lattice. The Erdős-Rényi model tends to an infinite-dimensional regular lattice.
+\end{remark}
+
+% --------------------------------------------------------
+\section{Phase Transitions and the Giant Component}
+% --------------------------------------------------------
+
+\subsection{Average Connectivity}
+In E-R networks, the threshold for transitions depends on the network size $N$ and the connection probability $p$. We use the average connectivity $\lambda$ as the control parameter:
+$$ \langle k \rangle \approx pN = \lambda $$
+
+\subsection{The Giant Component}
+\begin{definition}[Giant Component Emergence]
+    \begin{itemize}
+        \item For $\lambda < 1$, there is no giant component.
+        \item For $\lambda \ge 1$, there is a giant component that, for increasing $\lambda$, tends to include all the nodes.
+    \end{itemize}
+    Adding one link at a time creates larger and larger clusters, which is known as the ``avalanche phenomenon''.
+\end{definition}
+
+\begin{remark}[Transcendental Equation]
+    If we define $u$ as the probability of a node not belonging to the Giant Component, the average field equation yields the transcendental equation:
+    $$ u = e^{\lambda(u-1)} $$
+    The order parameter $S$, which is the fraction of nodes belonging to the giant component, is $S = 1 - u$.
+\end{remark}
+
+% --------------------------------------------------------
+\section{Network Properties in Random Graphs}
+% --------------------------------------------------------
+
+\subsection{Diameter and Average Path Length}
+Assuming a regular graph ($N \gg 1$) and a sparse network (regular tree, no loops), the diameter scales as:
+$$ d \propto \ln N $$
+A similar result holds for the average path length $\langle l(N) \rangle \propto \ln N$. As the network size grows, the distance between nodes grows slowly, which defines the ``small-world'' property characterized by easy traversability.
+
+\subsection{Degree Correlations}
+\begin{remark}[Absence of Correlations]
+    There is an absence of correlations between node features. Specifically, there is ALMOST none for finite-size graphs and none in the thermodynamic limit. For undirected graphs:
+    $$ p(k_1, k_2) \approx p(k_1) \cdot p(k_2) $$
+    Similarly, in an ER directed network, there is no correlation between in-degree and out-degree: $p(k_{IN}, k_{OUT}) = p(k_{IN}) \cdot p(k_{OUT})$.
+\end{remark}
+
+% --------------------------------------------------------
+\section{Stochastic Block Model (SBM)}
+% --------------------------------------------------------
+
+\begin{definition}[Stochastic Block Model]
+    A more complex null model that can modelize a nontrivial community structure of the network. It can be obtained by combining diagonal E-R blocks, possibly of different sizes and link densities, with non-diagonal blocks of random links.
+\end{definition}
