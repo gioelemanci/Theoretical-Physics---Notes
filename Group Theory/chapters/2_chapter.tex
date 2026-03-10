@@ -1,0 +1,216 @@
+\section{Unitary Representations of Continuous Symmetries}
+
+If the symmetry group G is a Lie group, then the quantum unitary operators representing the group action on states and observables can be expressed as functions of the parameter vector \(\bs{\theta}\) of \(G\):
+
+[...]
+
+\[
+    U(m(\theta, \theta')) = U(g(m(\theta, \theta'))) = U(g(\theta) g(\theta')) = \gamma(g(\theta), g(\theta')) U(g(\theta)) U(g(\theta')),
+\]
+where \(\gamma(g(\theta), g(\theta'))\) is a phase factor which can be written as \(\gamma(g(\theta), g(\theta')) = e^{i \omega(g(\theta), g(\theta'))}\) for some real function \(\omega\). Thus
+\[
+    U(m(\theta, \theta')) = e^{i \omega(g(\theta), g(\theta'))} U(g(\theta)) U(g(\theta')).
+\]
+
+\begin{example}[EXCERCISE]
+
+    ??? photo
+
+\end{example}
+
+When you have a Lie Group and a projected unitary representation in the Hilbert space of states, you can always get to this relation with the phase factor \(\gamma\) by redefining the unitary operators \(U(g)\) with a suitable phase factor, all given to the properties of the Lie group \(G\) and the properties of the projective representation \(U\).
+
+Since the Lie groups act homogeneously, we can always translates what happens at the identity element to any other element of the group. Thus, by looking at the properties of the group around the identity element, we can understand the properties of the whole group. By Taylor expanding \(U(\bs{\theta})\) near the neutral element \(\mathbf{0}\) of the group, we get
+\[
+    U(\bs{\theta}) = 1 - i \theta^a Q_a + \frac{1}{2} \theta^a \theta^b Q_{ab} + \mathrm{O}(\theta^3), \quad Q_{ab} = Q_{ba},
+\]
+where \(Q_a\) are the generators of the representation \(U\) of the Lie group \(G\). The generators \(Q_a\) are essentially the tangent vectors to the representation \(U\) of the Lie group \(G\) at the identity element
+\[
+    Q_a = i \frac{\partial U(\bs{\theta})}{\partial \theta^a} \Big|_{\bs{\theta} = \mathbf{0}}.
+\]
+
+We are now going to prove that the generators \(Q_a\) of the representation \(U\) of the Lie group \(G\) are self-adjoint operators:
+\[
+    Q_a^{\dagger} = Q_a.
+\]
+We can start from the adjoint
+\[
+    \begin{aligned}
+        Q_a^{\dagger} & = \left(i \frac{\partial U(\bs{\theta})}{\partial \theta^a} \Big|_{\bs{\theta} = \mathbf{0}}\right)^{\dagger}                          \\
+                      & = -i \frac{\partial U^{\dagger}(\bs{\theta})}{\partial \theta^a} \Big|_{\bs{\theta} = \mathbf{0}}                                      \\
+                      & = -i \frac{\partial U^{-1}(\bs{\theta})}{\partial \theta^a} \Big|_{\bs{\theta} = \mathbf{0}}                                           \\
+                      & = +i U(\bs{\theta})^{-1} \frac{\partial U(\bs{\theta})}{\partial \theta^a} U(\bs{\theta})^{-1} \Big|_{\bs{\theta} = \mathbf{0}} = Q_a,
+    \end{aligned}
+\]
+where we have used the unitarity of \(U\) and the fact that \(U(\mathbf{0}) = 1\). [comments]
+
+We have another property to prove: we have to normalize the phase function \(\omega\)
+\[
+    \omega(\bs{\theta}, \mathbf{0}) = \omega(\mathbf{0}, \bs{\theta}) = 0,
+\]
+so that we remember that
+\[
+    \omega(\bs{\theta}, \bs{\theta}') = \theta^a \theta'^b \omega_{ab} + \mathrm{O}(\theta^3),
+\]
+so that the phase factor \(\gamma\) is normalized to 1 at the identity element of the group, since
+\[
+    e^{i \omega(\mathbf{0}, \bs{\theta})} = \gamma(g(\mathbf{0}), g(\bs{\theta}')) = 1 = e^{i \omega(\bs{\theta}, \mathbf{0})} = \gamma(g(\bs{\theta}), g(\mathbf{0})) = 1.
+\]
+???
+
+[...]
+
+\[
+    \left[ Q_a, Q_b \right]
+\]
+
+...
+as we did for \(g(\theta)g(\theta')\) we can multiply the taylor expansion of \(U(\theta)\) and \(U(\theta')\) and compare the result with the taylor expansion of \(U(m(\theta, \theta'))\) to get
+\[
+    U(\bs{\theta}) U(\bs{\theta'}) = e^{-i \omega(\bs{\theta}, \bs{\theta'})} U(m(\bs{\theta}, \bs{\theta'})).
+\]
+If we insert the taylor exapnsions of
+\begin{itemize}
+    \item \(U(\bs{\theta}) = 1 - i \theta^a Q_a + \frac{1}{2} \theta^a \theta^b Q_{ab} + \mathrm{O}(\theta^3)\)
+    \item \(\omega(\bs{\theta}, \bs{\theta'}) = \theta^a \theta'^b \omega_{ab} + \mathrm{O}(\theta^3)\)
+    \item \(m(\bs{\theta}, \bs{\theta'}) = \bs{\theta} + \bs{\theta'} + \frac{1}{2} f_{ab}^c \theta^a \theta'^b + \mathrm{O}(\theta^3)\)
+\end{itemize}
+we get a mess, but if we compute everything and compare the coefficients of the terms of order \(\theta^a \theta'^b\) we get
+\[
+    Q_a Q_b = i m^c_{ab} Q_c + i \omega_{ab}\mathbb{I} - Q_{ab},
+\]
+and since we wanted to compute the commutator \(\left[ Q_a, Q_b \right]\) we can compute
+\[
+    Q_b Q_a = i m^c_{ba} Q_c + i \omega_{ba}\mathbb{I} - Q_{ba},
+\]
+so that subtracting the two we get
+\[
+    \left[ Q_a, Q_b \right] = i (m^c_{ab} - m^c_{ba}) Q_c + i (\omega_{ab} - \omega_{ba})\mathbb{I} = i f^c_{ab} Q_c + i \kappa_{ab} \mathbb{I},
+\]
+where we have recalled the structure constants of the Lie algebra \(\mathfrak{g}\) of the Lie group \(G\) and we have defined \(\kappa_{ab} = \omega_{ab} - \omega_{ba}\). This last coefficients \(\kappa_{ab}\) are called the \textbf{central charges} of the representation \(U\) of the Lie group \(G\). A central algebra is an algebra where the central charges are zero, so that the commutator of the generators \(Q_a\) of the representation \(U\) of the Lie group \(G\) is just
+\[
+    \left[ Q_a, Q_b \right] = i f^c_{ab} Q_c.
+\]
+The properties of the commutators of the generators \(Q_a\) of the representation \(U\) can be expressed as
+\begin{itemize}
+    \item \(\left[ Q_a, Q_b \right] = i f^c_{ab} Q_c + i \kappa_{ab} \mathbb{I}\)
+    \item \(\kappa_{ab} = \omega_{ab} - \omega_{ba}\)
+    \item \([Q_a,Q_b] + [Q_b,Q_a]=0 \implies \kappa_{ab}+ \kappa_{ba}=0\)
+    \item \([Q_a,[Q_b,Q_c]] + [Q_b,[Q_c,Q_a]] + [Q_c,[Q_a,Q_b]]=0\) (Jacobi identity)
+\end{itemize}
+
+The structure constants respects those identity in the following form
+\begin{itemize}
+    \item \(f^a_{bc} + f^a_{cb} = 0\)
+    \item \(f^d_{ab} f^e_{dc} + f^d_{bc} f^e_{da} + f^d_{ca} f^e_{db} = 0\) (Jacobi identity)
+\end{itemize}
+and along with the central charges they respect the following identity
+\[
+    \kappa_{ad} f^d_{bc} + \kappa_{bd} f^d_{ca} + \kappa_{cd} f^d_{ab} = 0,
+\]
+which is a consequence of the Jacobi identity for the generators \(Q_a\) of the representation \(U\) of the Lie group \(G\). A set of coefficients \(f^c_{ab}\) and \(\kappa_{ab}\) which respect the above identities is called a \textbf{Lie algebra} \(\mathfrak{g}\) \textbf{2-cocycle}. This naming is consistent since the central charges \(\kappa_{ab}\) are related to the phase factor \(\gamma\) of the projective representation \(U\) of the Lie group \(G\) by the relation \(\kappa_{ab} = \omega_{ab} - \omega_{ba}\).
+
+...
+\[
+    U(g,g^{\prime}) = \gamma(g,g^{\prime}) U(g)U(g^{\prime}),
+\]
+\[
+    U(g) \to \hat{U}(g) = \alpha(g) U(g),
+\]
+\[
+    \gamma(g,g^{\prime}) = \alpha(g, g^{\prime}) \alpha(g)^{-1} \alpha(g^{\prime})^{-1},
+\]
+so that we can redefine the unitary operators \(U(g)\) of the projective representation \(U\) of the Lie group \(G\) by a suitable phase factor \(\alpha(g)\) to get a new projective representation \(\hat{U}\) of the Lie group \(G\) with a new phase factor \(\hat{\gamma}\) which is related to the old one by the relation
+\[
+    \hat{\gamma}(g,g^{\prime}) = \alpha(g, g^{\prime}) \alpha(g)^{-1} \alpha(g^{\prime})^{-1} \gamma(g,g^{\prime}),
+\]
+so that if we can find a suitable phase factor \(\alpha(g)\) such that \(\hat{\gamma}(g,g^{\prime}) = 1\) for all \(g, g^{\prime} \in G\), then we can redefine the unitary operators \(U(g)\) of the projective representation \(U\) of the Lie group \(G\) by a suitable phase factor \(\alpha(g)\) to get a new projective representation \(\hat{U}\) of the Lie group \(G\) with a trivial phase factor \(\hat{\gamma}\), so that the new projective representation \(\hat{U}\) of the Lie group \(G\) is actually a linear representation of the Lie group \(G\). However, in general, it is not always possible to find such a phase factor \(\alpha(g)\), so that there are some projective representations of the Lie group \(G\) which cannot be redefined to get a linear representation of the Lie group \(G\).
+
+???
+
+\[
+    Q_a \to \hat{Q}_a = Q_a + k_a \mathbb{I},
+\]
+where \(k_a\) are the central shifts of the generators \(Q_a\) of the representation \(U\) of the Lie group \(G\). These shifts are related to the central charges \(\kappa_{ab}\) by the relation
+\[
+    \kappa_{ab} = f^c_{ab} k_c,
+\]
+which defines a \textbf{2-coboundary} Lie algebra. A 2-coboundary Lie algebra is special case of a 2-cocycle Lie algebra, where the central charges \(\kappa_{ab}\) can be expressed as a linear combination of the structure constants \(f^c_{ab}\) with coefficients given by the central shifts \(k_a\).
+This is \textbf{Lie Algebra Cohomografy}
+
+\subsection{Exponential Parametrization}
+
+Starting from the exponential parametrization of the Lie group \(G\)
+\[
+    \tilde{g}(\bs{\theta}) = \lim_{n \to \infty} g(\frac{\theta}{n})^n = e^{\theta^a T_a},
+\]
+while for the inverse and the multiplication we have
+\[
+    \begin{dcases}
+        \tilde{j}(\bs{\theta}) = - \theta^a, \\
+        \tilde{m}(\bs{\theta}, \bs{\theta}') = \bs{\theta} + \bs{\theta}' + \frac{1}{2} f_{ab}^c \theta^a \theta'^b + \mathrm{O}(\theta^3),
+    \end{dcases}
+\]
+where the last function is the Baker-Campbell-Hausdorff formula (BCH) for the multiplication of the Lie group \(G\) in the exponential parametrization.
+
+We can now use this exponential parametrization of the Lie group \(G\) to get an exponential parametrization of the projective representation \(U\) of the Lie group \(G\):
+\[
+    \tilde{U}(g(\bs{\theta})) = U(\tilde{g}(\bs{\theta})) = U(e^{\theta^a T_a}) = 1- i \theta^a Q_a + \frac{1}{2} \theta^a \theta^b Q_{ab} + \mathrm{O}(\theta^3).
+\]
+For the phase function \(\omega\) we have
+\[
+    \tilde{\omega}(\bs{\theta}, \bs{\theta}') = \tilde{\omega}_{ab} \theta^a \theta'^b + \mathrm{O}(\theta^3).
+\]
+At the linear level there are no differences between \(g\) and \(\tilde{g}\), they only manifest from the second order in the parameters \(\theta^a\). Thus we can derive
+\[
+    Q_a = \tilde{Q}_a,
+\]
+and for the phase function \(\omega\) we have
+\[
+    \tilde{Q}_{ab} = \frac{1}{2}( (\omega_{ab} + \omega_{ba}) \mathbb{I} - Q_a Q_b - Q_b Q_a).
+\]
+
+Now we are interested in knowing if the following is true:
+\[
+    \tilde{U}(\theta) = \exp(i\theta^a Q_a),
+\]
+which is not the case: this is a projected representation, so this will be proven to be true only up to a phase factor. We can start from the exponential parametrization of the projective representation \(U\) of the Lie group \(G\)
+\[
+    \tilde{U}(\bs{\theta}) = U(\tilde{g}(\bs{\theta})) = \lim_{n \to \infty} U(g(\frac{\theta}{n}))^n = \lim_{n \to \infty} U((\frac{1}{n^2})^n) \neq \lim_{n \to \infty} U((\frac{1}{n^2}))^n,
+\]
+where we highlighted the difference between this projected and a true representation. Computing further we get
+\[
+    \tilde{U}(\bs{\theta}) = \exp(i \sum_{k}^{n} \omega(\frac{\theta}{n}, \frac{k\theta}{n})) U(\frac{\bs{\theta}}{n})^n,
+\]
+where the last term, as we take the limit \(n \to \infty\), becomes
+\[
+    \lim_{n \to \infty} U(\frac{\bs{\theta}}{n})^n = (1 - i \frac{\theta^a}{n} Q_a)^n = e^{-i \theta^a Q_a},
+\]
+so that the exponential parametrization of the projective representation \(U\) of the Lie group \(G\) is given by
+\[
+    \tilde{U}(\bs{\theta}) = e^{i \alpha(\bs{\theta})} e^{-i \theta^a Q_a}.
+\]
+
+If we now want to get .....
+
+\[
+    e^{i \alpha(\bs{\theta}) - i \theta^a k_a} \tilde{U}(\bs{\theta}) = e^{-i \theta^a \hat{Q}_a},
+\]
+where \(\hat{Q}_a = Q_a + k_a \mathbb{I}\) are the shifted generators of the representation \(U\) of the Lie group \(G\): these operates in the same way since they differ only by a phase factor, but they have different central charges.
+
+Now we found a true representation
+\begin{itemize}
+    \item \(\hat{\tilde{U}}(\tilde{j}(\bs{\theta})) = \hat{\tilde{U}}(\bs{\theta})^{-1}\)
+    \item \(\hat{\tilde{U}}(\tilde{m}(\bs{\theta}, \bs{\theta'})) = \hat{\tilde{U}}(\bs{\theta}) \hat{\tilde{U}}(\bs{\theta'})\)
+\end{itemize}
+
+The term \(\exp(-i \theta^a k_a)\) is an important \textbf{phase factor}, since it is the one which allows us to get a true representation from a projective representation by shifting the generators \(Q_a\) of the representation \(U\) of the Lie group \(G\) by a suitable central shift \(k_a\). This is the reason why we introduced the concept of 2-coboundary Lie algebra, since it allows us to understand when a projective representation of a Lie group can be redefined to get a true representation of the Lie group.
+
+This is a \textbf{multi-valued function} on the underlying group manifold \(G\), since the phase factor usually is not an integer which comes back to the original value after a loop around the group manifold \(G\) (it is not guaranteed that the passage is single-valued): the exponential parametrization of the projective representation \(U\) of the Lie group \(G\) is a multi-valued function on the underlying group manifold \(G\). Usually then we introduce a branch cut in the complex plane to make it single-valued, in order to treat multi valued function as single valued function on the more complex Riemann surface (such as for the square root and the logarithm).
+
+In our case the exponential parametrization of the projective representation \(U\) of the Lie group \(G\) is a multi-valued function on the underlying group manifold \(G\), but can be made single-valued on a infinite Riemann surface which is a covering space of the underlying group manifold \(G\): a covering group \(\tilde{G}\). It is the same idea of the Riemann surface, but with more subtleties and complications, since the group structure has to be preserved.
+
+There can be made analogies with the various covering groups we can find in physics, such as the universal covering group of the Lorentz group, which is the Spin group, and the universal covering group of the rotation group \(SO(3)\), which is the special unitary group \(SU(2)\). The projective representations of the Lorentz group and the rotation group \(SO(3)\) can be redefined to get true representations of their respective covering groups, which are the Spin group and the special unitary group \(SU(2)\). This is a consequence of the fact that the central charges of the projective representations of the Lorentz group and the rotation group \(SO(3)\) can be expressed as linear combinations of the structure constants of their respective Lie algebras with coefficients given by suitable central shifts
+\[
+    \mathrm{SL}(2, \mathbb{C}) = \widetilde{\mathrm{SO}^+(1,3)}, \quad \mathrm{SU}(2) = \widetilde{\mathrm{SO}(3)}.
+\]
