@@ -1,0 +1,331 @@
+\chapter{Feynman Diagrams and Rules}
+
+
+\section{Hamiltonian Formalism and Interaction Picture}
+
+In QFT is often more convenient to work in the Hamiltonian formalism, where we express the dynamics of the system in terms of a Hamiltonian operator. The Hamiltonian can be split into a free part, which describes non-interacting particles, and an interaction part, which describes the interactions between particles.
+
+The Heisemberg picture is often used in QFT, where operators evolve in time while states remain constant. However, for perturbative calculations, it is more convenient to use the interaction picture, where both operators and states evolve in time. Let us start from the Heisemberg equation of motion for an operator \( O(t) \):
+\[
+    \dots
+\]
+\dots
+
+The solution
+\[
+    i \partial_t \hat{S}(t, t_0) = \hat{H}(t) \hat{S}(t, t_0).
+\]
+Now lwt us split the Hamiltonian into a free part and an interaction part:
+\[
+    \hat{H}(t) = \hat{H}_0 + V(t),
+\]
+and the Lagrangian into a free part and an interaction part:
+\[
+    \mathcal{L} = \mathcal{L}_0 + \mathcal{L}_{\text{int}}.
+\]
+Now we know:
+\[
+    H = \int \mathrm{d}^3 \mathbf{x} \, \mathcal{H} (\mathbf{x}), \quad \begin{dcases}
+        \mathcal{H} = \pi \dot{\phi} - \mathcal{L}, \\
+        \pi = \frac{\partial \mathcal{L}}{\partial \dot{\phi}},
+    \end{dcases}
+\]
+and if \(\mathcal{L}_{\text{int}} \) does not contain derivatives, then we simply have
+\[
+    V = - \int \mathrm{d}^3 \mathbf{x} \, \mathcal{L}_{\text{int}}.
+\]
+
+\subsection{Interaction Picture}
+
+IN the interaction picture, the fields evolve according to the free Hamiltonian \(H_0\), while the states evolve according with time (and thus the interactions) according to the interaction Hamiltonian \(V\):
+\[
+    \phi_0 = \phi_I = e^{i H_0 (t-t_0)} \phi_S e^{-i H_0 (t-t_0)}, \quad \phi_S = \phi_I (t=t_0).
+\]
+...
+\[
+    \phi = \phi_H = \hat{S}^{\dagger}(t,t_0) \phi_s \hat{S}(t,t_0) = \hat{U}^{\dagger} (t,t_0) \phi_I \hat{U}(t,t_0),
+\]
+where
+\[
+    \hat{U}(t,t_0) = e^{i H_0 (t-t_0)} \hat{S}(t,t_0).
+\]
+
+Now having \(H_H = H_s\) and \(H_0 = H_{0,s}\)  we can write the equation of motion for \(\hat{U}\):
+\[
+    i \partial_t \hat{U}(t,t_0) = V_I (t,t_0) \hat{U}(t,t_0),
+\]
+with
+\[
+    V_I = e^{i H_0 (t-t_0)} V_S e^{-i H_0 t-t_0},
+\]
+which is the potential in the interaction picture. The solution to this equation is:
+\[
+    V_I = V_s(\phi) \big|_{\phi \to \phi_I} = V(\phi_0),
+\]
+which means that the potential in the interaction picture is the same as the potential in the Schrödinger picture, but with the fields replaced by their interaction picture counterparts (which is the same as the free fields). This is a very important result, as it allows us to use the free fields to calculate the interactions, which is much easier than dealing with the full interacting fields.
+
+\paragraph{Dyson series.}
+The solution to the schrödinger equation for \(\hat{U}\) can be written as a time-ordered exponential:
+\[
+    \hat{U}(t,t_0) = \hat{T} \exp \left( -i \int_{t_0}^t \mathrm{d} t' V_I (t') \right),
+\]
+which is known as the \textbf{Dyson series}:
+\[
+    \hat{U}(t,t_0) = \mathbb{I} + (-i) \int_{t_0}^t \mathrm{d} t' V_I (t') + (-i)^2 \int_{t_0}^t \mathrm{d} t' \int_{t_0}^{t'} \mathrm{d} t'' V_I (t') V_I (t'') + \dots
+\]
+where if all the operators commute, we can write the Dyson series as a simple exponential:
+\[
+    \hat{U}(t,t_0) = \exp \left( -i \int_{t_0}^t \mathrm{d} t' V_I (t') \right),
+\]
+since we could reorder the operators without any problem. However, in general, the operators do not commute, and we need to use the time-ordering operator to ensure that the operators are ordered correctly in time, and we continue the computation as
+\[
+    U(t,t_0) = \mathbb{I} + (-i) \int_{t_0}^t \mathrm{d} t' V_I (t') + (-i)^2 \int_{t_0}^t \mathrm{d} t' \int_{t_0}^{t'} \mathrm{d} t'' V_I (t') V_I (t'') + \dots
+\]
+since up to renaming the integration variables, we can write the Dyson series like that and we can see that the time-ordering operator is not needed, since the integration limits ensure that the operators are ordered correctly in time.
+
+In the end we have
+\[
+    U(t,t_0) = \mathbb{I} -i \int_{t_0}^t \mathrm{d} t' V_I (t') U(t',t_0),
+\]
+which is an integral equation for \(U\) that can be solved iteratively, and we can see that the Dyson series is the solution to this integral equation. This is a very important result, as it allows us to calculate the time evolution operator in the interaction picture, which is essential for calculating scattering amplitudes and other physical quantities in QFT, even if the computation remains quite complicated.
+
+\subsection{Computing Green's Functions}
+
+Consider a Green's function of the form
+\[
+    \bra{\Omega} \hat{T} \{ \hat{\phi} (x_1) \dots \hat{\phi} (x_n) \} \ket{\Omega},
+\]
+we can write it in the interaction picture as
+\[
+    \bra{0} \hat{T} \{ \hat{\phi} (x_1) \dots \hat{\phi} (x_n) \} \ket{\Omega} = \frac{\bra{\Omega} \hat{T} \{ \hat{\phi} (x_1) \dots \hat{\phi}(x_n)  \} \exp[ -i \int_{-\infty}^{\infty} \mathrm{d} t \, V_I(t) ] \ket{0}}{\bra{0} \hat{T} \{ \exp[ -i \int_{-\infty}^{\infty} \mathrm{d} t \, V_I(t) ] \} \ket{0}},
+\]
+where we have used the fact that the vacuum state in the interaction picture is the same as the vacuum state in the Schrödinger picture, and we have also used the fact that the time evolution operator in the interaction picture can be written as a time-ordered exponential of the interaction Hamiltonian. We can expand since
+\[
+    \mathcal{H}_{int} = -\mathcal{L}_{int}, \quad \int \mathrm{d} t \, V_I(t) = - \int \mathrm{d}^4 x \, \mathcal{L}_{int} (\phi_0),
+\]
+so that the Green's function can be written as
+\[
+    \frac{\bra{0} \hat{T} \{ \hat{\phi} (x_1) \dots \hat{\phi}(x_n)  \} \exp[ i \int \mathrm{d}^4 x \, \mathcal{L}_{int} ] \ket{0}}{\bra{0} \hat{T} \{ \exp[ i \int \mathrm{d}^4 x \, \mathcal{L}_{int} ] \} \ket{0}},
+\]
+which is a very important result, as it allows us to calculate Green's functions in the interaction picture, which is much easier than calculating them in the Heisemberg picture, since we can use the free fields to calculate the interactions. This is the basis for perturbation theory in QFT, where we can expand the exponential of the interaction Lagrangian and calculate the Green's functions order by order in perturbation theory.
+
+\subsection{Wick's Theorem}
+
+Wick's theorem is a fundamental result in quantum field theory that allows us to express the time-ordered product of field operators as a sum of normal-ordered products and contractions. It is particularly useful for calculating Green's functions and scattering amplitudes in perturbation theory. Let us consider a time-ordered Green's function of the form
+\[
+    \bra{0} \hat{T} \{ \hat{\phi} (x_1) \dots \hat{\phi} (x_n)  \} \ket{0},
+\]
+where \(\hat{\phi} (x)\) is a free scalar field operator, thus behaving as a ladder operator. We can manipulate the fields as
+\[
+    \phi = \phi^+ + \phi^-, \quad \begin{dcases}
+        \phi^+ \ket{0} = 0, \\
+        \bra{0} \phi^- = 0,
+    \end{dcases}, \quad \begin{dcases}
+        \phi^+ = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{p}}}} a_{\mathbf{p}} e^{-i p \cdot x}, \\
+        \phi^- = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{p}}}} a_{\mathbf{p}}^{\dagger} e^{i p \cdot x},
+    \end{dcases}
+\]
+where \(\phi^+\) is the annihilation part of the field, and \(\phi^-\) is the creation part of the field. We can then use the normal ordering of the product of \(\hat{a}\) and \(\hat{a}^{\dagger}\) to simplify the expression: it puts all the creation operators to the left of the annihilation operators, thus ensuring that the vacuum expectation value of any normal-ordered product is zero. We will use the notation \(:\hat{O}:\) to denote the normal ordering of an operator \(\hat{O}\).
+\begin{example}
+    Let us consider the product of four ladder operators:
+    \[
+        a(p_1) a^{\dagger}(p_2) a(p_3) a^{\dagger}(p_4),
+    \]
+    then we can normal order this product as
+    \[
+        : a(p_1) a^{\dagger}(p_2) a(p_3) a^{\dagger}(p_4) : = a^{\dagger}(p_2) a^{\dagger}(p_4) a(p_1) a(p_3),
+    \]
+    and we can see that the vacuum expectation value of this normal-ordered product is zero:
+    \[
+        \bra{0} : a(p_1) a^{\dagger}(p_2) a(p_3) a^{\dagger}(p_4) : \ket{0} = 0.
+    \]
+\end{example}
+
+If we now consider the time-ordered product of two fields, a \textbf{2-point T-product}, assuming \(x^0>y^0\), we can write it as
+\[
+    \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \}_{x^0>y^0} = \hat{\phi}^{+}(x) \hat{\phi}^{+} (y) + \hat{\phi}^{+} (x) \hat{\phi}^{-} (y) + \hat{\phi}^{-} (x) \hat{\phi}^{+} (y) + \hat{\phi}^{-} (x) \hat{\phi}^{-} (y).
+\]
+Now we can normal order this product as
+\[
+    : \hat{\phi} (x) \hat{\phi} (y) : = \hat{\phi}^{-} (x) \hat{\phi}^{-} (y) + \hat{\phi}^{-} (x) \hat{\phi}^{+} (y) + \hat{\phi}^{+} (x) \hat{\phi}^{-} (y) + \hat{\phi}^{+} (x) \hat{\phi}^{+} (y),
+\]
+thus we can write in general (we do not need to assume \(x^0>y^0\) since the time-ordering operator will take care of that) that
+\[
+    \hat{t} \{ \hat{\phi} (x) \hat{\phi} (y) \} = : \hat{\phi} (x) \hat{\phi} (y) : + \theta(x^0-y^0) [\hat{\phi}^{+} (x), \hat{\phi}^{-} (y)] + \theta(y^0-x^0) [\hat{\phi}^{+} (y), \hat{\phi}^{-} (x)].
+\]
+
+If we now take the vacuum expectation value of this time-ordered product, we can see that the normal-ordered part will vanish, since it contains only creation and annihilation operators, and thus we are left with
+\[
+    \bra{0} \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \} \ket{0} = \Theta(x^0-y^0) [\hat{\phi}^{+} (x), \hat{\phi}^{-} (y)] + \Theta(y^0-x^0) [\hat{\phi}^{+} (y), \hat{\phi}^{-} (x)] = D_F (x,y),
+\]
+where \(D_F (x,y)\) is the Feynman propagator, describing the propagation of particles between two points in spacetime:
+\[
+    \hat{t} \{ \hat{\phi} (x) \hat{\phi} (y) \} = : \hat{\phi} (x) \hat{\phi} (y) : + D_F (x,y).
+\]
+
+[\dots ]
+
+This was the Wick's theorem for the time-ordered product of two fields, but we can generalize for it induction to the time-ordered product of \(n\) fields, which is the most general form of Wick's theorem:
+\[
+    \hat{T} \{ \hat{\phi} (x_1) \dots \hat{\phi} (x_n) \} = : \hat{\phi} (x_1) \dots \hat{\phi} (x_n) : + \text{all possible contractions},
+\]
+where a contraction between two fields is defined as the vacuum expectation value of the time-ordered product of those two fields, which is the Feynman propagator:
+\[
+    \dots
+\]
+
+\begin{example}[4-point function]
+    Let us consider the 4-point function
+    \[
+        \bra{0} \hat{T} \{ \hat{\phi} (x_1) \hat{\phi} (x_2) \hat{\phi} (x_3) \hat{\phi} (x_4) \} \ket{0},
+    \]
+    then we can write it using Wick's theorem as
+    \[
+        :\hat{\phi} (x_1) \hat{\phi} (x_2) \hat{\phi} (x_3) \hat{\phi} (x_4): + D_F(x_1,x_2) D_F(x_3,x_4) + D_F(x_1,x_3) D_F(x_2,x_4) + D_F(x_1,x_4) D_F(x_2,x_3),
+    \]
+    where we have used the fact that there are three possible contractions between the four fields, and each contraction gives us a Feynman propagator.
+        [...]
+
+\end{example}
+
+\begin{corollary}
+    As we said before, the vacuum expectation value of any normal-ordered product is zero, thus we have
+    \[
+        \bra{0} : \hat{\phi} (x_1) \dots \hat{\phi} (x_n) : \ket{0} = 0,
+    \]
+    and thus we can write the vacuum expectation value of the time-ordered product of \(n\) fields as
+    \[
+        \bra{0} \hat{T} \{ \hat{\phi} (x_1) \dots \hat{\phi} (x_n) \} \ket{0} = \text{all possible contractions},
+    \]
+    where \textit{all possible contractions} means that we need to sum over all possible ways of contracting the fields, and each contraction gives us a Feynman propagator. This is a very important result, as it allows us to calculate Green's functions in terms of Feynman propagators, which are much easier to calculate than the full time-ordered product of fields.
+\end{corollary}
+
+\begin{corollary}
+    If in a free theory we have an odd number of fields, then there are no possible contractions, since we cannot contract an odd number of fields, thus we have
+    \[
+        \bra{0} \hat{T} \{ \hat{\phi} (x_1) \dots \hat{\phi} (x_{2n+1}) \} \ket{0} = 0,
+    \]
+    which is a very important result, as it tells us that the vacuum expectation value of the time-ordered product of an odd number of fields is always zero, which is a consequence of the fact that we cannot contract an odd number of fields.
+
+    It can be proven using the fact that the normal-ordered product of an odd number of fields is zero, since it contains an odd number of creation and annihilation operators, and thus its vacuum expectation value is zero, and thus we are left with only the contractions, which are also zero since we cannot contract an odd number of fields. For an interacting theory, this is not necessarily true, since the interaction can create particles and thus we can have non-zero vacuum expectation values for the time-ordered product of an odd number of fields, but in a free theory this is always zero.
+\end{corollary}
+
+
+\section{Feynman Diagrams and Rules}
+
+Let us start to put all the pieces together with an example. We will first derive the Feynman rules for a simple interacting theory in the coordinate space, and then we will see how to generalize them to more complicated theories and to momentum space.
+
+\subsection{Coordinates Space}
+
+\begin{example}[\(\phi^3\) theory]
+    Let us study a \(\phi^3\) theory, which is a simple interacting theory of a scalar field with a cubic interaction term in the Lagrangian:
+    \[
+        \mathcal{L}_{\text{int}} = - \frac{\lambda}{3!} \phi^3,
+    \]
+    where \(\lambda\) is the coupling constant that controls the strength of the interaction. We want to calculate the 2-point function in this theory, which is given by
+    \[
+        \bra{\Omega} \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \} \ket{\Omega},
+    \]
+    where \(\ket{\Omega}\) is the vacuum state of the interacting theory. Using the formula we derived before for the Green's function in the interaction picture, we can write this as
+    \[
+        \frac{\bra{0} \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \} \exp[ i \int \mathrm{d}^4 z \, \mathcal{L}_{\text{int}} ] \ket{0}}{\bra{0} \hat{T} \{ \exp[ i \int \mathrm{d}^4 z \, \mathcal{L}_{\text{int}} ] \} \ket{0}},
+    \]
+    which we can expand in perturbation theory. Let us start from the numerator, which we can write as
+    \[
+        \begin{aligned}
+            \bra{0} \hat{T} \{ \hat{\phi}_0 (x) \hat{\phi}_0 (y) \} \ket{0} + (-i \frac{\lambda}{3!}) \bra{0} \hat{T} \{ \hat{\phi}_0 (x) \hat{\phi}_0 (y) \} \int \mathrm{d}^4 z \, \mathcal{L}_{\text{int}} (z) \ket{0} + \\
+            + (-i \frac{\lambda}{3!})^2 \bra{0} \hat{T} \{ \hat{\phi}_0 (x) \hat{\phi}_0 (y) \} \int \mathrm{d}^4 z_1 \, \mathcal{L}_{\text{int}} (z_1) \int \mathrm{d}^4 z_2 \, \mathcal{L}_{\text{int}} (z_2) \ket{0} + \dots
+        \end{aligned}
+    \]
+    where we have expanded the exponential of the interaction Lagrangian in a power series, and we have also used the fact that the fields in the interaction picture are the same as the free fields, which we have denoted with a subscript \(0\).
+
+    With \(\lambda=0\) we get the free theory back, with the usual Feynman propagator as we expected.
+
+    But with \(\lambda \neq 0\) we get corrections to the free theory, which can be represented as Feynman diagrams. The first term in the expansion corresponds to the free theory, which is just a single line connecting the two points \(x\) and \(y\), representing the propagation of a particle from \(x\) to \(y\). The second term corresponds to a correction to the free theory, which can be represented as a diagram with a loop, where the particle propagates from \(x\) to \(z\), interacts at \(z\) with another particle, and then propagates from \(z\) to \(y\). The third term corresponds to a correction with two loops, where the particle propagates from \(x\) to \(z_1\), interacts at \(z_1\) with another particle, then propagates from \(z_1\) to \(z_2\), interacts at \(z_2\) with another particle, and then propagates from \(z_2\) to \(y\). And so on for higher-order corrections.
+
+    If \(\lambda\) remains small, we can truncate the expansion at a certain order and get an approximation for the 2-point function. This is the basis for perturbation theory in QFT, where we can calculate physical quantities as a power series in the coupling constant, and each term in the series corresponds to a Feynman diagram that represents a particular process or interaction.
+
+    ... O(lambda) vanishes...
+
+    Let us use a simpler notation for the following computations:
+    \[
+        \begin{dcases}
+            D_{ij} = D_F (x_i, x_j), \\
+            D_{xi} = D_F (x, x_i),   \\
+            \phi_i = \phi (x_i),
+        \end{dcases}
+    \]
+    so that we can write the second order correction to the free theory as
+    \[
+        (-\frac{i \lambda}{3!})^2 \frac{1}{2!} \int \mathrm{d}^4 z_1 \, \mathrm{d}^4 z_2 \, \bra{0} \hat{T} \{ \hat{\phi}_x \hat{\phi}_y \hat{\phi}_{z_1} \hat{\phi}_{z_1} \hat{\phi}_{z_1} \hat{\phi}_{z_2} \hat{\phi}_{z_2} \hat{\phi}_{z_2}\} \ket{0},
+    \]
+    where now we can use Wick's theorem to calculate the vacuum expectation value of this time-ordered product, which will give us a sum of all possible contractions between the fields:
+    \[
+        (-\frac{i \lambda}{3!})^2 \frac{1}{2!} \int \mathrm{d}^4 z_1 \, \mathrm{d}^4 z_2 \, D_{x z_1} D_{y z_1} D_{z_1 z_2}^2 + \dots
+    \]
+    But maybe there is a way in which we can list all the possible contractions without having to write them all down, since as we can see, the number of contractions grows very quickly as we increase the order of the correction, and they may also be equivalent. This is where Feynman diagrams come in handy, as they provide a visual representation of the interactions and allow us to easily keep track of the different terms in the expansion.
+\end{example}
+
+Now we can start to derive the Feynman rules for this theory, which will allow us to write down the contribution of each diagram without having to calculate all the contractions explicitly.
+
+The Feynman graphical representation
+\begin{itemize}
+    \item \(x, \, y\) external points, represented as dots.
+    \item \(z_1, \, z_2\) internal points, represented as vertices.
+    \item \(D_{x z_1}\) and \(D_{y z_1}\) propagators, represented as lines connecting the external points to the internal points.
+    \item \(D_{z_1 z_2}^2\) propagators, represented as two lines connecting the internal points \(z_1\) and \(z_2\).
+\end{itemize}
+For the previous example, we have the following Feynman diagram:
+\[
+    \feynLoop \dots
+\]
+
+More generally, we can write the \textbf{Feynman rules} for an n-point function as
+\begin{itemize}
+    \item N external points, each connected to at least a propagator.
+    \item Any number of vertexes, each corresponding to an interaction term in the Lagrangian, and thus
+          \[
+              i \int \mathrm{d}^4 z \, \mathcal{L}_{\text{int}} (z),
+          \]
+          where in particular for our \(\phi^3\) theory, we have
+          \[
+              i \int \mathrm{d}^4 z \, (-\frac{\lambda}{3!} \phi^3 (z)) = -i \frac{\lambda}{3!} \int \mathrm{d}^4 z \, \phi^3 (z),
+          \]
+          which means that each vertex has to be connected to three lines, since the interaction term is cubic in the field. Every vertex is of order \(O(\lambda)\), since it comes from the interaction Lagrangian, and thus the order of the correction is given by the number of vertexes in the diagram.
+    \item The propagators as lines connecting ALL the points, since the contractions has to be complete, and thus we need to connect all the points with propagators, since we cannot have uncontracted fields in the vacuum expectation value.
+\end{itemize}
+These rules telling us how to draw the Feynman diagrams for a given process, and they also allow us to write down the mathematical expression corresponding to each diagram without having to calculate all the contractions explicitly, which is a very powerful tool for calculating physical quantities in QFT.
+
+The procedure of calculating a physical quantity using Feynman diagrams can be summarized as follows:
+\begin{enumerate}
+    \item Draw all the possible Feynman diagrams for the process you want to calculate, following the Feynman rules.
+    \item For each vertex, write down the corresponding factor from the interaction Lagrangian \(\to  -i \alpha \int \mathrm{d}^4 z\).
+    \item For each propagator, write down the corresponding Feynman propagator \(D_F (x,y)\).
+\end{enumerate}
+
+We have to understand how to put the correct factors \(\alpha\) in front of the integrals. Let us start from the interaction Lagrangian, which is given by
+\[
+    \mathcal{L}_{\text{int}} = \frac{\lambda^N}{N!} \phi^N,
+\]
+then a diagram with \(M\) vertexes of order \(O(\lambda^M)\) and any number of external points will have
+\begin{itemize}
+    \item \(M!\) ways of permuting the vertexes, since they are indistinguishable.
+    \item \(N!\) ways of permuting the fields in each vertex, since they are also indistinguishable, and thus we have \((N!)^M\) ways of permuting the fields in all the vertexes (\(N!\) for each vertex).
+\end{itemize}
+An example of naive counting of the factors for a diagram with \(M\) vertexes and \(N\) fields in each vertex would give us a factor of
+\[
+    (N!)^M \times M! \times (\frac{\lambda}{N!})^M \times \frac{1}{M!},
+\]
+where the first factor comes from the permutations of the fields in each vertex, the second factor comes from the permutations of the vertexes, the third factor comes from the interaction Lagrangian, and the last factor comes from the expansion of the exponential of the interaction Lagrangian.
+
+However, this counting is not correct, since we have to take into account that some diagrams may be equivalent under permutations of the vertexes and fields, and thus we need to divide by the number of symmetries of the diagram, which is given by the number of permutations of the vertexes and fields that leave the diagram unchanged. This is known as the \textbf{symmetry factor} of the diagram, and it can be calculated by counting the number of ways to permute the vertexes and fields without changing the diagram.
+
+    [... example on previous diagram ...]
+
+Thus the correct factor for a diagram with \(M\) vertexes and \(N\) fields in each vertex is given by the inverse of the symmetry factor of the diagram, which can be calculated by counting the number of ways to permute the vertexes and fields without changing the diagram:
+\begin{definition}[Symmetry factor]
+    The symmetry factor of a Feynman diagram is the number of independent transformations (permutations of the vertexes and fields in the diagram) which map the diagram onto itself (with external points fixed), and it is denoted by \(S\). The contribution of a diagram to a physical quantity is given by the inverse of the symmetry factor, which is \(1/S\).
+\end{definition}
+
+
+\subsection{Momentum Space}
