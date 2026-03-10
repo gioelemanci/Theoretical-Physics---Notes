@@ -231,44 +231,103 @@ where \(g\) is the coupling constant of the theory, so that the physical mass \(
     where \(\Lambda(p^2)\) is a regular function for \(p^2 \sim m^2\) which encodes the regular contributions from the other states in the spectrum of the theory.
 \end{example}
 
-\subsection{LSZ Reduction Formula}
+\subsection{LSZ Reduction Formula}\TODO{Add reference to Schwartz 6.1}
 
-Let us start from the definition of the S-matrix elements in terms of the in and out states:
+Let us start from the definition of the S-matrix elements in terms of the asymptotic in and out states:
 \[
     \bra{f} \hat{S} \ket{i},
 \]
-where \(\ket{i}\) and \(\ket{f}\) are the in and out states of the theory, which are defined as the asymptotic states of the theory at \(t \to -\infty\) and \(t \to +\infty\) respectively. Asymptotically, the interacting theory reduces to a free theory, so that the in and out states can be approximated by the free particle states of the free theory. This means that the field operators of the interacting theory can be approximated by the field operators of the free theory in the asymptotic limit, in which they act as creation and annihilation operators for the free particle states (or 1-particle):
+where \(\ket{i}\) and \(\ket{f}\) are the in and out states of the theory, which are defined as the asymptotic states of the theory at \(t \to -\infty\) and \(t \to +\infty\) respectively. Asymptotically, the interacting theory reduces to a free theory, so that the in and out states can be approximated by the free particle states of the free theory. This means that the field operators of the interacting theory can be approximated by the field operators of the free theory in this limit, in which they act as creation and annihilation operators for the free particle states (or 1-particle):
 \[
-    \phi(x) \Big|_{t \to \pm \infty} \sim \sqrt{Z} \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{\sqrt{2E_{\mathbf{p}}}} \left( a_{\mathbf{p}} e^{-ip \cdot x} + a_{\mathbf{p}}^\dagger e^{ip \cdot x} \right),
+    \hat{\phi}(x) \Big|_{t \to \pm \infty} \sim \sqrt{Z} \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{\sqrt{2E_{\mathbf{p}}}} \left( \hat{a}_{\mathbf{p}} e^{-ip \cdot x} + \hat{a}_{\mathbf{p}}^\dagger e^{ip \cdot x} \right),
 \]
-where \(Z\) is the field strength renormalization constant of the one particle state in the spectrum of the theory, and \(a_{\mathbf{p}}\) and \(a_{\mathbf{p}}^\dagger\) are the annihilation and creation operators for the free particle states of the free theory. The energy appearing in the denominator is the physical energy of the one particle state, which is related to the physical mass \(m\) by the relativistic dispersion relation \(E_{\mathbf{p}} = \sqrt{\mathbf{p}^2 + m^2} = p^0\).
+where \(Z\) is the field strength renormalization constant of the one particle state in the spectrum of the theory, and \(\hat{a}_{\mathbf{p}}\) and \(\hat{a}_{\mathbf{p}}^\dagger\) are the annihilation and creation operators for the free particle states of the free theory. The energy appearing in the denominator is the physical energy of the one particle state, which is related to the physical mass \(m\) by the relativistic dispersion relation \(E_{\mathbf{p}} = \sqrt{\mathbf{p}^2 + m^2} = p^0\).
 
-Note that the annihilation and creation operators \(a_{\mathbf{p}}\) and \(a_{\mathbf{p}}^\dagger\) are time independent, since they are defined as the asymptotic limits of the field operators, which are time dependent. The only assumption we are making is that the field operators of the interacting theory can be approximated by the field operators of the free theory in the asymptotic limit, which is a consequence of the fact that the interactions become negligible at large times. \TODO{check this last statement.}
+\begin{remark}
+    Note that the annihilation and creation operators \(\hat{a}_{\mathbf{p}}\) and \(\hat{a}_{\mathbf{p}}^\dagger\) are time independent in a free theory. We will assume that they are also time independent in the interacting theory, when considering the asymptotic limit \(t \to \pm \infty\), even if in general
+    \[
+        \hat{a}_{\mathbf{p}}(t \to \infty) \neq \hat{a}_{\mathbf{p}}(t \to -\infty),
+    \]
+    since the interactions can change the number of particles in the theory, so that the annihilation and creation operators at \(t \to +\infty\) can be different from those at \(t \to -\infty\) (the free-like field configurations may be different after the scattering process).
+\end{remark}
 
 If we consider a scattering process with \(2\) incoming particles and \(n\) outgoing particles, we can write the in and out states as
 \[
     \begin{aligned}
-        \ket{i} & = \sqrt{2E_a} \sqrt{2E_b} a^{\dagger}_{\mathbf{p}_a} a^{\dagger}_{\mathbf{p}_b} \ket{\Omega},                                                      \\
-        \ket{f} & = \sqrt{2E_1} \sqrt{2E_2} \cdots \sqrt{2E_n} a^{\dagger}_{\mathbf{p}_1} a^{\dagger}_{\mathbf{p}_2} \cdots a^{\dagger}_{\mathbf{p}_n} \ket{\Omega},
+        \ket{i} & = \sqrt{2E_a} \sqrt{2E_b} \hat{a}^{\dagger}_{\mathbf{p}_a} \, \hat{a}^{\dagger}_{\mathbf{p}_b} \ket{\Omega},                                                            \\
+        \ket{f} & = \sqrt{2E_1} \sqrt{2E_2} \cdots \sqrt{2E_n} \, \hat{a}^{\dagger}_{\mathbf{p}_1} \hat{a}^{\dagger}_{\mathbf{p}_2} \cdots \hat{a}^{\dagger}_{\mathbf{p}_n} \ket{\Omega},
     \end{aligned}
 \]
-where we have normalized the states by the factors of \(\sqrt{2E}\) to ensure that they are properly normalized according to the relativistic normalization convention. It is now time to compute the S-matrix element \(\bra{f} \hat{S} \ket{i}\) by inserting the expressions for the in and out states:
+where we have properly normalized the states by the factors of \(\sqrt{2E}\) according to the relativistic normalization convention. It is now time to compute the S-matrix element \(\bra{f} \hat{S} \ket{i}\) by inserting the expressions for the in and out states and recalling that \(\hat{S} = \mathbb{I} + i \hat{T}\), such that we can write
 \[
-    \bra{f} \hat{S} \ket{i} = \left[ \frac{i}{\sqrt{Z}} \int \mathrm{d}^4 x \, e^{ip \cdot x} (\partial^2 + m^2) \phi(x) \right]\dots \dots \dots \dots \dots
+    \begin{aligned}
+        \bra{f} \hat{S} \ket{i} & = \bra{f} \mathbb{I} + i \hat{T} \ket{i} = \bra{f} i \hat{T} \ket{i} = \sqrt{2E_a} \sqrt{2E_b} \sqrt{2E_1} \sqrt{2E_2} \cdots \sqrt{2E_n} \times                                                                                                       \\
+                                & \times \bra{\Omega} \hat{a}_{\mathbf{p}_1}(+\infty) \hat{a}_{\mathbf{p}_2}(+\infty) \cdots \hat{a}_{\mathbf{p}_n}(+\infty) \left(i \hat{T}\right) \hat{a}^{\dagger}_{\mathbf{p}_a}(-\infty) \, \hat{a}^{\dagger}_{\mathbf{p}_b}(-\infty) \ket{\Omega}.
+    \end{aligned}
 \]
-a bunch of Fourier transforms of the field operators, where the only difference is in the phase sign: incoming particles have a negative phase sign, while outgoing particles have a positive phase sign. Thus the final LSZ reduction formula for the S-matrix element of a scattering process with \(2\) incoming particles and \(n\) outgoing particles is
+The idea is now to rewrite everyting in terms of Green's functions of the theory, so let us first prove the following identity:
 \[
-    \bra{f} \hat{S} \ket{i} = \left[ \frac{i}{\sqrt{Z}} \int \mathrm{d}^4 x \, e^{ip_a \cdot x} (\partial^2 + m^2) \phi(x) \right] \left[ \frac{i}{\sqrt{Z}} \int \mathrm{d}^4 y \, e^{ip_b \cdot y} (\partial^2 + m^2) \phi(y) \right] \dots
-    \dots \dots \dots \dots
-    \left[ -\frac{i}{\sqrt{Z}} \int \mathrm{d}^4 z_1 \, e^{-ip_1 \cdot z_1} (\partial^2 + m^2) \phi(z_1) \right]  \left[ -\frac{i}{\sqrt{Z}} \int \mathrm{d}^4 z_2 \, e^{-ip_2 \cdot z_2} (\partial^2 + m^2) \phi(z_2) 	\right] 	\dots 	\left[ -\frac{i}{\sqrt{Z}} \int \mathrm{d}^4 z_n \, e^{-ip_n \cdot z_n} (\partial^2 + m^2) 	\phi(z_n) 	\right] 	\bra{\Omega} T\{\phi(x)\phi(y)\dots\phi(z_1)\phi(z_2)\dots\phi(z_n)\}\ket{\Omega},
+    \begin{aligned}
+        \frac{i}{\sqrt{Z}} \int \mathrm{d}^4 x \, e^{ip \cdot x} (\partial_x^2 + m^2) \hat{T} \{ \hat{\phi} (x) \hat{O} (y_1,\ldots,y_n)\} \\
+        = \sqrt{2E_{\mathbf{p}}} \left( \hat{a}_{\mathbf{p}}(+\infty) \hat{T} \hat{O} (y_1,\ldots,y_n) - \hat{T} \hat{O} (y_1,\ldots,y_n) \hat{a}_{\mathbf{p}}(-\infty) \right),
+    \end{aligned}
 \]
+where \(\hat{O} (y_1,\ldots,y_n)\) is an arbitrary product of operators of the theory, and we have used the fact that the field operator \(\hat{\phi}(x)\) can be approximated by the free field operator in the asymptotic limit.
+
+In order to prove this identity, we now define \(\hat{\mathcal{O}}(x) = \hat{T} \{\hat{\phi}(x) \hat{O} (y_1,\ldots,y_n)\}\) as the time ordered product of the field operator and the arbitrary product of operators, so that we can write
+\[
+    \frac{i}{\sqrt{Z}} \int \mathrm{d}^4 x \, e^{ip \cdot x} (\partial_x^2 + m^2) \hat{\mathcal{O}}(x) = \frac{i}{\sqrt{Z}} \int \mathrm{d}^4 x \, e^{ip \cdot x} (\partial_t^2 - \partial_i^2 + m^2) \hat{\mathcal{O}}(x),
+\]
+where we have explicitly written the derivatives in terms of the time and spatial derivatives. We can now integrate by parts the spatial derivatives, so that it changes sign and start acting on the left \(\overrightarrow{\partial}_i \to \overleftarrow{\partial}_i\),\footnote{We are assuming that the fields vanish at spatial infinity, so that the boundary terms from the integration by parts vanish: then the spatial derivatives will change sign and start acting on the left.} getting to
+\[
+    \frac{i}{\sqrt{Z}} \int \mathrm{d}^4 x \, e^{ip \cdot x} (\partial_t^2 + \mathbf{p}^2 + m^2) \hat{\mathcal{O}}(x),
+\]
+where we can recognize the relativistic dispersion relation \(E_{\mathbf{p}}^2 = \mathbf{p}^2 + m^2\) for a particle with mass \(m\) and momentum \(\mathbf{p}\), so that we can write
+\[
+    \frac{1}{\sqrt{Z}} \int \mathrm{d}^4 x \, i \, e^{ip \cdot x} (\partial_t^2 + E_{\mathbf{p}}^2) \hat{\mathcal{O}}(x) = \frac{1}{\sqrt{Z}} \int \mathrm{d}^4 x \, \partial_t \left( e^{ip \cdot x} (i \partial_t + E_{\mathbf{p}}) \hat{\mathcal{O}}(x) \right).
+\]
+Now we can split the integral in a spatial and a time integral, so that
+\[
+    \frac{1}{\sqrt{Z}} \int \mathrm{d} t \, \partial_t e^{i E_{\mathbf{p}} t} \, \int \mathrm{d}^3 \mathbf{x} \, e^{- i \mathbf{p} \cdot \mathbf{x}} (i \partial_t + E_{\mathbf{p}}) \hat{\mathcal{O}}(x),
+\]
+which in this form is a total time derivative (the first integral), so that we can evaluate it at the boundaries \(t = \pm \infty\), where we know the field operators to behave as free field operators, and the ladder operators to be time independent; so we can now work on the second integral and substitute the expression for \(\hat{\mathcal{O}}(x)\) and the asymptotic behavior of the field operator, getting to
+\[
+    \int \frac{\mathrm{d}^3 \mathbf{k}}{(2\pi)^3} \, \int \mathrm{d}^3 \mathbf{x} \, \left[ \frac{E_{\mathbf{p}} + E_{\mathbf{k}}}{\sqrt{2E_{\mathbf{k}}}} e^{-i E_{\mathbf{k}} t} e^{-i (\mathbf{p} - \mathbf{k}) \cdot \mathbf{x}} \hat{T} \{ \hat{a}_{\mathbf{k}} \hat{O} \} + \frac{E_{\mathbf{p}} - E_{\mathbf{k}}}{\sqrt{2E_{\mathbf{k}}}} e^{i E_{\mathbf{k}} t} e^{i (\mathbf{p} - \mathbf{k}) \cdot \mathbf{x}} \hat{T} \{ \hat{a}_{\mathbf{k}}^\dagger \hat{O} \} \right],
+\]
+in which a spatial integration gives us a delta function \(\delta^{(3)}(\mathbf{p} - \mathbf{k})\) which allows us to perform the integral over \(\mathbf{k}\), getting to
+\[
+    \begin{aligned}
+        \frac{1}{\sqrt{Z}} \int \mathrm{d}^4 x \, i \, e^{ip \cdot x} (\partial_t^2 + E_{\mathbf{p}}^2) \hat{\mathcal{O}}(x) & = \int \mathrm{d} t \, \partial_t \left[ e^{i E_{\mathbf{p}} t} \sqrt{2E_{\mathbf{p}}} \left( e^{-i E_{\mathbf{p}} t} \hat{T} \{ \hat{a}_{\mathbf{p}}(t) \hat{O} \} \right)\right] \\
+                                                                                                                             & = \sqrt{2E_{\mathbf{p}}} \left[ \hat{a}_{\mathbf{p}}(+\infty) \hat{T} \hat{O}(y_1, \ldots, y_n) - \hat{T} \hat{O}(y_1, \ldots, y_n) \hat{a}_{\mathbf{p}}(-\infty)\right],
+    \end{aligned}
+\]
+yielding the desired result. We can obtain a similar relation holding for its hermitian conjugate, which is
+\[
+    \frac{1}{\sqrt{Z}} \int \mathrm{d}^4 x \, (-i) \, e^{-ip \cdot x} (\partial_x^2 + m^2) \hat{\mathcal{O}}(x) = \sqrt{2E_{\mathbf{p}}} \left[ \hat{a}_{\mathbf{p}}^{\dagger}(+\infty) \hat{T} \hat{O}(y_1, \ldots, y_n) - \hat{T} \hat{O}(y_1, \ldots, y_n) \hat{a}^{\dagger}_{\mathbf{p}}(-\infty)\right].
+\]
+
+Now we can apply the derived result to the expression for the S-matrix element \(\bra{f} \hat{S} \ket{i}\) that we wrote above, so that we can write
+\[
+    \bra{f} \hat{S} \ket{i} = \sqrt{2E_a 2E_b 2E_1 2E_2 \cdots 2E_n} \bra{\Omega} \hat{T} \hat{a}_{\mathbf{p}_1}(+\infty) \hat{a}_{\mathbf{p}_2}(+\infty) \cdots \hat{a}_{\mathbf{p}_n}(+\infty) \left(i \hat{T}\right) \hat{a}^{\dagger}_{\mathbf{p}_a}(-\infty) \hat{a}^{\dagger}_{\mathbf{p}_b}(-\infty) \ket{\Omega},
+\]
+where we inserted a time ordering operator \(T\) to use the derived result (the time ordering does not change the result since the ladder operators are already time-ordered). We can now apply the derived result for each of the ladder operators in the above expression: while we consider \(\hat{a}_{\mathbf{p}_1}\) all the other ladder operators can be grouped in the arbitrary product of operators \(\hat{O}\) in the derived result, so that we can apply it to each of the ladder operators in the above expression, getting to the famous \textbf{LSZ reduction formula}, which is essentially
+\begin{equation}
+    \begin{aligned}
+        \bra{f} \hat{S} \ket{i} & = \left[ \frac{i}{\sqrt{Z}} \int \mathrm{d}^4 x \, e^{ip_a \cdot x_a} (\partial^2 + m^2) \phi(x) \right] \left[ \frac{i}{\sqrt{Z}} \int \mathrm{d}^4 y \, e^{ip_b \cdot x_b} (\partial^2 + m^2) \phi(y) \right]                           \\
+                                & \times \left[ -\frac{i}{\sqrt{Z}} \int \mathrm{d}^4 x_1 \, e^{-ip_1 \cdot x_1} (\partial^2 + m^2) \phi(x_1) \right] \cdots \left[ -\frac{i}{\sqrt{Z}} \int \mathrm{d}^4 x_n \, e^{-ip_n \cdot x_n} (\partial^2 + m^2) 	\phi(x_n) 	\right] \\
+                                & \times \bra{\Omega} T\{\phi(x)\phi(y)\dots\phi(x_1)\phi(x_2)\dots\phi(x_n)\}\ket{\Omega},
+    \end{aligned}
+    \label{eq:LSZ_reduction_formula}
+\end{equation}
 which is a way to relate the S-matrix elements to the time-ordered correlation functions of the fields, which are the Green's functions of the theory. The LSZ reduction formula is a powerful tool for computing the S-matrix elements from the Green's functions, and it is widely used in quantum field theory to compute scattering amplitudes and cross sections for various processes.
 
-\TODO{All calculations wrong around here, check them carefully.}
+The LSZ reduction formula can be interpreted as a way to amputate the external legs of the Green's functions, which correspond to the free propagators of the theory, and to put them on shell by applying the operator \((\partial^2 + m^2)\) to them, which gives zero when acting on the free propagators. The factors of \(1/\sqrt{Z}\) in the formula are necessary to cancel the field strength renormalization constants that appear in the residues of the poles of the Green's functions, so that we can obtain finite results for the S-matrix elements.
 
-If we rewrite it in the momentum space, integrating by parts the derivatives so that they act on the left at the end, we can write the LSZ reduction formula as
+Substantially, it is a bunch of Fourier transforms of the field operators, where the only difference is in the phase signs: incoming particles have a negative phase sign, while outgoing particles have a positive phase sign.
+
+If we rewrite it in the momentum space, integrating by parts the derivatives so that they act on the exponentials on their left (which corresponds to the substitution \(i(\partial_i^2 + m^2) \to -i (p_i^2 - m^2)\)) we can write then the LSZ reduction formula as\TODO{check formula.}
 \[
-    \bra{f} \hat{S} \ket{i} = \prod_{i = a,b,1,\dots ,n} \left[ \frac{i}{\sqrt{Z}} \int \mathrm{d}^4 x_i \, e^{\pm ip_i \cdot x_i} (\partial^2 + m^2) \right] \bra{\Omega} T\{\phi(x_a)\phi(x_b)\dots\phi(x_1)\phi(x_2)\dots\phi(x_n)\}\ket{\Omega},
+    \bra{f} \hat{S} \ket{i} = \prod_{i = a,b,1,\dots,n} \left[ \frac{i}{\sqrt{Z}} \int \mathrm{d}^4 x_i \, e^{\pm ip_i \cdot x_i} (\partial^2 + m^2) \right] \bra{\Omega} T\{\phi(x_a)\phi(x_b)\dots\phi(x_1)\phi(x_2)\dots\phi(x_n)\}\ket{\Omega},
 \]
 
 We have assumed asymptotic particles as the final state, with on shell momenta \(p_i^2 = m^2\), so that the factors of \((\partial^2 + m^2)\) in the LSZ reduction formula will give zero when acting on the external legs of the Green's functions, which are the free propagators of the theory. This means that the only contribution to the S-matrix elements will come from the poles of the Green's functions, which correspond to the physical particles in the spectrum of the theory. The residues of these poles will give the field strength renormalization constants \(Z\) for each particle, which will cancel with the factors of \(1/\sqrt{Z}\) in the LSZ reduction formula, giving a finite result for the S-matrix elements.
