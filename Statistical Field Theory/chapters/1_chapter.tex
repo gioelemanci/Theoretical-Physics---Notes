@@ -1,90 +1,262 @@
 \chapter{Review}
 
+In this chapter we will review some basic concepts of statistical mechanics, which will be useful for the rest of the course. We will start with the microcanonical ensemble, which is the simplest ensemble, and then we will move to the canonical ensemble, which is more general and more useful for practical applications. Finally, we will briefly discuss quantum statistical mechanics, which is a generalization of classical statistical mechanics to quantum systems.
+
+\section{Equal A Priori Probabilities}
+
+We begin recalling the foundamental principles of statistical mechanics, starting from a classical isolated system of \(N\) particles, with total energy \(E\) and volume \(V\).
+
+The \textbf{microstates} of the system are the points in the phase space of the system, which is a \(6N\)-dimensional space spanned by the coordinates and momenta of the particles. The \textbf{macrostates} of the system are defined by the macroscopic variables, such as energy, volume, and number of particles. The \textbf{ensemble} is a collection of microstates that are compatible with a given macrostate. The \textbf{probability distribution} of the system is a function that assigns a probability to each microstate in the ensemble.
+
+It is useful to recall the Hamiltonian formalism, which is a powerful tool for describing the dynamics of classical systems. The Hamiltonian \(H\) is a function of the coordinates and momenta of the particles, and it encodes the energy of the system. The equations of motion for the system can be derived from the Hamiltonian using Hamilton's equations, which describe how the coordinates and momenta evolve in time. For each particle \(i\) we have
+\[
+    \left( q_1,\, q_2,\, q_3,\, p_1,\, p_2,\, p_3 \right) \in \mathcal{M},
+\]
+where \(\mathcal{M}\) is the phase space of the system, which is a \(6N\)-dimensional manifold. The Hamiltonian \(H\) is a function that maps points in the phase space to real numbers, and it encodes the energy of the system
+\[
+    H = H(q_1,\ldots,q_{3N},\,p_1,\ldots,p_{3N}) : \mathcal{M} \to \mathbb{R}.
+\]
+The equations of motion for the system can be derived from the Hamiltonian using Hamilton's equations, which describe how the coordinates and momenta evolve in time:
+\[
+    \begin{dcases}
+        \dot{q}_i = \frac{\partial H}{\partial p_i}, \\
+        \dot{p}_i = -\frac{\partial H}{\partial q_i}.
+    \end{dcases}
+\]
+We can visualize the phase space of the system as a high-dimensional space, where each point represents a microstate of the system. The energy shell defined by the total energy \(E\) is a hypersurface in this phase space, and the trajectories of the system are represented by curves that lie on this hypersurface.\TODO{add a picture of the phase space and the energy shell}
+
+If we suppose that
+\begin{enumerate}
+    \item we know positions and momenta of all particles at a given time \(t\), thus we know the microstate of the system at time \(t\),
+    \item we have an ``infinite-powerful'' computer that can solve the equations of motion for the system, thus we can predict the microstate of the system at any time \(t'\) given the microstate at time \(t\),
+\end{enumerate}
+we should be able to predict the future evolution of the system with perfect accuracy. However, in practice, we do not have access to the microstate of the system, and we do not have an infinite-powerful computer that can solve the equations of motion for the system. Specially if we think about a system with \(N \sim N_A = 6 \times 10^{23}\) particles, it is impossible to know the microstate of the system, and it is impossible to solve the equations of motion for the system. We need to introduce approximations and assumptions in order to be able to make predictions about a large collection of particles.
+
+A standard way to introduce statistical mechanics is through the so-called \textbf{postulate of equal a priori probabilities}:
+\begin{postulate}[Equal A Priori Probabilities]
+    Macroscopic observables can be computed defining a \textbf{probability distribution} on the phase space of the system, which assigns probabilities to all microstates, and taking the expectation value of the observable with respect to this probability distribution. In an isolated system, all microstates are equally probable, thus the probability distribution is uniform on the energy shell defined by the sub-manifold of the phase space where the energy is equal to \(E\):
+    \[
+        \mathcal{M}_E = \{ (q_1, \ldots, q_{3N}, p_1, \ldots, p_{3N}) \in \mathcal{M} : H(q_1, \ldots, q_{3N}, p_1, \ldots, p_{3N}) = E \}.
+    \]
+\end{postulate}
+Let us analyze this postulate in more detail through an exemplification.
+
+\begin{example}
+    Suppose we have a system of \(N\) non-interacting particles in a box of volume \(V\), with total energy \(E\). We are interested in computing the average particle velocity \(\overline{v}_x\) along some axis \(x\).
+
+    We should compute the time dependent function \(v_x(t)\) and then take the time average of it:
+    \[
+        \overline{v}_x (t) = \overline{v}_x(\{q_j(t)\},\,\{p_j(t)\}) = \frac{1}{N} \sum_{j=1}^N \frac{v_{x,j}(t)}{m},
+    \]
+    which is very complicated in general, since we have to solve the equations of motion for the system in order to find the trajectories of the particles in the phase space. However, we can use the postulate of equal a priori probabilities to compute the average particle velocity without solving the equations of motion.
+
+    The function \(\overline{v}_x(\{q_j\},\,\{p_j\})\) is defined on the phase space of the system, and it assigns a value to each microstate of the system. Given the knowledge on some initial microstate, the system will evolve along a curve in the fixed energy shell defined by \(E\):
+    \[
+        \mathbf{R}(t) = \{q_j(t),\, p_j(t)\}, \quad \overline{v}_x(t) = \overline{v}_x(\mathbf{R}(t)).
+    \]
+    We can now assume the system to be at the equilibrium, thus we can take the time average of the function \(\overline{v}_x(t) \sim \overline{v}_x\) over a long time interval \(T\) as
+    \[
+        \overline{v}_x = \frac{1}{T} \int_0^T \mathrm{d}t \, \overline{v}_x(\mathbf{R}(t)).
+    \]
+    Now we can use the postulate of equal a priori probabilities to replace the time average with an average over the energy shell defined by \(E\):
+    \[
+        \overline{v}_x = \frac{1}{| \mathcal{M}_E |} \int_{\mathcal{M}_E} \mathrm{d} \mathcal{M} \, \overline{v}_x(\{q_j\},\,\{p_j\}),
+    \]
+    where we are using the previous definition of the energy shell \(\mathcal{M}_E\) and \(|\mathcal{M}_E|\) is the volume of the energy shell in the phase space
+    \[
+        | \mathcal{M}_E | = \int_{\mathcal{M}_E} \mathrm{d} \mathcal{M}.
+    \]
+    Thus we have computed the average particle velocity without solving the equations of motion for the system, but using only the postulate of equal a priori probabilities: it told us that \textit{averaging over the system trajectory is equivalent to averaging over the whole manifold at fixed energy.}
+\end{example}
+
+Let us now analyze the postulate of equal a priori probabilities in more detail. We have to stress some important points about it:
+\begin{itemize}
+    \item In typical equilibrium situations, macroscopic quantities (such as \(\overline{v}_x\) from the example) usually are constant in time only up to small fluctuations
+          \[
+              \overline{v}_x(t) = \overline{v}_x + \delta v_x(t).
+          \]
+          We have previously neglected these fluctuations, but they are actually present in the system, and they can be formally removed by studying the time averages. Indeed we expect those fluctuations to be small and to occur at microscopic time scales, much smaller than the time scales of the macroscopic observables, thus they will not affect the macroscopic properties of the system. Thus measuring (i.e. averaging) over a long time interval \(T\) will remove these fluctuations:
+          \[
+              \frac{1}{\tau} \int_0^\tau \mathrm{d}t \, (\overline{v}_x + \delta v_x(t) ) = \frac{1}{\tau} \left( \overline{v}_x \tau + \int_0^\tau \mathrm{d}t \, \delta v_x(t) \right) = \overline{v}_x,
+          \]
+          where we have used the fact that the time average of the fluctuations is zero.
+    \item The traditional definition of the postulate of equal a priori probabilities is simpler than the one we have given, since it is usually stated as \textit{in an isolated system, all microstates are equally probable}, without specifying that the microstates are the points in the energy shell defined by \(E\). We have given a more modern and precise definition of the postulate, which is more useful for our purposes, since it allows us to compute the average of macroscopic observables as an average over the energy shell in the phase space.
+    \item In the study of dynamical systems, it is possible to mathematically formalize the problem of proving the postulate of equal a priori probabilities, and to find conditions under which it holds. This is a very active field of research, called \textbf{ergodic theory}, and in some cases one can prove its validity, while in other cases one can find counterexamples where it does not hold. There exist complicated systems for which the postulate of equal a priori probabilities does not hold, but these systems are not relevant for our purposes, thus we will assume the validity of the postulate for the rest of the course, and we will use it as a fundamental principle.
+    \item We have assumed above that the system is at equilibrium, thus we can take the time average of the macroscopic observable over a long time interval \(T\). If the system is not at equilibrium, then the time average of the macroscopic observable will not be constant in time, and it will depend on the initial conditions of the system. Studying how a system reaches the equilibrium (or even defining it rigorously) is non-trivial, and it is a very active field of research, called \textbf{non-equilibrium statistical mechanics} or \textbf{thermalization}. Typically the approach to equilibrium is obtained via a weak coupling among theh system and the environment, which allows the system to exchange energy and information with the environment, so that the system is not completely isolated.
+\end{itemize}
+
+With the above discussion at hand, it is useful to define the concept of \textbf{typical behaviour}. Given a function defined on the phase space (an observable) \(f(\{q_j, p_j\})\) associated with some macroscopic quantity, we can define a \textbf{typical point} \(\mathbf{R} = \{q_j,p_j\}\) as the point in which the function \(f\) takes a value that is close to the average value of the function over the energy shell defined by \(E\):
+\[
+    f(\mathbf{R}) = \frac{1}{|\mathcal{M}_E|} \int_{\mathcal{M}_E} \mathrm{d} \mathcal{M} \, f(\{q_j\},\,\{p_j\}) + \delta f,
+\]
+where \(\delta f\) is a small fluctuation. The postulate of equal a priori probabilities implies that the typical behaviour of the system is close to the average behaviour of the system, thus we can say that the typical point in the phase space of the system is close to the average value of the function \(f\) over the energy shell defined by \(E\).
+
 \section{Microcanonical Ensemble}
 
- [...]
+The postulate of equal a priori probabilities defines the microcanonical ensemble (in general an ensemble is a collection of all possible microstates that are consistent with a given set of macroscopic constraints), which is the ensemble of microstates that are compatible with a given macrostate defined by the energy \(E\), volume \(V\), and number of particles \(N\). The probability distribution of the system in the microcanonical ensemble is uniform on the energy shell defined by \(E\), thus we can write it as
+\begin{equation}
+    \rho_{mc}(\{q_j\},\,\{p_j\}) = \begin{dcases}
+        \frac{1}{|\Gamma_{\Delta}(E)|}, & \text{if } E \leq H(\{q_j\},\,\{p_j\}) \leq E + \Delta, \\
+        0,                              & \text{otherwise},
+    \end{dcases}
+    \label{eq:microcanonical_distribution}
+\end{equation}
+where \(\Delta\) is a small energy interval that defines the width of the energy shell, and \(|\Gamma_{\Delta}(E)|\) is the volume of the energy shell in the phase space, which can be computed by considering the normalization condition for the probability distribution
+\[
+    \int \rho_{mc} \, \mathrm{d}^{3N}q \, \mathrm{d}^{3N}p = 1 \implies \rho_{mc} = \frac{1}{\int_{\Gamma_{\Delta}(E)} \mathrm{d}^{3N}q \, \mathrm{d}^{3N}p} = \frac{1}{|\Gamma_{\Delta}(E)|}.
+\]
+
+Given a function \(f\) defined on the phase space of the system, we can compute its \textbf{ensamble average}, denoted by \(\langle f \rangle_{mc}\) or \(\mathbb{E}_{mc}\left[ f \right]\), as the average of the function over the energy shell defined by \(E\) with respect to the probability distribution of the microcanonical ensemble:
+\begin{equation}
+    \langle f \rangle_{mc} = \int f(\{q_j\},\,\{p_j\}) \rho_{mc}(\{q_j\},\,\{p_j\}) \, \mathrm{d}^{3N}q \, \mathrm{d}^{3N}p.
+    \label{eq:microcanonical_ensemble_average}
+\end{equation}
+
+A \textit{consistency condition} for the microcanonical ensemble (or any other ensemble) is that the statistical fluctuations of macroscopic observables are small in the thermodynamic limit \(N \to \infty\). This means that the variance of a macroscopic observable \(f\) should vanish in the thermodynamic limit, thus we can write
+\[
+    \sigma_f^2 = \frac{\langle f^2 \rangle_{mc} - \langle f \rangle_{mc}^2}{\langle f^2 \rangle_{mc}} \ll 1 \quad \text{for } N \to \infty.
+\]
+Now we can use these conditions to further analyze this ensamble; in order to do so let us introduce the entropy \(S\) of the system, which can be used to derive the thermodynamic properties of the system, and to find the most probable configuration of the system.
 
 \subsection{Entropy}
 
-[...]
+As seen in previous courses, in this framework we are outlining a microscopic basis for the thermodynamic properties of the system, thus we need to introduce a microscopic definition of the entropy \(S\) of the system, which is a measure of the number of microstates available to the system at a given energy \(E\). The \textbf{Boltzmann formula} for the entropy is given by
+\begin{equation}
+    S(E) = k_B \log |\Gamma_{\Delta}(E)|,
+    \label{eq:microcanonical_entropy}
+\end{equation}
+where \(k_B\) is the Boltzmann constant, and \(|\Gamma_{\Delta}(E)|\) is the volume of the energy shell in the phase space. The Boltzmann formula for the entropy tells us that the entropy of the system is proportional to the logarithm of the number of microstates available to the system at a given energy \(E\). This is a fundamental result in statistical mechanics, and it allows us to derive the thermodynamic properties of the system from its microscopic properties.
+
+We will not derive the Boltzmann formula for the entropy, but we will use it as a fundamental principle to derive the thermodynamic properties of the system. For example, we can derive a definition of temperature \(T\) of the system from the entropy \(S\).
 
 \subsection{Temperature}
 
-Let us consider two systems \(S_1\) and \(S_2\) in thermal contact such that
+Let us consider two systems \(\mathcal{S}_1\) and \(\mathcal{S}_2\) in thermal contact such that they can exchange energy, but they are isolated from the rest of the universe. The total system is isolated, as well as the subsystems, thus we can apply the microcanonical ensemble to them.
+\begin{figure}[H]
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \begin{tikzpicture}
+
+            \fill[cyan, fill opacity=0.2] (0,0) rectangle (3,2);
+            \fill[red, fill opacity=0.2] (3,0) rectangle (6,2);
+
+            \draw[thick] (0,0) rectangle (6,2);
+            \draw[thick] (3,0) -- (3,2);
+
+            \node at (1.5, 1.5) {$V_1, N_1, E_1$};
+            \node at (4.5, 1.5) {$V_2, N_2, E_2$};
+            \node at (1.5, 0.5) {$\mathcal{S}_1$};
+            \node at (4.5, 0.5) {$\mathcal{S}_2$};
+
+        \end{tikzpicture}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \[
+            \begin{dcases}
+                N = N_1 + N_2, \\
+                V = V_1 + V_2, \\
+                E = E_1 + E_2.
+            \end{dcases}
+        \]
+    \end{minipage}
+\end{figure}
+Thermal contact means that the two systems can exchange energy, thus the total energy \(E\) is fixed, but the energy of each subsystem \(E_1\) and \(E_2\) can fluctuate. The total number of particles \(N\) and the total volume \(V\) are also fixed, since there is no exchange of matter or volume between the two systems.
+
+The total energy can now be computed from the Hamiltonian of the system, sum of the subsystems' Hamiltonians plus an interaction term
 \[
-    \begin{dcases}
-        N = N_1 + N_2, \\
-        V = V_1 + V_2, \\
-        E = E_1 + E_2.
-    \end{dcases}
+    H(\{q_j\},\,\{p_j\}) = H_1(\{q_{1j}\},\,\{p_{1j}\}) + H_2(\{q_{2j}\},\,\{p_{2j}\}) + \delta H_{12}(\{q_{1j}\},\,\{p_{1j}\},\,\{q_{2j}\},\,\{p_{2j}\}),
 \]
-The total energy can now be computed from the Hamiltonian of the system, sum of the subsystems' Hamiltonians
+where the last term accounts for the interaction between the two systems, which we will neglect in the following. The energy of the total system is fixed, but the energy of each subsystem can fluctuate. The probability of finding the system in a state with energy \(E_1\) is proportional to the number of states available to the second system with energy \(E_2 = E - E_1\). If we fix an energy shell of width \(\Delta\), we can write
 \[
-    H = H(\{q_f\},\,\{p_f\}) = H_1(\{q_{1f}\},\,\{p_{1f}\}) + H_2(\{q_{2f}\},\,\{p_{2f}\}) + \delta H_{12}(\{q_{1f}\},\,\{p_{1f}\},\,\{q_{2f}\},\,\{p_{2f}\}),
+    E_k^{(1)} = k \Delta, \qquad E_k^{(2)} = E - E_k^{(1)} = E - k \Delta,
 \]
-where the last term accounts for the interaction between the two systems, which we will neglect in the following. The energy of the total system is fixed, but the energy of each subsystem can fluctuate. The probability of finding the system in a state with energy \(E_1\) is proportional to the number of states available to the second system with energy \(E_2 = E - E_1\), which is given by \(\Omega_2(E - E_1)\). If we fix an energy shell of width \(\Delta\), we can write
-\[
-    E_k^{(1)} = k \Delta, \qquad E_k^{(2)} = E - E_k^{(1)} = E - k \Delta.
-\]
-Thus we can count the number of states available to the total system at a fixed energy \(E\) as
+and with this ``discretization'' we can count the number of states available to the total system at a fixed energy \(E\) as
 \[
     \Gamma(E) = \sum_{k=0}^{E/\Delta} \Gamma_1(E_k^{(1)}) \Gamma_2(E-E_k^{(1)}),
 \]
-where \(\Gamma_k(E) = \int_{E_k < H_k < E_k + \Delta} \mathrm{d}\{q_{kf}\} \mathrm{d}\{p_{kf}\}\) is the number of states available to the \(k\)-th subsystem at energy \(E\). Thus we are saying that \textit{in order to count the number of microstates at energy} \(E\) \textit{we have to multiply the number of microstates of the subsystem} \(S_1\) \textit{with energy} \(\epsilon_1\) \textit{to the number of microstates of} \(S_2\) \textit{at energy} \(\epsilon_2 = E - \epsilon_1\), \textit{then sum over all possible values of} \(\epsilon_1\). The most probable configuration of the system is the one that maximizes the number of states available to the total system, which is equivalent to maximizing the entropy of the total system. Thus we can compute the entropy of the total system as
+where \(\Gamma_k(E) = \int_{E < H_k < E + \Delta} \mathrm{d}\{q_{kf}\} \mathrm{d}\{p_{kf}\}\) is the number of states available to the \(k\)-th subsystem at energy \(E\).
+
+Thus we are saying that \textit{in order to count the number of microstates at energy} \(E\) \textit{we have to multiply the number of microstates of the subsystem} \(S_1\) \textit{with energy} \(\epsilon_1\) \textit{to the number of microstates of} \(S_2\) \textit{at energy} \(\epsilon_2 = E - \epsilon_1\), \textit{then sum over all possible values of} \(\epsilon_1\).
+
+The \textbf{most probable configuration} of the system is the one that maximizes the number of states available to the total system, which is equivalent to \textbf{maximizing the entropy} of the total system. Thus we can compute the entropy of the total system as
 \[
     S(E) = k_B \log \left[ \sum_{k=0}^{E/\Delta} \Gamma_1(E_k^{(1)}) \Gamma_2(E-E_k^{(1)}) \right].
 \]
-
-Now we are interested in finding the most probable configuration of the system, which is the one that maximizes the entropy. We can do this by taking the derivative of the entropy with respect to \(E_1\) and setting it to zero: let us denote \(\overline{E}_1\) the energy of the subsystem \(S_1\) that maximizes the entropy, then \(\overline{E}_2 = E - \overline{E}_1\) is the energy of the subsystem \(S_2\) that maximizes the entropy. We have
+Now, in order to maximize it, we can take the derivative of the entropy with respect to \(E_1\) and set it to zero: let us denote \(\bar{E}_1\) the energy of the subsystem \(S_1\) that maximizes the entropy, then \(\bar{E}_2 = E - \bar{E}_1\) is the energy of the subsystem \(S_2\) that maximizes the entropy. We have
 \[
-    \begin{aligned}
-        \Gamma(\overline{E}^{(1)})\Gamma(\overline{E}^{(2)}) \leq \Gamma(E) \leq \frac{E}{\Delta} \Gamma(\overline{E}^{(1)})\Gamma(\overline{E}^{(2)}), \\
-        \implies S(\overline{E}^{(1)}, V_1) + S(\overline{E}^{(2)}, V_2) \leq S(E, V) \leq S(\overline{E}^{(1)}, V_1) + S(\overline{E}^{(2)}, V_2) + k_B \log \left( \frac{E}{\Delta} \right),
-    \end{aligned}
+    \Gamma(\bar{E}^{(1)})\Gamma(\bar{E}^{(2)}) \leq \Gamma(E) \leq \frac{E}{\Delta} \Gamma(\bar{E}^{(1)})\Gamma(\bar{E}^{(2)}),
+\]
+where the first inequality comes from the fact that \(\Gamma(E)\) is a sum over all the values of \(E_1\), thus it is greater than or equal to the single term with \(E_1 = \bar{E}_1\), while the second inequality comes from the fact that there are at most \(E/\Delta\) terms in the sum, thus we can upper bound it by multiplying the maximum term by the number of terms. Taking the logarithm of these inequalities we arrive at
+\[
+    S(\bar{E}^{(1)}, V_1) + S(\bar{E}^{(2)}, V_2) \leq S(E, V) \leq S(\bar{E}^{(1)}, V_1) + S(\bar{E}^{(2)}, V_2) + k_B \log \left( \frac{E}{\Delta} \right),
 \]
 where both inequalities are saturated in the thermodynamic limit \(N \to \infty\): entropy and energy are extensive quantities, thus \(S(E, V) \sim N\) and \(E \sim N\), so the last term in the upper bound is negligible in the thermodynamic limit
 \[
     k_B \log\left(\frac{E}{\Delta}\right) \sim k_B \log(N) \ll N \sim S(E, V).
 \]
-Thus we can write, in the thermodynamic limit, the entropy of the total system as the sum of the entropies of the subsystems
+Thus we can write, in the thermodynamic limit, the entropy of the total system as the sum of the entropies of the subsystems, computed at the most probable values of the energy of the subsystems:
 \[
-    S(E,\,V) = S(\overline{E}^{(1)}, V_1) + S(\overline{E}^{(2)}, V_2).
+    S(E,\,V) = S(\bar{E}^{(1)}, V_1) + S(\bar{E}^{(2)}, V_2).
 \]
 
-The first consequence of this result is that the entropy is an extensive quantity, since it scales with the number of particles \(N\) in the system. The second consequence is that the most probable configuration of the system is the one that maximizes the entropy, which is equivalent to maximizing the number of states available to the total system. Thus we can write
+The first consequence of this result is that the \textbf{entropy is an extensive quantity}, since it scales with the number of particles \(N\) in the system. The second consequence is that the \textit{most probable configuration of the system is the one that maximizes the entropy}, which is equivalent to maximizing the number of states available to the total system. Thus we can write
 \[
-    \Gamma(E) = \Gamma_1(\overline{E}^{(1)}) \Gamma_2(\overline{E}^{(2)}).
+    \Gamma(E) = \Gamma_1(\bar{E}^{(1)}) \Gamma_2(\bar{E}^{(2)}).
 \]
-Therefore terms with different values of \(E_1\) are negligible compared to the term with \(E_1 = \overline{E}_1\), which is the one that maximizes the number of states available to the total system. This is a consequence of the fact that the number of states available to the total system grows exponentially with the number of particles \(N\), thus even a small difference in energy between different configurations can lead to a huge difference in the number of states available to the total system. \(\overline{E}^{(1)}\) and \(\overline{E}^{(2)}\) are the most probable values of the energy of the subsystems, which are the ones that maximize the entropy of the total system: the \textit{equilibrium energy values}. Thus we can write
+Therefore terms with different values of \(E_1\) are negligible compared to the term with \(E_1 = \bar{E}_1\), which is the one that maximizes the number of states available to the total system. This is a consequence of the fact that the number of states available to the total system grows exponentially with the number of particles \(N\), thus even a small difference in energy between different configurations can lead to a huge difference in the number of states available to the total system. \(\bar{E}^{(1)}\) and \(\bar{E}^{(2)}\) are the most probable values of the energy of the subsystems, which are the ones that maximize the entropy of the total system: the \textit{equilibrium energy values}. Mathematically, we can obtain \(\bar{E}^{(1)}\) from the saddle-point condition:
 \[
-    \begin{aligned}
-        \frac{\partial}{\partial \epsilon} \left[ \Gamma_1(\epsilon) \Gamma_2(E - \epsilon) \right]_{\epsilon = \overline{E}^{(1)}} = 0, \\
-        \implies \left[ \frac{\partial}{\partial \epsilon} \Gamma_1(\epsilon) \right]_{\epsilon = \overline{E}^{(1)}} \Gamma_2(E - \epsilon) + \Gamma_1(\epsilon) \left[ - \frac{\partial}{\partial \epsilon} \Gamma_2(E - \epsilon) \right]_{\epsilon = \overline{E}^{(2)}} = 0,
-    \end{aligned}
+    \frac{\partial}{\partial \epsilon} \left[ \Gamma_1(\epsilon) \Gamma_2(E - \epsilon) \right]_{\epsilon = \bar{E}^{(1)}} = 0,
 \]
-which now, dividing by \(\Gamma_1(\overline{E}^{(1)}) \Gamma_2(\overline{E}^{(2)})\), and using the definition of entropy we arrive at
-
+which, expanding the derivative, can be written as
 \[
-    [\dots ]
+    \left[ \frac{\partial}{\partial \epsilon} \Gamma_1(\epsilon) \right]_{\epsilon = \bar{E}^{(1)}} \Gamma_2(E - \epsilon) + \Gamma_1(\epsilon) \left[ - \frac{\partial}{\partial \epsilon} \Gamma_2(E - \epsilon) \right]_{\epsilon = \bar{E}^{(2)}} = 0,
 \]
-
-
+which now, dividing by \(\Gamma_1(\bar{E}^{(1)}) \Gamma_2(\bar{E}^{(2)})\) (in order to build the logarithmic derivative), and using the definition of entropy we arrive at
+\[
+    \frac{\partial}{\partial \epsilon} S_1 (\epsilon) \bigg|_{\epsilon = \bar{E}^{(1)}} = \frac{\partial}{\partial \epsilon} S_2(\epsilon) \bigg|_{\epsilon = \bar{E}^{(2)}}.
+\]
+This is a fundamental result, which tells us that at equilibrium the derivative of the entropy with respect to the energy is the same for both subsystems. This allows us to define a thermodynamic quantity which is equal in systems in thermal equilibrium, called \textbf{temperature} \(T\) (recovering the first principle of thermodynamics). The temperature is defined as the inverse of the derivative of the entropy with respect to the energy, thus we can write
+\[
+    \frac{1}{T} = \frac{\partial S}{\partial E}(E, V).
+\]
 
 \section{Canonical Ensemble}
+\begin{figure}[H]
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \begin{tikzpicture}
 
-We have
-\[
-    \begin{dcases}
-        N = N_1 + N_2, \\
-        V = V_1 + V_2, \\
-        E = E_1 + E_2,
-    \end{dcases} \quad \text{and} \quad
-    \begin{dcases}
-        N_2 \gg N_1, \\
-        V_2 \gg V_1, \\
-        E_2 \gg E_1.
-    \end{dcases}
-\]
+            \fill[cyan, fill opacity=0.2] (0,0) rectangle (2,2);
+            \fill[red, fill opacity=0.2] (2,0) rectangle (6,2);
+
+            \draw[thick] (0,0) rectangle (6,2);
+            \draw[dashed] (2,0) -- (2,2);
+
+            \node at (1, 1.5) {$V_1, N_1, E_1$};
+            \node at (4, 1.5) {$V_2, N_2, E_2$};
+            \node at (1, 0.5) {$\mathcal{S}_1$};
+            \node at (4, 0.5) {$\mathcal{S}_2$};
+
+        \end{tikzpicture}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \[
+            \begin{dcases}
+                N = N_1 + N_2, \\
+                V = V_1 + V_2, \\
+                E = E_1 + E_2,
+            \end{dcases} \quad \text{and} \quad
+            \begin{dcases}
+                N_2 \gg N_1, \\
+                V_2 \gg V_1, \\
+                E_2 \gg E_1.
+            \end{dcases}
+        \]
+    \end{minipage}
+\end{figure}
+
 The second system \(S_2\) is called the \textit{heat bath}, and it is so large that it can exchange energy with the first system \(S_1\) without changing its thermodynamic properties. The total system is isolated, thus we can apply the microcanonical ensemble to it. The probability of finding the system in a state with energy \(E_1\) is proportional to the number of states available to the second system with energy \(E_2 = E - E_1\), which is given by \(\Omega_2(E - E_1)\).
 
 Technically speaking, we want to find the probability distribution of the subsystem \(S_1\) when it is in contact with a heat bath \(S_2\), knowing the total probability distribution: the total system is isolated, thus we can apply the microcanonical ensemble to it, and we know that it will be evolving with a trajectory in the phase space that is uniformly distributed on the energy shell defined by the total energy \(E\). This means that if we analyze the evolution of the subsystem \(S_1\) in its phase space, we will find that it will not be limited to fixed energy states, but it will be able to explore all the energy states available to it, with a probability that is proportional to the number of states available to the heat bath \(S_2\) at the corresponding energy. we are interested in finding the \textbf{induced probability distribution} of the subsystem \(S_1\).
@@ -150,7 +322,7 @@ Let us report some postulates of quantum statistical mechanics:
 \begin{itemize}
     \item Postulate of equal a priori probabilities: in an isolated system, all microstates are equally probable,
           \[
-              \vert \overline{c_n} \vert^2 = \begin{dcases}
+              \vert \bar{c_n} \vert^2 = \begin{dcases}
                   \frac{1}{D}, & \text{if } E_n \in [E, E + \Delta], \\
                   0,           & \text{otherwise}.
               \end{dcases}
