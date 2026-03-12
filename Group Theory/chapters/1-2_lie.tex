@@ -23,50 +23,59 @@ which can be read as a normalizing condition. By virtue of the parametrization, 
 As the parametrization is one–to–one,\footnote{This means that each element of the group corresponds to a unique set of parameters: \(g(\bs{\theta})=g(\bs{\theta}') \implies \bs{\theta} = \bs{\theta}'\).} \(\bs{\theta}''\) is also uniquely determined by \(\bs{\theta}\), \(\bs{\theta}'\).
 So, it can be expressed as a function of them
 \[
-    \bs{\theta}'' = m(\bs{\theta}', \bs{\theta}),
+    \bs{\theta}'' = \mathbf{m}(\bs{\theta}', \bs{\theta}),
 \]
-which is a function of the \textbf{group multiplication}. The function \(m\) is smooth as the group multiplication is smooth. The inverse of \(g(\bs{\theta})\) is given by
+which is a function of the \textbf{group multiplication}. The function \(\mathbf{m}\) is smooth as the group multiplication is smooth. The inverse of \(g(\bs{\theta})\) is given by
 \[
     g(\bs{\theta})^{-1} = g(\bs{\theta}'),
 \]
-for some \(\bs{\theta}' = j(\bs{\theta})\), which is unique since the parameterization is one-to-one. The function \(j\), implementing the group inversion, is smooth as the group inversion is smooth.
+for some \(\bs{\theta}' = \mathbf{j}(\bs{\theta})\), which is unique since the parameterization is one-to-one. The function \(\mathbf{j}\), implementing the group inversion, is smooth as the group inversion is smooth.
 
-We have
+We have thus found two smooth functions \(\mathbf{m}\), \(\mathbf{j}\) that encode the group multiplication and inversion in terms of the parameters \(\bs{\theta}\):
 \[
     \begin{dcases}
-        m : D \times D \to D, \\
-        j : D \to D.
+        \mathbf{m} : D \times D \to D, \\
+        \mathbf{j} : D \to D,
+    \end{dcases} \quad \text{such that} \quad \begin{dcases}
+        g(\bs{\theta}') g(\bs{\theta}) = g(\mathbf{m}(\bs{\theta}', \bs{\theta})), \\
+        g(\mathbf{j}(\bs{\theta})) = g(\bs{\theta})^{-1}.
     \end{dcases}
 \]
 
-[...]
+These functions have to respect some properties, which are the group multiplication properties: associativity, invertibility and neutrality. Thus we can express the next proposition.
 
-These functions have to respect some properties, which are the group multiplication properties: associativity, invertibility and neutrality. Thus given three parameter vectors \(\bs{\theta}\), \(\bs{\theta}'\), \(\bs{\theta}''\), the following relations must hold:
-\[
-    \begin{aligned}
-        \left( g(\bs{\theta}) g(\bs{\theta}') \right) g(\bs{\theta}'') & = g(\bs{\theta}) \left( g(\bs{\theta}') g(\bs{\theta}'') \right), \\
-        g(m(\bs{\theta}, \bs{\theta}')) g(\bs{\theta}'')               & = g(\bs{\theta})g(m(\bs{\theta}', \bs{\theta}'')),                \\
-        g(m(m(\bs{\theta}, \bs{\theta}'), \bs{\theta}''))              & = g(m(\bs{\theta}, m(\bs{\theta}', \bs{\theta}''))),
-    \end{aligned}
-\]
-since the parametrization is one–to–one, these relations
-    [\dots ]
-and so we find the three properties of the group multiplication functions:
-\begin{equation}
-    \begin{aligned}
-        m(m(\bs{\theta}, \bs{\theta}'), \bs{\theta}'') & = m(\bs{\theta}, m(\bs{\theta}', \bs{\theta}'')), \\
-        m(\bs{\theta}, j(\bs{\theta}))                 & = m(j(\bs{\theta}), \bs{\theta}) = \mathbf{0},    \\
-        m(\bs{\theta}, \mathbf{0})                     & = m(\mathbf{0}, \bs{\theta}) = \bs{\theta}.
-    \end{aligned}
-\end{equation}
+\begin{proposition}
+    The following relations must hold:
+    \begin{equation}
+        \begin{aligned}
+            m(m(\bs{\theta}, \bs{\theta}'), \bs{\theta}'') & = m(\bs{\theta}, m(\bs{\theta}', \bs{\theta}'')), \\
+            m(\bs{\theta}, j(\bs{\theta}))                 & = m(j(\bs{\theta}), \bs{\theta}) = \mathbf{0},    \\
+            m(\bs{\theta}, \mathbf{0})                     & = m(\mathbf{0}, \bs{\theta}) = \bs{\theta}.
+        \end{aligned}
+    \end{equation}
+    Given any choice of three parameter vectors \(\bs{\theta}\), \(\bs{\theta}'\), \(\bs{\theta}''\). These identities constrain the form of the group multiplication function \(m\) and the inversion function \(j\) to an important extent.
+\end{proposition}
 
-The idea now is to try and understand the structure of \(G\) by looking at the behavior of \(g(\bs{\theta})\) in a neighborhood of the neutral element. This is done by Taylor expanding it in power series around \(\mathbf{0}\):
+\begin{proof}\TODO{Complete proof}
+    since the parametrization is one–to–one, these relations
+        [\dots ]
+    and so we find the three properties of the group multiplication functions:
+    \[
+        \begin{aligned}
+            \left( g(\bs{\theta}) g(\bs{\theta}') \right) g(\bs{\theta}'') & = g(\bs{\theta}) \left( g(\bs{\theta}') g(\bs{\theta}'') \right), \\
+            g(m(\bs{\theta}, \bs{\theta}')) g(\bs{\theta}'')               & = g(\bs{\theta})g(m(\bs{\theta}', \bs{\theta}'')),                \\
+            g(m(m(\bs{\theta}, \bs{\theta}'), \bs{\theta}''))              & = g(m(\bs{\theta}, m(\bs{\theta}', \bs{\theta}''))),
+        \end{aligned}
+    \]
+\end{proof}
+
+The idea now is to understand the structure of \(G\) by looking at the behavior of \(g(\bs{\theta})\) in a neighborhood of the neutral element. This is done by Taylor expanding in power series around \(\mathbf{0}\):
 \[
     g(\bs{\theta}) = g(\mathbf{0}) + \frac{\partial g}{\partial \theta^a} \bigg|_{\mathbf{0}} \theta^a + \frac{1}{2} \frac{\partial^2 g}{\partial \theta^a \partial \theta^b} \bigg|_{\mathbf{0}} \theta^a \theta^b + \mathrm{O}(\theta^3).
 \]
 Now computing individual terms of the expansion, we have
 \[
-    g(\bs{0}) = 1, \quad t_a = \frac{\partial g}{\partial \theta^a} \bigg|_{\mathbf{0}}, \quad t_{ab} = \frac{\partial^2 g}{\partial \theta^a \partial \theta^b} \bigg|_{\mathbf{0}},
+    g(\mathbf{0}) = 1, \quad t_a = \frac{\partial g}{\partial \theta^a} \bigg|_{\mathbf{0}}, \quad t_{ab} = \frac{\partial^2 g}{\partial \theta^a \partial \theta^b} \bigg|_{\mathbf{0}},
 \]
 so that
 \[

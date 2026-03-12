@@ -200,13 +200,17 @@ where \(\hat{Q}_a = Q_a + k_a \mathbb{I}\) are the shifted generators of the rep
 
 Now we found a true representation
 \begin{itemize}
-    \item \(\hat{\tilde{U}}(\tilde{j}(\bs{\theta})) = \hat{\tilde{U}}(\bs{\theta})^{-1}\)
-    \item \(\hat{\tilde{U}}(\tilde{m}(\bs{\theta}, \bs{\theta'})) = \hat{\tilde{U}}(\bs{\theta}) \hat{\tilde{U}}(\bs{\theta'})\)
+    \item \(\hat{\tilde{U}}(\tilde{\mathbf{j}}(\bs{\theta})) = \hat{\tilde{U}}(\bs{\theta})^{-1}\)
+    \item \(\hat{\tilde{U}}(\tilde{\mathbf{m}}(\bs{\theta}, \bs{\theta'})) = \hat{\tilde{U}}(\bs{\theta}) \hat{\tilde{U}}(\bs{\theta'})\)
 \end{itemize}
 
 The term \(\exp(-i \theta^a k_a)\) is an important \textbf{phase factor}, since it is the one which allows us to get a true representation from a projective representation by shifting the generators \(Q_a\) of the representation \(U\) of the Lie group \(G\) by a suitable central shift \(k_a\). This is the reason why we introduced the concept of 2-coboundary Lie algebra, since it allows us to understand when a projective representation of a Lie group can be redefined to get a true representation of the Lie group.
 
 This is a \textbf{multi-valued function} on the underlying group manifold \(G\), since the phase factor usually is not an integer which comes back to the original value after a loop around the group manifold \(G\) (it is not guaranteed that the passage is single-valued): the exponential parametrization of the projective representation \(U\) of the Lie group \(G\) is a multi-valued function on the underlying group manifold \(G\). Usually then we introduce a branch cut in the complex plane to make it single-valued, in order to treat multi valued function as single valued function on the more complex Riemann surface (such as for the square root and the logarithm).
+
+\[
+    \ln z = \ln \vert z \vert  + i \arg z + 2 \pi i n, \quad n \in \mathbb{Z}.
+\]
 
 In our case the exponential parametrization of the projective representation \(U\) of the Lie group \(G\) is a multi-valued function on the underlying group manifold \(G\), but can be made single-valued on a infinite Riemann surface which is a covering space of the underlying group manifold \(G\): a covering group \(\tilde{G}\). It is the same idea of the Riemann surface, but with more subtleties and complications, since the group structure has to be preserved.
 
@@ -214,3 +218,212 @@ There can be made analogies with the various covering groups we can find in phys
 \[
     \mathrm{SL}(2, \mathbb{C}) = \widetilde{\mathrm{SO}^+(1,3)}, \quad \mathrm{SU}(2) = \widetilde{\mathrm{SO}(3)}.
 \]
+
+\begin{example}[The translation group \(\mathrm{T}(3)\)]
+    The translation group \(\mathrm{T}(3)\) implements the translation symmetry of the three-dimensional space:
+    \[
+        \mathbf{a} \in \mathbb{E}_3, \quad T(\mathbf{x}) = \mathbf{x} + \mathbf{a},
+    \]
+    where \(T \in \mathrm{T}(3)\) and \(\mathbb{E}_3\) is the three-dimensional Euclidean space.
+
+    The proper translation group \(\mathrm{T}(3)\) can be represented by the unitary operators \(U(\mathbf{a})\) for a translation \(\mathbf{a} \in \mathbb{E}_3\) which act on the Hilbert space of states of a quantum system as
+    \[
+        (U(\mathbf{a})\Psi)(\mathbf{x}) = \Psi(\mathbf{x} + \mathbf{a}),
+    \]
+    where \(\Psi\) is a state of the quantum system and we want to prove that \(\{U(\mathbf{a})\}_{\mathbf{a} \in \mathbb{E}_3}\) yields a unitary representation of the proper translation group \(\mathrm{T}(3)\).
+    \begin{proof}
+        We can start by computing the composition of two translations \(\mathbf{a}\) and \(\mathbf{b}\):
+        [...]
+
+        There are no multiplicative phases in the right hand side. The operator family \(U(\mathbf{a})\) constitutes in this way a unitary representation of the proper translation group \(\mathrm{T}(3)\).
+    \end{proof}
+    Let us now discuss the infinitesimal generators of the translation group \(\mathrm{T}(3)\). The infinitesimal generators \(\hbar^{-1}\mathbf{p}\) of the unitary representation \(U\) of the proper translation group \(\mathrm{T}(3)\) are defined through the expansion of the unitary operators \(U(\mathbf{a})\) for small translations \(\delta\mathbf{a}\):
+    \[
+        U(\delta\mathbf{a}) = 1 + \frac{i}{\hbar} \mathbf{p} \cdot \delta\mathbf{a} + \mathrm{O}(\delta a^2),
+    \]
+    with \(\mathbf{p} = (p_1, p_2, p_3)\) being the momentum operator of the quantum system
+    \[
+        \mathbf{p} \Psi(\mathbf{x}) = -i \hbar \nabla \Psi(\mathbf{x}).
+    \]
+    Thus we can study the expansion of the unitary operators \(U(\mathbf{a})\) acting on a state \(\Psi\) for small translations \(\delta\mathbf{a}\):
+    \[
+        \begin{aligned}
+            (U(\delta\mathbf{a})\Psi)(\mathbf{x}) & = \Psi(\mathbf{x} + \delta\mathbf{a})                                                         \\
+                                                  & = \Psi(\mathbf{x}) + \delta \mathbf{a} \cdot \nabla \Psi(\mathbf{x}) + \mathrm{O}(\delta a^2) \\
+                                                  & = \dots
+        \end{aligned}
+    \]
+
+    \(\mathbf{p}\) is therefore the familiar quantum linear momentum operator as anticipated by the notation used. The result obtained is in line with the standard interpretation of momentum as the infinitesimal generator of configuration space translations.
+
+    As well–known from quantum theory, its components
+    \[
+        p_k = \mathbf{p} \cdot \mathbf{e}_k, \quad k = 1, 2, 3,
+    \]
+    satisfy the commutation relations
+    \[
+        [p_k, p_l] = 0, \quad k, l = 1, 2, 3,
+    \]
+    free of central charges, as expected from the fact that the translation group \(\mathrm{T}(3)\) is an abelian group, so that its Lie algebra is also abelian, with vanishing structure constants \(f^c_{ab} = 0\).
+
+    The translation group \(\mathrm{T}(3)\) is a special case of a more general class of groups called the Heisenberg group, which is a non-abelian group with non-vanishing structure constants and non-vanishing central charges. The Heisenberg group is the symmetry group of the quantum phase space, and its projective representations are related to the canonical commutation relations of quantum mechanics.
+
+    Thus the operators \(U(\mathbf{a})\) can be written in terms of the momentum operator \(\mathbf{p}\), the generators, as
+    \[
+        U(\mathbf{a}) = e^{\tfrac{i}{\hbar} \mathbf{a} \cdot \mathbf{p}}.
+    \]
+    \begin{proof}
+        limit for n....
+    \end{proof}
+
+
+    .
+
+
+\end{example}
+
+\begin{example}[The proper rotation group \(\mathrm{SO(3)} / \mathrm{SU}(2)\)]
+
+    The proper rotation group \(SO(3)\) implements the rotation symmetry of the three-dimensional space:
+    \[
+        R \in SO(3), \quad R: \mathbf{x} \to R\mathbf{x},
+    \]
+    where \(R\) is a proper rotation and \(\mathbf{x}\) is a vector in the three-dimensional space.
+
+    The proper rotation group \(SO(3)\) can be represented by the unitary operators \(U(R)\) for a proper rotation \(R \in SO(3)\) which act on the Hilbert space of states of a quantum system as
+    \[
+        (U(R)\Psi)(\mathbf{x}) = D(\mathbf{R})\Psi(R^{-1}\mathbf{x}),
+    \]
+    where \(\Psi\) is a state of the quantum system, \(\mathbf{x}\) is a point in the configuration space, and \(D(\mathbf{R})\) is a unitary operator which acts on the internal degrees of freedom of the quantum system, such as spin.
+
+    Indeed we know that the spin of a quantum system is related to the representation of the rotation group \(SO(3)\) on the internal degrees of freedom of the quantum system; this does not come as a surprise, since the spin of a quantum system is related to the way the quantum system transforms under rotations, and the rotation group \(SO(3)\) is the symmetry group of rotations in three-dimensional space.
+
+    We parametrized the representation in order to act on \(\mathbf{x}\) as the inverse of the rotation,\footnote{Which is always well defined from the properties of groups.} since this assumption is consistent with the composition of rotations, as we can see by computing the composition of two rotations \(R\) and \(R'\):
+    \[
+        U(\mathbf{R},\mathbf{R}') = U(\mathbf{R}) U(\mathbf{R}'),
+    \]
+    otherwise the the order would be inverted.
+
+    \(D(\mathbf{R})\) are \((2s+1)\times(2s+1)\) unitary matrices which form a representation of the rotation group \(SO(3)\) on the internal degrees of freedom of the quantum system, where \(s\) is the spin of the quantum system
+    \[
+        D(\mathbf{R})^{\dagger}D(\mathbf{R}) = D(\mathbf{R}) D(\mathbf{R})^{\dagger} = \mathbb{I},
+    \]
+    and they satisfy the composition law\footnote{Here the right order is implemented by the previously discussed choice of parametrization.}
+    \[
+        D(\mathbf{R} \mathbf{R}') = D(\mathbf{R}) D(\mathbf{R}').
+    \]
+    \begin{proof}
+        Let us show first that the operator \(U(R)\) is unitary. Define the operator
+        \[
+            U^*(\mathbf{R})\Psi(\mathbf{x}) = D(\mathbf{R})^\dagger \Psi(R\mathbf{x}),
+        \]
+        so that we can compute the composition of \(U^*(\mathbf{R})\) and \(U(\mathbf{R})\) which acts as the identity operator on the Hilbert space of states of the quantum system:
+        \[
+            (U^*(\mathbf{R}) U(\mathbf{R})\Psi)(\mathbf{x}) = D(\mathbf{R})^\dagger D(\mathbf{R}) \Psi(\mathbf{R}^{-1}\mathbf{R}\mathbf{x}) = \Psi(\mathbf{x}).
+        \]
+        The next thing to show is that
+        \[
+            \Vert U(\mathbf{R})\Psi \Vert^2 = \Vert \Psi \Vert^2,
+        \]
+        which is the definition of unitarity. We can compute
+        \[
+            \begin{aligned}
+                \Vert U(\mathbf{R})\Psi \Vert^2 & = \int d^3x \, |U(\mathbf{R})\Psi(\mathbf{x})|^2 = \int d^3x \, |D(\mathbf{R})\Psi(R^{-1}\mathbf{x})|^2 \\
+                                                & = \int d^3x \, |\Psi(R^{-1}\mathbf{x})|^2 = \int d^3x' \, |\Psi(\mathbf{x}')|^2 = \Vert \Psi \Vert^2,
+            \end{aligned}
+        \]
+        where we have used the unitarity of \(D(\mathbf{R})\) and \(J = |\det(\mathbf{R})^{-1}| = 1\). The last step is to show that the composition law is satisfied, which can be done by computing
+        \[
+            \begin{aligned}
+                (U(\mathbf{R} \mathbf{R}')\Psi)(\mathbf{x}) & = D(\mathbf{R} \mathbf{R}')\Psi((\mathbf{R} \mathbf{R}')^{-1}\mathbf{x}) = D(\mathbf{R}) D(\mathbf{R}')\Psi(\mathbf{R}'^{-1} \mathbf{R}^{-1}\mathbf{x}) \\
+                                                            & = D(\mathbf{R}) (U(\mathbf{R}')\Psi)(\mathbf{R}^{-1}\mathbf{x}) = (U(\mathbf{R}) U(\mathbf{R}')\Psi)(\mathbf{x}),
+            \end{aligned}
+        \]
+        proving that \(U(\mathbf{R} \mathbf{R}') = U(\mathbf{R}) U(\mathbf{R}')\).
+    \end{proof}
+
+    We now aim to study the \textbf{exponential parametrization} of the representation \(U\) of the proper rotation group \(SO(3)\). The generators \(J_k\) of the representation \(U\) of the proper rotation group \(SO(3)\) are defined through the expansion of the unitary operators \(U(R)\) for small rotations \(\delta R\).
+
+    We can then parametrize the rotation \(R\) by a vector \(\bs{\varphi} = (\varphi_1, \varphi_2, \varphi_3)\) which represents the axis of rotation and the angle of rotation, so that the exponential parametrization of the the proper rotation group \(SO(3)\) is given by
+    \[
+        R(\bs{\varphi}) = e^{- * \varphi}, \quad R(\bs{\varphi})^{-1} = e^{* \varphi},
+    \]
+    where
+    \[
+        *\varphi = \begin{pmatrix}
+            0          & \varphi_3  & -\varphi_2 \\
+            -\varphi_3 & 0          & \varphi_1  \\
+            \varphi_2  & -\varphi_1 & 0
+        \end{pmatrix},
+    \]
+    is the antisymmetric matrix associated to the vector \(\bs{\varphi} = (\varphi_1, \varphi_2, \varphi_3)\) which parametrizes the rotation \(R\).
+
+    Now we can reflect this exponential parametrization on the representation \(U\) of the proper rotation group \(SO(3)\) to get an exponential parametrization of the representation:
+    \[
+        (U(\bs{\varphi})\Psi)(\mathbf{x}) = D(\bs{\varphi})\Psi(e^{* \varphi}\mathbf{x}),
+    \]
+    where \(D(\bs{\varphi})\) is the exponential parametrization of the representation of the rotation group \(SO(3)\) on the internal degrees of freedom of the quantum system. We have to look at the expansion of the unitary operators \(U(\bs{\varphi})\) for small rotations \(\delta \bs{\varphi}\) to get the generators \(\mathbf{J}\) of the representation \(U\) of the proper rotation group \(SO(3)\):
+    \[
+        U(\delta \bs{\varphi}) = 1 - i \mathbf{J} \cdot \delta \bs{\varphi} + \mathrm{O}(\delta \varphi^2),
+    \]
+    where \(\mathbf{J} = (J_1, J_2, J_3)\) are the generators of the representation \(U\) of the proper rotation group \(SO(3)\), which are called the angular momentum operators of the quantum system. Then the expansion of the internal degrees transformation \(D(\bs{\varphi})\) for small rotations \(\delta \bs{\varphi}\) gives us
+    \[
+        D(\delta \bs{\varphi}) = 1 - i \bs{\Sigma} \cdot \delta \bs{\varphi} + \mathrm{O}(\delta \varphi^2),
+    \]
+    where \(\bs{\Sigma} = (\Sigma_1, \Sigma_2, \Sigma_3)\) are the generators of the representation of the rotation group \(SO(3)\) on the internal degrees of freedom of the quantum system, which are called the spin operators of the quantum system. Finally we have to compute the expansion of the spatial transformation \(e^{* \varphi}\) for small rotations \(\delta \bs{\varphi}\) to get
+    \[
+        e^{* \delta \varphi} = 1 + *\delta \varphi + \mathrm{O}(\delta \varphi^2),
+    \]
+    but since the rotation can be expressed as \(- \delta \bs{\varphi} \times \mathbf{x}\), we can write
+    \[
+        e^{* \delta \varphi} \mathbf{x} = \mathbf{x} - \delta \bs{\varphi} \times \mathbf{x} + \mathrm{O}(\delta \varphi^2).
+    \]
+
+    Now we can put everything together to get the expansion of the unitary operators \(U(\bs{\varphi})\) for small rotations \(\delta \bs{\varphi}\):
+    \[
+        \begin{aligned}
+            (U(\delta \bs{\varphi})\Psi)(\mathbf{x}) & = D(\delta \bs{\varphi})\Psi(e^{* \delta \varphi}\mathbf{x})                                                                                                          \\
+                                                     & = (1 - i \bs{\Sigma} \cdot \delta \bs{\varphi} + \mathrm{O}(\delta \varphi^2))\Psi(\mathbf{x} - \delta \bs{\varphi} \times \mathbf{x} + \mathrm{O}(\delta \varphi^2)) \\
+                                                     & = (1 - i \bs{\Sigma} \cdot \delta \bs{\varphi} + i (\delta \bs{\varphi} \times \mathbf{x}) \cdot (-i\nabla) + \mathrm{O}(\delta \varphi^2))\Psi(\mathbf{x})           \\
+                                                     & \dots                                                                                                                                                                 \\
+                                                     & = \Psi(\mathbf{x}) - \delta \bs{\varphi} \cdot (\mathbf{x} \times \nabla + i \bs{\Sigma})\Psi(\mathbf{x}) + \mathrm{O}(\delta \varphi^2),
+        \end{aligned}
+    \]
+    [...]
+
+    Thus we found
+    \[
+        \mathbf{J} = \hbar \bs{\Sigma} - i\hbar \mathbf{x} \times \nabla,
+    \]
+    where renaming \(\hbar \bs{\Sigma} = \mathbf{S}\) and \(-i \hbar \mathbf{x} \times \nabla = \mathbf{L}\) we get the familiar decomposition of the angular momentum operator \(\mathbf{J}\) into the spin operator \(\mathbf{S}\) and the orbital angular momentum operator \(\mathbf{L}\):
+    \[
+        \mathbf{J} = \mathbf{S} + \mathbf{L}.
+    \]
+
+    We know that the infinitesimal generators of a continuous symmetry group satisfy the same commutation relations as the Lie algebra of the symmetry group, so that the generators \(J_k\) of the representation \(U\) of the proper rotation group \(SO(3)\) satisfy the commutation relations
+    \[
+        [J_k, J_l] = i \hbar \epsilon_{klm} J_m, \quad k, l, m = 1, 2, 3,
+    \]
+    while the generators \(\Sigma_k\) of the representation of the rotation group \(SO(3)\) on the internal degrees of freedom of the quantum system satisfy the same commutation relations
+    \[
+        [\Sigma_k, \Sigma_l] = i \epsilon_{klm} \Sigma_m, \quad k, l, m = 1, 2, 3,
+    \]
+    where \(\epsilon_{klm}\) is the Levi-Civita symbol. The commutation relations of the generators \(J_k\) and \(\Sigma_k\) of the representation, are in line with the structure constants of the Lie algebra \(\mathfrak{so}(3)\) of the proper rotation group \(SO(3)\), which are given by
+    \[
+        f^m_{kl} = \epsilon_{klm}.
+    \]
+
+    Since we are using the exponential parametrization \(\mathbf{R}(\bs{\varphi})\) of \(\mathrm{SO}(3)\), we can get the exponential parametrization of the representation \(U(\bs{\varphi})\) in terms of the infinitesimal generators \(J_k\):
+    \[
+        U(\bs{\varphi}) = e^{-\tfrac{i}{\hbar} \bs{\varphi} \cdot \mathbf{J}}.
+    \]
+    \begin{proof}
+        limit for n....
+    \end{proof}
+
+\end{example}
+
+
+It should be made an extensive digression on the universal covering group, which is the group which allows us to get a single-valued representation from a multi-valued representation by lifting the representation to the covering group. The universal covering group of a Lie group \(G\) is a simply connected Lie group \(\tilde{G}\) which covers \(G\) in such a way that the projection map from \(\tilde{G}\) to \(G\) is a local diffeomorphism. The universal covering group \(\tilde{G}\) has the same Lie algebra as \(G\), but it can have different global properties, such as different topology and different fundamental group. The universal covering group \(\tilde{G}\) allows us to get a single-valued representation from a multi-valued representation of \(G\) by lifting the representation to \(\tilde{G}\).
+
+However we do not have the time to make this digression, so we will just mention that the universal covering group of the proper rotation group \(SO(3)\) is the special unitary group \(SU(2)\), which is a simply connected Lie group that covers \(SO(3)\) in such a way that the projection map from \(SU(2)\) to \(SO(3)\) is a local diffeomorphism. The universal covering group \(SU(2)\) has the same Lie algebra as \(SO(3)\), but it has different global properties, such as different topology and different fundamental group. The universal covering group \(SU(2)\) allows us to get a single-valued representation from a multi-valued representation of \(SO(3)\) by lifting the representation to \(SU(2)\).
