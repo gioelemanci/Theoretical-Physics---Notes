@@ -271,10 +271,11 @@ We can consider a general process in which the initial state is a two particle s
 Now we are left with the task of computing the S-matrix elements for the scattering process using wave packets, and then integrating the probability of scattering over all possible impact parameters to compute the cross section for the scattering process. But how are we going to model the wave packets? We can consider different types of wave packets, such as \textbf{Gaussian wave packets}, which are commonly used in quantum mechanics and quantum field theory due to their nice mathematical properties and their ability to represent \textit{localized states in both position and momentum space}. By choosing appropriate wave packet profiles, we can ensure that the initial and final states are well-defined and that the scattering probabilities are finite and physically meaningful.
 
 \begin{example}[Gaussian wave packet]
-    We can consider a Gaussian wave packet centered around \(p_i\) with a width \(\sigma\):
-    \[
-        \phi (\mathbf{k}) = N \exp[ -\frac{1}{4} \left(\frac{(\mathbf{k} - \mathbf{p})^2}{\Delta p^2}\right)^2 -i \mathbf{k} \cdot \langle \mathbf{x} \rangle],
-    \]
+    We can consider a Gaussian wave packet centered around \(p_i\) with a width \(\Delta p\):
+    \begin{equation}
+        \phi (\mathbf{k}) = N \exp[ -\frac{1}{4} \left(\frac{(\mathbf{k} - \mathbf{p})^2}{\Delta p}\right)^2 -i \mathbf{k} \cdot \langle \mathbf{x} \rangle],
+        \label{eq:gaussian_wave_packet}
+    \end{equation}
     where \(N\) is a normalization constant, \(\Delta p\) is the width of the wave packet in momentum space, and \(\langle \mathbf{x} \rangle\) is the average position of the wave packet in real space: using \(\hat{x}^{\mu} = i \frac{\partial}{\partial p_\mu}\), one can check that the uncertainty principle is satisfied with \(\Delta x \Delta p = \tfrac{1}{2}\).
 
     Thus the wave packet is normalized and has a well-defined momentum distribution, with the properties of a momentum eigenstate while being relatively well localized in space for finite \(\Delta p\). By using Gaussian wave packets, we can compute the S-matrix elements for the scattering process without encountering divergences, and we can ensure that the initial and final states are well-defined and physically meaningful.
@@ -288,11 +289,11 @@ Now we are left with the task of computing the S-matrix elements for the scatter
         \ket{p_b} \to \ket{\phi_b} & = \int \frac{\mathrm{d}^3 \mathbf{k}}{(2 \pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{k}}}} \phi_b (\mathbf{k}) \, e^{-i \mathbf{k} \cdot \mathbf{b}} \, \ket{\mathbf{k}},
     \end{aligned}
 \]
-where we exploited the dependence of \(\phi_b(\mathbf{k})\) upon \(\mathbf{b}\) the impact parameter as
+where we shifted the second wave packet by the impact parameter \(\mathbf{b}\), defined as
 \[
     \mathbf{b} = \bra{\phi_b} \hat{\mathbf{x}}^{\bot} \ket{\phi_b},
 \]
-with \(\hat{\mathbf{x}}^{\bot}\) being the position operator in the plane perpendicular to the beam axis.
+with \(\hat{\mathbf{x}}^{\bot}\) being the position operator in the plane perpendicular to the beam axis. Looking at the expression for the gaussian wave packet in \eqref{eq:gaussian_wave_packet}, we can think of having took out of \(\phi_b\) the exponential factor \(e^{-i \mathbf{k} \cdot \langle \hat{\mathbf{x}}^{\bot} \rangle}\), whereas in \(\phi_a\) it can be set to zero by choosing the average position of the wave packet to be at the origin. In this way we can model the initial states as wave packets that are localized in both position and momentum space, with the second wave packet shifted by the impact parameter \(\mathbf{b}\) with respect to the first one, to account for the spatial separation of the incoming particles in the scattering process.
 
 \paragraph{Outgoing states.} For the outgoing states we can consider just the momentum eigenstates, since the scattering has already happened, thus we can write
 \[
