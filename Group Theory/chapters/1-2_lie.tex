@@ -1,143 +1,172 @@
 \section{Lie Groups and Lie Algebras} \label{sec:lie}
 
-A Lie group \(G\) is an infinite group that can be parametrized in a neighborhood of the neutral element by continuous parameters \(\theta^a\), \(a = 1, \ldots, d\), organized as a vector \(\bs{\theta}\), in one–to–one fashion:
+A Lie group \(G\) is an infinite group that can be parametrized in a neighborhood of the neutral element by continuous parameters \(\theta^a\), \(a = 1, \ldots, d\), organized as a vector \(\underline{\theta}\), in one–to–one fashion:
 \[
     \begin{dcases}
-        \bs{\theta} \in D \subseteq \mathbb{R}^d, \\
-        g \, : \, D \mapsto G,                    \\
-        \bs{\theta} \mapsto g(\bs{\theta}),
+        \underline{\theta} \in D \subseteq \mathbb{R}^d, \\
+        g \, : \, D \mapsto G,                           \\
+        \underline{\theta} \mapsto g(\underline{\theta}),
     \end{dcases}
 \]
-where \(D\) is an open neighborhood of the origin in \(\mathbb{R}^d\) (\(\mathbf{0}\in D\) and \(g(\mathbf{0}) \in G\)). The number \(d\) of parameters is called the dimension of \(G\), seen as a differential map. The group operations of multiplication and inversion are smooth functions of the parameters.
+where \(D\) is an open neighborhood of the origin in \(\mathbb{R}^d\) (\(\underline{0}\in D\) and \(g(\underline{0}) \in G\)). The number \(d\) of parameters is called the dimension of \(G\), seen as a differential map. The group operations of multiplication and inversion are smooth functions of the parameters.
 
 If the parametrization is smooth, as we assume, \(G\) can be thought geometrically as a group manifold. Below, we treat \(G\) as a matrix group for definiteness.
 
 We assume that 0 belongs to the parameter space and that
 \[
-    g(\mathbf{0}) = 1,
+    g(\underline{0}) = 1,
 \]
-which can be read as a normalizing condition. By virtue of the parametrization, for any pair of parameter vectors \(\bs{\theta}\), \(\bs{\theta}'\), there exists a third parameter vector \(\bs{\theta}''\) such that
+which can be read as a normalizing condition. By virtue of the parametrization, for any pair of parameter vectors \(\underline{\theta}\), \(\underline{\theta}'\), there exists a third parameter vector \(\underline{\theta}''\) such that
 \[
-    g(\bs{\theta}') g(\bs{\theta}) = g(\bs{\theta}'').
+    g(\underline{\theta}') g(\underline{\theta}) = g(\underline{\theta}'').
 \]
-As the parametrization is one–to–one,\footnote{This means that each element of the group corresponds to a unique set of parameters: \(g(\bs{\theta})=g(\bs{\theta}') \implies \bs{\theta} = \bs{\theta}'\).} \(\bs{\theta}''\) is also uniquely determined by \(\bs{\theta}\), \(\bs{\theta}'\).
+As the parametrization is one–to–one,\footnote{This means that each element of the group corresponds to a unique set of parameters: \(g(\underline{\theta})=g(\underline{\theta}') \implies \underline{\theta} = \underline{\theta}'\).} \(\underline{\theta}''\) is also uniquely determined by \(\underline{\theta}\), \(\underline{\theta}'\).
 So, it can be expressed as a function of them
 \[
-    \bs{\theta}'' = \mathbf{m}(\bs{\theta}', \bs{\theta}),
+    \underline{\theta}'' = \underline{m}(\underline{\theta}', \underline{\theta}),
 \]
-which is a function of the \textbf{group multiplication}. The function \(\mathbf{m}\) is smooth as the group multiplication is smooth. The inverse of \(g(\bs{\theta})\) is given by
+which is a function of the \textbf{group multiplication}. The function \(\underline{m}\) is smooth as the group multiplication is smooth. The inverse of \(g(\underline{\theta})\) is given by
 \[
-    g(\bs{\theta})^{-1} = g(\bs{\theta}'),
+    g(\underline{\theta})^{-1} = g(\underline{\theta}'),
 \]
-for some \(\bs{\theta}' = \mathbf{j}(\bs{\theta})\), which is unique since the parameterization is one-to-one. The function \(\mathbf{j}\), implementing the group inversion, is smooth as the group inversion is smooth.
+for some \(\underline{\theta}' = \underline{j}(\underline{\theta})\), which is unique since the parameterization is one-to-one. The function \(\underline{j}\), implementing the group inversion, is smooth as the group inversion is smooth.
 
-We have thus found two smooth functions \(\mathbf{m}\), \(\mathbf{j}\) that encode the group multiplication and inversion in terms of the parameters \(\bs{\theta}\):
-\[
+We have thus found two smooth functions \(\underline{m}\), \(\underline{j}\) that encode the group multiplication and inversion in terms of the parameters \(\underline{\theta}\):
+\begin{equation}
     \begin{dcases}
-        \mathbf{m} : D \times D \to D, \\
-        \mathbf{j} : D \to D,
+        \underline{m} : D \times D \to D, \\
+        \underline{j} : D \to D,
     \end{dcases} \quad \text{such that} \quad \begin{dcases}
-        g(\bs{\theta}') g(\bs{\theta}) = g(\mathbf{m}(\bs{\theta}', \bs{\theta})), \\
-        g(\mathbf{j}(\bs{\theta})) = g(\bs{\theta})^{-1}.
+        g(\underline{\theta}') g(\underline{\theta}) = g(\underline{m}(\underline{\theta}', \underline{\theta})), \\
+        g(\underline{j}(\underline{\theta})) = g(\underline{\theta})^{-1}.
     \end{dcases}
-\]
+    \label{eq:lie_multiplication_inversion_functions_definitions}
+\end{equation}
 
-These functions have to respect some properties, which are the group multiplication properties: associativity, invertibility and neutrality. Thus we can express the next proposition.
-
+The group properties of associativity, invertibility and neutrality, which are satisfied by the group multiplication and inversion, translate into properties of the functions \(\underline{m}\), \(\underline{j}\) as follows:
 \begin{proposition}
     The following relations must hold:
     \begin{equation}
         \begin{aligned}
-            m(m(\bs{\theta}, \bs{\theta}'), \bs{\theta}'') & = m(\bs{\theta}, m(\bs{\theta}', \bs{\theta}'')), \\
-            m(\bs{\theta}, j(\bs{\theta}))                 & = m(j(\bs{\theta}), \bs{\theta}) = \mathbf{0},    \\
-            m(\bs{\theta}, \mathbf{0})                     & = m(\mathbf{0}, \bs{\theta}) = \bs{\theta}.
+            m(m(\underline{\theta}, \underline{\theta}'), \underline{\theta}'') & = m(\underline{\theta}, m(\underline{\theta}', \underline{\theta}'')), \\
+            m(\underline{\theta}, j(\underline{\theta}))                        & = m(j(\underline{\theta}), \underline{\theta}) = \underline{0},        \\
+            m(\underline{\theta}, \underline{0})                                & = m(\underline{0}, \underline{\theta}) = \underline{\theta}.
         \end{aligned}
+        \label{eq:lie_multiplication_inversion_functions_properties}
     \end{equation}
-    Given any choice of three parameter vectors \(\bs{\theta}\), \(\bs{\theta}'\), \(\bs{\theta}''\). These identities constrain the form of the group multiplication function \(m\) and the inversion function \(j\) to an important extent.
+    Given any choice of three parameter vectors \(\underline{\theta}\), \(\underline{\theta}'\), \(\underline{\theta}''\). These identities constrain the form of the group multiplication function \(m\) and the inversion function \(j\) to an important extent.
 \end{proposition}
 
-\begin{proof}\TODO{Complete proof}
-    since the parametrization is one–to–one, these relations
-        [\dots ]
-    and so we find the three properties of the group multiplication functions:
+\begin{proof}
+    The first identity is a consequence of the associativity of the group multiplication: using the definition of the multiplication function \(m\) along with the associativity of the group multiplication, we find
     \[
         \begin{aligned}
-            \left( g(\bs{\theta}) g(\bs{\theta}') \right) g(\bs{\theta}'') & = g(\bs{\theta}) \left( g(\bs{\theta}') g(\bs{\theta}'') \right), \\
-            g(m(\bs{\theta}, \bs{\theta}')) g(\bs{\theta}'')               & = g(\bs{\theta})g(m(\bs{\theta}', \bs{\theta}'')),                \\
-            g(m(m(\bs{\theta}, \bs{\theta}'), \bs{\theta}''))              & = g(m(\bs{\theta}, m(\bs{\theta}', \bs{\theta}''))),
+            g(m(m(\underline{\theta}, \underline{\theta}'), \underline{\theta}'')) & = g(m(\underline{\theta}, \underline{\theta}')) g(\underline{\theta}'') = g(\underline{\theta}) g(\underline{\theta}') g(\underline{\theta}'')    \\
+                                                                                   & = g(\underline{\theta}) g(m(\underline{\theta}', \underline{\theta}'')) = g(m(\underline{\theta}, m(\underline{\theta}', \underline{\theta}''))),
         \end{aligned}
     \]
+    which implies the first identity in \eqref{eq:lie_multiplication_inversion_functions_properties}\(_1\) by the one-to-one nature of the parametrization (otherwise we would have \(g(\underline{\theta}) = g(\underline{\theta}')\) for some \(\underline{\theta} \neq \underline{\theta}'\)). The second identity is a consequence of the invertibility of the group multiplication: using the definition of the inversion function \(j\) along with the invertibility of the group multiplication, we find
+    \[
+        \begin{aligned}
+            g(m(\underline{\theta}, j(\underline{\theta}))) & = g(\underline{\theta}) g(j(\underline{\theta})) = g(\underline{\theta}) g(\underline{\theta})^{-1} = 1 = g(\underline{0}), \\
+            g(m(j(\underline{\theta}), \underline{\theta})) & = g(j(\underline{\theta})) g(\underline{\theta}) = g(\underline{\theta})^{-1} g(\underline{\theta}) = 1 = g(\underline{0}),
+        \end{aligned}
+    \]
+    proving both sides of the second identity in \eqref{eq:lie_multiplication_inversion_functions_properties}\(_2\). The third identity is a consequence of the neutrality of the group multiplication: using the definition of the multiplication function \(m\) along with the neutrality of the group multiplication, we find
+    \[
+        g(m(\underline{0}, \underline{\theta})) = g(\underline{\theta}), \quad g(m(\underline{\theta}, \underline{0})) = g(\underline{\theta}),
+    \]
+    proving both sides of the third identity in \eqref{eq:lie_multiplication_inversion_functions_properties}\(_3\).
 \end{proof}
 
-The idea now is to understand the structure of \(G\) by looking at the behavior of \(g(\bs{\theta})\) in a neighborhood of the neutral element. This is done by Taylor expanding in power series around \(\mathbf{0}\):
+\subsection{Local Structure of the Group}
+
+The idea now is to understand the structure of \(G\) by looking at the behavior of \(g(\underline{\theta})\) in a neighborhood of the neutral element. This is done by Taylor expanding in power series around \(\underline{0}\) as:
 \[
-    g(\bs{\theta}) = g(\mathbf{0}) + \frac{\partial g}{\partial \theta^a} \bigg|_{\mathbf{0}} \theta^a + \frac{1}{2} \frac{\partial^2 g}{\partial \theta^a \partial \theta^b} \bigg|_{\mathbf{0}} \theta^a \theta^b + \mathrm{O}(\theta^3).
+    g(\underline{\theta}) = g(\underline{0}) + \frac{\partial g}{\partial \theta^a} \bigg|_{\underline{0}} \theta^a + \frac{1}{2} \frac{\partial^2 g}{\partial \theta^a \partial \theta^b} \bigg|_{\underline{0}} \theta^a \theta^b + \mathrm{O}(\theta^3).
 \]
 Now computing individual terms of the expansion, we have
 \[
-    g(\mathbf{0}) = 1, \quad t_a = \frac{\partial g}{\partial \theta^a} \bigg|_{\mathbf{0}}, \quad t_{ab} = \frac{\partial^2 g}{\partial \theta^a \partial \theta^b} \bigg|_{\mathbf{0}},
+    g(\underline{0}) = 1, \quad t_a = \frac{\partial g}{\partial \theta^a} \bigg|_{\underline{0}}, \quad t_{ab} = \frac{\partial^2 g}{\partial \theta^a \partial \theta^b} \bigg|_{\underline{0}} = t_{ba},
 \]
 so that
-\[
-    g(\bs{\theta}) = 1 + t_a \theta^a + \frac{1}{2} t_{ab} \theta^a \theta^b + \mathrm{O}(\theta^3).
-\]
-Let us highlight the fact that the coefficients \(t_a\), \(t_{ab}\) are matrices, as \(g(\bs{\theta})\) is a matrix group. \(t_{ab}\) in particular is symmetric in its indices \(a\), \(b\) since the order of differentiation does not matter.
+\begin{equation}
+    g(\underline{\theta}) = 1 + t_a \theta^a + \frac{1}{2} t_{ab} \theta^a \theta^b + \mathrm{O}(\theta^3).
+    \label{eq:lie_parametrization_taylor_expansion}
+\end{equation}
+Let us highlight the fact that the coefficients \(t_a\), \(t_{ab}\) are matrices, as \(g(\underline{\theta})\) is a matrix group. \(t_{ab}\) in particular is symmetric in its indices \(a\), \(b\) since the order of differentiation does not matter.
 
-We can now think of \(G\) as an \textbf{hypersurface in the space of matrices}, containing the identity matrix. In the neighborhood of the identity, there is \(D\), subset of our hypersurface, which is diffeomorphic to an open neighborhood of the origin in \(\mathbb{R}^d\).
+We can now think of \(G\) as an \textbf{hypersurface in the space of matrices}, containing the identity matrix. In the neighborhood of the identity, there is \(D\), subset of our hypersurface, which is diffeomorphic to an open neighborhood of the origin in \(\mathbb{R}^d\) (the domain of our parametrization).
 
-If we vary \(g(0,\dots,0,\theta^a,0,\dots,0)\), we get a curve in \(D\) passing through the identity (when \(\theta^a = 0\)). The tangent vector to this curve at the identity is given by \(t_a = \frac{\partial g}{\partial \theta^a} \big|_{\mathbf{0}}\). Varying all parameters \(\theta^a\) we get \(d\) curves in \(D\) passing through the identity and their tangent vectors at the identity are given by \(t_a\), \(a = 1, \ldots, d\). These tangent vectors are \textbf{linearly independent} since the parametrization is one–to–one. Thus, they span a vector space of dimension \(d\).
+If we vary \(g(0,\dots,0,\theta^a,0,\dots,0)\), we get a curve in \(D\) passing through the identity (when \(\theta^a = 0\)). The tangent vector to this curve at the identity is given by \(t_a = \frac{\partial g}{\partial \theta^a} \big|_{\underline{0}}\). Varying all parameters \(\theta^a\) we get \(d\) curves in \(D\) passing through the identity and their tangent vectors at the identity are given by \(t_a\), \(a = 1, \ldots, d\). These tangent vectors are \textbf{linearly independent} since the parametrization is one–to–one, thus they span a vector space of dimension \(d\).
 
-Thus the tangent space to \(G\) at the identity is more than a vector space of dimension \(d\) (spanned by the matrices \(t_a\), \(a = 1, \ldots, d\), costituing a basis). We denote this tangent space by \(\mathfrak{g}\) and call it the Lie algebra of \(G\).
-It is a vector space of dimension \(d\) and it is closed under the commutator of matrices. The Lie algebra \(\mathfrak{g}\) encodes all the information about the local structure of \(G\) around the identity element.
+The tangent space to \(G\) at the identity is more than a vector space of dimension \(d\) (spanned by the matrices \(t_a\), \(a = 1, \ldots, d\), costituing a basis). We denote this tangent space by \(\mathfrak{g}\) and call it the \textbf{Lie algebra} of \(G\). It is a vector space of dimension \(d\) and it is closed under the commutator of matrices: the Lie algebra \(\mathfrak{g}\) encodes all the information about the local structure of \(G\) around the identity element, but this will be clarified in a moment.
 
-We could now think to Taylor expand the group multiplication functions \(m\), \(j\) around \(\mathbf{0}\) and try to find the structure of \(G\) by looking at the properties of the coefficients of the expansion. Starting from the associativity property, we find that the coefficients of the expansion of \(m\) must satisfy
-\[
-    m^a(\bs{\theta}, \bs{\theta}') = \theta^a + \theta'^a + m^a_{bc} \theta^b \theta'^c + \mathrm{O}(\bs{\theta}'^2, \bs{\theta}) + \mathrm{O}(\bs{\theta}^2, \bs{\theta}'),
-\]
+We could now think to Taylor expand the group multiplication functions \(m\), \(j\) around \(\underline{0}\) and try to find relations among the coefficients of the expansion which encode the group structure. Starting from the multiplication function, we find that the coefficients of the expansion of \(m\) must satisfy
+\begin{equation}
+    m^a(\underline{\theta}, \underline{\theta}') = \theta^a + \theta'^a + m^a_{\ bc} \theta^b \theta'^c + \mathrm{O}(\underline{\theta}^3),
+    \label{eq:lie_multiplication_function_taylor_expansion}
+\end{equation}
 while for the inversion property we find
+\begin{equation}
+    j^a(\underline{\theta}) = -\theta^a + j^a_{\ bc} \theta^b \theta^c + \mathrm{O}(\underline{\theta}^3),
+    \label{eq:lie_inversion_function_taylor_expansion}
+\end{equation}
+where \(m^a_{\ bc}\), \(j^a_{\ bc}\) are the coefficients of the expansions. These coefficients are not independent, as it can be proven that they satisfy:
 \[
-    j^a(\bs{\theta}) = -\theta^a + j^a_{bc} \theta^b \theta^c + \mathrm{O}(\bs{\theta}^3).
+    j^a_{\ bc} = m^a_{\ bc} + m^a_{\ cb}.
 \]
-If we now recall the Taylor expansion of \(g(\bs{\theta})\) around \(\mathbf{0}\)
-\[
-    g(\mathbf{0}) = 1 + t_a \theta^a + \frac{1}{2} t_{ab} \theta^a \theta^b + \mathrm{O}(\theta^3),
-\]
-we can note how the coefficients \(t_a\) define another member of the Lie algebra \(\mathfrak{g}\) by defining the \textbf{commutator}, or \textbf{Lie bracket}, of two basis elements \(t_a\), \(t_b\) of \(\mathfrak{g}\) as follows:
-\[
-    [t_a, t_b] = t_a t_b - t_b t_a = f_{ab}^{\ \ c} t_c \in \mathfrak{g},
-\]
-where \(f_{ab}^{\ \ c}\) are the \textbf{structure constants} of the Lie algebra \(\mathfrak{g}\). The structure constants are \textit{antisymmetric in their lower indices} \(a\), \(b\) since the commutator is antisymmetric. These structure constants are related to the coefficients \(m^a_{\ bc}\) of the expansion of the group multiplication function \(m\) by
-\[
-    f^a_{\ bc} = m^a_{\ bc} - m^a_{\ cb}.
-\]
-If we change parametrization, the structure constants change accordingly, but the Lie algebra \(\mathfrak{g}\) remains the same.
 
-Taking again the definition of the multiplication function
+If we now recall the Taylor expansion of \(g(\underline{\theta})\) around \(\underline{0}\)
 \[
-    g(\bs{\theta}') g(\bs{\theta}) = g(m(\bs{\theta}', \bs{\theta})),
+    g(\underline{0}) = 1 + t_a \theta^a + \frac{1}{2} t_{ab} \theta^a \theta^b + \mathrm{O}(\theta^3),
 \]
-we can Taylor expand both sides around \(\mathbf{0}\) and find the following relation between the coefficients of the expansion of \(g\) and the structure constants:
-\[
-    \begin{aligned}
-        \left[ 1 + \theta^a t_a + \frac{1}{2} \theta^a \theta^b t_{ab} + \mathrm{O}(\theta^3) \right] \left[ 1 + \theta'^a t_a + \frac{1}{2} \theta'^a \theta'^b t_{ab} + \mathrm{O}(\theta'^3) \right] \\
-        =[\dots ]
-    \end{aligned}
-\]
-and by relating the coefficients of the expansion of both sides in \(\theta^b\), \(\theta'^a\) we find the following relations (renaming summation indices):
-\[
-    \begin{aligned}
-        t_a t_b & = t_{ab} + m^c_{\ ab} t_c, \\
-        t_b t_a & = t_{ab} + m^c_{\ ba} t_c,
-    \end{aligned}
-\]
-and if we subtract the second from the first, we find
-\[
-    [t_a, t_b] = (m^c_{\ ab} - m^c_{\ ba}) t_c = f_{ab}^{\ \ c} t_c,
-\]
-so that the structure constants \(f_{ab}^{\ \ c}\) of the Lie algebra \(\mathfrak{g}\) are related to the coefficients \(m^c_{\ ab}\) of the expansion of the group multiplication function \(m\) by
-\[
-    f_{\ ab}^{c} = m^c_{\ ab} - m^c_{\ ba}.
-\]
+we can note how the coefficients \(t_a\) define another member of the Lie algebra \(\mathfrak{g}\): the Lie algebra \(\mathfrak{g}\) is the tangent space to \(G\) at the identity, so it is spanned by the matrices \(t_a\), \(a = 1, \ldots, d\), which we have said to be closed under the commutator of matrices. Let us now define the commutator of two basis elements \(t_a\), \(t_b\) of \(\mathfrak{g}\) as follows:
+\begin{definition}[Lie Bracket]
+    The \textbf{commutator}, or \textbf{Lie bracket}, of two basis elements \(t_a\), \(t_b\) of \(\mathfrak{g}\) is defined as follows:
+    \[
+        [t_a, t_b] = t_a t_b - t_b t_a = f_{ab}^{\ \ c} t_c \in \mathfrak{g},
+    \]
+    where \(f_{ab}^{\ \ c}\) are the \textbf{structure constants} of the Lie algebra \(\mathfrak{g}\), encoding the properties of the Lie algebra \(\mathfrak{g}\) and thus of the local structure of the Lie group \(G\) around the identity element.
+\end{definition}
+
+Having defined the Lie bracket of two basis elements \(t_a\), \(t_b\) of \(\mathfrak{g}\), we can now prove the following proposition:
+\begin{proposition}
+    The structure constants are \textit{antisymmetric in their lower indices} \(a\), \(b\) since the commutator is antisymmetric. These structure constants are related to the coefficients \(m^a_{\ bc}\) of the expansion of the group multiplication function by
+    \[
+        f^a_{\ bc} = m^a_{\ bc} - m^a_{\ cb}.
+    \]
+    If we change parametrization, the structure constants change accordingly, but the Lie algebra \(\mathfrak{g}\) remains the same.
+\end{proposition}
+
+\begin{proof}
+    Taking again the definition of the multiplication function
+    \[
+        g(\underline{\theta}') g(\underline{\theta}) = g(m(\underline{\theta}', \underline{\theta})),
+    \]
+    we can Taylor expand both sides around \(\underline{0}\) and find the following relation between the coefficients of the expansion of \(g\) and the structure constants:
+    \[
+        \begin{aligned}
+            \left[ 1 + \theta^a t_a + \frac{1}{2} \theta^a \theta^b t_{ab} + \mathrm{O}(\theta^3) \right] \left[ 1 + \theta'^a t_a + \frac{1}{2} \theta'^a \theta'^b t_{ab} + \mathrm{O}(\theta'^3) \right] \\
+            = 1 + \left( \theta^a + \theta'^a + m^a_{\ bc} \theta^b \theta'^c \right) t_a + \frac{1}{2} \left( \theta^a + \theta'^a \right)\left( \theta^b + \theta'^b \right) t_{ab} + \mathrm{O}(\theta^2, \theta') + \mathrm{O}(\theta, \theta'^2).
+        \end{aligned}
+    \]
+    Relating the coefficients of the expansion of both sides in \(\theta^a \theta'^b\), we find the following relations (renaming summation indices):
+    \[
+        \begin{aligned}
+            t_a t_b & = t_{ab} + m^c_{\ ab} t_c, \\
+            t_b t_a & = t_{ba} + m^c_{\ ba} t_c,
+        \end{aligned}
+    \]
+    but since \(t_{ab} = t_{ba}\), if we subtract the second from the first, we find
+    \[
+        [t_a, t_b] = (m^c_{\ ab} - m^c_{\ ba}) t_c = f_{ab}^{\ \ c} t_c,
+    \]
+    so that the structure constants \(f_{ab}^{\ \ c}\) of the Lie algebra \(\mathfrak{g}\) are related to the coefficients \(m^c_{\ ab}\) of the expansion of the group multiplication function \(m\) by
+    \[
+        f_{\ ab}^{c} = m^c_{\ ab} - m^c_{\ ba}.
+    \]
+\end{proof}
 
 Thus to sum up:
 \begin{itemize}
@@ -153,63 +182,83 @@ Thus to sum up:
           \]
 \end{itemize}
 
-The Lie algebra, the tangent space to the Lie group at the identity, is not only a vector space, but also an algebra, since it is closed under the commutator of matrices. The Lie algebra encodes all the information about the local structure of the Lie group around the identity element. In particular, it encodes the structure constants \(f_{ab}^{\ \ c}\) which determine the commutation relations of the basis elements \(t_a\) of the Lie algebra.
+The Lie algebra, the tangent space to the Lie group at the identity, is not only a vector space, but also an algebra, since it is closed under the commutator of matrices. It encodes all the information about the local structure of the Lie group around the identity element. In particular, the structure constants \(f_{ab}^{\ \ c}\) determine the commutation relations of the basis elements \(t_a\) of the Lie algebra, which in turn determine the local structure of the Lie group \(G\) around the identity element.
 
 The commutator of the basis elements \(t_a\) of the Lie algebra \(\mathfrak{g}\) has some properties, which are the \textbf{Jacobi identity} and the \textbf{antisymmetry} of the commutator:
 \[
-    \begin{aligned}
+    \begin{dcases}
         \left[ t_a,\,t_b \right] + \left[ t_b,\,t_a \right] = 0, \\
         \left[ t_a,\,\left[ t_b,\,t_c \right] \right] + \left[ t_b,\,\left[ t_c,\,t_a \right] \right] + \left[ t_c,\,\left[ t_a,\,t_b \right] \right] = 0.
-    \end{aligned}
+    \end{dcases}
 \]
 These two properties can be expressed in terms of the structure constants \(f_{ab}^{\ \ c}\) as follows:
 \[
-    \begin{aligned}
-        f_{ab}^{\ \ c} + f_{ba}^{\ \ c}                                                               & = 0, \\
-        f_{ad}^{\ \ e} f_{bc}^{\ \ d} + f_{bd}^{\ \ e} f_{ca}^{\ \ d} + f_{cd}^{\ \ e} f_{ab}^{\ \ d} & = 0,
-    \end{aligned}
+    \begin{dcases}
+        f_{ab}^{\ \ c} + f_{ba}^{\ \ c}                  = 0, \\
+        f_{ad}^{\ \ e} f_{bc}^{\ \ d} + f_{bd}^{\ \ e} f_{ca}^{\ \ d} + f_{cd}^{\ \ e} f_{ab}^{\ \ d} = 0,
+    \end{dcases}
 \]
 which are the \textbf{antisymmetry} of the structure constants in their lower indices and the \textbf{Jacobi identity} for the structure constants, respectively. This means that not every set of numbers \(f_{ab}^{\ \ c}\) can be the structure constants of a Lie algebra, but only those that satisfy the antisymmetry and Jacobi identity properties.
 
 \subsection{Exponential Parametrization of Lie Groups}
 
-Given the parametrization of a Lie group \(G\) in a neighborhood of the identity element we used to define the Lie algebra \(\mathfrak{g}\) of \(G\)
+Given the parametrization of a Lie group \(G\) in a neighborhood of the identity element
 \[
-    g \, : \, D \mapsto G, \quad \bs{\theta} \in D \mapsto g(\bs{\theta}) \in G,
+    g \, : \, D \mapsto G, \quad \underline{\theta} \in D \mapsto g(\underline{\theta}) \in G,
 \]
-we can now try to find a global parametrization of \(G\) in terms of the elements of \(\mathfrak{g}\). If we consider another parametrization of \(G\) in a neighborhood of the identity element defined by
+is it possible to find a global parametrization of \(G\) in terms of the elements of its Lie algebra \(\mathfrak{g}\)? The answer is yes, and the way to do it is through the \textit{exponential map}.
+
+If we consider another parametrization of \(G\) in a neighborhood of the identity element defined by
 \[
-    \tilde{g}(\theta) = \lim_{N \to \infty} g\left(\frac{\theta}{N}\right)^N,
+    \tilde{g}(\underline{\theta}) = \lim_{N \to \infty} g\left(\tfrac{{\underline{\theta}}}{N}\right)^N,
 \]
-we obtain the \textbf{exponential map}, which provides a global parametrization of the Lie group \(G\) in terms of the elements of its Lie algebra \(\mathfrak{g}\). Let us analyze its behaviour in a neighborhood of the identity element. We have
+which if the group is suitably closed under the group multiplication, is well defined and provides a global parametrization of \(G\) in terms of the elements of its Lie algebra \(\mathfrak{g}\):
 \[
-    g\left(\frac{\theta}{N}\right)^N = \left[ 1 + \frac{t_a \theta^a}{N} + \frac{1}{2} \left( \frac{t_a \theta^a}{N} \right)^2 + \mathrm{O}\left(\frac{1}{N^3}\right) \right]^N \sim \left(1 +  \frac{t_a \theta^a}{N}\right)^N \xrightarrow{N \to \infty} e^{t_a \theta^a},
+    \tilde{g}(\underline{\theta}) = e^{\theta^a t_a}.
 \]
-which is the exponential of a matrix, defined by the power series
-\[
-    e^{t_a \theta^a} = \sum_{n=0}^{\infty} \frac{(t_a \theta^a)^n}{n!}.
-\]
+This new parametrization is called the \textbf{exponential parametrization} of \(G\) and the map \(\tilde{g} : \mathbb{R}^d \to G\) is called the \textbf{exponential map}.
+
+\begin{proof}
+    Let us show that the limit defining \(\tilde{g}(\underline{\theta})\) exists and is equal to \(e^{\theta^a t_a}\). Starting from the definition of \(\tilde{g}(\underline{\theta})\), we can Taylor expand \(g\left(\underline{\theta} / N\right)\) around \(\underline{0}\) as follows:
+    \[
+        g\left(\frac{{\underline{\theta}}}{N}\right)^N = \left[ 1 + \frac{t_a \theta^a}{N} + \frac{1}{2} \left( \frac{t_a \theta^a}{N} \right)^2 + \mathrm{O}\left(\frac{1}{N^3}\right) \right]^N \sim \left(1 +  \frac{t_a \theta^a}{N}\right)^N \xrightarrow{N \to \infty} e^{t_a \theta^a},
+    \]
+    which is the exponential of a matrix, defined by Euler's formula as the power series expansion
+    \[
+        e^{x} = \lim_{n \to \infty} (1 + \frac{x}{n})^n = \sum_{k=0}^\infty \frac{x^k}{k!}.
+    \]
+\end{proof}
+
 Thus, the exponential map provides a global parametrization of the Lie group \(G\) in terms of the elements of its Lie algebra \(\mathfrak{g}\) as follows:
 \[
-    \tilde{g}(\theta) = e^{t_a \theta^a} = 1 + \tilde{t}_a \theta^a + \frac{1}{2} \theta^a \theta^b \tilde{t}_{ab}  + \mathrm{O}(\theta^3),
+    \tilde{g}(\underline{\theta}) = e^{t_a \theta^a} = 1 + \tilde{t}_a \theta^a + \frac{1}{2} \theta^a \theta^b \tilde{t}_{ab}  + \mathrm{O}(\theta^3),
 \]
-where
+which is the same expansion did in \eqref{eq:lie_parametrization_taylor_expansion}. But when comparing the coefficients to the ones of the expansion of \(e^{i \theta^a t_a}\), we get the following relations:
 \[
-    \tilde{t}_A = t_a, \quad \tilde{t}_{ab} = t_a t_b + t_b t_a.
+    \tilde{t}_a = t_a, \quad \tilde{t}_{ab} = \tfrac{1}{2} t_a t_b + t_b t_a.
 \]
 
-The same goes for the he group multiplication function \(m\) and the inversion function \(j\). We can define new functions \(\tilde{m}\), \(\tilde{j}\) as follows:
+The same goes for the he group multiplication function \(\underline{m}\) and the inversion function \(\underline{j}\). We can define new functions \(\tilde{\underline{m}}\), \(\tilde{\underline{j}}\) as
 \[
     \begin{aligned}
-        \tilde{j}(\theta) = - \theta^a,                                                    \\
-        \tilde{g}(\tilde{j}(\theta)) = \tilde{g}(\theta)^{-1} = \dots = e^{-t_a \theta^a}, \\
+        \tilde{g}(\tilde{\underline{m}}(\underline{\theta}, \underline{\theta}')) & = \tilde{g}(\underline{\theta}') \tilde{g}(\underline{\theta}), \\
+        \tilde{g}(\tilde{\underline{j}}(\underline{\theta}))                      & = \tilde{g}(\underline{\theta})^{-1},
     \end{aligned}
 \]
-while for the multiplication function we have the \textbf{Campbell-Baker-Hausdorff function} so that
+which can be thought as the group multiplication and inversion functions in the exponential parametrization. If we now Taylor expand these new functions around \(\underline{0}\) we find that for the inversion function it is as the previous expansion \eqref{eq:lie_inversion_function_taylor_expansion}, but all the orders higher than the first vanish:
 \[
     \begin{aligned}
-        [\dots ]
+        \tilde{j}(\underline{\theta}) = - \theta^a, \quad \tilde{j}^a_{\ bc} = 0                                                          \\
+        e^{\underline{\theta}^a t_a} = \tilde{g}(\tilde{j}(\underline{\theta})) = \tilde{g}(\underline{\theta})^{-1} = e^{-t_a \theta^a}. \\
     \end{aligned}
+\]
+For the multiplication function we have instead the \textbf{Campbell-Baker-Hausdorff function} so that the expansion of the multiplication function in the exponential parametrization is given by
+\[
+    \tilde{m}^a(\underline{\theta}, \underline{\theta}') = \theta^a + \theta'^a + \tilde{}{m}^a_{\ bc} \theta^b \theta'^c + \mathrm{O}(\underline{\theta}^3),
+\]
+which is the same of \eqref{eq:lie_multiplication_function_taylor_expansion} but with different coefficients \(\tilde{m}^a_{\ bc}\) of the expansion, which are related to the structure constants \(f^a_{\ bc}\) of the Lie algebra \(\mathfrak{g}\) by
+\[
+    \tilde{m}^a_{\ bc} = \tfrac{1}{2} f^a_{\ bc}.
 \]
 
 These new structure constants are not different from the original ones, since the exponential map is a reparametrization of the Lie group \(G\) in terms of the elements of its Lie algebra \(\mathfrak{g}\): \(\tilde{t}_a = t_a\) implies that
@@ -252,7 +301,7 @@ which is like a polynomial expansion of the group multiplication function \(m\) 
     \[
         \mathrm{SU}(2) = \{ U \in \mathbb{C}^{2 \times 2} : U^\dagger U = \mathbb{I}_2, \det(U) = 1 \}.
     \]
-    It is a non-abelian Lie group of dimension 3: \(\bs{\theta} \in \mathbb{R}^3\). The elements of SU(2) can be parametrized using the Pauli matrices \(\sigma_i\) as follows:
+    It is a non-abelian Lie group of dimension 3: \(\underline{\theta} \in \mathbb{R}^3\). The elements of SU(2) can be parametrized using the Pauli matrices \(\sigma_i\) as follows:
     \[
         \tilde{g}(\theta) = e^{i \theta^i \frac{\tau(\theta)}{2}},
     \]
