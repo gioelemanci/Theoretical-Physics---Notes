@@ -1,93 +1,109 @@
-\chapter{Feynman Diagrams and Rules}
+\chapter{Feynman Diagrams}
 
+In the previous chapters we have seen how to calculate Green's functions in QFT and, as we have notice, the number of terms in the expansion of the Green's function grows very quickly as we increase the order of the correction, making it very difficult to keep track of all the terms and their contributions. This is where Feynman diagrams come in handy, as they provide a \textbf{visual representation of the interactions} and allow us to easily keep track of the different terms in the expansion.
+
+In this chapter we will see how to derive a set of practical rules, known as Feynman rules, that allow us to compute Green's functions and scattering amplitudes in a systematic way for an \textit{interacting theory in perturbation theory}, without having to calculate all the contractions explicitly. This method is based on Tylor expansions in the coupling constants \(g_j\), assuming a weak enough interaction, and it is a very powerful tool for calculating physical quantities in QFT, as it allows us to write down the contribution of each diagram without having to calculate all the contractions explicitly, which is a very powerful tool for calculating physical quantities in QFT.
+
+We will start by reviewing the Hamiltonian formalism and the interaction picture, which are essential for understanding how to calculate Green's functions in an interacting theory, and then we will see how to derive the Feynman rules for a simple interacting theory, and how to use them to calculate physical quantities. Through some examples, we will see how to apply the Feynman rules in practice, and then we will see how to generalize them to more complicated theories and to momentum space, which is the most common way to use Feynman diagrams in QFT.
 
 \section{Hamiltonian Formalism and Interaction Picture}
 
 In QFT is often more convenient to work in the Hamiltonian formalism, where we express the dynamics of the system in terms of a Hamiltonian operator. The Hamiltonian can be split into a free part, which describes non-interacting particles, and an interaction part, which describes the interactions between particles.
 
-The Heisemberg picture is often used in QFT, where operators evolve in time while states remain constant. However, for perturbative calculations, it is more convenient to use the interaction picture, where both operators and states evolve in time. Let us start from the Heisemberg equation of motion for an operator \( O(t) \):
+The \textbf{Heisenberg picture} is often used in QFT, where operators evolve in time while states remain constant. However, for perturbative calculations, it is more convenient to use the \textbf{interaction picture}, where both operators and states evolve in time. Let us start from the Heisenberg equation of motion for an operator \( \hat{O}(x) \):
 \[
-    \dots
+    i \partial_t \hat{O}(x) = [\hat{O}(x), \hat{H}(x)],
 \]
-\dots
-
-The solution
+where \(\hat{H}(x)\) is the Hamiltonian operator. We can write the solution to this equation through the time evolution operator \(\hat{S}(t, t_0)\) as
+\[
+    \hat{O}(\mathbf{x}, t) = \hat{S}^{\dagger}(t, t_0) \hat{O}(\mathbf{x}, t_0) \hat{S}(t, t_0),
+\]
+which can be inserted back into the Heisenberg equation of motion to get an equation for the time evolution operator:
 \[
     i \partial_t \hat{S}(t, t_0) = \hat{H}(t) \hat{S}(t, t_0).
 \]
-Now lwt us split the Hamiltonian into a free part and an interaction part:
+
+Now let us split the Hamiltonian into a free part and an interaction part:
 \[
-    \hat{H}(t) = \hat{H}_0 + V(t),
+    \hat{H}(t) = \hat{H}_0 + \hat{V}(t),
 \]
 and the Lagrangian into a free part and an interaction part:
 \[
     \mathcal{L} = \mathcal{L}_0 + \mathcal{L}_{\text{int}}.
 \]
-Now we know:
+In practice, \(\hat{H}_0\) will be the Hamiltonian of a free theory, which describes non-interacting particles whose dynamics can be solved exactly, while \(\hat{V}(t)\) will be the interaction Hamiltonian, which will be treated as a perturbation and encodes all the interaction terms. The free part of the Lagrangian \(\mathcal{L}_0\) will describe the dynamics of the free fields, while the interaction part \(\mathcal{L}_{\text{int}}\) will describe the interactions between the fields, indeed we can write the Legendre transform of the Lagrangian to get the Hamiltonian as
 \[
     H = \int \mathrm{d}^3 \mathbf{x} \, \mathcal{H} (\mathbf{x}), \quad \begin{dcases}
         \mathcal{H} = \pi \dot{\phi} - \mathcal{L}, \\
-        \pi = \frac{\partial \mathcal{L}}{\partial \dot{\phi}},
+        \pi = \partial \mathcal{L} / \partial \dot{\phi},
     \end{dcases}
 \]
-and if \(\mathcal{L}_{\text{int}} \) does not contain derivatives, then we simply have
+and if \(\mathcal{L}_{\text{int}} \) does not contain derivatives, then we simply have \(\mathcal{H}_{\text{int}} = - \mathcal{L}_{\text{int}} \), and thus we can write the interaction Hamiltonian as
 \[
     V = - \int \mathrm{d}^3 \mathbf{x} \, \mathcal{L}_{\text{int}}.
 \]
+If \(\mathcal{L}_{\text{int}} \) does indeed contain derivatives, then similar results can be obtained, but it will be easier to derive them in the Lagrangian formalism, which is more convenient for theories with derivative interactions, and we will see how to do that in the next chapters.
 
 \subsection{Interaction Picture}
 
-IN the interaction picture, the fields evolve according to the free Hamiltonian \(H_0\), while the states evolve according with time (and thus the interactions) according to the interaction Hamiltonian \(V\):
+We are now moving from the Heisenberg picture to the interaction picture, where both operators and states evolve in time. In the interaction picture, the \textit{fields evolve according to the free Hamiltonian} \(H_0\), while the \textit{states evolve according to the total Hamiltonian} \(V\): the interaction is encoded in the evolution of the states, while the fields evolve as if they were free fields. This is a very important point, as it allows us to use the free fields to calculate the interactions, which is much easier than dealing with the full interacting fields.
+
+Then of course the \textit{matrix elements} we are interested in computing \textit{will be independent from the chosen picture}, since they are physical quantities, and thus we can choose the picture that is more convenient for our calculations. Schrödinger, Heisenberg and interaction picture are just different ways of describing the same physics, and they are identically equivalent equivalent at a conventional reference time \(t = t_0\).
+
+Thus we can start from the Schrödinger picture, where the fields are time-independent, and then we can move to the interaction and Heisenberg picture, where the fields evolve in time according to the free Hamiltonian and the total Hamiltonian respectively. We can write the fields in the different pictures and see how they are related to each other as
 \[
-    \phi_0 = \phi_I = e^{i H_0 (t-t_0)} \phi_S e^{-i H_0 (t-t_0)}, \quad \phi_S = \phi_I (t=t_0).
-\]
-...
-\[
-    \phi = \phi_H = \hat{S}^{\dagger}(t,t_0) \phi_s \hat{S}(t,t_0) = \hat{U}^{\dagger} (t,t_0) \phi_I \hat{U}(t,t_0),
+    \begin{dcases}
+        \hat{\phi}_0 = \hat{\phi}_I = e^{i \hat{H}_0 (t-t_0)} \hat{\phi}_S e^{-i \hat{H}_0 (t-t_0)}, \quad \hat{\phi}_S = \hat{\phi}_I (t=t_0) \\
+        \hat{\phi} = \hat{\phi}_H = \hat{S}^{\dagger}(t,t_0) \hat{\phi}_S \hat{S}(t,t_0) = \hat{U}^{\dagger} (t,t_0) \hat{\phi}_I \hat{U}(t,t_0),
+    \end{dcases}
 \]
 where
 \[
-    \hat{U}(t,t_0) = e^{i H_0 (t-t_0)} \hat{S}(t,t_0).
+    \hat{U}(t,t_0) = e^{i \hat{H}_0 (t-t_0)} \hat{S}(t,t_0),
 \]
+is the time evolution operator connecting the interaction picture to the Heisenberg picture, while \(\hat{S}(t,t_0)\) is the time evolution operator connecting the Schrödinger picture to the Heisenberg picture.
 
-Now having \(H_H = H_s\) and \(H_0 = H_{0,s}\)  we can write the equation of motion for \(\hat{U}\):
+Now having \(\hat{H}_H = \hat{H}_S\) and \(\hat{H}_0 = \hat{H}_{0,S}\) (i.e. the Heisenberg Hamiltonian is the same as the Schrödinger Hamiltonian, and the free Hamiltonian is the same in both pictures) we can write the equation of motion for \(\hat{U}\) by inserting the fields in the Heisenberg equation of motion, which gives
 \[
-    i \partial_t \hat{U}(t,t_0) = V_I (t,t_0) \hat{U}(t,t_0),
+    i \partial_t \hat{U}(t,t_0) = \hat{V}_I (t,t_0) \hat{U}(t,t_0),
 \]
 with
 \[
-    V_I = e^{i H_0 (t-t_0)} V_S e^{-i H_0 t-t_0},
+    \hat{V}_I = e^{i \hat{H}_0 (t-t_0)} \hat{V}_S e^{-i \hat{H}_0 (t-t_0)},
 \]
-which is the potential in the interaction picture. The solution to this equation is:
+which is the \textbf{interaction potential} (potential in the interaction picture). In practice, since \(\hat{V}\) is given by the integral of the interaction Lagrangian, we can write it as
 \[
-    V_I = V_s(\phi) \big|_{\phi \to \phi_I} = V(\phi_0),
+    \hat{V}_I = \hat{V}_S(\hat{\phi}) \big|_{\hat{\phi} \to \hat{\phi}_I} = \hat{V}(\hat{\phi}_0),
 \]
 which means that the potential in the interaction picture is the same as the potential in the Schrödinger picture, but with the fields replaced by their interaction picture counterparts (which is the same as the free fields). This is a very important result, as it allows us to use the free fields to calculate the interactions, which is much easier than dealing with the full interacting fields.
 
-\paragraph{Dyson series.}
-The solution to the schrödinger equation for \(\hat{U}\) can be written as a time-ordered exponential:
-\[
-    \hat{U}(t,t_0) = \hat{T} \exp \left( -i \int_{t_0}^t \mathrm{d} t' V_I (t') \right),
-\]
-which is known as the \textbf{Dyson series}:
-\[
-    \hat{U}(t,t_0) = \mathbb{I} + (-i) \int_{t_0}^t \mathrm{d} t' V_I (t') + (-i)^2 \int_{t_0}^t \mathrm{d} t' \int_{t_0}^{t'} \mathrm{d} t'' V_I (t') V_I (t'') + \dots
-\]
-where if all the operators commute, we can write the Dyson series as a simple exponential:
-\[
-    \hat{U}(t,t_0) = \exp \left( -i \int_{t_0}^t \mathrm{d} t' V_I (t') \right),
-\]
-since we could reorder the operators without any problem. However, in general, the operators do not commute, and we need to use the time-ordering operator to ensure that the operators are ordered correctly in time, and we continue the computation as
-\[
-    U(t,t_0) = \mathbb{I} + (-i) \int_{t_0}^t \mathrm{d} t' V_I (t') + (-i)^2 \int_{t_0}^t \mathrm{d} t' \int_{t_0}^{t'} \mathrm{d} t'' V_I (t') V_I (t'') + \dots
-\]
-since up to renaming the integration variables, we can write the Dyson series like that and we can see that the time-ordering operator is not needed, since the integration limits ensure that the operators are ordered correctly in time.
+\subsubsection{Dyson Series}
 
-In the end we have
+The solution to the evolution equation for \(\hat{U}\) can be written as the following well-known time-ordered exponential:
 \[
-    U(t,t_0) = \mathbb{I} -i \int_{t_0}^t \mathrm{d} t' V_I (t') U(t',t_0),
+    \hat{U}(t,t_0) = \hat{T} \exp \left( -i \int_{t_0}^t \mathrm{d} t' \hat{V}_I (t') \right),
 \]
-which is an integral equation for \(U\) that can be solved iteratively, and we can see that the Dyson series is the solution to this integral equation. This is a very important result, as it allows us to calculate the time evolution operator in the interaction picture, which is essential for calculating scattering amplitudes and other physical quantities in QFT, even if the computation remains quite complicated.
+which can be expanded in a power series as
+\[
+    \hat{U}(t,t_0) = \mathbb{I} + (-i) \int_{t_0}^t \mathrm{d} t' \hat{V}_I (t') + \frac{(-i)^2}{2!} \int_{t_0}^t \mathrm{d} t' \int_{t_0}^{t} \mathrm{d} t'' \hat{T} \{\hat{V}_I (t') \hat{V}_I (t'')\} + \dots
+\]
+where if we now partition the integration domain of the \(n\)-th term of the series in a set of \(n!\) subdomains, with the idea to apply the time-ordering operator: up to renaming the integration variables, we can reorder the integration limits as
+\[
+    t^{\prime} > t^{\prime \prime} > \dots > t^{(n)} > t_0,
+\]
+making the integral of the \(n\)-th term of the series as
+\[
+    \hat{U}(t,t_0) = \mathbb{I} + (-i) \int_{t_0}^t \mathrm{d} t' \hat{V}_I (t') + (-i)^2 \int_{t_0}^t \mathrm{d} t' \int_{t_0}^{t^{\prime}} \mathrm{d} t'' \hat{V}_I (t') \hat{V}_I (t'') + \dots
+\]
+which is known as the \textbf{Dyson series}, and it is the solution to the evolution equation for \(\hat{U}\). Thus we can write the Dyson series in such a way that the time-ordering operator is not needed, since the integration limits ensure that the operators are ordered correctly in time. In the end we have
+\[
+    \hat{U}(t,t_0) = \mathbb{I} -i \int_{t_0}^t \mathrm{d} t' \hat{V}_I (t') \hat{U}(t',t_0),
+\]
+which is an integral equation for \(\hat{U}\) that can be solved iteratively, and we can see that the Dyson series is the solution to this integral equation. This is a very important result, as it allows us to calculate the time evolution operator in the interaction picture through
+\[
+    i \partial_t \hat{U}(t,t_0) = \hat{V}_I (t) \hat{U}(t,t_0),
+\]
+which is essential for calculating scattering amplitudes and other physical quantities in QFT, even if the computation remains quite complicated.
 
 \subsection{Computing Green's Functions}
 
@@ -95,19 +111,21 @@ Consider a Green's function of the form
 \[
     \bra{\Omega} \hat{T} \{ \hat{\phi} (x_1) \dots \hat{\phi} (x_n) \} \ket{\Omega},
 \]
-we can write it in the interaction picture as
+where \(\ket{\Omega}\) is the vacuum state of the interacting theory, and \(\hat{\phi} (x) = \hat{\phi}_H (x)\) are the interacting fields in the Heisenberg picture. Since the matrix elements are independent from the chosen picture, we can write it in the interaction picture as
 \[
-    \bra{0} \hat{T} \{ \hat{\phi} (x_1) \dots \hat{\phi} (x_n) \} \ket{\Omega} = \frac{\bra{\Omega} \hat{T} \{ \hat{\phi} (x_1) \dots \hat{\phi}(x_n)  \} \exp[ -i \int_{-\infty}^{\infty} \mathrm{d} t \, V_I(t) ] \ket{0}}{\bra{0} \hat{T} \{ \exp[ -i \int_{-\infty}^{\infty} \mathrm{d} t \, V_I(t) ] \} \ket{0}},
+    \bra{\Omega} \hat{T} \{ \hat{\phi} (x_1) \dots \hat{\phi} (x_n) \} \ket{\Omega} = \frac{\bra{0} \hat{T} \{ \hat{\phi} (x_1) \dots \hat{\phi}(x_n) \exp[ -i \int_{-\infty}^{\infty} \mathrm{d} t \, \hat{V}_I(t) ] \}\ket{0}}{\bra{0} \hat{T} \{ \exp[ -i \int_{-\infty}^{\infty} \mathrm{d} t \, \hat{V}_I(t) ] \} \ket{0}},
 \]
-where we have used the fact that the vacuum state in the interaction picture is the same as the vacuum state in the Schrödinger picture, and we have also used the fact that the time evolution operator in the interaction picture can be written as a time-ordered exponential of the interaction Hamiltonian. We can expand since
+where we have used the fact that the vacuum state in the interaction picture is the same as the vacuum state in the Schrödinger picture, and we have also used the fact that the time evolution operator in the interaction picture can be written as a time-ordered exponential of the interaction Hamiltonian.
+
+We can expand the computation considering that the interaction Hamiltonian is given by the integral of the interaction Lagrangian, which is the case for a large class of theories, and thus we can write
 \[
-    \mathcal{H}_{int} = -\mathcal{L}_{int}, \quad \int \mathrm{d} t \, V_I(t) = - \int \mathrm{d}^4 x \, \mathcal{L}_{int} (\phi_0),
+    \mathcal{H}_{int} = -\mathcal{L}_{int}, \quad \int \mathrm{d} t \, V_I(t) = - \int \mathrm{d}^4 x \, \mathcal{L}_{int} (x),
 \]
 so that the Green's function can be written as
 \[
-    \frac{\bra{0} \hat{T} \{ \hat{\phi} (x_1) \dots \hat{\phi}(x_n)  \} \exp[ i \int \mathrm{d}^4 x \, \mathcal{L}_{int} ] \ket{0}}{\bra{0} \hat{T} \{ \exp[ i \int \mathrm{d}^4 x \, \mathcal{L}_{int} ] \} \ket{0}},
+    \bra{\Omega} \hat{T} \{ \hat{\phi} (x_1) \dots \hat{\phi} (x_n) \} \ket{\Omega} = \frac{\bra{0} \hat{T} \{ \hat{\phi} (x_1) \dots \hat{\phi}(x_n)  \} \exp[ i \int \mathrm{d}^4 x \, \hat{\mathcal{L}}_{int} ] \ket{0}}{\bra{0} \hat{T} \{ \exp[ i \int \mathrm{d}^4 x \, \hat{\mathcal{L}}_{int} ] \} \ket{0}},
 \]
-which is a very important result, as it allows us to calculate Green's functions in the interaction picture, which is much easier than calculating them in the Heisemberg picture, since we can use the free fields to calculate the interactions. This is the basis for perturbation theory in QFT, where we can expand the exponential of the interaction Lagrangian and calculate the Green's functions order by order in perturbation theory.
+which is a very important result, as it allows us to calculate Green's functions in the interaction picture, which is much easier than calculating them in the Heisenberg picture, since we can use the free fields to calculate the interactions. This is the basis for perturbation theory in QFT, where we can expand the exponential of the interaction Lagrangian and calculate the Green's functions order by order in perturbation theory.
 
 \subsection{Wick's Theorem}
 
@@ -125,7 +143,7 @@ where \(\hat{\phi} (x)\) is a free scalar field operator, thus behaving as a lad
         \phi^- = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{p}}}} a_{\mathbf{p}}^{\dagger} e^{i p \cdot x},
     \end{dcases}
 \]
-where \(\phi^+\) is the annihilation part of the field, and \(\phi^-\) is the creation part of the field. We can then use the normal ordering of the product of \(\hat{a}\) and \(\hat{a}^{\dagger}\) to simplify the expression: it puts all the creation operators to the left of the annihilation operators, thus ensuring that the vacuum expectation value of any normal-ordered product is zero. We will use the notation \(:\hat{O}:\) to denote the normal ordering of an operator \(\hat{O}\).
+where \(\phi^+\) is the annihilation part of the field, and \(\phi^-\) is the creation part of the field. We can then use the normal ordering of the product of \(\hat{a}\) and \(\hat{a}^{\dagger}\) to simplify the expression: it puts all the creation operators to the left of the annihilation operators, thus ensuring that the vacuum expectation value of any normal-ordered product is zero. We will use the notation \(:\hat{O}:\) to denote the normal ordering of an operator (or a general product of operators) \(\hat{O}\).
 \begin{example}
     Let us consider the product of four ladder operators:
     \[
@@ -143,50 +161,83 @@ where \(\phi^+\) is the annihilation part of the field, and \(\phi^-\) is the cr
 
 If we now consider the time-ordered product of two fields, a \textbf{2-point T-product}, assuming \(x^0>y^0\), we can write it as
 \[
-    \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \}_{x^0>y^0} = \hat{\phi}^{+}(x) \hat{\phi}^{+} (y) + \hat{\phi}^{+} (x) \hat{\phi}^{-} (y) + \hat{\phi}^{-} (x) \hat{\phi}^{+} (y) + \hat{\phi}^{-} (x) \hat{\phi}^{-} (y).
+    \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \}_{x^0>y^0} = \hat{\phi}^{+}(x) \hat{\phi}^{+} (y) + \hat{\phi}^{+} (x) \hat{\phi}^{-} (y) + \hat{\phi}^{-} (x) \hat{\phi}^{+} (y) + \hat{\phi}^{-} (x) \hat{\phi}^{-} (y),
 \]
-Now we can normal order this product as
+where the only term that is not normal-ordered is the second term. We can then write the normal-ordered product of the two fields as
 \[
-    : \hat{\phi} (x) \hat{\phi} (y) : = \hat{\phi}^{-} (x) \hat{\phi}^{-} (y) + \hat{\phi}^{-} (x) \hat{\phi}^{+} (y) + \hat{\phi}^{+} (x) \hat{\phi}^{-} (y) + \hat{\phi}^{+} (x) \hat{\phi}^{+} (y),
+    : \hat{\phi} (x) \hat{\phi} (y) : = \hat{\phi}^{-} (x) \hat{\phi}^{-} (y) + \hat{\phi}^{-} (x) \hat{\phi}^{+} (y) + \hat{\phi}^{-} (y) \hat{\phi}^{+} (x) + \hat{\phi}^{+} (x) \hat{\phi}^{+} (y),
 \]
-thus we can write in general (we do not need to assume \(x^0>y^0\) since the time-ordering operator will take care of that) that
+which enforces
+\[
+    \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \}_{x^0>y^0} = : \hat{\phi} (x) \hat{\phi} (y) : + [\hat{\phi}^{+} (x), \hat{\phi}^{-} (y)].
+\]
+Since a symmetric expression exists for the case \(x^0<y^0\), we can write in general that the time-ordered product of two fields can be written as:
 \[
     \hat{t} \{ \hat{\phi} (x) \hat{\phi} (y) \} = : \hat{\phi} (x) \hat{\phi} (y) : + \theta(x^0-y^0) [\hat{\phi}^{+} (x), \hat{\phi}^{-} (y)] + \theta(y^0-x^0) [\hat{\phi}^{+} (y), \hat{\phi}^{-} (x)].
 \]
 
-If we now take the vacuum expectation value of this time-ordered product, we can see that the normal-ordered part will vanish, since it contains only creation and annihilation operators, and thus we are left with
+If we now take the vacuum expectation value of this time-ordered product (the commutator is not an operator, it is just a function multiplies by the identity), we can see that the normal-ordered part will vanish, since it contains only properly ordered creation and annihilation operators, and thus we are left with
 \[
     \bra{0} \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \} \ket{0} = \Theta(x^0-y^0) [\hat{\phi}^{+} (x), \hat{\phi}^{-} (y)] + \Theta(y^0-x^0) [\hat{\phi}^{+} (y), \hat{\phi}^{-} (x)] = D_F (x,y),
 \]
 where \(D_F (x,y)\) is the Feynman propagator, describing the propagation of particles between two points in spacetime:
 \[
-    \hat{t} \{ \hat{\phi} (x) \hat{\phi} (y) \} = : \hat{\phi} (x) \hat{\phi} (y) : + D_F (x,y).
+    \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \} = : \hat{\phi} (x) \hat{\phi} (y) : + D_F (x,y).
 \]
-
-[\dots ]
+Thus if we define the \textbf{contraction of two fields} as \textit{the vacuum expectation value of the time-ordered product} of those two fields, which is the Feynman propagator
+\[
+    \bcontraction[0.5ex]{}{\hat{\phi}}{_1}{\hat{\phi}} \hat{\phi}_1 \hat{\phi}_2 = \bra{0} \hat{T} \{ \hat{\phi}_1 \hat{\phi}_2 \} \ket{0} = D_F (x_1,x_2),
+\]
+we can write the time-ordered product of two fields as the normal-ordered product of those two fields summed to the contraction between them:
+\[
+    \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \} = : \hat{\phi} (x) \hat{\phi} (y) + \bcontraction[0.5ex]{}{\hat{\phi}}{(x)}{\hat{\phi}} \hat{\phi} (x) \hat{\phi} (y) :
+\]
+where the contraction is denoted by a line connecting the two fields, and it represents the Feynman propagator between those two fields. This is the simplest form of Wick's theorem, which allows us to express the time-ordered product of two fields as a sum of a normal-ordered product and a contraction.
 
 This was the Wick's theorem for the time-ordered product of two fields, but we can generalize for it induction to the time-ordered product of \(n\) fields, which is the most general form of Wick's theorem:
-\[
-    \hat{T} \{ \hat{\phi} (x_1) \dots \hat{\phi} (x_n) \} = : \hat{\phi} (x_1) \dots \hat{\phi} (x_n) : + \text{all possible contractions},
-\]
-where a contraction between two fields is defined as the vacuum expectation value of the time-ordered product of those two fields, which is the Feynman propagator:
-\[
-    \dots
-\]
+\begin{theorem}[Wick's theorem]
+    The time-ordered product of \(n\) fields can be written as the normal-ordered product of those \(n\) fields plus all possible contractions between those fields:
+    \[
+        \hat{T} \{ \hat{\phi} (x_1) \dots \hat{\phi} (x_n) \} = \, : \hat{\phi} (x_1) \dots \hat{\phi} (x_n) + \text{ all possible contractions }:
+    \]
+    where a contraction between two fields is defined as the vacuum expectation value of the time-ordered product of those two fields, which is the Feynman propagator between those two fields:
+    \[
+        \bcontraction[0.5ex]{}{\hat{\phi}}{_1}{\hat{\phi}} \hat{\phi}_1 \hat{\phi}_2 = \bra{0} \hat{T} \{ \hat{\phi}_1 \hat{\phi}_2 \} \ket{0} = D_F (x_1,x_2).
+    \]
+\end{theorem}
 
 \begin{example}[4-point function]
-    Let us consider the 4-point function
+    Let us consider the following 4-point function
     \[
         \bra{0} \hat{T} \{ \hat{\phi} (x_1) \hat{\phi} (x_2) \hat{\phi} (x_3) \hat{\phi} (x_4) \} \ket{0},
     \]
-    then we can write it using Wick's theorem as
+    and let us apply Wick's theorem to it. We can write the time-ordered product of the four fields as the normal-ordered product of those four fields plus all possible contractions between those fields:
     \[
-        :\hat{\phi} (x_1) \hat{\phi} (x_2) \hat{\phi} (x_3) \hat{\phi} (x_4): + D_F(x_1,x_2) D_F(x_3,x_4) + D_F(x_1,x_3) D_F(x_2,x_4) + D_F(x_1,x_4) D_F(x_2,x_3),
+        \begin{aligned}
+            \hat{T} \{ \hat{\phi}_1 \hat{\phi}_2 \hat{\phi}_3 \hat{\phi}_4 \} & = \, : \hat{\phi}_1 \hat{\phi}_2 \hat{\phi}_3 \hat{\phi}_4 +                                                                                                                                                                                                                                                                                                                                                                                             \\
+                                                                              & + \bcontraction[0.5ex]{}{\hat{\phi}}{_1}{\hat{\phi}} \hat{\phi}_1 \hat{\phi}_2 \hat{\phi}_3 \hat{\phi}_4 + \bcontraction[0.5ex]{}{\hat{\phi}}{_1 \hat{\phi}_2}{\hat{\phi}} \hat{\phi}_1 \hat{\phi}_2 \hat{\phi}_3 \hat{\phi}_4 + \ldots                                                                                                                                                                                                                  \\
+                                                                              & + \bcontraction[0.5ex]{}{\hat{\phi}}{_1 \hat{\phi}_2}{\hat{\phi}} \bcontraction{\hat{\phi}_1}{\hat{\phi}}{_2 \hat{\phi}_3}{\hat{\phi}} \hat{\phi}_1 \hat{\phi}_2 \hat{\phi}_3 \hat{\phi}_4 + \bcontraction[0.5ex]{}{\hat{\phi}}{_1 }{\hat{\phi}} \bcontraction[0.5ex]{\hat{\phi}_1 \hat{\phi}_2}{\hat{\phi}}{_3}{\hat{\phi}} \hat{\phi}_1 \hat{\phi}_2 \hat{\phi}_3 \hat{\phi}_4 + \bcontraction{}{\hat{\phi}}{_1 \hat{\phi}_2 \hat{\phi}_3}{\hat{\phi}}
+            \bcontraction[0.5ex]{\hat{\phi}_1}{\hat{\phi}}{_2}{\hat{\phi}}
+            \hat{\phi}_1 \hat{\phi}_2 \hat{\phi}_3 \hat{\phi}_4 :                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \\
+        \end{aligned}
     \]
-    where we have used the fact that there are three possible contractions between the four fields, and each contraction gives us a Feynman propagator.
-        [...]
+    where we denoted \(\hat{\phi}(x_i) \equiv \hat{\phi}_i\). Note that when contracting two fields in a product of more than two fields, we do not need to worry about having adjacent fields, since the contraction is well defined as
+    \[
+        :\bcontraction{}{\hat{\phi}}{_1 \hat{\phi}_2}{\hat{\phi}} \hat{\phi}_1 \hat{\phi}_2 \hat{\phi}_3 \hat{\phi}_4 : \, = \, : \hat{\phi}_2 \hat{\phi}_4 : D_F (x_1,x_3),
+    \]
+    and thus we can contract any two fields in the product, regardless of their position, and we will always get a well-defined result.
 
+    Using this last observation, we can notice how all the contractions of only two fields will give us a normal-ordered product of the remaining two fields, which will have zero vacuum expectation value, thus the only terms that will contribute to the vacuum expectation value of the 4-point function are the terms with two contractions, which will give us a product of two Feynman propagators: taking all the possible contractions of two pairs of fields, we get
+    \[
+        \begin{aligned}
+            \bra{0} \hat{T} \{ \hat{\phi} (x_1) \hat{\phi} (x_2) \hat{\phi} (x_3) \hat{\phi} (x_4) \} \ket{0} = D_F (x_1,x_2) D_F (x_3,x_4) \\
+            + D_F (x_1,x_3) D_F (x_2,x_4) + D_F (x_1,x_4) D_F (x_2,x_3),
+        \end{aligned}
+    \]
+    which shows the extent to which the number of terms grows as we increase the number of fields, since we have to sum over all possible contractions.
 \end{example}
+
+Wick's theorem can be easily proven by induction, starting from the case of two fields, which we have already shown, and then assuming that it holds for \(n-1\) fields, we can show that it holds for \(n\) fields by writing the time-ordered product of \(n\) fields as the time-ordered product of the first field and the time-ordered product of the remaining \(n-1\) fields, and then applying the induction hypothesis to the second part. Let us now see some important consequences of Wick's theorem.
 
 \begin{corollary}
     As we said before, the vacuum expectation value of any normal-ordered product is zero, thus we have
@@ -206,10 +257,8 @@ where a contraction between two fields is defined as the vacuum expectation valu
         \bra{0} \hat{T} \{ \hat{\phi} (x_1) \dots \hat{\phi} (x_{2n+1}) \} \ket{0} = 0,
     \]
     which is a very important result, as it tells us that the vacuum expectation value of the time-ordered product of an odd number of fields is always zero, which is a consequence of the fact that we cannot contract an odd number of fields.
-
-    It can be proven using the fact that the normal-ordered product of an odd number of fields is zero, since it contains an odd number of creation and annihilation operators, and thus its vacuum expectation value is zero, and thus we are left with only the contractions, which are also zero since we cannot contract an odd number of fields. For an interacting theory, this is not necessarily true, since the interaction can create particles and thus we can have non-zero vacuum expectation values for the time-ordered product of an odd number of fields, but in a free theory this is always zero.
 \end{corollary}
-
+This last result can be proven using the fact that the normal-ordered product of an odd number of fields is zero, since it contains an odd number of creation and annihilation operators, and thus its vacuum expectation value is zero, and thus we are left with only the contractions, which are also zero since we cannot contract an odd number of fields. For an interacting theory, this is not necessarily true, since the interaction can create particles and thus we can have non-zero vacuum expectation values for the time-ordered product of an odd number of fields, but in a free theory this is always zero.
 
 \section{Feynman Diagrams and Rules}
 
