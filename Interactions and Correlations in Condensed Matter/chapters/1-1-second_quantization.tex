@@ -1,0 +1,417 @@
+\chapter{Second Quantization}
+
+In the first quantization formalism, we describe a system of \(N\) particles by a wavefunction \(\Psi(\mathbf{r}_1, \mathbf{r}_2, \dots, \mathbf{r}_N)\), which is a function of the coordinates of all the particles. This wavefunction must satisfy the appropriate symmetry properties, depending on whether we are dealing with bosons or fermions. For bosons, the wavefunction must be symmetric under the exchange of any two particles, while for fermions, the wavefunction must be antisymmetric under the exchange of any two particles:
+\[
+    \Psi(\mathbf{r}_1, \mathbf{r}_2, \dots, \mathbf{r}_i, \dots, \mathbf{r}_j, \dots, \mathbf{r}_N) = \begin{dcases}
+        +\Psi(\mathbf{r}_1, \mathbf{r}_2, \dots, \mathbf{r}_j, \dots, \mathbf{r}_i, \dots, \mathbf{r}_N) & \text{for bosons},   \\
+        -\Psi(\mathbf{r}_1, \mathbf{r}_2, \dots, \mathbf{r}_j, \dots, \mathbf{r}_i, \dots, \mathbf{r}_N) & \text{for fermions}.
+    \end{dcases}
+\]
+But an important limitation of this formalism is that it cannot describe systems with a variable number of particles, since \uline{the wavefunction is defined for a fixed number of particles}
+\[
+    \Psi(\mathbf{r}_1, \mathbf{r}_2, \dots, \mathbf{r}_N) = \sum_{\nu_1 \ldots \nu_N} B_{\nu_1 \ldots \nu_N} \, S_\pm \phi_{\nu_1}(\mathbf{r}_1) \phi_{\nu_2}(\mathbf{r}_2) \cdots \phi_{\nu_N}(\mathbf{r}_N),
+\]
+where \(S_\pm\) is the symmetrization or antisymmetrization operator, depending on whether we are dealing with bosons or fermions, and \(\phi_{\nu}(\mathbf{r})\) are the single-particle wavefunctions. The coefficients \(B_{\nu_1 \ldots \nu_N}\) are the expansion coefficients of the wavefunction in terms of the single-particle states. Thus, the wavefunction is defined for a fixed number of particles \(N\), and it cannot describe processes that involve the creation or annihilation of particles. Furthermore we can write
+\[
+    S_\pm \phi_{\nu_1}(\mathbf{r}_1) \phi_{\nu_2}(\mathbf{r}_2) \cdots \phi_{\nu_N}(\mathbf{r}_N) = \begin{pmatrix}
+        \psi_{\nu_1}(\mathbf{r}_1) & \cdots & \psi_{\nu_1}(\mathbf{r}_N) \\
+        \vdots                     & \ddots & \vdots                     \\
+        \psi_{\nu_N}(\mathbf{r}_1) & \cdots & \psi_{\nu_N}(\mathbf{r}_N)
+    \end{pmatrix}_\pm,
+\]
+since the symmetrization or antisymmetrization operator can be expressed as a sum over all permutations of the particles, with a plus sign for bosons and a minus sign for fermions, which is equivalent to the determinant or permanent of the matrix of single-particle wavefunctions, depending on whether we are dealing with fermions or bosons.\footnote{The permanent of a matrix is the sum over all permutations of the matrix elements, with a plus sign for each permutation (while the determinant has alternating signs).} Thus, the wavefunction is defined for a fixed number of particles \(N\), and it cannot describe processes that involve the creation or annihilation of particles.
+
+This is a problem when we want to describe systems that can exchange particles with their environment, such as in the case of open systems or in the case of systems that can undergo particle creation and annihilation, such as in quantum field theory. To overcome this limitation, we need to introduce a new formalism, which is called \textbf{second quantization}, which allows us to describe systems with a variable number of particles by introducing creation and annihilation operators.
+
+\section{Occupation Number Representation}
+
+In the context of second quantization, we can describe the state of a system of particles by specifying the \textbf{occupation numbers of the single-particle states} (seen as a set of quantum numbers). The occupation number \(n_\nu\) of a single-particle state \(\nu\) is defined as the number of particles that occupy that state.
+
+Thus, we can represent the state of a \(N\)-particle system by a vector of occupation numbers:
+\[
+    \ket{n_{\nu_1}, n_{\nu_2}, \dots, n_{\nu_m}}, \quad \sum_{\nu} n_\nu = N,
+\]
+where \(n_{\nu_i}\) is the occupation number of the single-particle state \(\nu_i\), and the sum of all occupation numbers must be equal to the total number of particles \(N\). This representation is called the \textbf{occupation number representation}, and it is a convenient way to describe many-body systems, since it allows us to keep track of the number of particles in each state without having to specify the coordinates of each particle. From this it follows straightforwardly the definition of the number operator \(\hat{n}_\nu\), which counts the number of particles in the single-particle state \(\nu\):
+\[
+    \hat{n}_\nu \ket{n_{\nu_1}, n_{\nu_2}, \dots, n_{\nu_m}} = n_\nu \ket{n_{\nu_1}, n_{\nu_2}, \dots, n_{\nu_m}}.
+\]
+For bosons, the occupation number can take any non-negative integer value, while for fermions, the occupation number can only be 0 or 1, due to the Pauli exclusion principle:
+\[
+    n_\nu = \begin{dcases}
+        0, 1, 2, \dots & \text{for bosons},   \\
+        0, 1           & \text{for fermions}.
+    \end{dcases}
+\]
+
+In order to use this formalism, we need to introduce the analogue of the Hilbert space for the variable number of particles, which is called the \textbf{Fock space}. The Fock space is the direct sum of the Hilbert spaces for all possible numbers of particles:
+\[
+    \mathcal{F} = \bigoplus_{N=0}^{\infty} \mathcal{H}_N,
+\]
+where \(\mathcal{H}_N\) is the Hilbert space for \(N\) particles. The Fock space allows us to describe states with a variable number of particles, and it is the natural setting for the second quantization formalism. In the Fock space, we can define the vacuum state \(\ket{0}\), which is the state with no particles, and we can build all other states by applying creation operators to the vacuum state. But before let us make an example.
+
+\begin{example}[Fock space basis]
+    Let us consider a system of bosons with varying number of particles, and let us choose a single-particle basis with two states, which we can label as \(\ket{1}\) and \(\ket{2}\). The Fock space for this system is the direct sum of the Hilbert spaces for all possible numbers of particles:
+    \[
+        \mathcal{F} = \bigoplus_{N=0}^{\infty} \mathcal{H}_N.
+    \]
+    We can show some examples of basis for the Fock space:
+    \[
+        \begin{aligned}
+            \mathcal{H}_0 & = \ket{0, 0, \ldots, 0},                                                                                  \\
+            \mathcal{H}_1 & = \ket{1, 0, \ldots, 0}, \ket{0, 1, \ldots, 0}, \ldots, \ket{0, 0, \ldots, 1},                            \\
+            \mathcal{H}_2 & = \ket{1, 1, 0, \ldots, 0}, \ldots, \ket{1, 0, \ldots, 0, 1, 0, \ldots, 0}, \ket{2, 0, \ldots, 0}, \ldots \\
+        \end{aligned}
+    \]
+    where the first state is the vacuum state, the second states are the single-particle states, and the third states are the two-particle states. We can see that in the occupation number representation, we can easily keep track of the number of particles in each state, and we can build all possible states by permuting the occupation numbers.
+
+    Note that for a system of fermions, the basis states would be different, since the occupation numbers can only be 0 or 1, so we would not have states with more than one particle in the same state: the last state in the two-particle Hilbert space would not be allowed, since it would violate the Pauli exclusion principle.
+\end{example}
+
+Now it is time for us to introduce the creation and annihilation operators, which are the fundamental building blocks of the second quantization formalism.
+
+\subsection{Ladder Operators}
+
+Ladder operators are operators that can raise or lower the occupation number of a single-particle state. We will separate the definition of the ladder operators for bosons and fermions, since they satisfy different commutation or anticommutation relations.
+
+\subsubsection{Bosons}
+
+For bosons, we define the \textbf{creation operator} \(\hat{b}_\nu^\dagger\) and the \textbf{annihilation operator} \(\hat{b}_\nu\) for a single-particle state \(\nu\) as follows:
+\[
+    \begin{dcases}
+        \hat{b}_\nu \ket{n_{\nu_1}, n_{\nu_2}, \dots, n_\nu, \dots} = B_-(n_\nu) \ket{n_{\nu_1}, n_{\nu_2}, \dots, n_\nu - 1, \dots}, \\
+        \hat{b}_\nu^\dagger \ket{n_{\nu_1}, n_{\nu_2}, \dots, n_\nu, \dots} = B_+(n_\nu) \ket{n_{\nu_1}, n_{\nu_2}, \dots, n_\nu + 1, \dots},
+    \end{dcases}
+\]
+where \(B_-(n_\nu)\) and \(B_+(n_\nu)\) are coefficients that depend on the occupation number \(n_\nu\). The creation operator \(\hat{b}_\nu^\dagger\) increases the occupation number of the state \(\nu\) by one, while the annihilation operator \(\hat{b}_\nu\) decreases the occupation number of the state \(\nu\) by one. For bosons, these operators satisfy the following commutation relations:
+\[
+    \begin{dcases}
+        [\hat{b}_\nu, \hat{b}_{\nu'}^\dagger] = \delta_{\nu \nu'}, \\
+        [\hat{b}_\nu, \hat{b}_{\nu'}] = [\hat{b}_\nu^\dagger, \hat{b}_{\nu'}^\dagger] = 0,
+    \end{dcases}
+\]
+where \([A, B] = AB - BA\) is the commutator of the operators \(A\) and \(B\). The commutation relations reflect the fact that bosons can occupy the same state, and that the order of the operators does not matter.
+
+Let us apply these operators to the occupation number states to find the coefficients \(B_-(n_\nu)\) and \(B_+(n_\nu)\), starting from the vacuum state \(\ket{0, 0, \dots, 0, \dots}\):
+\[
+    \begin{aligned}
+        \hat{b}_\nu \ket{0, 0, \dots, 0, \dots}         & = 0,                                 &  & B_-(0) = 0, \\
+        \hat{b}_\nu^\dagger \ket{0, 0, \dots, 0, \dots} & = \ket{0, 0, \dots, 0, 1, 0, \dots}, &  & B_+(0) = 1,
+    \end{aligned}
+\]
+where we understood how the annihilation operator gives zero when applied to the vacuum state, while the creation operator creates a particle in the state \(\nu\).
+
+Now let us apply the operators to a generic normalized occupation number state \(\ket{\phi}\):
+\[
+    \hat{b}_\nu \ket{\phi}, \quad \bra{\phi} \hat{b}_\nu^\dagger \hat{b}_\nu \ket{\phi} = \vert \hat{b}_\nu \ket{\phi} \vert = \lambda >0,
+\]
+such that if we apply the creation operator to the state \(\hat{b}_\nu \ket{\phi}\) we get:
+\[
+    \hat{b}_\nu^\dagger \hat{b}_\nu \ket{\phi} = \lambda \ket{\phi} = n_\nu \ket{\phi},
+\]
+since the number operator \(\hat{n}_\nu = \hat{b}_\nu^\dagger \hat{b}_\nu\) counts the number of particles in the state \(\nu\)
+.
+Now if we apply the number operator \(\hat{n}_\nu = \hat{b}_\nu^\dagger \hat{b}_\nu\) to the state \(\hat{b}_\nu \ket{\phi}\), using the commutation relations, we should gbe able to find the coefficient \(B_-(n_\nu)\):
+\[
+    \hat{n}_\nu \hat{b}_\nu \ket{\phi} = (\hat{b}_\nu^\dagger \hat{b}_\nu) \hat{b}_\nu \ket{\phi} = (\hat{b}_\nu \hat{b}_\nu^\dagger - 1) \hat{b}_\nu \ket{\phi} = \hat{b}_\nu (\hat{b}_\nu^\dagger \hat{b}_\nu- 1) \ket{\phi} = (\lambda - 1) \hat{b}_\nu \ket{\phi},
+\]
+so that we can identify the coefficient \(B_-(n_\nu)\) as:
+\[
+    B_-(n_\nu) = \sqrt{n_\nu},
+\]
+and by applying the number operator to the state \(\hat{b}_\nu^\dagger \ket{\phi}\), we get:
+\[
+    \hat{n}_\nu \hat{b}_\nu^\dagger \ket{\phi} = (\hat{b}_\nu^\dagger \hat{b}_\nu) \hat{b}_\nu^\dagger \ket{\phi} = \hat{b}_\nu^\dagger (\hat{b}_\nu \hat{b}_\nu^\dagger) \ket{\phi} = \hat{b}_\nu^\dagger (\hat{b}_\nu^\dagger \hat{b}_\nu + 1) \ket{\phi} = (\lambda + 1) \hat{b}_\nu^\dagger \ket{\phi},
+\]
+so that we can identify the coefficient \(B_+(n_\nu)\) as:
+\[
+    B_+(n_\nu) = \sqrt{n_\nu + 1}.
+\]
+Thus, the action of the creation and annihilation operators on the occupation number states can be expressed as:
+\[
+    \begin{dcases}
+        \hat{b}_\nu \ket{n_{\nu_1}, n_{\nu_2}, \dots, n_\nu, \dots} = \sqrt{n_\nu} \ket{n_{\nu_1}, n_{\nu_2}, \dots, n_\nu - 1, \dots}, \\
+        \hat{b}_\nu^\dagger \ket{n_{\nu_1}, n_{\nu_2}, \dots, n_\nu, \dots} = \sqrt{n_\nu + 1} \ket{n_{\nu_1}, n_{\nu_2}, \dots, n_\nu + 1, \dots}.
+    \end{dcases}
+\]
+
+\subsubsection{Fermions}
+
+For fermions, we define the \textbf{creation operator} \(\hat{c}_\nu^\dagger\) and the \textbf{annihilation operator} \(\hat{c}_\nu\) for a single-particle state \(\nu\) with the same action on the occupation number states as for bosons, but with the coefficients \(B_-(n_\nu)\) and \(B_+(n_\nu)\) that depend on the occupation number \(n_\nu\) in a different way, since for fermions the occupation number can only be 0 or 1:
+\[
+    \begin{dcases}
+        \hat{c}_\nu \ket{n_{\nu_1}, n_{\nu_2}, \dots, n_\nu, \dots} = C_-(n_\nu) \ket{n_{\nu_1}, n_{\nu_2}, \dots, n_\nu - 1, \dots}, \\
+        \hat{c}_\nu^\dagger \ket{n_{\nu_1}, n_{\nu_2}, \dots, n_\nu, \dots} = C_+(n_\nu) \ket{n_{\nu_1}, n_{\nu_2}, \dots, n_\nu + 1, \dots},
+    \end{dcases}
+\]
+with \[
+    C_-(n_\nu) = \begin{dcases}
+        0 & \text{if } n_\nu = 0, \\
+        1 & \text{if } n_\nu = 1,
+    \end{dcases}
+    \quad
+    C_+(n_\nu) = \begin{dcases}
+        1 & \text{if } n_\nu = 0, \\
+        0 & \text{if } n_\nu = 1,
+    \end{dcases}
+\]
+so that the creation operator \(\hat{c}_\nu^\dagger\) creates a particle in the state \(\nu\) if it is not already occupied, while the annihilation operator \(\hat{c}_\nu\) annihilates a particle in the state \(\nu\) if it is occupied. For fermions, these operators satisfy the following anticommutation relations:
+\[
+    \begin{dcases}
+        \{\hat{c}_\nu, \hat{c}_\nu^\dagger\} = 1, \\
+        \{\hat{c}_\nu, \hat{c}_\nu\} = \{\hat{c}_\nu^\dagger, \hat{c}_\nu^\dagger\} = 0,
+    \end{dcases}
+\]
+since the multiparticle wavefunction must be antisymmetric under the exchange of any two particles, and thus the order of the operators matters. The anticommutation relations reflect the fact that fermions cannot occupy the same state:
+\[
+    \hat{c}_\nu^\dagger \hat{c}_\nu^\dagger = \frac{1}{2} \{\hat{c}_\nu^\dagger, \hat{c}_\nu^\dagger\} = 0,
+\]
+and similarly for the annihilation operator.
+
+\section{Hamiltonian of an Interacting System}
+
+In a many-body system, the Hamiltonian has to contain both a kinetic term, which describes the motion of the particles, and an interaction term, which describes the interactions between the particles. Let us show how to write the Hamiltonian of an interacting system in the second quantization formalism, starting from the first quantization formalism. We will see how many results from first quantization come in handy when it will be time to build the second quantization version.
+
+\subsubsection{First Quantization}
+
+In first quantization, the Hamiltonian of a system of \(N\) interacting particles can be written as:
+\[
+    H = \sum_{i=1}^N \hat{T}(\mathbf{r}_i, \nabla_{\mathbf{r}_i}) + \frac{1}{2} \sum_{i \neq j} \hat{V}(\mathbf{r}_i - \mathbf{r}_j),
+\]
+where \(\hat{T}(\mathbf{r}_i, \nabla_{\mathbf{r}_i})\) is the \textbf{one-body operator} for the \(i\)-th particle, and \(\hat{V}(\mathbf{r}_i - \mathbf{r}_j)\) is the interaction potential, or \textbf{two body operator}, between the \(i\)-th and \(j\)-th particles. The factor of \(\frac{1}{2}\) is included to avoid double counting the interactions between pairs of particles.
+
+The easiest case in which we can write the Hamiltonian of a many-body system is the Helium atom.
+
+\begin{example}[Helium atom]
+    Let us consider the helium atom, which consists of two electrons interacting with each other and with the nucleus. The Hamiltonian of the helium atom can be written as:
+    \[
+        H = \left[ -\frac{\hbar^2}{2m} \nabla_{\mathbf{r}_1}^2 - \frac{Ze^2}{4\pi \epsilon_0 r_1} \right] + \left[ - \frac{\hbar^2}{2m} \nabla_{\mathbf{r}_2}^2 - \frac{Ze^2}{4\pi \epsilon_0 r_2}\right] + \frac{e^2}{4\pi \epsilon_0 \vert \mathbf{r}_1 - \mathbf{r}_2 \vert },
+    \]
+    where \(m\) is the mass of the electron, \(Z\) is the atomic number of the nucleus (which is 2 for helium), \(e\) is the elementary charge, \(\epsilon_0\) is the vacuum permittivity and \(r_i\) is the distance of the \(i\)-th electron from the nucleus. The first term in square brackets represent the contribution of the kinetic energy and the potential energy of the first electron, while the second term in square brackets for the second electron; the last term represent the interaction between the two electrons, which is the \textbf{electron-electron interaction}. This Hamiltonian is a good starting point for understanding the electronic structure of the helium atom, and it can be solved using various approximation methods, such as perturbation theory or variational methods.
+\end{example}
+
+Let us study more in detail the structure of the one-body and two-body operators.
+
+\paragraph{One-body operator.}
+The one-body operator \(\hat{T}(\mathbf{r}_j, \nabla_{\mathbf{r}_j})\) is an operator that acts on the coordinates of a single particle, and it typically includes the kinetic energy term and the potential energy term due to external fields. It can be expressed in terms of the single-particle states as:
+\[
+    T_{\nu_a \nu_b} = \int \mathrm{d}^3 \mathbf{r}_j \, \Psi_{\nu_a}^*(\mathbf{r}_j) \hat{T}(\mathbf{r}_j, \nabla_{\mathbf{r}_j}) \Psi_{\nu_b}(\mathbf{r}_j),
+\]
+where \(\Psi_{\nu}(\mathbf{r}_j)\) are the single-particle wavefunctions, and the integral is taken over all space. The internal operator \(\hat{T}(\mathbf{r}_j, \nabla_{\mathbf{r}_j})\) can be expressed as the sum of the kinetic energy operator and the potential energy operator:
+\[
+    \hat{T}(\mathbf{r}_j, \nabla_{\mathbf{r}_j}) = -\frac{\hbar^2}{2m} \nabla_{\mathbf{r}_j}^2 + V_{\text{ext}}(\mathbf{r}_j),
+\]
+and since \(T_{\nu_a \nu_b}\) is the matrix element of the one-body operator between the single-particle states \(\nu_a\) and \(\nu_b\), we can write:
+\[
+    \hat{T}(\mathbf{r}_j, \nabla_{\mathbf{r}_j}) = \sum_{\nu_a \nu_b} T_{\nu_a \nu_b} \ket{\Psi_{\nu_b}(\mathbf{r}_j)} \bra{\Psi_{\nu_a}(\mathbf{r}_j)},
+\]
+where \(\ket{\Psi_{\nu_a}(\mathbf{r}_j)}\) and \(\ket{\Psi_{\nu_b}(\mathbf{r}_j)}\) are the single-particle states corresponding to the quantum numbers \(\nu_a\) and \(\nu_b\), respectively.
+
+\paragraph{Two-body operator.}
+The two-body operator \(\hat{V}(\mathbf{r}_j - \mathbf{r}_k)\) is an operator that acts on the coordinates of two particles, and it typically includes the interaction potential between the particles. It can be expressed in terms of the single-particle states as:
+\[
+    V_{\nu_c \nu_d, \nu_a \nu_b} = \int \mathrm{d}^3 \mathbf{r}_j \, \mathrm{d}^3 \mathbf{r}_k \, \Psi_{\nu_c}^*(\mathbf{r}_j) \Psi_{\nu_d}^*(\mathbf{r}_k) \hat{V}(\mathbf{r}_j - \mathbf{r}_k) \Psi_{\nu_a}(\mathbf{r}_j) \Psi_{\nu_b}(\mathbf{r}_k),
+\]
+where again \(\Psi_{\nu}(\mathbf{r}_j)\) are the single-particle wavefunctions, and the integral is taken over all space. The internal operator \(\hat{V}(\mathbf{r}_j - \mathbf{r}_k)\) can then be expressed as a sum over the single-particle states as:
+\[
+    \hat{V}(\mathbf{r}_j - \mathbf{r}_k) = \sum_{\nu_a \nu_b \nu_c \nu_d} V_{\nu_c \nu_d, \nu_a \nu_b} \ket{\Psi_{\nu_c}(\mathbf{r}_j)} \ket{\Psi_{\nu_d}(\mathbf{r}_k)} \bra{\Psi_{\nu_b}(\mathbf{r}_k)} \bra{\Psi_{\nu_a}(\mathbf{r}_j)},
+\]
+where \(V_{\nu_c \nu_d, \nu_a \nu_b}\) are the matrix elements of the two-body operator between the single-particle states.
+
+Now that we have expressed the one-body and two-body operators in terms of the single-particle states, we can rewrite the Hamiltonian of the system in terms of these operators as:
+\[
+    H = \sum_{i=1}^N \sum_{\nu_a \nu_b} T_{\nu_a \nu_b} \ket{\Psi_{\nu_b}(\mathbf{r}_i)} \bra{\Psi_{\nu_a}(\mathbf{r}_i)} + \frac{1}{2} \sum_{i \neq j} \sum_{\nu_a \nu_b \nu_c \nu_d} V_{\nu_c \nu_d, \nu_a \nu_b} \ket{\Psi_{\nu_c}(\mathbf{r}_i)} \ket{\Psi_{\nu_d}(\mathbf{r}_j)} \bra{\Psi_{\nu_b}(\mathbf{r}_j)} \bra{\Psi_{\nu_a}(\mathbf{r}_i)},
+\]
+where we have expressed the Hamiltonian in terms of the matrix elements of the one-body and two-body operators between the single-particle states. This Hamiltonian is still in a first quantization form, since it is expressed in terms of the coordinates of the particles, but it is a convenient starting point for expressing the Hamiltonian in terms of the creation and annihilation operators in the second quantization formalism.
+
+\subsubsection{Second Quantization}
+
+In order to express the Hamiltonian in terms of the creation and annihilation operators, we need to understand how to express the operators in second quantization. The key idea is to express the operators in terms of the ladder operators, which can be done by using the completeness relation of the single-particle states.
+
+It can be shown that an operator in first quantization can be expressed in second quantization as:
+\[
+    \hat{A} = \sum_{\nu_a \nu_b} A_{\nu_a \nu_b} \hat{a}_{\nu_a}^\dagger \hat{a}_{\nu_b},
+\]
+where \(A_{\nu_a \nu_b}\) are the matrix elements of the operator in the single-particle basis, and \(\hat{a}_{\nu}^\dagger\) and \(\hat{a}_{\nu}\) are the creation and annihilation operators for the single-particle state \(\nu\), respectively. Thus there exists a systematic way to express any operator in first quantization in terms of the creation and annihilation operators in second quantization, by expressing the operator in terms of its matrix elements in the single-particle basis, and then replacing the single-particle states with the corresponding creation and annihilation operators.
+
+We can then write the Hamiltonian of the system in second quantization as:
+\[
+    H = \sum_{\nu_a \nu_b} T_{\nu_a \nu_b} \hat{a}_{\nu_a}^\dagger \hat{a}_{\nu_b} + \frac{1}{2} \sum_{\nu_a \nu_b \nu_c \nu_d} V_{\nu_c \nu_d, \nu_a \nu_b} \hat{a}_{\nu_c}^\dagger \hat{a}_{\nu_d}^\dagger \hat{a}_{\nu_a} \hat{a}_{\nu_b},
+\]
+where the first term represents the one-body interactions, and the second term represents the two-body interactions between the particles. This Hamiltonian is now expressed in terms of the creation and annihilation operators, and it can be used to describe systems with a variable number of particles, since the creation and annihilation operators can create or annihilate particles in the system.
+
+\begin{figure}[H]
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[
+                particle/.style={
+                        draw=green!80!black,
+                        thick,
+                        postaction={decorate},
+                        decoration={markings, mark=at position 0.55 with {\arrow[scale=1.2]{stealth}}}
+                    },
+                interaction/.style={
+                        draw=orange!90!black,
+                        thick,
+                        decorate,
+                        decoration={snake, amplitude=1.2mm, segment length=2.5mm}
+                    }
+            ]
+            \coordinate (V) at (0,0);
+
+            \draw[particle] (-1.5, -2) -- (V) node[midway, right=0.1cm, text=green!80!black] {$|\nu_b\rangle$};
+            \draw[particle] (V) -- (-1.5, 2) node[midway, right=0.1cm, text=green!80!black] {$|\nu_a\rangle$};
+
+            \draw[interaction] (V) -- (2.5, 0) node[midway, above=0.2cm, text=orange!90!black] {$T_{\nu_a\nu_b}$};
+
+            \filldraw[black] (V) circle (2pt);
+        \end{tikzpicture}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.5\textwidth}
+        In the diagram on the left, we can see the one-body interaction between the single-particle states \(|\nu_a\rangle\) and \(|\nu_b\rangle\), which is represented by the matrix element \(T_{\nu_a\nu_b}\). The particle represented by the line entering the vertex is in the state \(|\nu_b\rangle\), while the particle represented by the line exiting the vertex is in the state \(|\nu_a\rangle\). The interaction is represented by a wavy line, which indicates that it is a one-body interaction, since it involves only one particle.
+    \end{minipage}
+\end{figure}
+
+The vertex represents the point where the interaction takes place, and it is associated with the matrix element \(T_{\nu_a\nu_b}\), which quantifies the strength of the interaction between the two states, or else the probability amplitude for the transition from state \(|\nu_b\rangle\) to state \(|\nu_a\rangle\) due to the one-body operator. Basically we are annihilating a particle in the state \(|\nu_b\rangle\) and creating a particle in the state \(|\nu_a\rangle\) due to the one-body interaction.
+
+\begin{figure}[H]
+    \begin{minipage}{0.45\textwidth}
+        For the two body interaction, represented in the diagram on the right, we have two vertices representing the interaction between the single-particle states \(|\nu_a\rangle\), \(|\nu_b\rangle\), \(|\nu_c\rangle\) and \(|\nu_d\rangle\). The particles represented by the lines entering the vertices are in the states \(|\nu_a\rangle\) and \(|\nu_b\rangle\), while the particles represented by the lines exiting the vertices are in the states \(|\nu_c\rangle\) and \(|\nu_d\rangle\).
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \begin{tikzpicture}[
+                particle/.style={
+                        draw=green!80!black,
+                        thick,
+                        postaction={decorate},
+                        decoration={markings, mark=at position 0.55 with {\arrow[scale=1.2]{stealth}}}
+                    },
+                interaction/.style={
+                        draw=orange!90!black,
+                        thick,
+                        decorate,
+                        decoration={snake, amplitude=1.2mm, segment length=2.5mm}
+                    }
+            ]
+            \coordinate (V1) at (-2,0);
+            \coordinate (V2) at (2,0);
+
+            \draw[particle] (-3.5, -2) -- (V1) node[midway, right=0.1cm, text=green!80!black] {$|\nu_a\rangle$};
+            \draw[particle] (V1) -- (-3.5, 2) node[midway, right=0.1cm, text=green!80!black] {$|\nu_c\rangle$};
+
+            \draw[particle] (3.5, -2) -- (V2) node[midway, left=0.1cm, text=green!80!black] {$|\nu_b\rangle$};
+            \draw[particle] (V2) -- (3.5, 2) node[midway, left=0.1cm, text=green!80!black] {$|\nu_d\rangle$};
+
+            \draw[interaction] (V1) -- (V2) node[midway, above=0.3cm, text=orange!90!black] {$V_{\nu_c\nu_d\nu_a\nu_b}$};
+
+            \filldraw[black] (V1) circle (2pt);
+            \filldraw[black] (V2) circle (2pt);
+        \end{tikzpicture}
+    \end{minipage}
+\end{figure}
+
+The interaction is represented by a wavy line connecting the two vertices, which indicates that it is a two-body interaction, since it involves two particles. The matrix element \(V_{\nu_c\nu_d\nu_a\nu_b}\) quantifies the strength of the interaction between the four states, or else the probability amplitude for the transition from states \(|\nu_a\rangle\) and \(|\nu_b\rangle\) to states \(|\nu_c\rangle\) and \(|\nu_d\rangle\) due to the two-body operator. We are describing a process in which we are annihilating two particles in the states \(|\nu_a\rangle\) and \(|\nu_b\rangle\) and creating two particles in the states \(|\nu_c\rangle\) and \(|\nu_d\rangle\) due to the two-body interaction.
+
+\section{Field Operators}
+
+Field operators are a powerful tool in quantum mechanics, particularly in the study of many-body systems. They allow us to describe the creation and annihilation of particles in a given state. The field operator $\hat{\Psi}(\mathbf{r})$ can be expressed as a sum over a complete set of single-particle states:
+\[
+    \begin{aligned}
+        \hat{\Psi}(\mathbf{r})         & = \sum_{\nu} \phi_\nu(\mathbf{r}) \hat{a}_\nu,           \\
+        \hat{\Psi}^\dagger(\mathbf{r}) & = \sum_{\nu} \phi_\nu^*(\mathbf{r}) \hat{a}_\nu^\dagger,
+    \end{aligned}
+\]
+
+If we have an homogeneous system, we can choose plane waves as our single-particle states to sum only over momentum states:
+\[
+    \begin{aligned}
+        \hat{\Psi}(\mathbf{r}) = \frac{1}{\sqrt{\Omega}} \sum_{\mathbf{k}} e^{-i \mathbf{k} \cdot \mathbf{r}} \hat{a}_{\mathbf{k}}, \\
+        \hat{\Psi}^\dagger(\mathbf{r}) = \frac{1}{\sqrt{\Omega}} \sum_{\mathbf{k}} e^{i \mathbf{k} \cdot \mathbf{r}} \hat{a}_{\mathbf{k}}^\dagger,
+    \end{aligned}
+\]
+we are summing over all quantum numbers $\nu$, which in this case are the momentum states $\mathbf{k}$, then we are creating or annihilating particles in all of those momentum states for a precise position $\mathbf{r}$. Since this operators are based on the same annihilation and creation operators, they satisfy the same commutation or anticommutation relations, depending on whether we are dealing with bosons or fermions. For bosons, the field operators satisfy the commutation relations:
+\[
+    \begin{dcases}
+        [\hat{\Psi}(\mathbf{r}), \hat{\Psi}^\dagger(\mathbf{r}')]  = \delta(\mathbf{r} - \mathbf{r}'), \\
+        [\hat{\Psi}(\mathbf{r}), \hat{\Psi}(\mathbf{r}')] = [\hat{\Psi}^\dagger(\mathbf{r}), \hat{\Psi}^\dagger(\mathbf{r}')] = 0,
+    \end{dcases}
+\]
+while for fermions, they satisfy the anticommutation relations:
+\[
+    \begin{dcases}
+        \{\hat{\Psi}(\mathbf{r}), \hat{\Psi}^\dagger(\mathbf{r}')\} = \delta(\mathbf{r} - \mathbf{r}'), \\
+        \{\hat{\Psi}(\mathbf{r}), \hat{\Psi}(\mathbf{r}')\} = \{\hat{\Psi}^\dagger(\mathbf{r}), \hat{\Psi}^\dagger(\mathbf{r}')\} = 0.
+    \end{dcases}
+\]
+Instead of wavefunctions, we can also express the field operators in terms of the position basis.
+
+Rewriting the Hamiltonian of our problem:
+\[
+    H = \sum_{\nu_a,\,\nu_b} \hat{T}_{\nu_a \nu_b} \hat{a}_{\nu_a}^\dagger \hat{a}_{\nu_b} + \frac{1}{2} \sum_{\nu_a,\,\nu_b,\,\nu_c,\,\nu_d} \hat{V}_{\nu_c \nu_d \nu_a \nu_b} \hat{a}_{\nu_c}^\dagger \hat{a}_{\nu_d}^\dagger \hat{a}_{\nu_a} \hat{a}_{\nu_b},
+\]
+where we are summing over all quantum numbers $\nu$, we can express the Hamiltonian in terms of the field operators as:
+\[
+    H = \sum_{\nu_a,\,\nu_b} \left( \int \mathrm{d}^3 \mathbf{r} \, \Psi_{\nu_a}^*(\mathbf{r}) T (\mathbf{r}, \nabla_{\mathbf{r}}) \Psi_{\nu_b}(\mathbf{r}) \right) \hat{a}_{\nu_a}^\dagger \hat{a}_{\nu_b} + \frac{1}{2} \sum_{\nu_a,\,\nu_b,\,\nu_c,\,\nu_d} \left( \int \mathrm{d}^3 \mathbf{r} \, \mathrm{d}^3 \mathbf{r}' \, \Psi_{\nu_c}^*(\mathbf{r}) \Psi_{\nu_d}^*(\mathbf{r}') V(\mathbf{r} - \mathbf{r}') \Psi_{\nu_a}(\mathbf{r}) \Psi_{\nu_b}(\mathbf{r}') \right) \hat{a}_{\nu_c}^\dagger \hat{a}_{\nu_d}^\dagger \hat{a}_{\nu_a} \hat{a}_{\nu_b},
+\]
+\[
+    [\dots]
+\]
+
+\paragraph{Kinetic term.}
+Let us analyze the kinetic term of the Hamiltonian:
+\begin{itemize}
+    \item in \textbf{first quantization}, the kinetic term is given by:
+          \[
+              \hat{T}(\mathbf{r}, \nabla_{\mathbf{r}}) = -\frac{\hbar^2}{2m} \nabla^2_{\mathbf{r}} \delta_{\sigma \sigma'},
+          \]
+          where we are using the basis \(\ket{\mathbf{k}, \sigma}\), such that
+          \[
+              \bra{\mathbf{r}}\ket{\mathbf{k}, \sigma} = \frac{1}{\sqrt{\Omega}} e^{i \mathbf{k} \cdot \mathbf{r}},
+          \]
+          and if we compute the matrix element of the kinetic term, we get:
+          \[
+              \bra{\mathbf{k}_a, \sigma_a} \hat{T}(\mathbf{r}, \nabla_{\mathbf{r}}) \ket{\mathbf{k}_b, \sigma_b} = \frac{\hbar^2 k_b^2}{2m} \delta_{\mathbf{k}_a \mathbf{k}_b} \delta_{\sigma_a \sigma_b},
+          \]
+    \item in \textbf{second quantization}, the kinetic term can be expressed as:
+          \[
+              T = \sum_{\nu_a,\,\nu_b} T_{\nu_a \nu_b} \hat{a}_{\nu_a}^\dagger \hat{a}_{\nu_b} = \sum_{\mathbf{k}, \mathbf{k}^{\prime}, \sigma, \sigma^{\prime}} \bra{\mathbf{k}, \sigma} \hat{T}(\mathbf{r}, \nabla_{\mathbf{r}}) \ket{\mathbf{k}^{\prime}, \sigma^{\prime}} \hat{a}_{\mathbf{k}, \sigma}^\dagger \hat{a}_{\mathbf{k}^{\prime}, \sigma^{\prime}} = \sum_{\mathbf{k}, \sigma} \frac{\hbar^2 k^2}{2m} \hat{a}_{\mathbf{k}, \sigma}^\dagger \hat{a}_{\mathbf{k}, \sigma},
+          \]
+\end{itemize}
+
+\paragraph{Coulomb term.}
+The Coulomb term of the Hamiltonian can be expressed as:
+\[
+    \begin{aligned}
+        V & = \frac{1}{2} \sum_{\sigma,\sigma^{\prime}} \sum_{\mathbf{k}_1, \mathbf{k}_2, \mathbf{k}_3, \mathbf{k}_4} \bra{\mathbf{k}_3, \sigma; \mathbf{k}_4, \sigma^{\prime}} V(\mathbf{r} - \mathbf{r}') \ket{\mathbf{k}_2, \sigma^{\prime}; \mathbf{k}_1, \sigma} \hat{a}_{\mathbf{k}_3, \sigma}^\dagger \hat{a}_{\mathbf{k}_4, \sigma^{\prime}}^\dagger \hat{a}_{\mathbf{k}_2, \sigma^{\prime}} \hat{a}_{\mathbf{k}_1, \sigma}                                                                                                                                                                                                         \\
+          & = \frac{1}{2} \sum_{\sigma,\sigma^{\prime}} \sum_{\mathbf{k}_1, \mathbf{k}_2, \mathbf{k}_3, \mathbf{k}_4} \left[ \int \int \mathrm{d}^3 \mathbf{r} \, \mathrm{d}^3 \mathbf{r}' \, \frac{e^{-i \mathbf{k}_3 \cdot \mathbf{r}}}{\sqrt{\Omega}} \frac{e^{-i \mathbf{k}_4 \cdot \mathbf{r}'}}{\sqrt{\Omega}} V(\mathbf{r} - \mathbf{r}') \frac{e^{i \mathbf{k}_2 \cdot \mathbf{r}'}}{\sqrt{\Omega}} \frac{e^{i \mathbf{k}_1 \cdot \mathbf{r}}}{\sqrt{\Omega}} \right] \hat{a}_{\mathbf{k}_3, \sigma}^\dagger \hat{a}_{\mathbf{k}_4, \sigma^{\prime}}^\dagger \hat{a}_{\mathbf{k}_2, \sigma^{\prime}} \hat{a}_{\mathbf{k}_1, \sigma} \\
+          & = \frac{1}{2} \sum_{\sigma,\sigma^{\prime}} \sum_{\mathbf{k}_1, \mathbf{k}_2, \mathbf{k}_3, \mathbf{k}_4} \frac{e^2}{\Omega^2}\left[ \int \int \mathrm{d}^3 \mathbf{r} \, \mathrm{d}^3 \mathbf{r}' \, \frac{e^{i (\mathbf{k}_1 - \mathbf{k}_3) \cdot \mathbf{r}} e^{i (\mathbf{k}_2 - \mathbf{k}_4) \cdot \mathbf{r}'}}{\vert \mathbf{r} - \mathbf{r}^{\prime} \vert} \right] \hat{a}_{\mathbf{k}_3, \sigma}^\dagger \hat{a}_{\mathbf{k}_4, \sigma^{\prime}}^\dagger \hat{a}_{\mathbf{k}_2, \sigma^{\prime}} \hat{a}_{\mathbf{k}_1, \sigma}                                                                                     \\
+    \end{aligned}
+\]
+if we now perform the change of variables $\bs{\xi} = \mathbf{r} - \mathbf{r}'$ we can express the Coulomb term as:\TODO{correct computations}
+\[
+    \begin{aligned}
+        = \frac{1}{2} \sum_{\sigma,\sigma^{\prime}} \sum_{\mathbf{k}_1, \mathbf{k}_2, \mathbf{k}_3, \mathbf{k}_4} \frac{e^2}{\Omega^2} \left[ \int \mathrm{d}^3 \mathbf{r} \, e^{i (\mathbf{k}_1 - \mathbf{k}_3) \cdot \mathbf{r}} \int \mathrm{d}^3 \bs{\xi} \, e^{i (\mathbf{k}_2 - \mathbf{k}_4) \cdot (\mathbf{r} - \bs{\xi})} \frac{1}{\vert \bs{\xi} \vert} \right] \hat{a}_{\mathbf{k}_3, \sigma}^\dagger \hat{a}_{\mathbf{k}_4, \sigma^{\prime}}^\dagger \hat{a}_{\mathbf{k}_2, \sigma^{\prime}} \hat{a}_{\mathbf{k}_1, \sigma}.
+    \end{aligned}
+\]
+So that in the end we find the Fourier transform of the Coulomb potential:
+\[
+    \tilde{V} = \int \mathrm{d}^3 \bs{\xi} \, \frac{e^{i (\mathbf{k}_2 - \mathbf{k}_4) \cdot \bs{\xi}}}{\vert \bs{\xi} \vert} = \frac{4\pi}{\vert \mathbf{k}_2 - \mathbf{k}_4 \vert^2},
+\]
+as we can see, the Coulomb potential is a very large range potential, since its transform as \(\mathbf{q} \to 0\) diverges:
+\[
+    \tilde{V} = \frac{4 \pi}{\vert \mathbf{q} \vert^2}.
+\]
+In the end, integrating over the delta functions, we can express the Coulomb term as:
+\[
+    V = \frac{1}{2 \Omega} \sum_{\sigma,\sigma^{\prime}} \sum_{\mathbf{k}_1, \mathbf{k}_2, \mathbf{q}} \frac{4 \pi e^2}{\vert \mathbf{q} \vert^2} \hat{a}_{\mathbf{k}_1 + \mathbf{q}, \sigma}^\dagger \hat{a}_{\mathbf{k}_2 - \mathbf{q}, \sigma^{\prime}}^\dagger \hat{a}_{\mathbf{k}_2, \sigma^{\prime}} \hat{a}_{\mathbf{k}_1, \sigma}.
+\]
+Thus during the interaction, two particles with momenta \(\mathbf{k}_1\) and \(\mathbf{k}_2\) exchange a momentum \(\mathbf{q}\) and end up with momenta \(\mathbf{k}_1 + \mathbf{q}\) and \(\mathbf{k}_2 - \mathbf{q}\), so that the total momentum is conserved during the interaction.\footnote{The momentum conservation is enforced at the end by the delta finction \(\delta_{\mathbf{k}_1, \mathbf{k}_3 + \mathbf{q}}\).} This is a consequence of the translational invariance of the system, which implies that the total momentum is a good quantum number. For the spin part, we know that the Coulomb interaction does not depend on the spin of the particles,\footnote{In some kind of interactions, we have other terms including all the Pauli matrices, so spin can switch.} so that the spin is also conserved during the interaction, which is a consequence of the rotational invariance of the system. \TODO{add drawing of the interaction (ie feynman diagram).}
+
+Thus we have modeled the interaction between the particles as a two-body interaction, which then scatters two particles with momenta \(\mathbf{k}_1\) and \(\mathbf{k}_2\) into two particles with momenta \(\mathbf{k}_1 + \mathbf{q}\) and \(\mathbf{k}_2 - \mathbf{q}\), where the momentum \(\mathbf{q}\) is the momentum exchanged during the interaction. This is a very general form of the interaction, which can be applied to any system with translational invariance, and it is the starting point for many-body perturbation theory and other techniques used to study interacting systems.
+
+This Hamiltonian cannot be solved exactly (for more than two particles), so we need to use some approximation methods to study the properties of the system. We are so going to develop the many body perturbation theory in the next chapters, which is a powerful tool to study interacting systems, and it is based on the idea of treating the interaction as a perturbation to the non-interacting system.
+
+
+
