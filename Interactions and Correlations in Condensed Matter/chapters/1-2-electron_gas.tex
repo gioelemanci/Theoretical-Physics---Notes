@@ -1,16 +1,24 @@
-\section{The Electron Gas}
+\chapter{The Electron Gas}
+
+The electron gas is a fundamental model in condensed matter physics that describes a system of free electrons: it is a widely used model to study different kinds of materials and systems. The electron gas is indeed a useful tool to understand the behavior of electrons in a solid, and it captures many of the essential features of real materials, such as the Fermi surface, the density of states, and the response functions.
+
+\section{Jellium Model}
 
 The electron gas is a model of a system of electrons that are free to move in a uniform background of positive charge, which is often used to study the properties of metals and other materials. This model is also known as the \textbf{jellium model}, and it is a useful tool to understand the behavior of electrons in a solid. Its main features are:
 \begin{itemize}
-    \item The electrons are treated as free particles, which means that they do not interact with each other, but they do interact with the positive background charge.
-    \item The positive background charge is treated as a uniform distribution of charge, which means that it does not have any structure or dynamics.
-    \item The system is assumed to be infinite and homogeneous, which means that it has no boundaries and that the properties of the system are the same everywhere.
+    \item The electrons are treated as \textit{free particles}, which means that they do not interact with each other, but they do interact with the positive background charge.
+    \item The positive background charge is treated as a \textit{uniform distribution of charge}, which means that it does not have any structure or dynamics.
+    \item The system is assumed to be \textit{infinite and homogeneous}, which means that it has no boundaries and that the properties of the system are the same everywhere.
 \end{itemize}
 The Hamiltonian of the electron gas can be expressed as:
 \[
     H = (T_{\text{ion}} + V_{\text{ion-ion}}) + (T_{\text{el}} + V_{\text{el-el}}) + V_{\text{el-ion}},
 \]
-where \(T_{\text{ion}}\) is the kinetic energy of the ions, \(V_{\text{ion-ion}}\) is the potential energy of the ion-ion interaction, \(T_{\text{el}}\) is the kinetic energy of the electrons, \(V_{\text{el-el}}\) is the potential energy of the electron-electron interaction, and \(V_{\text{el-ion}}\) is the potential energy of the electron-ion interaction. Let us review term by term, starting from the ionic part:\footnote{Capital letters for nuclei coordinates and small letters for electrons coordinates.}
+where \(T_{\text{ion}}\) is the kinetic energy of the ions, \(V_{\text{ion-ion}}\) is the potential energy of the ion-ion interaction, \(T_{\text{el}}\) is the kinetic energy of the electrons, \(V_{\text{el-el}}\) is the potential energy of the electron-electron interaction, and \(V_{\text{el-ion}}\) is the potential energy of the electron-ion interaction.
+
+\subsection{Jellium Hamiltonian}
+
+Let us review term by term, starting from the ionic part:\footnote{Capital letters for nuclei coordinates and small letters for electrons coordinates.}
 \[
     \begin{aligned}
         T_{\text{ion}} + V_{\text{ion-ion}} = \int \mathrm{d}^3 \mathbf{R} \hat{\Psi}_{\text{ion}}^\dagger(\mathbf{R}) \left( -\frac{\hbar^2}{2M} \nabla^2_{\mathbf{R}} \right) \hat{\Psi}_{\text{ion}}(\mathbf{R}) \\
@@ -19,85 +27,102 @@ where \(T_{\text{ion}}\) is the kinetic energy of the ions, \(V_{\text{ion-ion}}
 \]
 while for the electrons we have:
 \[
-    T_{\text{el}} + V_{\text{el-el}} = \int \mathrm{d}^3 \mathbf{r} \hat{\Psi}_{\text{el}}^\dagger(\mathbf{r}) \left( -\frac{\hbar^2}{2m} \nabla^2_{\mathbf{r}} \right) \hat{\Psi}_{\text{el}}(\mathbf{r}) + \frac{1}{2} \int \int \mathrm{d}^3 \mathbf{r}_1 \, \mathrm{d}^3 \mathbf{r}_2 \, \hat{\Psi}_{\text{el}}^\dagger(\mathbf{r}_1) \hat{\Psi}_{\text{el}}^\dagger(\mathbf{r}_2) \frac{e^2}{|\mathbf{r}_1 - \mathbf{r}_2|} \hat{\Psi}_{\text{el}}(\mathbf{r}_2) \hat{\Psi}_{\text{el}}(\mathbf{r}_1),
+    \begin{aligned}
+        T_{\text{el}} + V_{\text{el-el}} = \int \mathrm{d}^3 \mathbf{r} \hat{\Psi}_{\text{el}}^\dagger(\mathbf{r}) \left( -\frac{\hbar^2}{2m} \nabla^2_{\mathbf{r}} \right) \hat{\Psi}_{\text{el}}(\mathbf{r}) \\
+        + \frac{1}{2} \int \int \mathrm{d}^3 \mathbf{r}_1 \, \mathrm{d}^3 \mathbf{r}_2 \, \hat{\Psi}_{\text{el}}^\dagger(\mathbf{r}_1) \hat{\Psi}_{\text{el}}^\dagger(\mathbf{r}_2) \frac{e^2}{|\mathbf{r}_1 - \mathbf{r}_2|} \hat{\Psi}_{\text{el}}(\mathbf{r}_2) \hat{\Psi}_{\text{el}}(\mathbf{r}_1).
+    \end{aligned}
 \]
-In the jellium model, we assume that the ions are fixed in space and that they form a uniform background of positive charge, while the electrons are free to move in this background, such that the density can be expressed as:
+The remaining term is the electron-ion interaction, which can be expressed as:
+\[
+    V_{\text{el-ion}} = \sum_{\sigma} \int \int \mathrm{d}^3 \mathbf{r} \, \mathrm{d}^3 \mathbf{R} \, \hat{\Psi}_{\text{el}, \sigma}^\dagger(\mathbf{r}) \hat{\Psi}_{\text{ion}}^\dagger(\mathbf{R}) \left(\frac{- Z e^2}{|\mathbf{r} - \mathbf{R}|} \right) \hat{\Psi}_{\text{ion}}(\mathbf{R}) \hat{\Psi}_{\text{el} , \sigma}(\mathbf{r}).
+\]
+In the jellium model, we assume that the ions are fixed in space and that they form a \textbf{uniform background of positive charge}, while the electrons are free to move in this background, such that the density can be expressed as:
 \[
     \rho_{jel} (\mathbf{R}) = \frac{N}{\Omega},
 \]
-where \(N\) is the number of nuclei and \(\Omega\) is the volume of the system, such is constant. In the end the idea is to get rid of the ionic part (the nuclei, which have constant density) and to focus only on the electronic part, which is the one that determines the properties of the system. Thus the ion-ion interaction can be expressed as
+where \(N\) is the number of nuclei and \(\Omega\) is the volume of the system, such is constant. In the end the idea is to get rid of the ionic part (the nuclei, which have constant density) and to \textit{focus only on the electronic part, which is the one that determines the properties of the system}. Indeed, making this assumption, we can see that the complicated \textit{periodic potential} of the ions is replaced by a simple \textit{uniform background}.
+
+\paragraph{Ion-ion interaction.}
+We can use the jellium assumption to simplify the ion-ion interaction, which can be expressed as
 \[
     V_{\text{ion-ion}} = \frac{1}{2} \int \int \mathrm{d}^3 \mathbf{R}_1 \, \mathrm{d}^3 \mathbf{R}_2 \, \rho_{jel}(\mathbf{R}_1) \rho_{jel}(\mathbf{R}_2) \frac{1}{|\mathbf{R}_1 - \mathbf{R}_2|},
 \]
 where we are basically multiplicating the two infinitesimal charges \(\rho_{jel}(\mathbf{R}_1) \mathrm{d}^3 \mathbf{R}_1\) and \(\rho_{jel}(\mathbf{R}_2) \mathrm{d}^3 \mathbf{R}_2\) and then integrating over all space after dividing by the distance between the two charges. Thus we can write
 \[
     \begin{aligned}
-        V_{\text{ion-ion}} & = \frac{1}{2} \int \int \mathrm{d}^3 \mathbf{R}_1 \, \mathrm{d}^3 \mathbf{R}_2 \, \frac{N^2}{\Omega^2} \frac{1}{|\mathbf{R}_1 - \mathbf{R}_2|}               \\
-                           & = \frac{N^2}{2 \Omega^2} \int \mathrm{d}^3 \mathbf{R} \int \mathrm{d}^3 \bs{\xi} \, \frac{1}{|\bs{\xi}|} = \frac{N^2}{2 \Omega^2} \Omega \lim_{q \to 0} V_q,
+        V_{\text{ion-ion}} & = \frac{1}{2} \int \int \mathrm{d}^3 \mathbf{R}_1 \, \mathrm{d}^3 \mathbf{R}_2 \, \frac{N^2}{\Omega^2} \frac{1}{|\mathbf{R}_1 - \mathbf{R}_2|}                    \\
+                           & = \frac{N^2}{2 \Omega^2} \int \mathrm{d}^3 \mathbf{R} \int \mathrm{d}^3 \bs{\xi} \, \frac{1}{|\bs{\xi}|} = \frac{N^2}{2 \Omega^2} \,\Omega \, \lim_{q \to 0} V_q,
     \end{aligned}
 \]
-where in the end we have performed the change of variables \(\bs{\xi} = \mathbf{R}_1 - \mathbf{R}_2\) and we have expressed the integral in terms of the Fourier transform of the Coulomb potential, which diverges as \(q \to 0\).
+where in the end we have performed the change of variables \(\bs{\xi} = \mathbf{R}_1 - \mathbf{R}_2\) and we have expressed the integral in terms of the Fourier transform of the Coulomb potential, which diverges as \(q \to 0\). This means that the ion-ion interaction diverges in the thermodynamic limit, which is a problem for the theory, but we will see that this divergence is cancelled by the electron-ion interaction, so that the final Hamiltonian of the electron gas is well defined and does not diverge.
 
-Moving on to the electron-ion interaction, we can express it as:
+\paragraph{Electron-ion interaction.}
+Moving on to the electron-ion interaction (among electrons and the jellium background), we can express it as:
 \[
     \begin{aligned}
-        V_{\text{ion-el}} & = - \sum_{\sigma} \int \int \mathrm{d}^3 \mathbf{r} \, \mathrm{d}^3 \mathbf{R} \, \rho_{\text{el}}(\mathbf{r}) \rho_{\text{jel}}(\mathbf{R}) \frac{1}{|\mathbf{r} - \mathbf{R}|}                                                                                                                                                                                                        \\
-                          & = - \frac{N}{\Omega} \sum_{\sigma} \int \int \mathrm{d}^3 \mathbf{r} \, \mathrm{d}^3 \mathbf{R} \, \rho_{\text{el}}(\mathbf{r}) \frac{1}{|\mathbf{r} - \mathbf{R}|} = -\frac{N}{\Omega} \left[ \sum_{\sigma} \int \mathrm{d}^3 \mathbf{r} \, \rho_{\text{el}}(\mathbf{r}) \right] \int \mathrm{d}^3 \bs{\xi} \, \frac{1}{|\bs{\xi}|} = -\frac{N^2}{\Omega^2} \Omega \lim_{q \to 0} V_q,
+        V_{\text{el-ion}} & = - \sum_{\sigma} \int \int \mathrm{d}^3 \mathbf{r} \, \mathrm{d}^3 \mathbf{R} \, \rho_{\text{el}}(\mathbf{r}) \rho_{\text{ion}}(\mathbf{R}) \frac{1}{|\mathbf{r} - \mathbf{R}|}                               \\
+                          & = - \frac{N}{\Omega} \sum_{\sigma} \int \int \mathrm{d}^3 \mathbf{r} \, \mathrm{d}^3 \mathbf{R} \, \rho_{\text{el}}(\mathbf{r}) \frac{1}{|\mathbf{r} - \mathbf{R}|}                                            \\
+                          & = -\frac{N}{\Omega} \left[ \sum_{\sigma} \int \mathrm{d}^3 \mathbf{r} \, \rho_{\text{el}}(\mathbf{r}) \right] \int \mathrm{d}^3 \bs{\xi} \, \frac{1}{|\bs{\xi}|} = -\frac{N}{\Omega}\, N\, \lim_{q \to 0} V_q,
     \end{aligned}
 \]
-so that in the end if we sum the ion-ion and ion-electron interactions we get:
-\[
-    V_{\text{ion-ion}} + V_{\text{ion-el}} = \frac{N^2}{2 \Omega^2} \Omega \lim_{q \to 0} V_q - \frac{N^2}{\Omega^2} \Omega \lim_{q \to 0} V_q = -\frac{N^2}{2 \Omega^2} \Omega \lim_{q \to 0} V_q,
-\]
-which... check computations. \TODO{change all the ladder operators from a to c, since we are using electrons.}
+where, in the end, we used the fact that the total charge of the electrons is equal to the total charge of the ions, so that \(\sum_{\sigma} \int \mathrm{d}^3 \mathbf{r} \, \rho_{\text{el}}(\mathbf{r}) = N\), which is a consequence of the charge neutrality of the system. This means that the electron-ion interaction also diverges in the thermodynamic limit, but it has the opposite sign of the ion-ion interaction; but they do not cancel each other.
 
-Moving onto the interesting term, the electron-electron interaction, we can express it as:
+\paragraph{Electron-electron interaction for \(q=0\).}
+Moving onto the next interesting term, encoding the electron-electron interaction, we can consider the contribution for \(q=0\), which is the one that diverges, with the idea to show that this divergence is cancelled by the ion-ion and electron-ion interactions. Thus we can express the electron-electron interaction for \(q=0\) as:
 \[
-    V_{\text{el-el}} (q=0) = \frac{1}{2} \sum_{\sigma, \sigma'} \sum_{\mathbf{k}_1, \mathbf{k}_2} \left[ \lim_{q \to 0} V_q \right] \hat{a}_{\mathbf{k}_1, \sigma}^\dagger \hat{a}_{\mathbf{k}_2, \sigma'}^\dagger \hat{a}_{\mathbf{k}_2, \sigma'} \hat{a}_{\mathbf{k}_1, \sigma},
+    V_{\text{el-el}} (q=0) = \frac{1}{2} \sum_{\sigma, \sigma'} \sum_{\mathbf{k}_1, \mathbf{k}_2} \left[ \lim_{q \to 0} V_q \right] \hat{c}_{\mathbf{k}_1, \sigma}^\dagger \hat{c}_{\mathbf{k}_2, \sigma'}^\dagger \hat{c}_{\mathbf{k}_2, \sigma'} \hat{c}_{\mathbf{k}_1, \sigma},
 \]
-where now we are interested to change the order of the ladder operators, since we are dealing with fermions, so that the last term becomes:\TODO{correct computations}
+where now we are interested to change the order of the ladder operators, since we are dealing with fermions, so that the last term becomes:
 \[
     \begin{aligned}
-        \hat{a}_{\mathbf{k}_1, \sigma}^\dagger \hat{a}_{\mathbf{k}_2, \sigma'}^\dagger \hat{a}_{\mathbf{k}_2, \sigma'} \hat{a}_{\mathbf{k}_1, \sigma} & = -\hat{a}_{\mathbf{k}_1, \sigma}^\dagger \hat{a}_{\mathbf{k}_2, \sigma'}^\dagger \hat{a}_{\mathbf{k}_1, \sigma} \hat{a}_{\mathbf{k}_2, \sigma'} + \hat{a}_{\mathbf{k}_1, \sigma}^\dagger \hat{a}_{\mathbf{k}_1, \sigma}  \\
-                                                                                                                                                      & = -\hat{a}_{\mathbf{k}_1, \sigma}^\dagger \hat{a}_{\mathbf{k}_1, \sigma} \hat{a}_{\mathbf{k}_2, \sigma'}^\dagger \hat{a}_{\mathbf{k}_2, \sigma'} + 2\hat{a}_{\mathbf{k}_1, \sigma}^\dagger \hat{a}_{\mathbf{k}_1, \sigma} \\
-                                                                                                                                                      & = -n_{\mathbf{k}_1, \sigma} n_{\mathbf{k}_2, \sigma'} + 2 n_{\mathbf{k}_1, \sigma},
+        \hat{c}_{\mathbf{k}_1, \sigma}^\dagger \hat{c}_{\mathbf{k}_2, \sigma'}^\dagger \hat{c}_{\mathbf{k}_2, \sigma'} \hat{c}_{\mathbf{k}_1, \sigma} & = -\hat{c}_{\mathbf{k}_1, \sigma}^\dagger \hat{c}_{\mathbf{k}_2, \sigma'}^\dagger \hat{c}_{\mathbf{k}_1, \sigma} \hat{c}_{\mathbf{k}_2, \sigma'}                                                                                                  \\
+                                                                                                                                                      & = -\hat{c}_{\mathbf{k}_1, \sigma}^\dagger \left( \{ \hat{c}_{\mathbf{k}_2, \sigma'}^\dagger,\, \hat{c}_{\mathbf{k}_1, \sigma} \} - \hat{c}_{\mathbf{k}_1, \sigma} \hat{c}_{\mathbf{k}_2, \sigma'}^\dagger \right) \hat{c}_{\mathbf{k}_2, \sigma'} \\
+                                                                                                                                                      & = -\hat{c}_{\mathbf{k}_1, \sigma}^\dagger \left( \delta_{\mathbf{k}_1, \mathbf{k}_2} \delta_{\sigma, \sigma'} - \hat{c}_{\mathbf{k}_1, \sigma} \hat{c}_{\mathbf{k}_2, \sigma'}^\dagger \right) \hat{c}_{\mathbf{k}_2, \sigma'},
     \end{aligned}
 \]
-so that the electron-electron interaction can be expressed as:
+where we used the anticommutation relations of the fermionic ladder operators, which state that \(\{ \hat{c}_{\mathbf{k}, \sigma}^\dagger, \hat{c}_{\mathbf{k}', \sigma'} \} = \delta_{\mathbf{k}, \mathbf{k}'} \delta_{\sigma, \sigma'}\) and that all the other anticommutators are zero. Thus we can express the electron-electron interaction for \(q=0\) as:
 \[
-    V_{\text{el-el}}(q=0) = \frac{1}{2\Omega} \sum_{\sigma, \sigma'} \sum_{\mathbf{k}_1, \mathbf{k}_2} \left[ \lim_{q \to 0} V_q \right] (\hat{n}_{\mathbf{k}_1, \sigma} \hat{n}_{\mathbf{k}_2, \sigma'} - \delta_{\mathbf{k}_1, \mathbf{k}_2} \delta_{\sigma, \sigma'} \hat{n}_{\mathbf{k}_1, \sigma}),
+    \begin{aligned}
+        V_{\text{el-el}}(q=0) & = \frac{1}{2\Omega} \sum_{\sigma, \sigma'} \sum_{\mathbf{k}_1, \mathbf{k}_2} \left[ \lim_{q \to 0} V_q \right] (\hat{n}_{\mathbf{k}_1, \sigma} \hat{n}_{\mathbf{k}_2, \sigma'} - \delta_{\mathbf{k}_1, \mathbf{k}_2} \delta_{\sigma, \sigma'} \hat{n}_{\mathbf{k}_1, \sigma}) \\
+                              & = \frac{1}{2\Omega} \left[ \lim_{q \to 0} V_q \right] \sum_{\sigma} \sum_{\mathbf{k}_1} \left[ \left( \sum_{\sigma'} \sum_{\mathbf{k}_2} \hat{n}_{\mathbf{k}_1, \sigma} \hat{n}_{\mathbf{k}_2, \sigma'} \right) - \hat{n}_{\mathbf{k}_1, \sigma} \right],
+    \end{aligned}
 \]
-and remembering that the sum of the occupation numbers is equal to the total number of particles \(\sum_{\mathbf{k}} \hat{n}_{\mathbf{k}} = N\), we can simplify the expression further
+and remembering that the sum of the occupation numbers is equal to the total number of particles \(\sum_{\mathbf{k}} \hat{n}_{\mathbf{k}} = N\) (independently from \(\mathbf{k}_i\), since the sum is over all momenta), we can simplify the expression further
 \[
-    V = \frac{1}{2\Omega} (N^2 - N) \lim_{q \to 0} V_q \sim \frac{N^2}{2\Omega} \lim_{q \to 0} V_q,
+    V_{\text{el-el}}(q=0) = \frac{1}{2\Omega} (N^2 - N) \lim_{q \to 0} V_q \sim \frac{N^2}{2\Omega} \lim_{q \to 0} V_q,
 \]
-showing how the electron-electron interaction diverges as \(q \to 0\), which is a consequence of the long-range nature of the Coulomb interaction. This divergence is a problem for the theory, but if we sum this contribution with the ion-ion and ion-electron interactions, we get the following hamiltonian for the jellium model:
+after considering the TD limit, which shows how the electron-electron interaction diverges as \(q \to 0\) (a consequence of the long-range nature of the Coulomb interaction).
+
+\paragraph{Cancellation of the divergences.}
+If we sum the ion-ion and ion-electron interactions, we get the following expression:
 \[
-    H_{\text{el}} = \sum_{\mathbf{k} \sigma} \frac{\hbar^2 k^2}{2m} \hat{a}_{\mathbf{k}, \sigma}^\dagger \hat{a}_{\mathbf{k}, \sigma} + \frac{1}{2\Omega} \sum_{\sigma, \sigma'} \sum_{\mathbf{k}_1, \mathbf{k}_2, \mathbf{q}\neq 0} \left( \frac{4 \pi e^2}{q^2} \right) \hat{a}_{\mathbf{k}_1 + \mathbf{q}, \sigma}^\dagger \hat{a}_{\mathbf{k}_2 - \mathbf{q}, \sigma'}^\dagger \hat{a}_{\mathbf{k}_2, \sigma'} \hat{a}_{\mathbf{k}_1, \sigma},
+    V_{\text{ion-ion}} + V_{\text{ion-el}} = \frac{N^2}{2 \Omega} \lim_{q \to 0} V_q - \frac{N^2}{\Omega} \lim_{q \to 0} V_q = -\frac{N^2}{2 \Omega} \lim_{q \to 0} V_q,
 \]
-which is the Hamiltonian of the electron gas, where we have neglected the constant term that diverges as \(q \to 0\), since it does not affect the properties of the system. This Hamiltonian is the starting point for many-body perturbation theory and other techniques used to study interacting systems, and it is a very important model in condensed matter physics, since it captures many of the essential features of real materials, such as metals and semiconductors.
+which is easily recognized as the opposite of the electron-electron interaction for \(q=0\) (at the TD limit), so that we have:
+\[
+    V_{\text{ion-ion}} + V_{\text{ion-el}} + V_{\text{el-el}}(q=0) = 0,
+\]
+effectively cancelling the divergences of the theory, so that we can get rid of the \(q=0\) contribution to the electron-electron interaction and all the terms related to the interactions with the jellium background; now we can focus on the remaining contributions, which are well defined and do not diverge.
+
+After the removal of the divergences, we can express the \textbf{Hamiltonian of the homogeneous electron gas} as:
+\[
+    H_{\text{el}} = \sum_{\mathbf{k} \sigma} \frac{\hbar^2 k^2}{2m} \hat{c}_{\mathbf{k}, \sigma}^\dagger \hat{c}_{\mathbf{k}, \sigma} + \frac{1}{2\Omega} \sum_{\sigma, \sigma'} \sum_{\mathbf{k}_1, \mathbf{k}_2, \mathbf{q}\neq 0} \left( \frac{4 \pi e^2}{q^2} \right) \hat{c}_{\mathbf{k}_1 + \mathbf{q}, \sigma}^\dagger \hat{c}_{\mathbf{k}_2 - \mathbf{q}, \sigma'}^\dagger \hat{c}_{\mathbf{k}_2, \sigma'} \hat{c}_{\mathbf{k}_1, \sigma},
+\]
+where we have neglected the constant term that diverges as \(q \to 0\), since it does not affect the properties of the system, along with the terms related to the interactions with the jellium background. This Hamiltonian is the starting point for many-body perturbation theory and other techniques used to study interacting systems, and it is a very important model in condensed matter physics, since it captures many of the essential features of real materials, such as metals and semiconductors.
 
 The strength of this model is that it is simple enough to be solved exactly in some cases, but it is also rich enough to capture many of the essential features of real materials, such as the Fermi surface, the density of states, and the response functions. It is also a very useful model to study the effects of interactions on the properties of the system, such as the formation of collective excitations, the screening of the Coulomb interaction, and the emergence of new phases of matter.
 
+\section{Non Interacting Jellium Hamiltonian}
 
-
-
-
-
-
-
-
-
-
-Thus the hamiltonian of the electron gas can be expressed as:
+Thus the hamiltonian of the electron gas, after having removed all the divergences, can be expressed as:
 \[
-    H_{\text{el}} = \sum_{\mathbf{k} \sigma} \frac{\hbar^2 k^2}{2m} \hat{a}_{\mathbf{k}, \sigma}^\dagger \hat{a}_{\mathbf{k}, \sigma} + \frac{1}{2\Omega} \sum_{\sigma, \sigma'} \sum_{\mathbf{k}_1, \mathbf{k}_2, \mathbf{q}\neq 0} \left( \frac{4 \pi e^2}{q^2} \right) \hat{a}_{\mathbf{k}_1 + \mathbf{q}, \sigma}^\dagger \hat{a}_{\mathbf{k}_2 - \mathbf{q}, \sigma'}^\dagger \hat{a}_{\mathbf{k}_2, \sigma'} \hat{a}_{\mathbf{k}_1, \sigma},
+    H_{\text{el}} = \sum_{\mathbf{k} \sigma} \frac{\hbar^2 k^2}{2m} \hat{c}_{\mathbf{k}, \sigma}^\dagger \hat{c}_{\mathbf{k}, \sigma} + \frac{1}{2\Omega} \sum_{\sigma, \sigma'} \sum_{\mathbf{k}_1, \mathbf{k}_2, \mathbf{q}\neq 0} \left( \frac{4 \pi e^2}{q^2} \right) \hat{c}_{\mathbf{k}_1 + \mathbf{q}, \sigma}^\dagger \hat{c}_{\mathbf{k}_2 - \mathbf{q}, \sigma'}^\dagger \hat{c}_{\mathbf{k}_2, \sigma'} \hat{c}_{\mathbf{k}_1, \sigma},
 \]
 where the idea is to use the eigenvalues and eigenvectors of the non-interacting part of the Hamiltonian, which is the kinetic energy term, as a basis on which we will apply perturbation theory to study the effects of the interactions.
 
 The non-interacting part of the Hamiltonian is diagonal in the momentum space, and its eigenvalues are given by:
 \[
-    H_{\text{non-int}} \Psi_{\mathbf{k}, \sigma} = \frac{\hbar^2 k^2}{2m} \Psi_{\mathbf{k}, \sigma},
+    H_{\text{jel}}^{(0)} \Psi_{\mathbf{k}, \sigma} = \frac{\hbar^2 k^2}{2m} \Psi_{\mathbf{k}, \sigma},
 \]
 where the eigenvectors are normalized plane waves of the form:\QUESTION{check if chi-und-sigma exist}
 \[
@@ -139,7 +164,7 @@ from which we can extract the Fermi velocity, which is the velocity of the elect
 
 Now how do we connect the the microscopic parameters of the model, such as the density of electrons, to the Fermi energy and the Fermi momentum? We can express the density of electrons as:
 \[
-    n = \frac{N}{\Omega} = \frac{1}{\Omega} \bra{FS} \hat{N} \ket{FS} = \frac{1}{\Omega} \sum_{\mathbf{k}, \sigma} \hat{n}_{\mathbf{k}, \sigma} \bra{FS},
+    n = \frac{N}{\Omega} = \frac{1}{\Omega} \bra{FS} \hat{N} \ket{FS} = \frac{1}{\Omega} \sum_{\mathbf{k}, \sigma} \bra{FS} \hat{n}_{\mathbf{k}, \sigma} \ket{FS},
 \]
 where now we can express the sum over the momentum as an integral, so that we have:\footnote{The discretization goes to the continuum and we loose the PBC as we defined them, making just the right integration.......}
 \[
@@ -185,7 +210,7 @@ which is a very important relation, since it allows us to connect the microscopi
 
 Let us come back to the non interacting Hamiltonian of the electron gas, which is given by:
 \[
-    H_{jel}^{(0)} = \sum_{\mathbf{k} \sigma} \frac{\hbar^2 k^2}{2m} \hat{a}_{\mathbf{k}, \sigma}^\dagger \hat{a}_{\mathbf{k}, \sigma},
+    H_{jel}^{(0)} = \sum_{\mathbf{k} \sigma} \frac{\hbar^2 k^2}{2m} \hat{c}_{\mathbf{k}, \sigma}^\dagger \hat{c}_{\mathbf{k}, \sigma},
 \]
 then the spctrum of this Hamiltonian is given by:
 \[
@@ -206,7 +231,7 @@ In the condensed matter community, this problem was central in the sixties and s
 \]
 where the Bohr length \(a_0\) is the length scale that characterizes the size of the electron wavefunction, \(r_s\) length instead is the length scale that characterizes the average distance between the electrons, so that it represents 1 electron per sphere of radius \(a_0\) if \(r_s = 1\). Otherwise for \(r_s \to 0\) it represents a very high density, since we have many electrons in a small volume, while for \(r_s \to \infty\) it represents a very low density, since we have few electrons in a large volume. Thus the Wigner-Seitz radius is a very important parameter, since it allows us to characterize the properties of the system as a function of the density, and to understand the effects of the interactions on the properties of the system. It is an inverse measure for density, and it is a very useful parameter since we can write
 \[
-    \frac{E^{(0)}}{N} = \frac{3}{5} E_F = \frac{3}{5} \frac{\hbar^2 k_F^2}{2m} = \frac{3}{5} \frac{1}{2} \frac{\hbar^2}{m e^2} e^2 \left( \frac{a_0^2}{a_0^2} k_F^2 \right) = \frac{3}{5} \frac{a_0}{2} \frac{e^2}{a_0^2},
+    \frac{E^{(0)}}{N} = \frac{3}{5} E_F = \frac{3}{5} \frac{\hbar^2 k_F^2}{2m} = \frac{3}{5} \frac{1}{2} \frac{\hbar^2}{m e^2} e^2 \left( \frac{a_0^2}{a_0^2} k_F^2 \right) = \frac{3}{5} \frac{a_0}{2} \frac{e^2}{a_0^2} k_F^2,
 \]
 where if we compute
 \[
@@ -220,7 +245,7 @@ which shows that the energy per particle of the non-interacting Fermi gas scales
 
 Remeber that the Rydberg energy is the energy scale that characterizes the strength of the Coulomb interaction, and it is given by: \(1 \text{ Ry} = \SI{13.6}{\electronvolt}\).
 
-
+\section{I Order Perturbation Theory}
 
 
 The first important term from perturbation theory is the exchange energy term, which is basically due to the undistinguishability of the electrons, and it represents the energy cost of having indistinguishable particles, since the electrons must obey the Pauli principle, which means that they cannot occupy the same state, so that they must have different momenta or different spins, which leads to a reduction of the energy of the system, since the electrons can avoid each other more effectively.
@@ -282,3 +307,13 @@ so that the volume of the intersection of the two spheres can be expressed as:
     \end{aligned}
 \]
 where the first factor of 2 comes from the spin degeneracy, since we have two spin states for each momentum state, while the second factor of 2 comes from the fact that we have two equivalent sphere caps, since the intersection of the two spheres is symmetric with respect to the plane that bisects the line that connects their centers. Furthermore, \(\phi\) is not constraint on the integral since it is like a rotation around the axis that connects the centers of the two spheres, so that we can integrate it out.
+
+
+
+
+
+
+
+
+
+\section{II Order Perturbation Theory}
