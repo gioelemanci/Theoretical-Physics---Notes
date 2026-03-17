@@ -1,0 +1,447 @@
+\chapter{Vector calculus in $\mathbb{R}^3$ geometry}
+
+\section{Euclidean structure of $\mathbb{R}^3$}
+
+The Euclidean structure of R3 is nothing but the familiar “dot” product of vectors and is the fundamental structure characterizing \(\mathbb{R}^3\). We begin with a remark on notation. Any vector \(\mathbf{x} \in \mathbb{R}^3\) can be viewed as either a column or a row vector
+\[
+    \mathbf{x} = \begin{pmatrix}
+        x_1 \\
+        x_2 \\
+        x_3
+    \end{pmatrix}, \quad \mathbf{x} = \begin{pmatrix}
+        x_1 & x_2 & x_3
+    \end{pmatrix}.
+\]
+
+canonical orthonormal basis of \(\mathbb{R}^3\) is given by
+
+component of the vector
+
+matrices 3x3
+
+\section{Orientational structure of \(\mathbb{R}^3\)}
+
+For each triple of vectors \(\mathbf{x}, \mathbf{y}, \mathbf{z} \in \mathbb{R}^3\), we can define a matrix
+\[
+    (\mathbf{x}, \mathbf{y}, \mathbf{z}) = \begin{pmatrix}
+        x_1 & y_1 & z_1 \\
+        x_2 & y_2 & z_2 \\
+        x_3 & y_3 & z_3
+    \end{pmatrix}, \quad \mathbf{x} = \begin{pmatrix}
+        \textbf{x}^T \\
+        \textbf{y}^T \\
+        \mathbf{z}^T
+    \end{pmatrix}= \begin{pmatrix}
+        x_1 & x_2 & x_3 \\
+        y_1 & y_2 & y_3 \\
+        z_1 & z_2 & z_3
+    \end{pmatrix}.
+\]
+
+the reciprocally transposed matrices of R[3] having x, y, z as column and row vectors in the shown order, respectively. For fixed vectors x, y, the determinant of these matrices depends linearly on z. Therefore, there exists a vector x × y in R3 with the property that
+\[
+    \mathbf{x} \times \mathbf{y} \cdot \mathbf{z} = \det(\mathbf{x}, \mathbf{y}, \mathbf{z}) = \det\begin{pmatrix}
+        \textbf{x}^T \\
+        \textbf{y}^T \\
+        \textbf{z}^T
+    \end{pmatrix}.
+\]
+
+\dots
+
+\[
+    \begin{aligned}
+        \mathbf{x} \times \mathbf{y} + \mathbf{y} \times \mathbf{x} = 0,                                                                                            \\
+        \mathbf{x} \times (\mathbf{y} \times \mathbf{z}) + \mathbf{y} \times (\mathbf{z} \times \mathbf{x}) + \mathbf{z} \times (\mathbf{x} \times \mathbf{y}) = 0, \\
+        (\mathbf{x} \times \mathbf{y}) \cdot (\mathbf{u} \times \mathbf{v}) = \dots                                                                                 \\
+        \mathbf{x} \times (\mathbf{y} \times \mathbf{z}) = (\mathbf{x} \cdot \mathbf{z}) \mathbf{y} - (\mathbf{x} \cdot \mathbf{y}) \mathbf{z},                     \\
+        \mathbf{e}_i \times \mathbf{e}_j = \sum_k \epsilon_{ijk} \mathbf{e}_k.
+    \end{aligned}
+\]
+
+\begin{proof}
+    We are going to prove the determinant identity...
+\end{proof}
+
+\dots
+\section{Determinant and Trace Identities}
+Suppose \(A\) is a \(3 \times 3\) matrix and \(\mathbf{x}, \mathbf{y}, \mathbf{z}\) are three vectors in \(\mathbb{R}^3\), then we have the following identities:
+\[
+    \begin{aligned}
+        (A \mathbf{x}) \times (A \mathbf{y}) \cdot (A \mathbf{z}) = \det(A) \mathbf{x} \times \mathbf{y} \cdot \mathbf{z}, \\
+        (A \mathbf{x}) \times \mathbf{y} \cdot \mathbf{z} + \mathbf{x} \times (A \mathbf{y}) \cdot \mathbf{z} + \mathbf{x} \times \mathbf{y} \cdot (A \mathbf{z}) = \Tr(A) \mathbf{x} \times \mathbf{y} \cdot \mathbf{z},
+    \end{aligned}
+\]
+The first identity can be interpreted as the invariance of the determinant under linear transformations, while the second identity can be interpreted as the infinitesimal version of the first identity, which is related to the trace of the matrix \(A\). The first one is called the \textbf{determinant identity}, while the second one is called the \textbf{trace identity}.
+\begin{proof}
+    where the first one can be seen as
+    \[
+        (A \mathbf{x}) \times (A \mathbf{y}) \cdot (A \mathbf{z}) = \det\begin{pmatrix}
+            A\mathbf{x} & A\mathbf{y} & A\mathbf{z}
+        \end{pmatrix} = \det (A \begin{pmatrix}
+                \mathbf{x} & \mathbf{y} & \mathbf{z} \end{pmatrix}) = \det(A) \det\begin{pmatrix}
+            \mathbf{x} & \mathbf{y} & \mathbf{z}
+        \end{pmatrix}.
+    \]
+
+    If \(A = 1 + \lambda A\) and we consider an infinitesimal transformation, then we can differentiate the first identity with the leibniz rule to get the lhs of the second identity
+    \[
+        \frac{\mathrm{d}}{\mathrm{d} \lambda} (((1+\lambda A) \mathbf{x}) \times ((1 + \lambda A) \mathbf{y}) \cdot ((1+\lambda A) \mathbf{z})) \bigg|_{\lambda = 0} = (A \mathbf{x}) \times \mathbf{y} \cdot \mathbf{z} + \mathbf{x} \times (A \mathbf{y}) \cdot \mathbf{z} + \mathbf{x} \times \mathbf{y} \cdot (A \mathbf{z}),
+    \]
+    and now we can differentiate the rhs of the first identity to get the rhs of the second identity
+    \[
+        \frac{\mathrm{d}}{\mathrm{d} \lambda} ((1 + \lambda \Tr(A)) \mathbf{x} \times \mathbf{y} \cdot \mathbf{z}) \bigg|_{\lambda = 0} = \Tr(A) \mathbf{x} \times \mathbf{y} \cdot \mathbf{z},
+    \]
+    since \(\mathbf{x} \times \mathbf{y} \cdot \mathbf{z}\) is independent of \(\lambda\) and if \(A = (\mathbf{a}_1, \mathbf{a}_2, \mathbf{a}_3)\)
+    \[
+        (1+\lambda A) = \begin{pmatrix}
+            \mathbf{e}_1 + \lambda \mathbf{a}_1 & \mathbf{e}_2 + \lambda \mathbf{a}_2 & \mathbf{e}_3 + \lambda \mathbf{a}_3
+        \end{pmatrix},
+    \]
+    so that differentiating the determinant of this matrix
+    \[
+        \det(1 + \lambda A) = (\mathbf{e}_1 + \lambda \mathbf{a}_1) \times (\mathbf{e}_2 + \lambda \mathbf{a}_2) \cdot (\mathbf{e}_3 + \lambda \mathbf{a}_3),
+    \]
+    with respect to \(\lambda\) at \(\lambda = 0\) gives us the sum of the diagonal entries of \(A\), which is exactly the trace of \(A\):
+    \[
+        \begin{aligned}
+            \frac{\mathrm{d}}{\mathrm{d} \lambda} \det(1 + \lambda A) \bigg|_{\lambda = 0} & = \mathbf{a}_1 \cdot \mathbf{e}_2 \times \mathbf{e}_3 + \mathbf{e}_1 \times \mathbf{a}_2 \cdot \mathbf{e}_3 + \mathbf{e}_1 \times \mathbf{e}_2 \cdot \mathbf{a}_3 \\
+                                                                                           & = \mathbf{a}_1 \cdot \mathbf{e}_2 \times \mathbf{e}_3 + \mathbf{a}_2 \cdot \mathbf{e}_3 \times \mathbf{e}_1 + \mathbf{a}_3 \cdot \mathbf{e}_1 \times \mathbf{e}_2 \\
+                                                                                           & = \mathbf{a}_1 \cdot \mathbf{e}_1 + \mathbf{a}_2 \cdot \mathbf{e}_2 + \mathbf{a}_3 \cdot \mathbf{e}_3 = a_{11} + a_{22} + a_{33} = \Tr(A).
+        \end{aligned}
+    \]
+\end{proof}
+
+This identities are very useful when encountering the determinant and trace of a matrix in the context of Lie groups and Lie algebras, as we will see in the next chapters.
+
+\section{Direct Product}
+
+For two vectors \(\mathbf{x} = (x_1, x_2, x_3)\) and \(\mathbf{y} = (y_1, y_2, y_3)\) in \(\mathbb{R}^3\), we can define their direct product as a \(3\times 3\) matrix
+\[
+    \mathbf{x} \otimes \mathbf{y} = \begin{pmatrix}
+        x_1\, y_1 & x_1\, y_2 & x_1\, y_3 \\
+        x_2\, y_1 & x_2\, y_2 & x_2\, y_3 \\
+        x_3\, y_1 & x_3\, y_2 & x_3\, y_3
+    \end{pmatrix} \in \mathbb{R}(3) = \text{Mat}(3, \mathbb{R}).
+\]
+\begin{definition}[Direct Product]
+    The direct product of two vectors \(\mathbf{x}\) and \(\mathbf{y}\) in \(\mathbb{R}^3\) is defined as the \(3\times 3\) matrix obtained by multiplying each component of \(\mathbf{x}\) with each component of \(\mathbf{y}\), resulting in a matrix where the entry in the \(i\)-th row and \(j\)-th column is given by \(x_i y_j\). Mathematically, it can be expressed as:
+    \[
+        \begin{aligned}
+            \otimes \, : \, \mathbb{R}^3 \times \mathbb{R}^3 \mapsto \mathbb{R}^{3 \times 3}, \\
+            (\mathbf{x}, \mathbf{y}) \mapsto \mathbf{x} \otimes \mathbf{y} = \begin{pmatrix}
+                                                                                 x_1\, y_1 & x_1\, y_2 & x_1\, y_3 \\
+                                                                                 x_2\, y_1 & x_2\, y_2 & x_2\, y_3 \\
+                                                                                 x_3\, y_1 & x_3\, y_2 & x_3\, y_3
+                                                                             \end{pmatrix}.
+        \end{aligned}
+    \]
+\end{definition}
+
+This operation is bilinear and has the following properties:
+\[
+    \begin{dcases}
+        (\mathbf{x} \otimes \mathbf{y}) \mathbf{z} = (\mathbf{y} \cdot \mathbf{z}) \mathbf{x}, \\
+        (\mathbf{x} \otimes \mathbf{y})^T = \mathbf{y} \otimes \mathbf{x},                     \\
+        \Tr(\mathbf{x} \otimes \mathbf{y}) = \mathbf{x} \cdot \mathbf{y},                      \\
+        \det(\mathbf{x} \otimes \mathbf{y}) = 0.
+    \end{dcases}
+\]
+An eigenvector belong to the eigenvalue 0, so the direct product of two vectors is a singular matrix.
+
+This operation is also known as the outer product of two vectors, and it is different from the inner product (dot product) and the cross product. The direct product of two vectors can be used to construct higher-dimensional tensors and has applications in various fields such as physics, engineering, and machine learning.
+
+More identities can be derived from the definition of the direct product; suppose \(A \in \mathbb{R}(3)\) is a \(3 \times 3\) matrix and \(\mathbf{x}, \mathbf{y}\) are two vectors in \(\mathbb{R}^3\), then we have the following identities:
+\[
+    \begin{aligned}
+        (A \mathbf{x}) \otimes (A \mathbf{y}) = A (\mathbf{x} \otimes \mathbf{y}) A^T, \\
+        A = \sum_{i, j} A_{ij} \mathbf{e}_i \otimes \mathbf{e}_j.
+    \end{aligned}
+\]
+The first identity can be interpreted as the invariance of the direct product under linear transformations, while the second identity is the expansion of a matrix in terms of the canonical basis of \(\mathbb{R}^3\) and the direct product.
+
+\section{The Star Operator}
+
+For a fixed vector \(\mathbf{x} \in \mathbb{R}^3\), we can define a linear operator mapping any vector \(\mathbf{y} \in \mathbb{R}^3\) to the cross product of \(\mathbf{x}\) and \(\mathbf{y}\):
+\[
+    \star \, : \, \mathbb{R}^3 \mapsto \mathbb{R}(3),
+\]
+\[
+    \mathbf{x} \mapsto \star \mathbf{x} = \begin{pmatrix}
+        0    & x_3  & -x_2 \\
+        -x_3 & 0    & x_1  \\
+        x_2  & -x_1 & 0
+    \end{pmatrix}.
+\]
+\[
+    (\star \mathbf{x}) \mathbf{y} = - \mathbf{x} \times \mathbf{y}.
+\]
+\[
+    (^{\star} \mathbf{x})_{ij} = \sum_{k} \epsilon_{ijk} x_k.
+\]
+The star operator is a linear map that takes a vector in \(\mathbb{R}^3\) and produces a skew-symmetric matrix. This matrix can be used to compute the cross product of the original vector with any other vector in \(\mathbb{R}^3\).
+
+Given a matrix \(A \in \mathbb{R}(3)\), we can find its elements as
+\[
+    A_{ij} = \mathbf{e}_i \cdot A \mathbf{e}_j,
+\]
+valid for any matrix \(A\) and the canonical basis vectors \(\mathbf{e}_i\). Therefore, we can express the star operator in terms of the direct product as
+\[
+    \begin{aligned}
+        (\star \mathbf{x})_{ij} = \mathbf{e}_i \cdot (\star \mathbf{x}) \mathbf{e}_j = - \mathbf{e}_i \cdot (\mathbf{x} \times \mathbf{e}_j) \\
+        = + \mathbf{x} \cdot (\mathbf{e}_i \times \mathbf{e}_j) \dots
+    \end{aligned}
+\]
+
+We can find its transpose as
+\[
+    (\star \mathbf{x})^T = - \star \mathbf{x},
+\]
+and its determinant and trace as
+\[
+    \det(\star \mathbf{x}) = 0, \quad \Tr(\star \mathbf{x}) = 0,
+\]
+since the star operator has an eigenvalue of 0: this comes from the fact that the cross product of a vector with itself is always zero, which means that the star operator has a non-trivial kernel and therefore must have an eigenvalue of 0. The trace of the star operator is also zero because it is a skew-symmetric matrix (i.e. $(\star \mathbf{x})^T = -\star \mathbf{x}$), and the trace of any skew-symmetric matrix is always zero.
+
+We can also compute the action of the star operator on the action of a matrix \(A\) on a vector \(\mathbf{x}\):
+\[
+    \star (A \mathbf{x}) = \det A A^{-1,T} (\star \mathbf{x}) A^{-1},
+\]
+and this is very interesting: imagine that \(A\) is a rotation matrix
+\[
+    A = R \in \mathrm{SO}(3), \quad \det R = 1, \quad R^{-1} = R^T,
+\]
+then the star operator transforms under the rotation as
+\[
+    \star (R \mathbf{x}) = R (\star \mathbf{x}) R^T,
+\]
+which means that the star operator transforms covariantly under rotations, and this is a very important property in physics, especially in the study of angular momentum and spin.
+
+\begin{proof}
+    Suppose \(A \in \mathbb{R}(3)\) and \(\mathbf{y}, \mathbf{z} \in \mathbb{R}^3\). Then,
+    \[
+        \begin{aligned}
+            (\star (A \mathbf{x}) \mathbf{y}) \cdot \mathbf{z} = - ((A \mathbf{x}) \times \mathbf{y}) \cdot \mathbf{z} \\
+            = - (A \mathbf{x}) \times A A^{-1} \mathbf{y} \cdot A A^{-1} \mathbf{z}                                    \\
+            = - \det A (\mathbf{x} \times A^{-1} \mathbf{y} \cdot A^{-1} \mathbf{z})                                   \\
+            = \det A (A^{-1,T} (\mathbf{x} \times A^{-1} \mathbf{y}) \cdot \mathbf{z})                                 \\
+            = \det A ((A^{-1,T} (\star \mathbf{x}) A^{-1}) \mathbf{y}) \cdot \mathbf{z},
+        \end{aligned}
+    \]
+    but since \(\mathbf{z}\) is arbitrary, we can conclude that
+    \[
+        \star (A \mathbf{x}) \mathbf{y} = (\det A) A^{-1,T} (\star \mathbf{x}) A^{-1}\mathbf{y},
+    \]
+    which means that
+    \[
+        \star (A \mathbf{x}) = \det A A^{-1,T} (\star \mathbf{x}) A^{-1}.
+    \]
+\end{proof}
+
+Ther is another important identity involving the star operator, which is basically the inverse of the first identity: suppose \(A \in \mathbb{R}(3)_{AS}\), which is the space of skew-symmetric matrices, then we have
+\[
+    \begin{aligned}
+        \star \, : \, \mathbb{R}(3)_{AS} \mapsto \mathbb{R}^3, \\
+        A \mapsto \star A = \begin{pmatrix}
+                                A_{32} \\
+                                A_{13} \\
+                                A_{21}
+                            \end{pmatrix},
+    \end{aligned}
+\]
+so that we can find the action of the star operator on a skew-symmetric matrix \(A\) as
+\[
+    A \mathbf{x} = - (\star A) \times \mathbf{x}.
+\]
+Then we can find the elements of the skew-symmetric matrix \(A\) in terms of the components of the vector \(\star A\) as
+\[
+    (\star A)_{i} = \frac{1}{2} \sum_{j, k} \epsilon_{ijk} A_{jk},
+\]
+which means that the star operator is an isomorphism between the space of skew-symmetric matrices and the space of vectors in \(\mathbb{R}^3\). This is a very important result, as it allows us to identify the Lie algebra of the rotation group \(\mathrm{SO}(3)\) with the space of skew-symmetric matrices, and therefore with the space of vectors in \(\mathbb{R}^3\). This isomorphism is also known as the \textbf{Lie algebra isomorphism} between \(\mathfrak{so}(3)\) and \(\mathbb{R}^3\).
+
+\section{The Wedge Product}
+
+Suppose \(\mathbf{x}, \mathbf{y} \in \mathbb{R}^3\) are two vectors, then we can define their wedge product as a bivector in the exterior algebra of \(\mathbb{R}^3\):
+
+\begin{definition}[Wedge Product]
+    The wedge product of two vectors \(\mathbf{x}\) and \(\mathbf{y}\) in \(\mathbb{R}^3\) is defined as a bivector in the exterior algebra of \(\mathbb{R}^3\), denoted by \(\mathbf{x} \wedge \mathbf{y}\). It can be expressed as:
+    \[
+        \mathbf{x} \wedge \mathbf{y} = (x_1 y_2 - x_2 y_1) \mathbf{e}_1 \wedge \mathbf{e}_2 + (x_1 y_3 - x_3 y_1) \mathbf{e}_1 \wedge \mathbf{e}_3 + (x_2 y_3 - x_3 y_2) \mathbf{e}_2 \wedge \mathbf{e}_3,
+    \]
+    where \(\{\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3\}\) is the canonical basis of \(\mathbb{R}^3\). The wedge product is an antisymmetric bilinear operation that takes two vectors and produces a bivector, which can be thought of as an oriented area element in \(\mathbb{R}^3\).
+    \[
+        \begin{aligned}
+            \wedge \, : \, \mathbb{R}^3 \times \mathbb{R}^3 \mapsto \Lambda^2(\mathbb{R}^3), \\
+            (\mathbf{x}, \mathbf{y}) \mapsto \mathbf{x} \wedge \mathbf{y}.
+        \end{aligned}
+    \]
+    We can also express the wedge product in terms of the direct product as
+    \[
+        \mathbf{x} \wedge \mathbf{y} = \mathbf{x} \otimes \mathbf{y} - \mathbf{y} \otimes \mathbf{x},
+    \]
+    and its elements can be expressed as
+    \[
+        (\mathbf{x} \wedge \mathbf{y})_{ij} = x_i y_j - y_i x_j.
+    \]
+    and the matrix representation of the wedge product can be expressed as
+    \[
+        \mathbf{x} \wedge \mathbf{y} = \begin{pmatrix}
+            0                    & x_1 y_2 - x_2 y_1    & x_1 y_3 - x_3 y_1 \\
+            -(x_1 y_2 - x_2 y_1) & 0                    & x_2 y_3 - x_3 y_2 \\
+            -(x_1 y_3 - x_3 y_1) & -(x_2 y_3 - x_3 y_2) & 0
+        \end{pmatrix}.
+    \]
+\end{definition}
+
+It can be expressed in terms of the cross product as
+\[
+    \mathbf{x} \wedge \mathbf{y} = \star (\mathbf{x} \times \mathbf{y}),
+\]
+which means that the wedge product of two vectors can be obtained by applying the star operator to their cross product. This relationship between the wedge product and the cross product is a fundamental result in vector calculus and has important implications in physics, particularly in the study of electromagnetism and fluid dynamics: the cross product can be used to compute the curl of a vector field, while the wedge product can be used to compute the exterior derivative of a differential form. The wedge product is also a key operation in the theory of differential forms and has applications in geometry and topology.
+\begin{proof}
+    Suppose \(\mathbf{z} \in \mathbb{R}^3\) is a vector, and let us start from the action of the star operator on the cross product of two vectors \(\mathbf{x}\) and \(\mathbf{y}\) applied to \(\mathbf{z}\):
+    \[
+        \begin{aligned}
+            \star (\mathbf{x} \times \mathbf{y}) \mathbf{z} & = - (\mathbf{x} \times \mathbf{y}) \times \mathbf{z}
+            = - \mathbf{z} \times (\mathbf{x} \times \mathbf{y})                                                   \\
+                                                            & = \dots
+        \end{aligned}
+    \]
+    where we used the Jacobi identity between the first and second lines,...
+\end{proof}
+
+We can compute the determinant and trace of the wedge product as
+\[
+    \det(\mathbf{x} \wedge \mathbf{y}) = 0, \quad \Tr(\mathbf{x} \wedge \mathbf{y}) = 0,
+\]
+since the wedge product is a skew-symmetric matrix (since also the cross product is skew-symmetric), and any skew-symmetric matrix has an eigenvalue of 0 and a trace of 0. The wedge product can be thought of as an oriented area element in \(\mathbb{R}^3\), and its determinant being zero reflects the fact that it does not have full rank, while its trace being zero reflects the fact that it is a skew-symmetric matrix.
+
+Using the canonical ON basis of \(\mathbb{R}^3\), we can express the wedge product of the basis: there are 9 wedge products of the basis vectors, but only 3 of them are linearly independent, other 3 of them are zero, and the remaining 3 of them are linearly dependent on the first 3:
+\[
+    \begin{aligned}
+        \begin{dcases}
+            \mathbf{e}_i \wedge \mathbf{e}_i = 0, \\
+            \mathbf{e}_i \wedge \mathbf{e}_j = - \mathbf{e}_j \wedge \mathbf{e}_i.
+        \end{dcases}
+    \end{aligned}
+\]
+
+Considering a matrix \(A \in \mathbb{R}(3)_{AS}\) such that \(A^T = -A\), we know that \(A\) can be expressed as a linear combination of the wedge products of the basis vectors:
+\[
+    A = \frac{1}{2} \sum_{i, j} A_{ij} \mathbf{e}_i \wedge \mathbf{e}_j,
+\]
+which means that the space of skew-symmetric matrices can be identified with the space of bivectors in the exterior algebra of \(\mathbb{R}^3\). This is a very important result, as it allows us to identify the Lie algebra of the rotation group \(\mathrm{SO}(3)\) with the space of skew-symmetric matrices, and therefore with the space of bivectors in the exterior algebra of \(\mathbb{R}^3\). This isomorphism is also known as the \textbf{Lie algebra isomorphism} between \(\mathfrak{so}(3)\) and \(\Lambda^2(\mathbb{R}^3)\).
+
+\begin{proof}
+    We can write
+    \[
+        \begin{aligned}
+            A = \sum_{ij} A_{ij} \mathbf{e}_i \otimes \mathbf{e}_j = \frac{1}{2} \sum_{ij} (A_{ij} \mathbf{e}_i \otimes \mathbf{e}_j + A_{ij} \mathbf{e}_j \otimes \mathbf{e}_i) \\
+            = \frac{1}{2} \sum_{ij} A_{ij} (\mathbf{e}_i \otimes \mathbf{e}_j - \mathbf{e}_j \otimes \mathbf{e}_i)                                                               \\
+            = \frac{1}{2} \sum_{ij} A_{ij} \mathbf{e}_i \wedge \mathbf{e}_j,
+        \end{aligned}
+    \]
+    where we used the fact that \(A\) is skew-symmetric, so that \(A_{ij} = - A_{ji}\), and therefore we can symmetrize the sum over \(i\) and \(j\) to get the wedge product of the basis vectors.
+\end{proof}
+
+\section{Diagonalization Theorems}
+
+When considering a rotation matrix \(R \in \mathrm{SO}(3)\), you have to imagine that it is a complex matrix which happens to have real entries:
+\[
+    R \in \mathrm{SO}(3) \subset \mathbb{C}(3).
+\]
+Indeed its eigenvalues and vectors in general are complex. The Pauli matrices formalism is a way to represent these complex eigenvalues and eigenvectors in a more intuitive way, by using the Pauli matrices as a basis for the space of complex matrices.
+
+Thus we consider the complex extension of \(\mathbb{R}(3) \subset \mathbb{C}(3)\) of real \(3 \times 3\) matrices living in the complex space.
+
+in the real case
+\[
+    \mathbf{x} \cdot \mathbf{y} \in \mathbb{R}^3, \to  \begin{dcases}
+        \mathbf{x} \cdot \mathbf{x} \geq 0, \\
+        \mathbf{x} \cdot \mathbf{x} = 0 \iff \mathbf{x} = 0.
+    \end{dcases}
+\]
+For the complex case, we have to define a new inner product which is positive definite:
+\[
+    \mathbf{x} \cdot \mathbf{y} \in \mathbb{C}^3, \to  \begin{dcases}
+        \mathbf{x} \cdot \mathbf{x} \geq 0, \\
+        \mathbf{x} \cdot \mathbf{x} = 0 \text{ even if } \mathbf{x} \neq 0.
+    \end{dcases}
+\]
+This is the case for the standard inner product in \(\mathbb{C}^3\), thus we can define the hermitian inner product as
+\[
+    \mathbf{x}^* \cdot \mathbf{y} = \sum_{i=1}^3 x_i^* y_i, \to \begin{dcases}
+        \mathbf{x}^* \cdot \mathbf{x} \geq 0, \\
+        \mathbf{x}^* \cdot \mathbf{x} = 0 \iff \mathbf{x} = 0.
+    \end{dcases}
+\]
+
+The orthonormal basis \(\mathbf{v}_i\) of \(\mathbb{C}^3\) is defined as
+\[
+    \mathbf{v}_i^* \cdot \mathbf{v}_j = \delta_{ij}.
+\]
+Consideing this basis, we can represent any vector \(\mathbf{x} \in \mathbb{C}^3\) as
+\[
+    \mathbf{x} = \sum_{i} (v_i^* \cdot \mathbf{x}) \mathbf{v}_i = \sum_{i} x_i \mathbf{v}_i.
+\]
+\begin{proof}
+    We can write
+    \[
+        \begin{aligned}
+            \mathbf{x} & = \sum_{i} (v_i^* \cdot \mathbf{x}) \mathbf{v}_i, \\
+            \mathbf{x} & = \sum_{i} c_{ij} \mathbf{v}_j,
+        \end{aligned}
+    \]
+    and
+    \[
+        \mathbf{v}_i^* \cdot \mathbf{x} = \sum_{j} c_{ij} \mathbf{v}_i^* \cdot \mathbf{v}_j = c_{ii} = x_i,
+    \]
+    thus
+    \[
+        \mathbf{x} = \sum_{i} (v_i^* \cdot \mathbf{x}) \mathbf{v}_i,
+    \]
+    proving the equality.
+
+\end{proof}
+
+\[
+    \mathbf{x} = \sum_{i} (\mathbf{v}_i \otimes \mathbf{v}_i^*) \mathbf{x},
+\]
+using the fact that \(\mathbf{v}_i^* \cdot \mathbf{v}_j = \delta_{ij}\), ...
+
+
+
+
+Consider \(A \in \mathbb{C}(3)\) and suppose that \(A\) is diagonalizable, then there exists an orthonormal basis of eigenvectors \(\{\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3\}\) of \(\mathbb{C}^3\) such that
+\[
+    A \mathbf{v}_i = \lambda_i \mathbf{v}_i, \quad i = 1, 2, 3, \quad \lambda_i \in \mathbb{C}.
+\]
+This means that we can express the matrix \(A\) in terms of its eigenvalues and eigenvectors as
+\[
+    A = \sum_{i} \lambda_i \mathbf{v}_i \otimes \mathbf{v}_i^*,
+\]
+which is the \textbf{spectral decomposition} of the matrix \(A\).
+
+\begin{theorem}[Spectral theorem]
+    Let \(A\) be a diagonalizable matrix in \(\mathbb{C}(3)\). Then there exists an orthonormal basis of eigenvectors \(\{\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3\}\) of \(\mathbb{C}^3\) such that
+    \[
+        A = \sum_{i} \lambda_i \mathbf{v}_i \otimes \mathbf{v}_i^*,
+    \]
+    where \(\lambda_i\) are the eigenvalues of \(A\) corresponding to the eigenvectors \(\mathbf{v}_i\). Then the matrix can be diagonalized as
+    \[
+        A = V \Lambda V^{-1}, \quad A = \sum_{i} \lambda_i \mathbf{v}_i \otimes \mathbf{v}_i^*,
+    \]
+    where \(V\) is the matrix whose columns are the eigenvectors \(\mathbf{v}_i\) and \(\Lambda\) is the diagonal matrix whose diagonal entries are the eigenvalues \(\lambda_i\).
+\end{theorem}
+
+This decomposition allows us to understand the structure of the matrix \(A\) in terms of its eigenvalues and eigenvectors, and it is a fundamental result in linear algebra with applications in various fields such as physics, engineering, and machine learning. The spectral decomposition is particularly useful when dealing with normal matrices, which are matrices that commute with their conjugate transpose, as they can be diagonalized by a unitary transformation.
+
+\begin{proof}
+    Since \(A\) is diagonalizable, we can write \(A\) as
+    \[
+        \begin{aligned}
+            A & = A \mathbb{I}_3 = A \sum_{i} \mathbf{v}_i \otimes \mathbf{v}_i^* = \sum_{i} A \mathbf{v}_i \otimes \mathbf{v}_i^* \\
+              & = \sum_{i} \lambda_i \mathbf{v}_i \otimes \mathbf{v}_i^*= A.
+        \end{aligned}
+    \]
+\end{proof}

@@ -1,0 +1,92 @@
+\chapter{Pauli Matrices Formalism}
+
+In this chapter, we will explore the Pauli matrices and their applications in quantum mechanics from a group theory perspective. The Pauli matrices are a set of three 2x2 complex Hermitian and unitary matrices that are widely used in the study of spin-1/2 particles and quantum information theory.
+
+Our discussion will be centered around the following groups and their representations:
+\begin{itemize}
+    \item \(\mathrm{SU}(2)\): The special unitary group of degree 2, which is the double cover of the rotation group \(\mathrm{SO}(3)\). The Pauli matrices serve as generators for the Lie algebra \(\mathfrak{su}(2)\) associated with this group.
+    \item \(\mathrm{SO}(3)\): The special orthogonal group in three dimensions, which describes the symmetries of physical space. The representations of \(\mathrm{SO}(3)\) can be constructed using the Pauli matrices.
+    \item \(\mathrm{SL}(2, \mathbb{C})\): The special linear group of degree 2 over the complex numbers, which is related to the Lorentz group in relativistic quantum mechanics. The Pauli matrices play a crucial role in the representation theory of this group as well.
+    \item \(SO_+(1,3)\): The proper orthochronous Lorentz group, which describes the symmetries of spacetime in special relativity. The Pauli matrices are used to construct the spinor representations of this group.
+\end{itemize}
+
+\section{Pauli Matrix Functions}
+
+In this section, we will define the Pauli matrices and explore their properties. The Pauli matrix function is defined as follows:
+
+\begin{definition}[Pauli Matrix Function]
+    A Pauli matrix function is an element of \(\sigma \in \mathrm{Hom}(\mathbb{C}^3, \mathbb{C}(2))\), i.e. a linear map
+    \[
+        \sigma \, : \, \mathbb{C}^3 \to \mathbb{C}(2),
+    \]
+    satisfying the following properties: for all \(\mathbf{x}, \mathbf{y} \in \mathbb{C}^3\), we have
+    \begin{itemize}
+        \item \(\sigma(\mathbf{x})^{\dagger} = \sigma(\mathbf{x}^*)\), where \(\dagger\) denotes the Hermitian conjugate and \(*\) denotes complex conjugation.
+        \item \(\sigma(\mathbf{x}) \sigma(\mathbf{y}) = \mathbf{x} \cdot \mathbf{y} \mathbb{I}_3 + i \sigma (\mathbf{x} \times \mathbf{y})\), where \(\cdot\) denotes the dot product and \(\times\) denotes the cross product in \(\mathbb{C}^3\).
+    \end{itemize}
+\end{definition}
+
+\subsection{(Anti)commutation Relations}
+
+The Pauli matrices satisfy specific commutation and anticommutation relations that are fundamental to their algebraic structure. These relations can be expressed as follows:
+\begin{itemize}
+    \item Commutation relations: For any two Pauli matrices \(\sigma_i\) and \(\sigma_j\), we have
+          \[
+              [\sigma_i, \sigma_j] = 2i \epsilon_{ijk} \sigma_k,
+          \]
+          where \(\epsilon_{ijk}\) is the Levi-Civita symbol.
+
+    \item Anticommutation relations: For any two Pauli matrices \(\sigma_i\) and \(\sigma_j\), we have
+          \[
+              \{\sigma_i, \sigma_j\} = 2\delta_{ij} \mathbb{I}_2,
+          \]
+          where \(\delta_{ij}\) is the Kronecker delta and \(\mathbb{I}_2\) is the 2x2 identity matrix.
+\end{itemize}\TODO{check and correct}
+
+These define the \textbf{Clifford algebra} associated with the Pauli matrices, which is essential for understanding their role in quantum mechanics and representation theory: the Pauli matrices generate the Clifford algebra, which is isomorphic to the algebra of 2x2 complex matrices. This algebraic structure allows us to construct representations of the groups mentioned above and to analyze the symmetries of quantum systems.
+
+We have trace and determinant properties of the Pauli matrices as well, which are important for their applications in quantum mechanics: starting from the trace properties, we can derive the following identities for any \(\mathbf{x}, \mathbf{y}, \mathbf{z} \in \mathbb{C}^3\):
+\[
+    \begin{aligned}
+        \Tr (\sigma(\mathbf{x})) = 0,                                              \\
+        \Tr(\sigma(\mathbf{x})\sigma(\mathbf{y})) = 2 \mathbf{x} \cdot \mathbf{y}, \\
+        \Tr(\sigma(\mathbf{x})\sigma(\mathbf{y})\sigma(\mathbf{z})) = 2i \mathbf{x} \times \mathbf{y} \cdot \mathbf{z},
+    \end{aligned}
+\]
+\begin{proof}
+    we have that, from the definition of the Pauli matrix function, we can write \(\sigma(\mathbf{x}) = x_i \sigma_i\), where \(\sigma_i\) are the standard Pauli matrices. Then, we can compute the trace properties as follows:...
+
+    [only the firt two were proven]
+\end{proof}
+
+For the determinant properties, we can derive the following identities for any \(\mathbf{x} \in \mathbb{C}^3\):
+\[
+    \det(\sigma(\mathbf{x})) = -\mathbf{x} \cdot \mathbf{x},
+\]
+
+\begin{proof}
+    Start from \(\mathbf{x} \in \mathbb{R}^3\) we can write, if \(\mathbf{x} = \mathbf{y}\)
+    \[
+        \sigma(\mathbf{x})^2 = \mathbf{x} \cdot \mathbf{x} \mathbb{I}_2,
+    \]
+    and by computing the determinant of both sides, we get
+    \[
+        (\det(\sigma(\mathbf{x})))^2 = (\det(\mathbf{x} \cdot \mathbf{x} \mathbb{I}_2))^2 = (\mathbf{x}^2)^2,
+    \]
+    which implies
+    \[
+        \det(\sigma(\mathbf{x})) = \eta(\mathbf{x}) \mathbf{x} \cdot \mathbf{x}, \quad \eta(\mathbf{x}) = \pm 1.
+    \]
+    Indeed
+    \[
+        \eta(\mathbf{x}) = \frac{\det(\sigma(\mathbf{x}))}{\mathbf{x} \cdot \mathbf{x}},
+    \]
+    is a continuous function of \(\mathbf{x}\) that takes values in
+    \[
+        \mathbb{R}^3 \setminus \{0\} \to \mathbb{C},
+    \]
+    and since \(\mathbb{R}^3 \setminus \{0\}\) is connected, we have that \(\eta(\mathbf{x})\) is constant,
+    \[
+        \det(\sigma(\mathbf{x})) \det(\sigma(\mathbf{y})) = \dots
+    \]
+\end{proof}
