@@ -273,35 +273,34 @@ Let us start to put all the pieces together with an example. We will first deriv
     \]
     where \(\lambda\) is the coupling constant that controls the strength of the interaction. We want to calculate the 2-point function in this theory, which is given by
     \[
-        \bra{\Omega} \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \} \ket{\Omega},
+        \bra{\Omega} \hat{T} \{ \hat{\phi} (x_1) \hat{\phi} (x_2) \} \ket{\Omega},
     \]
-    where \(\ket{\Omega}\) is the vacuum state of the interacting theory. Using the formula we derived before for the Green's function in the interaction picture, we can write this as
+    where \(\ket{\Omega}\) is the vacuum state of the interacting theory and \(\hat{\phi}\) are the field operators. Using the formula we derived before for the Green's function in the interaction picture, we can write this as
     \[
-        \frac{\bra{0} \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \} \exp[ i \int \mathrm{d}^4 z \, \mathcal{L}_{\text{int}} ] \ket{0}}{\bra{0} \hat{T} \{ \exp[ i \int \mathrm{d}^4 z \, \mathcal{L}_{\text{int}} ] \} \ket{0}},
+        \frac{\bra{0} \hat{T} \{ \hat{\phi}_0 (x_1) \hat{\phi}_0 (x_2) \} \exp[ i \int \mathrm{d}^4 x \, \mathcal{L}_{\text{int}} ] \ket{0}}{\bra{0} \hat{T} \{ \exp[ i \int \mathrm{d}^4 x \, \mathcal{L}_{\text{int}} ] \} \ket{0}},
     \]
-    which we can expand in perturbation theory. Let us start from the numerator, which we can write as
+    with the free field operators \(\hat{\phi}_0\); now the idea is to expand the exponential in a power series. Let us start from the numerator, which we can write as
     \[
         \begin{aligned}
-            \bra{0} \hat{T} \{ \hat{\phi}_0 (x) \hat{\phi}_0 (y) \} \ket{0} + (-i \frac{\lambda}{3!}) \bra{0} \hat{T} \{ \hat{\phi}_0 (x) \hat{\phi}_0 (y) \} \int \mathrm{d}^4 z \, \mathcal{L}_{\text{int}} (z) \ket{0} + \\
-            + (-i \frac{\lambda}{3!})^2 \bra{0} \hat{T} \{ \hat{\phi}_0 (x) \hat{\phi}_0 (y) \} \int \mathrm{d}^4 z_1 \, \mathcal{L}_{\text{int}} (z_1) \int \mathrm{d}^4 z_2 \, \mathcal{L}_{\text{int}} (z_2) \ket{0} + \dots
+            \bra{0} \hat{T} \{ \hat{\phi}_0 (x_1) \hat{\phi}_0 (x_2) \} \ket{0} + (-i \frac{\lambda}{3!}) \bra{0} \hat{T} \{ \hat{\phi}_0 (x_1) \hat{\phi}_0 (x_2) \} \int \mathrm{d}^4 x \, \hat{\phi}_0(x) \ket{0} + \\
+            + (-i \frac{\lambda}{3!})^2 \bra{0} \hat{T} \{ \hat{\phi}_0 (x_1) \hat{\phi}_0 (x_2) \} \int \mathrm{d}^4 x \, \hat{\phi}_0(x) \int \mathrm{d}^4 y \, \hat{\phi}_0(y) \ket{0} + \dots
         \end{aligned}
     \]
     where we have expanded the exponential of the interaction Lagrangian in a power series, and we have also used the fact that the fields in the interaction picture are the same as the free fields, which we have denoted with a subscript \(0\).
-
     With \(\lambda=0\) we get the free theory back, with the usual Feynman propagator as we expected.
 
-    But with \(\lambda \neq 0\) we get corrections to the free theory, which can be represented as Feynman diagrams. The first term in the expansion corresponds to the free theory, which is just a single line connecting the two points \(x\) and \(y\), representing the propagation of a particle from \(x\) to \(y\). The second term corresponds to a correction to the free theory, which can be represented as a diagram with a loop, where the particle propagates from \(x\) to \(z\), interacts at \(z\) with another particle, and then propagates from \(z\) to \(y\). The third term corresponds to a correction with two loops, where the particle propagates from \(x\) to \(z_1\), interacts at \(z_1\) with another particle, then propagates from \(z_1\) to \(z_2\), interacts at \(z_2\) with another particle, and then propagates from \(z_2\) to \(y\). And so on for higher-order corrections.
+    The first term in the expansion thus corresponds to the free theory, which is just a single line connecting the two external points \(x_1\) and \(x_2\), representing the propagation of a particle from \(x_1\) to \(x_2\). The second term corresponds to a correction to the free theory, which can be represented as a diagram with a loop, where the particle propagates from \(x_1\) to \(x\), interacts at \(x\) with another particle, and then propagates from \(x\) to \(x_2\). The third term corresponds to a correction with two loops, where the particle propagates from \(x_1\) to \(x\), interacts at \(x\) with another particle, then propagates from \(x\) to \(y\), interacts at \(y\) with another particle, and then propagates from \(y\) to \(x_2\). And so on for higher-order corrections.
 
     If \(\lambda\) remains small, we can truncate the expansion at a certain order and get an approximation for the 2-point function. This is the basis for perturbation theory in QFT, where we can calculate physical quantities as a power series in the coupling constant, and each term in the series corresponds to a Feynman diagram that represents a particular process or interaction.
 
-    ... O(lambda) vanishes...
+    Let us highlight the fact that, for the Wick's theorem, the correction of the order \(O(\lambda)\) vanishes, since it contains an odd number of fields, and thus there are no possible contractions, and thus its vacuum expectation value is zero. The first non-vanishing correction to the free theory is thus the second order correction, which is of order \(O(\lambda^2)\), and it corresponds to a diagram with a loop, as we have seen before.
 
-    Let us use a simpler \textbf{shortcut notation} for the following computations:
+    Let us introduce a simpler \textbf{shortcut notation} for the following computations, since we will have to deal with a large number of fields and propagators, and it will be easier to keep track of them in this way. We will denote the Feynman propagator between two external points \(x_i\) and \(x_j\) as \(D_{ij}\), the Feynman propagator between an external point \(x_i\) and an internal point \(x\) as \(D_{ix}\), and the free field operator at a point \(x_i\) as \(\phi_i\). Thus we have
     \[
         \begin{dcases}
             D_{ij} = D_F (x_i, x_j), \\
             D_{xi} = D_F (x, x_i),   \\
-            \phi_i = \phi (x_i),
+            \phi_i = \phi_0 (x_i),
         \end{dcases}
     \]
     so that we can write the second order correction to the free theory as
@@ -310,28 +309,49 @@ Let us start to put all the pieces together with an example. We will first deriv
     \]
     where now we can use Wick's theorem to calculate the vacuum expectation value of this time-ordered product, which will give us a sum of all possible contractions between the fields:
     \[
-        (-\frac{i \lambda}{3!})^2 \frac{1}{2!} \int \mathrm{d}^4 z_1 \, \mathrm{d}^4 z_2 \, D_{x z_1} D_{y z_1} D_{z_1 z_2}^2 + \dots
+        (-\frac{i \lambda}{3!})^2 \frac{1}{2!} \int \mathrm{d}^4 x \, \mathrm{d}^4 y \, ( D_{1 x} D_{2 y} D_{x y}^2 + \dots),
     \]
-    But maybe there is a way in which we can list all the possible contractions without having to write them all down, since as we can see, the number of contractions grows very quickly as we increase the order of the correction, and they may also be equivalent. This is where Feynman diagrams come in handy, as they provide a visual representation of the interactions and allow us to easily keep track of the different terms in the expansion.
+    where we have to note that the number of contractions grows very quickly and different contractions may give us the same contribution, since they may be equivalent under permutations of the fields.
+
+    But maybe there is a way in which we can \textbf{list all the possible contractions} without having to write them all down, since as we can see, the number of contractions grows very quickly as we increase the order of the correction, and they may also be equivalent. This is where Feynman diagrams come in handy, as they provide a visual representation of the interactions and allow us to easily keep track of the different terms in the expansion.
+
+    Now we can start to derive the Feynman rules for this theory, which will allow us to write down the contribution of each diagram without having to calculate all the contractions explicitly. The Feynman graphical representation can be derived from this example, where we have the following elements:
+
+    \begin{figure}[H]
+        \begin{minipage}{0.45\textwidth}
+            \centering
+            \begin{tikzpicture}[
+                    thick,
+                    dot/.style={circle, fill=black, inner sep=1.5pt}
+                ]
+                \draw (3,0) circle (1cm);
+
+                \node[dot, label=below:$x_1$] (x1) at (0,0) {};
+                \node[dot, label=below left:$x$]  (x)  at (2,0) {};
+                \node[dot, label=below right:$y$] (y)  at (4,0) {};
+                \node[dot, label=below:$x_2$] (x2) at (6,0) {};
+
+                \draw (x1) -- (x);
+                \draw (y)  -- (x2);
+
+            \end{tikzpicture}
+            \caption{Feynman diagram for the second order correction to the 2-point function in a \(\phi^3\) theory: each internal point corresponds to an interaction vertex, connected to three lines, each corresponding to a propagator.}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.5\textwidth}
+            \begin{itemize}
+                \item \(x_1, \, x_2\) external points, represented as dots.
+                \item \(x, \, y\) internal points, represented as vertices.
+                \item \(D_{x 1}\) and \(D_{y 2}\) propagators, represented as lines connecting the external points to the internal points.
+                \item \(D_{x y}^2\) propagators, represented as two lines connecting the internal points \(x\) and \(y\).
+            \end{itemize}
+        \end{minipage}
+    \end{figure}
 \end{example}
-
-Now we can start to derive the Feynman rules for this theory, which will allow us to write down the contribution of each diagram without having to calculate all the contractions explicitly.
-
-The Feynman graphical representation
-\begin{itemize}
-    \item \(x, \, y\) external points, represented as dots.
-    \item \(z_1, \, z_2\) internal points, represented as vertices.
-    \item \(D_{x z_1}\) and \(D_{y z_1}\) propagators, represented as lines connecting the external points to the internal points.
-    \item \(D_{z_1 z_2}^2\) propagators, represented as two lines connecting the internal points \(z_1\) and \(z_2\).
-\end{itemize}
-For the previous example, we have the following Feynman diagram:
-\[
-    \feynLoop \dots
-\]
 
 More generally, we can write the \textbf{Feynman rules} for an n-point function as
 \begin{itemize}
-    \item N external points, each connected to at least a propagator.
+    \item N external points \(x_1, x_2, \ldots, x_n\), each connected to at least a propagator.
     \item Any number of vertexes, each corresponding to an interaction term in the Lagrangian, and thus
           \[
               i \int \mathrm{d}^4 z \, \mathcal{L}_{\text{int}} (z),
@@ -352,37 +372,88 @@ The procedure of calculating a physical quantity using Feynman diagrams can be s
     \item For each propagator, write down the corresponding Feynman propagator \(D_F (x,y)\).
 \end{enumerate}
 
-We have to understand how to put the correct factors \(\alpha\) in front of the integrals. Let us start from the interaction Lagrangian, which is given by
+\subsubsection{Diagram Prefactors}
+
+We have to understand how to put the correct prefactors \(\alpha\) in front of the integrals. Let us start from the interaction Lagrangian, which is given by
 \[
     \mathcal{L}_{\text{int}} = \frac{\lambda^N}{N!} \phi^N,
 \]
-then a diagram with \(M\) vertexes of order \(O(\lambda^M)\) and any number of external points will have
+then a diagram with \(M\) vertexes (obtained considering corrections up to order \(O(\lambda^M)\)) and any number of external points will have
 \begin{itemize}
     \item \(M!\) ways of permuting the vertexes, since they are indistinguishable.
-    \item \(N!\) ways of permuting the fields in each vertex, since they are also indistinguishable, and thus we have \((N!)^M\) ways of permuting the fields in all the vertexes (\(N!\) for each vertex).
+    \item \(N!\) ways of permuting the fields in each vertex, since they are also indistinguishable, thus a total of \((N!)^M\) ways of permuting the fields in all the vertexes.
 \end{itemize}
+Putting all these factors together, we get a factor of \((N!)^M \times M!\) only from the counting of the permutations of the vertexes and fields, and thus we need to divide by this factor to avoid overcounting, since we are summing over all the possible contractions, which already takes into account all the possible permutations of the vertexes and fields.
+
 An example of naive counting of the factors for a diagram with \(M\) vertexes and \(N\) fields in each vertex would give us a factor of
 \[
     (N!)^M \times M! \times (\frac{\lambda}{N!})^M \times \frac{1}{M!},
 \]
-where the first factor comes from the permutations of the fields in each vertex, the second factor comes from the permutations of the vertexes, the third factor comes from the interaction Lagrangian, and the last factor comes from the expansion of the exponential of the interaction Lagrangian.
+where the first factor comes from the permutations of fields in each vertex, the second factor comes from the permutations of the vertexes, the third factor comes from the interaction Lagrangian, and the last factor comes from the expansion of the exponential of the interaction Lagrangian. Is it possible that all these factors cancel out and we are left with a factor of \(\lambda^M\) for a diagram with \(M\) vertexes?
 
-However, this counting is not correct, since we have to take into account that some diagrams may be equivalent under permutations of the vertexes and fields, and thus we need to divide by the number of symmetries of the diagram, which is given by the number of permutations of the vertexes and fields that leave the diagram unchanged. This is known as the \textbf{symmetry factor} of the diagram, and it can be calculated by counting the number of ways to permute the vertexes and fields without changing the diagram.
-
-    [... example on previous diagram ...]
+No, this counting is not correct, since we have to take into account that some diagrams may be equivalent under permutations of the vertexes and fields, and thus we need to divide by the number of symmetries of the diagram: \textit{the number of permutations of the vertexes and fields that leave the diagram unchanged}. This is known as the \textbf{symmetry factor} of the diagram, and it can be calculated by counting the number of ways to permute the vertexes and fields without changing the diagram.
 
 Thus the correct factor for a diagram with \(M\) vertexes and \(N\) fields in each vertex is given by the inverse of the symmetry factor of the diagram, which can be calculated by counting the number of ways to permute the vertexes and fields without changing the diagram:
 \begin{definition}[Symmetry factor]
-    The symmetry factor of a Feynman diagram is the number of independent transformations (permutations of the vertexes and fields in the diagram) which map the diagram onto itself (with external points fixed), and it is denoted by \(S\). The contribution of a diagram to a physical quantity is given by the inverse of the symmetry factor, which is \(1/S\). The identity has to be counted as a symmetry, while swapping external points is not a symmetry, since they are fixed. One can sum the symmetries of the drawing by hand, or one can multiply the symmetry prefactors of the subdiagrams (\(D_{xy}\), \(D_{xx}^2\)...).
+    The symmetry factor of a Feynman diagram is the \textbf{number of independent transformations} (permutations of the vertexes and fields in the diagram) \textbf{mapping the diagram onto itself} (with external points fixed), and it is denoted by \(S\). The contribution of a diagram to a physical quantity is given by the inverse of the symmetry factor, which is \(1/S\). The \uline{identity has to be counted} as a symmetry, while \uline{swapping external points is not a symmetry}, since they are fixed. One can sum the symmetries of the drawing by hand, or one can multiply the symmetry prefactors of the subdiagrams (\(D_{xy}\), \(D_{xx}^2\)...).
 \end{definition}
 
-For the previous diagram, we get a symmetry factor of \(S=2\), from the permutation of the two vertexes and the two internal lines, thus the contribution of this diagram to the 2-point function is given by
-\[
-    \frac{1}{2} \times (-i \frac{\lambda}{3!})^2 \int \mathrm{d}^4 z_1 \, \mathrm{d}^4 z_2 \, D_{x z_1} D_{y z_1} D_{z_1 z_2}^2,
-\]
-where the factor of \(1/2\) comes from the symmetry factor of the diagram, and the rest of the factors come from the interaction Lagrangian and the Feynman propagators.
+\begin{example}[Back to the cubic interaction]
+    Let us go back to the second order correction to the 2-point function in the \(\phi^3\) theory, which corresponds to the following diagram:
+    \begin{figure}[H]
+        \begin{minipage}{0.45\textwidth}
+            \centering
+            \begin{tikzpicture}[
+                    thick,
+                    dot/.style={circle, fill=black, inner sep=1.5pt}
+                ]
+                \draw (3,0) circle (1cm);
 
-It can evem happen to have an internal subdiagram that is disconnected from the external points, which is called a \textit{vacuum bubble}, and it is possible to show that the contribution of a vacuum bubble cancels out with the denominator of the Green's function. For example, if we compute the next order corrections to the 2-point function, we get
+                \node[dot, label=below:$x_1$] (x1) at (0,0) {};
+                \node[dot, label=below left:$x$]  (x)  at (2,0) {};
+                \node[dot, label=below right:$y$] (y)  at (4,0) {};
+                \node[dot, label=below:$x_2$] (x2) at (6,0) {};
+
+                \draw (x1) -- (x);
+                \draw (y)  -- (x2);
+
+            \end{tikzpicture}
+            \caption{Feynman diagram for the second order correction to the 2-point function in a \(\phi^3\) theory: each internal point corresponds to an interaction vertex, connected to three lines, each corresponding to a propagator.}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.5\textwidth}
+            This diagram has two vertexes, each connected to three lines, and thus it corresponds to a correction of order \(O(\lambda^2)\). It can be obtained from 18 different contractions:
+            \begin{itemize}
+                \item 3 choices of \(\phi_x\) in \(\bcontraction[0.5ex]{}{\phi}{_1}{\phi} \phi_1 \phi_x\);
+                \item 3 choices of \(\phi_y\) in \(\bcontraction[0.5ex]{}{\phi}{_2}{\phi} \phi_2 \phi_y\);
+                \item 2 choices of the remaining \(\phi_y\) to be contracted with the first remaining \(\phi_x\).
+            \end{itemize}
+        \end{minipage}
+    \end{figure}
+    These 18 contractions have to be multiplied by 2 for the swap of the two vertexes \(x \leftrightarrow y\). Thus we get a total of 36 contractions which has to be divided by \((3!)^2 \times 2! = 72\), which is the number of permutations of the fields in the vertexes and the number of permutations of the vertexes, thus we get a symmetry factor of \(S=2\) for this diagram, and thus its contribution to the 2-point function is given by
+    \[
+        \frac{1}{2} \times (-i \frac{\lambda}{3!})^2 \int \mathrm{d}^4 z_1 \, \mathrm{d}^4 z_2 \, D_{x z_1} D_{y z_1} D_{z_1 z_2}^2,
+    \]
+    where the factor of \(1/2\) comes from the symmetry factor of the diagram, and the rest of the factors come from the interaction Lagrangian and the Feynman propagators.
+
+    In order to understand the symmetry factor of this diagram, we can also look at it from a different perspective; if we rewrite the contraction, we can see that permuting the propagators between the internal points \(x\) and \(y\) does not change the diagram, since they are indistinguishable:
+    \[
+        \bcontraction[0.5ex]{}{\phi_1}{\phi_2}{\phi_x}
+        \bcontraction[1ex]{\phi_1}{\phi_2}{\phi_x\phi_x\phi_x}{\phi_y}
+        \contraction[0.5ex]{\phi_1\phi_2\phi_x}{\phi_x}{\phi_x\phi_y}{\phi_y}
+        \contraction[1ex]{\phi_1\phi_2\phi_x\phi_x}{\phi_x}{\phi_y\phi_y}{\phi_y}
+        \phi_1 \phi_2 \phi_x \phi_x \phi_x \phi_y \phi_y \phi_y
+        \quad = \quad
+        \bcontraction[0.5ex]{}{\phi_1}{\phi_2}{\phi_x}
+        \bcontraction[1ex]{\phi_1}{\phi_2}{\phi_x\phi_x\phi_x}{\phi_y}
+        \contraction[1ex]{\phi_1\phi_2\phi_x}{\phi_x}{\phi_x\phi_y\phi_y}{\phi_y}
+        \contraction[0.5ex]{\phi_1\phi_2\phi_x\phi_x}{\phi_x}{\phi_y}{\phi_y}
+        \phi_1 \phi_2 \phi_x \phi_x \phi_x \phi_y \phi_y \phi_y,
+    \]
+    and if we compare it to the graphical representation of the diagram, we can see that this contraction symmetry corresponds to the symmetry of the diagram under the \textbf{vertical flip symmetry}, which is a symmetry of the diagram that leaves the external points fixed and swaps the internal points \(x\) and \(y\). This symmetry is the only non-trivial symmetry of the diagram and thus we have a total of 2 symmetries (do not forget the identity), which gives us a symmetry factor of \(S=2\), and thus a contribution of \(1/2\) for this diagram.
+\end{example}
+
+It can even happen to have an internal subdiagram that is disconnected from the external points, which is called a \textit{vacuum bubble}, and it is possible to show that the contribution of a vacuum bubble cancels out with the denominator of the Green's function. For example, if we compute the next order corrections to the 2-point function, we get
     [... diagrams ...]
 where the fifth and sixth diagrams have vacuum bubble. The complete expression associated to these diagrams is given by
 \[
@@ -407,28 +478,36 @@ Thus in the end, the contribution of the vacuum diagrams cancels out, and we are
 
 \subsubsection{Summary of Feynman Rules in Position Space}
 
+Let us group and summarize all the Feynman rules we have derived so far for a scalar field theory in position space:
+
 \begin{itemize}\TODO{Add more details.}
-    \item external point
-    \item vertex: \(i \int \mathrm{d}^4 z \, \mathcal{L}_{\text{int}} (z)\)
-    \item propagator: \(D_F (x,y)\)
-    \item symmetry factor: \(1/S\)
-    \item \(\bra{\Omega} \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \cdots \hat{\phi} (z) \} \ket{\Omega} = \sum \text{connected diagrams}\)
+    \item External point: \(x_i\), represented as a dot, and connected only to one propagator.
+    \item Vertex: \(i \int \mathrm{d}^4 z \, \mathcal{L}_{\text{int}} (z)\), represented as a dot and connected to a number of lines equal to the number of fields in the interaction term.
+    \item Propagator: \(D_F (x,y)\), represented as a line connecting two points, and corresponding to the Feynman free propagator between those two points.
+    \item Symmetry factor: \(1/S\), where \(S\) is the number of symmetries of the diagram, which can be calculated by counting the number of ways to permute the vertexes and fields without changing the diagram.
+    \item \(\bra{\Omega} \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \cdots \hat{\phi} (z) \} \ket{\Omega} = \sum \text{connected diagrams}\), since the contribution of the vacuum diagrams cancels out with the denominator of the Green's function, and thus we can focus only on the connected diagrams, which are the ones that contribute to the physical quantity we are calculating.
 \end{itemize}
 
 \subsection{Momentum Space}
 
-Let us study the same \(\phi^3\) theory \(\mathcal{L}_{int} = \frac{\lambda}{3!} \) for a \(2\to 2\) scattering process. We work up to the \textbf{leading order} (LO) correction, which means \(O(\lambda)\) that we have only one vertex, the first non zero matrix element; the Green's function is given by
+Let us study the same \(\phi^3\) theory \(\mathcal{L}_{int} = \frac{\lambda}{3!} \) for a \(2\to 2\) scattering process.\TODO{add draw of scatter.} We work up to the \textbf{leading order} (LO) correction, which means up to \(O(\lambda)\): only one vertex, the first non zero matrix element. The Green's function we are considering is given by
 \[
     \begin{aligned}
-        \bra{f} \hat{S} \ket{i} & = \bra{p_3, p_4} \hat{S} \ket{p_1, p_2}                                                                                                                                                                                                                                                  \\
-                                & = \prod_{j=1}^4 \left( -\frac{i}{\sqrt{Z}} (p_j^2 -m^2) \right) \times \int \mathrm{d}^4 x_1 \,\ldots\,\mathrm{d}^4 x_4 e^{i(p_3 x_3 + p_4 x_4 - p_1 x_1 - p_2 x_2)} \times \bra{\Omega} \hat{T} \{ \hat{\phi} (x_1) \hat{\phi} (x_2) \hat{\phi} (x_3) \hat{\phi} (x_4) \} \ket{\Omega},
+        \bra{f} \hat{S} \ket{i} & = \bra{p_3, p_4} \hat{S} \ket{p_1, p_2}                                                                             \\
+                                & = \prod_{j=1}^4 \left( -\frac{i}{\sqrt{Z}} (p_j^2 -m^2) \right)                                                     \\
+                                & \times \int \mathrm{d}^4 x_1 \,\ldots\,\mathrm{d}^4 x_4 e^{i(p_3 x_3 + p_4 x_4 - p_1 x_1 - p_2 x_2)}                \\
+                                & \times \bra{\Omega} \hat{T} \{ \hat{\phi} (x_1) \hat{\phi} (x_2) \hat{\phi} (x_3) \hat{\phi} (x_4) \} \ket{\Omega},
     \end{aligned}
 \]
 where we have used the LSZ reduction formula to relate the S-matrix element to the Green's function. Now for a free theory \(Z=1\), while for an interacting theory \(Z = 1 + O(\lambda)\), thus at the leading order we can set \(Z=1\) and thus we have
 \[
     \bra{f} \hat{S} \ket{i} = \int \mathrm{d}^4 x_1 \,\ldots\,\mathrm{d}^4 x_4 e^{i(p_3 x_3 + p_4 x_4 - p_1 x_1 - p_2 x_2)} \times \bra{\Omega} \hat{T} \{ \hat{\phi} (x_1) \hat{\phi} (x_2) \hat{\phi} (x_3) \hat{\phi} (x_4) \} \ket{\Omega}.
 \]
-Now we can use the Feynman rules in position space to write down the contribution of the leading order diagram, which is given by\TODO{insert diagram}
+Now we can use the Feynman rules in position space to write down the contribution of the leading order diagram, which is given by
+\[
+    \dots \text{diagrams} \dots
+\]
+
 \[
     O(\lambda^0) \, : \, D_{12} D_{34} + D_{13} D_{24} + D_{14} D_{23},
 \]
@@ -484,10 +563,88 @@ The delta functions do not always cancel out all the integrals over momenta, and
 \]
 \dots
 
-\subsubsection{Back to LSZ Reduction Formula}
 
 
 
 \subsubsection{Summary of Rules in Momentum Space}
+
+Let us summarize the Feynman rules in momentum space for a scalar field theory:
+\begin{itemize}
+    \item \(i \mathcal{M} = \sum \text{ fully connected diagrams} \), where the sum is over all the fully connected diagrams that contribute to the scattering process we are interested in, and \(\mathcal{M}\) is the scattering amplitude, which encodes all the information about the scattering process.
+    \item We assign a momentum \(\mathbf{k}\) to each internal line, with the convention that the momentum flows from the initial state to the final state (thus modulus and direction matter).
+    \item The external lines are on-shell, thus they satisfy the mass-shell condition \(p_j^2 = m^2\) for \(j=1,2,3,4\) and ...
+    \item The internal lines correspond to propagators, which in momentum space are given by \(\frac{i}{k^2 - m^2 + i \epsilon}\), where \(k\) is the momentum flowing through the internal line.
+    \item The vertexes correspond to factors from the interaction Lagrangian, which in momentum space are given by \(-i \lambda\) for a \(\phi^3\) theory, and more generally by the Fourier transform of the interaction term in the Lagrangian. They depend on the theory under consideration, and they also depend on the momenta flowing through the vertex.
+    \item \textbf{Momentum conservation at each vertex}: the sum of the incoming momenta must equal the sum of the outgoing momenta, which is enforced by delta functions in the mathematical expression corresponding to each diagram.
+    \item Each loop in the diagram corresponds to an integral over the loop momentum, which is not fixed by the delta functions, and thus we need to integrate over it. The measure of the integral is given by \(\int \frac{\mathrm{d}^4 k}{(2\pi)^4}\) for each unresolved loop momentum \(k\).
+    \item Symmetry factor: \(1/S\), where \(S\) is the number of symmetries of the diagram, which can be calculated by counting the number of ways to permute the vertexes and fields without changing the diagram. Same as in position space.
+\end{itemize}
+
+For leading order (LO) corrections, this is plenty enough to understand the scattering process and calculate the scattering amplitude, while for higher order corrections, we need to take into account also the renormalization of the theory, which is a more advanced topic that we will cover in the next chapter.
+
+
+
+When saying \textbf{fully connected diagrams}, we mean that the diagram is connected and that it \textit{does not contain any disconnected subdiagram}.
+[...]
+For example, in the following \(2 \to 4\) diagram:
+[...]
+The non fully connected diagram describes to separate processes more than a global interaction of 2 incoming particles scattering into 4 outgoing particles, and thus it does not contribute to the scattering amplitude of the process we are interested in, while the fully connected diagram describes exactely the process we are interested in.
+
+\begin{remark}
+    At leading order we have set \(Z=1\), and we confused the lagrangian mass with the physical one:...
+\end{remark}
+
+If we write again the second order correction to the \(2 \to 2\) scattering amplitude in momentum space, we get
+\[
+    [\dots diagrams \, and \, momenta \dots]
+\]
+
+\[
+    i \mathcal{M} = (-i \lambda)^2 \left[ \frac{i}{(p_1 + p_2)^2 - m^2} + \frac{i}{(p_1 - p_3)^2 - m^2} + \frac{i}{(p_1 - p_4)^2 - m^2} \right]
+\]
+where the \((-i \lambda)^2\) factor comes from the two vertexes, common for all the three diagrams, while inside the parenthesis we have the three propagator contributions of each diagram, which is given by the product of the propagators corresponding to the internal lines, and the delta functions that enforce momentum conservation at each vertex have already been integrated out: only applying the rules we got the result which would have implied a lot of calculationsotherwise.
+
+
+
+\subsubsection{Back to LSZ Reduction Formula}
+
+Now consider a \(2 \to n\) scattering process, where we have two incoming particles and \(n\) outgoing particles. If we want to calculate the scattering amplitude for this process, we can use the LSZ reduction formula, which relates the S-matrix element to the Green's function. The Green's function we need to calculate is given by
+\[
+    \dots
+\]
+
+drawing of scatter
+
+drawig of diagram with big amputated area
+
+list of: -o- (two point diagram), >o<< (amputated diagrams), meaning of amputated
+
+example of amputation
+
+\begin{definition}[Amputated diagram]
+    An amputated diagram is a Feynman diagram where we cannot disconnect any external line by cutting a single internal line. In other words, an amputated diagram is a diagram that does not contain any disconnected subdiagram, and thus it is fully connected.
+
+    The contribution of an amputated diagram to the scattering amplitude is given by the product of the propagators corresponding to the internal lines, and the factors from the vertexes, without including the external propagators, since they are on-shell and thus they do not contribute to the scattering amplitude.
+\end{definition}
+
+Thus the contribution of the sum of two point diagrams for external lines is given by
+\[
+    diog = \sum 2-point \, diagrams = some \, drowings = \frac{i Z}{P^2 - m^2} + regular \, (p^2 \sim m^2),
+\]
+
+We are left with a factor of \(\sqrt{Z}\) for each external line, which comes from the LSZ reduction formula, and thus we have a total of \(Z\) for the two external lines. The amputated diagram is given by
+
+\begin{itemize}
+    \item \(i \mathcal{M} = \sum\) fully connected amputated diagrams.
+    \item Assign momentum to internal lines, with the convention that the momentum flows from the initial state to the final state, and it is conserved at each vertex.
+    \item For each unresolved momentum, i.e. for each loop, we need to integrate over it with the measure \(\int \frac{\mathrm{d}^4 k}{(2\pi)^4}\).
+    \item External lines contribute with a factor of 1 each, since they are on-shell and thus they do not contribute to the scattering amplitude.
+    \item Internal lines contribute with a factor of \(\frac{i}{p^2 - m^2}\) each, where \(p\) is the momentum flowing through the internal line: propagator \(\equiv\) internal line.
+    \item Vertexes contribute with a factor of \(-i \lambda\) for a \(\phi^3\) theory, and more generally by the Fourier transform of the interaction term in the Lagrangian, which depends on the theory under consideration and on the momenta flowing through the vertex.
+    \item The symmetry factor of the diagram is given by \(1/S\), where \(S\) is the number of symmetries of the diagram, which can be calculated by counting the number of ways to permute the vertexes and fields without changing the diagram.
+    \item For each external particle, we need to multiply by a factor of \(\sqrt{Z}\), which comes from the LSZ reduction formula.
+\end{itemize}
+
+We derived these feynman rules from a real scalar theory with a cubic interaction, but they can be easily generalized to other theories: the only theory specific point is the vertex factor, which depends on the interaction term in the Lagrangian, while the other rules are general and can be applied to any theory.
 
 
