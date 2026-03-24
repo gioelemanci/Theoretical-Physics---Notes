@@ -1,0 +1,200 @@
+\section{I Order Perturbation Theory}
+
+
+The first important term from perturbation theory is the exchange energy term, which is basically due to the undistinguishability of the electrons, and it represents the energy cost of having indistinguishable particles, since the electrons must obey the Pauli principle, which means that they cannot occupy the same state, so that they must have different momenta or different spins, which leads to a reduction of the energy of the system, since the electrons can avoid each other more effectively.
+
+It is interactions that make the system more stable, even the ones just in the .....
+
+
+\subsection{Electron Interactions at I order}
+
+\[
+    \frac{E^{(1)}}{N} = \frac{\bra{FS} \hat{V}_{\text{el-el}}\ket{FS}}{N} = \frac{1}{2\Omega N} \sum_{\sigma_1, \sigma_2} \sum_{\mathbf{k}_1, \mathbf{k}_2, \mathbf{q}\neq 0} \left( \frac{4 \pi e^2}{q^2} \right) \bra{FS} \hat{c}_{\mathbf{k}_1 + \mathbf{q}, \sigma}^\dagger \hat{c}_{\mathbf{k}_2 - \mathbf{q}, \sigma'}^\dagger \hat{c}_{\mathbf{k}_2, \sigma'} \hat{c}_{\mathbf{k}_1, \sigma} \ket{FS},
+\]
+where the only possibility for this term to be non-vanishing is that the operators \(\hat{c}_{\mathbf{k}_1 + \mathbf{q}, \sigma}^\dagger\) and \(\hat{c}_{\mathbf{k}_2 - \mathbf{q}, \sigma'}^\dagger\) create particles in the Fermi sphere, while the operators \(\hat{c}_{\mathbf{k}_2, \sigma'}\) and \(\hat{c}_{\mathbf{k}_1, \sigma}\) destroy particles in the Fermi sea, so that we have:
+\begin{itemize}
+    \item \(\mathbf{q} = 0\), which means that the two particles have the same momentum, so that we would create and destroy the same particles, which is not possible since we are dealing with fermions, and indeed this term is neglected directly by the summation over \(\mathbf{q}\neq 0\).
+    \item \(\mathbf{q} = \mathbf{k}_2 - \mathbf{k}_1\) with \(\sigma_1 = \sigma_2\), which means that we create a particle with momentum \(\mathbf{k}_2\) and we destroy a particle with momentum \(\mathbf{k}_1\), so that we have a non-vanishing contribution to the energy, which is called the exchange energy, since it is due to the exchange of particles between the two states.
+\end{itemize}\TODO{add feynman diagram of the direct interaction and of the exchange interaction with right momentum and spin labels.}
+
+So the two particles scatter and after the coulomb interaction they exchange their momenta, but they keep the same spin, since the interaction is spin-independent, so that we have basically an exchange of particles between the two states, which is a consequence of the indistinguishability of the electrons, and it leads to a reduction of the energy of the system, since the electrons can avoid each other more effectively.
+
+These two terms are called the direct and exchange terms, or the \textbf{Hartree} and \textbf{Fock} terms, and they are the first two terms in the perturbation theory expansion of the energy of the system.
+
+\TODO{oister diagram for exchange and direct interaction + comments on oister}
+
+Now we have to compute the exchange energy, which can be expressed as an integral:
+\[
+    \bra{FS} \hat{c}_{\mathbf{k}_1 + \mathbf{q}, \sigma}^\dagger \hat{c}_{\mathbf{k}_2 - \mathbf{q}, \sigma'}^\dagger \hat{c}_{\mathbf{k}_2, \sigma'} \hat{c}_{\mathbf{k}_1, \sigma} \ket{FS} = \delta_{\sigma_1, \sigma_2} \delta_{\mathbf{k}_1 + \mathbf{q}, \mathbf{k}_2} \bra{FS} \hat{c}_{\mathbf{k}_1 + \mathbf{q}, \sigma_1}^\dagger \hat{c}_{\mathbf{k}_1, \sigma_1}^{\dagger} \hat{c}_{\mathbf{k}_1 + \mathbf{q}, \sigma_1} \hat{c}_{\mathbf{k}_1, \sigma_1} \ket{FS}
+\]
+where the delta functions come from the fact that we have to create and destroy the same particles, so that we have to have the same momentum and the same spin, and the expectation value can be computed using the anticommutation relations of the fermionic operators, so that we have:
+\[
+    = - \delta_{\sigma_1, \sigma_2} \delta_{\mathbf{k}_1 + \mathbf{q}, \mathbf{k}_2} \bra{FS} \hat{n}_{\mathbf{k}_1 + \mathbf{q}, \sigma_1} \hat{n}_{\mathbf{k}_1, \sigma_1} \ket{FS} = - \delta_{\sigma_1, \sigma_2} \delta_{\mathbf{k}_1 + \mathbf{q}, \mathbf{k}_2} \theta(k_F - |\mathbf{k}_1 + \mathbf{q}|) \theta(k_F - |\mathbf{k}_1|),
+\]
+where the minus sign comes from the anticommutation of the fermionic operators, and the theta functions come from the fact that we have to create and destroy particles in the Fermi sea, so that we have to have momenta that are less than the Fermi momentum. Thus the exchange energy can be expressed as:
+\[
+    \frac{E^{(1)}}{N} = -\frac{1}{2\Omega N} \sum_{\sigma} \sum_{\mathbf{k}, \mathbf{q} \neq 0} \left( \frac{4 \pi e^2}{q^2} \right) \theta(k_F - |\mathbf{k} + \mathbf{q}|) \theta(k_F - |\mathbf{k}|),
+\]
+where we have renamed the momentum \(\mathbf{k}_1\) to \(\mathbf{k}\) for simplicity. Now we can express the sum over the momentum as an integral
+\[
+    \sum_{\mathbf{k}, \mathbf{q} \neq 0} \to \frac{\Omega^2}{(2\pi)^6} \int \mathrm{d}^3 \mathbf{k} \, \int \mathrm{d}^3 \mathbf{q},
+\]
+but having two theta functions in the integrand makes it a bit more complicated, since we have to consider the intersection of two spheres in momentum space, which is the region where both theta functions are equal to 1, so that we have to compute the volume of the intersection of two spheres of radius \(k_F\) centered at \(\mathbf{k}\) and \(\mathbf{k} + \mathbf{q}\).\TODO{add graph of the intersection of the two spheres in momentum space.}
+
+We have to notice that if \(\mathbf{q} > 2 k_F\) then the intersection of the two spheres is empty, so that the exchange energy vanishes in this case. In the overlapping case, the volume of the intersection of the two spheres can be computed as a spherical cap: having fixed \(\mathbf{q}\) (which can vary in all directions but only for a limited range of module) we can integrate over the angles of \(\mathbf{k}\) and then over the module of \(\mathbf{k}\). So we can express the momenta in spherical coordinates as:
+\[
+    \mathbf{q} = (q \,|\, \theta_q \,|\, \phi_q), \quad \mathbf{k} = (k \,|\, \theta_k \,|\, \phi_k),
+\]
+where the integtration limits of the
+\[
+    \theta_K^{min} = 0, \text{ to } k_F \cos(\theta_k^{max}) = \frac{q}{2}, \quad \implies \frac{q}{2k_F} < \cos(\theta_k^{max}) < 1,
+\]
+since the two spheres intersect only if the distance between their centers is less than the sum of their radii, which means that we have to have \(q < 2 k_F\), and for the other piece of the sphere we have:
+\[
+    k^{max} = k_F, \quad k^{min}\cos(\theta_k) = \frac{q}{2}, \quad \implies \frac{q}{2 \cos(\theta_k)} < k < k_F,
+\]
+so that the volume of the intersection of the two spheres can be expressed as:
+\[
+    \begin{aligned}
+        \frac{E^{(1)}}{N} = - \frac{2}{2 \Omega N} \frac{\Omega}{(2\pi)^3} \int_{-1}^{1} \mathrm{d} \cos(\theta_q) \int_0^{2\pi} \mathrm{d}\phi_q \int_{0}^{2k_F} \mathrm{d} q \, q^2 \times \\
+        \times \frac{\Omega}{(2\pi)^3} \int_{\tfrac{q}{2 k_F}}^{1} \mathrm{d} \cos(\theta_k) \int_0^{2\pi} \mathrm{d}\phi_k \int_{\frac{q}{2 \cos(\theta_k)}}^{k_F} \mathrm{d} k \, k^2 \times 2 \left( \frac{4 \pi e^2}{q^2} \right),
+    \end{aligned}
+\]
+where the first factor of 2 comes from the spin degeneracy, since we have two spin states for each momentum state, while the second factor of 2 comes from the fact that we have two equivalent sphere caps, since the intersection of the two spheres is symmetric with respect to the plane that bisects the line that connects their centers. Furthermore, \(\phi\) is not constraint on the integral since it is like a rotation around the axis that connects the centers of the two spheres, so that we can integrate it out.
+
+
+... conti...
+
+Continuing the computation, we can express write the enormous integral as a function of \(k_F\):
+\[
+    \frac{E^{(1)}}{N} = - \frac{2^7 \pi^3 e^2 \Omega^2}{2^7 \Omega N \pi^6} I(k_F) = - \frac{e^2 \Omega}{\pi^3 N} I(k_F),
+\]
+where the integral \(I(k_F)\) is given by:
+\[
+    \begin{aligned}
+        I(k_f) & = \int_0^{2k_F} \mathrm{d} q \, q^2 \int_{\tfrac{q}{2 k_F}}^{1} \mathrm{d} \cos(\theta_k) \int_{\frac{q}{2 \cos(\theta_k)}}^{k_F} \mathrm{d} k \, k^2                   \\
+               & = \int_0^{2k_F} \mathrm{d} q \, q^2 \int_{\tfrac{q}{2 k_F}}^{1} \mathrm{d} \cos(\theta_k) \frac{1}{3}\left( k_F^3 - \left( \frac{q}{2 \cos(\theta_k)} \right)^3 \right) \\
+               & = \int_0^{2k_F} \mathrm{d} q \, q^2 \frac{1}{3} \left[ k_F^3 \cos \theta_k - \frac{q^3}{8} \left(- \frac{1}{2 \cos^2 \theta_k}\right) \right]_{\frac{q}{2k_F}}^{1}      \\
+               & = \int_0^{2k_F} \mathrm{d} q \, q^2 \frac{1}{3} \left[ k_F^3  - \frac{q}{2}k_F^2 + \frac{q^3}{8} \left( \frac{1}{2} - \frac{2}{q^2}k_F^2 \right) \right]                \\
+               & = \int_0^{2k_F} \mathrm{d} q \, q^2 \frac{1}{3} \left[ k_F^3  - \frac{3q}{4}k_F^2 + \frac{q^3}{16}\right]                                                               \\
+               & = \frac{1}{3} \left[ 2 k_F^4 +\dots  \right] = \frac{1}{4} k_F^4,
+    \end{aligned}
+\]
+where we integrated \(q\) starting from 0 even if the integral is not well defined in this limit, since the integrand is not well defined for \(q \to 0\), but we can regularize it by introducing a small cutoff \(\epsilon\), or anyway considering that in 0 the measure is null.
+
+Thus in the end we can express the exchange energy as:
+\[
+    \frac{E^{(1)}}{N} = - \frac{e^2 \Omega}{\pi^3 N} \frac{1}{4} k_F^4 = - \frac{e^2}{4 \pi^3} \frac{\Omega}{N} k_F^4,
+\]
+where we can express the ratio \(\Omega/N\) the inverse of the density while adding \(a_0 / a_0\) as
+\[
+    \frac{E^{(1)}}{N} = - \frac{e^2}{2 a_0} (a_0 k_F) \frac{k_F^3}{2 \pi^3} \frac{1}{n} = (- 1 \text{Ry}) \left[\left(\frac{9 \pi}{4}\right)^{1/3} \frac{1}{r_s}\right] \frac{3}{2\pi} = - \frac{0.916 \text{ Ry}}{r_s},
+\]
+where the first term is the Rydberg energy, which is the energy scale that characterizes the strength of the Coulomb interaction, while the second term is a dimensionless function of the Wigner-Seitz radius, which characterizes the density of the system; the last one comes from the fact that we can express the Fermi momentum as a function of the density as \(k_F = (3\pi^2 n)^{1/3}\), and the density as a function of the Wigner-Seitz radius as \(n = \frac{1}{\tfrac{4}{3} \pi (r_s a_0)^3}\), so that we can express the Fermi momentum as a function of the Wigner-Seitz radius. \TODO{checkkkkk}
+
+Thus the final result for the energy per particle of the interacting Fermi gas at first order in perturbation theory is given by:
+\[
+    \frac{E}{N} = \frac{E^{(0)} + E^{(1)}}{N} = \frac{2.211 \text{ Ry}}{r_s^2} - \frac{0.916 \text{ Ry}}{r_s},
+\]
+which shows that the energy per particle of the interacting Fermi gas scales as \(1/r_s^2\) at high density, and as \(1/r_s\) at low density, which is a very important result, since it gives us a reference point to compare with the energy of the non-interacting system, and to understand the effects of the interactions on the properties of the system as a function of the density.\TODO{add potential graph}
+
+It is cricial the difference in scaling power, since:
+\begin{itemize}
+    \item at \textbf{high density}, the kinetic energy dominates over the potential energy, since the kinetic energy scales as \(1/r_s^2\) while the potential energy scales as \(1/r_s\), so that the system behaves like a non-interacting Fermi gas, and the properties of the system are determined by the kinetic energy.
+    \item at \textbf{low density}, the potential energy dominates over the kinetic energy, since the potential energy scales as \(1/r_s\) while the kinetic energy scales as \(1/r_s^2\), so that the system behaves like a classical plasma, and the properties of the system are determined by the interactions between the electrons.
+\end{itemize}
+The minimum of the energy per particle is given by:
+\[
+    \frac{\mathrm{d}}{\mathrm{d} r_s} \left( \frac{E}{N} \right) = 0 \implies r_s^* \sim 4.83, \quad \frac{E^*}{N} \sim - 0.095 \text{ Ry} \sim -\SI{1.29}{\electronvolt},
+\]
+which is a very interesting result, since it shows that there is a minimum of the energy per particle at a finite value of the Wigner-Seitz radius, which means that there is a stable phase of the system at this density, and it also shows that the interactions between the electrons can lead to a reduction of the energy of the system, which is a consequence of the exchange interaction.
+
+For real materials we find
+\begin{itemize}
+    \item Sodium: Na, \(1s^2 \, 2s^2 \, 2p^6 \, 3s^1\), has \(r_s \sim 3.93\), which is close to the minimum of the energy per particle \(\frac{E}{N} \sim - \SI{1.13}{\electronvolt}\), so that it is a good metal, and it has a high density of states at the Fermi level, which leads to good conductivity.
+    \item For metals usually we have \(r_s \sim 2.5 - 6\), which means that they are in the regime where the interactions are important, but not dominant, so that they behave like a Fermi liquid, and their properties are determined by the interactions between the electrons, but they still have a well-defined Fermi surface and a high density of states at the Fermi level, which leads to good conductivity.
+\end{itemize}
+
+This result shows that the electron gas is stable when the repulsive interactions between the electrons are taken into account, and there is no need in confining the gas in some external potential in order to stabilize it, since the interactions themselves can lead to a stable phase of the system. This is a very important result, since it shows that the electron gas can be a good model for real materials such as metals, and it also shows that the interactions between the electrons can lead to interesting phenomena such as superconductivity and magnetism, which are not present in the non-interacting Fermi gas.
+
+At the end of the course we will see that th next order in perturbation theory gives us a correction to the energy that scales as \(\log(r_s)\), which is a very weak correction, but it is still important to understand the properties of the system at low density: in particular, in order to get the correct behavior of the energy per particle at low density, we will need to include an infinite number of terms in the perturbation theory expansion in order to get all the terms composing the logarithmic correction; stopping at any finite order will give us a correction that diverges.
+
+In first quantization formalism, with plane waves, we can obtain the same result, which is the Hartree-Fock energy of the system; historically all the terms after the first order were called \textbf{correlation energy}, since they are due to the correlations between the electrons that are not captured by the Hartree-Fock approximation. The correlation energy is a very important quantity, since it gives us a measure of the strength of the interactions between the electrons, and it can lead to interesting phenomena such as superconductivity and magnetism, which are not present in the non-interacting Fermi gas.
+
+\section{II Order Perturbation Theory}
+
+Since the first order perturbation theory gives us a good approximation to the energy of the system, we can now try to compute the second order correction to the energy. In second order we need to take into account the expectation value of the interaction term in the states that are not occupied in the Fermi sea, which are called virtual excitations:
+\[
+    \frac{E^{(2)}}{N} = \frac{1}{N} \sum_{\ket{\nu}\neq \ket{FS}} \frac{|\bra{\nu} \hat{V}_{\text{el-el}} \ket{FS}|^2}{E^{(0)} - E_\nu^{(0)}} = \frac{1}{N} \sum_{\ket{\nu}\neq \ket{FS}} \frac{\bra{FS} \hat{V}_{\text{el-el}} \ket{\nu} \bra{\nu} \hat{V}_{\text{el-el}} \ket{FS}}{E^{(0)} - E_\nu^{(0)}},
+\]
+which represent the contribution to the energy of the virtual excitations of the system, which are states that are not occupied in the Fermi sea, but they can be excited by the interactions between the electrons, so that they can contribute to the energy of the system even if they are not occupied in the ground state.
+
+The interaction term can be expressed as:
+\[
+    \hat{V}_{\text{el-el}} = \frac{1}{2\Omega} \sum_{\sigma_1, \sigma_2} \sum_{\mathbf{k}_1, \mathbf{k}_2, \mathbf{q}\neq 0} \left( \frac{4 \pi e^2}{q^2} \right) \hat{c}_{\mathbf{k}_1 + \mathbf{q}, \sigma}^\dagger \hat{c}_{\mathbf{k}_2 - \mathbf{q}, \sigma'}^\dagger \hat{c}_{\mathbf{k}_2, \sigma'} \hat{c}_{\mathbf{k}_1, \sigma},
+\]
+so that we have to compute the matrix elements of this operator between the Fermi sea and the virtual excitations: thus the first two ladder operators \(\hat{c}_{\mathbf{k}_1 + \mathbf{q}, \sigma}^\dagger \hat{c}_{\mathbf{k}_2 - \mathbf{q}, \sigma'}^\dagger\) have to create particles out of the Fermi sea, which seams a bit strange.
+
+But how should these states look like? Let us write
+\[
+    \ket{\nu} = \Theta(\vert \mathbf{k}_1 + \mathbf{q} \vert -k_F) \Theta(k_F - \vert \mathbf{k}_1 \vert) \Theta(\vert \mathbf{k}_2 - \mathbf{q} \vert -k_F) \Theta(k_F - \vert \mathbf{k}_2 \vert) \hat{c}_{\mathbf{k}_1 + \mathbf{q}, \sigma}^\dagger \hat{c}_{\mathbf{k}_2 - \mathbf{q}, \sigma'}^\dagger \hat{c}_{\mathbf{k}_2, \sigma'} \hat{c}_{\mathbf{k}_1, \sigma} \ket{FS},
+\]
+since we have to annihilate particles in the Fermi sea and create particles out of the Fermi sea, so that we have to have momenta that are less than the Fermi momentum for the annihilation operators, and momenta that are greater than the Fermi momentum for the creation operators.\TODO{add graph of the virtual excitations out of the Fermi sea.}
+
+To restore FS the only two processes that preserve the conservation of momentum are the following:
+\begin{itemize}
+    \item \textbf{Direct interaction}: where the two particles scatter exchanging a momenta \(\mathbf{q}\), which then is reabsorbed by the same two particles, so that we have a direct interaction between the two particles, which is a second order process since we have to exchange the momentum twice.
+    \item \textbf{Exchange interaction}: where the two particles scatter exchanging a momenta \(\mathbf{q}\), which then is reabsorbed by the same two particles, in a way that they exchange their momenta, so that we have an exchange interaction between the two particles, which is also a second order process since we have to exchange the momentum twice.
+\end{itemize} \TODO{add graph of the direct and exchange interactions at second order, both feynman and oister.}
+
+Inside the sphere the particles can only exchange position in phase space or in the end come back to their own starting state, since the Pauli principle forbids them to occupy the same state of other fermions in the FS.
+
+\subsection{Direct Interaction}
+
+The contribution of the direct interaction to the energy can be expressed as:
+\[
+    \begin{aligned}
+        \frac{E^{(2)}_d}{N} & = \sum_{\mathbf{q} \neq \mathbf{0}} \sum_{\mathbf{k}_1, \mathbf{k}_2} \sum_{\sigma_1, \sigma_2}  \left(\frac{1}{2\Omega} \frac{4 \pi e^2}{q^2}\right) \frac{1}{E^{(0)}- E_\nu}              \\
+                            & \times \Theta(\vert \mathbf{k}_1 + \mathbf{q} \vert -k_F) \Theta(k_F - \vert \mathbf{k}_1 \vert) \Theta(\vert \mathbf{k}_2 - \mathbf{q} \vert -k_F) \Theta(k_F - \vert \mathbf{k}_2 \vert),
+    \end{aligned}
+\]
+where again the theta functions come from the fact that we have to create particles out of the Fermi sea and destroy particles in the Fermi sea, restricting the domain.
+
+    [considerations on magnitude of terms]
+
+when \(\mathbf{q} \to 0\), we get
+\[
+    (V_q)^2 \sim \frac{1}{q^4},
+\]
+and
+\[
+    E^{(0)}-E_\nu \propto - \left[ \vert \mathbf{k}_1 - \mathbf{q} \vert^2 - \vert \mathbf{k}_1 \vert^2 + \vert \mathbf{k}_2 - \mathbf{q} \vert^2 - \vert \mathbf{k}_2 \vert^2 \right] \frac{\hbar^2}{2m} \sim \vert \mathbf{k}_1 \vert^2 + \vert \mathbf{q} \vert^2 + 2 \mathbf{k}_1 \cdot \mathbf{q} - \vert \mathbf{k}_1 \vert\dots   \sim \mathbf{q}
+\]
+which is linear in \(\mathbf{q}\).
+
+
+    [...]
+
+
+where now the theta functions resctrict the domain in a different way: the second one is equal, the first one is requesting that the particle remains outside the FS. Thus we have to select the intersection and take the difference between the two spheres, which is a bit more complicated to compute, but euristically as \(\mathbf{q}\) increases the intersection of the two spheres decreases, so that we have a smaller and smaller contribution to the energy, which is a consequence of the fact that the particles can avoid each other more effectively as they exchange more momentum, since they can explore a larger portion of the phase space.
+
+
+Thus, ignoring the prefactors, we can express the contribution of the direct interaction to the energy as:
+\[
+    \frac{E^{(2)}_d}{N} \sim \int_0 \mathrm{d} q \, q^2 \,\frac{1}{q^4}\, \frac{1}{q}\, q\, q = \int_0 \mathrm{d} q \, \frac{1}{q } \sim \log(q)_0 \to \infty,
+\]
+where the first factor of \(q^2\) comes from the measure of the integral, the second factor of \(1/q^4\) comes from the square of the Coulomb interaction, the third factor of \(1/q\) comes from the energy denominator, while the last two factors of \(q\) come from the theta functions that restrict the domain of integration, since they restrict the domain to a region that scales as \(q\) for small \(q\).
+
+Thus we have a logarithmic divergence in the limit \(q \to 0\), which is a consequence of the long-range nature of the Coulomb interaction, and it is a very important result, since it shows that we cannot treat the interactions between the electrons as a perturbation at low density, since we have a divergence in the energy at second order in perturbation theory, which means that we have to include an infinite number of terms in the perturbation theory expansion in order to get a finite result for the energy of the system at low density.
+
+\subsection{Exchange Interaction}
+
+The exchange interaction is a bit more complicated to compute, but it does not present any divergence:
+\[
+    \frac{E^{(2)}_e}{N} \sim \sum_{\mathbf{q}} \frac{1}{q^2} \frac{1}{\vert \mathbf{k}_1 - \mathbf{k}_2 + \mathbf{q} \vert^2 },
+\]
+which will give us a finite result, but the direct interaction will give us a preponential factor that diverges, so that the exchange interaction will give us a correction to the energy that is negligible compared to the direct interaction at low density, since the direct interaction will give us a logarithmic divergence, while the exchange interaction will give us a finite correction. Thus in the end we are forced to compute an infinite number of divergences in ordeer to obtain a finite result, if we want to proceed with perturbation theory.
+
+This problem arises from the long range nature of the Coulomb interaction, which makes the perturbation theory expansion diverge at low density. But we will consider other methods to compute the energy of the system at low density, which will give us a finite result for the energy of the system at low density, and it will also give us a better understanding of the properties of the system at low density, which are not captured by perturbation theory. It is time to move onto many-body techniques that will allow us to compute the energy of the system at low density, and to understand the properties of the system at low density, which are not captured by perturbation theory.
+
+We are neglecting the screening of the other electrons, which is a very important effect that will allow us to get a finite result for the energy of the system at low density. The screening of the other electrons will reduce the strength of the Coulomb interaction at low density, so that we will have a screened Coulomb interaction that will give us a finite result.
