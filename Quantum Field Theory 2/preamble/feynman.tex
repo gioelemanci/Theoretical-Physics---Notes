@@ -1,0 +1,387 @@
+% ==========================================
+% TIKZ FEYNMAN DIAGRAM DEFINITIONS
+% ==========================================
+
+% -----------------------------------------------------------------
+% Wrapper function to scale down the diagrams (for inline use)
+% -----------------------------------------------------------------
+
+\newcommand{\scalefeyn}[2]{\scalebox{#1}{#2}}
+
+% ---------------------------------------------------------
+% CATEGORY 1: BASIC TOPOLOGIES & BUILDING BLOCKS (phi^4 theory)
+% ---------------------------------------------------------
+
+\newcommand{\feynLine}{%
+    \tikz[baseline=-0.6ex, scale=0.5, thick]{
+        \draw (0,0) -- (1.5,0);
+        \filldraw (0,0) circle (2pt); \filldraw (1.5,0) circle (2pt);
+    }%
+}
+
+\newcommand{\feynHoriz}{%
+    \tikz[baseline=-0.6ex, scale=0.5, thick]{
+        \draw (0,0.4) -- (1,0.4);
+        \draw (0,-0.4) -- (1,-0.4);
+        \filldraw (0,0.4) circle (2pt); \filldraw (1,0.4) circle (2pt);
+        \filldraw (0,-0.4) circle (2pt); \filldraw (1,-0.4) circle (2pt);
+    }%
+}
+
+\newcommand{\feynVert}{%
+    \tikz[baseline=-0.6ex, scale=0.5, thick]{
+        \draw (0.2,0.4) -- (0.2,-0.4);
+        \draw (0.8,0.4) -- (0.8,-0.4);
+        \filldraw (0.2,0.4) circle (2pt); \filldraw (0.2,-0.4) circle (2pt);
+        \filldraw (0.8,0.4) circle (2pt); \filldraw (0.8,-0.4) circle (2pt);
+    }%
+}
+
+\newcommand{\feynCross}{%
+    \tikz[baseline=-0.6ex, scale=0.5, thick]{
+        \draw (0,0.4) -- (1,-0.4);
+        \draw (0,-0.4) -- (1,0.4);
+        \filldraw (0,0.4) circle (2pt); \filldraw (1,-0.4) circle (2pt);
+        \filldraw (0,-0.4) circle (2pt); \filldraw (1,0.4) circle (2pt);
+    }%
+}
+
+% ---------------------------------------------------------
+% CATEGORY 2: LOOP AND VACUUM DIAGRAMS (phi^4 theory)
+% ---------------------------------------------------------
+
+\newcommand{\feynEight}{%
+    \tikz[baseline=-0.6ex, scale=0.5, thick]{
+        \draw (0,0) circle (0.5);
+        \draw (1,0) circle (0.5);
+        \filldraw (0.5,0) circle (2pt);
+    }%
+}
+
+\newcommand{\feynDumbbell}{%
+    \tikz[baseline=-0.6ex, scale=0.65, thick]{
+        \draw (0,0) circle (0.4);
+        \draw (1.4,0) circle (0.4);
+        \draw (0.4,0) -- (1.0,0);
+        \filldraw (0.4,0) circle (1.5pt);
+        \filldraw (1.0,0) circle (1.5pt);
+    }%
+}
+
+\newcommand{\feynSunset}{%
+    \tikz[baseline=-0.6ex, scale=0.6, thick]{
+        \draw (0,0) circle (0.5);
+        \draw (-0.5,0) -- (0.5,0);
+        \filldraw (-0.5,0) circle (1.5pt);
+        \filldraw (0.5,0) circle (1.5pt);
+    }%
+}
+
+\newcommand{\feynLoop}{%
+    \tikz[baseline=-0.6ex, scale=0.6, thick]{
+        \draw (0,0) circle (0.5);
+        \filldraw (-0.5,0) circle (1.5pt);
+        \filldraw (0.5,0) circle (1.5pt);
+    }%
+}
+
+% ---------------------------------------------------------
+% CATEGORY 3: FERMIONIC DIAGRAMS (With arrows)
+% ---------------------------------------------------------
+
+\newcommand{\feynLineFermion}{%
+    \tikz[baseline=-0.6ex, scale=0.5, thick]{
+        \draw (0,0) -- (1.5,0);
+        \draw[->] (0,0) -- (0.9,0);
+        \filldraw (0,0) circle (2pt);
+        \filldraw (1.5,0) circle (2pt);
+    }%
+}
+
+\newcommand{\feynLoopFermion}{%
+    \tikz[baseline=-0.6ex, scale=0.6, thick, midarrow/.style={
+                postaction={decorate},
+                decoration={markings, mark=at position 0.55 with {\arrow{>}}}
+            }]{
+        \draw[midarrow] (-0.5,0) arc (180:0:0.5);
+        \draw[midarrow] (0.5,0) arc (0:-180:0.5);
+        \filldraw (-0.5,0) circle (1.5pt);
+        \filldraw (0.5,0) circle (1.5pt);
+    }%
+}
+
+% ---------------------------------------------------------
+% CATEGORY 4: SPECIFIC 2-POINT CORRELATION FUNCTIONS
+% ---------------------------------------------------------
+
+% 1. Tree Level (Free propagator)
+\newcommand{\feynTree}{%
+    \tikz[baseline=-0.6ex, scale=0.5, thick]{
+        \draw (0,0) -- (2,0);
+        \filldraw (0,0) circle (2pt) node[below=2pt] {\(x_1\)};
+        \filldraw (2,0) circle (2pt) node[below=2pt] {\(x_2\)};
+    }%
+}
+
+% 2. 1-Loop Bubble
+\newcommand{\feynBubble}{%
+    \tikz[baseline=-0.6ex, scale=0.5, thick]{
+        \draw (0,0) -- (0.8,0); % left leg
+        \draw (1.4,0) circle (0.6); % central bubble (center 1.4, radius 0.6)
+        \draw (2.0,0) -- (2.8,0); % right leg
+
+        \filldraw (0,0) circle (2pt) node[below=2pt] {\(x_1\)};
+        \filldraw (0.8,0) circle (2pt);
+        \filldraw (2.0,0) circle (2pt);
+        \filldraw (2.8,0) circle (2pt) node[below=2pt] {\(x_2\)};
+    }%
+}
+
+% 3. Double Tadpole (two tadpoles on the propagator)
+\newcommand{\feynDoubleTadpole}{%
+    \tikz[baseline=-0.6ex, scale=0.5, thick]{
+        \draw (0,0) -- (0.8,0); % first external propagator
+        \draw (2,0) -- (2.8,0); % second external propagator
+        \draw (0.8,0.4) circle (0.4); % first loop
+        \draw (2.0,0.4) circle (0.4); % second loop
+
+        \filldraw (0,0) circle (2pt) node[below=2pt] {\(x_1\)};
+        \filldraw (0.8,0) circle (2pt);
+        \filldraw (2.0,0) circle (2pt);
+        \filldraw (2.8,0) circle (2pt) node[below=2pt] {\(x_2\)};
+    }%
+}
+
+% 4. Cactus (Tadpole on top of another Tadpole)
+\newcommand{\feynCactus}{%
+    \tikz[baseline=-0.6ex, scale=0.5, thick]{
+        \draw (0,0) -- (2.4,0); % horizontal line
+        \draw (1.2,0) -- (1.2,0.8); % cactus stem
+        \draw (1.2,1.2) circle (0.4); % top loop
+
+        \filldraw (0,0) circle (2pt) node[below=2pt] {\(x_1\)};
+        \filldraw (1.2,0) circle (2pt);
+        \filldraw (1.2,0.8) circle (2pt);
+        \filldraw (2.4,0) circle (2pt) node[below=2pt] {\(x_2\)};
+    }%
+}
+
+% 5. Disconnected 1: Propagator + Double Tadpole in the vacuum
+\newcommand{\feynDiscDoubleTadpole}{%
+    \tikz[baseline=-0.6ex, scale=0.5, thick]{
+        % Connected part at the bottom
+        \draw (0,0) -- (2.4,0);
+        \filldraw (0,0) circle (2pt) node[below=2pt] {\(x_1\)};
+        \filldraw (2.4,0) circle (2pt) node[below=2pt] {\(x_2\)};
+
+        % Disconnected part at the top
+        \draw (0.7,1) -- (1.7,1); % horizontal stem
+        \draw (0.7,1.3) circle (0.3); % left loop
+        \draw (1.7,1.3) circle (0.3); % right loop
+        \filldraw (0.7,1) circle (2pt);
+        \filldraw (1.7,1) circle (2pt);
+    }%
+}
+
+% 6. Disconnected 2: Propagator + Sunset (Melon) in the vacuum
+\newcommand{\feynDiscSunset}{%
+    \tikz[baseline=-0.6ex, scale=0.5, thick]{
+        % Connected part at the bottom
+        \draw (0,0) -- (2.4,0);
+        \filldraw (0,0) circle (2pt) node[below=2pt] {\(x_1\)};
+        \filldraw (2.4,0) circle (2pt) node[below=2pt] {\(x_2\)};
+
+        % Disconnected part at the top (Sunset)
+        \draw (1.2,1.1) circle (0.5); % outer circle
+        \draw (0.7,1.1) -- (1.7,1.1); % central line
+        \filldraw (0.7,1.1) circle (2pt);
+        \filldraw (1.7,1.1) circle (2pt);
+    }%
+}
+
+% ---------------------------------------------------------
+% CATEGORY 5: 4-POINT CORRELATION FUNCTIONS
+% ---------------------------------------------------------
+
+% 1. s-channel (Horizontal propagator)
+\newcommand{\feynFourS}{%
+    \tikz[baseline=-0.6ex, scale=0.5, thick]{
+        % Internal propagator
+        \draw (0.8,0) -- (1.6,0);
+
+        % Left legs
+        \draw (0,0.8) -- (0.8,0);
+        \draw (0,-0.8) -- (0.8,0);
+        % Right legs
+        \draw (1.6,0) -- (2.4,0.8);
+        \draw (1.6,0) -- (2.4,-0.8);
+
+        % Internal vertices
+        \filldraw (0.8,0) circle (2pt);
+        \filldraw (1.6,0) circle (2pt);
+        % External nodes with labels
+        \filldraw (0,0.8) circle (2pt) node[left=2pt] {\(x_1\)};
+        \filldraw (0,-0.8) circle (2pt) node[left=2pt] {\(x_2\)};
+        \filldraw (2.4,0.8) circle (2pt) node[right=2pt] {\(x_3\)};
+        \filldraw (2.4,-0.8) circle (2pt) node[right=2pt] {\(x_4\)};
+    }%
+}
+
+% 2. t-channel (Vertical propagator)
+\newcommand{\feynFourT}{%
+    \tikz[baseline=-0.6ex, scale=0.5, thick]{
+        % Internal propagator
+        \draw (1.2,0.4) -- (1.2,-0.4);
+
+        % Upper legs
+        \draw (0,0.8) -- (1.2,0.4);
+        \draw (2.4,0.8) -- (1.2,0.4);
+        % Lower legs
+        \draw (0,-0.8) -- (1.2,-0.4);
+        \draw (2.4,-0.8) -- (1.2,-0.4);
+
+        % Internal vertices
+        \filldraw (1.2,0.4) circle (2pt);
+        \filldraw (1.2,-0.4) circle (2pt);
+        % External nodes with labels
+        \filldraw (0,0.8) circle (2pt) node[left=2pt] {\(x_1\)};
+        \filldraw (0,-0.8) circle (2pt) node[left=2pt] {\(x_2\)};
+        \filldraw (2.4,0.8) circle (2pt) node[right=2pt] {\(x_3\)};
+        \filldraw (2.4,-0.8) circle (2pt) node[right=2pt] {\(x_4\)};
+    }%
+}
+
+% 3. u-channel (Crossed legs)
+\newcommand{\feynFourU}{%
+    \tikz[baseline=-0.6ex, scale=0.5, thick]{
+        % Left legs
+        \draw (0,0.8) -- (1.2,0.4);
+        \draw (0,-0.8) -- (1.2,-0.4);
+
+        % Leg from bottom vertex to x3 (top right)
+        \draw (1.2,-0.4) -- (2.4,0.8);
+
+        % Trick: thick white line to "break" the underlying line
+        \draw[white, line width=4pt] (1.2,0.4) -- (2.4,-0.8);
+        % Leg from top vertex to x4 (bottom right)
+        \draw (1.2,0.4) -- (2.4,-0.8);
+
+        % Internal vertices
+        \filldraw (1.2,0.4) circle (2pt);
+        \filldraw (1.2,-0.4) circle (2pt);
+
+        % Internal propagator
+        \draw (1.2,0.4) -- (1.2,-0.4);
+
+        % External nodes with labels
+        \filldraw (0,0.8) circle (2pt) node[left=2pt] {\(x_1\)};
+        \filldraw (0,-0.8) circle (2pt) node[left=2pt] {\(x_2\)};
+        \filldraw (2.4,0.8) circle (2pt) node[right=2pt] {\(x_3\)};
+        \filldraw (2.4,-0.8) circle (2pt) node[right=2pt] {\(x_4\)};
+    }%
+}
+
+% 4. Disconnected: Vertical (x1-x2 and x3-x4)
+\newcommand{\feynFourDiscVert}{%
+    \tikz[baseline=-0.6ex, scale=0.5, thick]{
+        % Free propagators
+        \draw (0,0.8) -- (0,-0.8);
+        \draw (2.4,0.8) -- (2.4,-0.8);
+
+        % External nodes with labels
+        \filldraw (0,0.8) circle (2pt) node[left=2pt] {\(x_1\)};
+        \filldraw (0,-0.8) circle (2pt) node[left=2pt] {\(x_2\)};
+        \filldraw (2.4,0.8) circle (2pt) node[right=2pt] {\(x_3\)};
+        \filldraw (2.4,-0.8) circle (2pt) node[right=2pt] {\(x_4\)};
+    }%
+}
+
+% 5. Disconnected: Horizontal (x1-x3 and x2-x4)
+\newcommand{\feynFourDiscHoriz}{%
+    \tikz[baseline=-0.6ex, scale=0.5, thick]{
+        % Free propagators
+        \draw (0,0.8) -- (2.4,0.8);
+        \draw (0,-0.8) -- (2.4,-0.8);
+
+        % External nodes with labels
+        \filldraw (0,0.8) circle (2pt) node[left=2pt] {\(x_1\)};
+        \filldraw (0,-0.8) circle (2pt) node[left=2pt] {\(x_2\)};
+        \filldraw (2.4,0.8) circle (2pt) node[right=2pt] {\(x_3\)};
+        \filldraw (2.4,-0.8) circle (2pt) node[right=2pt] {\(x_4\)};
+    }%
+}
+
+% 6. Disconnected: Crossed (x1-x4 and x2-x3)
+\newcommand{\feynFourDiscCross}{%
+    \tikz[baseline=-0.6ex, scale=0.5, thick]{
+        % First free propagator (x2 to x3)
+        \draw (0,-0.8) -- (2.4,0.8);
+
+        % Trick: thick white line to break the crossing
+        \draw[white, line width=4pt] (0,0.8) -- (2.4,-0.8);
+
+        % Second free propagator (x1 to x4)
+        \draw (0,0.8) -- (2.4,-0.8);
+
+        % External nodes with labels
+        \filldraw (0,0.8) circle (2pt) node[left=2pt] {\(x_1\)};
+        \filldraw (0,-0.8) circle (2pt) node[left=2pt] {\(x_2\)};
+        \filldraw (2.4,0.8) circle (2pt) node[right=2pt] {\(x_3\)};
+        \filldraw (2.4,-0.8) circle (2pt) node[right=2pt] {\(x_4\)};
+    }%
+}
+
+% ---------------------------------------------------------
+% TEMPORARY: INLINE FEYNMAN PARSER (expl3 based)
+% ---------------------------------------------------------
+
+\ExplSyntaxOn
+\NewDocumentCommand{\inlinefeynman}{m}
+{
+    % baseline aggiusta l'altezza del diagramma rispetto al testo
+    \tikz[baseline=-0.5ex, x=0.6cm, y=0.6cm, line~width=0.6pt] {
+
+        % l_tmpa_int è la coordinata X di partenza (inizializzata a 0)
+        % l_tmpb_int è la coordinata X di arrivo del blocco corrente
+        \int_zero:N \l_tmpa_int
+        \int_zero:N \l_tmpb_int
+
+        \tl_map_inline:nn { #1 }
+        {
+            % Ad ogni passo, calcoliamo la coordinata di arrivo (X + 1)
+            \int_set:Nn \l_tmpb_int { \l_tmpa_int + 1 }
+
+            \str_case:nn { ##1 }
+            {
+                { - } {
+                        % Propagatore: linea dritta. Nodi a sinistra e a destra.
+                        \fill (\int_use:N \l_tmpa_int, 0) circle (1.5pt);
+                        \fill (\int_use:N \l_tmpb_int, 0) circle (1.5pt);
+                        \draw (\int_use:N \l_tmpa_int, 0) -- (\int_use:N \l_tmpb_int, 0);
+                    }
+                    { o } {
+                        % Anello (Bolla): due archi. Nodi a sinistra e a destra.
+                        \fill (\int_use:N \l_tmpa_int, 0) circle (1.5pt);
+                        \fill (\int_use:N \l_tmpb_int, 0) circle (1.5pt);
+                        \draw (\int_use:N \l_tmpa_int, 0) to[out=90, in=90] (\int_use:N \l_tmpb_int, 0);
+                        \draw (\int_use:N \l_tmpa_int, 0) to[out=-90, in=-90] (\int_use:N \l_tmpb_int, 0);
+                    }
+                    { > } {
+                        % Linee entranti (convergono nel nodo a destra)
+                        \fill (\int_use:N \l_tmpb_int, 0) circle (1.5pt);
+                        \draw (\int_use:N \l_tmpa_int, 0.5) -- (\int_use:N \l_tmpb_int, 0);
+                        \draw (\int_use:N \l_tmpa_int, -0.5) -- (\int_use:N \l_tmpb_int, 0);
+                    }
+                    { < } {
+                        % Linee uscenti (divergono dal nodo a sinistra)
+                        \fill (\int_use:N \l_tmpa_int, 0) circle (1.5pt);
+                        \draw (\int_use:N \l_tmpa_int, 0) -- (\int_use:N \l_tmpb_int, 0.5);
+                        \draw (\int_use:N \l_tmpa_int, 0) -- (\int_use:N \l_tmpb_int, -0.5);
+                    }
+            }
+            % Aggiorniamo la coordinata di partenza per il prossimo elemento
+            \int_set_eq:NN \l_tmpa_int \l_tmpb_int
+        }
+    }
+}
+\ExplSyntaxOff

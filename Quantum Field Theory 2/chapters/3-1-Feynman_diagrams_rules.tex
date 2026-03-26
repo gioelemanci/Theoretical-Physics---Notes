@@ -105,7 +105,7 @@ which is an integral equation for \(\hat{U}\) that can be solved iteratively, an
 \]
 which is essential for calculating scattering amplitudes and other physical quantities in QFT, even if the computation remains quite complicated.
 
-\subsection{Computing Green's Functions}
+\subsection{Computing Green's Functions}\TODO{Complete from the note, professor did not finish the topic.}
 
 Consider a Green's function of the form
 \[
@@ -135,27 +135,27 @@ Wick's theorem is a fundamental result in quantum field theory that allows us to
 \]
 where \(\hat{\phi} (x)\) is a free scalar field operator, thus behaving as a ladder operator. We can manipulate the fields as
 \[
-    \phi = \phi^+ + \phi^-, \quad \begin{dcases}
-        \phi^+ \ket{0} = 0, \\
-        \bra{0} \phi^- = 0,
+    \hat{\phi} = \hat{\phi}^+ + \hat{\phi}^-, \quad \begin{dcases}
+        \hat{\phi}^+ \ket{0} = 0, \\
+        \bra{0} \hat{\phi}^- = 0,
     \end{dcases}, \quad \begin{dcases}
-        \phi^+ = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{p}}}} a_{\mathbf{p}} e^{-i p \cdot x}, \\
-        \phi^- = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{p}}}} a_{\mathbf{p}}^{\dagger} e^{i p \cdot x},
+        \hat{\phi}^+ = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{p}}}} \hat{a}_{\mathbf{p}} e^{-i p \cdot x}, \\
+        \hat{\phi}^- = \int \frac{\mathrm{d}^3 \mathbf{p}}{(2\pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{p}}}} \hat{a}_{\mathbf{p}}^{\dagger} e^{i p \cdot x},
     \end{dcases}
 \]
-where \(\phi^+\) is the annihilation part of the field, and \(\phi^-\) is the creation part of the field. We can then use the normal ordering of the product of \(\hat{a}\) and \(\hat{a}^{\dagger}\) to simplify the expression: it puts all the creation operators to the left of the annihilation operators, thus ensuring that the vacuum expectation value of any normal-ordered product is zero. We will use the notation \(:\hat{O}:\) to denote the normal ordering of an operator (or a general product of operators) \(\hat{O}\).
+where \(\hat{\phi}^+\) is the annihilation part of the field, and \(\hat{\phi}^-\) is the creation part of the field. We can then use the normal ordering of the product of \(\hat{a}\) and \(\hat{a}^{\dagger}\) to simplify the expression: it puts all the creation operators to the left of the annihilation operators, thus ensuring that the vacuum expectation value of any normal-ordered product is zero. We will use the notation \(:\hat{O}:\) to denote the normal ordering of an operator (or a general product of operators) \(\hat{O}\).
 \begin{example}
     Let us consider the product of four ladder operators:
     \[
-        a(p_1) a^{\dagger}(p_2) a(p_3) a^{\dagger}(p_4),
+        \hat{a}(p_1) \hat{a}^{\dagger}(p_2) \hat{a}(p_3) \hat{a}^{\dagger}(p_4),
     \]
     then we can normal order this product as
     \[
-        : a(p_1) a^{\dagger}(p_2) a(p_3) a^{\dagger}(p_4) : = a^{\dagger}(p_2) a^{\dagger}(p_4) a(p_1) a(p_3),
+        : \hat{a}(p_1) \hat{a}^{\dagger}(p_2) \hat{a}(p_3) \hat{a}^{\dagger}(p_4) : = \hat{a}^{\dagger}(p_2) \hat{a}^{\dagger}(p_4) \hat{a}(p_1) \hat{a}(p_3),
     \]
     and we can see that the vacuum expectation value of this normal-ordered product is zero:
     \[
-        \bra{0} : a(p_1) a^{\dagger}(p_2) a(p_3) a^{\dagger}(p_4) : \ket{0} = 0.
+        \bra{0} : \hat{a}(p_1) \hat{a}^{\dagger}(p_2) \hat{a}(p_3) \hat{a}^{\dagger}(p_4) : \ket{0} = 0.
     \]
 \end{example}
 
@@ -173,28 +173,34 @@ which enforces
 \]
 Since a symmetric expression exists for the case \(x^0<y^0\), we can write in general that the time-ordered product of two fields can be written as:
 \[
-    \hat{t} \{ \hat{\phi} (x) \hat{\phi} (y) \} = : \hat{\phi} (x) \hat{\phi} (y) : + \theta(x^0-y^0) [\hat{\phi}^{+} (x), \hat{\phi}^{-} (y)] + \theta(y^0-x^0) [\hat{\phi}^{+} (y), \hat{\phi}^{-} (x)].
+    \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \} = : \hat{\phi} (x) \hat{\phi} (y) : + \theta(x^0-y^0) [\hat{\phi}^{+} (x), \hat{\phi}^{-} (y)] + \theta(y^0-x^0) [\hat{\phi}^{+} (y), \hat{\phi}^{-} (x)].
 \]
 
-If we now take the vacuum expectation value of this time-ordered product (the commutator is not an operator, it is just a function multiplies by the identity), we can see that the normal-ordered part will vanish, since it contains only properly ordered creation and annihilation operators, and thus we are left with
+If we now take the vacuum expectation value of this time-ordered product (the commutator is not an operator, it is just a function multiplied by the identity), we can see that the normal-ordered part will vanish, since it contains only properly ordered creation and annihilation operators, and thus we are left with\footnote{Here we simplified the product \(\bra{0}\ket{0}=1\), since the commutator is just a function multiplied by the identity operator; we could have recognized the Feynman propagator even without taking the vacuum expectation value, but it is important to see how the normal-ordered part vanishes, since it is a crucial step in the proof of Wick's theorem.}
 \[
     \bra{0} \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \} \ket{0} = \Theta(x^0-y^0) [\hat{\phi}^{+} (x), \hat{\phi}^{-} (y)] + \Theta(y^0-x^0) [\hat{\phi}^{+} (y), \hat{\phi}^{-} (x)] = D_F (x,y),
 \]
 where \(D_F (x,y)\) is the Feynman propagator, describing the propagation of particles between two points in spacetime:
 \[
-    \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \} = : \hat{\phi} (x) \hat{\phi} (y) : + D_F (x,y).
+    \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \} = : \hat{\phi} (x) \hat{\phi} (y) : +\, D_F (x,y).
 \]
-Thus if we define the \textbf{contraction of two fields} as \textit{the vacuum expectation value of the time-ordered product} of those two fields, which is the Feynman propagator
-\[
-    \bcontraction[0.5ex]{}{\hat{\phi}}{_1}{\hat{\phi}} \hat{\phi}_1 \hat{\phi}_2 = \bra{0} \hat{T} \{ \hat{\phi}_1 \hat{\phi}_2 \} \ket{0} = D_F (x_1,x_2),
-\]
-we can write the time-ordered product of two fields as the normal-ordered product of those two fields summed to the contraction between them:
-\[
-    \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \} = : \hat{\phi} (x) \hat{\phi} (y) + \bcontraction[0.5ex]{}{\hat{\phi}}{(x)}{\hat{\phi}} \hat{\phi} (x) \hat{\phi} (y) :
-\]
-where the contraction is denoted by a line connecting the two fields, and it represents the Feynman propagator between those two fields. This is the simplest form of Wick's theorem, which allows us to express the time-ordered product of two fields as a sum of a normal-ordered product and a contraction.
+With these results in hand, we can now define the contraction of two fields, which is a very important concept in Wick's theorem and in the calculation of Green's functions in perturbation theory.
 
-This was the Wick's theorem for the time-ordered product of two fields, but we can generalize for it induction to the time-ordered product of \(n\) fields, which is the most general form of Wick's theorem:
+\begin{definition}[Contraction of two fields]
+    The \textbf{contraction of two fields} is defined as \textit{the vacuum expectation value of the time-ordered product} of those two fields, which is the Feynman propagator
+    \[
+        \bcontraction[0.5ex]{}{\hat{\phi}}{_1}{\hat{\phi}} \hat{\phi}_1 \hat{\phi}_2 = \bra{0} \hat{T} \{ \hat{\phi}_1 \hat{\phi}_2 \} \ket{0} = D_F (x_1,x_2).
+    \]
+    This time-ordered product of two fields can be rewritten in a more convenient form as the normal-ordered product of the same two fields summed to their contraction:
+    \[
+        \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \} = : \hat{\phi} (x) \hat{\phi} (y) + \bcontraction[0.5ex]{}{\hat{\phi}}{(x)}{\hat{\phi}} \hat{\phi} (x) \hat{\phi} (y) :
+    \]
+    where the contraction is denoted by a line connecting the two fields, and it represents the Feynman propagator between those two fields.
+\end{definition}
+This is the simplest form of Wick's theorem, which allows us to express the time-ordered product of two fields as a sum of a normal-ordered product and a contraction; we already proven it in the previous steps, since it is the basis for the more general form of Wick's theorem, which we will see next.
+
+This last result can be generalized by induction to the time-ordered product of \(n\) fields, which is the most general form of Wick's theorem:
+
 \begin{theorem}[Wick's theorem]
     The time-ordered product of \(n\) fields can be written as the normal-ordered product of those \(n\) fields plus all possible contractions between those fields:
     \[
@@ -237,7 +243,32 @@ This was the Wick's theorem for the time-ordered product of two fields, but we c
     which shows the extent to which the number of terms grows as we increase the number of fields, since we have to sum over all possible contractions.
 \end{example}
 
-Wick's theorem can be easily proven by induction, starting from the case of two fields, which we have already shown, and then assuming that it holds for \(n-1\) fields, we can show that it holds for \(n\) fields by writing the time-ordered product of \(n\) fields as the time-ordered product of the first field and the time-ordered product of the remaining \(n-1\) fields, and then applying the induction hypothesis to the second part. Let us now see some important consequences of Wick's theorem.
+\begin{proof}
+    Wick's theorem can be easily proven by induction. Starting from the case of two fields, which we already proved, we can assume that the theorem holds for \(n-1\) fields, and then we can write the time-ordered product of \(n\) fields, assuming without loss of generality that \(x_1^0 > x_j^0\) for \(j>1\), as
+    \[
+        \begin{aligned}
+            \hat{T} \{ \hat{\phi}_1 \hat{\phi}_2 \cdots \hat{\phi}_n \} = \hat{\phi}_1 \hat{T} \{ \hat{\phi}_2 \cdots \hat{\phi}_n \} = (\hat{\phi}^+_1 + \hat{\phi}^-_1) : \hat{\phi}_2 \cdots \hat{\phi}_n + (\substack{\text{ all contractions of } \\ \hat{\phi}_2 \cdots \hat{\phi}_n}) :\, ,
+        \end{aligned}
+    \]
+    where we note how one can put \(\hat{\phi}_1^-\) right back in the normal ordering, since it is a creation operator and thus it does not change the normal ordering of the remaining fields, while \(\hat{\phi}_1^+\) is an annihilation operator and thus it has to be commuted with the remaining fields to be put in normal order, and thus it will give us a contraction with each of the remaining fields. Thus we can write
+    \[
+        \begin{aligned}
+            \hat{T} \{ \hat{\phi}_1 \hat{\phi}_2 \cdots \hat{\phi}_n \} & = \, : \hat{\phi}_1 \hat{\phi}_2 \cdots \hat{\phi}_n + \hat{\phi}_1 \times (\substack{\text{ all contractions of } \\ \hat{\phi}_2 \cdots \hat{\phi}_n}) : \\
+                                                                        & + \left[ \hat{\phi}_1^+ \, , \, : \hat{\phi}_2 \cdots \hat{\phi}_n + (\substack{\text{ all contractions of }       \\ \hat{\phi}_2 \cdots \hat{\phi}_n}) : \right],
+        \end{aligned}
+    \]
+    where in order to write the expression for the normal ordered product of the \(n\) fields, we had to sum the commutator of \(\hat{\phi}_1^+\) with the normal-ordered product and contractions of the remaining fields, exactely as done in the case of two fields. We can now develop the commutator, which in general behaves as
+    \[
+        [A , B_1 \cdots B_n] = [A,B_1] B_2 \cdots B_n + B_1 [A,B_2] \cdots B_n + \ldots + B_1 \cdots B_{n-1} [A,B_n],
+    \]
+    where the sum of commutators between \(\hat{\phi}_1^+\) and the remaining fields generates all the possible contractions of \(\hat{\phi}_1\) with those fields; combining these terms with the normal-ordered product gives us all possible contractions of the \(n\) fields, and thus we have proven that the time-ordered product of \(n\) fields can be written as the normal-ordered product of those \(n\) fields plus all possible contractions between those fields
+    \[
+        \hat{T} \{ \hat{\phi}_1 \hat{\phi}_2 \cdots \hat{\phi}_n \} = : \hat{\phi}_1 \hat{\phi}_2 \cdots \hat{\phi}_n + \text{ all possible contractions } :\, ,
+    \]
+    which is exactly what we wanted to prove:
+\end{proof}
+
+Let us now see some important consequences of Wick's theorem, which will be crucial for the calculation of Green's functions in perturbation theory.
 
 \begin{corollary}
     As we said before, the vacuum expectation value of any normal-ordered product is zero, thus we have
@@ -277,23 +308,23 @@ Let us start to put all the pieces together with an example. We will first deriv
     \]
     where \(\ket{\Omega}\) is the vacuum state of the interacting theory and \(\hat{\phi}\) are the field operators. Using the formula we derived before for the Green's function in the interaction picture, we can write this as
     \[
-        \frac{\bra{0} \hat{T} \{ \hat{\phi}_0 (x_1) \hat{\phi}_0 (x_2) \} \exp[ i \int \mathrm{d}^4 x \, \mathcal{L}_{\text{int}} ] \ket{0}}{\bra{0} \hat{T} \{ \exp[ i \int \mathrm{d}^4 x \, \mathcal{L}_{\text{int}} ] \} \ket{0}},
+        \frac{\bra{0} \hat{T} \{ \hat{\phi}_0 (x_1) \hat{\phi}_0 (x_2) \exp[ i \int \mathrm{d}^4 x \, \mathcal{L}_{\text{int}} ] \} \ket{0}}{\bra{0} \hat{T} \{ \exp[ i \int \mathrm{d}^4 x \, \mathcal{L}_{\text{int}} ] \} \ket{0}},
     \]
-    with the free field operators \(\hat{\phi}_0\); now the idea is to expand the exponential in a power series. Let us start from the numerator, which we can write as
+    with the free field operators \(\hat{\phi}_0\); now the idea is to expand the exponential in a power series in \(\lambda\), assuming it small. Let us start from the numerator, which we can write as
     \[
         \begin{aligned}
-            \bra{0} \hat{T} \{ \hat{\phi}_0 (x_1) \hat{\phi}_0 (x_2) \} \ket{0} + (-i \frac{\lambda}{3!}) \bra{0} \hat{T} \{ \hat{\phi}_0 (x_1) \hat{\phi}_0 (x_2) \} \int \mathrm{d}^4 x \, \hat{\phi}_0(x) \ket{0} + \\
-            + (-i \frac{\lambda}{3!})^2 \bra{0} \hat{T} \{ \hat{\phi}_0 (x_1) \hat{\phi}_0 (x_2) \} \int \mathrm{d}^4 x \, \hat{\phi}_0(x) \int \mathrm{d}^4 y \, \hat{\phi}_0(y) \ket{0} + \dots
+            \bra{0} \hat{T} \{ \hat{\phi}_0 (x_1) \hat{\phi}_0 (x_2) \} \ket{0} + (-i \frac{\lambda}{3!}) \bra{0} \hat{T} \{ \hat{\phi}_0 (x_1) \hat{\phi}_0 (x_2) \int \mathrm{d}^4 x \, \hat{\phi}_0(x)^3\} \ket{0} + \\
+            + (-i \frac{\lambda}{3!})^2 \bra{0} \hat{T} \{ \hat{\phi}_0 (x_1) \hat{\phi}_0 (x_2) \int \mathrm{d}^4 x \, \hat{\phi}_0(x)^3 \int \mathrm{d}^4 y \, \hat{\phi}_0(y)^3 \} \ket{0} + \dots
         \end{aligned}
     \]
     where we have expanded the exponential of the interaction Lagrangian in a power series, and we have also used the fact that the fields in the interaction picture are the same as the free fields, which we have denoted with a subscript \(0\).
     With \(\lambda=0\) we get the free theory back, with the usual Feynman propagator as we expected.
 
-    The first term in the expansion thus corresponds to the free theory, which is just a single line connecting the two external points \(x_1\) and \(x_2\), representing the propagation of a particle from \(x_1\) to \(x_2\). The second term corresponds to a correction to the free theory, which can be represented as a diagram with a loop, where the particle propagates from \(x_1\) to \(x\), interacts at \(x\) with another particle, and then propagates from \(x\) to \(x_2\). The third term corresponds to a correction with two loops, where the particle propagates from \(x_1\) to \(x\), interacts at \(x\) with another particle, then propagates from \(x\) to \(y\), interacts at \(y\) with another particle, and then propagates from \(y\) to \(x_2\). And so on for higher-order corrections.
+    \uline{The first term in the expansion thus corresponds to the free theory}, which is just a single line connecting the two external points \(x_1\) and \(x_2\), representing the propagation of a particle from \(x_1\) to \(x_2\). \uline{The second term corresponds to a correction to the free theory}, which can be represented as a diagram with a loop, where the particle propagates from \(x_1\) to \(x\), interacts at \(x\) with another particle, and then propagates from \(x\) to \(x_2\). \uline{The third term corresponds to a correction with two loops}, where the particle propagates from \(x_1\) to \(x\), interacts at \(x\) with another particle, then propagates from \(x\) to \(y\), interacts at \(y\) with another particle, and then propagates from \(y\) to \(x_2\). And so on for higher-order corrections.
 
-    If \(\lambda\) remains small, we can truncate the expansion at a certain order and get an approximation for the 2-point function. This is the basis for perturbation theory in QFT, where we can calculate physical quantities as a power series in the coupling constant, and each term in the series corresponds to a Feynman diagram that represents a particular process or interaction.
+    If \(\lambda\) remains small, we can \textit{truncate the expansion} at a certain order and get an approximation for the 2-point function. This is the basis for perturbation theory in QFT, where we can calculate physical quantities as a power series in the coupling constant, and each term in the series corresponds to a Feynman diagram that represents a particular process or interaction.
 
-    Let us highlight the fact that, for the Wick's theorem, the correction of the order \(O(\lambda)\) vanishes, since it contains an odd number of fields, and thus there are no possible contractions, and thus its vacuum expectation value is zero. The first non-vanishing correction to the free theory is thus the second order correction, which is of order \(O(\lambda^2)\), and it corresponds to a diagram with a loop, as we have seen before.
+    Let us highlight the fact that, for the Wick's theorem, the correction of the order \(O(\lambda)\) vanishes, since it contains an odd number of fields, and thus there are no possible contractions, and thus its vacuum expectation value is zero. \uline{The first non-vanishing correction to the free theory is thus the second order correction}, which is of order \(O(\lambda^2)\), and it corresponds to a \textbf{diagram with a loop}, as we have seen before.
 
     Let us introduce a simpler \textbf{shortcut notation} for the following computations, since we will have to deal with a large number of fields and propagators, and it will be easier to keep track of them in this way. We will denote the Feynman propagator between two external points \(x_i\) and \(x_j\) as \(D_{ij}\), the Feynman propagator between an external point \(x_i\) and an internal point \(x\) as \(D_{ix}\), and the free field operator at a point \(x_i\) as \(\phi_i\). Thus we have
     \[
@@ -313,7 +344,7 @@ Let us start to put all the pieces together with an example. We will first deriv
     \]
     where we have to note that the number of contractions grows very quickly and different contractions may give us the same contribution, since they may be equivalent under permutations of the fields.
 
-    But maybe there is a way in which we can \textbf{list all the possible contractions} without having to write them all down, since as we can see, the number of contractions grows very quickly as we increase the order of the correction, and they may also be equivalent. This is where Feynman diagrams come in handy, as they provide a visual representation of the interactions and allow us to easily keep track of the different terms in the expansion.
+    But maybe there is a way in which we can \textbf{list all the possible contractions} without having to write them all down, since as we can see, the number of contractions grows very quickly as we increase the order of the correction, and they may also be equivalent. This is where \textbf{Feynman diagrams} come in handy, as they provide a visual representation of the interactions and allow us to easily keep track of the different terms in the expansion.
 
     Now we can start to derive the Feynman rules for this theory, which will allow us to write down the contribution of each diagram without having to calculate all the contractions explicitly. The Feynman graphical representation can be derived from this example, where we have the following elements:
 
@@ -351,25 +382,26 @@ Let us start to put all the pieces together with an example. We will first deriv
 
 More generally, we can write the \textbf{Feynman rules} for an n-point function as
 \begin{itemize}
-    \item N external points \(x_1, x_2, \ldots, x_n\), each connected to at least a propagator.
-    \item Any number of vertexes, each corresponding to an interaction term in the Lagrangian, and thus
+    \item N external points \(x_1, x_2, \ldots, x_n\), each connected to only one propagator (line) in every theory.
+    \item Any number of vertexes, each corresponding to an interaction term in the Lagrangian
           \[
               i \int \mathrm{d}^4 z \, \mathcal{L}_{\text{int}} (z),
           \]
-          where in particular for our \(\phi^3\) theory, we have
+          where in particular for our \(\phi^3\) theory, we had
           \[
               i \int \mathrm{d}^4 z \, (-\frac{\lambda}{3!} \phi^3 (z)) = -i \frac{\lambda}{3!} \int \mathrm{d}^4 z \, \phi^3 (z),
           \]
-          which means that each vertex has to be connected to three lines, since the interaction term is cubic in the field. Every vertex is of order \(O(\lambda)\), since it comes from the interaction Lagrangian, and thus the order of the correction is given by the number of vertexes in the diagram.
-    \item The propagators as lines connecting ALL the points, since the contractions has to be complete, and thus we need to connect all the points with propagators, since we cannot have uncontracted fields in the vacuum expectation value.
+          which means that each vertex has to be connected to three lines, since the interaction term is cubic in the field.
+    \item Every vertex is of order \(O(\lambda)\), since it comes from the interaction Lagrangian, and thus the order of the correction is given by the number of vertexes in the diagram.
+    \item The propagators as lines connects ALL the points, since the contractions has to be complete, since we cannot have uncontracted fields in the vacuum expectation value.
 \end{itemize}
 These rules telling us how to draw the Feynman diagrams for a given process, and they also allow us to write down the mathematical expression corresponding to each diagram without having to calculate all the contractions explicitly, which is a very powerful tool for calculating physical quantities in QFT.
 
 The procedure of calculating a physical quantity using Feynman diagrams can be summarized as follows:
 \begin{enumerate}
     \item Draw all the possible Feynman diagrams for the process you want to calculate, following the Feynman rules.
-    \item For each vertex, write down the corresponding factor from the interaction Lagrangian \(\to  -i \alpha \int \mathrm{d}^4 z\).
-    \item For each propagator, write down the corresponding Feynman propagator \(D_F (x,y)\).
+    \item For each vertex, we have an expression to write down the corresponding factor from the interaction Lagrangian \(\to  -i \alpha \int \mathrm{d}^4 z\).
+    \item For each line, write down the corresponding Feynman propagator \(D_F (x,y)\).
 \end{enumerate}
 
 \subsubsection{Diagram Prefactors}
@@ -450,23 +482,30 @@ Thus the correct factor for a diagram with \(M\) vertexes and \(N\) fields in ea
         \contraction[0.5ex]{\phi_1\phi_2\phi_x\phi_x}{\phi_x}{\phi_y}{\phi_y}
         \phi_1 \phi_2 \phi_x \phi_x \phi_x \phi_y \phi_y \phi_y,
     \]
-    and if we compare it to the graphical representation of the diagram, we can see that this contraction symmetry corresponds to the symmetry of the diagram under the \textbf{vertical flip symmetry}, which is a symmetry of the diagram that leaves the external points fixed and swaps the internal points \(x\) and \(y\). This symmetry is the only non-trivial symmetry of the diagram and thus we have a total of 2 symmetries (do not forget the identity), which gives us a symmetry factor of \(S=2\), and thus a contribution of \(1/2\) for this diagram.
+    and if we compare it to the graphical representation of the diagram, we can see that this contraction symmetry corresponds to the invariance of the diagram under the \textbf{vertical flip symmetry}, which is a symmetry of the diagram that leaves the external points fixed and swaps the internal points \(x\) and \(y\). This symmetry is the only non-trivial symmetry of the diagram and thus we have a total of 2 symmetries (do not forget the identity), which gives us a symmetry factor of \(S=2\), and thus a contribution of \(1/2\) for this diagram.
 \end{example}
 
-It can even happen to have an internal subdiagram that is disconnected from the external points, which is called a \textit{vacuum bubble}, and it is possible to show that the contribution of a vacuum bubble cancels out with the denominator of the Green's function. For example, if we compute the next order corrections to the 2-point function, we get
-    [... diagrams ...]
+It can even happen to have an internal subdiagram that is disconnected from the external points, which is called a \textit{vacuum bubble}, and it is possible to show that the contribution of a vacuum bubble cancels out with the denominator of the Green's function. For example, if we were to compute the next order corrections to the 2-point function, we would get the following diagrams:
+\[
+    \begin{aligned}
+        \bra{\Omega} \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \} \ket{\Omega} \Big|_{\text{num}}
+         & = \quad \feynTree                                                                                  \\[2pt]
+         & + \quad \feynBubble \quad + \quad \feynDoubleTadpole \quad + \quad \feynCactus                     \\[2pt]
+         & + \quad \feynDiscDoubleTadpole \quad + \quad \feynDiscSunset \quad + \quad \mathcal{O}(\lambda^4),
+    \end{aligned}
+\]
 where the fifth and sixth diagrams have vacuum bubble. The complete expression associated to these diagrams is given by
 \[
     \begin{aligned}
-        \bra{\Omega} \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \} \ket{\Omega} = & D_{xy} + (-i \frac{\lambda}{3!})^2 \int \mathrm{d}^4 z_1 \, \mathrm{d}^4 z_2 \, D_{x z_1} D_{y z_1} D_{z_1 z_2}^2 + \\
-                                                                                & + \dots
+        \bra{\Omega} \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \} \ket{\Omega} \Big|_{\text{num}} & = D_{12} + (-i \lambda)^2 \int \mathrm{d}^4 x \,\mathrm{d}^4 y \, \left( \tfrac{1}{2} D_{1x} D_{2y} D_{x y}^2 + \tfrac{1}{4} D_{1x} D_{xx}^2 D_{2y} D_{yy}^2\right. \\
+                                                                                                 & + \left. \tfrac{1}{2} D_{1x} D_{2x} D_{xy} D_{yy} + D_{12} (\tfrac{1}{8} D_{xx} D_{xy} D_{yy} + \tfrac{1}{12} D_{xy}^3) \right) + \mathcal{O}(\lambda^4),
     \end{aligned}
 \]
-where the contribution of the vacuum bubbles has been canceled out with the denominator of the Green's function, which is given by
+where the contribution of the vacuum bubbles can be canceled out with the denominator of the Green's function, which is given by
 \[
-    \frac{1}{\bra{0} \hat{T} \{ \exp[ i \int \mathrm{d}^4 z \, \mathcal{L}_{int} ] \} \ket{0}}.
+    \bra{\Omega} \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \} \ket{\Omega} \Big|_{\text{den}} = \frac{1}{\bra{0} \hat{T} \{ \exp[ i \int \mathrm{d}^4 z \, \mathcal{L}_{int} ] \} \ket{0}}.
 \]
-Thus the denominator is exactly a Green's function with no external points, and thus it contains only \textbf{vacuum diagrams}, which are disconnected from the external points, and thus they do not contribute to the physical quantity we are calculating, and thus they can be canceled out with the denominator. This is a very important result, as it tells us that we can ignore the vacuum bubbles when calculating physical quantities in QFT, since they do not contribute to the final result, and thus we can focus only on the connected diagrams, which are the ones that contribute to the physical quantity we are calculating. Indeed we have:
+Thus the denominator is exactly a Green's function with no external points, and thus it contains only \textbf{vacuum diagrams}, which are disconnected from the external points, and thus they do not contribute to the physical quantity we are calculating, and thus they can be canceled out with the denominator. This is a very important result, as it tells us that we can ignore the vacuum bubbles when calculating physical quantities in QFT: they do not contribute to the final result, and thus we can focus only on the connected diagrams, which are the ones that contribute to the physical quantity we are calculating. Indeed we have:
 \begin{itemize}
     \item Numerator: \(\left(\sum \text{connected diagrams}\right)\left(1 + \sum \text{vacuum diagrams} \right)\).
     \item Denominator: \(\left(1 + \sum \text{vacuum diagrams}\right)\).
@@ -476,73 +515,227 @@ Thus in the end, the contribution of the vacuum diagrams cancels out, and we are
     \bra{\Omega} \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \cdots \hat{\phi} (z) \} \ket{\Omega} = \sum \text{connected diagrams}.
 \]
 
+\begin{example}[Still on the cubic interaction]
+    If we were to show the previous result explicitly for the \(\phi^3\) theory, we would have to compute the green's function up to order \(O(\lambda^4)\), which would give us the following diagrams:
+    \[
+        \begin{gathered}
+            \bra{\Omega} \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \} \ket{\Omega}                                                                                                                                                                                                                                                                                                     \\
+            = \frac{\left( \scalefeyn{0.7}{\feynTree} + \scalefeyn{0.7}{\feynBubble} + \scalefeyn{0.7}{\feynDoubleTadpole} + \scalefeyn{0.7}{\feynCactus} \right)\left(1 + \scalefeyn{0.7}{\feynDiscDoubleTadpole} + \scalefeyn{0.7}{\feynDiscSunset} \right)}{\left(1 + \scalefeyn{0.7}{\feynDiscDoubleTadpole} + \scalefeyn{0.7}{\feynDiscSunset} \right)} + \mathcal{O}(\lambda^4) \\
+            = \scalefeyn{0.7}{\feynTree} + \scalefeyn{0.7}{\feynBubble} + \scalefeyn{0.7}{\feynDoubleTadpole} + \scalefeyn{0.7}{\feynCactus} + \mathcal{O}(\lambda^4),
+        \end{gathered}
+    \]
+    which shows explicitly that the contribution of the vacuum bubbles cancels out with the denominator, and thus we are left with only the connected diagrams, which are the ones that contribute to the physical quantity we are calculating.
+\end{example}
+
 \subsubsection{Summary of Feynman Rules in Position Space}
 
 Let us group and summarize all the Feynman rules we have derived so far for a scalar field theory in position space:
 
-\begin{itemize}\TODO{Add more details.}
-    \item External point: \(x_i\), represented as a dot, and connected only to one propagator.
-    \item Vertex: \(i \int \mathrm{d}^4 z \, \mathcal{L}_{\text{int}} (z)\), represented as a dot and connected to a number of lines equal to the number of fields in the interaction term.
-    \item Propagator: \(D_F (x,y)\), represented as a line connecting two points, and corresponding to the Feynman free propagator between those two points.
-    \item Symmetry factor: \(1/S\), where \(S\) is the number of symmetries of the diagram, which can be calculated by counting the number of ways to permute the vertexes and fields without changing the diagram.
-    \item \(\bra{\Omega} \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \cdots \hat{\phi} (z) \} \ket{\Omega} = \sum \text{connected diagrams}\), since the contribution of the vacuum diagrams cancels out with the denominator of the Green's function, and thus we can focus only on the connected diagrams, which are the ones that contribute to the physical quantity we are calculating.
+\begin{itemize}
+    \item \textbf{External point}: \(x_i\), represented as a dot, and it is connected to only one propagator.
+    \item \textbf{Vertex}: \(i \int \mathrm{d}^4 z \, \mathcal{L}_{\text{int}} (z)\), represented as a dot and connected to a number of lines equal to the number of fields in the interaction term. It is specific to the theory we are considering, since it depends on the interaction Lagrangian, and thus it can be different for different theories.
+    \item \textbf{Propagator}: \(D_F (x,y)\), represented as a line connecting two points, and corresponding to the Feynman free propagator between those two points.
+    \item \textbf{Symmetry factor}: \(1/S\), where \(S\) is the number of symmetries of the diagram, which can be calculated by counting the number of ways to permute the vertexes and fields without changing the diagram. It contains the identity as a symmetry, while swapping external points is not a symmetry, since they are fixed.
+    \item \(\bra{\Omega} \hat{T} \{ \hat{\phi} (x) \hat{\phi} (y) \cdots \hat{\phi} (z) \} \ket{\Omega} = \sum \text{connected diagrams}\), since the contribution of the vacuum diagrams cancels out with the denominator of the Green's function, and we can focus only on the connected diagrams, which are the ones contributing to the physical quantity we are calculating.
 \end{itemize}
 
 \subsection{Momentum Space}
 
-Let us study the same \(\phi^3\) theory \(\mathcal{L}_{int} = \frac{\lambda}{3!} \) for a \(2\to 2\) scattering process.\TODO{add draw of scatter.} We work up to the \textbf{leading order} (LO) correction, which means up to \(O(\lambda)\): only one vertex, the first non zero matrix element. The Green's function we are considering is given by
+Let us study the same \(\phi^3\) theory \(\mathcal{L}_{int} = -\frac{\lambda}{3!} \phi^3\) for a \(2\to 2\) scattering process.
+\begin{figure}[H]
+    \centering
+    \tikzset{
+        directed/.style={
+                postaction={decorate},
+                decoration={
+                        markings,
+                        mark=at position 0.6 with {\arrow{stealth}}
+                    }
+            },
+        blackbox/.style={
+                circle,
+                draw=black,
+                minimum size=.8cm,
+                fill=white,
+                pattern=north east lines,
+                pattern color=black!60,
+                thick
+            }
+    }
+    \begin{tikzpicture}[scale=0.8, thick]
+
+        \node[blackbox] (blob) at (0,0) {};
+
+        \coordinate (in_coords) at (-2.5, 0);
+
+        \draw[directed, orange!90!black] (in_coords |- 0, 1) -- (blob.160);
+        \node[orange!90!black, left, font=\mathstrut] at (in_coords |- 0, 1) {$p_1$};
+
+        \draw[directed, orange!90!black] (in_coords |- 0, -1) -- (blob.200);
+        \node[orange!90!black, left, font=\mathstrut] at (in_coords |- 0, -1) {$p_2$};
+
+        \coordinate (out_coords) at (2.5, 0);
+
+        \draw[directed, green!80!black] (blob.20) -- (out_coords |- 0, 1);
+        \node[green!80!black, right, font=\mathstrut] at (out_coords |- 0, 1) {$p_3$};
+
+        \draw[directed, green!80!black] (blob.340) -- (out_coords |- 0, -1);
+        \node[green!80!black, right, font=\mathstrut] at (out_coords |- 0, -1) {$p_4$};
+
+    \end{tikzpicture}
+\end{figure}
+
+We work up to the \textbf{leading order} (LO) correction, which means up to the first non zero matrix element. It is not a general a priori order, such as \(\mathcal{O}(\lambda^0)\) or \(\mathcal{O}(\lambda^2)\); the leading order is determined by the structure of the interaction term, and is given by the lowest power of the coupling constant \(\lambda\) which gives a non zero matrix element.
+
+The Green's function we are considering can be computed as
 \[
     \begin{aligned}
-        \bra{f} \hat{S} \ket{i} & = \bra{p_3, p_4} \hat{S} \ket{p_1, p_2}                                                                             \\
-                                & = \prod_{j=1}^4 \left( -\frac{i}{\sqrt{Z}} (p_j^2 -m^2) \right)                                                     \\
+        \bra{f} \hat{S} \ket{i} & = \bra{p_3, p_4} \hat{S} \ket{p_1, p_2}  = \prod_{j=1}^4 \left( -\frac{i}{\sqrt{Z}} (p_j^2 -m^2) \right)            \\
                                 & \times \int \mathrm{d}^4 x_1 \,\ldots\,\mathrm{d}^4 x_4 e^{i(p_3 x_3 + p_4 x_4 - p_1 x_1 - p_2 x_2)}                \\
                                 & \times \bra{\Omega} \hat{T} \{ \hat{\phi} (x_1) \hat{\phi} (x_2) \hat{\phi} (x_3) \hat{\phi} (x_4) \} \ket{\Omega},
     \end{aligned}
 \]
-where we have used the LSZ reduction formula to relate the S-matrix element to the Green's function. Now for a free theory \(Z=1\), while for an interacting theory \(Z = 1 + O(\lambda)\), thus at the leading order we can set \(Z=1\) and thus we have
+where we have used the LSZ reduction formula to relate the S-matrix element to the Green's function. Now for a free theory \(Z=1\), while for an interacting theory \(Z = 1 + O(\lambda)\), thus at the leading order we can set \(Z=1\) (since we have lower order terms), and thus we write the Green's function as
 \[
     \bra{f} \hat{S} \ket{i} = \int \mathrm{d}^4 x_1 \,\ldots\,\mathrm{d}^4 x_4 e^{i(p_3 x_3 + p_4 x_4 - p_1 x_1 - p_2 x_2)} \times \bra{\Omega} \hat{T} \{ \hat{\phi} (x_1) \hat{\phi} (x_2) \hat{\phi} (x_3) \hat{\phi} (x_4) \} \ket{\Omega}.
 \]
 Now we can use the Feynman rules in position space to write down the contribution of the leading order diagram, which is given by
 \[
-    \dots \text{diagrams} \dots
-\]
-
-\[
-    O(\lambda^0) \, : \, D_{12} D_{34} + D_{13} D_{24} + D_{14} D_{23},
+    \begin{aligned}
+        \mathcal{O}(\lambda^0) & = \feynFourDiscVert + \feynFourDiscHoriz + \feynFourDiscCross \\
+                               & = D_{12} D_{34} + D_{13} D_{24} + D_{14} D_{23},
+    \end{aligned}
 \]
 where we have three possible contractions between the four fields, and thus we have three possible diagrams. Now we can write down the contribution of each diagram in momentum space by using the Fourier transform of the Feynman propagator, which is given assigning a momentum \(k\) to the internal line (with definite direction \(i \to j\)), and thus we have
 \[
-    D_{ij} = \int \frac{\mathrm{d}^4 k}{(2\pi)^4} \frac{e^{-i k (x_i - x_j)}}{k^2 - m^2 + i \epsilon},
+    D_{ij} = \int \frac{\mathrm{d}^4 k}{(2\pi)^4} \frac{e^{-i k (x_i - x_j)}}{k^2 - m^2 + i \epsilon} \quad = \quad \tikz[baseline=-0.6ex, scale=0.5, thick]{
+        \draw (0,0.5) -- (2,0.5);
+        \draw[->, blue!60] (0,0) -- (2,0);
+
+        \node[blue!60, below] at (1,0) {\(k\)};
+        \node[left] at (0,0.5) {\(i\)};
+        \node[right] at (2,0.5) {\(j\)};
+        \filldraw (0,0.5) circle (2pt);
+        \filldraw (2,0.5) circle (2pt);
+    }
 \]
-
-[...]
-
+Doing this for the first diagram, we get
+\[
+    \begin{aligned}
+        \text{Diag I: } & \prod_{j=1}^4 \left( -i(p_j^2 -m^2) \right) \times \int \mathrm{d}^4 x_1 \,\ldots\,\mathrm{d}^4 x_4\, \int \frac{\mathrm{d}^4 k_1}{(2\pi)^4} \frac{\mathrm{d}^4 k_2}{(2\pi)^4} \\
+                        & \times e^{-i x_1 (p_1 - k_1)} e^{-i x_2 (p_2 + k_1)} e^{i x_3 (p_3 - k_2)} e^{i x_4 (p_4 + k_2)} \times \frac{i}{k_1^2 - m^2} \frac{i}{k_2^2 - m^2},
+    \end{aligned}
+\]
+where we can recognize the Fourier transform of the propagators, and thus we can perform the integrals over the external points \(x_1, x_2, x_3, x_4\), which gives us delta functions that set the momenta of the internal lines to be equal to the momenta of the external lines, enforcing momentum conservation at each vertex. Thus simplifing a factor of \((2\pi)^4\) for each delta function, we get a term of the form
+\[
+    \delta^{(4)}(p_1 - k_1) \delta^{(4)}(p_2 + k_1) \delta^{(4)}(p_3 - k_2) \delta^{(4)}(p_4 + k_2) = \delta^{(4)}(p_1 + p_2) \delta^{(4)}(p_3 + p_4) \delta^{(4)}(k_1 - p_1) \delta^{(4)}(k_2 - p_3),
+\]
+where the first two delta functions enforce momentum conservation at the vertices, while the last two delta functions set the internal momenta to be equal to the external momenta. Thus we can perform the integrals over the internal momenta \(k_1\) and \(k_2\), enforcing \(k_1 = p_1\) and \(k_2 = p_3\), which leads us to
 \[
     \text{Diag I: } \prod_{j=1}^4 \left( -i(p_j^2 -m^2) \right) \times \delta^{(4)}(p_1 + p_2) \delta^{(4)}(p_3 + p_4) \times \frac{i}{p_1^2 - m^2} \frac{i}{p_3^2 - m^2} = 0,
 \]
-since the external momenta are on-shell, thus \(p_j^2 = m^2\) for \(j=1,2,3,4\). For the second diagram we can repeat the same procedure, and we get
+since the delta functions enforce a condition that makes the product vanish: \(p_1 + p_2 \neq 0\) as well as \(p_3 + p_4 \neq 0\), since they are both positive-energy momenta.
+
+For the second diagram we could repeat the same procedure, and we would get
 \[
     \text{Diag II: } \prod_{j=1}^4 \left( -i(p_j^2 -m^2) \right) \times \delta^{(4)}(p_1 - p_3) \delta^{(4)}(p_2 - p_4) \times \frac{i}{p_1^2 - m^2}\frac{i}{p_2^2 - m^2},
 \]
-where the delta functions set \(p_3 = p_1\) and \(p_4 = p_2\), which is describing the process where the particles \(p_1\) and \(p_2\) do not scatter, leading to a final state that is the same as the initial state (it is the identity process of \(\hat{S} = \mathbb{I} + i \hat{T}\)). The third diagram gives us the same contribution as the second diagram, since it is just a permutation of the external points, and we can ignore these two processes.
+where the delta functions set \(p_3 = p_1\) and \(p_4 = p_2\) this time, describing the process where the particles \(p_1\) and \(p_2\) do not scatter, leading to a final state that is the same as the initial state (it is the identity process of \(\hat{S} = \mathbb{I} + i \hat{T}\)). The third diagram gives us the same contribution as the second diagram, since it is just a permutation of the external points, and we can ignore these two processes.
 
-We are interested in the scattering process where the particles \(p_1\) and \(p_2\) interact and scatter into the final state \(p_3\) and \(p_4\) such that \(\ket{f} \neq \ket{i}\). The first non trivial diagrams come from the second order correction, which is given by\TODO{draw diagrams}
+We are interested in the scattering process where the particles \(p_1\) and \(p_2\) interact and scatter into the final state \(p_3\) and \(p_4\) such that \(\ket{f} \neq \ket{i}\). The first non trivial diagrams come from the second order correction \(\mathcal{O}(\lambda^2)\), which is given by
 \[
-    O(\lambda^2) \, : \, \dots [\text{diagrams}] \dots
+    \mathcal{O}(\lambda^2) = \feynFourS + \feynFourT + \feynFourU,
 \]
+where we have three possible diagrams, corresponding to the three possible channels of the scattering process: the \(s\)-channel, the \(t\)-channel and the \(u\)-channel (the origin of the names will be cleared in the following sections).
 
-...\TODO{draw diag 1 with k-directions}
+\begin{figure}[H]
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=1, thick]
 
+            % 1. DEFINE COORDINATES (Easy to tweak overall shape)
+            \coordinate (x1) at (0, 2.5);
+            \coordinate (x2) at (0, 0.5);
+            \coordinate (x)  at (2, 1.5);
+            \coordinate (y)  at (4.5, 1.5);
+            \coordinate (x3) at (6.5, 2.5);
+            \coordinate (x4) at (6.5, 0.5);
+
+            % 2. DRAW MAIN PROPAGATOR LINES
+            \draw (x1) -- (x);
+            \draw (x2) -- (x);
+            \draw (x)  -- (y);
+            \draw (y)  -- (x3);
+            \draw (y)  -- (x4);
+
+            % 3. DRAW MOMENTUM ARROWS (Using 'calc' for parallel shift)
+            % The syntax $(A)!0.2!(B)!3mm!90:(B)$ means:
+            % Go 20% from A to B, then shift 3mm perpendicularly (90 degrees).
+
+            % k1 (shifted up/right)
+            \draw[->, blue, thick] ($(x1)!0.3!(x)!3mm!90:(x)$) -- ($(x1)!0.7!(x)!3mm!90:(x)$)
+            node[midway, above right] {\(k_1\)};
+
+            % k2 (shifted down/right -> requires -90 degrees)
+            \draw[->, blue, thick] ($(x2)!0.3!(x)!3mm!-90:(x)$) -- ($(x2)!0.7!(x)!3mm!-90:(x)$)
+            node[midway, below right] {\(k_2\)};
+
+            % k (internal momentum, shifted up)
+            \draw[->, blue, thick] ($(x)!0.3!(y)!3mm!90:(y)$) -- ($(x)!0.7!(y)!3mm!90:(y)$)
+            node[midway, above] {\(k\)};
+
+            % k3 (shifted up/left)
+            \draw[->, blue, thick] ($(y)!0.3!(x3)!3mm!90:(x3)$) -- ($(y)!0.7!(x3)!3mm!90:(x3)$)
+            node[midway, above left] {\(k_3\)};
+
+            % k4 (shifted up/right)
+            \draw[->, blue, thick] ($(y)!0.3!(x4)!3mm!90:(x4)$) -- ($(y)!0.7!(x4)!3mm!90:(x4)$)
+            node[midway, above right] {\(k_4\)};
+
+            % 4. DRAW NODES AND LABELS ON TOP
+            % External nodes (Black)
+            \filldraw (x1) circle (2pt) node[above left] {\(x_1\)};
+            \filldraw (x2) circle (2pt) node[below left] {\(x_2\)};
+            \filldraw (x3) circle (2pt) node[above right] {\(x_3\)};
+            \filldraw (x4) circle (2pt) node[below right] {\(x_4\)};
+
+            % Internal interaction vertices (Red)
+            \filldraw[red] (x) circle (2pt) node[below=6pt] {\(x\)};
+            \filldraw[red] (y) circle (2pt) node[below=6pt] {\(y\)};
+
+        \end{tikzpicture}
+        \caption{$s$-channel with indication of the exchanged four-momenta at vertices $x$ and $y$.}
+        \label{fig:s_channel_momenta}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.35\textwidth}
+        Let us focus on the \(s\)-channel diagram, the first one, where as done before we assign a momentum \(k\) to the internal lines, getting from each vertex and momenta a term of the form \(e^{\pm i k \cdot x}\), with a \uline{positive sign for outgoing momenta} and a \uline{negative sign for incoming momenta}.
+    \end{minipage}
+\end{figure}
+Thus we get the following Fourier transform for the contribution of the first diagram:
 \[
-    \text{Diag I: } \prod_{j=1}^4 \left( -i(p_j^2 -m^2) \right) \times \int \mathrm{d}^4 x_1 \, \ldots\,\mathrm{d}^4 x_n \, e^{i(p_3 x_3 + p_4 x_4 - p_1 x_1 - p_2 x_2)} \times (-i\lambda)^2 \int \mathrm{d}^4 x\,\mathrm{d}^4 y \, D_{1 x} D_{2 x} D_{x y} D_{y3} D_{y4}
+    \begin{aligned}
+        \text{Diag I: } & \prod_{j=1}^4 \left( -i(p_j^2 -m^2) \right) \times \int \mathrm{d}^4 x_1 \, \ldots\,\mathrm{d}^4 x_4 \, e^{i(p_3 x_3 + p_4 x_4 - p_1 x_1 - p_2 x_2)} \\
+                        & \times (-i\lambda)^2 \int \mathrm{d}^4 x\,\mathrm{d}^4 y \, D_{1 x} D_{2 x} D_{x y} D_{y3} D_{y4}
+    \end{aligned}
 \]
+where we have used the Feynman rules in position space to write down the contribution of the diagram, and now we can use the Fourier transform of the propagators to write down the contribution of the diagram in momentum space, which is given by
 \[
-    = \prod (\cdot) \times \int \mathrm{d}^4 x_1 \, \ldots\,\mathrm{d}^4 x_n \, \times (-i \lambda)^2 \int \frac{\mathrm{d}^4 k_1}{(2\pi)^4} \cdots \frac{\mathrm{d}^4 k_4}{(2\pi)^4} \, \frac{\mathrm{d}^4 k}{(2\pi)^4} e^{-i x_1 (p_1 - k_1)} e^{-i x_2 (p_2 - k_2)} e^{-i x_3 (p_3 - k_3)} e^{-i x_4 (p_4 - k_4)} e^{i x (k - k_1 - k_2)} e^{i y (k_3 + k_4 - k)} \times \prod_{q \in \{k_1,\ldots,k_4,k\}} \left( \frac{i}{q^2 - m^2} \right)
+    \begin{aligned}
+        \text{Diag I: } & \prod (\cdot) \times \int \mathrm{d}^4 x_1 \, \ldots\,\mathrm{d}^4 x_4 \, \mathrm{d}^4 x \, \mathrm{d}^4 y \, \times (-i \lambda)^2 \int \frac{\mathrm{d}^4 k_1}{(2\pi)^4} \cdots \frac{\mathrm{d}^4 k_4}{(2\pi)^4} \, \frac{\mathrm{d}^4 k}{(2\pi)^4} \\
+                        & \times e^{-i x_1 (p_1 - k_1)} e^{-i x_2 (p_2 - k_2)} e^{-i x_3 (p_3 - k_3)} e^{-i x_4 (p_4 - k_4)}                                                                                                                                                     \\
+                        & \times e^{i x (k - k_1 - k_2)} e^{i y (k_3 + k_4 - k)} \times \prod_{q \in \{k_1,\ldots,k_4,k\}} \left( \frac{i}{q^2 - m^2} \right).
+    \end{aligned}
 \]
-[...] deltas [...]
-
-
+Paying again attention to the \((2\pi)\) factors, we can perform the integrals over the external points \(x_1, x_2, x_3, x_4\), which gives us delta functions that set the momenta of the internal lines to be equal to the momenta of the external lines, enforcing momentum conservation at each vertex. Thus simplifing a factor of \((2\pi)^4\) for each delta function, we get a term of the form
+\[
+    \delta^{(4)}(p_1 - k_1) \cdots \delta^{(4)}(p_4 - k_4) \delta^{(4)}(k - k_1 - k_2) \delta^{(4)}(k - k_3 - k_4),
+\]
+which can be rewritten as
+\[
+    \delta^{(4)}(p_1 - k_1) \cdots \delta^{(4)}(p_4 - k_4) \delta^{(4)}(k - p_1 - p_2) \delta^{(4)}(p_1 + p_2 - p_3 - p_4),
+\]
+where the first four delta functions set the internal momenta to be equal to the external momenta, while the last delta function enforces momentum conservation at the vertices. Thus in the end we can perform the integrals over the internal momenta \(k_1, k_2, k_3, k_4\), enforcing \(k_j = p_j\) for \(j=1,2,3,4\), which leads us to
 \[
     \bra{f} i\hat{T} \ket{i} = i \mathcal{M} (2\pi)^4 \delta^{(4)} (p_{in} - p_{out} ),
 \]
