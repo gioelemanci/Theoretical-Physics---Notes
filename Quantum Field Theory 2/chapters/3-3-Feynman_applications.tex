@@ -1,0 +1,304 @@
+\section{Applications of Feynman Diagrams}
+
+Let us now apply the Feynman rules to compute scattering amplitudes for various processes in different quantum field theories. We will start with the simplest case of a scalar field theory and then move on to more complex theories involving fermions and gauge bosons.
+
+We will divide diagrams in two categories:
+\begin{enumerate}
+    \item \textbf{The tree-level diagrams}: These are the diagrams that do not contain any loops. They represent the leading order contribution to the scattering amplitude and are often the simplest to compute.
+          \[
+              \feynFourS \qquad \feynFourT \qquad \feynFourU
+          \]
+    \item \textbf{The loop diagrams}: These are the diagrams that contain one or more loops. They represent higher-order corrections to the scattering amplitude and can be more challenging to compute due to the need for regularization and renormalization techniques.\TODO{improve diagrams.}
+          \[
+              \feynFourBubble \qquad \feynFourSunset \qquad \feynFourDumbbell
+          \]
+\end{enumerate}
+Thus in the loop diagrams, one or more internal lines form a closed loop, which can lead to unresolved integrals like \(\int \frac{d^4 k}{(2\pi)^4} \frac{1}{k^2 - m^2}\), which is divergent and requires regularization and renormalization to obtain a finite result.
+
+Usually the first type of diagrams (tree-level) gives the dominant contribution to the scattering amplitude, while the second type (loop diagrams) provides corrections that can be important for precision calculations. For the first ones, usually some algebra is enough to compute the amplitude, since we have no integrations left, while for the second ones, one needs to use more advanced techniques to handle the divergences and obtain meaningful results. Loop diagrams can also give rise to interesting phenomena such as virtual particles and vacuum polarization, which can have important implications for the behavior of quantum fields and the structure of spacetime, but they are in general more difficult to solve.
+
+\begin{remark}
+    We said that usually at LO only the tree diagrams appears, but this is nothing general: there exist cases in which we have loops appearing alredy at the leading order, which are more complicated.
+\end{remark}
+
+\begin{example}[\(2 \to  2\) scattering in \(\phi^3\) theory]
+    The idea is to compute the \textbf{differential cross section} \(\tfrac{\mathrm{d\sigma}}{\mathrm{d} \Omega}\) for the \(2 \to 2\) scattering process of identical particles in \(\phi^3\) theory at tree level, in the center of mass frame, as a function of the total center of mass energy \(E\) and the scattering angle \(\theta\).
+
+    At the leading order, we have already computed the matrix element for the \(2 \to 2\) scattering process in \(\phi^3\) theory: the Feynman rules told us that the relevant diagrams at tree level include the s-channel, t-channel, and u-channel diagrams:
+    \[
+        \begin{aligned}
+            i \mathcal{M} & = \feynFourS + \feynFourT + \feynFourU + \mathcal{O}(\lambda^4)                                                                               \\
+                          & = (-i \lambda)^2 \left[ \frac{1}{(p_1 + p_2)^2 - m^2} + \frac{1}{(p_1 - p_3)^2 - m^2} + \frac{1}{(p_1 - p_4)^2 - m^2} \right] + O(\lambda^4).
+        \end{aligned}
+    \]
+
+    We can define the \textbf{scattering angle} \(\theta\) as the angle between the incoming particle with momentum \(p_1\) and the outgoing particle with momentum \(p_3\):
+    \[
+        \cos \theta = \frac{\mathbf{p}_1 \cdot \mathbf{p}_3}{|\mathbf{p}_1||\mathbf{p}_3|},
+    \]
+    and this will allow us to express the scattering amplitude in terms of the Mandelstam variables, which are functions of \(E\) and \(\theta\). Before proceeding with the calculation, we have to study in more detail the kinematics of the process, which is the subject of the next section.
+\end{example}
+
+\subsection{4-Point Kinematics}
+
+Consider a more general \(2 \to 2\) scattering process, involving two incoming particles with momenta \(p_1\) and \(p_2\), and two outgoing particles with momenta \(p_3\) and \(p_4\). We are not interested in the specific theory describing the interaction or the type of particles involved, but we are requesting that all particles are on-shell, so that
+\[
+    p_i^2 = m^2, \quad i = 1, 2, 3, 4.
+\]
+The scattering amplitude is lorentz invariant, so that it is useful to express it in terms of the \textbf{Mandelstam variables} \(s\), \(t\), and \(u\).
+
+\begin{definition}[Mandelstam variables]
+    The Mandelstam variables \(s\), \(t\), and \(u\), are defined as follows:
+    \[
+        \begin{aligned}
+            s & = (p_1 + p_2)^2 = (p_3 + p_4)^2, \\
+            t & = (p_1 - p_3)^2 = (p_4 - p_2)^2, \\
+            u & = (p_1 - p_4)^2 = (p_2 - p_3)^2.
+        \end{aligned}
+    \]
+    These variables are not independent, since they satisfy the relation
+    \[
+        s + t + u = \sum_{j} m_j^2,
+    \]
+    as we will later prove. These variables are defined in such a way that they are invariant under Lorentz transformations, and provide a convenient way to express the scattering amplitude in terms of the kinematic variables of the process.
+\end{definition}
+
+Now the idea is to express the scattering amplitude in terms of the Mandelstam variables, which will allow us to compute the differential cross section as a function of the scattering angle \(\theta\) and the total center of mass energy \(E\).
+
+Starting from their definitions, we can express
+\[
+    s = p_1^2 + p_2^2 + 2 p_1 \cdot p_2 = m_1^2 + m_2^2 + 2 p_1 \cdot p_2,
+\]
+so that it becomes clear that the Mandelstam variables are related to the Lorentz invariants \(p_i \cdot p_j\). In particular, we have
+\[
+    \begin{aligned}
+         & \begin{dcases}
+               p_1 \cdot p_2 = \frac{1}{2}\left( s - m_1^2 - m_2^2 \right), \\
+               p_1 \cdot p_3 = \frac{1}{2}\left( t - m_1^2 - m_3^2 \right), \\
+               p_2 \cdot p_3 = \frac{1}{2}\left( u - m_2^2 - m_3^2 \right), \\
+               p_4 = p_1 + p_2 - p_3,
+           \end{dcases}
+    \end{aligned}
+\]
+so that every Lorentz invariant \(p_i \cdot p_j\) can be expressed in terms of the Mandelstam variables, since \(p_4\) can be always expressed in terms of the other three momenta using momentum conservation. Thus we are going to square the last relation, and we will obtain
+\[
+    \begin{aligned}
+        m_4^2 = p_4^2 & = (p_1 + p_2 - p_3)^2 = m_1^2 + m_2^2 + m_3^2 + 2 p_1 \cdot p_2 - 2 p_1 \cdot p_3 - 2 p_2 \cdot p_3                            \\
+                      & = m_1^2 + m_2^2 + m_3^2 + 2 \left(\tfrac{1}{2}\right)\left( s - m_1^2 - m_2^2 \right)                                          \\
+                      & - 2 \left(-\tfrac{1}{2}\right)\left( t - m_1^2 - m_3^2 \right) - 2 \left(- \tfrac{1}{2}\right)\left( u - m_2^2 - m_3^2 \right) \\
+                      & = s + t + u - m_1^2 - m_2^2 - m_3^2.
+    \end{aligned}
+\]
+Thus we have
+\[
+    s + t + u = \sum_{j} m_j^2,
+\]
+which is the relation we wanted to prove. For an \(N\)-particle scattering process, we can define the Mandelstam variables as (\(N>4\)):
+\begin{enumerate}
+    \item \(4N\) momentum components \(p_i^\mu\) for \(i = 1, \dots, N\).
+    \item \(N\) on-shell conditions \(p_i^2 = m_i^2\).
+    \item \(4\) momentum conservation conditions \(\sum_{i=1}^N p_i^\mu = 0\) (from translational invariance).
+    \item 6 independent Lorentz invariants \(p_i \cdot p_j\) for \(i < j\), i.e. 6 lorentz transformations leaving the amplitude invariant.
+\end{enumerate}
+Thus in the end we have
+\[
+    4N - N - 4 - 6 = 3N - 10 \textbf{ independent invariants},
+\]
+which can be chosen as
+\[
+    s_{ij} = (p_i + p_j)^2, \quad i < j,
+\]
+these represent the generalization of the Mandelstam variables for \(N\)-particle scattering processes.
+
+\subsubsection{Applications}
+
+Now for a \(2 \to  2\) general process, in the center of mass frame, we have two incoming particles parallel along the \(z\)-axis, and two outgoing particles with momenta \(\mathbf{p}_3\) and \(\mathbf{p}_4\) forming an angle \(\theta\) with the \(z\)-axis
+\[
+    p_1 = \begin{pmatrix}
+        E_1 \\
+        0   \\
+        0   \\
+        p
+    \end{pmatrix}, \quad p_2 = \begin{pmatrix}
+        E_2 \\
+        0   \\
+        0   \\
+        -p
+    \end{pmatrix},
+\]
+where \(p = \vert \mathbf{p}_1 \vert = \vert \mathbf{p}_2 \vert \) since \(\mathbf{p}_1 + \mathbf{p}_2 = 0\) in the center of mass frame. Now considering the outgoing particles, we can rotate the coordinate system so that they lie in the \(z\)-\(y\)-plane, with momenta
+\[
+    \begin{aligned}
+        \mathbf{p}_4 = \mathbf{p}_1 + \mathbf{p}_2 - \mathbf{p}_3 = - \mathbf{p}_3, \quad p^{\prime} = \vert \mathbf{p}_3 \vert = \vert \mathbf{p}_4 \vert, \\
+        \mathbf{p}_3 = \begin{pmatrix}
+                           E_3                    \\
+                           0                      \\
+                           p^{\prime} \sin \theta \\
+                           p^{\prime} \cos \theta
+                       \end{pmatrix}, \quad \mathbf{p}_4 = \begin{pmatrix}
+                                                               E_4                     \\
+                                                               0                       \\
+                                                               -p^{\prime} \sin \theta \\
+                                                               -p^{\prime} \cos \theta
+                                                           \end{pmatrix},
+    \end{aligned}
+\]
+since we are still in the center of mass frame; \(\theta\) is the scattering angle defined previously. Note that the scattering amplitude is invariant under rotations, so that we can always choose the coordinate system in such a way that the outgoing particles lie in the \(z\)-\(y\)-plane, and this will not affect the final result for the scattering amplitude.
+
+Now let us compute the center of mass energy \(E\) and the Mandelstam variables in terms of the scattering angle \(\theta\). We have
+\[
+    E \equiv E_{cm} = E_1 + E_2 = E_3 + E_4,
+\]
+with the first Mandelstam variable defined as
+\[
+    s = (p_1 + p_2)^2 = (E_1 + E_2)^2 = E^2,
+\]
+since the spatial momenta of the incoming particles cancel out. Now
+\[
+    (p_1 + p_2) \cdot p_1 = E \, E_1,
+\]
+and we can also express it as
+\[
+    (p_1 + p_2) \cdot p_1 = m_1^2 + p_2 \cdot p_1 = m_1^2 + \frac{1}{2}(s - m_1^2 - m_2^2) = \frac{1}{2}(E^2 + m_1^2 - m_2^2).
+\]
+Thus we have
+\[
+    \begin{dcases}
+        E_1 = \frac{E^2 + m_1^2 - m_2^2}{2E}, \\
+        E_2 = \frac{E^2 + m_2^2 - m_1^2}{2E}, \\
+    \end{dcases}
+\]
+and now
+\[
+    m_1^2 = p_1^2 = E_1 - \vert \mathbf{p}_1 \vert^2, \quad p = \frac{\sqrt{\left[E^2 - (m_1 + m_2)^2\right]\left[E^2 - (m_1 - m_2)^2\right]}}{2E},
+\]
+obtaining the expression for the momentum of the incoming particles in the center of mass frame. The problem is symmetric in the incoming and outgoing particles, so that we can do the same calculation for the outgoing particles, and we will obtain
+\[
+    \begin{dcases}
+        E_3 = \frac{E^2 + m_3^2 - m_4^2}{2E}, \\
+        E_4 = \frac{E^2 + m_4^2 - m_3^2}{2E},
+    \end{dcases} \quad p^{\prime} = \frac{\sqrt{\left[E^2 - (m_3 + m_4)^2\right]\left[E^2 - (m_3 - m_4)^2\right]}}{2E},
+\]
+where the same calculation enforces the substitutions \(1 \to 3\), \(2 \to 4\) and \(p \to p^{\prime}\).
+
+For the second Mandelstam variable, we have similarly
+\[
+    t = (p_1 - p_3)^2 = m_1^2 + m_3^2 - 2 p_1 \cdot p_3 = m_1^2 + m_2^2 - 2(E_1 E_3 - p p^{\prime} \cos \theta) = t(E, \theta),
+\]
+showing that \(t\) is a function of the center of mass energy \(E\) and the scattering angle \(\theta\). For the third Mandelstam variable, we have
+\[
+    u = (p_1 - p_4)^2 = m_1^2 + m_4^2 - 2 p_1 \cdot p_4 = m_1^2 + m_4^2 - 2(E_1 E_4 + p p^{\prime} \cos \theta) = u(E, \theta),
+\]
+which is also a function of the invariants \(E\) and \(\theta\). Thus we have expressed the Mandelstam variables in terms of the center of mass energy \(E\) and the scattering angle \(\theta\), which will allow us to compute the scattering amplitude and the differential cross section as a function of these variables.
+
+\subsubsection{Special cases}
+
+\begin{itemize}
+    \item \((m_1 = m_2)\): In this case, we have
+          \[
+              E_1 = E_2 = \frac{E}{2}, \quad p = \frac{\sqrt{E^2 - 4 m^2}}{2}.
+          \]
+    \item \((m_3 = m_4)\): In this case, we have
+          \[
+              E_3 = E_4 = \frac{E}{2}, \quad p^{\prime} = \frac{\sqrt{E^2 - 4 m^2}}{2}.
+          \]
+    \item \textbf{Elastic scattering}: In this case, we have \(m_1 = m_3\) and \(m_2 = m_4\), so that
+          \[
+              E_1 = E_3, \quad E_2 = E_4, \quad p = p^{\prime}.
+          \]
+    \item \((m_1 = m_2 = m_3 = m_4)\): In this case, we have
+          \[
+              E_i = \frac{E}{2}, \quad p = p^{\prime} = \frac{\sqrt{E^2 - 4 m^2}}{2}.
+          \]
+          This is the combination of the previous two cases, and it is the most common one in practice, since it describes the scattering of identical particles. The mandelstam variables in this case are given by
+          \[
+              \begin{dcases}
+                  s = E^2,                                         \\
+                  t = -\tfrac{1}{2}(E^2 - 4 m^2)(1 - \cos \theta), \\
+                  u = -\tfrac{1}{2}(E^2 - 4 m^2)(1 + \cos \theta),
+              \end{dcases}
+          \]
+          with the usual relation \(s + t + u = 4 m^2\).
+\end{itemize}
+
+\subsubsection{Back to The Example}
+
+Now we have what we need to compute the scattering amplitude for the \(2 \to 2\) scattering process in \(\phi^3\) theory at tree level, which is given by the sum of the s-channel, t-channel, and u-channel diagrams. Let us come back to this example.
+
+\begin{example}[\(2 \to  2\) scattering in \(\phi^3\) theory]
+    Remember that at the leading order, the matrix element for the \(2 \to 2\) scattering process in \(\phi^3\) theory can be computed using the Feynman rules: the relevant Feynman diagrams at tree level include the s-channel, t-channel, and u-channel diagrams, which have the following momentum dependence:
+    \[
+        i \mathcal{M} = \feynFourS + \feynFourT + \feynFourU + O(\lambda^4),
+    \]
+    which contribute to the scattering amplitude as follows:
+    \[
+        i \mathcal{M} = (-i \lambda)^2 \left[ \frac{1}{s - m^2} + \frac{1}{t - m^2} + \frac{1}{u - m^2} \right] + O(\lambda^4),
+    \]
+    from which it is easy to understand why they are called s-channel, t-channel, and u-channel diagrams; remember that in this case the Mandelstam variables are given by
+    \[
+        \begin{dcases}
+            s = E^2,                                         \\
+            t = -\tfrac{1}{2}(E^2 - 4 m^2)(1 - \cos \theta), \\
+            u = -\tfrac{1}{2}(E^2 - 4 m^2)(1 + \cos \theta),
+        \end{dcases}
+    \]
+    since we are considering the scattering of identical particles, so that \(m_1 = m_2 = m_3 = m_4 = m\).
+
+    Now we can express the scattering amplitude in terms of the Mandelstam variables (expressing them in terms of \(E\) and \(\theta\) as we found before), which will allow us to compute the differential cross section as a function of the scattering angle \(\theta\) and the total center of mass energy \(E\).
+
+    In particular, we have the differential cross section found at the beginning of the section, which in the center of mass frame can be expressed as
+    \[
+        \begin{aligned}
+            \frac{\mathrm{d\sigma}}{\mathrm{d} \Omega} & = \frac{1}{64 \pi^2 E^2} \frac{p^{\prime}}{p} |\mathcal{M}|^2 = \frac{1}{64 \pi^2 E^2} \frac{\sqrt{E^2 - 4 m^2}}{\sqrt{E^2 - 4 m^2}} |\mathcal{M}|^2               \\
+                                                       & = \frac{1}{64 \pi^2 s} |\mathcal{M}|^2 = \frac{\lambda^4}{64 \pi^2 E^2} \left| \frac{1}{s - m^2} + \frac{1}{t - m^2} + \frac{1}{u - m^2} \right|^2 + O(\lambda^6).
+        \end{aligned}
+    \]
+    This is the final result for the differential cross section for the \(2 \to 2\) scattering process in \(\phi^3\) theory at tree level, as a function of the total center of mass energy \(E\) and the scattering angle \(\theta\).
+\end{example}
+
+\subsection{Feynman Rules for Other Theories}
+
+We can generalize some of the Feynman rules we have found for the real scalar field to other theories, such as for different types of fields (complex scalar fields, Dirac fermion fields, vector boson fields) and for different interactions (Yukawa interactions, gauge interactions).
+
+For example, the generalization to a \(\phi^n\) theory is basically trivial:
+\[
+    \mathcal{L}_\text{int} = - \frac{\lambda}{n!} \phi^n,
+\]
+we just have to take into account the fact that each interaction vertex will now involve \(n\) lines instead of 3, and the Feynman rule for the vertex will be given by \(-i \lambda\) times a combinatorial factor that takes into account the number of ways to connect the lines to the vertex. For example, for a \(2 \to 2\) process in a \(\phi^4\) theory, since the vertexes come from the integrals \(\int \mathrm{d}^4 x \mathcal{L}_{\text{int}}\) after contracting all the fields, at the tree level we have only one diagram:
+\[
+    i \mathcal{M} = \feynFourTree + \mathcal{O}(\lambda^2) = -i \lambda + \mathcal{O}(\lambda^2),
+\]
+which is the one with a single vertex, and the Feynman rule for the vertex will be given by \(-i \lambda\).
+
+\section{General Approach for Feynman Rules}
+
+
+\subsection{Complex Scalar Field}
+
+
+\subsection{Dirac Fermion Field}
+
+\subsubsection{Additional Feynman Rules for Fermions}
+
+\begin{example}[Yukawa theory]
+
+\end{example}
+
+\begin{example}
+
+\end{example}
+
+\subsection{Vector Bosons}
+
+\subsection{Quantum Electrodynamics (QED)}
+
+\begin{example}[Two different types of particles in QED]
+
+\end{example}
+
+\subsection{Observations on Diagrams}
+
+\section{Crossing Symmetry}
+
+\subsection{Crossing Symmetry and Identical Fermions}
+
