@@ -174,9 +174,13 @@ since the Hamiltonian is diagonal in momentum space, and thus the Green's functi
 \begin{example}[Green's function for free electrons]
     Consider a system of free electrons described by the Hamiltonian
     \[
-        \hat{H} = \sum_{\mathbf{k}, \sigma} \xi_{\mathbf{k}} \hat{c}_{\mathbf{k}, \sigma}^\dagger \hat{c}_{\mathbf{k}, \sigma},
+        \hat{H} = \hat{H}_0 = \sum_{\mathbf{k}, \sigma} \xi_{\mathbf{k}} \hat{c}_{\mathbf{k}, \sigma}^\dagger \hat{c}_{\mathbf{k}, \sigma},
     \]
-    where \(\xi_{\mathbf{k}}\) is the energy of an electron with momentum \(\mathbf{k}\). The Green's function for this system can be computed using the definition:
+    where \(\xi_{\mathbf{k}}\) is the energy of an electron with momentum \(\mathbf{k}\):
+    \[
+        \xi_{\mathbf{k}} = \epsilon_{\mathbf{k}, \sigma} - \mu = \frac{\hbar^2 k^2}{2m} - \mu.
+    \]
+    The Green's function for this system can be computed using the definition:
     \[
         \mathcal{G}^R(\mathbf{k}, \sigma, t; t') = -i \theta(t - t') \langle \{ \hat{c}_{\mathbf{k}, \sigma}(t),\, \hat{c}_{\mathbf{k}, \sigma}^\dagger(t') \} \rangle.
     \]
@@ -217,3 +221,155 @@ since the Hamiltonian is diagonal in momentum space, and thus the Green's functi
     \]
     For an interacting hamiltonian, the Green's function will have a more complicated form, and it will contain information about the interactions and correlations in the system. The longer the time difference \(t - t'\), the more interactions and correlations will be taken into account in the Green's function, and thus it will deviate more from the free electron case.
 \end{example}
+
+Thus the idea is to arrive and compute the thermal average for the interacting system, which is a very hard task, and thus we will use perturbation theory to compute the Green's function for the interacting system, starting from the free electron Green's function as the zeroth order approximation. This will allow us to capture the effects of interactions and correlations in a systematic way, and to understand how they modify the properties of the system compared to the non-interacting case.
+
+Instead of time, usually the central quantity of interest is the Fourier transform of the Green's function in frequency space, which is given by
+\[
+    \mathcal{G}^R(\mathbf{k}, \sigma, \omega) = \int_{-\infty}^{\infty} \mathrm{d} t e^{i \omega t} \mathcal{G}^R(\mathbf{k}, \sigma, t; 0) = \int_{-\infty}^{\infty} \mathrm{d} t e^{i \omega t} (-i) \theta(t) e^{-i \xi_{\mathbf{k}} t} e^{- \delta t},
+\]
+where we have used the Fourier transform of the Heaviside step function and the exponential function; we set \(t^{\prime} = 0\) since it just corresponds to a shift in the time variable, and thus it does not affect the physics of the problem. Furthermore we added a small imaginary part \(\delta\) to the exponent to ensure convergence of the integral, which is a common technique in many body theory to handle the singularities that can arise in the Green's function. The result of this integral, after the integration of the delta, is
+\[
+    \mathcal{G}^R(\mathbf{k}, \sigma, \omega) = -i \int_0^{\infty} \mathrm{d} t e^{i (\omega - \xi_{\mathbf{k}, \sigma} + i \delta) t} = -i \left[ \frac{e^{i (\omega - \xi_{\mathbf{k}, \sigma} + i \delta) t}}{i (\omega - \xi_{\mathbf{k}, \sigma} + i \delta)} \right]_0^{\infty} = \frac{1}{\omega - \xi_{\mathbf{k}, \sigma} + i \delta},
+\]
+where the importance of the small exponential factor \(e^{- \delta t}\) is evident, since it ensures that the integral converges and that the Green's function has the correct analytic properties in the complex frequency plane. The poles of the Green's function in the complex frequency plane correspond to the energy levels of the system, and the imaginary part of the poles gives information about the lifetime of the quasiparticles in the system.
+
+Every time we Fourier transform the Green's function, we are changing the representation of the Green's function from the time domain to the frequency domain, and thus we are changing the way we look at the physics of the problem. The \(\delta\) term in the Green's function is crucial for ensuring that the Green's function has the correct analytic properties: it is a slight shift in the complex frequency plane that ensures that the poles of the Green's function are located in the correct half-plane, which is essential for maintaining causality and for correctly describing the response of the system to external perturbations.
+
+We found \(\mathcal{G}_0^R(\mathbf{k}, \sigma, \omega)\) the retarded Green's function for a free electron system, which is the starting point for our perturbative expansion
+\[
+    \mathcal{G}_0^R(\mathbf{k}, \sigma, \omega) = \frac{1}{\omega - \xi_{\mathbf{k}, \sigma} + i \delta}.
+\]
+
+Associated to this green's function, we can also define the \textbf{spectral function}, which is given by the imaginary part of the Green's function:
+\[
+    A (\mathbf{k}, \sigma) = -\frac{1}{\pi} \mathrm{Im} \mathcal{G}_0^R(\mathbf{k}, \sigma, \omega) = - \frac{1}{\pi} \mathrm{Im} \left( \frac{1}{\omega - \xi_{\mathbf{k}, \sigma} + i \delta} \right),
+\]
+where we know
+\[
+    \frac{1}{x + i \delta} = \mathcal{P} \left( \frac{1}{x} \right) - i \pi \delta(x),
+\]
+where \(\mathcal{P}\) denotes the Cauchy principal value, and thus we can write the spectral function as
+\[
+    A (\mathbf{k}, \sigma) = - \frac{1}{\pi} \mathrm{Im} \left( \frac{1}{\omega - \xi_{\mathbf{k}, \sigma} + i \delta} \right) \frac{\omega - \xi_{\mathbf{k}, \sigma} - i \delta}{\omega - \xi_{\mathbf{k}, \sigma} - i \delta}
+\]
+where we multiplied and divided by the denominator with a changed sign in front of \(i \delta\), and computing the imaginary part we get
+\[
+    A(\mathbf{k}, \sigma) = - \frac{1}{\pi} \mathrm{Im} \left( \frac{\omega - \xi_{\mathbf{k}, \sigma} - i \delta}{(\omega - \xi_{\mathbf{k}, \sigma})^2 + \delta^2} \right) = \frac{1}{\pi} \left( \frac{\delta}{(\omega - \xi_{\mathbf{k}, \sigma})^2 + \delta^2} \right) \xrightarrow{\delta \to  0} \frac{1}{\pi} \frac{\delta}{(\omega - \xi_{\mathbf{k}, \sigma})^2 + \delta^2},
+\]
+since the lorentzian function \(\frac{1}{\pi} \frac{\delta}{x^2 + \delta^2}\) converges to the Dirac delta function \(\delta(x)\) in the limit \(\delta \to 0\), we can write the spectral function as
+\[
+    A(\mathbf{k}, \sigma) = \delta(\omega - \xi_{\mathbf{k}, \sigma}),
+\]
+which means that the spectral function for a free electron system is a delta function centered at the energy \(\xi_{\mathbf{k}, \sigma}\). This indicates that the energy levels of the system are sharply defined, and that the quasiparticles have an infinite lifetime (since there is no broadening of the spectral function).
+
+Thus the only possible energy for a particle with momentum \(\mathbf{k}\) and spin \(\sigma\) is \(\xi_{\mathbf{k}, \sigma}\), and the spectral function tells us that the density of states at this energy is infinite, while it is zero at all other energies. This is a characteristic feature of non-interacting systems, where the energy levels are discrete and sharply defined. In contrast, in interacting systems, the spectral function will generally have a more complex structure that reflect the effects of interactions and correlations in the system.
+
+If we now add a term in the Green's function to account for the interactions in the system: a time exponential decay term \(e^{-\frac{t-t^{\prime}}{\Gamma}}\), where \(\Gamma\) takes into account the interactions and correlations in the system, and thus it gives a finite lifetime to the quasiparticles in the system. The Green's function for an interacting system can thus be written as
+\[
+    \mathcal{G}^R(\mathbf{k}, \sigma, t; t') = -i \theta(t - t') e^{-i \xi_{\mathbf{k}, \sigma} (t - t')} e^{-\frac{t-t^{\prime}}{\Gamma}},
+\]
+where the exponential decay term \(e^{-\frac{t-t^{\prime}}{\Gamma}}\) captures the effects of interactions and correlations in the system, and it leads to a broadening of the spectral function, which indicates that the energy levels of the system are no longer sharply defined, and that the quasiparticles have a finite lifetime. The Fourier transform of this Green's function will give us a more complex expression for the Green's function in frequency space, which will contain information about the interactions and correlations in the system. The spectral function for this interacting system can be computed as
+\[
+    A(\mathbf{k}, \sigma) = -\frac{1}{\pi} \mathrm{Im} \mathcal{G}^R(\mathbf{k}, \sigma, \omega) = \frac{1}{\pi} \frac{(1/\Gamma)}{(\omega - \xi_{\mathbf{k}, \sigma})^2 + (1/\Gamma)^2},
+\]
+where we have used the Fourier transform of the Green's function with the exponential decay term, and we can see how the interactions and correlations in the system lead to a broadening of the spectral function, which indicates that the energy levels of the system are no longer sharply defined, and that the quasiparticles have a finite lifetime. The width of the spectral function is given by \(1/\Gamma\), which is inversely proportional to the lifetime of the quasiparticles: the shorter the lifetime, the broader the spectral function, and vice versa. This illustrates how interactions and correlations in the system can lead to a finite lifetime for quasiparticles, and how this is reflected in the properties of the Green's function and the spectral function.\TODO{Add image of parabula with delta functions and lorentzian functions.}
+
+Thus given the interaction we need a machinery capable of computing \(\Gamma\), in order to obtain the Green's function for the interacting system, and thus to understand the properties of the system in the presence of interactions and correlations. This is where perturbation theory and Feynman diagrams come into play, as they provide a systematic way to compute the effects of interactions on the Green's function and to extract physical quantities such as \(\Gamma\) from the theory. In a certain sense we are measuring how many states are available for the particle to decay into, and thus how many interactions it can have with other particles in the system, which is what gives rise to the finite lifetime of the quasiparticles in the system. Thus we can generalize the Densitiy of States (DeS) to the case of an interacting system, by using the spectral function, which is given by
+\[
+    \mathrm{DeS}(\omega) = \sum_{\mathbf{k}, \sigma} A(\mathbf{k}, \sigma, \omega),
+\]
+where the spectral function \(A(\mathbf{k}, \sigma, \omega)\) captures the effects of interactions and correlations in the system, and thus it gives us a more accurate picture of the density of states in the presence of interactions. The density of states for an interacting system will generally have a more complex structure than the non-interacting case, and it will reflect the effects of interactions and correlations in the system, such as the broadening of energy levels and the emergence of new features in the density of states due to interactions.
+
+Experiments in angular resolved photoemission spectroscopy (ARPES) can directly measure the spectral function \(A(\mathbf{k}, \sigma, \omega)\) of a material, providing insights into the electronic structure and interactions in the system. By analyzing the ARPES data, we can extract information about the energy dispersion, the lifetime of quasiparticles, and the effects of interactions and correlations in the material. This makes the spectral function a crucial quantity for understanding the physics of condensed matter systems and for interpreting experimental results.
+
+IIMAGINARY TIME FORMALISM
+
+Let us assume \(t>0\), then we can write the Green's function as
+\[
+    \begin{aligned}
+        \mathcal{G}^R(\mathbf{k}, \sigma, t) & = -i \left\langle \{ \hat{c}_{\mathbf{k}, \sigma} (t),\, \hat{c}_{\mathbf{k}, \sigma}^\dagger \} \right\rangle = \dots
+    \end{aligned}
+\]
+where we have used the definition of the Green's function and the time evolution of the annihilation operator in the Heisenberg picture. Now we are interested in computing the green's function ... where
+\[
+    C_{AB}(t,t^{\prime}) = \langle \hat{A}(t) \hat{B}(t') \rangle = - \frac{1}{Z} \mathrm{Tr} \left( e^{-\beta H} \hat{A}(t) \hat{B}(t') \right) = -\frac{1}{Z} \mathrm{Tr} e^{- \beta H} \hat{U}(0,t) \hat{A}(t) \hat{U}(t,0) \hat{U}(0,t') \hat{B}(t') \hat{U}(t',0),
+\]
+where we have inserted the identity operator in the form of the time evolution operator \(\hat{U}(t,0)\) and \(\hat{U}(0,t)\) to express the operators in the Heisenberg picture in terms of the operators in the Schrödinger picture. Now we can use the definition of the time evolution operator to write
+\[
+    \hat{A} (t) = e^{i H_0 t} \hat{A} e^{-i H_0 t}.
+\]
+
+Now the idea is to express the time evolution operator in the interaction picture, which allows us to separate the effects of the non-interacting part of the Hamiltonian from the effects of the interactions. Furthermore from the Dyson series expansion of the time evolution operator, we can express
+\[
+    \hat{U}(t,0) = \hat{T} \exp\left( -i \int_0^t \mathrm{d} t' \hat{V}_I(t') \right).
+\]
+
+The trick is to substitute the time with a complex counterpart:
+\[
+    t \rightarrow - i \tau,
+\]
+where \(\tau\) is a real variable that we will call imaginary time. This substitution allows us to transform the time evolution operator into a form that is more amenable to perturbative calculations, and it also allows us to connect the Green's function to the partition function of the system, which is a central quantity in statistical mechanics. We can write the operators as
+\[
+    A(\tau) = e^{H \tau} A e^{-H \tau},
+\]
+
+\dots
+
+
+and for the time evolution operator we have
+\[
+    \hat{U} (\tau, 0) = \hat{T} \exp\left( - \tau H_0 + \tau \hat{H} \right),
+\]
+ao that if we want to compute the evolution operator in the interaction picture, we can write
+\[
+    \frac{\mathrm{d}}{\mathrm{d} \tau} \hat{U}_I(\tau, 0) = -i \hat{V}_I(\tau) \hat{U}_I(\tau, 0),
+\]
+and we can compute the time evolution operator in the interaction picture using the Dyson series expansion as
+\[
+    \hat{U}_I(\tau, 0) = \hat{T}_{\tau}  \exp\left( -i \int_0^\tau \mathrm{d} \tau' \hat{V}_I(\tau') \right) = 1 - i \int_0^\tau \mathrm{d} \tau' \hat{V}_I(\tau') + (-1)^2 \int_0^\tau \mathrm{d} \tau' \int_0^{\tau'} \mathrm{d} \tau'' \hat{V}_I(\tau') \hat{V}_I(\tau'') + \dots
+\]
+where we have used the definition of the time-ordering operator in imaginary time, which orders the operators according to their imaginary time arguments, with the operator with the largest imaginary time argument placed to the left. This allows us to express the time evolution operator in a form that is more suitable for perturbative calculations, and it also allows us to connect the Green's function to the partition function of the system, which is a central quantity in statistical mechanics.
+
+If we operate the substitution \(\tau = \beta\) we get\TODO{Check the sign in the exponentials.}
+\[
+    U(\beta, 0) = e^{\beta H_0} e^{- \beta H} \implies e^{-\beta H} = e^{-\beta H_0} \hat{U}(\beta, 0).
+\]
+We thus found an expression for the density matrix of the system in terms of the time evolution operator in the interaction picture, which allows us to connect the Green's function to the partition function of the system, and thus to compute the Green's function using perturbation theory. This is a crucial step in many body theory, as it allows us to compute physical quantities such as the Green's function and the spectral function in the presence of interactions and correlations, but in the expression is teh free hamiltonian to appear.
+
+The interacting correlation function can thus be expressed as (assuming \(\tau > \tau'\)):
+\[
+    \begin{aligned}
+        C_{AB}(\tau, \tau') & = - \left\langle \hat{A}(\tau) \hat{B}(\tau') \right\rangle                                                                                                 \\
+                            & =  -\frac{1}{Z} \mathrm{Tr} e^{-\beta H} \hat{U}(0,\tau) \hat{A}(\tau) \hat{U}(\tau,0) \hat{U}(0,\tau') \hat{B}(\tau') \hat{U}(\tau',0)                     \\
+                            & = -\frac{1}{Z} \mathrm{Tr} e^{-\beta H_0} \hat{U}(\beta, 0) \hat{U}(0,\tau) \hat{A}(\tau) \hat{U}(\tau,0) \hat{U}(0,\tau') \hat{B}(\tau') \hat{U}(\tau',0),
+    \end{aligned}
+\]
+where we have used the expression for the density matrix in terms of the time evolution operator in the interaction picture, and we can now use the previously derived expression for the time evolution operator in the interaction picture to express the correlation function in a form that is more suitable for perturbative calculations. This allows us to compute the Green's function and other physical quantities in the presence of interactions and correlations, using perturbation theory and Feynman diagrams to systematically account for the effects of interactions in the system. Thus
+\[
+    C_{AB}(\tau, \tau') = -\frac{1}{Z} \mathrm{Tr} e^{-\beta H_0} \hat{U}(\beta, \tau) \hat{A}(\tau) \hat{U}(\tau, \tau') \hat{B}(\tau') \hat{U}(\tau', 0),
+\]
+and we will see how the imaginary time \(\tau\) is limited in the range \(0> \tau < \beta\), and the same for \(\tau^{\prime}\). But let us assume it for now. This expression written as this is \textit{tau-ordered}.
+
+We can proceed noting how sign do not change if we reorder some operators, so that
+\[
+    \begin{aligned}
+        C_{AB}(\tau, \tau') & = -\frac{1}{Z} \mathrm{Tr} e^{-\beta H_0} \hat{T}_{\tau} \left\{ \hat{U}(\beta, \tau) \hat{U}(\tau, \tau') \hat{U}(\tau', 0)  \hat{A}(\tau) \hat{B}(\tau') \right\} \\
+                            & = - \frac{1}{Z} \mathrm{Tr} e^{-\beta H_0} \hat{T}_{\tau} \left\{ \hat{U}(\beta, 0)  \hat{A}(\tau) \hat{B}(\tau') \right\},
+    \end{aligned}
+\]
+This is a crucial step in the derivation, as it allows us to express the correlation function in a form that is more suitable for perturbative calculations, and it also allows us to connect the Green's function to the partition function of the system, which is a central quantity in statistical mechanics. The final expression for the correlation function in imaginary time is thus
+\[
+    C_{AB}(\tau, \tau') = - \frac{1}{Z} \mathrm{Tr} e^{-\beta H_0} \hat{T}_{\tau} \left\{ \hat{U}(\beta, 0)  \hat{A}(\tau) \hat{B}(\tau') \right\},
+\]
+which is a trace with respect to the non-interacting Hamiltonian \(H_0\) of the time-ordered product of the time evolution operator in the interaction picture and the operators \(A\) and \(B\) in imaginary time (in Dirac picture, thus evolving with the non-interacting Hamiltonian). But as a normalization, we have the inverse of the partition function, which is still accouinting for the interactions
+\[
+    Z = \Tr e^{-\beta H} = \Tr e^{-\beta H_0} \hat{U}(\beta, 0).
+\]
+If we multiply and derive for the non interacting partition function, we can write the correlation function as
+\[
+    C_{AB}(\tau, \tau') = - \frac{\left\langle \hat{U}(\beta, 0) \hat{A}(\tau) \hat{B}(\tau') \right\rangle_0}{\left\langle \hat{U}(\beta, 0) \right\rangle_0},
+\]
+where the \(\frac{1}{Z_0}\) added let us write the thermal average at the numerator with respect to the non-interacting Hamiltonian \(H_0\), while the inverse of \(\frac{Z_0}{Z}\) let us write the thermal average at the denominator with respect to the non-interacting Hamiltonian \(H_0\) as well.
+
+This is a crucial step in the derivation, as it allows us to express the correlation function in a form that is more suitable for perturbative calculations, and it also allows us to connect the Green's function to the partition function of the system, which is a central quantity in statistical mechanics. The only price we are forced to pay is that we have to compute the time evolution operator in the interaction picture, which is given by the Dyson series expansion, and thus we have to compute the effects of interactions in a perturbative way, using Feynman diagrams to systematically account for the effects of interactions in the system. This is the essence of many body theory, and it allows us to compute physical quantities such as the Green's function and the spectral function in the presence of interactions and correlations, which are crucial for understanding the physics of condensed matter systems.
