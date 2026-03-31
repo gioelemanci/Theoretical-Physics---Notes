@@ -241,6 +241,7 @@ We found \(\mathcal{G}_0^R(\mathbf{k}, \sigma, \omega)\) the retarded Green's fu
     \mathcal{G}_0^R(\mathbf{k}, \sigma, \omega) = \frac{1}{\omega - \xi_{\mathbf{k}, \sigma} + i \delta}.
 \]
 
+\subsection{Spectral Function}
 Associated to this green's function, we can also define the \textbf{spectral function}, which is given by the imaginary part of the Green's function:
 \[
     A (\mathbf{k}, \sigma) = -\frac{1}{\pi} \mathrm{Im} \mathcal{G}_0^R(\mathbf{k}, \sigma, \omega) = - \frac{1}{\pi} \mathrm{Im} \left( \frac{1}{\omega - \xi_{\mathbf{k}, \sigma} + i \delta} \right),
@@ -283,7 +284,7 @@ where the spectral function \(A(\mathbf{k}, \sigma, \omega)\) captures the effec
 
 Experiments in angular resolved photoemission spectroscopy (ARPES) can directly measure the spectral function \(A(\mathbf{k}, \sigma, \omega)\) of a material, providing insights into the electronic structure and interactions in the system. By analyzing the ARPES data, we can extract information about the energy dispersion, the lifetime of quasiparticles, and the effects of interactions and correlations in the material. This makes the spectral function a crucial quantity for understanding the physics of condensed matter systems and for interpreting experimental results.
 
-IIMAGINARY TIME FORMALISM
+\subsection{Imaginary Time Formalism}
 
 Let us assume \(t>0\), then we can write the Green's function as
 \[
@@ -291,9 +292,12 @@ Let us assume \(t>0\), then we can write the Green's function as
         \mathcal{G}^R(\mathbf{k}, \sigma, t) & = -i \left\langle \{ \hat{c}_{\mathbf{k}, \sigma} (t),\, \hat{c}_{\mathbf{k}, \sigma}^\dagger \} \right\rangle = \dots
     \end{aligned}
 \]
-where we have used the definition of the Green's function and the time evolution of the annihilation operator in the Heisenberg picture. Now we are interested in computing the green's function ... where
+where we have used the definition of the Green's function and the time evolution of the annihilation operator in the Heisenberg picture. Now we are interested in computing the \textbf{correlation function} for an interacting system, which is given by
 \[
-    C_{AB}(t,t^{\prime}) = \langle \hat{A}(t) \hat{B}(t') \rangle = - \frac{1}{Z} \mathrm{Tr} \left( e^{-\beta H} \hat{A}(t) \hat{B}(t') \right) = -\frac{1}{Z} \mathrm{Tr} e^{- \beta H} \hat{U}(0,t) \hat{A}(t) \hat{U}(t,0) \hat{U}(0,t') \hat{B}(t') \hat{U}(t',0),
+    \begin{aligned}
+        \mathcal{C}_{AB}(t,t^{\prime}) & = \langle \hat{A}(t) \hat{B}(t') \rangle = - \frac{1}{Z} \mathrm{Tr} \left( e^{-\beta H} \hat{A}(t) \hat{B}(t') \right) \\
+                                       & = -\frac{1}{Z} \mathrm{Tr} e^{- \beta H} \hat{U}(0,t) \hat{A}(t) \hat{U}(t,0) \hat{U}(0,t') \hat{B}(t') \hat{U}(t',0),
+    \end{aligned}
 \]
 where we have inserted the identity operator in the form of the time evolution operator \(\hat{U}(t,0)\) and \(\hat{U}(0,t)\) to express the operators in the Heisenberg picture in terms of the operators in the Schrödinger picture. Now we can use the definition of the time evolution operator to write
 \[
@@ -366,7 +370,11 @@ which is a trace with respect to the non-interacting Hamiltonian \(H_0\) of the 
 \[
     Z = \Tr e^{-\beta H} = \Tr e^{-\beta H_0} \hat{U}(\beta, 0).
 \]
-If we multiply and derive for the non interacting partition function, we can write the correlation function as
+If we multiply and derive for the non interacting partition function
+\[
+    C_{AB}(\tau, \tau') = - \frac{Z_0}{Z_0} \frac{1}{Z} \mathrm{Tr} e^{-\beta H_0} \hat{T}_{\tau} \left\{ \hat{U}(\beta, 0)  \hat{A}(\tau) \hat{B}(\tau') \right\},
+\]
+we can rewrite the correlation function as
 \[
     C_{AB}(\tau, \tau') = - \frac{\left\langle \hat{U}(\beta, 0) \hat{A}(\tau) \hat{B}(\tau') \right\rangle_0}{\left\langle \hat{U}(\beta, 0) \right\rangle_0},
 \]
