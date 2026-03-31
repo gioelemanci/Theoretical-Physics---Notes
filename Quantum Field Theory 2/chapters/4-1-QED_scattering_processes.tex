@@ -1,27 +1,421 @@
 \chapter{Quantum Electrodynamics - QED}
 
-
-
-
 \section{Scattering Processes in QED}
 
+Consider QED with two flavors of fermions, namely the electron (\(e^-\)) and the muon (\(\mu^-\)). The Lagrangian for this theory is given by:\footnote{Here \(\mu\) stands for the muon, it is not a Lorentz index.}
+\[
+    \begin{aligned}
+        \mathcal{L} & = - \frac{1}{4} F_{\nu \rho} F^{\nu \rho} + \bar{\psi}_e (i \slashed{\partial} - m_e) \psi_e + \bar{\psi}_\mu (i \slashed{\partial} - m_\mu) \psi_\mu \\
+                    & + Q_e e \bar{\psi}_e \gamma^\nu \psi_e A_\nu + Q_\mu e \bar{\psi}_\mu \gamma^\nu \psi_\mu A_\nu,
+    \end{aligned}
+\]
+where \(Q_i\) (with \(i = e, \mu\)) are the electric charges of the electron and muon, respectively, in units of the elementary charge \(e\). In this theory, we can study various scattering processes, such as electron-muon scattering, Compton scattering, and more. For what follows, we will set \(Q_e = Q_\mu = -1\) for simplicity, as both the electron and muon have the same electric charge in nature, but QED allows for the possibility of different charges.\footnote{This is a non-trivial statement, it is possible to prove that this is true for abelian gauge theories, but not for non-abelian ones.}
 
 \subsection{Electron - Muon Scattering}
 
-\subsection{Dirac Algebra}
-\begin{example}
+Consider the scattering process \(e^- e^+ \to \mu^- \mu^+\). The leading order Feynman diagram (Tree level) for this process is given by the exchange of a virtual photon between the electron-positron pair and the muon-antimuon pair. The amplitude for this process can be calculated using the Feynman rules for QED. \TODO{add the Feynman diagram here.}
 
-\end{example}
+We will not compute explicitly the amplitude here, but we will follow an equivalent simple rule:
+
+\begin{center}\uline{\textit{Apply the Feynman rules while following the Fermion lines backwards.}}\end{center}
+
+Doing so we get the following expression for the amplitude:
+\[
+    i \mathcal{M} = \overline{v}_{s_2}(p_2) (-i e \gamma^\nu) u_{s_1}(p_1) \frac{-i g_{\nu \rho}}{(p_1 + p_2)^2} \overline{u}_{s_3}(p_3) (-i e \gamma^\rho) v_{s_4}(p_4),
+\]
+where the first term comes from the electron-positron vertex, the second term is the photon propagator, and the third term comes from the muon-antimuon vertex. The indices \(s_i\) (with \(i = 1, 2, 3, 4\)) represent the spin states of the particles involved in the scattering process.
+
+We can simplify the notation by defining \(u_i \equiv u_{s_i}(p_i)\) and \(v_i \equiv v_{s_i}(p_i)\) for \(i = 1, 2, 3, 4\). With this notation, the amplitude can be written as:
+\[
+    i \mathcal{M} = \frac{i e^2}{s} \left( \overline{v}_2 \gamma^{\rho} u_1 \right) \left( \overline{u}_3 \gamma_{\rho} v_4 \right).
+\]
+
+Since ideally we want to compute the cross section for this process, we need to compute the squared amplitude, averaged over the initial spins and summed over the final spins. This implies that we need to compute \(\mathcal{M}^*\) other than \(\vert \mathcal{M} \vert^2 \). Recalling that
+\[
+    \left( \overline{\psi}_1 \gamma^{\nu_1} \cdots \gamma^{\nu_n} \psi_2 \right) = \left( \overline{\psi}_2 \gamma^{\nu_n} \cdots \gamma^{\nu_1} \psi_1 \right),
+\]
+thus the matrix element can be rewritten as
+\[
+    i \mathcal{M}^* = \frac{i e^2}{s} \left( \overline{u}_1 \gamma^{\rho} v_2 \right) \left( \overline{v}_4 \gamma_{\rho} u_3 \right) = \TODO{add the Feynman diagram for the conjugate process here.}
+\]
+where thus the conjugate process should describe the same diagram but flipped horizontally.
+
+\paragraph{Polarization of the states.}
+Now we could specify the polarization of the incoming and outgoing states, since most of the times we do not have control over the polarization of the particles in the initial state (they are not prepared in any specific spin state, which is therefore random), and we can assume to not measure the polarization of the particles in the final state. This leads us to the definition of an \textbf{unpolarized cross section}, which is obtained by \uline{averaging over the initial spins and summing over the final spins}. In this case, this is obtained by integrating over the phase space the \textbf{unpolarized squared scattering amplitude}:
+\[
+    \vert \mathcal{M} \vert^2_{\text{unpol}} = \frac{1}{2} \sum_{s_1} \frac{1}{2} \sum_{s_2} \sum_{s_3} \sum_{s_4} \left| \mathcal{M}_{s_1\,s_2 \to s_3\,s_4} \right|^2,
+\]
+[... computations ...]
+
+So the square of a fermion line, summed over polarizations, can be expressed as a trace of gamma matrices: it is a powerful result, since it allows us to compute the squared amplitude without having to worry about the spinor structure of the states, but only applying a trace. This is a consequence of the completeness relations for the spinors, which allow us to express the sum over polarizations in terms of traces of gamma matrices.
+
+    [... computations ... diagram ...]
+
+Thus we
+\begin{itemize}
+    \item Follow the fermion lines backwards to write down the amplitude.
+    \item Replace ``cut lines'' with a sum over polarizations, which can be expressed as a trace of gamma matrices.
+\end{itemize}
+
+\[
+    \vert \mathcal{M} \vert_{\text{unpol}}^2 = \frac{e^4}{4 s^2} \Tr \left[ (\slashed{p}_1 + m_e) \gamma^\rho (\slashed{p}_2 + m_e) \gamma^\sigma \right] \Tr \left[ (\slashed{p}_3 + m_\mu) \gamma_\sigma (\slashed{p}_4 - m_\mu) \gamma_\rho \right].
+\]
+
+But we need to understand how to compute traces of gamma matrices, which is the topic of the next section, in which we will review some properties of the gamma matrices and of the Dirac algebra in general.
+
+\subsection{Dirac Algebra}
+
+[...]
+
+Remember that we are tracing with respect to the spinor indices, thus we are tracing over \(4 \times 4\) matrices, since the gamma matrices are \(4 \times 4\) matrices. The following identities hold for the traces of gamma matrices:
+\[
+    \Tr [\mathbb{I}_4] = 4,
+\]
+\[
+    \Tr [\gamma^\nu] = 0,
+\]
+\[
+    \Tr [\gamma^\nu \gamma^\rho] = 4 g^{\nu \rho},
+\]
+\begin{proof}
+    \[
+        \Tr [\gamma^\nu \gamma^\rho] = \Tr [\gamma^\rho \gamma^\nu] = - \Tr [\gamma^\nu \gamma^\rho] + 2 g^{\nu \rho} \Tr [\mathbb{I}_4] = 4 g^{\nu \rho},
+    \]
+    since we can write
+    \[
+        2 \Tr [\gamma^\nu \gamma^\rho] = 2 g^{\nu \rho} \Tr [\mathbb{I}_4] = 8 g^{\nu \rho}.
+    \]
+\end{proof}
+
+Let us use a simplified notation, in which \(\Tr [\mu \nu \rho \sigma] \equiv \Tr [\gamma^{\mu} \gamma^{\nu} \gamma^{\rho} \gamma^{\sigma}]\). Then we can proceed in the proof of the following identity:
+\[
+    \Tr [\gamma^{\mu} \gamma^\nu \gamma^\rho \gamma^\sigma] = 4 \left( g^{\mu \nu} g^{\rho \sigma} - g^{\mu \rho} g^{\nu \sigma} + g^{\mu \sigma} g^{\nu \rho} \right).
+\]
+\begin{proof}
+    \[
+        \Tr [\mu \nu \rho \sigma] = \Tr [\nu \sigma \rho \mu] = - \Tr [\nu \rho \mu \sigma] + 2 g^{\mu \sigma} \Tr [\nu \rho],
+    \]
+    where now we can apply the previous identity to get
+    \[
+        \Tr [\mu \nu \rho \sigma] = \Tr [\nu \mu \rho \sigma] - 2 g^{\mu \rho} \Tr [\nu \sigma] + 8 g^{\mu \sigma} g^{\nu \rho} = \dots
+    \]
+    where in the end simplifying we get the desired result:
+    \[
+        \Tr [\mu \nu \rho \sigma] = 4 \left( g^{\mu \nu} g^{\rho \sigma} - g^{\mu \rho} g^{\nu \sigma} + g^{\mu \sigma} g^{\nu \rho} \right).
+    \]
+\end{proof}
+
+We are not going to prove the followig traces, but they are very useful in the computations involving polirized fermions or chiral theories. Let us define \(\gamma^5 = i \gamma^0 \gamma^1 \gamma^2 \gamma^3\), then we have the following identities:
+\[
+    \begin{dcases}
+        \Tr [\gamma^5] = 0,                                                                                     \\
+        \Tr [\gamma^5 \gamma^\nu] = 0,                                                                          \\
+        \Tr [\gamma^5 \gamma^\nu \gamma^\rho] = 0,                                                              \\
+        \Tr [\gamma^{\mu} \gamma^\nu \gamma^\rho \gamma^\sigma \gamma^5] = -4 i \epsilon^{\mu \nu \rho \sigma}, \\
+        \Tr [\gamma^{\mu_1} \cdots \gamma^{\mu_{2n+1}} \gamma^5] = 0,
+    \end{dcases}
+\]
+where \(\epsilon^{\mu \nu \rho \sigma}\) is the Levi-Civita symbol.
 
 \subsection{Back to Electron - Muon Scattering}
 
+Let us rewrite the unpolarized squared amplitude for the electron-muon scattering process:
+\[
+    \vert \mathcal{M} \vert_{\text{unpol}}^2 = \frac{e^4}{4 s^2} \Tr \left[ (\slashed{p}_1 + m_e) \gamma^\rho (\slashed{p}_2 + m_e) \gamma^\sigma \right] \Tr \left[ (\slashed{p}_3 + m_\mu) \gamma_\sigma (\slashed{p}_4 - m_\mu) \gamma_\rho \right].
+\]
+Then let us apply the identities for the traces of gamma matrices to compute the traces in the expression above. From the first trace we get
+\[
+    \Tr \left[ (\slashed{p}_1 + m_e) \gamma^\rho (\slashed{p}_2 + m_e) \gamma^\sigma \right]
+\]
+where computing the products inside the trace we can ignore all the terms that contain an odd number of gamma matrices, since their trace is zero. Thus we are left with
+\[
+    \Tr \left[ (\slashed{p}_1 + m_e) \gamma^\rho (\slashed{p}_2 + m_e) \gamma^\sigma \right] = \Tr [\slashed{p}_1 \gamma^\rho \slashed{p}_2 \gamma^\sigma] - m_e^2 \Tr [\gamma^\rho \gamma^\sigma],
+\]
+but the last one is a result we already know, while for the first we can take out the four-momentum from the trace, since it is just a number, and get\TODO{check computations}
+\[
+    \Tr \left[ (\slashed{p}_1 + m_e) \gamma^\rho (\slashed{p}_2 + m_e) \gamma^\sigma \right] = 4 \left( p_1^\rho p_2^\sigma + p_1^\sigma p_2^\rho - g^{\rho \sigma} (p_1 \cdot p_2 - m_e^2) \right).
+\]
+Thus in the end we get
+\[
+    = 4 (p_1^{\nu} p_2^{\mu} + p_1^{\mu} p_2^{\nu} - (p_1 \cdot p_2) g^{\mu \nu}) - m_e^2 \cdot 4 g^{\mu \nu}.
+\]
+The other trace term is basically identical....
+
+    [reasoning about masses...]
+
+Thus we can neglect the mass of the electron, since it will only become importabt in following orders in perturbation theory. Thus we can write the unpolarized squared amplitude as
+    [...]
+\[
+    \vert \mathcal{M} \vert_{\text{unpol}}^2 = \frac{e^4}{4 s^2} \cdot 16 \left[ (p_1 \cdot p_3) (p_2 \cdot p_4) + (p_1 \cdot p_4) (p_2 \cdot p_3) - (p_1 \cdot p_2) (p_3 \cdot p_4) + m_\mu^2 (p_1 \cdot p_2) \right].
+\]
+[...]
+\[
+    \vert \mathcal{M} \vert_{\text{unpol}}^2 = \frac{2e^4}{s^2} \left[ \left(t- m_\mu\right)^2 + \left( u - m_\mu\right)^2 + 2 m_\mu^2 s \right],
+\]
+where now we have expressed the result in terms of the Mandelstam variables (\(s + t + u = 2m_\mu^2 + 2m_e^2 \sim 2m_\mu^2\)), which as we have seen are lorentz invariant combinations of the four-momenta of the particles involved in the scattering process. This is a very useful result, since it allows us to express the squared amplitude in terms of Lorentz invariant quantities, which are easier to compute and to interpret physically.
+
+\subsubsection{Center of Mass Frame}
+
+We move to the center of mass frame, in which the total momentum of the system is zero. In this frame, we can express the four-momenta of the particles in terms of their energies and three-momenta. Let us denote by \(E_i\) and \(\vec{p}_i\) the energy and three-momentum of the \(i\)-th particle, respectively. Then we have
+\[
+    E_1 = E_2 = E_3 = E_4 = \frac{E_{cm}}{2} \equiv E_e \geq m_\mu,
+\]
+and we can write
+\[
+    p_1 = \begin{pmatrix}
+        E_e \\
+        0   \\
+        0   \\
+        E_e
+    \end{pmatrix}, \quad p_2 = \begin{pmatrix}
+        E_e \\
+        0   \\
+        0   \\
+        -E_e
+    \end{pmatrix}, \quad p_3 = \begin{pmatrix}
+        E_e            \\
+        0              \\
+        p' \sin \theta \\
+        p' \cos \theta
+    \end{pmatrix}, \quad p_4 = \begin{pmatrix}
+        E_e             \\
+        0               \\
+        -p' \sin \theta \\
+        -p' \cos \theta
+    \end{pmatrix},
+\]
+where \(p^{\prime} = \sqrt{E_e^2 - m_\mu^2}\). Then we can express the Mandelstam variables in terms of the energies and the scattering angle \(\theta\):
+\[
+    \begin{dcases}
+        s = E_{cm}^2 = 4 E_e^2,                                               \\
+        t = (p_3 - p_1)^2 = m_\mu^2 - 2 (E_e^2 - E_e p^{\prime} \cos \theta), \\
+        u = (p_3 - p_2)^2 = m_\mu^2 - 2 (E_e^2 + E_e p^{\prime} \cos \theta),
+    \end{dcases}
+\]
+where we have used the fact that \(p_1^2 = p_2^2 = m_e^2 \sim 0\) and \(p_3^2 = p_4^2 = m_\mu^2\). Thus we can express the unpolarized squared amplitude in terms of the center of mass energy and the scattering angle:
+\[
+    \vert \mathcal{M} \vert_{\text{unpol}}^2 = \dots
+\]
+which, expanding the squares and using the expression for \(p^{\prime}\) we get to
+\[
+    \vert \mathcal{M} \vert_{\text{unpol}}^2 = e^4 \left[ (1 + \cos^2 \theta) + \frac{m_\mu^2}{E_e^2} (1 - \cos^2 \theta) \right].
+\]
+
+Now having expressed the unpolarized squared amplitude in terms of the center of mass energy and the scattering angle, we can compute the differential cross section for this process. The differential cross section is given by
+\[
+    \frac{\mathrm{d} \sigma}{\mathrm{d} \Omega} = \frac{1}{64 \pi^2 E_{cm}^2} \frac{p_f}{p_i} \vert \mathcal{M} \vert_{\text{unpol}}^2,
+\]
+where \(E_{cm}^2 = 4 E_e^2\) is the center of mass energy squared and the fraction of momenta can be written as
+\[
+    \frac{p_f}{p_i} = \frac{p^{\prime}}{E_e} = \sqrt{1 - \frac{m_\mu^2}{E_e^2}}.
+\]
+Thus we can compute the differential cross section, using the constant
+\[
+    \alpha = \frac{e^2}{4 \pi} \approx \frac{1}{137},
+\]
+we get
+\[
+    \frac{\mathrm{d} \sigma}{\mathrm{d} \Omega} = \frac{\alpha^2}{16 E_e^2} \sqrt{1 - \frac{m_\mu^2}{E_e^2}}\left[ (1 + \cos^2 \theta) + \frac{m_\mu^2}{E_e^2} (1 - \cos^2 \theta) \right].
+\]
+\[
+    \frac{\mathrm{d} \sigma}{\mathrm{d} \cos \theta}  = 2 \pi \frac{\mathrm{d} \sigma}{\mathrm{d} \Omega}.
+\]
+\[
+    \sigma = \int_{-1}^{1} \mathrm{d} \cos \theta \, \frac{\mathrm{d} \sigma}{\mathrm{d} \cos \theta} = \frac{\alpha^2}{E_e^2} \frac{\pi}{3} \sqrt{1 - \frac{m_\mu^2}{E_e^2}} \left( 1 + \frac{m_\mu^2}{2 E_e^2} \right).
+\]
+
+\begin{example}[Excercise]
+    Use crossing symmetry to compute the unpolarized squared amplitude for the \(e^- \mu^- \to e^- \mu^-\) process:
+    \[
+        \vert \mathcal{M} \vert_{\text{unpol}}^2 (e^- \mu^- \to e^- \mu^-) = \frac{2 e^4}{t^2} \left[ (s - m_\mu^2)^2 + (u - m_\mu^2)^2 + 2 m_\mu^2 t \right].
+    \]
+    [...]
+\end{example}
+
+\begin{remark}[Crossing Symmetry]
+    [...]
+\end{remark}
+
+
+
 \subsection{Polarized Matrix Elements}
 
-\subsection{Compton Scattering and External Photons}
+There are several formalism to compute the polarized matrix elements, which are the amplitudes for specific spin states of the particles involved in the scattering process. Let us review some of the most common cases:
+\begin{itemize}
+    \item \textbf{Massless case}
+          In the massless case, we can use the helicity states \(u_L\) and \(u_R\), chirality projectors to compute the polarized matrix elements. The chirality projectors are defined as
+          \[
+              P_L = \frac{1 - \gamma_5}{2}, \quad P_R = \frac{1 + \gamma_5}{2},
+          \]
+          and they project the spinors onto their left-handed and right-handed components, respectively:
+          \[
+              \begin{dcases}
+                  P_L u_L = u_L, \quad P_L v_R = v_R, \\
+                  P_R u_R = u_R\dots
+              \end{dcases}
+          \]
+
+          Let us consider \(i \mathcal{M}\) with left-handed fermions
+          \[
+              u_L(p) \overline{u}_L (p) = \sum_{s} P_L u_s \overline{u}_s = P_L (\slashed{p} + m) = \frac{1 - \gamma_5}{2} \slashed{p},
+          \]
+          Thus we can still use the trace technology to compute the polarized matrix elements, but we need to insert the chirality projectors in the traces, which will make the computations more involved, since we will have to use also the identities for the traces of gamma matrices with \(\gamma_5\).
+
+          \dots
+
+    \item \textbf{Massive case}
+          In the massive case, we can use the spin states \(u_{s}\) and \(v_{s}\) to compute the polarized matrix elements.
+              [...]
+          \[
+              P_S = \frac{1}{2} \left( 1 + \gamma_5 \slashed{S} \right),
+          \]
+          where \(S^\mu\) is the spin four-vector, which in the rest frame of the particle is given by \(S^\mu = (0, \mathbf{s})\), where \(\mathbf{s}\) is the three-dimensional spin vector. The spin projectors \(P_S\) project the spinors onto their spin states, and they can be used to compute the polarized matrix elements in the massive case. In other frames we can lorentz transform the spin four-vector to get the correct expression for the spin projector.
+
+    \item \textbf{Alternative}
+          The \textbf{spinor-helicity formalism} ...
+\end{itemize}
+
+
+\subsection{External Photons and Compton Scattering}
+
+Let us consider a process where we have an external photon, \TODO{add the Feynman diagram for Compton scattering here.} The amplitude for this process can be computed using the Feynman rules for QED, and it will involve the polarization vector of the external photon.
+\[
+    i \mathcal{M} = \epsilon_\mu(p) (i \mathcal{M})^{\mu},
+\]
+where the last term is only a way to write the rest of the diagram, which will be contracted with the polarization vector of the photon. The amplitude for this process will depend on the polarization of the external photon, and we will need to sum over the polarizations of the photon to get the unpolarized cross section for this process.
+
+In the rest frame,
+\[
+    p^{\mu} = \begin{pmatrix}
+        E \\
+        0 \\
+        0 \\
+        E
+    \end{pmatrix},
+\]
+assuming to be in the Lorenz gauge
+\[
+    p_\mu \epsilon^\mu(p) = 0,
+\]
+we can note that this choice does not fix completely the gauge, since we can still perform a gauge transformation of the form
+\[
+    \epsilon^\mu(p) \to \epsilon^\mu(p) + \alpha p^\mu,
+\]
+which for example we can use to fix \(\epsilon^0(p) = 0\). Thus we have a basis of polarization vectors for the photon, which are given by
+\[
+    \epsilon^\mu_{\pm}(p) = \begin{pmatrix}
+        0     \\
+        1     \\
+        \pm i \\
+        0
+    \end{pmatrix},
+\]
+[...]
+and the Ward identity
+\[
+    p_\mu (\mathcal{M})^{\mu} = 0,
+\]
+which tells us how if we replace the polarization vector of the photon with its momentum, we get a vanishing amplitude, which is a consequence of the gauge invariance of the theory. This identity will be very useful in the computations involving external photons, since it allows us to simplify the expressions for the amplitudes by using the fact that we can replace the polarization vector with the momentum of the photon without changing the value of the amplitude.
+
+In other words, the term of the amplitude contracting with the polarization vector of the photon should be a conserved current that couples to the photon, thus it should satisfy the Ward identity, which is a consequence of the gauge invariance of the theory.
+\[
+    \partial_\mu J^\mu = 0 \implies p_\mu J^{\mu} = 0.
+\]
 
 \subsubsection{Polarization Sums}
 
+If we look at
+\[
+    \vert \mathcal{M} \vert^2 = (\epsilon_s^{\mu} \mathcal{M}_\mu) (\epsilon_{s}^{*\nu} \mathcal{M}^*_\nu),
+\]
+then for the unpolarized cross section we need to sum over the polarizations of the photon, which means that we need to compute
+\[
+    \sum_{s = \pm} \epsilon_s^{\mu} \epsilon_{s}^{*\nu}.
+\]
+Assuming again the momentum along the \(z\)-axis, we can write this summation as
+\[
+    \sum_{s = \pm} \epsilon_s^{\mu} \epsilon_{s}^{*\nu} = \begin{pmatrix}
+        0 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 0
+    \end{pmatrix}.
+\]
+
+We can rewrite this expression in a more covariant way, by noting that the polarization vectors of the photon satisfy the following completeness relation:
+\[
+    \sum_{s=\pm} \epsilon_s^{\mu} \epsilon_{s}^{*\nu} = - g^{\mu \nu} + \frac{p^\mu \eta^\nu + p^\nu \eta^\mu}{p \cdot \eta},
+\]
+where \(\eta^\mu\) is an arbitrary massless four-vector that satisfies the condition \(\epsilon_s \cdot \eta = 0\). This completeness relation allows us to express the sum over the polarizations of the photon in a covariant way, which is very useful in the computations involving external photons, since it allows us to simplify the expressions for the amplitudes by using the fact that we can replace the sum over the polarizations with a covariant expression that involves the metric tensor and the momentum of the photon.
+
+If we chose \(\eta^\mu = (1, 0, 0, -1)\), then we can check that the completeness relation reduces to the expression we found before for the sum over the polarizations of the photon:
+\[
+    \epsilon_{\pm}^{\mu} = \begin{pmatrix}
+        0     \\
+        1     \\
+        \pm i \\
+        0
+    \end{pmatrix}.
+\]
+
+[...] [...]
+
+However
+\[
+    \vert \mathcal{M} \vert^2 = \sum_{s} \epsilon_s^{\mu} \epsilon_{s}^{*\nu} \mathcal{M}_\mu \mathcal{M}^*_\nu,
+\]
+where for the Ward identity to hold we need to have
+\[
+    \begin{dcases}
+        p_\mu \mathcal{M}^\mu = 0, \\
+        p_\nu \mathcal{M}^{*\nu} = 0,
+    \end{dcases}
+\]
+son in practice we are allowed to replace the sum over the polarizations of the photon with \(- g^{\mu \nu}\) without changing the value of the amplitude, since the terms proportional to \(p^\mu\) and \(p^\nu\) will vanish when contracted with \(\mathcal{M}_\mu\) and \(\mathcal{M}^*_\nu\), respectively. Thus we can write
+\[
+    \sum_{s} \epsilon_s^{\mu} \epsilon_{s}^{*\nu} \to - g^{\mu \nu}.
+\]
+This derivation is a consequence of Ward Identity in the particular case of just one external photon, but it can be generalized to the case of multiple external photons; indeed we know a stronger version of the Ward identity, which states that if we replace the polarization vector of any external photon with its momentum, we get a vanishing amplitude:
+\[
+    p_\mu \mathcal{M}^{\mu\,\nu_1 \cdots \nu_n} = 0,
+\]
+where now we have \(n+1\) external photons, and the amplitude is a tensor with \(n\) Lorentz indices, one for each external photon (we removed the polarization vectors of the photons, they are not inside \(\mathcal{M}^{\mu\,\nu_1 \cdots \nu_n}\) ). Thus we can replace the sum over the polarizations of each external photon with \(- g^{\mu \nu}\) without changing the value of the amplitude, since the terms proportional to \(p^\mu\) and \(p^\nu\) will vanish when contracted with the amplitude due to the Ward identity. This is a very powerful result, since it allows us to simplify the computations involving external photons by replacing the sum over the polarizations with a simple expression that involves only the metric tensor.
+
+We will prove the Ward identity later, but for now we can use it to compute the unpolarized cross section for the Compton scattering process.
+
 \subsubsection{Compton Scattering}
+
+The compton scattering process is given by \(e^-(p_1) \gamma(p_2) \to e^-(p_3) \gamma(p_4)\).
+Let us set the mass of the electron to zero for simplicity, since it will not play a role in the computations at leading order. Then we can write the amplitude for this process as\TODO{add diagrams}
+\[
+    i \mathcal{M} \bigg|_{\text{Tree}} = \dots diagrams \dots
+\]
+\[
+    = -(ie)^2 \left[\overline{u}_3 \gamma^{\nu} \frac{i (\slashed{p}_1 + \slashed{p}_2)}{(p_1 + p_2)^2}\gamma^{\nu} u_1 + \overline{u}_3 \gamma^{\nu} \frac{i (\slashed{p}_3 - \slashed{p}_2)}{(p_2 - p_3)^2}\gamma^{\nu} u_1 \right] \epsilon_{2 \mu} \epsilon^*_{4 \nu} \equiv i \mathcal{M}^{\mu \nu}\epsilon_{2 \mu} \epsilon^*_{4 \nu},
+\]
+and we now want to verify the general Ward identity in this process for \(\epsilon_2^{\mu} \to p_2^{\mu}\). Thus we need to check the contraction among momentum and the rest of the amplitude:\TODO{check computations}
+\[
+    p_{2 \mu} (i \mathcal{M})^{\mu \nu} = -(ie)^2 \left[\overline{u}_3 \slashed{p}_2 \frac{i (\slashed{p}_1 + \slashed{p}_2)}{(p_1 + p_2)^2}\gamma^{\nu} u_1 + \overline{u}_3 \gamma^{\nu} \frac{i (\slashed{p}_3 - \slashed{p}_2)}{(p_2 - p_3)^2}\slashed{p}_2 u_1 \right] \epsilon^*_{4 \nu}.
+\]
+\[
+    \slashed{p}\slashed{p} = p^2 \mathbb{I}_4,
+\]
+\[
+    \begin{aligned}
+        \text{I line: }  & \slashed{p}_1 \slashed{p}_2 = - \slashed{p}_2 \slashed{p}_1 + 2 p_1 \cdot p_2 \text{ and } \slashed{p}_2 u_1 = 0,            \\
+        \text{II line: } & \slashed{p}_2 \slashed{p}_3 = - \slashed{p}_3 \slashed{p}_2 + 2 p_2 \cdot p_3 \text{ and } \overline{u}_3 \slashed{p}_3 = 0,
+    \end{aligned}
+\]
+
+[...]
+
+\begin{remark}
+    We get a zero amplitude independently of the choice of the polarization vector of the outgoing photon \(\epsilon_4^{\nu} \), and it should work even for an unphysical state of \(\epsilon_4^{\nu} \).
+
+    It is important to note that the Ward identity does not hold for individual Feynman diagrams, but only for the sum of all the diagrams that contribute to a given process. There was indeed a cancellation between the two diagrams that contribute to the Compton scattering process, which is a consequence of the gauge invariance of the theory.
+
+    The single diagram is not gauge invariant indeed, but their sum is, and this is a consequence of the fact that the gauge invariance of the theory is a global property that is not manifest in the individual diagrams, but only in their sum.
+\end{remark}
 
 \subsection{Notes on Convergence}
 
