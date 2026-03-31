@@ -1,0 +1,252 @@
+\section{Imaginary Time Formalism}
+
+Let us assume \(t>0\), then we can write the Green's function as
+\[
+    \begin{aligned}
+        \mathcal{G}^R(\mathbf{k}, \sigma, t) & = -i \left\langle \{ \hat{c}_{\mathbf{k}, \sigma} (t),\, \hat{c}_{\mathbf{k}, \sigma}^\dagger \} \right\rangle = \dots
+    \end{aligned}
+\]
+where we have used the definition of the Green's function and the time evolution of the annihilation operator in the Heisenberg picture. Now we are interested in computing the \textbf{correlation function} for an interacting system, which is given by
+\[
+    \begin{aligned}
+        \mathcal{C}_{AB}(t,t^{\prime}) & = \langle \hat{A}(t) \hat{B}(t') \rangle = - \frac{1}{Z} \mathrm{Tr} \left( e^{-\beta H} \hat{A}(t) \hat{B}(t') \right) \\
+                                       & = -\frac{1}{Z} \mathrm{Tr} e^{- \beta H} \hat{U}(0,t) \hat{A}(t) \hat{U}(t,0) \hat{U}(0,t') \hat{B}(t') \hat{U}(t',0),
+    \end{aligned}
+\]
+where we have inserted the identity operator in the form of the time evolution operator \(\hat{U}(t,0)\) and \(\hat{U}(0,t)\) to express the operators in the Heisenberg picture in terms of the operators in the Schrödinger picture. Now we can use the definition of the time evolution operator to write
+\[
+    \hat{A} (t) = e^{i H_0 t} \hat{A} e^{-i H_0 t}.
+\]
+
+Now the idea is to express the time evolution operator in the interaction picture, which allows us to separate the effects of the non-interacting part of the Hamiltonian from the effects of the interactions. Furthermore from the Dyson series expansion of the time evolution operator, we can express
+\[
+    \hat{U}(t,0) = \hat{T} \exp\left( -i \int_0^t \mathrm{d} t' \hat{V}_I(t') \right).
+\]
+
+The trick is to substitute the time with a complex counterpart:
+\[
+    t \rightarrow - i \tau,
+\]
+where \(\tau\) is a real variable that we will call imaginary time. This substitution allows us to transform the time evolution operator into a form that is more amenable to perturbative calculations, and it also allows us to connect the Green's function to the partition function of the system, which is a central quantity in statistical mechanics. We can write the operators as
+\[
+    A(\tau) = e^{H \tau} A e^{-H \tau},
+\]
+
+\dots
+
+
+and for the time evolution operator we have
+\[
+    \hat{U} (\tau, 0) = \hat{T} \exp\left( - \tau H_0 + \tau \hat{H} \right),
+\]
+ao that if we want to compute the evolution operator in the interaction picture, we can write
+\[
+    \frac{\mathrm{d}}{\mathrm{d} \tau} \hat{U}_I(\tau, 0) = -i \hat{V}_I(\tau) \hat{U}_I(\tau, 0),
+\]
+and we can compute the time evolution operator in the interaction picture using the Dyson series expansion as
+\[
+    \hat{U}_I(\tau, 0) = \hat{T}_{\tau}  \exp\left( -i \int_0^\tau \mathrm{d} \tau' \hat{V}_I(\tau') \right) = 1 - i \int_0^\tau \mathrm{d} \tau' \hat{V}_I(\tau') + (-1)^2 \int_0^\tau \mathrm{d} \tau' \int_0^{\tau'} \mathrm{d} \tau'' \hat{V}_I(\tau') \hat{V}_I(\tau'') + \dots
+\]
+where we have used the definition of the time-ordering operator in imaginary time, which orders the operators according to their imaginary time arguments, with the operator with the largest imaginary time argument placed to the left. This allows us to express the time evolution operator in a form that is more suitable for perturbative calculations, and it also allows us to connect the Green's function to the partition function of the system, which is a central quantity in statistical mechanics.
+
+If we operate the substitution \(\tau = \beta\) we get\TODO{Check the sign in the exponentials.}
+\[
+    U(\beta, 0) = e^{\beta H_0} e^{- \beta H} \implies e^{-\beta H} = e^{-\beta H_0} \hat{U}(\beta, 0).
+\]
+We thus found an expression for the density matrix of the system in terms of the time evolution operator in the interaction picture, which allows us to connect the Green's function to the partition function of the system, and thus to compute the Green's function using perturbation theory. This is a crucial step in many body theory, as it allows us to compute physical quantities such as the Green's function and the spectral function in the presence of interactions and correlations, but in the expression is teh free hamiltonian to appear.
+
+The interacting correlation function can thus be expressed as (assuming \(\tau > \tau'\)):
+\[
+    \begin{aligned}
+        C_{AB}(\tau, \tau') & = - \left\langle \hat{A}(\tau) \hat{B}(\tau') \right\rangle                                                                                                 \\
+                            & =  -\frac{1}{Z} \mathrm{Tr} e^{-\beta H} \hat{U}(0,\tau) \hat{A}(\tau) \hat{U}(\tau,0) \hat{U}(0,\tau') \hat{B}(\tau') \hat{U}(\tau',0)                     \\
+                            & = -\frac{1}{Z} \mathrm{Tr} e^{-\beta H_0} \hat{U}(\beta, 0) \hat{U}(0,\tau) \hat{A}(\tau) \hat{U}(\tau,0) \hat{U}(0,\tau') \hat{B}(\tau') \hat{U}(\tau',0),
+    \end{aligned}
+\]
+where we have used the expression for the density matrix in terms of the time evolution operator in the interaction picture, and we can now use the previously derived expression for the time evolution operator in the interaction picture to express the correlation function in a form that is more suitable for perturbative calculations. This allows us to compute the Green's function and other physical quantities in the presence of interactions and correlations, using perturbation theory and Feynman diagrams to systematically account for the effects of interactions in the system. Thus
+\[
+    C_{AB}(\tau, \tau') = -\frac{1}{Z} \mathrm{Tr} e^{-\beta H_0} \hat{U}(\beta, \tau) \hat{A}(\tau) \hat{U}(\tau, \tau') \hat{B}(\tau') \hat{U}(\tau', 0),
+\]
+and we will see how the imaginary time \(\tau\) is limited in the range \(0> \tau < \beta\), and the same for \(\tau^{\prime}\). But let us assume it for now. This expression written as this is \textit{tau-ordered}.
+
+We can proceed noting how sign do not change if we reorder some operators, so that
+\[
+    \begin{aligned}
+        C_{AB}(\tau, \tau') & = -\frac{1}{Z} \mathrm{Tr} e^{-\beta H_0} \hat{T}_{\tau} \left\{ \hat{U}(\beta, \tau) \hat{U}(\tau, \tau') \hat{U}(\tau', 0)  \hat{A}(\tau) \hat{B}(\tau') \right\} \\
+                            & = - \frac{1}{Z} \mathrm{Tr} e^{-\beta H_0} \hat{T}_{\tau} \left\{ \hat{U}(\beta, 0)  \hat{A}(\tau) \hat{B}(\tau') \right\},
+    \end{aligned}
+\]
+This is a crucial step in the derivation, as it allows us to express the correlation function in a form that is more suitable for perturbative calculations, and it also allows us to connect the Green's function to the partition function of the system, which is a central quantity in statistical mechanics. The final expression for the correlation function in imaginary time is thus
+\[
+    C_{AB}(\tau, \tau') = - \frac{1}{Z} \mathrm{Tr} e^{-\beta H_0} \hat{T}_{\tau} \left\{ \hat{U}(\beta, 0)  \hat{A}(\tau) \hat{B}(\tau') \right\},
+\]
+which is a trace with respect to the non-interacting Hamiltonian \(H_0\) of the time-ordered product of the time evolution operator in the interaction picture and the operators \(A\) and \(B\) in imaginary time (in Dirac picture, thus evolving with the non-interacting Hamiltonian). But as a normalization, we have the inverse of the partition function, which is still accouinting for the interactions
+\[
+    Z = \Tr e^{-\beta H} = \Tr e^{-\beta H_0} \hat{U}(\beta, 0).
+\]
+If we multiply and derive for the non interacting partition function
+\[
+    C_{AB}(\tau, \tau') = - \frac{Z_0}{Z_0} \frac{1}{Z} \mathrm{Tr} e^{-\beta H_0} \hat{T}_{\tau} \left\{ \hat{U}(\beta, 0)  \hat{A}(\tau) \hat{B}(\tau') \right\},
+\]
+we can rewrite the correlation function as
+\[
+    C_{AB}(\tau, \tau') = - \frac{\left\langle \hat{U}(\beta, 0) \hat{A}(\tau) \hat{B}(\tau') \right\rangle_0}{\left\langle \hat{U}(\beta, 0) \right\rangle_0},
+\]
+where the \(\frac{1}{Z_0}\) added let us write the thermal average at the numerator with respect to the non-interacting Hamiltonian \(H_0\), while the inverse of \(\frac{Z_0}{Z}\) let us write the thermal average at the denominator with respect to the non-interacting Hamiltonian \(H_0\) as well.
+
+This is a crucial step in the derivation, as it allows us to express the correlation function in a form that is more suitable for perturbative calculations, and it also allows us to connect the Green's function to the partition function of the system, which is a central quantity in statistical mechanics. The only price we are forced to pay is that we have to compute the time evolution operator in the interaction picture, which is given by the Dyson series expansion, and thus we have to compute the effects of interactions in a perturbative way, using Feynman diagrams to systematically account for the effects of interactions in the system. This is the essence of many body theory, and it allows us to compute physical quantities such as the Green's function and the spectral function in the presence of interactions and correlations, which are crucial for understanding the physics of condensed matter systems.
+
+
+
+
+
+
+\begin{remark}[Tau ordering for fermions]
+    Let us define the tau ordering for fermions (since for bosons the sign does not change) as
+    \[
+        [\dots]
+    \]
+    for three operators \(C(\tau_1)\), \(C(\tau_2)\) and \(C(\tau_3)\) we would have had
+    \[
+        [\dots]
+    \]
+
+    We had \(\tau > \tau'\) such that
+    \[
+        \left\langle C(\tau) C(\tau') \right\rangle \to U(\beta, 0) U(0,\tau)\hat{C}(\tau) U(\tau,0)U(0,\tau') \hat{B}(\tau') U(\tau',0),
+    \]
+    and remember that \(U(\tau, \beta) = e^{- i \int_{\tau}^{\beta} V(\tau) \mathrm{d}\tau}\), and in the interaction integral we usually have an even number of ladder operators, since every time we have an annihilation operator we have a creation operator, so that the sign does not change if we reorder the time evolution operators (it follows from the anticommutation relations of the ladder operators).
+
+    When instead we want to swap the two operators \(C(\tau)\) and \(C(\tau')\) we have to consider their anticommutation relations, so that we have a sign change. The tau ordering only assures the correct ordering of the time evolution operators, but it does not account for the sign change due to the anticommutation relations of the fermionic operators.
+\end{remark}
+
+\subsection{Correlation Functions in Imaginary Time}
+
+In the imaginary time formalism, we can define the correlation function for two operators \(A\) and \(B\) as
+\[
+    \mathcal{C}_{AB}(\tau, \tau') = - \left\langle \hat{T}_{\tau} \left\{ \hat{A}(\tau) \hat{B}(\tau') \right\} \right\rangle,
+\]
+which would be the same for bosonic or fermionic operators. We can compute further the correlation function as
+\[
+    \mathcal{C}_{AB}(\tau, \tau') = - \theta(\tau - \tau') \left\langle \hat{A}(\tau) \hat{B}(\tau') \right\rangle \mp \theta(\tau' - \tau) \left\langle \hat{B}(\tau') \hat{A}(\tau) \right\rangle,
+\]
+where the minus sign is for bosonic operators and the plus sign is for fermionic operators, and we have used the definition of the tau ordering operator to express the correlation function in terms of the Heaviside step function \(\theta\) and the thermal averages of the operators \(A\) and \(B\) in imaginary time. This expression allows us to compute the correlation function in imaginary time, which is a crucial quantity in many body theory, as it allows us to compute physical quantities such as the Green's function and the spectral function in the presence of interactions and correlations, using perturbation theory and Feynman diagrams to systematically account for the effects of interactions in the system.
+
+We use imaginary time to put on equal foot the time evolution and the thermal average: the exponentials appearing in the time evolution and in the thermal average are of the same form (the imaginary unit vanished), and thus we can use the same techniques to compute both quantities, which allows us to connect the Green's function to the partition function of the system, which is a central quantity in statistical mechanics. It is just more convenient to work with imaginary time, since it allows us to use the same techniques to compute both the time evolution and the thermal average, and control the convergence of the series: with imaginary exponentials we have oscillations that are difficult to manage, but with real exponentials we have a more straightforward convergence behavior; then we can analytically continue the results to real time if we are interested in computing physical quantities in real time, such as when comparing experimental results with theoretical predictions, since most experiments are performed in real time.
+
+If we assume \(- \beta < \tau < 0\) and \(\tau' = 0\), we can write the correlation function as
+\[
+    \mathcal{C}_{AB}(\tau, 0) = \mp \left\langle \hat{B}(0) \hat{A}(\tau) \right\rangle = \mp \frac{1}{Z} \Tr(e^{- \beta \hat{H}} \hat{B}(0) e^{ \tau \hat{H}}\hat{A}e^{- \tau \hat{H}}),
+\]
+but since the trace is cyclic we can write
+\[
+    \mathcal{C}_{AB}(\tau, 0) = \mp \frac{1}{Z} \Tr(e^{ \tau \hat{H}}\hat{A}e^{- \tau \hat{H}} e^{- \beta \hat{H}}\hat{B}(0)) = \mp \frac{1}{Z} \Tr(e^{- \tau \hat{H}} \hat{A} e^{-(\tau + \beta)\hat{H}} \hat{B}(0)) = \pm \mathcal{C}_{AB}(\tau + \beta, 0),
+\]
+thus \uline{the correlation function is periodic in imaginary time with period \(\beta\) for bosonic operators, and antiperiodic in imaginary time with period \(\beta\) for fermionic operators}. \TODO{add plot of periodical correlation functions.}
+\begin{figure}[H]
+    \begin{minipage}{0.6\textwidth}
+        We can clearly notice how periodically with \(\beta\) on the imaginary time axis the correlation function repeats itself, and how the sign changes for fermionic operators, while it does not change for bosonic operators. It will be clear in the future why they have a similar plot, for now we can just notice the periodicity and the antiperiodicity of the correlation function in imaginary time. Also an interesting feature of this correlation functions is that the jump at \(\tau = 0\) is related to the commutation or anticommutation relations of the operators \(A\) and \(B\), and thus it is 1 for both bosonic and fermionic operators, but the sign of the jump is changes.
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.35\textwidth}
+
+    \end{minipage}
+\end{figure}
+
+\subsection{Imaginary Frequencies}
+
+Since the correlation function \(\mathcal{C}_{AB}(\tau, 0)\) is periodic in imaginary time, we can express it as a Fourier series in imaginary time, which allows us to express the correlation function in terms of its Fourier coefficients, which are called the \textit{Matsubara frequencies}. The Fourier series expansion of the correlation function in imaginary time is given by
+\[
+    \mathcal{C}_{AB}(\tau, 0) = \frac{1}{\beta} \sum_{n=-\infty}^{+\infty} e^{-i \pi n \frac{\tau}{\beta}} \tilde{\mathcal{C}}_{AB}(n) = \begin{dcases}
+        \frac{1}{\beta} \sum_{n=-\infty}^{+\infty} e^{-i \pi (2n) \frac{\tau}{\beta}} \tilde{\mathcal{C}}_{AB}(n),   & \text{for bosonic operators},   \\
+        \frac{1}{\beta} \sum_{n=-\infty}^{+\infty} e^{-i \pi (2n+1) \frac{\tau}{\beta}} \tilde{\mathcal{C}}_{AB}(n), & \text{for fermionic operators}.
+    \end{dcases}
+\]
+Indeed if we were to commpute these transforms at \(\tau + n^{\prime} \beta\) we would have the same expression with or without the sign change: it automatically enforces the statistics of the considered particles.
+
+Usually the last expression is written in a different form:
+\[
+    \mathcal{C}_{AB}(\tau, 0) = \begin{dcases}
+        \frac{1}{\beta} \sum_{n=-\infty}^{+\infty} e^{-i \omega_n \tau} \tilde{\mathcal{C}}_{AB}(\omega_n), & \text{for bosonic operators},   \\
+        \frac{1}{\beta} \sum_{n=-\infty}^{+\infty} e^{-i \omega_n \tau} \tilde{\mathcal{C}}_{AB}(\omega_n), & \text{for fermionic operators},
+    \end{dcases}
+\]
+where we have defined the \textbf{Matsubara frequencies} as
+\[
+    \begin{dcases}
+        \omega_n = 2n \pi / \beta,       & \text{for bosonic operators},   \\
+        \omega_n = (2n + 1) \pi / \beta, & \text{for fermionic operators}.
+    \end{dcases}
+\]
+For fermions \(\omega_n \neq 0\) for every value of \(n\), while for bosons \(\omega_n = 0\) for \(n=0\). We can show haw this is a direct consequence of the bose or fermi distributions, which are given by
+\[
+    n_F(\xi) = \frac{1}{e^{\beta \xi} + 1}, \qquad n_B(\xi) = \frac{1}{e^{\beta \xi} - 1},
+\]
+where \(\xi\) is the imaginary energy of the state. We have to look out for every case in which the denominator of the distribution function can vanish, since this would lead to a divergence in the distribution function, and thus to a divergence in the correlation function.
+
+For fermions for example we get
+\[
+    e^{- \beta \xi} = -1 = e^{i \pi} e^{2 \pi n} \implies \xi = i \pi (2n + 1) / \beta,
+\]
+which are exactly the fermionic Matsubara frequencies. For bosons instead we get
+\[
+    e^{- \beta \xi} = 1 = e^{2 \pi i n} \implies \xi = i 2 \pi n / \beta,
+\]
+which are exactly the bosonic Matsubara frequencies. Thus the Matsubara frequencies are a direct consequence of the statistics of the particles, and they are crucial for understanding the behavior of the correlation function in imaginary time, and thus for computing physical quantities such as the Green's function and the spectral function in the presence of interactions and correlations, using perturbation theory and Feynman diagrams to systematically account for the effects of interactions in the system.
+
+The temperature is the residue of the poles in the density of states.
+
+Of course, if we know the imaginary energy correlation function, we can compute the correlation function in imaginary time by performing the inverse Fourier transform, which is given by
+\[
+    \tilde{\mathcal{C}}_{AB}(\omega_n) = \int_0^{\beta} \mathrm{d} \tau' e^{i \omega_n \tau'} \mathcal{C}_{AB}(\tau^{\prime}).
+\]
+
+We have always treated many body physics at zero temperature, where \(\omega_n\) becomes a continuous variable, but the imaginary time formalism allows us to treat many body physics at finite temperature, where \(\omega_n\) is a discrete variable, and thus we can compute physical quantities.
+
+\subsection{Matsubara Green's Function}
+
+As we have seen, the building block of many body theory is the imaginary time non-interacting correlation function, which is given by
+\[
+    \mathcal{G}_0(\mathbf{k}, \sigma, \tau) = - \left\langle \hat{T}_{\tau} \left\{ \hat{c}_{\mathbf{k}, \sigma}(\tau) \hat{c}_{\mathbf{k}, \sigma}^\dagger(0) \right\} \right\rangle_0,
+\]
+in the Heisemberg picture, where the operators evolve with the non-interacting Hamiltonian \(H_0\)
+\[
+    \frac{\mathrm{d}}{\mathrm{d} \tau} \hat{c}_{\mathbf{k}, \sigma}(\tau) = [H_0, \hat{c}_{\mathbf{k}, \sigma}(\tau)], \implies \begin{dcases}
+        \hat{c}_{\mathbf{k}, \sigma}(\tau) = e^{-\xi_{\mathbf{k}} \tau} \hat{c}_{\mathbf{k}, \sigma}, \\
+        \hat{c}^{\dagger}_{\mathbf{k}, \sigma}(\tau) = e^{\xi_{\mathbf{k}} \tau} \hat{c}^{\dagger}_{\mathbf{k}, \sigma},
+    \end{dcases}
+\]
+where we have no more imaginary unit in the exponentials, since we are working with imaginary time, and \(H_0 = \sum_{\mathbf{k}, \sigma} \xi_{\mathbf{k}} \hat{c}_{\mathbf{k}, \sigma}^\dagger \hat{c}_{\mathbf{k}, \sigma}\). Thus we can compute the non-interacting correlation function as
+\[
+    \begin{aligned}
+        \mathcal{G}_0(\mathbf{k}, \sigma, \tau) & = - \theta(\tau) \left\langle \hat{c}_{\mathbf{k}, \sigma}(\tau) \hat{c}_{\mathbf{k}, \sigma}^\dagger(0) \right\rangle_0 + \theta(-\tau) \left\langle \hat{c}_{\mathbf{k}, \sigma}^\dagger(0) \hat{c}_{\mathbf{k}, \sigma}(\tau) \right\rangle_0                                     \\
+                                                & = - \theta(\tau) e^{-\xi_{\mathbf{k}} \tau} \left\langle \hat{c}_{\mathbf{k}, \sigma} \hat{c}_{\mathbf{k}, \sigma}^\dagger \right\rangle_0 + \theta(-\tau) e^{-\xi_{\mathbf{k}} \tau} \left\langle \hat{c}_{\mathbf{k}, \sigma}^\dagger \hat{c}_{\mathbf{k}, \sigma} \right\rangle_0 \\
+                                                & = \left[ - \theta(\tau) (1 - n_F(\xi_{\mathbf{k}})) + \theta(-\tau) n_F(\xi_{\mathbf{k}})\right] e^{-\xi_{\mathbf{k}} \tau} ,
+    \end{aligned}
+\]
+where we have used the definition of the non-interacting correlation function, the time evolution of the operators in the Heisenberg picture, and the definition of the Fermi distribution function \(n_F(\xi) = \frac{1}{e^{\beta \xi} + 1}\). We can also write the non-interacting correlation function in terms of the Matsubara frequencies as\footnote{We have taken only one term since in the integral we are fixing \(\tau > 0\).}
+\[
+    \begin{aligned}
+        \mathcal{G}_0(\mathbf{k}, \sigma, \omega_n) & = \int_0^{\beta} \mathrm{d} \tau e^{i \omega_n \tau} \mathcal{G}_0(\mathbf{k}, \sigma, \tau) = - (1 - n_F(\xi_{\mathbf{k}})) \int_0^{\beta} \mathrm{d} \tau e^{i \omega_n \tau} e^{-\xi_{\mathbf{k}} \tau}                                                                                             \\
+                                                    & = - (1 - \frac{1}{e^{\beta \xi} + 1}) \frac{e^{(i \omega_n - \xi_{\mathbf{k}}) \beta} - 1}{i \omega_n - \xi_{\mathbf{k}}} = - \frac{1}{e^{\beta \xi_{\mathbf{k}} } + 1} \frac{e^{(i \omega_n - \xi_{\mathbf{k}}) \beta} - 1}{i \omega_n - \xi_{\mathbf{k}}} = \frac{1}{i \omega_n - \xi_{\mathbf{k}}},
+    \end{aligned}
+\]
+where we used the fact that \(e^{i \omega_n \beta} = -1\) for each \(n\) for fermions. If we compare the same expression in the real time:
+\[
+    \mathcal{G}_0(\mathbf{k}, \sigma, \omega) = \frac{1}{\omega - \xi_{\mathbf{k}} + i \delta},
+\]
+we can note an heavy similarity between the two expressions, with the only difference being the imaginary unit in the denominator, which is a direct consequence of the fact that we are working with imaginary time instead of real time. Indeed we can pass from one expression to the other by performing the \textbf{analytical continuation}
+\[
+    i \omega_n \to \omega + i \delta,
+\]
+which is a crucial step in many body theory, as it allows us to connect the results obtained in imaginary time to physical quantities that can be measured in real time, such as the spectral function and the density of states, which are crucial for understanding the physics of condensed matter systems. It is valid in general even if we presented only a specific case, but any correlation function in imaginary time can be analytically continued to real time, and thus we can compute physical quantities in real time starting from the results obtained in imaginary time, which is a powerful technique in many body theory.
+
+\begin{example}[Feynman Diagrams]
+    ..............\TODO{diagram}
+
+    \[
+        \sum_{i \omega_n} \frac{1}{i \omega_n + i \nu_n - \xi_{\mathbf{k} + \mathbf{q}}} \frac{1}{i \omega_n - \xi_{\mathbf{k}}},
+    \]
+
+    but we will see...
+\end{example}

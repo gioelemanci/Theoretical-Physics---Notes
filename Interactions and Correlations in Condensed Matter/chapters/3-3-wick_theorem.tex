@@ -1,0 +1,46 @@
+\section{Wick's Theorem}
+
+Recalling the expansion in non interacting Green's functions, we have
+\[
+    \mathcal{C}_{AB}(\tau, \tau') = \frac{\left\langle \hat{T}_{\tau} \{\hat{U}(\beta, 0)\hat{A}(\tau) \hat{B}(\tau')\} \right\rangle_0}{\left\langle \hat{U}(\beta, 0) \right\rangle_0},
+\]
+where from the definition of the time evolution operator, we have
+\[
+    \begin{aligned}
+        \left\langle \hat{U}(\beta, 0) \right\rangle_0 & = \left\langle \hat{T}_{\tau} \sum_{n=1}^{\infty} \frac{(-1)^n}{n!} \left[ -\int_0^{\beta} d\tau_1 \int_0^{\beta}\mathrm{d}\tau_2 \cdots \int_0^{\beta} \mathrm{d}\tau_n \hat{V}_I(\tau_1) \hat{V}_I(\tau_2) \cdots \hat{V}_I(\tau_n) \right] \right\rangle_0            \\
+                                                       & = \langle 1 \rangle_0 + \sum_{n=1}^{\infty} \frac{(-1)^n}{n!} \int_0^{\beta} d\tau_1 \int_0^{\beta}\mathrm{d}\tau_2 \cdots \int_0^{\beta} \mathrm{d}\tau_n \left\langle \hat{T}_{\tau} \{\hat{V}_I(\tau_1) \hat{V}_I(\tau_2) \cdots \hat{V}_I(\tau_n)\} \right\rangle_0,
+    \end{aligned}
+\]
+where each of the interaction potential is a product of a different number of creation and annihilation operators. Note how we are producing a sum of .......
+
+\begin{theorem}[Wick's Theorem]
+    The expectation value of a time ordered product of creation and annihilation operators can be expressed as the sum of all possible contractions of the operators. We can write this as\TODO{check computatioons}
+    \[
+        \mathcal{G}^{(n)}_0 ((\nu_1, \tau_1), (\nu_2, \tau_2), \ldots, (\nu_n, \tau_n); (\nu'_1, \tau'_1), (\nu'_2, \tau'_2), \ldots, (\nu'_n, \tau'_n)) = (-1)^n \left\langle \hat{T}_{\tau} \{\hat{c}_{\nu_1}(\tau_1) \hat{c}_{\nu_2}(\tau_2) \cdots \hat{c}_{\nu_n}(\tau_n) \hat{c}^{\dagger}_{\nu'_1}(\tau'_1) \hat{c}^{\dagger}_{\nu'_2}(\tau'_2) \cdots \hat{c}^{\dagger}_{\nu'_n}(\tau'_n)\} \right\rangle_0,
+    \]
+    where the right hand side can be expressed as the sum of all possible contractions of the operators, expressed as
+    \[
+        \mathcal{G}^{(n)}_0 ((\nu_1, \tau_1), \ldots, (\nu'_n, \tau'_n)) = \begin{pmatrix}
+            \mathcal{G}_0(\nu_1, \tau_1; \nu'_1, \tau'_1) & \mathcal{G}_0(\nu_1, \tau_1; \nu'_2, \tau'_2) & \cdots & \mathcal{G}_0(\nu_1, \tau_1; \nu'_n, \tau'_n) \\
+            \mathcal{G}_0(\nu_2, \tau_2; \nu'_1, \tau'_1) & \mathcal{G}_0(\nu_2, \tau_2; \nu'_2, \tau'_2) & \cdots & \mathcal{G}_0(\nu_2, \tau_2; \nu'_n, \tau'_n) \\
+            \vdots                                        & \vdots                                        &        & \vdots                                        \\
+            \mathcal{G}_0(\nu_n, \tau_n; \nu'_1, \tau'_1) & \mathcal{G}_0(\nu_n, \tau_n; \nu'_2, \tau'_2) & \cdots & \mathcal{G}_0(\nu_n, \tau_n; \nu'_n, \tau'_n)
+        \end{pmatrix}
+    \]
+    where based on the statistics of the particles, we have the determinant for fermions and the permanent for bosons.
+\end{theorem}
+
+\begin{example}
+    For the two particle Green's function for non interacting fermions, we have
+    \[
+        \begin{aligned}
+            \mathcal{G}_0^{(2)} & = \left\langle \hat{T}_{\tau} \{\hat{c}_{\nu_1}(\tau_1) \hat{c}_{\nu_2}(\tau_2) \hat{c}^{\dagger}_{\nu'_2}(\tau'_2) \hat{c}^{\dagger}_{\nu'_1}(\tau'_1)\} \right\rangle_0 = \mathcal{G}_0(\nu_1, \tau_1; \nu'_1, \tau'_1) \mathcal{G}_0(\nu_2, \tau_2; \nu'_2, \tau'_2) - \mathcal{G}_0(\nu_1, \tau_1; \nu'_2, \tau'_2) \mathcal{G}_0(\nu_2, \tau_2; \nu'_1, \tau'_1)                                                                                \\
+                                & = \det \begin{pmatrix}
+                                             \mathcal{G}_0(\nu_1, \tau_1; \nu'_1, \tau'_1) & \mathcal{G}_0(\nu_1, \tau_1; \nu'_2, \tau'_2) \\
+                                             \mathcal{G}_0(\nu_2, \tau_2; \nu'_1, \tau'_1) & \mathcal{G}_0(\nu_2, \tau_2; \nu'_2, \tau'_2)
+                                         \end{pmatrix}                                                                                                                                                                                                                                                                                                                                                 \\
+                                & = \left\langle \hat{T}_{\tau} \{\hat{c}_{\nu_1}(\tau_1) \hat{c}^{\dagger}_{\nu'_1}(\tau'_1)\} \right\rangle_0 \left\langle \hat{T}_{\tau} \{\hat{c}_{\nu_2}(\tau_2) \hat{c}^{\dagger}_{\nu'_2}(\tau'_2)\} \right\rangle_0 - \left\langle \hat{T}_{\tau} \{\hat{c}_{\nu_1}(\tau_1) \hat{c}^{\dagger}_{\nu'_2}(\tau'_2)\} \right\rangle_0 \left\langle \hat{T}_{\tau} \{\hat{c}_{\nu_2}(\tau_2) \hat{c}^{\dagger}_{\nu'_1}(\tau'_1)\} \right\rangle_0,
+        \end{aligned}
+    \]
+    which are exactly the \textit{exchange energy} and the \textit{direct energy} of the two particle Green's function: it's the hartree-fock term for the two particle Green's function.\TODO{check everything}
+\end{example}
