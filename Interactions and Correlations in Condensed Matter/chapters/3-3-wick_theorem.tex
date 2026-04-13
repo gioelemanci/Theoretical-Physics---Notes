@@ -16,14 +16,17 @@ where each of the interaction potential is a product of a different number of cr
 \begin{theorem}[Wick's Theorem]
     The expectation value of a time ordered product of creation and annihilation operators can be expressed as the sum of all possible contractions of the operators. We can write this as\TODO{check computatioons}
     \[
-        \mathcal{G}^{(n)}_0 ((\nu_1, \tau_1), (\nu_2, \tau_2), \ldots, (\nu_n, \tau_n); (\nu'_1, \tau'_1), (\nu'_2, \tau'_2), \ldots, (\nu'_n, \tau'_n)) = (-1)^n \left\langle \hat{T}_{\tau} \{\hat{c}_{\nu_1}(\tau_1) \hat{c}_{\nu_2}(\tau_2) \cdots \hat{c}_{\nu_n}(\tau_n) \hat{c}^{\dagger}_{\nu'_1}(\tau'_1) \hat{c}^{\dagger}_{\nu'_2}(\tau'_2) \cdots \hat{c}^{\dagger}_{\nu'_n}(\tau'_n)\} \right\rangle_0,
+        \begin{aligned}
+            \mathcal{G}^{(n)}_0 ((\nu_1, \tau_1), (\nu_2, \tau_2), \ldots, (\nu_n, \tau_n); (\nu'_1, \tau'_1), (\nu'_2, \tau'_2), \ldots, (\nu'_n, \tau'_n)) \\
+            = (-1)^n \left\langle \hat{T}_{\tau} \{\hat{c}_{\nu_1}(\tau_1) \hat{c}_{\nu_2}(\tau_2) \cdots \hat{c}_{\nu_n}(\tau_n) \hat{c}^{\dagger}_{\nu'_1}(\tau'_1) \hat{c}^{\dagger}_{\nu'_2}(\tau'_2) \cdots \hat{c}^{\dagger}_{\nu'_n}(\tau'_n)\} \right\rangle_0,
+        \end{aligned}
     \]
-    where the right hand side can be expressed as the sum of all possible contractions of the operators, expressed as
+    where the right hand side can be expressed as the sum of all possible contractions of the operators, which can be written as
     \[
         \mathcal{G}^{(n)}_0 ((\nu_1, \tau_1), \ldots, (\nu'_n, \tau'_n)) = \begin{pmatrix}
             \mathcal{G}_0(\nu_1, \tau_1; \nu'_1, \tau'_1) & \mathcal{G}_0(\nu_1, \tau_1; \nu'_2, \tau'_2) & \cdots & \mathcal{G}_0(\nu_1, \tau_1; \nu'_n, \tau'_n) \\
             \mathcal{G}_0(\nu_2, \tau_2; \nu'_1, \tau'_1) & \mathcal{G}_0(\nu_2, \tau_2; \nu'_2, \tau'_2) & \cdots & \mathcal{G}_0(\nu_2, \tau_2; \nu'_n, \tau'_n) \\
-            \vdots                                        & \vdots                                        &        & \vdots                                        \\
+            \vdots                                        & \vdots                                        & \ddots & \vdots                                        \\
             \mathcal{G}_0(\nu_n, \tau_n; \nu'_1, \tau'_1) & \mathcal{G}_0(\nu_n, \tau_n; \nu'_2, \tau'_2) & \cdots & \mathcal{G}_0(\nu_n, \tau_n; \nu'_n, \tau'_n)
         \end{pmatrix}
     \]
@@ -34,7 +37,8 @@ where each of the interaction potential is a product of a different number of cr
     For the two particle Green's function for non interacting fermions, we have
     \[
         \begin{aligned}
-            \mathcal{G}_0^{(2)} & = \left\langle \hat{T}_{\tau} \{\hat{c}_{\nu_1}(\tau_1) \hat{c}_{\nu_2}(\tau_2) \hat{c}^{\dagger}_{\nu'_2}(\tau'_2) \hat{c}^{\dagger}_{\nu'_1}(\tau'_1)\} \right\rangle_0 = \mathcal{G}_0(\nu_1, \tau_1; \nu'_1, \tau'_1) \mathcal{G}_0(\nu_2, \tau_2; \nu'_2, \tau'_2) - \mathcal{G}_0(\nu_1, \tau_1; \nu'_2, \tau'_2) \mathcal{G}_0(\nu_2, \tau_2; \nu'_1, \tau'_1)                                                                                \\
+            \mathcal{G}_0^{(2)} & = \left\langle \hat{T}_{\tau} \{\hat{c}_{\nu_1}(\tau_1) \hat{c}_{\nu_2}(\tau_2) \hat{c}^{\dagger}_{\nu'_2}(\tau'_2) \hat{c}^{\dagger}_{\nu'_1}(\tau'_1)\} \right\rangle_0                                                                                                                                                                                                                                                                            \\
+                                & = \mathcal{G}_0(\nu_1, \tau_1; \nu'_1, \tau'_1) \mathcal{G}_0(\nu_2, \tau_2; \nu'_2, \tau'_2) - \mathcal{G}_0(\nu_1, \tau_1; \nu'_2, \tau'_2) \mathcal{G}_0(\nu_2, \tau_2; \nu'_1, \tau'_1)                                                                                                                                                                                                                                                          \\
                                 & = \det \begin{pmatrix}
                                              \mathcal{G}_0(\nu_1, \tau_1; \nu'_1, \tau'_1) & \mathcal{G}_0(\nu_1, \tau_1; \nu'_2, \tau'_2) \\
                                              \mathcal{G}_0(\nu_2, \tau_2; \nu'_1, \tau'_1) & \mathcal{G}_0(\nu_2, \tau_2; \nu'_2, \tau'_2)
@@ -42,5 +46,147 @@ where each of the interaction potential is a product of a different number of cr
                                 & = \left\langle \hat{T}_{\tau} \{\hat{c}_{\nu_1}(\tau_1) \hat{c}^{\dagger}_{\nu'_1}(\tau'_1)\} \right\rangle_0 \left\langle \hat{T}_{\tau} \{\hat{c}_{\nu_2}(\tau_2) \hat{c}^{\dagger}_{\nu'_2}(\tau'_2)\} \right\rangle_0 - \left\langle \hat{T}_{\tau} \{\hat{c}_{\nu_1}(\tau_1) \hat{c}^{\dagger}_{\nu'_2}(\tau'_2)\} \right\rangle_0 \left\langle \hat{T}_{\tau} \{\hat{c}_{\nu_2}(\tau_2) \hat{c}^{\dagger}_{\nu'_1}(\tau'_1)\} \right\rangle_0,
         \end{aligned}
     \]
-    which are exactly the \textit{exchange energy} and the \textit{direct energy} of the two particle Green's function: it's the hartree-fock term for the two particle Green's function.\TODO{check everything}
+    which are exactly the \textit{exchange energy} and the \textit{direct energy} of the two particle Green's function: it's the Hartree-Fock term for the two particle Green's function.\TODO{check everything}
 \end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+The interating green's function
+\[
+    \begin{aligned}
+        \mathcal{G}(\sigma_b,\, \mathbf{r}_b,\, \tau_b,\, \sigma_a,\, \mathbf{r}_a,\, \tau_a) = - \left\langle \hat{T}_{\tau} \hat{\Psi}_{\sigma_b}(\mathbf{r}_b, \tau_b) \hat{\Psi}_{\sigma_a}(\mathbf{r}_a, \tau_a) \right\rangle \\
+        = - \frac{\left\langle \hat{T}_{\tau} \{\hat{U}(\beta, 0)\hat{\Psi}_{\sigma_b}(\mathbf{r}_b, \tau_b) \hat{\Psi}_{\sigma_a}(\mathbf{r}_a, \tau_a)\} \right\rangle_0}{\left\langle \hat{U}(\beta, 0) \right\rangle_0},
+    \end{aligned}
+\]
+
+[\dots]
+
+\[
+    \mathcal{G}(b,a) = - \frac{\sum_{n=0}^{\infty} \frac{(-1)^n}{n!} \int_0^{\beta} \mathrm{d} \tau_1 \cdots \int_0^{\beta} \mathrm{d} \tau_n \left\langle \hat{T}_{\tau} \hat{V}_{int}(\tau_1)\cdots\hat{V}_{int}(\tau_n) \hat{\Psi}(a)\hat{\Psi}(b)\right\rangle_0}{\sum_{n=0}^{\infty} \frac{(-1)^n}{n!} \int_0^{\beta} \mathrm{d} \tau_1 \cdots \int_0^{\beta} \mathrm{d} \tau_n \left\langle \hat{T}_{\tau} \hat{V}_{int}(\tau_1)\cdots\hat{V}_{int}(\tau_n)\right\rangle_0},
+\]
+
+\[
+    \int \mathrm{d} \tau_j \hat{V}_{int}(\tau_j) = \frac{1}{2} \sum_{\sigma_j \sigma_{j^{\prime}}} \int \int \mathrm{d} r_j \, \mathrm{d} r_{j^{\prime}} \, \int_0^{\beta} \mathrm{d} \tau_j \left( \hat{\Psi}^\dagger_{\sigma_j}(\mathbf{r}_j, \tau_j) \hat{\Psi}^\dagger_{\sigma_{j^{\prime}}}(\mathbf{r}_{j^{\prime}}, \tau_j) \frac{e^2}{\vert \mathbf{r}_j - \mathbf{r}_{j^{\prime}} \vert}\hat{\Psi}_{\sigma_{j^{\prime}}}(\mathbf{r}_{j^{\prime}}, \tau_j) \hat{\Psi}_{\sigma_j}(\mathbf{r}_j, \tau_j) \right),
+\]
+since the fields operators are in the Heisenberg picture we need time; it is important to notice that all these operators are expressed with resoect to the same \(\tau_j\).
+
+We can usa a more compact notation, renaming the interacion potential
+\[
+    \hat{V}_{int} (j,j^{\prime}) = \frac{e^2}{\vert \mathbf{r}_j - \mathbf{r}_{j^{\prime}}\vert},
+\]
+and we can also use this notation for the field operators, where in the second field we have the two different indices appearing; we can thus add an integral over \(\mathrm{d} \tau_{j^{\prime}}\) with a \(\delta(\tau_j, \tau_{j^{\prime} })\), so that we get:
+\[
+    \int \mathrm{d} \tau_j \hat{V}_{int}(\tau_j) = \frac{1}{2} \sum_{\sigma_j \sigma_{j^{\prime}}} \int \int \mathrm{d} r_j \, \mathrm{d} r_{j^{\prime}} \, \int_0^{\beta} \mathrm{d} \tau_j \int_0^{\beta} \mathrm{d} \tau_{j^{\prime}} \left( \hat{\Psi}^\dagger(j) \hat{\Psi}(j^{\prime}) \hat{V}_{int} (j,j^{\prime}) \hat{\Psi}(j) \hat{\Psi}(j^{\prime}) \right),
+\]
+where the integration we added can restore the mixed indices in the second field operator.
+
+We can now rewrite the first expression for the interacting green function as
+\[
+    \mathcal{G}(b,a) = - \frac{\sum_{n=0}^{\infty} \frac{(-1/2)^n}{n!} \int \mathrm{d}1 \mathrm{d}1^{\prime} \cdots \mathrm{d}n \mathrm{d}n^{\prime} \hat{V}_{11^{\prime}} \cdots \hat{V}_{n n^{\prime}} \left\langle \hat{T}_{\tau} \hat{\Psi}_1^\dagger \hat{\Psi}_{1^{\prime}}^\dagger \hat{\Psi}_{1^{\prime}} \hat{\Psi}_{1} \cdots \hat{\Psi}_n^\dagger \hat{\Psi}_{n^{\prime}}^\dagger \hat{\Psi}_{n^{\prime}} \hat{\Psi}_{n} \hat{\Psi}_b \hat{\Psi}^\dagger_a \right\rangle_0}{\sum_{n=0}^{\infty} \frac{(-1/2)^n}{n!} \int \mathrm{d}1 \mathrm{d}1^{\prime} \cdots \mathrm{d}n \mathrm{d}n^{\prime} \hat{V}_{11^{\prime}} \cdots \hat{V}_{n n^{\prime}} \left\langle \hat{T}_{\tau} \hat{\Psi}_1^\dagger \hat{\Psi}_{1^{\prime}}^\dagger \hat{\Psi}_{1^{\prime}} \hat{\Psi}_{1}\cdots \hat{\Psi}_n^\dagger \hat{\Psi}_{n^{\prime}}^\dagger \hat{\Psi}_{n^{\prime}} \hat{\Psi}_{n}\right\rangle_0},
+\]
+where we have used the compact notation for the interaction potential and the field operators. We can now use Wick's theorem to express the expectation values in terms of non interacting green's functions, which are known, and thus we can express the interacting green's function in terms of non interacting green's functions, which are known. We can thus write
+\[
+    \mathcal{G}(b,a) = - \frac{\sum_{n=0}^{\infty} \frac{(-1/2)^n}{n!} \int \mathrm{d}1 \mathrm{d}1^{\prime} \cdots \mathrm{d}n \mathrm{d}n^{\prime} \hat{V}_{11^{\prime}} \cdots \hat{V}_{n n^{\prime}} (-1)^{2n+1} \mathcal{G}_0 (b, 1, 1^{\prime} , \dots, n, n^{\prime} ;\, a, 1, 1^{\prime}, n, n^{\prime})}{\sum_{n=0}^{\infty} \frac{(-1/2)^n}{n!} \int \mathrm{d}1 \mathrm{d}1^{\prime} \cdots \mathrm{d}n \mathrm{d}n^{\prime} \hat{V}_{11^{\prime}} \cdots \hat{V}_{n n^{\prime}} (-1)^{2n} \mathcal{G}_0 (1, 1^{\prime} , \dots, n, n^{\prime} ;\,1, 1^{\prime}, n, n^{\prime})},
+\]
+which can be computed as the enormous determinant e presented for Wick's theorem.
+
+Let us compute the denominetor:
+\[
+    \begin{aligned}
+        D = 1 - \frac{1}{2}\int \mathrm{d} 1 \mathrm{d} 1^{\prime} \hat{V}_{11^{\prime}} \begin{bmatrix}
+                                                                                             \mathcal{G}_0(1,1)          & \mathcal{G}_0(1,1^{\prime})         \\
+                                                                                             \mathcal{G}_0(1^{\prime},1) & \mathcal{G}(1^{\prime}, 1^{\prime})
+                                                                                         \end{bmatrix} + \\
+        + \frac{1}{8} \int \mathrm{d} 1 \mathrm{d} 1^{\prime} \mathrm{d}2 \mathrm{d}2^{\prime} \hat{V}_{11^{\prime}}\hat{V}_{22^{\prime}} [\dots].
+    \end{aligned}
+\]
+But it is very useful to represent these green's functions as Feynman Diagrams:
+
+[\textit{subtraction of the Hartree and Fock diagrams (dumbell with wiggle line in the middle minus oister with wiggle in the middle)}]\TODO{draw the diagrams}
+
+\(\mathcal{G}_0(11) = - \left\langle \hat{\Psi}_1^\dagger \hat{\Psi}_1 \right\rangle\) which describes the annihilation and the consequent creation of a particle in the same 1 (position, spin, time)
+
+There is a simple rule that gives us the exponent on the \((-1)^{\#}\), where \(\# =\)\textit{number of fermionic loops in the diagram}, so that the Hartree diagram has \((-1)^2\) in front of himself, while Fock has just \((-1)\).
+
+We can notice how, even if the diagrams remains very simple, from the determinant in the second term of the expansion of the denominator we get 24 diagrams. Let us draw the more important ones:
+
+[\textit{double hartreee (dumbell wiggle), double fock (two oysters with one wiggle line each), hartree + fock, two oisters connected by two wiggle lines (in the vertexes)}]\TODO{draw the diagrams}
+
+and by countimg the loops we can decide the sign of each diagram, which is very important for the final result. Some of these diagrams are disconnected and can be recognized as the product of smaller diagrams, while others are more complicated and connected.
+
+We will see that summing all of these diagrams we can obtain the interaction energy for our system, which is the main goal of this expansion. We can also obtain the self energy, which is the main quantity we are interested in, and which is the main quantity we will be interested in for the rest of the course. We can also obtain the spectral function, which is another important quantity that we will be interested in for the rest of the course. We can also obtain the density of states, which is another important quantity that we will be interested in for the rest of the course. We can also obtain the conductivity, which is another important quantity that we will be interested in for the rest of the course. We can also obtain the optical conductivity, which is another important quantity that we will be interested in for the rest of the course. We can also obtain the magnetic susceptibility, which is another important quantity that we will be interested in for the rest of the course. We can also obtain the specific heat, which is another important quantity that we will be interested in for the rest of the course. We can also obtain the compressibility, which is another important quantity that we will be interested in for the rest of the course. We can also obtain the superfluid density, which is another important quantity that we will be interested in for the rest of the course. We can also obtain the critical temperature, which is another important quantity that we will be interested in for the rest of the course. We can also obtain the critical exponents, which are another important quantity that we will be interested in for the rest of the course. We can also obtain the phase diagram, which is another important quantity that we will be interested in for the rest of the course. We can also obtain the renormalization group flow, which is another important quantity that we will be interested in for the rest of the course. We can also obtain many other quantities that we will be interested in for the rest of the course. [DELETE]
+
+This infinite sum magically becomes a finite result, giving the \textit{correlation energy} for the system (the whole sum without the hartree fock term).
+
+Let us remine that
+\[
+    \mathcal{Z} = \Tr e^{-\beta H} = \Tr e^{-\beta H_0} \hat{U}(\beta, 0),
+\]
+and since the logarithm of the partition function is the free energy, and we can recognize the infinite sum of digrams in that expression, we can infere (but we will compiute this result in the future) that pplying the logarithm to the previous expansion in some ways we remove the disconnected diarams and we are left withe the ...
+Note that the denominator is only bubbles, vacuum diagrams.
+
+
+
+Going to the numerator we get:
+\[
+    N = \mathcal{G}_0(b,a) - \frac{1}{2} \int \mathrm{d}1 \mathrm{d}1^{\prime} \hat{V}_{11^{\prime}} \begin{bmatrix}
+        \mathcal{G}_0(b, a)           & \mathcal{G}_0(b,1)           & \mathcal{G}_0(b, 1^{\prime})          \\
+        \mathcal{G}_0(1, a)           & \mathcal{G}(1, 1)            & \mathcal{G}_0(1 , 1^{\prime})         \\
+        \mathcal{G}_0 (1^{\prime}, a) & \mathcal{G}_0(1^{\prime}, 1) & \mathcal{G}_0(1^{\prime}, 1^{\prime})
+    \end{bmatrix} + \dots
+\]
+where the first term is just the free propagator from \(a\) to \(b\), while the second term is the sum of all the diagrams with one interaction line:
+
+[\textit{all of the diagrams have a wiggle line between 1 and 1', hartree + free prop among a and b, oister + free propagator, a to 1 to b + wiggleline from 1 to 1' + self loop 1' to 1', a to 1 to 1' to b + wiggleline 1 to 1', as before but crossed propagators (a to 1' and 1 to b), a to 1' to b + wiggleline among 1' and 1 and self loop 1 to 1}.]
+
+and the sign is again decided by the number of fermionic loops. Again we have both connected and disconnected diagrams, but continuing the computation it becomes clear that we have the same diagrams from the denominator multiplied by the free propagators. Thus we can factorize the numerator as the product of the connected diagrams times the denominator (both connected and disconnected from D) of this correlation function:
+
+[(\textit{connected diagrams for N}) \(\times\) (\textit{all diagrams of D})]
+
+Thus our full interacting Green's function can be expressed as an infinite sum of connected diagrams from the numerator:
+\[
+    \mathcal{G}(b,a) = \frac{N}{D} = \text{Sum of all connected single particle green's functions} =
+\]
+
+[\textit{free prop a to b, a to b + wiggle to self loop, other with loops connected to ab prop with wiggle lines}]
+
+If by cutting only one fermionic line the diagram become disconnected, we can call them \textit{one particle reducible}, while if cutting any fermionic line in the digram we are left with a different diagram but still connected, then the diagram is called \textit{one particle irreducuble}. Now if we define \(\Sigma\) as the sum of all 1 particle irreducuble diagrams without the external legs, we have found the \textbf{self-energy}.
+
+Take the diagrams from the connected N which are just the self energy diagrams with the legs attached back, we can write the full green's function as \TODO{substitute Gcal 0 with the line with Gcal 0 written below.}
+\[
+    \mathcal{G}(b,a) = \mathcal{G}_0 + \mathcal{G}_0 \Sigma \mathcal{G}_0 + \mathcal{G}_0 \Sigma \mathcal{G}_0 \Sigma \mathcal{G}_0 + \dots,
+\]
+and in this way we can get all the connected diagrams we were looking for. We can rewrite this as
+\[
+    \mathcal{G}(b,a) = \mathcal{G}_0 + \mathcal{G}_0 \Sigma \left[ \mathcal{G}_0 + \mathcal{G}_0 \Sigma \mathcal{G}_0 + \mathcal{G}_0 \Sigma \mathcal{G}_0 \Sigma \mathcal{G}_0 + \dots \right] = \mathcal{G}_0 + \mathcal{G}_0 \Sigma \mathcal{G}(b,a) = \mathcal{G}_0(b,a) + \mathcal{G}(b,l)\Sigma(l,j)\mathcal{G} (j,a),
+\]
+since inthe parenthesis we could recognize the full interacting green's function.
+
+Since we are deaking mostly with translationally invariant systems, we can obtain diagonal expressions for the green's functions and the self energy, so that we can write
+\[
+    \mathcal{G}_0(\mathbf{k}, i\omega) = \frac{1}{i \omega - \xi_{\mathbf{k}}},
+\]
+then
+\[
+    \mathcal{G}(\mathbf{k}, i\omega_n) = \mathcal{G}_0(\mathbf{k}, i \omega_n) \Sigma (\mathbf{k}, i \omega_n) \mathcal{G}(\mathbf{k}, i \omega_n) = \frac{\mathcal{G}_0(\mathbf{k},i \omega_n)}{1 - \mathcal{G}_0(\mathbf{k}, i \omega_n) \Sigma(\mathbf{k}, i \omega_n)} = \frac{1}{\mathcal{G}_0^{-1}(\mathbf{k}, i \omega_n) - \Sigma(\mathbf{k}, i \omega_n)} = \frac{1}{i \omega_n - \xi_{\mathbf{k}} - \Sigma(\mathbf{k}, i \omega_n)},
+\]
+which is the famous \textbf{Dyson's equation}, which gives us the full interacting green's function in terms of the non interacting green's function and the self energy, which is the sum of all 1 particle irreducuble diagrams without the external legs. This is a very important result, since it allows us to compute the full interacting green's function once we know the self energy, which is a much simpler quantity to compute than the full interacting green's function.
+
+If in the denominator \(\Sigma\) is null, we are left withe the non interacting green's function, while if \(\Sigma\) is a constant, we are left with a shift of the chemical potential, which is the Hartree-Fock approximation. If \(\Sigma\) is a function of \(\mathbf{k}\) and \(i \omega_n\), we have a more complicated expression for the green's function, which can be computed once we know the self energy. Thus the self energy is a crucial quantity in the study of interacting systems, since it contains all the information about the interactions in the system
+\[
+    \mathcal{G}(\mathbf{k}, i \omega_n) = \frac{1}{i \omega_n - \xi_{\mathbf{k}} - \Sigma(\mathbf{k}, i \omega_n)} = \frac{1}{i \omega_n - \frac{\hbar^2 k^2}{2m} - \text{Re}\Sigma(\mathbf{k}, i \omega_n) - i \text{Im} \Sigma(\mathbf{k}, i \omega_n)},
+\]
+where the real part of the self energy gives us a shift of the energy levels, while the imaginary part gives us a finite lifetime for the quasiparticles, which is a very important result, since it tells us that the quasiparticles are not stable, but they have a finite lifetime, which is a consequence of the interactions in the system. We can also obtain the spectral function from the green's function, which is another important quantity that we will be interested in for the rest of the course. The spectral function gives us information about the density of states and the excitations in the system, which are crucial for understanding the physical properties of the system.
+
+Thus we can see that Wick's theorem is a very powerful tool that allows us to compute all these quantities from the non interacting green's function and the self energy, which are much simpler quantities to compute than the full interacting green's function.
