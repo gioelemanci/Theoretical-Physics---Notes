@@ -1,0 +1,94 @@
+\chapter{Bohh}
+
+ [...]
+
+From the Heine Borel theorem we know that a subset of $\mathbb{R}$ is compact if and only if it is closed (there are no limiting points that belong to the set) and bounded. We can use this to show that the set of all subgroups of $\mathbb{R}$ is uncountable.
+
+\begin{example}[Compactness of the unitary group]
+    The unitary group \(G = U(n)\) satisfies the following properties:
+    \[
+        \sum_{i} u^*_{ij} u_{ik} = \delta_{jk},
+    \]
+    and expanding the sum we understand that for \(i=j\) we have no entries greater than 1:
+    \[
+        \vert u_{ij} \vert \leq 1.
+    \]
+    Furthermore if we have some matrix group defined by a set of polynomial equations, then the set of solutions is closed. Therefore \(U(n)\) is a closed and bounded subset of \(\mathbb{R}^{n^2}\) and thus compact.
+\end{example}
+
+\begin{example}[Non compact Lie Groups]
+    \(GL(n,\mathbb{R})\) or \(GL(n,\mathbb{C})\), \(SL(n,\mathbb{R})\), \(SO(1,n-1)\) are not compact, since they are not bounded.
+\end{example}
+
+\begin{definition}[Connectedness]
+    A topological space \(G\) is \textit{connected} if for any two ponts \(g_1,\,g_2 \in G\) there exists a continuous path \(\gamma : [0,1] \to G\) such that \(\gamma(0) = g_1\) and \(\gamma(1) = g_2\) (it is not necessary to impose the limits on the domanin of \(\gamma\), but it is convenient to do so).
+\end{definition}
+
+This curve is a continuous map, thus any function cannot vary discontinuously along it. In particular, if we have a continuous homomorphism \(f : G \to H\) and \(G\) is connected, then the image of \(f\) must be connected as well. This is because the image of a continuous map is always connected.
+
+If we start from a point where \(\det(f(g)) = 1\) for some \(g \in G\), then we can infere that \(\det(f(g)) = 1\) for all \(g \in \gamma \subset G\). This is because the determinant is a continuous function, and if it is unitary at one point, it must be unitary along the entire path connecting that point to any other point in \(G\).
+
+    [... unitary and orthogonal groups ...]
+
+\begin{definition}[Simply connected Lie groups]
+    If a group \(G\) is connected and any closed curve in \(G\) can be continuously contracted (smoothly deformed) to a point, then \(G\) is called \textit{simply connected}.
+\end{definition}
+
+It is easier to think about topological spaces as being made of rubber, and the continuous deformation as being a process of stretching and bending the space without tearing it. In this way, a simply connected space is one that has no holes or loops that cannot be contracted to a point. As a visual example, the case of a thorus, a can connect any two points with a continuous path, but there are loops around the hole of the thorus that cannot be contracted to a point. On the other hand, a sphere is simply connected, because any loop on the sphere can be contracted to a point.
+
+\begin{example}[Simply connectedness in Lie groups]
+    The unitary group \(U(n)\) is not simply connected, since it contains \(U(1) \subset U(n)\) which is topologically a circle, and thus has loops that cannot be contracted to a point. On the other hand, the special unitary group \(SU(n)\) is simply connected, because it does not contain any loops that cannot be contracted to a point.
+
+    Another example is the special orthogonal group \(SO(3)\) in three dimensional space: For \(n \geq 3\), \(SO(n)\) is not simply connected. However, for \(n = 2\), \(SO(2)\) is simply connected. If we think about \(SU(2)\), which is the double cover of \(SO(3)\), we can see that it is simply connected: the inehrited loops from \(SO(3)\) can be contracted to a point in \(SU(2)\) because of the double cover structure. In fact, \(SU(2)\) is topologically equivalent to the 3-sphere \(S^3\), which is simply connected. Thus spin-\(\tfrac{1}{2}\) objects, which are described by representations of \(SU(2)\), can be thought of as living on a simply connected space, while the rotations in three-dimensional space, described by \(SO(3)\), have a non-simply connected structure due to the presence of loops that cannot be contracted to a point.
+\end{example}
+
+[Talking about foundamental groups, we are implying that we are working with a connected manifold, since the fundamental group is defined for connected spaces. If the space is not connected, we can consider the fundamental group of each connected component separately.]
+
+\subsection{Lie Algebra from Tangent Vectors}
+
+\begin{definition}[Tangent vectors]
+    Let \((\mathcal{M}, \{u_{\alpha}\})\) and a point \(p \in \mathcal{M}\) in the manifold. Let us imagine a smooth curve \(\gamma : (a, b) \to \mathcal{M}\) such that \(\gamma(t=0) = p\). We can define the tangent vector to the curve at the point \(p\), \(\dot{\gamma}_p\) as as a differential operator acting on smooth functions \(\phi \in \mathbb{C}^{\infty}(\mathcal{M})\) as follows:
+    \[
+        \dot{\gamma}_p(\phi) = \left. \frac{\mathrm{d}}{\mathrm{d} t} (\phi \circ \gamma) (t)\right|_{t=t_0}.
+    \]
+\end{definition}
+
+A set of tangent vectors at a point \(p\) spans a \(m\) dimensional vector space (\(m = \mathrm{dim} \mathcal{M}\)), called the tangent space at \(p\), denoted by \(T_p \mathcal{M}\). The dimension of the tangent space is thus equal to the dimension of the manifold.
+
+Let us now consider a chart \(p \in U\) with coordinates \(x \equiv x^i : U \to \mathbb{R}^m\). We can define a set of tangent vectors at \(p\) as follows:
+\[
+    \dot{\gamma}_p^i(\phi) = \left. \frac{\mathrm{d}}{\mathrm{d} t} (\phi \circ x^{-1} \circ x \circ \gamma) (t)\right|_{t=t_0} = \left. \frac{\mathrm{d}}{\mathrm{d} t} (\phi \circ x^{-1}) (x(\gamma(t)))\right|_{t=t_0}.
+\]
+Applying the chain rule, we can write this as:
+\[\TODO{correct the expression below, it is not correct}
+    \dot{\gamma}_p^i(\phi) = \left. \frac{\mathrm{d} x^j}{\mathrm{d} t} \frac{\partial}{\partial x^j} (\phi \circ x^{-1}) (x(\gamma(t)))\right|_{t=t_0} = \left. \frac{\mathrm{d} x^j}{\mathrm{d} t}\right|_{t=t_0} \left. \frac{\partial}{\partial x^j} (\phi \circ x^{-1}) (x)\right|_{x=x(p)}.
+\]
+Thus we find that
+\[
+    \dot{\gamma}_p(\phi) = \sum_{i} \gamma^i(t_0) \frac{\partial}{\partial x^i} (\phi \circ x^{-1}) (x(p)) = \sum_{i} \gamma^i(t_0) \frac{\partial}{\partial x^i} (\phi(p)).
+\]
+In a local coorfinate patch thus the tangent vector can be expressed as a linear combination of the partial derivatives with respect to the coordinates, evaluated at the point \(p\). The coefficients of this linear combination are given by the components of the curve \(\gamma\) at \(t=t_0\). Thus the tangent space has dimension equal to the number of coordinates, which is equal to the dimension of the manifold.
+
+\begin{corollary}
+    If we have two manifolds \(\mathcal{M}_1\) and \(\mathcal{M}_2\) of dimensions \(m_1\) and \(m_2\) respectively, then the tangent space of their product is the direct sum of their tangent spaces:
+    \[
+        T_p(\mathcal{M}_1 \times \mathcal{M}_2) \cong T_p\mathcal{M}_1 \oplus T_p\mathcal{M}_2 = T_p \mathcal{M},
+    \]
+    where \(p = (p_1, p_2)\) is a point in the product manifold \(\mathcal{M}_1 \times \mathcal{M}_2\).
+\end{corollary}
+
+\begin{definition}[Tangent bundle]
+    If one take the union of all the tangent spaces at all points of the manifold, we obtain the \textbf{tangent bundle} \(T\mathcal{M} = \bigcup_{p \in \mathcal{M}} T_p \mathcal{M}\). The tangent bundle is itself a manifold of dimension \(2m\), where \(m\) is the dimension of the original manifold \(\mathcal{M}\) (we have to keep the original maniforld in the definition of the tangent bundle, since the tangent spaces are defined at each point of the manifold):
+    \[
+        T\mathcal{M} = \{ (p,\mathbf{v}) | p \in \mathcal{M}, \mathbf{v} \in T_p \mathcal{M} \},
+    \]
+    and furthermore we have a natural projection map \(\pi : T\mathcal{M} \to \mathcal{M}\) defined by \(\pi(p,\mathbf{v}) = p\). The tangent bundle is a vector bundle, since each fiber (the tangent space at each point) is a vector space.
+\end{definition}
+
+\begin{definition}[Vector fields]
+    A \textbf{vector field} on a manifold \(\mathcal{M}\) is a smooth section of the tangent bundle, that is, a smooth map \(V : \mathcal{M} \to T\mathcal{M}\) such that \(\pi \circ V = \mathrm{id}_{\mathcal{M}}\). In other words, for each point \(p \in \mathcal{M}\), the vector field assigns a tangent vector \(V(p) \in T_p \mathcal{M}\). It is also called a \textit{section} of the tangent bundle \(T\mathcal{M}\).
+\end{definition}
+
+Thus we associate to each point of the manifold a tangent space, and a vector field is a smooth assignment of a tangent vector to each point of the manifold. We are cutting the fibers of the bundle, and we are left with a single vector at each point of the manifold.
+
+Since locally this vector field is a map from the manifold to the tangent space, if and only if the map is smooth, then the vector field is smooth and can be written as \(\Gamma(T\mathcal{M})\).
