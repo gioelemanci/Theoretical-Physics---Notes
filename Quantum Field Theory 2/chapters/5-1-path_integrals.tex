@@ -1,0 +1,222 @@
+\chapter{Path Integrals}
+
+Path integrals were invented as an alternative but equivalent quantization procedure to canonical quantization. In this chapter, we will introduce the path integral formulation of quantum field theory and show how it can be used to compute correlation functions and scattering amplitudes.
+
+Applying path integrals to traditional quantum mechanics seems a bit complicated and unnecessary, but it becomes very useful in quantum field theory, where the canonical quantization procedure can be quite cumbersome. Moreover, path integrals provide a more intuitive picture of quantum mechanics and quantum field theory, as they allow us to think of particles as taking all possible paths between two points, rather than just a single path.
+
+Among other things, path integrals are particularly useful:
+\begin{itemize}
+    \item \textbf{Lorentz invariance is manifest}: the path integral formulation is manifestly Lorentz invariant, since it is a lagrangian formulation of the theory, and thus it does not require a choice of time coordinate or a specific reference frame (we do not need the hamiltonian).
+    \item \textbf{Quantization of gauge field theories} is more straightforward: the path integral formulation allows us to easily implement gauge fixing and Faddeev-Popov ghosts, which are necessary for quantizing gauge theories.
+    \item \textbf{Numerical simulations for strongly interacting theories} (where perturbation theory fails): path integrals can be evaluated numerically using Monte Carlo methods, which is particularly useful for studying strongly interacting theories such as quantum chromodynamics (QCD) on the lattice (the idea is to discretize spacetime into a lattice and then evaluate the path integral numerically).
+    \item The use of \textbf{functional integrals} allows us to easily derive the generating functional for correlation functions, which is a powerful tool for computing correlation functions and scattering amplitudes in quantum field theory. For examples \textit{symmetries} in QFT are much easier to understand in the path integral formulation, since they can be implemented as transformations of the fields in the path integral, and thus we can easily derive Ward identities and other relations between correlation functions.
+\end{itemize}
+
+\section{Path Integral Formulation of Quantum Mechanics}
+
+The idea of the path integral formulation is to express the transition amplitude between two states as a sum over all possible paths that the system can take between those states. In quantum mechanics, the most used eexample to illustrate the path integral formulation is the \textbf{double slit experiment}, where we can think of the particle as taking all possible paths from the source to the detector, and the interference pattern arises from the constructive and destructive interference of these paths.
+
+    [\textit{drawing of source of particles, slits and detector}]\TODO{Add drawing of double slit experiment}
+
+\[
+    A(x \to y) = A (x \to a \to y) + A (x \to b \to y),
+\]
+where \(a\) and \(b\) are the two slits. In the path integral formulation, we can express the transition amplitude as a sum over all possible paths that the particle can take from \(x\) to \(y\), but we can do more, adding virtually an infinite number of screens with slits in between \(x\) and \(y\), and thus we can express the transition amplitude as a sum over all possible paths that the particle can take from \(x\) to \(y\) through any number of slits. In the limit of infinitely many screens with infinitely many slits, we can express the transition amplitude as a sum over all possible paths that the particle can take from \(x\) to \(y\), without any constraints.
+
+    [\textit{draw of infinite walls and slits among x and y}]\TODO{Add drawing of infinite walls and slits among x and y}
+
+If \(\gamma\) is a specific path from \(x\) to \(y\), then we can associate to it a complex number \(A(\gamma)\) called the amplitude of the path, and then we can express the transition amplitude as a sum over all possible paths:
+\[
+    A(x \to y) = \sum_{\gamma} A(x \to y,\, \gamma).
+\]
+
+In order to implement this idea, we can discretize the time interval between \(x\) and \(y\) into \(N\) small intervals of size \(\epsilon\), and then we can express the transition amplitude as a sum over all possible paths that the particle can take from \(x\) to \(y\) through these small intervals:
+\[
+    \bra{f;\,t_f}\ket{i;\,t_i}, \quad t_i < t_1 < \cdots < t_n < t_f, \quad t_{k+1} - t_k = \epsilon,
+\]
+where we have inserted \(N-1\) complete sets of states at intermediate times \(t_1, \ldots, t_{N-1}\). Then we can express the transition amplitude as a sum over all possible paths that the particle can take from \(x\) to \(y\) through these small intervals by adding the resolution of the identity at each intermediate time:
+\[
+    \bra{f;\,t_f}\ket{i;\,t_i} = \int \mathrm{d} q_1 \cdots \mathrm{d}q_n \bra{f;\,t_f}\ket{q_{n};\,t_{n}} \bra{q_{n};\,t_{n}}\ket{q_{N-1};\,t_{N-1}} \cdots \bra{q_1;\,t_1}\ket{i;\,t_i}.
+\]
+The result to this expression is
+\[
+    \bra{f;\,t_f}\ket{i;\,t_i} = N \int_{q(t_i) = x_i}^{q(t_f) = x_f} \mathcal{D} q(t) e^{i S[q(t)]},
+\]
+where \(S[q(t)] = \int \mathrm{d}t \, L(q(t), \dot{q}(t))\) is the action of the path \(q(t)\), and \(\mathcal{D} q(t)\) is a measure that assigns a weight to each path. The normalization factor \(N\) is chosen such that the transition amplitude is properly normalized. In order to understand this expression more intuitively, we can always go back to its discretized version:
+\[
+    \bra{f;\,t_f}\ket{i;\,t_i} = N \int \mathrm{d} q_1 \cdots \mathrm{d}q_n \exp[i \sum_{k} L(q_k, \dot{q}_{k}) \cdot \epsilon], \quad \dot{q}_k = \frac{q_{k+1} - q_k}{\epsilon}.
+\]
+
+We can also generalize the last expression using the time ordering operator \(\hat{T}\):
+\[
+    \bra{f;\,t_f} \hat{T} \{\hat{q}(t_a) \hat{q}(t_b) \cdots\} \ket{i;\,t_i} = N \int_{q(t_i) = x_i}^{q(t_f) = x_f} \mathcal{D} q(t) e^{i S[q(t)]} q(t_a) q(t_b) \cdots, \quad t_i < t_a < t_b < \cdots < t_f,
+\]
+where the time ordering operator \(\hat{T}\) ensures that the operators are ordered in time from right to left, with the earliest time on the right and the latest time on the left. This expression allows us to compute correlation functions of the form \(\bra{f;\,t_f} \hat{T} \{\hat{q}(t_a) \hat{q}(t_b) \cdots\} \ket{i;\,t_i}\) using path integrals.
+
+There exists also a discretized version of the last expression, which is more intuitive and easier to understand:
+\[
+    \bra{f;\,t_f} \hat{T} \{\hat{q}(t_a) \hat{q}(t_b) \cdots\} \ket{i;\,t_i} = N \int \mathrm{d} q_1 \cdots \mathrm{d}q_n \exp[i \sum_{k} L(q_k, \dot{q}_{k}) \cdot \epsilon] q(t_a) q(t_b) \cdots,
+\]
+where we have replaced the operators \(\hat{q}(t_a)\) and \(\hat{q}(t_b)\) with the corresponding functions \(q(t_a)\) and \(q(t_b)\) in the path integral as did before. This expression allows us to compute correlation functions of the form \(\bra{f;\,t_f} \hat{T} \{\hat{q}(t_a) \hat{q}(t_b) \cdots\} \ket{i;\,t_i}\) using path integrals in a more intuitive way. Time ordering is basically implemented for free, since the path integral already sums over all possible paths, and thus it automatically takes into account all possible time orderings of the operators. \QUESTION{time ordering.}
+
+\subsection{Classical Limit}
+
+In the classical limit, the path integral is dominated by the path that minimizes the action, which is the classical path. This is because in the classical limit, the action is much larger than \(\hbar \to 0\), and thus the contributions from paths that deviate from the classical path are suppressed by a factor of \(e^{i S/\hbar}\),\footnote{We omitted the \(\hbar\) factor for simplicity, but via dimensional analysis it can be easily recovered.} which oscillates rapidly and averages out to zero. Therefore, in the classical limit, we can approximate the path integral by evaluating it at the classical path, which gives us the classical equations of motion.
+
+Thus the most important contribution to the path integral comes from the classical path, which is the path that minimizes the action. This is known as the principle of least action, and it is a fundamental principle in classical mechanics that states that the motion of a system is determined by the path that minimizes the action. From these procedure we can easily compute the Euler-Lagrange equations of motion, which are the equations that govern the dynamics of the system in classical mechanics. In the path integral formulation, we can derive the Euler-Lagrange equations by performing a variation of the action with respect to the path, and then setting the variation to zero.
+
+\section{Path Integral Formulation of QFT}
+
+The path integral formulation can be generalized with the use of some handy substitutions:
+\[
+    \begin{dcases}
+        q \to \phi(x), \\
+        t, \, \mathrm{d} t \to x^{\mu}, \, \mathrm{d}^4 x,
+    \end{dcases}
+\]
+
+... green's finctions... \(\ket{i} = \ket{f} = \ket{\Omega}\)...
+
+\[
+    \bra{\Omega} \hat{T} \{\hat{\phi}(x_1) \hat{\phi}(x_2) \cdots \hat{\phi} (x_n)\} \ket{\Omega} = N \int \mathcal{D} \phi(x) e^{i S[\phi(x)]} \phi(x_1) \phi(x_2) \cdots \phi(x_n),
+\]
+where now the action is \(S[\phi(x)] = \int \mathrm{d}^4 x \, \mathcal{L}(\phi(x), \partial_\mu \phi(x))\). The normalization \(N\) can be fixed by requiring that the vacuum-to-vacuum transition amplitude is equal to one \(\bra{\Omega} \ket{\Omega} = 1\):
+\[
+    N = \frac{1}{\int \mathcal{D} \phi(x) e^{i S[\phi(x)]}}.
+\]
+
+
+In order to get the discretized version of the last expression, we can discretize spacetime into a lattice of points, \(x_i \to \phi_i \equiv \phi(x_i)\) and
+
+    [\textit{draw of lattice}]\TODO{Add drawing of lattice}
+
+\[
+    \bra{\Omega} \hat{T} \{\hat{\phi}(x_1) \hat{\phi}(x_2) \cdots \hat{\phi} (x_n)\} \ket{\Omega} = N \int \mathrm{d} \phi_1 \cdots \mathrm{d} \phi_N \exp[i \sum_{k=1}^N \Delta^4 x \mathcal{L}(\phi_k)] \phi_1 \phi_2 \cdots \phi_N,
+\]
+
+where again... and in the limit for \(n \to  \infty\) ...
+
+But how do we evaluate the path integral? In general, it is very difficult to evaluate the path integral exactly, but we have some options based on the context in which we are working:
+\begin{itemize}
+    \item \textbf{Lattice QFT}: we can evaluate the path integral numerically using Monte Carlo methods, which is particularly useful for studying strongly interacting theories such as quantum chromodynamics (QCD) on the lattice (the idea is to discretize spacetime into a lattice and then evaluate the path integral numerically). In the end we could infere the properties at the continuum limit by taking the limit of the lattice spacing going to zero.
+    \item \textbf{Perturbation Theory}: if the lagrangian of the theory is quadratic in the fields, then we can evaluate the path integral exactly using \textit{gaussian integrals}. If the lagrangian is not quadratic, then we can treat the non-quadratic terms as perturbations and evaluate the path integral perturbatively using Feynman diagrams: we can Taylor expand the exponential of the action around the free theory, and then we can use Wick's theorem to evaluate the resulting correlation functions in terms of the free propagators. This is the standard approach for computing scattering amplitudes in quantum field theory, and it is based on the idea that we can treat interactions as small perturbations to the free theory.
+\end{itemize}
+
+\subsection{Gaussian Integrals}
+
+One dimensional gaussian integrals are given by
+\[
+    \int_{-\infty}^{\infty} \mathrm{d} z e^{-\tfrac{a}{2} z^2} = \sqrt{\frac{2\pi}{a}}, \quad a > 0.
+\]
+Now the generalization to \(n\) dimensions is given by \(\mathbf{z} = (z_1, z_2, \ldots, z_n)\)
+\[
+    \int \mathrm{d} z_1 \cdots \mathrm{d} z_n \; \exp[-\frac{1}{2} \mathbf{z}^T \hat{A} \mathbf{z} + \mathbf{J} \cdot \mathbf{z}] = \sqrt{\frac{(2\pi)^{n/2}}{\sqrt{\det \hat{A}}}} \exp[\frac{1}{2} \mathbf{J}^T \hat{A}^{-1} \mathbf{J}].
+\]
+
+As we said cubic or higher order terms in the lagrangian can be treated as perturbations, and thus we can evaluate the path integral perturbatively using Feynman diagrams: we can Taylor expand the exponential of the action around the free theory
+\[
+    \int_{-\infty}^{\infty} \mathrm{d} z \exp[-\frac{1}{2}] \dots \dots
+\]
+and
+\[
+    \dots
+\]
+
+
+\subsection{Computing Green's Functions}
+
+Since we are working in a space of functions, we have to define the functional derivative as
+\[
+    \frac{\partial }{\partial J(x)} J(y) = \delta^{(4)}(x-y),
+\]
+which implies
+\[
+    \frac{\partial }{\partial J(x)} \int \mathrm{d}^4 y \, J(y) \phi(y) = \phi(x),
+\]
+which is the continuum version of the discrete case \(\frac{\partial }{\partial J_i} \sum_j J_j \phi_j = \phi_i\) (and \(\frac{\partial}{\partial J_i} J_j = \delta_{ij}\)). This functional derivative obeys the same properties as the ordinary derivative, such as linearity and the product rule. We can use this functional derivative to compute correlation functions by introducing a source term \(J(x)\) in the action, and then taking functional derivatives with respect to \(J(x)\) to obtain correlation functions of the fields.
+
+Since we can almost treat it as a normal derivative we have
+\[
+    \frac{\partial}{\partial J(x)} \int \mathrm{d}^4 y \, (\partial_\mu J(y)) \phi(y) = - \partial_\mu \phi(x),
+\]
+having integrated by parts and assuming that the fields vanish at infinity. This is a very useful property, since it allows us to compute correlation functions involving derivatives of the fields by simply taking functional derivatives with respect to the source term.
+
+\begin{example}[Exercise]
+    Consider a lagrangian \(\mathcal{L} = \mathcal{L} (l_k, \partial_\mu l_k)\) show that the equations of motion can ...
+\end{example}
+
+We can also define the \textbf{generating functional} \(Z[J]\) as
+\[
+    Z[J] \equiv \int \mathcal{D} \phi e^{i S[\phi(x)] + i \int \mathrm{d}^4 x J(x) \phi(x)},
+\]
+where \(J(x)\) can be thought as a classical source that couples to the quantum field \(\phi(x)\). The generating functional \(Z[J]\) is a powerful tool for computing correlation functions, since we can obtain correlation functions by taking functional derivatives of \(Z[J]\) with respect to \(J(x)\) and then setting \(J(x) = 0\):
+\[
+    \bra{\Omega} \hat{T} \{\hat{\phi}(x_1) \hat{\phi}(x_2) \cdots \hat{\phi} (x_n)\} \ket{\Omega} = \frac{1}{Z[0]} \left. \left(-i\frac{\partial}{\partial J(x_1)}\right) \left(-i\frac{\partial}{\partial J(x_2)}\right) \cdots \left(-i\frac{\partial}{\partial J(x_n)}\right) Z[J] \right|_{J=0},
+\]
+where the normalization factor \(1/Z[0]\) is necessary to ensure that the correlation functions are properly normalized. The generating functional \(Z[J]\) can be evaluated exactly for free theories, and it can be evaluated perturbatively for interacting theories using Feynman diagrams.
+
+If we can compute the generating functional \(Z[J]\) for a given theory, then we can compute all correlation functions of the theory by taking functional derivatives with respect to \(J(x)\) and then setting \(J(x) = 0\): we basically know everything about the theory, and thus we can compute all scattering amplitudes and other physical observables. This is why the generating functional \(Z[J]\) is such a powerful tool in quantum field theory.
+
+In order to compute exactely the generating functional \(Z[J]\) for a free theory, we can use the fact that the action is quadratic in the fields, and thus we can evaluate the path integral exactly using gaussian integrals: rewriting the action as
+\[
+    i \int \mathrm{d}^4 x \, \left( \mathcal{L} + \phi J \right) = -\frac{i}{2} \int \mathrm{d}^4 x \phi \left( \partial^2 + m^2 - i \epsilon\right) \phi + i \int \mathrm{d}^4 x \, J \phi,
+\]
+where we have added a small imaginary part \(i \epsilon\) to the mass term in order to ensure that the path integral converges. Then we can evaluate the path integral using gaussian integrals, and we find
+\[
+    Z[J] = Z[0] \exp\left[i \int \mathrm{d}^4 x \left(-\frac{1}{2} \phi (\partial^2 + m^2 - i \epsilon) \phi + J \phi \right)\right],
+\]
+where we can rename \((\partial^2 + m^2 - i \epsilon) = \hat{A}\) as the matrix used when defining the gaussian integral. We have to note a couple of things:
+\[
+    \begin{dcases}
+        \hat{A} = \partial^2 + m^2 - i \epsilon,                                                     \\
+        \hat{A} D_F(x-y) = \delta^{(4)}(x-y),                                                        \\
+        \sum_j A_{ij} (D_F)_{jk} = \delta_{ik} \to \int \mathrm{d}^4 p \, e^{ip \cdot (x-y)} \Pi(p), \\
+        i (\partial^2 + m^2 - i \epsilon) \Pi(p) = 1 \implies \Pi(p) = \frac{i}{p^2 - m^2 + i \epsilon}.
+    \end{dcases}
+\]
+
+Thus now we can rewrite the generating functional \(Z[J]\) as
+\[
+    Z[J] = Z_0 \exp\left[-\frac{1}{2} \int \mathrm{d}^4 x \int  \mathrm{d}^4 y J(x) D_F(x-y) J(y)\right],
+\]
+which is the exact expression for the generating functional of a free theory. From this expression, we can compute all correlation functions of the free theory by taking functional derivatives with respect to \(J(x)\) and then setting \(J(x) = 0\).
+
+\subsubsection{Green's Functions of a Free Theory}
+
+\begin{example}[Two point green's function]
+    The two point green's function is given by
+    \[
+        \bra{0} \hat{T} \{\hat{\phi}(x_1) \hat{\phi}(x_2)\} \ket{0} = \frac{1}{Z[0]} \left. \left(-i\frac{\partial}{\partial J(x_1)}\right) \left(-i\frac{\partial}{\partial J(x_2)}\right) Z[J] \right|_{J=0}.
+    \]
+    Then we can compute the functional derivatives and we find
+    \[
+        \begin{aligned}
+            \bra{0} \hat{T} \{\hat{\phi}(x_1) \hat{\phi}(x_2)\} \ket{0} & = \frac{1}{Z[0]} \left. \left(-i\frac{\partial}{\partial J(x_1)}\right) \left[-\frac{1}{2} \int \mathrm{d}^4 y D_F(x_2-y) J(y) - \frac{1}{2} \int \mathrm{d}^4 x J(x) D_F(x-x_2) \right] \frac{Z[J]}{Z_0}\right|_{J=0} \\
+                                                                        & = \frac{1}{2} D_F(x_2 - x_1) + \frac{1}{2} D_F(x_1 - x_2) = D_F(x_2 - x_1),
+        \end{aligned}
+    \]
+    which is the Feynman propagator of the free theory.
+\end{example}
+
+\begin{example}[Four point green's function]
+    If we rename for convenience
+    \[
+        \begin{dcases}
+            D_F(x-y) = D_{xy},                                                                                       \\
+            J(x) = J_x,                                                                                              \\
+            \int \mathrm{d}^4 x \int \mathrm{d}^4 y J(x) D_F(x-y) J(y) = \sum_{x,y} J_x D_{xy} J_y = J_x D_{xy} J_y, \\
+            \frac{\partial}{\partial J_z} (J_x D_{xy} J_y) = D_{zy} J_y + J_x D_{xz} = 2 J_x D_{xz},
+        \end{dcases}
+    \]
+    then we can compute the four point green's function as
+    \[
+        \begin{aligned}
+            \bra{0} \hat{T} \{\hat{\phi}_1 \hat{\phi}_2 \hat{\phi}_3 \hat{\phi}_4\} \ket{0} & = \left. (-i)^4 \frac{\partial^4}{\partial J_1 \partial J_2 \partial J_3 \partial J_4} \exp[-\frac{1}{2} J_x D_{xy} J_y] \right|_{J=0} \\
+                                                                                            & = \frac{\partial}{\partial J_1} \cdots \frac{\partial}{\partial J_3} (-J_x D_{x4}) \exp[\cdots] \bigg|_{J=0}                           \\
+                                                                                            & = \frac{\partial}{\partial J_1} \frac{\partial}{\partial J_2} \left(-D_{34} + J_x D_{x4} J_y D_{yz} \right)\exp[\cdots] \bigg|_{J=0}   \\
+                                                                                            & =  \cdots = D_{14} D_{23} + D_{24} D_{13} + D_{12} D_{34}                                                                              \\
+                                                                                            & = \sum \text{ full contractions of } \phi_1 \phi_2 \phi_3 \phi_4,
+        \end{aligned}
+    \]
+    which is the sum of all possible contractions of the four fields, and thus it is the sum of all possible Feynman diagrams with four external legs.
+\end{example}
