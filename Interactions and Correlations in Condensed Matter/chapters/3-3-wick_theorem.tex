@@ -60,7 +60,7 @@ where each of the interaction potential is a product of a different number of cr
 
 
 
-
+\section{Interacting Green's Function}
 
 The interating green's function
 \[
@@ -179,7 +179,10 @@ Since we are deaking mostly with translationally invariant systems, we can obtai
 \]
 then
 \[
-    \mathcal{G}(\mathbf{k}, i\omega_n) = \mathcal{G}_0(\mathbf{k}, i \omega_n) \Sigma (\mathbf{k}, i \omega_n) \mathcal{G}(\mathbf{k}, i \omega_n) = \frac{\mathcal{G}_0(\mathbf{k},i \omega_n)}{1 - \mathcal{G}_0(\mathbf{k}, i \omega_n) \Sigma(\mathbf{k}, i \omega_n)} = \frac{1}{\mathcal{G}_0^{-1}(\mathbf{k}, i \omega_n) - \Sigma(\mathbf{k}, i \omega_n)} = \frac{1}{i \omega_n - \xi_{\mathbf{k}} - \Sigma(\mathbf{k}, i \omega_n)},
+    \begin{aligned}
+        \mathcal{G}(\mathbf{k}, i\omega_n) = \mathcal{G}_0(\mathbf{k}, i \omega_n) \Sigma (\mathbf{k}, i \omega_n) \mathcal{G}(\mathbf{k}, i \omega_n) = \frac{\mathcal{G}_0(\mathbf{k},i \omega_n)}{1 - \mathcal{G}_0(\mathbf{k}, i \omega_n) \Sigma(\mathbf{k}, i \omega_n)} \\
+        = \frac{1}{\mathcal{G}_0^{-1}(\mathbf{k}, i \omega_n) - \Sigma(\mathbf{k}, i \omega_n)} = \frac{1}{i \omega_n - \xi_{\mathbf{k}} - \Sigma(\mathbf{k}, i \omega_n)},
+    \end{aligned}
 \]
 which is the famous \textbf{Dyson's equation}, which gives us the full interacting green's function in terms of the non interacting green's function and the self energy, which is the sum of all 1 particle irreducuble diagrams without the external legs. This is a very important result, since it allows us to compute the full interacting green's function once we know the self energy, which is a much simpler quantity to compute than the full interacting green's function.
 
@@ -187,6 +190,176 @@ If in the denominator \(\Sigma\) is null, we are left withe the non interacting 
 \[
     \mathcal{G}(\mathbf{k}, i \omega_n) = \frac{1}{i \omega_n - \xi_{\mathbf{k}} - \Sigma(\mathbf{k}, i \omega_n)} = \frac{1}{i \omega_n - \frac{\hbar^2 k^2}{2m} - \text{Re}\Sigma(\mathbf{k}, i \omega_n) - i \text{Im} \Sigma(\mathbf{k}, i \omega_n)},
 \]
-where the real part of the self energy gives us a shift of the energy levels, while the imaginary part gives us a finite lifetime for the quasiparticles, which is a very important result, since it tells us that the quasiparticles are not stable, but they have a finite lifetime, which is a consequence of the interactions in the system. We can also obtain the spectral function from the green's function, which is another important quantity that we will be interested in for the rest of the course. The spectral function gives us information about the density of states and the excitations in the system, which are crucial for understanding the physical properties of the system.
+where the real part of the self energy gives us a shift of the energy levels (the \textit{band distortion}, so we can for example pass from a parabolic spectre of energy levels, given by the free particle dispersion relation, to some other shape), while the imaginary part gives us a finite lifetime for the quasiparticles (the one mediating the interactions), which is a very important result, since it tells us that the quasiparticles are not stable, but they have a finite lifetime, which is a consequence of the interactions in the system. We can also obtain the spectral function from the green's function, which is another important quantity that we will be interested in for the rest of the course. The spectral function gives us information about the density of states and the excitations in the system, which are crucial for understanding the physical properties of the system.
 
 Thus we can see that Wick's theorem is a very powerful tool that allows us to compute all these quantities from the non interacting green's function and the self energy, which are much simpler quantities to compute than the full interacting green's function.
+
+
+
+
+
+
+
+
+\section{Free Energy of an Interacting System}
+
+Can we still talk about the fermi sphere in the presence of interactions? The answer is yes, since the real part of the self energy gives us a shift of the energy levels, which will become zero at the level of the fermi energy. We are now going to address the problem of how interactions affect the energy levels.
+
+Let us connect the partition function (encoding the statistics of the interacting system) to the free energy, which is the quantity we are interested in, since it gives us all the thermodynamic properties of the system:
+\[
+    F = E - TS,
+\]
+from thermodynamics, where \(E\) is the internal energy and \(S\) is the entropy. Thus our goal is to define the entropy of an interacting system, which is a very complicated quantity to define, since we have to take into account all the interactions. Starting from the Boltzmann factor of each state
+\[
+    p_n = \frac{e^{-\beta E_n}}{Z}, \quad H \ket{n} = E_n \ket{n}, \quad \sum_{n} p_n = 1,
+\]
+and remembering that the partition function is the trace of the density matrix, we can write
+\[
+    Z = \Tr e^{-\beta H} = \sum_{n} \bra{n} e^{-\beta H} \ket{n} = \sum_{n} e^{-\beta E_n}.
+\]
+
+We can define the entropy as
+\[
+    S = -k_B \sum_{n} p_n \ln p_n = -k_B \sum_{n} \frac{e^{-\beta E_n}}{Z} \ln \left( \frac{e^{-\beta E_n}}{Z} \right) = k_B \beta \sum_{n} p_n E_n + k_B \ln Z,
+\]
+where the first term is the average energy of the system (since it is a sum over all states wheighted by the Boltzmann factors for each level), while the second term is the logarithm of the partition function, which is related to the free energy. Thus we can write
+\[
+    \begin{aligned}
+        S = \frac{1}{T} \langle E \rangle + k_B \ln Z,           \\
+        \implies TS = \langle E \rangle + \frac{1}{\beta} \ln Z, \\
+        \implies F = E - TS = -k_B T \ln Z,
+    \end{aligned}
+\]
+which is a very important result, since it tells us that the free energy of the system is directly related to the partition function, which is the quantity we can compute from the green's functions and the self energy.
+
+Let us recall that the density matrix is the evolution operator in imaginary time, so that we can write
+\[
+    F = - \frac{1}{\beta} \ln \Tr e^{-\beta H} = - \frac{1}{\beta} \ln \Tr e^{-\beta H_0} \hat{U}(\beta, 0),
+\]
+where thus
+\[
+    \begin{aligned}
+        U(\beta, 0) = \hat{T}_{\tau} e^{-\int_0^{\beta} \mathrm{d} \tau \hat{V}_{int}(\tau)} \\
+        = 1 - \int_0^{\beta} \mathrm{d} \tau \hat{V}_{int}(\tau) + \frac{1}{2!} \int_0^{\beta} \mathrm{d} \tau_1 \int_0^{\beta} \mathrm{d} \tau_2 \hat{V}_{int}(\tau_1) \hat{V}_{int}(\tau_2) + \dots,
+    \end{aligned}
+\]
+
+If we define the non interacting partition function as \(Z_0 = \Tr e^{-\beta H_0}\), then we can write
+\[
+    F = - \frac{1}{\beta} \ln (\frac{Z_0}{Z_0} \Tr e^{-\beta H_0} \hat{U}(\beta, 0)) = - \frac{1}{\beta} \ln Z_0 + \frac{1}{\beta} \ln \Tr \left( e^{-\beta H_0} \hat{U}(\beta, 0) \right).
+\]
+This allows us to separate the free energy into a non-interacting part and an interacting correction:
+\[
+    F = F_0 - \frac{1}{\beta} \ln \left\langle \hat{U}(\beta, 0) \right\rangle_0,
+\]
+and the change in free energy due to interactions is given by
+\[
+    \Delta F = F - F_0 = - \frac{1}{\beta} \ln \left\langle \hat{U}(\beta, 0) \right\rangle_0,
+\]
+which is exactely the correlation energy of the system, which is the energy correction due to interactions beyond the Hartree-Fock approximation (the previously derived connected and disconnected vacuum diagrams). We can compute this quantity using the expansion of \(\hat{U}(\beta, 0)\) and Wick's theorem, which allows us to express it in terms of non-interacting green's functions and self energies, which are much simpler quantities to compute than the full interacting green's function.
+
+Thus we have a powerful tool to compute the free energy of the system, which gives us all the thermodynamic properties of the system. We can also obtain other quantities from the free energy, such as the specific heat, the compressibility, the magnetic susceptibility, etc. Thus we have a very powerful framework to study interacting systems and their thermodynamic properties.
+
+We are going to show that computing the infinite diagrammatic sum of the energy corrections, we will get a finite result, which is the correlation energy of the system. We have to study the logarithm, since it will erase all the disconnected diagrams, which are the ones that give us the infinite contributions to the energy, while the connected diagrams will give us a finite contribution. The following can be formally proved, but we are going only to show a convincing argument for this result, which is the one that we will use in the rest of the course.
+
+Any disconnected diagram can be written as the product of two or more connected diagrams, so that we can write
+\[
+    \left\langle U(\beta, 0) \right\rangle_0 = 1 + \frac{1}{2} D_1 + \frac{1}{2} D_2 + \frac{1}{8} D_1^2 - \frac{1}{8} D_1 D_2 - \frac{1}{8} D_2 D_1 - \frac{1}{8} D_2^2 + \dots,
+\]
+where \(D_1\) is the Hartree diagram and \(D_2\) is the Fock diagram, which are the two connected diagrams that we have at the first order of the expansion. Thus continuing the computation we can write
+\[
+    \begin{aligned}
+        \left\langle U(\beta,0) \right\rangle_0 = 1 + \frac{1}{2} D_1 + \frac{1}{2}(-\frac{1}{2}D_1)^2 + \frac{1}{2} D_2 + \frac{1}{2}(-\frac{1}{2}D_2)^2 - \frac{1}{4} D_1 D_2 + \dots \\
+        = 1 + (-\frac{1}{2} D_1 + \frac{1}{2}D_2 + \dots) + \frac{1}{2}(-\frac{1}{2} D_1 + \frac{1}{2} D_2 + \dots)^2 + \dots                                                           \\
+        = e^{\frac{1}{2} D_1 + \frac{1}{2} D_2},
+    \end{aligned}
+\]
+where we can recognize the formal Taylor expansion of the exponential of the sum of all connected vacuum diagrams, which is a very important result, since it shows how, putting this result in the expression for the free energy, we get
+\[
+    \Delta F = - \frac{1}{\beta} \ln \left\langle \hat{U}(\beta, 0) \right\rangle_0 = - \frac{1}{\beta} \left(\sum \text{ connected vacuum diagrams } \right).
+\]
+This result is proved in the \textbf{Linked Cluster Theorem}, which states that \textit{the logarithm of the partition function can be expressed as the sum of all connected vacuum diagrams}, which are the ones that give us the finite contribution to the free energy, while the disconnected diagrams give us the infinite contributions, which are erased by the logarithm.
+
+We will see that the free energy and the total energy, at zero temperature, are the same quantity, since we are at zero temperature, so that the entropy is zero.
+
+    [\textit{frawing of} \(\Delta F\) \textit{as one over beta multiplied by the sum of connected vacuum diagrams}]
+
+Not all the vacuum conected diagrams are finite, for example the third one diverges as \(\frac{1}{q^4}\), while the third as ... and the fourth as \(\frac{1}{q^6}\)... In general the diagrams diverges as
+\[
+    \left(\frac{1}{q^2}\right)^n, \quad n = \text{ number of interaction lines},
+\]
+so that higher order diagrams diverge more and more.
+
+\subsection{Random Phase Approximation}
+
+A first approximation to the correlation energy is given by the \textbf{Random Phase Approximation}, which consists in summing only the bubble diagrams, which are the ones that give us the most divergent contributions to the energy, so that we can write
+\[
+    \Delta F^{EPA}_{correlation} = - \frac{1}{\beta} \sum \text{ connected ring diagrams},
+\]
+where we put the underscript correlation since we always include the Hartree-Fock term in the free energy:
+\[
+    \Delta F = \Delta F_{Hartree-Fock} + \Delta F_{correlation}.
+\]
+Each order add a bubble and an interaction line (Coulomb potential).
+
+    [\textit{drawingsssss of n bubbles and n interaction lines, with the first one having two bubbles and two interaction lines, etc.}]
+
+After recognizing the coulomb potential in the interaction line, we can call each bubble (they are all identical) as \(\Pi\); since each diagram has \(n\) bubbles and \(n\) interaction lines, alternating between odd \(n\) and even \(n\) we have a different signs in the summation, so that we can write
+\[
+    \Delta F^{RPA}_{correlation} = - \frac{1}{2\beta} \sum_{\mathbf{q}} \sum_{i \nu_n} \sum_{n=2}^{\infty} \frac{(-1)^{n+1}}{n} \left[ V_q \Pi_0(\mathbf{q},\, i \nu_n) \right]^n,
+\]
+where the first sum is over the momentum, the second sum is over the imaginary frequencies, and the third sum is over the order of the diagram, which starts from 2 since we are not including the Hartree-Fock term. Then the term \((-1)^{n+1}\) comes from the sign of the fermionic loops and from the combinatorial factor of the diagram, \(\frac{1}{2n}\) from the computation of the determinant in the interacting correlation function, while the term \(\left[ V_q \Pi_0(\mathbf{q},\, i \nu_n) \right]^n\) comes from the fact that each diagram has \(n\) bubbles and \(n\) interaction lines, so that we have \(n\) factors of \(V_q \Pi_0(\mathbf{q},\, i \nu_n)\). The prefactor is computed after complicated combinatorial arguments, but it is not important for us, since we are interested in the final result of the summation, which is the correlation energy in the RPA approximation.
+
+Considering the loops \(\Pi_0\) we can understand how the incoming and outgoing momenta are related always \(q\), they are identical, but it contributes in the sum over momenta and frequencies: we will need to compute it in the future, but it is important to notice that it is a function of the momentum and the frequency.
+
+The final expression for the correlation energy in the RPA approximation is given by computing the infinite sum over \(n\), which is a geometric series:
+\[
+    \sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n} x^n = \ln (1 + x),
+\]
+thus subtracting the term for \(n=1\), we get:
+\[
+    \Delta F^{RPA}_{correlation} = \frac{1}{2\beta} \sum_{\mathbf{q}} \sum_{i \nu_n} \left[ \ln (1 + V_q \Pi_0(\mathbf{q},\, i \nu_n)) - V_q \Pi_0(\mathbf{q},\, i \nu_n) \right],
+\]
+where we were able to obtain a finite result for the correlation energy after an infinite summation of the most divergent diagrams, which is a very important result, since it shows how we can obtain finite results from infinite summations of diagrams, the main goal of many body condensed matter physics. We will see that this result is a very good approximation for the correlation energy, which is the main quantity we are interested in for the rest of the course, since it gives us all the thermodynamic properties of the system, and it is also a very good approximation for the total energy of the system.
+
+We said that \(\Pi_0 (q, i \nu_n)\) is a crucial quantity, since it is the building block of the diagrams considered in the RPA approximation, so that we will need to compute it.
+
+    [\textit{Drawing of Pi bubble, with }\(k, i \omega_n\) \textit{on the fermionic line below, and }\(k+q, i \omega_n + i \nu_n\) \textit{on the fermionic line above}]
+
+Thus the two lines are propagators given by
+\[
+    \begin{dcases}
+        \mathcal{G}_0(k, i \omega_n) = \frac{1}{i \omega_n - \xi_k}, \\
+        \mathcal{G}_0(k+q, i \omega_n + i \nu_n) = \frac{1}{i \omega_n + i \nu_n - \xi_{k+q}},
+    \end{dcases}
+\]
+and since the two lines are connected by a vertex, we have to sum over all the possible momenta and frequencies (we should make an excursus on the Feynman rules, but for now we will just state the result), so that we can write\footnote{We ignored the sum over the spin indices, since it is conserved and gives a degeneracy, and we added only a factor of 2 in front of the sum.}
+\[
+    \begin{aligned}
+        \Pi_0(q, i \nu_n) = - \frac{2}{\beta V} \sum_{k, i \omega_n} \mathcal{G}_0(k, i \omega_n) \mathcal{G}_0(k+q, i \omega_n + i \nu_n) \\
+        = - \frac{2}{\beta V} \sum_{k, i \omega_n} \frac{1}{i \omega_n - \xi_k} \frac{1}{i \omega_n + i \nu_n - \xi_{k+q}},
+    \end{aligned}
+\]
+where \(V\) is the volume of the system, and the factor of 2 comes from the spin degeneracy. This is called the \textbf{Lindhard function}, which is a very important quantity in the study of interacting systems, since it gives us information about the response of the system to external perturbations, such as an external electric field or an external magnetic field.
+
+We can now use a general technique to compute the sum over the fermionic frequencies, which is called the \textbf{Matsubara summation}, which is general and can be applied to any sum over fermionic frequencies, and it is based on the use of the residue theorem from complex analysis. Recalling the Matsubara frequencies for fermions, which are given by
+\[
+    i \omega_n = \frac{i \pi(2n + 1)}{\beta},
+\]
+thus we can rewrite
+\[
+    \Pi_0(q, i \nu_n) = - \frac{2}{V} \sum_{k} \frac{1}{\beta} \sum_{i \omega_n} \mathcal{F} (i \omega_n),
+\]
+where the method we are going to implement will give us a way to compute the sum over the frequesncies of this \(\mathcal{F}(i \omega_n)\)
+\[
+    \mathcal{F}(z) = \frac{1}{z - \xi_k} \frac{1}{z + i \nu_n - \xi_{k+q}},
+\]
+Since the Matsubara frequencies are the poles of the Fermi-Dirac distribution, we can use the residue theorem to compute the sum over the frequencies. Let us write
+\[
+    I = \lim_{R \to \infty} \oint \frac{\mathrm{d}z}{2 \pi i} \mathcal{F} (z) n_F(z) = \sum \text{residues of } \mathcal{F}(z) n_F(z) = 0,
+\]
+since the radius of the contour goes to infinity and the function goes to zero at infinity. The poles of the Fermi-Dirac distribution are given by the Matsubara frequencies, and they are located in the imaginary axis of the complex plane, so that we can write
+
+    [\textit{drawing of complex plane, poles (matsubara and denominator of F) and circle}]
+
+and in the final expression we have that \(\frac{1}{\beta}\) is the residue of the Fermi-Dirac distribution at the Matsubara frequencies, while the term we are going to compute is the residue of \(\mathcal{F}(z)\) at the poles of the denominator, which are given by \(z = \xi_k\) and \(z = \xi_{k+q} - i \nu_n\).
