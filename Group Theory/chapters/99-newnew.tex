@@ -1,4 +1,4 @@
-\chapter{Bohh}
+\chapter{ling lin}
 
  [...]
 
@@ -92,3 +92,248 @@ In a local coorfinate patch thus the tangent vector can be expressed as a linear
 Thus we associate to each point of the manifold a tangent space, and a vector field is a smooth assignment of a tangent vector to each point of the manifold. We are cutting the fibers of the bundle, and we are left with a single vector at each point of the manifold.
 
 Since locally this vector field is a map from the manifold to the tangent space, if and only if the map is smooth, then the vector field is smooth and can be written as \(\Gamma(T\mathcal{M})\).
+
+
+
+
+
+\[
+    \dot{\gamma}_p(\phi) \in T_p \mathcal{M},
+\]
+
+\[
+    \dot{\gamma}_p(\phi) = \frac{\mathrm{d}}{\mathrm{d} t} (\phi \circ \gamma) (t_0) = \sum_{i} \gamma^i(t_0) \frac{\partial}{\partial x^i} (\phi(p)),
+\]
+where \(\partial_i = \frac{\partial}{\partial x^i}\) is the basis for the tangent space at the point \(p\). Thus we can express the tangent vector as a linear combination of the basis vectors of the tangent space, with coefficients given by the components of the curve \(\gamma\) at \(t=t_0\). This shows that the tangent space at each point of the manifold is a vector space, and that the dimension of the tangent space is equal to the dimension of the manifold.
+
+The vector field is a smooth assignment of a tangent vector to each point of the manifold
+\[
+    V : \mathcal{M} \to T\mathcal{M}, \quad p \mapsto (p, V_p) \in T_p \mathcal{M},
+\]
+and it can be thought of as a smooth map from the manifold to the tangent bundle. The vector field can be expressed in local coordinates as a linear combination of the basis vectors of the tangent space, with coefficients that are smooth functions on the manifold:
+\[
+    x^i (p) \in \mathbb{R}^n, \quad x^i (p) \mapsto (x^i (p), V^i(p)) \in T_p \mathcal{M} \equiv \mathbb{R}^n \times \mathbb{R}^n,
+\]
+This allows us to perform calculus on the manifold using the vector fields, and to define concepts such as divergence, curl, and gradient in a coordinate-independent way. If this mapping is smooth for every choice of chart, then the vector field is smooth and can be written as \(\Gamma(T\mathcal{M})\), and it forms a Lie algebra under the Lie bracket operation defined by the commutator of vector fields. Thus we managed to generalize the notion of vector fields from Euclidean space to arbitrary manifolds, and we can use this to define the Lie algebra of a Lie group as the tangent space at the identity element of the group.
+
+We can also apply a vector field \(V \in \Gamma(T\mathcal{M})\) on a function \(\phi \in \mathbb{C}^{\infty}(\mathcal{M})\) to obtain a new function \(V(\phi) : \mathcal{M} \to \mathbb{R}\) defined by
+\[
+    p \mapsto V(\phi)(p) := V_p(\phi) \in \mathbb{R}, \quad V(\phi) \in \mathbb{C}^{\infty}(\mathcal{M}),
+\]
+where \(V_p\) is the tangent vector assigned to the point \(p\) by the vector field \(V\). This allows us to define the action of a vector field on functions, and to perform calculus on the manifold using the vector fields.
+
+If we now take two vector fields \(V, W \in \Gamma(T\mathcal{M})\), we can apply the previous construction to the function \(V(\phi)\) to obtain a new function \(W(V(\phi)) : \mathcal{M} \to \mathbb{R}\) defined by
+\[
+    W(V(\phi))(p) := W_p(V(\phi)) \in \mathbb{R}, \quad W(V(\phi)) \in \mathbb{C}^{\infty}(\mathcal{M}),
+\]
+where \(W_p\) is the tangent vector assigned to the point \(p\) by the vector field \(W\). This can be computed as follows:
+\[
+    W_p(V(\phi)) = \sum_{i} W_p^i \partial_i (V(\phi))(p) = \sum_{ij} W_p^i \partial_i (V^j(p) \partial_j (\phi \circ x^{-1}))(x(p)),
+\]
+where we have used the local coordinate expression for the vector fields; we can continue to compute this expression by applying the product rule for differentiation:
+\[
+    W_p(V(\phi)) = \sum_{ij} W_p^i \partial_i (V^j(p)) \partial_j (\phi \circ x^{-1})(x(p)) + \sum_{ij} W_p^i V_p^j \partial_i \partial_j (\phi \circ x^{-1})(x(p)).
+\]
+Note that a second derivative term has appeared in the expression, which we do not now how to interpret in terms of the original vector fields \(V\) and \(W\): this new term is not a vector anymore, it is not an object behaving as a vector field \(X(\phi)\) with \(X \in \Gamma(T\mathcal{M})\). We cannot interpret this result as another vector field operating on the same function \(\phi\), since the second derivative term does not have the same structure as the original vector fields.
+
+\begin{definition}[Lie bracket of vector fields]
+    The Lie bracket of two vector fields (or commutator) \(V, W \in \Gamma(T\mathcal{M})\) is defined as the \uline{new vector field} \([V, W] \in \Gamma(T\mathcal{M})\) such that
+    \[
+        [V, W](\phi) := V(W(\phi)) - W(V(\phi)),
+    \]
+    for all smooth functions \(\phi \in \mathbb{C}^{\infty}(\mathcal{M})\). This new vector field is defined by the difference of the two second derivative terms that appeared in the previous expression, and it can be shown that it satisfies the properties of a Lie bracket, as we will see.
+\end{definition}
+
+With this new object defined, we have an operation that takes two vector fields and produces a new vector field, with in charts can be written as
+\[
+    [V, W]^j = \sum_{i} \left( V^i \partial_i W^j - W^i \partial_i V^j \right) \partial_j.
+\]
+
+\begin{proposition}
+    For any three vector fields \(X, Y, Z \in \Gamma(T\mathcal{M})\), the Lie bracket satisfies the following properties:
+    \begin{itemize}
+        \item \textbf{Antisymmetry}: \([X, Y] = -[Y, X]\).
+        \item \textbf{Bilinearity}: \([aX + bY, Z] = a[X, Z] + b[Y, Z]\) and \([Z, aX + bY] = a[Z, X] + b[Z, Y]\) for all scalars \(a, b \in \mathbb{R}\).
+        \item \textbf{Jacobi identity}: \([X, [Y, Z]] + [Y, [Z, X]] + [Z, [X, Y]] = 0\).
+    \end{itemize}
+\end{proposition}
+
+\begin{corollary}
+    With the previously defined Lie bracket, the set of vector fields \(\Gamma(T\mathcal{M})\) can be endowed with the structure of a \textit{non-associative} algebra over \(\mathbb{R}\). We said non-associative because the Lie bracket does not satisfy the associative property, but it satisfies the Jacobi identity instead:
+    \[
+        [[X,Y],Z] \neq [X,[Y,Z]].
+    \]
+    The Jacobi identity is a weaker condition than associativity, and it ensures that the Lie bracket defines a consistent algebraic structure on the space of vector fields.
+\end{corollary}
+
+It is now time to connect this construction to the Lie algebra of a Lie group.
+
+\begin{definition}
+    Given a smooth map \(f : \mathcal{M} \to \mathcal{N}\) between two manifolds, we can define an induced map (which will be identified with a \textit{vector space homomorphism} for every point in the manifold) on the tangent spaces, called the \textbf{pushforward} of \(f\), denoted by \((f_*)_p : T_p \mathcal{M} \to T_{f(p)} \mathcal{N}\). The pushforward is defined by
+    \[
+        (f_*)_p (\dot{\gamma}_p) = \dot{(f \circ \gamma)}_{f(p)} \quad \forall p \in \mathcal{M},
+    \]
+    then let \(h \in \mathbb{C}^{\infty}(\mathcal{N})\), and \(v = \dot{\gamma}_p \in T_p\mathcal{M}\), then we have
+    \[
+        \implies \left[(f_*)_p(v)\right](h) = v(h \circ f).
+    \]
+    In coordinates \(x\) for \(\mathcal{M}\) and \(y\) for \(\mathcal{N}\), we can write the pushforward as
+    \[
+        [(f_*)_p]^i_k = \partial_k (y^i \circ f \circ x^{-1})(x(p)) = (\mathrm{d} f)^i_k (x(p)),
+    \]
+    where \(\mathrm{d} f\) is the Jacobian matrix of the map \(f\) at the point \(p\): \(f^i(x^k)\). This is just the jacobian matrix of a vector-valued function, which is a linear map that takes a tangent vector at \(p\) and maps it to a tangent vector at \(f(p)\) by applying the derivative of the function \(f\) to the components of the tangent vector.
+\end{definition}
+
+This concept is known in the field of general relativity as the \textbf{Lie dragging} of a vector field along a curve, and it is used to describe how vector fields change as they are transported along curves in a manifold. The pushforward allows us to compare vector fields at different points in the manifold, and to understand how they transform under smooth maps between manifolds.
+
+If the function \(f\) is a diffeomorphism (smooth and invertible), then the pushforward is an isomorphism between the tangent spaces at \(p\) and \(f(p)\), and it allows us to transfer the structure of the tangent space from one point to another. This is particularly useful when we want to define the Lie algebra of a Lie group, as we will see successively.
+
+\begin{proposition}
+    If \(f : \mathcal{M} \to \mathcal{N}\) is a diffeomorphism, then the pushforward \((f_*)_p\) is an isomorphism between vector fields on \(\mathcal{M}\) and vector fields on \(\mathcal{N}\):
+    \[
+        f_* : \Gamma(T\mathcal{M}) \to \Gamma(T\mathcal{N}), \quad V \mapsto f_*(V),
+    \]
+    \[
+        (f_*(V))_{f(p)} = (f_*)_p(V_p) \in T_{f(p)} \mathcal{N},
+    \]
+    and since consequently the jacobian matrix of \(f\) is invertible, we can also define the inverse pushforward \((f^{-1}_*)_{f(p)} : T_{f(p)} \mathcal{N} \to T_p \mathcal{M}\) as the inverse of the pushforward, and it is also an isomorphism between vector fields on \(\mathcal{N}\) and vector fields on \(\mathcal{M}\).
+\end{proposition}
+
+We can now imagine to concatenate functions; let \(f_1 \in \mathbb{C}^{\infty}(\mathcal{M}, \mathcal{N})\) and \(f_2 \in \mathbb{C}^{\infty}(\mathcal{N}, \mathcal{Q})\) be two diffeomorphisms, then their composition \(f_2 \circ f_1 : \mathcal{M} \to \mathcal{Q}\) is also a diffeomorphism, and we can define the pushforward of the composition as follows:
+\[
+    \forall p \in \mathcal{M}, \quad [(f_2 \circ f_1)_*]_p = [(f_2)_*]_{f_1(p)} \circ [(f_1)_*]_p : T_p \mathcal{M} \to T_{f_2(f_1(p))} \mathcal{Q},
+\]
+which can be read as the pushforward of the composition is the composition of the pushforwards. This property is known as the \textbf{functoriality} of the pushforward, and it ensures that the pushforward behaves well under composition of functions, which is a fundamental property for any mathematical construction that aims to capture the structure of smooth maps between manifolds.
+
+Now we are ready to define the Lie algebra of a Lie group as the tangent space at the identity element of the group, and to show how the Lie bracket of vector fields induces a Lie bracket on this tangent space, which will give us the structure of a Lie algebra on the tangent space at the identity element. This is a crucial step in understanding the relationship between Lie groups and their associated Lie algebras, and it will allow us to study the properties of Lie groups using the tools of Lie algebras.
+
+\begin{definition}
+    Let \(G\) be a Lie group, and let \(e\) be the identity element of \(G\). Then any \(a \in G\) defines a ``\textit{left-translation}'' which maps any element \(g \in G\) to \(ag\):
+    \[
+        L_a : G \to G, \quad g \mapsto L_a g = ag.
+    \]
+    This left-translation is a diffeomorphism, since it is smooth and has a smooth inverse given by \((L_{a})^{-1} = L_{a^{-1}}\). Left translation are natural diffeomorphisms of the Lie group, and they allow us to transfer the structure of the tangent space at the identity element to any other point in the group. In particular, we can use left translations to define a vector field on the Lie group by translating a tangent vector at the identity element to every other point in the group.
+\end{definition}
+
+\begin{definition}
+    Let us consider a class of vector fields \(V \in \Gamma(TG)\) on a Lie group \(G\) that are invariant under left translations; they are called \textbf{left-invariant vector fields}, and they satisfy the following property:
+    \[
+        \forall a \in G, \quad (L_a)_* V = V,
+    \]
+    which means that the vector field is unchanged under left translations. In other words, for any point \(g \in G\), the value of the vector field
+    \[
+        \forall a,g \in G, \quad [(L_a)_* V]_ag = [(L_a)_*]_g (V_g) = V_{ag},
+    \]
+    which reads as the value of the vector field at the point \(ag\) is equal to the pushforward of the vector field at the point \(g\) under the left translation by \(a\). This property ensures that the vector field is consistent with the group structure of \(G\).
+\end{definition}
+
+\begin{lemma}
+    Given a tangent vector \(v \in T_e G\) (any point would have been fine, so we chose the identity element for convenience), there exists a unique left-invariant vector field \(V^{(v)} \in \Gamma(TG)\) by translating \(v\) to every point in the group using left translations, which satisfies the initial conditions
+    \[
+        V^{(v)}_e = v.
+    \]
+    Since it is a left-invariant vector field, for every point \(g \in G\) we can use left translation to define the value of the vector field at that point.
+\end{lemma}
+
+On a lie group we have a one to one correspondence between tangent vectors at a point (the identity element for convenience) and left-invariant vector fields, which allows us to transfer the structure of the tangent space at the identity element to the entire group
+\[
+    v \in T_e G, \quad v \mapsto V^{(v)} \in \Gamma(TG), \quad (V^{(v)})_g = (L_g)_* (v) \in T_g G.
+\]
+
+The other ingredient we need to define the Lie algebra of a Lie group is the closeness of the Lie bracket of vector fields, which we have already defined.
+
+\begin{proposition}
+    The set of left-invariant vector fields on a Lie group \(G\) is closed under the Lie bracket operation \([\cdot,\,\cdot]\), which means that if \(V, W \in \Gamma(TG)\) are left-invariant vector fields, then
+    \[
+        [V,W] \in \Gamma(TG) \text{ is left-invariant}.
+    \]
+\end{proposition}
+
+In order to prove this proposition, we need to show another final lemma:
+
+\begin{lemma}
+    Let \(f : \mathcal{M} \to \mathcal{N}\) suriective and \(\phi \in \mathbb{C}^\infty(\mathcal{N})\) (so that \((\phi \circ f \in \mathbb{C}^\infty(\mathcal{M}))\)) and \(V \in \Gamma(T\mathcal{M})\) be a vector field on \(\mathcal{M}\) such that \((f_*)(V)\) is a well defined vector field on \(\mathcal{N}\), then we have
+    \[
+        V(\phi \circ f) = (f_*(V))(\phi) \circ f \iff V(\phi \circ f) = (f_*(V))_{f(p)} (\phi) = ((f_*)(V)(\phi) \circ f)(p).
+    \]
+    This means that ...
+\end{lemma}
+
+\begin{proof}
+    Let \(\phi \in \mathbb{C}^\infty(G)\). Then, for any \(a,g \in G\) we have
+    \[
+        \begin{aligned}
+            [(L_a)_* [V,W]]_{ag}(\phi) = \dots \\
+            = [V,W]_g (\phi \circ L_a) = V_g (W(\phi \circ L_a)) - W_g (V(\phi \circ L_a)),
+        \end{aligned}
+    \]
+    and since we have the previous lemma, we can write for a generic vector field \(U\) on \(G\)
+    \[
+        [(L_a)_* U]_ag = U_{ag} \implies U(\phi \circ L_a)(g) = [(L_a)_* U]_{ag}(\phi) = U_{ag}(\phi) = U(\phi)(L_a(g)) = (U(\phi) \circ L_a)(g).
+    \]
+    Thus we can write
+    \[
+        \begin{aligned}
+            ((L_a)_* [V,W])_{ag}(\phi) = V_g (W(\phi) \circ L_a) - W_g (V(\phi) \circ L_a) \\
+            = (((L_a)_*)_g V)_g (W(\phi)) - (((L_a)_*)_g W)_g (V(\phi))                    \\
+            = [(L_a)_* V]_{ag} (W(\phi)) - [(L_a)_* W]_{ag} (V(\phi))                      \\
+            = V_{ag} (W(\phi)) - W_{ag} (V(\phi)) = [V,W]_{ag}(\phi),
+        \end{aligned}
+    \]
+    since both \(V\) and \(W\) are left-invariant vector fields, and thus we have shown that \([(L_a)_* [V,W]]_{ag}(\phi) = [V,W]_{ag}(\phi)\) for all \(a,g \in G\), which means that \([V,W]\) is left-invariant.
+\end{proof}
+
+Thus we have shown that the set of left-invariant vector fields on a Lie group \(G\) is closed under the Lie bracket operation, which means that we can define a Lie algebra structure on the tangent space at the identity element of the group by using the Lie bracket of left-invariant vector fields. This is a crucial step in understanding the relationship between Lie groups and their associated Lie algebras.
+
+\begin{definition}
+    Let \(G\) be a Lie group, and let \(e\) be the identity element of \(G\). The \textbf{Lie algebra} of \(G\) (or \textit{associated to} \(G\)), denoted by \(\mathfrak{g}\), is defined as the \(\mathbb{R}\)-vector space \(\mathfrak{g} = T_e G\) with the bilinear product given by the Lie bracket of left-invariant vector fields:
+    \[
+        [\cdot,\,\cdot]_\mathfrak{g} : \mathfrak{g} \times \mathfrak{g} \to \mathfrak{g}, \quad (v,w) \mapsto [V^{(v)},W^{(w)}]_\mathfrak{g} := [V^{(v)}, V^{(w)}]_e,
+    \]
+    where \((\mathfrak{g}, [\cdot,\cdot]_\mathfrak{g})\) satisfies antisymmetry, bilinearity, and the Jacobi identity, and thus it is abstractly defining a Lie algebra.
+\end{definition}
+
+\begin{definition}
+    A vector space basis \(\{T_i\}_{i=1,\dots,n}\) with \(n = \text{dim}\mathfrak{g}\) of the Lie algebra \(\mathfrak{g}\) is called a \textbf{basis of generators} of the Lie algebra. Since the Lie brackets of elements of the Lie algebra can be expressed as linear combinations of the basis elements (since the algebra is closed under the Lie bracket), we can write
+    \[
+        [T_i,\,T_j] = \sum_{k=1}^n c_{ij}^k T_k,
+    \]
+    where \(c_{ij}^k\) are the \textbf{structure constants} of the Lie algebra \(\mathfrak{g}\) with the basis of generators \(\{T_i\}\).
+\end{definition}
+
+We can highlight some properties of the structure constants \(c_{ij}^k\) that follow from the properties of the Lie bracket:
+\begin{itemize}
+    \item They are antisymmetric in the first two (lower) indices: \(c_{ij}^k = -c_{ji}^k\), which follows from the antisymmetry of the Lie bracket.
+    \item They satisfy the Jacobi identity: \(\sum_{l=1}^n (c_{ij}^l c_{lk}^m + c_{jk}^l c_{li}^m + c_{ki}^l c_{lj}^m) = 0\) for all \(i,j,k,m\), which follows from the Jacobi identity of the Lie bracket.
+\end{itemize}
+These comes directly from the properties of the Lie bracket and thus their application onto the generators of the Lie algebra. Furthermore an abstract Lie algebra can be defined by specifying a choice of basis \(\{T_i\}\) along with a set of structure constants \(c_{ij}^k\) that satisfy the above properties, without any reference to a specific Lie group.
+
+As an easy example, we can consider the tensor \(\epsilon_{ij}^k\) and check that it respects the above properties: along with a good choice of basis, it can be used to define the structure constants of the Lie algebra \(\mathfrak{su}(2)\) associated to the Lie group \(SU(2)\).
+
+We used real coefficients for the Lie algebra, but we could have used complex coefficients as well, and thus we would have defined a complex Lie algebra. The choice of real or complex coefficients depends on the context and the applications we have in mind, and it does not affect the general properties of the Lie algebra. The extension and generalization is straightforward, and it is just a matter of changing the field over which the vector space is defined.
+
+\section{Lie Algebra of Matrix Groups}
+
+If we consider matrices \(G \subseteq \mathrm{GL}(V)\), with \(V\) (\(n = \text{dim}V\)) a vector space over \(\mathbb{R}\) or \(\mathbb{C}\) (with a proper basis chosen), then \(\mathrm{GL}(V) \simeq \mathrm{GL}(n, \mathbb{R})\) or \(\mathrm{GL}(n, \mathbb{C})\), respectively (for simplicity let us stick to the real case, the complex case is just a straightforward generalization).
+
+Taking than any element \(g \in G \subseteq \mathrm{GL}(n, \mathbb{R})\) can be thought of as an \(n \times n\) matrix
+\[
+    g = (g^{AB})_{AB}, \quad g^{AB} : G \to \mathbb{R}, \quad g \to g^{AB},
+\]
+for any fixed pair of indices \(A,B\). Thus we can think of the elements of the group as being labeled by a set of real numbers, which are the entries of the matrix.
+
+\begin{definition}
+    Let \(G \subset \mathrm{GL}(n, \mathbb{R})\) be a matrix group. Let \(v \in T_k G\) and \((U,x\equiv x^k)\), such that a test function \(\phi \in \mathbb{C}^{\infty}(G)\) with \(k = 1,\dots , \text{dim}G \neq n^2\) and a point \(h \in U\), then
+    \[
+        \begin{aligned}
+            v(\phi) = \sum_{k} v^k \partial_k \phi \big|_{x(h)}                                                         \\
+            = \sum_{k,A,B} v^k \frac{\partial g^{AB}}{\partial x^k} \bigg|_{x(h)} \frac{\partial \phi}{\partial g^{AB}} \\
+            = \sum_{A,B} v^{AB} \frac{\partial \phi}{\partial g^{AB}},
+        \end{aligned}
+    \]
+    where we can see how the summation over \(k\) defines a sort of \textit{tangent matrix}
+    \[
+        v^{AB} := \sum_{k} v^k \frac{\partial g^{AB}}{\partial x^k} \bigg|_{x(h)}, \quad \frac{\mathrm{d}}{\mathrm{d} t} (\gamma^{AB}(t)) \bigg|_{t=t_0} = v^{AB},
+    \]
+    which is the tangent vector to the curve \(\gamma^{AB}(t)\) in the space of matrices, and it can be thought of as an element of the Lie algebra associated to the matrix group \(G\). Thus we can identify the tangent space at the identity element of the group with a subspace of the space of matrices, and this subspace is precisely the Lie algebra of the group.
+\end{definition}
