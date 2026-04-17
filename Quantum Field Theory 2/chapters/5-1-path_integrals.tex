@@ -220,3 +220,211 @@ which is the exact expression for the generating functional of a free theory. Fr
     \]
     which is the sum of all possible contractions of the four fields, and thus it is the sum of all possible Feynman diagrams with four external legs.
 \end{example}
+
+
+\subsection{Perturbation Theory and Feynman Diagrams}
+
+[...]
+
+
+Since the procedure adopted untill now is valid only for free theories: we were treating the lagrangian without derivatives of the fields as a gaussian integral, and thus we were able to evaluate the path integral exactly. Let us check that also interacting lagrangians can be treated in the path integral formulation\dots
+
+We know that the Feynman rules come from \dots
+For interacting field the recipe is
+\begin{itemize}
+    \item For each field in the lagrangian, we can adopt the substitution \(\phi(x) \to \int \mathrm{d}^4 k \phi(k) e^{-ik \cdot x}\).
+    \item For incoming particles (or outgoing anti-particles) at the vertex, we have to apply a derivative of the form
+          \[
+              \frac{\delta}{\delta \phi(\pm p)} \mathcal{L}_{\int},
+          \]
+          where the minus sign is for incoming particles and the plus sign is for outgoing particles.
+    \item For outgoing particles (or incoming anti-particles) at the vertex, we have to apply a derivative of the form
+          \[
+              \frac{\delta}{\delta \phi^*(\pm p)} \mathcal{L}_{\int}.
+          \]
+    \item For both the previous cases, we have to evaluate the resulting expression at \(\phi = 0\) and then we have to multiply by \(i\).
+\end{itemize}
+
+\begin{example}[Interacting Lagrangian in sQED]
+    [...]
+    Computing the fuctional derivatives appeared in the previous recipe, we have to use the following properties of the functional derivative:
+    \[
+        \frac{\delta}{\delta \phi(p)} \phi(k) = \delta^{(4)}(p-k), \quad \frac{\partial}{\partial A^{\mu}(p)} A^\nu(k) = \delta^{\nu}_{\mu} \delta^{(4)}(p-k),
+    \]
+    so that in the end we have found the Feynman rule for the vertex, which is given by
+    \[
+        \cdot = e \delta_\mu^{\ \nu}(-i (p_1)_\nu - i (p_2)_\nu) \delta^{(4)}(-p_1 + p_2 - p_3)= -i e (p_1 + p_2)_\mu.
+    \]
+    We can also apply the same procedure to compute the Feynman rule for the other vertex, which is given by ...
+\end{example}
+
+\subsection{Fermionic Path Integrals}
+
+Inside the path integrals, every quantity commutes, since we are treating them as ordinary functions, and thus we cannot use the same procedure for fermionic fields: they anticommute. In order to treat fermionic fields in the path integral formulation, we have to introduce a new type of variables called \textbf{Grassmann variables} \(\theta_i\), which are anticommuting variables that satisfy the following properties:
+\begin{itemize}
+    \item \textbf{Anticommutation}: \(\theta_i \theta_j = -\theta_j \theta_i\) for all \(i, j\). In particular, this implies that \(\theta_i^2 = 0\) for all \(i\).
+    \item \textbf{Integration} and \textbf{differentiation}: the integral of a Grassmann variable is well defined and identical to differentiation:
+          \[
+              \int \mathrm{d} \theta_1 \cdots \mathrm{d} \theta_n X = \frac{\partial}{\partial \theta_n} \cdots \frac{\partial}{\partial \theta_1} X,
+          \]
+          This definition is consistent with the anticommutation property, since it implies that the integral of any product of Grassmann variables is zero unless it contains exactly one factor of each variable. Furthermore, obviously we have
+          \[
+              \frac{\partial \theta_i}{\partial \theta_j} = \delta_{ij},
+          \]
+          which is consistent with the anticommutation property, since it implies that the derivative of any product of Grassmann variables is zero unless it contains exactly one factor of each variable.
+    \item \textbf{Gaussian integrals}: the gaussian integral over Grassmann variables is given by
+          \[
+              \int \mathrm{d} \theta_1 \mathrm{d} \overline{\theta}_1 \cdots \mathrm{d} \theta_n \mathrm{d} \overline{\theta}_n \exp\left(-\sum_{i,j} \overline{\theta}_i A_{ij} \theta_j + \sum_{j} \left(\overline{\eta}_j \theta_j + \overline{\theta}_j \eta_j\right) \right) = \det A \exp\left(\sum_{i,j} \overline{\eta}_i (A^{-1})_{ij} \eta_j\right),
+          \]
+          where \(A\) is an \(n \times n\) antisymmetric matrix and \(\eta_j\) and \(\overline{\eta}_j\) are Grassmann variables that serve as sources for the fermionic fields. This formula is the fermionic analogue of the gaussian integral for bosonic fields, and it is a crucial tool for evaluating path integrals involving fermionic fields. Note that differently from the bosonic case, the determinant appears in the numerator rather than in the denominator.
+\end{itemize}
+
+We have now the tools needed to evaluate path integrals involving fermionic fields, and thus we can compute correlation functions and scattering amplitudes for theories that include fermions, such as quantum electrodynamics (QED) and the Standard Model of particle physics.
+
+Let us then derive the generating functional for a free fermionic theory, which is given by
+\[
+    Z[\eta, \overline{\eta}] = \int \mathcal{D} \psi \mathcal{D} \overline{\psi} \exp\left[i \int \mathrm{d}^4 x \left( \overline{\psi}(i \slashed{\partial} - m) \psi + \overline{\eta} \psi + \overline{\psi} \eta\right)\right],
+\]
+and after applying the substitution \(m \to m-i\epsilon\) in order to ensure the formal convergence of the path integral, we can evaluate it using the formula for gaussian integrals over Grassmann variables, and we find
+\[
+    Z[\eta, \overline{\eta}] = Z[0, 0] \exp\left[-\int \mathrm{d}^4 x \int \mathrm{d}^4 y \, \overline{\eta}(x) S_F(x-y) \eta(y)\right],
+\]
+where the fermionic propagator \(S_F(x-y)\) appeared: it is defined as the inverse of the operator \(i \slashed{\partial} - m + i \epsilon\):
+\[
+    S_F(x-y) = \int \frac{\mathrm{d}^4 k}{(2\pi)^4} e^{-i (x-y)\cdot k} \frac{i}{\slashed{k} - m + i \epsilon} = \int \frac{\mathrm{d}^4 k}{(2\pi)^4} e^{-i (x-y)\cdot k} \frac{i (\slashed{k} + m)}{k^2 - m^2 + i \epsilon} = \bra{0} \hat{T} \{\hat{\psi}(x) \overline{\hat{\psi}}(y)\} \ket{0}.
+\]
+
+As a final note, we have to highlight that also the grassman derivatives are anticommuting variables, since they are defined as the integral over grassman variables, and thus they inherit the anticommutation property of the grassman variables. This means that when we take functional derivatives with respect to the sources \(\eta\) and \(\overline{\eta}\), we have to be careful about the order of the derivatives, since they do not commute.
+
+\subsection{Derivatives of the Fields}
+We have already seen that
+\[
+    \bra{\Omega} \hat{T} \{\hat{\phi}(x_1) \hat{\phi}(x_2) \cdots \hat{\phi} (x_n)\} \ket{\Omega} = \int \mathrm{D} \phi(x) e^{i S[\phi(x)]} \phi(x_1) \phi(x_2) \cdots \phi(x_n),
+\]
+and we now want to understand what happens when we substitute one of the fields with its derivative, for example
+\[
+    \int \mathrm{D} \phi e^{i S[\phi(x)]} (\partial_{t_1} \phi(x_1) ) \phi(x_2) \cdots \phi(x_n),
+\]
+can be expanded using linearity of the path integral as
+\[
+    \dots
+\]
+Thus derivatives inside the path integral can be treated as functional derivatives outside the Green's functions, since we can integrate by parts and then we can use the properties of the functional derivative to compute correlation functions involving derivatives of the fields.
+
+.......
+
+
+
+\section{Quantization of QED}
+
+Quantizing gauge theories in path integral formulation is more complicated than quantizing scalar theories, since we have to deal with the gauge symmetry of the theory:
+\[
+    A_\mu(x) \to A_\mu(x) + \partial_\mu \alpha(x),
+\]
+which implies that the path integral is not well defined, since we are integrating over an infinite number of gauge equivalent configurations. In order to fix this problem, we have to introduce a gauge fixing term in the lagrangian, which breaks the gauge symmetry and allows us to define a well defined path integral.
+
+The action in a QED theory is given by
+\[
+    S = \dots
+\]
+In order to obtain the propagator, we have to invert the operator that appears in the quadratic part of the action, which is given by
+\[
+    \hat{O} = -i (\partial^2 g_{\mu\nu} - \partial_\mu \partial_\nu),
+\]
+which then can be used to obtain
+\[
+    \hat{O} D_F^{\nu\rho}(x-y) = -i (\partial^2 g_{\mu\nu} - \partial_\mu \partial_\nu) D_F^{\nu\rho}(x-y) = \delta_\mu^{\ \rho} \delta^{(4)}(x-y).
+\]
+However this equation has no solution, since the operator \(\hat{O}\) is not invertible due to the gauge symmetry of the theory: it has a non-trivial null space
+\[
+    \partial_\mu \alpha(x) \in \text{Null}(\hat{O}).
+\]
+Equivalently, if the field is of the form
+\[
+    \hat{A}^{\mu}(x) = \partial^\mu \alpha(x),
+\]
+then the action is null \(S=0\) and the path integral diverges, since we are integrating over an infinite number of gauge equivalent configurations. This is a manifestation of the fact that the gauge symmetry is a redundancy in the description of the theory, and thus we have to fix this redundancy in order to define a well defined path integral.
+
+Also in the momentum space the same problem arises, since the operator \(\hat{O}\) has a non-trivial null space:
+\[
+    D_F^{\mu \nu}(x-y) = \dots
+\]
+where it is easy to notice how \(p^{\nu}\) is annihilated by \(p^2 g_{\mu \nu} + p_\mu p_\nu\), leading to a non-invertible operator and thus we cannot solve for \(\Pi^{\mu \nu}\).
+
+\begin{example}[Massive spin 1 case]
+    ...
+\end{example}
+
+We have to find a way to define a domain of integration over inequivalent configurations, and thus we have to introduce a gauge fixing term in the lagrangian, which breaks the gauge symmetry and allows us to define a well defined path integral.
+
+    [...]
+
+We will use the method by Faddeev and Popov, which consists in inserting a factor of one in the path integral in the form of an integral over the gauge group, and then we can use this factor to fix the gauge and define a well defined path integral (this can be generalized also to non-abelian gauge theories, but we will focus on the abelian case for simplicity).
+
+We have to choose a gauge fixing condition, which is a function \(G[A]\) that depends on the gauge field \(A_\mu\) and that is equal to zero for a specific choice of gauge:
+\[
+    G[A_{\alpha}] = F[ A + \frac{1}{e} \partial \alpha] = 0, \quad A_{\alpha}(x) = A(x) + \frac{1}{e} \partial \alpha(x),
+\]
+for some function \(G[A]\) (for example \(G[A] = \partial^\mu A_\mu\) for the Lorenz gauge). Then we can use a continuum version of
+\[
+    1 = \int \mathrm{d} z_1 \cdots \mathrm{d} z_n \delta(g_1(\mathbf{z})) \cdots \delta(g_n(\mathbf{z})) \det \left( \frac{\partial g_i}{\partial z_j} \right),
+\]
+namely
+\[
+    1 = \int \mathcal{D} \alpha \delta(G[A_{\alpha}]) \det \left( \frac{\delta G[A_{\alpha}]}{\delta \alpha} \right),
+\]
+where \(\delta(G[A_{\alpha}])\) is the continuum limit of a product of delta functions that impose the gauge fixing condition at each point in space-time, and \(\det \left( \frac{\delta G[A_{\alpha}]}{\delta \alpha} \right)\) is the Faddeev-Popov determinant, which arises from the change of variables in the path integral when we insert the factor of one.
+
+If we now assume that \(\frac{\delta G[A_{\alpha}]}{\delta \alpha}\) is independent of \(A_\mu\) (true for the Lorenz gauge), then we can pull it out of the path integral and we find
+\[
+    \dots
+\]
+
+Inserting these results in the path integral, we find
+\[
+    \int \mathrm{D} A \exp[i S[A]] = \int \mathrm{D} \alpha \, \det \left( \frac{\delta G[A_{\alpha}]}{\delta \alpha} \right) \int \mathrm{D} A \exp[i S[A]] \delta(G[A_{\alpha}]) = \dots
+\]
+where we have shifted the integration variable \(A_\mu \to A_\mu - \frac{1}{e} \partial_\mu \alpha\) in the last step, and we have used the fact that the action is gauge invariant \(S[A] = S[A_{\alpha}]\). Now we can finally fix the gauge by imposing
+\[
+    G[A] = \partial_\mu A^\mu - \omega(x) = 0,
+\]
+for a generic function \(\omega(x)\). We still get
+\[
+    \frac{\partial}{\partial \alpha} G[A_{\alpha}] = \det(\frac{1}{e} \partial^2),
+\]
+so that the path integral becomes
+\[
+    \int \mathrm{D} A \exp[i S[A]] = \det(\frac{1}{e} \partial^2) \left(\int \mathrm{D} \alpha\right) \int \mathrm{D} A \exp[i S[A]] \delta(\partial_\mu A^\mu - \omega(x)),
+\]
+where the first term \(\det(\frac{1}{e} \partial^2) \left(\int \mathrm{D} \alpha\right)\) is a constant and the expression is true for any choice of \(\omega(x)\). We can then average over \(\omega(x)\) with a gaussian weight: we avrage over a gaussian distribution centered in \(\omega = 0\):
+\[
+    \begin{dcases}
+        f(A) = g(A,\omega) = \sum_{\omega} g(A, \omega) h(\omega), \\
+        \sum_{\omega} h(\omega) = 1,
+    \end{dcases} \quad \begin{dcases}
+        f(A) = \int \mathrm{d} \omega \, g(A, \omega) h(\omega), \\
+        \int \mathrm{d} \omega \, h(\omega) = 1,
+    \end{dcases}
+\]
+so that we can write
+\[
+    1 = N(\xi) \dots
+\]
+which after an integration over \(\int \mathrm{D} \omega\) will be of the form
+\[
+    \int \mathrm{D} A e^{i S[A]} = N_0 \int \mathrm{D} A e^{i S[A] + i \int \mathrm{d}^4 x \frac{1}{2\xi} (\partial_\mu A^\mu)^2},
+\]
+
+[...]
+
+gauge invariant operator\dots
+
+momentum space\dots
+
+The propagator depends on the gauge fixing parameter \(\xi\)\dots
+
+In practice one oftenly choose a vealue of \(\xi\):
+\begin{itemize}
+    \item \(\xi = 1\) is the \textbf{Feynman gauge}, which is the most commonly used gauge in perturbative calculations and is the one adopted until now.
+    \item \(\xi = 0\) is the \textbf{Lorentz gauge}, also called the \textbf{Landau gauge}, which is a popular choice for non-perturbative calculations and for lattice QCD.
+\end{itemize}
