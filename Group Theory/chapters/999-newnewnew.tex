@@ -1,0 +1,242 @@
+\subsection{Will see}
+
+[...]
+
+\begin{proposition}[Exponential on matrix group]
+    Let $G$ be a matrix group, then \(\forall X \in \mathfrak{g}\) we have
+    \[
+        [\exp(X)]^{AB} = (e^X)^{AB},
+    \]
+    where \(X=X^{AB}\) is the tangent matrix and
+    \[
+        e^X = \sum_{n=0}^\infty \frac{X^n}{n!},
+    \]
+    and this is exactly the exponential map defined in the previous section.
+\end{proposition}
+
+\begin{proof}
+    Let \(\sigma_{X}\) be the integral curve of the left-invariant vector field associated with \(X\), \(V^{(X)}\); we have from the definition of integral curve that
+    \[
+        \dot{\sigma}_{X}(t) = V^{(X)}_{\sigma_{X}(t)} = [(L_{\sigma_{X}(t)})_{*}]_e (X).
+    \]
+    Now we can use the exponential map to write
+    \[
+        (\frac{\mathrm{d} }{\mathrm{d} t} \exp(tX))^{AB} = [\dot{\sigma}_{X}(t)]^{AB} = [\sigma_{X}(t)]^{AC} X^{CB} = [\exp(tX)]^{AC} X^{CB}.
+    \]
+    Since the one parameter subgroup \(\sigma_{X}\) satisfies the composition
+    \[
+        \sigma_{X}(t+s) = \sigma_{X}(t) \sigma_{X}(s),
+    \]
+    then if we fix one of the parameters, say \(s\), we can treat \(\sigma_{X}(s)\) as a constant matrix and solve the above ODE to get
+    \[
+        \frac{\mathrm{d}}{\mathrm{d} t} [\sigma_{X}(t+s)]^{AB}\bigg|_{s} = [\sigma_{X}(s)]^{AC} X^{CB} \implies [\sigma_{X}(s)]^{AB} = \frac{\mathrm{d} }{\mathrm{d} \tau} \sigma(\tau)^{AB} \bigg|_{\tau=t+s} = \left( [(L_{\sigma_{X}(t+s)})_*]_e (X) \right)^{AB},
+    \]
+    which can be read as the tangent vector of \(\sigma_{X}\) at the point \(\sigma_{X}(t+s)\) which is given by the pushforward at the identity. We have then:
+    \[
+        \frac{\mathrm{d}}{\mathrm{d} t} [\sigma_{X}(t+s)]^{AB}\bigg|_{s} = \sigma_X(t+s)^{AC} X^{CB} = \sigma_X(t)^{AC} \sigma_X(s)^{CD} X^{DB},
+    \]
+    since we are still making computations which makes sense only when speaking about matrices. Then
+    \[
+        \frac{\mathrm{d}}{\mathrm{d} t} [\sigma_{X}(t+s)]^{AB}\bigg|_{s} = \dots
+    \]
+    \TODO{substitute t + s with t + t2 at t1}
+    When we consider \(t_1 = 0\) the term \(\sigma_{X}(t_1)\) is just the identity matrix, so we have
+    \[
+        (\sigma_X(t_2) X)^{AB} = (X \sigma_X(t_2))^{AB}, \quad \forall t_2 \in \mathbb{R},
+    \]
+    thus we have that \(\sigma_X(t)\) commutes with \(X\) for all \(t\). Then the above ODE can be solved by the power series expansion of the exponential function, and we have
+    \[
+        \implies (\frac{\mathrm{d} }{\mathrm{d} t} \exp(tX))^{AB} = (X \exp(tX))^{AB} = (\exp(tX) X)^{AB}.
+    \]
+    Given this equation we know that the solution is given by the power series expansion of the exponential function, and we needed to show the commutation of \(\sigma_X(t)\) with \(X\) to be able to solve the ODE (since ...).
+\end{proof}
+
+\section{Representation theory}
+
+From notes [...] (2 - representation of Lie groups and Lie algebras)
+
+We are going to exploit why when we have a group representation we also have an algebra representation, and how the exponential map is the link between the two. We are going to see that the exponential map is a homomorphism between the Lie algebra and the Lie group, and that it allows us to construct representations of the Lie group from representations of the Lie algebra.
+
+The key is the finding how given any grouo representation of a lie group we can act on this representation with the exponential map to get a representation of the lie algebra, and vice versa.
+
+\subsection{Representation of Groups: Recap}
+
+In this section we will refer to a general group as \(G\) and a vector space \(V\) on a field \(\mathbb{K} = \mathbb{C}\) or \(\mathbb{R}\).
+
+\begin{definition}
+    A representation of a group \(G\) on a vector space \(V\) is a homomorphism \(D: G \to GL(V)\), \(D \in \text{Hom}(G,GL(V))\) where \(GL(V)\) is the group of invertible linear transformations on \(V\). Thus \(D : V \to V\) is an invertible linear transformation for each \(g \in G\) and we have
+    \[
+        D(g_1,g_2) = \dots
+    \]
+\end{definition}
+
+A few common nomenclatures:
+\begin{itemize}
+    \item Representation space
+    \item Dimension of the representation
+    \item Infinite or finite dimensional representation
+    \item Real or complex representation
+\end{itemize}
+
+\begin{definition}
+    Let us consider two representations and two vector spaces, \(D_1 : G \to GL(V_1)\) and \(D_2 : G \to GL(V_2)\). We can define direct sum and tensor product of representations as follows:
+    \[
+        \begin{dcases}
+            a a a a a \\
+            b b b b b
+        \end{dcases}
+    \]
+    which are still representations of \(G\) on the vector spaces \(V_1 \oplus V_2\) and \(V_1 \otimes V_2\) respectively: \textbf{direct sum representation} and \textbf{tensor product representation}. We are linearly extending the definition of the representation to the direct sum and tensor product of vector spaces.
+\end{definition}
+
+\begin{definition}[Complex conjugate representation]
+    Let us consider a representation \(D : G \to GL(V)\) on a vector space \(V\). We can define the complex conjugate representation as follows:
+    \[
+        \overline{D} : G \to GL(V^*), \quad g \mapsto \overline{D}(g) = (D(g))^*,
+    \]
+    where \(V^*\) is the dual vector space of \(V\) and \(D(g)^*\) is the complex conjugate of the linear transformation \(D(g)\).
+\end{definition}
+
+\begin{definition}[Dual representation]
+    Let us consider a representation \(D : G \to GL(V)\) on a vector space \(V\). We can define the dual representation as follows:
+    \[
+        D^\vee  : G \to GL(V^\vee), \quad D^\vee(g) = D(g)^*,
+    \]
+    where \(V^\vee\) is the dual vector space of \(V\) and \(D(g)^*\) is the dual of the linear transformation \(D(g)\).
+\end{definition}
+
+dual space
+
+transpose map
+
+basis for space has a dual basis for the dual space: relation between the two is given by the delta function
+
+application of dual on vector written as sum of components of the vector times the components of the dual vector
+
+scalar product provides a canonical isomorphism between the vector space and its dual: we can identify a vector with its dual by using the scalar product
+
+natural paring between the dual space and the original space: left invariant under the combined action of the representation and its dual representation on it
+\[
+    [D^{\vee} (g)(\omega)](D(g)(v)) = \omega(v), \quad \forall g \in G, \omega \in V^\vee, v \in V.
+\]
+Looking at the previous equation as matrix multiplication, we can see that it holds if and only if \(D^\vee(g) = D(g)^*\), which is the definition of the dual representation: the two matrices in the middle have to become the identity matrix, which is the condition for the natural pairing to be invariant under the combined action of the representation and its dual representation on it.
+
+\begin{definition}[Equivalent representations]
+    Two different representations of the same group are equivalent if there exists an isomorphism between the two representation spaces (vector spaces) that intertwines the two representations such that
+    \[
+        \forall g \in G, \quad A D_1(g) A^{-1} = D_2(g),
+    \]
+    ...
+\end{definition}
+
+It is easy to show that this is an equivalence relation, since we have
+\begin{itemize}
+    \item Reflexivity: \(D_1\) is equivalent to itself, since we can take \(A = I\) the identity matrix.
+    \item Symmetry: if \(D_1\) is equivalent to \(D_2\), then \(D_2\) is equivalent to \(D_1\), since we can take \(A^{-1}\) as the intertwining operator.
+    \item Transitivity: if \(D_1\) is equivalent to \(D_2\) and \(D_2\) is equivalent to \(D_3\), then \(D_1\) is equivalent to \(D_3\), since we can take the product of the two intertwining operators as the intertwining operator between \(D_1\) and \(D_3\).
+\end{itemize}
+
+\begin{example}[Equivalent representations in physics]
+    For example electrons and up-quarks are different particles, but they transform in the same way under the gauge group of the Standard Model, so they are equivalent representations of the gauge group: they are both half-integer spin representations of the Lorentz group. As far as the representation under rotation group is concerned, they are equivalent representations, since they have the same spin.
+\end{example}
+
+\begin{definition}[Invariant subspace]
+    Let us consider a representation \(D : G \to GL(V)\) on a vector space \(V\). A subspace \(W \subset V\) is invariant under the action of the representation if \(D(g)(W) \subset W\) for all \(g \in G\).
+    \dots
+    This will define a smaller representation of \(G\) on the subspace \(W\) by restricting the representation to \(W\).
+\end{definition}
+
+There always exists at least two invariant subspaces, the trivial subspace \(\{0\}\) and the whole space \(V\), which are invariant under the action of any representation. We are interested in finding non-trivial invariant subspaces, which will allow us to decompose the representation into smaller representations.
+
+\begin{definition}[Reducibility of representations]
+    Let \((D,V)\) be a representation of a group \(G\). We say that:
+    \begin{enumerate}
+        \item \((D,V)\) is called \textbf{reducible} if there exists a non-trivial invariant subspace \(W \subset V\) such that \(D(g)(W) \subset W\) for all \(g \in G\).
+        \item \((D,V)\) is called \textbf{irreducible} if there does not exist a non-trivial invariant subspace \(W \subset V\) such that \(D(g)(W) \subset W\) for all \(g \in G\).
+        \item \((D,V)\) is called \textbf{completely reducible} if it can be decomposed into a direct sum of irreducible representations, i.e. if there exists a decomposition of the representation space \(V\) into a direct sum of invariant subspaces \(V = W_1 \oplus W_2 \oplus \dots \oplus W_n\) such that each \(W_i\) is an irreducible representation of \(G\).
+              \begin{itemize}
+                  \item \(D |_{L_k}\) has no non-trivial invariant subspace, so it is irreducible.
+                  \item \(L_i \cap L_j = \{0\}\) for \(i \neq j\):...
+              \end{itemize}
+    \end{enumerate}
+    ...
+\end{definition}
+
+\begin{proposition}
+    A representation is completely reducible if and only if there exists irreducible representations \((D_k, V_k)\) such that
+    \[
+        (D,V) = \left(\bigoplus_k D_k, \, \bigoplus_k V_k\right),
+    \]
+    such that the irreducible representations \(D_k\) are a sort of "building blocks" of the representation \(D\) in the sense that any representation can be decomposed into a direct sum of irreducible representations, and the irreducible representations are the "atoms" of the representation theory, since they cannot be decomposed further into smaller representations.
+\end{proposition}
+
+We need a notion of inner product on the representation space to be able to talk about orthogonality of subspaces and to be able to decompose the representation into irreducible representations. We will see that for compact groups we can always find an inner product on the representation space that is invariant under the action of the group, which will allow us to decompose the representation into irreducible representations.
+
+\begin{definition}[Hermitian inner product and representations]
+    Let \(V\) a finite dimensional vector space over \(\mathbb{C}\) endowed with a Hermitian inner product. Then a representation \(D : G \to GL(V)\) is called unitary if \(D(g)\) is a unitary operator for all \(g \in G\):
+    \[
+        D(g)^{-1} = D(g)^{\dagger}, \quad \forall g \in G,
+    \]
+    where the dagger of a linear map \(O\) on a vector space with a Hermitian inner product is defined as the unique linear map \(O^{\dagger}\) such that
+    \[
+        \bra{v} \ket{O w} =  \bra{O^{\dagger} v}\ket{w}, \quad \forall v,w \in V.
+    \]
+\end{definition}
+
+An obvious consequence of the definition of unitary representation is that the inner product is invariant under the action of the group, since we have
+\[
+    \bra{v}\ket{v} = \bra{v}\ket{D(g)^{-1}D(g)w} = \bra{D(g)v}\ket{D(g)w} = \bra{v^{\prime}}\ket{w^{\prime}},
+\]
+where we have defined \(v^{\prime} = D(g)v\) and \(w^{\prime} = D(g)w\). This means that the inner product is invariant under the action of the group, which will allow us to decompose the representation into irreducible representations by using the orthogonality of subspaces.
+
+For unitary representation, we can give a version of the powerful Weyl theorem, which states:
+\begin{theorem}[Weyl's unitary trick]
+    Let \(V\) be a complex vector space with an Hermitian inner product, and let \((D,V)\) a representation of a group \(G\) with respect to this inner product. Then any representation of \(G\) on \(V\) is equivalent to a unitary representation. ...
+\end{theorem}
+
+The idea is to make use of orthogonal decomposition of the representation space to decompose the representation into irreducible representations, and then to use the fact that for compact groups we can always find an invariant inner product on the representation space to make the representation unitary.
+
+We need orthogonality and compatibility of the representation with the inner product to be able to decompose the representation into irreducible representations, and we need the invariance of the inner product under the action of the group to be able to make the representation unitary.
+
+    [...]
+
+reducible and completely reducible becomes the same
+
+we need to define the concept of an integration measure
+
+\begin{proposition}
+    Let \(D\) be a representation of a finite group \(G\) on a finite dimensional complex vector space \(V\). Then there exists an positive Hermitian inner product on \(V\) with respect to which \(D\) is a unitary representation.
+\end{proposition}
+
+\begin{proof}
+    Pick a basis and define an inner product on \(V\) \dots
+
+    Now we can define a new inner product by averaging over the group (diagonal sum with complex conjugation on first argument):
+    \[
+        \bra{u}\ket{v} \coloneqq \frac{1}{|G|} \sum_{g \in G} \bra{D(g)u}\ket{D(g)v}_0,
+    \]
+    For finite group it is a finite linear combination of inner products, so it is still an inner product, so all the defining properties of an inner product are still satisfied.
+
+    On a Lie group the previous expression would look like
+    \[
+        \frac{1}{V(G)} \int_G \mathrm{d} \mu_G \bra{D(g)u}\ket{D(g)v}_0,
+    \]
+    ...
+
+    Then we have
+    \[
+        \begin{aligned}
+            [\dots ] \\
+            [\dots ] \\
+            [\dots ].
+        \end{aligned}
+    \]
+    So in the end
+    \[
+        \implies D(g)^{\dagger} = D(g)^{-1}, \quad \forall g \in G,
+    \]
+    which means that \(D\) is a unitary representation with respect to the new inner product.
+\end{proof}
+
+Thus for finite groups we can always find an inner product on the representation space that makes the representation unitary, and for compact groups we can always find an invariant inner product on the representation space that makes the representation unitary. This is a very powerful result, since it allows us to restrict our attention to unitary representations when studying the representation theory of finite and compact groups, which are the most common types of groups in physics.
+
