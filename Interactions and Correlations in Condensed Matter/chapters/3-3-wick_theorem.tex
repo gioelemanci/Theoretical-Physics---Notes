@@ -324,20 +324,20 @@ where we were able to obtain a finite result for the correlation energy after an
 
 We said that \(\Pi_0 (q, i \nu_n)\) is a crucial quantity, since it is the building block of the diagrams considered in the RPA approximation, so that we will need to compute it.
 
-    [\textit{Drawing of Pi bubble, with }\(k, i \omega_n\) \textit{on the fermionic line below, and }\(k+q, i \omega_n + i \nu_n\) \textit{on the fermionic line above}]
+    [\textit{Drawing of Pi bubble, with }\(k, i \omega_n - i \nu_n\) \textit{on the fermionic line below, and }\(k+q, i \omega_n \) \textit{on the fermionic line above}]
 
 Thus the two lines are propagators given by
 \[
     \begin{dcases}
-        \mathcal{G}_0(k, i \omega_n) = \frac{1}{i \omega_n - \xi_k}, \\
-        \mathcal{G}_0(k+q, i \omega_n + i \nu_n) = \frac{1}{i \omega_n + i \nu_n - \xi_{k+q}},
+        \mathcal{G}_0(k, i \omega_n - i \nu_n) = \frac{1}{i \omega_n - - i \nu_n \xi_k}, \\
+        \mathcal{G}_0(k+q, i \omega_n) = \frac{1}{i \omega_n - \xi_{k+q}},
     \end{dcases}
 \]
 and since the two lines are connected by a vertex, we have to sum over all the possible momenta and frequencies (we should make an excursus on the Feynman rules, but for now we will just state the result), so that we can write\footnote{We ignored the sum over the spin indices, since it is conserved and gives a degeneracy, and we added only a factor of 2 in front of the sum.}
 \[
     \begin{aligned}
-        \Pi_0(q, i \nu_n) = - \frac{2}{\beta V} \sum_{k, i \omega_n} \mathcal{G}_0(k, i \omega_n) \mathcal{G}_0(k+q, i \omega_n + i \nu_n) \\
-        = - \frac{2}{\beta V} \sum_{k, i \omega_n} \frac{1}{i \omega_n - \xi_k} \frac{1}{i \omega_n + i \nu_n - \xi_{k+q}},
+        \Pi_0(q, i \nu_n) = - \frac{2}{\beta V} \sum_{k, i \omega_n - i \nu_n} \mathcal{G}_0(k, i \omega_n) \mathcal{G}_0(k+q, i \omega_n) \\
+        = - \frac{2}{\beta V} \sum_{k, i \omega_n} \frac{1}{i \omega_n - i \nu_n - \xi_k} \frac{1}{i \omega_n - \xi_{k+q}},
     \end{aligned}
 \]
 where \(V\) is the volume of the system, and the factor of 2 comes from the spin degeneracy. This is called the \textbf{Lindhard function}, which is a very important quantity in the study of interacting systems, since it gives us information about the response of the system to external perturbations, such as an external electric field or an external magnetic field.
@@ -350,16 +350,199 @@ thus we can rewrite
 \[
     \Pi_0(q, i \nu_n) = - \frac{2}{V} \sum_{k} \frac{1}{\beta} \sum_{i \omega_n} \mathcal{F} (i \omega_n),
 \]
-where the method we are going to implement will give us a way to compute the sum over the frequesncies of this \(\mathcal{F}(i \omega_n)\)
+where the method we are going to implement will give us a way to compute the sum over the frequencies of this \(\mathcal{F}(i \omega_n)\),
 \[
-    \mathcal{F}(z) = \frac{1}{z - \xi_k} \frac{1}{z + i \nu_n - \xi_{k+q}},
+    \mathcal{F}(z) = \frac{1}{z - i \nu_n - \xi_k} \frac{1}{z - \xi_{k+q}},
 \]
-Since the Matsubara frequencies are the poles of the Fermi-Dirac distribution, we can use the residue theorem to compute the sum over the frequencies. Let us write
+where \(z = i \omega_n\). Since the Matsubara frequencies are the poles of the Fermi-Dirac distribution, we can use the residue theorem to compute the sum over the frequencies. Let us write
 \[
     I = \lim_{R \to \infty} \oint \frac{\mathrm{d}z}{2 \pi i} \mathcal{F} (z) n_F(z) = \sum \text{residues of } \mathcal{F}(z) n_F(z) = 0,
 \]
-since the radius of the contour goes to infinity and the function goes to zero at infinity. The poles of the Fermi-Dirac distribution are given by the Matsubara frequencies, and they are located in the imaginary axis of the complex plane, so that we can write
+since the radius of the contour goes to infinity and the function goes to zero at infinity. The poles of the Fermi-Dirac distribution are given by the infinite number of Matsubara frequencies, located in the imaginary axis of the complex plane, so that we can write
 
     [\textit{drawing of complex plane, poles (matsubara and denominator of F) and circle}]
 
-and in the final expression we have that \(\frac{1}{\beta}\) is the residue of the Fermi-Dirac distribution at the Matsubara frequencies, while the term we are going to compute is the residue of \(\mathcal{F}(z)\) at the poles of the denominator, which are given by \(z = \xi_k\) and \(z = \xi_{k+q} - i \nu_n\).
+and in the final expression we have that \(\frac{1}{\beta}\) is the residue of the Fermi-Dirac distribution at the Matsubara frequencies, while the term we are going to compute is the residue of \(\mathcal{F}(z)\) at the poles of the denominator, which are given by \(z_b = i \nu_n + \xi_k\) and \(z_a = \xi_{k+q}\) (and \(z_n\) the Matsubara frequencies).
+
+Thus we can write
+\[
+    I = 0 = \sum_{z_n} \text{Residue}(z_n) + \text{Residue}(z_a) + \text{Residue}(z_b),
+\]
+where
+\[
+    \text{Residue}(z_n) = \lim_{z \to z_n} (z - z_n) \mathcal{F}(z) n_F(z) = \lim_{z \to z_n} (z-z_n) \mathcal{F}(z) \frac{1}{0 + \frac{\mathrm{d}}{\mathrm{d}z}[e^{\beta z} + 1]\bigg|_{z=z_n} (z-z_n) + \dots},
+\]
+where we just expanded the Fermi-Dirac distribution around the pole \(z_n\) and we used the fact that the residue of a function at a simple pole is given by the limit of the function multiplied by \((z-z_n)\) as \(z\) approaches \(z_n\). We can stop to the first order in the expansion since we are interested in the limit \(z \to z_n\) (and the \((z-z_n)\) term simplifies, wile the others are multiplied by \((z-z_n)\) which is going to zero in this limit), so that we can write
+\[
+    \text{Residue}(z_n) = \lim_{z \to z_n} \mathcal{F}(z) \frac{1}{\beta e^{\beta z_n}} = - \frac{1}{\beta} \mathcal{F}(z_n),
+\]
+where the minus sign comes from the fact that \(e^{\beta z_n} = e^{i \pi (2n + 1)} = -1\). This is exactly the term we have in the expression for \(\Pi_0\), so that in the end we will compute it as the other residue with sign changed.
+
+The other two residues are given by
+\[
+    \begin{aligned}
+        \text{Residue}(z_a) = \lim_{z \to z_a} (z - z_a) \mathcal{F}(z) n_F(z) \\
+        = \lim_{z \to z_a} (z-z_a) \frac{1}{z - i \nu_n - \xi_k} \frac{1}{z - \xi_{k+q}} n_F(z) = \frac{n_F(\xi_{k+q})}{\xi_{k+q} - i \nu_n - \xi_k},
+    \end{aligned}
+\]
+for the pole \(z_a\), while for the pole \(z_b\) we have
+\[
+    \begin{aligned}
+        \text{Residue}(z_b) = \lim_{z \to z_b} (z - z_b) \mathcal{F}(z) n_F(z) \\
+        = \lim_{z \to z_b} (z-z_b) \frac{1}{z - i \nu_n - \xi_k} \frac{1}{z - \xi_{k+q}} n_F(z) = \frac{n_F(i \nu_n + \xi_k)}{i \nu_n + \xi_k - \xi_{k+q}}.
+    \end{aligned}
+\]
+
+Thus we can write
+\[
+    I = 0 = - \frac{1}{\beta} \sum_{z_n} \mathcal{F}(z_n) - \frac{n_F(\xi_{k+q})}{ i \nu_n + \xi_k -\xi_{k+q}} + \frac{n_F(i \nu_n + \xi_k)}{i \nu_n + \xi_k - \xi_{k+q}},
+\]
+where we can notice how in the last term
+\[
+    n_F(i \nu_n + \xi_k) = n_F(\xi_k),
+\]
+since the fermi distribution is periodic in the imaginary axis with period \(i \nu_n\), so that we can write
+\[
+    n_F(z) = \frac{1}{e^{\beta z} + 1}, \quad e^{\beta (i \nu_n + \xi_k)} = e^{\beta i \nu_n} e^{\beta \xi_k} = e^{i \pi (2n + 1)} e^{\beta \xi_k} = - e^{\beta \xi_k}.
+\]
+
+\begin{example}
+    Let us show how a fermionic closed loop gives us
+    \[
+        loop = - \frac{1}{\beta} \sum_{i \omega_n} \frac{1}{i \omega_n - \xi_k} = n_F(\xi_k),
+    \]
+    since\dots
+    [\dots]
+\end{example}
+
+Thus we can write
+\[
+    \frac{1}{\beta} \sum_{i \omega_n} \mathcal{F}(i \omega_n) = \frac{n_F(\xi_{k}) - n_F(\xi_{k+q})}{i \nu_n + \xi_k - \xi_{k+q}},
+\]
+and we have finally found an expression for the \textbf{Lindhard function} in the Matsubara formalism, which is
+\[
+    \Pi_0(q, i \nu_n) = \frac{2}{V} \sum_{\mathbf{k}} \frac{n_F(\xi_{k}) - n_F(\xi_{k+q})}{i \nu_n + \xi_k - \xi_{k+q}} \to \frac{2}{(2\pi)^3} \int \mathrm{d}^3 k \frac{n_F(\xi_{k}) - n_F(\xi_{k+q})}{i \nu_n + \xi_k - \xi_{k+q}},
+\]
+which is a very important result, since it gives us the building block of the diagrams considered in the RPA approximation, which is a very good approximation for the correlation energy of the system.
+
+In QFT when treating loops in the diagrammatic expansion, usually we have to introduce a \textbf{cutoff} in the momentum integration, since the loops give us divergent contributions to the energy; in condensed matter physics we do not have this problem, since the momentum integration is always limited by the size of the Brillouin zone, which is a consequence of the \textbf{lattice structure} of the system: we have always \textit{periodic boundary conditions}, so that the momentum is quantized and limited by the size of the Brillouin zone, which gives us a natural cutoff for the momentum integration.
+
+Note how the numerator of the Lindhard function is the difference of two Fermi-Dirac distributions, which gives us a non zero contribution only when we are in a region of the momentum space near the Fermi surface: this functions are both either 0 or 1, so that the difference is zero unless we are in a region where one of them is 1 and the other is 0, which happens only near the Fermi surface. So the main contribution to the correlation energy in the RPA approximation comes from the region near the Fermi surface, which is a very important result: the low energy excitations of the system are the ones that give us the main contribution to the correlation energy (the interactions are more effective near the Fermi surface, where we have a high density of states).
+
+Recall then the expression for the correlation energy in the RPA approximation:
+\[
+    \Delta F^{RPA}_{correlation} = \frac{1}{2\beta} \sum_{\mathbf{q}} \sum_{i \nu_n} \left[ \ln (1 + \frac{4\pi}{q^2} \Pi_0(\mathbf{q},\, i \nu_n)) - \frac{4\pi}{q^2} \Pi_0(\mathbf{q},\, i \nu_n) \right] = \text{ sum of connected ring diagrams},
+\]
+now we are interested in the behavior of this quantity in the limit of small \(q\) (transfer momentum), which is the limit that gives us the most divergent contributions to the energy: if we destroy a particle inside the fermi sphere (near the surface) we can only create a particle outside the fermi sphere (near the surface), so that we have a small momentum transfer \(q\) between the two states. All the processes are dominated by small momentum transfers, which is a very important result, since it tells us that the main contribution to the correlation energy comes from the region near the Fermi surface, where we have a high density of states and where the interactions are more effective.
+
+Thus we compute the expansion of the numerator of the Lindhard function for small \(q\), which is given by
+\[
+    n_F (\xi_{k+q}) = n_F(\xi_k) + \mathbf{q} \cdot \nabla_k n_F(\xi_k) + O(q^2),
+\]
+which implies that
+\[
+    n_F(\xi_{k}) - n_F(\xi_{k+q}) = n_k - n_{k+q} \sim - \mathbf{q} \cdot \nabla_k n_k = - \mathbf{q} \cdot \nabla_k \theta(k_F - k) = \mathbf{q} \cdot \hat{k} \delta(k - k_F) = q \cos \theta \delta(k - k_F),
+\]
+where we used the fact that the derivative of the theta functions has a minus sign and the delta function, and we defined \(\theta\) as the angle between the momentum \(\mathbf{k}\) and the momentum transfer \(\mathbf{q}\). The nominator of the Lindhard function for small \(q\) is given by\footnote{We are using atomic units, so \(\hbar = m = 1\), so that the dispersion relation is given by \(\xi_k = \tfrac{k^2}{2}\).}
+\[
+    \xi_{k+q} - \xi_k = \frac{1}{2} \left[ (\mathbf{k}+\mathbf{q})^2 - \mathbf{k}^2 \right] = \frac{1}{2} (2 k q \cos \theta + q^2) \sim k q \cos \theta,
+\]
+since \(q\) is small and we stop to the first order in \(q\), so that we can write
+\[
+    \Pi_0(q, i \nu_n) = \frac{2}{(2\pi)^3} \int \mathrm{d}^3 \mathbf{k} \frac{n_F(\xi_{k}) - n_F(\xi_{k+q})}{i \nu_n + \xi_k - \xi_{k+q}} \sim \frac{2}{(2\pi)^3} \int \mathrm{d}^3 k \frac{q \cos \theta \delta(k - k_F)}{i \nu_n - k q \cos \theta},
+\]
+where the measure can be written as \(\mathrm{d}^3 \mathbf{k} = k^2 \sin \theta \mathrm{d}k \mathrm{d}\theta \mathrm{d}\phi\), so that we can write
+\[
+    \Pi_0(q, i \nu_n) \sim \frac{2}{(2\pi)^3} \int_0^{\infty} k^2 \mathrm{d}k \int_{-1}^{1} \mathrm{d}\cos\theta \int_0^{2\pi} \mathrm{d}\phi \frac{q \cos \theta \delta(k - k_F)}{i \nu_n - k q \cos \theta},
+\]
+which can be rewritten with a change of variable as
+\[
+    \Pi_0(q, i \nu_n) = \frac{k_F^2}{2\pi^2} \int_{-1}^{1} \mathrm{d}\mu \frac{q \mu}{i \nu_n - v_F \mu q} = \frac{k_F^2}{2\pi^2} \int_{-1}^{1} \mathrm{d}\mu \frac{1}{v_F}\frac{\mu}{\frac{i \nu_n}{v_F q} - \mu},
+\]
+and \(v_F\) is the Fermi velocity, which is given by \(v_F = \frac{k_F}{m}\) (in atomic units \(v_F = k_F\)), cancelling out the square of the Fermi momentum in the numerator, we get
+\[
+    \Pi_0(q, i \nu_n) = \frac{k_F}{2\pi^2} \int_{-1}^{1} \mathrm{d}\mu \frac{\mu}{\frac{i \nu_n}{v_F q} - \mu} = \frac{k_F}{\pi^2} \left[ - 1 + \frac{i \nu_n}{2 v_F q} \ln \left( \frac{i \nu_n + v_F q}{i \nu_n - v_F q} \right) \right],
+\]
+where we can write the logarithm of an imaginary number as a series of sines and cosines, which in the end gives an arcotangent, so that we can write
+\[
+    \Pi_0(q, i \nu_n) = \frac{k_F}{\pi^2} \left[ - 1 + \frac{\nu_n}{v_F q} \arctan \left( \frac{v_F q}{\nu_n} \right) \right].
+\]
+
+Now we can look at the limit for small frequencies, where the Lindhard function goes to a constant, which is given by
+\[
+    \Pi_0(q, 0) = - \frac{k_F}{\pi^2} = - D(\epsilon_F) \sim \frac{1}{r_s},
+\]
+where \(D(\epsilon_F)\) is the density of states at the Fermi energy, which is a very important quantity in the study of interacting systems, since it gives us information about the number of states available for the particles to occupy at the Fermi energy, which is crucial for understanding the physical properties of the system. The parameter \(r_s\) is a dimensionless parameter that characterizes the strength of the interactions in the system.\TODO{check this last part.}
+
+[... screening ...]
+
+Since at zero temperature we are not summing over a discrete set of frequencies, but we are integrating over a continuous variable
+\[
+    i \nu_n = i \frac{2 \pi n}{\beta} \xrightarrow{T \to 0} \dots
+\]
+then the summation in the expression for the correlation energy becomes an integral, so that we can write
+\[
+    \Delta F^{RPA}_{correlation} = \frac{1}{2} \int \frac{\mathrm{d}^3 \mathbf{q}}{(2\pi)^3 / V} \int_{-\infty}^{\infty} \frac{\mathrm{d}\nu}{2\pi} \left[ \ln (1 + V_q \Pi_0(\mathbf{q},\, i \nu)) - V_q \Pi_0(\mathbf{q},\, i \nu) \right],
+\]
+where the volume factor appeared from
+\[
+    \frac{1}{V} \sum_{q} \to \int \frac{\mathrm{d}^3 \mathbf{q}}{(2\pi)^3},
+\]
+and since it was not present in the original expression, we have to put it in the denominator of the measure of the integral. Now we have to substitute the expression for the Lindhard function, which was given by
+\[
+    \Pi_0(q, i \nu) = \frac{k_F}{\pi^2} \Phi(\frac{\nu}{v_F q}), \quad \Phi(x) = - 1 + \frac{x}{2} \ln \left( \frac{x + 1}{x - 1} \right),
+\]
+so that we can write
+\[
+    \Delta F^{RPA}_{correlation} = \frac{1}{2} \int \frac{\mathrm{d}^3 \mathbf{q}}{(2\pi)^3 / V} \int_{-\infty}^{\infty} \frac{\mathrm{d}\nu}{2\pi} \left[ \ln (1 + \frac{q_{TF}^2}{q^2} \Phi(\frac{\nu}{v_F q})) - \frac{q_{TF}^2}{q^2} \Phi(\frac{\nu}{v_F q}) \right],
+\]
+where we defined the Thomas-Fermi wavevector as
+\[
+    q_{TF}^2 = \frac{4 k_F}{\pi},
+\]
+which is a very important quantity in the study of interacting systems, since it gives us information about the screening of the interactions in the system, which is crucial for understanding the physical properties of the system. The Thomas-Fermi wavevector is a measure of the strength of the screening in the system, and it is related to the density of states at the Fermi energy.
+
+Renaming also
+\[
+    \frac{\nu}{v_F q} = u, \quad \nu = u v_F q, \quad \mathrm{d}\nu = v_F q \mathrm{d}u,
+\]
+we can write
+\[
+    \frac{\Delta F^{RPA}_{correlation}}{V} = \frac{1}{2} \int \frac{\mathrm{d}^3 \mathbf{q}}{(2\pi)^3} \int_{-\infty}^{\infty} \frac{\mathrm{d}u}{2\pi} v_F q \left[ \ln (1 + \frac{q_{TF}^2}{q^2} \Phi(u)) - \frac{q_{TF}^2}{q^2} \Phi(u) \right],
+\]
+and now going to polar coordinates in the momentum space,
+\[
+    \mathrm{d}^3 \mathbf{q} = 4 \pi q^2 \mathrm{d}q,
+\]
+and renaming also the momentum as
+\[
+    q = q_{TF} y, \quad q^3 \mathrm{d}q = q^4_{TF} y^3 \mathrm{d}y,
+\]
+we can write
+\[
+    \frac{\Delta F^{RPA}_{correlation}}{V} = \mathcal{C} v_F q_{TF}^4 \int_0^{\infty} y^3 \mathrm{d}y \int_{-\infty}^{\infty} \mathrm{d}u \left[ \ln (1 + \frac{\Phi(u)}{y^2}) - \frac{\Phi(u)}{y^2} \right],
+\]
+where \(\mathcal{C}\) is a numerical constant that we are not interested in, now the idea is to break the \(y\) integral in three parts:
+\[
+    \begin{dcases}
+        0 \leq y \leq 1 \, : \, 0 \leq q \leq q_{TF},               \\
+        1 \leq y \leq \frac{1}{r_s} \, : \, q_{TF} \leq q \leq k_F, \\
+        \frac{1}{r_s} \leq y \leq \infty \, : \, k_F \leq q \leq \infty,
+    \end{dcases}
+\]
+where the first two region will give us a finite contribution to the correlation energy, while the last one will need to be controlled since the domain of integration goes to infinity, which...
+\[
+    \Delta F^{RPA}_{correlation} \sim \text{constant} \cdot \int_1^{k_F / q_{TF}} \frac{1}{y} \mathrm{d}y \sim \text{constant} \cdot \ln \left( \frac{k_F}{q_{TF}} \right) \sim \text{constant} \cdot \ln (\frac{1}{\sqrt{r_s}}),
+\]
+since
+\[
+    k_F \sim \frac{1}{r_s}, \quad q_{TF}^2 \sim k_F \sim \frac{1}{r_s}.
+\]
+
+This was one of the most important results in the history of many body physics, since it was the first time that a finite result for the correlation energy of the electron gas was obtained, which is a very important quantity in the study of interacting systems, since it gives us information about the energy correction due to interactions beyond the Hartree-Fock approximation, which is crucial for understanding the physical properties of the system. The RPA approximation gives us a very good approximation for the correlation energy, which is a very important result, since it shows how we can obtain finite results from infinite summations of diagrams, which is the main goal of many body condensed matter physics.
+
+Thus in the end
+\[
+    \frac{\Delta F^{RPA}}{V} = \frac{2.21}{r_s^2} - \frac{0.911}{r_s} + A \ln (r_s) + B + O(r_s),
+\]
+which is the \textbf{Gellman formula} for the correlation energy of the electron gas, where the first term is the kinetic energy, the second term is the exchange energy, and the last two terms are the correlation energy in the RPA approximation, which is a very good approximation for the correlation energy of the electron gas.
