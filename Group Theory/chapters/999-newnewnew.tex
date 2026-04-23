@@ -240,3 +240,359 @@ we need to define the concept of an integration measure
 
 Thus for finite groups we can always find an inner product on the representation space that makes the representation unitary, and for compact groups we can always find an invariant inner product on the representation space that makes the representation unitary. This is a very powerful result, since it allows us to restrict our attention to unitary representations when studying the representation theory of finite and compact groups, which are the most common types of groups in physics.
 
+
+
+
+
+\begin{example}[Reducible representation]
+    Let us consider the group \(G = (\mathbb{R}, +)\) on the vector space \(V = \mathbb{R}^2\) with the representation defined by
+    \[
+        D \, : \, G \mapsto \mathrm{GL}(V) = \mathrm{GL}(2, \mathbb{R}), \quad D(r) = \begin{pmatrix}
+            1 & r \\
+            0 & 1
+        \end{pmatrix},
+    \]
+    respecting obviously the group composition law, since we have
+    \[
+        D(r_1 + r_2) = D(r_1)D(r_2), \quad D(-r) = D(r)^{-1}.
+    \]
+    Then the action of the representation on a vector
+    \[
+        \begin{pmatrix}
+            x \\
+            y
+        \end{pmatrix} \in \mathbb{R}^2,
+    \]
+    is given by
+    \[
+        D(r) \begin{pmatrix}
+            x \\
+            y
+        \end{pmatrix} = \begin{pmatrix}
+            x + r y \\
+            y
+        \end{pmatrix},
+    \]
+    which means that we have a non trivial invariant subspace given by the \(y\)-axis, which is
+    \[
+        L = \left\{ \begin{pmatrix} x \\ 0 \end{pmatrix} : x \in \mathbb{R} \right\} \subseteq \mathbb{R}^2,
+    \]
+    such that
+    \[
+        D(r) \big|_{L} = \mathbb{I} \implies D(r) l = l, \quad \forall l \in L, r \in G.
+    \]
+    Suppose there exists a non trivial invariant subspace \(L^{\prime} \neq \{0\}\) of the vector space \(V \sim \mathbb{R}^2\), with dimension \(\text{dim}(L^{\prime})=1\), then
+    \[
+        L^{\prime} = \left\{ \lambda v | \lambda \in \mathbb{R} \right\}, \text{ for some } v \in \mathbb{R}^2, v \neq 0,
+    \]
+    and thus for any value of the group parameter \(r\) we have
+    \[
+        \forall r \in \mathbb{R}, \quad D(r) v = \lambda_r v, \text{ for some } \lambda_r \in \mathbb{R},
+    \]
+    which means that \(v\) is an eigenvector of the representation \(D(r)\) for all \(r\), and thus we have
+    \[
+        \iff \begin{pmatrix}
+            v_1 + r v_2 \\
+            v_2
+        \end{pmatrix} = \lambda_r \begin{pmatrix}
+            v_1 \\
+            v_2
+        \end{pmatrix}, \iff v_2 = \lambda_r v_2, \quad v_1 + r v_2 = \lambda_r v_2, \quad \forall r \in \mathbb{R},
+    \]
+    which means that either \(v_2 = 0 \implies L^{\prime} =L\) or \(\lambda_r = 1\) for all \(r\). This means that the representation \(D\) is reducible, since it has a non trivial invariant subspace \(L\), but it is \textbf{not completely reducible}, since it cannot be decomposed into a direct sum of irreducible representations, since the only invariant subspace is \(L\) and it does not have a complementary invariant subspace.
+\end{example}
+
+\begin{proposition}
+    Let \(D\) be a representation of a finite group \(G\) on a finite dimensional complex vector space \(V\). Then there exists a positive Hermitian inner product on \(V\) with respect to which \(D\) is a unitary representation.
+\end{proposition}
+
+\begin{theorem}
+    Let \(V\) be a complex vector space with an Hermitian inner product, and let \((D,V)\) a unitary representation of a group \(G\) with respect to this inner product. Then
+    \[
+        D \text{ is reducible} \iff D \text{ is completely reducible}.
+    \]
+\end{theorem}
+
+This means that compact groups can be represented by unitary representations, and thus we can always decompose a representation of a compact group into irreducible representations, which are the building blocks of the representation theory of compact groups. This is a very powerful result, since it allows us to restrict our attention to unitary representations when studying the representation theory of compact groups, which are the most common types of groups in physics. This is expressed by the next two propositions:
+\begin{proposition}
+    Let \((D,V)\) be a finite dimensional complex representation of a compact Lie group \(G\). Then there exists a positive Hermitian inner product on \(V\) with respect to which \(D\) is a unitary representation
+\end{proposition}
+\begin{proposition}
+    Let \(G\) be a compact Lie group. Then any complex representation of \(G\) is completely reducible if and only if it is reducible.
+\end{proposition}
+
+\subsubsection{Dual Space}
+
+Let \(V^{\vee}=\{\varphi \, : \, V \to \mathbb{K} \text{ linear function}\}\), then given a basis \(\{b_k\}\) of \(V\) we can notice how any linear function \(\varphi \in V^{\vee}\) is completely determined by its action on the basis vectors, since we can write any vector \(v \in V\) as a linear combination of the basis vectors, and thus we have
+\[
+    \varphi(v) = \varphi(v^k b_k) = v^k \varphi(b_k),
+\]
+which directly implies that the dual space \(V^{\vee}\) has the same dimension as \(V\), and thus we can define a \textbf{dual basis} \(\{e^{\ell}\}\) of \(V^{\vee}\) such that
+\[
+    e^\ell(b_k) = \delta^\ell_k, \implies \varphi = \varphi_\ell e^\ell,
+\]
+then we can write the action of the dual representation on the dual space as
+\[
+    \varphi(v) = v^k \varphi(b_k) = v^k \varphi_\ell e^\ell(b_k) = v^k \varphi_\ell \delta^\ell_k = v^k \varphi_k.
+\]
+
+Adopting the same bases, we can represent the vectors of \(V\) as column vectors and the linear functions of \(V^{\vee}\) as row vectors, and thus given two vectors \(v,w \in V\)
+\[
+    v \simeq \vec{v} = \begin{pmatrix}
+        v_1    \\
+        \vdots \\
+        v_n
+    \end{pmatrix}, \quad w \simeq \vec{w} = \begin{pmatrix}
+        w_1    \\
+        \vdots \\
+        w_n
+    \end{pmatrix},
+\]
+then we can define the action of \(\varphi\) on \(v\) as
+\[
+    \varphi(v) = \vec{\varphi} \cdot \vec{v} = \vec{w}^T \cdot \vec{v} = w_k v^k,
+\]
+where we have defined \(\vec{\varphi} = (w_1, \dots, w_n)\) as the row vector representation of the linear function \(\varphi\). This is the natural pairing between the dual space and the original space, which is left invariant under the combined action of the representation and its dual representation on it.
+
+\begin{definition}
+    Let \(E \, : \, V \mapsto V\) be a linear map, we can define a matrix representation of \(E\) with respect to the basis \(\{b_k\}\) as
+    \[
+        E(b_k) = E^{l}_{\ k} b_l,
+    \]
+    then the action of \(E\) on a vector \(v\) can be written as
+    \[
+        E(v) = v^k E^l_{\ k} b_l = (E^l_{\ k} v^k) b_l,
+    \]
+    where the term between the last parentheses is the matrix multiplication of the matrix representation of \(E\) with the column vector representation of \(v\): \(E \cdot \vec{v}\). We can thus define the dual map \(E^{\vee} : V^{\vee} \mapsto V^{\vee}\) as
+    \[
+        [E^{\vee}(\varphi)](v) = \varphi(E(v)),
+    \]
+    which can be read as the action of the dual map on the dual space, and we are requesting that it will be compatible with the action of the original map on the original space, in the sense that the natural pairing between the dual space and the original space is invariant under the combined action of the representation and its dual representation on it. This are endomorphisms of the vector space \(V\) and its dual \(V^{\vee}\), and we can write
+    \[
+        E^{\vee}(e^{\ell}) = (E^{\vee})^{\ \ell}_{n} e^n,
+    \]
+    which implies
+    \[
+        \begin{aligned}
+            [E^{\vee}(e^{\ell})](b_k) = (E^{\vee})^{\ \ell}_{n} e^n(b_k) = (E^{\vee})^{\ \ell}_{k} \\
+            = e^{\ell}(E(b_k)) = e^{\ell}(E^j_{\ k} b_j) = E^{\ell}_{\ k},
+        \end{aligned}
+    \]
+    thus in this matrix representation we have that the dual map is represented by the transpose of the matrix representation of the original map, i.e. we have
+    \[
+        E^{\vee} = E^T,
+    \]
+    since from the position of the indices we can see that the matrix representation of the dual map is obtained by inverting rows with columns of the matrix representation of the original map.
+\end{definition}
+
+Suppose that we have a linear map \(B\) on a vector space \(V\) and another linear map \(A\) on the dual space \(V^{\vee}\) such that
+\[
+    \begin{dcases}
+        A \,:\, V^{\vee} \mapsto V^{\vee}, \quad A(\varphi) = A^{\ \ell}_{n} \varphi_{\ell} e^n, \\
+        B \,:\, V \mapsto V, \quad B(v) = B^l_{\ k} v^k b_l,
+    \end{dcases}
+\]
+then the natural pairing between the dual space and the original space is invariant under the combined action of \(A\) and \(B\) on it if and only if
+\[
+    [A(\varphi)][B(v)] = \varphi_{\ell} A_n^{\ \ell} B^n_{\ k} v^k = \varphi_{\ell} (A^T)^{\ \ell}_{k} B^k_{\ \ell} v^k = \varphi(v) = \vec{\varphi}^T \cdot A^T \cdot (B \vec{v}) = (A \vec{\varphi})^T \cdot (B\vec{v}),
+\]
+[\dots ]
+
+If \(D \, : \, G \mapsto \mathrm{GL}(V)\) is a representation of a group \(G\) on a vector space \(V\) such that
+\[
+    D(g) \in \mathrm{GL}(V) \subseteq \mathrm{End}(V), \quad \forall g \in G,
+\]
+then its dual representation \(D^{\vee} \, : \, G \mapsto \mathrm{GL}(V^{\vee})\) is defined by
+\[
+    D^{\vee}(g) = (D(g^{-1}))^T \in \mathrm{End}(V^{\vee}), \quad \forall g \in G,
+\]
+we have
+\[
+    [D^{\vee}(g)(\varphi)](D(g)(v)) = [D(g^{-1})^T\vec{\varphi}]^T(D(g)\vec{v}) = \vec{\varphi}^T \cdot D(g^{-1}) \cdot D(g) \cdot \vec{v} = \vec{\varphi}^T \cdot \vec{v} = \varphi(v).
+\]
+
+
+
+\subsubsection{Equivalent Representations}
+
+\begin{proposition}
+    Let \(G\) be a compact Lie group, and let \((D,V)\) be a complex representation of \(G\) on a finite dimensional vector space \(V\). Then there exists an equivalent representation \((\overline{D},V)\) such that
+    \[
+        (\overline{D},V) = (D^{\vee},V^{\vee}) \iff \exists A : V \mapsto V^{\vee} \text{ isomorphism s. t. } A^{-1} \overline{D}(g) A = D^{\vee}(g), \quad \forall g \in G,
+    \]
+    it is equivalent to the existence of an isomorphism between the representation space \(V\) and its dual \(V^{\vee}\) that intertwines the representation \(D\) with its dual representation \(D^{\vee}\).
+\end{proposition}
+
+\begin{proof}
+    There exists a \(G\)-invariant Hermitian product \(\bra{\cdot}\ket{\cdot}\) on \(V\) such that \((D,V)\) is unitary with respect to it, since \(G\) is compact. Then we can define an isomorphism \(A : V \mapsto V^{\vee}\) by
+    \[
+        \begin{dcases}
+            \bra{\cdot}\ket{\cdot} \, : \, V \times V \mapsto \mathbb{K} \text{ Hermitian}, \\
+            A \, : \, V \mapsto V^{\vee}, \quad A(v) = \bra{v}\ket{\cdot} \in V^{\vee},
+        \end{dcases}
+    \]
+    which is an isomorphism since the inner product is non-degenerate. Then picking an ON basis \(\{b_k\}\) of \(V\) with respect to the inner product, we can write
+    \[
+        \implies (D(g))^{\dagger} = (D(g)^*)^T = D(g)^{-1}, \quad \forall g \in G,
+    \]
+    in the matrix representation with respect to the basis \(\{b_k\}\) (the basis is necessary to be able to write the representation as a matrix, in any other basis the dagger may not be defined as the transpose of the c.c.), and thus we have
+    \[
+        D^\vee(g) = (D(g^{-1}))^T \text{ in dual basis},
+    \]
+    in the matrices sense, then it is easy to verify that
+    \[
+        D^\vee(g) = (D(g^{-1}))^T = (D(g)^{-1})^T = (D(g)^{-1})^T = ((D(g)^*)^T)^T = \overline{D}(g),
+    \]
+    which means that the dual representation is equivalent to the complex conjugate representation. Even though \(V\) and \(V^\vee\) are differnt vector spaces, they are isomorphic, and thus we can identify them by using the isomorphism \(A\) defined above, which means that we can identify the dual representation with the complex conjugate representation.
+\end{proof}
+
+In particle physics we are often interested in finding representations that are equivalent to their complex conjugate, since they correspond to particles that are their own antiparticles, such as the photon or the gluon. This is a very important property, since it allows us to identify particles with their antiparticles, which is a fundamental aspect of particle physics. For example, the charge conjugation operator in quantum field theory is an example of an operator that maps a representation to its complex conjugate, and thus it allows us to identify particles with their antiparticles. This is a very important aspect of particle physics, since it allows us to understand the properties of particles and their interactions.
+
+\section{Representation of Lie Algebras}
+
+\begin{definition}
+    Let \((D,V)\) be the representation of a Lie group \(G\) on a vector space \(V\). In group theory
+    \[
+        D \,:\, G \mapsto \mathrm{GL}(V)\sim \mathbb{R}^{n \times n},
+    \]
+    is a smooth map from the Lie group \(G\) to the group of invertible linear transformations on \(V \sim \mathbb{K}^n\) (is a technical requirement that will let us take derivatives and compute push-forwards). Any such representation is a ``model'' of \(G\) in \(\mathrm{GL}(V)\) as
+    \[
+        D(G) = \{ D(g) | g \in G\} \subset \mathrm{GL}(V),
+    \]
+    it needn't be ``accurate'' in the sense that it can be a homomorphism that is not injective, but it is still a representation of \(G\) on \(V\), for example
+    \[
+        D(g) = \mathbb{I}, \quad \forall g \in G,
+    \]
+    so that it is a very ``crude'' model of \(G\) in \(\mathrm{GL}(V)\), but it is still a representation of \(G\) on \(V\).
+\end{definition}
+
+\begin{definition}
+    Let us give some definitions that will be useful to define the representation of a Lie algebra, and to understand the relation between the representation of a Lie group and the representation of its Lie algebra.
+    \begin{enumerate}[label=(\alph*)]
+        \item A \textbf{Lie algebra homomorphism} is a linear map \(f : \mathfrak{g} \to \mathfrak{h}\) between two Lie algebras \(\mathfrak{g}\) and \(\mathfrak{h}\) is a \(\mathbb{R}\)-vector space homomorphism that preserves the Lie bracket, i.e. it satisfies
+              \[
+                  f([X,Y]_{\mathfrak{g}}) = [f(X),f(Y)]_{\mathfrak{h}}, \quad \forall X,Y \in \mathfrak{g}.
+              \]
+        \item Given a Lie algebra \(\mathfrak{g}\), a \textbf{Lie algebra representation} \((d,V)\) on a \(\mathbb{R}\)-vector space \(V\), is a Lie algebra homomorphism \(\rho : \mathfrak{g} \to \mathfrak{gl}(V) \simeq \mathrm{End}(V)\) from the Lie algebra \(\mathfrak{g}\) to the Lie algebra of endomorphisms of a vector space \(V\) (including non invertible ones). These carry a canonical Lie algebra structure on \(\mathrm{End}(V)\) such that given two endomorphisms \(A,B \in \mathrm{End}(V)\) and some real number \(\lambda \in \mathbb{R}\) we have
+              \[
+                  \begin{dcases}
+                      \lambda A \, : \, v \mapsto \lambda A(v), \\
+                      (A+B) \, : \, v \mapsto A(v) + B(v),
+                  \end{dcases}
+              \]
+              which does define a canonical vector space structure on \(\mathrm{End}(V)\), and the Lie bracket is given by the commutator of endomorphisms, i.e. we have
+              \[
+                  \begin{dcases}
+                      [A,B]_{\mathrm{End}(V)} \, : \, v \mapsto A(B(v)) - B(A(v)),        \\
+                      [\lambda A, B]_{\mathrm{End}(V)} = \lambda [A,B]_{\mathrm{End}(V)}, \\
+                      [A+B, C]_{\mathrm{End}(V)} = [A,C]_{\mathrm{End}(V)} + [B,C]_{\mathrm{End}(V)},
+                  \end{dcases}
+              \]
+              from the induced Lie algebra structure on \(\mathrm{End}(V)\). In particular, the representation of the Lie brackets on \(\mathfrak{g}\) becomes the commutator of the endomorphisms on \(V\), i.e. we have
+              \[
+                  d([X,Y]_{\mathfrak{g}}) = d(X) d(Y) - d(Y) d(X), \quad \forall X,Y \in \mathfrak{g}.
+              \]
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}
+    The exponential map
+    \[
+        \exp \,:\, \mathrm{End}(V) \mapsto \mathrm{GL}(V),
+    \]
+    is defined as the power series
+    \[
+        \exp(A) = e^A \,:\, V \mapsto V, \quad v \mapsto \sum_{n=0}^{\infty} \frac{A^n(v)}{n!}.
+    \]
+\end{lemma}
+
+\begin{proof}
+    From proposition 1.5.10\TODO{ref} plus the choice of a basis on \(V\) we can identify \(\mathrm{End}(V)\) with the space of \(n \times n\) matrices, and thus we can define the exponential map as the power series defined above, which is well defined since it converges for any matrix \(A\).
+\end{proof}
+
+\begin{lemma}
+    Let \(F \,:\, G_1 \mapsto G_2\) be a Lie group homomorphism between two Lie groups \(G_1\) and \(G_2\) (with Lie algebras \(\mathfrak{g}_1\) and \(\mathfrak{g}_2\)), then the push-forward of \(F\) at the identity element \(e \in G_1\) defines a Lie algebra homomorphism between the Lie algebras of \(G_1\) and \(G_2\), i.e. we have
+    \[
+        F_*([X,Y]_{\mathfrak{g}_1}) = [F_*(X), F_*(Y)]_{\mathfrak{g}_2}, \quad \forall X,Y \in \mathfrak{g}_1.
+    \]
+\end{lemma}
+
+We will not prove this lemma since it is just an exercise of application of definitions and concepts of differential geometry, but the idea is that the push-forward of a Lie group homomorphism at the identity element defines a linear map between the tangent spaces of the two Lie groups at their identity elements, which are isomorphic to their Lie algebras, and thus we can identify the push-forward with a linear map between the Lie algebras, which is a Lie algebra homomorphism since it preserves the Lie bracket.
+
+\begin{proposition}
+    Let \(D \,:\, G \mapsto \mathrm{GL}(V)\) be a representation of a Lie group \(G\) on a vector space \(V\). Then the push-forward of \(D\) at the identity element \(e \in G\) defines a representation of the Lie algebra \(\mathfrak{g}\) of \(G\) on \(V\), i.e. we have
+    \[
+        d = (D_*)_e \,:\, \mathfrak{g} \mapsto \mathfrak{gl}(V)\simeq\mathrm{End}(V), \quad d(X) = (D_*)_e(X), \quad \forall X \in \mathfrak{g},
+    \]
+    which is a Lie algebra homomorphism since it preserves the Lie bracket.
+\end{proposition}
+
+\begin{corollary}
+    Let \((D,V)\) be a representation of the group \(G\) and \((d,V)\) the associated representation of the Lie algebra \(\mathfrak{g}\) obtained by taking the push-forward of \(D\) at the identity element. Then we have
+    \[
+        D(\exp(X)) \in \mathrm{GL}(V), \quad D(\exp(X)) = \exp(d(X)), \quad \forall X \in \mathfrak{g},
+    \]
+    which means that the representation of the Lie group \(G\) can be obtained by exponentiating the representation of its Lie algebra \(\mathfrak{g}\).
+\end{corollary}
+\begin{proof}
+    Use tha fact that \(F\,:\, G_1 \mapsto G_2\) is a Lie group homomorphism, then we have
+    \[
+        \exp_2(F_*(X)) = F(\exp_1(X)), \quad \forall X \in \mathfrak{g}_1,
+    \]
+    where \(\exp_1\) and \(\exp_2\) are the exponential maps of the Lie groups \(G_1\) and \(G_2\) respectively, then we can apply this result to the representation as \(F \sim D\) of the Lie group \(G\), which is a Lie group homomorphism from \(G\) to \(\mathrm{GL}(V)\), and thus we have
+    \[
+        \exp_{\mathrm{GL}(V)}(d(X)) = D(\exp_G(X)), \quad \forall X \in \mathfrak{g},\TODO{check if correct}
+    \]
+    which means that the representation of the Lie group \(G\) can be obtained by exponentiating the representation of its Lie algebra \(\mathfrak{g}\).
+\end{proof}
+
+This is what we need to connect finite transformations with infinitesimal transformations, since the representation of the Lie algebra \(\mathfrak{g}\) can be thought of as the infinitesimal version of the representation of the Lie group \(G\), and thus we can obtain the representation of the Lie group by exponentiating the representation of its Lie algebra. This is a very powerful result, since it allows us to study the representation theory of Lie groups by studying the representation theory of their Lie algebras, which is often simpler and more tractable. This is particularly useful in physics, where we are often interested in studying the symmetries of physical systems, which are described by Lie groups, and thus we can study their representations by studying the representations of their Lie algebras.
+
+\begin{corollary}
+    If we have a representation \(D \,:\, G \mapsto \mathrm{GL}(V)\) which is unitary, then the associated representation of the Lie algebra \(\mathfrak{g}\) is given by anti-Hermitian operators, i.e.
+    \[
+        d(X)^T = -d(X), \quad \forall X \in \mathfrak{g}
+    \]
+\end{corollary}
+\begin{proof}
+    If the representation of the Lie group \(e^{d(X)}\) is unitary, then we have
+    \[
+        \left( e^{d(X)} \right)^{\dagger} = \sum_{n} \left( \frac{(d(X))^n}{n!} \right)^\dagger = \sum_{n} \frac{(d(X)^{\dagger})^n}{n!} = e^{d(X)^{\dagger}} = e^{-d(X)},
+    \]
+    which comes directly from the definition of unitary representation, thus proving the claim.
+\end{proof}
+
+\begin{remark}
+    In physics it is common to define the exponential map with an extra factor of \(i\) in the exponent, i.e. we have
+    \[
+        D(g) = e^{i d(X)},
+    \]
+    which strictly speaking makes sense only for complex Lie algebras, in which case
+    \[
+        d_{\text{phys}} \coloneq -i (D_{\ast})_e = -id,
+    \]
+    which is just an alternative convention for the representation of the Lie algebra, used by physicists since it allows to work with Hermitian operators instead of anti-Hermitian operators, which are more common in the fields of application. This is just a matter of convention, and it does not change the mathematical structure of the representation theory, but it is important to be aware of this convention when working with representations in physics.
+\end{remark}
+
+\begin{example}
+    \begin{enumerate}
+        \item If \(G \subseteq \mathrm{GL}(V)\) is a matrix group to  begin with, then the ``defining representation'' of \(G\) is just the inclusion map, i.e. we have
+              \[
+                  D \,:\, G \mapsto \mathrm{GL}(V), \quad D(g) = g, \quad \forall g \in G,
+              \]
+              which is a representation of \(G\) on \(V\) since it is a group homomorphism from \(G\) to \(\mathrm{GL}(V)\). Then the associated defining representation of the Lie algebra \(d \,:\, \mathfrak{g} \mapsto \mathrm{End}(V)\) is given by
+              \[
+                  d(X) = (D_*)_e(X) = X, \quad \forall X \in \mathfrak{g},
+              \]
+              which means that the representation of the Lie algebra is just the identity map on the Lie algebra, which is a very simple representation of the Lie algebra. It is also known as the \textbf{foundamental representation}. We implicitly computed them in the section about Lie groups, when we computed the Lie algebra of a matrix group by taking the tangent space at the identity element, which is just the Lie algebra itself.
+        \item The ``\textbf{trivial representation}'' is defined by
+              \[
+                  D \,:\, G \mapsto \mathrm{GL}(V), \quad D(g) = \mathbb{I}, \quad \forall g \in G,
+              \]
+              which is a representation of \(G\) on \(V\) since it is a group homomorphism from \(G\) to \(\mathrm{GL}(V)\). Then the associated representation of the Lie algebra is given by
+              \[
+                  d(X) = (D_*)_e(X) = 0, \quad \forall X \in \mathfrak{g},
+              \]
+              which means that the representation of the Lie algebra is just the zero map on the Lie algebra, which is a very simple representation of the Lie algebra.
+    \end{enumerate}
+\end{example}
