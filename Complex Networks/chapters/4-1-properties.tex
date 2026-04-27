@@ -207,24 +207,73 @@ Closeness characterizes the \textit{optimal spread capacity of a node} within a 
 \section{Betweenness Centrality}
 % ==========================================
 
+In the study of complex networks, while degree centrality measures the local connectivity of a node, \textbf{Betweenness Centrality} (BC) quantifies its role in intermediation and traffic flow. It is based on the assumption that information (or physical traffic) travels predominantly along the shortest paths between pairs of nodes. A node with high betweenness acts as a critical bridge or a cutpoint, controlling the flow between different, otherwise disconnected, regions of the network.
+
 \begin{definition}[Betweenness Centrality]
-    % Define for nodes and edges (intermediation/traffic).
-    \[ BC_i = \frac{\#P_{mn}(i)}{\#P_{mn}} \]
+    Let $G = (V, E)$ be a graph. The Betweenness Centrality $BC_i$ of a node $i$ (or equivalently, an edge) is defined as the fraction of all shortest paths in the network that pass through it:
+    \[ BC_i = \sum_{m \neq i \neq n} \frac{\#P_{mn}(i)}{\#P_{mn}} \]
+    where $\#P_{mn}$ is the total number of shortest paths from node $m$ to node $n$, and $\#P_{mn}(i)$ is the number of those shortest paths that actually pass through node $i$.
 \end{definition}
 
+In practical applications, computing the exact shortest paths requires specific algorithms depending on the network properties:
+\begin{itemize}
+    \item \textbf{Dijkstra's Algorithm:} Used for networks with only positive link weights. It computes all shortest paths from a single source node in $\mathcal{O}(N^2)$ or $\mathcal{O}(E \log V)$ time.
+    \item \textbf{Floyd-Warshall Algorithm:} Computes the shortest paths for all node pairs simultaneously in $\mathcal{O}(N^3)$ time. It allows for signed links and its matrix-based formulation makes it highly suitable for distributed computing optimization across multiple cores.
+\end{itemize}
+
+It is worth noting that a node might have a very low degree $k$ but a disproportionately high betweenness centrality. Such nodes act as \textit{brokers} or \textit{bridges} between dense clusters. In a typical scatterplot of $BC$ versus $k$, these nodes are easily identifiable as outliers that deviate from the expected positive correlation.
+
+\paragraph{Limitations.} The fundamental hypothesis of BC is that interactions occur \textit{only} along the shortest paths. In many real-world scenarios, this is an oversimplification: longer paths might be preferred to avoid traffic jams or bottlenecks, requiring the introduction of further topological weights.
+
 \subsection{Normalized Betweenness}
-% Explain scaling with respect to the maximum BC value (star network).
-\[ BC_{MAX} = \frac{(N-1)(N-2)}{2} \]
+
+The absolute value of Betweenness Centrality scales with the network size $N$, because larger networks naturally possess more paths. To compare the betweenness of nodes belonging to different networks, a proper normalization is required.
+
+The theoretical maximum value for betweenness centrality is achieved by the central node in a \textbf{star network} topology. In this configuration, all peripheral nodes (which are $N-1$) must route their traffic through the central hub. The number of possible pairs among these peripheral nodes is given by the binomial coefficient:
+\[ BC_{MAX} = \binom{N-1}{2} = \frac{(N-1)(N-2)}{2} \]
+
+We can thus define the normalized (or absolute) betweenness centrality, $BC_{ABS}$, by scaling the raw value with respect to $BC_{MAX}$:
 \[ BC_{ABS} = \frac{BC}{BC_{MAX}} \]
 
+\paragraph{Scaling properties.} The minimum possible value of BC corresponds to a leaf node (a node connected to only one other node). The paths going from one node to all others (and vice versa) scale as $2N$, meaning $BC_{min} \sim \mathcal{O}(N)$. In contrast, for a star network hub, $BC_{max} \sim \mathcal{O}(N^2)$. Consequently, the normalized measure $BC_{ABS}$ ranges from $\mathcal{O}(1/N)$ up to $\mathcal{O}(1)$.
+When a network exhibits very high normalized betweenness values, it structurally resembles a tree: a very sparse graph with a distinct absence of cycles that could generate alternative paths.
+
 \subsection{Betweenness and Global Efficiency}
-% Define Global Efficiency (harmonic composition) and its relation to BC.
+
+Betweenness centrality is intimately connected to the concept of network efficiency. The \textbf{Global Efficiency} ($E$) of a network measures its overall capability to transfer information and is defined as the mean of the inverse of the lengths of all shortest paths (often referred to as a "harmonic composition"):
+\[ \epsilon_{ij} = \frac{1}{P_{ij}} \]
+\[ E = \langle \epsilon_{ij} \rangle = \frac{1}{N(N-1)} \sum_{i \neq j} \frac{1}{P_{ij}} \]
+
+We can measure the importance of a single node (or link) $i$ by evaluating the \textit{local efficiency variation} after a structural perturbation. Specifically, we remove the $i$-th node/link and compute the relative drop in Global Efficiency.
 
 \begin{example}[Immune System Network Analysis]
-    % Discuss the bipartite directed graph of cells and mediators.
-    % Explain the perturbative effect of mediator removal on Global Efficiency.
+    The concepts of betweenness and perturbative efficiency can be elegantly applied to biological systems, such as the human Immune System. We can model the system using nodes to represent different cells (e.g., B lymphocytes, T cells, neutrophils - about 19 types) and links to represent mediators (e.g., cytokines, chemokines, hormones - around 100 kinds).
+
+    The system is initially described by two directed bipartite graphs:
+    \begin{enumerate}
+        \item Cells producing mediators (directed edges from cells to mediators).
+        \item Mediators targeting cells (directed edges from mediators to cells).
+    \end{enumerate}
+    By contracting this bipartite structure, we obtain a directed, weighted cell-cell network where the edge weights correspond to the number of distinct mediators enabling communication between two cells. Because the same mediators often connect multiple different cells, the network is densely connected and the weights are widely distributed.
+
+    \paragraph{Perturbative Analysis.} To understand the relevance of specific mediators, we study the perturbative effect of removing a single mediator from the system. Since a single mediator acts on multiple cells, its removal alters several edge weights simultaneously. The impact is quantified by the variation in the Global Efficiency of the projected network:
+    \[ \Delta E = \frac{|E - E'|}{E} = \frac{|E(G) - E(G')|}{E} \]
+    where $G'$ is the network after the mediator removal.
+
+    \paragraph{Biological Interpretation.} Ranking the mediators based on their $\Delta E$ (which acts as a measure of centrality) yields profound biological insights. Top-ranking mediators are primarily associated with the \textit{innate immune system} (which provides a non-specific response to external antigens), rather than the adaptive one. This suggests that network centrality encodes evolutionary history: the most central elements are also the most ancient ones in the evolutionary timeline of the organism.
+
+    \paragraph{Similar Multi-partite Examples.} This specific modeling approach—where the exchange of distinct "mediators" creates weighted connections between macroscopic entities—is ubiquitous in complex systems:
+    \begin{itemize}
+        \item \textbf{Economics:} Countries exchanging different quantities of specific goods (oil, gold, wheat).
+        \item \textbf{Finance:} Markets interacting via the exchange of various currencies (dollars, pounds, yen).
+        \item \textbf{Biochemistry:} Different metabolic reactions connected by the utilization of the same ubiquitous compounds (e.g., ATP, $H_2O$, $CO_2$) or atomic elements (like the carbon cycle or electron exchange in redox reactions).
+    \end{itemize}
+
     \TODO{Add image of Immune System bipartite network and mediator ranking plot}
 \end{example}
+
+
+
 
 % ==========================================
 \section{Eigenvector Centrality}
