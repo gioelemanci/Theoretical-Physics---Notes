@@ -1,0 +1,201 @@
+\chapter{Renormalization}
+
+ [...]
+
+To introduce the topic we go back to one of the easiest examples of a quantum field theory, the $\phi^4$ theory. The Lagrangian density is given by
+\[
+    \mathcal{L} = \frac{1}{2} (\partial_\mu \phi)(\partial^\mu \phi) - \frac{1}{2} m^2 \phi^2 - \frac{\lambda}{4!} \phi^4.
+\]
+We consider one of the simplest processes, the $2 \to 2$ scattering process
+\[
+    \phi(p_1)\phi(p_2) \to \phi(p_3)\phi(p_4),
+\]
+which at leading order is given by the tree-level Feynman diagram
+\[
+    i \mathcal{M}_{LO}  = [\textit{Draw LO}] = -i \lambda.
+\]
+The differential cross section is given by
+\[
+    \frac{\mathrm{d} \sigma_{LO}}{\mathrm{d} \Omega}\big|_{\text{CM}} = \frac{1}{64 \pi^2 E_{cm}} \frac{\vert \mathbf{p}_{out} \vert}{\vert \mathbf{p}_{in} \vert} \vert \mathcal{M}_{LO} \vert = \frac{1}{64 \pi^2} \frac{\lambda^2}{s}.
+\]
+
+We now have to compute the amplitude \(i \mathcal{M} \) at next-to-leading order (NLO). The Feynman diagrams contributing to the NLO amplitude are given by
+\[
+    i \mathcal{M} = i \mathcal{M}_{LO} + i \mathcal{M}_{NLO} + \mathcal{O}(\lambda^3),
+\]
+\[
+    i \mathcal{M}_{NLO} = [\textit{Draw NLO}] = i (\mathcal{M}_1 + \mathcal{M}_2 + \mathcal{M}_3).
+\]
+
+Let us study the diagrams one by one. Having defined \(p = p_1 + p_2\), the first diagram is given by
+\[
+    i \mathcal{M}_1 = \frac{(-i \lambda)^2}{2} \int \frac{\mathrm{d}^4 k}{(2\pi)^4} \frac{i}{k^2 - m^2 + i\epsilon} \frac{i}{(k+p)^2 - m^2 + i \epsilon} = (-i \lambda)^2 i V(p^2),
+\]
+since the result hs to be lorentz invariant and can only depend on the Lorentz invariant \(p^2\) (the \(\tfrac{1}{2}\) global factor was due to the symmetry of the diagram).
+
+The second and third diagrams are more or less the same: they can be obtained from the first diagram by replacing \(p\) with \(p_1 - p_3\) and \(p_1 - p_4\) respectively:
+\[
+    \mathcal{M}_2 = \mathcal{M}_1 \big|_{p \to p_1 - p_3}, \qquad \mathcal{M}_3 = \mathcal{M}_1 \big|_{p \to p_1 - p_4}.
+\]
+We can thus write
+\[
+    i \mathcal{M}_{NLO} = i (-i \lambda)^2 [V(s) + V(t) + V(u)],
+\]
+thus our work is restricted to the computation of the loop integral \(V(p^2)\), which is a bit unfortunate since \uline{it is divergent}. Indeed, if we take the limit \(k^{\mu}  \to \infty\) we have
+\[
+    k^{\mu} \to \infty \quad \Rightarrow \quad V(p^2) \sim \int \frac{\mathrm{d}^4 k}{(2\pi)^4} \frac{1}{k^4} \sim \log \Lambda \to \infty,
+\]
+which is the definition of a logarithmic divergence: we are in the presence of an \textbf{ultraviolet (UV) divergence}, since the divergence is due to the contribution of high momentum modes in the loop integral.
+
+    [...]
+
+\subsubsection{Observations}
+
+\begin{itemize}
+    \item In quantum mechanics, when computing an amplitude for an event, we need to coonsider all the different intermediate states that can contribute to the process. As \(\Delta x \Delta p \sim O(\hbar) \sim \Delta E \Delta t\), ...
+    \item Contrary to the previos observation, we cannot neither expect the thery to be valid at arbitrarily high energies, nor to be able to measure the amplitude with infinite precision (not even QED or the Standard Model). Some new effects...
+    \item Experiments at low energy scales are not sensitive to the details of the UV completion of the theory, but only to a few parameters...
+    \item We are trying to compute \(i \mathcal{M} \) and \(\frac{\mathrm{d} \sigma}{\mathrm{d} \Omega}\) as functions of the free parameters of the lagrangian, namely \(\lambda\) and \(m\). [...]
+
+          But how do we ...
+\end{itemize}
+
+[...]
+
+\textbf{Summary}: ...
+
+    [...]
+
+\paragraph{Solution.} The solution can be achieved as a two step process:
+\begin{enumerate}
+    \item \textbf{Regularization}: we introduce a regulator in the theory, which is a parameter that makes the loop integrals finite. For example, we can introduce a cutoff \(\Lambda\) in the loop integral, such that we only integrate over momenta \(k\) such that \(\vert k \vert < \Lambda\)
+          \[
+              \int_{-\infty}^{\infty} \mathrm{d}^4 k \to \int_{-\Lambda}^{\Lambda} \mathrm{d}^4 k,
+          \]
+          and then we can take the limit \(\Lambda \to \infty\) at the end. This way, we have to deal with a finite loop integral depending on a \textbf{regulator}, but we have to be careful when taking the limit \(\Lambda \to \infty\) at the end, since we can get infinite results.
+    \item \textbf{Renormalization}: we redefine the parameters of the theory (the mass and the coupling constant) in such a way that the physical observables (the amplitude and the cross section) are finite in the limit \(\Lambda \to \infty\): rewriting observables as functions of other observables. The result will become finite\footnote{Under certain condition that we will have to further stress.} in the limit \(\Lambda \to \infty\) where the regulator is removed.
+\end{enumerate}
+
+UV divergence as manifestation of our ignorance of the UV completion of the theory...
+For example for macroscopic objects...
+
+We should be able to study physics at low energy scales (and high distances) without knowing the details of the UV completion of the theory, but only a few parameters that encode the effects of the UV completion at low energy scales.
+
+Similarly, we should be able to relate...
+
+\subsection{Classical Example: Infinite Wire Potetial}
+
+Consider an infinite wire along the \(z\) axis with a uniform charge density \(\lambda\). We want to compute the electric potential \(V(r)\) at a distance \(r\) from the wire.
+
+Without computing anything, we can note from some dimensional analysis that the potential already has some problems:
+\[
+    V(r) = \lambda f(r), \quad [V] = 1, \quad [\lambda] = [L]^{-1} = 1,
+\]
+thus it seems that \(f(r)\) should be dimensionless and the potential will result in being constant, which is not what we expect.
+
+By trying to compute the potential we find that the problem is given by a divergence in the integral:
+\[
+    V(r) = \int_{-\infty}^{\infty} \mathrm{d} x \frac{\lambda}{4 \pi r(x)} = \frac{\lambda}{4 \pi} \int_{-\infty}^{\infty} \frac{\mathrm{d} x}{\sqrt{r^2 + x^2}} = \infty,
+\]
+where we should however notice that
+\[
+    E_i = - \partial_i V(r) = \frac{\lambda}{4 \pi} \int_{-\infty}^{\infty} \mathrm{d} x \frac{r_i}{(r^2 + x^2)^{3/2}} = \frac{\lambda}{2 \pi r} \hat{r}_i,
+\]
+is finite, which seems to be a contradiction. From these some observations follows naturally:
+\begin{itemize}
+    \item Infinite wires do not exist in nature, [...]
+    \item If \(r \ll \) lenght of the wire, de details of what happens at the end of the real finite wire are not relevant, and we can still use the infinite wire approximation to compute the electric field, which is what we are interested in.
+    \item The potential \(V = V(r)\) is not a physical observable, since it is not measurable: only differences of potential are measurable, and these are finite: \(\Delta V = V(r_2) - V(r_1)\).
+\end{itemize}
+
+Thus we can apply the solution in two steps as we explained before:
+\begin{itemize}
+    \item \textbf{Regularization}: we introduce a regulator in the theory, which is a parameter that makes the integral finite. For example, we can introduce a cutoff \(\Lambda\) in the integral, such that we only integrate over \(x\) such that \(\vert x \vert < \Lambda\)
+          \[
+              \int_{-\infty}^{\infty} \mathrm{d} x \to \int_{-\Lambda}^{\Lambda} \mathrm{d} x,
+          \]
+          and then we can take the limit \(\Lambda \to \infty\) at the end:
+          \[
+              V(r) = \frac{\lambda}{4 \pi} \int_{-\Lambda}^{\Lambda} \frac{\mathrm{d} x}{\sqrt{r^2 + x^2}} = \frac{\lambda}{4 \pi} \log\left( \frac{\sqrt{r^2 + \Lambda^2} + \Lambda}{\sqrt{r^2 + \Lambda^2} - \Lambda}\right).
+          \]
+          The divergence is still there in the limit \(\Lambda \to \infty\), but at least we have a finite result depending on the regulator \(\Lambda\).
+
+    \item \textbf{Renormalization}: we redefine the parameters of the theory (the potential) in such a way that the physical observables (the electric field) are finite in the limit \(\Lambda \to \infty\). We can choose an arbitrary distance \(r_0\) (not too far from the wire) in order to renormalize the potential:
+          \[
+              V_R(r) = V(r) - V(r_0),
+          \]
+          which is an observable and indeed it is finite in the limit \(\Lambda \to \infty\):
+          \[
+              V_R(r) = - \frac{\lambda}{4 \pi} \log\left( \frac{r^2}{r_0^2} \right) + \mathcal{O}(\frac{1}{\Lambda^2}),
+          \]
+          as \(\Lambda \to \infty\). The divergence has thus disappeared in the renormalized potential \(V_R\), which is the physical observable, and we have a finite result for the electric field: ...
+\end{itemize}
+
+\section{Alternative Regularization Schemes}
+
+A regularization scheme is a way to make the loop integrals finite, and there are many different regularization schemes that can be used in quantum field theory. The regularization we just showed is called \textbf{cutoff regularization}
+\[
+    \int_{-\infty}^{\infty} \mathrm{d}^4 k \to \int_{-\Lambda}^{\Lambda} \mathrm{d}^4 k,
+\]
+which can be used in any theory, but it has the disadvantage of breaking Lorentz invariance and gauge invariance (and other symmetries), making intermediate steps in calculations more complicated (for example we cannot make use of the Ward identity anymore). It is not very convenient and outside textbook examples it is not used in practice.
+
+    [...]
+
+Let us present some of the most common regularization schemes used in quantum field theory:
+\begin{itemize}
+    \item \textbf{Modified interaction} (Pauli-Villars regularization): we can modify the form of the interaction in the high energy regime, since it should not affect the low energy physics. For example, we could modify the Coulomb potential at short distances by introducing:
+          \[
+              \frac{\lambda \mathrm{d} x}{4 \pi r} \to \frac{\lambda \mathrm{d} x}{4 \pi} \left( \frac{1}{r} - \frac{1}{\sqrt{r^2 + \Lambda^2}}\right),
+          \]
+          which will reduce to the original potential in the limit \(\Lambda \to \infty\), but it will be finite for any finite value of \(\Lambda\). The integral of the potential will now be finite
+          \[
+              \dots
+          \]
+          [...]
+          Loop integrals can be regularized in a similar way by modifying the propagator at high energies as
+          \[
+              \frac{i}{k^2 - m^2 + i \epsilon} \to \frac{i}{k^2 - m^2 + i \epsilon} - \frac{i}{k^2 - \Lambda^2 + i \epsilon},
+          \]
+          which makes it finite for any finite value of \(\Lambda\) and reduces to the original propagator in the limit \(\Lambda \to \infty\). This is the \textbf{Pauli-Villars} regularization scheme.
+
+    \item \textbf{Dimensional regularizarion}. The previous regularization scheme have a clear physical interpretation: ...
+          The method that is almost exclusively used today is called \textit{dimensional regularization} (by Giambiagi, Bollini ...), which do not have a clear physical interpretation, but it is very convenient for calculations and it preserves all the symmetries of the theory.
+
+          Dimensional regularization is based on the idea of performing the loop integrals in \(d\) dimensions instead of 4 dimensions, where \(d\) is a smaller number than 4, such that the loop integrals are finite. For example, the integral we are using as an example in the \(\phi^4\) theorywill be convenient to compute in \(d = 2,3\) dimensions. It turns out that we can compute it as an \uline{analytic function of the number of spacetime dimensions} \(d\):
+          \[
+              \int_{-\infty}^{\infty} \mathrm{d}^4 k \frac{1}{k^4} \to \int_{-\infty}^{\infty} \mathrm{d}^d k \frac{1}{k^4} = \dots
+          \]
+          this function will have a pole for \(d=4\), which will be removed in smaller dimensions, and we can take the limit \(d \to 4\) at the end of the calculation, which will be equivalent to taking the limit \(\Lambda \to \infty\) in the cutoff regularization scheme.
+
+              [...]
+
+          We can also apply it to our toy-example of the infinite wire potential, by performing the integral in \(d\) dimensions instead of 4 dimensions:
+          \[
+              V(r) = \dots \begin{dcases}
+                  x \to \mathbf{x} = \begin{pmatrix}
+                                         x_1 & x_2 & \cdots & x_{d}
+                                     \end{pmatrix}                                           \\
+                  \mathrm{d} x \to \mathrm{d}^d x = \mathrm{d} x_1 \mathrm{d} x_2 \cdots \mathrm{d} x_{d} \\
+                  x^2 \to \vert \mathbf{x}^2 \vert = \sum_{j=1}^d x_j^2
+              \end{dcases}
+          \]
+          such that we can rewrite the potential as
+          \[
+              V(r) = \dots
+          \]
+          where \(\mu\) is a scale with mass dimension \(1 = [\mu]\).
+              [...]
+              [...]
+          The integral is now convergent for \(0<d<1\), where it is analytic in \(d\). We can thus analytically continue the result in the whole complex plane with the exception for some points in which it will have poles. We can show that ...
+          \[
+              \dots
+          \]
+          and we get the usual result for \(V_R\) as \(d \to 1\).
+
+    \item \textbf{Renormalization without regulators}. In principle, it is not necessary to introduce a regulator (\(\Lambda\) or \(d\)) in order to renormalize the theory: we can indeed introduce directly at the integrand level some physical, finite and renormalized quantities. Considering the toy example of the infinite wire potential, we could have introduced directly the renormalized potential at the integrand level as
+          \[
+              V_R(r) = V(r) - V(r_0) = \frac{\lambda}{4 \pi} \int_{-\infty}^{\infty} \mathrm{d} x \left( \frac{1}{\sqrt{r^2 + x^2} } - \frac{1}{\sqrt{r_0^2 + x^{2}}}\right) = -\frac{\lambda}{4 \pi} \log\left( \frac{r^2}{r_0^2} \right),
+          \]
+          which is finite and does not require any regulator.
+              [...]
+\end{itemize}
