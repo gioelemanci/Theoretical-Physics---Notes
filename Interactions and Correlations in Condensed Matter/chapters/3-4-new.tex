@@ -1,0 +1,183 @@
+\subsection{Long Range Coulomb Interactions}
+
+\subsubsection{Fermi Surface}
+
+
+
+
+
+
+\section{Phonons}
+
+The phonons are the other important quasi-particles in the system. We aim to derive the ...
+
+The easyiest way to derive phonons is to start from a line of atoms with a lattice constant $a$ labeled by $n$. Thu \(t_n = na\) is the position of the $n$-th atom. We will thenote with \(u_n\) the displacement of the $n$-th atom from its equilibrium position.
+
+    [\textit{Draw a picture of the line of atoms with the displacements}]
+
+Atoms in the system interact with their neighbors, and the energy of the system depends on the displacements of the atoms. Then we want to write down the Hamiltonian of the system as a function of the displacements \(u_n\):
+\[
+    E_0(\{u_n\}) = E_0(\{u_n = 0\}) + \sum_{n} \frac{\partial E_0}{\partial u_n} \big|_{\{u_n = 0\}} u_n + \frac{1}{2} \sum_{n,m} \frac{\partial^2 E_0}{\partial u_n \partial u_m} \big|_{\{u_n = 0\}} u_n u_m + \cdots
+\]
+where we have expanded the energy of the system in a Taylor series around the equilibrium position. The first term is just a constant while the second vanishes because we are at the equilibrium position. Therefore, the leading term is the third term, which is quadratic in the displacements. We can then write the Hamiltonian as:
+\[
+    E_0(\{u_n\}) = E_0(\{u_n = 0\}) + \frac{1}{2} \sum_{n,n^{\prime}} D_{nn^{\prime}} u_n u_{n^{\prime}},
+\]
+where we have defined the interaction force costants matrix \(D_{nn^{\prime}} = \frac{\partial^2 E_0}{\partial u_n \partial u_{n^{\prime}}} \big|_{\{u_n = 0\}}\). This matrix has some useful properties:
+\begin{enumerate}
+    \item The matrix \(D_{nn^{\prime}}\) is real, which ensures that the energy is real.
+    \item The matrix \(D_{nn^{\prime}}\) is symmetric, i.e., \(D_{nn^{\prime}} = D_{n^{\prime}n}\) if the system is invariant under atoms translations \(t_n - t_{n^{\prime}} = t_m - t_{m^{\prime}}\).
+    \item The force acting on the $n$-th atom is given by \(F_n = -\frac{\partial E_0}{\partial u_n} = -\sum_{n^{\prime}} D_{nn^{\prime}} u_{n^{\prime}}\). Therefore, if we sum all the entries on the $n$-th row or column of the matrix \(D_{nn^{\prime}}\), we get \(\sum_{n^{\prime}} D_{nn^{\prime}} = 0\) because the total force acting on the system must be zero for configurations in which all the atoms are displaced by the same amount, i.e., \(u_n = u\) for all $n$.
+\end{enumerate}
+
+Since we are considering a line of atoms with only nearest neighbor interactions, the matrix \(D_{nn^{\prime}}\) has the following form:
+\[
+    D_{n, n+1} = -C, \quad D_{n-1,n} = C, \quad D_{nn} = 2C, \quad D_{nm} = 0 \text{ for } |n-m| > 1.
+\]
+
+Thus the energy of the system can be written as:
+\[
+    E_0(\{u_n\}) = E_0(\{0\}) + \frac{C}{2} \sum_{n} (2u_n^2 - u_n u_{n+1} - u_{n-1} u_n) = E_0(\{0\}) + \frac{C}{2} \sum_{n} (u_n - u_{n+1})^2,
+\]
+where the proof of the last equality is left as an exercise for the reader. Thus we have found the enrgy for a system of \(N\) coupled harmonic oscillators, which is the Hamiltonian of the phonons. If we close the chain of atoms into a ring, we have periodic boundary conditions, which means that \(u_{N+1} = u_1\).
+
+The phonons are the normal modes of the system, which can be found by diagonalizing the matrix \(D_{nn^{\prime}}\). The found basis of phonons is called the normal mode basis, and the phonons are the quanta of the normal modes.
+
+Until now we made a classical treatment of the phonons, but we can also quantize the phonons, obtaining an hamiltonian for n coupled quantum harmonic oscillators. The quantization of the phonons is done by promoting the displacements \(u_n\) and their conjugate momenta \(p_n\) to operators that satisfy the canonical commutation relations \([\hat{u}_n, \hat{P}_m] = i \hbar \delta_{nm}\). The resulting Hamiltonian is given by:
+\[
+    \hat{H} = \sum_{n} \frac{1}{2M} \hat{P}_n^2 + \frac{1}{2} C \sum_{n} \left[ 2\hat{u}_n^2 - \hat{u}_n \hat{u}_{n+1} - \hat{u}_{n-1} \hat{u}_n \right],
+\]
+where \(M\) is the mass of the atoms. We now want to diagonalize this Hamiltonian, which is equivalent to finding the normal modes of the system. We can do this by performing a Fourier transform of the displacements and momenta:
+\[
+    \hat{P}_q = \frac{1}{\sqrt{N}} \sum_{n} e^{-i q t_n} \hat{P}_n, \quad \hat{u}_q = \frac{1}{\sqrt{N}} \sum_{t_n} e^{-i q t_n} \hat{u}_n, \quad [\hat{u}_q, \hat{P}_{q^{\prime}}] = i \hbar \delta_{q, q^{\prime}}.
+\]
+
+Let us now convert tge Hamiltonian in the Fourier space. The displacement term can be converted with the inverse of te previous Fourier transform, which is given by:
+\[
+    \sum_{n} \hat{u}_n^2 = \frac{1}{N}\sum_{n} \sum_{q q^{\prime}} e^{i(q + q^{\prime}) t_n} \hat{u}_q \hat{u}_{q^{\prime}} = \sum_{q q^{\prime}} \left[\frac{1}{N} \sum_{n} e^{i (q + q^{\prime}) t_n} \right] \hat{u}_q \hat{u}_{q^{\prime}} = \sum_{q} \hat{u}_q \hat{u}_{-q},
+\]
+and for the squared momentum term we have almost the same expression, but with the momenta instead of the displacements:
+\[
+    \sum_{n} \hat{P}_n^2 = \sum_{q} \hat{P}_q \hat{P}_{-q}.
+\]
+The last term is a bit more tricky, but we can use the following trick:
+\[
+    \begin{aligned}
+        \sum_{n} \hat{u}_n \hat{u}_{n+1} = \frac{1}{N} \sum_{n} \sum_{q q^{\prime}} e^{i (q + q^{\prime}) t_n + i q^{\prime} a} \hat{u}_q \hat{u}_{q^{\prime}} = \\
+        \sum_{q q^{\prime}} \left[ \frac{1}{N} \sum_{n} e^{i (q + q^{\prime}) t_n} \right] e^{i q^{\prime} a} \hat{u}_q \hat{u}_{q^{\prime}} = \sum_{q} e^{i q a} \hat{u}_q \hat{u}_{-q}.
+    \end{aligned}
+\]
+Thus the Hamiltonian in the Fourier space is given by:
+\[
+    \hat{H} = \sum_{q} \frac{1}{2M} \hat{P}_q \hat{P}_{-q} + \frac{C}{2} \sum_{q} \hat{u}_q \hat{u}_{-q} (2 - e^{i q a} - e^{-i q a}) = \sum_{q}\frac{1}{2M} \hat{P}_q \hat{P}_{-q} + 2C \sum_{q}  \hat{u}_q \hat{u}_{-q}(1 - \cos(q a)),
+\]
+which can be rewritten as:
+\[
+    \hat{H} = \frac{1}{2} \sum_{q} \left[ \frac{1}{M} \hat{P}_q \hat{P}_{-q} + M \omega_q^2 \hat{u}_q \hat{u}_{-q} \right], \quad M \omega_q^2 = C (2 - e^{i q a} - e^{-i q a}) = 4C \sin^2\left(\frac{q a}{2}\right).
+\]
+We have found the Hamiltonian of a system of decoupled harmonic oscillators, which is the Hamiltonian of the phonons. The phonon frequencies are given by \(\omega_q = 2 \sqrt{\frac{C}{M}} \left\vert \sin\left(\frac{q a}{2}\right) \right\vert \), which is the dispersion relation of the phonons. The phonons are the quanta of the normal modes of the system, and they are bosonic particles. If we plot the dispersion relation of the phonons, we can see that it has a linear behavior for small values of $q$, while for higher values of $q$ it becomes periodic.
+
+    [\textit{Draw the dispersion relation of the phonons}]
+
+A parabolic dispersion relation is a fingerprint of a free particle, while a linear dispersion relation indicates a collective mode. Therefore, the phonons are collective modes of the system, which are not free particles.
+
+The typical energy of the electrons on the fermi surface is of the order of electronvolts, but confronting this energy with the typical energy of the phonons, which is of the order of millielectronvolts, we can see that the phonons are much slower than the electrons. This is due to the mass of the ions which is much larger than the mass of the electrons. The \textbf{Debye energy}, which is the maximum energy of the phonons, is of the order of millielectronvolts, which is much smaller than the typical energy of the electrons on the fermi surface.
+
+From the equation of sound waves, we can see that the speed of sound is given by \(v_s = \sqrt{\frac{C a^2}{M}}\), which is similar to the speed of the phonons for small values of $q$. Phonons at small values of $q$ are called acoustic phonons, while phonons at higher values of $q$ are called optical phonons. The acoustic phonons are the ones that are responsible for the sound waves in the system, while the optical phonons are the ones that are responsible for the optical properties of the system.
+
+As in second quantization, where we defined the operators ...
+\[
+    \hat{H} = \frac{1}{2} \frac{P^2}{2m} + \frac{1}{2} m \omega^2 x^2 \to \hat{H} = \hbar \omega \left( \hat{a}^{\dagger} \hat{a} + \frac{1}{2} \right),
+\]
+we can make use of a symilar canonical transformation to define the creation and annihilation operators for the phonons, which are defined by:
+\[
+    \hat{u}_q = \sqrt{\frac{\hbar}{2 M \omega_q}} (\hat{b}_q + \hat{b}_{-q}^{\dagger}), \quad \hat{P}_q = i \sqrt{\frac{\hbar M \omega_q}{2}} (\hat{b}_{-q}^{\dagger} - \hat{b}_q),
+\]
+which is endowed with the usual commutation relations \([\hat{b}_q, \hat{b}_{q^{\prime}}^{\dagger}] = \delta_{q, q^{\prime}}\). With this transformation, the Hamiltonian of the phonons can be rewritten as:
+\[
+    \hat{H} = \sum_{q} \hbar \omega_q \left( \hat{b}_q^{\dagger} \hat{b}_q + \frac{1}{2} \right),
+\]
+which is the second quantized version of the non interacting phonons hamiltonian. The phonons are bosonic particles, which means that they can occupy the same state, and they are the quanta of the normal modes of the system.
+
+\subsection{Electron and Phonons}
+
+If we consider a system of electrons and phonons, we can write the Hamiltonian of the system as:
+\[
+    \hat{H} = \sum_{k \sigma} \xi_{k \sigma} \hat{c}_{k \sigma}^{\dagger} \hat{c}_{k \sigma} + \sum_{q} \hbar \omega_q \left( \hat{b}_q^{\dagger} \hat{b}_q + \frac{1}{2} \right) + H_{\text{e-ph}},
+\]
+basically the sum of the two free hamiltonians plus the \textbf{electron-phonon interaction hamiltonian} (term responsible for resistivity and conductivity of the material). \(\xi_{k \sigma} = 2t \cos (k a)\) is the energy of the electron with momentum \(k\) and spin \(\sigma\) on the lattice, and \(g_q\) is the coupling constant between the electrons and the phonons.
+
+    [\textit{Draw the dispersion relation of the electrons and the phonons in lattice momentum space}]
+
+The lattice in which we are considering the electrons and the phonons is the same, so that the momenta \(k\) and \(q\) are defined in the same Brillouin zone (different letters are used just to distinguish the momenta of the electrons from the momenta of the phonons); the only difference is the order of magnitude of the momenta, as we saw.
+
+Imagine the electrons as a spread out homogeneus charge, if we take a small volume element of the system, we can see
+\[
+    \mathrm{d} q = -e n(r) \mathrm{d} V,
+\]
+where \(n(r)\) is the density of electrons at position \(r\).
+
+    [\textit{Draw of system and volume element and coordinates}]
+
+We know the interaction potential among electrons and ions in a static lattice to be given by
+\[
+    \hat{V}_{\text{e-ions}} = \sum_{j}^N \int \mathrm{d}^3 \mathbf{r} (-e) n(\mathbf{r}) V_{\text{ions}}(\mathbf{r} - \mathbf{R}_j - \mathbf{u}_j),
+\]
+where the ion potential is given by
+\[
+    V_\text{ions}(\mathbf{r} - \mathbf{R}_j - \mathbf{u}_j) \sim V_\text{ions}(\mathbf{r} - \mathbf{R}_j) - \nabla V_\text{ions}(\mathbf{r} - \mathbf{R}_j) \cdot \mathbf{u}_j,
+\]
+which inserted in the previous equation gives
+\[
+    V_{\text{e-ions}} = \sum_{j}^N \int \mathrm{d}^3 \mathbf{r} (-e) n(\mathbf{r}) V_{\text{ions}}(\mathbf{r} - \mathbf{R}_j) + \sum_{j}^N \int \mathrm{d}^3 \mathbf{r} (-e) n(\mathbf{r}) \nabla V_{\text{ions}}(\mathbf{r} - \mathbf{R}_j) \cdot \mathbf{u}_j,
+\]
+where in the first term the nuclei are fixed in their equilibrium positions (we have no dependence upon the \(\mathbf{u}_j\) displacements), while in the second term the nuclei are displaced from their equilibrium positions. The first term is somehow the Born-Oppenheimer approximation (considering fixed nuclei we can solve the electronic problem exactly), while in the second term the electron-phonon interaction is encoded (it contains both displacements and electron density).
+
+If we second consider only the second term, we can give an idea of how to second quantize the electron-phonon interaction. Starting from the electron density, we can write it in second quantization as
+\[
+    n(\mathbf{r}) = \sum_{\sigma} \hat{\Psi}_{\sigma}^{\dagger}(\mathbf{r}) \hat{\Psi}_{\sigma}(\mathbf{r}),
+\]
+where the field operators can be expanded in the basis given by the plane waves as
+\[
+    \hat{\Psi}_{\sigma}(\mathbf{r}) = \frac{1}{\sqrt{V}} \sum_{k} e^{i k \cdot r} \hat{c}_{k \sigma}, \quad \hat{\Psi}_{\sigma}^{\dagger}(\mathbf{r}) = \frac{1}{\sqrt{V}} \sum_{k} e^{-i k \cdot r} \hat{c}_{k \sigma}^{\dagger}.
+\]
+Thus the electron density can be rewritten as
+\[
+    n(\mathbf{r}) = \frac{1}{V} \sum_{k k^{\prime} \sigma} e^{i (k - k^{\prime}) \cdot r} \hat{c}_{k \sigma}^{\dagger} \hat{c}_{k^{\prime} \sigma}.
+\]
+Thus the electron-phonon interaction can be rewritten as
+\[
+    \hat{H}_{\text{e-ph}} = - \sum_{j}^N \int \mathrm{d}^3 \mathbf{r} (-e) n(\mathbf{r}) \nabla V_{\text{ions}}(\mathbf{r} - \mathbf{R}_j) \cdot \mathbf{u}_j = \frac{1}{V} \sum_{k \sigma} \sum_{q} g_q \hat{c}_{k+q, \sigma}^{\dagger} \hat{c}_{k, \sigma} (\hat{b}_q + \hat{b}_{-q}^{\dagger}),
+\]
+where all the constants have been absorbed in the \textbf{electron-phonon coupling constant} \(g_q\):
+\[
+    g_q = i e \frac{\sqrt{N}}{\sqrt{2 M \omega_q}} q V_q,
+\]
+where \(V_q\) is the Fourier transform of the ion potential: it can be the coulomb potential, but it can also be a screened coulomb potential, which is more realistic in a metal.
+
+We can rewrite the full Hamiltonian of the system as
+\[
+    \hat{H} = \sum_{k \sigma} \xi_{k \sigma} \hat{c}_{k \sigma}^{\dagger} \hat{c}_{k \sigma} + \sum_{q} \hbar \omega_q \left( \hat{b}_q^{\dagger} \hat{b}_q + \frac{1}{2} \right) + \frac{1}{V} \sum_{k \sigma} \sum_{q} g_q \hat{c}_{k+q, \sigma}^{\dagger} \hat{c}_{k, \sigma} (\hat{b}_q + \hat{b}_{-q}^{\dagger}),
+\]
+which is the Hamiltonian of a system of electrons and phonons with electron-phonon interaction.
+
+The electron-phonon interaction describes the process in which an electron with momentum \(k\) and spin \(\sigma\) scatters to a state with momentum \(k + q\) and the same spin \(\sigma\) by emitting or absorbing a phonon with momentum \(q\).
+
+    [\textit{Draw process of absorption of phonon and exited electron + inverse (-q) (emission)}]
+
+We are thus considering both the processes of absorption and emission of phonons, which are responsible for the resistivity and conductivity of the material. The electron-phonon interaction is also responsible for the superconductivity in the material, which will be discussed in future.
+
+We can now take a step further: if we consider two electrons in the system, they can interact with each other by exchanging a phonon. This process is called \textbf{phonon-mediated electron-electron interaction}, and it is responsible for the superconductivity in the material.
+
+    [\textit{Draw graph of e-e phonon mediated interaction}]
+
+We will have to define the phonon propagator which mediates the interaction between the electrons: in the case of electrons interacting through photons, we have the following coupling constant:
+\[
+    D_{phot} = e \frac{4 \pi}{q^2} e,
+\]
+while in the case of electrons interacting through phonons, we have the coupling interaction constant:
+\[
+    D_{phon}\dots
+\]
+\TODO{check everything and correct last equations}
+The interaction mediated by the phonons is retarded with respect to the interaction mediated by the photons, which is almost instantaneous (order of \(c\)). This is due to the fact that the phonons are much slower than the electrons, as we saw before, and this velocity will be dictated by the phonon dispersion relation through the phonon energy \(\omega_q\). The retarded nature of the phonon-mediated interaction is responsible for the superconductivity in the material, which will be discussed in future.
