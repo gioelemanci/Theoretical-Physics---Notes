@@ -1,0 +1,224 @@
+To sum up:
+\begin{itemize}
+    \item \(d \,:\, \mathfrak{g} \mapsto \mathrm{End}(V) \) is a lie algebra representation ...
+    \item If \(D \,:\, G \mapsto \mathrm{GL}(V) \) is a group representation, then ...
+\end{itemize}
+
+[...]
+
+\subsection{The Adjoint Representation}
+
+\begin{definition}
+    Let \(G\) be a Lie group then the conjugation by \(g \in G\) is a smooth map
+    \[
+        C_g \,:\, G \mapsto \dots
+    \]
+    This is also called the ``adjoint action'' (by \(g\)) on \(G\) iself
+    \[
+        \implies (C_g)_* \,:\, T_h G \mapsto T_{C_g(h)} G
+    \]
+    is a homomorphism of Lie groups, and in particular, the map
+    \[
+        h = e, \dots
+    \]
+    ...
+\end{definition}
+
+
+[... DIO MALEDICA IL POLLINE ...]
+
+\begin{proposition}
+    The adjoint action induces an endomorphism \dots
+    [...]
+\end{proposition}
+
+\begin{proof}
+    \begin{enumerate}
+        \item \(\mathrm{Ad}_g = [(C_g)_*]_e \) is an invertible endomorphism for any \(g \in G\) since \(C_g \,:\, G \mapsto G \) is a diffeomorphism (its inverse is smooth and \((C_{g})^{-1} = C_{g^{-1}}\)):
+              \[
+                  \implies (C_g)_* \text{ is an invertible endomorphism } \forall g \in G.
+              \]
+
+        \item \(g \mapsto \mathrm{Ad}_g\) respects the group structure:
+              \[
+                  C_{g_1 \, g_2}(h) = g_1 (g_2 h g_2^{-1})g_1^{-1} = C_{g_1} (C_{g_2}(h)),
+              \]
+              [...]
+    \end{enumerate}
+\end{proof}
+
+We are going to express a corollary which helps us to understand the meaning of the adjoint representation.
+
+\begin{corollary}
+    Let \(\mathrm{ad} \,:\, \mathfrak{g} \mapsto \mathrm{End}(\mathfrak{g}) \), with \(X \mapsto \mathrm{ad}_X \) be the Lie algebra representation induced by the adjoint representation of \(G\), \(\mathrm{Ad}\,:\, G \mapsto \mathrm{GL}(\mathfrak{g}) \). This algebra representation satisfies the following relations
+    \begin{enumerate}
+        \item \(\mathrm{ad}_X (Y) = [X, Y] \) for any \(X, Y \in \mathfrak{g}\).
+        \item \(\mathrm{Ad}_{\exp(X)} (Y)= \exp(\mathrm{ad}_X)(Y) = e^{\mathrm{ad}_X } (Y)\) for any \(X, Y \in \mathfrak{g}\).
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    Following corollary (2.2.6)\TODO{ref} we have that
+    \[
+        D(\exp(X)) = \exp(d(X)) = e^{d(X)} \quad \forall X \in \mathfrak{g},
+    \]
+    which proves the second point almost trivially. For the first point, we have that \(\forall X \in \mathfrak{g}\)
+    \[
+        X \mapsto V^{(X)} \mapsto \sigma_X(t) = \exp(tX), \quad \dot{\sigma}_X(0) = V^{(X)}_e = X,
+    \]
+    and thus \(\forall g \in G, Y \in \mathfrak{g}, \phi \in C^{\infty}(G),\), we have that
+    \[
+        \mathrm{Ad}_g (Y)(\phi) = [(C_g)_*]_e (Y)(\phi) = [(C_g)_* V^{(Y)}(\phi) \circ C_g]_e,
+    \]
+    [...]
+    thus from lemma (1.3.13)\TODO{ref} we have that
+    \[
+        \begin{aligned}
+            \mathrm{Ad}_g (Y)(\phi) = V^{(Y)}(\phi \circ C_g)(e) = V^{(Y)}_e(\phi \circ C_g) = \frac{\mathrm{d}}{\mathrm{d} t} (\phi \circ C_g \circ \exp(tY))_{t=0} \\
+            = \dots
+        \end{aligned}
+    \]
+    which in the end
+    \[
+        \implies \dots
+    \]
+    and any \(g\) spits out an endomorphism \(\mathrm{Ad} \,:\, G \mapsto \mathrm{GL}(\mathfrak{g}) \).
+\end{proof}
+
+In order to compute the adjoint representation of the lie algebra we need to take the push forward and ...
+\[
+    \mathrm{ad}_X = (\mathrm{Ad})_* (X) = (\mathrm{Ad}_*)\dot{\sigma}_X(0) = \frac{\mathrm{d}}{\mathrm{d} s} (\mathrm{Ad} \circ \sigma_X(s))_{s=0}
+\]
+\[
+    \implies \mathrm{ad}_X (Y) = \frac{\mathrm{d}}{\mathrm{d} s} (\mathrm{Ad}_{\exp(sX)}(Y))_{s=0} = \frac{\partial}{\partial s}\left[ \frac{\partial}{\partial t} \exp(sX)\exp(tY)\exp(-sX)\big|_{t=0}\right]_{s=0},
+\]
+and using the Baker-Campbell-Hausdorff formula we have that
+\[
+    \begin{aligned}
+        BCH \implies \exp(sX)\exp(tY)\exp(-sX) = \exp\left( tY + s[X, Y] + \dots \right) \\
+        =  \exp(\dots )
+    \end{aligned}
+\]
+and by deriving with respect to \(t\) (it is not difficult to believe that it is the same as deriving the usual exponential) we have that
+\[
+    \left(Y + \frac{s}{2} ([X, Y] - [Y, X]) + s^2 (\dots) + st(\dots) + \mathcal{O}(s^2t)\right) \exp(\dots),
+\]
+which needs to be evaluated at \(t=0\) and then derived with respect to \(s\) at \(s=0\), thus we have that
+\[
+    \xrightarrow{t=0} \left(Y + s[X,Y] + \mathcal{O}(s^2)\right) \xrightarrow{\partial / \partial s} [X, Y] + \mathcal{O}(s) \xrightarrow{s=0} [X, Y].
+\]
+
+Pick basis ... applying the adjoint representation of one of the elements of the basis element for the lie algebra on another of such besis elemnts
+\[
+    \mathrm{ad}_{T_i}T_j = [T_i, T_j] = C_{ij}^{\ \ k} T_k,
+\]
+then we know how the representation of the basis elements acts ...
+\[
+    E(b_j) = E^i_{\ j} b_i = E(v^j b_j) = (E^i_{\ j}v^j)b_i,
+\]
+which means that the matrix elements of the representation of the basis elements are given by the structure constants of the lie algebra
+\[
+    \implies (\mathrm{ad}_{T_i})^k_{\ j} = C_{ij}^{\ \ k}.
+\]
+We now have a very complete picture of the tools we have at our disposal to study the representations of lie groups and lie algebras...
+
+\begin{example}
+    Let us consider the lie group \(\mathrm{SU}(2)\) and its lie algebra \(\mathfrak{su}(2) = \{\)anti-Hermitian, traceless\(\}\), which elements can be written as
+    \[
+        X = \begin{pmatrix}
+            ai   & z   \\
+            -z^* & -ai
+        \end{pmatrix}, \quad a \in \mathbb{R}, z \in \mathbb{C}.
+    \]
+    The standard basis for \(\mathfrak{su}(2)\) is given by
+    \[
+        T_1 = -\frac{i}{2} \sigma_x, \quad T_2 = -\frac{i}{2} \sigma_y, \quad T_3 = -\frac{i}{2} \sigma_z,
+    \]
+    where \(\sigma_x, \sigma_y, \sigma_z\) are the Pauli matrices. The structure constants of \(\mathfrak{su}(2)\) are given by
+    \[
+        [T_i, T_j] = \epsilon_{ij}^{\ \ k} T_k \implies \mathrm{ad}_{T_n} \equiv L_n \in \mathrm{End}(\mathfrak{su}(2)) \,:\, X \mapsto [T_n, X] = L_n(X),
+    \]
+    defines the Pauli basis
+    \[
+        (L_n)^k = \epsilon_{nj}^{\ \ k},
+    \]
+    with \TODO{check indices}
+    \[
+        (L_n^T)^k_{\ j} = (L_n)^j_{\ k} = \epsilon_{nj}^{\ \ k} = -\epsilon_{nk}^{\ \ j} = -(L_n)^j_{\ k} = -(L_n^T)^k_{\ j},
+    \]
+    which means that the matrices \(L_n\) are antisymmetric and thus they are anti-Hermitian, and thus they span the set of all antisymmetric \(3 \times 3\) matrices, which is the lie algebra \(\mathfrak{so}(3)\) of the lie group \(\mathrm{SO}(3)\). We have thus shown that the adjoint representation of \(\mathfrak{su}(2)\) is isomorphic to the fundamental representation of \(\mathfrak{so}(3)\).
+
+        [...]
+
+    The group adjoint representation of \(\mathrm{SU}(2)\) is the same as the defining representation of \(\mathrm{SO}(3)\) for the same observations as before
+    \[
+        \mathrm{Ad}^{\mathrm{SU}(2)} \cong \text{ defining rep. of } \mathrm{SO}(3) \cong \mathrm{Ad}^{\mathrm{SO}(3)}.
+    \]
+    This is not true in general:
+    \begin{enumerate}
+        \item if \(\mathfrak{g} \cong \mathfrak{h}\) are isomorphic lie algebras, then certainly \(\mathrm{ad}^{\mathfrak{g}} \cong \mathrm{ad}^{\mathfrak{h}}\) are isomorphic lie algebra representations, but
+        \item the defining representation of \(\mathrm{SO}(n) \not\cong \mathrm{Ad^{\mathrm{SO}(n)}} \) is not isomorphic to the adjoint representation of \(\mathrm{SO}(n)\) for \(n > 3\) in general.
+    \end{enumerate}
+\end{example}
+
+\section{Reductibility of Lie Group and Algebra Representations}
+
+\begin{definition}
+    Let \((d,V)\) be the representation of a lie algebra \(\mathfrak{g}\). A non trivial invariant subspace \(L \subset V\) is a subspace different from \(\{0\}\) and \(V\) such that \(d(X)(L) \in L\) for any \(X \in \mathfrak{g}\), \(d \in L\).
+\end{definition}
+
+\begin{proposition}
+    Let \(G\) be the connected lie group and \((D, V)\) be a finite-dimensional representation of \(G\). Then, the representation is (ir-)reducible if and only if the induced representation of the lie algebra \(\mathfrak{g}\), \((d=(D_*)_e,\,V)\)  is (ir-)reducible.
+\end{proposition}
+\begin{proof}
+    [...] we need to prove two implications:
+    \begin{enumerate}
+        \item [...]
+        \item [...]
+    \end{enumerate}
+    Assume \(d\) is reducible, ther tehre exist a non trivial invariant subspace \(L \subset V\) such that \(\forall X \in \mathfrak{g}\), \(\forall v \in L\) we have that \(d(X)(v) \in L\). Then we can write
+    \[
+        D(\exp(X))(v) = \exp(d(X))(v) = e^{d(X)}(v) = \lim_{m \to \infty} \sum_{n}^m \frac{d(X)^n}{n!}(v) \in L = \lim_{m \to \infty} a_m,
+    \]
+    which means that
+    \[
+        \forall m \in \mathbb{N}, a_m \in L \implies \lim_{m \to \infty} a_m \in L \implies D(\exp(X))(v) \in L.
+    \]
+
+    The other way is almost analogous; we start from the assumption that \(D\) is reducible, thus there exist a non trivial invariant subspace \(L \subset V\) such that for a curve \(\sigma(t) \in G\) we have that \(D(\sigma(t))(v) \in L\) for any \(v \in L\). Since any \(X \in \mathfrak{g}\) is tangent to \(\sigma_X(t) = \exp(tX)\) at \(t=0\), then we have that
+    \[
+        \begin{aligned}
+            \forall v \in L, \quad d(X)(v) = \frac{\mathrm{d}}{\mathrm{d} t} \left( e^{t d(X)}(v)\right)_{t=0} = \frac{\mathrm{d}}{\mathrm{d} t} \left( D(\exp(tX))(v)\right)_{t=0} \\
+            = \lim_{t \to 0} \frac{1}{t} \left( D(\exp(tX))(v) - v \right) \in L \forall t,
+        \end{aligned}
+    \]
+    which means that \(d(X)(v) \in L\) for any \(X \in \mathfrak{g}\) and \(v \in L\).
+\end{proof}
+
+\begin{definition}
+    A lie algebra \(\mathfrak{g}\) ia called abelian if \([X, Y] = 0\) for any \(X, Y \in \mathfrak{g}\). By corollary (2.3.3)\TODO{ref} we have that the adjoint representation of an abelian lie algebra is trivial,
+    \[
+        \mathrm{ad}_X = 0 \quad \forall X \in \mathfrak{g},
+    \]
+    thus any one-dimensional lie algebra is abelian, and any representation of an abelian lie algebra is reducible since any subspace is invariant under the action of the lie algebra. \TODO{check}
+\end{definition}
+
+If \(G\) is connected then its Lie algebra is abelian if and only if \(G\) is abelian, thus any representation of an abelian lie group is reducible.
+
+    [...]
+
+\begin{theorem}[Schwarz's lemma]
+    Let \((D_1, V_1)\) and \((D_{2}, V_2 )\) be irreducible representations of a lie group \(G\) or a Lie algebra \(\mathfrak{g}\). If we have an homomorphism of representations \(A \in \text{Hom}(V_1, V_2) \,:\, V_1 \mapsto V_2\) such that \(A \circ D_1(g) = D_2(g) \circ A\) for any \(g \in G\) (or \(A \circ d_1(X) = d_2(X) \circ A\) for any \(X \in \mathfrak{g}\)), then either \(A = 0\) or \(A\) is invertible, i.e. it is an isomorphism of representations. In particular, if it is invertible then the two representations are isomorphic, and if \(V_1 = V_2\) then \(A\) is a scalar multiple of the identity.
+\end{theorem}
+\begin{proof}
+    For any element \(x \in \ker(A) \subset V_1\) , then we have
+    \[
+        \forall g \in G \, ( \text{or } \mathfrak{g}) \implies A(D_1(g)(x)) = D_2(g)(A(x)) = 0 \implies D_1(g)(x) \in \ker(A),
+    \]
+    thus \(\ker(A)\) is an invariant subspace of \(V_1\), and since \(V_1\) is irreducible, then either \(\ker(A) = \{0\}\) or \(\ker(A) = V_1\). In the first case, \(A\) is \textit{injective}, and in the second case \(A = 0\).
+
+    For any element \(y \in \text{im}(A) \subset V_2\), then there exist \(x \in V_1\) such that \(A(x) = y\), thus we have that \(A(D_1(g)(x)) \in \text{im}(A)\) and
+    \[
+        A(D_1(g)(x)) = D_2(g)(A(x)) = D_2(g)(y),
+    \]
+    thus \(\text{im}(A)\) is an ariant subspace of \(D_2\) and since \(D_2\) is irreducible, then either \(\text{im}(A) = \{0\}\) or \(\text{im}(A) = V_2\). In the first case, \(A = 0\), and in the second case \(A\) is \textit{surjective}. Thus, if \(A \neq 0\), then it is both injective and surjective, thus it is an isomorphism of representations.
+\end{proof}
