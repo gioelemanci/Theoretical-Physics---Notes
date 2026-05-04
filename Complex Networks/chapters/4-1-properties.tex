@@ -221,29 +221,44 @@ In practical applications, computing the exact shortest paths requires specific 
     \item \textbf{Floyd-Warshall Algorithm:} Computes the shortest paths for all node pairs simultaneously in $\mathcal{O}(N^3)$ time. It allows for signed links and its matrix-based formulation makes it highly suitable for distributed computing optimization across multiple cores.
 \end{itemize}
 
-It is worth noting that a node might have a very low degree $k$ but a disproportionately high betweenness centrality. Such nodes act as \textit{brokers} or \textit{bridges} between dense clusters. In a typical scatterplot of $BC$ versus $k$, these nodes are easily identifiable as outliers that deviate from the expected positive correlation.
+\begin{figure}[H]
+    \begin{minipage}{0.6\textwidth}
+        \paragraph{Brokers (or bridges).} It is worth noting that a node might have a very low degree $k$ but a disproportionately high betweenness centrality. Such nodes act as \textit{brokers} or \textit{bridges} between dense clusters. In a typical scatterplot of $BC$ versus $k$, these nodes are easily identifiable as outliers that deviate from the expected positive correlation.
 
-\paragraph{Limitations.} The fundamental hypothesis of BC is that interactions occur \textit{only} along the shortest paths. In many real-world scenarios, this is an oversimplification: longer paths might be preferred to avoid traffic jams or bottlenecks, requiring the introduction of further topological weights.
+        \paragraph{Limitations.} The fundamental hypothesis of BC is that \uline{interactions occur \textit{only} along the shortest paths}. In many real-world scenarios, this is an oversimplification: longer paths might be preferred to avoid traffic jams or bottlenecks, requiring the introduction and analysis of further topological weights.
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.35\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/bridge_BC.png}
+        \caption{Betweenness Centrality (BC) quantifies the importance of a node based on the fraction of shortest paths that pass through it.}
+    \end{minipage}
+\end{figure}
 
 \subsection{Normalized Betweenness}
 
-The absolute value of Betweenness Centrality scales with the network size $N$, because larger networks naturally possess more paths. To compare the betweenness of nodes belonging to different networks, a proper normalization is required.
+The absolute value of Betweenness Centrality scales with the network size $N$, because larger networks naturally possess more paths (and it is related to the average path length). To compare the betweenness of nodes belonging to different networks, a proper normalization is required.
 
 The theoretical maximum value for betweenness centrality is achieved by the central node in a \textbf{star network} topology. In this configuration, all peripheral nodes (which are $N-1$) must route their traffic through the central hub. The number of possible pairs among these peripheral nodes is given by the binomial coefficient:
-\[ BC_{MAX} = \binom{N-1}{2} = \frac{(N-1)(N-2)}{2} \]
-
-We can thus define the normalized (or absolute) betweenness centrality, $BC_{ABS}$, by scaling the raw value with respect to $BC_{MAX}$:
+\[
+    BC_{MAX} = \binom{N-1}{2} = \frac{(N-1)(N-2)}{2}
+\]
+We can thus define the \textbf{normalized} (or absolute) \textbf{betweenness centrality}, $BC_{ABS}$, by scaling the raw value with respect to $BC_{MAX}$:
 \[ BC_{ABS} = \frac{BC}{BC_{MAX}} \]
 
 \paragraph{Scaling properties.} The minimum possible value of BC corresponds to a leaf node (a node connected to only one other node). The paths going from one node to all others (and vice versa) scale as $2N$, meaning $BC_{min} \sim \mathcal{O}(N)$. In contrast, for a star network hub, $BC_{max} \sim \mathcal{O}(N^2)$. Consequently, the normalized measure $BC_{ABS}$ ranges from $\mathcal{O}(1/N)$ up to $\mathcal{O}(1)$.
-When a network exhibits very high normalized betweenness values, it structurally resembles a tree: a very sparse graph with a distinct absence of cycles that could generate alternative paths.
+\uline{When a network exhibits very \textbf{high normalized betweenness values}, it structurally resembles a tree}: a very sparse graph with a distinct absence of cycles that could generate alternative paths.
 
 \subsection{Betweenness and Global Efficiency}
 
-Betweenness centrality is intimately connected to the concept of network efficiency. The \textbf{Global Efficiency} ($E$) of a network measures its overall capability to transfer information and is defined as the mean of the inverse of the lengths of all shortest paths (often referred to as a "harmonic composition"):
-\[ \epsilon_{ij} = \frac{1}{P_{ij}} \]
-\[ E = \langle \epsilon_{ij} \rangle = \frac{1}{N(N-1)} \sum_{i \neq j} \frac{1}{P_{ij}} \]
-
+Betweenness centrality is intimately connected to the concept of network efficiency. The \textbf{Global Efficiency} ($E$) of a network measures its overall capability to transfer information and is defined as \textit{the mean of the inverse of the lengths of all shortest paths} (often referred to as a "harmonic composition"):
+\[
+    \epsilon_{ij} = \frac{1}{P_{ij}}
+\]
+\[
+    E = \langle \epsilon_{ij} \rangle = \frac{1}{N(N-1)} \sum_{i \neq j} \frac{1}{P_{ij}}
+\]
+It is a powerful tool for quantifying the overall performance of a network in terms of \textbf{information transfer} (total transferability).
 We can measure the importance of a single node (or link) $i$ by evaluating the \textit{local efficiency variation} after a structural perturbation. Specifically, we remove the $i$-th node/link and compute the relative drop in Global Efficiency.
 
 \begin{example}[Immune System Network Analysis]
@@ -255,110 +270,63 @@ We can measure the importance of a single node (or link) $i$ by evaluating the \
         \item Mediators targeting cells (directed edges from mediators to cells).
     \end{enumerate}
     By contracting this bipartite structure, we obtain a directed, weighted cell-cell network where the edge weights correspond to the number of distinct mediators enabling communication between two cells. Because the same mediators often connect multiple different cells, the network is densely connected and the weights are widely distributed.
+    \begin{figure}[H]
+        \begin{minipage}{0.6\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{img/immune_sys_example.png}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.35\textwidth}
+            \caption{A sub-network illustrating the directed, weighted cell-cell graph obtained from the contraction of the bipartite cell-mediator network. Nodes represent distinct immune system cells (e.g., B lymphocytes, dendritic cells, granulocytes, and mast cells). The directed edges represent communication pathways, with weights ($e_{ij}$) explicitly corresponding to the number of distinct chemical mediators (such as specific interleukins, TNF-$\alpha$, or TGF-$\beta$) that facilitate the targeted interaction.}
+        \end{minipage}
+    \end{figure}
 
     \paragraph{Perturbative Analysis.} To understand the relevance of specific mediators, we study the perturbative effect of removing a single mediator from the system. Since a single mediator acts on multiple cells, its removal alters several edge weights simultaneously. The impact is quantified by the variation in the Global Efficiency of the projected network:
     \[ \Delta E = \frac{|E - E'|}{E} = \frac{|E(G) - E(G')|}{E} \]
     where $G'$ is the network after the mediator removal.
 
     \paragraph{Biological Interpretation.} Ranking the mediators based on their $\Delta E$ (which acts as a measure of centrality) yields profound biological insights. Top-ranking mediators are primarily associated with the \textit{innate immune system} (which provides a non-specific response to external antigens), rather than the adaptive one. This suggests that network centrality encodes evolutionary history: the most central elements are also the most ancient ones in the evolutionary timeline of the organism.
-
-    \paragraph{Similar Multi-partite Examples.} This specific modeling approach—where the exchange of distinct "mediators" creates weighted connections between macroscopic entities—is ubiquitous in complex systems:
-    \begin{itemize}
-        \item \textbf{Economics:} Countries exchanging different quantities of specific goods (oil, gold, wheat).
-        \item \textbf{Finance:} Markets interacting via the exchange of various currencies (dollars, pounds, yen).
-        \item \textbf{Biochemistry:} Different metabolic reactions connected by the utilization of the same ubiquitous compounds (e.g., ATP, $H_2O$, $CO_2$) or atomic elements (like the carbon cycle or electron exchange in redox reactions).
-    \end{itemize}
-
-    \TODO{Add image of Immune System bipartite network and mediator ranking plot}
 \end{example}
 
-
+\paragraph{Similar Multi-partite Examples.} This specific modeling approach—where the exchange of distinct "mediators" creates weighted connections between macroscopic entities—is ubiquitous in complex systems:
+\begin{itemize}
+    \item \textbf{Economics:} Countries exchanging different quantities of specific goods (oil, gold, wheat).
+    \item \textbf{Finance:} Markets interacting via the exchange of various currencies (dollars, pounds, yen).
+    \item \textbf{Biochemistry:} Different metabolic reactions connected by the utilization of the same ubiquitous compounds (e.g., ATP, $H_2O$, $CO_2$) or atomic elements (like the carbon cycle or electron exchange in redox reactions).
+\end{itemize}
 
 
 % ==========================================
 \section{Eigenvector Centrality}
 % ==========================================
 
+A fundamental shift in the definition of centrality occurs when we posit that a node is "important" if it is connected to other "important" nodes. This recursive concept is the foundation of Eigenvector Centrality (EC), originally introduced in sociology and mathematics (see Katz 1953, Bonacich 1987, and for a comprehensive review, Newman's "Networks: An Introduction").
+
 \begin{definition}[Eigenvector Centrality]
-    % Relate to being connected to other "important" nodes.
-    \[ EC_i \propto \sum_{j \sim i} EC_j \implies A \vec{x} = \lambda \vec{x} \]
+    Let $G$ be a network described by an adjacency matrix $A$. The \textbf{Eigenvector Centrality} $EC_i$ of a node $i$ is defined such that it is proportional to the sum of the centralities of its neighbors. Mathematically, by introducing a proportionality constant $\frac{1}{\lambda}$, this is expressed as:
+    \[ EC_i = \frac{1}{\lambda} \sum_j A_{ij} \cdot EC_j \]
+    In vector notation, denoting the vector of centralities as $\vec{x}$, this recursive relation naturally translates into a classic eigenvalue problem:
+    \[ A \cdot \vec{x} = \lambda \cdot \vec{x} \]
 \end{definition}
 
-\subsection{Directed Networks: Hubs and Authorities}
-% Explain right eigenvector (pointed by others) vs left eigenvector (pointing to others).
+\subsection{Solving the Eigenvalue Problem}
+The solution for the Eigenvector Centrality is given by the components of the eigenvector relative to the maximum eigenvalue, $\lambda_{MAX}$:
+\[ \lambda_{MAX} : EC_i = x_i^{\lambda_{MAX}} \]
+By the Perron-Frobenius theorem (for non-negative matrices), the eigenvector associated with the largest eigenvalue $\lambda_{MAX}$ is guaranteed to have all strictly positive components ($x_i > 0$), making it the most physically meaningful solution for a centrality measure.
 
-\begin{definition}[Hubs and Authorities (HITS)]
-    % Define Authorities (x) and Hubs (y).
-    \[ \vec{x} = \alpha A \vec{y}, \quad \vec{y} = \beta A^T \vec{x} \]
-    \[ AA^T \vec{x} = \lambda \vec{x}, \quad A^T A \vec{y} = \lambda \vec{y} \]
-\end{definition}
+\paragraph{Note on other eigenvectors:} Technically, other eigenvectors of the adjacency matrix could be used to assign values to nodes. However, positivity for all components is no longer guaranteed for eigenvectors associated with $\lambda \neq \lambda_{MAX}$. Despite this, these alternate eigenvectors can still carry structural insights, and one could potentially sort nodes based on these signed values to identify specific topological features or network bipartitions.
 
-% ==========================================
-\section{Network Backbone and Salient Links}
-% ==========================================
+\subsection{Eigenvector Centrality in Directed Networks}
+When dealing with directed graphs, the adjacency matrix $A$ is generally asymmetric. Consequently, we have two distinct options for computing eigenvector centrality, depending on the flow of information:
+\begin{itemize}
+    \item \textbf{Right eigenvector:} This measures the centrality of nodes based on being \textbf{pointed to} by other nodes (receiving incoming links).
+    \item \textbf{Left eigenvector:} This measures the centrality of nodes based on \textbf{pointing to} other nodes (generating outgoing links).
+\end{itemize}
 
-\begin{definition}[Salient Links]
-    % Define via spanning trees of shortest paths.
-    \[ S = \langle T \rangle = \frac{1}{N} \sum_k T_k \]
-\end{definition}
+\paragraph{Pathologies and Limitations.} Directed networks introduce specific structural problems for Eigenvector Centrality:
+\begin{enumerate}
+    \item If a node $j$ has an in-degree $K_{IN} = 0$ (meaning $A_{ij} = 0$ for all $i$), its eigenvalue centrality is strictly zero: $EC_j = 0$.
+    \item Because the measure is recursive, if a node is pointed to \textit{only} by nodes that have $EC = 0$, its own centrality will also be forced to zero.
+    \item In general, directed networks suffer from issues related to separated components (e.g., source or sink components). This heavily impacts the overall eigenvector spectrum. In matrix terms, this corresponds to block matrices with absorbing states (sinks), which can localize the centrality on a very small subset of the network.
+\end{enumerate}
 
-\subsection{Difference Between Salience and Betweenness}
-% Explain spontaneous stratification and the bimodal distribution of salient links in weighted graphs.
-\TODO{Add images comparing Link Weight, Link Betweenness, and Salience distributions (Air traffic, Food web, etc.)}
-\TODO{Add image showing BC vs Salience in a planar graph}
-
-% ==========================================
-\section{Clustering Coefficient}
-% ==========================================
-
-\begin{definition}[Clustering Coefficient]
-    % Define transitivity / 3-cycles.
-    \[ C_i = \frac{2e_i}{k_i(k_i - 1)} = \frac{\#C_3}{\#C_2} \]
-\end{definition}
-
-\subsection{Clustering Coefficient in Erdős-Rényi Networks}
-% Explain the E-R null model limit.
-\[ \lim_{N \to \infty} C_G = 0 \quad (\text{for constant } \lambda) \]
-
-\begin{example}[Clustering in Brain Networks]
-    % Discuss functional NMR, correlation matrices, and thresholds leading to high transitivity.
-\end{example}
-
-% ==========================================
-\section{Statistical Properties in Null Models}
-% ==========================================
-
-\subsection{Types of Null Models}
-% Briefly define Global, Local, and Meso-scale null models.
-
-\subsection{Gaussianity of Centrality Measures in E-R}
-% Discuss how centrality measures distribute in large random graphs.
-\TODO{Add quantile plots showing Gaussianity of Closeness, Eigenvector, and Betweenness centralities}
-
-\subsection{Scaling Relations: Degree vs. Betweenness}
-% Explain the exact limit for a tree vs generic networks.
-\[ BC \le K^2 \]
-\TODO{Add scatterplots of Closeness vs K, BC vs K, and EC vs K for E-R graphs}
-\TODO{Add diagram of tree-structure regions explaining the $BC \propto K^2$ limit}
-
-% ==========================================
-\section{Comparative Examples in Basic Topologies}
-% ==========================================
-% Section to visualize how K, BC, CL, and EC behave in simple, deterministic graphs.
-
-\begin{example}[Complete Graph]
-    \TODO{Add graph drawing and centrality values table/plot for a complete graph}
-\end{example}
-
-\begin{example}[Path Graph]
-    \TODO{Add graph drawing and centrality values table/plot for a path graph}
-\end{example}
-
-\begin{example}[Cycle Graph]
-    \TODO{Add graph drawing and centrality values table for a cycle graph}
-\end{example}
-
-\begin{example}[Dumbbell and Block Networks]
-    % Compare structural holes, cutpoints, and redundant cutpoints.
-    \TODO{Add graph drawings and centrality values tables/plots for block networks and generic trees}
-\end{example}

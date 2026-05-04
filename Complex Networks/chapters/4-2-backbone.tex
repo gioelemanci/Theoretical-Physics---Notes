@@ -1,0 +1,52 @@
+% ==========================================
+\section{Network Backbone and Salient Links}
+% ==========================================
+
+While centrality measures like Betweenness Centrality (BC) evaluate the importance of a node or a link based on the total number of shortest paths crossing it, this approach can sometimes obscure the fundamental skeleton of a network. To extract the true "backbone" of a complex graph, we introduce the concept of \textbf{Salient Links}.
+
+\subsection{Definition of Link Salience}
+Given a graph, instead of looking at all individual shortest paths simultaneously, we consider the \textit{shortest-path spanning tree} $T_k$ rooted at a specific node $k$. This tree represents the most efficient pathways to reach all other nodes in the network starting from $k$.
+
+The \textbf{Salience} of a link $(i,j)$, denoted as $S_{ij}$, is defined as the fraction of these shortest-path trees that contain the link $(i,j)$. Mathematically, it is the average over all possible root nodes:
+\[ S_{ij} = \frac{1}{N} \sum_{k=1}^{N} T_{ij}(k) \]
+where $T_{ij}(k) = 1$ if the link $(i,j)$ belongs to the spanning tree $T_k$, and $0$ otherwise.
+Similarly, the global salience of the network can be expressed as an average of the trees:
+\[ S = \langle T \rangle = \frac{1}{N} \sum_{k=1}^{N} T_k \]
+
+\textit{Crucial Note:} Link Salience is \textbf{not} equivalent to Edge Betweenness Centrality. While BC counts the absolute multiplicity of shortest paths, Salience treats the entire shortest-path tree of a node as a single coherent structure, measuring how indispensable a link is across all global broadcast trees.
+
+\subsection{Distributions: Continuous vs. Bimodal}
+
+In many real-world complex systems (e.g., transportation networks like air traffic, biological food webs, or global trade networks), standard link-level centrality measures such as Link Weight ($W$) and Link Betweenness ($BC$) exhibit a \textbf{continuous, often broad or scale-free distribution}.
+
+\TODO{Add image of continuous distribution of centrality measures at link level (Air traffic, Food web, World trade plots)}
+
+However, Link Salience ($S$) behaves fundamentally differently. In many weighted graphs, the salience of links spontaneously stratifies, exhibiting a \textbf{bimodal distribution} $p(s)$. The distribution is sharply peaked near $S \approx 0$ (links that are rarely part of any spanning tree) and $S \approx 1$ (links that are almost always necessary).
+
+\TODO{Add image of bimodal distribution of salient links in weighted graphs showing spontaneous stratification and network backbone}
+
+This bimodal nature reveals a "spontaneous stratification" of the network topology: it naturally filters the graph into a highly salient \textbf{network backbone} (the critical infrastructure of the network) and a set of redundant, non-salient peripheral connections.
+
+\subsection{Topological Differences between BC and Salience}
+
+The conceptual difference between Betweenness Centrality and Salience becomes starkly apparent when analyzing homogeneous topologies, such as a planar graph with random connections between neighboring nodes.
+
+\TODO{Add image comparing BC and Salience on a planar graph (core-periphery vs homogeneous distribution)}
+
+\begin{itemize}
+    \item \textbf{Betweenness Centrality:} Tends to artificially induce a \textit{core-periphery differentiation}. Links near the topological center of the planar graph will inevitably intercept more shortest paths simply due to geometry, accumulating high BC values and creating a centralized "bottleneck."
+    \item \textbf{Link Salience:} Maintains a \textit{homogeneous distribution}. Because it evaluates links based on their presence in spanning trees rather than raw path counting, it does not falsely elevate the center, accurately reflecting the homogeneous nature of the underlying planar grid.
+\end{itemize}
+
+\subsection{Salient Links in Dynamical Processes}
+
+The structural backbone identified by salient links plays a critical role in dynamical processes, particularly in spreading and transport phenomena.
+
+Consider a repeated random walk on a weighted network, where the passage of the walker through a node equates to an "infection" event. If we trace and "sign" the specific paths through which nodes become infected—effectively creating a random walk with memory (a \textit{non-Markovian process})—we observe a striking correlation with the network's structural salience.
+
+The expected number of passages through a given link during this dynamical spreading process is directly proportional to its salience:
+\[ \text{\# passages} \propto S_{link} \]
+
+\TODO{Add image of scatter plot showing the correlation between Salient links and dynamical processes (random walk / infection passages)}
+
+This demonstrates that the salient backbone is not just a static topological artifact; it provides the primary deterministic channels for information, disease, or traffic flow in complex systems.
