@@ -1,9 +1,9 @@
-\chapter{Phase Transitions}
+\chapter[Phase Transitions and Mean Field Theory]{Phase Transitions and \\Mean Field Theory}
 
 Phase Transitions are fundamental phenomena in statistical physics, where a system undergoes a qualitative change in its macroscopic properties as external parameters (like temperature or pressure) are varied. These transitions can be classified into different types based on their characteristics and the nature of the change in the system. Let us start from the definition of a phase of a many-particle system, which is crucial for understanding phase transitions.
 
 \begin{definition}[Phase of Many-Particle System]
-    A phase of a many-particle system is a region in the parameter space (e.g., temperature, pressure) where the system exhibits distinct physical properties and behavior: it is a ``type'' of collective state of matter. They are defined in terms of macroscopic properties such as density, magnetization, or symmetry.
+    A phase of a many-particle system is a region in the parameter space (e.g. temperature, pressure) where the system exhibits distinct physical properties and behavior: it is a ``type'' of collective state of matter. They are defined in terms of macroscopic properties such as density, magnetization, or symmetry.
 \end{definition}
 
 A phase transition occurs when a system undergoes an \textit{abrupt change from one phase to another} (states) \textit{as we smoothly vary an external parameter}. Often PTs are accompanied by a discontinuity or singularity in some thermodynamic quantity, which serves as an order parameter to characterize the transition.
@@ -176,7 +176,7 @@ At any temperature below the critical temperature, we can observe a first-order 
 
 The critical temperature separates two phases with different symmetries: the paramagnetic phase has a higher symmetry (rotational symmetry) than the ferromagnetic phase (which has a lower symmetry due to the alignment of spins). This is an example of spontaneous symmetry breaking, where the ordered phase exhibits a lower symmetry than the disordered phase. The study of this magnetic system and its phase transitions provides valuable insights into the behavior of many other systems that exhibit similar phenomena, such as superconductors and liquid crystals.
 
-\subsection{Critical Behaviour}
+\section{Critical Behaviour}
 
 When the order parameter approaches zero continuously at the critical point, we can describe its behavior using a power law:
 \[
@@ -233,7 +233,7 @@ The critical exponents are a set of numbers that characterize the behavior of ph
 
 \end{itemize}
 
-\subsubsection{Correlation Length and Universality}
+\subsection{Correlation Length and Universality}
 
 Before continuing with the definitions of \(\nu\) and \(\eta\), we have to introduce the concept of \textbf{correlation length}, which is a measure of how far correlations in the system extend. Near the critical point, the correlation length diverges, indicating that fluctuations occur over increasingly large distances. Let us introduce it through a little model: let us consider a system of spins on a lattice, where each spin \(s_i\) can take on values of +1 or -1.
 The magnetization \(m\) is defined as the average spin per site:
@@ -284,207 +284,4 @@ The response function measures indeed how the system responds to external pertur
 \begin{remark}\TODO{add reference to J. Cardy - scaling and renormalization in statistical physics, 1.2}
     Second order phase transitions are also called \textbf{continuous phase transitions} because the order parameter changes continuously across the transition, and there is no latent heat associated with the transition. As we will see, these PTs are associated with the \textbf{spontanoeus symmetry breaking}. In some cases, the symmetry is only \textbf{emergent}, meaning that it is not present in the microscopic description of the system but emerges as a result of the collective behavior of the system near the critical point (approximate symmetry which becomes exact only near the critical point). This emergent symmetry can play a crucial role in determining the properties of the system and its critical behavior.
 \end{remark}
-
-
-\section{Mean Field Theory}\TODO{reference: D. Tong - statistical field theory, 1 | D. Tong - statistical physics, 5}
-
-Mean field theory is a powerful approximation method used to study phase transitions and critical phenomena in many-body systems. The basic idea behind mean field theory is to replace the complex interactions between particles in the system with an average or "mean" field that each particle experiences. This simplification allows us to derive self-consistent equations for the order parameter and analyze the behavior of the system near the critical point.
-
-Let us concentrate on a classical model, the Ising model, which is a prototypical model for studying ferromagnetic phase transitions.
-
-\subsection{Ising Model} \TODO{insert images of spins on a lattice}
-
-The Ising model consists of a lattice of spins, where each spin \(s_i\) can take on values of +1 or -1. The Hamiltonian of the Ising model is given by:
-\[
-    H = - J \sum_{\langle i,j \rangle} s_i s_j - h \sum_i s_i,
-\]
-where \(J\) is the coupling constant that determines the strength of the interaction between neighboring spins, \(h\) is the external magnetic field, and the sum \(\langle i,j \rangle\) runs over pairs of \textbf{nearest-neighbor} spins. The first term in the Hamiltonian represents the interaction between neighboring spins, which favors alignment (ferromagnetic order) when \(J > 0\). The second term represents the coupling of the spins to the external magnetic field, which tends to align the spins in the direction of the field.
-
-\begin{definition}[Coordination Number]
-    The coordination number \(z\) of a lattice is the number of nearest neighbors that each site has. For example, in a two-dimensional square lattice, each site has 4 nearest neighbors, so the coordination number is \(z = 4\). In a three-dimensional cubic lattice, each site has 6 nearest neighbors, so the coordination number is \(z = 6\). The coordination number plays an important role in determining the behavior of the system and the nature of the phase transition.
-\end{definition}
-
-Our aim is to study the equilibrium properties (where observables can effectively be calculated through thermal averaging) of the Ising model and understand the nature of the phase transition it exhibits. To do this, we will apply mean field theory to derive self-consistent equations for the magnetization (order parameter) and analyze the behavior of the system near the critical point.
-
-Each configuration of the system is specified by the set of spin values \(\{s_i\}_{i=1}^N\), and it is associated to a probability given by the Boltzmann distribution:
-\[
-    P(\{s_i\}) = \frac{1}{Z} e^{-\beta H(\{s_i\})},
-\]
-where \(Z\) is the \textbf{partition function}, defined as the sum over all possible configurations:
-\[
-    Z = \sum_{\{s_i\}} e^{-\beta H(\{s_i\})}.
-\]
-
-\begin{example}[Pair of spins]
-    When we have only two spins, the partition function can be calculated explicitly. The Hamiltonian for two spins \(s_1\) and \(s_2\) is given by:
-    \[
-        H = - J s_1 s_2 - h (s_1 + s_2),
-    \]
-    where the sum is removed since we only have two spins. We can now compute the energy for each of the four possible configurations of the spins:
-    \begin{itemize}
-        \item \(s_1 = +1,\, s_2 = +1\): \(H = - J - 2h\).
-        \item \(s_1 = +1,\, s_2 = -1\): \(H = J\).
-        \item \(s_1 = -1,\, s_2 = +1\): \(H = J\).
-        \item \(s_1 = -1,\, s_2 = -1\): \(H = - J + 2h\).
-    \end{itemize}
-    The partition function is then given by:
-    \[
-        Z = e^{\beta J + 2\beta h} + 2 e^{-\beta J} + e^{\beta J - 2\beta h}.
-    \]
-
-    If we now wanted to compute the probability of finding the system in the configuration \(s_1 = +1,\, s_2 = +1\), we would use the Boltzmann distribution:
-    \[
-        P(s_1 = +1,\, s_2 = +1) = \frac{e^{\beta J + 2\beta h}}{Z}.
-    \]
-
-    For the magnetization, we can compute the average spin per site:
-    \[
-        M = \mathbb{E}_c[\sum_{i} s_i], \quad m = \frac{M}{N} = \frac{1}{N} \mathbb{E}_c[s_1 + s_2],
-    \]
-    where the summations run over the configuration space.
-    \[
-        m = \sum_{\langle s_i \rangle} p(\{s_i\}) \left( \frac{1}{N} \sum_{i} s_i \right),
-    \]
-    where the sum runs over all possible configurations of the spins. In this case, we can explicitly compute the magnetization by summing over the four configurations.
-\end{example}
-
-If we were now to consider a system with \(N=100\), we would have \(2^{100}\) possible configurations for a chain with \(z=2\), which is an astronomically large number. This makes it impossible to compute the partition function and the magnetization by explicitly summing over all configurations. This is where mean field theory comes into play, as it allows us to approximate the behavior of the system without needing to consider every possible configuration.
-
-\subsection{Mean Field Approach - Euristic}
-
-Let us now apply the mean field approximation to the Ising model. The key idea is to replace the interaction term in the Hamiltonian with an average or "mean" field that each spin experiences. This allows us to derive a self-consistent equation for the magnetization.
-
-It is a \textit{euristic} approach, which is not exact but provides a good approximation, remaining not systematic, not rigorous and hard to fully justify. We will see how it can be derived from a more rigorous approach, which is the \textbf{Landau-Ginzburg effective field theory}.
-
-There are many versions of this approach (different implementations of the approximation), but the idea is almost the same: we want to replace some microscopic degrees of freedom with an average field, which is the mean field. The mean field is defined as the average value of the spin at a given site:
-
-Let us rewrite the Hamiltonian of the Ising model
-\[
-    H = - J \sum_{\langle s_i, s_j \rangle} s_i s_j - h \sum_i s_i.
-\]
-If we now consider the case in which the coupling constant \(J\) is positive (\(J>0\) which corresponds to a ferromagnetic interaction), and a null external magnetic field (\(h=0\)), the Hamiltonian simplifies to:
-\[
-    H = - J \sum_{\langle s_i, s_j \rangle} s_i s_j.
-\]
-In this case the system exhibits a phase transition at a critical temperature \(T_c\), below which the spins tend to align and the system enters an ordered ferromagnetic phase, while above \(T_c\) the spins are disordered and the system is in a paramagnetic phase.
-
-Being interested in the behavior of the magnetization, we can express it as a thermal average in the canonical ensemble:
-\[
-    \mathbb{E}_c \left[ \frac{1}{N} \sum_{i} s_i \right] = \frac{1}{N} \sum_{\{s_i\}} \left( \sum_{i} s_i \right) \frac{e^{-\beta H(\{s_i\})}}{Z},
-\]
-where the sum runs over all possible configurations of the spins. The mean field approximation consists in building a term which encodes the average effect of the neighboring spins on a given spin: it is natural to think about building this average field from the magnetization, so let us analyze it in more detail. The magnetization can assume the following values:
-\[
-    M \in \left[ -N,\, -N+2,\, -N+4,\, \ldots,\, +N \right],
-\]
-where the values change by 2 because each spin can flip from +1 to -1 or vice versa. The magnetization per site is then given by:
-\[
-    m = \frac{M}{N} \in \left[ -1,\, -1 + \frac{2}{N},\, -1 + \frac{4}{N},\, \ldots,\, +1 \right].
-\]
-
-The average field we are building has to be proportional to the magnetization \(m\), which serves as a measure of the degree of order in the system. Thus we can express the sum over configurations of the spins as a sum over the magnetization \(M\) and then a sum over all configurations that correspond to that magnetization:
-\[
-    \sum_{\{s_i\}_{i=1}^N} [\dots] = \sum_{M=-N}^{N} \sum_{\{s_i\}_{i=1}^N} \delta\left(\sum_{i} s_i - M\right)[\dots],
-\]
-where we have introduced a delta function to enforce the constraint that the sum of the spins equals the magnetization \(M\). This allows us to rewrite the partition function as a sum over the magnetization, but let's understand better the meaning of this delta function through an example.
-
-\begin{example}[\(N=2\)]
-    If we have only two spins, the possible configurations and their corresponding magnetizations are:
-    \begin{itemize}
-        \item A: \(s_1 = +1,\, s_2 = +1\): \(M = 2\).
-        \item B: \(s_1 = +1,\, s_2 = -1\): \(M = 0\).
-        \item C: \(s_1 = -1,\, s_2 = +1\): \(M = 0\).
-        \item D: \(s_1 = -1,\, s_2 = -1\): \(M = -2\).
-    \end{itemize}
-    The delta function \(\delta\left(\sum_{i} s_i - M\right)\) ensures that we only sum over configurations that correspond to a specific magnetization \(M\).
-
-    Let us analyze the contribution of each configuration to the partition function: starting from a sum over all configurations, we get
-    \[
-        Z = \sum_{\{s_i\}} e^{-\beta H(\{s_i\})} = e^{- \beta H(A)} + e^{-\beta H(B)} + e^{-\beta H(C)} + e^{-\beta H(D)},
-    \]
-    where \(H(A)\), \(H(B)\), \(H(C)\), and \(H(D)\) are the Hamiltonian evaluated at each configuration: considering the case \(h=0\) for simplicity, we have
-    \[
-        H(A) = -J, \quad H(B) = J, \quad H(C) = J, \quad H(D) = -J.
-    \]
-    Thus the partition function can be rewritten as
-    \[
-        Z = 2 (e^{\beta J} + e^{-\beta J}).
-    \]
-
-    We now want to get the same result using the sum over magnetization, which is given by
-    \[
-        Z = \sum_{M = -2}^2 \sum_{\{s_i\}} \delta\left(\sum_{i} s_i - M\right) e^{-\beta H(\{s_i\})} = \sum_{M = -2}^2 e^{-\beta H(M)} \sum_{\{s_i\}} \delta\left(\sum_{i} s_i - M\right) = 2 (e^{\beta J} + e^{-\beta J}),
-    \]
-    where we have used the fact that the Hamiltonian depends only on the magnetization \(M\) and not on the specific configuration of the spins, and that the sum over configurations for each magnetization value is just the number of configurations with that value of magnetization. This example illustrates how the sum over configurations can be rewritten as a sum over magnetization, with the delta function ensuring that we only consider configurations that correspond to a specific magnetization.
-\end{example}
-
-Now we can implement the mean field approximation by replacing the interaction term in the Hamiltonian with an average field that each spin experiences. This average field is proportional to the magnetization \(m\), which serves as a measure of the degree of order in the system: in a fixed magnetization sector (m-sector) we can replace the interaction term with an effective field that depends on the magnetization (reinserting the external magnetic field \(h\)):
-\[
-    H_{mf} (\{s_i\}, m) = -J \sum_{\langle i, j \rangle} s_i \, m - h \sum_i s_i,
-\]
-where we are summing over single sites (only \(s_i\) appears in the sum), but we kept the notation of the sum over nearest neighbors to indicate that the effective field is proportional to the number of nearest neighbors (coordination number \(z\)) and the magnetization \(m\). This is the point where we have to accept that this method works even if it is hard to justify: there exist some ad-hoc argument, but it would be meaningless to use those since we will anyway present the Landau-Ginzburg effective field theory in the following sections, which then will make us able to justify this approximation in a systematic way.
-
-\begin{remark}
-    The hamiltonian \(H_{mf}\) is independent of the specific configuration of the spins \(\{s_i\}\), as long as
-    \[
-        \sum_{i} s_i = M,
-    \]
-    So that we have efficiently replaced the interaction term with an average field that depends only on the magnetization \(m\). This allows us to derive a self-consistent equation for the magnetization and analyze the behavior of the system near the critical point without needing to consider every possible configuration of the spins.
-\end{remark}
-
-If we continue the computation of the mean field hamiltonian  we get
-\[
-    H_{mf} (\{s_i\}, m) = -J m \sum_{\langle i, j \rangle} s_i - h \sum_i s_i = - (J z m + h) \sum_i s_i = - (J z m + h) Nm,
-\]
-where we have used the fact that the sum over the spins is equal to the magnetization \(M = Nm\) and the sum over the nearest neighbors gives a factor of the coordination number \(\frac{Nz}{2}\).\footnote{When we count the same site for each of its n.n., we are counting each \(s_i\) a number of \(z\) times, but we have to divide by 2 to avoid double-counting. Thus the total is \(N\cdot \frac{z}{2}\).} This mean field Hamiltonian describes a system of non-interacting spins in an \textit{effective magnetic field} that depends on the magnetization \(m\) and the external field \(h\).
-
-The average magnetization per spin in the canonical ensamble can now be performed easily applying the mean field approximation:
-\[
-    \begin{aligned}
-        \mathbb{E}_c\left[ \frac{1}{N} \sum_{i} s_i \right] & = \sum_{m \in [-1, \ldots, +1]} m \sum_{\{s_i\}} \delta\left(\sum_{i} s_i - Nm\right) \frac{e^{-\beta H_{mf}(m)}}{Z} \\
-                                                            & = \frac{1}{Z} \sum_{m} m e^{-\beta H_{mf}(m)} \left[ \sum_{\{s_i\}} \delta\left(\sum_{i} s_i - Nm\right) \right],    \\
-    \end{aligned}
-\]
-where the last term identifieas a sum over all the configurations of the spins that correspond to a given magnetization \(m\). Note that a configuration of \(N_{\uparrow}\) of up spins and \(N_{\downarrow}\) of down spins corresponds to a magnetization
-\[
-    m = \frac{N_{\uparrow} - N_{\downarrow}}{N} = \frac{2 N_{\uparrow} - N}{N} = 2 \frac{N_{\uparrow}}{N} - 1.
-\]
-The number of such configurations is given by the binomial coefficient:
-\[
-    \binom{N}{N_{\uparrow}} = \frac{N!}{N_{\uparrow}! (N - N_{\uparrow})!} = \Omega(N_\uparrow),
-\]
-which we can approximate using Stirling's formula for large \(N\):
-\[
-    \log(\Omega(N_\uparrow)) \approx N \log N - N_{\uparrow} \log N_{\uparrow} - (N - N_{\uparrow}) \log (N - N_{\uparrow}),
-\]
-which after some algebraic manipulations can be rewritten as
-\[
-    \log(\Omega(N_\uparrow)) \approx N \left[ \log(2) - \frac{(1+m)}{2}\log (1+m) - \frac{(1-m)}{2}\log (1-m) \right].
-\]
-Thus we have found an expression for the number of configurations that correspond to a given magnetization \(m\), which can be used to compute the final form of the magnetization:
-\[
-    \mathbb{E}_c \left[ \frac{1}{N} \sum_{i} s_i \right] = \frac{1}{Z} \sum_{m} m e^{-\beta N f(m)} = \frac{1}{Z} \sum_{m} m e^{-\beta H_{mf}(m)} \Omega(m),
-\]
-where we have defined the function \(f(m)\) as
-\[
-    f(m) = - hm - \frac{Jzm^2}{2} - T \left[ \log(2) - \frac{(1+m)}{2}\log (1+m) - \frac{(1-m)}{2}\log (1-m) \right],
-\]
-which can be interpreted as a \textbf{free energy density} (per site) that depends on the magnetization \(m\). Indeed we have the last sum over the magnetization \(m\) getting dominated by the minimum of the function \(f(m)\) in the thermodynamic limit \(N \to \infty\), while the other terms get suppressed by the factor \(e^{-\beta N f(m)}\).\footnote{Since we always have to consider an enormously large \(N\) (the real world is at the thermodynamic limit), even small variations in \(f(m)\) will be exponentially suppressed.} Thus the average magnetization can be approximated as
-\[
-    \mathbb{E}_c \left[ \frac{1}{N} \sum_{i} s_i \right] \approx \frac{1}{e^{-\beta N f(m^*)}} \left( m^* e^{-\beta N f(m^*)} \right) = m^*, \qquad \frac{\partial f(m)}{\partial m}\bigg|_{m^*} = 0,
-\]
-where \(m^*\) is the value of \(m\) that minimizes the function \(f(m)\).\TODO{Add a figure of a parabula with the minimum at m-star.} This is known as a \textit{saddle point approximation}, which is a common technique used in statistical mechanics to evaluate integrals or sums that are dominated by the contribution of a single point (the minimum of the free energy in this case). We can use the same approximation to compute the partition function \(Z\) as well, which is given by
-\[
-    Z = \sum_{m} e^{-\beta N f(m)} \approx e^{-\beta N f(m^*)}.
-\]
-
-\paragraph{Self-consistency relation.}
-Now computing the derivative of \(f(m)\) with respect to \(m\) and setting it to zero, we get the self-consistent equation for the magnetization:
-\[
-    \beta(h + J z m) = \frac{1}{2} \log\left( \frac{1+m}{1-m} \right) = \tanh^{-1}(m),
-\]
-where the last step is obtaines after some algebraic manipulations. This equation can be rewritten as
-\[
-    m = \tanh\left( \beta h_{eff} \right), \quad h_{eff} = h + J z m,
-\]
-where \(h_{eff}\) is the effective magnetic field that each spin experiences due to the mean field approximation. This self-consistent equation can be solved numerically to find the magnetization \(m\) as a function of temperature \(T\) and external field \(h\), allowing us to analyze the behavior of the system near the critical point and understand the nature of the phase transition. The effective field \(h_{eff}\) captures the influence of the neighboring spins on a given spin, and the self-consistent equation reflects the fact that the magnetization \(m\) depends on itself through the effective field. This is a hallmark of mean field theory, where the order parameter (magnetization) is determined by a self-consistent equation that takes into account the average effect of the interactions in the system.
 

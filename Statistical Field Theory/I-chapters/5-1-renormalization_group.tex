@@ -1,8 +1,23 @@
 \chapter{Renormalization Group}
 
- [...]
+The renormalization group (RG) is a powerful theoretical framework that allows us to understand the behavior of physical systems at different scales, and in particular to analyze critical phenomena and phase transitions. It provides a unified perspective on the many facets of critical phenomena.
 
-\section{Solution for the 1D Ising Model}
+The name ``renormalization group'' is rather misleading: it is a framework in which one applies transformations on a system, but \uline{such transformations do not form a group} in the mathematical sense (since they do not have an inverse). However, the name has been kept for historical reasons, since it was first introduced in the context of quantum field theory, where it was used to understand the behavior of quantum fields at different energy scales; now it is used to refer to a more general framework that can be applied to a wide range of systems, and it is associated with a wide set of ideas and techniques that are used to understand critical phenomena in statistical mechanics.\TODO{Add reference to the John Cardy book, chapter 3.}
+
+The renormalization group is based upon the observation that critical phenomena are dominated by fluctuations at a scale \(\xi\) which diverges at the critical point, and thus the system is effectively scale-invariant at criticality. The idea is then to iteratively modify our description of the system, eliminating details about the short range correlations at each step, and thus to understand how the system behaves at different scales. In this way, one is eventually left with a simplified description of the system that captures the essential features of the critical behavior through correlations at large scales.
+
+This iterative procedure is called a \textbf{coarse-graining transformation}, and it allows us to understand how the parameters of the system change as we look at it at different scales. It is indeed equivalent to a flow in the space of parameters (space of all possible free energies or actions), which is called the \textbf{action space}, and the fixed points of this flow correspond to critical points of phase transitions.
+
+The RG flow allows us to understand the behavior of the system near criticality, and in particular to identify the relevant and irrelevant directions in the parameter space, which are associated with the critical exponents that describe the behavior of physical quantities near the critical point.
+
+The conceptual framework derived from the RG analysis is very general, and can be implemented in different forms and with different techniques; traditionally, the main distinction is between the \textbf{real space RG} and the \textbf{momentum space RG}:
+\begin{itemize}
+    \item The first one is very useful to introduce the framework, as it involves a more intuitive approach.
+    \item The latter provides more powerful tools for quantitative computations: it encodes a systematic approach to derive critical exponents below the upper critical dimension for istance.
+\end{itemize}
+However, as we said, real space RG is more intuitive and thus we will start by using this approach to revisit the 1D Ising model, which we have already solved, in order to understand how the RG works in a simple case, and then we will introduce the more general framework that can be applied to more complicated systems.
+
+\section{Coarse-Graining in Real Space}
 
  [...]
 
@@ -57,6 +72,8 @@ where \(\delta g\), \(\delta h\) and \(k^{\prime} (k, h)\) are implicitly define
     When we write the Hamiltonian, if we assume directly that \(N \to \infty\), the system has an infinite number of degrees of freedom, and the RG transformation is from an infinite-dimensional space to itself, which is not very useful. Instead, we can consider a finite system with \(N\) sites, and then take the limit \(N \to \infty\) at the end of the calculation. We are speaking about a space of parameters, not a space of configurations, so the RG transformation is from a finite-dimensional space to itself, which is more manageable. \TODO{check if this is correct}
 \end{remark}
 
+\section{Recursion Relations and Flow Diagrams}
+
 The previous set of equations is also called the \textbf{RG recursion relations}
 
 [...]
@@ -105,7 +122,11 @@ Going to \(h=0\) we can also derive a \textbf{flow diagram}...
 
 [...]
 
-Thus if we are close to a fixed point, an RG step will move us away, but the ... Thus we can linearze the flow equations around the fixed point. Let us consider in particular \(T \sim 0\) and \(h \sim 0\), corresponding to \(y \sim 1\) and \(x \to \infty\). We can write
+Thus if we are close to a fixed point, an RG step will move us away, but the ...
+
+\subsection{Linearization and Scaling Form}
+
+Thus we can linearze the flow equations around the fixed point. Let us consider in particular \(T \sim 0\) and \(h \sim 0\), corresponding to \(y \sim 1\) and \(x \to \infty\). We can write
 \[
     \begin{dcases}
         (x^{\prime})^4 = \frac{x^4}{4}, \\
@@ -240,7 +261,7 @@ which means that the flow is away from the critical point, which is thus an unst
 
 Now the idea is to use those to demonstarte the scaling and hyperscaling relations, which are the relations between the critical exponents that describe the behavior of physical quantities near the critical point.
 
-\subsubsection{Scaling Relation for Free Energy}
+\subsection{Scaling Relation for Free Energy}
 
 In the path integral formulation, the partition function is given by
 \[
@@ -264,7 +285,7 @@ and using the fact that \(V_{\text{new}} / V = b^{-D}\), we can write
 \]
 which is the scaling relation for the free energy, where \(g\) is a scaling function that depends on the ratio \(h / t^{y_h / y_t}\). This scaling relation allows us to understand how the free energy behaves near the critical point, and in particular how it depends on the reduced temperature \(t\) and the magnetic field \(h\).
 
-\subsubsection{Scaling Relation for Correlation Length}
+\subsection{Scaling Relation for Correlation Length}
 
 The correlation length
 \[
@@ -293,9 +314,9 @@ The fact that the functional form of the correlation length is preserved under t
 
 In the end the idea will again be to linearize the flow equations around the fixed point and...
 
-\subsection{General Case}
+\section{Formal Framework}
 
-[...]
+ [...]
 In the most general case, we can write the free energy as a functional of the order parameter \(m(\mathbf{x})\) and a set of parameters \(\mathbf{s}\):
 \[
     F[m] = \int \mathrm{d}^D \mathbf{x} \left[ \frac{t}{2} m^2 + u m^4 + v_1 m^6 + v_2 m^8 + \cdots + \frac{k}{2} (\nabla m)^2 + \frac{L}{2} (\nabla m)^2 + \cdots + hm + h m^{5 / 7}+ \cdots\right],
@@ -323,6 +344,8 @@ since in the parameter space, with the most general functional form, the RG tran
 which allows us to understand how the system behaves at different scales, and in particular to identify the critical points and the nature of the phase transitions.
 
 We are visualizing the RG transformation as a flow in the parameters space, which is called the \textbf{action space}, and the fixed points of this flow correspond to scale-invariant theories, since we are rescaling effectively the system, thus they have to be associated with critical points of phase transitions (at zero or infinite temperature). The flow of the parameters under the RG transformation allows us to understand the behavior of the system at different scales, and in particular to identify the critical points and the nature of the phase transitions.
+
+\subsection{Scaling Directions and Anomalous Dimensions}
 
 Let us imagine a complicated infinite dimensional parameter function
 \[
