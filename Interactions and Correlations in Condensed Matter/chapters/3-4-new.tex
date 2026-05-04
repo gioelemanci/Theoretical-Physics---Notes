@@ -167,17 +167,132 @@ The electron-phonon interaction describes the process in which an electron with 
 
 We are thus considering both the processes of absorption and emission of phonons, which are responsible for the resistivity and conductivity of the material. The electron-phonon interaction is also responsible for the superconductivity in the material, which will be discussed in future.
 
-We can now take a step further: if we consider two electrons in the system, they can interact with each other by exchanging a phonon. This process is called \textbf{phonon-mediated electron-electron interaction}, and it is responsible for the superconductivity in the material.
+We can now take a step further: if we consider two electrons in the system, they can interact with each other by exchanging a phonon. This process is called \textbf{phonon-mediated electron-electron interaction}, and it is responsible for the superconductivity in the material. Basically, one electron can emit a phonon, which is then absorbed by another electron, and this process can be repeated multiple times, each times with a transfer of momentum \(q\) and energy \(\omega_q\). The effective interaction between the two electrons is given by the sum of all the possible processes of emission and absorption of phonons, which can be represented by a Feynman diagram. This is possible only in a lattice, because in a free space the phonons do not exist, and therefore the electrons cannot interact through phonon exchange.
 
     [\textit{Draw graph of e-e phonon mediated interaction}]
 
-We will have to define the phonon propagator which mediates the interaction between the electrons: in the case of electrons interacting through photons, we have the following coupling constant:
-\[
-    D_{phot} = e \frac{4 \pi}{q^2} e,
-\]
-while in the case of electrons interacting through phonons, we have the coupling interaction constant:
-\[
-    D_{phon}\dots
-\]
-\TODO{check everything and correct last equations}
 The interaction mediated by the phonons is retarded with respect to the interaction mediated by the photons, which is almost instantaneous (order of \(c\)). This is due to the fact that the phonons are much slower than the electrons, as we saw before, and this velocity will be dictated by the phonon dispersion relation through the phonon energy \(\omega_q\). The retarded nature of the phonon-mediated interaction is responsible for the superconductivity in the material, which will be discussed in future.
+
+We will have to define the phonon propagator which mediates the interaction between the electrons: in the case of electrons interacting through photons, we have the following coupling constant
+\[
+    V_{phot} = e \frac{4 \pi}{q^2} e,
+\]
+while in the case of electrons interacting through phonons, we have to consider the electron-phonon ``potential''
+\[
+    V_{el-phon} (q, i \nu_n) = \frac{1}{V} \vert g_q \vert^2 D_{0}(q, i \nu_n),
+\]
+which is the interacting part of the hamiltonian, where \(D_{0}(q, i \nu_n)\) is the phonon propagator, which is what we want to compute. Calling \(\hat{A}_q = (\hat{b}_q + \hat{b}_{-q}^{\dagger})\), then we can define the phonon propagator as
+\[
+    D_{0} (q, i \nu_n) = - \left\langle T_{\tau} \hat{A}_q(\tau) \hat{A}_{-q}(0) \right\rangle_0,
+\]
+which can be computed remembering that we are considering states in the interaction picture, and that the time evolution of the operators is given by the free hamiltonian of the phonons. Let us compute firstly the operator \(\hat{A}(q,\tau)\):
+\[
+    \begin{aligned}
+        A(q,\tau) = e^{\tau \hat{H}_{phon}} A_q e^{-\tau \hat{H}_{phon}} = e^{\tau H_{phon}} (\hat{b}_q + \hat{b}_{-q}^{\dagger}) e^{-\tau \hat{H}_{phon}} \\
+        = e^{\tau H_{phon}} \hat{b}_q e^{-\tau \hat{H}_{phon}} + e^{\tau \hat{H}_{phon}} \hat{b}_{-q}^{\dagger} e^{-\tau \hat{H}_{phon}} = e^{-\tau \hbar \omega_q} \hat{b}_q + e^{\tau \hbar \omega_q} \hat{b}_{-q}^{\dagger},
+    \end{aligned}
+\]
+where the phonon hamiltonian is given by \(\hat{H}_{phon} = \sum_{q} \hbar \omega_q \left( \hat{b}_q^{\dagger} \hat{b}_q + \frac{1}{2} \right)\) (we need to consider the non interacting part and the non fermionic part since we are basically treating free bosons). With this expression for the operator \(A(q,\tau)\), we can now compute the phonon propagator in the imaginary time formalism:
+\[
+    \begin{aligned}
+        D_0(q, \tau) = - \left\langle T_{\tau} A(q,\tau) A(-q,0) \right\rangle_0 = - \left\langle A(q,\tau) A(-q,0) \right\rangle_0 \text{ for } \tau > 0 \\
+        = - \left\langle (\hat{b}_q(\tau) + \hat{b}_{-q}^{\dagger}(\tau)) (\hat{b}_{-q}(0) + \hat{b}_q^{\dagger}(0)) \right\rangle_0                      \\
+        = - \left\langle (e^{-\tau \hbar \omega_q} \hat{b}_q + e^{\tau \hbar \omega_q} \hat{b}_{-q}^{\dagger}) (\hat{b}_{-q} + \hat{b}_q^{\dagger}) \right\rangle_0
+    \end{aligned}
+\]
+where the signo in \(\omega_q\) is positive even when associated to \(\hat{b}^{\dagger}_{-q}\) since the dispersion relation of the phonons is an even function of the momentum, i.e., \(\omega_q = \omega_{-q}\). The last expression can be computed remembering that we are considering the non interacting part of the hamiltonian, and that the phonons are bosonic particles, which means that they can occupy the same state. The final result is given by
+\[
+    D_0 (q,\tau) = - \left[ \left\langle \hat{b}_q\hat{b}_{q}^\dagger \right\rangle_0 e^{-\tau \hbar \omega_q} + \left\langle \hat{b}^\dagger_{-q}\hat{b}_{-q} \right\rangle_0 e^{\tau \hbar \omega_q} \right],
+\]
+where from four terms only two remains, due to orthogonality of the states. The remaining two terms can be computed remembering that the phonons are bosonic particles, which means that they can occupy the same state, and that the average number of phonons in a state with energy \(\hbar \omega_q\) is given by the Bose-Einstein distribution \(n_B(\omega_q) = \frac{1}{e^{\beta \hbar \omega_q} - 1}\). Thus we have
+\[
+    D_0 (q, \tau) = - \left[ (n_B(\omega_q) + 1) e^{-\tau \hbar \omega_q} + n_B(\omega_q) e^{\tau \hbar \omega_q} \right],
+\]
+and now we can finally compute the phonon propagator in the Matsubara frequency space by performing a Fourier transform of the previous expression:
+\[
+    \begin{aligned}
+        D_0(q, i \nu_n) = \int_0^{\beta} \mathrm{d} \tau e^{i \nu_n \tau} D_0(q, \tau) = \int_0^{\beta} \mathrm{d} \tau e^{i \nu_n \tau} \left[ - (n_B(\omega_q) + 1) e^{-\tau \hbar \omega_q} - n_B(\omega_q) e^{\tau \hbar \omega_q} \right], \\
+        = - (n_B(\omega_q) + 1) \int_0^{\beta} \mathrm{d} \tau e^{(i \nu_n - \hbar \omega_q) \tau} - n_B(\omega_q) \int_0^{\beta} \mathrm{d} \tau e^{(i \nu_n + \hbar \omega_q) \tau}                                                           \\
+        = - (n_B(\omega_q) + 1) \frac{e^{(i \nu_n - \hbar \omega_q) \beta} - 1}{i \nu_n - \hbar \omega_q} - n_B(\omega_q) \frac{e^{(i \nu_n + \hbar \omega_q) \beta} - 1}{i \nu_n + \hbar \omega_q}.
+    \end{aligned}
+\]
+We now that the matsubara frequencies for bosons are given by \(\nu_n = 2 n \pi / \beta\), which means that \(e^{i \nu_n \beta} = 1\) (for fermions this would be \(-1\)). With this expression, we can simplify the previous result as
+\[
+    \begin{aligned}
+        D_{0} (q, i \nu_n) = - (n_B(\omega_q) + 1) \frac{e^{-\beta \hbar \omega_q} - 1}{i \nu_n - \hbar \omega_q} - n_B(\omega_q) \frac{e^{\beta \hbar \omega_q} - 1}{i \nu_n + \hbar \omega_q} \\
+        = - (n_B(\omega_q) + 1) \frac{1 - e^{-\beta \hbar \omega_q}}{i \nu_n - \hbar \omega_q} - \frac{1}{e^{\beta \hbar \omega_q} - 1} \frac{e^{\beta \hbar \omega_q} - 1}{i \nu_n + \hbar \omega_q},
+    \end{aligned}
+\]
+which in the end will give us the final result for the phonon propagator in the Matsubara frequency space:
+\[
+    D_0(q, i \nu_n) = \frac{1}{i \nu_n - \hbar \omega_q} - \frac{1}{i \nu_n + \hbar \omega_q} = \frac{2 \hbar \omega_q}{(i \nu_n)^2 - (\hbar \omega_q)^2}.
+\]
+where we can see that the phonon propagator has poles at the phonon frequencies \(\omega_q\) and \(-\omega_q\), which is a signature of the fact that the phonons are bosonic particles. The phonon propagator is a key quantity in the theory of electron-phonon interactions, as it describes how the phonons mediate the interaction between the electrons. Comparing it to the fermionic green's function in the matsubara frequency space, we can see that the phonon propagator has a different structure:
+\[
+    \begin{dcases}
+        D_0 (q, i \nu_n) = \frac{2 \hbar \omega_q}{(i \nu_n)^2 - (\hbar \omega_q)^2} \text{ for bosons}, \\
+        G_0 (k, i \omega_n) = \frac{1}{i \omega_n - \xi_k} \text{ for fermions},
+    \end{dcases}
+\]
+mainly due to the fact that we derived it from an interacting term which presented two terms with different signs. The phonon propagator is a key quantity in the theory of electron-phonon interactions, as it describes how the phonons mediate the interaction between the electrons.
+
+Using this propagator, we can now compute the effective interaction between the electrons mediated by the phonons...
+\[
+    \Sigma(k, i \omega_n) = [\textit{ draw of single line with one phonon propagator and two electron-phonon vertices }]
+\]
+\[
+    = \int \mathrm{d}q \sum_{i \nu_n} \vert g_q \vert^2 \mathcal{G}_0 (k-q, i \omega_n - i \nu_n) D_0(q, i \nu_n),
+\]
+
+[...]
+
+Thus now we can consider two different kinds of interactions between the electrons: the direct interaction mediated by the photons, which is given by the coulomb potential, and the retarded interaction mediated by the phonons, which is given by the electron-phonon coupling constant \(g_q\) and the phonon propagator \(D_0(q, i \nu_n)\). The competition between these two interactions is responsible for different phenomena in the material, such as superconductivity, charge density waves, and so on. The phonon-mediated interaction is attractive, while the photon-mediated interaction is repulsive, and this competition can lead to different phases of the material depending on the strength of the interactions and the temperature.
+
+Thus now we have two different interactions between the electrons:
+\[
+    V_{eff} (q, i \nu_n) = V_{phot} + V_{el-phon} = e \frac{4 \pi}{q^2} e + \frac{1}{V} \vert g_q \vert^2 D_0(q, i \nu_n),
+\]
+which is the effective interaction between the electrons mediated by both the photons and the phonons. The competition between these two interactions is responsible for different phenomena in the material, such as superconductivity, charge density waves, and so on. The phonon-mediated interaction is attractive, while the photon-mediated interaction is repulsive, and this competition can lead to different phases of the material depending on the strength of the interactions and the temperature.
+
+Thus
+\[
+    V_{eff} = [\textit{ draw of effective interaction mediated by both photons and phonons }]
+\]
+where the general formula for the electron-phonon coupling constant is given by
+\[
+    g_q = i e \frac{\sqrt{N}}{\sqrt{2 M \hbar \omega_q}} q \frac{4 \pi Z e}{q^2},
+\]
+which in the specific case of the \textbf{jellium model} can be rewritten as
+\[
+    g^2_q = \frac{\Omega}{2} V_c(q),
+\]
+where \(\Omega\) is the characteristic frequency of the system, improperly letting us write \(\delta \rho^+ (t) \propto e^{i \Omega t} \delta \rho\). This formula can be computed as...
+
+    [...]
+
+Putting this result back in the expression for the effective interaction, we can see that the effective interaction between the electrons mediated by both the photons and the phonons is given by
+\[
+    V_{eff} = V_c(q) + \frac{\Omega}{2} V_c(q) D_0(q, i \nu_n) = V_c(q) \left[ 1 + \frac{\Omega}{2} D_0(q, i \nu_n) \right] \\
+    = V_c(q) \left[ 1 + \frac{\Omega}{2} \frac{2 \Omega}{(i \nu_n)^2 - \Omega^2} \right].
+\]
+Since this result is specific for the jellium model, where we do not have a real lattice, thus the specific frequency of the system will be constant (which then won't depend on the momentum \(q\)), and we can rewrite the previous result as
+\[
+    V_{eff} = V_c(q) \left[ 1 + \frac{\Omega^2}{(i \nu_n)^2 - \Omega^2} \right] = V_c(q) \frac{(i \nu_n)^2}{(i \nu_n)^2 - \Omega^2},
+\]
+which is the effective interaction between the electrons mediated by both the photons and the phonons in the jellium model. We can see that for frequencies \(\nu_n\) much smaller than \(\Omega\), the effective interaction is attractive, while for frequencies \(\nu_n\) much larger than \(\Omega\), the effective interaction is repulsive. This is a signature of the fact that the phonon-mediated interaction is attractive, while the photon-mediated interaction is repulsive, and this competition can lead to different phases of the material depending on the strength of the interactions and the temperature.
+
+If we consider the analytical continuation of the effective interaction to the real frequency axis, we can see that the effective interaction has a pole at the frequency \(\Omega\), which is a signature of the fact that the phonons are bosonic particles, and that they mediate the interaction between the electrons. The effective interaction can be rewritten as
+\[
+    V_{eff}(q,i \nu_n) = V_c(q) \frac{\nu^2}{\nu^2 - \Omega^2} \xrightarrow{an. cont.} V_{eff}^R (q, \nu) =  V_c(q) \frac{\nu^2}{\nu^2 - \Omega^2 + i \delta},
+\]
+and if we try to plot it as a function of the real frequency \(\nu\), we can see that it has a peak at the frequency \(\Omega\), which is a sort of resonance. The effective interaction is attractive (negative) for frequencies \(\nu\) much smaller than \(\Omega\), while it is repulsive (positive) for frequencies \(\nu\) much larger than \(\Omega\), which is a signature of the competition between the phonon-mediated interaction and the photon-mediated interaction.
+
+    [\textit{Draw plot of effective interaction as a function of real frequency}]
+
+If we try to imagine the physical meaning of this result, we can imagine electrons on a thin layer (\(\sim 10\) eV) of the fermi surface, which can interact with each other by exchanging phonons with energy \(\Omega\) of the order of millielectronvolts. For frequencies \(\nu\) much smaller than \(\Omega\), the effective interaction is attractive, which means that the electrons can form Cooper pairs and become superconducting. For frequencies \(\nu\) much larger than \(\Omega\), the effective interaction is repulsive, which means that the electrons cannot form Cooper pairs and remain in a normal state. The competition between these two interactions is responsible for the superconductivity in the material, which will be discussed in future.
+
+    [ \textit{Draw of fermi surface and order of energies involved} ]
+
+We are used to think that two particles that interact with each other through a repulsive interaction cannot form a bound state, but in this case we have an effective interaction that is attractive for frequencies \(\nu\) much smaller than \(\Omega\). This is just the many body justification of the repulsive and attractive nature of the photon-mediated and phonon-mediated interactions, respectively.
+
+Polarizability of the lattice as an electron passes by the lattice, which is the physical origin of the electron-phonon interaction. The electron can polarize the lattice, creating a distortion in the lattice, which can then interact with another electron, leading to an effective attraction between the electrons mediated by the phonons. This is the physical picture behind the electron-phonon interaction, and it is responsible for different phenomena in the material, but depends on the time scales of this polarization and the entity of the interaction: the two electrons has to interact at energies near the energy of the lattice vibration.
