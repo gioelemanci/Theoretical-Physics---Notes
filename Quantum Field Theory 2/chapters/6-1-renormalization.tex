@@ -199,3 +199,349 @@ Let us present some of the most common regularization schemes used in quantum fi
           which is finite and does not require any regulator.
               [...]
 \end{itemize}
+
+
+
+
+
+
+
+
+\section{One Loop Integrals in Dimensional Regularization}
+
+In general, the loop integrals we have to compute in quantum field theory are of the form
+\[
+    \int \frac{\mathrm{d}^D k}{(2\pi)^D} \frac{1}{D_1^{\alpha_1} D_2^{\alpha_2} \cdots D_n^{\alpha_n}},
+\]
+where we have defined the ``denominators of the propagators'' as
+\[
+    \begin{dcases}
+        D_i = l_i^2 - m_i^2 + i\epsilon, \\
+        l_i^{\mu} = k^{\mu} + \sum_{j=1} \beta_{ij} p_j^{\mu},
+    \end{dcases}
+\]
+where \(p_j\) are the external momenta and \(\beta_{ij}\) are some coefficients that depend on the topology of the diagram. We can also promote the metric tensor to \(D\) dimensions (1 timelike and \(D-1\) spacelike dimensions) as
+\[
+    g_{\mu \nu} = \begin{pmatrix}
+        1      & 0      & \cdots & 0      \\
+        0      & -1     & \cdots & 0      \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0      & 0      & \cdots & -1
+    \end{pmatrix}, \quad \text{such that} \quad g_{\mu}^{\ \mu} = \delta^{\mu}_{\ \mu} = D.
+\]
+Since it is not convenient to treat an integral with many denominators, we can use the \textbf{Feynman parameters} to rewrite it as an integral with a single denominator:
+\[
+    \frac{1}{D_1 \cdots D_n} = \int_0^1 \mathrm{d} x_1 \cdots \int_0^1 \mathrm{d} x_n \, \delta\left( 1 - \sum_{j=1}^n x_j\right) \frac{(n-1)!}{\left( x_1 D_1 + \cdots + x_n D_n\right)^n},
+\]
+where the delta function is needed to ensure that the sum of the Feynman parameters \(x_i\) is equal to 1. By taking derivatives with respect to the propagator denominators \(D_i\) we can also get the following more general formula:
+\[
+    \left(\frac{\partial}{\partial D_i}\right) \implies \frac{1}{D_i^{\alpha_1} \cdots D_n^{\alpha_n}} = \int_0^1 \mathrm{d} x_1 \cdots \int_0^1 \mathrm{d} x_n \, \delta\left( 1 - \sum_{j=1}^n x_j\right) \frac{\Gamma(\alpha_1 + \cdots + \alpha_n)}{\Gamma(\alpha_1) \cdots \Gamma(\alpha_n)} \frac{x_1^{\alpha_1 - 1} \cdots x_n^{\alpha_n - 1}}{\left( x_1 D_1 + \cdots + x_n D_n\right)^{\alpha_1 + \cdots + \alpha_n}},
+\]
+with the condition of \(\alpha \equiv \sum_{i=1}^n \alpha_i\).
+
+In order to analitically continue the integral to non integer values of the exponents \(\alpha_i\) we have to introduce the \textbf{Gamma function}, which is defined as
+\[
+    \Gamma(z) = \int_0^{\infty} \mathrm{d} t \, t^{z-1} e^{-t},
+\]
+which is a generalization of the factorial function to complex numbers, since for positive integers \(n\) we have \(\Gamma(n) = (n-1)!\). The Gamma function has some important properties that we will use in the following:
+\begin{itemize}
+    \item It has poles at \(z = 0, -1, -2, \dots\) with residue \(\text{Res}(\Gamma(z), z=-n) = \frac{(-1)^n}{n!}\).
+    \item It satisfies the following functional equation: \(\Gamma(z+1) = z \Gamma(z)\), which is obtained by performing an integration by parts in the definition of the Gamma function.
+    \item By direct integration we can show that \(\Gamma(1) = 1\).
+    \item The last two properties together imply that \(\Gamma(n) = (n-1)!\) for positive integers \(n \geq 0\).
+\end{itemize}
+It converges for \(\Re(z) > 0\), but can also be analitically continued to the whole complex plane with the exception of the poles at \(z = 0, -1, -2, \dots\). Thus we are now ready to write the more general formula for the loop integrals in dimensional regularization (and in Feynman parameterization):
+\[
+    \frac{1}{D_1^{\alpha_1} \cdots D_n^{\alpha_n}} = \dots
+\]
+
+\begin{proof}
+    Let us start from noticing that the following integral after a change of variable \(x \to x^{\prime} =  D x\) can be rewritten in terms of gamma functions as
+    \[
+        \int_0^{\infty} \mathrm{d} x \, x^{\alpha - 1} e^{-D x} = D^{-\alpha} \int_0^{\infty} \mathrm{d} x^{\prime} \, x^{\prime \alpha - 1} e^{-x^{\prime}} = \frac{\Gamma(\alpha)}{D^{\alpha}}.
+    \]
+    If we apply this formula (referred to as the \textit{Schwinger's trick}) to the denominator of the propagators n times, we obtain:
+    \[
+        \frac{1}{D_1^{\alpha_1} \cdots D_n^{\alpha_n}} = \dots
+    \]
+
+    But we want to get to a Feynman parametrized form, thus we have to introduce the delta function to ensure that the sum of the Feynman parameters \(x_i\) is equal to 1. We can do this by using the following identity:
+    \[
+        1 = \int_0^{\infty} \mathrm{d} g \, \delta\left( g - \sum_{j=1}^n x_j\right),
+    \]
+    and then rescaling the Feynman parameters as \(x_i \to g x_i\), in order to get
+    \[
+        \frac{1}{D_1^{\alpha_1} \cdots D_n^{\alpha_n}} = \dots
+    \]
+
+    But now it is not difficult to recognize that the integral over \(g\) is again of the form of the Schwinger's trick, and we can perform it to get the final result:
+    \[
+        \dots
+    \]
+    which leads us to the desired formula.
+\end{proof}
+
+\begin{example}[D-dimensional solid angle]
+    We will show that the solid angle in \(D\) dimensions is given by
+    \[
+        \Omega_D = \int \mathrm{d} \Omega_D = \frac{2 \pi^{D/2}}{\Gamma(D/2)},
+    \]
+    where \(\mathrm{d} \Omega_D\) is the measure of the solid angle in \(D\) dimensions. We can start from the Gaussian integral in \(D\) dimensions, and we will compute it both in cartesian coordinates and in spherical coordinates:
+
+    [...]
+
+\end{example}
+
+\subsection{Gamma Functions and Wick Rotation}
+
+Studying the properties of the Gamma function we can see that it has poles at \(z = 0, -1, -2, \dots\). This means that if we have a loop integral that is divergent in 4 dimensions, it will have a pole at \(D=4\) in dimensional regularization. In particular, around \(z=0\), we can expand as
+\[
+    \Gamma(\epsilon) = \frac{1}{\epsilon} - \gamma_E + \mathcal{O}(\epsilon),
+\]
+as \(\epsilon \to 0\). Here, \(\gamma_E\) is the Euler-Mascheroni constant, which is defined as
+\[
+    \gamma_E = \lim_{n \to \infty} \left( \sum_{k=1}^n \frac{1}{k} - \log n\right) \approx 0.5772,
+\]
+but its numerical value is of no importance for us, since it always cancels out when deriving physical observables. The important thing is that knowing how the gamma function behaves around zero lets us understand how it behaves around all of its poles, since we can always exploit one of its properties to write:
+\[
+    \Gamma(z+1) = z \Gamma(z) \quad \Rightarrow \quad \Gamma(-1 + \epsilon) = \frac{\Gamma(\epsilon)}{-1 + \epsilon},
+\]
+[...]
+
+With feynman parameterization, we can always ...
+
+    [...]
+
+Thus let us consider a \textbf{tadpole integral} of the following form in dimensional regularization:
+\[
+    I = \int \frac{\mathrm{d}^D k}{(2\pi)^D} \frac{1}{(k^2 - m^2 + i \epsilon)^{\alpha}}, \quad \alpha = 1,2,3,\dots
+\]
+
+[\textit{Draw of complex plane and wick rotation}]
+
+Considering firstly the integral over the time component \(k^0\) of the loop momentum, we can perform a \textbf{Wick rotation}: we can rotate the contour of integration in the complex plane of \(k^0\) from the real axis to the imaginary axis counter-clockwise without crossing any poles, by defining
+\[
+    k^0 = \pm (\sqrt{\mathbf{k}^2 + m^2} - i \epsilon).
+\]
+With this choice of the contour, the integral does not change, since we are not crossing any poles (we can imagine to close the contour ...); this Wick rotation is equivalent to performing a change of variable
+\[
+    \begin{dcases}
+        k^0 = i k_E^0, \\
+        \mathbf{k} = \mathbf{k}_E,
+    \end{dcases}
+\]
+and it corresponds to performing the loop integral in Euclidean space (rotation to euclidean coordinates) instead of Minkowski space: indeed we have
+\[
+    \begin{aligned}
+        k^2   & \equiv (k^0)^2 - \vert \mathbf{k} \vert^2,              &  & \text{Minkowski space} \\
+        k_E^2 & \equiv (k_E^0)^2 +\vert \mathbf{k}_E \vert^2 = - k_E^2, &  & \text{Euclidean space}
+    \end{aligned}
+\]
+impliying that \(k^2 = - k_E^2\). The tadpole integral then
+\[
+    I = \dots
+\]
+where we could restore the feynman prescription easily by performing the change of variable \(m^2 \to m^2 - i \epsilon\) in the final result. We could now use the Schwinger's trick
+\[
+    \frac{1}{D^{\alpha}} = \dots
+\]
+to rewrite the denominator of the propagator as an integral over a Feynman parameter \(x\):
+\[
+    I = \dots
+\]
+Now the integral in the euclidean space is just a gaussian integral, which we can compute by using the formula for the solid angle in \(D\) dimensions:
+\[
+    \int \mathrm{d}^D k_E \exp(-k_E^2 x) = \left(\frac{\pi}{x}\right)^{D/2},
+\]
+such that we get
+\[
+    \dots
+\]
+using again schwinger's trick with \(D \to m^2\) and \(\alpha \to \alpha - D/2\) we obtain
+\[
+    \dots
+\]
+which putting everything together gives us the final result for the tadpole integral in dimensional regularization:
+\[
+    I = \dots
+\]
+[...]
+
+So to compute a one loop integral in dimensional regularization we can follow the following steps:
+\begin{itemize}
+    \item \dots
+    \item ...
+    \item \dots
+\end{itemize}
+
+We can now apply this procedure to compute the one loop correction to the amplitude in the \(\phi^4\) theory.
+
+\subsection{Phi 4 in D-Dimensions and 2-2 Scattering at NLO}
+
+We first consider the \(\phi^4\) theory in \(D\) dimensions; doing dimensional analysis for our theory:
+\[
+    \dots
+\]
+we can write the interaction lagrangian density as
+\[
+    \mathcal{L}_{\text{int}} = - \frac{\lambda}{4!} \mu^{4-D} \phi^4,
+\]
+where \(\mu\) is a mass scale, with
+\[
+    [\mu] = 1 \implies [\lambda] = 0,
+\]
+were the constaint on the mass dimension of \(\lambda\) is given by the requirement that the interaction lagrangian density has mass dimension \(D\).
+
+We can now compute the amplitude for the \(2 \to 2\) scattering process at NLO in dimensional regularization. Firstly, the new Feynman rule for the vertex is given by
+\[
+    \text{Draw of vertex} = - i \lambda \mu^{4-D},
+\]
+and this implies
+\[
+    \begin{aligned}
+        i \mathcal{M}_{LO} = vertex = - i \lambda \mu^{4-D}, \\
+        i \mathcal{M}_{NLO} = [\textit{Draw NLO}] = i (-i \lambda)^2 \mu^{4-D}[V(s) + V(t) + V(u)],
+    \end{aligned}
+\]
+where the second factor of \(\mu\) is absorbed into the vertex factor:
+\[
+    i V(p^2) = \frac{1}{2} \mu^{4-D} \int \frac{\mathrm{d}^D k}{(2\pi)^D} \frac{i}{k^2 - m^2} \frac{i}{(k+p)^2 - m^2}.
+\]
+Let us underline two observations:
+\begin{itemize}
+    \item The integral \(V(p^2)\) is still dimensionless with this choice of the vertex factor, as it should be since the amplitude has to be dimensionless.
+    \item The feynman prescription is understood: we have to perform the change \(m^2 \to m^2 - i \epsilon\) in the final result if we need to make it explicit.
+\end{itemize}
+
+Now using the Feynman parameterization for \(N=2\) we can rewrite the integral as
+\[
+    \frac{1}{D_1 D_2} = \int_0^1 \mathrm{d} x \frac{1}{\left( (1-x) D_1 + x D_2 \right)^2},
+\]
+and
+\[
+    i V(p^2) = - \frac{\mu^{4-D}}{2} \int \dots
+\]
+which can be shifted by \(k^{\mu} \to k^{\mu} - x p^{\mu}\) in order to obtain
+\[
+    i V(p^2) = \dots
+\]
+If we now define \(M^2(p^2) = m^2 - (x(1-x)p^2)\), we can recgnize the form of the tadpole integral we computed in the previous section, and we can use the result we obtained for it to get
+\[
+    i V(p^2) = \dots
+\]
+where we can notice we have not eliminated the divergence yet, since we have a pole at \(D=4\) in the gamma function; but we have obtained a finite result for the loop integral, which is what we wanted to achieve with regularization. As promised, both \(iV(p^2)\) and thus \(i \mathcal{M}\) functions are analytic in \(D\) with the exception of some poles. At some points we will be interested in expanding the result around \(D=4\); let us define \(\epsilon\) as
+\[
+    D = 4 - 2 \epsilon,
+\]
+such that the limit \(\epsilon \to 0\) corresponds to the limit \(D \to 4\). We can then use the following properties
+\[
+    \begin{dcases}
+        \Gamma(2-\tfrac{D}{2}) = \Gamma(\epsilon) = \frac{1}{\epsilon} - \gamma_E + \mathcal{O}(\epsilon), \\
+        (4\pi)^{-D/2} =   \frac{1}{16 \pi^2} (1 + \epsilon \log(4\pi)) + \mathcal{O}(\epsilon^2),          \\
+        (M^2)^{D/2 - 2} = (M^2)^{-\epsilon} = 1 - \epsilon \log M^2 + \mathcal{O}(\epsilon^2),             \\
+        \mu^{4-D} = \mu^{2 \epsilon} = 1 + \epsilon \log \mu^2 + \mathcal{O}(\epsilon^2),
+    \end{dcases}
+\]
+in order to get the following expansion for \(i V(p^2)\) around \(D=4\):
+\[
+    i V(p^2) = - \frac{i}{32 \pi^2} \left(\frac{1}{\epsilon} - \gamma_E + \log(4\pi) - \int_0^1 \mathrm{d} x \log \left( \frac{M^2(p^2)}{\mu^2} \right) \right)+ \mathcal{O}(\epsilon).
+\]
+The integral in \(\mathrm{d} x\) appearing in the previous expression can be computed analytically, but it is not important for us to get its explicit form, since we are interested in the \textbf{regulated amplitude}, which is given by
+\[
+    \mu^{D-4} (i \mathcal{M}) =\dots
+\]
+where this step concludes the regularization procedure, since we have obtained a finite result for the amplitude depending on the regulator \(\epsilon\), which is what we wanted to achieve with regularization. We can now move to the renormalization procedure, in order to get a finite result for the amplitude in the limit \(\epsilon \to 0\).
+
+\subsubsection{Renormalization of the Amplitude}
+
+Thus we now start from a regulated amplitude, which is a finite function of the regulator \(\epsilon\), and we want to get a finite result for the amplitude in the limit \(\epsilon \to 0\) by redefining the parameters of the theory (the mass and the coupling constant) in such a way that the physical observables (the amplitude and the cross section) are finite in the limit \(\epsilon \to 0\). We can rewrite observables as functions of other observables, and the result will become finite in the limit \(\epsilon \to 0\) where the regulator is removed.
+
+Thus we start by replacing the bare parameters \(m\) and \(\lambda\) of our lagrangian with physical, observable quantities. Since LO is independent of the mass, which furthermore can be written as
+\[
+    m = m_{\text{phys}} + \mathcal{O}(\lambda),
+\]
+the renormalization of \(m\) comes into play only at \(\mathcal{O}(\lambda^3)\) for the amplitude (but we would need...)
+
+Therefore we have to focus on the renormalization of the coupling constant \(\lambda\).
+\begin{remark}
+    We should also multiply by ...
+\end{remark}
+
+We thus want to understand \uline{how to define a \(\lambda_{\text{phys}}\) to renormalize the coupling constant \(\lambda\)}.
+
+[...]
+
+\[
+    \sqrt{s} = E_{cm} = 2m \implies s = 4 m^2,
+\]
+
+[...]
+
+We define
+\[
+    \mu^{D-4} (i \mathcal{M}) \bigg\vert_{s=4 m^2}^{t=u=0} = - i \lambda_{\text{phys}},
+\]
+as a renormalization condition, which allows us to define the physical coupling constant \(\lambda_{\text{phys}}\) as the value of the amplitude at a specific kinematic point (the renormalization point)
+\[
+    \lambda_{\text{phys}} = \lambda - \frac{3 \lambda^2}{32 \pi^2} \left(\dots  \right) + \mathcal{O}(\lambda^3).
+\]
+This is the \textbf{renormalization condition} that we have to impose in order to define the physical coupling constant \(\lambda_{\text{phys}}\) in terms of the bare coupling constant \(\lambda\) and the regulator \(\epsilon\). By inverting this relation perturbatively, we can express the bare coupling constant \(\lambda\) as a function of the physical coupling constant \(\lambda_{\text{phys}}\) and the regulator \(\epsilon\):
+\begin{enumerate}
+    \item We know \(\lambda_{\text{phys}} = \lambda + \alpha \lambda^2 + \mathcal{O}(\lambda^3)\).
+    \item We want to get an ansatz of the form \(\lambda = \lambda_{\text{phys}} + \alpha^{\prime} \lambda_{\text{phys}}^2 + \mathcal{O}(\lambda_{\text{phys}}^3)\).
+\end{enumerate}
+By plugging the ansatz into the first relation we get
+\[
+    \lambda = \lambda + (\alpha + \alpha^{\prime}) \lambda^2 + \mathcal{O}(\lambda^3) \implies \alpha^{\prime} = - \alpha,
+\]
+such that we can use this relation to rewrite the amplitude as a function of the physical coupling constant \(\lambda_{\text{phys}}\) and the regulator \(\epsilon\):
+\[
+    \mu^{-2\epsilon} (i \mathcal{M}) = - i \lambda_{\text{phys}} - i \frac{3 \lambda_{\text{phys}}^2}{32 \pi^2} \left( \dots \right) + \mathcal{O}(\lambda_{\text{phys}}^3),
+\]
+which is now a finite result at \(\epsilon \to 0\) (equivalently at \(D \to 4\)), since the divergence has been absorbed into the redefinition of the coupling constant. We have thus obtained a finite result for the amplitude in the limit in which the regulator is removed, by redefining the parameters of the theory (the coupling constant) in such a way that the physical observables (the amplitude) are finite.
+
+We can now use this result to compute the cross section for the \(2 \to 2\) scattering process at NLO, for example, or other physical observables that can be derived from the amplitude.
+
+\begin{remark}
+    We could have chosen a different renormalization condition (i.e. a different definition of the physical coupling constant), and we would have obtained a different result for the amplitude. Let us for example choose the following renormalization condition:
+    \[
+        \mu^{D-4} (i \mathcal{M}) \bigg\vert_{s=s_0,\, t= t_0,\, u= u_0} = - i \lambda_{\text{phys}}^{\prime},
+    \]
+    which will be different from the previous one, since we are evaluating the amplitude at a different kinematic point. This is not a problem, since the physical observables (the cross section) will be the same in both cases, as they should be, since they are independent of the choice of the renormalization condition. But proceding with the calculation
+    \[
+        \mu^{-2\epsilon} (i \mathcal{M}) = - i \lambda_{\text{phys}}^{\prime} - i \frac{3 (\lambda_{\text{phys}}^{\prime})^2}{32 \pi^2} \int_0^1 \mathrm{d}x  \left( \dots \right) + \mathcal{O}((\lambda_{\text{phys}}^{\prime})^3),
+    \]
+    which is different from the previous result, since we are evaluating the integral at a different kinematic point. However, the physical observables will be the same in both cases, since if we now rewrite perturbatively the physical coupling constant \(\lambda_{\text{phys}}^{\prime}\) as a function of \(\lambda_{\text{phys}}\):
+    \[
+        \lambda_{\text{phys}}^{\prime} = \lambda_{\text{phys}} + \alpha^{\prime \prime} \lambda_{\text{phys}}^2 + \mathcal{O}(\lambda_{\text{phys}}^3),
+    \]
+    which will end up giving us the same result for the amplitude as a function of \(\lambda_{\text{phys}}\) and \(\epsilon\) as before, up to the perturbative order we are considering, and thus the same result for the physical observables.
+\end{remark}
+
+Thus the renormalization scheme is not unique, since we can choose different renormalization conditions, but the physical observables will be the same in all the different renormalization schemes, and it all comes down to a choice of how to define the physical parameters of the theory in terms of the bare parameters and the regulator.
+
+\subsection{A Note on Analytic Continuation}
+
+Let us finally compute the integral in the Feynman parameter \(x\) that appears in the expression for the amplitude, which is given by
+\[
+    \dots
+\]
+
+[...]
+
+\[
+    \dots
+\]
+
+The analytic continuation to \(p^2 = s \geq 4m^2\), but doing so we would get a negative argument for \(w-1\) in the logarithm, which is not defined for real numbers. The logarithm as a complex function has a branch cut on the negative real axis, and we have to specify how to go around it in order to get a well defined result. If \(z>0\) we have
+\[
+    \begin{dcases}
+        \dots \\
+        \dots
+    \end{dcases}
+\]
+What is the correct imaginary part to choose for the logarithm? We can get it by employing the feynman prescription, which is equivalent to performing the change \(M^2 \to M^2 - i \epsilon\) or \(m^2 \to m^2 - i \epsilon\) or even \(p^2 \to p^2 + i \epsilon\) in the final result, and the easiest one is to perform the change \(p^2 \to p^2 + i \epsilon\), for small \(\epsilon\) and check the sign of \(i\pi\) (even numerically).
+
+We will find...
+
+    [...]
