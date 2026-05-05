@@ -1,17 +1,281 @@
 \chapter[Quantum Field Theory and Statistical Mechanics]{Quantum Field Theory and \\Statistical Mechanics}
 
+A deep connection exists between quantum field theory (QFT) and statistical mechanics.
+This relation becomes particularly powerful in the study of critical phenomena, as one can see from the \textbf{Landau-Ginzburg formulation} and by the observation that systems at phase transitions are described by field theories with scale invariance.
+\uline{At criticality the theory is invariant under dilatations of coordinates}
+\[
+    x_{\mu}\rightarrow\lambda x_{\mu}.
+\]
+Order parameters (fields) transform as
+\[
+    \Phi_{i}\rightarrow\lambda^{\Delta_{i}}\Phi_{i},
+\]
+where the \(\Delta_i\) determine critical exponents, so their calculation is crucial. This implies power-law behavior:
+\[
+    \langle\Phi_{i}(x)\Phi_{i}(0)\rangle\sim\frac{1}{|x|^{2\Delta_{i}}},
+\]
+so that the \(\Delta_{i}\) can be extracted if one is able to compute the correlation functions exactly.
+
+This suggested Polyakov to formulate a strategy to solve scale invariant QFT known as the \textbf{Polyakov programme}:
+\begin{enumerate}
+    \item show that scale invariance implies, under very general assumptions, a larger \textbf{conformal invariance};
+    \item conformal invariance and operator product expansions of local fields lead to \textbf{conformal bootstrap}, which is a set of conditions to be satisfied by the 4-point correlation functions;
+    \item conformal bootstrap constraints the correlation functions and in some cases is able to determine them exactly;
+    \item correlation functions allow to compute \(\beta\)-functions, renormalization group eigenvalues, scale dimensions and ultimately critical exponents.
+\end{enumerate}
+The classification of fixed points of Renormalization Group, in practice of the critical points and therefore the possible universality classes is thus equivalent to classify all the conformal field theories (CFT).
+
 \section{Path Integral Formulation}
+
+The path integral formulation of quantum field theory (QFT) shows deep links with statistical mechanics.
+It is indeed possible, thanks to a Wick rotation on the time axis, to write the generating functional of Green functions in a way that makes evident its equivalence to a partition function of a statistical mechanical system with one more spatial dimension.
+If the Hamiltonian density of the QFT is quadratic in the conjugated momenta, this statistical system will be purely configurational.
+In this section we quickly recall the basics of the path integral formulation of a Wick rotated QFT.
 
 \subsection{Quantum Mechanics}
 
+A system with degrees of freedom \(q(t)\) and Lagrangian \(L(q,\dot{q})\) has quantum transition \textbf{amplitude between} an initial state \(\ket{q_{i}}\) and a final one \(\ket{q_{f}}\) given by:
+\[
+    Z(q_{f},t_{f};q_{i},t_{i})=\bra{q_{f}}e^{-iH(t_{f}-t_{i})}\ket{q_{i}}.
+\]
+By discretizing the time interval
+\[
+    t_{i}=t_{0}<t_{1}<...<t_{n}=t_{f}, \quad t_{k}-t_{k-1}=\epsilon,
+\]
+and inserting complete sets of states
+\[
+    \mathbb{I}=\int \mathrm{d} q\ket{q}\bra{q},
+\]
+one gets:
+\[
+    Z=\int\prod_{j=1}^{n-1}\mathrm{d} q_{j}\prod_{j=0}^{n-1}\bra{q_{j+1}}e^{-i\epsilon H}\ket{q_{j}}.
+\]
+Expanding for small \(\epsilon\) and inserting momentum eigenstates, one obtains:
+\begin{equation}
+    Z=\int\mathcal{D}q \, e^{iS[q]},
+    \label{eq:path_integral_qm}
+\end{equation}
+where
+\[
+    S[q]=\int_{t_{i}}^{t_{f}}\mathrm{d}t \, L(q,\dot{q})
+\]
+is the action.
+
+In this way, the quantum transition amplitude is expressed as a sum over all possible paths \(q(t)\) connecting the initial and final states, weighted by the exponential of the action evaluated on those paths.
+This formulation is particularly useful for systems where the Hamiltonian is not easily diagonalizable, and it provides a natural framework for perturbation theory.
+
 \subsection{Quantum Field Theory}
+The same construction illustrated above can be done also in QFT.
+From the Hamiltonian point of view, actually, \uline{a field theory is a system with an infinite number of degrees of freedom}.
+To the dynamical variables \(q_{i}(t)\) with \(i=1,...,N\) one substitutes a field \(\phi(x,t)\), where the continuum index \(x\) plays the role of the discrete index \(i\); in other words, the field \(\phi(x,t)\) represents a dynamical variable for any point \(x\) of space.
+Here, we do not better specify the field, which can have a scalar, vector, tensor or spinor nature, with indices in Minkowski spacetime with metric \(g=\text{diag}(1,-1,...,-1)\) and/or other possible indices for internal degrees of freedom.
+
+The same formulae obtained in quantum mechanics for the time evolution amplitude can be applied to the case of a system with Lagrangian density \(\mathcal{L}(\phi,\partial_{\mu}\phi)\) and Hamiltonian density
+\[
+    \mathcal{H}=\pi\cdot\dot{\phi}-\mathcal{L},
+\]
+where \(\pi\) represents the momentum density
+\[
+    \pi=\frac{\delta\mathcal{L}}{\delta\dot{\phi}}.
+\]
+For example, the Lagrangian density of a scalar field of mass \(m\) is given by
+\[
+    \mathcal{L}(\phi,\partial_{\mu}\phi)=\frac{1}{2}\partial_{\mu}\phi\partial^{\mu}\phi-V(\phi),
+\]
+where the first term is called \textit{kinetic term}, while the term describing the \textbf{self interaction} of the field
+\[
+    V(\phi)=\sum_{k=1}^{\infty}g_{k}\phi^{k},
+\]
+is called \textit{potential}.
+The term quadratic in \(\phi\) usually has, in QFT, the meaning of a mass term and \(g_{2}=m^{2}/2\) but, for example, in the LG formulation it has a meaning as (dimensionless) temperature \(t=(T-T_{c})/T_{c}.\)
+The \textbf{conjugated momentum density} \(\pi=\dot{\phi}\) allows to write the Hamiltonian density as
+\[
+    \mathcal{H}(\pi,\phi)=\frac{1}{2}\dot{\phi}^{2}+\frac{1}{2}(\nabla\phi)^{2}+V(\phi).
+\]
+With analogy of what is done in the quantum mechanics case, one obtains
+\[
+    \bra{\phi_{f}(x)}e^{-i\hat{H}(t_{f}-t_{0})}\ket{\phi_{0}(x)} = \int_{\phi(x,t_{0}) = \phi_{0}(x)}^{\phi(x,t_{f}) = \phi_{f}(x)}\mathcal{D}\phi\mathcal{D}\pi \, e^{i\hbar\int_{t_{0}}^{t_{f}}\mathrm{d} t\int \mathrm{d}^{D-1} x [\pi\cdot\dot{\phi}-\mathcal{H}]}.
+\]
+In QFT one often considers the limit \(t_{0}\rightarrow-\infty\) and \(t_{f}\rightarrow+\infty\), therefore considering an interaction running on the whole spacetime.
+For Hamiltonians quadratic in \(\pi(x),\) it is possible to apply the same considerations of the quantum mechanical case and Gauss-integrate on momenta, getting
+\begin{equation}
+    Z=\int\mathcal{D}\phi \, e^{\frac{i}{\hbar}S[\phi]},
+    \label{eq:path_integral_qft}
+\end{equation}
+where the action is now the integral over the whole spacetime of the Lagrangian density
+\[
+    S[\phi]=\int \mathrm{d} t \mathrm{d}^{D-1}x \, \mathcal{L}(\phi,\partial_{\mu}\phi).
+\]
+Correlation functions are defined as:
+\begin{equation}
+    \langle\phi(x_{1})\cdots\phi(x_{n})\rangle=\frac{\int\mathcal{D}\phi \, \phi(x_{1})\cdots\phi(x_{n})e^{iS[\phi]}}{\int\mathcal{D}\phi \, e^{iS[\phi]}}.
+    \label{eq:correlation_functions_qft}
+\end{equation}
 
 \subsection{Wick Rotation}
 
-\section{Bridge to Statistical Mechanics}
+The oscillatory nature of the path integral makes it difficult to define rigorously. For this reason, it is usual to perform a Wick rotation:
+\begin{equation}
+    t \to -i\tau, \implies \begin{dcases}
+        \mathrm{d} t \to -i\mathrm{d}\tau, \\
+        \partial_{t} \to i\partial_{\tau}.
+    \end{dcases}
+    \label{eq:wick_rotation}
+\end{equation}
+In the example of a scalar field considered above, the Lagranian density becomes, after the Wick rotation
+\[
+    \mathcal{L} = -\frac{1}{2} \partial_{\mu}\phi\partial^{\mu}\phi - V(\phi) = - \mathcal{H},
+\]
+where now the metric is Euclidean \(g_{\mu\nu} = \delta_{\mu\nu}\) with the index \(\mu\) running from \(1\) to \(D\) and setting \(\tau=x_{D}\).
+Thus, at this point, the action is conveniently substituted by the so called \textbf{Euclidean action}
+\[
+    S = i S_E, \quad S_E[\phi] = \int \mathrm{d}^D x \, \left[ \frac{1}{2} (\partial_\mu\phi)^2 + V(\phi) \right],
+\]
+or, more generally
+\begin{equation}
+    S_E[\phi] = \int \mathrm{d}^D x \, \mathcal{H}(\phi, \nabla\phi).
+    \label{eq:euclidean_action}
+\end{equation}
 
-\subsection{Generating Functional}
+The possibility of doing this analytic continuation to imaginary times can easily be established in perturbative QFT. Indeed in the perturbative regime the most general Green function
+\[
+    G(x_1, \dots, x_n) = \int \prod_{i=1}^n \frac{\mathrm{d}^D p_i}{(2 \pi)^D} e^{i \sum_{i=1}^n p_i \cdot x_i} \tilde{G}(p_1, \dots, p_n),
+\]
+is formed by sums of Feynman diagrams, built with vertices and propagators of the free theory. This latter can be obtained by putting \(V(\phi)=0\). In Minkowski spacetime, giving meaning to eq. \eqref{eq:path_integral_qft} by adding to the action a term \(\tfrac{i \epsilon}{2}\phi^2\) (with \(\epsilon\) arbitrarily small) we obtain, for the free propagator in momentum space (using units with \(\hbar=1\))
+\[
+    \frac{i}{p_0^2 - \vert \mathbf{p} \vert^2 - m^2 + i \epsilon}.
+\]
+In the complex plane of \(p_0 = \tfrac{E}{c}\), such propagator has a pole just above the negative part and another just below the positive part of the real axis. As a consequence, in the complex \(p_0\) plane, if we rotate simultaneously and identically all the integration paths in propagators in a Feynman diagram, these singularities are avoided, thus permitting the analytic continuation of the Green function to the function
+\[
+    G(x_1, \dots, x_n) \to G(\xi t_1, \mathbf{x}_1, \dots, \xi t_n, \mathbf{x}_n), \quad \xi = \rho e^{i \theta},
+\]
+given by the usual Green's function of the Euclidean theory, with \(\rho > 0\) and \(\theta \in [0, \pi]\) and all the times \(t_i\) replaced by \(\rho t_i\). This function is analytical in the half plane \(\Im(\rho) < 0\) and the original Green functions are recovered for \(\rho \to 1\). Introducing the new integration variables \(p^0_i \to \tfrac{p^0_i}{\rho}\) in the particular case of \(\rho = -1\) we get
+\[
+    G(-i t_1, \mathbf{x}_1, \dots, -i t_n, \mathbf{x}_n) \propto \int \prod_{i=1}^n \frac{\mathrm{d}^D p_i}{(2 \pi)^D} e^{- \sum_{i=1}^n p_i \cdot x_i} \tilde{G}(p_1, \dots, p_n),
+\]
+Therefore, \uline{in the perturbative expansion the results of the euclidean theory are analytically connected to those in the Minkowski spacetime}. Practically, in many cases the results obtained in the euclidean space can be directly used to extract physical information and it is pointless to explicitly continue analytically to the Minkowski spacetime.
+
+There are rigorous theorems as the Osterwalder-Schrader positivity condition, on the validity of such analytic continuation even in non-perturbative regime for almost all QFT of physical interest (with the remarkable exception of Einstein gravity). In the following we shall always assume that the theories we deal with admit the analytic continuation of Wick to an euclidean metric.
+
+\section{Connection with Statistical Mechanics}
+
+The great advantage of Wick rotation and of the redefinition of QFT on euclidean space consists in the link we can establish between field theory and statistical mechanics.
+The Euclidean path integral has the same structure as a partition function:
+\[
+    Z = \sum_{\text{conf.}} e^{-\beta H}.
+\]
+
+This single powerful observation leads to the following correspondence:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ll}
+        \toprule
+        \textbf{QFT}                                            & \textbf{Statistical Mechanics}  \\
+        \midrule
+        \(\phi(x)\)                                             & LG Field or microscopical conf. \\
+        \(S_{E}[\phi]\)                                         & Hamiltonian \(H\)               \\
+        \(Z\)                                                   & Partition function              \\
+        \(\langle\phi(x_{1})\cdot\cdot\cdot\phi(x_{n})\rangle\) & Correlation functions           \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+
+\subsection{Generating Functionals}
+
+The generating fuctional of Green functions is defined from the partition function \(Z\) by introducing a source \(J(x)\), similar to coupling a statistical model to an external magnetic field:
+\begin{equation}
+    Z[J]=\int\mathcal{D}\phi \, e^{-S_{E}[\phi]+\int \mathrm{d}^{D}xJ(x)\phi(x)}.
+    \label{eq:generating_functional}
+\end{equation}
+It is called generating functional since all of the n-point correlation functions are generated by its successive functional derivatives
+\[
+    \langle\phi(x_{1})\cdot\cdot\cdot\phi(x_{n})\rangle=\frac{\delta^{n}Z[J]}{\delta J(x_{1})\cdot\cdot\cdot\delta J(x_{n})}\bigg|_{J=0}.
+\]
+This generation includes also disconnected functions.
+What is physically relevant is the set of \textbf{connected n-point functions}, generated by the functional:
+\begin{equation}
+    W[J]=\log \, Z[J].
+    \label{eq:connected_generating_functional}
+\end{equation}
+which, being the logarithm of a partition function, looks like the free energy in Statistical Mechanics.
 
 \subsection{Effective Action}
 
-\subsection{Dimensions and Operators}
+In particular the one point function, or expectation value, of a field, is called classical field in QFT.
+The name is inspired by \textbf{Ehrenfest theorem}: \textit{the average of an operator evoleves in time with the classical equations of motion}, i.e.
+\[
+    \phi_{cl}(x)=\frac{\delta W}{\delta J(x)}=\langle\phi(x)\rangle.
+\]
+This definition of classical field has, as analog is Statistical Mechanics: the \textbf{order parameter}.
+The effective action is the Legendre transform of the generating functional of connected correlation functions:
+\[
+    \Gamma[\phi_{c}] = W[J]-\int \mathrm{d}^{D}xJ(x)\phi_{c}(x).
+\]
+It plays a role analogous to the Gibbs free energy in statistical mechanics.
+In QFT \(\Gamma[\phi_{c}]\) is the generating function of the so-called 1-particle irreducible graphs, which are very important in the Feynman diagrams perturbative expansion and in its partial resummation through the Dyson equation.
+The conclusion is that the equivalence of Statistical Mechanics and (Wick rotated) QFT is on a solid ground and shows the wide generality of QFT as a mathematical tool for the systems with an infinite numebr of degrees of freedom, being able to describe a large range of models in many areas of physics.
+
+\subsection{Classical Dimensions and Relevance of Operators}
+
+Consider a scalar field theory, with action
+\begin{equation}
+    S = \int \mathrm{d}^{D}x\left[\frac{1}{2}(\partial_{\mu}\phi)^{2}+\sum_{n}g_{n}\phi^{n}\right]
+    \label{eq:scalar_field_action}
+\end{equation}
+If we perform dimensional analysis, we can infer the dimension of the field \(\phi\) from the kinetic term:
+\[
+    [\phi]=\frac{D-2}{2}.
+\]
+The dimension of the coupling can be inferred from the potential term:
+\[
+    [g_{n}]=D-n\frac{D-2}{2}.
+\]
+From the \textbf{renormalization group analysis}, we know that the fields in the potential are:
+\begin{itemize}
+    \item \([g_{n}]>0\) \textit{relevant}: they drive the theory out of the fixed point of RG (which corresponds to a critical point).
+    \item \([g_{n}]=0\) \textit{marginal}: they can be relevant or irrelevant depending on the sign of their \(\beta\)-function.
+    \item \([g_{n}]<0\) \textit{irrelevant}: they are suppressed by the renormalization group flow.
+\end{itemize}
+Thinking of the potential as perturbation of a Gaussian model (free massless boson), we can see that the irrelevant perturbations leave us on the same critical surface and the fluctuations become, in most cases, uncontrollably wild.
+The perturbation series by these sort of operators turns out to be non-renormalizable, i.e. plugged by infinities that cannot be cured by some regularization procedure.
+
+\uline{The "good" theories are instead the renormalizable ones}, where the dominating field in the potential is relevant, driving the theory out of the fixed point of RG (which corresponds to a critical point) towards a RG flow to some \textit{"infrared" destiny} (critical or trivial).
+So what field theorists call renormalizability of a theory corresponds, in Statistical Mechanics, adopting the RG language, to relevant perturbations.
+
+If \(V(\phi)\) is a polynomial whose term with maximal power is \(\phi^{n}\), there exists a space-time dimension
+\[
+    D_{crit}=\frac{2n}{n-2}
+\]
+called \textbf{upper critical dimension} such that, for \(D>D_{crit}\), \([g_{n}]\) is irrelevant or marginal and the theory becomes non-renormalizable. This puts a bound on which theories one can be renormalizable at a given spacetime dimension.
+For a single scalar theory like \eqref{eq:scalar_field_action} we have:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ll}
+        \toprule
+        Dimension & Max. field in the potential \\
+        \midrule
+        \(D=4\)   & \(\phi^{4}\)                \\
+        \(D=3\)   & \(\phi^{6}\)                \\
+        \(D=2\)   & any power (\(n=\infty\))    \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+In \(D=2\) a scalar field admits any sort of potential.
+As an example we cite the celebrated \textit{Sine-Gordon theory}
+\[
+    S=\int \mathrm{d}^{2}x\left(\frac{1}{2}(\partial_{\mu}\phi)^{2}-\frac{m^{2}}{\beta^{2}}\cos \, \beta\phi\right)
+\]
+a very important theory in many aspects, ranging from soliton theory to being the prototypical example of integrable QFT.
+
+\subsubsection{Summary of the main concepts of this chapter}
+The path integral formulation shows that:
+\begin{itemize}
+    \item QFT describes fluctuations of order parameters;
+    \item correlation functions encode physical observables;
+    \item critical phenomena correspond to field theories at RG fixed points.
+\end{itemize}
+This provides the conceptual framework for conformal field theory.
