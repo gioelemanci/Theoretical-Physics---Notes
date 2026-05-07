@@ -92,3 +92,214 @@ from which we can see that the infinitesimal transformation \(\mathrm{ad}_{\exp(
 \begin{example}[...]
     [...]
 \end{example}
+
+[...]
+
+\begin{theorem}
+    A Lie algebra is semi-simple if and only if the Killing form is a non-degenerate bilinear form, i.e., if \(K(X,Y)=K(Y,X)=0\)  for all \(Y \in \mathfrak{g}\), then \(X = 0\).
+\end{theorem}
+
+While this theorem can be clearly stated, and is important for us in the following, its proof utilizes concepts of ideals and radicals of Lie algebras, which we have not introduced. This is a bit hard to prove so we wont.
+
+\begin{theorem}
+    Let \(G\) be a compact real Lie group and \(\mathfrak{g}\) its Lie algebra. Then its Lie algebra has to be \textbf{reductive}:
+    \[
+        \mathfrak{g} \equiv \mathfrak{g}^{(ab)} \oplus \mathfrak{g}^{(ss)},
+    \]
+    where \(\mathfrak{g}^{(ab)}\) is an abelian Lie algebra and \(\mathfrak{g}^{(ss)}\) is a semisimple Lie algebra. Furthermore, the Killing form is negative-semi-definite: ...
+
+    Conversely, if \(\mathfrak{g}\) is a real Lie algebra with negative-definite Killing form (then \(\mathfrak{g}\) must be semi-simple), then any connected Lie group with algebra \(\mathfrak{g}\) is compact. If a real Lie algebra \(\mathfrak{g}\) has positive-definite Killing form, then \(\mathfrak{g} = {0}\).
+\end{theorem}
+
+Thus the Killing form relates to the semisimplicity of the algebra, and thus to the compactness of the group. In particular, for a compact real Lie group, the killing form is negative-semi-definite, and thus it is negative-definite on the semisimple part of the algebra, and zero on the abelian part.
+
+The relevance of these results to us is highlighted in the following way. Consider first a real semi-simple algebra \(\mathfrak{g}\) with compact \(G_0\). Pick an \(\mathbb{R}\)-basis \(\{T_i\}\) such that
+\[
+    K_{ij} = K(T_i, T_j) = \text{diag}\left(-1, \dots, -1\right).
+\]
+which is always possible by Gram–Schmidt. One particularly nice property of this basis is that the structure constants
+\[
+    [T_i, T_j] = \mathrm{ad}_{T_i}(T_j) = c_{ij}^k T_k,
+\]
+are constrained by the invariance of the Killing form
+\[
+    \dots
+\]
+thus using the invariance and the symmetry of the Killing form we can derive a constraint on the structure constants, which is a very useful property for computations: \uline{they are \textbf{completely antisymmetric} in the three indices}, thus they are the structure constants of a Lie algebra with respect to an orthonormal basis. We already know that the structure constants were antisymmetric in the first two indices (due to the definition through commutators), but now we have a stronger constraint, which is that they are completely antisymmetric in all three indices.
+
+Passing to the complexification, we can define a \(\mathbb{C}\)-basis of \(\mathfrak{g}_\mathbb{C}\), \(\{J_m = i T_m\}\), which by Corollary 3.3.2 is orthonormal, i.e., \(K^{\mathfrak{g}_\mathbb{C}}(J_m, J_n) = K^{\mathfrak{g}_\mathbb{C}}(i T_m, i T_n) = -K^{\mathfrak{g}_\mathbb{C}}(T_m, T_n) = -K(T_m, T_n) = \delta_{mn}\). In this new basis, the adjoint rep \(\mathrm{ad}\) of \(\mathfrak{g}_\mathbb{C}\) satisfies
+\[
+    \dots
+\]
+which is an Hermitian matrix. We now know that in this basis we can diagonalize the adjoint representation, since we have found a basis in which the adjoint representation is Hermitian. So \(\mathrm{ad}_{J_l} \in \mathrm{End}(\mathfrak{g}_\mathbb{C}) \) for the particular generators \(J_l\) of the complexified algebra can be diagonalized.
+
+Given the many details / proofs we have left out in arriving at this statement, we summarize the main result in the following:
+\begin{corollary}
+    Let \(\mathfrak{g}\) be a complex semi-simple Lie algebra. Then there exists elements \(X \in \mathfrak{g}\) such that \(\mathrm{ad}_X \in \mathrm{End}(\mathfrak{g})\) is diagonalizable.
+\end{corollary}
+This is also a sort of justification for the habit of physicists to use infinitesimal transformations with complex coefficients... you can find the real.... ?
+
+In the following, we will mostly work on complex algebras, so \(\mathfrak{g}\) will denote a complex semi-simple Lie algebra unless otherwise stated.
+
+\subsubsection{Cartan subalgebra}
+
+\begin{definition}
+    We have two statements
+    \begin{enumerate}[label=(\roman*)]
+        \item toroidal...
+        \item cartan subalgebra...
+    \end{enumerate}
+\end{definition}
+
+In the example \(\mathfrak{g} = \mathfrak{su}(2)_\mathbb{C} = \mathfrak{sl}(2; \mathbb{C})\), we alredy saw that \(J_3\) spans a Cartan subalgebra (since the generators do not commute we can take one of them). However it is also clear that any of the other generators \(J_{1/2}\) would equally span a Cartan algebra. So the \uline{Cartan is no unique, but basically “a basis change away”}.
+
+This is made precise in the following
+\begin{theorem}
+    Let \(\mathfrak{h}_1, \mathfrak{h}_2 \subset \mathfrak{g}\) be two Cartan subalgebras of a complex semi-simple Lie algebra \(\mathfrak{g}\). Then there exists an element in any group \(G\) with such algebra that maps one Cartan subalgebra to the other by the adjoint action:
+    \[
+        \mathfrak{h}_1 = \mathrm{Ad}_\mathfrak{g} (\mathfrak{h}_2).
+    \]
+    Consequently, \(\mathrm{dim}(\mathfrak{h}_1) = \mathrm{dim}(\mathfrak{h}_2)\).
+\end{theorem}
+This is in a sense just a rotation, since the Killing form is left invariant by the adjoint action, thus it is a rotation in the space of generators. Thus all Cartan subalgebras are equivalent.
+
+\begin{definition}
+    The \textbf{rank} of a complex semi-simple Lie algebra \(\mathfrak{g}\) is the dimension of its Cartan subalgebra(s) \(\mathfrak{h}\):
+    \[
+        \mathrm{rank}(\mathfrak{g}) := \mathrm{dim}(\mathfrak{h}).
+    \]
+\end{definition}
+Thus \(\mathfrak{su}(2)_\mathbb{C} = \mathfrak{sl}(2; \mathbb{C})\) has rank 1; more generally, \(\mathfrak{su}(n)_\mathbb{C} = \mathfrak{sl}(n; \mathbb{C})\) has rank \(n - 1\); \(\mathrm{rank}(\mathfrak{so}(2n)_\mathbb{C}) = \mathrm{rank}(\mathfrak{so}(2n + 1)_\mathbb{C}) = n\).
+
+The name “toral/toroidal” algebra comes from the following. By definition, a toral algebra \(\mathfrak{h} \subset \mathfrak{g}\) is Abelian. If we pick a compact real form \(\mathfrak{k} \subset \mathfrak{g}\), then \(\mathfrak{h} \cap \mathfrak{k}\) is a real toral algebra, which exponentiates into a compact Abelian subgroup (these elements commute), i.e., of the form \(\mathrm{U}(1)^n \equiv (\mathbb{S}^1)^n \) which is topologically a torus. A Cartan subalgebra exponentiates into a “maximal torus”, which is a common name in the literature. Just as their algebras, maximal tori \(\mathcal{H}_{1,2}\) are conjugate to each other:
+\[
+    \exists g \in G \,:\, g\mathcal{H}_1g^{-1} = \mathcal{H}_2.
+\]
+
+\section{Roots and Root Decomposition}
+
+In the following, we assume that we have fixed a Cartan algebra \(\mathfrak{h} \subset \mathfrak{g}\); other choices would yield identical results given that they differ by a basis change \(\mathrm{Ad}_g \in G \to \mathrm{GL}(\mathfrak{g})\). Since by definition all elements of \(\mathfrak{h}\) commute, i.e.
+\[
+    \forall H, H' \in \mathfrak{h}, \quad [\mathrm{ad}_H, \mathrm{ad}_{H'}] = \mathrm{ad}_{[H, H']} = 0,
+\]
+we can diagonalize \(\mathrm{ad}_H\) for all \(H \in \mathfrak{h}\) simultaneously, i.e., we can find a basis of \(\mathfrak{g}\) which consists of (simultaneous) eigenvectors \(X\) of all \(\mathrm{ad}_H\), whose eigenvalue we denote by \(\lambda(H) \in \mathbb{C}\):
+\[
+    \implies \mathrm{ad}_H(X) = [H, X] = \lambda(H) X.
+\]
+
+Such eigenvalues satisfy for any \(H_1, H_2 \in \mathfrak{h}\):
+\[
+    \begin{aligned}
+        \mathrm{ad}_{H_1 + H_2}(X) & = \mathrm{ad}_{H_1}(X) + \mathrm{ad}_{H_2}(X) = \lambda(H_1) X + \lambda(H_2) X = (\lambda(H_1) + \lambda(H_2)) X, \\
+        \mathrm{ad}_{c H_1}(X)     & = c \mathrm{ad}_{H_1}(X) = c \lambda(H_1) X, \quad c \in \mathbb{C},
+    \end{aligned}
+\]
+So every (simultaneous) eigenvector \(X \in \mathfrak{g}\) defines a linear functional \(\lambda \,:\, \mathfrak{h} \to \mathbb{C}\), \(H \mapsto \lambda(H)\), i.e., \(\lambda \in \mathfrak{h}^\vee\) is an element of the vector space dual to the Cartan algebra.
+
+For any \(\alpha \in \mathfrak{h}^\vee\), we can then define the eigenspace
+\[
+    \mathfrak{g}_{\alpha} := \{ X \in \mathfrak{g} \,:\, \mathrm{ad}_H(X) = [H, X] = \alpha(H) X, \forall H \in \mathfrak{h} \},
+\]
+i.e., the set of eigenvectors whose eigenvalues agree with the linear functional \(\alpha\). Note that, as defined here, \(\mathfrak{g}_{\alpha}\) is a vector space, but a priori not a Lie algebra. Clearly, a generic \(\alpha \in \mathfrak{h}^\vee\) will not be the eigenvalues of \(\mathrm{ad}_H\) for any \(H \in \mathfrak{h}\), so \(\mathfrak{g}_{\alpha} = \{0\}\) generically. Furthermore, since \(\mathfrak{h}\) is the maximal Abelian subalgebra, it is easy to see that \(\mathfrak{h} = \mathfrak{g}_0\). \uline{So this is a vector space but not a Lie algebra in general}.
+
+\begin{definition}[Root system]
+    [...]
+\end{definition}
+
+The set of all dual vector as appears ...
+
+\begin{lemma}
+    \(\mathcal{R}\) is a finite set.
+\end{lemma}
+\begin{proof}
+    This is obvious from the fact that eigenspaces \(\mathfrak{g}_{\alpha}\) associated to different eigenvalues of a diagonalizable endomorphism are linearly independent. Since \(\mathfrak{g}\supset \mathfrak{g}_{\alpha}\) is finite dimensional, there can only be finitely many \(\alpha\) such that \(\mathfrak{g}_\alpha \neq \{0\}\).
+\end{proof}
+
+Let us revisit \(\mathfrak{g}=\mathfrak{sl}(2; \mathbb{C})\). We fix \(\mathfrak{h} = \{ \mu J_3 \,|\, \mu \in \mathbb{C} \} \subset \mathfrak{sl}(2; \mathbb{C})\) as the Cartan algebra. Given the commutation relation \([J_3,\,J_{\pm}] = \pm J_{\pm}\), we see that \(\mathrm{ad}_{J_3}\) only has \(\pm 1\) as non-zero eigenvalues. So \(R = \{ \alpha_+ \equiv \alpha, \alpha_- = -\alpha \} \subset \mathfrak{h}^\vee\) with \(\alpha : \mathfrak{h} \to \mathbb{C}\), \(J_3 \mapsto 1\), and \(\mathfrak{g}_{\alpha_\pm} = \{ \mu J_\pm \,|\, \mu \in \mathbb{C} \}\). Notice how, as a vector space, \(\mathfrak{sl}(2; \mathbb{C}) = \mathfrak{h} \oplus \mathfrak{g}_{\alpha_+} \oplus \mathfrak{g}_{\alpha_-} \). These features, together with a few other ones that are easy to check explicitly for \(\mathfrak{sl}(2; \mathbb{C})\), are the content of the following theorem.
+
+\begin{theorem}
+    We fix \(\mathfrak{h} \subset \mathfrak{g}\) as the Cartan subalgebra, and \(R\) the root system of \(\mathfrak{g}\) with \(\mathfrak{h} = \mathfrak{g}_0\).
+    \begin{enumerate}[label=(\roman*)]
+        \item We can decompose the Lie algebra as a vector space as
+              \[
+                  \dots
+              \]
+              as the cartan subalgebra plus the root spaces. This is called the root decomposition of the algebra.
+        \item If we take two such elements ... then the commutator lives in the space associated to the sum of the two roots ... and the brackets must be closed...
+        \item If we have two roots that do not sum to zero ...
+        \item For any root \(\alpha\), one can take the killing form restricted to the root space \(\mathfrak{g}_\alpha\) and the root space \(\mathfrak{g}_{-\alpha}\), and this gives a non-degenerate pairing between these two spaces, thus they have the same dimension.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}[label=(\roman*)]
+        \item Follows directly from \(\{\mathrm{ad}_H \,|\, H \in \mathfrak{h}\}\) being simultaneously diagonalizable, so \(\mathfrak{g}\) decomposes into the direct sum of the eigenspaces, which are by definition the root subspaces \(\mathfrak{g}_{\alpha}\).
+        \item Direct computation gives for any \(H \in \mathfrak{h}\):
+              \[
+                  \dots
+              \]
+        \item We can rewrite (ii) also as \(\mathrm{ad}_{E_{\alpha}} (E_{\beta}) \in \mathfrak{g}_{\alpha + \beta}\). So, for \(E_{\gamma} \in \mathfrak{g}_{\gamma}\) we have
+              \[
+                  \mathrm{ad}_{E_{\alpha}} \circ \mathrm{ad}_{E_{\beta}} = \sum_{\alpha, i} \lambda_{\alpha}^{(i)} E_\alpha^{(i)} \in \mathfrak{g}_{\alpha + \beta + \gamma},
+              \]
+              So if \(\alpha + \beta \neq 0\) then \(E_{\gamma} \notin \mathfrak{g}_{\alpha + \beta + \gamma}\), which implies that \(\lambda_{\gamma}^{(i)} = 0\): all of the diagonal elements of the matrix representing this endomorphism in the root-eigenbasis are zero.
+
+              Then, unless \(\alpha + \beta = 0\), \(\mathrm{ad}_{E_{\alpha}} \circ \mathrm{ad}_{E_{\beta}} \) maps any basis vector \(T\) which by (i) can be chosen to be an eigenvector with certain eigenvalue \(\gamma \in \mathcal{R}\), to a linear combination of basis vectors that are eigenvectors with eigenvalues \(\alpha + \beta + \gamma \neq \gamma\). This again implies that the diagonal entries for the matrix of \(\mathrm{ad}_{E_{\alpha}} \circ \mathrm{ad}_{E_{\beta}} \) in the root-eigenbasis must be all 0, so \(\Tr(\mathrm{ad}_{E_{\alpha}} \circ \mathrm{ad}_{E_{\beta}}) = K(E_{\alpha}, E_{\beta}) = 0\).
+        \item By (iii), the only elements \(0 \neq Y \in \mathfrak{g}\) such that \(K(X, Y) \neq 0\) for an element \(0 \neq X \in \mathfrak{g}_\alpha \subset \mathfrak{g}\) must be in \(\mathfrak{g}_{-\alpha} \subset \mathfrak{g}\). Since we assumed the Lie algebra to be semi-simple, then its Killing form \(K\) is non-degenerate on \(\mathfrak{g}\): there must exist such a \(0 \neq Y \in \mathfrak{g}_{-\alpha}\). So \(K\) provides a non-degenerate pairing \(\mathfrak{g}_\alpha \times \mathfrak{g}_{-\alpha} \to \mathbb{C}\). Thus, if \(\mathfrak{g}_\alpha\) is non-trivial, also \(\mathfrak{g}_{-\alpha} \neq \{0\}\), hence \(-\alpha \in \mathcal{R}\).
+    \end{enumerate}
+\end{proof}
+
+Thus if we take commutators of vectors from different groups, we get vectors in the group associated to the sum of the roots. In particular, if we take commutators of vectors in the same group, we get vectors in the group associated to twice the root. So if \(2\alpha \notin \mathcal{R}\) then \(\mathfrak{g}_{2\alpha} = \{0\}\) and thus \([\mathfrak{g}_\alpha, \mathfrak{g}_\alpha] = \{0\}\).\TODO{check}
+
+This is the single most important result about semi-simple Lie algebras. Everything we will learn further about their structure, including the classification and constructing their representations, builds on this decomposition.
+
+\begin{definition}
+    Using the fact that \(K|\_{\mathfrak{h}}\) is a non-degenerate symmetric pairing, we have a vector space isomorphism \(\kappa \,:\, \mathfrak{h}^\vee \xrightarrow{\simeq} \mathfrak{h}\). This gives us a non trivial notion of duality, which is invertible:
+    \[
+        \begin{aligned}
+            \kappa^{-1} \,:\, & \mathfrak{h} \xrightarrow{\simeq} \mathfrak{h}^\vee, \\
+                              & H \mapsto \kappa(H, \cdot).
+        \end{aligned}
+    \]
+    \begin{enumerate}
+        \item Let \(\alpha \in \mathfrak{h}^\vee\), then we can denote \(H_{\alpha} := \kappa(\alpha)\). It satisfies \(K(H_{\alpha}, H_{\beta}) = \alpha(H_{\beta})\) for all \(\alpha, \beta \in \mathfrak{h}^\vee\).
+        \item ...
+    \end{enumerate}
+\end{definition}
+
+For a better intuition about it, let us fix a basis \(\{H_i\}\) of \(\mathfrak{h}\), in which \(K|_{\mathfrak{h}}\) has the matrix \(\kappa_{ij} = K(H_i, H_j)\). In the dual basis \(\{\theta_i\}\) of \(\mathfrak{h}^\vee\) (i.e., \(\theta_i(H_j) = \delta_{ij}\)), we have for all \(\alpha \in \mathfrak{h}^\vee\) the equation
+\[
+    H_\alpha = \kappa(\alpha_i \theta_i) = \kappa_{ij} \alpha_i H_j,
+\]
+where \(\kappa_{ij} \equiv (\kappa^{-1})_{ij}\) is the inverse matrix, which also encodes the pairing on \(\mathfrak{h}^\vee\):
+\[
+    \begin{aligned}
+        (\alpha, \beta) = K(H_\alpha, H_\beta) = K(\kappa^{ij}\alpha_i H_j, \kappa^{lm}\beta_l H_m) = \alpha_i \beta_l \kappa^{ij} \kappa^{lm} K(H_j, H_m) \\
+        = \alpha_i \beta_l \kappa^{ij} \kappa^{lm} \kappa_{jm} = \alpha_i \beta_l \kappa^{ij} \delta^l_{\ j} = k^{ij} \alpha_i \beta_j.
+    \end{aligned}
+\]
+
+For \(\mathfrak{g} = \mathfrak{sl}(2; \mathbb{C})\), we have used for \(\mathfrak{h}\) the basis \(H = J_3\), with \(K(J_3, J_3) = 2\) and
+\[
+    [J_3, X] = \alpha(J_3) X, \quad [J_e, J_\pm] = \pm J_\pm,
+\]
+and the roots \(\alpha^{\pm} : J_3 \mapsto \pm 1\) associated with eigenvectors \(E_{\pm\alpha} = J_{\pm}\):
+\[
+    \mathfrak{g}_{\alpha^{\pm}} = \{ \mu J_{\pm} \,|\, \mu \in \mathbb{C} \} = \{ \mu E_{\pm\alpha} \,|\, \mu \in \mathbb{C} \}.
+\]
+Then:
+\begin{enumerate}
+    \item \(H_{\alpha} = \kappa(\alpha) = \lambda J_3 \in \mathfrak{h}\), is determined by the condition...
+
+          If we choose a different basis for the Cartan subalgebra, for example \(J_1\) instead of \(J_3\), then we would have a different root system. However, the root system is basically the same...
+    \item \(\alpha(J_3)=1\), they form a dual pair of basis for...
+\end{enumerate}
+
+\begin{lemma}
+    Let \(E_+ \in \mathfrak{g}_{\alpha}\) and \(E_- \in \mathfrak{g}_{-\alpha}\), then
+    \[
+        [E_+ ,\, E_-] = K(E_+,E_-) = H_{\alpha}.
+    \]
+\end{lemma}
+\begin{proof}
+    [...]
+\end{proof}
