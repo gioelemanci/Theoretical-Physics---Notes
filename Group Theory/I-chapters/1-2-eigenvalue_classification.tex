@@ -1,0 +1,241 @@
+\section{Energy Eigenvalues Classification}
+
+The energy spectrum of a quantum system typically contains many energy values. The problem then arises of devising a classification method for the energy eigenvalues. There does not exist any a priori ideal classification scheme. However, symmetry provides a natural one. In this section, we show that when the system is characterized by a dynamical symmetry group \(G\), the energy eigenvalues can be efficiently classified based on the unitary representations of \(G\) according to which the energy eigenstates transform under the action of \(G\).
+
+We assume that the system’s Hamiltonian \(H\) has a \textbf{completely discrete spectrum} and that each energy eigenvalue has \textbf{finite degeneracy}. Let \(E\) be an energy eigenvalue of \(H\) and let \(\mathcal{H}_E\) be the corresponding eigenspace, which is \(d_E\)-dimensional given a degeneracy \(d_E\); this subspace is spanned by all vectors \(\Psi\) which respect the eigenvalue equation
+\[
+    H \Psi = E \Psi.
+\]
+Let now \(\Psi\) be a vector of \(\mathcal{H}_E\), then for any symmetry transformation \(g\) of \(G\) we have
+\[
+    H U(g)\Psi = U(g) H \Psi = E U(g) \Psi,
+\]
+as a direct consequence of \eqref{eq:dynamical_symmetry_hamiltonian_invariance_unitary_representation_definition}. This means that \(U(g)\Psi\) is also an eigenvector of \(H\) with the same eigenvalue \(E\). Thus, the eigenspace \(\mathcal{H}_E\) is invariant under the action of \(G\). The unitary operators \(U(g)\) representing the symmetry transformations of \(G\) on the Hilbert space \(\mathcal{H}\) of the system restrict to unitary operators on the eigenspace \(\mathcal{H}_E\), thus providing a unitary representation of \(G\) on \(\mathcal{H}_E\). The energy eigenvalue \(E\) can be classified according to the unitary representation of \(G\) according to which the energy eigenstates in \(\mathcal{H}_E\) transform under the action of \(G\).
+
+\subsection{Unitary Representations on the Eigenspaces}
+
+If we now consider \( \{ \Phi_i \} \) an ON basis for the subspace \(\mathcal{H}_E\), then these vectors respect the eigenvalue equation and the orthonormality condition
+\[
+    \begin{dcases}
+        H \Phi_i = E \Phi_i, \\
+        \bra{\Phi_i} \ket{\Phi_j} = \delta_{ij}.
+    \end{dcases}
+\]
+Since the unitary representation of \(G\) on \(\mathcal{H}_E\) is given by the restriction of the unitary representation of \(G\) on \(\mathcal{H}\), we have that for any symmetry transformation \(g\) of \(G\) and any vector \(\Phi_i\) of the ON basis \(\{\Phi_i\}\) of \(\mathcal{H}_E\), the transformed vector \(U(g)\Phi_i\) is a linear combination of the vectors of the ON basis \(\{\Phi_i\}\):
+\begin{equation}
+    U(g)\Phi_i = \sum_{j=1}^{d_E} \Phi_j D_{ji}(g),
+    \label{eq:unitary_representation_eigenspace_linear_combination_definition}
+\end{equation}
+where \(D_{ji}(g)\) are the complex, \(g\)-dependent matrix elements of the unitary representation of \(G\) on \(\mathcal{H}_E\). We aim to prove that the family of matrices \(D(g)\) with elements \(D_{ji}(g)\) forms a unitary representation of the symmetry group \(G\) on the eigenspace \(\mathcal{H}_E\).
+\begin{proposition}
+    For each element \(g\) of the symmetry group \(G\), there exists a \(d_E \times d_E\) complex matrix \(D(g) = (D_{ji}(g))\) which is unitary:
+    \begin{equation}
+        \begin{aligned}
+            D(g \cdot g^{\prime}) & = D(g) D(g^{\prime}),               \\
+            D(g)^{\dagger} D(g)   & = D(g) D(g)^{\dagger} = \mathbb{I},
+        \end{aligned}
+        \label{eq:unitary_representation_eigenspace_definition}
+    \end{equation}
+    for all \(g\), \(g'\) in \(G\). The family of unitary matrices \(D(g)\) forms a unitary representation of the symmetry group \(G\) on the eigenspace \(\mathcal{H}_E\) corresponding to the energy eigenvalue \(E\).
+\end{proposition}
+
+\begin{proof}
+    As \(U(g)\) is a unitary representation of \(G\) on the Hilbert space \(\mathcal{H}\) of the system, we know that for any \(g\), \(g'\) in \(G\) we have
+    \[
+        U(g \cdot g^{\prime}) \Phi_i = U(g) U(g^{\prime}) \Phi_i.
+    \]
+    Since the vectors \(\Phi_i\) form a basis for the eigenspace \(\mathcal{H}_E\), the above equation implies that the matrix elements of \(U(g)\) in this basis satisfy the same multiplication rule as the matrices \(D(g)\), from \eqref{eq:unitary_representation_eigenspace_linear_combination_definition}:
+    \[
+        U(g \cdot g^{\prime}) \Phi_i = \sum_{j=1}^{d_E} \Phi_j D_{ji}(g \cdot g^{\prime}),
+    \]
+    and
+    \[
+        \begin{aligned}
+            U(g) U(g^{\prime}) \Phi_i & = U(g) \sum_{j} \Phi_j D_{ji}(g^{\prime}) = \sum_{j} U(g) \Phi_j D_{ji}(g^{\prime})                                                            \\
+                                      & = \sum_{j} \left( \sum_{k} \Phi_k D_{kj}(g) \right) D_{ji}(g^{\prime}) = \sum_{k} \Phi_k \left( \sum_{j} D_{kj}(g) D_{ji}(g^{\prime}) \right).
+        \end{aligned}
+    \]
+    Now if we put together the above two equations, we can prove the first relation in \eqref{eq:unitary_representation_eigenspace_definition}:
+    \[
+        D_{ji} (g \cdot g^{\prime}) = \sum_{k} D_{kj}(g) D_{ji}(g^{\prime}),
+    \]
+    which is the multiplication rule for the matrices \(D(g)\).
+
+    The second relation in \eqref{eq:unitary_representation_eigenspace_definition} is a consequence of \eqref{eq:unitary_representation_eigenspace_linear_combination_definition} and the orthonormality of the basis \(\{\Phi_i\}\):
+    \[
+        \begin{aligned}
+            \delta_{ij} & = \bra{\Phi_i} \ket{\Phi_j} = \bra{U(g) \Phi_i} \ket{U(g) \Phi_j}                                                               \\
+                        & = \bra{\sum_{k} \Phi_k D_{ki}(g)} \ket{\sum_{l} \Phi_l D_{lj}(g)} = \sum_{k, l} D_{ki}(g)^* \bra{\Phi_k} \ket{\Phi_l} D_{lj}(g) \\
+                        & = \sum_{k} D_{ik}(g)^{\dagger} D_{kj}(g) = (D(g)^{\dagger} D(g))_{ij},
+        \end{aligned}
+    \]
+    where in the last steps we have transposed the indices and used the definition of the adjoint matrix \(D(g)^{\dagger}\). This proves that \(D(g)^{\dagger} D(g) = \mathbb{I}\).
+\end{proof}
+
+Having proven \eqref{eq:unitary_representation_eigenspace_definition}, we know \(g \mapsto D(g)\) to be a unitary representation of the symmetry group \(G\) on the eigenspace \(\mathcal{H}_E\) corresponding to the energy eigenvalue \(E\), and from \eqref{eq:unitary_representation_eigenspace_linear_combination_definition} we know the basis vectors \(\Phi_i\) to transform under the action of \(G\) through \(D(g)\).
+
+The energy eigenvalue \(E\) can thus be classified according to the unitary representation \(D(g)\), where the energy eigenstates in \(\mathcal{H}_E\) transform under the action of \(G\). The problem is that there are infinitely many orthonormal bases of the energy eigenspace \(\mathcal{H}_E\) of \(E\). The representation \(D(g)\) depends on the chosen basis \(\{\Phi_i\}\). So \(D(g)\) by itself cannot be used to distinguish \(E\) from other energy eigenvalues. Let us analyze this point in greater detail.
+
+\begin{proposition}
+    Let \(\{\Phi_{\ i}^1\}\) and \(\{\Phi_{\ i}^2\}\) be two ON bases for the eigenspace \(\mathcal{H}_E\) corresponding to the energy eigenvalue \(E\). Then, let the corresponding unitary representations be \(D^1(g)\) and \(D^2(g)\), defined by \eqref{eq:unitary_representation_eigenspace_linear_combination_definition} with respect to the bases \(\{\Phi_{\ i}^1\}\) and \(\{\Phi_{\ i}^2\}\), respectively.
+
+    There exist a \(d_E \times d_E\) unitary matrix \(A\) such that its elements \(A_{ij}\) relate the two bases \(\{\Phi_{\ i}^1\}\) and \(\{\Phi_{\ i}^2\}\) as
+    \begin{equation}
+        \Phi_{\ i}^2 = \sum_{j=1}^{d_E} \Phi_{\ j}^1 A_{ji},
+        \label{eq:unitary_representation_eigenspace_basis_change_definition}
+    \end{equation}
+    and the two unitary representations \(D^1(g)\) and \(D^2(g)\) are related by the similarity transformation
+    \begin{equation}
+        D^2(g) = A^{-1} D^1(g) A,
+        \label{eq:unitary_representation_eigenspace_similarity_transformation_definition}
+    \end{equation}
+    for all \(g\) in \(G\). Thus, the two unitary representations \(D^1(g)\) and \(D^2(g)\) are equivalent representations of the symmetry group \(G\).
+\end{proposition}
+
+\begin{proof}
+    Using \eqref{eq:unitary_representation_eigenspace_linear_combination_definition}, we can develop \eqref{eq:unitary_representation_eigenspace_basis_change_definition} as
+    \[
+        \begin{aligned}
+            U(g) \Phi_{\ i}^2 & = U(g) \sum_{j=1}^{d_E} \Phi_{\ j}^1 A_{ji} = \sum_{j=1}^{d_E} U(g) \Phi_{\ j}^1 A_{ji} = \sum_{j=1}^{d_E} \left( \sum_{k=1}^{d_E} \Phi_{\ k}^1 D_{kj}^1(g) \right) A_{ji} \\
+                              & = \sum_{k=1}^{d_E} \Phi_{\ k}^1 \left( \sum_{j=1}^{d_E} D_{kj}^1(g) A_{ji} \right) = \sum_{k=1}^{d_E} \Phi_{\ k}^1 (D^1(g) A)_{ki},
+        \end{aligned}
+    \]
+    on one hand, and
+    \[
+        \begin{aligned}
+            U(g) \Phi_{\ i}^2 & = \sum_{k=1}^{d_E} \Phi_{\ k}^2 D_{ki}^2(g) = \sum_{k=1}^{d_E} \left( \sum_{j=1}^{d_E} \Phi_{\ j}^1 A_{jk} \right) D_{ki}^2(g)      \\
+                              & = \sum_{j=1}^{d_E} \Phi_{\ j}^1 \left( \sum_{k=1}^{d_E} A_{jk} D_{ki}^2(g) \right) = \sum_{j=1}^{d_E} \Phi_{\ j}^1 (A D^2(g))_{ji}.
+        \end{aligned}
+    \]
+    Putting together the above two equations, we have
+    \[
+        (D^1(g) A)_{ki} = (A D^2(g))_{ki}, \quad \text{i.e., } D^1(g) A = A D^2(g),
+    \]
+    which shows that the two unitary representations \(D^1(g)\) and \(D^2(g)\) are related by the similarity transformation \(D^2(g) = A^{-1} D^1(g) A\). This proves that the two unitary representations \(D^1(g)\) and \(D^2(g)\) are equivalent representations of the symmetry group \(G\).
+\end{proof}
+
+Thus two unitary representations \(D^1(g)\) and \(D^2(g)\) of the symmetry group \(G\) of the same dimension \(d_E\), related as in \eqref{eq:unitary_representation_eigenspace_similarity_transformation_definition}, for some unitary matrix \(A\), are said to be \textbf{unitarily equivalent}. Thus the unitary representation \(D(g)\) in \eqref{eq:unitary_representation_eigenspace_linear_combination_definition} is independent of the choice of the ON basis \(\{\Phi_i\}\) for the eigenspace \(\mathcal{H}_E\) up to unitary equivalence.
+
+We can in this way characterize the energy eigenvalue \(E\) by a \textit{unitary equivalence class of unitary representations}\footnote{It is a class of equivalence of unitary representations, where the representations are unitarily equivalent.} of \(G\) and use this class to group \(E\) with other eigenvalues sharing the very same class. In this way, \textbf{a symmetry based classification of the energy spectrum is achieved}. Since however there are infinitely many representations of any given group, the classification scheme obtained may not be so useful. Fortunately, generic representations can be decomposed as combinations of a smaller set of more basic representations, which can then be used to refine the scheme.
+
+\subsection{Reducibility and Irreducibility}
+
+Suppose that we are able to chose the orthonormal basis \(\{\Phi_i\}\) of the energy eigenspace \(\mathcal{H}_E\) to be of indexed \(\Phi_{\alpha r}\) by two indices \(\alpha\), \(r\) in such a way that \eqref{eq:unitary_representation_eigenspace_linear_combination_definition} takes the form
+\[
+    U(g) \Phi_{\alpha r} = \sum_{s} \Phi_{\alpha s} D_{\alpha s r}(g),
+\]
+for every element \(g\) of \(G\), for certain \(g\)-dependent coefficients \(D_{\alpha s r}(g)\). Therefore, the vectors \(\Phi_{\alpha r}\) for fixed \(\alpha\) mix among themselves under the action of \(G\). This means that, for fixed \(g\), the matrix \(D(g)\) has the block diagonal form
+\[
+    D(g) = \begin{pmatrix}
+        D_1(g) & 0      & \cdots & 0      \\
+        0      & D_2(g) & \cdots & 0      \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0      & 0      & \cdots & D_a(g)
+    \end{pmatrix},
+\]
+and let us assume that the blocks \(D_{\alpha}(g)\) are of dimension \(d_{\alpha}\), which is the smallest non trivial dimension for each block (i.e. the blocks cannot be further decomposed into diagonal blocks by a furhter change of basis \(\Phi_{\alpha r}\)). Then, the unitary representation \(g \mapsto D(g)\) of \(G\) on \(\mathcal{H}_E\) is said to be \textbf{reducible}, and its blocks \(D_{\alpha}(g)\) are said to define an \textbf{irreducible} representations \(g \mapsto D_{\alpha}(g)\) of \(G\) (\textit{irreducible components}).
+
+The energy eigenvalue \(E\) can then be classified through the irreducible representations \(D_{\alpha}(g)\) of \(G\). The former way of proceeding provides a classification scheme of the energy spectrum relying on a more restricted set of elements and so potentially more useful than that furnished by the latter.
+
+We can resume the results obtained in this section as follows:
+\begin{itemize}
+    \item Each energy eigenvalue \(E\) is characterized by a set of irreducible unitary representations \(D_{\alpha}\) of \(G\), unique up to unitary equivalence, describing how the eigenvectors belonging to \(E\) transform under the action of \(G\).
+    \item The energy eigenvalues can be grouped in subsets of eigenvalues sharing the same representation content \(D_{\alpha}\) providing a classification scheme of the energy spectrum.
+\end{itemize}
+
+Let us illustrate the above results with a few examples.
+
+\begin{example}[The One-Dimensional Harmonic Oscillator]
+    The parity transformation \(P\) is space reflection about the origin. Observation show that the parity group \(C_2 = \{\mathbb{I},P\}\) is a dynamical symmetry group of the one–dimensional harmonic oscillator.
+
+    As well known, the energy eigenvalues of the one–dimensional harmonic oscillator are given by
+    \[
+        H \Phi_n = E_n \Phi_n. \quad E_n = \hbar \omega (n + 1/2),
+    \]
+    with \(n = 0, 1, 2, \ldots\), and are non degenerate. The energy eigenstates of the one–dimensional harmonic oscillator transform under the action of the parity transformation \(P\) as
+    \[
+        U(P) \Phi_n = \Phi_n (-1)^n.
+    \]
+    Thus the parity group \(C_2\) has two irreducible unitary representations: the trivial representation \(D_+(P) = 1\) and the sign representation \(D_-(P) = -1\). The energy eigenvalues of the one–dimensional harmonic oscillator are classified according to these two irreducible unitary representations of \(C_2\): the energy eigenvalues with even \(n\) transform according to the trivial representation \(D_+\), while those with odd \(n\) transform according to the sign representation \(D_-\). Thus we classify them as even or odd energy eigenvalues according to the parity of \(n\).
+\end{example}
+
+\begin{example}[The Hydrogen Atom]
+    It can be shown that the proper rotation group \(\mathrm{SO}(3)\) is a dynamical symmetry group of the hydrogen atom. The energy eigenvalues of the hydrogen atom are known to be given by
+    \[
+        H \Phi_{n l m} = E_n \Phi_{n l m}, \quad E_n = -\frac{m c^2 \alpha^2}{2 n^2}.
+    \]
+    The energy eigenvalues of the hydrogen atom are degenerate, with degeneracy \(d_{E_n} = n^2\):
+    \begin{enumerate}
+        \item \(n = 0, 1, 2, \ldots\),
+        \item \(l = 0, 1, \ldots, n-1\),
+        \item \(m = -l, -l+1, \ldots, l-1, l\),
+    \end{enumerate}
+\end{example}
+and the eigenstates \(\Phi_{n l m}\) are also eigenstates of the total angular momentum operator \(L^2\) and of the component along the quantization axis of the angular momentum operator \(L_z\):
+\[
+    \begin{dcases}
+        L^2 \Phi_{n l m} = \hbar^2 l(l+1) \Phi_{n l m}, \\
+        L_0 \Phi_{n l m} = \hbar m \Phi_{n l m}.
+    \end{dcases}
+\]
+Furthermore, the other spherical coordinates of the angular momentum \(L_{\pm}\) act on the eigenstates \(\Phi_{n l m}\) as
+\[
+    L_{\pm} \Phi_{n l m} = \hbar \sqrt{l(l+1) - m(m \pm 1)} \Phi_{n l (m \pm 1)},
+\]
+thus acting as ladder operators on the index \(m\).
+
+Since \(\mathbf{L}\) is the \textbf{infinitesimal generator} of the proper rotation group \(\mathrm{SO}(3)\) (which will be discussed in the next section \ref{sec:lie}), the energy eigenstates \(\Phi_{n l m}\) transform under the action of \(\mathrm{SO}(3)\) according to the irreducible unitary representation \(D_l(\mathbf{R})\) of \(\mathrm{SO}(3)\), of dimension \(d_l = 2l + 1\):
+\[
+    U(\mathbf{R}) \Phi_{n l m} = \sum_{m'=-l}^{l} \Phi_{n l m'} D_{l m' m}(\mathbf{R}),
+\]
+so that \(D_l(\mathbf{R})\) is \((2l+1)\times(2l+1)\) dimensional, and the mappings \(\mathbf{R} \mapsto D_l(\mathbf{R})\) can be shown to be unitary irreducible representations of \(\mathrm{SO}(3)\). Thus for each energy eigenvalue \(E_n\) of the hydrogen atom, the energy eigenstates \(\Phi_{n l m}\) transform under the action of \(\mathrm{SO}(3)\) according to the \(n\) irreducible \((2l+1)\)-dimensional unitary representation \(D_{l=0,1,\ldots,n-1}\) of \(\mathrm{SO}(3)\). In this way, the symmetry based classification of the energy spectrum is achieved for the hydrogen atom.
+
+\begin{example}[The Sulfur Trioxide Molecule SO\(_3\)]\TODO{put image of the molecule}
+    The molecule of sulfur trioxide SO\(_3\) has the shape of a planar equilateral triangle, with the sulfur atom at the center and the three oxygen atoms at the vertices. The symmetry group of this molecule is the dihedral group \(D_3\), which is a subgroup of \(\mathrm{SO}(3)\).
+
+    A planar equilateral triangle has the following symmetries:
+    \begin{itemize}
+        \item Three rotations of \(120^{\circ}\) about the axis perpendicular to the plane of the triangle, which we call \(C_3\) rotations:
+              \[
+                  0^{\circ} : \begin{pmatrix}
+                      123        \\
+                      \downarrow \\
+                      123
+                  \end{pmatrix}, \quad 120^{\circ} : \begin{pmatrix}
+                      123        \\
+                      \downarrow \\
+                      231
+                  \end{pmatrix}, \quad 240^{\circ} : \begin{pmatrix}
+                      123        \\
+                      \downarrow \\
+                      312
+                  \end{pmatrix}.
+              \]
+        \item Three reflections about the axes of symmetry of the triangle, which we call \(\sigma_v\) reflections:
+              \[
+                  \sigma_v^1 : \begin{pmatrix}
+                      123        \\
+                      \downarrow \\
+                      132
+                  \end{pmatrix}, \quad \sigma_v^2 : \begin{pmatrix}
+                      123        \\
+                      \downarrow \\
+                      321
+                  \end{pmatrix}, \quad \sigma_v^3 : \begin{pmatrix}
+                      123        \\
+                      \downarrow \\
+                      213
+                  \end{pmatrix}.
+              \]
+    \end{itemize}
+    Putting together the above symmetries, we find a total of six symmetries, which form the dihedral group \(D_3\), which coincides with the symmetric group \(S_3\) of permutations of three objects. The energy eigenvalues of the sulfur trioxide molecule SO\(_3\) can be classified according to the irreducible unitary representations of \(D_3\).
+
+    This group has three \textit{unitary equivalence classes of irreducible unitary representations}: the trivial representation \(D_+\), the sign representation \(D_-\) and a two-dimensional representation \(D_2\). They are of dimensions \(d_+ = 1\), \(d_- = 1\) and \(d_2 = 2\), respectively, and we can deduce their dimensionality through the following theorem:
+    \begin{theorem}
+        The sum of the squares of the dimensions \(d_{\alpha}\) of the irreducible unitary representations \(D_{\alpha}\) of a finite non-abelian group \(G\) is equal to the order \(|G|\) (the number of elements) of the group:
+        \[
+            \sum_{\alpha} d_{\alpha}^2 = |G|.
+        \]
+    \end{theorem}
+    In our case the only way to satisfy the above relation is to have \(d_+^2 + d_-^2 + d_2^2 = 1^2 + 1^2 + 2^2 = 6\), which is the order of \(D_3\). The energy eigenvalues of the sulfur trioxide molecule SO\(_3\) can be classified according to these three irreducible unitary representations of \(D_3\).
+\end{example}
