@@ -125,7 +125,7 @@ are constrained by the invariance of the Killing form
 \[
     \dots
 \]
-thus using the invariance and the symmetry of the Killing form we can derive a constraint on the structure constants, which is a very useful property for computations: \uline{they are \textbf{completely antisymmetric} in the three indices}, thus they are the structure constants of a Lie algebra with respect to an orthonormal basis. We already know that the structure constants were antisymmetric in the first two indices (due to the definition through commutators), but now we have a stronger constraint, which is that they are completely antisymmetric in all three indices.
+thus using the invariance and the symmetry of the Killing form we can derive a constraint on the structure constants, which is a very useful property for computations: \uline{they are \textbf{completely} \textbf{antisymmetric} in the three indices}, thus they are the structure constants of a Lie algebra with respect to an orthonormal basis. We already know that the structure constants were antisymmetric in the first two indices (due to the definition through commutators), but now we have a stronger constraint, which is that they are completely antisymmetric in all three indices.
 
 Passing to the complexification, we can define a \(\mathbb{C}\)-basis of \(\mathfrak{g}_\mathbb{C}\), \(\{J_m = i T_m\}\), which by Corollary 3.3.2 is orthonormal, i.e., \(K^{\mathfrak{g}_\mathbb{C}}(J_m, J_n) = K^{\mathfrak{g}_\mathbb{C}}(i T_m, i T_n) = -K^{\mathfrak{g}_\mathbb{C}}(T_m, T_n) = -K(T_m, T_n) = \delta_{mn}\). In this new basis, the adjoint rep \(\mathrm{ad}\) of \(\mathfrak{g}_\mathbb{C}\) satisfies
 \[
@@ -217,14 +217,14 @@ The set of all dual vector as appears ...
 
 Let us revisit \(\mathfrak{g}=\mathfrak{sl}(2; \mathbb{C})\). We fix \(\mathfrak{h} = \{ \mu J_3 \,|\, \mu \in \mathbb{C} \} \subset \mathfrak{sl}(2; \mathbb{C})\) as the Cartan algebra. Given the commutation relation \([J_3,\,J_{\pm}] = \pm J_{\pm}\), we see that \(\mathrm{ad}_{J_3}\) only has \(\pm 1\) as non-zero eigenvalues. So \(R = \{ \alpha_+ \equiv \alpha, \alpha_- = -\alpha \} \subset \mathfrak{h}^\vee\) with \(\alpha : \mathfrak{h} \to \mathbb{C}\), \(J_3 \mapsto 1\), and \(\mathfrak{g}_{\alpha_\pm} = \{ \mu J_\pm \,|\, \mu \in \mathbb{C} \}\). Notice how, as a vector space, \(\mathfrak{sl}(2; \mathbb{C}) = \mathfrak{h} \oplus \mathfrak{g}_{\alpha_+} \oplus \mathfrak{g}_{\alpha_-} \). These features, together with a few other ones that are easy to check explicitly for \(\mathfrak{sl}(2; \mathbb{C})\), are the content of the following theorem.
 
-\begin{theorem}
+\begin{theorem}[Root decomposition]
     We fix \(\mathfrak{h} \subset \mathfrak{g}\) as the Cartan subalgebra, and \(R\) the root system of \(\mathfrak{g}\) with \(\mathfrak{h} = \mathfrak{g}_0\).
     \begin{enumerate}[label=(\roman*)]
         \item We can decompose the Lie algebra as a vector space as
               \[
-                  \dots
+                  \mathfrak{g} = \mathfrak{h} \oplus \bigoplus_{\alpha \in \mathcal{R} \Subset} \mathfrak{g}_\alpha,
               \]
-              as the cartan subalgebra plus the root spaces. This is called the root decomposition of the algebra.
+              as the cartan subalgebra plus the root spaces. This is called the root decomposition of the algebra. It is not a sum of algebras, since the root spaces are not closed under the Lie bracket, they are just vector spaces.
         \item If we take two such elements ... then the commutator lives in the space associated to the sum of the two roots ... and the brackets must be closed...
         \item If we have two roots that do not sum to zero ...
         \item For any root \(\alpha\), one can take the killing form restricted to the root space \(\mathfrak{g}_\alpha\) and the root space \(\mathfrak{g}_{-\alpha}\), and this gives a non-degenerate pairing between these two spaces, thus they have the same dimension.
@@ -253,7 +253,7 @@ Thus if we take commutators of vectors from different groups, we get vectors in 
 This is the single most important result about semi-simple Lie algebras. Everything we will learn further about their structure, including the classification and constructing their representations, builds on this decomposition.
 
 \begin{definition}
-    Using the fact that \(K|\_{\mathfrak{h}}\) is a non-degenerate symmetric pairing, we have a vector space isomorphism \(\kappa \,:\, \mathfrak{h}^\vee \xrightarrow{\simeq} \mathfrak{h}\). This gives us a non trivial notion of duality, which is invertible:
+    Using the fact that \(K|_{\mathfrak{h}}\) is a non-degenerate symmetric pairing, we have a vector space isomorphism \(\kappa \,:\, \mathfrak{h}^\vee \xrightarrow{\simeq} \mathfrak{h}\). This gives us a non trivial notion of duality, which is invertible:
     \[
         \begin{aligned}
             \kappa^{-1} \,:\, & \mathfrak{h} \xrightarrow{\simeq} \mathfrak{h}^\vee, \\
@@ -294,6 +294,11 @@ Then:
     \item \(\alpha(J_3)=1\), they form a dual pair of basis for...
 \end{enumerate}
 
+We found the roots of the root system identifying the eigenvalues of the adjoint representation of the Cartan subalgebra...
+We restrict the killing form to the cartan subspace and use it to define a non-degenerate pairing (given by a non degenerate matrix) between the root spaces associated to opposite roots, which allows us to find the dual vector \(H_{\alpha}\) associated to each root \(\alpha\) (it gives an isomorphism between \(\mathfrak{h}^\vee\) and \(\mathfrak{h}\)). We can use this matrix \(\kappa\) to identify vectors in the Cartan subalgebra with linear functionals on it. We can use this pairing as a geometric euclidean pairing on the root space, which allows us to define angles and lengths of roots (through scalar products). We can use the root decomposition to find the commutation relations among the generators of the algebra, which are constrained by the root structure.
+
+Let us discuss some further properties of the root decomposition, which are important for the classification of representations.
+
 \begin{lemma}
     Let \(E_+ \in \mathfrak{g}_{\alpha}\) and \(E_- \in \mathfrak{g}_{-\alpha}\), then
     \[
@@ -303,3 +308,177 @@ Then:
 \begin{proof}
     [...]
 \end{proof}
+
+\begin{lemma}
+    Let \(E_+ \in \mathfrak{g}_{\alpha}\) and \(E_- \in \mathfrak{g}_{-\alpha}\), then
+    \[
+        [E_+ ,\, E_-] = K(E_+,E_-) H_{\alpha},
+    \]
+    for \(\alpha \in \mathcal{R}\), where \(H_{\alpha} = \kappa(\alpha)\) is the dual vector associated to \(\alpha\) through the Killing form.
+\end{lemma}
+\begin{proof}
+    \[
+        H:=\dots
+    \]
+    \[
+        K\big|_{\mathfrak{h}} = \dots
+    \]
+    This means that by leaving the second argument of the Killing form free, we can identify it with the dual vector \(H_{\alpha}\) associated to \(\alpha\) through the Killing form...
+    \[
+        H = \kappa(\kappa^{-1}(H)) =\dots
+    \]
+\end{proof}
+
+\begin{lemma}
+    Let \(\alpha \in \mathcal{R} \subset \mathfrak{h}^\vee\) be a root \(\mathfrak{g}\). Then \((\alpha, \alpha) = K(H_{\alpha}, H_{\alpha}) \neq 0\).
+\end{lemma}
+\begin{proof}
+    Let us make a futher assumption: the basis of the cartan subalgebra can diagonalize ... such that \(\mathrm{ad}_{H_{\alpha}}\) is Hermitian (highly non trivial and we cannot prove it at this point, but it is true). Then we can compute
+    \[
+        K(H_{\alpha}, H_{\alpha}) = \Tr(\mathrm{ad}_{H_{\alpha}} \circ \mathrm{ad}_{H_{\alpha}}) = \sum_{\beta \in \mathcal{R}}  \beta(H_{\alpha})^2 \dim(\mathfrak{g}_\beta),
+    \]
+    we knew that we can diagonalize \(\mathrm{ad}_{H_{\alpha}}\), but knowing that it is Hermitian allows us to conclude that its eigenvalues are real, thus \(\beta(H_{\alpha})^2 \geq 0\) for all \(\beta \in \mathcal{R}\) (also the dimension of the subspaces are positive), so the sum is positive, thus \(K(H_{\alpha}, H_{\alpha}) > 0\).
+
+    Thus assuming the hermiticity let us define the ``length'' of a root \(\alpha\) as \(|\alpha| := \sqrt{(\alpha, \alpha)} = \sqrt{K(H_{\alpha}, H_{\alpha})}\). We can now divide by \((\alpha, \alpha)\).
+\end{proof}
+
+\begin{lemma}
+    Let \(J_+^{(\alpha)}\) ...
+    \[
+        K(J_+^{(\alpha)}, J_-^{(\alpha)}) = \frac{2}{(\alpha, \alpha)}.
+    \]
+    We needed the previous lemma to be able to divide by \((\alpha, \alpha)\) and thus to define the normalized generators \(J_{3}^{(\alpha)}\) associated to the root \(\alpha\):
+    \[
+        J_3^{(\alpha)}\coloneqq \frac{H_{\alpha}}{(\alpha, \alpha)}.
+    \]
+    Then...
+
+    The claim is that we have found a subalgebra of \(\mathfrak{g}\) isomorphic to \(\mathfrak{sl}(2; \mathbb{C})_{\alpha}\) associated to each root \(\alpha\), which is generated by the three elements \(J_+^{(\alpha)}\), \(J_-^{(\alpha)}\) and \(J_3^{(\alpha)}\). This is called the \textbf{root subalgebra} associated to the root \(\alpha\).
+\end{lemma}
+\begin{proof}
+    By direct computation
+    \[
+        \dots
+    \]
+    Evaluating \(\alpha\) on its dual vector \(H_{\alpha}\) we get \(\alpha(H_{\alpha}) = K(H_{\alpha}, H_{\alpha}) = (\alpha, \alpha)\) is just the norm; the commutator among \(H_{\alpha} \) and \(J_{\pm}^{(\alpha)}\) is just the eigenvalue of \(H_{\alpha}\) on the root space \(\mathfrak{g}_{\pm\alpha}\), since the latter ar eigenvalues of \(\mathrm{ad}_{H_{\alpha}}\) by definition.
+
+    We have in the end found the commutation relations of \(\mathfrak{sl}(2; \mathbb{C})\) for the generators \(J_3^{(\alpha)}\), \(J_{\pm}^{(\alpha)}\).
+\end{proof}
+
+Every root of a semisimple lie algebra defines a subalgebra isomorphic to \(\mathfrak{sl}(2; \mathbb{C})\), which is generated by the three elements \(J_3^{(\alpha)}\), \(J_{\pm}^{(\alpha)}\). This is a very important result, since it allows us to describe the lie algebra in terms of the representations of this subalgebra; in particular, taking the adjoint representation of the lie algebra, we can restrict it to the root subalgebra (spanned by \(J_+^{\alpha}\), \(J_-^{\alpha}\) and \(J_3^{\alpha}\)), and thus we can decompose the algebra into irreducible representations of \(\mathfrak{sl}(2; \mathbb{C})\), on the space of endomorphisms of the algebra itself:
+\[
+    \mathrm{ad}^{(\mathfrak{g})} \big|_{\mathfrak{sl}(2; \mathbb{C})_{\alpha}} \,:\, \mathfrak{sl}(2; \mathbb{C})_{\alpha} \to \mathrm{End}(\mathfrak{g}).
+\]
+
+\begin{proposition}
+    Let \(\alpha \in \mathcal{R}\) be a root of a complex semi-simple Lie algebra \(\mathfrak{g}\). Then let the root subalgebra \(\mathfrak{sl}(2; \mathbb{C})_{\alpha} = \mathrm{span}_{\mathbb{C}}\{J_3^{(\alpha)}, J_+^{(\alpha)}, J_-^{(\alpha)}\}\) associated to \(\alpha\). Then the subspace
+    \[
+        V\coloneqq\dots
+    \]
+    this is a vector space which defines an irreducible representation of \(\mathfrak{sl}(2; \mathbb{C})_{\alpha}\) under the adjoint action (induced by the restriction on the adjoint representation on the subspace): it is an \(\mathfrak{sl}(2; \mathbb{C})\) irreducible representation under
+    \[
+        \left\{\left. \mathrm{ad}^{(\mathfrak{g})}_{J_\pm^{(\alpha)}}\right|_V , \left. \mathrm{ad}^{(\mathfrak{g})}_{J_3^{(\alpha)}}\right|_V \right\}.
+    \]
+\end{proposition}
+
+\begin{proof}
+    First recall... spin... It is carachterized by
+    \[
+        d(J_3)\ket{j,m} = \dots
+    \]
+    Now, since \(\mathfrak{g}_{\alpha}\) are orthogonal to each other (except for \(\pm \alpha\)), there can only be a finite set of \(m \in \mathbb{Z} \backslash \{0\}\) for which \(\mathfrak{g}_{m \alpha}\) is non-trivial, since \(V \subset \mathfrak{g}\) must be finite dimensional.
+
+    We want to show that \(V\) is invariant under \(\left\{\left. \mathrm{ad}^{(\mathfrak{g})}_{J_\pm^{(\alpha)}}\right|_V , \left. \mathrm{ad}^{(\mathfrak{g})}_{J_3^{(\alpha)}}\right|_V \right\}\), in order to prove that it is a representation space of \(\mathfrak{sl}(2; \mathbb{C})_{\alpha}\).
+    \begin{itemize}
+        \item \(\dots \)
+        \item \(\dots \)the relevant cases are with \(m=\pm 1\) since in the definition of \(V\) we are excluding \(0\) and if we act with \(J_\pm^{(\alpha)}\) we get \(\pm 1\) in the eigenvalue, so we need to check the cases for \(m = \pm 1\) to be sure of the result...
+    \end{itemize}
+    This shows that this operators restricted on \(V\) are endomorphisms of \(V\), thus \(V\) is a representation space of \(\mathfrak{sl}(2; \mathbb{C})_{\alpha}\).
+
+    From the first bullet point we know that the basis vectors of \(V\) are eigenvectors of \(\mathrm{ad}_{J_3^{(\alpha)}}\) with eigenvalues \(m \in \mathbb{Z} \backslash \{0\}\). Furthermore we know from this first point that the \(J_3^{(\alpha)}\)-eigenbasis in \(V\) has integer eigenvalues. If the subspace \(V\) splits in a direct sum of subspaces
+    \[
+        \dots
+    \]
+    i.e. it is reducible, then the irreducible components must be integer spin representations of \(\mathfrak{sl}(2; \mathbb{C})\), which have a \(J_3^{(\alpha)}\)-eigenvalue 0 subspace, which is one dimensional, so that the \(J_3^{(\alpha)}\)-eigenvalue 0 subspace of \(V\) will have dimension \(N\). However from the definition of \(V\) we have that this eigenspace is simply
+    \[
+        \left\{ \mu J_3^{(\alpha)} \big | \mu \in \mathbb{C} \right\},
+    \]
+    which is one dimensional, so \(N = 1\) and thus \(V\) is irreducible.
+\end{proof}
+
+This leads to a set of practically useful facts about the roots of semi-simple Lie algebras:
+
+\begin{theorem}
+    Let \(\mathfrak{g} = \mathfrak{h} \oplus \bigoplus_{\alpha \in \mathcal{R}} \mathfrak{g}_\alpha \) be the root decomposition of a complex semi-simple Lie algebra \(\mathfrak{g}\) with respect to a Cartan subalgebra \(\mathfrak{h}\). Then the following properties hold:
+    \begin{enumerate}[label=(\roman*)]
+        \item a
+        \item Every root subspace is one dimensional, i.e., \(\dim(\mathfrak{g}_\alpha) = 1\) for all \(\alpha \in \mathcal{R}\).
+        \item This particular pairing between vectors we are claiming that they are in \(\mathbb{Z}\) i.e. they are integers...
+        \item On the dual space we can define a linear map called reflection which takes any vector... if we tae anothr root, its reflection is also a root... if we reflects two roots with respect to each other, we get a rotation in the plane spanned by these two roots, and this rotation maps roots to roots...
+        \item For any \(\alpha \in \mathcal{R}\), the only multiples of \(\alpha\) which are roots are \(\pm \alpha\).
+        \item For roots \(\alpha,\,\beta\neq\alpha\), then any
+              \[
+                  W = \bigoplus_{k \in \mathbb{Z}} \mathfrak{g}_{\beta + k \alpha},
+              \]
+              is an irreducible representation of the root subalgebra \(\mathfrak{sl}(2; \mathbb{C})_{\alpha}\) associated to \(\alpha\).
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    We can prove these properties one by one.
+    \begin{enumerate}[label=(\roman*)]
+        \item If \(\mathcal{R} \) does not span \(\mathfrak{h}^{\vee}\) then there exists a non-zero element \(H \in \mathfrak{h}\) such that \(\alpha(H) = 0\) for all \(\alpha \in \mathcal{R}\). This means that \(H\) commutes with all the generators of the algebra, thus it is in the center of the algebra, which contradicts the assumption of semi-simplicity...
+        \item This follows from Prop. 3.4.8: since \(\{\mu J_3^{(\alpha)} | \mu \in \mathbb{C} \} \bigoplus\) ...
+        \item \(J_3^{(\alpha)}\) every eigenvalue has to be integer or half integer, thus this fraction must be an integer... the pairing is not symmetric and it is only linear in the second argument.
+        \item For any pair of roots their angular bracket is integer and from the previous proof we saw that \(E_{\beta} \in \mathfrak{g}_{\beta}\) has \(J_3^{(\alpha)}\) eigenvalue is \(\tfrac{n}{2}\), then there must be.... we can think of it as ....
+              \[
+                  0 \neq \ket{j,\,-\tfrac{n}{2}} = \begin{dcases}
+                      [\dots ] \quad n>0, \\
+                      [\dots ] \quad n<0.
+                  \end{dcases}
+              \]
+              Thus in the end we get
+              \[
+                  \implies \dots
+              \]
+        \item Assume that \(\alpha\) and \(\beta = c \alpha\), \(c \in \mathbb{C}\), are both roots. By (iii), \(\langle \alpha, \beta \rangle = 2c\) and\( \langle \beta, \alpha \rangle = 2/c \) must be integer, so we have the possibilities \(c = \pm 1, \, \pm 2,\, \pm \tfrac{1}{2}\)...
+
+              By part (ii) of the theorem, we know...
+
+              So \(2 \alpha\) is not a root. Analogously, we can argue for \(\mathfrak{g}_{-\alpha} = \{\mu J_{-}^{(\alpha)} | \mu \in \mathbb{C} \}\) to be the lowest weight subspace, and so \(\mathfrak{g}_{m \alpha} = \{0\}\) for \(m < 1\), i.e., \(-2 \alpha\) is not a root.
+        \item ...
+    \end{enumerate}
+\end{proof}
+
+The next corollary will directly tell us how to construct the entire algebra from the root system, and thus it is the key to the classification of complex semi-simple Lie algebras.
+
+\begin{corollary}
+    We only need to know the finite set of root vectors and the pairings among them to reconstruct the entire algebra.
+
+    As a vectors space, the algebra is a direct sum of one dimensional root spaces, each associated to a root, plus the Cartan subalgebra. The Lie bracket is determined by the root structure and the pairing among the root vectors.
+
+    \begin{itemize}
+        \item For each root we find basis elements and generators for the cartan subspace which carries some symetric inner product, which along with the pairing directly defines the killing form. The norm is already defined
+
+        \item For every \(X = J_3^{(\alpha)}\), \(E_{\alpha}\) we can define the adjoint action of every generator of the algebra on it (define the crresponding endomorphism \(\mathrm{ad}_X \in \mathrm{End}(\mathfrak{g})\)), which is determined by the root structure and the pairing, thus we can find the commutation relations among all the generators of the algebra:
+              \begin{itemize}
+                  \item \(\dots \)
+                  \item \(\dots \)
+                  \item \(\dots \)
+              \end{itemize}
+    \end{itemize}
+\end{corollary}
+the last is the only non trivial, but after showing that we have a irreducible representation of \(\mathfrak{sl}(2; \mathbb{C})\) we can use the known representation theory of \(\mathfrak{sl}(2; \mathbb{C})\) so that we can use \(E_{\alpha} \) as a raising operator to find the commutation relations with all the other generators of the algebra, which are determined by the root structure and the pairing...
+\begin{proof}
+    Almost everything follows straightforwardly from Theorem 3.4.9 and its proof. The only non-trivial points are the numerical factors in the last equation. To see these...
+\end{proof}
+
+\subsubsection{Summary}
+
+Let us summarize what we have seen so far.
+\begin{itemize}
+    \item By viewing a complex semi-simple \(\mathfrak{g}\) as the representation space of the adjoint
+          representation (ad, \(\mathfrak{g}\)), we are naturally led to consider a vector space basis for \(\mathfrak{g}\) consisting of simultaneous eigenvectors of the maximally commuting subalgebra (the Cartan subalgebra) \(\mathfrak{h}\) of \(\mathfrak{g}\).
+    \item The standard diagonalization theorem directly implies the root decomposition Theorem 3.4.3, where the eigenspaces \(\mathfrak{g}_{\alpha}\) are labelled by the eigenvalues \(\alpha \in\) \(\mathcal{R} \subset \mathfrak{h}^{\vee}\)  called roots.
+    \item Every root \(\alpha \in \mathcal{R}\) is associated with a subalgebra \(\mathfrak{sl}(2; \mathbb{C})_{\alpha} \subset \mathfrak{g}\); through the adjoint action, \(\mathfrak{g}\) becomes a (generally reducible) representation of \(\mathfrak{sl}(2; \mathbb{C})_{\alpha}\). Using the known representation theory of \(\mathfrak{sl}(2; \mathbb{C})\), we could deduce a series of properties of \(\mathfrak{g}\) and the roots, which culminated in Theorem 3.4.9.
+    \item These results allow us to essentially completely reconstruct the algebra \(\mathfrak{g}\) from its roots. In turn, the stringent consistency conditions of roots make them much easier to quantify and categorize. This will become particularly clear in the following section.
+\end{itemize}

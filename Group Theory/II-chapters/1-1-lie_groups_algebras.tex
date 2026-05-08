@@ -2,62 +2,120 @@
 
  [...]
 
-From the Heine Borel theorem we know that a subset of $\mathbb{R}$ is compact if and only if it is closed (there are no limiting points that belong to the set) and bounded. We can use this to show that the set of all subgroups of $\mathbb{R}$ is uncountable.
+\section{Lie Groups as Manifolds}
 
-\begin{example}[Compactness of the unitary group]
-    The unitary group \(G = U(n)\) satisfies the following properties:
+\begin{definition}
+    A Lie group \(G\) is a smooth differentiable manifold which is also a group, where the following two maps based on the group law are smooth maps between manifolds:
     \[
-        \sum_{i} u^*_{ij} u_{ik} = \delta_{jk},
+        \begin{aligned}
+            G \times G & \to G, \quad (g_1,\,g_2) \mapsto g_1g_2, \\
+            G          & \to G, \quad g \mapsto g^{-1}.
+        \end{aligned}
     \]
-    and expanding the sum we understand that for \(i=j\) we have no entries greater than 1:
-    \[
-        \vert u_{ij} \vert \leq 1.
-    \]
-    Furthermore if we have some matrix group defined by a set of polynomial equations, then the set of solutions is closed. Therefore \(U(n)\) is a closed and bounded subset of \(\mathbb{R}^{n^2}\) and thus compact.
+    If the underlying manifold of a Lie group \(G\) is a complex manifold, and the above maps are holomorphic, then \(G\) is also called a complex Lie group.
+\end{definition}
+
+Standard examples are matrix groups (“classical Lie groups”). We will see these in more details later.
+
+\begin{definition}
+    A Lie group homomorphism / isomorphism is a group homomorphism / isomorphism \(f : G \to H\) which is also a smooth map between manifolds.
+\end{definition}
+In the context of Lie groups, we will always use ``homomorphism / isomorphisms'' in the above sense unless otherwise stated.
+
+\begin{example}[example 1.2.3]
+    [...]
+
+    [...]
 \end{example}
 
-\begin{example}[Non compact Lie Groups]
-    \(GL(n,\mathbb{R})\) or \(GL(n,\mathbb{C})\), \(SL(n,\mathbb{R})\), \(SO(1,n-1)\) are not compact, since they are not bounded.
+A Lie group \(G\) is called compact / (simply-)connected, if \(G\) is compact / (simply-)connected as a topological space. Thus let us recall the definitions of compactness and connectedness in the context of topological spaces, and then we will see some examples of compact and non-compact Lie groups, as well as simply connected and non-simply connected Lie groups.
+
+\begin{definition}[Topological Compactness]
+    A topological space \(G\) is \textit{compact} if every open cover of \(G\) has a finite subcover. In other words, if we have a collection of open sets \(\{U_{\alpha}\}_{\alpha \in A}\) such that \(G \subseteq \bigcup_{\alpha \in A} U_{\alpha}\), then there exists a finite subset \(A' = (\alpha_1, \ldots, \alpha_k)_{k < \infty} \subseteq A\) such that \(G \subseteq \bigcup_{\alpha \in A'} U_{\alpha}\).
+\end{definition}
+
+\begin{example}[Compactness and Lie groups]
+    \begin{itemize}
+        \item From the Heine Borel theorem we know that a subset of $\mathbb{R}$ is compact if and only if it is closed (there are no limiting points that belong to the set) and bounded. We can use this to show that the set of all subgroups of $\mathbb{R}$ is uncountable. Thus for matrix groups, for which \(G \subset \mathbb{R}^{n}\) for some \(n \in \mathbb{N}\), we have
+              \[
+                  G \text{ compact } \iff G \text{ closed and bounded},
+              \]
+              where bounded simply means bounded magnitude of the entries of the matrices.
+
+        \item The unitary group \(G = \mathrm{U}(n)\) satisfies the following properties: given a unitary matrix \(U \in \mathrm{U}(n)\), we have \(U^{\dagger} U = \mathbb{I}\),and thus
+              \[
+                  \sum_{i} U^*_{ij} U_{ik} = (U^{\dagger}U)_{jk} = \delta_{jk},
+              \]
+              and expanding the sum we understand that for \(i=j\) we have no entries greater than 1:
+              \[
+                  \vert U_{ij} \vert \leq 1.
+              \]
+              Furthermore if we have some matrix group defined by a set of polynomial equations, then the set of solutions is closed. Therefore \(\mathrm{U}(n)\) is a closed and bounded subset of \(\mathbb{R}^{n^2}\) and thus compact.
+
+        \item \(GL(n,\mathbb{R})\) or \(GL(n,\mathbb{C})\), \(SL(n,\mathbb{R})\), \(SO(1,n-1)\) are not compact, since they are not bounded.
+    \end{itemize}
 \end{example}
 
-\begin{definition}[Connectedness]
-    A topological space \(G\) is \textit{connected} if for any two ponts \(g_1,\,g_2 \in G\) there exists a continuous path \(\gamma : [0,1] \to G\) such that \(\gamma(0) = g_1\) and \(\gamma(1) = g_2\) (it is not necessary to impose the limits on the domanin of \(\gamma\), but it is convenient to do so).
+\begin{definition}[Topological Connectedness]
+    A topological space \(G\) is \textit{connected} if for any two ponts \(g_1,\,g_2 \in G\) there exists a continuous path \(\gamma : [0,1] \to G\) such that \(\gamma(0) = g_1\) and \(\gamma(1) = g_2\) (it is not necessary to impose the limits on the domanin of \(\gamma\), since the statement with \(g_1,g_2 \in \gamma\) would have been sufficient, but it is convenient to do so). This means that we can connect any two points in \(G\) with a continuous path, and thus there are no isolated points or disconnected components in \(G\).
 \end{definition}
 
 This curve is a continuous map, thus any function cannot vary discontinuously along it. In particular, if we have a continuous homomorphism \(f : G \to H\) and \(G\) is connected, then the image of \(f\) must be connected as well. This is because the image of a continuous map is always connected.
 
 If we start from a point where \(\det(f(g)) = 1\) for some \(g \in G\), then we can infere that \(\det(f(g)) = 1\) for all \(g \in \gamma \subset G\). This is because the determinant is a continuous function, and if it is unitary at one point, it must be unitary along the entire path connecting that point to any other point in \(G\).
 
-    [... unitary and orthogonal groups ...]
+\begin{example}[Connectedness and Lie groups]
+    \begin{itemize}
+        \item The orthogonal group \(\mathrm{O}(n)\) is not connected, since it has two disconnected components: the component of the identity, which consists of all orthogonal matrices with determinant 1 (the special orthogonal group \(\mathrm{SO}(n)\)), and the component consisting of all orthogonal matrices with determinant -1. We cannot have a continuous curve connecting \(Q_1 \in \mathrm{O}(n) \) and \(Q_2 \in \mathrm{O}(n)\) if they belong to different components (\(\det(Q_1)=1\) and \(\det(Q_2)=-1\)), since the determinant would have to change continuously from 1 to -1, which is not possible.
+
+        \item The unitary group \(\mathrm{U}(n)\) is connected, since any unitary matrix can be continuously deformed to the identity matrix by a path of unitary matrices. This is because the determinant of a unitary matrix is a complex number of magnitude 1
+              \[
+                  u \in \mathrm{U}(n) \implies \vert \det(U) \vert = 1,
+              \]
+              and we can continuously change the phase of the determinant from 1 to any other value on the unit circle without leaving the set of unitary matrices. Thus we can connect any two unitary matrices with a continuous path in \(\mathrm{U}(n)\).
+
+        \item The special orthogonal group \(\mathrm{SO}(n)\) and the special unitary group \(\mathrm{SU}(n)\) are also connected, since they are defined as the connected components of \(\mathrm{O}(n)\) and \(\mathrm{U}(n)\) respectively that contain the identity element. Thus any two elements in \(\mathrm{SO}(n)\) or \(\mathrm{SU}(n)\) can be connected by a continuous path within the same component.
+    \end{itemize}
+\end{example}
 
 \begin{definition}[Simply connected Lie groups]
-    If a group \(G\) is connected and any closed curve in \(G\) can be continuously contracted (smoothly deformed) to a point, then \(G\) is called \textit{simply connected}.
+    If a group \(G\) is connected and any closed curve (or loop) \(\gamma \subset G\) can be continuously contracted (smoothly deformed) to a point, then \(G\) is called \textit{simply connected}.
 \end{definition}
 
 It is easier to think about topological spaces as being made of rubber, and the continuous deformation as being a process of stretching and bending the space without tearing it. In this way, a simply connected space is one that has no holes or loops that cannot be contracted to a point. As a visual example, the case of a thorus, a can connect any two points with a continuous path, but there are loops around the hole of the thorus that cannot be contracted to a point. On the other hand, a sphere is simply connected, because any loop on the sphere can be contracted to a point.
 
 \begin{example}[Simply connectedness in Lie groups]
-    The unitary group \(U(n)\) is not simply connected, since it contains \(U(1) \subset U(n)\) which is topologically a circle, and thus has loops that cannot be contracted to a point. On the other hand, the special unitary group \(SU(n)\) is simply connected, because it does not contain any loops that cannot be contracted to a point.
+    \begin{itemize}
+        \item The unitary group \(U(n)\) is not simply connected, since it contains \(U(1) \subset U(n)\) which is topologically a circle
+              \[
+                  \mathrm{U}(1) \cong \mathrm{SO}(2) \cong S^1,
+              \]
+              and thus has loops that cannot be contracted to a point. On the other hand, the special unitary group \(\mathrm{SU}(n)\) is simply connected, because it does not contain any loops that cannot be contracted to a point. Indeed, the determinant is a homomorphism in \(\mathrm{U}(n)\) that maps the group to \(\mathrm{U}(1)\), and it is possible to define a curve which composition with the determinant gives a ``\textit{winding number}'' different from zero, which means that the curve cannot be contracted to a point.
 
-    Another example is the special orthogonal group \(SO(3)\) in three dimensional space: For \(n \geq 3\), \(SO(n)\) is not simply connected. However, for \(n = 2\), \(SO(2)\) is simply connected. If we think about \(SU(2)\), which is the double cover of \(SO(3)\), we can see that it is simply connected: the inehrited loops from \(SO(3)\) can be contracted to a point in \(SU(2)\) because of the double cover structure. In fact, \(SU(2)\) is topologically equivalent to the 3-sphere \(S^3\), which is simply connected. Thus spin-\(\tfrac{1}{2}\) objects, which are described by representations of \(SU(2)\), can be thought of as living on a simply connected space, while the rotations in three-dimensional space, described by \(SO(3)\), have a non-simply connected structure due to the presence of loops that cannot be contracted to a point.
+        \item Another example is the special orthogonal group \(\mathrm{SO}(3)\) in three dimensional space: For \(n \geq 3\), \(\mathrm{SO}(n)\) is not simply connected. However, for \(n = 2\), \(\mathrm{SO}(2)\) is simply connected. If we think about \(\mathrm{SU}(2)\), which is the double cover of \(\mathrm{SO}(3)\), we can see that it is simply connected: the inehrited loops from \(\mathrm{SO}(3)\) can be contracted to a point in \(\mathrm{SU}(2)\) because of the double cover structure. In fact, \(\mathrm{SU}(2)\) is topologically equivalent to the 3-sphere \(\mathrm{S}^3\), which is simply connected. Thus spin-\(\tfrac{1}{2}\) objects, which are described by representations of \(\mathrm{SU}(2)\), can be thought of as living on a simply connected space, while the rotations in three-dimensional space, described by \(\mathrm{SO}(3)\), have a non-simply connected structure due to the presence of loops that cannot be contracted to a point.
+    \end{itemize}
 \end{example}
 
-[Talking about foundamental groups, we are implying that we are working with a connected manifold, since the fundamental group is defined for connected spaces. If the space is not connected, we can consider the fundamental group of each connected component separately.]
+\begin{remark}[Fundamental groups and connectedness]
+    Talking about fundamental groups, we are implying that we are working with a connected manifold, since the fundamental group is defined for connected spaces. If the space is not connected, we can consider the fundamental group of each connected component separately.
+\end{remark}
 
-\subsection{Lie Algebra from Tangent Vectors}
+\section{Lie Algebra from Tangent Vectors}
+
+As hopefully familiar from GR and/or differential geometry, tangent vectors play a crucial role in the study of manifolds. In this section we will see that on a Lie group \(G\), the tangent vectors at the identity element \(e \in G\) carry an algebra structure, the so-called Lie algebra \(\mathfrak{g}\). The big advantage of the Lie algebra over the group is that the algebra is first and foremost a vector space, and vector spaces are much more “rigid” and thus easier to study than the Lie group. It will play an important role for our understanding and classification of Lie groups and their representations
 
 \begin{definition}[Tangent vectors]
-    Let \((\mathcal{M}, \{u_{\alpha}\})\) and a point \(p \in \mathcal{M}\) in the manifold. Let us imagine a smooth curve \(\gamma : (a, b) \to \mathcal{M}\) such that \(\gamma(t=0) = p\). We can define the tangent vector to the curve at the point \(p\), \(\dot{\gamma}_p\) as as a differential operator acting on smooth functions \(\phi \in \mathbb{C}^{\infty}(\mathcal{M})\) as follows:
+    Let \((\mathcal{M}, \{u_{\alpha}\})\) and a point \(p \in \mathcal{M}\) in the manifold. Let us imagine a smooth curve \(\gamma : (a, b) \to \mathcal{M}\) such that \(\gamma(t_0) = p\) for some \(t_0 \in (a,b)\). We can define the tangent vector to the curve at the point \(p\), \(\dot{\gamma}_p\) as as a differential operator acting on smooth functions \(\phi \in \mathbb{C}^{\infty}(\mathcal{M})\) as follows:
     \[
-        \dot{\gamma}_p(\phi) = \left. \frac{\mathrm{d}}{\mathrm{d} t} (\phi \circ \gamma) (t)\right|_{t=t_0}.
+        \dot{\gamma}_p(\phi) := \left. \frac{\mathrm{d}}{\mathrm{d} t} (\phi \circ \gamma) (t)\right|_{t=t_0}.
     \]
 \end{definition}
 
-A set of tangent vectors at a point \(p\) spans a \(m\) dimensional vector space (\(m = \mathrm{dim} \mathcal{M}\)), called the tangent space at \(p\), denoted by \(T_p \mathcal{M}\). The dimension of the tangent space is thus equal to the dimension of the manifold.
+A set of tangent vectors at a point \(p\) spans a \(n\)-dimensional vector space (\(n = \mathrm{dim} (\mathcal{M})\)), called the tangent space at \(p\), denoted by \(T_p \mathcal{M}\). The dimension of the tangent space is thus equal to the dimension of the manifold.
 
-Let us now consider a chart \(p \in U\) with coordinates \(x \equiv x^i : U \to \mathbb{R}^m\). We can define a set of tangent vectors at \(p\) as follows:
+Let us now consider a local chart \(p \in U\) with coordinate functions\(x \equiv x^i : U \to \mathbb{R}^n\). We can define a set of tangent vectors at \(p\) as a natural basis for the tangent space \(T_p \mathcal{M}\) as follows:
 \[
-    \dot{\gamma}_p^i(\phi) = \left. \frac{\mathrm{d}}{\mathrm{d} t} (\phi \circ x^{-1} \circ x \circ \gamma) (t)\right|_{t=t_0} = \left. \frac{\mathrm{d}}{\mathrm{d} t} (\phi \circ x^{-1}) (x(\gamma(t)))\right|_{t=t_0}.
+    \dot{\gamma}_p(\phi) = \left. \frac{\mathrm{d}}{\mathrm{d} t} (\phi \circ x^{-1} \circ x \circ \gamma) (t)\right|_{t=t_0} = \left. \frac{\mathrm{d}}{\mathrm{d} t} (\phi \circ x^{-1}) (x(\gamma(t)))\right|_{t=t_0}.
 \]
 Applying the chain rule, we can write this as:
 \[\TODO{correct the expression below, it is not correct}
@@ -67,7 +125,7 @@ Thus we find that
 \[
     \dot{\gamma}_p(\phi) = \sum_{i} \gamma^i(t_0) \frac{\partial}{\partial x^i} (\phi \circ x^{-1}) (x(p)) = \sum_{i} \gamma^i(t_0) \frac{\partial}{\partial x^i} (\phi(p)).
 \]
-In a local coorfinate patch thus the tangent vector can be expressed as a linear combination of the partial derivatives with respect to the coordinates, evaluated at the point \(p\). The coefficients of this linear combination are given by the components of the curve \(\gamma\) at \(t=t_0\). Thus the tangent space has dimension equal to the number of coordinates, which is equal to the dimension of the manifold.
+In a local coordinate patch thus the tangent vector can be expressed as a linear combination of the partial derivatives with respect to the coordinates, evaluated at the point \(p\). The coefficients of this linear combination are given by the components of the curve \(\gamma\) at \(t=t_0\). Thus the tangent space has dimension equal to the number of coordinates, which is equal to the dimension of the manifold.
 
 \begin{corollary}
     If we have two manifolds \(\mathcal{M}_1\) and \(\mathcal{M}_2\) of dimensions \(m_1\) and \(m_2\) respectively, then the tangent space of their product is the direct sum of their tangent spaces:
@@ -78,7 +136,7 @@ In a local coorfinate patch thus the tangent vector can be expressed as a linear
 \end{corollary}
 
 \begin{definition}[Tangent bundle]
-    If one take the union of all the tangent spaces at all points of the manifold, we obtain the \textbf{tangent bundle} \(T\mathcal{M} = \bigcup_{p \in \mathcal{M}} T_p \mathcal{M}\). The tangent bundle is itself a manifold of dimension \(2m\), where \(m\) is the dimension of the original manifold \(\mathcal{M}\) (we have to keep the original maniforld in the definition of the tangent bundle, since the tangent spaces are defined at each point of the manifold):
+    If one take the union of all the tangent spaces at all points of the manifold, we obtain the \textbf{tangent bundle} \(T\mathcal{M} = \bigcup_{p \in \mathcal{M}} T_p \mathcal{M}\). The tangent bundle is itself a manifold of dimension \(2n\), where \(n\) is the dimension of the original manifold \(\mathcal{M}\) (we have to keep the original maniforld in the definition of the tangent bundle, since the tangent spaces are defined at each point of the manifold):
     \[
         T\mathcal{M} = \{ (p,\mathbf{v}) | p \in \mathcal{M}, \mathbf{v} \in T_p \mathcal{M} \},
     \]
