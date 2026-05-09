@@ -51,7 +51,7 @@ where \(Z\) is the \textbf{partition function}, defined as the sum over all poss
 
     For the magnetization, we can compute the average spin per site:
     \[
-        M = \mathbb{E}_c[\sum_{i} s_i], \quad m = \frac{M}{N} = \frac{1}{N} \mathbb{E}_c[s_1 + s_2],
+        M = \left\langle \sum_{i} s_i \right\rangle_c, \quad m = \frac{M}{N} = \frac{1}{N} \left\langle s_1 + s_2 \right\rangle_c,
     \]
     where the summations run over the configuration space.
     \[
@@ -82,7 +82,7 @@ In this case the system exhibits a phase transition at a critical temperature \(
 
 Being interested in the behavior of the magnetization, we can express it as a thermal average in the canonical ensemble:
 \[
-    \mathbb{E}_c \left[ \frac{1}{N} \sum_{i} s_i \right] = \frac{1}{N} \sum_{\{s_i\}} \left( \sum_{i} s_i \right) \frac{e^{-\beta H(\{s_i\})}}{Z},
+    \left\langle \frac{1}{N} \sum_{i} s_i \right\rangle_c = \frac{1}{N} \sum_{\{s_i\}} \left( \sum_{i} s_i \right) \frac{e^{-\beta H(\{s_i\})}}{Z},
 \]
 where the sum runs over all possible configurations of the spins. The mean field approximation consists in building a term which encodes the average effect of the neighboring spins on a given spin: it is natural to think about building this average field from the magnetization, so let us analyze it in more detail. The magnetization can assume the following values:
 \[
@@ -152,8 +152,8 @@ where we have used the fact that the sum over the spins is equal to the magnetiz
 The average magnetization per spin in the canonical ensamble can now be performed easily applying the mean field approximation:
 \[
     \begin{aligned}
-        \mathbb{E}_c\left[ \frac{1}{N} \sum_{i} s_i \right] & = \sum_{m \in [-1, \ldots, +1]} m \sum_{\{s_i\}} \delta\left(\sum_{i} s_i - Nm\right) \frac{e^{-\beta H_{mf}(m)}}{Z} \\
-                                                            & = \frac{1}{Z} \sum_{m} m e^{-\beta H_{mf}(m)} \left[ \sum_{\{s_i\}} \delta\left(\sum_{i} s_i - Nm\right) \right],    \\
+        \left\langle \frac{1}{N} \sum_{i} s_i \right\rangle_c & = \sum_{m \in [-1, \ldots, +1]} m \sum_{\{s_i\}} \delta\left(\sum_{i} s_i - Nm\right) \frac{e^{-\beta H_{mf}(m)}}{Z} \\
+                                                              & = \frac{1}{Z} \sum_{m} m e^{-\beta H_{mf}(m)} \left[ \sum_{\{s_i\}} \delta\left(\sum_{i} s_i - Nm\right) \right],    \\
     \end{aligned}
 \]
 where the last term identifieas a sum over all the configurations of the spins that correspond to a given magnetization \(m\). Note that a configuration of \(N_{\uparrow}\) of up spins and \(N_{\downarrow}\) of down spins corresponds to a magnetization
@@ -174,7 +174,7 @@ which after some algebraic manipulations can be rewritten as
 \]
 Thus we have found an expression for the number of configurations that correspond to a given magnetization \(m\), which can be used to compute the final form of the magnetization:
 \[
-    \mathbb{E}_c \left[ \frac{1}{N} \sum_{i} s_i \right] = \frac{1}{Z} \sum_{m} m e^{-\beta N f(m)} = \frac{1}{Z} \sum_{m} m e^{-\beta H_{mf}(m)} \Omega(m),
+    \left\langle \frac{1}{N} \sum_{i} s_i \right\rangle_c = \frac{1}{Z} \sum_{m} m e^{-\beta N f(m)} = \frac{1}{Z} \sum_{m} m e^{-\beta H_{mf}(m)} \Omega(m),
 \]
 where we have defined the function \(f(m)\) as
 \[
@@ -182,7 +182,7 @@ where we have defined the function \(f(m)\) as
 \]
 which can be interpreted as a \textbf{free energy density} (per site) that depends on the magnetization \(m\). Indeed we have the last sum over the magnetization \(m\) getting dominated by the minimum of the function \(f(m)\) in the thermodynamic limit \(N \to \infty\), while the other terms get suppressed by the factor \(e^{-\beta N f(m)}\).\footnote{Since we always have to consider an enormously large \(N\) (the real world is at the thermodynamic limit), even small variations in \(f(m)\) will be exponentially suppressed.} Thus the average magnetization can be approximated as
 \[
-    \mathbb{E}_c \left[ \frac{1}{N} \sum_{i} s_i \right] \approx \frac{1}{e^{-\beta N f(m^*)}} \left( m^* e^{-\beta N f(m^*)} \right) = m^*, \qquad \frac{\partial f(m)}{\partial m}\bigg|_{m^*} = 0,
+    \left\langle \frac{1}{N} \sum_{i} s_i \right\rangle_c \approx \frac{1}{e^{-\beta N f(m^*)}} \left( m^* e^{-\beta N f(m^*)} \right) = m^*, \qquad \frac{\partial f(m)}{\partial m}\bigg|_{m^*} = 0,
 \]
 where \(m^*\) is the value of \(m\) that minimizes the function \(f(m)\).\TODO{Add a figure of a parabula with the minimum at m-star.} This is known as a \textit{saddle point approximation}, which is a common technique used in statistical mechanics to evaluate integrals or sums that are dominated by the contribution of a single point (the minimum of the free energy in this case). We can use the same approximation to compute the partition function \(Z\) as well, which is given by
 \[

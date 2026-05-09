@@ -1,6 +1,12 @@
 \chapter[Exact Solution of the Ising Model]{Exact Solution of the \\Ising Model}
 
- [...]
+The Ising model represents one of the fundamental paradigms of statistical mechanics and lattice field theory. Originally formulated to describe the behavior of ferromagnetic materials, over the decades it has assumed a much broader role, becoming the essential testing ground for understanding phase transitions and critical phenomena. In this chapter, we will undertake a rigorous study of the model, moving from topologically simpler cases to some of the most sophisticated achievements of twentieth-century theoretical physics.
+
+The discussion will begin with the one-dimensional Ising model. Although van Hove's theorem precludes the existence of a finite-temperature phase transition in 1D, the analysis of this system remains crucial for pedagogical and methodological reasons. By introducing the transfer matrix formalism, we will be able to exactly compute the partition function, the magnetization, and the behavior of the two-point correlation function, highlighting the role of the correlation length and its exponential decay.
+
+In the second part of the chapter, we will shift our focus to the two-dimensional Ising model, a physically much richer system. Unlike the one-dimensional case, the 2D lattice admits the existence of an order-disorder phase transition at a finite temperature. After a heuristic analysis based on the competition between energy and entropy in the formation of \textit{domain walls}, we will provide a rigorous proof using the celebrated Peierls argument.
+
+Finally, we will present two of the most mathematically elegant results in all of statistical mechanics. First, we will discuss the Kramers-Wannier duality which, by exploiting the deep topological symmetries between high- and low-temperature expansions on the dual lattice, allows for the exact determination of the system's critical point. To culminate this journey, we will explore the exact analytical solution of the 2D model by Lars Onsager: a monumental achievement that, by explicitly demonstrating a logarithmic singularity in the specific heat, forever revolutionized our theoretical understanding of phase transitions.
 
 \section{Ising Model in One Dimension}
 
@@ -14,7 +20,7 @@ where we have periodic boundary conditions \(s_{N+1} = s_1\). The partition func
 \]
 It is important since we can derive an expression for the ensemble average of the magnetization per site as a function of the partition function:
 \[
-    \mathbb{E}_c \left[ \frac{1}{N} \sum_{i=1}^{N} s_i \right] = - \frac{1}{N\beta} \frac{\partial \log Z_N}{\partial h}.
+    \left\langle \frac{1}{N} \sum_{i=1}^{N} s_i \right\rangle_c = - \frac{1}{N\beta} \frac{\partial \log Z_N}{\partial h}.
 \]
 If we manipulate the expression of the hamiltonian, to express two symmetric sums, we get
 \[
@@ -102,7 +108,7 @@ from this we can understand that there are no singularities in the free energy a
 
 Let us now compute the magnetization per site as a function of temperature \(T\) and external field \(h\). We can use the expression for the partition function to compute the magnetization as
 \[
-    \mathbb{E}_{c}\left[s_i\right] = m = -\frac{1}{N} \frac{\partial}{\partial h} \log Z = -\frac{1}{\beta} \frac{\partial}{\partial h} (\frac{F}{N}).
+    \left\langle s_i \right\rangle_c = m = -\frac{1}{N} \frac{\partial}{\partial h} \log Z = -\frac{1}{\beta} \frac{\partial}{\partial h} (\frac{F}{N}).
 \]
 Inserting the expression for the free energy per site, we get
 \[
@@ -110,18 +116,31 @@ Inserting the expression for the free energy per site, we get
 \]
 This expression shows that the magnetization \(m\) is a smooth function of temperature \(T\) and external field \(h\), and it does not exhibit any singularities or discontinuities, which is consistent with the absence of a phase transition in the 1D Ising model at finite temperature.
 
-\TODO{add plot of m vs h for different T.}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{img/ising_1d_m-h_plot.png}
+    \caption{Magnetization per site \(m\) as a function of the external field \(h\) at different values of temperature \(T\).}
+\end{figure}
 
 As \(T\) increases, the curve becomes more steep, but it never exihibit a discontinuity or a singularity, which confirms that there is no phase transition in the 1D Ising model at finite temperature. Only in the limit \(T \to 0\) we have a discontinuity in the magnetization at \(h = 0\), where the system transitions from a fully magnetized state with \(m = +1\) for \(h > 0\) to a fully magnetized state with \(m = -1\) for \(h < 0\):
 \[
     \lim_{T \to 0} m(T,h) = \text{sgn}(\sinh(\beta h)) = \text{sgn}(h).
 \]
 
-We could repeat the computation for \(\chi\) the magnetic susceptibility, which is given by
-\[
-    \chi = \frac{\partial}{\partial h} m(T,h) = \dots
-\]
-and it can be shown that \(\chi\) does not diverge at any finite temperature, which is consistent with the absence of a phase transition in the 1D Ising model at finite temperature. Only in the limit \(T \to 0\) we have a divergence in the magnetic susceptibility at \(h = 0\), which indicates a critical point at zero temperature.
+\begin{figure}[H]
+    \begin{minipage}{0.4\textwidth}
+        \includegraphics[width=\textwidth]{img/ising_1d_chi-T_plot.png}
+        \caption{Magnetic susceptibility \(\chi\) as a function of temperature \(T\) at zero external field \(h = 0\).}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.55\textwidth}
+        We could repeat the computation for \(\chi\) the \textbf{magnetic susceptibility}, which is given by
+        \[
+            \chi = \frac{\partial}{\partial h} m(T,h) = \dots
+        \]
+        and it can be shown that \(\chi\) does not diverge at any finite temperature, which is consistent with the absence of a phase transition in the 1D Ising model at finite temperature. Only in the limit \(T \to 0\) we have a divergence in the magnetic susceptibility at \(h = 0\), which indicates a critical point at zero temperature.
+    \end{minipage}
+\end{figure}
 
 The euristic derivation of mean field theory has to have some assumptions which do not hold at low dimensions, and this is the reason why it fails to capture the correct critical behavior in 1D and 2D systems. Only in higher dimensions, where fluctuations are less important, the mean field theory provides a more accurate description of the critical behavior and the critical exponents.
 
@@ -131,15 +150,15 @@ The exact solution of the 1D Ising model using the transfer matrix method allows
 
 It is now time to compute the two-point correlation function for the 1D Ising model: the correlation function is defined as
 \[
-    \mathbb{E}_{c}\left[ s_i s_{i+r} \right] = \frac{1}{Z} \sum_{\{s_k\}} s_i s_{i+r} e^{-\beta H(\{s_k\})},
+    \left\langle s_i s_{i+r} \right\rangle = \frac{1}{Z} \sum_{\{s_k\}} s_i s_{i+r} e^{-\beta H(\{s_k\})},
 \]
 which can become a connected correlation function if we subtract the product of the magnetizations:
 \[
-    \mathbb{E}_{c}\left[ s_i s_{i+r} \right] - \mathbb{E}_{c}\left[ s_i \right] \mathbb{E}_{c}\left[ s_{i+r} \right] = \frac{1}{Z} \sum_{\{s_k\}} s_i s_{i+r} e^{-\beta H(\{s_k\})} - m^2.
+    \left\langle s_i s_{i+r} \right\rangle - \left\langle s_i \right\rangle \left\langle s_{i+r} \right\rangle = \frac{1}{Z} \sum_{\{s_k\}} s_i s_{i+r} e^{-\beta H(\{s_k\})} - m^2.
 \]
 To compute the correlation function, we can use the transfer matrix method again. We can express the correlation function in terms of the transfer matrix as follows:
 \[
-    \mathbb{E}_{c}\left[ s_i s_{i+r} \right] = \frac{1}{Z} \sum_{\alpha_1=1}^2 \sum_{\alpha_2=1}^2 \dots \sum_{\alpha_N=1}^2 \sigma_{\alpha_j} \sigma_{\alpha_{j+r}} T_{\alpha_1, \alpha_2} T_{\alpha_2, \alpha_3} \cdots T_{\alpha_N, \alpha_1},
+    \left\langle s_i s_{i+r} \right\rangle = \frac{1}{Z} \sum_{\alpha_1=1}^2 \sum_{\alpha_2=1}^2 \dots \sum_{\alpha_N=1}^2 \sigma_{\alpha_j} \sigma_{\alpha_{j+r}} T_{\alpha_1, \alpha_2} T_{\alpha_2, \alpha_3} \cdots T_{\alpha_N, \alpha_1},
 \]
 where \(\sigma_{\alpha_j}\) is the spin value corresponding to the state \(\alpha_j\) (i.e., \(\sigma_1 = +1\) and \(\sigma_2 = -1\)). We can rewrite this expression in a more compact form using matrix notation. Let us define a diagonal matrix \(D\) such that
 \[
@@ -150,11 +169,11 @@ where \(\sigma_{\alpha_j}\) is the spin value corresponding to the state \(\alph
 \]
 meaning that \(D\) is a diagonal matrix with entries corresponding to the spin values. Then we can express the correlation function as
 \[
-    \mathbb{E}_{c}\left[ s_j s_{j+r} \right] = \frac{1}{Z} \sum_{\alpha_1=1}^2 \sum_{\alpha_2=1}^2 \dots \sum_{\alpha_N=1}^2 T_{\alpha_1, \alpha_2} T_{\alpha_2, \alpha_3} \cdots T_{\alpha_{j-1}, \alpha_j} D_{\alpha_j, \beta_1} T_{\beta_1, \alpha_{j+1}} \cdots T_{\alpha_{j+r-1}, \alpha_{j+r}} D_{\alpha_{j+r}, \beta_2} T_{\beta_2, \alpha_{j+r+1}} \cdots T_{\alpha_N, \alpha_1},
+    \left\langle s_j s_{j+r} \right\rangle = \frac{1}{Z} \sum_{\alpha_1=1}^2 \sum_{\alpha_2=1}^2 \dots \sum_{\alpha_N=1}^2 T_{\alpha_1, \alpha_2} T_{\alpha_2, \alpha_3} \cdots T_{\alpha_{j-1}, \alpha_j} D_{\alpha_j, \beta_1} T_{\beta_1, \alpha_{j+1}} \cdots T_{\alpha_{j+r-1}, \alpha_{j+r}} D_{\alpha_{j+r}, \beta_2} T_{\beta_2, \alpha_{j+r+1}} \cdots T_{\alpha_N, \alpha_1},
 \]
 where we have inserted the diagonal matrices \(D\) at the positions corresponding to the spins \(s_j\) and \(s_{j+r}\). This expression can be further simplified by recognizing that the sums over the indices \(\alpha_k\) correspond to matrix multiplications, and we can express
 \[
-    \mathbb{E}_{c}\left[ s_j s_{j+r} \right] = \frac{1}{Z} \text{Tr}(T^{j-1} D T^{r} D T^{N-r+1-j}),
+    \left\langle s_j s_{j+r} \right\rangle = \frac{1}{Z} \text{Tr}(T^{j-1} D T^{r} D T^{N-r+1-j}),
 \]
 where we have used the cyclic property of the trace to rearrange the order of the matrices. This expression allows us to compute the two-point correlation function in terms of the transfer matrix and the diagonal matrix \(D\), which encodes the spin values. By diagonalizing the transfer matrix with a unitary matrix \(U\):
 \[
@@ -179,11 +198,11 @@ Now putting everything together, we can express the correlation function as
 \]
 In the end we find a close analytical form for the correlation function, which can be expressed as
 \[
-    \mathbb{E}_{c}\left[ s_j s_{j+r} \right]_{h=0} = \frac{\lambda_+^{N-r}\lambda_-^r + \lambda_-^{N-r}\lambda_+^r}{\lambda_+^N + \lambda_-^N},
+    \left\langle s_j s_{j+r} \right\rangle_{h=0} = \frac{\lambda_+^{N-r}\lambda_-^r + \lambda_-^{N-r}\lambda_+^r}{\lambda_+^N + \lambda_-^N},
 \]
 and again if we use tha fact that \(\vert \frac{\lambda_-}{\lambda_+} \vert < 1\), we can simplify this expression in the thermodynamic limit as
 \[
-    \mathbb{E}_{c}\left[ s_j s_{j+r} \right]_{h=0} =\dots \sim e^{-\tfrac{r}{\xi}},
+    \left\langle s_j s_{j+r} \right\rangle_{h=0} =\dots \sim e^{-\tfrac{r}{\xi}},
 \]
 effectively defining the correlation length \(\xi\) as
 \[
