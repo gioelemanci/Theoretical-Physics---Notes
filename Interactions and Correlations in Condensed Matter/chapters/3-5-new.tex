@@ -132,7 +132,10 @@ and if we now integrate over \(\mathbf{r}_1\) and \(\mathbf{r}_2\), we get:
 \]
 and it will still be zero if the term in square brackets is zero, so we can write:
 \[
-    \sum_{k^{\prime}} \left[ 2 E_{k^{\prime}} - E \right] g(k^{\prime}) \int \int \mathrm{d}^3 r_1 \mathrm{d}^3 r_2 \, \frac{1}{V} e^{i(\mathbf{k}^{\prime}- \mathbf{k}) \cdot (\mathbf{r}_1 - \mathbf{r}_2)} + \sum_{k^{\prime}} g(k^{\prime}) \int \int \mathrm{d}^3 r_1 \mathrm{d}^3 r_2 \, U(\mathbf{r}_1, \mathbf{r}_2) \frac{1}{V} e^{i(\mathbf{k}^{\prime}- \mathbf{k}) \cdot (\mathbf{r}_1 - \mathbf{r}_2)} = 0,
+    \begin{aligned}
+        \sum_{k^{\prime}} \left[ 2 E_{k^{\prime}} - E \right] g(k^{\prime}) \int \int \mathrm{d}^3 r_1 \mathrm{d}^3 r_2 \, \frac{1}{V} e^{i(\mathbf{k}^{\prime}- \mathbf{k}) \cdot (\mathbf{r}_1 - \mathbf{r}_2)} \\
+        + \sum_{k^{\prime}} g(k^{\prime}) \int \int \mathrm{d}^3 r_1 \mathrm{d}^3 r_2 \, U(\mathbf{r}_1, \mathbf{r}_2) \frac{1}{V} e^{i(\mathbf{k}^{\prime}- \mathbf{k}) \cdot (\mathbf{r}_1 - \mathbf{r}_2)} = 0,
+    \end{aligned}
 \]
 which has to be true for any \(\chi^S\), and we can recognize the Fourier transform of the potential \(U_{k k^{\prime}}\), while the first term gives basically a delta function, so we can write:
 \[
@@ -217,3 +220,91 @@ To form a good superconductor, we need a large density of states at the Fermi le
 We cannot get that term taylor expanding the effective interaction mediated by phonons, since it is zero at zero energy and momentum, but we can get it by considering infinite order perturbation theory, but as presented here it is an analytic result, since we have just made some approximations to solve the Schrodinger equation for two electrons interacting via an attractive potential mediated by phonons. The key ingredient is the existence of a finite density of states at the Fermi level, which allows us to obtain a finite energy gap even for a weak attractive interaction.
 
 Electron-phonon coupling is crucial, because the larger it is the larger the attractive interaction mediated by phonons, and thus the larger the energy gap and the critical temperature of the superconductor. Good conductors (not super-) have a very very small electron-phonon coupling, and thus they do not have a superconducting state (if they had high electron-phonon coupling, they would not conduct well, since the electrons would be scattered by phonons). On the other hand, good superconductors have a large electron-phonon coupling, which leads to a strong attractive interaction mediated by phonons, and thus to a large energy gap and a high critical temperature, but they are not good conductors, since the electrons are strongly scattered by phonons. This is a trade-off between conductivity and superconductivity, and it is one of the reasons why we do not have room temperature superconductors yet.
+
+\subsection{Do not know}
+
+From a many body perspective, imagine to have
+
+    [\textit{two electron lines entering in Lambda box, opposite spins and opposite momenta and fermionic frequencies} = \(\tilde{k}= (\mathbf{k}, ik_\nu)\) \textit{and} \(\tilde{P}\) = effective interaction + two effective interactions + 3...]
+
+The \(\Lambda\) box is called \textbf{scattering vertex}
+It is a sort of selection of diagrams, in which we are not including, for example, the cross diagrams or others, we are making a subselection (only \textit{ladder diagrams}) to try and find the form for the scattering vertex, which is the effective interaction between two electrons in the Cooper channel, which is the channel in which the two electrons have opposite momenta and opposite spins.
+
+In order to find an expression for the scattering vertex, we want to cut off the contributions of the external legs...
+
+At a critical temperature, the scattering vertex diverges, and this is a signature of the instability of the normal state towards the formation of Cooper pairs and superconductivity. The divergence of the scattering vertex is a key ingredient for understanding the mechanism of superconductivity. We can try to study the scattering vertex, and since every time we have some instabilities of the ground state (the fermi sphere) we have a divergence of the scattering vertex, we can try to find the critical temperature at which this divergence occurs, and thus we can find the critical temperature of the superconducting transition.
+
+Dyson equation for the 2 particle scattering vertex in the Cooper channel can be written diagrammatically as:
+[\textit{Lambda box} = \textit{vertical wiggle + vertical wiggle attached to lambda box }]
+
+where we used the usual trick of (after having cut off the external legs) to write the scattering vertex as a sum of the effective interaction plus the effective interaction attached to the scattering vertex itself, which is a sort of self-consistent equation for the scattering vertex, and it is a sort of geometric series, since we can iterate this equation and we get an infinite series of diagrams, which can be summed up to get a closed form for the scattering vertex.
+
+we are just considering the particle-particle channel, in which the two electrons have opposite momenta and opposite spins, and we are not considering other channels, such as the particle-hole channel, in which the two electrons have opposite momenta but the same spin. in functional renormization group theory, it is possible to consider all the channels at the same time, and to study the flow of the scattering vertex in all the channels, but here we are just considering the particle-particle channel, which is the most relevant for superconductivity.
+
+\[
+    \Lambda(\mathbf{k}, \mathbf{p}) = V + \frac{1}{\beta \Omega} \sum_{\vert i \omega_n \vert < \omega_D} \sum_{\mathbf{k}_1 : \epsilon_{\mathbf{k}_1} < \omega_D} \mathcal{G}_{0 \uparrow}(\mathbf{k}_1, i \omega_n) \mathcal{G}_{0 \downarrow}(-\mathbf{k}_1, -i \omega_n) \Lambda(\mathbf{k}_1, \mathbf{p}),
+\]
+where we can assume the interaction potential to be a constant in the narrow shell around the Fermi surface, and also that everything is different from zero; since there is no \(\mathbf{k}\) dependence under this assumption (it would have been given by the interaction potential, but we just assumed it constant), we can write the scattering vertex as a constant, and we can write the equation for the scattering vertex as:
+\[
+    \Lambda = \frac{V}{1 - \frac{V}{\beta} \sum_{i \omega_n} \frac{1}{\Omega} \sum_{\mathbf{k}_1} \mathcal{G}_{0 \uparrow}(\mathbf{k}_1, i \omega_n) \mathcal{G}_{0 \downarrow}(-\mathbf{k}_1, -i \omega_n)},
+\]
+which is the RPA expression for the scattering vertex in the Cooper channel, and we can see that the scattering vertex diverges when the denominator goes to zero, which is a signature of the instability of the normal state towards the formation of Cooper pairs and superconductivity.
+
+In the denominator we have substantially a bubble diagram, which is the product of two Green's functions, and it is called the particle-particle bubble, since it describes the propagation of two particles (the two electrons) in the Cooper channel. The divergence of the scattering vertex occurs when the particle-particle bubble becomes large enough to compensate the attractive interaction \(V\), and this is a signature of the instability of the normal state towards the formation of Cooper pairs and superconductivity.
+
+    [\textit{Particle-Particle Bubble vs particle-hole bubble, with the two Green's functions going in the same direction for the particle-particle bubble, and in opposite direction for the particle-hole bubble}]
+
+when the denominator goes to zero (with \(\beta\)) we can find the critical temperature at which the superconducting transition occurs, which is given by the same critical temperature that we found from the gap equation, since they are both describing the same physics of the formation of Cooper pairs and superconductivity. It was not clear at the beginning, but now we can see that the gap equation and the divergence of the scattering vertex are two different ways to describe the same physics of the formation of Cooper pairs and superconductivity, and they give us the same critical temperature for the superconducting transition.
+
+We need to compute the bubble and see when it is equal to 1, in order to find the critical value of the interaction \(V\) at which the scattering vertex diverges, and thus we can find the critical temperature for the superconducting transition. The bubble can be computed by performing the summation over Matsubara frequencies and the integration over momenta, and it gives us a function of temperature, which we can then use to find the critical temperature at which the scattering vertex diverges.
+
+    [\textit{Particle-Particle Bubble, with} \(\mathbf{k}_1,i \omega_n\) \textit{and} \(-\mathbf{k}_1, -i \omega_n\) \textit{pointing in the same direction} =]
+
+\[
+    diag = \frac{1}{\beta} \sum_{i \omega_n} \frac{1}{\Omega} \sum_{\mathbf{k}_1} \mathcal{G}_{0 \uparrow}(\mathbf{k}_1, i \omega_n) \mathcal{G}_{0 \downarrow}(-\mathbf{k}_1, -i \omega_n) = \frac{1}{\beta} \sum_{i \omega_n} \frac{1}{\Omega} \sum_{\mathbf{k}_1} \frac{1}{i \omega_n - \xi_{\mathbf{k}_1}} \frac{1}{-i \omega_n - \xi_{\mathbf{k}_1}},
+\]
+we consider the following integral in the complex plane:
+\[
+    I = \int \frac{\mathrm{d} z}{2 \pi i} \frac{1}{z - \xi_{\mathbf{k}_1}} \frac{1}{-z - \xi_{\mathbf{k}_1}} n_F(z),
+\]
+which is the integral of the product of the same two Green's functions and the Fermi distribution function, and it has poles at \(z = \xi_{\mathbf{k}_1}\) and \(z = -\xi_{\mathbf{k}_1}\), which are the poles of the Green's functions, and it has also poles at the Matsubara frequencies \(z = i \omega_n\), which are the poles of the Fermi distribution function. We can compute this integral by closing the contour in the upper half plane, as we already did when we computed the summation over Matsubara frequencies, and we get:
+\[
+    bubble = \frac{1}{\Omega} \sum_{\mathbf{k}_1} \frac{1 - 2 n_F(\xi_{\mathbf{k}_1})}{2 \xi_{\mathbf{k}_1}},
+\]
+where the temperature dependence is given by the Fermi distribution function, and it is crucial for finding the critical temperature at which the scattering vertex diverges, and thus for finding the critical temperature for the superconducting transition. The bubble is a function of temperature, and it increases as the temperature decreases, and it diverges at zero temperature, which is a signature of the instability of the normal state towards the formation of Cooper pairs and superconductivity at zero temperature.
+
+The critical temperature can be found by solving the equation \(1 = V \cdot bubble(T_c)\), which gives us the critical temperature at which the scattering vertex diverges, and thus at which the superconducting transition occurs. If we now transform the summation over momenta into an integral over energy, we can write the bubble as:
+\[
+    bubble = \int \mathrm{d} \epsilon \, D(\epsilon) \frac{1 - 2 n_F(\epsilon)}{2 \epsilon} = \int_{E_F-\omega_D}^{E_F+\omega_D} \mathrm{d} \epsilon \, D(\epsilon) \frac{1 - 2 n_F(\epsilon)}{2 \epsilon},
+\]
+where we have restricted the integration to the narrow shell around the Fermi surface, and we can approximate the density of states as a constant in this narrow shell, and we can write:
+\[
+    bubble = D(E_F) \int_{E_F}^{E_F + \omega_D} \mathrm{d} \epsilon \, \frac{1 - 2 n_F(\epsilon)}{\epsilon} = D(E_F) \int_{0}^{\omega_D} \mathrm{d} \epsilon \, \frac{1 - 2 n_F(\epsilon)}{\epsilon},
+\]
+and since \(\omega_D \sim 100K\), we can split the integral into two parts, one from \(0\) to \(k_B T\), and one from \(k_B T\) to \(\omega_D\) (assuming \(k_B T \ll \omega_D\) and \(k_B T = 0\) on the Fermi surface), and we can write:
+\[
+    bubble = D(E_F) \left[ \int_{0}^{k_B T} \mathrm{d} \epsilon \, \frac{1 - 2 n_F(\epsilon + E_F)}{\epsilon} + \int_{k_B T}^{\omega_D} \mathrm{d} \epsilon \, \frac{1 - 2 n_F(\epsilon + E_F)}{\epsilon} \right],
+\]
+
+[\textit{some drawing of integral plot}]
+
+since we are considering integrals of a sort of hyperbolic tangent, which it is approximately equal to \(1\) for \(\epsilon \gg k_B T\), and it is approximately equal to \(-1\) for \(\epsilon \ll k_B T\) (furthermore linear in \(\epsilon\) for \(\epsilon \sim k_B T\)) we can understand that
+\begin{itemize}
+    \item the first integral gives a contribution of the order of \(D(E_F)(k_B T)\), since in the regime of the first integral the hyperbolic tangent is approximately linear with \(\epsilon\);
+    \item the second integral gives a contribution of the order of \(D(E_F) \ln(\frac{\omega_D}{k_B T})\), which is positive and finite, since the integral is dominated by the ending part of the hyperbolic tangent, which is approximately equal to \(1\) for \(\epsilon \gg k_B T\).
+\end{itemize}
+thus we can write the bubble as:
+\[
+    bubble = D(E_F) \left[ k_B T + \ln \left( \frac{\omega_D}{k_B T} \right) \right] \sim D(E_F) \ln \left( \frac{\hbar \omega_D}{k_B T} \right),
+\]
+and since we are looking for the critical temperature at which the scattering vertex diverges, we can write the equation for the critical temperature as:
+\[
+    V D(E_F) \ln \left( \frac{\hbar \omega_D}{k_B T_c} \right) = 1,
+\]
+which gives us the critical temperature as:
+\[
+    T_c = \frac{\hbar \omega_D}{k_B} e^{-\frac{1}{V D(E_F)}},
+\]
+which is the same critical temperature that we found from the gap equation, and it shows that the critical temperature is exponentially small in the inverse of the product of the attractive interaction and the density of states at the Fermi level, which is a key ingredient for the formation of Cooper pairs and superconductivity. This is a remarkable result, since it shows that even a weak attractive interaction can lead to a finite critical temperature, and thus to a superconducting state.
+
+If one had computed the integral of the fermi function precisely, one would have found a prefactor of \(1.14\) in front of the Debye frequency, but since we are just interested in the order of magnitude of the critical temperature, we can neglect this prefactor.
