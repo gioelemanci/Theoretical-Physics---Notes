@@ -30,7 +30,263 @@
 
 [...]
 
+\[
+    \frac{\mathrm{d}}{\mathrm{d} \mu_R} \mathcal{M} (\lambda(\mu_R), \mu_R) = 0.
+\]
+
 \subsection{Scale Dependence and Beta Functions}
 
+We can define the beta function for the coupling constant $\lambda$ with the \textbf{running coupling equation}:
+\[
+    \mu_R^2 \frac{\mathrm{d}}{\mathrm{d} \mu_R^2} \lambda(\mu_R) = \beta(\lambda).
+\]
+
 [...]
+
+\[
+    \beta_0 = \frac{3}{32 \pi}\dots
+\]
+
+[...]
+
+Let us try to solve the running coupling equation in perturbation theory. We can write $\lambda(\mu_R)$ as a power series in $\lambda$:
+\[
+    \beta(\lambda) = \beta_0 \lambda^2 + \beta_1 \lambda^3 + \dots
+\]
+Let us assume that we know the value of $\lambda$ at some reference scale $\mu_0$. We can then write:
+\[
+    \overline{\lambda} = \lambda(\mu_R^2 = \mu_0^2).
+\]
+We know wnat to understand how $\lambda$ changes as we change the scale $\mu_R$. We can define the ration at which we change the scale as:
+\[
+    \tau = \log \left( \frac{\mu_R^2}{\mu_0^2} \right).
+\]
+We can then writw lambda as a perturbative funtion of \(\overline{\lambda}\) as
+\[
+    \lambda = \overline{\lambda}\left( 1 + c_1(\tau) \overline{\lambda} + c_2(\tau) \overline{\lambda}^2 + \dots \right),
+\]
+with the idea that the coefficients \(c_i(\tau)\) will capture the scale dependence of \(\lambda\). We can then plug this expansion into the running coupling equation along with the expansion of the beta function to find the coefficients \(c_i(\tau)\). we will expand the left and right hand sides of the running coupling equation and match the coefficients of powers of \(\overline{\lambda}\) to find the functions \(c_i(\tau)\).
+
+To start, we need boundary conditions for the functions \(c_i(\tau)\) (it is a differential equation). We know that at \(\tau = 0\) (which reads \(\mu_R = \mu_0\)), we have \(\lambda = \overline{\lambda}\), which implies that \(c_i(0) = 0\) for all \(i\). This gives us the initial conditions we need to solve for the functions \(c_i(\tau)\).
+
+The first non trivial order is the order \(\overline{\lambda}^2\). At this order, we have:
+\[
+    \mathcal{O}(\lambda^2): \quad \dots
+\]
+which means that
+\[
+    c_1^{\prime} = \beta_0, \quad c_1 = \beta_0 \log \tau = \beta_0 \log \left( \frac{\mu_R^2}{\mu_0^2} \right).
+\]
+We can now write lambda (at this order) as a function of \(\overline{\lambda}\) and \(\tau\) as
+\[
+    \lambda = \overline{\lambda}\left( 1 + \beta_0 \log \left( \frac{\mu_R^2}{\mu_0^2} \right) \overline{\lambda} \right) + \mathcal{O} \left( \overline{\lambda}^3 \right).
+\]
+Thus the running coupling equation at this order completely predicts the scale dependence of \(\lambda\) in terms of the beta function coefficient \(\beta_0\).
+
+    [...]
+
+Let us compute the next order in the perturbative expansion. At order \(\overline{\lambda}^3\), we have:
+\[
+    \mathcal{O}(\lambda^3): \quad c_1^{\prime} \overline{\lambda}^2 + c_2^{\prime} \overline{\lambda}^3 = \beta_0 \left( \overline{\lambda}^2 + 2 c_1 \overline{\lambda}^3 + \dots \right) + \beta_1 \overline{\lambda}^3 + \dots
+\]
+just by recakking the expansion of \(\lambda\) in terms of \(\overline{\lambda}\). We can then match the coefficients of \(\overline{\lambda}^3\), using the solution for \(c_1\) we found at the previous order, to find:
+\[
+    - c_1 = \beta_0 \tau \implies c_2^{\prime} = 2 \beta_0^2 \tau + \beta_1,
+\]
+which can now be solved as
+\[
+    \begin{aligned}
+        c_2 & = \dots                                                                              \\
+            & = \beta_0^2 \log^2(\frac{\mu_R^2}{\mu_0^2}) + \beta_1 \log(\frac{\mu_R^2}{\mu_0^2}).
+    \end{aligned}
+\]
+
+Thus we have found at leading order and the next order the scale dependence of \(\lambda\) in terms of the beta function coefficients \(\beta_0\) and \(\beta_1\): if we change the scale \(\mu_R\), we can predict how \(\lambda\) changes based on the values of \(\beta_0\) and \(\beta_1\). Let us make some further observations:
+\begin{itemize}
+    \item The functional form of the scale dependence of \(\lambda\) is completely determined by the running coupling equation. This means that if we know the beta function coefficients, we can predict how \(\lambda\) changes with scale.
+    \item The coefficient \(\beta_1\) can be fixed by renormalizing at two loops: this is because the beta function at order \(\lambda^3\) receives contributions from two loop diagrams, so we need to renormalize at two loops to find \(\beta_1\).
+    \item ...
+\end{itemize}
+
+It is easy to convince ourselves that at higher orders in perturbation theory, the scale dependence of \(\lambda\) will be given by a polynomial in \(\log(\mu_R^2/\mu_0^2)\) of degree equal to the order in perturbation theory.
+\[
+    \begin{aligned}
+        c^{\prime}_3 & = \dots                                                                                                                                \\
+        c_3          & = \beta_0^3 \log^3(\frac{\mu_R^2}{\mu_0^2}) + \beta_0 \beta_1 \log^2(\frac{\mu_R^2}{\mu_0^2}) + \beta_2 \log(\frac{\mu_R^2}{\mu_0^2}),
+    \end{aligned}
+\]
+where now \(\beta_2\) can be derived from three loop renormalization, \(\beta_3\) from four loop renormalization, and so on.
+
+This is because at each order in perturbation theory, we will have contributions to the beta function that are proportional to powers of \(\lambda\), and when we solve the running coupling equation, we will find that the scale dependence of \(\lambda\) is given by a polynomial in \(\log(\mu_R^2/\mu_0^2)\) whose coefficients are determined by the beta function coefficients at that order.
+
+    [... highest powers of logarithms at each order in perturbation theory are determined by the lowest order beta function coefficient \(\beta_0\) ...]
+
+This observation is important: let us imagine to have two very different scales
+\[
+    \mu_R^2 \gg \mu_0^2 \quad \text{or} \quad \mu_R^2 \ll \mu_0^2.
+\]
+If this is the case, then the logarithm \(\log(\mu_R^2/\mu_0^2)\) can become of order \(\mathcal{O}(1)\). In this scenarion, we can predict how at all perturbative orders the scale dependence of \(\lambda\) will be given by a polynomial in \(\log(\mu_R^2/\mu_0^2)\), having \textit{large logarithms}: the leading contribution is called the \textbf{leading logarithm}, LL.
+\[
+    \lambda^{k+1} \log^k(\frac{\mu_R^2}{\mu_0^2}),
+\]
+whoch we can consider of order \(\mathcal{O}(\lambda)\) if
+\[
+    \lambda \log(\frac{\mu_R^2}{\mu_0^2}) \sim \mathcal{O}(1).
+\]
+Then the running coupling equation allows us to predict the leading logarithm at all orders in perturbation theory, which is a non trivial result. This is because the leading logarithm at order \(\lambda^{k+1}\) is determined by the lowest order beta function coefficient \(\beta_0\), which can be computed from one loop renormalization. Thus we can predict the leading logarithm at all orders in perturbation theory just by computing the one loop beta function coefficient \(\beta_0\).
+
+Similarly, the next to leading logarithm (NLL) have form
+\[
+    \lambda^{k+2} \log^k(\frac{\mu_R^2}{\mu_0^2}),
+\]
+i.e. one higher power of \(\lambda\) than the leading logarithm, but the same power of the logarithm. The NLL at order \(\lambda^{k+2}\) is determined by the beta function coefficients \(\beta_0\) and \(\beta_1\), which can be computed from one loop and two loop renormalization, respectively. Thus we can predict the NLL at all orders in perturbation theory just by computing the one loop and two loop beta function coefficients \(\beta_0\) and \(\beta_1\) (i.e. renormlization up to two loops).
+
+Let us now focus on the leading logarithm. Since they only depend on the lowest order beta function coefficient \(\beta_0\), we can solve the running coupling equation at leading logarithm accuracy by only keeping the leading logarithm contribution to the beta function, which is given by \(\beta_0 \lambda^2\) (\(\beta_1 = \beta_2 = \dots = 0\)). We are solving the running coupling equation non perturbatively, using a truncated expansion of the beta function, which is a non trivial result. We have
+\[
+    \frac{\mathrm{d}}{\mathrm{d} \tau} \lambda = \beta_0 \lambda^2 + \mathcal{O} \left( \lambda^3 \right).
+\]
+We neglect the higher order contributions to the beta function, which is a consistent approximation at leading logarithm accuracy. We can then solve this equation by separation of variables:
+\[
+    \int_{\overline{\lambda}}^{\lambda} \frac{\mathrm{d} \lambda}{\lambda^2} = \beta_0 \int_0^{\tau} \mathrm{d} \tau,
+\]
+where recall that \(\overline{\lambda} = \lambda(\mu_0)\) and \(\lambda = \lambda(\mu_R)\). We can then perform the integrals to find
+\[
+    - \frac{1}{\lambda(\mu_0^2)} + \frac{1}{\lambda(\mu_R^2)} = \beta_0 \tau = \beta_0 \log \left( \frac{\mu_R^2}{\mu_0^2} \right).
+\]
+Solving for \(\lambda(\mu_R^2)\), we find the leading logarithm resummed expression for the running coupling:
+\[
+    \lambda(\mu_R^2) = \frac{\lambda(\mu_0^2)}{1 - \beta_0 \lambda(\mu_0^2) \log \left( \frac{\mu_R^2}{\mu_0^2} \right)} = \lambda(\mu_0^2) \sum_{k=0}^{\infty} \left( \beta_0 \lambda(\mu_0^2) \log \left( \frac{\mu_R^2}{\mu_0^2} \right) \right)^k,
+\]
+where we have explicited the fact that the leading logarithm at order \(\lambda^{k+1}\) is given by \(\beta_0^k \lambda^{k+1} \log^k(\mu_R^2/\mu_0^2)\). This is a non trivial result: we have found a non perturbative expression for the running coupling at leading logarithm accuracy, which resums the leading logarithms at all orders in perturbation theory. This \textbf{resummation} is important when the logarithm becomes large, as it allows us to make reliable predictions even in this regime.
+
+Resummation in quantum field theory is a powerful technique that allows us to improve the convergence of perturbative expansions by summing up certain classes of terms to all orders in perturbation theory. In the case of the running coupling, resummation allows us to capture the leading logarithmic behavior of the coupling at all orders, which is crucial for making accurate predictions when the scale dependence becomes significant.
+
+    [...]
+
+One can show that if we had included an additional term in the beta function, such as \(\beta_1 \lambda^3\), we would have found connections proportional to...
+
+\subsection{Resummation}\TODO{change and move back}
+
+[...]
+
+\subsubsection{Landau Pole}
+
+The denominator of the resummed expression for the running coupling can become zero at a certain scale
+\[
+    \mu_R = \Lambda,
+\]
+which is called the \textbf{Landau pole}. This indicates that the coupling becomes infinite at that scale, which is a sign of a breakdown of the theory.
+
+We can solve this equation for \(\mu_0 = \Lambda\) to find the scale at which the Landau pole occurs (the scale at which the theory becomes non perturbative):
+\[
+    \lambda(\mu_R^2) = \frac{1}{\beta_0 \log \left( \frac{\Lambda^2}{\mu_R^2} \right)}.
+\]
+it is not difficult to see that
+\[
+    \begin{dcases}
+        \lambda(\mu_R^2 \to 0) \to 0, \\
+        \lambda(\mu_R^2 \to \Lambda^2) \to \infty.
+    \end{dcases}
+\]
+
+[\textit{Plot of divergence in the coupling}]
+
+[...]
+
+The \textbf{fixed point} is a point where the running of lambda stops, i.e. where the beta function is zero \(\beta(\lambda) = 0\). For example, in a \(\phi^4\) theory, we have a trivial infrared fixed point at \(\lambda = 0\), which is an attractive fixed point in the infrared. Other possibilities can arise in more complicated theories, such as non abelian gauge theories, where we can have non trivial fixed points that are not at zero coupling. The existence of fixed points is important for understanding the behavior of the theory at different scales, and can have implications for phenomena such as phase transitions and critical behavior.
+
+    [...]
+
+Why would we want to use a scheme such as MS or \(\overline{\text{MS}}\) instead of the on shell scheme?
+
+[...]
+
+Consider \(\mathcal{M}(\phi \phi \to \phi \phi)\) for \(p^2 \gg m^2\):
+\[
+    \int \dots
+\]
+in the on shell scheme, we would have
+\[
+    i \mathcal{M}_{NLO} = \dots
+\]
+At L-loops we expect to have contributions of the form
+\[
+    i\mathcal{M} \sim \lambda \lambda^L \log^L \left( \frac{p^2}{m^2} \right)
+\]
+
+[\textit{draw L loops}]
+
+the perturbative expansion breaks down when \(\lambda \log(s/m^2) \sim \mathcal{O}(1)\).
+
+The on-shell schemes is defined as \(s = 4m^2\), but at order \(\mathcal{O}(m^2)\) the scheme is ill defined, since we have null scales....?
+
+In \(\overline{\text{MS}}\) we have instead
+\[
+    \dots
+\]
+where
+\begin{enumerate}
+    \item The massless limit is fine
+    \item choosing \(\mu_R^2 \sim \mathcal{O}(s)\) allows us to resum the large logarithms, which is important for making reliable predictions at high energies. It avoids large logarithms in the perturbative expansion, which can spoil the convergence of the series and lead to unreliable predictions.
+\end{enumerate}
+
+The running couplin equation in MS or \(\overline{\text{MS}}\) is ...
+
+    [...]
+
+\[
+    \mu_R \sim \mathcal{O}\left( \text{ scale describing the problem }\right).
+\]
+
+[...]
+
+In principle observables do not depend on the renormalization scheme, but in practice they do at finite order in perturbation theory. The choice of renormalization scheme can affect the convergence of the perturbative expansion and the size of higher order corrections, so it is important to choose a scheme that is appropriate for the problem at hand.
+
+If we truncate the series in lambda at some order, the choice of renormalization scheme can affect the numerical value of the coupling constant and the predictions for observables. Seeing how much the predictions change when we change the renormalization scheme can give us an estimate of the theoretical uncertainty associated with truncating the perturbative expansion.
+
+The \(\overline{\text{MS}}\) scheme can be used to renormalize the mass of the theory, but it is not a physical mass (it is not the pole of the propagator or the eigenvalue of \(\hat{P}^2\)), since it depends on the renormalization scale \(\mu_R\).
+
+    [...]
+
+    [...]
+
+    [...]
+
+\subsection{Renormalization without Regulators}
+
+As we mentioned, in principle we can perform renormalization without introducing a regulator. This is called \textbf{renormalization without regulators}.
+
+As an example, let us consider the 2-2 scattering in \(\phi^4\) theory.
+
+\[
+    i \mathcal{M}_{NLO} = (-i \lambda)^2 \dots
+\]
+where \(\delta \lambda\) is the counterterm for the coupling constant, and the integral is divergent and we had
+\[
+    i V(p^2) = \frac{1}{2} \int \frac{\mathrm{d}^4 k}{(2\pi)^4} \frac{i}{(k^2 - m^2)((k+p)^2 - m^2)}.
+\]
+In the on shell scheme, we have defined
+\[
+    \delta \lambda = - \lambda^2 \int
+\]
+to cancel the divergence of the integral, so that the NLO contribution to the amplitude is finite. We can then write the NLO amplitude as
+\[
+    \begin{aligned}
+        i \mathcal{M}_{NLO} \big|_{os} & = \dots
+                                       & = \dots
+    \end{aligned}
+\]
+where we have defined
+\[
+    \begin{aligned}
+        i \tilde{V}(p^2) & = i V(p^2) - i V(4m^2) \\
+                         & = \dots                \\
+                         & = \dots
+    \end{aligned}
+\]
+which is finite. Thus we have performed renormalization without introducing a regulator, by defining the counterterm in such a way that it cancels the divergence of the integral, and then writing the amplitude in terms of a finite quantity \(\tilde{V}(p^2)\). One can compute this finite quantity explicitly with Feynman parameters...
+
+    [...]
+
+This strategy becomes quite inconvenient...
 
