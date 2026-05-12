@@ -1,0 +1,231 @@
+\section{BCS theory}
+
+ [...]
+
+We can define the coopers pair operator as
+\[
+    \hat{C}_{\mathbf{k} \uparrow}^\dagger \hat{C}_{-\mathbf{k} \downarrow}^\dagger
+\]
+
+[...]
+
+We can write the BCS Hamiltonian as
+\[
+    H_{BCS} = \sum_{\mathbf{k}, \sigma} \xi_{\mathbf{k}\sigma} \dots \dots \dots
+\]
+where the interacting term has theh creation and annihilation of cooper pairs multiplied by the potential. The first term is the kinetic energy of the electrons, while the second term is the interaction between the electrons that leads to the formation of cooper pairs.
+
+Diagrammatically, we can represent the BCS Hamiltonian as
+
+    [\textit{the hamiltonian tales a cooper pair and scatter it back (through the potential part) in another cooper pair}]
+
+We have an interaction term that scatters a cooper pair from one state to another. We cannot solve this hamiltonian exactly, but we can use some techniques to find an approximate solution some of which we already know.
+
+We will use the \textbf{mean field approximation} to solve this hamiltonian. If we have two operators \(\hat{A} \) and \(\hat{B} \), we can write their product as
+\[
+    \hat{A} \hat{B} \simeq \langle \hat{A} \rangle \hat{B} + \hat{A} \langle \hat{B} \rangle - \langle \hat{A} \rangle \langle \hat{B} \rangle,
+\]
+in order to have only mean field terms of single operators.
+
+We already encountered an approximation of this kind: recalling the coulmb potential
+\[
+    V(q) C^\dagger_{\mathbf{k}_1+\mathbf{q} \uparrow} C^\dagger_{\mathbf{k}_2-\mathbf{q} \downarrow} C_{\mathbf{k}_1 \downarrow} C_{\mathbf{k}_2 \uparrow},
+\]
+and we wrote it as the mean field approximation, finding some averages which enforced \(q=0\) for the hartree term plus an exchange term for Fock.
+
+If we apply the same approximation to the BCS hamiltonian, we can write
+\[
+    H_{BCS} \simeq \dots
+\]
+which in the end gives a constant term plus a term that is quadratic in the creation and annihilation operators (the constant can be reabsorbed in the chemical potential). We have no more interaction term, it is not anymore an interacting hamiltonian. But there are strange terms as strange combinations of creation and annihilation operators.
+
+\(\langle C^{\dagger}_{\mathbf{k} \uparrow} C_{-\mathbf{k} \downarrow} \rangle\) is strange since we have the same state at the edges of the average, but it is not zero: before, if we encountered a term like this, since one operator destroys a particle and the other creates a particle, in different states, we would say that the average is zero. We will see later the consequences of these terms being non zero.
+
+Let us define
+\[
+    \begin{dcases}
+        \Delta_{\mathbf{k}} = \frac{1}{N} \sum_{\mathbf{k}^{\prime}} V_{\mathbf{k}\mathbf{k}'} \langle C_{-\mathbf{k}^{\prime} \downarrow} C_{\mathbf{k} \uparrow} \rangle, \\
+        \Delta_{\mathbf{k}}^* = \frac{1}{N} \sum_{\mathbf{k}^{\prime}} V_{\mathbf{k}\mathbf{k}'} \langle C^{\dagger}_{\mathbf{k}^{\prime} \uparrow} C^{\dagger}_{-\mathbf{k}^{\prime} \downarrow} \rangle,
+    \end{dcases}
+\]
+then we can write the hamiltonian as
+\[
+    H_{BCS} \simeq \sum_{\mathbf{k}, \sigma} \xi_{\mathbf{k}\sigma} C^{\dagger}_{\mathbf{k} \sigma} C_{\mathbf{k} \sigma} + \sum_{\mathbf{k}} (\Delta_{\mathbf{k}} C^{\dagger}_{\mathbf{k} \uparrow} C^{\dagger}_{-\mathbf{k} \downarrow} + \Delta_{\mathbf{k}}^* C_{-\mathbf{k} \downarrow} C_{\mathbf{k} \uparrow}),
+\]
+which is a quadratic hamiltonian that we can solve exactly: it is a hamiltonian of free particles with an anomalous term that creates and destroys cooper pairs. We can diagonalize this hamiltonian in order to find the energy spectrum of the system and the ground state wavefunction.
+
+If we look at the newly defined \(\Delta_{\mathbf{k}}\), we see that it is a sum of the potential multiplied by the average of the cooper pair operator. We can interpret \(\Delta_{\mathbf{k}}\) as the \textbf{order parameter} of the superconducting phase, since it is non zero only in the superconducting phase and it is zero in the normal phase. The fact that \(\Delta_{\mathbf{k}}\) is non zero means that there is a finite average of the cooper pair operator, which means that there is a finite density of cooper pairs in the system.
+
+Imagine to take some normal state, like the fermi sphere
+\[
+    \Psi_{FS} = \prod_{\mathbf{k} \in FS} C^{\dagger}_{\mathbf{k} \uparrow} C^{\dagger}_{-\mathbf{k} \downarrow} \ket{0},
+\]
+but if we try to compute the average of the cooper pair operator in this state, we find that it is zero. This means that the normal state does not have a finite density of cooper pairs, and therefore it is not a superconducting state. It is intuitive, since we did not include any mechanism to form cooper pairs in the normal state. If we now use the following ansatz for the wavefunction
+\[
+    \Psi_{BCS} = \prod_{\mathbf{k} \in FS} \left[u_{\mathbf{k}} + v_{\mathbf{k}} C^{\dagger}_{\mathbf{k} \uparrow} C^{\dagger}_{-\mathbf{k} \downarrow} \right] \ket{0},
+\]
+with the condition of \(\vert u_{\mathbf{k}} \vert^2 + \vert v_{\mathbf{k}} \vert^2 = 1\) for each \(\mathbf{k}\). This wavefunction is a superposition of the normal state and the state with cooper pairs, and it is the ground state of the BCS hamiltonian. We do not justify this ansatz, but we will see later that it is the correct one. Even historically, this ansatz was proposed since it explained the experimental results, and then it was justified a posteriori by the diagonalization of the hamiltonian.
+
+If we now try to rewrite it in a vectorial form, we define the \textbf{Nambu spinor}
+\[
+    \Psi_{\mathbf{k}} = \begin{pmatrix}
+        C_{\mathbf{k} \uparrow} \\
+        C^{\dagger}_{-\mathbf{k} \downarrow}
+    \end{pmatrix}, \quad \Psi_{\mathbf{k}}^\dagger = \begin{pmatrix}
+        C^{\dagger}_{\mathbf{k} \uparrow} & C_{-\mathbf{k} \downarrow}
+    \end{pmatrix},
+\]
+which are very convenient to use in this context since they allow us to write the hamiltonian in a compact form. In order to do so, let us try to rezrite the following term with these spinors
+\[
+    \sum_{\mathbf{k} \sigma} \xi_{\mathbf{k}\sigma} C^{\dagger}_{\mathbf{k} \sigma} C_{\mathbf{k} \sigma} = \sum_{\mathbf{k}} \xi_{\mathbf{k}} (C^{\dagger}_{\mathbf{k} \uparrow} C_{\mathbf{k} \uparrow} + C^{\dagger}_{\mathbf{k} \downarrow} C_{\mathbf{k} \downarrow}) = \sum_{\mathbf{k}} \xi_{\mathbf{k}} (C^{\dagger}_{\mathbf{k} \uparrow} C_{\mathbf{k} \uparrow} + C^{\dagger}_{-\mathbf{k} \downarrow} C_{-\mathbf{k} \downarrow})
+\]
+where the last step is justified by the fact that we are summing over all \(\mathbf{k}\) and that the dispersion is symmetric \(\xi_{\mathbf{k}} = \xi_{-\mathbf{k}}\). we can now use the anticommutation relations of the fermionic operators to rewrite
+\[
+    C^{\dagger}_{-\mathbf{k} \downarrow} C_{-\mathbf{k} \downarrow} = 1 - C_{-\mathbf{k} \downarrow} C^{\dagger}_{-\mathbf{k} \downarrow},
+\]
+so that we can write
+\[
+    \sum_{\mathbf{k} \sigma} \xi_{\mathbf{k}\sigma} C^{\dagger}_{\mathbf{k} \sigma} C_{\mathbf{k} \sigma} = \sum_{\mathbf{k}} \xi_{\mathbf{k}} (C^{\dagger}_{\mathbf{k} \uparrow} C_{\mathbf{k} \uparrow} - C_{-\mathbf{k} \downarrow} C^{\dagger}_{-\mathbf{k} \downarrow}) + \sum_{\mathbf{k}} \xi_{\mathbf{k}}.
+\]
+This expression can be written in a compact form using the Nambu spinors as
+\[
+    \sum_{\mathbf{k}} \Psi_{\mathbf{k}}^\dagger \begin{bmatrix}
+        \xi_{\mathbf{k}} & 0                 \\
+        0                & -\xi_{\mathbf{k}}
+    \end{bmatrix} \Psi_{\mathbf{k}} + \sum_{\mathbf{k}} \xi_{\mathbf{k}},
+\]
+or, explicitly writing the components of the spinor
+\[
+    \sum_{\mathbf{k}} \begin{pmatrix}
+        C^{\dagger}_{\mathbf{k} \uparrow} & C_{-\mathbf{k} \downarrow}
+    \end{pmatrix} \begin{bmatrix}
+        \xi_{\mathbf{k}} & 0                 \\
+        0                & -\xi_{\mathbf{k}}
+    \end{bmatrix} \begin{pmatrix}
+        C_{\mathbf{k} \uparrow} \\
+        C^{\dagger}_{-\mathbf{k} \downarrow}
+    \end{pmatrix} + \sum_{\mathbf{k}} \xi_{\mathbf{k}}.
+\]
+
+For the anomalous term, we can write
+\[
+    \begin{aligned}
+        \sum_{\mathbf{k}} (\Delta_{\mathbf{k}} C^{\dagger}_{\mathbf{k} \uparrow} C^{\dagger}_{-\mathbf{k} \downarrow} + \Delta_{\mathbf{k}}^* C_{-\mathbf{k} \downarrow} C_{\mathbf{k} \uparrow}) \\
+        = \sum_{\mathbf{k}} \begin{pmatrix}
+                                C^{\dagger}_{\mathbf{k} \uparrow} & C_{-\mathbf{k} \downarrow}
+                            \end{pmatrix} \begin{bmatrix}
+                                              0                     & \Delta_{\mathbf{k}} \\
+                                              \Delta_{\mathbf{k}}^* & 0
+                                          \end{bmatrix} \begin{pmatrix}
+                                                            C_{\mathbf{k} \uparrow} \\
+                                                            C^{\dagger}_{-\mathbf{k} \downarrow}
+                                                        \end{pmatrix}.
+    \end{aligned}
+\]
+
+Thus we can write the BCS mean field hamiltonian in a compact form as
+\[
+    H_{BCS}^{mf} = \sum_{\mathbf{k}} \Psi_{\mathbf{k}}^\dagger \begin{bmatrix}
+        \xi_{\mathbf{k}}      & \Delta_{\mathbf{k}} \\
+        \Delta_{\mathbf{k}}^* & -\xi_{\mathbf{k}}
+    \end{bmatrix} \Psi_{\mathbf{k}} + \sum_{\mathbf{k}} \xi_{\mathbf{k}},
+\]
+which is a quadratic hamiltonian that we can diagonalize to find the energy spectrum and the ground state wavefunction. The matrix that appears in the hamiltonian is called the \textbf{Bogoliubov-de Gennes} (BdG) matrix, and it is a \(2 \times 2\) matrix that describes the coupling between the normal and anomalous terms in the hamiltonian. The eigenvalues of this matrix give us the energy spectrum of the system, while the eigenvectors give us the coefficients \(u_{\mathbf{k}}\) and \(v_{\mathbf{k}}\) that appear in the BCS wavefunction.
+
+\begin{remark}
+    One could try to decompose any \(2\times 2\) hamiltonian in terms of the identity and the Pauli matrices, since they form a complete basis for \(2\times 2\) matrices. In this case, we can write
+    \[
+        \dots
+    \]
+    then by taking the square of the hamiltonian and using the anticommutation relations of the Pauli matrices, we can find the energy spectrum of the system:
+    \[
+        H^2 = (\alpha^2 + \beta^2 + \gamma^2) \sigma_0 \implies E = \pm \sqrt{\alpha^2 + \beta^2 + \gamma^2}.
+    \]
+\end{remark}
+
+We can use the Pauli matrices trick to find the hamiltonian in the form
+\[
+    \dots
+\]
+
+Now we can diagonalize the hamiltonian by finding the eigenvalues and eigenvectors of the BdG matrix. The eigenvalues are given by
+\[
+    E_{\mathbf{k}} = \pm \sqrt{\xi_{\mathbf{k}}^2 + \vert \Delta_{\mathbf{k}} \vert^2},
+\]
+where \(\vert \Delta_{\mathbf{k}} \vert^2\), since we wrote \(\Delta = \Delta_1 - i \Delta_2\) is given by
+\[
+    (\Delta_1 - i \Delta_2)(\Delta_1 + i \Delta_2).
+\]
+Thus the eigevectors are two dimensional vectors that can be written as
+\[
+    \begin{pmatrix}
+        \sqrt{\frac{1}{2}\left[ 1 + \frac{\xi_{\mathbf{k}}}{E_{\mathbf{k}}} \right]} \\
+        \sqrt{\frac{1}{2}\left[ 1 - \frac{\xi_{\mathbf{k}}}{E_{\mathbf{k}}} \right]}
+    \end{pmatrix}, \quad \begin{pmatrix}
+        -\sqrt{\frac{1}{2}\left[ 1 - \frac{\xi_{\mathbf{k}}}{E_{\mathbf{k}}} \right]} \\
+        \sqrt{\frac{1}{2}\left[ 1 + \frac{\xi_{\mathbf{k}}}{E_{\mathbf{k}}} \right]}
+    \end{pmatrix},
+\]
+which are orthogonal and normalized. We can now identify the coefficients \(u_{\mathbf{k}}\) and \(v_{\mathbf{k}}\) that appear in the BCS wavefunction with the components of the eigenvectors, so that we can write
+\[
+    u_{\mathbf{k}} = \sqrt{\frac{1}{2}\left[ 1 + \frac{\xi_{\mathbf{k}}}{E_{\mathbf{k}}} \right]}, \quad v_{\mathbf{k}} = \sqrt{\frac{1}{2}\left[ 1 - \frac{\xi_{\mathbf{k}}}{E_{\mathbf{k}}} \right]}.
+\]
+Remember that we are working in the Nambu spinor space, so that when we apply the eigenvectors to these spinors
+\[
+    \Psi_{\mathbf{k}}^{\dagger} \begin{pmatrix}
+        u_{\mathbf{k}} \\
+        v_{\mathbf{k}}
+    \end{pmatrix} = u_{\mathbf{k}} C^{\dagger}_{\mathbf{k} \uparrow} + v_{\mathbf{k}} C_{-\mathbf{k} \downarrow} = a_{\mathbf{k} \uparrow}^{\dagger},
+\]
+and
+\[
+    \Psi_{\mathbf{k}}^{\dagger} \begin{pmatrix}
+        -v_{\mathbf{k}} \\
+        u_{\mathbf{k}}
+    \end{pmatrix} = u_{\mathbf{k}} C_{-\mathbf{k} \downarrow} - v_{\mathbf{k}} C^{\dagger}_{\mathbf{k} \uparrow} = a_{-\mathbf{k} \downarrow},
+\]
+which are the \textbf{Bogoliubov operators} that diagonalize the hamiltonian (they are fermionic, thus they satisfy the fermionic anticommutation relations). Thus we have found the coefficients \(u_{\mathbf{k}}\) and \(v_{\mathbf{k}}\) that appear in the BCS wavefunction by diagonalizing the hamiltonian, which justifies the ansatz that we made for the wavefunction. Thus we can write the BCS (mean field) hamiltonian in the diagonal form as
+\[
+    H_{BCS}^{mf} = \sum_{\mathbf{k}} E_{\mathbf{k}} a_{\mathbf{k} \sigma}^\dagger a_{\mathbf{k} \sigma}.
+\]
+
+Stufying the spectrum, instead, let us assume momentaneously that \(\Delta_{\mathbf{k}} = \Delta\) is a constant, then we can write the spectrum as
+\[
+    E_{\mathbf{k}} = \pm \sqrt{\xi_{\mathbf{k}}^2 + \Delta^2},
+\]
+then the spectrum will be given by two branches, one with positive energy and one with negative energy, and there will be a gap of \(2\Delta\) between the two branches.
+
+    [\textit{draw of the energy spectrum, two inverted parabulas symmetric in y and with a gap of 2delta between ...}]
+
+This gap is called the \textbf{superconducting gap}, and it is a direct consequence of the formation of cooper pairs in the system. The presence of this gap means that there is a finite energy cost to create excitations in the system, which is a hallmark of the superconducting phase: it is an insulator for the presence of the gap, since we need to pay an energy cost to create excitations, but it is a superconductor since we have a finite density of cooper pairs that can condense and flow without resistance. The excitations are called \textbf{Bogoliubov quasiparticles}, and they are a \uline{superposition of electrons and holes}, since they are created by the Bogoliubov operators that are a linear combination of creation and annihilation operators.
+
+If we compute the density of states of the system, we find that since we have the gap, far from it we have only a parabolic dispersion (density is square root) ...
+
+    [\textit{draw of the density of states, with .........}]
+
+Keep in mind that the gap is very small compared to the ground state energy, so that the spectrum is almost continuous, but there is a small gap around the Fermi level that is a signature of the superconducting phase. Furthermore, remember that we did not treat the whole energy of the system, but only the superconducting part, so that the total energy of the system is given by the sum of the superconducting part and the normal part, which is given by the kinetic energy of the electrons. The normal part of the spectrum is given by the parabolic dispersion, while the superconducting part is given by the gapped spectrum that we found.\TODO{check, professor was supercazzoling us}
+
+\begin{example}[STS spectrum of superconductors]
+    The superconducting gap can be measured experimentally using Scanning Tunneling Spectroscopy (STS), which is a technique that allows us to measure the local density of states of a material. In a superconductor, the STS spectrum will show a gap around the Fermi level, with peaks at the edges of the gap corresponding to the coherence peaks of the superconducting state. The size of the gap can be extracted from the STS spectrum, and it provides information about the strength of the superconducting pairing.
+
+        [\textit{Image of sts}]
+
+    In a metal we have a finite density of states at the Fermi level, while in a superconductor we have a gap, so the density of states is zero at the Fermi level. The peaks at the edges of the gap are called coherence peaks, and they are a signature of the superconducting state. The size of the gap can be extracted from the distance between the coherence peaks, and it provides information about the strength of the superconducting pairing.
+\end{example}
+
+Taking again the definition of the order parameter, we want to show that it is non zero in the superconducting phase (below the critical temperature), and that it is zero in the normal phase (above the critical temperature).
+
+In order to do so, we can write the expectation value of the bogoliubov operators we find the density of cooper pairs in the system, which is given by
+    [...]
+
+Now taking thus the definition of the order parameter, we can write
+\[
+    \begin{aligned}
+        \Delta_{\mathbf{k}} & = \frac{1}{N} \sum_{\mathbf{k}^{\prime}} V_{\mathbf{k}\mathbf{k}'} \langle C_{-\mathbf{k}^{\prime} \downarrow} C_{\mathbf{k} \uparrow} \rangle                                                                                                                                                                                                            \\
+                            & = -\frac{1}{N} \sum_{\mathbf{k}^{\prime}} V_{\mathbf{k}\mathbf{k}'} \langle (v_{\mathbf{k}^{\prime}} a_{\mathbf{k}^{\prime} \uparrow}^{\dagger} + u_{\mathbf{k}^{\prime}} a_{-\mathbf{k}^{\prime} \downarrow}) (u_{\mathbf{k}^{\prime}} a_{\mathbf{k}^{\prime} \uparrow}^{\dagger} - v_{\mathbf{k}^{\prime}} a_{-\mathbf{k}^{\prime} \downarrow}) \rangle \\
+                            & = -\frac{1}{N} \sum_{\mathbf{k}^{\prime}} V_{\mathbf{k}\mathbf{k}'} \left[ v_{\mathbf{k}^{\prime}}u_{\mathbf{k}^{\prime}} \dots   \right]
+    \end{aligned}
+\]
+
+[...]
+
