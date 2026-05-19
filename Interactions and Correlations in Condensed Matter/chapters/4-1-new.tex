@@ -1,0 +1,131 @@
+\chapter{Diagrammatic Monte Carlo}
+
+elevtron electron, electron phonon, Landau 1933 polaron \(H^{pol}_{el-ph}\)
+
+we will see different hamiltonians we are not able to solve analytically
+
+montecarlo to diagrammatic montecarlo
+
+\section{Review of the Polaron Problem}
+
+We have a lattice composed by different types of atoms forming a crista: many body system.
+We dope the system, injectinng excess charges: it can be either an electron or an hole. for example injecting an electron in a crystal, if the cristal is either ionic or polarizable, equally charged particle will be displaced away from the electron, while oppositely charged particles will be attracted towards the electron. This injection breaks the local symmetry of the system, and this local rearrangement generates a potential, which actually creates a trap for the electron itself. The electron is then trapped in this potential, in the quantum well, and it is not free to move around the crystal. This forms a quasiparticle, which is called polaron. The polaron is the electron dressed by the phonon cloud, and it is a composite particle. The phonons can cause vibrations locally, thus an electron can bond with phonons to create this localized distortion, and when the dimension of the polaron is smaller than the lattice constant, we call it small polaron, while if the dimension of the polaron is larger than the lattice constant, we call it large polaron. The nature of the polaron is determined by the strength of the electron-phonon coupling, which is a measure of how strongly the electron interacts with the lattice vibrations. If a material is dominated by short range el-ph interactions is more prone to form small polarons, while if a material is dominated by long range el-ph interactions is more prone to form large polarons.
+
+From the point of view of the numerical and analytical methods, we can divide in two main categories:
+\begin{itemize}
+    \item we can contruct a schrodinger equation, where the hamiltonian contains all the dof of the system, huge object, but if we are able to contruct it we have this deterministic first principle method, which is very powerful. We can gain lots of insight, but we have to make a lot of approximations.
+    \item We can contruct a hamiltonian, which is an effective hamiltonian, where we consider just the more important dof of the system, in a restricted hilbert space, and the ingredients are rather clear: electronic dof (one single electronic dispersion band) + phonons (summed over momenta, these are the phonon which interact to form the polaron) + the interaction between the two (mixed term of both types of operators). This is an effective hamiltonian, like the BCS, but in this case we are focusing on just a few particles and tune the adjustable parameters of the hamiltonian to reproduce the physics of the system. Furthermore, many body correlations are included here and were not present in the first approach, and we can solve this hamiltonian with different methods, either analytical or numerical. This is a more phenomenological approach, but it is more flexible and it is more powerful to capture the physics of the system.
+\end{itemize}
+
+From a pictorial point of view, from the first principle approach, we can plot the potential energy landscape of the system, and we can see how the electron is trapped in the potential well, and we can see how the phonons are distributed around the electron. There is no preferential side for the electron to be trapped, its probability distribution to be found in each site of the lattice is a uniform pdf. This comes immediatly from the solution of the schrodinger equation, which is a delocalized wavefunction, and the probability distribution is uniform.
+In the reciprocal k-space the electron will occupy the first free band of the system.
+uniform distribution will correspond to a minimal energy which we can calculate, and if we switch on the el-ph coupling, the electron will be trapped in a potential well, and the probability distribution will be localized around the center of the well, and the energy will be lower than the free electron case. The stronger the el-ph coupling, the more localized the electron will be, and the lower the energy will be. Localization in real space corresponds to delocalization in k-space, and the electron will occupy completely the first band (which will result in a flat band below the fermi surface).
+We can calculate the energy of the configuration with the distorted lattice, and if it is less than the energy of the free electron, then the polaron is stable, and the system will prefer to be in this configuration (the material is prone to form polarons).
+
+The polaron hamiltonian considers:
+\begin{itemize}
+    \item incoming electron, which is a free electron, with a dispersion \(\epsilon_k\), which is the energy of the electron as a function of its momentum \(k\).
+    \item the vertex in which the electron interacts with the phonon, which is the el-ph coupling \(g\): the phonon propagates with momentum \(q\) and the electron with momentum \(k-q\).
+    \item the phonon propagator, which is the energy of the phonon as a function of its momentum \(q\), and it is given by \(\omega_q\).
+    \item the outgoing electron, which is the same as the incoming electron, with momentum \(k\), after the interaction with the phonon.
+\end{itemize}
+This dispersion relation for the electron is just for one band, which is the one in which the polaron forms. We can consider both tight band or a parabolic band, but the physics is the same. For the large polaron (on which we will focus on), the dispersion is parabolic, and the el-ph coupling is long range, and it is given by the Fröhlich hamiltonian. Indeed the coupling constant is proportional to the inverse of the momentum, which means that the coupling is stronger for small momenta, which corresponds to long range interactions in real space. The strebght is also given by the \(\alpha\) coefficient, depending on the material and in particular on its dielectric properties. These are the main ingredients defining the hamiltonian.
+
+There is a possibility to solve this hamiltonian analytically, but it is not exact, and it is based on some approximations. We want to compute properties of this quasiparticle: since the polaron formation causes a change inn the band dispersion, we are then interested in computing the polaron dispersion; similarly, if a material want to form a polaron, it means that the energy of the polaron is lower than the energy of the free electron or other type of solutions, so we want to compute the polaron energy; many of this quantities pass by the computation of greens functions and self energy, which are the main quantities we want to compute.
+
+One idea is to employ perturbation theory, which is a powerful method to compute the properties of the system, but it is based on the assumption that the el-ph coupling is weak, and it is not able to capture the physics of the system when the coupling is strong. we have seen that the interaction strenght is given by alpha, then we can use it compared to 1 to determine if the coupling is weak or strong, and in the strong coupling regime we have to use other methods, which are non perturbative. Weak distorsion are associated to large polarons, while strong distorsion are associated to small polarons, and the physics is different in the two cases.
+
+The variational approach, instead, is generally more applicable to the strong coupling regime, and it is based on the idea of constructing a trial wavefunction, which is a guess for the true wavefunction of the system, and then we minimize the energy with respect to the parameters of the trial wavefunction. This method can capture some of the physics of the system, but it is not exact, and it is based on some assumptions about the form of the trial wavefunction.
+
+Results from perturbation theory and variational principle, different dipendences on momenta and alpha.
+
+The phonons causes a renormalization of the electron mass, which is called the effective mass of the polaron, and it is larger than the bare mass of the electron, and it depends on the el-ph coupling strength. The stronger the coupling, the larger the effective mass, and this is a signature of the polaron formation. But let us now focus on the energy.
+
+Perturbation theory result (only in a small region of values for alpha) gives only a small fraction of the polaron energy and it is linear, while the variational approach gives a wider range of estimate of the polaron energy, which becomes more and more accurate as the coupling strength increases, and it is quadratic in alpha. The exact solution of the hamiltonian, which we can obtain with diagrammatic montecarlo, gives a result which is in between the two approximations, and it is able to capture the physics of the system for all values of alpha, from weak to strong coupling regime. Diagrammatic Monte Carlo can provide numerically exact solution for all values of the coupling strength, and it is able to capture the physics of the system in both weak and strong coupling regimes, and it can be used to benchmark the results obtained with perturbation theory and variational principle.
+
+There is also a Feynman Path Integral approach, which is a powerful method to compute the properties of the system, and it is based on the idea of expressing the partition function of the system as a path integral over all possible paths of the system, and then we can use this path integral to compute the properties of the system. This method can capture some of the physics of the system, but it is not exact, and it is based on some assumptions about the form of the paths.
+
+\section{Monte Carlo Methods}
+
+different types of montecaro based on the same common feature: the use of random numbers to perform numerical calculations. The main idea is to use random sampling to estimate the properties of a system, and it is particularly useful for systems with a large number of degrees of freedom, where traditional methods are not able to provide accurate results.
+
+There are problems simply to complicated to be solved analytically methods,even with approximations, and we need to use numerical methods to solve them. A stochastic approach means we relies on random sampling to obtain numerical results, and the extimations obtained can be approximations, wrong, very good approximations or even numerically exact, depending on the method used and the problem at hand.
+
+We can cut off some portions of the phase space, and we can use random sampling to explore the remaining portion of the phase space, and we can use this sampling to estimate the properties of the system.
+
+Monte carlo started as a method to compute integrals, and it is based on the idea of using random sampling to estimate the value of an integral, and it is particularly useful for high-dimensional integrals, where traditional methods are not able to provide accurate results.
+If we want to explore a configuration space governed by a complex probability distribution, with a form we do not know analitycally, we can use random sampling to explore this configuration space, and we can use Markov Chain Monte Carlo (MCMC) methods to generate a sequence of samples from this distribution, and we can use these samples to estimate the properties of the system. Doing so we hop from one configuration to another, and we can use this sequence of samples to estimate the properties of the system. This is a powerful method to explore complex configuration spaces, and it is widely used in many fields, including physics, chemistry, biology, and machine learning.
+
+It is also used in optimization problems, where we want to find the minimum of a function, and we can use random sampling to explore the configuration space of the function, and we can use this sampling to estimate the minimum of the function. We will not explore this type of applications, but it is worth mentioning that montecarlo is a powerful method to solve optimization problems, and it is widely used in many fields.
+
+There are several different types of montecarlo methods, ll implied in different applications, and they are based on the same common feature of using random sampling to estimate the properties of a system. Some of the most common types of montecarlo methods include: Path integral Monte Carlo, Variational Monte Carlo, Diffusion Monte Carlo, and Diagrammatic Monte Carlo. Each of these methods has its own advantages and disadvantages, and it is suitable for different types of problems.
+
+\subsection{Basic Statistics}
+
+Probability density function (pdf) are normalized and positice definite, and they can be used to describe the probability of finding a system in a particular state.
+
+The expectation value of a variable \(X\) with respect to a pdf \(\rho(x)\) is given by the integral of the product of the function and the pdf over the entire configuration space. The variable \(x\) is distributed according to the pdf \(\rho(x)\), and the expectation value is a measure of the average value of the function \(X\) over the configuration space, weighted by the probability of finding the system in each state.
+
+For continuous or discrete variables, we can use the same formula to compute the expectation value, but we have to replace the integral with a sum in the case of discrete variables. For a function of the variable \(X\), we can compute the expectation value of the function by replacing \(X\) with the function in the formula for the expectation value.
+
+in montecarlo, working with discrete variables, we just compute a mean. The montecarlo extimator of the expectation value is given by the average of the function over a set of samples drawn from the pdf. The law of large numbers states that as the number of samples increases, the montecarlo estimator converges to the true expectation value, and it is a powerful result that allows us to use montecarlo methods to estimate the properties of a system with a high degree of accuracy. The same applies to funxtions. Montecarlo does not compute explicitly neither the sum neither the integral, it just sumsover the samples chosen randomly from the pdf, and it is a powerful method to estimate the properties of a system, especially when the configuration space is large and complex. How this is achieved in practice is not trivial
+
+\begin{example}[Monte Carlo Extimator: trivial example]
+    we consider the expectation value of a function,
+
+    If we knew the pdf we could sample more values from the region in which the weight is higher, and we could obtain a better estimate of the expectation value. But we do not know the pdf, and we have to use random sampling to explore the configuration space.
+
+    The key idea is that the expectation value is similar to the sample average as long as the samples are drawn from the correct distribution. If we can generate samples from the correct distribution, then we can use the sample average to estimate the expectation value, and this is the basis of montecarlo methods.
+
+    We can imagine to sample uniformly from the configuration space, and we can use these samples to estimate the expectation value, but this is not efficient, because we are sampling from regions of the configuration space that have a low probability of being occupied by the system, and we are not sampling enough from regions that have a high probability of being occupied by the system.
+
+    MC extimates drawing many random numbers in this region, and thus as N increases, the estimate becomes more and more accurate, and it converges to the true expectation value. This is a powerful result that allows us to use montecarlo methods to estimate the properties of a system with a high degree of accuracy, even when the configuration space is large and complex. This can be proven by the law of large numbers, which states that as the number of samples increases, the sample average converges to the true expectation value.
+
+    Knowing the pdf, then we can obtain the exact expectation value by sampling from the correct distribution, and this is the basis of montecarlo methods.
+\end{example}
+
+We will always asses the quality of the montecarlo estimate by comparing it with the exact solution, and this can be done through variance and standard deviation, which are measures of the spread of the distribution of the samples around the true expectation value. The variance is defined as the average of the squared difference between the samples and the true expectation value, and it is a measure of how much the samples deviate from the true expectation value. The standard deviation is the square root of the variance, and it is a measure of how much the samples deviate from the true expectation value in units of the original variable. A smaller variance and standard deviation indicate that the montecarlo estimate is more accurate, while a larger variance and standard deviation indicate that the montecarlo estimate is less accurate.
+
+\subsection{Calculating \(\pi\) with Monte Carlo}
+
+This will be our first example of a montecarlo method, and it is a simple example to illustrate the basic idea of montecarlo methods. We can use random sampling to estimate the value of \(\pi\), which is a fundamental constant in mathematics and physics, and it is defined as the ratio of the circumference of a circle to its diameter.
+
+The basic idea is to take the quarter unit circle and unit square in the positive quarter plane, and we can use random sampling to estimate the area of the quarter unit circle, which is given by \(\pi/4\). We can generate \(N\) random points \((x_i, y_i)\) in the 2D unit square, uniformly distributed (it is not the best approach, but we will come back later to this) and we can count how many of these points fall inside the quarter unit circle. The ratio of the number of points that fall inside the quarter unit circle to the total number of points generated will give us an estimate of \(\pi/4\), and we can multiply this ratio by 4 to obtain an estimate of \(\pi\).
+
+After one estimate of \(\pi\) (thermalization is complete), we can repeat the process many times to obtain a distribution of estimates for \(\pi\), and we can compute the mean and standard deviation of this distribution to assess the accuracy of our estimate. As we increase the number of random points \(N\), the estimate of \(\pi\) will become more accurate, and the standard deviation will decrease, indicating that our estimate is converging to the true value of \(\pi\). This is a powerful demonstration of how montecarlo methods can be used to estimate properties of a system with a high degree of accuracy, even when the configuration space is large and complex.
+
+We need to address how to count the points: how do we distinguish between points that fall inside the quarter unit circle and points that fall outside? We can use the equation of the quarter unit circle, which is given by \(x^2 + y^2 \leq 1\). If a point \((x_i, y_i)\) satisfies this equation, then it falls inside the quarter unit circle, and we can count it as a point that falls inside. If a point does not satisfy this equation, then it falls outside the quarter unit circle, and we can count it as a point that falls outside. We thus define a function \(f(x_i, y_i)\) that takes the value 1 if the point falls inside the quarter unit circle and 0 if it falls outside
+\[
+    f(x,y) = \begin{dcases}
+        1, & \text{ if } x^2 + y^2 \leq 1, \\
+        0, & \text{ otherwise},
+    \end{dcases}
+\]
+and we can use this function to count the number of points that fall inside the quarter unit circle.
+
+The area of the quarter unit circle is given by the following 2D integral:
+\[
+    A_c = \frac{\pi}{4} = \int_0^1 \int_0^1 f(x, y) \mathrm{d} x \mathrm{d} y
+\]
+
+In the MC pov we have to insert in some way the pdf, so we can multiply by \(1=\frac{\rho}{\rho}\) and we can write the area as an expectation value with respect to the pdf \(\rho(x,y)\):
+\[
+    A_c = \left\langle \frac{f(x,y)}{\rho(x,y)} \right\rangle_{\rho} \sim \frac{1}{N} \sum_{i=1}^N \frac{f(x_i, y_i)}{\rho(x_i, y_i)},
+\]
+where the samples \((x_i, y_i)\) are drawn from the pdf \(\rho(x,y)\). In the end we approximated again the expectation value with the sample average, and we can use this formula to estimate the area of the quarter unit circle, and thus to estimate the value of \(\pi\). The choice of the pdf \(\rho(x,y)\) can affect the accuracy of our estimate, and it is important to choose a pdf that is well-suited for the problem at hand. In this case, since we are sampling uniformly from the unit square
+\[
+    \rho(x,y) = 1 = \mathcal{U}(0,1) \times \mathcal{U}(0,1),
+\]
+we can simplify the formula for the area to
+\[
+    A_c = \left\langle f(x,y) \right\rangle_{\rho} \sim \frac{1}{N} \sum_{i=1}^N f(x_i, y_i) = \frac{N_c}{N},
+\]
+where \(N_c\) is the number of points that fall inside the quarter unit circle, and we can use this formula to estimate the area of the quarter unit circle, and thus to estimate the value of \(\pi\). This is a powerful demonstration of how montecarlo methods can be used to estimate properties of a system with a high degree of accuracy, even when the configuration space is large and complex.
+
+After just one MC run/extimate, we can repeat the process many times to obtain a distribution of estimates for \(\pi\), and we can compute the mean and standard deviation of this distribution to assess the accuracy of our estimate. As we increase the number of random points \(N\) or the number of runs, the estimate of \(\pi\) will become more accurate, and the standard deviation will decrease, indicating that our estimate is converging to the true value of \(\pi\). The final distribution of estimates for \(\pi\) will be a normal distribution centered around the true value of \(\pi\).
+
+A single run with an anormous \(N\) will be worse than many runs with a smaller \(N\), for statistical reasons, and furthermore, we would not get a variance, which is important to assess the quality of our estimate.
+
+In an alternative approach, we could use a one dimensional function and inytegral to compute \(\pi\), for example we could use the function \(f(x) = \sqrt{1-x^2}\), which is the equation of the quarter unit circle, and we could compute the area of the quarter unit circle by integrating this function from 0 to 1. Following the same procedure as before, we can use random sampling to estimate the value of \(\pi\) by generating \(N\) random points \(x_i\) in the interval [0, 1], and we can compute the function \(f(x_i)\) for each of these points. Again we will use the sample average to estimate the area of the quarter unit circle, and all of this can be considered as a further test on our method. The final estimate of \(\pi\) will be given by different formula, but the procedure is the same as before, and we can use this alternative approach to estimate the value of \(\pi\) and to assess the accuracy of our estimate.
+
+we will see that problems arises from the arbitrary choice of the pdf, and we will see how to address these, since it is not the best distribution, but it already gives a good estimate of \(\pi\).
