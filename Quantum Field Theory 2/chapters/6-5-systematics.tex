@@ -1,0 +1,361 @@
+\section{Systematics of Renormalization}
+
+ [...]
+
+\begin{itemize}
+    \item DOes this always work for all ultraviolet divergences?
+    \item What about other theories?
+\end{itemize}
+
+[...]
+
+\begin{definition}[Superficial Degree of Divergence]
+    Given a Feynman graph \(G\), we define its superficial degree of divergence \(D(G)\) as the subtraction of the maximum power of loop momenta in the numerator of the integrand (including \(\mathrm{d}^D k_i\)), minus the maximum power of loop momenta in the denominator of the integrand.
+
+        [...]
+
+\end{definition}
+
+\begin{example}[Feynman Graphs in \(D=4\)]
+    [...]
+\end{example}
+
+[ ... naive expectation ... ]
+
+\begin{example}[Divergences in Feynman Graphs]
+    [...]
+\end{example}
+
+The naive expectation can be wrong in two ways:
+\begin{enumerate}
+    \item less divergent...
+    \item more divergent...
+\end{enumerate}
+
+\begin{example}
+    [...]
+\end{example}
+
+[ ... Divergences in sub-loops ... ]
+
+For any graph \(G\) we have
+\begin{itemize}
+    \item L
+    \item I
+    \item E
+    \item V
+\end{itemize}
+
+[...]
+
+\begin{itemize}
+    \item More external legs \(E\) makes the graph less divergent (more convergent).
+    \item More loops \(L\) makes the graph:
+          \begin{itemize}
+              \item more convergent for \(N < 4\),
+              \item more divergent for \(N > 4\),
+              \item the same for \(N = 4\).
+          \end{itemize}
+\end{itemize}
+
+\subsubsection{\(\phi^N\) Theory: \(N=4\) case}
+
+[...]
+
+\subsubsection{\(\phi^N\) Theory: \(N<4\) case}
+
+[...]
+
+\subsubsection{\(\phi^N\) Theory: \(N>4\) case}
+
+[...]
+
+\subsection{Higher-Loop Renormalization}
+
+We need to address the question of how to deal with divergences in sub-loops. In the previous example we had
+
+    [ \textit{drawing of graph with subloops} ]
+
+where we had \(D(G)<0\) but still a divergence due to the sub-loop. We need to make sure that we can consistently renormalize the sub-loop, and then the whole graph.
+
+The divergence of the sub-loop can however be renormalized by a one-loop counterterm, which is a local operator. This means that the divergence of the sub-loop can be absorbed into a redefinition of the parameters of the theory, and we can consistently renormalize the whole graph:
+
+[ \textit{drawing of sum of two graphs = finite} ]
+
+[ \textit{drawing sum of subloop and counterterm} ]
+
+[...]
+
+\subsubsection{BPHZ Theorem}
+
+In general, disentangling all the divergences of a graph can be very complicated, but it can be shown that it is always possible to do so. Indeed, even sub-loop divergences can be renormalized by counterterms at lower loop-orders; after this procedure, we are left with a graph that is superficially divergent, meaning that it can be renormalized by a counterterm of the same form as the original Lagrangian. This is the content of the BPHZ theorem, which is of paramount importance in quantum field theory:
+
+\begin{theorem}[BPHZ Theorem]
+    Any ultraviolet divergence of a graph can be renormalized (removed) by the counterterms corresponding to superficially divergent 1PI green functions.
+
+    (\textit{Bogoliubov, Parasiuk, Hepp, Zimmermann})
+\end{theorem}
+
+The proof is rather complicated and can be found in more advanced textbooks on quantum field theory, but the main idea is to use the fact that the divergences of a graph can be disentangled by using the fact that they are local, and then to use the fact that the counterterms are also local to absorb them.\TODO{add reference to proof}
+
+Thus the BPHZ theorem guarantees that we can consistently renormalize any quantum field theory, as long as we have a finite number of counterterms corresponding to superficially divergent 1PI green functions. This means we can study the renormalizability of theories using only their superficial divergences, without having to worry about the divergences of sub-loops.
+
+\subsection{Systematics of Renormalization for QED}
+
+We are going to repeat the analysis of the superficial degree of divergence for QED, and see how it works in practice.
+
+Let us call \(E_{\psi}\) and \(I_{\psi}\) the number of external and internal Dirac (fermionic) lines, and \(E_{\gamma}\) and \(I_{\gamma}\) the number of external and internal photon lines.
+
+    [\textit{draw of fermion line with two vertex to each of which one photon line is attached}]
+
+We are interested in computing how many times a fermionic or photon line attaches to a vertex. We can distinguish the case of internal and external lines, since the former can be attached to two vertices, while the latter can only be attached to one vertex. We have
+\[
+    \begin{aligned}
+        V  & = 2I_{\gamma} + E_{\gamma} \\
+        2V & = 2I_{\psi} + E_{\psi}
+    \end{aligned}
+\]
+Using these relations plus Euler's formula
+\[
+    L =  I - V + 1, \quad I = I_{\psi} + I_{\gamma},
+\]
+then we can write
+\[
+    \begin{aligned}
+        I_{\gamma} & = \dots \\
+        I_{\psi}   & = \dots
+    \end{aligned}
+\]
+
+Thus as \(k \to \infty\) we know that the integrand of the Feynman graph behaves as
+\[
+    \begin{aligned}
+        \frac{1}{\slashed{k}} \sim \text{fermion line (to be drawn)} \\
+        \frac{1}{k^2} \sim \text{photon line (to be drawn)}
+    \end{aligned}
+\]
+so that in the end we can compute the superficial degree of divergence as
+\[
+    D(G) = \dots
+\]
+[ \dots ]
+This shows furthermore that for a sufficiently large number of external legs the graph is convergent, while for a small number of external legs the graph is divergent. In particular
+\[
+    D(G) \geq 0 \quad \text{for} \quad (E_{\gamma} + \frac{3}{2} E_{\psi}) \leq 4,
+\]
+thus the superficially divergent 1PI Green functions are
+
+    [\textit{draw of 6 1PI green functions}]
+
+\begin{enumerate}[label=(\roman*)]
+    \item The first one is zero since\dots
+    \item The third one is zero for Furry's theorem: \textit{Green functions with an odd number of external photon legs vanish}\dots It implies that also the first one is zero.
+    \item The second graph is renormalized by counterterms from the renormalization constants \(Z_A\), \(Z_m\), \(Z_{\psi}\) and \(Z_e\). This is true also for the fifth and sixth graph, which are renormalized by the same counterterms.
+    \item We are left with the fourth graph, which can be shown to be finite even if it is superficially divergent, due to gauge invariance. This is a non-trivial result, which can be shown by using the Ward-Takahashi identities, which are a consequence of gauge invariance. Let us see this in detail.
+\end{enumerate}
+
+Considering the fourth graph, its superficial degree of divergence is \(D(G) = 0\), so it is logarithmically divergent. Only largest terms as \(\vert k^{\mu} \vert \to \infty\) are independent of \(m\), \(p^{\mu}\)\dots
+[\dots ]
+[\textit{draw}]
+[\dots ]
+
+This must come from a lagrangian term of the form
+\[
+    \mathcal{L} \dots
+\]
+which would not be gauge invariant: this counterterm cannot be generated by a gauge invariant theory, so it must be zero. This is a consequence of the Ward-Takahashi identities, which are a consequence of gauge invariance\dots
+
+Equivalently, we can use Bose symmetry to show that the counterterm must be of the form\dots
+[\dots ]
+since photons are bosons, the counterterm must be symmetric under the exchange of the photon legs, so it must be of the form\dots
+[\dots ]
+from the ward takanashi identity
+\[
+    p_{1 \mu} C^{\mu \nu \rho \sigma} = p_{2 \mu} C^{\mu \nu \rho \sigma}= \cdots  = 0,
+\]
+so the constant in front of the counterterm must be zero, so the counterterm must be zero, so the graph is finite.
+
+\subsection{Renormalizability from Dimensional Analysis}
+
+It can be shown that the renormalizability of theories is related to \dots
+
+Consider a general theory with an arbitrary number of
+\begin{itemize}
+    \item scalar fields \(\phi_i\),
+    \item Dirac fields \(\psi_i\),
+    \item massless spin 1 vector fields \(A_i\),
+\end{itemize}
+
+UV limit for fields...
+
+Furthermore, we know that Feynman rules in vertexes are polynomials in the momenta, so the leading terms... we can neglect all masses and external momenta...
+
+    [\textit{draw >o< and integral where we simplify momenta and masses}]
+\[
+    \int \frac{\mathrm{d}^4 k}{(k^2 - m^2)((k+p)^2 - m^2)} \sim \int \frac{\mathrm{d}^4 k}{k^4} \sim \int \frac{\mathrm{d}^4 k}{\vert k \vert^4},
+\]
+We can notice how, after removing the couplings, the superficial degree of divergence is related to the mass dimension
+\[
+    D\left(\int \mathrm{d}^{D}k_1 \cdots \mathrm{d}^{D}k_L \frac{1}{k^{\alpha}} \right) = DL - \alpha = \left[ \mathrm{d}^{D}k_1 \cdots \mathrm{d}^{D}k_L \frac{1}{k^{\alpha}} \right],
+\]
+we are looking at an amputed 1PI green function, without external legs.
+
+A generic amputed green funxtion in momentum space has the form
+\[
+    \dots
+\]
+where we had the delta enforcing momentum conservation on the lhs, and the integral of the product of propagators and vertexes on the rhs. The superficial degree of divergence is then given by the mass dimension of the amputated green function \(\mathcal{M}(E_{\phi}, E_{\psi}, E_{\gamma})\), which will be given by
+\[
+    \begin{aligned}
+        \left[ \mathcal{M}(E_{\phi}, E_{\psi}, E_{\gamma}) \right] = \dots
+    \end{aligned}
+\]
+which is the same as the superficial degree of divergence \(D(G)\) of the graph \(G\) corresponding to the 1PI green function \(\mathcal{M}(E_{\phi}, E_{\psi}, E_{\gamma})\). This is a general result, which holds for any theory, and it allows us to determine the superficial degree of divergence of a graph by simply looking at the mass dimension of the corresponding green function.
+
+If we now consider an interaction lagrangian of the form
+\[
+    \mathcal{L} = \sum_{j} g_j O_j,
+\]
+as a sum of couplings \(g_j\) times operators \(O_j\) (depending on the fields \(O = O(\phi_i, \psi_i, A_i)\), as products of fields and their derivatives). In \(D=4\) we .......
+
+If we now consider a graph \(G\) with \(N_i\) vertices of type \(i\), then the graph itself will have a form
+\[
+    G \sim \prod_{i} g_i^{N_i} \int \mathrm{d}^D k_1 \cdots \mathrm{d}^D k_L \frac{1}{k^{\alpha}},
+\]
+By dimensional analysis, we can write
+\[
+    \dots
+\]
+hence, its superficial degree of divergence will be given by
+\[
+    D(G) = \dots
+\]
+This shows that the superficial degree of divergence of a graph is related to the mass dimension of the couplings \(g_i\) and the operators \(O_j\) in the interaction lagrangian. Let us now look at some special cases to see how this works in practice.
+\begin{itemize}
+    \item \(\Delta_j \geq 0\): ... The maximum degree of divergence is independent of the number of vertices (therefore even independent on the number of loops), so the theory is \textbf{renormalizable}. The number of divergent green functions does not depend on the number of loops, so we can renormalize the theory by a finite number of counterterms.
+
+          Since \(\Delta_j = [g_j] \geq 0 \iff [O_j] \leq 4\), which means that the operators in the interaction lagrangian must have mass dimension less than or equal to 4, so they can only be products of fields and their derivatives with mass dimension less than or equal to 4. This is a very strong constraint on the form of the interaction lagrangian, and it is one of the reasons why renormalizable theories are so special.
+    \item \(\Delta_j > 0\): ... if this is strictly the case for all operators in the interaction lagrangian, then the theory is \textbf{super-renormalizable}. The argument is similar, since with more loops we have more negative contributions to the superficial degree of divergence, so the theory becomes more and more convergent as we add more loops, so we only have a finite number of divergent green functions, which can be renormalized by a finite number of counterterms....?
+    \item \(\Delta_j < 0\): ... for at least one \(\Delta_j < 0\), the theory is \textbf{non-renormalizable}. The argument is that the superficial degree of divergence becomes more and more positive as we add more loops ``\(-N_j \Delta_j\) '' ...
+
+          Every green function becomes divergent at sufficiently high loop order, so we have an infinite number of divergent green functions, which can only be renormalized by an infinite number of counterterms, so the theory is \textbf{non-renormalizable}.
+\end{itemize}
+
+We have thus found a way to relate the renormalizability of a theory to the mass dimension of the couplings and operators in the interaction lagrangian, which is a very powerful tool to determine the renormalizability of a theory by simply looking at its lagrangian. For a larger collection of theories, the degree of divergence depend of the formula
+\[
+    D(G) = 4 - E_{\phi} - \frac{3}{2} E_{\psi} - E_{\gamma} - \sum_{j} N_j \Delta_j,
+\]
+so we can determine the renormalizability of a theory by looking at the mass dimension of the couplings and operators in the interaction lagrangian, and the number of external legs of the green functions we are interested in.
+
+\begin{example}[Massive Spin 1]
+    Why massive spin 1 is different from massless spin 1? The reason is that the propagator of a massive spin 1 field behaves as
+    \[
+        wiggleline = \frac{i}{k^2 - m^2 + i \epsilon} \left(- g_{\mu\nu}  + \frac{k_\mu k^{\mu}}{m^2}\right),
+    \]
+    which as \(k \to \infty\) behaves as
+    \[
+        \xrightarrow{\vert k \vert \to \infty} \frac{i}{k^2} \frac{k_\mu k^{\nu}}{m^2} \not\sim \frac{1}{k^{\alpha}},
+    \]
+    and the leading term is not independent of the mass \(m\), so it does not behave as a massless spin 1 field: it breaks the assumption we made in the analysis of the superficial degree of divergence, so it can lead to a different behavior of the superficial degree of divergence, and therefore to a different renormalizability of the theory.
+
+    Indeed, if we were to consider a theory of QED with a massive photon, we would find that ...
+
+        [...]
+
+\end{example}
+
+\begin{remark}[Higgs Mechanism]
+    The Higgs mechanism allows us to give mass to the photon without breaking gauge invariance, so we can have a theory of massive spin 1 fields that is still renormalizable. This is one of the reasons why the Higgs mechanism is so important in particle physics, since it allows us to have a consistent theory of massive spin 1 fields, which are essential for the description of the weak interactions.
+
+    ...
+\end{remark}
+
+\begin{example}[Gravity]
+    We will not be concerned with gravity in this course, but it is interesting to note that gravity is a non-renormalizable theory: the gravitational potential is given by
+    \[
+        \sim G \frac{m_1 m_2}{r},
+    \]
+    and since the coupling constant of gravity (the Newton constant \(G\)) has mass dimension \(-2\), so it has \(\Delta_j < 0\), so it is non-renormalizable. This is one of the reasons why we need a theory of quantum gravity, since we cannot have a consistent theory of quantum gravity without a renormalizable theory.
+
+    We can obtain a QFT by considering the quantization of the metric field \(g_{\mu\nu}\), but this theory is non-renormalizable, so we need to find a way to make it renormalizable, which is one of the main goals of quantum gravity research. This theory would also give us some insights and results, but these would be correct only up to a certain energy scale, after which the non-renormalizability would become a problem.
+\end{example}
+
+\subsection{Renormalizable Theories}
+
+We can now state the condition for a theory to be renormalizable in terms of the UV behaviour of the fields and the mass dimension of the couplings and operators in the interaction lagrangian:
+\begin{center}
+    \textit{A theory is renormalizable if all its ultraviolet divergences can be renormalized by a finite number of counterterms at all orders.}
+\end{center}
+
+It follows that...
+
+We have also seen that lagrangians...
+
+However, even in renormalizable theories we may need to add other interaction terms to the lagrangian, which are not present in the original lagrangian, to make it finite.
+
+\begin{example}[Yukawa theory]
+    In the Yukawa theory we have an interaction lagrangian of the form
+    \[
+        \mathcal{L}_{int} = -g \phi \bar{\psi} \psi,
+    \]
+    which, in \(D=4\) has a coupling \(g\) with mass dimension \([g]=0\)...
+
+        [\textit{drawing of 1PI green functions a-f}]
+    \begin{enumerate}[label=(\alph*)]
+        \item the first one
+        \item the second one...
+    \end{enumerate}
+
+    Thus in the end we have to add terms to the lagrangian in order to obtain the correct counterterms to renormalize the theory, so the final lagrangian will be of the form
+    \[
+        \mathcal{L}_{int} = -g \phi \bar{\psi} \psi - \frac{g_3}{3!} \phi^3 - \frac{g_4}{4!} \phi^4,
+    \]
+    thus ...
+
+    Let us look at the mass dimensions of the couplings in the final lagrangian: we have \([g] = 0\), \([g_3] = 1\) and \([g_4] = 0\), so all the couplings have non-negative mass dimension, so the theory is renormalizable. This is a very interesting result, since it shows that loop corrections generate the \(\phi^3\) and \(\phi^4\) interactions, even if they are not present in the original lagrangian, but the theory is still renormalizable, since the couplings of these interactions have non-negative mass dimension.
+\end{example}
+
+This is an example of a more general rule:
+\begin{center}
+    \textit{If a theory is renormalizable, it must include all the renormalizable interactions compatible with the field content and the symmetries of the theory.}
+\end{center}
+In particular, we need to add all the interactions such that \([g_j] \geq 0\) or equivalently \([O_j] \leq 4\), which are compatible with the field content and the symmetries of the theory, since these interactions can be generated by loop corrections.
+
+We can thus say that in quantum field theory, the lagrangian of a renormalizable theory is not just a choice, but it is determined by the field content and the symmetries of the theory, since we need to include all the renormalizable interactions compatible with the field content and the symmetries of the theory.
+
+The symmetries of a theory are not one of the properties of the theory, but they are what directly defines the theory, since they determine the form of the lagrangian, and therefore the dynamics. This is one of the reasons why symmetries are so important in quantum field theory.
+
+\subsection{Non-Renormalizable Theories} % optional
+
+A non renormalizable theory is a theory that has an infinite number of divergent green functions, which can only be renormalized by an infinite number of counterterms, so it is not a consistent theory at all energy scales.
+
+    [...]
+
+Non renormalizable theories can still be useful as \textbf{effective field theories}, namely as low energy approximations of a more fundamental theory, which is renormalizable. In this case, the non-renormalizable theory is only valid up to a certain energy scale, after which the non-renormalizability becomes a problem, and we need to use the more fundamental theory to describe the physics at higher energies. This approximation is called \textbf{UV} completion.
+
+Consider a non renormalizable theory with an interaction lagrangian of the form
+\[
+    \mathcal{L}_{int} = \lambda \hat{O}(x), \quad \text{with } [\lambda] < 0,
+\]
+where \(\hat{O}(x)\) is an operator with mass dimension greater than 4.
+
+We could imagine to rewrite the coupling \(\lambda\) as
+\[
+    \lambda = \frac{g}{M^k}, \quad k = - [\lambda] > 0,
+\]
+where
+\begin{itemize}
+    \item \(g\) is a dimensionless coupling, which is the coupling of the more fundamental theory, and it is renormalizable,
+    \item \(M\) is a mass scale, which is the scale of the more fundamental theory, and it is the scale at which the non-renormalizability becomes a problem.
+\end{itemize}
+
+If we are interested in studying the physics at energy scales \(E \ll M\), then we can neglect the non-renormalizable interactions, since they are suppressed by powers of \(E/M\), and we can use the renormalizable theory to describe the physics at low energies...
+
+Non renormalizable theories are thus perfectly valid and predictive below some energy scale, and they can be used to describe the physics at low energies, as long as we are aware of their limitations.
+
+Moreover:
+\begin{itemize}
+    \item The low energy limit of a QFT (which may also be renormalizable) is an effective field theory, which is non-renormalizable, since it contains all the interactions compatible with the symmetries of the theory, including non-renormalizable interactions. The original QFT is the UV completion of the effective field theory. An example is the fermi theory of beta decay, which is a non-renormalizable effective field theory (since its interaction lagragian contains a four-fermion interaction with coupling of mass dimension \(-2\)); if we compute the same decay in the standard model, we find that the four-fermion interaction is generated by the exchange of a W boson, which is a renormalizable theory, and it is the UV completion of the fermi theory.
+    \item A renormalizable theory is generally not valid at all energy scales. Beyond a certain energy scale, new physics may appear. Below such energy scale, these effects can be described by adding suitable non-renormalizable operators to the lagrangian of the renormalizable theory. This means that in the end even renormalizable theories can be viewed as the first term in a large \(M\) expansion of the more foundamental lagrangian.
+    \item The lagrangian of a non-renormalizable theory is determined by the field content and the symmetries of the theory, since we need to include all the interactions compatible with the field content and the symmetries of the theory. While generally there is an infinite number of interactions compatible with it, for low energy processes we can neglect all the interactions above a certain energy scale.
+\end{itemize}
