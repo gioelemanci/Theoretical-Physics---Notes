@@ -1,0 +1,261 @@
+\section{Conceptual Framework}
+
+ [...]
+
+\begin{enumerate}
+    \item \textbf{Coarse-Grain}: ...
+          \[
+              m^{\prime}(x) = \frac{1}{b^D} \int_{|y| < b} m(x^{\prime}) dx^{\prime},
+          \]
+    \item \textbf{Prescale}: ...
+    \item \textbf{Renormalize}: By the way we define \(m\) we want to preserve the originale domain for \(m(x^{\prime})\); we need to divide by some scale factor
+          \[
+              m \to \frac{m}{\zeta},
+          \]
+          which is equivalent to a variable change
+          \[
+              m(\mathbf{x}) \xrightarrow{\text{RG step}} m_{\text{new}}(\mathbf{x}_{\text{new}}) = \frac{1}{\zeta b^{D}}\int_{\mathcal{C}} \mathrm{d}^D \mathbf{x}^{\prime} m(\mathbf{x}^{\prime}),
+          \]
+          where \(\mathcal{C}\) is again the cell centered around \(b \mathbf{x}_{\text{new}}\).
+\end{enumerate}
+
+This reflect on the partition function as
+\[
+    \mathcal{Z} \mapsto \mathcal{Z} = \int \mathcal{D} m_{\text{new}} e^{-F_{\text{new}}[m_{\text{new}}(\mathbf{x}_{\text{new}})]},
+\]
+where the functional form of the free energy is preserved, but the parameters are changed. The RG transformation is thus a mapping in the space of parameters, which allows us to understand how the system behaves at different scales.
+
+    [...]
+
+We assume that close to the critical temperature \(T_c\) we can neglect all the parameters of \(F\) except for the most relevant ones, which are \(t\) and \(h\):
+\[
+    F[m(\mathbf{x})] = F[m(\mathbf{x}); t, h],
+\]
+where \(t\) is the reduced temperature defined as \(t = \frac{T - T_c}{T_c}\). The RG transformation will then give us the flow equations for \(t\) and \(h\), which will allow us to understand the behavior of the system near the critical point.
+
+Thus if we are close to criticality, when applying an RG transformation we will get
+\[
+    \implies F_{\text{new}}[m_{\text{new}}(\mathbf{x}_{\text{new}}); t_{\text{new}}, h_{\text{new}}] = F[m_{\text{new}}(\mathbf{x}_{\text{new}}); t_{\text{new}}, h_{\text{new}}],
+\]
+where the functional form of the free energy is preserved, but the parameters \(t\) and \(h\) are changed to \(t_{\text{new}}\) and \(h_{\text{new}}\). This again translates into a transfomation of the field ...
+\[
+    \begin{dcases}
+        t_{\text{new}} = \dots \\
+        h_{\text{new}} = \dots
+    \end{dcases}
+\]
+which will give us the flow equations for \(t\) and \(h\).
+
+First, since RG steps involve changes at short lenght scales, then it cannot generate singularities; therefore, close to criticality \([(t,h)=(0,0)]\), we can expand the flow equations in Taylor series:
+\[
+    \begin{dcases}
+        t_b(t,h) \sim A(b) t + B(b) h + \mathcal{O}(t^2, h^2), \\
+        h_b(t,h) \sim C(b) t + D(b) h + \mathcal{O}(t^2, h^2),
+    \end{dcases}
+\]
+from which we will have to deduce symmetry relations for the coefficients \(A(b)\), \(B(b)\), \(C(b)\) and \(D(b)\). The free energy is indeed invariant under the combined transformations
+\[
+    \begin{dcases}
+        m(\mathbf{x}) \to -m(\mathbf{x}), \\
+        h \to -h,
+        t \to t,
+    \end{dcases}
+\]
+then the hamiltonian will also be invariant under the same transformations; now using this transformation we can write
+\[
+    \begin{dcases}
+        t_b (t,h) = A(b) t, \\
+        h_b (t,h) = D(b) h,
+    \end{dcases}
+\]
+and fixing \(A(1) = D(1) = 1\) then
+\[
+    \begin{dcases}
+        A(b_1 b_2) = A(b_1)A(b_2), \\
+        D(b_1 b_2) = D(b_1)D(b_2),
+    \end{dcases}
+\]
+which suggest the existence of a group structure for the RG transformations, and thus we can write
+\[
+    \begin{dcases}
+        A(b) = b^{y_t}, \\
+        D(b) = b^{y_h},
+    \end{dcases}
+\]
+which will give us a solution for certain values of the exponents \(y_t,\,y_h \in \mathbb{R}\). Now we want to understand the sign of thee exponents \(y_t\) and \(y_h\), which will give us the stability of the fixed point.
+
+Since after an RG step the correlation length gets divided by \(b\), it seems that we are looking at a less critical system: it moves us away from criticality, which should correspond to
+\[
+    y_t,\,y_h >0.
+\]
+Thus teh parameters \(t\) and \(h\) transforms under the flow equations near criticality as
+\[
+    \begin{dcases}
+        t^{\prime} = t_{\text{new}} = b^{y_t} t, \\
+        h^{\prime} = h_{\text{new}} = b^{y_h} h,
+    \end{dcases}
+\]
+which means that the flow is away from the critical point, which is thus an unstable fixed point.
+
+Now the idea is to use those to demonstarte the scaling and hyperscaling relations, which are the relations between the critical exponents that describe the behavior of physical quantities near the critical point.
+
+\subsection{Scaling Relation for Free Energy}
+
+In the path integral formulation, the partition function is given by
+\[
+    \mathcal{Z} = \int \mathcal{D} m e^{-F[m;t,h]} = \int \mathcal{D} m_{\text{new}} e^{-F}[m_{\text{new}}; t_{\text{new}}, h_{\text{new}}],
+\]
+but since the integration variable is a dummy variable, we can write
+\[
+    \mathcal{Z} = \int \mathcal{D} m e^{-F[m; t_{\text{new}}, h_{\text{new}}]},
+\]
+and since the free energy is the logarithm of the partition function, we can write
+\[
+    f(t,h) = -\frac{1}{V} \ln \mathcal{Z}.
+\]
+We have to take into account that the volume of the system is also changed under the RG transformation, since we are rescaling the lenghts by a factor \(b\), thus we have to write
+\[
+    V f(t,h) = V_{\text{new}} f (t_\text{new}, h_\text{new}),
+\]
+and using the fact that \(V_{\text{new}} / V = b^{-D}\), we can write
+\[
+    f(t,h) = b^{-D} f (b^{y_t} t, b^{y_h} h) \implies f(t,h) = t^{\frac{D}{y_t}} f(1, t^{-\tfrac{y_h}{y_t}} h) = t^{\tfrac{D}{y_t}} g\left(\frac{h}{t^{\tfrac{y_h}{y_t}}}\right),
+\]
+which is the scaling relation for the free energy, where \(g\) is a scaling function that depends on the ratio \(h / t^{y_h / y_t}\). This scaling relation allows us to understand how the free energy behaves near the critical point, and in particular how it depends on the reduced temperature \(t\) and the magnetic field \(h\).
+
+\subsection{Scaling Relation for Correlation Length}
+
+The correlation length
+\[
+    \xi = \Gamma(t,h)
+\]
+is defined as the length scale over which the correlations between the spins decay exponentially. Near the critical point, the correlation length diverges, and its behavior can be described by a scaling relation. Under an RG transformation, again the idea is to write the correlation length in terms of the new parameters:
+\[
+    \begin{dcases}
+        \xi_{\text{new}} = \Gamma(t_{\text{new}}, h_{\text{new}}), \\
+        \xi_{\text{new}} = \frac{\xi}{b} = \frac{\Gamma(t,h)}{b},
+    \end{dcases}
+\]
+and this implies that
+\[
+    \Gamma(t,h) = b \Gamma(b^{y_t} t, b^{y_h} h), \quad b = t^{-\frac{1}{y_t}},
+\]
+which again gives us the scaling relation for the correlation length:
+\[
+    \Gamma(t,h) = t^{-\tfrac{1}{y_t}} \Gamma(1, t^{-\tfrac{y_h}{y_t}} h),
+\]
+and now we can identify the critical exponent \(\nu\) that describes the divergence of the correlation length as
+\[
+    \nu = \frac{1}{y_t}, \text{ since } \xi \sim t^{-\nu} \text{ for } h = 0.
+\]
+The fact that the functional form of the correlation length is preserved under the RG transformation does not mean that this procedure is valid only for simple cases, but we assumed it for simplicity in the derivation of the scaling relations, but we will see the general implications.
+
+In the end the idea will again be to linearize the flow equations around the fixed point and...
+
+\section{Formal Framework}
+
+ [...]
+In the most general case, we can write the free energy as a functional of the order parameter \(m(\mathbf{x})\) and a set of parameters \(\mathbf{s}\):
+\[
+    F[m] = \int \mathrm{d}^D \mathbf{x} \left[ \frac{t}{2} m^2 + u m^4 + v_1 m^6 + v_2 m^8 + \cdots + \frac{k}{2} (\nabla m)^2 + \frac{L}{2} (\nabla m)^2 + \cdots + hm + h m^{5 / 7}+ \cdots\right],
+\]
+where this functional form is the most general one that we can write, and the RG transformation will give us the flow equations for all the parameters \(t\), \(u\), \(v_1\), \(v_2\), \(\dots\), \(k\), \(L\) and \(h\), which will allow us to understand the behavior of the system near the critical point.
+
+When we apply an RG iteration, we are basically performing a change of variables
+\[
+    m^{\prime}(\mathbf{x}^{\prime}) = \frac{1}{\zeta b^{D}} \int_{\mathcal{C}} \mathrm{d}^D [m(\mathbf{x}^{\prime})],
+\]
+...
+
+But we can already see that the functional form do not change after a parameter change, which is the key point of the RG transformation:
+\[
+    F[m, \mathbf{s}] = F[m, (t,u,v_1,v_2,\dots, k, L, h, \dots)] \xrightarrow{\text{RG step}} F[m, (t_{\text{new}}, u_{\text{new}}, v_{1,\text{new}}, v_{2,\text{new}}, \dots, k_{\text{new}}, \dots, h_{\text{new}}, \dots)],
+\]
+and
+\[
+    F[m, \mathbf{s}] \xrightarrow{RG} F_\text{new}[m, \mathbf{s}_{\text{new}}] = F[m_{\text{new}}, \mathbf{s}_{\text{new}}],
+\]
+since in the parameter space, with the most general functional form, the RG transformation is a mapping from the parameter space to itself
+\[
+    \mathbf{s}_1 \mapsto \mathbf{s}_2 \mapsto \mathbf{s}_3 \mapsto \cdots \in \text{Action Space}, \quad \mathbf{s}^{\prime} = \mathbb{R}_b(\mathbf{s}),
+\]
+which allows us to understand how the system behaves at different scales, and in particular to identify the critical points and the nature of the phase transitions.
+
+We are visualizing the RG transformation as a flow in the parameters space, which is called the \textbf{action space}, and the fixed points of this flow correspond to scale-invariant theories, since we are rescaling effectively the system, thus they have to be associated with critical points of phase transitions (at zero or infinite temperature). The flow of the parameters under the RG transformation allows us to understand the behavior of the system at different scales, and in particular to identify the critical points and the nature of the phase transitions.
+
+\subsection{Scaling Directions and Anomalous Dimensions}
+
+Let us imagine a complicated infinite dimensional parameter function
+\[
+    S^* = \dots
+\]
+we can taylor expand it around the fixed point as
+\[
+    \dots \dots \dots
+\]
+and at least we get a formal expression\dots
+
+commutation property of functions
+
+Hence, we can find a common eigenbasis \(\{O_i\}\)  for the linearized RG transformation, and we can write
+\[
+    \mathcal{R}_b^L O_i = \lambda_i(b) O_i,
+\]
+such that
+\[
+    RRO \dots
+\]
+and we obtain the following constraints on the eigenvalues \(\lambda_i(b)\):
+\[
+    \lambda(b)\lambda(b^{\prime}) = \lambda(bb^{\prime}),
+\]
+and recalling that \(\lambda(1) = 1\) (since for \(b=1\) the RG transformation is the identity), we can write
+\[
+    \lambda(b) = b^{y_i},
+\]
+which let us understand
+\[
+    \begin{dcases}
+        O_i \text{ are called \textbf{scaling directions},} \\
+        y_i \text{ are called \textbf{anomalous dimensions}.}
+    \end{dcases}
+\]
+Since the eigenvectors \(O_i\) form a complete basis, we can write any Hamiltonian in the vicinity of \(S^*\) as
+\[
+    S = S^* + \sum_{i} g_i O_i,
+\]
+which after one RG step becomes
+\[
+    \mathcal{R}_b[S] = S^* + \sum_{i} g_i b^{y_i} O_i,
+\]
+and thus we can classify the scaling directions as
+\begin{itemize}
+    \item \textbf{Relevant operators} if \(y_i > 0\): the flow is away from the fixed point, and thus they are associated with unstable directions.
+    \item \textbf{Irrelevant operators} if \(y_i < 0\): the flow is towards the fixed point, and thus they are associated with stable directions.
+    \item \textbf{Marginal operators} if \(y_i = 0\): the flow is neither towards nor away from the fixed point, and thus they are associated with marginal directions.
+\end{itemize}
+We call them ``operators'' even if they are just directions in the parameter space, because they are associated with physical operators in the theory and historically they were called operators in the context of quantum field theory, where the RG was first developed. There is a natural way to associate to each scaling direction a physical operator, since the parameters of the Hamiltonian are associated with physical operators. We accept it as a name for now.
+
+Relevant operators are those for which \(g_i\) becomes larger and larger under the RG flow, and thus they are associated with unstable directions, since they move us away from the fixed point. Irrelevant operators are those for which \(g_i\) becomes smaller and smaller under the RG flow, and thus they are associated with stable directions, since they move us towards the fixed point. Marginal operators are those for which \(g_i\) does not change under the RG flow, and thus they are associated with marginal directions, since they do not move us towards or away from the fixed point.
+
+The saddle point calculation give us exact result when concerned about criticality, because neglecting irrelevant operators not only we make a small error, but we are actually neglecting terms that are going to zero under the RG flow, after looking at an infinite scale of the system. This is the key point of the RG analysis: we are not neglecting terms that are small, but we are neglecting terms that are going to zero.
+
+Let us consider again the scale lenght \(\xi\); if we repeat the same procedure as before, we can write
+\[
+    g_i \to b^{y_i} g_i \implies \xi(g_1, g_2, \dots) = b \xi(b^{y_1} g_1, b^{y_2} g_2, \dots),
+\]
+we can order the operators in such a way that \(y_1 > y_2 > \cdots\), and thus we can write
+\[
+    b = g^{-\tfrac{1}{y_1}}, \quad \xi(g_1, g_2, \dots) = g_1^{-\tfrac{1}{y_1}} \xi(1, g_2 g_1^{-\tfrac{y_2}{y_1}}, \dots),
+\]
+namely we have derived the scaling form of the correlation length, which is a function of the relevant operators, and the irrelevant operators only appear in the scaling function as corrections to scaling.
+
+If we have a fixed points we have two options: correlation to 0 or correlation to infinity, and thus if we start from a point, if the RG moves me away from the fixed point, then I am in the basin of attraction of the other fixed point, and thus I will end up to an infinite temperature fixed point, while if the RG moves me towards the fixed point, then I am in the basin of attraction of the zero temperature fixed point, and thus I will end up to a zero temperature fixed point.
+
+To reach the repulsive point (infinite correlation) we need to fine-tune the parameters, and thus we need to set \(t = 0\) and \(h = 0\), which means that we need to set the temperature to the critical temperature and the magnetic field to zero, which is a very special point in the parameter space, and thus it is not surprising that we have a phase transition only at this point.
+
+\TODO{Check literally everything.}
+
+Historically, the RG was developed in the context of quantum field theory, where it was used to understand the behavior of quantum fields at different energy scales. The idea was coming from Kardanoff, but only after the work of Wilson, who developed the RG in a more systematic way, it was understood that the RG is a powerful tool to understand critical phenomena in statistical mechanics, and it has been applied to a wide range of systems, from classical to quantum systems, and from equilibrium to non-equilibrium systems.
+
+The epsilon expansion ...

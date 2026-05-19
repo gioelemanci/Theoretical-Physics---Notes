@@ -1,47 +1,197 @@
 \chapter{Renormalization Group}
 
-The renormalization group (RG) is a powerful theoretical framework that allows us to understand the behavior of physical systems at different scales, and in particular to analyze critical phenomena and phase transitions. It provides a unified perspective on the many facets of critical phenomena.
+The renormalization group (RG) is a powerful theoretical framework that allows us to understand the behavior of physical systems at different scales, and in particular to analyze criticality and phase transitions. It provides a unified perspective on the many facets of critical phenomena.
 
-The name ``renormalization group'' is rather misleading: it is a framework in which one applies transformations on a system, but \uline{such transformations do not form a group} in the mathematical sense (since they do not have an inverse). However, the name has been kept for historical reasons, since it was first introduced in the context of quantum field theory, where it was used to understand the behavior of quantum fields at different energy scales; now it is used to refer to a more general framework that can be applied to a wide range of systems, and it is associated with a wide set of ideas and techniques that are used to understand critical phenomena in statistical mechanics.\TODO{Add reference to the John Cardy book, chapter 3.}
+The name ``renormalization group'' is rather misleading: it is a framework in which one applies transformations on a system, but \uline{such transformations do not form a group} in the mathematical sense. However, the name has been kept for historical reasons, since it was first introduced in the context of quantum field theory, where it was used to understand the behavior of quantum fields at different energy scales; now it is used to refer to a more general framework that can be applied to a wide range of systems, and it is associated to a vast set of ideas and techniques that are used to understand critical phenomena in statistical mechanics.\TODO{Add reference to the John Cardy book, chapter 3.}
 
-The renormalization group is based upon the observation that critical phenomena are dominated by fluctuations at a scale \(\xi\) which diverges at the critical point, and thus the system is effectively scale-invariant at criticality. The idea is then to iteratively modify our description of the system, eliminating details about the short range correlations at each step, and thus to understand how the system behaves at different scales. In this way, one is eventually left with a simplified description of the system that captures the essential features of the critical behavior through correlations at large scales.
+The renormalization group is based upon the following observation: \textit{critical phenomena are dominated by fluctuations at a scale \(\xi\) which diverges at the critical point; the system thus becomes effectively scale-invariant at criticality}. The idea is to \uline{iteratively modify our description of the system}, eliminating details about the short range correlations at each step, and thus to understand how the system behaves at different scales. In this way, one is eventually left with a simplified description of the system that captures the essential features of the critical behavior through correlations at large scales.
 
-This iterative procedure is called a \textbf{coarse-graining transformation}, and it allows us to understand how the parameters of the system change as we look at it at different scales. It is indeed equivalent to a flow in the space of parameters (space of all possible free energies or actions), which is called the \textbf{action space}, and the fixed points of this flow correspond to critical points of phase transitions.
+This iterative procedure is called a \textbf{coarse-graining transformation}, and it allows us to understand how the parameters of the system change as we look at it at different scales. It is indeed equivalent to a flow in the space of parameters (space of all possible free energies or actions), which is called the \textbf{action space}, and the \textbf{fixed points} of this flow correspond to critical points of phase transitions. The RG flow allows us to understand the behavior of the system near criticality, and in particular to identify \textit{relevant and irrelevant directions} in the parameter space, associated with the critical exponents that describe the behavior of physical quantities at criticality.
 
-The RG flow allows us to understand the behavior of the system near criticality, and in particular to identify the relevant and irrelevant directions in the parameter space, which are associated with the critical exponents that describe the behavior of physical quantities near the critical point.
+The conceptual framework derived from the RG analysis is very general, and can be implemented in different forms and with different techniques; traditionally, the main distinction is made between \textbf{real space RG} and \textbf{momentum space RG}: the first one is very useful to introduce the framework, as it involves a more intuitive approach; the latter, instead, provides more powerful tools for quantitative computations (for istance, encoding a systematic approach to derive critical exponents below the upper critical dimension).
 
-The conceptual framework derived from the RG analysis is very general, and can be implemented in different forms and with different techniques; traditionally, the main distinction is between the \textbf{real space RG} and the \textbf{momentum space RG}:
-\begin{itemize}
-    \item The first one is very useful to introduce the framework, as it involves a more intuitive approach.
-    \item The latter provides more powerful tools for quantitative computations: it encodes a systematic approach to derive critical exponents below the upper critical dimension for istance.
-\end{itemize}
 However, as we said, real space RG is more intuitive and thus we will start by using this approach to revisit the 1D Ising model, which we have already solved, in order to understand how the RG works in a simple case, and then we will introduce the more general framework that can be applied to more complicated systems.
 
 \section{Coarse-Graining in Real Space}
 
- [...]
+Consider again the 1D Ising model, with Hamiltonian
+\[
+    H = - J \sum_{i} s_i s_{i+1} - \tilde{h} \sum_i s_i - \tilde{g}N,
+\]
+were \(J\) is the coupling constant, \(\tilde{h}\) is the external field and we added a constant term \(-\tilde{g}N\) to the Hamiltonian: it does not change the physics of the system, but it will be useful for the RG analysis.
 
-Starting from the Hamiltonian
+In order to write the partition function, we can introduce the following coefficients:
 \[
-    \dots
+    \begin{dcases}
+        k = \beta J,         \\
+        h = \beta \tilde{h}, \\
+        g = \beta \tilde{g},
+    \end{dcases}
 \]
-and having introduced the coefficients in such a way that they respect the following identity:
+so that we can write the partition function as
 \[
-    \dots
+    \mathcal{Z} = \sum_{\{s_i\}} e^{k \sum_i s_i s_{i+1}} \, e^{h \sum_i s_i} \, e^{g N}.
 \]
-It is convenient to parametrize as
+
+Now we have everything described in terms of the spin configurations (microscopic degrees of freedom), but we expect them to carry a lot of unnecessary details, since we are interested in the behavior of the system at larger scales than the microscopic one. The idea is to change our description of the system in terms of \textbf{coarser-grained degrees of freedom}: it naively consists in ``thinning'' the degrees of freedom by summing over some of the spins.
+
+It is easy to understand that this idea can be implemented in different ways, and thus there is not a unique way to perform the coarse-graining transformation, but in general the procedure involves the separation of the system in different blocks and then the definition of a rule to relate the original degrees of freedom to the new ones. We will employ, for the 1D Ising model, the procedure that makes the subsequent computations easier: the so called \textbf{decimation} procedure.
+
+\begin{figure}[H]
+    \begin{minipage}{0.55\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{img/RG_decimation.jpg}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.4\textwidth}
+        \caption{Decimation procedure for the 1D Ising model: the new coarse-grained degrees of freedom \(s_i^{\prime}\) are defined as the majority of the original ones \((s_i, s_{i+1})\) in each of the two-spins blocks in which we have divided the system.}
+    \end{minipage}
+\end{figure}
+
+We divide the system into blocks of two spins, and we define the new coarse-grained degrees of freedom \(s_i^{\prime}\) as the majority of the original ones \((s_i, s_{i+1})\) in each block: if the spins are equal, then the majority is well defined, while if they are different, we choose to take the first value of the two, since they are equivalent.\footnote{In other words, we are summing over the odd spins, since we are basically always taking the value of the first spin of the couple.} In this way, we have defined a new set of degrees of freedom that are coarser than the original ones, and we can move on with the RG analysis by writing the partition function in terms of the new degrees of freedom.
+
+In order to do this, let us define the following function of two spins, which will soon come in handy:
+\[
+    B(s_1,s_2) = k\,s_1 s_2 + \frac{h}{2} (s_1 + s_2) + g.
+\]
+It can be directly substituted in the expression of the partition function, since the exponent \(-\beta H\) can be written as:
+\[
+    - \beta H = k \sum_i s_i s_{i+1} + h \sum_i s_i + g N = \sum_i B(s_i, s_{i+1}).
+\]
+Therefore, the partition function can be written as
+\[
+    \mathcal{Z} = \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_i, s_{i+1})} = \sum_{\{s^{\prime}_i\}_{i=1}^{N/2}} \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_{i}, s_{i+1})} \prod_{i} \delta(s_i^{\prime}, s_{2i+1}),
+\]
+where the delta function enforces the definition of the new degrees of freedom \(s_i^{\prime}\) as the majority of the original ones in each block.\footnote{As a technical detail, let us highlight that the product is over all the new degrees of freedom, thus it will span \(i = 0, \dots, N/2 - 1\) spins.} This identity is not trivial, thus we are going to show it explicitly.
+
+\begin{proof}
+    Let us start from a simple case: we have a system with \(N = 4\) spins with periodic boundary conditions, and we want to define the new degrees of freedom as \(s_1^{\prime} = s_1\) and \(s_2^{\prime} = s_3\). The total number of configurations is \(2^4 = 16\)
+    \[
+        \{s_i\}_{i=1}^4 = \{(1,1,1,1),\,(1,1,1,-1),\,\dots,\, (1,1,-1,-1),\,\dots,\,(-1,-1,-1,-1)\}.
+    \]
+    We can define \(Z_{lhs}\) as the microscopical partition function, and \(Z_{rhs}\) as the coarse-grained one, thus we want to show that \(Z_{lhs} = Z_{rhs}\). We can write
+    \[
+        \begin{aligned}
+            Z_{lhs} = e^{B(1,1) + B(1,1) + B(1,1) + B(1,1)} + e^{B(1,1) + B(1,1) + B(1,-1) + B(-1,1)} \\
+            + \dots + e^{B(-1,-1) + B(-1,-1) + B(-1,-1) + B(-1,-1)},
+        \end{aligned}
+    \]
+    while for the new partition function we have to first understand how the coarse-grained degrees of freedom are defined: we have configurations of the form
+    \[
+        \{s^{\prime}_i\}_{i=0}^1 = \{(1,1),\,(1,-1),\,(-1,1),\,(-1,-1)\},
+    \]
+    but we have only to consider the configurations of the original spins that are compatible with the definition of the new ones through the delta function. For instance, considering the first configuration \((s_0^{\prime}, s_1^{\prime}) = (1,1)\) we have to consider only the configurations of the original spins such that
+    \[
+        \delta(s_0^{\prime}, s_1) \delta(s_1^{\prime}, s_3) = \delta(1, s_1) \delta(1, s_3),
+    \]
+    which means that the original configurations compatible with this definition are only four:
+    \[
+        \{(1,1,1,1),\,(1,1,1,-1),\,(1,-1,1,1),\,(1,-1,1,-1)\},
+    \]
+    and thus the contribution to the partition function from this configuration of the new degrees of freedom is
+    \[
+        \begin{aligned}
+            e^{B(1,1) + B(1,1) + B(1,1) + B(1,1)} + e^{B(1,1) + B(1,1) + B(1,-1) + B(-1,1)} \\
+            + e^{B(1,-1) + B(-1,1) + B(1,-1) + B(-1,1)} + e^{B(1,-1) + B(-1,1) + B(1,-1) + B(-1,-1)},
+        \end{aligned}
+    \]
+    which is exactly the same contribution we had in the original partition function for the first four configurations of the original spins. We can repeat this procedure for all the other configurations of the new degrees of freedom, and we will find that the contributions to the partition function are exactly the same as in the original one, thus we have \(Z_{lhs} = Z_{rhs}\).
+
+    But we can do better than this: we can prove explicity the identity for a generic system with \(N\) spins. We want to prove that
+    \[
+        \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_i, s_{i+1})} = \sum_{\{s^{\prime}_i\}_{i=1}^{N/2}} \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_{i}, s_{i+1})} \prod_{i} \delta(s_i^{\prime}, s_{2i+1}).
+    \]
+    We can switch the order of the sums on the right hand side, since they are finite sums of indipendent variables, thus we can write
+    \[
+        r.h.s. = \sum_{\{s_i\}_{i=1}^N} \sum_{\{s^{\prime}_i\}_{i=1}^{N/2}} e^{\sum_{i} B(s_{i}, s_{i+1})} \prod_{i} \delta(s_i^{\prime}, s_{2i+1}),
+    \]
+    then we can take the exponential out of the sum on the new degrees of freedom, since it does not depend on them, and we can write
+    \[
+        r.h.s. = \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_{i}, s_{i+1})} \sum_{\{s^{\prime}_i\}_{i=1}^{N/2}} \prod_{i} \delta(s_i^{\prime}, s_{2i+1}).
+    \]
+    Now the last sum of products of delta functions is equal to one, since for each configuration of the original spins there is only one configuration of the new degrees of freedom that is compatible with it, thus we have
+    \[
+        r.h.s. = \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_{i}, s_{i+1})} = l.h.s.,
+    \]
+    which proves the identity.
+\end{proof}
+
+After this statistical digression, we can now proceed with the computation of the partition function in terms of the new degrees of freedom. We can write
+\[
+    \begin{aligned}
+        \mathcal{Z} & = \sum_{\{s^{\prime}_i\}_{i=1}^{N/2}} \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_{i}, s_{i+1})} \prod_{i} \delta(s_i^{\prime}, s_{2i+1})                                                                                             \\
+                    & = \sum_{\{s^{\prime}_i\}_{i=1}^{N/2}} \prod_{i} e^{ \sum_{i=1}^{N/2} \left( B(s_{2i+1}, s_{2i+2}) + B(s_{2i+2}, s_{2i+3}) \right) } \prod_i \delta(s_i^{\prime}, s_{2i+1})                                                       \\
+                    & = \sum_{\{s^{\prime}_i\}_{i=1}^{N/2}} \sum_{\{s_{2i+2}\}_{i=1}^{N/2}} e^{\sum_i^{N/2} B(s_i^{\prime}, s_{2i+2}) + B(s_{2i+2}, s_{i+1}^{\prime})} = \sum_{\{s_i^{\prime} \}_{i=1}^{N/2}} e^{-\beta H^{\prime}[\{s_i^{\prime}\}]},
+    \end{aligned}
+\]
+where we have defined \(H^{\prime}\) as a new Hamiltonian that depends on the new degrees of freedom; now we can further simplify the expression as follows:
+\[
+    \begin{aligned}
+        e^{-\beta H^{\prime}[\{s_i^{\prime}\}]} & = \sum_{\{s_{2i+2}\}_{i=1}^{N/2}} e^{\sum_i^{N/2} B(s_i^{\prime}, s_{2i+2}) + B(s_{2i+2}, s_{i+1}^{\prime})}             \\
+                                                & = \prod_{i=1}^{N/2} \left[ \sum_{s_{2i+2} = \pm 1} e^{B(s_i^{\prime}, s_{2i+2}) + B(s_{2i+2}, s_{i+1}^{\prime})} \right] \\
+                                                & = e^{\sum_{i=1}^{N/2} B^{\prime} (s_i^{\prime}, s_{i+1}^{\prime})},
+    \end{aligned}
+\]
+where we have defined the new \(B^{\prime}\) as the function satisfying the following identity:
+\[
+    e^{B^{\prime} (s_1^{\prime}, s_2^{\prime})} = \sum_{s = \pm 1} e^{B(s_1^{\prime}, s) + B(s, s_2^{\prime})}.
+\]
+Since this function must be symmetric under the exchange of \(s_1^{\prime}\) and \(s_2^{\prime}\), it can be proven rigorously that its most general form is
+\[
+    B^{\prime} (s_1^{\prime}, s_2^{\prime}) = k^{\prime} s_1^{\prime} s_2^{\prime} + \frac{h^{\prime}}{2} (s_1^{\prime} + s_2^{\prime}) + g^{\prime},
+\]
+where \(k^{\prime}\), \(h^{\prime}\) and \(g^{\prime}\) are new parameters that depend on the original ones, and they are implicitly defined by the above identity.
+
+This is a crucial step in the RG analysis: we have shown that after the coarse-graining transformation, the partition function can be written as
+\[
+    \mathcal{Z} = \sum_{\{s_i^{\prime} \}_{i=1}^{N/2}} e^{-\beta H^{\prime}[\{s_i^{\prime}\}]},
+\]
+where the new Hamiltonian has the same form as the original one, but with different parameters
+\[
+    - \beta H^{\prime}[\{s_i^{\prime}\}] = \sum_{i=1}^{N/2} B^{\prime} (s_i^{\prime}, s_{i+1}^{\prime}) = k^{\prime} \sum_{i=1}^{N/2} s_i^{\prime} s_{i+1}^{\prime} + h^{\prime} \sum_{i=1}^{N/2} s_i^{\prime} + g^{\prime} \frac{N}{2},
+\]
+which means we have \textit{coarse-grained} the description of the system
+\[
+    \begin{aligned}
+        \{s_i\}_{i=1}^{N} \quad & \to \quad \{s_i^{\prime}\}_{i=0}^{N/2-1},       \\
+        (k, h, g) \quad         & \to \quad (k^{\prime}, h^{\prime}, g^{\prime}).
+    \end{aligned}
+\]
+In the thermodinamic limit \(N \to \infty\) this transformation corresponds to a flow in the space of parameters, which is a way of thinking about the RG transformation that we will extensively discuss in the following.
+
+
+
+
+\TODO{change all the summation limits from 1-N/2 to 0-N/2-1.}
+
+
+
+
+To sum up, we have shown that the partition function of the original system can be written as the partition function of a new system with the same form of the Hamiltonian, but with different parameters: we started from the original hamiltonian
+\[
+    - \beta H = k \sum_i s_i s_{i+1} + h \sum_i s_i + g N = \sum_i B(s_i, s_{i+1}),
+\]
+inside the exponential of the partition function, and through the coarse-graining transformation we have derived a new hamiltonian
+\[
+    - \beta H^{\prime} = k^{\prime} \sum_i s_i^{\prime} s_{i+1}^{\prime} + h^{\prime} \sum_i s_i^{\prime} + g^{\prime} \frac{N}{2} = \sum_i B^{\prime}(s_i^{\prime}, s_{i+1}^{\prime}),
+\]
+and in this new description in terms of the ``renormalized'' Hamiltonian, depending upon the new parameters \(k^{\prime}\), \(h^{\prime}\) and \(g^{\prime}\). In this case, the functional form of the Hamiltonian (and thus the partition function) is preserved, but the parameters are changed, and they are implicitly defined by the identity in equation (?)\TODO{add reference}, which explicitly reads
+\[
+    e^{k^{\prime} s_1^{\prime} s_2^{\prime} + \frac{h^{\prime}}{2} (s_1^{\prime} + s_2^{\prime}) + g^{\prime}} = \sum_{s = \pm 1} e^{k s (s_1^{\prime} + s_2^{\prime}) + \frac{h}{2} (s_1^{\prime} + s_2^{\prime}) + hs + 2g}.
+\]
+It is now convenient to employ the following change of variables:
 \[
     \begin{dcases}
         x = e^k, \\
         y = e^h, \\
         z = e^g,
-    \end{dcases} \quad \begin{dcases}
+    \end{dcases} \qquad \begin{dcases}
         x^{\prime} = e^{k^{\prime}}, \\
         y^{\prime} = e^{h^{\prime}}, \\
-        z^{\prime} = e^{g^{\prime}},
+        z^{\prime} = e^{g^{\prime}}.
     \end{dcases}
 \]
-then we have four choices for \((s_1,\,s_2) = (\pm 1,\, \pm 1)\):
+We have then four possible choices for \((s_1,\,s_2) = (\pm 1,\, \pm 1)\), all of which need to satisfy the above identity, thus we have the following system of equations:
 \[
     \begin{aligned}
         (+1,\,+1) \quad & \implies \quad x^{\prime} y^{\prime} z^{\prime} = z^2 y (x^2 y + x^2 y^{-1}),                \\
@@ -50,41 +200,47 @@ then we have four choices for \((s_1,\,s_2) = (\pm 1,\, \pm 1)\):
         (-1,\,-1) \quad & \implies \quad x^{\prime} (y^{\prime})^{-1} z^{\prime} = z^2 y^{-1} (x^{-2} y + x^2 y^{-1}).
     \end{aligned}
 \]
-With simple algebra we can find the solution
+The system is determined, since we have three unknowns \(x^{\prime}\), \(y^{\prime}\) and \(z^{\prime}\) and three independent equations (the second and the third one are the identical). With simple algebra we can find the solution
 \[
     \begin{dcases}
-        (z^{\prime})^4 = \dots \\
-        (y^{\prime})^2 = \dots \\
-        (x^{\prime})^4 = \dots
+        (z^{\prime})^4 = z^8 (x^2 y + x^{-2} y^{-1})(x^{-2} y + x^{2} y^{-1}) (y + y^{-1})^2, \\
+        (y^{\prime})^2 = y^2 \frac{x^2 y + x^{-2} y^{-1}}{x^{-2} y + x^{2} y^{-1}},           \\
+        (x^{\prime})^4 = \frac{(x^2 y + x^{-2} y^{-1})(x^{-2} y + x^{2} y^{-1})}{(y + y^{-1})^2},
     \end{dcases}
 \]
-which provides, after taking the logarithm, the RG flow equations for the parameters \(k\) and \(h\):
+which provides, after taking the logarithm, the \textbf{RG flow equations} for the parameters \(k\) and \(h\):
 \[
     \begin{dcases}
-        g^{\prime} = \dots \\
-        h^{\prime} = \dots \\
-        k^{\prime} = \dots
+        g^{\prime} = 2g + \delta g(k, h), \\
+        h^{\prime} = h + \delta h(k, h),  \\
+        k^{\prime} = k^{\prime} (k, h)
     \end{dcases}
 \]
-where \(\delta g\), \(\delta h\) and \(k^{\prime} (k, h)\) are implicitly defined by the above equations. This flow equations describe how the parameters of the Hamiltonian change in the \textbf{action space} (or \textit{free energy space}) as we perform a \textbf{coarse-graining transformation}. The fixed points of this flow correspond to scale-invariant theories, which are often associated with critical points of phase transitions.
+where \(\delta g\), \(\delta h\) and \(k^{\prime} (k, h)\) are implicitly defined by the above equations. \uline{This flow equations describe how the parameters of the Hamiltonian change in the \textbf{action space} (or \textit{free energy space}) as we perform a \textbf{coarse-graining transformation}}. The fixed points of this flow correspond to scale-invariant theories, which are often associated with critical points of phase transitions.
 
 \begin{remark}
-    When we write the Hamiltonian, if we assume directly that \(N \to \infty\), the system has an infinite number of degrees of freedom, and the RG transformation is from an infinite-dimensional space to itself, which is not very useful. Instead, we can consider a finite system with \(N\) sites, and then take the limit \(N \to \infty\) at the end of the calculation. We are speaking about a space of parameters, not a space of configurations, so the RG transformation is from a finite-dimensional space to itself, which is more manageable. \TODO{check if this is correct}
+    When we write the Hamiltonian, if we assume directly that \(N \to \infty\), the system has an infinite number of degrees of freedom, and the RG transformation is from an infinite-dimensional space to itself, which is not very useful. Instead, we can consider a finite system with \(N\) sites, and then take the limit \(N \to \infty\) at the end of the calculation.
+
+    We are speaking about a space of parameters, not a space of configurations, so the RG transformation is from a finite-dimensional space to itself, which is more manageable. \TODO{check if this is correct}
 \end{remark}
 
-\section{Recursion Relations and Flow Diagrams}
+Notice how during the RG transformation, lenghts in the system are actually rescaled: in the original microscopic description, the distance between two neighboring spins is one, while in the new description, the distance between two neighboring can be two (as an example, \(s_1\) and \(s_3\) are not neighbors, but the new spins \(s_0^{\prime}\) and \(s_2^{\prime}\), defined by the previous ones, are neighbors). Thus, spins which where separated by a distance \(R\) in the original lattice are now effevtively separated by a distance \(R/2\) in the new lattice, and thus the RG transformation is also a \textbf{length rescaling} transformation.
 
-The previous set of equations is also called the \textbf{RG recursion relations}
+\subsection{Recursion Relations and Flow Diagrams}
 
-[...]
+The previous set of equations is also called the \textbf{RG recursion relations} for the parameters of the Hamiltonian, and they can be used to understand how the system behaves at different scales. In particular, they allow us to identify the fixed points of the RG flow, which correspond to scale-invariant theories, and thus to critical points of phase transitions.
 
-In general one can proceed as follows:
+Although the Ising model is a very simple model, the RG analysis is not trivial, and it can be quite involved for more complicated models. However, the presented approach to compute the partition function already reveals the essential and recurring themes of the RG analysis.
+
+In general one proceeds as follows:
 \begin{enumerate}
-    \item \textbf{Coarse-graining} or ``thinning'' of the degrees of freedom: ...
-    \item \textbf{Lenght rescaling}: ...
-    \item Derivation of new \textbf{renormalized Hamiltonian}: ...
+    \item \textbf{Coarse-graining} or ``thinning'' of the degrees of freedom: we define new degrees of freedom that are coarser than the original ones, and we write the partition function in terms of these new degrees of freedom.
+    \item \textbf{Lenght rescaling}: after the coarse-graining transformation, the new degrees of freedom are defined on a lattice with a different spacing, thus we need to rescale the lengths in order to compare the new system with the original one.
+    \item Derivation of new \textbf{renormalized Hamiltonian}: after the coarse-graining and the length rescaling, we can write the partition function in terms of a new Hamiltonian that has the same form as the original one, but with different parameters.
 \end{enumerate}
-These steps...
+We will soon come back to these steps to clarify and state them in a more general and rigorous way, but for now we can already see how they work in the case of the 1D Ising model. However, this is the essential procedure to obtain the RG flow equations for the parameters of the Hamiltonian, which are the main tool to derive predictions about the critical behavior of the system (existence of phase transitions, critical exponents, etc.).
+
+\subsubsection{Ising RG Flow: No External Field}
 
 Now let us set \(h=0\), which implies \(y=1\), and see how the RG flow looks like in the \((k, h)\) plane. The flow equations give us
 \[
@@ -92,9 +248,9 @@ Now let us set \(h=0\), which implies \(y=1\), and see how the RG flow looks lik
 \]
 and we can write
 \[
-    e^{4k^{\prime}} = \cdots \quad \implies \quad k^{\prime} = \frac{1}{2} \ln \left(\cosh(2k)\right).
+    e^{4k^{\prime}} = \left(\frac{e^{2k} + e^{-2k^{\prime}}}{2}\right) \quad \implies \quad k^{\prime} = \frac{1}{2} \ln \left(\cosh(2k)\right).
 \]
-This recursion relation has two fixed points: \(k = 0\) and \(k = \infty\). The fixed points are the only candidates for critical points (where the system can undergo a phase transition), since they are the only points where the system is scale-invariant. In this case, the only critical point is at \(k = 0\), which corresponds to the infinite temperature limit, where the system is disordered. The other fixed point at \(k = \infty\) corresponds to the zero temperature limit, where the system is ordered.
+This recursion relation has two fixed points: \(k = 0\) and \(k = \infty\). The fixed points are the only candidates for critical points (where the system can undergo a phase transition), since they are the only points where the system is scale-invariant.
 
 The first one is unstable, while the second one is stable:
 \begin{itemize}
@@ -110,19 +266,85 @@ The first one is unstable, while the second one is stable:
           which means that the flow is towards \(k = 0\) and an infinite temperature.
 \end{itemize}
 
-[\textit{Drawing of flows on k and T line}]\TODO{add drawing of flows on k and T line}
+In this case, the only critical point is at \(k = 0\), which corresponds to the infinite temperature limit, where the system is disordered. The other fixed point at \(k = \infty\) corresponds to the zero temperature limit, where the system is ordered.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.8\textwidth}
+        \centering
+        \begin{tikzpicture}[
+                flow/.style={
+                        decoration={
+                                markings,
+                                mark=at position 0.08 with {\arrow[blue, line width=1.5pt]{<}},
+                                mark=at position 0.13 with {\arrow[blue, line width=1.5pt]{<}},
+                                mark=at position 0.22 with {\arrow[blue, line width=1.5pt]{<}},
+                                mark=at position 0.50 with {\arrow[blue, line width=1.5pt]{<}},
+                                mark=at position 0.75 with {\arrow[blue, line width=1.5pt]{<}},
+                                mark=at position 0.88 with {\arrow[blue, line width=1.5pt]{<}},
+                                mark=at position 0.93 with {\arrow[blue, line width=1.5pt]{<}},
+                            },
+                        postaction={decorate}
+                    }
+            ]
+            \draw[thick, flow] (0,0) -- (10,0);
+
+            \fill[red!80!black] (0,0) circle (4pt);
+            \fill[red!80!black] (10,0) circle (4pt);
+
+            \node[below=8pt] at (0,0) {$K=0$};
+            \node[below=8pt] at (10,0) {$K=+\infty$};
+
+        \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{0.8\textwidth}
+        \centering
+        \begin{tikzpicture}[
+                flow/.style={
+                        decoration={
+                                markings,
+                                mark=at position 0.08 with {\arrow[blue, line width=1.5pt]{>}},
+                                mark=at position 0.13 with {\arrow[blue, line width=1.5pt]{>}},
+                                mark=at position 0.25 with {\arrow[blue, line width=1.5pt]{>}},
+                                mark=at position 0.50 with {\arrow[blue, line width=1.5pt]{>}},
+                                mark=at position 0.75 with {\arrow[blue, line width=1.5pt]{>}},
+                                mark=at position 0.88 with {\arrow[blue, line width=1.5pt]{>}},
+                                mark=at position 0.93 with {\arrow[blue, line width=1.5pt]{>}},
+                            },
+                        postaction={decorate}
+                    }
+            ]
+
+            \draw[thick, flow] (0,0) -- (10,0);
+
+            \fill[red!80!black] (0,0) circle (4pt);
+            \fill[red!80!black] (10,0) circle (4pt);
+
+            \node[below=8pt] at (0,0) {$T=0$};
+            \node[below=8pt] at (10,0) {$T=+\infty$};
+        \end{tikzpicture}
+    \end{minipage}
+    \caption{One-dimensional renormalization group (RG) flow diagrams. The upper figure depicts the flow of the coupling constant $K$ towards the trivial fixed point at $K=0$. The lower figure shows the equivalent flow parameterized by temperature $T$, where the system is driven away from the unstable critical point at $T=0$ towards the stable high-temperature limit at $T=+\infty$.}
+\end{figure}
 
 Thus the initial problem \(\mathcal{Z}(\beta, h=0) \) is recursively mapped onto new ones \(\mathcal{Z}^{\prime}(\beta^{\prime}, h=0)\) and \(\mathcal{Z}^{\prime\prime}(\beta^{\prime\prime}, h=0)\), which by construction have to be numerically equal to the original one, but with different parameters. The flow of the parameters under the RG transformation allows us to understand the behavior of the system at different scales, and in particular to identify the critical points and the nature of the phase transitions. In this case, we see that there is no phase transition at finite temperature, since the only critical point is at \(T = \infty\), which is not physically relevant.
 
     [...]
 
-Going to \(h=0\) we can also derive a \textbf{flow diagram}...
+Going beyond and introducing an external field \(h \neq 0\) we can also derive a \textbf{flow diagram} for generic values of \(k\) and \(h\), which is a graphical representation of the RG flow in the parameter space. The flow diagram allows us to visualize how the parameters evolve under the RG transformation, and to identify the fixed points and their stability properties.
 
-[\textit{Drawing of flow diagram}]\TODO{add drawing of flow diagram}
+\begin{figure}[H]
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{img/RG_flow_temporary.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.35\textwidth}
+        \caption{Flow diagram for the 1D Ising model in the \((k, h)\) plane. The flow lines indicate how the parameters \(k\) and \(h\) evolve under the RG transformation.}
+    \end{minipage}
+\end{figure}
 
-[...]
-
-Thus if we are close to a fixed point, an RG step will move us away, but the ...
+In the precence of an external field, the flow diagram becomes more complex, but we can still identify the fixed points and their stability properties. All points in the parameter space flow towards the stable fixed point at \(k = 0\) and arbotrary \(h\), which corresponds to the disordered phase with independent and uncorrelated spins (\(\xi=0\) in this case).
 
 \subsection{Linearization and Scaling Form}
 
@@ -159,265 +381,3 @@ Now for \(h \to 0\) we have
     \xi(e^{-k}, 0) \sim e^{2k} \sim e^{2\beta J} \sim e^{\frac{2J}{T}},
 \]
 which is the well-known result for the correlation length of the 1D Ising model at zero magnetic field. This shows how the RG analysis allows us to derive the scaling behavior of physical quantities near critical points, and in this case, it confirms that there is no phase transition at finite temperature, since the correlation length diverges only as \(T \to 0\). We had to postulate the scaling form of the correlation length, but now we have an hint the RG ideas are adequate to derive the scaling form of physical quantities near critical points, and in particular to understand the behavior of the correlation length as a function of the parameters of the system.
-
-\section{Conceptual Framework}
-
- [...]
-
-\begin{enumerate}
-    \item \textbf{Coarse-Grain}: ...
-          \[
-              m^{\prime}(x) = \frac{1}{b^D} \int_{|y| < b} m(x^{\prime}) dx^{\prime},
-          \]
-    \item \textbf{Prescale}: ...
-    \item \textbf{Renormalize}: By the way we define \(m\) we want to preserve the originale domain for \(m(x^{\prime})\); we need to divide by some scale factor
-          \[
-              m \to \frac{m}{\zeta},
-          \]
-          which is equivalent to a variable change
-          \[
-              m(\mathbf{x}) \xrightarrow{\text{RG step}} m_{\text{new}}(\mathbf{x}_{\text{new}}) = \frac{1}{\zeta b^{D}}\int_{\mathcal{C}} \mathrm{d}^D \mathbf{x}^{\prime} m(\mathbf{x}^{\prime}),
-          \]
-          where \(\mathcal{C}\) is again the cell centered around \(b \mathbf{x}_{\text{new}}\).
-\end{enumerate}
-
-This reflect on the partition function as
-\[
-    \mathcal{Z} \mapsto \mathcal{Z} = \int \mathcal{D} m_{\text{new}} e^{-F_{\text{new}}[m_{\text{new}}(\mathbf{x}_{\text{new}})]},
-\]
-where the functional form of the free energy is preserved, but the parameters are changed. The RG transformation is thus a mapping in the space of parameters, which allows us to understand how the system behaves at different scales.
-
-    [...]
-
-We assume that close to the critical temperature \(T_c\) we can neglect all the parameters of \(F\) except for the most relevant ones, which are \(t\) and \(h\):
-\[
-    F[m(\mathbf{x})] = F[m(\mathbf{x}); t, h],
-\]
-where \(t\) is the reduced temperature defined as \(t = \frac{T - T_c}{T_c}\). The RG transformation will then give us the flow equations for \(t\) and \(h\), which will allow us to understand the behavior of the system near the critical point.
-
-Thus if we are close to criticality, when applying an RG transformation we will get
-\[
-    \implies F_{\text{new}}[m_{\text{new}}(\mathbf{x}_{\text{new}}); t_{\text{new}}, h_{\text{new}}] = F[m_{\text{new}}(\mathbf{x}_{\text{new}}); t_{\text{new}}, h_{\text{new}}],
-\]
-where the functional form of the free energy is preserved, but the parameters \(t\) and \(h\) are changed to \(t_{\text{new}}\) and \(h_{\text{new}}\). This again translates into a transfomation of the field ...
-\[
-    \begin{dcases}
-        t_{\text{new}} = \dots \\
-        h_{\text{new}} = \dots
-    \end{dcases}
-\]
-which will give us the flow equations for \(t\) and \(h\).
-
-First, since RG steps involve changes at short lenght scales, then it cannot generate singularities; therefore, close to criticality \([(t,h)=(0,0)]\), we can expand the flow equations in Taylor series:
-\[
-    \begin{dcases}
-        t_b(t,h) \sim A(b) t + B(b) h + \mathcal{O}(t^2, h^2), \\
-        h_b(t,h) \sim C(b) t + D(b) h + \mathcal{O}(t^2, h^2),
-    \end{dcases}
-\]
-from which we will have to deduce symmetry relations for the coefficients \(A(b)\), \(B(b)\), \(C(b)\) and \(D(b)\). The free energy is indeed invariant under the combined transformations
-\[
-    \begin{dcases}
-        m(\mathbf{x}) \to -m(\mathbf{x}), \\
-        h \to -h,
-        t \to t,
-    \end{dcases}
-\]
-then the hamiltonian will also be invariant under the same transformations; now using this transformation we can write
-\[
-    \begin{dcases}
-        t_b (t,h) = A(b) t, \\
-        h_b (t,h) = D(b) h,
-    \end{dcases}
-\]
-and fixing \(A(1) = D(1) = 1\) then
-\[
-    \begin{dcases}
-        A(b_1 b_2) = A(b_1)A(b_2), \\
-        D(b_1 b_2) = D(b_1)D(b_2),
-    \end{dcases}
-\]
-which suggest the existence of a group structure for the RG transformations, and thus we can write
-\[
-    \begin{dcases}
-        A(b) = b^{y_t}, \\
-        D(b) = b^{y_h},
-    \end{dcases}
-\]
-which will give us a solution for certain values of the exponents \(y_t,\,y_h \in \mathbb{R}\). Now we want to understand the sign of thee exponents \(y_t\) and \(y_h\), which will give us the stability of the fixed point.
-
-Since after an RG step the correlation length gets divided by \(b\), it seems that we are looking at a less critical system: it moves us away from criticality, which should correspond to
-\[
-    y_t,\,y_h >0.
-\]
-Thus teh parameters \(t\) and \(h\) transforms under the flow equations near criticality as
-\[
-    \begin{dcases}
-        t^{\prime} = t_{\text{new}} = b^{y_t} t, \\
-        h^{\prime} = h_{\text{new}} = b^{y_h} h,
-    \end{dcases}
-\]
-which means that the flow is away from the critical point, which is thus an unstable fixed point.
-
-Now the idea is to use those to demonstarte the scaling and hyperscaling relations, which are the relations between the critical exponents that describe the behavior of physical quantities near the critical point.
-
-\subsection{Scaling Relation for Free Energy}
-
-In the path integral formulation, the partition function is given by
-\[
-    \mathcal{Z} = \int \mathcal{D} m e^{-F[m;t,h]} = \int \mathcal{D} m_{\text{new}} e^{-F}[m_{\text{new}}; t_{\text{new}}, h_{\text{new}}],
-\]
-but since the integration variable is a dummy variable, we can write
-\[
-    \mathcal{Z} = \int \mathcal{D} m e^{-F[m; t_{\text{new}}, h_{\text{new}}]},
-\]
-and since the free energy is the logarithm of the partition function, we can write
-\[
-    f(t,h) = -\frac{1}{V} \ln \mathcal{Z}.
-\]
-We have to take into account that the volume of the system is also changed under the RG transformation, since we are rescaling the lenghts by a factor \(b\), thus we have to write
-\[
-    V f(t,h) = V_{\text{new}} f (t_\text{new}, h_\text{new}),
-\]
-and using the fact that \(V_{\text{new}} / V = b^{-D}\), we can write
-\[
-    f(t,h) = b^{-D} f (b^{y_t} t, b^{y_h} h) \implies f(t,h) = t^{\frac{D}{y_t}} f(1, t^{-\tfrac{y_h}{y_t}} h) = t^{\tfrac{D}{y_t}} g\left(\frac{h}{t^{\tfrac{y_h}{y_t}}}\right),
-\]
-which is the scaling relation for the free energy, where \(g\) is a scaling function that depends on the ratio \(h / t^{y_h / y_t}\). This scaling relation allows us to understand how the free energy behaves near the critical point, and in particular how it depends on the reduced temperature \(t\) and the magnetic field \(h\).
-
-\subsection{Scaling Relation for Correlation Length}
-
-The correlation length
-\[
-    \xi = \Gamma(t,h)
-\]
-is defined as the length scale over which the correlations between the spins decay exponentially. Near the critical point, the correlation length diverges, and its behavior can be described by a scaling relation. Under an RG transformation, again the idea is to write the correlation length in terms of the new parameters:
-\[
-    \begin{dcases}
-        \xi_{\text{new}} = \Gamma(t_{\text{new}}, h_{\text{new}}), \\
-        \xi_{\text{new}} = \frac{\xi}{b} = \frac{\Gamma(t,h)}{b},
-    \end{dcases}
-\]
-and this implies that
-\[
-    \Gamma(t,h) = b \Gamma(b^{y_t} t, b^{y_h} h), \quad b = t^{-\frac{1}{y_t}},
-\]
-which again gives us the scaling relation for the correlation length:
-\[
-    \Gamma(t,h) = t^{-\tfrac{1}{y_t}} \Gamma(1, t^{-\tfrac{y_h}{y_t}} h),
-\]
-and now we can identify the critical exponent \(\nu\) that describes the divergence of the correlation length as
-\[
-    \nu = \frac{1}{y_t}, \text{ since } \xi \sim t^{-\nu} \text{ for } h = 0.
-\]
-The fact that the functional form of the correlation length is preserved under the RG transformation does not mean that this procedure is valid only for simple cases, but we assumed it for simplicity in the derivation of the scaling relations, but we will see the general implications.
-
-In the end the idea will again be to linearize the flow equations around the fixed point and...
-
-\section{Formal Framework}
-
- [...]
-In the most general case, we can write the free energy as a functional of the order parameter \(m(\mathbf{x})\) and a set of parameters \(\mathbf{s}\):
-\[
-    F[m] = \int \mathrm{d}^D \mathbf{x} \left[ \frac{t}{2} m^2 + u m^4 + v_1 m^6 + v_2 m^8 + \cdots + \frac{k}{2} (\nabla m)^2 + \frac{L}{2} (\nabla m)^2 + \cdots + hm + h m^{5 / 7}+ \cdots\right],
-\]
-where this functional form is the most general one that we can write, and the RG transformation will give us the flow equations for all the parameters \(t\), \(u\), \(v_1\), \(v_2\), \(\dots\), \(k\), \(L\) and \(h\), which will allow us to understand the behavior of the system near the critical point.
-
-When we apply an RG iteration, we are basically performing a change of variables
-\[
-    m^{\prime}(\mathbf{x}^{\prime}) = \frac{1}{\zeta b^{D}} \int_{\mathcal{C}} \mathrm{d}^D [m(\mathbf{x}^{\prime})],
-\]
-...
-
-But we can already see that the functional form do not change after a parameter change, which is the key point of the RG transformation:
-\[
-    F[m, \mathbf{s}] = F[m, (t,u,v_1,v_2,\dots, k, L, h, \dots)] \xrightarrow{\text{RG step}} F[m, (t_{\text{new}}, u_{\text{new}}, v_{1,\text{new}}, v_{2,\text{new}}, \dots, k_{\text{new}}, \dots, h_{\text{new}}, \dots)],
-\]
-and
-\[
-    F[m, \mathbf{s}] \xrightarrow{RG} F_\text{new}[m, \mathbf{s}_{\text{new}}] = F[m_{\text{new}}, \mathbf{s}_{\text{new}}],
-\]
-since in the parameter space, with the most general functional form, the RG transformation is a mapping from the parameter space to itself
-\[
-    \mathbf{s}_1 \mapsto \mathbf{s}_2 \mapsto \mathbf{s}_3 \mapsto \cdots \in \text{Action Space}, \quad \mathbf{s}^{\prime} = \mathbb{R}_b(\mathbf{s}),
-\]
-which allows us to understand how the system behaves at different scales, and in particular to identify the critical points and the nature of the phase transitions.
-
-We are visualizing the RG transformation as a flow in the parameters space, which is called the \textbf{action space}, and the fixed points of this flow correspond to scale-invariant theories, since we are rescaling effectively the system, thus they have to be associated with critical points of phase transitions (at zero or infinite temperature). The flow of the parameters under the RG transformation allows us to understand the behavior of the system at different scales, and in particular to identify the critical points and the nature of the phase transitions.
-
-\subsection{Scaling Directions and Anomalous Dimensions}
-
-Let us imagine a complicated infinite dimensional parameter function
-\[
-    S^* = \dots
-\]
-we can taylor expand it around the fixed point as
-\[
-    \dots \dots \dots
-\]
-and at least we get a formal expression\dots
-
-commutation property of functions
-
-Hence, we can find a common eigenbasis \(\{O_i\}\)  for the linearized RG transformation, and we can write
-\[
-    \mathcal{R}_b^L O_i = \lambda_i(b) O_i,
-\]
-such that
-\[
-    RRO \dots
-\]
-and we obtain the following constraints on the eigenvalues \(\lambda_i(b)\):
-\[
-    \lambda(b)\lambda(b^{\prime}) = \lambda(bb^{\prime}),
-\]
-and recalling that \(\lambda(1) = 1\) (since for \(b=1\) the RG transformation is the identity), we can write
-\[
-    \lambda(b) = b^{y_i},
-\]
-which let us understand
-\[
-    \begin{dcases}
-        O_i \text{ are called \textbf{scaling directions},} \\
-        y_i \text{ are called \textbf{anomalous dimensions}.}
-    \end{dcases}
-\]
-Since the eigenvectors \(O_i\) form a complete basis, we can write any Hamiltonian in the vicinity of \(S^*\) as
-\[
-    S = S^* + \sum_{i} g_i O_i,
-\]
-which after one RG step becomes
-\[
-    \mathcal{R}_b[S] = S^* + \sum_{i} g_i b^{y_i} O_i,
-\]
-and thus we can classify the scaling directions as
-\begin{itemize}
-    \item \textbf{Relevant operators} if \(y_i > 0\): the flow is away from the fixed point, and thus they are associated with unstable directions.
-    \item \textbf{Irrelevant operators} if \(y_i < 0\): the flow is towards the fixed point, and thus they are associated with stable directions.
-    \item \textbf{Marginal operators} if \(y_i = 0\): the flow is neither towards nor away from the fixed point, and thus they are associated with marginal directions.
-\end{itemize}
-We call them ``operators'' even if they are just directions in the parameter space, because they are associated with physical operators in the theory and historically they were called operators in the context of quantum field theory, where the RG was first developed. There is a natural way to associate to each scaling direction a physical operator, since the parameters of the Hamiltonian are associated with physical operators. We accept it as a name for now.
-
-Relevant operators are those for which \(g_i\) becomes larger and larger under the RG flow, and thus they are associated with unstable directions, since they move us away from the fixed point. Irrelevant operators are those for which \(g_i\) becomes smaller and smaller under the RG flow, and thus they are associated with stable directions, since they move us towards the fixed point. Marginal operators are those for which \(g_i\) does not change under the RG flow, and thus they are associated with marginal directions, since they do not move us towards or away from the fixed point.
-
-The saddle point calculation give us exact result when concerned about criticality, because neglecting irrelevant operators not only we make a small error, but we are actually neglecting terms that are going to zero under the RG flow, after looking at an infinite scale of the system. This is the key point of the RG analysis: we are not neglecting terms that are small, but we are neglecting terms that are going to zero.
-
-Let us consider again the scale lenght \(\xi\); if we repeat the same procedure as before, we can write
-\[
-    g_i \to b^{y_i} g_i \implies \xi(g_1, g_2, \dots) = b \xi(b^{y_1} g_1, b^{y_2} g_2, \dots),
-\]
-we can order the operators in such a way that \(y_1 > y_2 > \cdots\), and thus we can write
-\[
-    b = g^{-\tfrac{1}{y_1}}, \quad \xi(g_1, g_2, \dots) = g_1^{-\tfrac{1}{y_1}} \xi(1, g_2 g_1^{-\tfrac{y_2}{y_1}}, \dots),
-\]
-namely we have derived the scaling form of the correlation length, which is a function of the relevant operators, and the irrelevant operators only appear in the scaling function as corrections to scaling.
-
-If we have a fixed points we have two options: correlation to 0 or correlation to infinity, and thus if we start from a point, if the RG moves me away from the fixed point, then I am in the basin of attraction of the other fixed point, and thus I will end up to an infinite temperature fixed point, while if the RG moves me towards the fixed point, then I am in the basin of attraction of the zero temperature fixed point, and thus I will end up to a zero temperature fixed point.
-
-To reach the repulsive point (infinite correlation) we need to fine-tune the parameters, and thus we need to set \(t = 0\) and \(h = 0\), which means that we need to set the temperature to the critical temperature and the magnetic field to zero, which is a very special point in the parameter space, and thus it is not surprising that we have a phase transition only at this point.
-
-\TODO{Check literally everything.}
-
-Historically, the RG was developed in the context of quantum field theory, where it was used to understand the behavior of quantum fields at different energy scales. The idea was coming from Kardanoff, but only after the work of Wilson, who developed the RG in a more systematic way, it was understood that the RG is a powerful tool to understand critical phenomena in statistical mechanics, and it has been applied to a wide range of systems, from classical to quantum systems, and from equilibrium to non-equilibrium systems.
-
-The epsilon expansion ...
