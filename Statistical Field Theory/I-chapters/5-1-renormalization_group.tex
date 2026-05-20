@@ -60,19 +60,20 @@ It can be directly substituted in the expression of the partition function, sinc
 \]
 Therefore, the partition function can be written as
 \[
-    \mathcal{Z} = \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_i, s_{i+1})} = \sum_{\{s^{\prime}_i\}_{i=1}^{N/2}} \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_{i}, s_{i+1})} \prod_{i} \delta(s_i^{\prime}, s_{2i+1}),
+    \mathcal{Z} = \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_i, s_{i+1})} = \sum_{\{s^{\prime}_i\}_{i=0}^{n'}} \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_{i}, s_{i+1})} \prod_{i=0}^{n'} \delta(s_i^{\prime}, s_{2i+1}),
 \]
-where the delta function enforces the definition of the new degrees of freedom \(s_i^{\prime}\) as the majority of the original ones in each block.\footnote{As a technical detail, let us highlight that the product is over all the new degrees of freedom, thus it will span \(i = 0, \dots, N/2 - 1\) spins.} This identity is not trivial, thus we are going to show it explicitly.
+where the delta function enforces the definition of the new degrees of freedom \(s_i^{\prime}\) as the majority of the original ones in each block. Let us highlight that the final product is over the new degrees of freedom, and it spans the new configurations, which are less than the original ones: indeed we defined \(n^{\prime} = \tfrac{N}{2}-1\) since we are considering only the odd-indexed spins in the majority definition we gave for the coarse-graining procedure.
 
+This last identity is not trivial, thus we are going to show it explicitly.
 \begin{proof}
     Let us start from a simple case: we have a system with \(N = 4\) spins with periodic boundary conditions, and we want to define the new degrees of freedom as \(s_1^{\prime} = s_1\) and \(s_2^{\prime} = s_3\). The total number of configurations is \(2^4 = 16\)
     \[
         \{s_i\}_{i=1}^4 = \{(1,1,1,1),\,(1,1,1,-1),\,\dots,\, (1,1,-1,-1),\,\dots,\,(-1,-1,-1,-1)\}.
     \]
-    We can define \(Z_{lhs}\) as the microscopical partition function, and \(Z_{rhs}\) as the coarse-grained one, thus we want to show that \(Z_{lhs} = Z_{rhs}\). We can write
+    We can define \(\mathcal{Z}_{lhs}\) as the microscopical partition function, and \(\mathcal{Z}_{rhs}\) as the coarse-grained one, thus we want to show that \(\mathcal{Z}_{lhs} = \mathcal{Z}_{rhs}\). We can write
     \[
         \begin{aligned}
-            Z_{lhs} = e^{B(1,1) + B(1,1) + B(1,1) + B(1,1)} + e^{B(1,1) + B(1,1) + B(1,-1) + B(-1,1)} \\
+            \mathcal{Z}_{lhs} = e^{B(1,1) + B(1,1) + B(1,1) + B(1,1)} + e^{B(1,1) + B(1,1) + B(1,-1) + B(-1,1)} \\
             + \dots + e^{B(-1,-1) + B(-1,-1) + B(-1,-1) + B(-1,-1)},
         \end{aligned}
     \]
@@ -95,19 +96,19 @@ where the delta function enforces the definition of the new degrees of freedom \
             + e^{B(1,-1) + B(-1,1) + B(1,-1) + B(-1,1)} + e^{B(1,-1) + B(-1,1) + B(1,-1) + B(-1,-1)},
         \end{aligned}
     \]
-    which is exactly the same contribution we had in the original partition function for the first four configurations of the original spins. We can repeat this procedure for all the other configurations of the new degrees of freedom, and we will find that the contributions to the partition function are exactly the same as in the original one, thus we have \(Z_{lhs} = Z_{rhs}\).
+    which is exactly the same contribution we had in the original partition function for the first four configurations of the original spins. We can repeat this procedure for all the other configurations of the new degrees of freedom, and we will find that the contributions to the partition function are exactly the same as in the original one, thus we have \(\mathcal{Z}_{lhs} = \mathcal{Z}_{rhs}\).
 
     But we can do better than this: we can prove explicity the identity for a generic system with \(N\) spins. We want to prove that
     \[
-        \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_i, s_{i+1})} = \sum_{\{s^{\prime}_i\}_{i=1}^{N/2}} \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_{i}, s_{i+1})} \prod_{i} \delta(s_i^{\prime}, s_{2i+1}).
+        \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_i, s_{i+1})} = \sum_{\{s^{\prime}_i\}_{i=0}^{n'}} \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_{i}, s_{i+1})} \prod_{i=0}^{n'} \delta(s_i^{\prime}, s_{2i+1}).
     \]
     We can switch the order of the sums on the right hand side, since they are finite sums of indipendent variables, thus we can write
     \[
-        r.h.s. = \sum_{\{s_i\}_{i=1}^N} \sum_{\{s^{\prime}_i\}_{i=1}^{N/2}} e^{\sum_{i} B(s_{i}, s_{i+1})} \prod_{i} \delta(s_i^{\prime}, s_{2i+1}),
+        r.h.s. = \sum_{\{s_i\}_{i=1}^N} \sum_{\{s^{\prime}_i\}_{i=0}^{n'}} e^{\sum_{i} B(s_{i}, s_{i+1})} \prod_{i=0}^{n'} \delta(s_i^{\prime}, s_{2i+1}),
     \]
     then we can take the exponential out of the sum on the new degrees of freedom, since it does not depend on them, and we can write
     \[
-        r.h.s. = \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_{i}, s_{i+1})} \sum_{\{s^{\prime}_i\}_{i=1}^{N/2}} \prod_{i} \delta(s_i^{\prime}, s_{2i+1}).
+        r.h.s. = \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_{i}, s_{i+1})} \sum_{\{s^{\prime}_i\}_{i=0}^{n'}} \prod_{i=0}^{n'} \delta(s_i^{\prime}, s_{2i+1}).
     \]
     Now the last sum of products of delta functions is equal to one, since for each configuration of the original spins there is only one configuration of the new degrees of freedom that is compatible with it, thus we have
     \[
@@ -119,9 +120,9 @@ where the delta function enforces the definition of the new degrees of freedom \
 After this statistical digression, we can now proceed with the computation of the partition function in terms of the new degrees of freedom. We can write
 \[
     \begin{aligned}
-        \mathcal{Z} & = \sum_{\{s^{\prime}_i\}_{i=1}^{N/2}} \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_{i}, s_{i+1})} \prod_{i} \delta(s_i^{\prime}, s_{2i+1})                                                                                             \\
-                    & = \sum_{\{s^{\prime}_i\}_{i=1}^{N/2}} \prod_{i} e^{ \sum_{i=1}^{N/2} \left( B(s_{2i+1}, s_{2i+2}) + B(s_{2i+2}, s_{2i+3}) \right) } \prod_i \delta(s_i^{\prime}, s_{2i+1})                                                       \\
-                    & = \sum_{\{s^{\prime}_i\}_{i=1}^{N/2}} \sum_{\{s_{2i+2}\}_{i=1}^{N/2}} e^{\sum_i^{N/2} B(s_i^{\prime}, s_{2i+2}) + B(s_{2i+2}, s_{i+1}^{\prime})} = \sum_{\{s_i^{\prime} \}_{i=1}^{N/2}} e^{-\beta H^{\prime}[\{s_i^{\prime}\}]},
+        \mathcal{Z} & = \sum_{\{s^{\prime}_i\}_{i=0}^{n'}} \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_{i}, s_{i+1})} \prod_{i=0}^{n'} \delta(s_i^{\prime}, s_{2i+1})                                                                                    \\
+                    & = \sum_{\{s^{\prime}_i\}_{i=0}^{n'}} \prod_{i=0}^{n'} e^{ \sum_{i=1}^{N/2} \left( B(s_{2i+1}, s_{2i+2}) + B(s_{2i+2}, s_{2i+3}) \right) } \prod_{i=0}^{n'} \delta(s_i^{\prime}, s_{2i+1})                                     \\
+                    & = \sum_{\{s^{\prime}_i\}_{i=0}^{n'}} \sum_{\{s_{2i+2}\}_{i=1}^{N/2}} e^{\sum_i^{N/2} B(s_i^{\prime}, s_{2i+2}) + B(s_{2i+2}, s_{i+1}^{\prime})} = \sum_{\{s^{\prime}_i\}_{i=0}^{n'}} e^{-\beta H^{\prime}[\{s_i^{\prime}\}]},
     \end{aligned}
 \]
 where we have defined \(H^{\prime}\) as a new Hamiltonian that depends on the new degrees of freedom; now we can further simplify the expression as follows:
@@ -144,7 +145,7 @@ where \(k^{\prime}\), \(h^{\prime}\) and \(g^{\prime}\) are new parameters that 
 
 This is a crucial step in the RG analysis: we have shown that after the coarse-graining transformation, the partition function can be written as
 \[
-    \mathcal{Z} = \sum_{\{s_i^{\prime} \}_{i=1}^{N/2}} e^{-\beta H^{\prime}[\{s_i^{\prime}\}]},
+    \mathcal{Z} = \sum_{\{s^{\prime}_i\}_{i=0}^{n'}} e^{-\beta H^{\prime}[\{s_i^{\prime}\}]},
 \]
 where the new Hamiltonian has the same form as the original one, but with different parameters
 \[
@@ -153,19 +154,11 @@ where the new Hamiltonian has the same form as the original one, but with differ
 which means we have \textit{coarse-grained} the description of the system
 \[
     \begin{aligned}
-        \{s_i\}_{i=1}^{N} \quad & \to \quad \{s_i^{\prime}\}_{i=0}^{N/2-1},       \\
+        \{s_i\}_{i=1}^{N} \quad & \to \quad \{s_i^{\prime}\}_{i=0}^{n'},          \\
         (k, h, g) \quad         & \to \quad (k^{\prime}, h^{\prime}, g^{\prime}).
     \end{aligned}
 \]
 In the thermodinamic limit \(N \to \infty\) this transformation corresponds to a flow in the space of parameters, which is a way of thinking about the RG transformation that we will extensively discuss in the following.
-
-
-
-
-\TODO{change all the summation limits from 1-N/2 to 0-N/2-1.}
-
-
-
 
 To sum up, we have shown that the partition function of the original system can be written as the partition function of a new system with the same form of the Hamiltonian, but with different parameters: we started from the original hamiltonian
 \[
@@ -244,29 +237,35 @@ We will soon come back to these steps to clarify and state them in a more genera
 
 Now let us set \(h=0\), which implies \(y=1\), and see how the RG flow looks like in the \((k, h)\) plane. The flow equations give us
 \[
-    y^{\prime} =1 \implies h^{\prime} = 0,
+    y^{\prime} = \frac{x^2 + x^{-2}}{x^2 + x^{-2}} = 1 \implies h^{\prime} = 0,
 \]
-and we can write
+and we can write the recursion relation for \(k\) (from \((x^{\prime})^4\)) as
 \[
-    e^{4k^{\prime}} = \left(\frac{e^{2k} + e^{-2k^{\prime}}}{2}\right) \quad \implies \quad k^{\prime} = \frac{1}{2} \ln \left(\cosh(2k)\right).
+    e^{4k^{\prime}} = \left(\frac{e^{2k} + e^{-2k^{\prime}}}{2}\right)^2 \quad \implies \quad k^{\prime} = \frac{1}{2} \ln \left(\cosh(2k)\right).
 \]
-This recursion relation has two fixed points: \(k = 0\) and \(k = \infty\). The fixed points are the only candidates for critical points (where the system can undergo a phase transition), since they are the only points where the system is scale-invariant.
+This recursion relation has two fixed points, which can be found by setting \(k^{\prime} = k\):
+\[
+    k = \frac{1}{2} \ln \left(\cosh(2k)\right) \quad \implies \quad k = 0 \quad \text{or} \quad k = +\infty.
+\]
+This is because the function \(f(k) = \frac{1}{2} \ln \left(\cosh(2k)\right)\) is a monotonically increasing function of \(k\) (the hyperbolic cosine is almost a parabola and its logarithm is also monotonically increasing for \(k > 0\)) that starts from \(f(0) = 0\) and diverges as \(k \to +\infty\). Thus, the only points where \(f(k) = k\) are at \(k = 0\) and \(k = +\infty\).
+
+The fixed points are the only candidates for critical points (where the system can undergo a phase transition), since they are the only points where the system is scale-invariant.
 
 The first one is unstable, while the second one is stable:
 \begin{itemize}
     \item At \(k = 0\), we have \(\beta = 0\), and thus an infinite temperature \(T \to \infty\): it is a \textbf{stable} fixed point. If we perturb it slightly, for a small \(k\), we have
           \[
-              k^{\prime} = \frac{1}{2} \ln \left(\cosh(2k)\right) \approx \frac{1}{2}\ln(1 + \tfrac{(2k)^2}{2}) \approx k^2 < k,
+              k^{\prime} = \frac{1}{2} \ln \left(\cosh(2k)\right) \approx \frac{1}{2}\ln(1 + \left(\tfrac{2k}{2}\right)^2) \approx k^2 < k,
           \]
-          which means that the flow is towards \(k = 0\).
+          which means that the flow is pushing towards \(k = 0\): the system is driven towards the infinite temperature limit, where it is disordered. This is also called \textbf{sink} or \textbf{attractor}.
     \item At \(k = \infty\), we have \(\beta \to \infty\), and thus a zero temperature \(T \to 0\): it is an \textbf{unstable} fixed point. If we perturb it slightly, for a large \(k\), we have
           \[
               k^{\prime} = \frac{1}{2} \ln \left(\cosh(2k)\right) \approx \frac{1}{2} \ln \left(\frac{2^{2k}}{2}\right) = k - \ln 2 < k,
           \]
-          which means that the flow is towards \(k = 0\) and an infinite temperature.
+          which means that the flow is pushing towards \(k = 0\) and an infinite temperature: indeed, a perturbation to the large coupling constant \(k\) will make it smaller, effectively driving away the system from the zero temperature limit, where it is ordered.
 \end{itemize}
 
-In this case, the only critical point is at \(k = 0\), which corresponds to the infinite temperature limit, where the system is disordered. The other fixed point at \(k = \infty\) corresponds to the zero temperature limit, where the system is ordered.
+In this case, the only critical point is at \(k = 0\), which corresponds to the infinite temperature limit, where the system is disordered. The other fixed point at \(k = \infty\) corresponds to the zero temperature limit, where the system is ordered, but it is unstable, since any perturbation will drive the system away from it. Thus, there is no phase transition at finite temperature in the 1D Ising model, and the system is always disordered for any finite temperature.
 
 \begin{figure}[H]
     \centering
@@ -327,16 +326,16 @@ In this case, the only critical point is at \(k = 0\), which corresponds to the 
     \caption{One-dimensional renormalization group (RG) flow diagrams. The upper figure depicts the flow of the coupling constant $K$ towards the trivial fixed point at $K=0$. The lower figure shows the equivalent flow parameterized by temperature $T$, where the system is driven away from the unstable critical point at $T=0$ towards the stable high-temperature limit at $T=+\infty$.}
 \end{figure}
 
-Thus the initial problem \(\mathcal{Z}(\beta, h=0) \) is recursively mapped onto new ones \(\mathcal{Z}^{\prime}(\beta^{\prime}, h=0)\) and \(\mathcal{Z}^{\prime\prime}(\beta^{\prime\prime}, h=0)\), which by construction have to be numerically equal to the original one, but with different parameters. The flow of the parameters under the RG transformation allows us to understand the behavior of the system at different scales, and in particular to identify the critical points and the nature of the phase transitions. In this case, we see that there is no phase transition at finite temperature, since the only critical point is at \(T = \infty\), which is not physically relevant.
+Thus the initial problem \(\mathcal{Z}(\beta, h=0) \) is recursively mapped onto new ones \(\mathcal{Z}^{\prime}(\beta^{\prime}, h=0)\), \(\mathcal{Z}^{\prime\prime}(\beta^{\prime\prime}, h=0)\), etc., which by construction have to be all numerically equal to the original one, but with different parameters. The flow of the parameters under the RG transformation allows us to understand the behavior of the system at different scales, and in particular to identify the critical points and the nature of the phase transitions. So under repeated RG transformations, any initial ``hard'' Hamiltonian (depending upon a generic \(\beta\)) is mapped onto a new simpler one arbitrarily closer to the stable fixed point \(\beta \sim 0\). Furthermore we got to identify some fixed points of the flow, which are the only candidates for critical points.
 
-    [...]
+\subsubsection{Ising RG Flow: External Field}
 
 Going beyond and introducing an external field \(h \neq 0\) we can also derive a \textbf{flow diagram} for generic values of \(k\) and \(h\), which is a graphical representation of the RG flow in the parameter space. The flow diagram allows us to visualize how the parameters evolve under the RG transformation, and to identify the fixed points and their stability properties.
 
 \begin{figure}[H]
     \begin{minipage}{0.6\textwidth}
         \centering
-        \includegraphics[width=0.9\textwidth]{img/RG_flow_temporary.png}
+        \includegraphics[width=0.8\textwidth]{img/RG_flow_temporary.png}
     \end{minipage}
     \hfill
     \begin{minipage}{0.35\textwidth}
@@ -344,40 +343,48 @@ Going beyond and introducing an external field \(h \neq 0\) we can also derive a
     \end{minipage}
 \end{figure}
 
-In the precence of an external field, the flow diagram becomes more complex, but we can still identify the fixed points and their stability properties. All points in the parameter space flow towards the stable fixed point at \(k = 0\) and arbotrary \(h\), which corresponds to the disordered phase with independent and uncorrelated spins (\(\xi=0\) in this case).
+In the precence of an external field, the flow diagram becomes more complex, but we can still identify the fixed points and their stability properties. All points in the parameter space flow towards the stable fixed points at \(k = 0\) and arbitrary \(h\), which corresponds to the disordered phase with independent and uncorrelated spins (\(\xi=0\) in this case).
 
 \subsection{Linearization and Scaling Form}
 
-Thus we can linearze the flow equations around the fixed point. Let us consider in particular \(T \sim 0\) and \(h \sim 0\), corresponding to \(y \sim 1\) and \(x \to \infty\). We can write
+It is now time to investigate how the analysis of the RG flow allows us to obtain predictions about the behavior of physical quantities near the fixed points, the only candidates for critical points. In particular, the 1D Ising model does not have a phase transition at finite temperature, making this study rather trivial, but the method we are going to use is general and can be applied to more complicated models, where the RG flow can be more complex and the fixed points can have different stability properties.
+
+Thus we can start by linearizing the flow equations around the fixed points since we are interested in the behavior near these. Let us consider in particular \(T \sim 0\) and \(h \sim 0\), corresponding to \(y \sim 1\) and \(x \to \infty\). We can write
 \[
     \begin{dcases}
-        (x^{\prime})^4 = \frac{x^4}{4}, \\
-        (y^{\prime})^2 = y^4,
-    \end{dcases} \text{ and } \begin{dcases}
+        (x^{\prime})^4 \simeq \frac{x^4}{4}, \\
+        (y^{\prime})^2 \simeq y^2 \frac{x^2 y}{x^2 y^{-1}} = y^4,
+    \end{dcases} \quad \implies \quad \begin{dcases}
         e^{-k^{\prime}} = \sqrt{2} e^{-k}, \\
         h' = 2 h.
     \end{dcases}
 \]
 After each RG iteration, the correlation length gets divided by two, and therefore, we can write \(\xi\) as a function of \(e^{-k}\) and \(h\):
 \[
-    \xi = \xi[k,h] \to \dots
+    \xi = \xi(k,h) \to \frac{\xi(k,h)}{2} = \xi(k^{\prime}, h^{\prime}),
 \]
-where the initial form will be
+where the equality is due to the fact that the partition function is invariant under the RG transformation, thus the correlation length must be invariant as well. This is a crucial point: the RG transformation is a change of variables in the partition function, which does not change its value, thus any physical quantity derived from it must be invariant under the RG transformation.
+
+Thus we have the following identity for the correlation length:
 \[
     \frac{1}{2} \xi(e^{-k}, h) = \xi(\sqrt{2} e^{-k}, 2h),
 \]
 which after \(\ell\) RG iterations becomes
 \[
-    \dots
+    \xi(e^{-k}, h) = 2^{\ell} \xi(2^{\ell/2} e^{-k}, 2^{\ell} h).
 \]
-... the \textbf{scaling form}...
+Now if we chose \(\ell\) such that
 \[
-    \dots
+    2^{\ell/2}e^{-k} = 1 \quad \implies \quad \ell = 2k,
 \]
-This is the most non trivial result of the RG analysis: we are rewriting a new hamiltonian with new parameters, but the partition function is the same, and thus the correlation length is the same. This allows us to derive the scaling form of the correlation length.
+since we are interested in the behavior near \(k \to \infty\) (or \(T \to 0\)) and we want to keep the first argument of the correlation length fixed, we obtain the \textbf{scaling form} of the correlation length:
+\[
+    \xi(e^{-k}, h) = e^{2k} \xi(1, e^{2k} h) = e^{2k} g_\xi(e^{2k} h),
+\]
+where \(g_\xi\) is a scaling function that depends on the combination \(e^{2k} h\). This is the most non trivial result of the RG analysis: we are rewriting a new hamiltonian with new parameters, but the partition function is the same, and thus the correlation length is the same. This is what allowed us to derive the scaling form of the correlation length.
 
-Now for \(h \to 0\) we have
+Now setting \(h \to 0\) to study the behavior of the correlation length at zero magnetic field, we can treat \(g_\xi(0)\) as a constant, and we obtain
 \[
-    \xi(e^{-k}, 0) \sim e^{2k} \sim e^{2\beta J} \sim e^{\frac{2J}{T}},
+    \xi(e^{-k}, 0) \sim e^{2k} \sim e^{2\beta J} \sim e^{\frac{2J}{k_B T}},
 \]
 which is the well-known result for the correlation length of the 1D Ising model at zero magnetic field. This shows how the RG analysis allows us to derive the scaling behavior of physical quantities near critical points, and in this case, it confirms that there is no phase transition at finite temperature, since the correlation length diverges only as \(T \to 0\). We had to postulate the scaling form of the correlation length, but now we have an hint the RG ideas are adequate to derive the scaling form of physical quantities near critical points, and in particular to understand the behavior of the correlation length as a function of the parameters of the system.
