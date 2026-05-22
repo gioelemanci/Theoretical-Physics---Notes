@@ -1,0 +1,223 @@
+\section{Free Theories in Two Dimensions}
+
+Before continuing with the analysis of CFT in 2D, we pause to consider some simple examples, crucial in learning features of CFT and at the same time of great utility. The massless free boson is essentially the Gaussian theory considered and illustrated in the RG framework where it represents one of the most important sets of universality classes of critical phenomena. The free massless fermion is also a very interesting CFT in itself, but its importance will appear later, when it will be related to the Ising universality class.
+
+\subsection{Free Massless Boson}
+
+[...]
+\[
+    \mathcal{S} = \frac{1}{8\pi} \int \mathrm{d}^2 x \, \partial_\mu \varphi(x) \partial^\mu \varphi(x),
+\]
+where the factor \(1/8\pi\) is just a convention, choosen by Ginsparg, but it is not important, the calculation are simpler.
+
+    [comment on zero mass term]
+
+A first result we can express with just field theory is
+\[
+    \langle \varphi(x)\varphi(y) \rangle = - \log \vert x - y \vert^2 + \text{const.},
+\]
+where \(x,y\) are two dimensional vectors, and the constant is an arbitrary constant which can be fixed by some normalization condition. By changing to complex coordinates, we can write
+\[
+    \langle \varphi(x)\varphi(y)\rangle = - \log (z - w ) + \log (\bar{z} - \bar{w}) + \text{const.},
+\]
+effectively decoupling the holomorphic and anti-holomorphic sectors. Furthermore if we consider the d'Alembert equation for the free boson
+\[
+    \box \varphi(z,\bar{z}) = \dots
+\]
+so that the more general solution of the equation of motion is given by the sum of a holomorphic and an anti-holomorphic, decoupled.
+
+\begin{remark}
+    The presence of the logarithm in the two-point function is a consequence of the fact that the free boson in two dimensions is a massless field, and thus it has a long-range correlation. This is not a conformal field, since we cannot put it in the set of fields of the algebra of local fields of the theory; actually Coleman in the Seventie wrote a paper showing that the massless boson in two dimensions is not a conformal field, but it does not mean that it can be a generator of a bigger algebra of fields, and thus it can be used to construct a conformal field theory, as we will see in the next chapters. If we insist with this lagrangian in thinking that \(\varphi\) as a foundamental field, we are simply wrong, but we can use this to build composite fields, which are conformal fields, and thus we can use the free boson to build a conformal field theory.
+\end{remark}
+
+Since the two components are totally decoupled, we can work with \(z\) and all the results will hold for \(\bar{z}\) as well.
+
+We can define the following
+\[
+    \begin{aligned}
+        \langle \partial \phi(z) \partial \phi(w) \rangle = \partial_z \partial_w \langle \phi(z) \phi(w) \rangle \\
+        = - \partial_z \partial_w \log (z - w) = - \partial_w \frac{1}{z - w} = - \frac{1}{(z - w)^2},
+    \end{aligned}
+\]
+and since there is a minus sign we can ``be russians about it'' and write the action with a minus sign in front, or instead define the following field
+\[
+    J(z) = i \partial \phi(z),
+\]
+for which we can write
+\[
+    \langle J(z) J(w) \rangle = \frac{1}{(z - w)^2},
+\]
+which has good properties, and it is a conformal field with scaling dimension \(\Delta = 1\) (since it transforms as the derivative of a primary field). It is a field that depends onaly on \(z\) and it is a \((1,0)\) field, so it is a chiral field. Its spin is \(s=1\) while for \(\bar{J}(\bar{z})\) we would find the same scaling dimension but spin \(s=-1\) and
+\(\partial_\mu J^{\mu} = \partial J = \bar{\partial} \bar{J} =\bar{\partial} J = 0\), such that \(J\) and \(\bar{J}\) are conserved currents, and thus they are chiral currents. The charge implemented by the current do not necessary have a physical meaning, but we know that there have to be some symmetries in the theory.
+
+\subsubsection{Operator Product Expansions}
+
+Now let us try to study the operators product expansion of the field \(J(z)\) with itself, which is a fundamental tool in conformal field theory. We can write
+\[
+    \begin{aligned}
+        J(z)J(w) = \contraction{}{J(z)}{}{J(w)} J(z) J(w) + \dots
+    \end{aligned}
+\]
+where any part which is singular in this expansion is called a contraction (we are sort of generalizing the Wick theorem) and they will be represented by the connection among fields.
+Thus up to regular terms, we can write
+\[
+    \langle J(z)J(w) \rangle = \frac{1}{(z-w)^2} = \contraction{}{J(z)}{}{J(w)} J(z) J(w),
+\]
+so that we can write the operator product expansion of \(J(z)\) with itself as
+\[
+    J(z)J(w) = \frac{1}{(z-w)^2} + \text{reg.}(z-w)^n,
+\]
+where the regular terms are less singular than the leading term, and they can be expanded in a power series in \(z-w\). Thus when we are computing the two point function of \(J(z)\) with itself, we are basically picking up the singular part of the operator product expansion, which is the contraction of the two fields. The regular part does not contribute to the two-point function, since it is regular when \(z\) approaches \(w\), and thus it does not have any singularity.\TODO{check.}
+[...]
+Then if we compute \(T(z)\) we can find
+\[
+    T(z) = - \frac{1}{2} : (\partial \phi(z))^2 : = \frac{1}{2} : J(z)^2 :,
+\]
+[...]
+so we have to subtract the diverging part, which is basically the normal ordering of the fields (we are basically subtracting the vacuum expectation value of the product of fields, which is the singular part of the operator product expansion)...
+    [...]
+
+If we now compute the operator product expansion of \(T(z)\) with the conserved current \(J(w)\), we can find
+\[
+    T(z)J(w) = \frac{1}{2} : J(z)^2 : J(w),
+\]
+where if we apply the Wick theorem (contracting in all possible ways the fields) we can find\TODO{add normal ordering ::}
+\[
+    T(z)J(w) = \frac{1}{2} \contraction{}{J(z)}{}{J(z)} J(z) J(z) J(w) + \frac{1}{2} \contraction{}{J(z)}{}{J(w)} J(z) J(z) J(w),
+\]
+but since inside the normal ordering (the fields at most commute) we have only regular terms, the first term does not contribute, and we are left with
+\[
+    T(z)J(z) = \frac{1}{2} \contraction{}{J(z)}{}{J(w)} J(z) J(z) J(w) = \frac{J}{(z-w)^2} + \text{reg.}
+\]
+
+[\textit{OPE draw as z to w (points) }]
+
+we know that the ope for two generic operators has to be of the form
+\[
+    \dots
+\]
+so we can expand \(J(z)\) in a Taylor series around \(w\) (since it is analytic in \(z\) and \(w\) is in the domain of analyticity)
+\[
+    J(z) = \dots
+\]
+and we can find
+\[
+    T(z)J(w) = \frac{J(w)}{(z-w)^2} + \frac{\partial J(w)}{z - w} + \text{reg.}
+\]
+which is a very important result, since it shows that \(J(w)\) is a primary field with scaling dimension \(\Delta = 1\), since the leading term in the OPE has a second order pole (and \(h=1\) is the coefficient in front of the leading term).
+
+For the next OPE, we can compute \(T(z)T(w)\), which is the OPE of the stress-energy tensor with itself, and we can find\TODO{fix wick contractions}
+\[
+    \begin{aligned}
+        T(z)T(w) & = \frac{1}{4} : J(z)J(z) : : J(w)J(w) :                                                                                                         \\
+                 & = \frac{1}{4} \contraction{}{J(z)}{}{J(z)} J(z) J(z) : J(w)J(w) : + \frac{1}{4} \contraction{}{J(z)}{J(z)}{J(w)} J(z) J(z) : J(w)J(w) : + \dots
+    \end{aligned}
+\]
+giving us terms (1), (2), and (3) which are the contractions of the fields, and we can compute them one by one:
+\begin{enumerate}
+    \item The first term gives us only regular terms, since the contraction of \(J(z)\) with itself is regular inside the normal ordering, so it does not contribute to the OPE.
+    \item The second term gives us a contribution to the OPE, since the contraction of \(J(z)\) with \(J(w)\) gives us a singular term, and thus it contributes as
+          \[
+              \contraction{}{J(z)}{J(z)}{J(w)} J(z) J(z) : J(w)J(w) : = \frac{1}{(z-w)^2} : J(w)J(w) :,
+          \]
+          which can be expanded as \(J(z) = J(w) + (z-w) \partial J(w) + \dots\) in order to get
+          \[
+              \contraction{}{J(z)}{J(z)}{J(w)} J(z) J(z) : J(w)J(w) : = \frac{:J^2(w):}{(z-w)^2} + \frac{:J(w)\partial J(w):}{z-w} + \text{reg.}
+          \]
+          One can compute \(2 :J\partial J: = \partial :J^2: \) after some algebra, so we can write the contribution of this term as
+          \[
+              \contraction{}{J(z)}{J(z)}{J(w)} J(z) J(z) : J(w)J(w) : = \frac{2 :J^2(w):}{(z-w)^2} + \frac{\partial :J^2(w):}{z-w} + \text{reg.}
+          \]
+          but in the first term we can recognize the stress-energy tensor \(T(w) = \frac{1}{2} :J^2(w):\), and in the second term we can recognize the derivative of the stress-energy tensor \(\partial T(w) = \frac{1}{2} \partial :J^2(w):\), so we can write the contribution of this term as
+          \[
+              \contraction{}{J(z)}{J(z)}{J(w)} J(z) J(z) : J(w)J(w) : = \frac{2 T(w)}{(z-w)^2} + \frac{\partial T(w)}{z-w} + \text{reg.},
+          \]
+          and if the term (3) does not give us any contribution, we would have found that \(T(z)\) is a primary field with scaling dimension \(\Delta = 2\), but we will see that this is not the case.
+    \item [...]
+
+\end{enumerate}
+\[
+    T(z)T(w) = \frac{1}{2} \frac{1}{\vert z-w \vert^2} + \frac{2 T(w)}{(z-w)^2} + \frac{\partial T(w)}{z-w} + \text{reg.},
+\]
+so we have an extra term in the OPE, which is not the transformation of a primary field, and thus \(T(z)\) is not a primary field, but it is a secondary field.
+In general this ope in general has an arbitrary constant \(c\) in front of the first term, which is called the \textbf{central charge} of the theory, and it is a very important parameter which characterizes the conformal field theory. In our case we have \(c=1\), but in general it can be any real number, and it can be negative as well.
+
+We do not know yet the physical meaning of the central charge, but we will see that it is related to the number of degrees of freedom of the theory, and it is also related to the anomaly of the theory when we try to quantize it. It is caracteristic of the theory, since it comes from the OPE of the stress-energy tensor with itself, which is a fundamental field in the theory (coming directly from the lagrangian of the theory), and thus it is a parameter which characterizes the theory.
+
+The classification of conformal field theories is the idea to find numbers such as the central charge which can determin univocally the theory, and thus to classify all the possible conformal field theories. This is not possible in general, but for example the \textbf{minimal models} (\(0<c<1\)) are a class of conformal field theories which are completely classified by the central charge and the scaling dimensions of the primary fields, and also completely solved, since we can compute all the correlation functions of the theory. The ising model...
+
+\subsection{Free Majorana Fermion}
+
+Another fundamental model in two-dimensional conformal field theory is the free massless Majorana fermion. Its Euclidean action is defined using a two-component spinor \(\Psi\) and the standard Dirac matrices:
+\[
+    \mathcal{S} = \frac{1}{4\pi} \int d^2x \Psi^\dagger \gamma^0 \gamma^\mu \partial_\mu \Psi
+\]
+where we can choose the representation \(\gamma^0 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}\) and \(\gamma^1 = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}\).
+
+Writing the two-component spinor explicitly as \(\Psi = \begin{pmatrix} \psi \\ \bar{\psi} \end{pmatrix}\), the action decouples into two independent terms:
+\[
+    \mathcal{S} = \frac{1}{4\pi} \int d^2x (\bar{\psi} \partial_z \bar{\psi} + \psi \partial_{\bar{z}} \psi)
+\]
+Varying this action yields the classical equations of motion:
+\[
+    \begin{cases}
+        \partial_z \bar{\psi} = 0 \implies \bar{\psi} = \bar{\psi}(\bar{z}) \\
+        \partial_{\bar{z}} \psi = 0 \implies \psi = \psi(z)
+    \end{cases}
+\]
+This cleanly demonstrates the holomorphic factorization: \(\psi(z)\) is purely chiral, and \(\bar{\psi}(\bar{z})\) is purely anti-chiral.
+
+\begin{example}[Exercise: Computing the Fermion Propagator]
+    We wish to find the fundamental two-point function \(\langle \psi(z)\psi(w) \rangle\). In the path integral formalism, the propagator is the Green's function of the kinetic operator. For the holomorphic component \(\psi\), the relevant operator from the action is \(\partial_{\bar{z}}\). We must solve \(\partial_{\bar{z}} G(z, w) \propto \delta^{(2)}(z-w)\). Using the standard complex analysis identity \(\partial_{\bar{z}} \left(\frac{1}{z}\right) = \pi \delta^{(2)}(z)\), and fixing the normalization from the \(1/4\pi\) factor in the action, we obtain the exact propagator:
+    \[
+        \langle \psi(z)\psi(w) \rangle = \frac{1}{z-w}
+    \]
+\end{example}
+
+\subsubsection{Operator Product Expansions}
+
+From the propagator, we immediately read off the fundamental Operator Product Expansion (OPE) for the free fermion, representing the Wick contraction:
+\[
+    \psi(z)\psi(w) \sim \frac{1}{z-w}
+\]
+Taking a derivative with respect to \(z\) allows us to find the contraction between a derivative and a field:
+\[
+    \partial\psi(z)\psi(w) \sim -\frac{1}{(z-w)^2}
+\]
+
+We now construct the holomorphic stress-energy tensor \(T(z)\) by applying the standard procedure to the Lagrangian. To ensure finite quantum operators, we define it using normal ordering:
+\[
+    T(z) = \frac{\partial \mathcal{L}}{\partial (\partial_z \Psi)} \partial_z \Psi = -\frac{1}{2} :\psi(z)\partial\psi(z):
+\]
+
+To understand the conformal properties of \(\psi(z)\), we must compute its OPE with \(T(z)\). Applying Wick's theorem to \(T(z)\psi(w) = -\frac{1}{2} :\psi(z)\partial\psi(z): \psi(w)\), we must be careful with the anti-commuting nature of the fermionic fields. Evaluating the two possible single contractions yields:
+\[
+    T(z)\psi(w) = \frac{\frac{1}{2}\psi(z)}{(z-w)^2} + \frac{\frac{1}{2}\partial\psi(w)}{z-w} + \text{regular terms}
+\]
+Because we need the right-hand side expressed entirely at the target point \(w\), we Taylor expand the remaining field \(\psi(z)\) around \(w\):
+\[
+    \psi(z) = \psi(w) + (z-w)\partial\psi(w) + \dots
+\]
+Substituting this expansion into the first term of the contraction gives:
+\[
+    \frac{\frac{1}{2} [\psi(w) + (z-w)\partial\psi(w)]}{(z-w)^2} = \frac{\frac{1}{2}\psi(w)}{(z-w)^2} + \frac{\frac{1}{2}\partial\psi(w)}{z-w}
+\]
+Combining this result with the second term of the original contraction, the two halves sum to a whole derivative:
+\[
+    T(z)\psi(w) = \frac{\frac{1}{2}\psi(w)}{(z-w)^2} + \frac{\partial\psi(w)}{z-w} + \text{regular terms}
+\]
+This is precisely the defining OPE of a primary field. By comparing it to the general definition, we deduce that the holomorphic fermion \(\psi\) is a primary operator of conformal dimension \((\Delta, \bar{\Delta}) = (\frac{1}{2}, 0)\). Symmetrically, the anti-holomorphic fermion \(\bar{\psi}\) is a primary operator of dimension \((0, \frac{1}{2})\).
+
+\begin{example}[Exercise: Computing the $TT$ OPE for the Fermion]
+    We must evaluate \(T(z)T(w) = \frac{1}{4} :\psi(z)\partial\psi(z): :\psi(w)\partial\psi(w):\). To find the central charge, we only need the fully contracted term, which yields the leading \(1/(z-w)^4\) singularity.
+    By tracking the fermion anticommutations, the full contraction generates two distinct terms:
+    \[
+        \frac{1}{4} \left[ - \langle \psi(z)\psi(w) \rangle \langle \partial\psi(z)\partial\psi(w) \rangle + \langle \psi(z)\partial\psi(w) \rangle \langle \partial\psi(z)\psi(w) \rangle \right]
+    \]
+    Using \(\langle \psi(z)\psi(w) \rangle = \frac{1}{z-w}\), taking appropriate derivatives gives \(\langle \partial\psi(z)\partial\psi(w) \rangle = -\frac{2}{(z-w)^3}\), \(\langle \psi(z)\partial\psi(w) \rangle = \frac{1}{(z-w)^2}\), and \(\langle \partial\psi(z)\psi(w) \rangle = -\frac{1}{(z-w)^2}\).
+    Plugging these in:
+    \[
+        \frac{1}{4} \left[ - \left(\frac{1}{z-w}\right)\left(-\frac{2}{(z-w)^3}\right) + \left(\frac{1}{(z-w)^2}\right)\left(-\frac{1}{(z-w)^2}\right) \right] = \frac{1}{4} \left[ \frac{2}{(z-w)^4} - \frac{1}{(z-w)^4} \right] = \frac{1/4}{(z-w)^4}
+    \]
+    Comparing this isolated leading singularity to the general definition \(T(z)T(w) \sim \frac{c/2}{(z-w)^4}\), we conclude that the free Majorana fermion possesses a central charge of \(c = 1/2\).
+\end{example}
