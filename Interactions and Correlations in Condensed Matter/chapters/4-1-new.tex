@@ -129,3 +129,119 @@ A single run with an anormous \(N\) will be worse than many runs with a smaller 
 In an alternative approach, we could use a one dimensional function and inytegral to compute \(\pi\), for example we could use the function \(f(x) = \sqrt{1-x^2}\), which is the equation of the quarter unit circle, and we could compute the area of the quarter unit circle by integrating this function from 0 to 1. Following the same procedure as before, we can use random sampling to estimate the value of \(\pi\) by generating \(N\) random points \(x_i\) in the interval [0, 1], and we can compute the function \(f(x_i)\) for each of these points. Again we will use the sample average to estimate the area of the quarter unit circle, and all of this can be considered as a further test on our method. The final estimate of \(\pi\) will be given by different formula, but the procedure is the same as before, and we can use this alternative approach to estimate the value of \(\pi\) and to assess the accuracy of our estimate.
 
 we will see that problems arises from the arbitrary choice of the pdf, and we will see how to address these, since it is not the best distribution, but it already gives a good estimate of \(\pi\).
+
+
+
+
+
+
+
+
+
+In MC sampling or integration, pdf is an input of the method: the chosen pdf can affect the accuracy of our estimate, and it is important to choose a pdf that is well-suited for the problem at hand. In our case it would be beter to have a large number of \(N_i\) inside the quarter unit circle, and a smaller number of \(N_o\) outside the quarter unit circle, so we can have a better estimate of the area of the quarter unit circle. Ou problem hase an integrand with high value near 0 and low value near 1, so it would be better to have a pdf that is peaked near 0 and decays towards 1, so we can have more samples in the region where the integrand is large, and fewer samples in the region where the integrand is small. We can also try to use a pdf that is proportional to the integrand, which is called importance sampling, and it can improve the accuracy of our estimate by reducing the variance of the samples. In this case, we can use a pdf that is proportional to the function \(\sqrt{1-x^2}\). We would need to normalize this pdf, but we cannot always derive the normalization constant simply, in this case we have \(\pi\) as normalization, which is the output of our calculation.
+
+If we were to know the exact pdf then the solution would be exact with zero variance.
+
+\subsection{Markov Chains}
+
+If we do not know the normalization of the pdf, we can emply markov chain with the metropolis algorithm, starting from the first.
+a markov chain is a decision, proposal of moving from a point in the configuration space to another point, under some scheme we will introduce later, and we can use this markov chain to generate a sequence of samples from the pdf, and we can use these samples to estimate the properties of the system. The new point has to have some memories of the point we came from, and confronting the local probabilities of the two points, we can decide to accept or reject the move. At the end, iterating this process and counting how many times we have accepted a certain move, we can obtain an histogram of the visited points, which will be proportional to the pdf, and we can use this histogram to estimate the properties of the system.
+
+The major difference is that now the samples are not independent, but they are correlated,but this correlatioon is limited to the present state...
+
+We want our chain to spend more time where the pdf is larger, and less time where the pdf is smaller, so we can have a better estimate of the properties of the system. IN order to understand how to construct a markov chain we need to introduce the transition probabilities corresponding to the probability of moving from one point in the configuration space to another point. We are going to generalize the transition probabilities with the transition probability matrix, which is a matrix that contains the transition probabilities for all possible pairs of points in the configuration space. imagine a system with 4 possible states. The transition probability matrix will be a 4x4 matrix, where the element in the i-th row and j-th column will be the transition probability from state i to state j. This is a sort of generalization of the first example with two states. We still do not know the pdf, but we can use the transition probability matrix to generate a sequence of samples from the pdf, and we can use these samples to estimate the properties of the system.
+
+After iterating this process many times, we can obtain a sequence of samples from the pdf, and applying the trasnition probability matrix many times, adjusting the transition probabilities at each step, we can obtain a sequence of samples that converges to the true pdf, and the markov chain ensures that the probabilities converge and are finite in the end. we obtained the pdf to sample from, and we can use this pdf to estimate the properties of the system, and this is the basis of markov chain montecarlo methods. It should be similar to our target function.
+
+We want to build a Markov chain (which is guaranteed to converge in general, there are some peculiar cases, but we are not interested in those) whose equilibrium distribution is exactly the desired target distribution. Once we have a stationary solution from markov chain which has the structure of our target distribution, then we can use this markov chain to generate samples from the target distribution.
+
+But how do we accept or reject each step in order to obtain a markov chain that converges to the desired target distribution? We can use the Metropolis-Hastings algorithm, which is a practical receipt which suggest us a way to build a markov chain whose equilibrium distribution is exactly the desired target distribution. The problem resides in how to decide to choose the transition probabilities in order to obtain a markov chain that converges to the desired target distribution. We need to define a clever acceptance or rejection scheme.
+
+Main steps:
+\begin{itemize}
+    \item define target function, which is the function we want to sample from
+    \item start from an initial point in the configuration space, which can be chosen randomly or based on some prior knowledge of the system
+    \item propose a new point in the configuration space, which can be done by adding a random perturbation to the current point, or by using some other proposal distribution
+    \item important step: we compare the probability of the new point with thw previous ones, based on our target probability (function) (if we take the ratio of two unnormalized probabilities, the normalization constant cancels out, and we can use this ratio to decide whether to accept or reject the new point)
+    \item accept or reject the new point based on the knowledge of the target distribution
+    \item if we accept the new point, we move to the new point, and if we reject the new point, we stay at the current point
+    \item repeat the process many times to generate a sequence of samples from the target distribution
+\end{itemize}
+
+\begin{example}[Metropolis-Hastings Algorithm: trivial example]
+    We want to sample from a target distribution, which is the mixing of two gaussian random variables...
+
+    We have the target distribution and we choose a starting point, now we have to propose a move. we need to define a procedure to do this proposals: proposal distribution, we define a distribution (simple one, a gaussian) centered in the current point, and we draw a random number from this distribution to propose a new point. we will not complicate the tractation with details on proposals distributions, usually they are local but they can be global, we will not go into details. uniform is not th best choice.
+
+    until we are in the admittable sector for our target distribution, we will accept the proposal, and we will move to the new point, and if we are not in the admittable sector, we will reject the proposal, and we will stay at the current point.
+
+    We compute our function (which we know, we do not know the normalization constant) in the first and second points, and we can define an acceptance probability, as the minimum between 1 and the ratio of the function evaluated at the new point and the function evaluated at the current point: the acceptance probability must fullfill the axioms of probabilities, and it is a clever choice that ensures the convergence of the markov chain to the desired target distribution.
+
+    IN order to accept or reject, we draw a random number from a uniform distribution between 0 and 1, and if this random number is less than the acceptance probability, we accept the new point, and if this random number is greater than the acceptance probability, we reject the new point. At each step we have to draw a random number to propose a new point, and we have to draw another random number to decide whether to accept or reject the new point, and this is the basis of the Metropolis-Hastings algorithm.
+
+    points - evaluation at points - ratio - acceptance probability - accept or reject
+
+    recap
+    \[
+        f(x) = \frac{1}{2} \mathcal{N}(-2, 1) + \frac{1}{2} \mathcal{N}(2, 1) = \frac{1}{2 \sqrt{2 \pi}} \left[ e^{- \frac{(x+2)^2}{2}} + e^{- \frac{(x-2)^2}{2}} \right]
+    \]
+    the initial point is \(x_t = 0.6\) and we choose the proposal distribution as
+    \[
+        \mathcal{N}(x_t, \sigma^2), \quad \sigma^2 = 0.4,
+    \]
+    and the proposal is
+    \[
+        x_{t+1} = x_t + \eta, \quad \eta \sim \mathcal{N}(0, \sigma^2),
+    \]
+    let us suppose we got \(x_{t+1} = 1.2\), now we compute \(f(x_t)\) and \(f(x_{t+1})\), and we can compute
+    \[
+        \alpha = \min \left( 1, \frac{f(x_{t+1})}{f(x_t)} \right) = \min \left( 1, \frac{f(1.2)}{f(0.6)} \right),
+    \]
+    where we have
+    \[
+        f(x_t) = f(0.6) = 0.08166, \quad f(x_{t+1}) = f(1.2) = 0.014604,
+    \]
+    thus
+    \[
+        \alpha = \min \left( 1, \frac{0.014604}{0.08166} \right) = \min(1, 1.79) = 1,
+    \]
+    now we draw a random number from a uniform distribution between 0 and 1, let us say we drew \(u = 0.42\), then the \(\alpha\) value is grater than the acceptnce, so we acccept the move
+    \[
+        \left(0.6,\,1.2,\,\dots \right)
+    \]
+    if we now start again from the new point \(x_{t+1} = 1.2\), we can propose a new point, and we can repeat the process (we will do an example of rejection)
+    let us imagine we got \(x_{t+2} = 0\) (which would also be drawn from a larger proposal distribution than the previous one, but this is just an example), now we compute \(f(x_{t+1})\) and \(f(x_{t+2})\)
+    \[
+        f(0) = 0.05399, \quad f(1.2) = 0.014604
+    \]
+    and then alpha will be
+    \[
+        \alpha = \min \left( 1, \frac{f(x_{t+2})}{f(x_{t+1})} \right) = \min \left( 1, \frac{f(0)}{f(1.2)} \right) = \min \left( 1, 0.37 \right) = 0.37,
+    \]
+    and if we now draw a random number from a uniform distribution between 0 and 1, let us say we drew \(u = 0.72\), then the \(\alpha\) value is less than the acceptance, so we reject the move and we stay at the current point
+    \[
+        \left(0.6,\, 1.2,\, 1.2,\,\cdots\right)
+    \]
+    we continuo thousands of times and at the end we plot the histogram of the visited points, and we can see that the histogram is proportional to the target distribution, and we can use this histogram to estimate the properties of the system, and this is the basis of markov chain montecarlo methods.
+
+    When we say that we have to run the markov chain for a long time, we mean that we have to run the markov chain until we reach the stationary distribution, which is the distribution that we want to sample from. The time it takes to reach the stationary distribution depends on the choice of the proposal distribution and the acceptance probability, and it can be quite long for some choices. We will then use this new distribution to sample from for our monte carlo method.
+\end{example}
+
+More general forms of the acceotance probability invludes also the conditional probability of the step and its inverse. When we reach the stationary distribution, this has to fullfill the detailed balance condition, which means that the probability of moving from one point to another point is equal to the probability of moving from the second point to the first point, and this is a necessary condition for the markov chain to converge to the desired target distribution. The Metropolis-Hastings algorithm is a clever choice of acceptance probability that ensures that the markov chain satisfies the detailed balance condition, and thus it converges to the desired target distribution.
+
+skeleton of pseudocode for the Metropolis-Hastings algorithm...
+
+We would now like to connect this MCMC to DiagMC
+approximating a distribution with MCMC
+basically we are working with a simple free propagator (exponential) ... basic idea... implementation details...
+we have to discretize the space to feed the computer... the discretization choices affect the result...
+connecting with the pi example, this approxiamtion of the integral for the propagator is similar to the approximation of the integral for the area of the quarter unit circle, and we can use the same idea to estimate the properties of the system, and this is the basis of diagrammatic montecarlo methods.
+
+A first glimpse of diagmc
+
+the exponential was a feynman diagram of the free propagator, and then the updates we propose are the shape and characteristics of the feynman diagram: we are exploring the space of all possible feynman diagrams, and we are using MCMC to sample from this space, and we are using the samples to estimate the properties of the system. We are generating and sampling feynman diagrams.
+
+As we move on to more complicated diagrams, as diagrammatic series: the order of the diagram gives the number of vertices, and the configuration space becomes much more richer: we can update the momentum and other internal variables, number of vertices, the topology of the diagram, and we can use MCMC to sample from this space, and we can use the samples to estimate the properties of the system. We are generating and sampling feynman diagrams of different orders and topologies, and we are using these samples to estimate the properties of the system, and this is the basis of diagrammatic montecarlo methods. We have increased tremendously the complexity of our space, so we need finer update sttrategies, which usually are divided in two major classes in diagmc:
+class 1: uodates that do not change the order of the diagram, but they change the internal variables of the diagram, such as the momentum and other internal variables or the topology, and we can use these updates to explore the space of diagrams of a given order.
+class 2: updates that change the order of the diagram, such as adding or removing a vertex, and we can use these updates to explore the space of diagrams of different orders. We need to define a clever acceptance or rejection scheme for these updates, in order to ensure that the markov chain converges to the desired target distribution, which is the distribution of feynman diagrams that we want to sample from.
+
