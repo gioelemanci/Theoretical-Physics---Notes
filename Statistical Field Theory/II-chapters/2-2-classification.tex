@@ -147,7 +147,7 @@ Thus, the first two components \(T\) and \(\bar{T}\) are the holomorphic and ant
 
 Next let us take into account the action  as the integral of the lagrangian density, which is a local field, and thus we can write
 \[
-    S = \int \mathrm{d}^2 x \, \mathcal{L}(x) = \int \mathrm{d} z \mathrm{d} \bar{z} \, \mathcal{L}(z, \bar{z}),
+    \mathcal{S} = \int \mathrm{d}^2 x \, \mathcal{L}(x) = \int \mathrm{d} z \mathrm{d} \bar{z} \, \mathcal{L}(z, \bar{z}),
 \]
 and since the action is supposed to have zero mass dimension, the lagrangian density must have scaling dimension \(\Delta = 2\). Thus, the lagrangian density is a local field with scaling dimension 2, and since we derive the stress-energy tensor from the lagrangian through
 \[
@@ -163,60 +163,81 @@ We know that a two point function at the critical point should rescale by a powe
 \]
 thus if we do a mobius transformation when approaching the forth order pole, it is fine, but a slightly more general transformation will give us some extra terms, which are not the transformation of a primary field, so \(T\) is not a primary field, but it is a secondary field. The same holds for \(\bar{T}\). \uline{Thus the stress-energy tensor is not a primary field.}
 
+\subsection{Relation between OPE and commutators}
 
+Let \(a(z)\) and \(b(z)\) be holomorphic fields (we do not consider here the dependence on \(\bar{z}\)). Consider two operators defined by contour integrals:
+\[
+    A = \oint_0 \mathrm{d}z \, a(z), \quad B = \oint_0 \mathrm{d}w \, b(w).
+\]
+To relate their commutator to the OPE, we first consider the integral of their radially ordered product \(\mathcal{R}\{a(z)b(w)\}\). In radial quantization (as we will see in section \ref{sec:radial_quantization_state_operator}), radial ordering acts exactly like time-ordering: for \(|z| > |w|\) it yields \(a(z)b(w)\), while for \(|z| < |w|\) it yields \(\eta b(w)a(z)\), where \(\eta = \pm 1\) dictates the particle statistics (\(+1\) for bosons, \(-1\) for fermions).
 
+By defining \(C_\pm\) as contours around the origin with radius \(|w| \pm \epsilon\), we can write the integral along a small loop enclosing \(w\) as the limit of the difference between these two orderings:
+\[
+    \oint_w \mathrm{d}z \, \mathcal{R}\{a(z)b(w)\} = \lim_{\epsilon \to 0} \left\{ \oint_{C_+} \mathrm{d}z \, a(z)b(w) - \eta \oint_{C_-} \mathrm{d}z \, b(w)a(z) \right\} = [A, b(w)]_\eta.
+\]
 
+The contours \(C_\pm\) can be continuously deformed à la Cauchy to obtain the single circular integral around \(w\), as depicted in Figure \ref{fig:OPE_commutator_contour_deformation}. Since on these fixed contours the operators no longer cross each other radially, the right-hand side directly becomes the action of the (anti-)commutator, denoted by \([\cdot, \cdot]_\eta\).
 
+\begin{figure}[H]
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{img/OPE_commutators.jpg}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.35\textwidth}
+        \caption{Contours \(C_+\) and \(C_-\) can be deformed à la Cauchy to obtain the circle integral around \(w\).}
+        \label{fig:OPE_commutator_contour_deformation}
+    \end{minipage}
+\end{figure}
 
+Integrating both sides over \(w\), the (anti-)commutator of the two global fields \(A\) and \(B\) can be computed as:
+\[
+    [A, B]_\eta = \oint_0 \mathrm{d}w \oint_w \mathrm{d}z \, \mathcal{R}\{a(z)b(w)\}.
+\]
+This crucial result implies that the commutator of two operators is entirely determined by the singular terms of their OPE. Thanks to Cauchy's residue theorem, integrating \(z\) around \(w\) guarantees that all regular terms vanish, isolating only the pole contributions.
 
-
-
-
-
-
-
-\subsection{Conserved Charges and Conformal Generators}
+\subsection{Conserved Charges, OPE and Classification of Fields}\label{sec:noether_OPE_classification}
 
 According to Noether's theorem, every continuous symmetry of the action yields a conserved current. In our cylindrical geometry, the conserved charge associated with the continuity equation \(\partial_\mu j^\mu = 0\) is obtained by integrating the temporal component of the current over the spatial slice:
 \[
-    \mathcal{Q} = \int_0^L d\sigma j_\tau(\sigma, \tau)
+    \mathcal{Q} = \int_0^L d\sigma j_\tau(\sigma, \tau).
 \]
 This charge acts as the generator of the corresponding symmetry. The infinitesimal variation of any local field under this symmetry is determined by its commutator (or anti-commutator, depending on the statistics) with the charge:
 \[
-    \delta\Phi(\sigma, \tau) = [\mathcal{Q}, \Phi(\sigma, \tau)]_\eta
+    \delta\Phi(\sigma, \tau) = [\mathcal{Q}, \Phi(\sigma, \tau)]_\eta.
 \]
 To make contact with the powerful methods of complex analysis, we translate this formulation from the cylinder to the complex plane. In terms of the complex coordinates \(z\) and \(\bar{z}\), the components of the current vector \(j_\mu\) (where \(\mu = \tau, \sigma\)) can be decoupled into purely holomorphic and anti-holomorphic parts, \(j(z)\) and \(\bar{j}(\bar{z})\):
 \[
-    j_\tau(\tau, \sigma) = \frac{j(z) + \bar{j}(\bar{z})}{2} \;, \quad j_\sigma(\tau, \sigma) = \frac{j(z) - \bar{j}(\bar{z})}{2i}
+    j_\tau(\tau, \sigma) = \frac{j(z) + \bar{j}(\bar{z})}{2} \;, \quad j_\sigma(\tau, \sigma) = \frac{j(z) - \bar{j}(\bar{z})}{2i}.
 \]
 Under the exponential map, the spatial integral over \(\sigma\) from \(0\) to \(L\) on the cylinder seamlessly transforms into a closed contour integral in the complex plane, circulating around the origin. The total charge \(\mathcal{Q}\) naturally splits into holomorphic and anti-holomorphic sectors:
 \[
-    \mathcal{Q} = \frac{Q + \bar{Q}}{2} \quad \text{with} \quad Q = \oint_0 \frac{dz}{2\pi i} j(z) \;, \quad \bar{Q} = \oint_0 \frac{d\bar{z}}{2\pi i} \bar{j}(\bar{z})
+    \mathcal{Q} = \frac{Q + \bar{Q}}{2} \quad \text{with} \quad Q = \oint_0 \frac{dz}{2\pi i} j(z) \;, \quad \bar{Q} = \oint_0 \frac{d\bar{z}}{2\pi i} \bar{j}(\bar{z}).
 \]
 We can now apply this general formalism to the specific case of local conformal symmetry. For an infinitesimal conformal transformation parameterized by independent holomorphic and anti-holomorphic functions:
 \[
-    z \to z + \epsilon(z) \;, \quad \bar{z} \to \bar{z} + \bar{\epsilon}(\bar{z})
+    z \to z + \epsilon(z) \;, \quad \bar{z} \to \bar{z} + \bar{\epsilon}(\bar{z}),
 \]
 the corresponding conserved Noether currents are directly proportional to the components of the energy-momentum tensor. Thus, the conserved charges that generate these transformations are exactly given by:
 \[
-    Q_\epsilon = \frac{1}{2\pi i} \oint dz \, \epsilon(z) T(z)
+    Q_\epsilon = \frac{1}{2\pi i} \oint dz \, \epsilon(z) T(z),
 \]
 and similarly in the anti-holomorphic sector:
 \[
-    \bar{Q}_{\bar{\epsilon}} = -\frac{1}{2\pi i} \oint d\bar{z} \, \bar{\epsilon}(\bar{z}) \bar{T}(\bar{z})
+    \bar{Q}_{\bar{\epsilon}} = -\frac{1}{2\pi i} \oint d\bar{z} \, \bar{\epsilon}(\bar{z}) \bar{T}(\bar{z}).
 \]
 A crucial feature of these contour integrals is their topological invariance: because the stress-energy tensor \(T(z)\) is purely holomorphic away from singularities, the contour can be continuously deformed without altering the value of the integral, provided no operator insertions are crossed.
 
 By taking the commutator of these charges with a generic field, we obtain the infinitesimal conformal variation of that field. Representing the commutator via a contour integral tightly wrapping the insertion point \(w\), we find:
 \[
-    \delta_\epsilon \Phi(w, \bar{w}) = [Q_\epsilon, \Phi(w, \bar{w})] = \oint_w \frac{dz}{2\pi i} \epsilon(z) T(z) \Phi(w, \bar{w})
-\]
-\[
-    \delta_{\bar{\epsilon}} \Phi(w, \bar{w}) = [\bar{Q}_{\bar{\epsilon}}, \Phi(w, \bar{w})] = -\oint_{\bar{w}} \frac{d\bar{z}}{2\pi i} \bar{\epsilon}(\bar{z}) \bar{T}(\bar{z}) \Phi(w, \bar{w})
+    \begin{aligned}
+        \delta_\epsilon \Phi(w, \bar{w})         & = [Q_\epsilon, \Phi(w, \bar{w})] = \oint_w \frac{dz}{2\pi i} \epsilon(z) T(z) \Phi(w, \bar{w}),                                                      \\
+        \delta_{\bar{\epsilon}} \Phi(w, \bar{w}) & = [\bar{Q}_{\bar{\epsilon}}, \Phi(w, \bar{w})] = -\oint_{\bar{w}} \frac{d\bar{z}}{2\pi i} \bar{\epsilon}(\bar{z}) \bar{T}(\bar{z}) \Phi(w, \bar{w}).
+    \end{aligned}
 \]
 This profound relation explicitly demonstrates that the variation of any field under local conformal transformations is completely dictated by its Operator Product Expansion (OPE) with the energy-momentum tensor.
 
-\subsection{Definition of Primary Field from the OPE with the Stress Tensor}
+\subsubsection{Definition of Primary Field from the OPE with the Stress Tensor}
 
 Given the relation between variations and the energy-momentum tensor, we can now provide a purely algebraic, quantum-mechanical definition of a primary field. A local field \(\Phi(w, \bar{w})\) is formally defined as a \textbf{primary field} of conformal weights \((h, \bar{h})\) if its short-distance Operator Product Expansion with the stress tensor takes the precise form:
 \[
@@ -242,17 +263,8 @@ Inserting these results back into the variation, we immediately find:
 \[
     \delta_\epsilon \Phi(w, \bar{w}) = \epsilon(w) \partial_w \Phi(w, \bar{w}) + h \partial_w \epsilon(w) \Phi(w, \bar{w})
 \]
-By performing the identical procedure for the anti-holomorphic variation \(\delta_{\bar{\epsilon}} \Phi\) and combining the two parts, we exactly recover the infinitesimal conformal transformation law of a primary field. Thus, the analytic structure of the OPE perfectly encapsulates the geometric symmetries of the theory.
-
-
-
-
-
-
-
-
-
-
-
-
-
+By performing the identical procedure for the anti-holomorphic variation \(\delta_{\bar{\epsilon}} \Phi\) we obtain
+\[
+    \delta_{\bar{\epsilon}} \Phi(w, \bar{w}) = \bar{\epsilon}(\bar{w}) \partial_{\bar{w}} \Phi(w, \bar{w}) + \bar{h} \partial_{\bar{w}} \bar{\epsilon}(\bar{w}) \Phi(w, \bar{w}),
+\]
+and combining the two parts, we exactly recover the infinitesimal conformal transformation law of a primary field. Thus, the analytic structure of the OPE perfectly encapsulates the geometric symmetries of the theory.

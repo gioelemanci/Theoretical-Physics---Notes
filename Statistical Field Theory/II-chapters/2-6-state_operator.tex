@@ -1,0 +1,337 @@
+\section{Radial Quantization and State-Operator Correspondence}
+\label{sec:radial_quantization_state_operator}
+
+Up to this point, we have mostly described conformal field theory in terms of local fields, their transformation properties, and their correlation functions. We now move to a more intrinsic operator formulation.
+
+The key idea is that in two-dimensional Euclidean field theory it is natural to quantize the theory not with respect to one of the Cartesian coordinates, but with respect to the radial distance from the origin. In this framework:
+\begin{itemize}
+    \item circles centered at the origin play the role of equal-time slices;
+    \item local operator insertions define states on such circles;
+    \item the generators of conformal transformations act as operators on the Hilbert space.
+\end{itemize}
+This geometric setup naturally leads to the operator-state correspondence, one of the most remarkable and powerful features of two-dimensional conformal field theory.
+
+\subsection{Transformation of the Stress Tensor under the Cylinder Map}
+
+Unlike a primary field, the stress tensor does not transform homogeneously under general conformal maps because of the central charge anomaly. Under a finite conformal transformation
+\[
+    z \mapsto w = f(z),
+\]
+the transformation law of the stress tensor acquires an inhomogeneous shift:
+\[
+    T(z) = \left(\frac{dw}{dz}\right)^2 T(w) + \frac{c}{12}\{w, z\},
+\]
+where the shift \(\{w, z\}\) is the Schwarzian derivative, defined as:
+\[
+    \{w, z\} = \frac{w'''(z)}{w'(z)} - \frac{3}{2}\left(\frac{w''(z)}{w'(z)}\right)^2.
+\]
+
+To study finite-size effects, we can map the complex plane to a cylindrical geometry. We define the transformation from the plane coordinate \(z\) to the cylinder coordinate \(w\) as \(w = \frac{L}{2\pi} \log z\). Because the complex logarithm is a multi-valued function, we must choose a branch cut (for example, along the negative real axis, giving a phase shift of \(\pm i\pi\)). By identifying the values on the two sides of the cut via periodic boundary conditions, the mapped strip wraps around itself seamlessly, defining a cylinder (as we have seen in section \ref{sec:plane_cylinder_map}).
+
+If we decompose the new coordinate into its real and imaginary parts, \(w = \tau + i\sigma\), we can identify \(\tau \in (-\infty, \infty)\) as the infinite Euclidean time, and \(\sigma \in [0, L]\) as the compactified spatial coordinate. We refer to this geometry as being infinite in time and finite in space. The finite size of the space is entirely dictated by the periodicity in \(\sigma\), which is controlled by the scale factor \(\frac{L}{2\pi}\).
+
+For the sake of mathematical simplicity, let us explicitly compute the transformation of the stress-energy tensor using the normalized map \(w = \log z\) (which corresponds to setting the circumference to \(L = 2\pi\)). The derivatives of this map are simply:
+\[
+    w'(z) = \frac{1}{z} \;, \quad w''(z) = -\frac{1}{z^2} \;, \quad w'''(z) = \frac{2}{z^3}.
+\]
+Inserting these derivatives into the definition of the Schwarzian derivative, we find:
+\[
+    \{w, z\} = \frac{2/z^3}{1/z} - \frac{3}{2}\left(\frac{-1/z^2}{1/z}\right)^2 = \frac{2}{z^2} - \frac{3}{2z^2} = \frac{1}{2z^2}.
+\]
+Substituting this result, along with the first derivative \(\mathrm{d} w/\mathrm{d} z\), back into the general transformation law, we obtain:
+\[
+    T_{\text{plane}}(z) = \frac{1}{z^2} T_{\text{cyl}}(w) + \frac{c}{24z^2}.
+\]
+Equivalently, we can invert this relation to isolate the stress tensor on the cylinder:
+\[
+    T_{\text{cyl}}(w) = z^2 T_{\text{plane}}(z) - \frac{c}{24}.
+\]
+
+This final equation carries profound physical implications when we evaluate it on the vacuum state. On the infinite, flat complex plane, global conformal invariance dictates that the one-point function of any field with a non-zero conformal weight must strictly vanish, \(\langle \varphi \rangle = 0\). The only field allowed to have a non-zero expectation value is the identity operator \(\mathbb{I}\), which is perfectly invariant under all transformations and has a conformal weight of zero. Therefore, evaluating the stress tensor on the plane yields \(\langle T_{\text{plane}}(z) \rangle = 0\).
+
+However, if we take the vacuum expectation value of our inverted equation, we find a non-zero result on the cylinder. How can we have a vacuum expectation value different from zero? This occurs because the vacuum state on the cylinder is physically distinct from the vacuum state on the plane due to the non-trivial topology of the mapping. The cylindrical geometry is finite in space, which introduces boundary conditions that restrict the quantum fluctuations.
+
+This constant shift implies that the vacuum energy on the cylinder is not zero. Summing the holomorphic and anti-holomorphic contributions yields a macroscopic shift in the ground-state energy:
+\[
+    E_0 = -\frac{c}{12},
+\]
+(up to normalization conventions for the cylinder circumference). This is the conformal field theory realization of the \textbf{Casimir effect}: \textit{a generalized vacuum energy driven purely by the finite geometry and directly proportional to the central charge \(c\) of the theory}.
+
+Understanding transformations to finite geometries and the role of the central charge in these mappings is a cornerstone of modern theoretical physics. It has critical practical implications for the study of critical phenomena (especially when predicting finite-size scaling in numerical simulations constrained by finite memory or lattice sizes) as well as in string theory, where the fundamental worldsheet is frequently modeled precisely as a cylinder or a torus.
+
+\subsection{Hamiltonian on the Cylinder}
+
+The ultimate goal of introducing this geometric machinery is to properly quantize the conformal field theory on the cylinder. By transforming the generator of time translations from the plane to the cylinder, we can identify the Hamiltonian of the theory in this geometry. Because \(\tau\) represents the Euclidean time direction, the operator generating translations along \(\tau\) is precisely the Hamiltonian \(H_{\text{cyl}}\). Consequently, equal-time commutators in this quantization scheme correspond to commutators evaluated on the same cylindrical slice at a constant \(\tau\). Under the plane-to-cylinder map, this Hamiltonian is identified as:
+\[
+    H_{\text{cyl}} = L_0 + \bar{L}_0 - \frac{c}{12},
+\]
+up to normalization conventions depending on the circumference of the cylinder.
+
+Similarly, we can consider the momentum operator \(P_{\text{cyl}}\), which generates translations along the compact spatial direction \(\sigma\) (i.e., rigid translations along the circumference of the cylinder). Interestingly, for the momentum operator, the anomalous displacement due to the central charge perfectly cancels out between the holomorphic and anti-holomorphic sectors. Thus, the momentum on the cylinder is simply given by:
+\[
+    P_{\text{cyl}} = L_0 - \bar{L}_0.
+\]
+
+Mapping this dynamics back to the complex plane reveals a profound geometric correspondence. Because \(\tau \propto \log |z|\), increasing the time \(\tau\) on the cylinder corresponds exactly to increasing the modulus \(|z|\) on the plane. Therefore, time evolution on the cylinder is precisely equivalent to radial evolution on the plane, and constant-time slices on the cylinder seamlessly map to concentric circles on the plane. In terms of \textbf{continuous symmetries}, \uline{time translations on the cylinder correspond to dilatations on the plane, while spatial translations along the cylinder's circumference correspond to purely angular rotations on the plane}. The explicit identification of the Hamiltonian and momentum operators on the cylinder is thus crucial for quantizing the theory and understanding how its dynamics dynamically manifest across these equivalent geometries.
+
+For a physical state characterized by conformal weights \((h, \bar{h})\), the energy on the cylinder is given by the eigenvalue of \(H_{\text{cyl}}\):
+\[
+    E = h + \bar{h} - \frac{c}{12}
+\]
+This relation elegantly shows that the eigenvalues of energy and momentum on the cylinder correspond directly to the scaling dimension \(\Delta = h + \bar{h}\) and the spin \(s = h - \bar{h}\) of the associated fields on the plane. The central charge \(c\) plays a fundamental role in determining the entire energy spectrum on the cylinder, leading directly to the presence of a non-zero vacuum energy (the Casimir effect) that we discussed earlier. Finally, this energy formula plays an extremely important role in finite-size scaling techniques, providing a direct analytical method to extract the central charge of physical statistical systems at criticality simply by studying their finite-volume spectrum.
+
+\subsection{Time Ordering and Radial Ordering}
+
+In the standard formulation of Quantum Field Theory, the products of quantum operators inside correlation functions are physically meaningful only if they are properly time-ordered. The time-ordering operator \(\mathcal{T}\) ensures that \textit{operators acting at earlier times are applied to the state first} (i.e., placed to the right). On our newly defined cylinder, where \(\tau\) acts as the time coordinate, the time-ordered product of two generic fields is defined as:
+\[
+    \mathcal{T} \{ A_1(\sigma_1, \tau_1) A_2(\sigma_2, \tau_2) \} =
+    \begin{cases}
+        A_1(\sigma_1, \tau_1) A_2(\sigma_2, \tau_2)      & \text{if } \tau_1 > \tau_2 \\
+        \eta A_2(\sigma_2, \tau_2) A_1(\sigma_1, \tau_1) & \text{if } \tau_1 < \tau_2
+    \end{cases}
+\]
+where the statistical factor \(\eta\) accounts for the quantum statistics of the fields involved:
+\[
+    \eta =
+    \begin{cases}
+        +1 & \text{if at least one of the two fields is bosonic,} \\
+        -1 & \text{if both fields are fermionic.}
+    \end{cases}
+\]
+Because we have established that time \(\tau\) on the cylinder corresponds exactly to the radial distance \(|z|\) on the plane (\(\tau \propto \log|z|\)), the dynamical concept of time ordering is naturally translated into the geometric concept of \textbf{radial ordering} on the complex plane.
+
+We define the radial ordering operator \(\mathcal{R}\) such that \uline{operators located closer to the origin act first, evolving radially outwards}. For two fields inserted at complex coordinates \(z_1\) and \(z_2\), this reads:
+\[
+    \mathcal{R} \{ A_1(z_1, \bar{z}_1) A_2(z_2, \bar{z}_2) \} =
+    \begin{cases}
+        A_1(z_1, \bar{z}_1) A_2(z_2, \bar{z}_2)      & \text{if } |z_1| > |z_2| \\
+        \eta A_2(z_2, \bar{z}_2) A_1(z_1, \bar{z}_1) & \text{if } |z_1| < |z_2|
+    \end{cases}
+\]
+This radial quantization is particularly natural in Conformal Field Theory because the radial ordering of operator insertions is strictly preserved by conformal transformations. Physically, a quantum state is associated with a circle of fixed radius \(r\), and is defined by performing the path integral over the interior of the disk. Inserting local operators inside this disk systematically modifies the state defined on the boundary circle. Furthermore, beyond preserving causality, this geometric setup provides an incredibly powerful analytical tool: radial ordering is precisely the natural framework required to perform contour manipulations and evaluate Operator Product Expansions (OPEs) using complex analysis.
+
+When we compute correlation functions or evaluate the Operator Product Expansion (OPE) of two fields as they approach each other, the radial ordering is strictly and implicitly assumed. Furthermore, it plays a vital role when translating commutators of conserved charges into contour integrals, where the difference between integrating over a larger circle versus a smaller circle precisely encodes the commutator (or anti-commutator) of the enclosed operators. We will see this in more detail in the following sections.
+
+\subsection{The State-Operator Correspondence}
+
+To make the construction of radial quantization concrete, consider a circle of radius \(|z| = R\) on the complex plane. A state on that boundary circle is defined by performing the Euclidean path integral over the interior disk \(|z| < R\), keeping the field configurations on the boundary fixed.
+
+If no operator is inserted inside the disk, the path integral naturally defines the vacuum state of the theory:
+\[
+    \ket{0} = \int_{|z| < R} \mathcal{D}\varphi \, e^{-S[\varphi]} .
+\]
+However, if a local operator \(\Phi(z, \bar{z})\) is inserted inside the disk, the path integral defines a new, modified state on the boundary. In particular, inserting the operator exactly at the origin defines a corresponding "ket" state:
+\[
+    \ket{\Phi} = \Phi(0,0)\ket{0} = \lim_{z,\bar{z} \to 0} \Phi(z,\bar{z})\ket{0}.
+\]
+This geometric picture perfectly matches the cylinder mapping. The origin of the plane (\(z=0\)) corresponds to the infinite past on the cylinder (\(\tau \to -\infty\)). Therefore, inserting an operator at the origin is equivalent to preparing an asymptotic ``in'' state in the standard scattering formalism. Because the conformal map from the cylinder lands on the Riemann sphere (the compactified complex plane), the operator creating the state remains strictly local. This requirement of locality ensures that the correlation functions are mathematically well-defined and physically consistent with the axioms of quantum field theory.
+
+This powerful relation is known as the \textbf{state-operator correspondence}. While a mapping between states and local operators can sometimes appear in non-conformal theories, it is absolutely guaranteed to hold in two-dimensional Conformal Field Theory. It implies that \textit{every state in the Hilbert space can be represented by some local operator inserted at the origin}. Crucially, \uline{this allows us to fully classify both the fields and the states of the theory using the irreducible representations of the Virasoro algebra.}
+
+\subsubsection{Bra States and the Inversion Map}
+
+To formulate a complete quantum mechanics framework, we also need to define ``bra'' states, which correspond to the asymptotic ``out'' states at infinite future (\(\tau \to +\infty\) on the cylinder). On the complex plane, this corresponds to inserting an operator at spatial infinity (\(z \to \infty\)). To define this rigorously without dealing with divergences, we use the inversion map:
+\[
+    z \mapsto w = \frac{1}{z}.
+\]
+This inversion is a global Möbius transformation that beautifully maps the point at infinity back to the origin on the Riemann sphere. By transforming the field from \(z\) to this new coordinate \(w\) and taking the limit as \(w \to 0\), we define a \uline{local} field acting on the vacuum to create the ``out state''. When we transform a primary field of conformal weights \((h, \bar{h})\) through this inversion, the Jacobian factors introduce powers of \(z\) and \(\bar{z}\). Thus, the conjugate bra state is defined as:
+\[
+    \bra{\Phi} = \lim_{z,\bar{z} \to \infty} \bra{0} z^{2h} \bar{z}^{2\bar{h}} \Phi(z, \bar{z}).
+\]
+These compensating scale factors are strictly necessary to produce a finite, non-zero limit and ensure consistency with the normalization of correlation functions.
+
+\subsubsection{Inner Products and Hilbert Space Sectors}
+
+The state-operator correspondence implies a direct and profound relation between the algebraic inner product of states in the Hilbert space and the analytic two-point correlation functions evaluated on the plane.
+Let \(\Phi\) and \(\Psi\) be two primary fields. Using our definition for the bra state, the inner product is written as:
+\[
+    \bra{\Psi} \ket{\Phi} = \lim_{z,\bar{z} \to \infty} z^{2h_\Psi} \bar{z}^{2\bar{h}_\Psi} \bra{0} \Psi(z,\bar{z}) \Phi(0,0) \ket{0}.
+\]
+The expectation value on the right is exactly the standard two-point function of the fields. As we have derived previously from the global Ward identities, the two-point function of primary fields is highly constrained:
+\[
+    \langle \Psi(z,\bar{z}) \Phi(0,0) \rangle = \frac{C_{\Psi\Phi} \delta_{h_\Psi, h_\Phi} \delta_{\bar{h}_\Psi, \bar{h}_\Phi}}{z^{2h_\Psi} \bar{z}^{2\bar{h}_\Psi}}.
+\]
+Inserting this known form into the inner product, a beautiful cancellation occurs: the \(z^{2h_\Psi}\) and \(\bar{z}^{2\bar{h}_\Psi}\) factors from the bra state definition exactly cancel the identical coordinate dependence in the denominator of the two-point function. The spatial dependence completely vanishes, leaving only the overall constant:
+\[
+    \bra{\Psi} \ket{\Phi} = C_{\Psi\Phi} \delta_{h_\Psi, h_\Phi} \delta_{\bar{h}_\Psi, \bar{h}_\Phi}.
+\]
+Thus, the two-point function seamlessly defines the natural scalar product on the space of states.
+
+This result carries a vital physical meaning: states created by operators with different conformal weights are strictly orthogonal. This orthogonality principle is extremely powerful, as it provides a natural mechanism to divide the entire Hilbert space of the theory into distinct, non-overlapping superselection sectors, each built upon a different primary state.
+
+\subsection{Action of Virasoro Generators on States}
+
+We now examine how the Virasoro generators act on the states defined by local operators. Recall that a state associated with a primary field is defined by inserting the field at the origin in the path integral definition of the vacuum, \(\ket{\Phi} = \Phi(0,0)\ket{0}\). To find the explicit action of the Virasoro modes \(L_n\) on this state, we use their commutation relation with the primary field:
+\[
+    [L_n, \Phi(w,\bar{w})] = (w^{n+1}\partial_w + h(n+1)w^n)\Phi(w,\bar{w}).
+\]
+
+We evaluate this action by taking the limit as \(w, \bar{w} \to 0\). First, we must rely on the fundamental properties of the vacuum state \(\ket{0}\). The physical requirement that the stress-energy tensor \(T(z)\) must be perfectly regular (finite) both at the origin and at spatial infinity imposes that the vacuum state must be annihilated by all modes \(L_n\) with \(n > 0\). Furthermore, the conditions \(L_{-1}\ket{0} = L_0\ket{0} = L_1\ket{0} = 0\) directly express the \textit{invariance of the vacuum under the global conformal subgroup} (translations, dilatations, and special conformal transformations). Thus we know that \uline{the vacuum state gets annihilated by the application of any generator \(L_n\) for \(n \geq -1\).}
+
+Since the vacuum is annihilated by these modes, applying the commutator to the vacuum state eliminates the term where the mode acts on the right:
+\[
+    \lim_{w, \bar{w} \to 0} (L_n \Phi(w,\bar{w}) - \Phi(w,\bar{w}) L_n) \ket{0} = \lim_{w, \bar{w} \to 0} L_n \Phi(w,\bar{w}) \ket{0} = L_n \ket{\Phi}.
+\]
+For any \(n \ge 1\), evaluating the right-hand side of the commutator at \(w \to 0\) yields strictly zero, as all terms carry positive powers of \(w\):
+\[
+    \begin{aligned}
+        L_n \ket{\Phi} & = \lim_{w, \bar{w} \to 0} \left( w^{n+1} \partial_w \Phi(w,\bar{w}) + h(n+1)w^n \Phi(w,\bar{w}) \right) \ket{0} \\
+                       & = \lim_{w, \bar{w} \to 0} (w^{n+1} \ket{\partial \Phi} + h(n+1)w^n \ket{\Phi}) = 0
+    \end{aligned}
+\]
+where now it is not important to specify the precise form of the state created by the derivative of the field, since the positive powers of \(w\) ensure that all contributions vanish in the limit. Thus, \uline{all positive modes \(L_n\) with \(n \ge 1\) annihilate the primary state}.
+
+However, for the specific case of \(n = 0\), the derivative term vanishes (due to the \(w^1\) factor), but the zero-th power of \(w\) in the second term leaves a non-zero contribution. The commutator evaluation reduces precisely to \(h \Phi(0,0)\), yielding:
+\[
+    L_0 \ket{\Phi} = h \ket{\Phi}.
+\]
+An identical derivation holds for the anti-holomorphic sector, yielding \(\bar{L}_n \ket{\Phi} = 0\) for \(n \ge 1\) and \(\bar{L}_0 \ket{\Phi} = \bar{h} \ket{\Phi}\). Because the state is annihilated by all positive modes and is an eigenstate of the zero-modes, we conclude that the state associated with a primary field acts as a \textbf{highest-weight state} for the Virasoro algebra.
+
+\subsubsection{Dilatations as the Hamiltonian of Radial Quantization}
+
+A crucial consequence of radial quantization is that \textit{radial evolution is dynamically generated by dilatations}. Under a global scale transformation \(z \to \lambda z\) and \(\bar{z} \to \lambda \bar{z}\), the radial coordinate transforms as \(r \to \lambda r\). In terms of the Euclidean cylinder time \(\tau = \log r\), this purely geometric rescaling corresponds to a standard time translation \(\tau \to \tau + \log \lambda\).
+
+Therefore, the generator of dilatations intrinsically plays the role of the Hamiltonian in radial quantization. Combining the holomorphic and anti-holomorphic sectors, this generator is given by \(L_0 + \bar{L}_0\). Similarly, the angular momentum operator, which generates rigid rotations, is given by the difference \(L_0 - \bar{L}_0\).
+
+We can now readily compute the action of these macroscopic physical operators on our primary states: using the eigenvalue equations we just derived from the Virasoro algebra, for a state associated with a primary field of conformal weights \((h, \bar{h})\), we find:
+\[
+    \begin{aligned}
+        (L_0 + \bar{L}_0) \ket{\Phi} & = (h + \bar{h}) \ket{\Phi} = \Delta \ket{\Phi}, \\
+        (L_0 - \bar{L}_0) \ket{\Phi} & = (h - \bar{h}) \ket{\Phi} = s \ket{\Phi}.
+    \end{aligned}
+\]
+Thus, the scaling dimension \(\Delta\) becomes the exact energy of the state in radial quantization, while the conformal spin \(s\) corresponds directly to its physical angular momentum.
+
+\subsubsection{Highest-Weight States and Primary Fields}
+
+Motivated by our previous discussion on the action of the Virasoro modes, we can formally define a \textbf{highest-weight state} \(\ket{h, \bar{h}}\) as a state satisfying the eigenvalue equations for the zero-modes:
+\[
+    L_0 \ket{h, \bar{h}} = h \ket{h, \bar{h}}, \quad \bar{L}_0 \ket{h, \bar{h}} = \bar{h} \ket{h, \bar{h}},
+\]
+while being strictly annihilated by all positive modes:
+\[
+    L_n \ket{h, \bar{h}} = 0, \quad \bar{L}_n \ket{h, \bar{h}} = 0 \quad (n > 0).
+\]
+
+These conditions perfectly match the properties we just derived for the states created by inserting primary fields at the origin. Therefore, we establish a fundamental structural identification of conformal field theory: \uline{primary fields on the complex plane strictly correspond to highest-weight states in radial quantization}.
+
+\subsubsection{Descendant States}
+
+In standard Lie algebras like \(\mathrm{SU}(2)\), applying lowering operators to a highest-weight state generates a finite multiplet of states with progressively lower eigenvalues. In the infinite-dimensional Virasoro algebra, however, the situation is different. Starting from a highest-weight state (the primary state), one obtains new states by acting with the negative Virasoro modes \(L_{-n}\) (with \(n > 0\)).
+
+To understand the physical nature of these states, we evaluate their energy (the eigenvalue of \(L_0\)). We start from the fundamental commutation relation:
+\[
+    [L_0, L_{-n}] = n L_{-n}.
+\]
+
+By applying this commutator to a primary state \(\ket{\Phi} = \ket{h, \bar{h}}\) of weight \(h\), we find:
+\[
+    L_0 (L_{-n} \ket{\Phi}) = (L_{-n} L_0 + n L_{-n}) \ket{\Phi} = (h + n) (L_{-n} \ket{\Phi}).
+\]
+
+This reveals a crucial physical property: while the operators \(L_{-n}\) act algebraically as lowering operators, they physically \textit{increase} the conformal weight by \(n\) units. Because the conformal weight dictates the energy on the cylinder, the state \(L_{-n}\ket{\Phi}\) has \(n\) units of energy more than the primary state. Therefore, the ``highest-weight'' state actually represents the \textit{stable, lowest-energy ground state of its representation sector}.
+
+We can apply these negative modes multiple times to the primary state, generating an infinite ``tower'' of descendant states. A generic descendant state takes the form:
+\[
+    L_{-n_1} L_{-n_2} \cdots L_{-n_k} \ket{h, \bar{h}} \quad \text{with } n_i > 0
+\]
+
+This generic state is characterized by a \textbf{level} \(N = n_1 + \dots + n_k\), and its total holomorphic weight is \(h + N\). \uline{The primary state and its infinite tower of descendants together form a complete representation of the Virasoro algebra}, known as a \textbf{Verma module}. This structure is fundamental for understanding the spectrum of states in two-dimensional conformal field theories and for organizing the resolution of correlation functions (through the OPE and the Ward identities) in terms of contributions from primary fields and their descendants.
+
+\begin{example}[Examples of Descendant States]
+    At the lowest levels, the first independent descendant states in the holomorphic sector are:
+    \[
+        L_{-1}\ket{h, \bar{h}} \;, \quad L_{-2}\ket{h, \bar{h}} \;, \quad L_{-1}^2\ket{h, \bar{h}} \;, \quad \dots
+    \]
+
+    Under the state-operator correspondence, these descendant states correspond to local operators obtained by acting on the primary field with derivatives (and more general conformal descendants). For instance, consider the state \(L_{-1}\ket{\Phi}\). We know from the action of Virasoro generators on fields that:
+    \[
+        [L_{-1}, \Phi(w, \bar{w})] = \partial_w \Phi(w, \bar{w}).
+    \]
+
+    Evaluating this at the origin directly maps the state to the derivative field:
+    \[
+        L_{-1}\ket{\Phi} = (\partial\Phi)(0,0)\ket{0}.
+    \]
+
+    Similarly, in the anti-holomorphic sector, \(\bar{L}_{-1}\ket{\Phi} = (\bar{\partial}\Phi)(0,0)\ket{0}\). This confirms our earlier geometric observation: the derivative of a primary field is not primary itself, but rather the first descendant in its conformal family.
+\end{example}
+
+\subsection{Conformal Families and Verma Modules}
+
+As we have established, applying negative Virasoro modes to a highest-weight state (primary state) \(\ket{h}\) generates an infinite tower of descendant states with increasing energy. Let us examine the lowest energy levels of this construction:
+\begin{itemize}
+    \item Applying \(L_{-1}\) to \(\ket{h}\) generates a state \(L_{-1}\ket{h}\) with weight \(h+1\).
+    \item Applying operators to reach weight \(h+2\), we can use either \(L_{-2}\) or apply \(L_{-1}\) twice, generating two states: \(L_{-2}\ket{h}\) and \(L_{-1}^2\ket{h}\).
+    \item To reach weight \(h+3\), we could seemingly construct multiple combinations: \(L_{-3}\ket{h}\), \(L_{-1}^3\ket{h}\), \(L_{-2}L_{-1}\ket{h}\), and \(L_{-1}L_{-2}\ket{h}\).
+\end{itemize}
+However, the Virasoro algebra imposes strict linear dependencies among these combinations. For example, using the commutation relation \([L_{-1}, L_{-2}] = -L_{-3}\), we can rewrite \(L_{-1}L_{-2}\ket{h} = L_{-2}L_{-1}\ket{h} - L_{-3}\ket{h}\). This proves that \(L_{-1}L_{-2}\ket{h}\) is not a linearly independent state.
+
+To systematically avoid overcounting and correctly identify the basis of independent states, we must choose and maintain a strict ordering convention. The standard choice is to order the modes with decreasing indices:
+\[
+    L_{-n_1} L_{-n_2} \cdots L_{-n_k} \ket{h}, \quad \text{with } n_1 \ge n_2 \ge \cdots \ge n_k \ge 1.
+\]
+
+We can summarize the basis states and the dimensionality of the vector space at each low-lying level \(N\) in the following table:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ccc}
+        \toprule
+        \textbf{Level} \(N\) & \textbf{Basis States}                                                                                       & \textbf{Dimension} \(p(N)\) \\
+        \midrule
+        0                    & \(\ket{h}\)                                                                                                 & 1                           \\
+        1                    & \(L_{-1}\ket{h}\)                                                                                           & 1                           \\
+        2                    & \(L_{-2}\ket{h}, \, L_{-1}^2\ket{h}\)                                                                       & 2                           \\
+        3                    & \(L_{-3}\ket{h}, \, L_{-2}L_{-1}\ket{h}, \, L_{-1}^3\ket{h}\)                                               & 3                           \\
+        4                    & \(L_{-4}\ket{h}, \, L_{-3}L_{-1}\ket{h}, \, L_{-2}^2\ket{h}, \, L_{-2}L_{-1}^2\ket{h}, \, L_{-1}^4\ket{h}\) & 5                           \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:verma_modules}
+\end{table}
+
+While the dimension of the space of descendants matches the level \(N\) up to \(N=3\), this pattern breaks down at \(N=4\) (where the dimension is 5). The exact dimensionality of the subspace at level \(N\) is given mathematically by \(p(N)\), the number of integer partitions of \(N\). Euler provided an elegant solution to compute these partitions using a generating function:
+\[
+    \Phi(q) = \sum_{N=0}^{\infty} p(N) q^N = \prod_{n=1}^{\infty} \frac{1}{1-q^n}
+\]
+By expanding the infinite product on the right-hand side, the non-negative integer coefficients of the Taylor expansion exactly predict the number of linearly independent descendant states at each level (miracolously the coefficients are all positive integers).
+
+Of course, the Virasoro algebra allows us to navigate this tower in both directions. While negative modes \(L_{-n}\) act as creation operators moving us up to higher energy levels, applying generators with positive \(n\) to these descendants acts as lowering operators (in the sense of the energy spectrum), pulling us back down towards the primary state or to other lower-level descendants.
+
+We started from primary states (generated by the application of a primary field to the vacuum) and we generated an infinite tower of descendant states. Under the state-operator correspondence, these descendants are the states generated by secondary fields (which are precisely the fields obtained by applying the modes \(L_{-n}\) to the primary field). The set of all descendants generated from a given primary state forms a representation of the Virasoro algebra. This representation is called a \textbf{conformal family} or \textbf{conformal tower}. Thus every primary field gives rise to:
+\begin{itemize}
+    \item A primary state (the highest-weight state) at the top, with conformal weights \((h, \bar{h})\).
+    \item An infinite tower of descendant states generated by the action of negative Virasoro modes, each with increasing conformal weight.
+\end{itemize}
+
+Schematically, we can represent a conformal family as:
+\[
+    \ket{h, \bar{h}} \quad \rightarrow \quad L_{-1}\ket{h, \bar{h}}, \, \bar{L}_{-1} \ket{h, \bar{h}}, \, L_{-2}\ket{h, \bar{h}}, \, \bar{L}_{-2} \ket{h, \bar{h}}, \, L_{-1}^2\ket{h, \bar{h}}, \, \dots
+\]
+This is the representation-theoretic organization underlying the operator content of the theory.
+
+\subsubsection{Verma Modules}
+
+The most general representation obtained by freely acting with all negative modes on a highest-weight state is called a \textbf{Verma module}. Each conformal family forms a representation of the Virasoro algebra, providing the complete algebraic framework needed to describe every state and field in the theory.
+
+In the holomorphic sector, the Verma module built on a highest-weight state \(\ket{h}\) is the linear span of states of the form
+\[
+    L_{-n_1} L_{-n_2} \cdots L_{-n_k}, \quad n_1 \geq n_2 \geq \cdots \geq n_k \geq 1,
+\]
+exactly as represented in the table above (Table \ref{tab:verma_modules}). The anti-holomorphic sector is constructed in an identical way using the \(\bar{L}_{-n}\) modes. The full Verma module is then the tensor product of the holomorphic and anti-holomorphic sectors. The ordering convention avoids overcounting, since different products of negative modes are generally not independent unless ordered, as seen.
+
+A Verma module (in the holomorphic sector), denoted as \(\mathcal{V}_{c,h}\), is formally defined as the infinite direct sum of the finite-dimensional subspaces of descendant states at each level \(N\):
+\[
+    \mathcal{V}_{c,h} = \bigoplus_{N=0}^{\infty} \mathcal{V}_{c,h}^{(N)}
+\]
+where \(\mathcal{V}_{c,h}^{(N)}\) is the subspace at level \(N\), having dimension \(p(N)\). The entire module is uniquely labeled by the central charge \(c\) of the theory and the conformal weight \(h\) of the original primary state. The Verma modules are the fundamental building blocks of the representation theory of the Virasoro algebra and are the essential tool for classifying the operator content in two-dimensional conformal field theories.
+
+\subsubsection{Null States and Reducibility}
+
+In general, not all descendant states generated within a Verma module are physically independent or physically allowed. It may happen that some specific linear combination of descendants possesses a strictly zero norm. Such states are called \textbf{null states} or \textbf{singular vectors}.
+
+A singular vector \(\ket{\chi}\) at level \(N\) exhibits a deeply peculiar algebraic property: while it is built from negative modes acting on \(\ket{h}\), it is simultaneously annihilated by all positive Virasoro modes (\(L_n \ket{\chi} = 0\) for \(n > 0\)). This means a singular vector behaves exactly like a new, independent primary state embedded within the descendant tower. Because its inner product with any other state is zero, \textit{it completely decouples from all physical correlation functions}.
+
+When null states are present, the original Verma module is no longer irreducible. Because the singular vector acts as a highest-weight state itself, it generates its own entire sub-Verma module of descendants. To preserve the probabilistic interpretation of quantum mechanics (unitarity) and obtain a physically sound irreducible representation, one must mathematically quotient out the entire submodule generated by these null states.
+
+This reducibility issue is of paramount importance: setting the singular vectors to zero imposes incredibly powerful differential equations on the correlation functions. This mathematical truncation process will become central later, as it is the exact mechanism that governs the finite operator content and the exact solvability of the so-called \textbf{minimal models}. For the moment, we simply note that the representation theory of the infinite-dimensional Virasoro algebra is profoundly richer and more intricate than that of an ordinary finite-dimensional Lie algebra.

@@ -2,235 +2,231 @@
 
 \subsection{Mode Expansion of the Stress Energy Tensor}
 
-Starting from the conformal transformation in the \(z\) variable
+Starting from an infinitesimal conformal transformation in the complex coordinate parameterized by a holomorphic function
 \[
     w = z + \epsilon(z),
 \]
-we have the conserved charge associated with this transformation, which can be expressed as an integral of the stress energy tensor \(T(z)\) around a contour \(C\):
+we recall that the conserved Noether charge associated with this local symmetry can be expressed as a contour integral of the stress-energy tensor \(T(z)\) around a closed path \(C\):
 \[
-    Q_{\epsilon} = \frac{1}{2\pi i} \oint_C \mathrm{d} z \, \epsilon(z) T(z).
+    Q_{\epsilon} = \frac{1}{2\pi i} \oint_C \mathrm{d}z \, \epsilon(z) T(z).
 \]
 
-[...]
-
-[...]
-
-\subsection{Virasoro Algebra from the Stress Energy Tensor OPE}
-
-We can now compute the commutator of the modes \(L_n\) to find the Virasoro algebra. Starting from the definition of the modes:
+To systematically study these charges and the algebraic structure they form, it is extremely convenient to expand our local fields into discrete modes. On the cylinder, where the spatial coordinate is naturally compact and periodic, any generic local field \(\phi(\sigma, \tau) = \phi(w, \bar{w})\) admits a standard Fourier expansion:
 \[
-    L_n = \frac{1}{2\pi i} \oint_C \mathrm{d} z \, z^{n+1} T(z),
+    \phi(w, \bar{w}) = \sum_{n, \bar{n} = -\infty}^{+\infty} \phi_{n, \bar{n}} e^{-\frac{2\pi i}{L}(n w + \bar{n} \bar{w})}.
 \]
-we can compute the commutator \([L_m, L_n]\) starting from the product of two modes:
+When we map this theory back to the complex plane, we must take into account the transformation law for a primary field of conformal weights \((h, \bar{h})\). Since the scaling dimensions dictate how the field rescales, this Fourier series translates directly into a Laurent expansion around the origin:
 \[
-    L_m, L_n = \dots
+    \phi(z, \bar{z}) = \sum_{n, \bar{n} = -\infty}^{+\infty} \phi_{n, \bar{n}} z^{-n-\Delta} \bar{z}^{-\bar{n}-\bar{\Delta}}.
 \]
-which gives us this two integrals around the origin, with contraints on the radii of the contours, which then subtracted with the opposite order of integration, we can use singular part of the OPE of the stress energy tensor with itself (which we know from the previous calculation) to evaluate the integrals and find the commutation relations of the modes \(L_n\):
+By using the Cauchy integral theorem, we can isolate and extract the individual mode operators \(\phi_{n, \bar{n}}\) via the inversion formula:
 \[
-    [L_m, L_n] = \oint_{0} \frac{\mathrm{d} w}{2\pi i} w^{m+1} \oint_{w} \frac{\mathrm{d} z}{2\pi i} z^{n+1} \left( \frac{c / 2}{(z-w)^4} + \frac{2 T(w)}{(z-w)^2} + \frac{\partial_w T(w)}{z-w} \right),
+    \phi_{n, \bar{n}} = \oint_0 \frac{\mathrm{d}z}{2\pi i} \oint_0 \frac{\mathrm{d}\bar{z}}{2\pi i} z^{n+\Delta-1} \bar{z}^{\bar{n}+\bar{\Delta}-1} \phi(z, \bar{z}).
 \]
-where \(c\) is the central charge of the theory. To evaluate these integrals, we can use Cauchy formulae
+
+We now apply this general formalism specifically to the stress-energy tensor. As we established earlier, the tensor splits into independent chiral (\(T(z)\)) and anti-chiral (\(\bar{T}(\bar{z})\)) components, which possess conformal weights \((2,0)\) and \((0,2)\) respectively. Therefore, setting \(\Delta = 2\), their Laurent expansions take the special form:
+\[
+    T(z) = \sum_{n=-\infty}^{+\infty} L_n z^{-n-2} \;, \quad \bar{T}(\bar{z}) = \sum_{n=-\infty}^{+\infty} \bar{L}_n \bar{z}^{-n-2}.
+\]
+The expansion coefficients \(L_n\) and \(\bar{L}_n\) are the celebrated Virasoro modes. Inverting the series through contour integration, these modes are given explicitly by:
+\[
+    L_n = \oint_0 \frac{\mathrm{d}z}{2\pi i} z^{n+1} T(z) \;, \quad \bar{L}_n = \oint_0 \frac{\mathrm{d}\bar{z}}{2\pi i} \bar{z}^{n+1} \bar{T}(\bar{z}).
+\]
+
+Notice the profound connection between these modes and the conserved charges we introduced at the beginning. Because the transformations \(\epsilon(z)\) are holomorphic, they can be expanded in a basis of polynomials \(\epsilon_n(z) = -z^{n+1}\). Inserting this expansion into the integral for \(Q_{\epsilon}\), the general conserved conformal charge becomes a direct linear combination of the Virasoro modes:
+\begin{equation}
+    Q_{\epsilon} = \sum_{n=-\infty}^{+\infty} \epsilon_n L_n.
+    \label{eq:conformal_charge_virasoro}
+\end{equation}
+Consequently, the holomorphic conformal generators \(\{L_n\}\) form the exact basis of a linear Lie algebra, just as the anti-holomorphic modes \(\{\bar{L}_n\}\) form an independent copy of this algebra for the anti-chiral sector.
+
+\subsection{Virasoro Algebra from Stress Energy Tensor OPE}
+
+We can now compute the exact commutation relations of the Virasoro modes \(L_n\). Starting from their definition via contour integrals:
+\[
+    L_n = \oint_0 \frac{\mathrm{d}w}{2\pi i} w^{n+1} T(w) \;, \quad L_m = \oint_0 \frac{\mathrm{d}z}{2\pi i} z^{m+1} T(z),
+\]
+we can express their commutator \([L_m, L_n]\) using the radial ordering formalism we developed earlier. The commutator translates into the difference of two contour integrals, which can be deformed into a single integral of the radially ordered product, where the \(z\) contour tightly encloses the point \(w\):
+\[
+    [L_m, L_n] = \frac{1}{(2\pi i)^2} \oint_0 \mathrm{d}w \, w^{n+1} \oint_w \mathrm{d}z \, z^{m+1} T(z)T(w).
+\]
+
+To evaluate this, we insert the singular part of the \(T(z)T(w)\) Operator Product Expansion into the integral:
+\[
+    [L_m, L_n] = \frac{1}{(2\pi i)^2} \oint_0 \mathrm{d}w \, w^{n+1} \oint_w \mathrm{d}z \, z^{m+1} \left[ \frac{c/2}{(z-w)^4} + \frac{2T(w)}{(z-w)^2} + \frac{\partial_w T(w)}{z-w} \right].
+\]
+
+We can evaluate the inner integral over \(z\) using Cauchy's integral formula and its derivatives:
+\[
+    f(w) = \oint_w \frac{\mathrm{d}z}{2\pi i} \frac{f(z)}{z-w} \;, \quad \frac{\mathrm{d}^k f(w)}{\mathrm{d}w^k} = k! \oint_w \frac{\mathrm{d}z}{2\pi i} \frac{f(z)}{(z-w)^{k+1}}.
+\]
+We divide the calculation into three parts, corresponding to the three poles in the OPE.
+
+\subsubsection{Fourth-Order Pole}
+
+The fourth-order pole gives a purely numerical contribution proportional to the central charge \(c\):
 \[
     \begin{aligned}
-        f(z) = \oint_{z} \frac{\mathrm{d} w}{2 \pi i} \frac{f(w)}{w-z}, \\
-        \frac{\mathrm{d}^n}{\mathrm{d} z^n} f(z) = n! \oint_{z} \frac{\mathrm{d} w}{2 \pi i} \frac{f(w)}{(w-z)^{n+1}},
+        I_1 & = \frac{1}{2\pi i} \oint_0 \mathrm{d}w \, w^{n+1} \oint_w \frac{\mathrm{d}z}{2\pi i} z^{m+1} \frac{c/2}{(z-w)^4} \\
+            & = \frac{c/2}{3!} \frac{1}{2\pi i} \oint_0 \mathrm{d}w \, w^{n+1} \partial_w^3 (w^{m+1})                          \\
+            & = \frac{c}{12} (m+1)m(m-1) \frac{1}{2\pi i} \oint_0 \mathrm{d}w \, w^{m+n-1}.
     \end{aligned}
 \]
-to evaluate the integrals and find the commutation relations of the modes \(L_n\). We have to divide the calculation into three parts, corresponding to the three terms in the OPE of the stress energy tensor with itself.
 
-The first term gives us a contribution proportional to the central charge \(c\),
+Since the contour integral of \(w^k\) around the origin vanishes unless \(k = -1\) (where it equals \(2\pi i\)), this term is non-zero only when \(m+n = 0\):
+\[
+    I_1 = \frac{c}{12} (m^3 - m) \delta_{m+n, 0}.
+\]
+
+\subsubsection{Second-Order Pole}
+
+The second-order pole contributes:
 \[
     \begin{aligned}
-        I_1 & = \oint_{0} \frac{\mathrm{d} w}{2\pi i} w^{m+1} \oint_{w} \frac{\mathrm{d} z}{2\pi i} z^{n+1} \frac{c / 2}{(z-w)^4}                                          \\
-            & = \dots                                                                                                                                                      \\
-            & = \frac{c}{12}(m+1) m (m - 1) \oint \frac{\mathrm{d} w}{2\pi i} w^{m+n-1} = \frac{c}{12} (m^3 - m) \delta_{m+n,0} = \frac{c}{12} m (m^2 - 1) \delta_{n, -m},
+        I_2 & = \frac{1}{2\pi i} \oint_0 \mathrm{d}w \, w^{n+1} \oint_w \frac{\mathrm{d}z}{2\pi i} z^{m+1} \frac{2T(w)}{(z-w)^2} \\
+            & = \frac{2}{2\pi i} \oint_0 \mathrm{d}w \, w^{n+1} \partial_w (w^{m+1}) T(w)                                        \\
+            & = 2(m+1) \frac{1}{2\pi i} \oint_0 \mathrm{d}w \, w^{m+n+1} T(w).
     \end{aligned}
 \]
-where we have used the fact that the integral of \(w^{m+n-1}\) around the origin is zero unless \(m+n=0\), in which case it is equal to \(2\pi i\). The second term gives us a contribution proportional to the modes \(L_{m+n}\),
+
+Recognizing the integral as the exact definition of the mode \(L_{m+n}\), we get:
+\[
+    I_2 = 2(m+1) L_{m+n}.
+\]
+
+\subsubsection{First-Order Pole}
+
+Finally, the first-order pole yields:
 \[
     \begin{aligned}
-        I_2 & = \oint_{0} \frac{\mathrm{d} w}{2\pi i} w^{m+1} \oint_{w} \frac{\mathrm{d} z}{2\pi i} z^{n+1} \frac{2 T(w)}{(z-w)^2} \\
-            & = \frac{2}{2 \pi i} \oint_{0} \mathrm{d} w \, w^{m + n + 1} (m+1) T(w),
+        I_3 & = \frac{1}{2\pi i} \oint_0 \mathrm{d}w \, w^{n+1} \oint_w \frac{\mathrm{d}z}{2\pi i} z^{m+1} \frac{\partial_w T(w)}{z-w} \\
+            & = \frac{1}{2\pi i} \oint_0 \mathrm{d}w \, w^{m+n+2} \partial_w T(w).
     \end{aligned}
 \]
-where if we consider the integral of \(w^{m+n+1} T(w)\) around the origin, we can use the definition of the modes \(L_k\) to express it in terms of the modes:
+Using integration by parts on the \(w\) contour, this becomes:
 \[
-    \oint_{0} \mathrm{d} w \, w^{m + n + 1} T(w) = 2\pi i L_{m+n},
+    I_3 = - \frac{1}{2\pi i} \oint_0 \mathrm{d}w \, \partial_w (w^{m+n+2}) T(w) = - (m+n+2) L_{m+n}.
 \]
-thus the second term gives us a contribution of
-\[
-    I_2 = 2 (m+1) L_{m+n}.
-\]
-For the third term, we have
-\[
-    \begin{aligned}
-        I_3 & = \oint_{0} \frac{\mathrm{d} w}{2\pi i} w^{m+1} \oint_{w} \frac{\mathrm{d} z}{2\pi i} z^{n+1} \frac{\partial_w T(w)}{z-w} \\
-            & = \oint_{0} \frac{\mathrm{d} w}{2\pi i} w^{m+1 n+1} \partial_w T(w)                                                       \\
-            & = - \oint_{0} \frac{\mathrm{d} w}{2 \pi i} \partial_w (w^{m+n+2}) T(w) = - (m+n+2) L_{m+n},
-    \end{aligned}
-\]
-where we have used integration by parts to evaluate the integral. Summing up the contributions from the three terms, we find the commutation relations of the modes \(L_n\):
-\[
-    [L_m, L_n] = (m-n) L_{m+n} + \frac{c}{12} (m^3 - m) \delta_{n, -m},
-\]
-which is the \textbf{Virasoro algebra}. This is the algebra of the modes generating the \(z\) part of the conformal transformations in two-dimensional conformal field theory, and it plays a central role in the structure of these theories. We have another virasoro algebra for the \(\bar{z}\) part of the conformal transformations, generated by the modes \(\bar{L}_n\) of the anti-holomorphic stress energy tensor \(\bar{T}(\bar{z})\), which satisfy the same commutation relations as the \(L_n\) modes:
-\[
-    [\bar{L}_m, \bar{L}_n] = (m-n) \bar{L}_{m+n} + \frac{c}{12} (m^3 - m) \delta_{n, -m}.
-\]
-Furthermore, since the holomorphic and anti-holomorphic parts of the stress energy tensor commute with each other, we also have
+
+\subsubsection{Virasoro Commutation Relations}
+
+Summing the three contributions (\(I_1 + I_2 + I_3\)), we obtain the fundamental commutation relations of the modes:
+\begin{equation}
+    [L_m, L_n] = (m-n) L_{m+n} + \frac{c}{12} (m^3 - m) \delta_{m+n, 0}.
+    \label{eq:virasoro_algebra}
+\end{equation}
+
+This equation defines the \textbf{Virasoro algebra}. It is the infinite-dimensional algebra generating the holomorphic conformal transformations in two-dimensional CFT.
+
+By repeating the exact same procedure for the anti-holomorphic stress tensor \(\bar{T}(\bar{z})\), we find that its modes \(\bar{L}_n\) satisfy an identical algebra:
+\begin{equation}
+    [\bar{L}_m, \bar{L}_n] = (m-n) \bar{L}_{m+n} + \frac{c}{12} (m^3 - m) \delta_{m+n, 0}.
+    \label{eq:anti-holomorphic_virasoro_algebra}
+\end{equation}
+
+Furthermore, because the holomorphic and anti-holomorphic sectors are completely independent, their respective generators commute:
 \[
     [L_m, \bar{L}_n] = 0.
 \]
-Thus the conformal group in two dimensions is generated by two copies of the Virasoro algebra, one for the holomorphic part and one for the anti-holomorphic part, and these two algebras commute with each other. This rich algebraic structure is a key feature of two-dimensional conformal field theories and allows for a deep understanding of their properties and classification.
 
-The fields defined on the 2D worldsheet transforms under the action of the Virasoro algebra, and we can classify them according to their transformation properties. The first understanding of these transformations came from string theory, where the fields defined on the worldsheet of the string transform under the action of the Virasoro algebra, which is the algebra of the conformal transformations on the worldsheet.
+Thus, the full local conformal symmetry in two dimensions is dynamically governed by two independent, commuting copies of the Virasoro algebra. This rich and rigidly constrained algebraic structure is the cornerstone that makes two-dimensional conformal field theories exactly solvable in many cases.
 
-This is an example of a Lie Algebra, but it is an infinite-dimensional Lie algebra, which is a key feature of two-dimensional conformal field theories. Its internal product is given by the commutator of the modes \(L_n\), satisfying the Jacobi identity. From these, mathematicians started studying anc classifying the infinite-dimensional Lie algebras, and the Virasoro algebra is one of the most important examples in this classification.
+\subsubsection{The Full Conformal Algebra and the Classical Limit}
 
-Any state in the Hilbert space and any field in the algebra of local fields in CFT must be classified in irreducible representations of the Virasoro algebra, which are called \textbf{Virasoro representations}. We have a huge hilbert space and operator algebra, but we can classify all the states and fields in terms of the representations of the Virasoro algebra, which is a powerful tool for understanding the structure of two-dimensional conformal field theories. Since the algebra is infinite dimensional too, we can have a finite or infinite number of irreducible representations (infinite dimensional), and it should diide in direct sums of irreducible representations.
-
-The strategy wil be to use the representation theory of the Virasoro algebra to classify the fields and states in the theory, and then use this classification to compute correlation functions and other physical quantities. This is a key step in solving two-dimensional conformal field theories and understanding their properties.
-
-We can see that Witt algebra is the algebra of the modes of the stress energy tensor without the central extension, i.e., without the central charge term in the commutation relations. The Virasoro algebra is a central extension of the Witt algebra, which means that it includes an additional term proportional to the central charge \(c\) in the commutation relations. The Witt algebra is a subalgebra of the Virasoro algebra, and it corresponds to the case where the central charge \(c\) is zero. In two-dimensional conformal field theories, the central charge \(c\) plays a crucial role in determining the properties of the theory, and it can take on different values depending on the specific model being studied.
-
-The cenrak charge term, furthermore, disappears for \(m=-1,0,1\), so that if we restrict ourselves the Mobius transformations, which are generated by the modes \(L_{-1}, L_0, L_1\), we recover the Witt algebra without the central extension. This is consistent with the fact that the global conformal transformations in two dimensions form a finite-dimensional subgroup of the full infinite-dimensional conformal group, and this subgroup is generated by the modes \(L_{-1}, L_0, L_1\) of the Virasoro algebra (or Witt in this case).
-
-\subsection{Central Charge Interpretation}
-
-[... interpretations of the central charge, etc. ...]
-
-
-
-
-[...]
-
-notes
-
-    [...]
-
-\subsection{action of visaroro generators on primary fields}
-
-we start from ope, then we determine the action of the commutator with primary fields...
-
-remember that we have to be careful for when modulo z is greater than modulo w
-we apply the same procedure we did for tt and we obtain the result with cauchy formulae, and we find the action of the Virasoro generators on primary fields
-this is the explicit action of a mode Ln on a primary field, which is a key result in conformal field theory.
-
-    [...]
-
-
-\section{Radial Quantization and State-Operator Correspondence}
-
-\subsection{Transformation of the stress tensor under the cylinder map}
-
-Unlike a primary field, the stress tensor does not transform homogeneously under general conformal maps because of the central charge.
-
-Under a finite trasformation, the stress energy tensor transforms as...
-We can define the map from the plane to the cylinder as...
-If we map a coordinate \(z\) on the plane to a coordinate \(w\) on the cylinder, since the logarithm is a multi-valued function, we have to choose a branch cut (\(i\pi\)) and identifying with periodic boundary conditions the values on the two sides of the cut, we can define the map from the plane to the cylinder.
-tau and sigma identification and their domain...
-geometry infinite in time and finite in space (we call them in this way)
-the finite size of the space is given by the periodicity in sigma, which is controlled by the term \(\frac{L}{2\pi}\)
-
-[back to the transformation of the stress energy tensor under the cylinder map]
-
-the derivatives of the map are given by...
-we can now compute the schwarzian derivative of the map, which is given by...
-we have also the first derivative of w in the expression of the transformation of the stress energy tensor, which we just computed
-Therefore we can compute the transformation of the stress energy tensor under the cylinder map, which is given by... and its inverse is given by...
-This last equation tells us how the stress energy tensor transforms under the map from the plane to the cylinder. any field apart from the identity, transform with a zero one-point function \(\langle \varphi \rangle=0\): at the conformal point, where the field is close to criticality, the one-point function of any field other than the identity is zero. This is because the one-point function of a primary field with non-zero conformal weight must vanish due to conformal invariance. The only field that can have a non-zero one-point function is the identity operator, which has conformal weight zero and is invariant under all conformal transformations. \TODO{check}
-We are basically computing the one-point function of the stress energy tensor on the cylinder on the vacuum state... how can we have a vacuum expectation value different from zero? This is because the vacuum state on the cylinder is not the same as the vacuum state on the plane, due to the non-trivial topology of the cylinder. The vacuum state on the cylinder can be thought of as a thermal state with a finite temperature, and this leads to a non-zero expectation value for the stress energy tensor. The central charge \(c\) appears in this expectation value. A geometry which is finite in space has some non zero energy of the vacuum, which is a sort of generalized casimir energy, proportional to the central charge \(c\) of the theory.
-transformations to finite geometries, and the role of the central charge in these transformations, is a key aspect of conformal field theories and has important implications for the study of critical phenomena, specially when computing with a finite memory, and for the study of string theory, where the worldsheet is often taken to be a cylinder or a torus.
-
-\subsubsection{hamiltonian}
-
-trasnforming the generator of time translations on the cylinder, we can identify the hamiltonian of the theory on the cylinder, which is given by...
-we call it hamiltonian of the cylinder because this operators corresponds to the generators of translations in the tau direction on the cylinder, which is the time direction in this geometry. equal time commutators on the cylinder are given by the commutators on the same cilindric slice at the same tau
-the idea is to use all of this machinery to quantize the theory on the cylinder
-
-For yhe momentum we see that the displacement due to the central charge is zero, so the momentum operator is given by...
-this operator does translations in the sigma direction on the cylinder, which is the spatial direction in this geometry. its a translation on the same circonference.
-back to the plane, increasing tau means increasing the modulus of z, so that time evolution on the cylinder corresponds to radial evolution on the plane, and the circonferences in the cylinder becomes concentric on the plane
-time translations on the cylinder correspond to dilatations on the plane, and space translations on the cylinder correspond to rotations on the plane. This is a key aspect of the relationship between the geometry of the cylinder and the geometry of the plane in two-dimensional conformal field theories, and it allows us to understand how the symmetries of the theory manifest in different geometries. The identification of the Hamiltonian and momentum operators on the cylinder is crucial for quantizing the theory and understanding its dynamics in this geometry.
-the eigenvalues of energy and momentum on the cylinder becomes the scaling dimensions \(\Delta\) and the spin \(s\) of the fields on the plane, which are key quantities in conformal field theory. This relationship between the geometry of the cylinder and the geometry of the plane is a fundamental aspect of two-dimensional conformal field theories and allows us to understand how the symmetries of the theory manifest in different geometries. The central charge \(c\) also plays a role in determining the spectrum of energy and momentum on the cylinder, and it can lead to interesting phenomena such as the presence of a non-zero vacuum energy, which is related to the Casimir effect in this geometry.
-
-We now want to quantize conformal field theory
-
-    [time ordering to radial odering, etc.]
-commutator with eta, both fermions or at least one boson
-why should we use radial quantization? it is only a consequence of the choice to time order on the plane.
-since quantizing we have to mantain causality, in cft we have to mantain the radial ordering, which is the natural ordering on the plane, and this leads us to the choice of radial quantization. the distance from the origin of different points on the plane corresponds to different times in the radial quantization, and the conformal transformations preserve the radial ordering, which is crucial for maintaining causality in the theory.
-
-we define a vacuum ...
-we can define a state by applying a field at (0,0) in the complex z plane to the vacuum state, which gives us a state in the Hilbert space of the theory.
-the conformal transformation goes from the cylinder to the riemann sphere. the point z equal infinte is a point on the rieman spherem so that we are preserving locality on the rieman sphere, which is a key aspect of conformal field theories. This requirement of locality on the Riemann sphere ensures that the correlation functions of the theory are well-defined and that the theory is consistent with the principles of quantum field theory.
-This is the state-operator corrspondence, which is a fundamental aspect of two-dimensional conformal field theories. It allows us to relate the fields in the theory to states in the Hilbert space, and it provides a powerful tool for understanding the structure of the theory and computing correlation functions. it can be possessed by non conformal theories as well, but it is not guaranteed to hold in general, while in conformal field theories it is a key feature that allows us to classify the states and fields in terms of the representations of the Virasoro algebra and to compute correlation functions using the OPE and the Ward identities.
-because of the plane cylinder map, the operator creating the state is local, and the state created by this operator is a local state on the Riemann sphere, which is a key aspect of conformal field theories. This locality property ensures that the correlation functions of the theory are well-defined and that the theory is consistent with the principles of quantum field theory. The state-operator correspondence allows us to relate the fields in the theory to states in the Hilbert space, and it provides a powerful tool for understanding the structure of the theory and computing correlation functions.
-we can use irreps of virasoro to classify the states and fields in the theory
+In other words, the complete local conformal algebra in two dimensions is given by the direct product of the holomorphic and anti-holomorphic sectors:
 \[
-    \Phi(0,0) \ket{0} = \ket{\Phi} = \lim_{z,\bar{z} \to 0} \Phi(z,\bar{z}) \ket{0}.
+    \Gamma = \text{Vir}_c \otimes \overline{\text{Vir}}_c
 \]
+where \(\text{Vir}_c\) denotes the Virasoro algebra with central charge \(c\), explicitly written as:
+\begin{equation}
+    \begin{aligned}
+        [L_n, L_m]             & = (n-m)L_{n+m} + \frac{c}{12}n(n^2-1)\delta_{n,-m},       \\
+        [L_n, \bar{L}_m]       & = 0,                                                      \\
+        [\bar{L}_n, \bar{L}_m] & = (n-m)\bar{L}_{n+m} + \frac{c}{12}n(n^2-1)\delta_{n,-m}.
+    \end{aligned}
+    \label{eq:full_virasoro_algebra}
+\end{equation}
+Consequently, the physical conformal fields of the theory must lie in irreducible representations of this full algebra \(\Gamma\).
 
-the inversion transformation on the plane corresponds to a specific conformal transformation that maps the point at infinity to the origin and vice versa. inversion is a mobius transformation.
-we can trasnform the field from zero to this new w and if we take the limit of w going to zero, we are defining a local field in w acting on a new vacuum, and this is the out field (tau going to + infinity instead of tau going to - infinity), which is the state created by the field at infinity.
-when we do this transformation from w to z we get this two terms z to the something, and we have defined the bra state as the limit of the field at infinity acting on the vacuum. So we have the two states at 0 and infinity on the plane (on the cylinder is tau going to minus infinity and tau going to plus infinity), which are the in and out states of the theory, and they are related by the inversion transformation on the plane.
-
-\subsubsection{inner product}
-
-The state-operator correspondence implies a direct relation between inner products in the Hilbert space and two-point functions on the plane...
-the definition of the inner product is exactly the 2 point function of the fields corresponding to the states.
-we have computed already an expression for the two-point function of primary fields, which we can now use
-on the denominator we can just write \(\Phi\) since we have the deltas at the numerator: if the two fields have different conformal weights, the inner product is zero, while if they have the same conformal weights (they are basically the same or in the same multiplet), the inner product is given by the constant \(C\) in the two-point function.
-the two point funxtion cancels out thetwo z terms in the definition of the inner product, and we are left with the constant \(C\), which is the normalization of the two-point function.
-states created by different operators (with differents conformal weughts) are orthogonal (we are starting to have a notion which helps us in dividing the Hilbert space in different sectors).
-
-If we apply the generators of dilations and rotations to a state...
-...
-we can use the commutator of the modes \(L_0\) with the field \(\Phi\) to find the action of \(L_0\) on the state \(\ket{\Phi}\):
+It is particularly illuminating to consider the limit where the central charge vanishes. If we set \(c = 0\), the Virasoro algebra rigorously reduces to:
 \[
-    \lim_{w, \bar{w} \to 0} (L_0 \Phi + \Phi L_0) \ket{0} = \lim_{w, \bar{w} \to 0} L_0 \Phi \ket{0} = h \ket{\Phi},
+    [L_m, L_n] = (m-n)L_{m+n},
 \]
-\(L_i\) when \(i=-1,0,1\) applied to the vacuum state gives us zero, since the vacuum state is invariant under the global conformal transformations....
-Thus the scaling dimension becomes the energy in radial quantization, while the spin becomes the angular momentum.
+which is precisely the \textbf{Witt algebra}, namely the classical Lie algebra of holomorphic vector fields defined on the circle.
+Therefore, mathematically, the Virasoro algebra represents the unique non-trivial central extension of the Witt algebra. Physically, the central term proportional to \(c\) is a purely quantum effect, arising directly from the short-distance singularities in the operator product expansion.
 
-    [commutator to know how the modes act on the states, then we can compute the action of dilatations and rotations on the states, then we go on with action of virasoro on fields]
+This profound observation perfectly clarifies the relation between the classical discussion of conformal symmetry and its quantum counterpart:
+\begin{itemize}
+    \item \textbf{Classically}, the infinitesimal conformal transformations strictly form the Witt algebra without any anomalous extension;
+    \item \textbf{Quantum mechanically}, the presence of the conformal anomaly forces the physical generators to satisfy the Virasoro algebra.
+\end{itemize}
 
-Ln with n positive applied to the vacuum is zero (the same on the bra since 1 to -1 and viceversa and 0 remains 0)
-since we asked T(z) to be finite at zero and infinity, then the modes \(L_n\) with \(n \geq -1\) must annihilate the vacuum state, which means that the vacuum state is a highest weight state of the Virasoro algebra.
+Historically, the profound understanding of these transformations originated in the context of string theory, where the fields defined on the two-dimensional worldsheet of the string transform precisely under the action of the Virasoro algebra. Mathematically, this constitutes a quintessential example of an infinite-dimensional Lie algebra. Its internal product is given by the mode commutator \([L_m, L_n]\), which strictly satisfies the Jacobi identity. The emergence of this algebraic structure not only revolutionized theoretical physics but also sparked an intense, dedicated mathematical effort to study and classify infinite-dimensional Lie algebras.
 
-Thus if we apply the modes \(L_n\) with \(n \geq -1\) to the field \(\Phi\), again with the commutator, and putting the limit for w, wbar to 0 and we apply to the vacuum, we cancel the term with the mode on the right since it gives us zero, and we are left with the term with the mode on the left, which action on the state we can infer by computing the commutator
+The overarching strategy to completely solve a two-dimensional Conformal Field Theory relies entirely on this algebraic framework. Despite the immense size of the Hilbert space and the local operator algebra, every physical state and field must fall into specific irreducible representations of the Virasoro algebra. Consequently, the full Hilbert space rigidly decomposes into a direct sum of these infinite-dimensional representations. By exploiting this representation theory, we can systematically classify the operator content of the theory and analytically compute correlation functions, which is the fundamental mechanism making two-dimensional conformal models exactly solvable.
+
+\subsubsection{The Global Conformal Subalgebra}
+
+An important finite-dimensional subalgebra of the full Virasoro algebra is generated by the following three modes:
 \[
-    \lim (L_n \Phi - \Phi L_n) \ket{0} = \lim L_n \Phi \ket{0} = L_n \ket{\Phi} = \lim w^{n+1} \ket{\partial \Phi} + h (n+1) w^n \ket{\Phi} = 0
+    L_{-1}, \quad L_0, \quad L_1.
 \]
-when we compute the limit
+It is crucial to notice that the central extension term, \(\frac{c}{12}m(m^2-1)\delta_{m+n,0}\), strictly vanishes for \(m, n \in \{-1, 0, 1\}\). Because \(m^3 - m = 0\) on this specific subspace, the central anomaly disappears entirely. Consequently, if we restrict our algebra to these generators, the commutation relations close without any central charge contribution:
+\begin{equation}
+    [L_0, L_{-1}] = L_{-1} \;, \quad [L_0, L_1] = -L_1 \;, \quad [L_1, L_{-1}] = 2L_0.
+    \label{eq:global_conformal_algebra}
+\end{equation}
 
-    [highest weight state, primary fields, etc.]
+These three specific modes are precisely the generators of the \textbf{global conformal group} (the Möbius transformations). Algebraically, they form the Lie algebra \(\mathfrak{sl}(2, \mathbb{C})\) in the holomorphic sector, which is exactly what we expect from the global conformal transformations defined on the Riemann sphere.
 
-For n negative instead, applied to the heighest weight state, they give us a new state, which in su2 lead to a lower energy state, but here we have an infinite number of states with lower and lower energy, which are called descendant states.
+This elegantly confirms a fundamental physical property: \uline{the central extension affects only the genuinely local, infinite-dimensional part of the conformal symmetry}. While the local conformal symmetry inevitably acquires a quantum anomaly, \textit{the global conformal symmetry remains perfectly unbroken in the quantum theory}.
 
-we can start from \([L_0,\,L_{-n}] = nL_{-n}\) (\(n>0\)) and apply it (the commutator) to a state \(\ket{\Phi}\) to find the energy of the descendant states...
-the state \(L_{-n}\ket{\Phi}\) is n units of energy (eigenvalue of \(L_0\), its the enrgy only on the cylinder) higher than the state \(\ket{\Phi}\), so that the descendant states have higher energy than the primary state.
+\subsection{Interpretation of the Central Charge}
 
-we can also imagine to have multiple applications of the modes \(L_{-n}\) to the primary state, which gives us a tower of descendant states with increasing energy. from the primary state, we can generate an infinite tower of descendant states by applying the modes \(L_{-n}\) with \(n>0\), and this is a key feature of the representation theory of the Virasoro algebra. The primary state is the highest weight state of the representation (lowest energy), and the descendant states are generated by applying the lowering operators \(L_{-n}\) to the primary state. This structure of primary and descendant states is fundamental for understanding the spectrum of states in two-dimensional conformal field theories and for computing correlation functions using the OPE and the Ward identities.
+The central charge \(c\) is arguably the most important macroscopic parameter of a two-dimensional conformal field theory. As we established, while the classical algebra of infinitesimal conformal transformations is the Witt algebra, the quantum mechanical framework modifies this algebra by introducing a central extension. This quantum modification mathematically originates from the singular fourth-order pole in the \(TT\) Operator Product Expansion. The coefficient \(c\) precisely measures the size of this quantum anomaly.
 
-\(L_{-1} \Phi\) to h+1
-\(L_{-2} \Phi\) or \(L_{-1}^2 \ket{\Phi}\) to h+2
-\(L_{-3} \Phi\) or \(L_{-1}^3 \ket{\Phi}\) or \(L_{-1} L_{-2} \ket{\Phi}\) to h+3 (not \(L_{-1}L_{-2}\ket{\Phi}\), since from virasoro algebra we have \([L_{-1}, L_{-2}] = -L_{-3}\), so that \(L_{-1} L_{-2} \ket{\Phi}\) is not linearly independent from the other states, we have an order to decide and mantain),
+It is extremely useful to emphasize the following fundamental points regarding \(c\):
+\begin{itemize}
+    \item \(c\) is a dynamical parameter and is not uniquely fixed by conformal symmetry alone.
+    \item Different physical theories generally correspond to distinct values of \(c\).
+    \item \(c\) actively counts, in a broad sense, the \textit{number of effective degrees of freedom of the theory}. We can plainly see this additive property from our earlier concrete examples:
+          \begin{itemize}
+              \item a single free real scalar boson has \(c = 1\),
+              \item a single free Majorana fermion has \(c = 1/2\).
+          \end{itemize}
+\end{itemize}
 
-and so on, so that the first level was a one dimensional space, the second level is a two dimensional space (we can use linear combinations to build the same eigenvalue), and so on, so that we have an infinite tower of descendant states with increasing energy.
-Until 3 it seems that the dimensionality of the space of descendant states is equal to the number of partitions of the level, but from 4 it seems that this is not the case anymore, since for 4 it is already 5. It is the same problem of trying to find the integer smaller than mine that summed up makes my number (euler solved it, partitions of a number) and also taking only the linearly indipendent one
-the formula for the number of partitions of a number \(p(N)\) is given by the following equation
+This intuitive statement (that the central charge counts the effective degrees of freedom) can be made mathematically rigorous with advanced methods that go beyond the immediate scope of these lectures (most notably through Zamolodchikov's famous \(c\)-theorem, which proves that a generalized function \(c\) strictly decreases along Renormalization Group flows, formalizing the physical loss of high-energy degrees of freedom as a system cools down).
+
+Ultimately, the physical significance of the central charge is multifold and pervasive across the whole theory:
+\begin{itemize}
+    \item It formally measures the \textbf{conformal anomaly} (the quantum breaking of classical scale invariance when placing the theory on a curved background).
+    \item It actively appears in the finite-size geometric dependence of the vacuum energy on the cylinder (generating the \textbf{Casimir effect}).
+    \item It universally controls the asymptotic growth of the density of states at extremely high energies through \textbf{Cardy's formula}, effectively determining the high-energy thermodynamic entropy of the system.
+    \item It plays a central, rigid role in the exact classification of the so-called \textbf{minimal models} (rational CFTs with a finite number of primary fields).
+\end{itemize}
+
+Thus, the precise numerical value of \(c\) is not merely an algebraic curiosity, but a quantity that encapsulates the deepest dynamical and thermodynamic information about the physical theory.
+
+\subsection{Action of Virasoro Generators on Primary Fields}
+
+We now want to determine the explicit action of the Virasoro generators on a local primary field. To do this, we must compute the commutator \([L_n, \Phi(w, \bar{w})]\). In the framework of radial quantization, we must be incredibly careful with the ordering of operators: the commutator translates geometrically into the difference of two contour integrals over \(z\), one where \(|z| > |w|\) and one where \(|z| < |w|\). Applying the exact same contour deformation procedure we used for the \(TT\) commutator, this difference collapses into a single contour integral over \(z\) tightly wrapping the insertion point \(w\):
 \[
-    \Phi(q) = \sum_{N=0}^{\infty} p(N) q^N = \prod_{n=1}^{\infty} \frac{1}{1-q^n},
+    [L_n, \Phi(w, \bar{w})] = \oint_w \frac{\mathrm{d}z}{2\pi i} z^{n+1} T(z)\Phi(w, \bar{w}).
 \]
-and we can show that if we take the first twenty terms of the expansion of the product on the right, we find the number of partitions of the first twenty numbers, which is given by the coefficients of the expansion, which miracolously are non negative integers. euler proved it and we can use this to find the number of descendant states at each level, which is given by the number of partitions of the level.
-
-Obviously, if we apply the generators with positive n to the descendant states, we can go back to the primary state, since they are raising operators, and we can also go to other descendant states with lower energy, since they are also lowering operators.
-
-We started from states generated by the application of a primary field to the vacuum, which are called primary states, and we have generated an infinite tower of descendant states by applying the modes \(L_{-n}\) with \(n>0\) to the primary state. This descendants are then the states generated by secondary fields, which are the fields obtained by applying the modes \(L_{-n}\) to the primary field.
-
-each tower is a representation of a virasoro algebra (hopefully irreducible, but we will see), then we have all we need to describe each state and field in the theory in terms of the representations of the Virasoro algebra. the towers are called Verma modules, and they are the building blocks of the representation theory of the Virasoro algebra. a verma module \(\mathcal{V}_{c,h}\) is composed by the direct sum of the finite dimensional subspaces of descendant states at each level
+We can now evaluate this integral by starting from the defining Operator Product Expansion of the stress-energy tensor with a primary field:
 \[
-    \mathcal{V}_{c,h} = \bigoplus_{N=0}^{\infty} \mathcal{V}_{c,h}^{(N)},
+    T(z)\Phi(w, \bar{w}) \sim \frac{h\Phi(w, \bar{w})}{(z-w)^2} + \frac{\partial_w \Phi(w, \bar{w})}{z-w}.
 \]
-where \(\mathcal{V}_{c,h}^{(N)}\) is the finite dimensional subspace of descendant states at level \(N\), which has dimension equal to the number of partitions of \(N\). The Verma module is labeled by the central charge \(c\) and the conformal weight \(h\) of the primary state, and it encodes the structure of the representation of the Virasoro algebra generated by the primary state and its descendants. The Verma modules are a key tool for understanding the representation theory of the Virasoro algebra and for classifying the fields and states in two-dimensional conformal field theories.
+Inserting the singular part of this OPE directly into our contour integral, we obtain:
+\[
+    [L_n, \Phi(w, \bar{w})] = \oint_w \frac{\mathrm{d}z}{2\pi i} z^{n+1} \left[ \frac{h\Phi(w, \bar{w})}{(z-w)^2} + \frac{\partial_w \Phi(w, \bar{w})}{z-w} \right].
+\]
+By applying Cauchy's integral formula and its first derivative formula to the analytic function \(f(z) = z^{n+1}\) evaluated at the pole \(z = w\), we can easily extract the residues for both terms:
+\begin{equation}
+    [L_n, \Phi(w, \bar{w})] = (w^{n+1}\partial_w + h(n+1)w^n)\Phi(w, \bar{w}).
+    \label{eq:virasoro_primary_action}
+\end{equation}
+This formula is extremely important and represents a key result in two-dimensional conformal field theory. It shows explicitly how the infinite set of local Virasoro generators act dynamically on primary fields as differential operators.
+
+Furthermore, we can observe the consistency of this result with the global subgroup. If we restrict this action to the modes \(n = -1, 0, 1\), the differential operators accurately reproduce the classical action of the globally defined transformations. Specifically, \(L_{-1}\) generates spatial translations (\(\partial_w\)), \(L_0\) generates dilatations and rotations (\(w\partial_w + h\)), and \(L_1\) generates special conformal transformations (\(w^2\partial_w + 2hw\)).
