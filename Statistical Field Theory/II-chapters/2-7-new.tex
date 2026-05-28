@@ -117,7 +117,7 @@ With \(m=2\) we have only one unitary theory, which has only the vacuum state an
 
 For example we have the Ising model with a distribution of vacancies (in some sites on the lattice we have a vacancy, which means that there is no spin in that site), which has an interesting phase diagram, and it has a tri-critical point.
 
-Let us consider the case \(m=3\), we can compute a table of values for \(r\) and \(s\) at \(c = \frac{1}{2}\)
+Let us consider the case \(m=3\), we can compute a table of values for \(h_{rs}\) depending on \(r\) and \(s\), the values they can assume at \(c = \frac{1}{2}\)
 \[
     [\dots]
 \]
@@ -126,3 +126,177 @@ and we get only 3 values of \(h\), which correspond to the three primary fields 
 We should imagine to have this Kaz table (left table) multiplied by another identical Kaz table for the anti-holomorphic sector (right table), which gives us the full spectrum of the theory, which is given by the tensor product of the holomorphic and anti-holomorphic sectors. Thus, for each value of \(c\) we have a discrete set of values of \(h\) and \(\bar{h}\) for which the determinant is zero, which gives us the unitarity constraints on the theory. And once we get \(h\) and \(\bar{h}\) we can compute the conformal dimension \(\Delta = h + \bar{h}\) and the spin \(s = h - \bar{h}\) of the primary fields, which gives us the full spectrum of the theory. Looking at the universality classes given by these tables, we strongly suspect that this is the Ising model (as well as the free-majorana fermion theory, which is equivalent to the Ising model).
 
 we can have a bosonic description of the Ising model, which is given by a \(\phi^4\) lagrangian, as well as the fermionic description, which is given by a free Majorana fermion lagrangian. These two descriptions are equivalent and dual.
+
+
+    [...]
+
+\[
+    \mathcal{H}_c = \bigoplus_{h_{rs}, \bar{h}_{\bar{r}\bar{s}}} N_{rs}^{\bar{r}\bar{s}} \mathrm{Vir}_c(h_{rs}) \otimes \bar{\mathrm{Vir}}_{c}(\bar{h}_{\bar{r}\bar{s}}).
+\]
+
+[...]
+
+
+If we take from the two tables values of \(h_{rs}\) and \(\bar{h}_{\bar{r}\bar{s}}\), we can build some fields with some properties:
+\[
+    \Phi_{00} = \mathbb{I},
+\]
+\[
+    \Phi_{0 \frac{1}{2}} = \bar{\Psi}, \quad \Phi_{\frac{1}{2} 0} = \Psi,
+\]
+which are the two chiral components of the Majorana fermion field, which has conformal dimension \(1/2\) and spin \(1/2\),
+\[
+    \Phi_{\frac{1}{16} \frac{1}{16}} = \sigma,
+\]
+which Onsager shown when solving the Ising model that the magnetiation is a field with scaling dimension \(1/8\),
+\[
+    \Phi_{\frac{1}{2} \frac{1}{2}} = \epsilon,
+\]
+which gives the scaling dimension of the energy density operator.
+
+Fields which results in having fractional spins (different from integers or half integers) are non local (sum cut in the domain of definition of the field), and they can be useful to derive some additional informations about the theory, but we will not discuss them here.
+
+minimal models are labelled by the kaz table, which gives us the values of \(h_{rs}\) and \(\bar{h}_{\bar{r}\bar{s}}\) for each fixed value of \(c\), which gives us the unitarity constraints on the theory. Every model with central charge comprised between \(0\) and \(1\) is a minimal model if it is unitary. Others in this range are non unitary theories, which can be interesting to study, but we will not discuss them here. For \(c>1\) we have an infinite number of theories, which can be classified only with additional symmetries, and they are not minimal models.
+
+\subsection{fusion rules}
+
+\[
+    \phi_i (z, \bar{z}) \phi_j (0, 0) \sim \sum_k C_{ij}^k z^{h_k - h_i - h_j} \bar{z}^{\bar{h}_k - \bar{h}_i - \bar{h}_j} \times \left[ \phi_k(0, 0) + \sum_{N, \bar{N}}z^N \bar{z}^{\bar{N}} \times \text{descendants}\right],
+\]
+where the sum is over all the primary fields of the theory, and the coefficients \(C_{ij}^k\) are called the structure constants of the theory.
+
+    [...]
+
+Instead of writing all the OPE coefficients we can write an expression for how many times a primary field appears in the OPE of two other primary fields, which is given by the fusion rules:
+\[
+    \phi_i \times \phi_j = \sum_k N_{ij}^k \phi_k,
+\]
+where \(N_{ij}^k\) is the number of times the primary field \(\phi_k\) appears in the OPE of \(\phi_i\) and \(\phi_j\). The fusion rules are a way to encode the information about the OPE coefficients in a more compact way.
+
+This is to obtain the representations of the virasoro algebra, it is a way to summarize the relations between the primary fields of the theory, and it is a way to classify the representations of the Virasoro algebra. The fusion rules can be computed using the conformal symmetry and the structure of the Verma modules, which allows us to find exact results for the fusion rules in minimal models and other CFTs.
+
+when computing correlation functions, we can use this generalized OPE to write the correlation function as a sum over the contributions of the primary fields and their descendants, which allows us to find constraints on the structure constants \(C_{ij}^k\) which are called the \textbf{conformal bootstraps}. In minimal models we obtain a closed set of equations for the structure constants, which can be solved exactly, giving us the exact values of the structure constants in these theories. In more general CFTs, we can use numerical methods to solve the conformal bootstrap equations, which allows us to find approximate values for the structure constants and to constrain the space of possible CFTs.
+
+A closed formula for the most general structure constants in minimal models has been found by Dotsenko and Fateev, which is given by a complicated expression involving gamma functions and the parameters \(m\), \(r\), and \(s\) that label the primary fields in the Kaz table. This formula allows us to compute the structure constants for any minimal model, which gives us a complete solution of these theories.
+
+If we want to compute the fusion rules for the model for which we derived the fields before, we have
+\[
+    \mathbb{I} \times \Phi = \Phi,
+\]
+\[
+    \epsilon \times \epsilon = \mathbb{I},
+\]
+where we have the whole family of the identity operator (with all the descendants),
+\[
+    \sigma \times \sigma = \mathbb{I} + \epsilon,
+\]
+\[
+    \sigma \times \epsilon = \sigma,
+\]
+which all comes from the fact that the fusion rules are associative and commutative, and that the identity operator is the identity element of the fusion algebra. we can also use the fusion rules to find
+\[
+    \Psi \times \Psi = \epsilon,
+\]
+\[
+    \bar{\Psi} \times \bar{\Psi} = \epsilon,
+\]
+\[
+    \Psi \times \bar{\Psi} = \mathbb{I},
+\]
+all results coming from the fusion rules.
+
+we can define a new field
+\[
+    \Psi \times \sigma = \mu,
+\]
+which is the dual field: in the ising model we have dual descriptions in high and low temperature, and the field \(\sigma\) is the order parameter, while the field \(\mu\) is the dual to the order parameter. Both fields are local but not mutually, since their OPE contains a branch cut, which means that they are non local with respect to each other.
+
+The fact that we have this duality in the description of the Ising model is a consequence of the fact that there is a further symmetry in the theory, which is the Kramers-Wannier duality, which relates the high temperature phase to the low temperature phase of the Ising model. At criticality the theory is self-dual, which means that the order parameter and the dual order parameter have the same scaling dimension, which is \(1/8\) in this case. This is a consequence of the fact that the theory has a \(\mathbb{Z}_2\) symmetry, which is the symmetry that flips the spins in the Ising model, and this symmetry is responsible for the duality between the order parameter and the dual order parameter. \TODO{check}
+
+With \(c=\frac{1}{2}\) we are describing both the ising model and the free Majorana fermion theory, which are equivalent. They have the same spectrum of primary fields and the same fusion rules, which means that they are the same theory, just described in two different ways.
+
+The two dual description from the wannier duality have each a subset of of fields which respect to tey are local, while they are non local with respect to the other description.
+
+
+
+\subsection{M3 OPE and composit fields slides}
+
+ope of sigma, magntization, we have a first structure constant we can dispose of (by renormalizing sigma), but the others not. the first term goes to \(x^2\) since \(L_{-1}\) applied to the vacuum gives zero so the \(x\) term is absent. the first line is sigma sigma going to identity, the second line is sigma sigma going to epsilon...
+
+we want spin zero so we have to apply the same operators in both sectors, and we have to apply the same number of operators in both sectors...
+
+sigma epsilon...
+
+we are using the fusion rules to find the structure constants, and we are using the conformal symmetry to find the form of the correlation functions, which allows us to find constraints on the structure constants, which are called the conformal bootstrap equations. In minimal models we can solve these equations exactly, which gives us the exact values of the structure constants in these theories.
+
+the negative powers are some sort of singularities, which are really bad since it is fractional: when computing correlation functions we have to be careful about these singularities, since they can lead to non local behavior of the fields and to the presence of branch cuts in the correlation functions, which means that the fields are non local with respect to each other.
+
+the contraction part of these OPE are the singular part, which is the part that contains the negative powers of \(x\), while the regular part is the part that contains the non negative powers of \(x\). we can define the normal ordered square as our OPE with the singular part removed, which gives us a well defined composite field, but still with a fractional scaling dimension, so we multiply by the appropriate power of \(x\) to make it better.
+
+we can then compute sigma cube normal ordered in the same way, which gives us terms in sigma times epsilon, which we already computed, in the end we found that the dalambertian of sigma is propostional to sigma cube normal ordered, which is a non linear equation of motion for the field sigma: this is the euler lagrange equation, so that we can write a lagrangian for the field sigma, which is given by a \(\phi^4\) lagrangian, which is the lagrangian of the Landau-Ginzburg model, which is a bosonic description of the Ising model. This is the Ising universality class.
+
+Why does only appear this field with a power of four? where are the other fields? the reason is that at criticality their coefficients are zero, which means that they do not appear in the OPE at criticality, but they can appear away from criticality, which means that they can be relevant perturbations of the theory.
+
+The action of the model will be given by the action exactely at criticality plus some perturbations, which are given by the relevant fields of the theory. PCFT, perturbed conformal field theory, is the study of the theory away from criticality, which is given by the action at criticality plus some perturbations given by the relevant fields of the theory. The relevant fields are the fields with scaling dimension less than 2 (since they have to be less than the spacetime dimensions), which means that they are relevant perturbations of the theory, which can drive the theory away from criticality and can lead to interesting phenomena such as phase transitions and crossovers between different universality classes. Furthermore this fields are the one with the same \(h\) and \(\bar{h}\), since they have to be local, which means that they have to be local with respect to all the other fields in the theory, which means that they have to have integer spin. \TODO{check}
+
+In the ising lagrangian we found the sigma cube term is eated by the equation of motion: the dalambertian is appearing instead.
+
+at m equal 4 we will have sigma to the sixth, m equal five has sigma to the eith and so on on even powers.
+
+the fields in the first two diagonal of the kaz table are the relevant fields, which means that they are the fields with scaling dimension less than 2 (equally h less the 1) and they are the fields that can appear as perturbations of the theory, which can drive the theory away from criticality and can lead to interesting phenomena such as phase transitions and crossovers between different universality classes.
+
+All the universality classes of critical phenomena in two dimensions are described by minimal models, which are the unitary CFTs with central charge less than 1, and they are classified by the values of \(m\) and the corresponding values of \(h_{r,s}(c)\) for which the determinant is zero, which gives us the unitarity constraints on the theory. Each minimal model corresponds to a different universality class of critical phenomena in two dimensions, and the primary fields of the theory correspond to the order parameters and other relevant fields of the universality class, which can be used to describe the critical behavior of the system. The fusion rules and the structure constants of the theory can be used to compute correlation functions and to find exact results for the critical exponents and other critical properties of the system.
+
+\subsection{Conformal bootstrap}
+
+Once we have all the OPE we need, we can compute
+\[
+    \langle \sigma(z, \bar{z}) \sigma(0, 0) \rangle = \frac{1}{|z|^{1/4}}
+\]
+where modulo z is the module of the vector \((z, \bar{z})\),
+
+the perturbations here are around the conformal point, which is already an interacting theory, but can be computed exactly and then we can use perturbation theory to compute the corrections to the critical exponents and other critical properties of the system near the conformal point, which can be used to describe the critical behavior of the system near the critical point.
+
+\[
+    \langle \epsilon(z, \bar{z}) \epsilon(0, 0) \rangle = \frac{1}{|z|^{2}}
+\]
+
+we can compute three point functions (here z is vector)\TODO{correct exponents}
+\[
+    \langle \sigma(z_1) \sigma(z_2) \epsilon(z_3) \rangle = \frac{C_{\sigma \sigma \epsilon}}{|z_{12}|^{1/4} |z_{13}|^{1/2} |z_{23}|^{1/2}},
+\]
+where \(C_{\sigma \sigma \epsilon}\) is the structure constant of the theory, which can be computed using the conformal bootstrap equations.
+
+For the four point function we have
+\[
+    \langle \sigma(z_1) \sigma(z_2) \sigma(z_3) \sigma(z_4) \rangle = \frac{1}{|z_{12}|^{1/4} |z_{34}|^{1/4}} \mathcal{F}(x, \bar{x}),
+\]
+we can define
+\[
+    x = \frac{z_{12} z_{34}}{z_{13} z_{24}}, \quad \bar{x} = \frac{\bar{z}_{12} \bar{z}_{34}}{\bar{z}_{13} \bar{z}_{24}},
+\]
+which is invariant under conformal transformations, and it is called the cross ratio. The four point funciton must rescale as the fields times an invariant function of the cross ratio, which is called the conformal block. The conformal block can be computed using the OPE and the fusion rules, which allows us to find exact results for the four point function in minimal models and other CFTs.
+
+... The complication is that we have null vectors, ...?
+
+... mapping sigmas in different points and we find this invariant function of the cross ratio, we map the points with a mobius transformation and it becomes a four point function with three fixed points 0, 1 and infinity and the variable of the cross ratio.
+
+... applying \(L_{-2} + \alpha L_{-1}^2\) ...
+\[
+    \mathcal{F} = \langle \sigma(\infty) \sigma(1) \sigma(x) \sigma(0) \rangle,
+\]
+\[
+    = \langle (T(z) + \alpha \partial^2) \sigma(\infty) \sigma(1) \sigma(x) \sigma(0) \rangle,
+\]
+becomes the ward identity???
+\[
+    = \mathcal{D} \langle \sigma(\infty) \sigma(1) \sigma(x) \sigma(0) \rangle + \alpha \partial^2 \langle \sigma(\infty) \sigma(1) \sigma(x) \sigma(0) \rangle,
+\]
+\[
+    = \mathcal{D}^{\prime} \langle \sigma(\infty) \sigma(1) \sigma(x) \sigma(0) \rangle,
+\]
+where \(\mathcal{D}\) and \(\mathcal{D}^{\prime}\) are some differential operators in \(x\) and \(\bar{x}\) (factorized) which is equal to zero since we have a null vector, which gives us a differential equation for the conformal block \(\mathcal{F}\), and there is a known solution by riemann for hypergeometric functions.
+
+writing the solution we have found the four point function. Furthermore we can compute structure constants within this function by expanding the four point function in the limit \(x \to 0\) and comparing it with the OPE expansion...???
+
+...

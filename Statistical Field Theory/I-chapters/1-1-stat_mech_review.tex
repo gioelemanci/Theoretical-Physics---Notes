@@ -50,18 +50,20 @@ Let us analyze this postulate in more detail through an exemplification.
     \]
     which is very complicated in general, since we have to solve the equations of motion for the system in order to find the trajectories of the particles in the phase space. However, we can use the postulate of equal a priori probabilities to compute the average particle velocity without solving the equations of motion.
 
-    The function \(\overline{v}_x(\{q_j\},\,\{p_j\})\) is defined on the phase space of the system, and it assigns a value to each microstate of the system. Given the knowledge on some initial microstate, the system will evolve along a curve in the fixed energy shell defined by \(E\):
+    The function \(\overline{v}_x(\{q_j\},\,\{p_j\})\) is defined on the phase space of the system, and it assigns a value to each microstate of the system. Given the knowledge on some initial microstate, the system will evolve along a curve in the fixed energy shell defined by \(E\):\TODO{add a picture of phase space with submanifold and curve}
     \[
         \mathbf{R}(t) = \{q_j(t),\, p_j(t)\}, \quad \overline{v}_x(t) = \overline{v}_x(\mathbf{R}(t)).
     \]
     We can now assume the system to be at the equilibrium, thus we can take the time average of the function \(\overline{v}_x(t) \sim \overline{v}_x\) over a long time interval \(T\) as
-    \[
+    \begin{equation}
         \overline{v}_x = \frac{1}{T} \int_0^T \mathrm{d}t \, \overline{v}_x(\mathbf{R}(t)).
-    \]
+        \label{eq:equilibrium_time_average}
+    \end{equation}
     Now we can use the postulate of equal a priori probabilities to replace the time average with an average over the energy shell defined by \(E\):
-    \[
+    \begin{equation}
         \overline{v}_x = \frac{1}{| \mathcal{M}_E |} \int_{\mathcal{M}_E} \mathrm{d} \mathcal{M} \, \overline{v}_x(\{q_j\},\,\{p_j\}),
-    \]
+        \label{eq:equilibrium_ensemble_average}
+    \end{equation}
     where we are using the previous definition of the energy shell \(\mathcal{M}_E\) and \(|\mathcal{M}_E|\) is the volume of the energy shell in the phase space
     \[
         | \mathcal{M}_E | = \int_{\mathcal{M}_E} \mathrm{d} \mathcal{M}.
@@ -86,14 +88,17 @@ Let us now analyze the postulate of equal a priori probabilities in more detail.
 \end{itemize}
 
 With the above discussion at hand, it is useful to define the concept of \textbf{typical behaviour}. Given a function defined on the phase space (an observable) \(f(\{q_j, p_j\})\) associated with some macroscopic quantity, we can define a \textbf{typical point} \(\mathbf{R} = \{q_j,p_j\}\) as the point in which the function \(f\) takes a value that is close to the average value of the function over the energy shell defined by \(E\):
-\[
+\begin{equation}
     f(\mathbf{R}) = \frac{1}{|\mathcal{M}_E|} \int_{\mathcal{M}_E} \mathrm{d} \mathcal{M} \, f(\{q_j\},\,\{p_j\}) + \delta f,
-\]
+    \label{eq:typical_point}
+\end{equation}
 where \(\delta f\) is a small fluctuation. The postulate of equal a priori probabilities implies that the typical behaviour of the system is close to the average behaviour of the system, thus we can say that the typical point in the phase space of the system is close to the average value of the function \(f\) over the energy shell defined by \(E\).
 
 \section{Statistical Ensembles}
 
- [...]
+In statistical mechanics, the concept of an ensemble provides a powerful framework to bridge the microscopic dynamics of a many-body system with its macroscopic thermodynamic observables. The most fundamental of these is the \textbf{microcanonical ensemble}, which describes strictly isolated systems characterized by a fixed energy, volume, and number of particles. Relying on the postulate of equal a priori probabilities, this ensemble allows us to formally define the entropy of a system via the celebrated Boltzmann formula. From this purely statistical counting of accessible microstates, we can rigorously derive core thermodynamic concepts, such as the condition for thermal equilibrium and the microscopic definition of temperature.
+
+Building upon this foundation, we can relax the strict energy constraint to consider a system in thermal contact with a macroscopic heat bath, leading to the \textbf{canonical ensemble}. In this configuration, the system's energy is allowed to fluctuate, and the probability of finding it in a specific microstate is naturally governed by the Boltzmann distribution. To formalize this, we introduce the partition function as the central mathematical object of the ensemble. As we will see, this function serves as a powerful generating tool to derive all key macroscopic observables and thermodynamic potentials, such as the Helmholtz free energy, for both continuous phase spaces and discrete physical systems.
 
 \subsection{Microcanonical Ensemble}
 
@@ -191,7 +196,7 @@ Now, in order to maximize it, we can take the derivative of the entropy with res
 \[
     \Gamma(\bar{E}^{(1)})\Gamma(\bar{E}^{(2)}) \leq \Gamma(E) \leq \frac{E}{\Delta} \Gamma(\bar{E}^{(1)})\Gamma(\bar{E}^{(2)}),
 \]
-where the first inequality comes from the fact that \(\Gamma(E)\) is a sum over all the values of \(E_1\), thus it is greater than or equal to the single term with \(E_1 = \bar{E}_1\), while the second inequality comes from the fact that there are at most \(E/\Delta\) terms in the sum, thus we can upper bound it by multiplying the maximum term by the number of terms. Taking the logarithm of these inequalities we arrive at
+where the first inequality comes from the fact that \(\Gamma(E)\) is a sum over all the values of \(E_1\), thus it is greater than or equal to the single term with \(E_1 = \bar{E}_1\), while the second inequality comes from the fact that there are at most \(E/\Delta\) terms in the sum, thus we can upper bound it by multiplying the maximum term by the number of terms. Taking the logarithm we arrive at
 \[
     S(\bar{E}^{(1)}, V_1) + S(\bar{E}^{(2)}, V_2) \leq S(E, V) \leq S(\bar{E}^{(1)}, V_1) + S(\bar{E}^{(2)}, V_2) + k_B \log \left( \frac{E}{\Delta} \right),
 \]
@@ -214,16 +219,17 @@ Therefore terms with different values of \(E_1\) are negligible compared to the 
 \]
 which, expanding the derivative, can be written as
 \[
-    \left[ \frac{\partial}{\partial \epsilon} \Gamma_1(\epsilon) \right]_{\epsilon = \bar{E}^{(1)}} \Gamma_2(E - \epsilon) + \Gamma_1(\epsilon) \left[ - \frac{\partial}{\partial \epsilon} \Gamma_2(E - \epsilon) \right]_{\epsilon = \bar{E}^{(2)}} = 0,
+    \left[ \frac{\partial}{\partial \epsilon} \Gamma_1(\epsilon) \right]_{\epsilon = \bar{E}^{(1)}} \Gamma_2(E - \epsilon) + \Gamma_1(\epsilon) \left[ - \frac{\partial}{\partial \epsilon} \Gamma_2(\epsilon) \right]_{\epsilon = \bar{E}^{(2)}} = 0,
 \]
 which now, dividing by \(\Gamma_1(\bar{E}^{(1)}) \Gamma_2(\bar{E}^{(2)})\) (in order to build the logarithmic derivative), and using the definition of entropy we arrive at
 \[
     \frac{\partial}{\partial \epsilon} S_1 (\epsilon) \bigg|_{\epsilon = \bar{E}^{(1)}} = \frac{\partial}{\partial \epsilon} S_2(\epsilon) \bigg|_{\epsilon = \bar{E}^{(2)}}.
 \]
 This is a fundamental result, which tells us that at equilibrium the derivative of the entropy with respect to the energy is the same for both subsystems. This allows us to define a thermodynamic quantity which is equal in systems in thermal equilibrium, called \textbf{temperature} \(T\) (recovering the first principle of thermodynamics). The temperature is defined as the inverse of the derivative of the entropy with respect to the energy, thus we can write
-\[
+\begin{equation}
     \frac{1}{T} = \frac{\partial S}{\partial E}(E, V).
-\]
+    \label{eq:temperature_definition}
+\end{equation}
 
 \subsection{Canonical Ensemble}
 
@@ -262,9 +268,9 @@ This is a fundamental result, which tells us that at equilibrium the derivative 
     \end{minipage}
 \end{figure}
 
-The second system \(S_2\) is called the \textit{heat bath}, and it is so large that it can exchange energy with the first system \(S_1\) without changing its thermodynamic properties. The total system is isolated, thus we can apply the microcanonical ensemble to it. The probability of finding the system in a state with energy \(E_1\) is proportional to the number of states available to the second system with energy \(E_2 = E - E_1\), which is given by \(\Omega_2(E - E_1)\).
+The second system \(S_2\) is called the \textit{heat bath}, and it is so large that it can exchange energy with the first system \(S_1\) without changing its thermodynamic properties. The total system is isolated, thus we can apply the microcanonical ensemble to it. The probability of finding the system in a state with energy \(E_1\) is proportional to the number of states available to the second system with energy \(E_2 = E - E_1\), which is given by \(\Gamma_2(E - E_1)\).
 
-Technically speaking, we want to find the probability distribution of the subsystem \(S_1\) when it is in contact with a heat bath \(S_2\), knowing the total probability distribution: the total system is isolated, thus we can apply the microcanonical ensemble to it, and we know that it will be evolving with a trajectory in the phase space that is uniformly distributed on the energy shell defined by the total energy \(E\). This means that if we analyze the evolution of the subsystem \(S_1\) in its phase space, we will find that it will not be limited to fixed energy states, but it will be able to explore all the energy states available to it, with a probability that is proportional to the number of states available to the heat bath \(S_2\) at the corresponding energy. we are interested in finding the \textbf{induced probability distribution} of the subsystem \(S_1\).
+Technically speaking, we want to find the probability distribution of the subsystem \(S_1\) when it is in contact with a heat bath \(S_2\), knowing the total probability distribution: the total system is isolated, thus we can apply the microcanonical ensemble to it, and we know that it will be evolving with a trajectory in the phase space that is uniformly distributed on the energy shell defined by the total energy \(E\). This means that if we analyze the evolution of the subsystem \(S_1\) in its phase space, we will find that it will not be limited to fixed energy states, but it will be able to explore all the energy states available to it, with a probability that is proportional to the number of states available to the heat bath \(S_2\) at the corresponding energy. We are interested in finding the \textbf{induced probability distribution} of the subsystem \(S_1\).
 
 Let us visualize the phase space of the total system as a high-dimensional space, where each point represents a microstate of the total system. The energy shell defined by the total energy \(E\) is a hypersurface in this phase space, and the trajectory of the total system is uniformly distributed on this hypersurface. The subsystem \(S_1\) can be thought of as a projection of the total system onto a lower-dimensional subspace, where each point represents a microstate of the subsystem \(S_1\). The probability distribution of the subsystem \(S_1\) is then given by the projection of the uniform distribution on the energy shell onto this lower-dimensional subspace. Differents probabilities correspond to different energy states of the subsystem \(S_1\), and the probability of finding the subsystem \(S_1\) in a state with energy \(E_1\) is proportional to the number of states available to the heat bath \(S_2\) at energy \(E - E_1\).
 
@@ -272,100 +278,164 @@ The idea is to fix a point in the phase space of the subsystem \(S_1\) with ener
 
 So we fix an energy \(\epsilon\) for the subsystem \(S_1\), and we want to find the number of states available to the heat bath \(S_2\) at energy \(E - \epsilon\). \textit{The number of points in the phase space of} \(S\) \textit{that corresponds to} \(P\) \textit{is equal to the number of points in the phase space of} \(S_2\) \textit{that corresponds to} \(E - \epsilon\). Thus we can write
 \[
-    \rho(\{q_f\},\,\{p_f\}) \propto \frac{\Gamma_2(E - \epsilon)}{\Gamma(E)}.
+    \rho(\{q_j\},\,\{p_j\}) \propto \frac{\Gamma_2(E - \epsilon)}{\Gamma(E)}.
 \]
 We know that the entropy of the heat bath \(S_2\) is related to the number of states available to it by the Boltzmann formula (we are using \(k_B=1\) for simplicity), such that
 \[
-    \Gamma_2(E - \epsilon) = e^{S_2(E - \epsilon)} \sim e^{S_2(E) - \epsilon \frac{\partial S_2}{\partial E} \epsilon},
+    \Gamma_2(E - \epsilon) = e^{S_2(E - \epsilon)} \sim e^{S_2(E) - \frac{\partial S_2}{\partial E} \epsilon},
 \]
 where we have used the fact that the entropy is an extensive quantity, thus we can write it as a function of the energy per particle, and we have expanded it around the total energy \(E\) of the heat bath \(S_2\). We can now recall the temperature as a thermodynamic quantity defined as the inverse of the derivative of the entropy with respect to the energy, while reinserting the Boltzmann constant \(k_B\) for clarity, we have
 \[
-    \rho(\{q_f\},\,\{p_f\}) \propto e^{-\beta \epsilon} = e^{- \frac{\epsilon}{k_B T}},
+    \rho(\{q_j\},\,\{p_j\}) \propto e^{-\beta \epsilon} = e^{- \frac{\epsilon}{k_B T}},
 \]
 where \(\beta = \frac{1}{k_B T}\) is the inverse temperature. Thus we have derived the Boltzmann distribution for the subsystem \(S_1\) in contact with a heat bath \(S_2\). The probability of finding the subsystem \(S_1\) in a state with energy \(\epsilon\) is proportional to the exponential of the negative of the energy divided by the temperature of the heat bath \(S_2\). This is the canonical ensemble, where the subsystem \(S_1\) is in thermal equilibrium with a heat bath \(S_2\) at temperature \(T\).
 
-We can now define the partition function \(Z\) as the normalization constant for the probability distribution of the subsystem \(S_1\), such that
-\[
-    Z = \int \frac{\mathrm{d}^{3N}q \, \mathrm{d}^{3N}p}{h^{3N}N!} \, e^{-\beta H(\{q\},\,\{p\})},
-\]
+We can now define the partition function \(\mathcal{Z}\) as the normalization constant for the probability distribution of the subsystem \(S_1\), such that
+\begin{equation}
+    \mathcal{Z} = \int \frac{\mathrm{d}^{3N}q \, \mathrm{d}^{3N}p}{h^{3N}N!} \, e^{-\beta H(\{q\},\,\{p\})},
+    \label{eq:canonical_partition_function}
+\end{equation}
 which can be used as a generating function for the thermodynamic properties of the subsystem \(S_1\). For example, the free energy \(F\) can be computed from the partition function as
-\[
-    F = -k_B T \log Z = -\frac{1}{\beta} \log Z,
-\]
+\begin{equation}
+    F = -k_B T \log \mathcal{Z} = -\frac{1}{\beta} \log \mathcal{Z},
+    \label{eq:canonical_free_energy}
+\end{equation}
 and the internal energy \(U\) can be computed as
-\[
-    U = -\frac{\partial}{\partial \beta} \log Z,
-\]
+\begin{equation}
+    U = -\frac{\partial}{\partial \beta} \log \mathcal{Z},
+\end{equation}
 while the entropy \(S\) can be computed as
-\[
+\begin{equation}
     S = -\frac{\partial F}{\partial T} = k_B \beta^2 \frac{\partial F}{\partial \beta}.
-\]
+\end{equation}
 
 \subsubsection{Discrete System}
 
-A discrete system is a system that can only take a finite number of states, such as a spin system or a lattice gas. In this case, let us imagine a collection of \(N\) particles that can only occupy a finite number of states, let us imagine two values of spin, up and down, thus we have \(2^N\) possible configurations of the system. The phase space of the system is now a discrete set of points, configurations (a set of sets) \(\{c_j\}_{j=1}^N\), and the probability distribution of the system is defined on this discrete set of points. The partition function can be written as a sum over all possible configurations of the system, such that
-\[
-    Z = \sum_{\{c_j\}} e^{-\beta H(\{c_j\})}.
-\]
+A discrete system is a system that can only take a finite number of states, such as a spin system or a lattice gas. In this case, let us imagine a collection of \(N\) particles that can only occupy a finite number of states, let us imagine two values of spin, up and down, thus we have \(2^N\) possible configurations of the system. The phase space of the system is now a discrete set of points, configurations (a set of sets) \(\{c_j\}_{j=1}^N\), and the probability distribution of the system is defined on this discrete set of points.
+
+Assuming that the phase space is explored uniformly at equilibrium, we can define the discretized version of the canonical and microcanonical ensembles, along with the corresponding observables, by replacing the integrals over the phase space with sums over the discrete set of points. The partition function can thus be written as a sum over all possible configurations of the system, such that
+\begin{equation}
+    \mathcal{Z} = \sum_{\{c_j\}} e^{-\beta H(\{c_j\})},
+    \label{eq:discrete_partition_function}
+\end{equation}
+where the function \(H(\{c_j\})\) is the Hamiltonian of the system, which encodes the energy of each configuration of the system.
 
 \section{Quantum Statistical Mechanics}
 
-Considering a general quantum mechanical system, we can study it with different tools, such as the hamiltonian operator, the density matrix, the partition function, etc. The Hamiltonian operator \(H\) is a self-adjoint operator that acts on the Hilbert space of the system, and it encodes the energy of the system. The density matrix \(\rho\) is a positive semi-definite operator that acts on the Hilbert space of the system, and it encodes the state of the system. The partition function \(Z\) is a scalar quantity that encodes the thermodynamic properties of the system.
+Let us complete the review of the theory background by recalling some basic concepts of quantum statistical mechanics, which is the extension of classical statistical mechanics to quantum systems.
+
+Considering a general quantum mechanical system, we can study it with different tools, such as the hamiltonian operator, the density matrix, the partition function, etc. The Hamiltonian operator \(H\) is a self-adjoint operator that acts on the Hilbert space of the system, and it encodes the energy of the system. The density matrix \(\rho\) is a positive semi-definite operator that acts on the Hilbert space of the system, and it encodes the state of the system. The partition function \(\mathcal{Z}\) is a scalar quantity that encodes the thermodynamic properties of the system.
+
+\subsection{Hilbert Space and Dynamics}
+
+In a quantum system, the state of the system is described by a vector \(\ket{\psi}\) in the \textbf{Hilbert space} \(\mathcal{H}\), and the observables of the system are described by self-adjoint operators that act on the Hilbert space. The dynamics of the system is governed by the \textit{Schrödinger equation}, which describes how the state of the system evolves in time under the action of the \textbf{Hamiltonian operator}, which is a self-adjoint operator that encodes the energy of the system. Since the Hamiltonian operator is self-adjoint, it has a complete set of eigenstates \(\{\ket{E_n}\}_{n=1}^D\) with corresponding eigenvalues \(\{E_n\}_{n=1}^D\) (\(D\) is the dimension of the Hilbert space), which represent the energy levels of the system:
 \[
-    \begin{aligned}
-        \hat{H} \ket{n} = E_n \ket{n},                                                                                          \\
-        \ket{\psi} \in \mathcal{H},                                                                                             \\
-        \{\ket{E_n}\}_{n=1}^D \implies \ket{\psi} = \sum_{n=1}^D c_n \ket{E_n},                                                 \\
-        \bra{\psi} \hat{A} \ket{\psi} = \sum_{n,m} c_n^* c_m \bra{E_n} \hat{A} \ket{E_m},                                       \\
-        \ket{\psi(t)} = \sum_{n} c_n(t) \ket{E_n}, \quad c_n(t) = c_n e^{-i \frac{E_n}{\hbar} t}                                \\
-        \bra{\psi(t)} \hat{A} \ket{\psi(t)} = \sum_{n,m} c_n^* c_m e^{i \frac{E_n - E_m}{\hbar} t} \bra{E_n} \hat{A} \ket{E_m}, \\
-        \implies = \frac{1}{T} \int_0^T \mathrm{d}t \, \bra{\psi(t)} \hat{A} \ket{\psi(t)} = \sum_{n} |c_n|^2 \bra{E_n} \hat{A} \ket{E_n}.
-    \end{aligned}
+    \hat{H} \ket{E_n} = E_n \ket{E_n}.
 \]
-
-Let us report some postulates of quantum statistical mechanics:
-\begin{itemize}
-    \item Postulate of equal a priori probabilities: in an isolated system, all microstates are equally probable,
-          \[
-              \vert \bar{c_n} \vert^2 = \begin{dcases}
-                  \frac{1}{D}, & \text{if } E_n \in [E, E + \Delta], \\
-                  0,           & \text{otherwise}.
-              \end{dcases}
-          \]
-    \item postulate of random phases: the phases of the coefficients \(c_n\) are random variables uniformly distributed in the interval \([0, 2\pi]\), thus
-          \[
-              \frac{1}{T} \int_0^T \mathrm{d}t \, c_n^*(t) c_m(t) = \frac{1}{T}  \int_0^T \mathrm{d}t \, c_n^* c_m \, e^{i \frac{E_n - E_m}{\hbar} t} = \begin{dcases}
-                  \vert c_n \vert^2, & \text{if } n = m, \\
-                  0,                 & \text{otherwise}.
-              \end{dcases}
-          \]
-\end{itemize}
-
-The time average of an observable \(\hat{A}\) is given by
+Given a state \(\ket{\psi}\) of the system and a complete set of eigenstates of the Hamiltonian, we can express the state \(\ket{\psi}\) as a linear combination of the eigenstates of the Hamiltonian as
 \[
-    \begin{aligned}
-        \overline{\bra{\psi(t)} \hat{A} \ket{\psi(t)}} = \frac{1}{T} \int_0^T \mathrm{d}t \, \bra{\psi(t)} \hat{A} \ket{\psi(t)} = \sum_{n} |c_n|^2 \bra{E_n} \hat{A} \ket{E_n}.
-    \end{aligned}
+    \{\ket{E_n}\}_{n=1}^D \implies \ket{\psi} = \sum_{n=1}^D c_n \ket{E_n},
 \]
-[...]
-
-We can define the density matrix \(\rho\) as
-\[
-    \rho = \frac{1}{Z} \sum_{E \leq E_n \leq E+\Delta} \ket{E_n} \bra{E_n},
-\]
-which is a positive semi-definite operator that encodes the state of the system. The expectation value of an observable \(\hat{A}\) can be then computed as
-\[
-    \langle \hat{A} \rangle = \mathrm{Tr}(\rho \hat{A}).
-\]
-
-
+where \(c_n = \bra{E_n} \ket{\psi} \in \mathbb{C}\) are the coefficients of the linear combination, which can be interpreted as the probability amplitudes of the state \(\ket{\psi}\) in the energy eigenbasis. Indeed they respect the normalization condition \(\sum_{n=1}^D |c_n|^2 = 1\), which ensures that the total probability of finding the system in any of the energy eigenstates is equal to one.
 
 We have to note that dealing with quantum statistical mechanics is more complicated than dealing with classical statistical mechanics, since we have to deal with operators instead of functions, and we have to deal with the non-commutativity of operators. However, the general principles of statistical mechanics still apply, and we can still define ensembles, partition functions, and thermodynamic quantities in the quantum case. The main difference is that we have to use the language of operators and Hilbert spaces instead of the language of functions and phase space.
 
+\subsubsection{Observables and Expectation Values}
+
+Recalling finally that the observables are associated to hermitian operators, the \textbf{expectation value} of an observable \(\hat{A}\) in the state \(\ket{\psi}\) can be computed as
+\[
+    \bra{\psi} \hat{A} \ket{\psi} = \sum_{n,m} c_n^* c_m \bra{E_n} \hat{A} \ket{E_m}.
+\]
+If we were to consider the time evolution of the state \(\ket{\psi}\) under the action of the Hamiltonian, we can write it as
+\[
+    \ket{\psi(t)} = \sum_{n} c_n(t) \ket{E_n}, \quad c_n(t) = c_n e^{-i \frac{E_n}{\hbar} t},
+\]
+and thus the expectation value of an observable \(\hat{A}\) at time \(t\) can be computed as
+\[
+    \bra{\psi(t)} \hat{A} \ket{\psi(t)} = \sum_{n,m} c_n^*(t) c_m(t) \bra{E_n} \hat{A} \ket{E_m} = \sum_{n,m} c_n^* c_m e^{i \frac{E_n - E_m}{\hbar} t} \bra{E_n} \hat{A} \ket{E_m},
+\]
+which is a complicated time dependent sum over the energy eigenstates of the system, but quantum statistical mechanics allows us to simplify it under some assumptions which we will see in the following.
+
+However, we can alreadty use the fact that the theory applies at equilibrium, where \uline{observables are time independent up to small fluctuations}; in order to avoid such complications, we can consider the \textbf{time average} of the expectation value of an observable \(\hat{A}\) over a \textit{long time interval} \(T\).\footnote{With long time interval here we refer to larger time scales than the microscopic ones, but still much smaller than the macroscopic time scale.} We denote the time average of an observable \(\hat{A}\) as \(\overline{\bra{\psi(t)} \hat{A} \ket{\psi(t)}}\), and we can compute it as
+\[
+    \bra{\psi(t)} \hat{A} \ket{\psi(t)} \mapsto \overline{\bra{\psi(t)} \hat{A} \ket{\psi(t)}}.
+\]
+
+\subsection{Postulates of Quantum Statistical Mechanics}
+
+We can now introduce the postulates of quantum statistical mechanics, which are the fundamental principles that govern the behavior of quantum systems at thermal equilibrium. These postulates are based on the idea that at thermal equilibrium, the system is in a state that maximizes the entropy of the system, subject to the constraints imposed by the energy and other conserved quantities of the system. For a macroscopic quantum system with energy \(E\) at thermal equilibrium, the following holds:
+\begin{itemize}
+    \item \textbf{Postulate of equal a priori probabilities}: in an isolated system, all microstates are equally probable, thus the probability distribution of the system is uniform over the energy shell defined by the energy \(E\) and a small energy interval \(\Delta\), such that we can write
+          \[
+              \overline{\vert c_n \vert}^2 = \begin{dcases}
+                  \frac{1}{D}, & \text{if } E_n \in [E, E + \Delta], \\
+                  0,           & \text{otherwise},
+              \end{dcases}
+          \]
+          where \(D\) is the number of energy eigenstates in the energy shell defined by \(E\) and \(\Delta\) (the dimension of the Hilbert space in which the system is described).
+
+    \item \textbf{Postulate of random phases}: the phases of the coefficients \(c_n\) are random variables uniformly distributed in the interval \([0, 2\pi]\), thus
+          \[
+              \overline{c_n(t) c_m^*(t)} = \frac{1}{T} \int_0^T \mathrm{d}t \, c_n^*(t) c_m(t) = \frac{1}{T}  \int_0^T \mathrm{d}t \, c_n^* c_m \, e^{i \frac{E_n - E_m}{\hbar} t} = \begin{dcases}
+                  \vert c_n \vert^2, & \text{if } n = m, \\
+                  0,                 & \text{otherwise},
+              \end{dcases}
+          \]
+          which in the end explains our previous assumption on expectation values of observables at equilibrium.
+\end{itemize}
+
+It is still an open question to justify these postulates from first principles, but they are very useful for computing the thermodynamic properties of quantum systems at thermal equilibrium, and they are widely used in the literature of quantum statistical mechanics.
+
+Using these postulates, we can compute the time average of an observable \(\hat{A}\) using the expression for the expectation value of an observable at time \(t\) that we have derived before, thus we can write
+\[
+    \begin{aligned}
+        \overline{\bra{\psi(t)} \hat{A} \ket{\psi(t)}} = \frac{1}{T} \int_0^T \mathrm{d}t \, \bra{\psi(t)} \hat{A} \ket{\psi(t)} = \sum_{n} |c_n|^2 \bra{E_n} \hat{A} \ket{E_n},
+    \end{aligned}
+\]
+where in the end we have used the postulate of random phases to eliminate the off-diagonal terms in the sum, thus we are left with a sum over the diagonal terms only, which is a much simpler expression to compute. This is a fundamental result, which tells us that at thermal equilibrium, the expectation value of an observable \(\hat{A}\) can be computed as a sum over the energy eigenstates of the system, weighted by the probability of finding the system in each energy eigenstate:
+\[
+    \overline{\bra{\psi(t)} \hat{A} \ket{\psi(t)}} = \sum_{n \in I(E)} \vert c_n \vert^2 A_{nn}, \quad I(E) = \{n : E \leq E_n \leq E + \Delta\}.
+\]
+
+\subsection{Density Matrix and Statistical Ensembles}
+
+After these considerations, we are directly led to the definition of a statistical ensemble for a quantum system at thermal equilibrium, which is a probability distribution over the energy eigenstates of the system, such that the probability of finding the system in an energy eigenstate \(\ket{E_n}\) is given by \(\vert c_n \vert^2\). Since we have derived a sort of microcanonical ensemble for the quantum system from the postulates of quantum statistical mechanics, we have to define a sort of uniform distribution over the energy eigenstates in the energy shell defined by \(E\) and \(\Delta\). We can accomplish this by defining \textbf{density matrix}, which is a positive semi-definite operator that encodes the state of the system, and it can be used to compute the expectation values of observables and the thermodynamic properties of the system.
+
+We can define the density matrix \(\hat{\rho}\) for the quantum microcanonical ensemble as
+\[
+    \hat{\rho} = \frac{1}{Z} \sum_{E \leq E_n \leq E+\Delta} \ket{E_n} \bra{E_n},
+\]
+where \(Z\) is just a normalization constant. The expectation value of an observable \(\hat{A}\), with this definition of the density matrix, can be then computed as
+\[
+    \langle \hat{A} \rangle \sim \overline{\bra{\psi(t)} \hat{A} \ket{\psi(t)}} = \mathrm{Tr}[\hat{\rho} \hat{A}].
+\]
+
+\begin{remark}
+    An useful property of the density matrix, coming from the fact that the coefficients \(c_n\) are random variables respecting the normalization condition \(\sum_n \vert c_n \vert^2 = 1\), is that its trace is equal to one:
+    \[
+        \Tr \hat{\rho} = \sum_n \bra{E_n} \hat{\rho} \ket{E_n} = \sum_n \vert c_n \vert^2 = 1,
+    \]
+    which ensures that the total probability of finding the system in any of the energy eigenstates is equal to one.
+\end{remark}
+
 Defining an ensemble in quantum statistical mechanics automatically defines a density matrix, which encodes the state of the system, and from which we can compute the expectation values of observables and the thermodynamic properties of the system. We are governing our set of eigenstates with a probability distribution, which is encoded in the density matrix, and we can compute the expectation values of observables and the thermodynamic properties of the system from this density matrix.
 
-For a quantum system at thermal equilibrium, we have the following identification of the thermodynamic free energy \(F\) with the partition function \(Z\):
+Indeed, we can also define the canonical ensemble for a quantum system at thermal equilibrium, by defining the density matrix for the canonical ensemble as
 \[
-    F = -k_B T \log Z,
+    \hat{\rho} = \frac{1}{\mathcal{Z}} e^{-\beta \hat{H}} = \frac{1}{\mathcal{Z}} \sum_{n} e^{-\beta E_n} \ket{E_n} \bra{E_n},
 \]
-which is the same relation that we have in classical statistical mechanics. These postulates are like operational tools: justify them as they are can be rally difficult and it is an actual field of research with a lot of literature, but they are very useful for computing the thermodynamic properties of quantum systems at thermal equilibrium. For us, justifying why a precise postulate workd in the actual setting will be enough.
+where now \(\mathcal{Z}\) is still a normalization constant, but it has a non trivial expression which recovers its definition as the partition function of the system, which can be computed recalling \(\Tr \hat{\rho} = 1\) as
+\[
+    \mathcal{Z} = \Tr e^{-\beta \hat{H}} = \sum_n e^{-\beta E_n},
+\]
+and it is known as the \textbf{thermal partition function}.
+
+\subsubsection{Free Energy and Thermodynamic Observables}
+
+Finally, we can state one last postulate of quantum statistical mechanics, which is the identification of the thermodynamic free energy \(F\) with the partition function \(\mathcal{Z}\):
+\[
+    F = -k_B T \log \mathcal{Z} = -\frac{1}{\beta} \log \mathcal{Z},
+\]
+which is the same relation that we have in classical statistical mechanics. These postulates are like operational tools: justify them as they are can be rally difficult and it is an actual field of research with a lot of literature, but they are very useful for computing the thermodynamic properties of quantum systems at thermal equilibrium. For us, justifying why a precise postulate work in the actual setting will be enough.
+
+As usual, from the free energy we can compute all the thermodynamic observables of the system, such as the internal energy \(U\) and the entropy \(S\), with the standard relations that we have in classical statistical mechanics. This is the power of such postulates: they allow us to compute the thermodynamic properties of quantum systems at thermal equilibrium, and they are widely used in the literature of quantum statistical mechanics.
