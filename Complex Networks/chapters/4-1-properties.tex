@@ -70,8 +70,8 @@ Erdős-Rényi (E-R) ensembles serve as the simplest null models to establish a b
 
 Two standard 2D joint distributions analyzed are:
 \begin{itemize}
-    \item $K_{IN}$ vs $K_{OUT}$ (in a directed graph): in real networks (non E-R), we often observe non-trivial patterns that can indicate specific functional roles of nodes (e.g., "hubs" with high outdegree but low indegree).
-    \item $K$ vs $K_{NN}$ (the average degree of a node's first neighbors): real networks often show significant correlations in this relationship, which can help identify specialized nodes (e.g., "effector" nodes with low degree but high-degree neighbors, or "master" nodes with high degree but low-degree neighbors).
+    \item $K_{IN}$ vs $K_{OUT}$ (in a directed graph): in real networks (non E-R), we often observe non-trivial patterns that can indicate specific functional roles of nodes (e.g., ``hubs'' with high outdegree but low indegree).
+    \item $K$ vs $K_{NN}$ (the average degree of a node's first neighbors): real networks often show significant correlations in this relationship, which can help identify specialized nodes (e.g., ``effector'' nodes with low degree but high-degree neighbors, or ``master'' nodes with high degree but low-degree neighbors).
 \end{itemize}
 
 \begin{definition}[Degree of Nearest Neighbors]
@@ -104,12 +104,12 @@ Two standard 2D joint distributions analyzed are:
         \end{minipage}
     \end{figure}
 
-    Conversely, biological networks like the Yeast PPI (Protein-Protein Interaction) network exhibit a non-trivial $K$ vs $K_{NN}$ correlation. This specific pattern helps identify specialized biological roles, such as "effector" and "master" nodes. If we perform a link reshuffling on this network (randomizing connections while preserving degrees), this observed pattern is completely destroyed, proving it is a product of evolutionary design rather than random chance.
+    Conversely, biological networks like the Yeast PPI (Protein-Protein Interaction) network exhibit a non-trivial $K$ vs $K_{NN}$ correlation. This specific pattern helps identify specialized biological roles, such as ``effector'' and ``master'' nodes. If we perform a link reshuffling on this network (randomizing connections while preserving degrees), this observed pattern is completely destroyed, proving it is a product of evolutionary design rather than random chance.
 
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{img/yeast_ppi.png}
-        \caption{The Yeast PPI network (Maslov Sneppen Science 2002) shows a non-trivial correlation between \(K_0\) and \(K_1\), as well as for $K$ and $K_{NN}$, which helps identify specialized biological roles. This pattern is destroyed by link reshuffling, indicating it is a product of evolutionary design. In the center we can see a schemaic view of the network, where we can identify "effector" nodes (low degree but high-degree neighbors) and "master" nodes (high degree but low-degree neighbors).}
+        \caption{The Yeast PPI network (Maslov Sneppen Science 2002) shows a non-trivial correlation between \(K_0\) and \(K_1\), as well as for $K$ and $K_{NN}$, which helps identify specialized biological roles. This pattern is destroyed by link reshuffling, indicating it is a product of evolutionary design. In the center we can see a schemaic view of the network, where we can identify ``effector'' nodes (low degree but high-degree neighbors) and ``master'' nodes (high degree but low-degree neighbors).}
     \end{figure}
 \end{example}
 
@@ -117,7 +117,7 @@ Two standard 2D joint distributions analyzed are:
 \subsection{Weighted Networks and Node Strength}
 % ==========================================
 
-For weighted networks where links possess a specific \textbf{weight} ($W_{ij} > 0$), the concept of degree is extended to "strength". It should be noted that the degree of a node in a weighted network is still defined as the number of links connected to it, regardless of their weights. However, the strength of a node provides a more nuanced measure of its connectivity by accounting for the weights of the links.
+For weighted networks where links possess a specific \textbf{weight} ($W_{ij} > 0$), the concept of degree is extended to ``strength''. It should be noted that the degree of a node in a weighted network is still defined as the number of links connected to it, regardless of their weights. However, the strength of a node provides a more nuanced measure of its connectivity by accounting for the weights of the links.
 
 \begin{definition}[Node Strength]
     The strength of a node is defined as the sum of the weights of all links connected to it:
@@ -133,7 +133,7 @@ Analyzing the relationship between topological degree ($K$) and strength ($S$) r
 \end{itemize}
 
 \begin{remark}[Weighted and Topological Networks]
-    If we have a weighted network matrix $W$, we can always extract its underlying topological adjacency matrix $A$ by applying an element-wise logical function: $A = W > 0$. Whenever analyzing a weighted network, it is best practice to study the original and the "binarized" (topological) network in parallel to isolate the specific role the weights play: if the weighted and topological analyses yield similar results, then the weights are not adding significant information beyond the topology. Conversely, if the results differ significantly, it indicates that the weights are crucial for understanding the network's structure and function.
+    If we have a weighted network matrix $W$, we can always extract its underlying topological adjacency matrix $A$ by applying an element-wise logical function: $A = W > 0$. Whenever analyzing a weighted network, it is best practice to study the original and the ``binarized'' (topological) network in parallel to isolate the specific role the weights play: if the weighted and topological analyses yield similar results, then the weights are not adding significant information beyond the topology. Conversely, if the results differ significantly, it indicates that the weights are crucial for understanding the network's structure and function.
 \end{remark}
 
 % ==========================================
@@ -145,7 +145,7 @@ Nodes with a degree of exactly $K = 1$ are known as pendant nodes, or ``\textit{
 We can structurally reduce a network using the \textbf{Pendant Node Removal Algorithm}, which iteratively deletes all nodes with $K=1$. This iterative pruning will result in one of two outcomes:
 \begin{enumerate}
     \item \textbf{Nothing remains:} This implies the original network was a pure tree (containing no cycles), where all nodes are leafs except for a few cutpoints. In this case, the network's structure is entirely defined by its degree distribution.
-    \item \textbf{A sub-network remains:} We are left with a "core network" without any leafs. In this core, every node has $K \ge 2$, indicating the presence of structural cycles. The properties of this core network are not solely determined by the degree distribution, as the presence of cycles introduces additional structural complexity.
+    \item \textbf{A sub-network remains:} We are left with a ``core network'' without any leafs. In this core, every node has $K \ge 2$, indicating the presence of structural cycles. The properties of this core network are not solely determined by the degree distribution, as the presence of cycles introduces additional structural complexity.
 \end{enumerate}
 
 % ==========================================
@@ -251,7 +251,7 @@ We can thus define the \textbf{normalized} (or absolute) \textbf{betweenness cen
 
 \subsection{Betweenness and Global Efficiency}
 
-Betweenness centrality is intimately connected to the concept of network efficiency. The \textbf{Global Efficiency} ($E$) of a network measures its overall capability to transfer information and is defined as \textit{the mean of the inverse of the lengths of all shortest paths} (often referred to as a "harmonic composition"):
+Betweenness centrality is intimately connected to the concept of network efficiency. The \textbf{Global Efficiency} ($E$) of a network measures its overall capability to transfer information and is defined as \textit{the mean of the inverse of the lengths of all shortest paths} (often referred to as a ``harmonic composition''):
 \[
     \epsilon_{ij} = \frac{1}{P_{ij}}
 \]
@@ -288,7 +288,7 @@ We can measure the importance of a single node (or link) $i$ by evaluating the \
     \paragraph{Biological Interpretation.} Ranking the mediators based on their $\Delta E$ (which acts as a measure of centrality) yields profound biological insights. Top-ranking mediators are primarily associated with the \textit{innate immune system} (which provides a non-specific response to external antigens), rather than the adaptive one. This suggests that network centrality encodes evolutionary history: the most central elements are also the most ancient ones in the evolutionary timeline of the organism.
 \end{example}
 
-\paragraph{Similar Multi-partite Examples.} This specific modeling approach—where the exchange of distinct "mediators" creates weighted connections between macroscopic entities—is ubiquitous in complex systems:
+\paragraph{Similar Multi-partite Examples.} This specific modeling approach—where the exchange of distinct ``mediators'' creates weighted connections between macroscopic entities—is ubiquitous in complex systems:
 \begin{itemize}
     \item \textbf{Economics:} Countries exchanging different quantities of specific goods (oil, gold, wheat).
     \item \textbf{Finance:} Markets interacting via the exchange of various currencies (dollars, pounds, yen).
@@ -300,7 +300,7 @@ We can measure the importance of a single node (or link) $i$ by evaluating the \
 \section{Eigenvalue Centrality}
 % ==========================================
 
-A fundamental shift in the definition of centrality occurs when we posit that a node is "important" if it is connected to other "important" nodes. This recursive concept is the foundation of Eigenvalue Centrality (EC), originally introduced in sociology and mathematics (see Katz 1953, Bonacich 1987, and for a comprehensive review, Newman's "Networks: An Introduction").
+A fundamental shift in the definition of centrality occurs when we posit that a node is ``important'' if it is connected to other ``important'' nodes. This recursive concept is the foundation of Eigenvalue Centrality (EC), originally introduced in sociology and mathematics (see Katz 1953, Bonacich 1987, and for a comprehensive review, Newman's ``Networks: An Introduction'').
 
 \begin{definition}[Eigenvalue Centrality]
     Let $G$ be a network described by an adjacency matrix $A$. The \textbf{Eigenvalue Centrality} $EC_i$ of a node $i$ is defined such that it is proportional to the sum of the centralities of its neighbors. Mathematically, by introducing a proportionality constant $\frac{1}{\lambda}$, this is expressed as:
@@ -340,7 +340,7 @@ To resolve some of the issues of directed networks, we can distinguish between t
     \item \textbf{Authorities ($\vec{x}$):} Nodes containing highly relevant information. They are characterized by being pointed to by many hub papers.
     \item \textbf{Hubs ($\vec{y}$):} Nodes that act as extensive directories or review articles, pointing to many papers with relevant information (authorities).
 \end{itemize}
-Importantly, the same node $i$ possesses both an authority score $x_i$ and a "hubness" score $y_i$.
+Importantly, the same node $i$ possesses both an authority score $x_i$ and a ``hubness'' score $y_i$.
 
 \begin{definition}[Hubs and Authorities Scores]
     In a directed network described by an adjacency matrix $A$, each node $i$ is assigned an \textbf{authority score} $x_i$ and a \textbf{hub score} $y_i$. These quantities are defined by a mutually recursive relationship, where a good authority is pointed to by good hubs, and a good hub points to good authorities. Using proportionality constants $\alpha$ and $\beta$, the system is formalized as:

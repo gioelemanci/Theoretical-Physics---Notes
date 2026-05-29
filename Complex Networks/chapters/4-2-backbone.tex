@@ -2,7 +2,7 @@
 \section{Network Backbone and Salient Links}
 % ==========================================
 
-While centrality measures like Betweenness Centrality (BC) evaluate the importance of a node or a link based on the total number of shortest paths crossing it, this approach can sometimes obscure the fundamental skeleton of a network. To extract the true "backbone" of a complex graph, we introduce the concept of \textbf{Salient Links}.
+While centrality measures like Betweenness Centrality (BC) evaluate the importance of a node or a link based on the total number of shortest paths crossing it, this approach can sometimes obscure the fundamental skeleton of a network. To extract the true ``backbone'' of a complex graph, we introduce the concept of \textbf{Salient Links}.
 
 \subsection{Definition of Link Salience}
 Given a graph, instead of looking at all individual shortest paths simultaneously, we consider the \textit{shortest-path spanning tree} $T_k$ rooted at a specific node $k$. This tree represents the most efficient pathways to reach all other nodes in the network starting from $k$.
@@ -43,7 +43,7 @@ However, Link Salience ($S$) behaves fundamentally differently. In many weighted
     \end{minipage}
 \end{figure}
 
-This bimodal nature reveals a "spontaneous stratification" of the network topology: it naturally filters the graph into a highly salient \textbf{network backbone} (the critical infrastructure of the network) and a set of redundant, non-salient peripheral connections.
+This bimodal nature reveals a ``spontaneous stratification'' of the network topology: it naturally filters the graph into a highly salient \textbf{network backbone} (the critical infrastructure of the network) and a set of redundant, non-salient peripheral connections.
 
 \subsection{Topological Differences between BC and Salience}
 
@@ -61,7 +61,7 @@ The conceptual difference between Betweenness Centrality and Salience becomes st
 \end{figure}
 
 \begin{itemize}
-    \item \textbf{Betweenness Centrality:} Tends to artificially induce a \textit{core-periphery differentiation}. Links near the topological center of the planar graph will inevitably intercept more shortest paths simply due to geometry, accumulating high BC values and creating a centralized "bottleneck."
+    \item \textbf{Betweenness Centrality:} Tends to artificially induce a \textit{core-periphery differentiation}. Links near the topological center of the planar graph will inevitably intercept more shortest paths simply due to geometry, accumulating high BC values and creating a centralized ``bottleneck.''
     \item \textbf{Link Salience:} Maintains a \textit{homogeneous distribution}. Because it evaluates links based on their presence in spanning trees rather than raw path counting, it does not falsely elevate the center, accurately reflecting the homogeneous nature of the underlying planar grid.
 \end{itemize}
 
@@ -69,7 +69,7 @@ The conceptual difference between Betweenness Centrality and Salience becomes st
 
 The structural backbone identified by salient links plays a critical role in dynamical processes, particularly in spreading and transport phenomena.
 
-Consider a repeated random walk on a weighted network, where the passage of the walker through a node equates to an "infection" event. If we trace and "sign" the specific paths through which nodes become infected—effectively creating a random walk with memory (a \textit{non-Markovian process})—we observe a striking correlation with the network's structural salience.
+Consider a repeated random walk on a weighted network, where the passage of the walker through a node equates to an ``infection'' event. If we trace and ``sign'' the specific paths through which nodes become infected—effectively creating a random walk with memory (a \textit{non-Markovian process})—we observe a striking correlation with the network's structural salience.
 
 \begin{figure}[H]
     \begin{minipage}{0.4\textwidth}
@@ -104,7 +104,7 @@ In perfectly symmetric graphs, topological equivalence forces many centrality me
 \end{figure}
 
 \begin{itemize}
-    \item \textbf{Complete Graph (Clique):} In a fully connected network of $N$ nodes, every node is connected to every other node. Consequently, all nodes share the exact same degree ($K = N-1$), Closeness, and Eigenvector centrality. Crucially, the Betweenness Centrality is exactly zero ($BC = 0$) for all nodes. Since every pair of nodes is connected by a direct edge (a path of length 1), no node ever acts as an intermediary or "bridge" on a shortest path.
+    \item \textbf{Complete Graph (Clique):} In a fully connected network of $N$ nodes, every node is connected to every other node. Consequently, all nodes share the exact same degree ($K = N-1$), Closeness, and Eigenvector centrality. Crucially, the Betweenness Centrality is exactly zero ($BC = 0$) for all nodes. Since every pair of nodes is connected by a direct edge (a path of length 1), no node ever acts as an intermediary or ``bridge'' on a shortest path.
 \end{itemize}
 
 \begin{figure}[H]
@@ -124,29 +124,29 @@ Breaking the periodic boundary conditions of a cycle yields a path graph (a simp
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/path_centrality.png}
-    \caption{In a path graph, nodes at the extremities have low centrality measures, while those near the center exhibit higher values. This illustrates how Betweenness and Closeness Centrality capture "topological interiority" in a linear structure.}
+    \caption{In a path graph, nodes at the extremities have low centrality measures, while those near the center exhibit higher values. This illustrates how Betweenness and Closeness Centrality capture ``topological interiority'' in a linear structure.}
 \end{figure}
 
-In a path graph, nodes at the extremities (leaves) have a degree of $1$ and $BC = 0$, as they cannot mediate any paths. As we move toward the geometric center of the line, both Betweenness and Closeness Centrality strictly increase, peaking at the central node(s). This topology clearly visualizes how $BC$ and $CL$ act as measures of "topological interiority," capturing how close a node is to the topological center of mass of the system.
+In a path graph, nodes at the extremities (leaves) have a degree of $1$ and $BC = 0$, as they cannot mediate any paths. As we move toward the geometric center of the line, both Betweenness and Closeness Centrality strictly increase, peaking at the central node(s). This topology clearly visualizes how $BC$ and $CL$ act as measures of ``topological interiority,'' capturing how close a node is to the topological center of mass of the system.
 
 \subsection{Structural Holes and Brokers: The Dumbbell Graphs}
 
-The most critical topological examples are those that decouple Degree Centrality from Betweenness Centrality, illustrating the concept of "brokers" or "structural holes."
+The most critical topological examples are those that decouple Degree Centrality from Betweenness Centrality, illustrating the concept of ``brokers'' or ``structural holes.''
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/dumbbell_graph.png}
-    \caption{The dumbbell graph consists of two dense clusters connected by a single bridging node. This structure highlights the concept of "brokers" or "structural holes."}
+    \caption{The dumbbell graph consists of two dense clusters connected by a single bridging node. This structure highlights the concept of ``brokers'' or ``structural holes.''}
 \end{figure}
 
 \begin{itemize}
-    \item \textbf{The Dumbbell (Single Cutpoint):} Consider two dense clusters (blocks/cliques) connected by a single bridging node. The nodes inside the clusters have high degree and high Eigenvector Centrality (because they are connected to many other well-connected nodes). However, the central connecting node (the cutpoint, e.g., Node 6 in the slide) has a relatively \textit{low degree} ($K=2$) but the \textit{absolute maximum Betweenness Centrality}. This happens because $100\%$ of the shortest paths traveling from one block to the other must bottleneck through this specific node. It is the ultimate "broker".
+    \item \textbf{The Dumbbell (Single Cutpoint):} Consider two dense clusters (blocks/cliques) connected by a single bridging node. The nodes inside the clusters have high degree and high Eigenvector Centrality (because they are connected to many other well-connected nodes). However, the central connecting node (the cutpoint, e.g., Node 6 in the slide) has a relatively \textit{low degree} ($K=2$) but the \textit{absolute maximum Betweenness Centrality}. This happens because $100\%$ of the shortest paths traveling from one block to the other must bottleneck through this specific node. It is the ultimate ``broker''.
 \end{itemize}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/dumbbell_redundant_cutpoint.png}
-    \caption{By adding alternative paths between the two blocks, we can create a "redundant cutpoint" scenario. This illustrates how Betweenness Centrality can be highly sensitive to network redundancy, as the central node's $BC$ can drop to zero if it is bypassed by a shorter or equivalent route.}
+    \caption{By adding alternative paths between the two blocks, we can create a ``redundant cutpoint'' scenario. This illustrates how Betweenness Centrality can be highly sensitive to network redundancy, as the central node's $BC$ can drop to zero if it is bypassed by a shorter or equivalent route.}
 \end{figure}
 
 \begin{itemize}
@@ -162,7 +162,7 @@ The most critical topological examples are those that decouple Degree Centrality
 
 \subsection{Complex Community Structures}
 
-Real-world networks rarely look like perfect dumbbells, but they often exhibit a "community structure" or "core-periphery" organization that behaves similarly.
+Real-world networks rarely look like perfect dumbbells, but they often exhibit a ``community structure'' or ``core-periphery'' organization that behaves similarly.
 
 \begin{figure}[H]
     \centering
@@ -177,7 +177,7 @@ Nodes deep inside a community will boast high Degree and Eigenvector Centrality.
 \section{Clustering Coefficient and Null Models}
 % ==========================================
 
-A fundamental property of many real-world networks is the \textbf{transitivity of connectivity}, commonly summarized by the social adage: "the friends of my friends are also my friends." The \textbf{Clustering Coefficient} is the structural metric designed to quantify this tendency of nodes to cluster together and form tightly knit groups.
+A fundamental property of many real-world networks is the \textbf{transitivity of connectivity}, commonly summarized by the social adage: ``the friends of my friends are also my friends.'' The \textbf{Clustering Coefficient} is the structural metric designed to quantify this tendency of nodes to cluster together and form tightly knit groups.
 
 \begin{definition}[Local Clustering Coefficient]
     For a given node $i$ with degree $k_i$, let $e_i$ be the actual number of links connecting its first neighbors (adjacent nodes) to each other. The local clustering coefficient $C_i$ is defined as the ratio between $e_i$ and the maximum possible number of links that could exist between those neighbors:
@@ -233,7 +233,7 @@ Tracking region synchronization through the clustering coefficient has proven to
 
 \subsection{The Erdős-Rényi Ensemble as a Null Model}
 
-To properly interpret the centrality and clustering values measured in real-world networks, we must compare them against a baseline where no underlying organizational principle exists. The \textbf{Erdős-Rényi (ER) random graph ensemble} serves as this fundamental null model. In an ER graph, nodes are statistically "indistinguishable," and connections are formed purely by chance. By studying the probability distributions of various centrality measures and the relations between them in this null model, we can identify which features of real networks are non-trivial and functionally significant.
+To properly interpret the centrality and clustering values measured in real-world networks, we must compare them against a baseline where no underlying organizational principle exists. The \textbf{Erdős-Rényi (ER) random graph ensemble} serves as this fundamental null model. In an ER graph, nodes are statistically ``indistinguishable,'' and connections are formed purely by chance. By studying the probability distributions of various centrality measures and the relations between them in this null model, we can identify which features of real networks are non-trivial and functionally significant.
 
 \paragraph{Clustering Coefficient in Random Graphs.}
 In an ER graph, the probability of an edge existing between any two nodes is uniformly equal to $p$, and every edge represents an independent event. Consequently, the probability that two neighbors of a given node $i$ are connected is simply $p$.
@@ -314,7 +314,7 @@ In many standard network models, including random graphs, local centrality measu
     \caption{Scatter plots showing the relationship between Degree ($K$) and various centrality measures (Betweenness Centrality, Closeness Centrality, Eigenvector Centrality) in a random graph. Closeness and Eigenvector Centrality exhibit a strong linear correlation with degree, while Betweenness Centrality shows a more complex, non-linear relationship.}
 \end{figure}
 
-As shown in the scatter plots, metrics such as \textbf{Closeness Centrality} and \textbf{Eigenvector Centrality} exhibit a strictly linear relationship with the degree $K$. In these topologies, knowing the degree of a node allows us to predict its Closeness or Eigenvector centrality almost perfectly. Consequently, these measures do not convey significantly "new" structural information about the nodes compared to the simple degree distribution.
+As shown in the scatter plots, metrics such as \textbf{Closeness Centrality} and \textbf{Eigenvector Centrality} exhibit a strictly linear relationship with the degree $K$. In these topologies, knowing the degree of a node allows us to predict its Closeness or Eigenvector centrality almost perfectly. Consequently, these measures do not convey significantly ``new'' structural information about the nodes compared to the simple degree distribution.
 
 However, \textbf{Betweenness Centrality (BC)} breaks this linear pattern. The relationship between $BC$ and $K$ is non-linear and much more sensitive to the macroscopic topology of the network.
 
