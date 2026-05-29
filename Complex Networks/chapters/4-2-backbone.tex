@@ -19,11 +19,29 @@ Similarly, the global salience of the network can be expressed as an average of 
 
 In many real-world complex systems (e.g., transportation networks like air traffic, biological food webs, or global trade networks), standard link-level centrality measures such as Link Weight ($W$) and Link Betweenness ($BC$) exhibit a \textbf{continuous, often broad or scale-free distribution}.
 
-\TODO{Add image of continuous distribution of centrality measures at link level (Air traffic, Food web, World trade plots)}
+\begin{figure}[H]
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/link_centrality_distribution.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.35\textwidth}
+        \caption{Typical continuous distributions of link-level centrality measures (e.g., Link Weight, Link Betweenness) in complex networks. These distributions often show heavy tails, indicating a wide range of link importance.}
+    \end{minipage}
+\end{figure}
 
 However, Link Salience ($S$) behaves fundamentally differently. In many weighted graphs, the salience of links spontaneously stratifies, exhibiting a \textbf{bimodal distribution} $p(s)$. The distribution is sharply peaked near $S \approx 0$ (links that are rarely part of any spanning tree) and $S \approx 1$ (links that are almost always necessary).
 
-\TODO{Add image of bimodal distribution of salient links in weighted graphs showing spontaneous stratification and network backbone}
+\begin{figure}[H]
+    \begin{minipage}{0.25\textwidth}
+        \caption{Bimodal distribution of link salience in weighted graphs, showing spontaneous stratification and the emergence of a network backbone.}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.7\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/salience_distribution.png}
+    \end{minipage}
+\end{figure}
 
 This bimodal nature reveals a "spontaneous stratification" of the network topology: it naturally filters the graph into a highly salient \textbf{network backbone} (the critical infrastructure of the network) and a set of redundant, non-salient peripheral connections.
 
@@ -31,7 +49,16 @@ This bimodal nature reveals a "spontaneous stratification" of the network topolo
 
 The conceptual difference between Betweenness Centrality and Salience becomes starkly apparent when analyzing homogeneous topologies, such as a planar graph with random connections between neighboring nodes.
 
-\TODO{Add image comparing BC and Salience on a planar graph (core-periphery vs homogeneous distribution)}
+\begin{figure}[H]
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/planar_graph_BC_LS.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.35\textwidth}
+        \caption{A planar graph with random connections between neighboring nodes, serving as a test case to compare Betweenness Centrality and Link Salience. In such a homogeneous topology, BC tends to create a core-periphery structure, while Salience maintains a more uniform distribution of importance across links.}
+    \end{minipage}
+\end{figure}
 
 \begin{itemize}
     \item \textbf{Betweenness Centrality:} Tends to artificially induce a \textit{core-periphery differentiation}. Links near the topological center of the planar graph will inevitably intercept more shortest paths simply due to geometry, accumulating high BC values and creating a centralized "bottleneck."
@@ -44,9 +71,295 @@ The structural backbone identified by salient links plays a critical role in dyn
 
 Consider a repeated random walk on a weighted network, where the passage of the walker through a node equates to an "infection" event. If we trace and "sign" the specific paths through which nodes become infected—effectively creating a random walk with memory (a \textit{non-Markovian process})—we observe a striking correlation with the network's structural salience.
 
-The expected number of passages through a given link during this dynamical spreading process is directly proportional to its salience:
-\[ \text{\# passages} \propto S_{link} \]
+\begin{figure}[H]
+    \begin{minipage}{0.4\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{img/salience_dynamics_correlation.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.55\textwidth}
+        The expected number of passages through a given link during this dynamical spreading process is directly proportional to its salience:
+        \[ \text{\# passages} \propto S_{link} \]
 
-\TODO{Add image of scatter plot showing the correlation between Salient links and dynamical processes (random walk / infection passages)}
+        \caption{Correlation between link salience and the number of passages in a random walk with memory (non-Markovian process). Links with higher salience are traversed more frequently, indicating their critical role in the dynamics of spreading processes.}
+    \end{minipage}
+\end{figure}
 
 This demonstrates that the salient backbone is not just a static topological artifact; it provides the primary deterministic channels for information, disease, or traffic flow in complex systems.
+
+% ==========================================
+\section{Comparing Centrality Measures on Toy Models}
+% ==========================================
+
+To build a solid intuition regarding how different centrality measures behave, it is highly instructive to compute and compare them on simple, canonical network topologies (toy models). By observing how Degree ($K$), Betweenness ($BC$), Closeness ($CL$), and Eigenvector Centrality ($EC$) fluctuate across these extreme structural cases, we can better understand their specific biases and applications.
+
+\subsection{Symmetric Topologies: Complete and Cycle Graphs}
+
+In perfectly symmetric graphs, topological equivalence forces many centrality measures to flatten out, highlighting the baseline behavior of the metrics.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/complete_graph_centrality.png}
+    \caption{In a complete graph, all nodes are structurally equivalent, resulting in identical Degree, Closeness, and Eigenvector Centrality values across the network. Betweenness Centrality is zero for all nodes, as no node serves as a bridge on any shortest path.}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{Complete Graph (Clique):} In a fully connected network of $N$ nodes, every node is connected to every other node. Consequently, all nodes share the exact same degree ($K = N-1$), Closeness, and Eigenvector centrality. Crucially, the Betweenness Centrality is exactly zero ($BC = 0$) for all nodes. Since every pair of nodes is connected by a direct edge (a path of length 1), no node ever acts as an intermediary or "bridge" on a shortest path.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/cycle_graph_centrality.png}
+    \caption{In a cycle graph (ring), all nodes have the same degree and identical centrality measures due to the graph's symmetry. This illustrates that local metrics cannot differentiate nodes in translationally invariant networks.}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{Cycle Graph (Ring):} Similar to the complete graph, the cycle graph exhibits perfect symmetry (periodic boundary conditions). Every node has $K=2$. Because no node occupies a structurally privileged position, $BC$, $CL$, and $EC$ are identical across the entire network. This demonstrates that local metrics cannot differentiate nodes in translationally invariant networks.
+\end{itemize}
+
+\subsection{Spatial Gradients: The Path Graph}
+
+Breaking the periodic boundary conditions of a cycle yields a path graph (a simple line of nodes), which immediately introduces a spatial gradient into the centrality measures.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/path_centrality.png}
+    \caption{In a path graph, nodes at the extremities have low centrality measures, while those near the center exhibit higher values. This illustrates how Betweenness and Closeness Centrality capture "topological interiority" in a linear structure.}
+\end{figure}
+
+In a path graph, nodes at the extremities (leaves) have a degree of $1$ and $BC = 0$, as they cannot mediate any paths. As we move toward the geometric center of the line, both Betweenness and Closeness Centrality strictly increase, peaking at the central node(s). This topology clearly visualizes how $BC$ and $CL$ act as measures of "topological interiority," capturing how close a node is to the topological center of mass of the system.
+
+\subsection{Structural Holes and Brokers: The Dumbbell Graphs}
+
+The most critical topological examples are those that decouple Degree Centrality from Betweenness Centrality, illustrating the concept of "brokers" or "structural holes."
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/dumbbell_graph.png}
+    \caption{The dumbbell graph consists of two dense clusters connected by a single bridging node. This structure highlights the concept of "brokers" or "structural holes."}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{The Dumbbell (Single Cutpoint):} Consider two dense clusters (blocks/cliques) connected by a single bridging node. The nodes inside the clusters have high degree and high Eigenvector Centrality (because they are connected to many other well-connected nodes). However, the central connecting node (the cutpoint, e.g., Node 6 in the slide) has a relatively \textit{low degree} ($K=2$) but the \textit{absolute maximum Betweenness Centrality}. This happens because $100\%$ of the shortest paths traveling from one block to the other must bottleneck through this specific node. It is the ultimate "broker".
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/dumbbell_redundant_cutpoint.png}
+    \caption{By adding alternative paths between the two blocks, we can create a "redundant cutpoint" scenario. This illustrates how Betweenness Centrality can be highly sensitive to network redundancy, as the central node's $BC$ can drop to zero if it is bypassed by a shorter or equivalent route.}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{Redundant Cutpoint:} The sensitivity of Betweenness Centrality is highlighted if we slightly perturb the previous graph by adding alternative paths between the two blocks. If the cutpoint is bypassed by a shorter or equivalent route, its $BC$ immediately crashes to zero. This shows that $BC$ assumes routing strictly follows the absolute shortest paths, making it highly sensitive to network redundancy.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/tree_graph_centrality.png}
+    \caption{Even if the cutpoint is not bypassed, the presence of alternative paths can significantly reduce its Betweenness Centrality. This illustrates how $BC$ can be diluted by network redundancy, even when the original bottleneck node remains a critical connector.}
+
+\end{figure}
+
+\subsection{Complex Community Structures}
+
+Real-world networks rarely look like perfect dumbbells, but they often exhibit a "community structure" or "core-periphery" organization that behaves similarly.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/community_structure.png}
+    \caption{A generic graph with a two-blocks community structure, illustrating how nodes at the boundaries can act as brokers.}
+\end{figure}
+
+In a 2-block network (characterized by many internal links within communities and very few cross-links between them), we see a macroscopic manifestation of the dumbbell effect.
+Nodes deep inside a community will boast high Degree and Eigenvector Centrality. Conversely, the few nodes positioned at the boundaries—those handling the sparse cross-links—will act as local bridges. Just like the cutpoint, these boundary nodes will exhibit a Betweenness Centrality that is disproportionately high compared to their degree. Identifying these nodes is crucial for understanding how to disrupt or facilitate communication between distinct communities in a complex system.
+
+% ==========================================
+\section{Clustering Coefficient and Null Models}
+% ==========================================
+
+A fundamental property of many real-world networks is the \textbf{transitivity of connectivity}, commonly summarized by the social adage: "the friends of my friends are also my friends." The \textbf{Clustering Coefficient} is the structural metric designed to quantify this tendency of nodes to cluster together and form tightly knit groups.
+
+\begin{definition}[Local Clustering Coefficient]
+    For a given node $i$ with degree $k_i$, let $e_i$ be the actual number of links connecting its first neighbors (adjacent nodes) to each other. The local clustering coefficient $C_i$ is defined as the ratio between $e_i$ and the maximum possible number of links that could exist between those neighbors:
+    \[ C_i = \frac{e_i}{\max(e_i)} = \frac{2e_i}{k_i(k_i - 1)} \]
+\end{definition}
+
+Geometrically, if two neighbors of node $i$ are also connected to each other, these three nodes form a \textbf{triangle}. Therefore, $C_i$ essentially measures the local density of triangles centered at node $i$. The value of $C_i$ ranges from $0$ (a purely star-like neighborhood with no interconnected neighbors) to $1$ (a fully connected clique where all neighbors interact with each other).
+
+\begin{figure}[H]
+    \begin{minipage}{0.55\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/clustering_coefficient.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.4\textwidth}
+        \caption{Illustration of the local clustering coefficient $C_i$ for a node $i$. The numerator counts the actual number of links ($e_i$) between the neighbors of $i$, while the denominator counts the maximum possible number of links between those neighbors, which is given by $\frac{k_i(k_i - 1)}{2}$.}
+    \end{minipage}
+\end{figure}
+
+An alternative, more formal way to express this transitivity is by counting cycles:
+\[ C_i = \frac{\# C_3}{\# C_2} \]
+where $\# C_3$ represents the number of triangles (cycles of order 3) passing through $i$, and $\# C_2$ represents the number of connected triples centered at $i$ (paths of length 2, or cycles of order 2).
+
+To characterize the entire network, we compute the \textbf{Global Clustering Coefficient} $C$, which is simply the average of the local coefficients over all nodes in the network: $C = \langle C_i \rangle$.
+
+\subsection{Comparison with the Erdős–Rényi Null Model}
+
+To determine if a network exhibits meaningful clustering, its global clustering coefficient $C$ must be compared against an appropriate null model, typically an Erdős–Rényi (E-R) random graph with the same number of nodes and links, or a random configuration model preserving the exact degree sequence.
+
+Based on this comparison, real networks generally fall into two broad structural categories:
+\begin{itemize}
+    \item \textbf{Social Networks:} Typically exhibit $C \gg C_{random}$. This exceptionally high clustering is driven by \textbf{triadic closure}, a sociological mechanism where individuals sharing a mutual acquaintance have a high probability of becoming acquainted themselves.
+    \item \textbf{Technological Networks:} Systems like the Internet or power grids often show $C \le C_{random}$. These networks are typically designed for efficient distribution over large distances, naturally favoring a \textbf{tree-like structure} that avoids redundant, costly triangular loops.
+\end{itemize}
+
+\subsection{Applications: Functional Brain Networks}
+
+A prominent application of the clustering coefficient is in neuroscience, specifically in the topological analysis of functional brain networks derived from time-series data of brain activity (such as functional NMR).
+
+The standard analytical pipeline involves several steps:
+\begin{enumerate}
+    \item \textbf{Data Acquisition:} Time series are extracted across various spatial scales, ranging from high-resolution brain voxels ($\sim 10^5$) to broader, macroscopic brain regions ($\sim 10^2$).
+    \item \textbf{Network Construction:} A functional network is built by assessing the co-activation between regions. This is quantified using correlation-like measures (e.g., lagged Pearson's correlation, mutual information, or Granger causality). The result is a symmetric, fully connected, weighted correlation matrix.
+    \item \textbf{Filtering and Discretization:} To extract the underlying functional topology, the continuous correlation matrix is often binarized into a unweighted $0/1$ network by applying a threshold $C_{THRS}$. Only functional links with a correlation $C_{ij} > C_{THRS}$ are retained.
+\end{enumerate}
+
+\paragraph{Thresholding Effects and Pathological Synchronization.}
+The choice of the threshold significantly impacts the resulting network topology. If a very high threshold is applied (e.g., $0.95$), the remaining strong correlations tend to mathematically mimic an \textit{equivalence relation}. In such relations, transitivity holds strictly (if region A is highly correlated to B, and B to C, then A is highly correlated to C). Consequently, correlation-based networks subjected to a high global threshold naturally exhibit an abundance of triangles, leading to characteristically high clustering coefficients.
+
+Tracking region synchronization through the clustering coefficient has proven to be a robust clinical indicator. For instance, certain neurological pathologies, such as \textbf{epilepsy}, are structurally characterized by abnormally high functional brain synchronization. In these contexts, anomalous spikes in the clustering coefficient serve as a reliable biomarker.
+
+\textit{Relevant Literature:} The correlation between structural brain features and various centrality/clustering measures is extensively explored in literature (see \textit{Zanghieri et al., Brain Sci 2021}; \textit{Latora, arXiv 2010}; and \textit{Testa, NeuroImage 2018}).
+
+\subsection{The Erdős-Rényi Ensemble as a Null Model}
+
+To properly interpret the centrality and clustering values measured in real-world networks, we must compare them against a baseline where no underlying organizational principle exists. The \textbf{Erdős-Rényi (ER) random graph ensemble} serves as this fundamental null model. In an ER graph, nodes are statistically "indistinguishable," and connections are formed purely by chance. By studying the probability distributions of various centrality measures and the relations between them in this null model, we can identify which features of real networks are non-trivial and functionally significant.
+
+\paragraph{Clustering Coefficient in Random Graphs.}
+In an ER graph, the probability of an edge existing between any two nodes is uniformly equal to $p$, and every edge represents an independent event. Consequently, the probability that two neighbors of a given node $i$ are connected is simply $p$.
+
+Mathematically, the expected local clustering coefficient $C_i$ can be derived directly from its definition:
+\[ C_i = \frac{k_i(k_i - 1) \cdot p}{k_i(k_i - 1)} = p \]
+Since $C_i$ is equal to $p$ for every node, the global clustering coefficient $C_G$ is also simply $p$. By expressing $p$ in terms of the average network connectivity (mean degree) $\lambda = pN$, we obtain:
+\[ C_G = \frac{1}{N} \sum_i C_i = p = \frac{\lambda}{N} \]
+
+This elegant result has profound topological implications in the thermodynamic limit. If we consider a family of ER graphs where the average degree $\lambda$ is kept constant while the network size $N$ increases to infinity, the clustering coefficient vanishes:
+\[ \lim_{\substack{N \to \infty \\ \lambda = \text{const}}} C_G = 0 \]
+This demonstrates that, in the thermodynamic limit, sparse random networks are \textbf{locally tree-like}. They contain virtually no triangles and no short cycles, unless the mean connectivity $\lambda$ is forced to grow proportionally with the network size.
+
+\subsection{Relationship Between Clustering and Degree}
+
+Because the local clustering coefficient $C_i$ in an ER graph is identically $p$ regardless of the node's degree $k_i$, there is absolutely no statistical correlation between $C$ and $K$.
+
+\begin{figure}[H]
+    \begin{minipage}{0.35\textwidth}
+        \caption{In an Erdős-Rényi random graph, the local clustering coefficient $C_i$ is independent of the node degree $k_i$, resulting in a flat distribution when plotting $C_i$ against $k_i$. This illustrates the lack of correlation between clustering and degree in random graphs.}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/ER_clustering_degree.png}
+    \end{minipage}
+\end{figure}
+
+However, in non-random, real-world networks, we observe a highly non-trivial relationship. For instance, in technological networks like the Internet, empirical data reveals a strong negative correlation between a node's degree and its clustering coefficient.
+
+\begin{figure}[H]
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/internet_clustering_degree.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.35\textwidth}
+        \caption{In the Internet, there is a strong negative correlation between node degree $k$ and local clustering coefficient $C_i$. Highly connected hubs tend to have very low clustering coefficients, indicating that their neighbors are not interconnected. This reflects the role of hubs as global bridges connecting distinct communities.}
+    \end{minipage}
+\end{figure}
+
+In these complex systems, the most highly connected hubs tend to have very small clustering coefficients. This occurs because hubs act as global bridges connecting many distinct, otherwise disjoint sub-communities. Because the hub's neighbors belong to different functional or topological clusters, they are very unlikely to be connected to each other, thus suppressing the local transitivity $C_i$ of the hub itself.
+
+\subsection{Gaussianity of Centrality Measures in Random Graphs}
+
+Finally, we can analyze the probability density functions (PDF) of centrality measures in dense random graphs. Consider an ER graph with $N=1000$ and $p=0.1$, resulting in a high average degree of $\lambda = 100$.
+
+While the exact degree distribution of an ER graph is binomial (which approaches a Poisson distribution for large $N$), for large values of $\lambda$, the Poisson distribution converges to a Gaussian (Normal) distribution by the Central Limit Theorem. We can visually verify this using a quantile-quantile (Q-Q) plot, where the empirical quantiles of the degree sequence are plotted against the theoretical quantiles of a Gaussian distribution.
+
+\begin{figure}[H]
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/ER_degree_qqplot.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.35\textwidth}
+        \caption{Q-Q plot for the degree distribution of an Erdős-Rényi graph with $N=1000$ and $p=0.1$. The points closely follow a straight diagonal line, confirming that the degree distribution is well-approximated by a Gaussian distribution in this regime.}
+    \end{minipage}
+\end{figure}
+
+Because nodes in an ER graph are structurally indistinguishable and the topology lacks complex correlations, local centrality measures tend to be tightly coupled to the node degree. As a result, measures like \textbf{Closeness Centrality} and \textbf{Eigenvector Centrality} also exhibit highly Gaussian distributions, forming near-perfect straight lines on their respective Q-Q plots.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/ER_closeness_qqplot.png}
+    \caption{Q-Q plot for Closeness Centrality, Eigenvector Centrality, and Betweenness Centrality illustrating their Gaussianity.}
+\end{figure}
+
+\textbf{Anomalies in Betweenness:} Interestingly, while Closeness and Eigenvector centralities are strongly Gaussian, \textbf{Betweenness Centrality} often shows noticeable deviations from the straight diagonal line, particularly at the tails of the distribution. This implies that even in a completely random topology, the non-local nature of shortest-path routing can generate extreme outlier values (bottlenecks) that do not strictly follow a normal distribution.
+
+\subsection{Correlation Between Centrality Measures and Degree}
+
+In many standard network models, including random graphs, local centrality measures are not entirely independent of the node degree $K$. When evaluating these metrics across a network, we often observe strong correlations.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/centrality_degree_correlation.png}
+    \caption{Scatter plots showing the relationship between Degree ($K$) and various centrality measures (Betweenness Centrality, Closeness Centrality, Eigenvector Centrality) in a random graph. Closeness and Eigenvector Centrality exhibit a strong linear correlation with degree, while Betweenness Centrality shows a more complex, non-linear relationship.}
+\end{figure}
+
+As shown in the scatter plots, metrics such as \textbf{Closeness Centrality} and \textbf{Eigenvector Centrality} exhibit a strictly linear relationship with the degree $K$. In these topologies, knowing the degree of a node allows us to predict its Closeness or Eigenvector centrality almost perfectly. Consequently, these measures do not convey significantly "new" structural information about the nodes compared to the simple degree distribution.
+
+However, \textbf{Betweenness Centrality (BC)} breaks this linear pattern. The relationship between $BC$ and $K$ is non-linear and much more sensitive to the macroscopic topology of the network.
+
+\subsubsection{The Upper Bound of Betweenness Centrality: $BC \propto K^2$}
+
+The non-linear relationship between Betweenness and Degree is mathematically bounded. Specifically, the Betweenness Centrality of a node grows at most quadratically with its degree:
+\[ BC \propto K^2 \]
+In general networks, this acts as a strict upper limit:
+\[ BC \le \mathcal{O}(K^2) \]
+
+To rigorously understand why this quadratic bound exists, we can consider the extreme topological case that maximizes Betweenness: a pure \textbf{tree structure} where the node in question acts as a central cutpoint.
+
+\begin{figure}[H]
+    \begin{minipage}{0.45\textwidth}
+        \caption{A tree structure where a central node $v$ acts as a cutpoint connecting $k$ distinct branches. This configuration maximizes the Betweenness Centrality of node $v$, as all shortest paths between nodes in different branches must pass through it.}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/tree_cutpoint.png}
+    \end{minipage}
+\end{figure}
+
+Let $v$ be a vertex with degree $k$. Assume that $v$ acts as a perfect cutpoint connecting $k$ distinct, otherwise disconnected sub-communities (branches). For simplicity, let's assume each of these $k$ branches contains roughly $N_0$ nodes.
+Because the network is a tree, \textit{any} shortest path traveling from a node in one branch to a node in another branch must strictly pass through $v$.
+
+We can compute the exact Betweenness Centrality by combinatorial counting:
+\begin{enumerate}
+    \item The number of possible pairs of branches is given by the binomial coefficient:
+          \[ \binom{k}{2} = \frac{k(k-1)}{2} \]
+    \item For any given pair of branches, the number of distinct node pairs (one node in the first branch, one in the second) is:
+          \[ N_0 \times N_0 = N_0^2 \]
+\end{enumerate}
+
+The total number of shortest paths passing through the cutpoint $v$ is the product of these two quantities:
+\[ BC_v \approx N_0^2 \cdot \frac{k(k-1)}{2} \propto k^2 \]
+
+This derivation proves that $BC \propto K^2$ is exactly valid for a star-like tree configuration. In any real, non-tree network, the presence of cycles introduces alternative, redundant paths. These alternative routes allow some shortest paths to bypass the central node $v$, causing its actual Betweenness to drop below the theoretical maximum, which is why $BC \le K^2$ serves as an upper bound.
+
+\subsection{Hierarchy of Null Models}
+
+To conclude the analysis of network structures, it is important to note that the Erdős-Rényi (ER) graph is only the simplest baseline. Network science utilizes a hierarchy of null models to test hypotheses at different scales of complexity:
+
+\begin{itemize}
+    \item \textbf{Global Null Models:} Models like the classical ER graph, where we hypothesize identical, homogeneous statistical properties for all nodes across the entire network.
+    \item \textbf{Local Null Models:} Models where topological features change from node to node. The most famous example is the \textit{Configuration Model}, which preserves the exact degree distribution (or degree sequence) of the real network but randomizes all connections. This allows us to test if a network's properties are simply a byproduct of its local degree sequence.
+    \item \textbf{Meso-scale Null Models:} These intermediate models preserve structures at the community level. They assign connection probabilities based on the characteristics within network communities, or among nodes that share similar properties and structural roles (e.g., Stochastic Block Models).
+\end{itemize}

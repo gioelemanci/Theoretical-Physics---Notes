@@ -297,36 +297,81 @@ We can measure the importance of a single node (or link) $i$ by evaluating the \
 
 
 % ==========================================
-\section{Eigenvector Centrality}
+\section{Eigenvalue Centrality}
 % ==========================================
 
-A fundamental shift in the definition of centrality occurs when we posit that a node is "important" if it is connected to other "important" nodes. This recursive concept is the foundation of Eigenvector Centrality (EC), originally introduced in sociology and mathematics (see Katz 1953, Bonacich 1987, and for a comprehensive review, Newman's "Networks: An Introduction").
+A fundamental shift in the definition of centrality occurs when we posit that a node is "important" if it is connected to other "important" nodes. This recursive concept is the foundation of Eigenvalue Centrality (EC), originally introduced in sociology and mathematics (see Katz 1953, Bonacich 1987, and for a comprehensive review, Newman's "Networks: An Introduction").
 
-\begin{definition}[Eigenvector Centrality]
-    Let $G$ be a network described by an adjacency matrix $A$. The \textbf{Eigenvector Centrality} $EC_i$ of a node $i$ is defined such that it is proportional to the sum of the centralities of its neighbors. Mathematically, by introducing a proportionality constant $\frac{1}{\lambda}$, this is expressed as:
+\begin{definition}[Eigenvalue Centrality]
+    Let $G$ be a network described by an adjacency matrix $A$. The \textbf{Eigenvalue Centrality} $EC_i$ of a node $i$ is defined such that it is proportional to the sum of the centralities of its neighbors. Mathematically, by introducing a proportionality constant $\frac{1}{\lambda}$, this is expressed as:
     \[ EC_i = \frac{1}{\lambda} \sum_j A_{ij} \cdot EC_j \]
     In vector notation, denoting the vector of centralities as $\vec{x}$, this recursive relation naturally translates into a classic eigenvalue problem:
     \[ A \cdot \vec{x} = \lambda \cdot \vec{x} \]
 \end{definition}
 
 \subsection{Solving the Eigenvalue Problem}
-The solution for the Eigenvector Centrality is given by the components of the eigenvector relative to the maximum eigenvalue, $\lambda_{MAX}$:
+The solution for the Eigenvalue Centrality is given by the components of the eigenvector relative to the maximum eigenvalue, $\lambda_{MAX}$:
 \[ \lambda_{MAX} : EC_i = x_i^{\lambda_{MAX}} \]
 By the Perron-Frobenius theorem (for non-negative matrices), the eigenvector associated with the largest eigenvalue $\lambda_{MAX}$ is guaranteed to have all strictly positive components ($x_i > 0$), making it the most physically meaningful solution for a centrality measure.
 
 \paragraph{Note on other eigenvectors:} Technically, other eigenvectors of the adjacency matrix could be used to assign values to nodes. However, positivity for all components is no longer guaranteed for eigenvectors associated with $\lambda \neq \lambda_{MAX}$. Despite this, these alternate eigenvectors can still carry structural insights, and one could potentially sort nodes based on these signed values to identify specific topological features or network bipartitions.
 
-\subsection{Eigenvector Centrality in Directed Networks}
-When dealing with directed graphs, the adjacency matrix $A$ is generally asymmetric. Consequently, we have two distinct options for computing eigenvector centrality, depending on the flow of information:
+\subsection{Eigenvalue Centrality in Directed Networks}
+When dealing with directed graphs, the adjacency matrix $A$ is generally asymmetric. Consequently, we have two distinct options for computing Eigenvalue Centrality, depending on the flow of information:
 \begin{itemize}
     \item \textbf{Right eigenvector:} This measures the centrality of nodes based on being \textbf{pointed to} by other nodes (receiving incoming links).
     \item \textbf{Left eigenvector:} This measures the centrality of nodes based on \textbf{pointing to} other nodes (generating outgoing links).
 \end{itemize}
 
-\paragraph{Pathologies and Limitations.} Directed networks introduce specific structural problems for Eigenvector Centrality:
+\paragraph{Pathologies and Limitations.} Directed networks introduce specific structural problems for Eigenvalue Centrality:
 \begin{enumerate}
     \item If a node $j$ has an in-degree $K_{IN} = 0$ (meaning $A_{ij} = 0$ for all $i$), its eigenvalue centrality is strictly zero: $EC_j = 0$.
     \item Because the measure is recursive, if a node is pointed to \textit{only} by nodes that have $EC = 0$, its own centrality will also be forced to zero.
     \item In general, directed networks suffer from issues related to separated components (e.g., source or sink components). This heavily impacts the overall eigenvector spectrum. In matrix terms, this corresponds to block matrices with absorbing states (sinks), which can localize the centrality on a very small subset of the network.
 \end{enumerate}
 
+
+% ==========================================
+\section{Hubs and Authorities (HITS Algorithm)}
+% ==========================================
+
+To resolve some of the issues of directed networks, we can distinguish between two mutually reinforcing roles a node can play. A classic example is a network of academic paper citations:
+\begin{itemize}
+    \item \textbf{Authorities ($\vec{x}$):} Nodes containing highly relevant information. They are characterized by being pointed to by many hub papers.
+    \item \textbf{Hubs ($\vec{y}$):} Nodes that act as extensive directories or review articles, pointing to many papers with relevant information (authorities).
+\end{itemize}
+Importantly, the same node $i$ possesses both an authority score $x_i$ and a "hubness" score $y_i$.
+
+\begin{definition}[Hubs and Authorities Scores]
+    In a directed network described by an adjacency matrix $A$, each node $i$ is assigned an \textbf{authority score} $x_i$ and a \textbf{hub score} $y_i$. These quantities are defined by a mutually recursive relationship, where a good authority is pointed to by good hubs, and a good hub points to good authorities. Using proportionality constants $\alpha$ and $\beta$, the system is formalized as:
+    \[ x_i = \alpha \sum_j A_{ij} \cdot y_j \implies \vec{x} = \alpha A \vec{y} \]
+    \[ y_i = \beta \sum_j A_{ji} \cdot x_j \implies \vec{y} = \beta A^T \vec{x} \]
+\end{definition}
+
+\subsection{Combining the Equations}
+The two systems of equations can be decoupled by substitution, leading to two separate eigenvalue problems. Let $\lambda = \frac{1}{\alpha \beta}$:
+\begin{enumerate}
+    \item Substituting $\vec{y}$ into the first equation:
+          \[ \vec{x} = \alpha \beta A A^T \vec{x} \implies A A^T \vec{x} = \lambda \vec{x} \]
+    \item Substituting $\vec{x}$ into the second equation:
+          \[ \vec{y} = \alpha \beta A^T A \vec{y} \implies A^T A \vec{y} = \lambda \vec{y} \]
+\end{enumerate}
+
+Since the matrix $A^T A$ (like $A A^T$) is by definition symmetric, the two distinct problems share the \textbf{same eigenvalue spectrum} (real eigenvalues), although they yield \textbf{different eigenvectors}. The eigenvector of $A A^T$ provides the authority scores, while the eigenvector of $A^T A$ provides the hub scores.
+
+\paragraph{Network Interpretation.}
+These matrices correspond to the structural symmetrization approaches used for directed graphs:
+\begin{itemize}
+    \item $A A^T$ represents the \textbf{cocitation network} (where a link indicates two nodes are cited by the same source).
+    \item $A^T A$ represents the \textbf{bibliographic coupling network} (where a link indicates two nodes cite the same target).
+\end{itemize}
+
+\subsection{Notes on the HITS Algorithm}
+This coupled approach forms the basis of the \textbf{HITS (Hyperlink-Induced Topic Search) algorithm}, developed by J. M. Kleinberg (\textit{Authoritative sources in a hyperlinked environment, J. ACM 46, 604-632, 1999}; also discussed in Newman's book).
+
+From a computational standpoint, one does not need to solve both eigenvalue problems from scratch. Given the equations:
+\[ A A^T \vec{x} = \lambda \vec{x} \]
+\[ A^T A \vec{y} = \lambda \vec{y} \]
+It can be easily seen that $\vec{y} = A^T \vec{x}$ acts as the required eigenvector. Thus, we only need to compute the eigenvalue problem for $A A^T$ to find the authority vector $\vec{x}$, and then derive the hub vector $\vec{y}$ through a simple matrix multiplication.
+
+\textbf{Final Note:} Although the HITS algorithm is mathematically and conceptually very elegant, it is actually not much used in modern broad-scale applications, as it has not (yet) found overwhelmingly interesting practical uses compared to other ranking algorithms like PageRank.
