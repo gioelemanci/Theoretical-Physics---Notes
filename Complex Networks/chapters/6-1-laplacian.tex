@@ -169,6 +169,7 @@ This question was famously posed for the continuous case in 1966 by Mark Kac in 
 \section{Spectral Properties of the Laplacian}
 
 \subsection{The First Eigenvectors and Network Components}
+
 The spectrum of the Laplacian matrix provides immediate and profound insights into the macroscopic structure of a network, starting with its smallest eigenvalues.
 
 If a network consists of a \textbf{unique connected component}, there is exactly one zero eigenvalue (\( \lambda_1 = 0 \)). The corresponding eigenvector is the constant vector:
@@ -195,6 +196,7 @@ By calculating the eigenvalues of the Laplacian, the number of null eigenvalues 
 \end{remark}
 
 \subsection{The Fiedler Number (\( \lambda_2 \)) and Algebraic Connectivity}
+
 For a connected graph, the first eigenvalue is trivially zero. The \textbf{first non-zero eigenvalue} (typically denoted as \( \lambda_2 \), assuming eigenvalues are sorted in ascending order) is known as the \textbf{Fiedler number} (\( \lambda_2 > 0 \)). It is also widely referred to as the \textbf{algebraic connectivity} of the graph.
 
 The Fiedler number has incredibly interesting properties related to:
@@ -208,13 +210,14 @@ The Fiedler number has incredibly interesting properties related to:
 \textit{(References: Spectral graph theory, Fan Chung CBMS 1997; Laplacian eigenvectors of graphs, Stadler Springer 2007).}
 
 \subsection{Connectivity in Network Ensembles}
+
 The specific value of the Fiedler number—especially when evaluated in relation to the maximum degree of the network and the total number of vertices \( n \)—gives global information on the overall robustness and connectivity of the network. As previously established, \( \lambda_2 = 0 \) if the network is disjoint.
 
 For different families of standard graphs (network ensembles), the Fiedler value scales differently with the number of nodes \( n \):
 
-\begin{table}[h!]
+\begin{table}[H]
     \centering
-    \begin{tabular}{c|c}
+    \begin{tabular}{lc}
         \toprule
         \textbf{Graph Type} & \textbf{Fiedler Value (\( \lambda_2 \))} \\
         \midrule
@@ -230,11 +233,24 @@ For different families of standard graphs (network ensembles), the Fiedler value
 
 Notably, \textbf{Erdős–Rényi (E-R) random graphs} act as \textbf{expanders} (graphs that are sparse but highly connected) provided they have a sufficiently high link density.
 
-\TODO{Insert image showing the evolution of dumbbell graphs for n=3 to n=8.}
-\TODO{Insert image showing a binary tree graph.}
-\TODO{Insert image showing a 3D grid graph.}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/dumbbell_evolution.png}
+    \caption{Evolution of dumbbell graphs for a growing number of nodes \( n \) (from \( n=3 \) to \( n=8 \)). The Fiedler number decreases as the graph becomes more "bottlenecked" with a single link connecting two large cliques.}
+\end{figure}
+
+\begin{figure}[H]
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/binary_tree_graph.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \caption{A binary tree graph, which has a Fiedler number that scales as \( \Theta(1/n) \), reflecting its relatively poor connectivity compared to more densely connected graphs.}
+    \end{minipage}
+\end{figure}
 
 \subsection{Graph Bipartitioning via the Fiedler Vector}
+
 The Fiedler number provides a measure of connectivity: a "small" Fiedler eigenvalue indicates a poorly connected graph (e.g., a graph with a narrow bottleneck).
 
 More importantly, the eigenvector associated with \( \lambda_2 \) — known as the \textbf{Fiedler vector} — gives us a powerful heuristic to divide the graph into \textbf{two parts} (bipartitioning). This is achieved simply by looking at the \textbf{sign} of its components.
@@ -249,9 +265,14 @@ For example, given a Fiedler vector:
 \]
 The nodes corresponding to negative values form one cluster, and those with positive values form the other.
 
-\TODO{Insert image showing a bipartite dumbbell graph with N=10 and KMAX=5, where nodes are visually separated into two distinct clusters connected by a single central link, with lambda2 = 0.29.}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/bipartite_dumbbell.png}
+    \caption{A bipartite dumbbell graph with \( N=10 \) nodes and a maximum degree \( K_{max}=5 \). The nodes are visually separated into two distinct clusters connected by a single central link, with a Fiedler number \( \lambda_2 = 0.29 \).}
+\end{figure}
 
 \subsection{Node Clustering: Two Main Strategies}
+
 Following the concept of bipartitioning via the Fiedler vector, we can generalize the approach to divide the network into multiple communities. Historically and practically, there are two primary strategies for node clustering using the Laplacian spectrum:
 
 \begin{enumerate}
@@ -272,11 +293,17 @@ Following the concept of bipartitioning via the Fiedler vector, we can generaliz
         \item \textbf{The sign of the eigenvector components} determines the position of the oscillation (whether a specific point on the rope is displaced "above" or "below" the resting axis).
     \end{itemize}
 
-    The points where the eigenvector components cross zero are called \textbf{nodal points}.
-    \TODO{Insert image of vibrating ropes showing the standing waves and the nodal points intersecting the central horizontal axis.}
+    The points where the eigenvector components cross zero are called \textbf{nodal points}. These nodal points physically separate different regions of the rope that are vibrating in synchrony (i.e., they have the same sign). In the context of a graph, these nodal points correspond to the "cut points" that separate clusters of nodes with positive and negative components in the Fiedler vector.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/stationary_waves.png}
+        \caption{Visualization of standing waves on a vibrating rope. The nodal points (where the wave crosses the central axis) correspond to the sign changes in the eigenvector components, effectively separating different clusters of nodes in a graph.}
+    \end{figure}
 \end{example}
 
 \subsection{Notes on Clustering, Manifolds, and Intrinsic Metrics}
+
 In continuous real \( N \)-dimensional manifolds (like the rope or a metal plate), \textbf{nodal points} physically divide different regions of the manifold that are vibrating in synchrony (domains with the same sign).
 
 However, if we are dealing with a pure \textbf{topological manifold} (a general complex network), we have a problem: we have no geometric idea of what a "region" is, because the graph lacks a spatial metric (distance between nodes is only topological, not physical).
@@ -306,12 +333,16 @@ The second eigenvector (\( \vec{x}_2 \)) provides the first \textit{non-trivial}
 
 \begin{example}
     Consider a simple linear graph of 5 nodes.
-    \TODO{Insert image of a simple path graph with 5 nodes connected in a line.}
     The Fiedler vector for this specific topology assigns coordinates that space the nodes out symmetrically while keeping connected nodes adjacent:
     \[
         \vec{x}_2 = (-0.6015, \ -0.3717, \ 0.0000, \ 0.3717, \ 0.6015)^T
     \]
     By ordering the nodes according to these values, we naturally recover the optimal 1D layout of the chain.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/chain_graph.png}
+        \caption{A simple chain graph with 5 nodes. The Fiedler vector assigns coordinates that space the nodes symmetrically while keeping connected nodes adjacent.}
+    \end{figure}
 \end{example}
 
 \subsection{Graph Visualization: The Center of Mass Approach}
@@ -420,22 +451,31 @@ Spectral Centrality proves extremely useful in real-world, data-driven networks.
 \textbf{Networks from Time Series:}
 Consider a network generated from the S\&P 500 financial time series at a daily scale. We start with the time correlation matrix \( C_{ij} \) between assets. We can map this to a distance metric:
 \[
-    s_{ij} = \sin(\arccos(C_{ij})/2)
+    s_{ij} = \sin(\arccos(C_{ij})/2),
 \]
-And then convert it into an adjacency matrix using a Gaussian kernel:
+then convert it into an adjacency matrix using a Gaussian kernel:
 \[
-    A_{ij} = e^{- \frac{s_{ij}^2}{\sigma^2}}
+    A_{ij} = e^{- \frac{s_{ij}^2}{\sigma^2}}.
 \]
-\TODO{Insert image showing the S\&P 500 correlation function plot and the resulting heatmaps comparing 1-spectral, 2-spectral, and 3-spectral centralities against Degree, Betweenness, and Eigenvector centralities across different equity windows.}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/sp500_correlation.png}
+    \caption{Plot of correlation for the S\&P 500 assets on a daily scale (left), and the resulting heatmaps comparing 1-spectral, 2-spectral, and 3-spectral centralities against Degree, Betweenness, and Eigenvector centralities across different equity windows (dx).}
+\end{figure}
 
 \begin{example}[Spectral Centrality vs. Efficiency (Biological Example)]
     When studying complex biological networks, different metrics capture different systemic properties.
-    \TODO{Insert scatter plot comparing Spectral Centrality SC1 (log scale) vs. Efficiency E for biological immune system markers like CSF-1, IL-7, TGF-beta, etc.}
+
     In the context of the immune system:
     \begin{itemize}
         \item \textbf{Efficiency \( E \)} provides an \textbf{evolutionary} ranking (identifying nodes critical to the innate, baseline structural immune system).
         \item \textbf{Spectral Centrality \( SC \)} provides a \textbf{functional} ranking (identifying nodes that dynamically drive specific processes, like hematopoiesis).
     \end{itemize}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/biological_SC_E.png}
+        \caption{Scatter plot comparing Spectral Centrality SC1 (log scale) vs. Efficiency E for biological immune system markers.}
+    \end{figure}
 \end{example}
 
 \subsubsection{Important Notes on Spectral Centrality}

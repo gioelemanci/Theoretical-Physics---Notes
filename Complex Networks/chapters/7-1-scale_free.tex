@@ -2,79 +2,817 @@
 \chapter[Scale-Free Networks and Generative Models]{Scale-Free Networks and\\Generative Models}
 % ==========================================
 
-% ==========================================
-\section{Introduction to Scale-Free Networks}
-% ==========================================
-% Introduzione empirica e confronto con i modelli nulli.
+While random graphs like the Erdős–Rényi (E-R) model provide a foundational mathematical framework, many real-world networks exhibit an extremely heterogeneous topology that cannot be captured by a simple binomial or Poisson degree distribution.
 
-\subsection{Heavy-Tailed Degree Distributions}
-% Definizione di rete scale-free e distribuzione a legge di potenza (Power-law P(k) ~ k^-gamma).
-% Contronto visivo e concettuale tra reti casuali (Erdős-Rényi, curva a campana) e reti Scale-Free.
+Instead, these real systems are characterized by a \textbf{heavy-tailed probability density function (pdf)} for the degree distribution \( p(k) \). Specifically, the probability of finding a node with degree \( k \) decays as a power-law:
+\[
+    p(k) \propto k^{-\alpha}
+\]
+Networks exhibiting this property are called \textbf{scale-free networks}. The term "scale-free" indicates the absence of a characteristic "typical" scale for the node degree (unlike the mean of a bell curve).
 
-\subsection{Empirical Examples}
-% Esempi dal mondo reale: WWW, Actor network, Power grids.
-% Il ruolo degli "Hub" e l'estrema eterogeneità del sistema.
+It is crucial to note that "scale-free" defines a property of the degree distribution, but \textbf{it is not a unique network ensemble} (like the E-R model). Various scale-free network generative models can produce the exact same power-law degree distribution, but differ drastically in other topological features and centrality measures, such as:
+\begin{itemize}
+    \item Clustering Coefficient (\( C \)).
+    \item Assortativity (the tendency of high-degree nodes to connect to other high-degree nodes).
+    \item The relationship between Betweenness Centrality (\( BC \)) and node degree (\( k \)).
+\end{itemize}
+Because of these differences, the specific \textbf{network construction process} (the generative model) is of fundamental importance.
 
-% ==========================================
-\section{The Barabási-Albert (BA) Model}
-% ==========================================
-% Il primo modello generativo fondamentale.
+\subsubsection{Erdős–Rényi vs. Scale-Free Topologies}
+The difference between a random network and a scale-free network is immediately evident when plotting their degree distributions:
+\begin{itemize}
+    \item \textbf{Random Network (E-R):} The degree distribution follows a \textbf{bell curve} (Poisson distribution in the limit of large \( N \)). Most nodes have a degree very close to the average \( \langle k \rangle \), and hubs (nodes with extremely high degree) are practically non-existent.
+    \item \textbf{Scale-Free Network:} The degree distribution follows a \textbf{power-law}. Most nodes have a very small degree, but there is a non-negligible probability of finding a few nodes with an extraordinarily high number of links (the hubs).
+\end{itemize}
 
-\subsection{Core Mechanisms: Growth and Preferential Attachment}
-% Spiegazione dei due ingredienti mancanti nel modello E-R.
-% Definizione formale della probabilità di attacco preferenziale ("Rich-get-richer").
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/scale_free_comparison.png}
+    \caption{Linear plots comparing the bell curve of a Random Network with the heavy-tailed power-law curve of a Scale-free Network.}
+\end{figure}
 
-\subsection{Continuum Theory and Rate Equation}
-% Derivazione analitica/matematica dell'esponente.
-% Approssimazione continua (Master Equation / Rate equation).
-% Dimostrazione formale che il modello BA genera un esponente gamma = 3.
+To easily identify a power-law distribution, it is standard practice to plot \( P(k) \) on a \textbf{log-log scale}. Taking the logarithm of both sides of the power-law equation yields:
+\[
+    \log p(k) = -\alpha \log k + c
+\]
+On a log-log plot, a power-law distribution appears as a \textbf{straight decreasing line}, where the slope of the line corresponds exactly to the scaling exponent \( -\alpha \).
 
-\subsection{Topological Properties and Limitations of the BA Model}
-% Analisi delle altre metriche nel modello BA: 
-% - Distanze medie (Ultra-small world).
-% - Clustering coefficient (decresce con la dimensione della rete, a differenza delle reti reali).
-% - Assenza di community structure e assortativity.
+\begin{figure}[H]
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/scale_free_loglog.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.35\textwidth}
+        \caption{Log-log plot of the degree distribution \( P(k) \) for a scale-free network, illustrating the straight line with slope equal to the negative exponent \( -\alpha \).}
+    \end{minipage}
+\end{figure}
 
-% ==========================================
-\section{Extensions of the Barabási-Albert Model}
-% ==========================================
-% Modifiche per adattare il modello ai dati empirici.
+\subsubsection{Ubiquity in Real-World Systems}
 
-\subsection{Non-linear Preferential Attachment}
-% Cosa succede se l'attacco preferenziale non è strettamente lineare (sub-linear vs super-linear).
-% Gelificazione (Winner-takes-all) vs perdita della legge di potenza.
+Scale-free properties are not just mathematical curiosities; they are pervasive across vastly different disciplines. Empirical data has shown that power-law degree distributions are found in many real systems:
 
-\subsection{Node Fitness and Competitive Growth}
-% Introduzione del parametro "Fitness" (es. Modello Bianconi-Barabási).
-% Modello a gas di Bose e condensazione di Bose-Einstein nelle reti complesse.
+\begin{itemize}
+    \item \textbf{Social Networks:} Actors in movies (co-starring networks), author citation networks, sexual contact networks, and email/Facebook friend connections.
+    \item \textbf{Technological Networks:} The World Wide Web (hyperlink connections), the Internet (router connections), and air transport networks.
+    \item \textbf{Biological Networks:} Cellular "omic" networks, including protein-protein interaction networks, gene regulatory networks, metabolic pathways, and DNA contact maps.
+\end{itemize}
 
-% ==========================================
-\section{The Duplication-Divergence Model}
-% ==========================================
-% Un approccio alternativo basato sulla biologia evolutiva.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/scale_free_empirical.png}
+    \caption{Three log-log plots (A, B, C) representing empirical scale-free distributions: A (actor network), B (WWW in 1999), and C (power grid).}
+\end{figure}
 
-\subsection{Biological Motivation: Gene Duplication}
-% Origine del modello: evoluzione delle reti di interazione proteica (PPI) tramite duplicazione genica.
+\subsubsection{Statistical Moments and Divergence}
 
-\subsection{Mechanisms of Duplication and Divergence}
-% Definizione dell'algoritmo passo-passo:
-% 1. Scelta di un nodo target e clonazione.
-% 2. Mantenimento parziale dei link.
-% 3. Divergenza/Mutazione (aggiunta o rimozione di nuovi link).
+The most profound physical consequence of the scale-free topology emerges when we study its statistical moments (such as the mean and the variance).
 
-\subsection{Mathematical Formulation and Tunable Exponents}
-% Equazione del tasso (Rate equation) per il modello Dupl-Div.
-% Dimostrazione di come questo modello permetta di generare esponenti variabili (a differenza del BA fisso a 3).
-% Shifted power-law.
+In a pure theoretical scale-free model, where the maximum degree extends to infinity (\( k_{MAX} \rightarrow \infty \)), some statistical moments \textbf{diverge}.
+The \( \beta \)-th moment of the degree distribution is defined as:
+\[
+    \langle k^\beta \rangle = \sum_i k_i^\beta \cdot p(k_i)
+\]
+Passing from the discrete sum to the continuous integral over the domain \( D \):
+\[
+    \langle k^\beta \rangle \rightarrow \int_D k^\beta \cdot p(k) dk = \int_D k^\beta \cdot k^{-\alpha} dk = \int_D k^{\beta-\alpha} dk
+\]
+The convergence of this integral depends entirely on the exponent \( \alpha \). For the integral to yield a finite value as \( k \to \infty \), we need \( (\beta - \alpha) < -1 \), which means \( \alpha > \beta + 1 \).
 
-% ==========================================
-\section{Implicit Preferential Attachment and Analogies}
-% ==========================================
-% Chiusura concettuale.
+\begin{remark}[Note on Mean and Variance]
+    \begin{itemize}
+        \item To have a finite \textbf{mean} (first moment, \( \beta = 1 \)), we need the scaling exponent \( \alpha > 2 \).
+        \item To have a finite \textbf{variance} (related to the second moment, \( \beta = 2 \)), we need \( \alpha > 3 \).
+    \end{itemize}
+\end{remark}
+
+Empirically, the vast majority of real-world scale-free networks exhibit an exponent in the range:
+\[
+    2 < \alpha < 3
+\]
+This specific regime is incredibly important: it guarantees that the network has a finite average degree (mean), but its \textbf{variance theoretically diverges} (tends to infinity). This mathematically explains the nature of scale-free networks: the immense variance is what allows for the spontaneous emergence of massive, highly connected "hubs" that hold the entire network together.
+
+\section{The Barabási-Albert Network Growth Model}
+
+Why do some real-world networks exhibit scale-free power-law distributions rather than behaving like Erdős–Rényi (E-R) random networks? The fundamental difference lies in how the networks are formed. The static nature of E-R graphs fails to capture the dynamics of real systems.
+
+To generate a scale-free topology, the Barabási-Albert (B-A) model introduces two necessary ingredients:
+\begin{enumerate}
+    \item \textbf{Network Growth (Non-stationary process):} The number of nodes grows over time. This is analogous to a grand-canonical ensemble in thermodynamics, characterized by a varying number of elements.
+    \item \textbf{Link Selection Rules:} Links are not chosen randomly with uniform probability. There is a specific mechanism guiding how new nodes connect to existing ones.
+\end{enumerate}
+
+\subsubsection{Hypothesis Plausibility}
+
+These two hypotheses are highly reasonable and biologically/technologically plausible for non-stationary (evolving) systems.
+
+From a thermodynamic point of view, these are \textbf{"open" systems} with a constantly variable number of elements. Examples include the addition of new websites to the WWW, new users joining social media platforms, or new proteins emerging in genomes over evolutionary timescales. Surely, all these systems have experienced a significant "growth" phase, even if that growth might eventually slow down to a "stationary" state.
+
+\subsubsection{The Preferential Attachment Rule}
+
+To satisfy the second ingredient, the B-A model uses the \textbf{preferential attachment} rule, often summarized by the adage \textbf{"the rich get richer"}.
+
+This rule states that when a new node enters the system, it creates links to older, existing nodes with a probability that is \textbf{strictly proportional to their current degree}. Therefore, highly connected nodes (hubs) are exponentially more likely to acquire even more connections.
+
+Mathematically, the probability \( p_i(t) \) that a new node links to an existing \( i \)-th node at time \( t \) is given by:
+\[
+    p_i(t) = \frac{k_i(t)}{\sum_j k_j(t)}
+\]
+where the denominator is the sum of the degrees of all nodes currently in the network.
+
+\subsubsection{Limit Distribution of the B-A Model}
+
+When simulating the B-A model over a long time, the limit degree distribution perfectly converges to a \textbf{scale-free network with a scaling exponent \( \alpha = 3 \)}.
+
+An incredibly robust feature of this model is that the macroscopic network properties (specifically the exponent \( \alpha \)) \textbf{do not depend} on the microscopic initial parameters, such as the initial number of nodes or the exact number of links added at each time step. The asymptotic behavior is always:
+\[
+    p_\infty(k) \propto k^{-3} \implies \alpha = 3
+\]
+
+\subsection{Mathematical Demonstration: Continuous Approximation}
+
+We can prove this result analytically using a continuous time approximation. Let us define the network construction algorithm:
+\begin{itemize}
+    \item \textbf{Initial state:} Start with \( m_0 \) connected nodes at \( t = 0 \).
+    \item \textbf{Growth step:} At each time step \( t \), add exactly \textbf{one node} equipped with \( k_0 = m \) links (where \( m < m_0 \)).
+\end{itemize}
+
+Under these rules, the total number of nodes \( N(t) \) increases linearly with time:
+\[
+    N(t) = m_0 + t
+\]
+Consequently, the total number of links \( L(t) \) also grows linearly. Because each undirected link adds \( 2 \) to the total sum of degrees in the network, the sum of all degrees at time \( t \) is:
+\[
+    \sum_j k_j(t) = \sum_j k_j(t=0) + 2mt = l_0 + 2mt
+\]
+where \( l_0 \) is the initial sum of degrees.
+
+We can track the evolution of the degree of a "typical" individual node \( i \) using a differential equation. The rate of change of its degree is \( m \) (the number of new links introduced) multiplied by the preferential attachment probability:
+\[
+    \frac{dk_i(t)}{dt} = m \cdot \frac{k_i(t)}{\sum_j k_j(t)} = m \cdot \frac{k_i(t)}{l_0 + 2mt}
+\]
+For long times (\( t \gg 1 \)), we can neglect the small initial constant \( l_0 \), simplifying the equation to:
+\[
+    \frac{dk_i(t)}{dt} \approx m \frac{k_i(t)}{2mt} = \frac{k_i(t)}{2t}
+\]
+Integrating this separable differential equation yields the explicit formula for the degree of node \( i \) based on the time \( t_i \) it was introduced into the network:
+\[
+    k_i(t) = m \sqrt{\frac{t}{t_i}}
+\]
+\textit{Physical meaning:} The node degree \( k \) depends heavily on the time \( t_i \) in which it appeared. Older nodes (small \( t_i \)) have had much more time to accumulate links and become hubs.
+
+To find the degree distribution, we rewrite the relation to isolate \( t_i \):
+\[
+    t_i = t \left( \frac{m}{k_i(t)} \right)^2 = t \frac{m^2}{k_i^2}
+\]
+Now, we calculate the Cumulative Density Function (cdf), which is the probability that a node has a degree smaller than \( k \):
+\[
+    cdf: P(k_i < k) = P\left( t_i > \frac{m^2 t}{k^2} \right)
+\]
+Using basic probability rules:
+\[
+    P\left( t_i > \frac{m^2 t}{k^2} \right) = 1 - P\left( t_i \leq \frac{m^2 t}{k^2} \right) = 1 - \frac{N_i}{N(t)}
+\]
+Since nodes are added uniformly at a constant rate of 1 per time step, the number of nodes added up to time \( \tau \) is just \( \tau \). Therefore, \( N_i = \frac{m^2 t}{k^2} \), and the total number of nodes is \( N(t) = t_{TOT} = t + m_0 \):
+\[
+    P(k_i < k) = 1 - \frac{m^2 t}{k^2} \frac{1}{(t + m_0)}
+\]
+
+Finally, to get the Probability Density Function (pdf) \( p(k) \), we take the partial derivative of the cdf with respect to \( k \):
+\[
+    pdf: \frac{\partial (cdf)}{\partial k} = \frac{t}{(t + m_0)} \cdot \frac{2m^2}{k^3}
+\]
+In the thermodynamic limit of large times (\( t \gg m_0 \)), the fraction \( \frac{t}{t+m_0} \rightarrow 1 \), leaving us with:
+\[
+    p(k) \xrightarrow{t \gg 1} \frac{2m^2}{k^3} \propto k^{-3}
+\]
+This mathematically proves the emergence of the \( \alpha = 3 \) scale-free distribution. \textit{Note: The exact same analytical results are obtained if the addition rules are only satisfied "on average", provided the variance is not too large.}
+
+\subsubsection{B-A Network Visualization and Centrality}
+
+When visually rendering a Barabási-Albert network, the topology looks vastly different from an E-R random graph.
+
+Due to the preferential attachment mechanism, a few extremely dense hubs anchor the entire structure, with many low-degree nodes hanging off them. Despite having a completely different (non E-R) degree distribution \( p(k) \), the B-A model often retains similar macroscopic centrality relations. For example, plotting Betweenness Centrality (BC) versus Node Degree (\( K \)) reveals a strong positive, slightly convex correlation: nodes with the highest degree naturally act as the primary topological bridges for shortest paths across the network.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/ba_network.png}
+    \caption{Visualization of a Barabási-Albert (B-A) network generated with \( N = 2000 \), \( N_0 = 20 \), and \( N_L = 1 \). The network exhibits a highly clustered, hub-and-spoke hierarchical topology, with a few dominant hubs and many low-degree nodes. The scatter plot of Betweenness Centrality (BC) vs. Node Degree (K) illustrates a strong positive correlation, indicating that high-degree nodes serve as critical topological bridges in the network.}
+\end{figure}
+
+\subsection{Testing the Hypotheses}
+
+\subsubsection{Removing Network Growth}
+To truly understand why both ingredients (growth and preferential attachment) are strictly necessary to generate a scale-free topology, we can test what happens when we remove them one by one.
+
+First, what happens if we \textbf{remove the growth} of the number of nodes, but \textbf{keep preferential attachment}?
+In this scenario, we have a fixed number of nodes, and we continuously add links between them, favoring nodes that are already highly connected.
+
+Initially, the network will exhibit a \textbf{transient phase} with a scale-free distribution (provided the total number of nodes \( N_{NODE} \) is sufficiently high). However, because the system is closed, the addition of links will eventually reach \textbf{saturation}. As time goes to infinity, every node will eventually connect to every other node (\( K = K_{MAX} \)), resulting in a trivial \textbf{fully connected graph} rather than a scale-free network.
+
+\subsubsection{Removing Preferential Attachment}
+Next, we test the opposite scenario: what happens if we keep network growth, but \textbf{remove preferential attachment}?
+In this case, a new node enters the system at each time step and links to one of the existing nodes \textbf{randomly} (with uniform probability), regardless of how many links the existing node already has.
+
+The probability \( p_i(t) \) of linking to the \( i \)-th node is no longer dependent on its degree \( k_i \), but simply inversely proportional to the total number of available nodes \( N(t) = m_0 + t \):
+\[
+    p_i(t) \approx \frac{1}{m_0 + t}
+\]
+\textit{(Note: The original slide writes the denominator as \( \sum k_i(t) \), but conceptually and mathematically, uniform random attachment means dividing by the total number of nodes, hence \( m_0 + t \)).}
+
+The differential equation for the growth of a typical node's degree becomes:
+\[
+    \frac{dk_i(t)}{dt} = \frac{1}{m_0 + t}
+\]
+Integrating this equation yields a logarithmic growth of the degree over time, rather than a square-root growth:
+\[
+    k_i(t) = \log\left(\frac{m_0 + t}{m_0 + t_i}\right)
+\]
+
+We can derive the resulting degree distribution by isolating \( t_i \):
+\[
+    t_i = \frac{m_0 + t}{e^k} - m_0
+\]
+Following the same cumulative density function (cdf) logic as before:
+\[
+    cdf : P(k_i < k) = P\left( t_i > \frac{m_0 + t}{e^k} - m_0 \right) = 1 - \frac{\frac{m_0 + t}{e^k} - m_0}{t + m_0}
+\]
+Taking the derivative to find the probability density function (pdf) in the limit of large times (\( t \gg 1 \)):
+\[
+    pdf(t \gg 1) = \frac{\partial cdf}{\partial k} = e^{-k}
+\]
+
+\textbf{Conclusion:} Removing preferential attachment results in an \textbf{exponential distribution} \( P(k) \propto e^{-k} \), not a power-law scale-free distribution.
+
+Crucially, note that this exponential distribution is \textbf{not a Poisson distribution} (like we see in E-R random graphs). Even without preferential attachment, the mere fact that the network grows introduces a \textbf{hierarchy} due to the appearance of nodes at different times. This is called the \textbf{"memory effect"}: older nodes are still more connected simply because they have been in the network longer and had more random chances to receive links.
+
+\subsection{The Memory Effect and Network Hierarchy}
+The mathematical derivations above highlight a fundamental property of uniformly growing networks: the \textbf{memory effect}.
+
+In these systems, some network properties (like node connectivity or centrality) are heavily attributable to the \textbf{time of appearance} of the node in the network. Mathematically, node "age" acts as a \textbf{monotonic function of degree}.
+
+Because of this, B-A networks are \textbf{intrinsically hierarchical}. This makes them excellent models for evolutionary biological systems and social models where age correlates with influence.
+\textit{Example:} If we rank the mediators of the Immune System Network using an Efficiency measure, the most critical nodes are often the oldest from an evolutionary standpoint. Similarly, in a scale-free network, we can reliably guess the degree of a node if we know the exact time it appeared in the system (e.g., the creation date of a website or the publication year of a foundational paper).
+
+\subsubsection{Important Properties and Limitations of the B-A Model}
+To conclude the analysis of the Barabási-Albert model, there are several strict structural constraints and notes to keep in mind:
+
+\begin{itemize}
+    \item \textbf{Fixed Scaling Exponent:} In the pure B-A model, the exponent \( \alpha = 3 \) is mathematically rigid and \textbf{non-modifiable}. This is a limitation of the model, as real-world scale-free networks usually have exponents ranging between 2 and 3. (More advanced models, like the fitness model, are required to tune this exponent).
+    \item \textbf{Initial Conditions Matter:} The starting network configuration is not entirely negligible. For example, if we start with disconnected subnetworks or \( k_0 = 0 \), the topology can be structurally compromised.
+    \item \textbf{Trees vs. Graphs:} If the model is initiated with \( m = 1 \) (each new node brings exactly one link), the resulting network will strictly be a \textbf{tree} (a graph with no closed loops/cycles).
+    \item \textbf{Directionality:} The standard B-A model constructs a \textbf{non-directed graph}. However, because links are always drawn from a new node to an older node, it is possible to spontaneously define directions based on the arrow of time (e.g., citation networks, where new papers point to older ones).
+\end{itemize}
+
+\subsection{Properties of the Barabási-Albert Network}
+
+The generative rules of the Barabási-Albert (B-A) model produce a topology that differs radically from classical random graphs. Below is a detailed breakdown of its primary structural, metric, and spectral properties.
+
+\subsubsection{Connectivity, Diameter, and the Ultra-Small World}
+
+Because every new node added to the network immediately creates \( m \) links to existing nodes, the resulting B-A graph is \textbf{obviously always connected} (assuming the initial core was connected). There are no isolated nodes or disconnected components.
+
+One of the most striking features of scale-free networks is how short the distances between nodes are. The average path length (and consequently the diameter and radius) scales significantly slower than in E-R graphs. Depending on the scale-free exponent \( \alpha \) (sometimes denoted as \( \lambda \) in the literature):
+\begin{itemize}
+    \item For \( 2 < \alpha < 3 \), the diameter scales proportionally to \( \log(\log(N)) \).
+    \item For the exact B-A limit case where \( \alpha = 3 \), the diameter scales as:
+          \[
+              d \propto \frac{\log(N)}{\log(\log(N))}
+          \]
+\end{itemize}
+Because this scaling is exponentially slower than the standard \( \log(N) \) of small-world networks, B-A networks are formally classified as \textbf{ultrasmall-world} networks.
+
+This optimal small-world connectivity is achieved because a massive number of low-degree nodes are directly connected to a tiny handful of extremely dense nodes: the \textbf{hubs}. Unlike in E-R networks where all nodes are roughly statistically equal, in a scale-free network, hubs completely dominate and determine the global properties of the system.
+
+\subsubsection{Clustering Coefficient}
+
+In the B-A model, the clustering coefficient \( C \) behaves quite differently from both regular lattices and Watts-Strogatz models.
+First, the clustering coefficient is strictly greater than zero only if \( m > 1 \) (if \( m = 1 \), the network is a tree, and by definition, trees have no closed triangles, so \( C = 0 \)).
+
+As the network grows, the clustering coefficient decreases. Specifically, it scales with the network dimension \( N \) as \( N^{-a} \) (with \( a < 1 \)). Because it drops as the network gets larger and more scattered, it asymptotically behaves somewhat similarly to an E-R random graph (where \( C = \langle k \rangle / N \)), though the decline is generally slower.
+
+Using a mean-field approximation, the clustering coefficient evaluated at time \( t \) (which corresponds to network size \( N \)) can be expressed as:
+\[
+    C = \frac{m-1}{8} \frac{(\log t)^2}{t}
+\]
+
+\begin{figure}[H]
+    \begin{minipage}{0.35\textwidth}
+        \caption{Analytical and numerical decrease of the clustering coefficient in the log-log plot as a function of the network size \( t \) for B-A networks with \( m = 2 \). The plot should show a clear downward trend, illustrating the scaling behavior \( C \propto N^{-a} \).}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/ba_clustering.png}
+    \end{minipage}
+\end{figure}
+
+\subsubsection{Degree Correlation and Disassortativity}
+
+Although the B-A model is a "random" model (in the sense that connections are chosen probabilistically), the resulting links are \textbf{not completely uncorrelated}.
+
+If we look at the probability of finding a link between a node of degree \( k_1 \) and a node of degree \( k_2 \), it does not equal the product of their independent probabilities:
+\[
+    P(n_1 = k_1, n_2 = k_2) \neq P(n_1 = k_1) \cdot P(n_2 = k_2)
+\]
+This inequality implies a strong structural correlation. Because of the preferential attachment rule, new nodes (which inherently have a low degree) are overwhelmingly forced to link to the oldest nodes (which have a high degree). Conversely, low-degree nodes tend \textbf{not} to connect with each other.
+
+This creates a distinct \textbf{stratification} in the network architecture: hubs connect to peripheral nodes, and peripheral nodes connect to hubs. This specific topological relationship between a node's connectivity and its nearest neighbors' (NN) connectivity is called \textbf{disassortativity}. Disassortativity is a highly likely and defining feature in many real-world technological and biological networks.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/ba_disassortativity.png}
+    \caption{Examples of assortative and disassortative networks. In an assortative network (a), hubs connect to hubs, forming a dense core. In a disassortative B-A network (b), hubs repel each other and connect primarily to low-degree nodes, creating a star-like hierarchy.}
+\end{figure}
+
+\subsubsection{Spectral Properties}
+
+The unique topology of the B-A network fundamentally alters the spectrum of its adjacency and Laplacian matrices.
+
+In standard E-R random networks, the eigenvalue distribution closely follows Wigner's famous \textbf{semicircle law}. In contrast, the spectrum of a scale-free network \textbf{does not follow the semicircle law}. Instead, the eigenvalue distribution features a sharp, triangle-like peak in the center and exhibits \textbf{heavier tails} that decay according to a power-law. These heavy tails mathematically represent the presence of the massive hubs and the extreme heterogeneity of the network structure.
+
+\begin{figure}[H]
+    \begin{minipage}{0.35\textwidth}
+        \caption{Schematic representation of the eigenvalue spectrum of a B-A network, showing the central triangular peak and the heavy power-law tails, in contrast to the dashed line representing the semicircle law of E-R random graphs.}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/ba_spectrum.png}
+    \end{minipage}
+\end{figure}
+
+\subsection{Beyond Pure B-A: Real-World Deviations and Hierarchical Modularity}
+
+While the standard Barabási-Albert model elegantly explains the emergence of power-law degree distributions via growth and preferential attachment, empirical studies on real complex systems—particularly biological ones—reveal structural properties that a "pure" B-A model cannot reproduce.
+
+\begin{example}[Metabolic Networks]
+    A classic empirical validation of scale-free topologies is found in cellular metabolic networks. If we map the substrates and products of metabolic reactions as nodes, we observe extremely heterogeneous connectivities.
+
+    Research spanning multiple organisms (e.g., \textit{Archaeoglobus fulgidus}, \textit{E. coli}, \textit{C. elegans}, and an averaged dataset of 43 organisms) shows that both the "in-degree" and "out-degree" of these metabolic networks follow a strict power law.
+    The observed scaling exponent is approximately:
+    \[
+        \alpha \sim 2.2
+    \]
+    This aligns perfectly with the theoretical expectation for scale-free networks (\( 2 < \alpha < 3 \)), guaranteeing a finite mean degree but a diverging variance, allowing for the existence of highly connected metabolic hubs (like ATP or water).
+    \textit{(Reference: Metabolic networks, Barabási, Nature 2000).}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/metabolic_spectrum.png}
+        \caption{Log-log plots showing the degree distribution \(P(k)\) vs. \(k\) for the in-degree and out-degree of A. Fulgidus (a), E. Coli (b), C. Elegans (c), and the 43-organism average (d), highlighting the linear decay with slope \(\alpha \sim 2.2\) for both in-degree and out-degree distributions (Metabolic Networks, Barabási, Nature 2000).}
+    \end{figure}
+\end{example}
+
+\begin{example}[Anomalies in Clustering and Hierarchy]
+    Despite sharing the scale-free degree distribution, real metabolic networks hide an internal \textbf{hierarchy and modularity} that deeply contrasts with pure B-A or E-R networks. This is evident when analyzing the clustering coefficient \( C \):
+
+    \begin{enumerate}
+        \item \textbf{Clustering vs. Network Size (\( C(N) \)):}
+              In the standard B-A model, the global clustering coefficient scales as \( N^{-a} \), meaning it decreases as the network grows. However, in real metabolic networks, the average clustering coefficient \( C(N_{NODE}) \) is roughly \textbf{constant} and independent of the network size.
+
+        \item \textbf{Local Clustering vs. Node Degree (\( C_i(k) \)):}
+              In a standard E-R random graph, the clustering coefficient is independent of a node's degree. In real metabolic networks, the local clustering coefficient \( C_i(k) \) explicitly \textbf{decays as a function of \( k \)}.
+              \textit{Physical meaning:} Low-degree nodes have a very high clustering coefficient because they belong to tightly knit, dense local functional modules. Conversely, the massive hubs have a low clustering coefficient because their role is to act as bridges connecting many different, disconnected modules together.
+    \end{enumerate}
+    \textit{(Reference: Ravasz, Barabási, Science 2002).}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/clustering_analysis.png}
+        \caption{Evidence of hierarchy and modularity in real metabolic networks (Ravasz et al., Science 2002). \textbf{(A)} Schematic representation of modular structural motifs and their relative clustering. \textbf{(B)} Trend of the average clustering coefficient with respect to network size (N): unlike the pure Barabási-Albert model (solid line) where it decreases, in real metabolic networks (colored dots) the global clustering remains consistently high regardless of network size. \textbf{(C-F)} Log-log plots of the local clustering coefficient versus node degree (k) for different organisms (e.g., \textit{A. aeolicus}, \textit{E. coli}, \textit{S. cerevisiae}). A clear decay is observed: low-degree nodes form densely interconnected modules (high clustering), while large hubs act as bridges between different modules (low clustering). This strong hierarchical behavior is absent in classic Erdős-Rényi random graphs.}
+    \end{figure}
+\end{example}
+
+\subsubsection{Evolutionary Principles: Modularity, Hierarchy, and Fractals}
+To resolve the discrepancies between the pure B-A model and real-world observations, we must look at the \textbf{evolutionary principles} governing these systems.
+
+In biology, networks often grow not just by adding single nodes (standard preferential attachment), but through the \textbf{duplication of identical modules} (e.g., gene duplication events). When you combine modularity (tightly connected local communities) with hierarchy (hubs connecting these modules), the duplication process naturally generates a \textbf{fractal structure}.
+
+This fractal, self-similar growth perfectly explains why the global clustering does not dilute as the network expands.
+
+\begin{figure}[H]
+    \begin{minipage}{0.4\textwidth}
+        \caption{Schematic representation of the fractal growth process in hierarchical modular networks. Starting from a small, densely connected module (e.g., a triangle), the network grows by duplicating this module and connecting it to existing hubs. This process creates a self-similar, fractal-like structure where local clustering remains high even as the network expands.}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.55\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{img/fractal_growth.png}
+    \end{minipage}
+\end{figure}
+
+\subsubsection{Deterministic Scale-Free Networks}
+
+To mathematically model this fractal growth, we can move away from stochastic (probabilistic) algorithms and use \textbf{deterministic scale-free models}.
+
+In a deterministic model, we define a starting module (e.g., at step \( n=0 \) or \( n=1 \)) and apply a strict geometric rule to replicate and connect it at each subsequent iteration (\( n=2, 3, \dots \)).
+
+Because the generation is based on copying a highly clustered initial motif, we can exactly reproduce a scale-free degree distribution while maintaining a global clustering coefficient \( C > 0 \) that \textbf{does not decay} with network size. This serves as a much more accurate topological model for evolved hierarchical systems.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/deterministic_scale_free.png}
+    \caption{Visualization of a deterministic scale-free network generated through a fractal growth process. Starting from a small, highly clustered motif, the network is iteratively duplicated and connected according to a strict geometric rule. The resulting topology exhibits a power-law degree distribution while maintaining a constant global clustering coefficient.}
+
+\end{figure}
+
+\section{Scale-Free Networks: Variations on the Theme}
+
+As we have seen, the standard Barabási-Albert (B-A) model elegantly generates a scale-free topology, but it suffers from a major mathematical constraint: it produces a fixed, unmodifiable scaling exponent (\( \alpha = 3 \)). In reality, empirical networks exhibit a wide range of exponents (typically between 2 and 3) and display complex dynamics that the pure B-A model cannot capture.
+
+To incorporate more general features and achieve more realistic macroscopic behavior, various modifications to the basic B-A model have been proposed. The four main variations are:
+\begin{enumerate}
+    \item \textbf{Attractiveness}
+    \item \textbf{Fitness}
+    \item \textbf{Node aging}
+    \item \textbf{Generalized preferential attachment}
+\end{enumerate}
+
+\subsection{I Variation: Initial Attractiveness}
+
+\subsubsection{Modifying the Preferential Attachment Rule}
+
+The first variation introduces the concept of \textbf{Initial Attractiveness}. Let us consider a \textbf{directed network} model where, at each time step, \( m \) new connections are added to the network.
+\textit{Note: Unlike the strict B-A model, this general framework does not mathematically require that all \( m \) new connections must originate strictly from the newly added node.}
+
+In the pure B-A model, a node with zero links has a zero probability of acquiring new links. To overcome this "cold start" problem and model systems more realistically, we modify the preferential attachment rule. The probability \( p_{IN}(t) \) of a node receiving an \textit{incoming} link is no longer strictly proportional only to its current incoming connectivity \( K_{IN}(t) \). Instead, we add a constant baseline value \( A \), which represents the inherent \textbf{attractiveness} of the node:
+\[
+    p_{IN}(t) \propto K_{IN}(t) + A \quad \text{with} \quad A \geq 0
+\]
+Because \( A \geq 0 \), even a newly born node with \( K_{IN} = 0 \) possesses a non-zero probability of attracting links from the very beginning.
+
+\subsubsection{Tuning the Scaling Exponent}
+
+The profound mathematical consequence of adding this simple constant \( A \) is that it alters the asymptotic behavior of the network. Analytical demonstrations show that as the network grows, the distribution of incoming connectivity tends toward a power-law:
+\[
+    p_{IN}(K) \propto K_{IN}^{-\gamma}
+\]
+However, the scaling exponent \( \gamma \) is no longer locked at 3. It is now a function of the attractiveness \( A \) and the number of links added per step \( m \):
+\[
+    \gamma = 2 + \frac{A}{m}
+\]
+Since \( A \geq 0 \) and \( m > 0 \), the term \( A/m \) is always positive. This means that by simply varying the initial attractiveness parameter \( A \), we can theoretically generate scale-free networks with \textbf{any exponent greater than 2} (\( \gamma \geq 2 \)). This flexibility allows the model to perfectly fit the degree distributions observed in real-world empirical data.
+
+\subsubsection{Node-Specific Attractiveness and the Mean Field}
+While the equation above uses a single constant \( A \) for the entire network, assuming that an initial attractiveness value is exactly equal for \textit{all} nodes does not seem very biologically or technologically realistic.
+
+To make the model physically plausible, we can interpret \( A \) as an \textbf{average value}. We can conceptualize more advanced models where attractiveness is \textbf{node-specific} (each node \( i \) is born with its own unique \( A_i \)). As long as the variance of these individual attractiveness values remains finite, the overall system will still produce the exact same \textbf{"mean field"} macroscopic behavior, correctly converging to the expected scale-free distribution.
+
+\subsection{II Variation: Node Fitness}
+
+\subsubsection{Overcoming the "Older Get Richer" Paradigm}
+
+A major limitation of the standard Barabási-Albert (B-A) model is its strict reliance on the \textbf{"older get richer"} (or first-mover advantage) paradigm. Because node degree grows strictly as a function of time, the oldest nodes are mathematically guaranteed to become the largest hubs.
+
+However, in real-world networks, a latecomer can still become a massive hub if it possesses intrinsically superior qualities (e.g., a highly innovative paper published recently might quickly surpass a mediocre paper published decades ago, or a new social media platform might rapidly drain users from an older one). To model this, we introduce the concept of a different growth speed for different nodes based on their inherent \textbf{fitness}.
+
+\subsubsection{The Fitness Parameter (\( \eta \))}
+
+We assign a specific fitness parameter \( \eta_i \) to each node \( i \). The preferential attachment rule is then modified so that the probability of acquiring a new link depends on both the node's current degree \( k_i(t) \) \textit{and} its fitness \( \eta_i \).
+
+The modified link probability is:
+\[
+    p_i(t) = \frac{\eta_i \cdot k_i(t)}{\sum_j \eta_j \cdot k_j(t)}
+\]
+In this competitive model (often called the Bianconi-Barabási model), a younger node with a very high fitness \( \eta \) can acquire links at a much faster rate than an older node with a low fitness, eventually overtaking it in degree.
+
+\subsubsection{Impact on the Degree Distribution}
+
+The resulting degree distribution \( p(k) \) of the network is no longer a simple, fixed power-law; it now heavily depends on the underlying \textbf{node fitness distribution} \( p(\eta) \).
+
+Analytical solutions show that different fitness distributions yield entirely different network topologies:
+\begin{itemize}
+    \item \textbf{Uniform fitness distribution:} If \( p(\eta) \) is uniform, the degree distribution picks up a logarithmic correction and scales as:
+          \[
+              p(k) \approx \frac{k^{-2.25}}{\log(k)}
+          \]
+    \item \textbf{Exponential fitness distribution:} If \( p(\eta) \) is exponential, the network loses its pure power-law tail entirely. Instead, the degree distribution becomes a \textbf{stretched exponential}:
+          \[
+              p(k) \propto e^{-t^b} \quad \text{with} \quad 0 < b < 1
+          \]
+          \textit{(Note: While the slide uses \( t \) in the exponent, in standard network literature this stretched exponential is typically expressed in terms of the degree as \( e^{-c \cdot k^b} \), indicating a decay that is faster than a power-law but slower than a pure exponential).}
+\end{itemize}
+
+\subsubsection{Robustness of the B-A Model}
+
+Introducing fitness makes a lot of sense in real situations (e.g., modeling consensus forming around new opinions, or the spread of innovative scientific papers).
+
+However, as demonstrated by the equations above, introducing fitness \textbf{destroys the strict scale-free property} of the network. This reveals a fundamental theoretical insight: the pure B-A model is \textbf{not very robust to perturbations}. Minor, highly realistic tweaks to its generative rules completely alter its asymptotic macroscopic behavior.
+
+\begin{example}[Citation Networks]
+    These fitness dynamics are particularly relevant when studying \textbf{citation networks}, which represent excellent candidates for practical network analysis projects.
+
+    For example, utilizing a full database dump of PubMed (accessible in real-time via PubMed APIs), we can construct a network where:
+    \begin{itemize}
+        \item \textbf{Node} = Scientific paper
+        \item \textbf{Link} = Citation (directed link from a newer paper to an older one)
+    \end{itemize}
+
+    In such a project, one can characterize network features as a function of specific node attributes. For instance, analyzing the citation growth speed (the effective "fitness") of a paper as a function of its characteristics, its authors, the publishing journal, or its specific research topic.
+\end{example}
+
+\subsection{III Variation: Node Ageing}
+
+\subsubsection{The Concept of Ageing in Networks}
+
+In the standard Barabási-Albert model, a node continues to accumulate links indefinitely as long as the network grows. However, in many real-world systems, this is highly unrealistic. For example, in a citation network, older papers typically stop receiving new citations after a certain period as the scientific focus shifts to newer discoveries.
+
+To simulate this "aging" of nodes, researchers have considered different rules. We will explore two primary mechanisms: one that is analytically tractable (leading to sudden inactivation) and another that models a gradual decay of attractiveness.
+
+\subsubsection{Ageing Rule 1: Sudden Inactivation (Exponential Cutoff)}
+
+The first mechanism assumes that each node has a \textbf{constant chance of becoming "inactive"} at any given moment. Once a node becomes inactive, it "dies" from a network growth perspective and can no longer receive any new incoming links.
+
+Because the probability of deactivation is constant at each step, the "active life" \( T \) of each node follows a discrete \textbf{geometric distribution}. If we divide time into small intervals \( \delta \) and assign a probability \( P \) of deactivation in each interval, the probability that a node survives longer than \( n \) intervals is:
+\[
+    p(T > n\delta) = (1 - P)^n
+\]
+The expected average active lifetime is therefore:
+\[
+    \langle T \rangle = \frac{\delta}{P}
+\]
+If we move to the continuous limit (where the time intervals become infinitely small, \( n \to \infty \) and \( \delta \to 0 \)), and we define a characteristic time constant \( \alpha = \delta / P \), the geometric distribution cleanly converges to an \textbf{exponential law}:
+\[
+    \lim_{\substack{n \to \infty \\ \delta \to 0 \\ \delta/P = \alpha}} p(T > t = n\delta) = \left(1 - \frac{\delta}{\alpha}\right)^{\frac{t}{\delta}} = e^{-\frac{t}{\alpha}}
+\]
+
+\textbf{Topological Consequence:}
+This aging mechanism fundamentally alters the degree distribution. By giving nodes a finite expected lifespan, we prevent the oldest nodes from growing infinitely large. This introduces an \textbf{exponential cutoff} to the power-law distribution. For sufficiently large values of \( k \), the exponential term dominates and "dumps" the scale-free effect, resulting in a \textbf{Gamma-like distribution}:
+\[
+    p(k) \propto k^{-\alpha} e^{-\beta k}
+\]
+
+\begin{figure}[H]
+    \begin{minipage}{0.35\textwidth}
+        \caption{Schematic log-log plot of the degree distribution \( P(k) \) vs. \( k \) for a network with node aging. The plot should show three curves: "No aging" (a straight line representing the pure power-law), "Slow aging" (a curve that follows the power-law initially but bends downward at the tail), and "Fast aging" (a curve that cuts off and drops down much earlier due to rapid node inactivation).}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/aging_cutoff.png}
+    \end{minipage}
+
+\end{figure}
+
+\subsubsection{Ageing Rule 2: Gradual Decay of Preferential Attachment}
+
+The second mechanism models aging not as a sudden death, but as a gradual loss of relevance. The preferential attachment rule is modified such that a node's ability to attract new links decays over time \( t \) following a power-law governed by an aging parameter \( \beta \).
+
+The modified probability of acquiring a link becomes:
+\[
+    p_i(t) \propto \frac{k_i(t)}{t^\beta}
+\]
+The resulting network topology is exquisitely sensitive to the chosen value of \( \beta \):
+\begin{itemize}
+    \item \textbf{Strong Ageing (\( \beta > 1 \)):} The attractiveness decays so quickly that the preferential attachment mechanism is effectively neutralized. The network \textbf{loses its scale-free behavior} entirely.
+    \item \textbf{Moderate Ageing (\( 0 < \beta < 1 \)):} The network maintains a scale-free power-law distribution (\( p(k) \propto k^{-\gamma} \)), but the aging parameter increases the scaling exponent beyond the standard B-A limit. Specifically, the exponent falls into the range:
+          \[
+              3 < \gamma < \infty
+          \]
+\end{itemize}
+
+\subsubsection{Summary: Ageing and Open Systems Dynamics}
+
+Incorporating an aging mechanism—which is highly plausible in almost all social, biological, and technological networks—increases the "elasticity" of the generative model. Depending on the exact rules and parameters, aging can either:
+\begin{enumerate}
+    \item Introduce exponential cutoffs that destroy the pure scale-free distribution at the extreme tail.
+    \item Provide a way to smoothly scale the exponent \( \gamma \) within a limited regime of parameters.
+\end{enumerate}
+
+Finally, when dealing with open systems, we can also consider models that incorporate explicit \textbf{node birth and death} rates. While many real systems simply grow over time, some maintain a constant number of active nodes by balancing birth and death.
+This dynamic framework raises interesting questions for real-world modeling: \textit{What happens to the topology if the network undergoes a sudden "inflation period" characterized by drastically increased, exponential node growth?}
+
+\subsection{IV Variation: Generalized Preferential Attachment}
+
+The standard Barabási-Albert model relies on a strictly linear preferential attachment rule, where the probability of a node receiving a link is exactly proportional to its degree (\( p_i \propto k_i \)).
+
+However, we can generalize this mechanism by assuming that the probability depends on a \textbf{nonlinear power} of the node's degree. We introduce an attachment exponent \( \alpha \), leading to the generalized probability:
+\[
+    p_i(t) = \frac{k_i(t)^\alpha}{\sum_j k_j(t)^\alpha}
+\]
+Depending on the value of this new parameter \( \alpha \), the network dynamics enter completely different macroscopic regimes.
+
+\subsubsection{Sub-linear Regime: \( 0 < \alpha < 1 \)}
+
+In this regime, the attachment is \textit{less than proportional}. The "rich get richer" mechanism is weakened, meaning hubs do not grow fast enough to sustain a pure power-law distribution.
+
+Consequently, the scale-free nature is destroyed. The limit degree distribution becomes a \textbf{stretched exponential}:
+\[
+    p(k) \approx e^{-\mu \cdot k^{1-\alpha}} \quad \text{with} \quad 1 \leq \mu \leq 2
+\]
+
+\subsubsection{Super-linear Regime: \( \alpha > 1 \)}
+
+If \( \alpha > 1 \), the attachment is \textit{more than proportional}. The "rich get richer" effect becomes overwhelmingly strong, leading to a "winner-takes-all" dynamic.
+
+In statistical mechanics, this corresponds perfectly to \textbf{Bose-Einstein condensation}. In the thermodynamic limit (as the network grows infinitely large), a single "super-hub" node emerges and aggressively collects a finite, macroscopic portion of all the links in the entire system. Because this single node monopolizes the connections, very few links remain for the rest of the network.
+Topologically, the network collapses and approximates a massive \textbf{star graph}.
+
+\subsubsection{Asymptotic Linear Behavior}
+
+We know that for exactly proportional attachment (\( \alpha = 1 \)), we recover the standard B-A distribution:
+\[
+    p(k) \propto k^{-3}
+\]
+However, we can obtain different scaling exponents by introducing an attachment rule that is non-linear for small degrees, but \textbf{becomes linearly proportional only in the limit of large degrees} (\( k \gg 1 \)).
+
+Mathematically, we require that the attachment probability asymptotically approaches a linear function:
+\[
+    p_i(t) \xrightarrow{k \to \infty} a_\infty k
+\]
+An example of such a function is:
+\[
+    p_i(t) = \frac{k_i}{k_i + a} \cdot k_i
+\]
+For small values of \( k_i \), the function is non-linear. But for very large hubs (\( k_i \gg a \)), the fraction \( \frac{k_i}{k_i + a} \) tends to 1, and the probability scales strictly as \( k_i \).
+
+\begin{figure}[H]
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/generalized_pa.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.35\textwidth}
+        \caption{Graph of the generalized preferential attachment function \( p_i(k) \) as a function of \( k \). The curve should start non-linearly near the origin (for small \( k \)) and asymptotically approach the straight diagonal line \( p_i(k) \approx a_\infty k \) for large \( k \).}
+    \end{minipage}
+\end{figure}
+
+By carefully tuning these asymptotically linear rules, it is possible to mathematically generate scale-free networks capable of displaying \textbf{all possible exponents greater than 2}.
+
+\subsubsection{Summary Note: Robustness of the B-A Model}
+
+These four variations (Attractiveness, Fitness, Ageing, and Generalized PA) collectively highlight a fundamental conclusion regarding the Barabási-Albert model: \textbf{scale-free network generation purely via standard preferential attachment is not very robust.}
+
+Even slight, highly realistic variations to the original B-A rules can radically modify the resulting topology—introducing exponential cutoffs, stretching the distributions, or condensing the network completely. Therefore, when modeling real complex systems, the specific underlying generative mechanisms must be carefully chosen to match empirical observations.
+
+\subsection{Final Observations: Fat-Tails and the Non-Locality Problem}
+
+To conclude the discussion on the Barabási-Albert model and scale-free networks, we must address some fundamental critical observations regarding their applicability to real-world systems.
+
+\subsubsection{Are there any real scale-free networks?}
+
+A rigorous mathematical definition of a scale-free network implies a pure power-law degree distribution that extends indefinitely. However, in any physical, biological, or technological system, \textbf{the infinite limit is never reached}. Finite size constraints inherently truncate the degree distribution.
+
+Because of this, many real-world networks that are colloquially called "scale-free" are actually more accurately described as simply having \textbf{fat-tailed distributions} (or heavy-tailed). While they exhibit highly heterogeneous connectivity and the presence of hubs, their exact statistical distribution might not be a perfect power-law. Common fat-tailed alternatives include the Gamma, Lognormal, and Weibull (stretched exponential) distributions.
+
+A major methodological issue arises when analyzing empirical data: the \textbf{indistinguishability} of certain distributions. If a network is relatively small (\( N < 1000 \) nodes), statistical noise at the tail makes it incredibly difficult to visually or even statistically distinguish between a true power-law, a lognormal, or a stretched exponential simply by looking at the Probability Density Function (pdf) or Cumulative Distribution Function (cdf) on a log-log plot.
+
+\begin{figure}[H]
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/scale_free_real_theory.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.35\textwidth}
+        \caption{Schematic log-log plot comparing comparing theoretical distributions (Chi-square, Lognormal, Power-law) with empirical Real network data, illustrating how visually similar different fat-tailed distributions can appear for small datasets.}
+    \end{minipage}
+\end{figure}
+
+\textit{Crucial Note:} Why does this distinction matter? Because \textbf{other probability distributions require completely different generative models!} If a real network is actually lognormal, attempting to model its growth using standard B-A preferential attachment is physically and mathematically incorrect.
+
+\subsubsection{Mathematical Forms of Fat-Tailed Distributions}
+
+For reference, here are the formal probability density functions of the most common fat-tailed distributions that often masquerade as power-laws in empirical network analysis:
+
+\begin{itemize}
+    \item \textbf{Lognormal:}
+          \[
+              p(x) = \frac{1}{x\sqrt{2\pi\sigma^2}} e^{-\frac{(\log x - \mu)^2}{2\sigma^2}}
+          \]
+    \item \textbf{Gamma:}
+          \[
+              p(x) = \frac{1}{\Gamma(k)\theta^k} x^{k-1} e^{-\frac{x}{\theta}}
+          \]
+    \item \textbf{Weibull / Stretched Exponential:}
+          \[
+              p(x) = \frac{k}{\lambda} \left(\frac{x}{\lambda}\right)^{k-1} e^{-\left(\frac{x}{\lambda}\right)^k}
+          \]
+\end{itemize}
+
+\subsubsection{The B-A Model and the Problem of Non-Locality}
+
+Beyond the exact shape of the degree distribution, there is a fundamental theoretical flaw in the strict Barabási-Albert model. As we know, the degree distribution \( p(k) \) is not the only salient feature of a network; different generative methods can lead to the exact same \( p(k) \) but yield different topological properties (like clustering or assortativity) that uniquely characterize them.
+
+The most glaring physical unrealistic assumption of the pure B-A model is its \textbf{non-locality}.
+The preferential attachment mechanism mathematically dictates that the probability of a new node connecting to node \( i \) is \( \frac{k_i}{\sum_j k_j} \).
+
+To calculate this probability, the new node must somehow know the exact degree of node \( i \), as well as the degrees of \textit{all other nodes} in the entire network simultaneously. This implies \textbf{perfect global information}.
+
+Is it always possible to have this information in real systems? \textbf{In general, it is not.}
+When a new person joins a social network, they do not scan the friend counts of all 3 billion users to decide who to follow. When a new website is created, the webmaster does not globally evaluate the in-degree of every single page on the internet. Real networks grow based on \textbf{local information}, random walks, and local searches, making the global non-local requirement of the strict B-A model an abstract mathematical convenience rather than a true physical reality.
+
+\section{The Duplication Model}
+
+\subsection{Topologies of Biological Systems}
+When we analyze biological networks, such as the proteome (protein-protein interaction networks), we observe a specific set of topological features that are not fully captured by standard random graphs or pure Barabási-Albert (B-A) scale-free models.
+
+Specifically, these biological systems exhibit:
+\begin{itemize}
+    \item A degree distribution \( p(k) \) that is broadly \textbf{scale-free but with an exponential cutoff} (yielding a Gamma-like distribution, as older nodes do not grow infinitely).
+    \item A significantly \textbf{higher level of clustering} compared to random networks, maintaining strong "small-world" properties (high local modularity alongside short global path lengths).
+\end{itemize}
+The fundamental question arises: how can we theoretically generate these specific topological features by taking into account the actual, physical "biological" properties of the system?
+
+\subsubsection{The Biological Mechanism: Gene Duplication and Mutation}
+In biology, the basic functional mapping is \textbf{Gene \( \rightarrow \) Protein}. During cell division and DNA replication, random errors occur.
+
+One of the most critical macroscopic errors for evolutionary network development is \textbf{Gene Duplication}: a gene is entirely "copied" several times. Immediately after duplication, the new gene produces the exact same protein as the original, meaning it perfectly inherits all the original protein's network interactions (links).
+
+However, over evolutionary time, \textbf{mutations} accumulate inside the duplicated gene. These mutations progressively modify the produced protein's structure. Consequently, its initial set of functional interactions is modified—some original interactions are \textbf{lost}, and completely new functional interactions are \textbf{added}.
+
+\subsubsection{Historical Context: Darwin and Haldane}
+The evolutionary power of structural duplication was recognized long before modern network science.
+
+In \textit{On the Origin of Species} (1859), Charles Darwin noted the evolutionary flexibility of redundant structures:
+\begin{quote}
+    \textit{"We have formerly seen that parts many times repeated are eminently liable to vary in number and structure; consequently it is quite probable that natural selection, during the long-continued course of modification, should have seized on a certain number of the primordially similar elements, many times repeated, and have adapted them to the most diverse purposes."}
+\end{quote}
+
+Later, in 1932, J.B.S. Haldane formalized this genetically. He suggested that gene duplication events are highly favorable because they produce "spare" genes. These redundant copies can be freely altered by mutations to develop new functions \textit{without} causing a fatal disadvantage to the organism (since the original gene is still there performing the essential baseline function). Furthermore, organisms with multiple copies of critical genes are statistically less prone to harmful, function-destroying mutations.
+
+\subsection{The Duplication Model for Directed Networks}
+To translate this biological reality into a mathematical network generative model, we define the \textbf{Duplication Model} for a directed network.
+
+At each time step, the network grows according to the following algorithmic rules:
+\begin{enumerate}
+    \item \textbf{Duplication:} A random target node (representing a gene) with \( m \) links is selected and completely \textbf{duplicated}. A new node is added to the network, and it initially copies all \( m \) links of the target node.
+    \item \textbf{Rewiring (Mutation):} For each of the duplicated outgoing links, there is a probability \( P = \alpha \) that the link is \textbf{rewired} to point to a completely different, randomly chosen node in the network (representing the gain of a new functional interaction due to mutation).
+    \item \textbf{Maintenance (Conservation):} Conversely, there is a probability \( P = 1 - \alpha \) that the duplicated outgoing link is \textbf{maintained}, continuing to point to the exact same target as the original gene's link.
+\end{enumerate}
+
+By applying these simple, biologically motivated rules of copy-and-mutate, the network naturally develops highly clustered communities (because duplicates share neighbors) while still producing hubs. The mathematical challenge then becomes: under these specific generative rules, \textbf{how does the incoming connectivity of the nodes vary asymptotically?}
+
+\subsection{Mathematical Formulation of the Duplication Model}
+
+To mathematically understand how the duplication-mutation mechanism shapes the network, we can analyze the growth of a generic node's incoming connectivity \( k_{in} \) using a continuous approximation, similarly to what we did for the Barabási-Albert model.
+
+In this directed network model, when a new node is added (representing a duplicated gene), an existing node in the network:
+\begin{enumerate}
+    \item Receives \( m \) \textbf{new links} directly from the newly added node with a probability \( \alpha \).
+    \item Receives \textbf{"old" links} (proportional to its existing degree, as its incoming neighbors are duplicated) with a probability \( 1 - \alpha \).
+\end{enumerate}
+
+\subsubsection{Continuous Approximation and the Differential Equation}
+Assuming the total number of nodes \( N \) grows linearly with time (\( N \simeq t \)), we can write the differential equation for the time evolution of the incoming degree \( k_{in,i}(t) \) of a specific node \( i \):
+\[
+    \frac{\partial k_{in,i}(t)}{\partial t} = (1 - \alpha)\frac{k_{in,i}(t)}{N} + m\frac{\alpha}{N}
+\]
+Substituting \( N \simeq t \), we get:
+\[
+    \frac{d k_i}{dt} = \frac{[(1 - \alpha)k_i + m\alpha]}{t}
+\]
+To solve this separable differential equation, we introduce a change of variable: let \( k' = (1 - \alpha)k_i + m\alpha \), which implies \( dk' = (1 - \alpha)dk_i \). The equation rewrites as:
+\[
+    \frac{dt}{t} = \frac{dk'}{(1 - \alpha)k'}
+\]
+Integrating both sides from the node's birth time \( t_i \) to current time \( t \):
+\[
+    \ln\left(\frac{t}{t_i}\right) = \ln\left( (k')^{\frac{1}{1 - \alpha}} \right)
+\]
+By exponentiating and isolating the birth time \( t_i \), we obtain the relation between a node's age and its transformed degree:
+\[
+    t_i = t \cdot (k')^{-\frac{1}{1 - \alpha}}
+\]
+
+\subsubsection{Degree Distribution: A Shifted Power-Law}
+Assuming linear growth of the network (where the birth times \( t_i \) are uniformly distributed, as in the standard B-A model), we can calculate the Cumulative Density Function (cdf). The probability that a node has a degree smaller than \( k' \) is proportional to the probability that its birth time \( t_i \) is greater than the corresponding threshold:
+\[
+    cdf: P(k'_i < k') = P\left( t_i > t \cdot (k')^{-\frac{1}{1 - \alpha}} \right) \propto (k')^{-\frac{1}{1 - \alpha}}
+\]
+Substituting \( k' \) back with our original variables, the cdf takes the form:
+\[
+    cdf \propto [(1 - \alpha)k + m\alpha]^{-\frac{1}{1 - \alpha}}
+\]
+Finally, to find the Probability Density Function (pdf), we take the derivative of the cdf with respect to \( k \):
+\[
+    pdf: \frac{d(cdf)}{dk} = p(k_{in}) \propto \left[ k_{in} + \frac{m\alpha}{1 - \alpha} \right]^{-\frac{2 - \alpha}{1 - \alpha}}
+\]
+
+\textbf{Key Takeaway:} The resulting degree distribution is a \textbf{shifted power-law} of the form \( (x + a)^b \).
+The mathematical structure is strictly analogous to the B-A model with \textbf{initial attractiveness} (where the probability was proportional to \( k + A \)). However, here the interpretation is entirely different: the shift and the exponent are not arbitrary constants, but emerge directly from the biological mutation probability \( \alpha \). This model naturally allows for the \textbf{tuning of the scale-free polynomial exponent} simply by varying the mutation rate.
+
+\subsection{Implicit Preferential Attachment}
+One of the most elegant features of the duplication model is that it generates a scale-free topology \textbf{without an explicit preferential attachment rule}. We do not need a mechanism where nodes consciously "seek out" the most connected hubs.
+
+Instead, the preferential attachment is \textbf{implicit}. By uniformly choosing a gene to be duplicated at random, the genes that have already been successfully duplicated many times in the past (forming large functional families) are statistically more likely to have one of their members chosen again.
+Mathematically, the probability of duplicating a specific type of node is:
+\[
+    p_{DUPL}(i, t) = \frac{\text{NODE}_i}{\sum \text{NODE}(t)}
+\]
+Because of this statistical redundancy, the probability of getting new links naturally ends up being proportional to the node's incoming degree, perfectly mimicking the "rich get richer" effect through pure blind duplication.
 
 \subsection{The Chinese Restaurant Process (CRP)}
-% Analogia statistica tra l'evoluzione dei gradi dei nodi e il processo dei tavoli del ristorante cinese.
+This generative process for the evolution of node degree is heavily analogous to a famous concept in probability theory known as the \textbf{Chinese Restaurant Process (CRP)}.
 
-\subsection{Emergence of Implicit Preferential Attachment}
-% Dimostrazione di come copiare/duplicare nodi casualmente generi "intrinsecamente" un attacco preferenziale.
-% Applicazioni del meccanismo di duplicazione al di fuori della biologia (es. clonazione di pagine web nel WWW).
+Imagine a restaurant with an infinite number of tables, each capable of seating an infinite number of people. When a new customer enters:
+\begin{itemize}
+    \item They choose to sit at an \textbf{already occupied table} with a probability proportional to the number of customers already seated there (representing the duplication of an existing link, probability \( \alpha \)).
+    \item Alternatively, they choose to sit at a \textbf{completely new, unoccupied table} with a constant probability (representing a mutation leading to a novel interaction, probability \( 1 - \alpha \)).
+\end{itemize}
+This dynamic leads to the exact same heavy-tailed distribution of customers at tables as we see with links connecting to biological nodes.
+
+\subsection{Duplication Model and the World Wide Web}
+While primarily formulated to explain biological evolution, the duplication model is universal enough to describe human technological systems.
+
+A strikingly similar mechanism can be imagined for the creation of \textbf{new websites on the WWW}. When people create a new website (e.g., a blog, a course page, a repository), they rarely build their link structure from absolute scratch. Instead, they often "duplicate" the structure of an existing, similar website—copying its hyperlinks to other external resources—and then apply personal modifications (adding new links or deleting old ones). This simple copy-and-edit human behavior naturally leads to the strongly clustered, scale-free structure of the Internet.
