@@ -1,0 +1,302 @@
+\chapter{Dynamics on Networks}
+\label{sec:dynamics_networks}
+
+The study of complex networks inherently extends beyond static topological analyses to encompass the various dynamical processes that occur within or shape the networks themselves. We can broadly classify the interplay between dynamics and network theory into three distinct categories:
+
+\begin{enumerate}
+    \item \textbf{Dynamic models of topology evolution:} These are generative models where the structure of the network evolves over time to achieve a certain topology. Prominent examples include the Barabási-Albert (B-A) model, which relies on growth and preferential attachment to generate scale-free topologies, and duplication-divergence models, often used to explain the evolution of biological networks.
+    \item \textbf{Dynamics on networks (fixed topology):} In this paradigm, the underlying network infrastructure remains static, while dynamical processes occur through interactions along the established links. Classic examples include opinion spreading models, load diffusion processes, and the propagation of epidemics (e.g., SIR models) across a population.
+    \item \textbf{Simultaneous topology evolution and network dynamics:} This represents the most complex class, often referred to as adaptive or co-evolving networks. Here, the state of the nodes influences the network's topology, and the topology simultaneously restricts the dynamics. A quintessential example is found in biological neural networks, where signal processing (node dynamics) happens concurrently with synaptic plasticity (link weight evolution and structural changes).
+\end{enumerate}
+
+\section{Error and Attack Tolerance in Transfer Networks}
+\label{subsec:error_attack_tolerance}
+
+When considering networks that facilitate the transfer of physical quantities or information—such as data packets in the Internet or power in an electrical grid—we must analyze the flow passing through the nodes. A standard topological proxy for this flow is the \textit{Betweenness Centrality} (BC).
+
+A critical question in network resilience is understanding what happens when nodes are removed (due to random errors or targeted attacks) and the existing flow is subsequently redistributed across the remaining network infrastructure. This redistribution is strictly constrained by the finite capacity of the individual nodes, which can lead to severe systemic vulnerabilities, including the possibility of a total network collapse or breakdown.
+
+\subsection{Node Capacity and Flow Redistribution}
+\label{subsubsec:capacity_redistribution}
+
+In a realistic transfer network, nodes cannot handle an infinite amount of load. We define the capacity of a generic node \(i\), denoted as \(C_i\), to be strictly proportional to its initial steady-state load. Assuming the initial load is well-approximated by its Betweenness Centrality (\(BC_i\)), the capacity is modeled as:
+\[
+    C_i = \alpha \cdot BC_i
+\]
+where \(\alpha\) is the \textit{tolerance parameter}, with the condition \(\alpha \geq 1\). This parameter ensures that each node can handle a load slightly larger than its nominal operational load. The initial damage to the system is typically triggered by a node breakdown (removal). Once a node is removed, the paths that previously traversed it are interrupted, forcing the flow to be rerouted to neighboring nodes. This requires a global recomputation of the Betweenness Centrality for all active nodes in the perturbed network.
+
+\subsubsection{Cascading Failures and Blackouts}
+\label{subsubsec:cascading_failures}
+
+The rerouting of flows can push the remaining nodes beyond their operational limits. Specifically, if the newly recomputed load on node \(i\), denoted as \(BC_i(\text{NEW})\), exceeds its predefined capacity:
+\[
+    BC_i(\text{NEW}) > C_i
+\]
+then node \(i\) also breaks down and is subsequently removed from the network. This secondary failure triggers a further redistribution of the load, potentially causing other nodes to exceed their capacities. This iterative process is known as a \textit{breakdown cascade} or, in the context of power grids, a "blackout".
+
+\subsubsection{Determinants of Network Breakdown}
+\label{subsubsec:breakdown_determinants}
+
+The extent and severity of a cascading breakdown are not uniform across all systems but are heavily dependent on three primary factors:
+\begin{itemize}
+    \item \textbf{The value of the tolerance parameter \(\alpha\):} Higher values provide a larger buffer against transient load spikes, mitigating the cascade effect.
+    \item \textbf{The network topology:} The underlying structural properties (e.g., degree distribution, assortativity) dictate how efficiently alternative paths can absorb the redistributed flow.
+    \item \textbf{The type of initial removal:} Random node failures (errors) generally have different systemic consequences compared to the targeted removal of highly central or highly connected nodes (attacks).
+\end{itemize}
+
+\subsection{Topological Vulnerability to Cascading Failures}
+\label{subsec:topological_vulnerability}
+
+The interaction between the tolerance parameter and the network topology yields counterintuitive results regarding network robustness.
+
+\TODO{Inserire l'immagine del grafico di Motter et al. (Size of the largest connected component as a function of the tolerance parameter $\alpha$). Il grafico confronta le reti omogenee nel pannello principale e le reti eterogenee nel riquadro, mostrando le cascate innescate dalla rimozione casuale, dal nodo con carico maggiore o dal nodo con grado maggiore.}
+
+Extensive simulations, such as those modeled by Motter et al., reveal that networks with \textit{heterogeneous connectivity}—most notably scale-free networks—are inherently \textbf{more fragile} with respect to attacks (and even random errors) when cascading load redistributions are taken into account. While scale-free networks are notoriously robust to random node deletion in purely static topological assessments, the dynamic redistribution of flow changes the paradigm entirely. The failure of a highly central hub forces a massive volume of flow onto lower-capacity peripheral nodes, almost guaranteeing their immediate overload and initiating a catastrophic cascade.
+
+Conversely, a homogeneous \textit{Random Erdős-Rényi (E-R) network} proves to be the \textbf{least easily attackable} under these dynamical constraints. Because the load and node capacities are relatively evenly distributed across the entire network, the removal of any single node results in a highly dispersed and manageable load redistribution, thereby naturally hindering the propagation of the breakdown cascade.
+
+\section{Epidemic Spreading Processes}
+\label{sec:epidemics}
+
+The diffusion of a pathology through a population is fundamentally a contact-driven process. The classical, baseline hypothesis in epidemiological modeling assumes \textit{random contacts} among individuals, which topologically corresponds to an Erdős-Rényi (E-R) random network structure. Depending on the nature of the pathogen, the diffusion dynamics can be modeled using different compartmental approaches.
+
+\subsection{Compartmental Models: SIR and SIS}
+\label{subsec:compartmental_models}
+
+In compartmental models, the population is divided into distinct states (or compartments) based on their health status. The two most fundamental models are:
+\begin{itemize}
+    \item \textbf{SIR Model (Susceptible-Infected-Removed):} This model is used for pathologies where infection confers permanent immunity or leads to death (e.g., measles).
+    \item \textbf{SIS Model (Susceptible-Infected-Susceptible):} This applies to diseases where individuals do not gain lasting immunity and return to the susceptible pool after recovery (e.g., influenza, SARS-CoV-2, or computer viruses).
+\end{itemize}
+
+\subsubsection{Model Parameters and Transitions}
+
+The dynamic transitions between these compartments are governed by two primary parameters:
+\begin{itemize}
+    \item \(\lambda\): The transmission rate (or "infectivity" of the virus).
+    \item \(\mu\): The recovery (or death) rate.
+\end{itemize}
+
+The infection process, common to both models, requires a contact between a Susceptible node \(i\) and an Infected node \(j\). This interaction can be represented as a chemical reaction:
+\[
+    S(i) + I(j) \xrightarrow{\lambda} I(i) + I(j)
+\]
+
+The recovery process differs between the two models. In the SIR model, the infected node transitions to the Removed state:
+\[
+    I(i) \xrightarrow{\mu} R(i)
+\]
+In the SIS model, the node transitions back to the Susceptible state:
+\[
+    I(i) \xrightarrow{\mu} S(i)
+\]
+
+A critical parameter in evaluating these dynamics is the \textit{flux ratio parameter}, defined as \(\sigma = \frac{\lambda}{\mu}\). The primary objective of these models is to characterize the values of \(\sigma\) that lead to a widespread epidemic outbreak. In this context, \textbf{immunization} plays a crucial role: it mathematically translates to a reduction in the transmission rate \(\lambda\) (i.e., reducing the flux from S to I), either by lowering the overall percentage of infectious individuals or by reducing the probability that a susceptible individual becomes infected upon contact.
+
+\subsubsection{Stationary vs. Transient States}
+
+It is important to note the fundamental differences in the final states of these models. The SIR model possesses an \textbf{absorbing state}. In the stationary limit (\(t \to \infty\)), either there is no infection from the start (\(I = 0\)), or all connected nodes eventually become infected and subsequently transition to the Removed state (\(S = I = 0\)). Therefore, for the SIR model, the true epidemiological interest lies in analyzing the \textit{transient} dynamics.
+
+Conversely, the SIS model allows for a \textbf{stationary endemic state}, meaning the disease can persist indefinitely within a constant percentage of the population over time.
+
+\subsection{The Homogeneous Mixing Assumption}
+\label{subsec:homogeneous_mixing}
+
+To formulate tractable analytical equations, we assume a random E-R network with a macroscopic number of nodes (\(N \gg 1\)). Under the \textit{mean-field approximation}, we neglect local topological fluctuations and assume all nodes have an equal, average degree, denoted as \(\langle k \rangle\) or \(\bar{k}\).
+
+We express the populations as fractions of the total population \(N\):
+\begin{itemize}
+    \item \(s(t)\): fraction of the Susceptible (healthy) population.
+    \item \(\rho(t)\): fraction of the Infected population.
+    \item \(r(t)\): fraction of the Removed (recovered/dead) population.
+\end{itemize}
+For an isolated system, the conservation of mass dictates that \(s(t) + \rho(t) + r(t) = 1\) at any given time \(t\).
+
+\subsection{The SIS Model Dynamics}
+\label{subsec:sis_dynamics}
+
+\TODO{Inserire il diagramma a blocchi del modello SIS: un blocco "S" e un blocco "I" con due frecce contrapposte che li collegano, indicando il flusso bidirezionale.}
+
+Based on the Law of Mass Action, fluxes between compartments are proportional to the sample density. Assuming initial conditions where the vast majority of the population is healthy (\(s(0) \approx 1\)) and the initial infected fraction is infinitesimally small (\(\rho(0) \ll 1\)), the differential equations governing the SIS dynamics are:
+\[
+    \frac{ds(t)}{dt} = \mu \rho(t) - \lambda \langle k \rangle \rho(t) s(t)
+\]
+\[
+    \frac{d\rho(t)}{dt} = -\frac{ds(t)}{dt} \implies s(t) = 1 - \rho(t)
+\]
+These equations highlight that the increase in infected cases depends both on the intrinsic pathogen property (\(\lambda\)) and the topological property of the network (\(\langle k \rangle\)). Consequently, an epidemic can be mitigated by medical interventions acting on \(\lambda\) (vaccination/cure) or societal interventions acting on \(\langle k \rangle\) (lockdowns).
+
+\subsubsection{Early Stage Dynamics and \(R_0\)}
+
+In the early stages of the epidemic, since \(s(t) \approx 1\), the equation for the infected fraction simplifies to:
+\[
+    \frac{d\rho(t)}{dt} \approx (\langle k \rangle \lambda - \mu) \rho(t)
+\]
+Integrating this yields an exponential growth or decay:
+\[
+    \rho(t) = \rho_0 e^{(\langle k \rangle \lambda - \mu)t}
+\]
+The behavior is dictated by the sign of the exponent. We can define the \textbf{basic reproduction number}, \(R_0\), as:
+\[
+    R_0 = \frac{\langle k \rangle \lambda}{\mu}
+\]
+If \(R_0 > 1\), the infection spreads exponentially; if \(R_0 < 1\), the infection naturally dies out.
+
+\subsubsection{The Epidemic Threshold (\(\lambda_c\))}
+
+To find the stationary states, we substitute \(s(t) = 1 - \rho(t)\) into the rate equation and set the derivative to zero:
+\[
+    \frac{d\rho(t)}{dt} = \rho(t) \left[ \lambda \langle k \rangle (1 - \rho(t)) - \mu \right] = 0
+\]
+Ignoring the trivial disease-free equilibrium (\(\rho = 0\)), the non-zero endemic stationary state is:
+\[
+    \rho^* = 1 - \frac{\mu}{\lambda \langle k \rangle}
+\]
+This defines an \textbf{epidemic threshold} \(\lambda_c\):
+\[
+    \lambda_c = \frac{\mu}{\langle k \rangle}
+\]
+For \(\lambda < \lambda_c\), the only physically acceptable solution is \(\rho = 0\) (No epidemics). For \(\lambda > \lambda_c\), the system reaches an Endemic state.
+
+\subsection{The SIR Model Dynamics}
+\label{subsec:sir_dynamics}
+
+\TODO{Inserire il diagramma a blocchi del modello SIR: tre blocchi sequenziali "S", "I" ed "R", collegati da frecce unidirezionali da S verso I, e da I verso R.}
+
+For the SIR model, the initial conditions are typically \(s(0) \approx 1\), \(\rho(0) \approx 0\), and \(r(0) = 0\). The corresponding differential equations are:
+\[
+    \frac{ds(t)}{dt} = -\lambda \langle k \rangle \rho(t) s(t)
+\]
+\[
+    \frac{d\rho(t)}{dt} = -\mu \rho(t) + \lambda \langle k \rangle \rho(t) s(t)
+\]
+\[
+    \frac{dr(t)}{dt} = \mu \rho(t)
+\]
+
+\subsubsection{SIR Epidemic Threshold}
+
+By combining the first and third equations (\(\dot{s} = -\frac{\lambda \langle k \rangle}{\mu} \dot{r} s\)), we can relate the susceptible and removed fractions directly:
+\[
+    s(t) = e^{-\sigma \langle k \rangle r(t)}
+\]
+As \(t \to \infty\), the infected fraction goes to zero (\(\rho \to 0\)), meaning the final recovered fraction is \(r(t_\infty) \simeq 1 - s(t_\infty)\). Substituting this yields an implicit equation for the final outbreak size:
+\[
+    r(t_\infty) = 1 - e^{-\sigma \langle k \rangle r(t_\infty)}
+\]
+While \(r(t_\infty) = 0\) is always a mathematical solution, a macroscopic epidemic occurs (analogous to the emergence of a giant connected component in percolation theory) only if the derivative of the right-hand side at the origin is strictly greater than 1:
+\[
+    \sigma_c \langle k \rangle > 1 \implies \sigma_c > \frac{1}{\langle k \rangle} \implies \lambda_c > \frac{\mu}{\langle k \rangle}
+\]
+
+\TODO{Inserire il grafico della "Epidemic threshold": Un grafico nel piano $(\lambda, \rho)$, che mostra una fase assorbente (Healthy state, $\rho=0$) per $\lambda < \lambda_c$ e una biforcazione verso una fase attiva (Infected state, $\rho>0$) per $\lambda > \lambda_c$.}
+
+It is crucial to emphasize that this threshold strongly depends on both the intrinsic properties of the pathogen (\(\lambda, \mu\)) and the structural average connectivity of the underlying network (\(\langle k \rangle\)).
+
+\subsection{Immunization and Real-World Epidemics}
+\label{subsec:immunization_real_world}
+
+To effectively combat the spread of an epidemic, authorities often resort to immunization strategies (e.g., vaccination campaigns). In a standard mean-field approximation, if we randomly immunize a fraction \(g\) of the nodes in a network, the effective infectivity factor \(\lambda\) is linearly rescaled:
+\[
+    \lambda' = \lambda(1 - g)
+\]
+Because the system possesses an epidemic threshold, there exists a critical fraction of immunized subjects, denoted as \(g_c < 1\), at which the effective infectivity drops below the threshold (\(\lambda' < \lambda_c\)). Reaching this critical immunization threshold successfully eradicates the epidemic from the network. This represents the classical random immunization strategy.
+
+\subsubsection{Application: Computer Viruses}
+
+While biological diseases are the primary focus of epidemiological models, these frameworks also apply to digital infections. For computer viruses, the SIS model provides a more accurate representation than the SIR model because computers can typically be reinfected by the same malware after an antivirus software removes it.
+
+Interestingly, empirical data on computer viruses often reveals an average virus lifespan characterized by an exponential decay. However, the timescale of this decay is typically on the order of months, which is vastly longer than the operational timescale of antivirus interventions (hours or days).
+
+\TODO{Insert the plot showing the prevalence of computer viruses over time. The graph displays an exponential decay on a logarithmic scale ($P(t)$ vs time in months), illustrating long survival times $\tau$ (e.g., $\tau = 14$ months for macro viruses) despite localized antivirus actions.}
+
+\subsection{Epidemics on Heterogeneous Networks}
+\label{subsec:heterogeneous_networks}
+
+The classical mean-field approximation relies heavily on the assumption of homogeneous mixing, where every node has a degree well-approximated by the average degree \(\langle k \rangle\). However, most real-world networks (e.g., scale-free networks) exhibit massive structural heterogeneity. We hypothesize that differences in epidemic dynamics observed in the real world might be driven by the heterogeneity of the connections, rendering the simple \(\langle k \rangle\)-based mean-field results inaccurate.
+
+To address this, we introduce the \textbf{Degree-Based Mean Field (DBMF)} approach. The core model assumption here is that all nodes with the same degree \(k\) are statistically equivalent and behave in a similar way. Consequently, we must:
+\begin{enumerate}
+    \item Stratify the differential equations according to the degree class \(k\).
+    \item Solve a coupled system of equations for the various degrees, weighted by the network's degree distribution \(p(k)\).
+\end{enumerate}
+
+\subsubsection{The Heterogeneous SIR Model}
+
+Given a degree distribution \(p(k)\) with a finite average degree and variance, we define the fraction of susceptible, infected, and removed nodes within a specific degree class \(k\) as \(s_k(t)\), \(\rho_k(t)\), and \(r_k(t)\), respectively. The global average of the removed population, for instance, is given by:
+\[
+    \langle r(t) \rangle = \sum_k p(k) \cdot r_k(t)
+\]
+
+The degree-based mean-field equations for the SIR model become:
+\[
+    \frac{ds_k(t)}{dt} = -\lambda k s_k(t) \Theta(t)
+\]
+\[
+    \frac{d\rho_k(t)}{dt} = -\rho_k(t) + \lambda k s_k(t) \Theta(t)
+\]
+\[
+    \frac{dr_k(t)}{dt} = \rho_k(t)
+\]
+Here, \(\Theta(t)\) is a crucial weighted parameter representing the probability that any given link points to an infected node. It is computed by averaging over the degree distribution:
+\[
+    \Theta(t) = \frac{\sum_k k \cdot p(k) \cdot \rho_k(t)}{\sum_k k \cdot p(k)} = \frac{1}{\langle k \rangle} \sum_k k \cdot p(k) \cdot \rho_k(t)
+\]
+
+\subsubsection{The Heterogeneous SIS Model and Epidemic Threshold}
+
+Applying the same stratification to the SIS model, the conservation of mass within class \(k\) dictates \(\dot{s}_k + \dot{\rho}_k = 0\), or \(s_k(t) = 1 - \rho_k(t)\). The time evolution of the infected fraction in class \(k\) is:
+\[
+    \dot{\rho}_k = -\rho_k + \lambda k (1 - \rho_k) \Theta(\lambda)
+\]
+To find the stationary endemic state (\(\dot{\rho}_k = 0\)), we solve for the equilibrium infected fraction \(\rho_{k_{EQ}}\):
+\[
+    \rho_{k_{EQ}} = \frac{\lambda k \Theta(\lambda)}{1 + \lambda k \Theta(\lambda)}
+\]
+By substituting this equilibrium solution back into the definition of \(\Theta\), we obtain a self-consistency equation:
+\[
+    \Theta_{EQ}(\lambda) = \frac{1}{\langle k \rangle} \sum_k k \cdot p(k) \cdot \frac{\lambda k \Theta_{EQ}(\lambda)}{1 + \lambda k \Theta_{EQ}(\lambda)}
+\]
+
+\TODO{Insert the graphs illustrating the graphical solution for the heterogeneous SIS model. The plots should show the intersection of $y_1(\Theta) = \Theta$ and $y_2(\Theta) = \text{RHS}$ of the self-consistency equation. Panel A should show the case where the slope at the origin is $<1$ (only trivial solution $\Theta=0$), and Panel B should show the case where the slope is $\geq 1$ (yielding a non-trivial solution $\Theta^* > 0$).}
+
+A non-trivial endemic state (\(\Theta > 0\)) emerges only if the derivative of the right-hand side with respect to \(\Theta\), evaluated at \(\Theta = 0\), is strictly greater than or equal to 1:
+\[
+    \left. \frac{d}{d\Theta} \left( \frac{1}{\langle k \rangle} \sum_k k \cdot p(k) \cdot \frac{\lambda k \Theta}{1 + \lambda k \Theta} \right) \right|_{\Theta=0} \geq 1
+\]
+Evaluating this derivative yields the critical epidemic threshold \(\lambda_c\) for heterogeneous networks:
+\[
+    \lambda_c = \frac{\langle k \rangle}{\langle k^2 \rangle}
+\]
+
+\subsection{The Absence of an Epidemic Threshold}
+\label{subsec:no_threshold}
+
+The formula \(\lambda_c = \langle k \rangle / \langle k^2 \rangle\) represents a profound shift in our understanding of epidemic dynamics. For highly heterogeneous networks, such as scale-free networks governed by a power-law degree distribution \(p(k) \sim k^{-\gamma}\) with \(2 < \gamma \le 3\), the second moment of the degree distribution (\(\langle k^2 \rangle\)) diverges to infinity in the thermodynamic limit (\(N \to \infty\)).
+
+Consequently, \textbf{the critical threshold for epidemic growth tends to zero} (\(\lambda_c \to 0\)). This implies that on a scale-free network, an epidemic state will manifest regardless of how weak the pathogen's infectivity \(\lambda\) is. There is no phase transition; the system is always in an active spreading phase.
+
+\TODO{Insert the plot showing the absence of an epidemic threshold. The graph ($\rho$ vs $\lambda$) should feature a curve that rises immediately from the origin ($\lambda=0$), contrasted with dashed lines representing standard models that possess a non-zero critical threshold.}
+
+This structural vulnerability renders randomized immunization strategies highly ineffective on scale-free networks. Even with a large fraction \(g < 1\) of randomly immunized nodes, the epidemic cannot be contained. Instead, a \textbf{targeted immunization} strategy is strictly required. By selectively vaccinating the "hubs" (nodes with the highest \(k\)), we artificially truncate the degree distribution, forcing \(\langle k^2 \rangle\) to remain finite and restoring a non-zero epidemic threshold.
+
+\subsubsection{Finite-Size Effects}
+
+It is important to emphasize that theoretical critical threshold values (\(\lambda_c\)) are mathematically exact only in the thermodynamic limit. Real-world networks possess a finite number of nodes, meaning \(\langle k^2 \rangle\) cannot truly be infinite. Finite-size effects introduce uncertainty and cause the effective threshold to be slightly greater than zero. In practice, minimum effective immunization ratios for finite networks must be calculated through numerical simulations to ensure the strategy works with a sufficiently high probability.
+
+\subsection{Advanced Considerations: Correlations and Probabilistic Models}
+\label{subsec:advanced_epidemics}
+
+The DBMF model outlined above relies on the assumption that there are no degree-degree correlations (i.e., the probability of a node of degree \(k\) connecting to a node of degree \(k'\) does not depend on \(k\)). To build a more general model, we must take into account the assortative or disassortative nature of the network using the conditional probability \(P(k'|k)\).
+
+The refined differential equation becomes highly complex and generally lacks a closed-form analytical solution:
+\[
+    \frac{d\rho_k}{dt} = -\rho_k + \lambda k (1 - \rho_k) \sum_{k'} P(k'|k)\rho_{k'}
+\]
+The joint degree probability can be estimated empirically from real network data or modeled mathematically (e.g., recognizing that Barabási-Albert scale-free networks are inherently disassortative). By linearizing this equation (neglecting second-order terms in \(\rho_k\)), we obtain a linear system:
+\[
+    \frac{d\rho_k}{dt} = -\rho_k + \lambda k \sum_{k'} P(k'|k)\rho_{k'}
+\]
+The dynamic stability of the epidemic will thus depend on the sign of the leading eigenvalue of the matrix \(C\), defined by \(C_{ij} = \delta_{ij} + \lambda k P(i|j)\).
+
+Finally, while mean-field continuous equations are powerful analytical tools, epidemic diffusion is fundamentally stochastic. The continuous rates can be interpreted as the probability for a single node to undergo a discrete state transition. Modern computational epidemiology heavily relies on \textit{Monte Carlo-like simulations}, where neighboring node interactions are simulated probabilistically at the microscopic level. This allows researchers to track the exact topological diffusion over the network as infected states move through links, dynamically modifying individual node states and overcoming the limitations of continuous compartmental assumptions.

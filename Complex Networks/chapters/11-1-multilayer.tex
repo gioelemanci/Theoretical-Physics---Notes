@@ -1,0 +1,411 @@
+\chapter{Multilayer Networks}
+\label{chap:multilayer_networks}
+
+\section{Introduction and Mathematical Representation}
+\label{sec:intro_multilayer}
+
+Classical network theory traditionally assumes that interactions between entities can be aggregated into a single, homogeneous graph. However, the vast majority of real-world complex systems are characterized by multiple, distinct types of interactions occurring simultaneously between the exact same set of underlying components. To capture this multidimensional complexity, we must transition to the framework of \textbf{Multilayer Networks}.
+
+In a multilayer network, the same nodes can exhibit fundamentally different types of relations, each conceptualized as a separate "layer." Typical examples include:
+\begin{itemize}
+    \item \textbf{Social communication:} Individuals exchanging messages through varied channels (e.g., email, phone calls, instant messaging).
+    \item \textbf{Transportation systems:} People or goods navigating between the same geographic locations using different modes of transport (e.g., airplane, car, train, walking).
+    \item \textbf{Scientific collaboration:} Researchers interacting via distinct academic networks, such as citation graphs versus co-authorship networks.
+    \item \textbf{Online social networks:} Users expressing different types of engagement on a platform (e.g., retweeting, replying, "liking," or expressing agreement on varied topics).
+    \item \textbf{Textual and biological analysis:} Word co-occurrences evaluated within sliding windows of different lengths, or analogous multilayer relationships defined for pixels in images or amino acids in proteins.
+    \item \textbf{Data-driven multiplexes:} Constructing distinct interaction layers from the exact same underlying dataset (e.g., a time series) by applying different mathematical similarity metrics (such as Euclidean distance, Pearson correlation, mutual information, or Granger causality).
+\end{itemize}
+
+\subsection{Representations of Multilayer Networks}
+\label{subsec:representation_multilayer}
+
+Given a system composed of \(N\) nodes and \(L\) distinct layers of interaction, finding an appropriate mathematical representation is a non-trivial challenge. Depending on the analytical needs, the system can be formalized in three primary ways:
+
+\begin{enumerate}
+    \item \textbf{The 4-Index Tensor:} The most rigorous and lossless mathematical formulation uses a 4-index tensor, specifically an \(N \times N \times L \times L\) structure. This tensor elegantly captures both intra-layer links (connections between different nodes within the same layer) and inter-layer links (connections for the same node, or different nodes, across different layers).
+    \item \textbf{The "Flattened" Matrix:} To utilize standard linear algebra tools, the tensor can be unfolded into a large, block-diagonal matrix of dimensions \((N \times L) \times (N \times L)\). Here, each block represents a specific layer's topology, and off-diagonal blocks represent inter-layer connectivity.
+    \item \textbf{The "Condensed" Matrix:} This is a standard \(N \times N\) adjacency matrix obtained by simply aggregating the layers. It involves summing over all intra-layer links and completely neglecting the inter-layer structural information.
+\end{enumerate}
+
+\TODO{Insert a visual diagram showing the three representations of multilayer networks. The image should display a 3D isometric view of stacked, colored network layers (the full tensor view), juxtaposed against a flattened block-diagonal matrix layout, and finally converging into a single, condensed projection where all links are squashed onto a single plane.}
+
+It is crucial to note that these representations are decidedly not identical in terms of information content. Comparing the properties of the full tensor representation against its condensed projection often provides critical insights into the hidden structural complexity of the system.
+
+\section{Multiplex Networks and Multilinks}
+\label{sec:multiplex_networks}
+
+A highly common subclass of multilayer systems is the \textbf{Multiplex Network}. In a pure multiplex configuration, there are no explicit interactions between different nodes across different layers; the nodes remain identical across all layers, but the specific topological links connecting them vary per layer.
+
+For a system with \(M\) layers, the topology is described by a set of \(M\) standard adjacency matrices, \(A^\alpha\), where \(\alpha \in \{1, 2, \dots, M\}\).
+
+\subsection{Multilinks and Multiadjacency Matrices}
+\label{subsec:multilinks_multiadjacency}
+
+To rigorously quantify the overlap and correlation of edges across layers, we define the concept of a \textbf{multilink}. A multilink describes the exact combination of layers in which an edge exists between a specific pair of nodes.
+
+We define a binary vector \(\vec{m} = (m_1, m_2, \dots, m_M)\), where each component \(m_\alpha \in \{0, 1\}\). A multilink \(\vec{m}\) represents a connection state where two nodes are connected in layer \(\alpha\) strictly if \(m_\alpha = 1\), and are disconnected in that layer if \(m_\alpha = 0\).
+
+Based on this, we can define a set of \textbf{multiadjacency matrices}, denoted as \(\{A_{ij}^{\vec{m}}\}\). An element \(A_{ij}^{\vec{m}} = 1\) if and only if the precise multilink state \(\vec{m}\) exists between node \(i\) and node \(j\). The formula to calculate these elements from the individual layer adjacency matrices \(a_{ij}^\alpha\) is:
+\[
+    A_{ij}^{\vec{m}} = \prod_{\alpha=1}^M \left[ m_\alpha a_{ij}^\alpha + (1 - m_\alpha)(1 - a_{ij}^\alpha) \right]
+\]
+
+\subsubsection{Example: The Duplex Network}
+\label{subsubsec:duplex_example}
+
+Consider a simple multiplex with exactly two layers (\(M = 2\)), known as a duplex. Because there are two layers, there are \(2^M = 4\) possible multilink states, yielding four distinct multiadjacency matrices for any pair of nodes \(i\) and \(j\):
+\begin{align*}
+    A_{ij}^{(1,1)} & = a_{ij}^1 a_{ij}^2             \\
+    A_{ij}^{(1,0)} & = a_{ij}^1 (1 - a_{ij}^2)       \\
+    A_{ij}^{(0,1)} & = (1 - a_{ij}^1) a_{ij}^2       \\
+    A_{ij}^{(0,0)} & = (1 - a_{ij}^1) (1 - a_{ij}^2)
+\end{align*}
+By definition, the sum of all possible mutually exclusive multilink states must equal 1:
+\[
+    A_{ij}^{(1,1)} + A_{ij}^{(1,0)} + A_{ij}^{(0,1)} + A_{ij}^{(0,0)} = 1
+\]
+
+\TODO{Insert a schematic diagram illustrating a duplex network and its multilinks. The diagram should show two parallel layers (Layer 1 and Layer 2) with nodes connected by distinct links. Below it, show a visual breakdown of the four possible multilink vectors: (1,1) where both layers have a link, (1,0) and (0,1) where only one layer has a link, and (0,0) where neither layer has a link between a given node pair.}
+
+\subsection{Multivariate Multiplex Analysis}
+\label{subsec:multivariate_multiplex_analysis}
+
+Because multiplex networks map multiple distinct relationships onto the same set of entities, standard scalar network measures (like degree or centrality) naturally expand into \textbf{vector quantities}. Every node and link in a multiplex is described by a multidimensional feature space, with one component corresponding to each layer.
+
+This opens the door to sophisticated multivariate analysis techniques:
+\begin{enumerate}
+    \item \textbf{Layer Similarities:} By calculating a specific centrality measure across all nodes for each layer, we obtain vectors that characterize entire layers. Comparing these vectors allows us to assess macro-scale correlations and differences between the layers themselves.
+    \item \textbf{Node Feature Vectors:} Conversely, we can isolate a single node and extract its centrality (or other topological features) across all \(M\) layers. This allows for node clustering, multidimensional outlier detection, and regression analysis (e.g., attempting to mathematically estimate a node's topological importance in layer \(\alpha\) based solely on its properties in layers \(\beta\) and \(\gamma\)).
+\end{enumerate}
+
+A key analytical question in multiplex theory is identifying when "the sum is different from its parts." This involves strictly comparing layered measures (e.g., the average of node centralities computed on individual layers) against the scalar measure calculated directly on the aggregated, condensed network. When these values diverge significantly, the multiplex possesses non-trivial multidimensional properties that standard single-layer analysis would completely overlook.
+
+\section{Multiplex Unique Measures}
+\label{sec:multiplex_unique_measures}
+
+While many standard topological metrics can be generalized into vectors for multiplex networks, certain measures exist that are fundamentally exclusive to the multilayer framework. These measures attempt to capture the structural interdependence explicitly driven by the crossing of different layers.
+
+\subsection{Network Reachability and Node Interdependence}
+\label{subsec:reachability_interdependence}
+
+A prominent example of a multiplex-specific measure is \textbf{node interdependence}, which evaluates network reachability based on paths that explicitly mandate crossing multiple layers to arrive at their destination.
+
+Let \(\sigma_{ij}\) represent the total number of pathways connecting node \(i\) to node \(j\), considering all possible intra-layer and inter-layer routes. Let \(\psi_{ij}\) represent the specific subset of those paths that strictly pass through multiple layers. The interdependence parameter \(\lambda_i\) for a given node \(i\) is defined as:
+\[
+    \lambda_i = \sum_{i \neq j} \frac{\psi_{ij}}{\sigma_{ij}}
+\]
+
+The interpretation of this metric is highly intuitive:
+\begin{itemize}
+    \item \(\lambda_i \approx 1\): The node relies almost entirely on paths that alternate between layers to reach the rest of the network (e.g., a commuter who must necessarily use both a train and a bus to reach their destination).
+    \item \(\lambda_i \approx 0\): The node can reach the rest of the network utilizing only paths that remain completely within single, isolated layers.
+\end{itemize}
+
+\subsection{Building Multiplexes from Single Datasets}
+\label{subsec:building_multiplexes_from_data}
+
+Finally, multiplexes do not only arise from inherently different physical infrastructures. Given a singular dataset—such as an array of biological time series or financial stock prices—researchers can proactively construct a multiplex to extract deeper relational insights.
+
+By calculating various statistical measures on the exact same data, each metric defines a unique layer:
+\begin{itemize}
+    \item \textbf{Layer 1:} Linear relationships captured by \textit{Pearson's correlation}.
+    \item \textbf{Layer 2:} Nonlinear dependencies mapped via \textit{Mutual Information}.
+    \item \textbf{Layer 3:} Directional predictive flows modeled by \textit{Granger causality}.
+    \item \textbf{Layer 4:} Rank-based \textit{Nonparametric correlations} (e.g., Spearman's).
+\end{itemize}
+Integrating these distinct mathematical lenses into a unified multiplex structure allows for a comprehensive, multi-faceted characterization of the complex relationships governing the nodes, far exceeding the descriptive power of any single metric used in isolation.
+
+\section{Multiplex Applications and Real-World Examples}
+\label{sec:multiplex_applications}
+
+The theoretical framework of multiplex networks provides a powerful toolset for modeling complex systems across a wide array of disciplines. Analyzing systems through a multidimensional lens often reveals hidden structural properties that single-layer aggregations obscure. This framework offers rich avenues for practical research and project development, with prominent applications including:
+
+\begin{itemize}
+    \item \textbf{Social Networks:} Modeling individuals (nodes) connected through multiple distinct communication platforms (e.g., Twitter, WhatsApp, Facebook) or tracking the same users across different interaction types (e.g., retweeting about completely different topics).
+    \item \textbf{Transportation Networks:} Representing fixed geographic locations as nodes, while different layers represent distinct transport vectors (e.g., bus routes, bicycle paths, car roads, flight paths).
+    \item \textbf{Time-Varying Networks:} Treating temporal evolution as a multiplex, where each distinct time window constitutes a separate, sequential layer.
+    \item \textbf{Biological Networks:} Analyzing proteins connected by fundamentally different relationships, such as physical interactions, co-expression correlations, or co-occurrence in scientific literature (e.g., the STRING database).
+    \item \textbf{Communication and Text Analysis:} Mapping personal contacts across varied channels (email, SMS, phone calls), or linking words in corpora across documents covering different topics.
+\end{itemize}
+
+\subsection{Co-authorship and Citation Multiplexes}
+\label{subsec:coauthorship_citation}
+
+A classic application of multiplex analysis is found in bibliometrics, specifically in mapping scientific collaborations and citations. Consider a massive network of over \(10,000\) authors. We can define a duplex (a two-layer multiplex) representing two distinct types of relationships: layer 1 for citations, and layer 2 for co-authorships. Alternatively, we can define a duplex based on the journal of publication, analyzing co-citations and co-authorships simultaneously within specific journals (e.g., Physical Review E - PRE, and Physical Review Letters - PRL).
+
+\subsubsection{Weighted Multiplex Measures: Strength and IPR}
+\label{subsubsec:multiplex_measures}
+
+To analyze these weighted networks mathematically, we extract specific measures for each node within each layer \(\alpha\). The \textbf{node strength} \(s_i^\alpha\) is the sum of the weights of all links attached to node \(i\) in layer \(\alpha\):
+\[
+    s_i^\alpha = \sum_{j=1}^N a_{ij}^\alpha
+\]
+Typically, node strength scales with the node degree \(k\) according to a power law:
+\[
+    s^\alpha(k) \propto k^{\beta_\alpha} \quad \text{where} \quad \beta_\alpha \geq 1
+\]
+
+To measure the heterogeneity of weight distribution among a node's edges, we use the \textbf{Inverse Participation Ratio (IPR)}, denoted as \(Y_i^\alpha\):
+\[
+    Y_i^\alpha = \sum_{j=1}^N \left( \frac{a_{ij}^\alpha}{s_i^\alpha} \right)^2
+\]
+The IPR also follows a scaling relation with degree:
+\[
+    Y^\alpha(k) \propto \frac{1}{k^{\lambda_\alpha}}
+\]
+where the exponent \(\lambda_\alpha \leq 1\) is strictly layer-dependent, characterizing how evenly an author's collaborations or citations are distributed.
+
+\subsubsection{Cross-Journal Collaboration Dynamics}
+\label{subsubsec:cross_journal_dynamics}
+
+\TODO{Insert a 2x2 panel of graphs showing 'Collaboration in PRE and PRL multiplex'. The top row should show Strength vs Degree ($s^{(m_1, m_2)}$ vs $k^{(m_1, m_2)}$) for PRL and PRE. The bottom row should show IPR vs Degree ($Y^{(m_1, m_2)}$ vs $k^{(m_1, m_2)}$). Differentiate the data points by multilink status (e.g., blue for (1,1) and green for (1,0) or (0,1)).}
+
+By utilizing multilink vectors \((m_1, m_2)\), we can separate authors who publish exclusively in one journal from those who collaborate across both. Empirical analysis shows that authors who collaborate in \textit{both} journals (the \((1,1)\) multilink state) exhibit a noticeably higher degree-strength relation. Furthermore, their IPR distribution is significantly more heterogeneous, indicating a complex, highly uneven distribution of collaborative efforts compared to single-journal authors.
+
+\subsection{Gene-Gene Weighted Duplexes in Oncology}
+\label{subsec:gene_gene_duplex}
+
+Multiplex networks offer profound insights into pathological cellular states. We can construct a gene-gene weighted duplex comparing healthy tissue against colon cancer tissue (e.g., using GSE4183 Gene Expression Profiling data).
+
+\subsubsection{Network Construction and Specificity}
+\label{subsubsec:cancer_network_construction}
+
+The network nodes consist of \(2835\) mapped genes. The two layers correspond to the Normal (N) and Cancer (C) states. Links are established using Kendall's \(\tau\) (a nonparametric correlation between sample gene expression profiles), mathematically imposing a constant \(10\%\) link density per layer to ensure topological comparability. The weights on these links are defined by the averaged Euclidean distances of gene expressions across samples.
+
+By analyzing the multilink states, we can classify genes:
+\begin{itemize}
+    \item \textbf{Overlap (1,1):} Genes correlated structurally in \textit{both} Normal and Cancer samples.
+    \item \textbf{(1,0) and (0,1):} Genes whose correlations exist \textit{only} in the Normal layer or \textit{only} in the Cancer layer.
+\end{itemize}
+
+\TODO{Insert the two scatter plots showing Strength vs Degree for NORMAL (left) and CANCER (right). The graphs should highlight the (1,1) overlapping links in blue, and the layer-specific (1,0) or (0,1) links in green. Note the text indicating that C-specific genes show more disordered behavior.}
+
+Topological analysis reveals that Cancer-specific genes (those isolated in the Cancer layer) exhibit a distinctly more \textbf{disordered behavior} in their strength-degree scaling (with scaling exponent \(\alpha \sim 1\)). This structural disorder serves as a topological footprint for cancer specificity.
+
+\subsubsection{Identifying Core Functional Genes}
+\label{subsubsec:core_functional_genes}
+
+\TODO{Insert the scatter plot comparing $S_{11}(C)$ on the y-axis against $S_{11}(N)$ on the x-axis. The plot should show a tight diagonal alignment of data points, representing the 'core' genes.}
+
+By comparing the properties of the overlapping \((1,1)\) links across both layers, researchers identified a "core" of genes that maintain identical topological relations in both the C and N layers. Genes that correlate strongly within this core exhibit highly similar expression profiles regardless of the pathological state, allowing researchers to robustly identify foundational, common cellular functions that remain unperturbed by the malignancy.
+
+\subsection{Brain Connectomics as Multilayer Networks}
+\label{subsec:brain_connectomics}
+
+The human brain is perhaps the ultimate multiplex system. Brain connectomics relies on integrating multiple layers of distinct biological information to understand cognitive function and pathology.
+
+\TODO{Insert the visual diagram of 'Structural and functional brain networks' (Brain duplex). The image should show the brain's anatomy mapping to a 'Structural brain network' (blue wiring) derived from DTI, and a 'Functional brain network' (red wiring) derived from fMRI, and how these two fundamentally different graphs are integrated.}
+
+Several possible network layers can be considered when mapping the brain:
+\begin{itemize}
+    \item \textbf{Structural layers:} Anatomical wiring derived from NMR DTI (Diffusion Tensor Imaging).
+    \item \textbf{Functional layers:} Statistical dependencies of activity derived from functional NMR BOLD (Blood-Oxygen-Level-Dependent) signals.
+    \item \textbf{State-dependent layers:} Networks representing different physiological conditions (e.g., awake resting state, deep sleep, coma).
+    \item \textbf{Junction-specific layers:} Differentiating between chemical and electrical synapses.
+\end{itemize}
+True understanding of brain dynamics requires mathematical techniques that combine and contrast the information across these disparate layers.
+
+\subsection{The \textit{C. Elegans} Connectome Duplex}
+\label{subsec:celegans_connectome}
+
+The nematode \textit{Caenorhabditis elegans} is a premier model organism in network biology due to its fully mapped nervous system. The connectome consists of \(281\) neurons, interconnected by \(6394\) chemical synapses, \(890\) electrical junctions, and \(1410\) neuromuscular junctions.
+
+\TODO{Insert the complex network graph showing the C. Elegans Connectome, with nodes colored by type or module and a dense web of directed and undirected links.}
+
+\subsubsection{Duplex Overlap and Path Associations}
+\label{subsubsec:celegans_overlap}
+
+We can model the neural interactions as a duplex:
+\begin{enumerate}
+    \item \textbf{Chemical synapses:} A directed network layer derived from electron micrographs.
+    \item \textbf{Electrical junctions (Gap junctions):} An undirected network layer, as the biological directionality of the current is generally unknown.
+\end{enumerate}
+
+Direct duplex analysis reveals exactly \(232\) structurally overlapping links. This represents \(22.6\%\) of the total links in the electrical layer and \(10.6\%\) of the links in the chemical layer. Predictably, the most topologically central neurons in the organism are robustly connected in both layers simultaneously.
+
+However, complex network analysis must go beyond simple, direct link overlap. A fundamental question arises: \textit{Given two nodes directly linked in one layer, how are they proximally related in the other layer?} To answer this, researchers evaluate the significant statistical \textbf{association between shortest path lengths} across the two layers (where a path length of 1 represents a direct link). This multilayer shortest-path analysis reveals hidden redundancies and interdependent routing protocols critical for the organism's neural robustness.
+
+\section{Statistical Comparison and Cross-Layer Associations}
+\label{sec:cross_layer_associations}
+
+As established in the analysis of the \textit{C. elegans} connectome, a simple evaluation of direct link overlap is insufficient to capture the full structural interdependence of a multiplex system. A much more profound analytical question is: \textit{Given that two nodes are directly linked in one layer, how are they topologically related in the other layer?}
+
+To answer this quantitatively, we must move beyond simple edge intersection and investigate the statistical association between \textbf{shortest path lengths} across different layers. The core methodology involves counting the number of shortest paths of a specific length \(d_p\) between two nodes in one layer, strictly conditioned on whether those same two nodes are directly connected (path length of 1) or not connected in the other layer.
+
+\subsection{Statistical Methodology: The Exact Fisher Test}
+\label{subsec:fisher_exact_test}
+
+To determine if the observed cross-layer path associations are statistically significant or merely products of random chance given the network's density, we perform a proportion test, specifically the \textbf{Exact Fisher Test}.
+
+We construct a \(2 \times 2\) contingency table to test the association between two categorical variables: the presence of a direct link in Layer \(\alpha\), and the presence of a shortest path of length \(d_p\) in Layer \(\beta\).
+
+\TODO{Insert the visual of the 2x2 contingency table for the Fisher Exact Test. The table should show VarA (e.g., Connected/Not Connected in Layer 1) against VarB (e.g., Path length $d_p$/Path length $\neq d_p$ in Layer 2), resulting in four quadrants: A, B, C, and D, with their respective marginal totals.}
+
+Let the matrix cells be defined as \(A, B, C,\) and \(D\), where:
+\begin{itemize}
+    \item \(A\): Number of node pairs linked in Layer \(\alpha\) AND having path length \(d_p\) in Layer \(\beta\).
+    \item \(B\): Number of node pairs NOT linked in Layer \(\alpha\) AND having path length \(d_p\) in Layer \(\beta\).
+    \item \(C\): Number of node pairs linked in Layer \(\alpha\) AND having path length \(\neq d_p\) in Layer \(\beta\).
+    \item \(D\): Number of node pairs NOT linked in Layer \(\alpha\) AND having path length \(\neq d_p\) in Layer \(\beta\).
+\end{itemize}
+Let \(N = A + B + C + D\) be the total number of node pairs. The hypergeometric probability \(p\) of observing this specific distribution of values, under the null hypothesis of independence, is calculated exactly as:
+\[
+    p = \frac{(A + B)! (C + D)! (A + C)! (B + D)!}{N! A! B! C! D!}
+\]
+By computing this p-value for every possible path length \(d_p\), we can rigorously identify which specific proximity relations are statistically overrepresented.
+
+\subsection{Application: The \textit{C. Elegans} Duplex}
+\label{subsec:celegans_path_association}
+
+We apply this statistical framework to the \textit{C. elegans} neural duplex, analyzing the interplay between the chemical synapse layer and the electrical gap-junction layer.
+
+\subsubsection{Electrical Paths Conditioned on Chemical Links}
+\label{subsubsec:electrical_conditioned_chemical}
+
+First, we analyze the distribution of shortest paths in the undirected \textbf{electrical layer}, conditioned on the presence of a directed link in the \textbf{chemical layer}.
+
+\TODO{Insert the two histograms for the Electrical Layer. The left histogram should show the absolute, unconditional distribution of shortest paths in the electrical layer (peaking around $d_p = 4-5$). The right histogram should show the conditional distribution: shortest paths in the electrical layer strictly between nodes that share a direct link in the chemical layer.}
+
+\TODO{Insert the p-value significance plot for the Electrical layer. The plot should display the p-value on the y-axis against the shortest path length $d_p$ on the x-axis. Include an arrow highlighting the massive drop in p-value (approaching zero) at $d_p = 1, 2,$ and $3$.}
+
+When we map the p-values derived from the Fisher test for each path length, we observe a striking phenomenon: there is a massive, statistically significant \textbf{overrepresentation of shortest paths of length 1, 2, and 3} in the electrical layer specifically when those nodes are directly linked in the chemical layer. This implies that chemical connectivity tightly binds nodes in the electrical topology, enforcing a strict maximum proximity of 3 electrical hops.
+
+\subsubsection{Chemical Paths Conditioned on Electrical Links}
+\label{subsubsec:chemical_conditioned_electrical}
+
+Conversely, we reverse the conditioning to analyze the shortest paths in the \textbf{chemical layer} between nodes that share a direct link in the \textbf{electrical layer}.
+
+\TODO{Insert the two histograms for the Chemical Layer. The left panel must show the overall shortest path distribution in the chemical layer. The right panel must show the distribution of shortest paths in the chemical layer specifically between nodes that share a direct link in the electrical layer.}
+
+\TODO{Insert the corresponding p-value significance plot for the Chemical layer. The graph should highlight the overrepresentation (p-value near 0) exclusively for shortest paths of length 1 and 2 in the chemical layer when the nodes are linked in the electrical layer.}
+
+The reciprocal analysis yields a similarly strong, yet tighter, association. The Fisher test confirms a significant overrepresentation of chemical paths of length 1 and 2 between electrically coupled neurons. The multiplex topology is highly entangled; proximity in one physiological interaction layer virtually guarantees topological proximity in the other.
+
+\subsection{Multiplex Network Inference}
+\label{subsec:network_inference}
+
+The discovery of these strong statistical associations between direct links and short paths across different layers leads to a powerful predictive application: \textbf{Network Inference}.
+
+In many real-world empirical networks, data collection is noisy, expensive, or incomplete, leading to missing links in the adjacency matrices. However, the cross-layer associations imply that we have the mathematical capability to \textit{infer direct connectivity} in one layer if the nodes exhibit a sufficiently short path between them in another, well-mapped layer.
+
+The fundamental research question becomes: \textit{Can we accurately predict missing links in one layer by leveraging our complete knowledge of the links in the other layers of the multiplex?}
+
+To solve this, modern complex network theory increasingly intersects with advanced machine learning paradigms. By combining topological association rules with algorithmic models—most notably \textbf{Graph Neural Networks (GNNs)} and multidimensional link prediction algorithms—researchers can utilize the entire multiplex tensor to probabilistically reconstruct missing data, validate experimental findings, and uncover hidden structural dependencies that single-layer analyses are mathematically blind to.
+
+\section[Machine Learning, Knowledge Graphs, Network-of-Networks]{Machine Learning, Knowledge Graphs,\\Network-of-Networks}
+\label{sec:multilayer_advanced_applications}
+
+The mathematical flexibility of the multilayer network framework allows it to be seamlessly integrated with modern computational paradigms, including machine learning algorithms and massive multidimensional knowledge graphs. This section explores cutting-edge applications and theoretical extensions that push the boundaries of complex systems analysis.
+
+\subsection{Multilayer Networks and Machine Learning: The OhmNet Model}
+\label{subsec:ohmnet_machine_learning}
+
+A significant breakthrough in network science is the development of \textbf{node embedding} techniques (such as \textit{node2vec}), which map nodes into a low-dimensional continuous vector space while preserving their structural network neighborhoods. While traditionally applied to single-layer networks, this concept can be generalized to multiple layers if explicit knowledge about the relationships between those layers is available.
+
+A premier example of this generalization is \textbf{OhmNet}, an algorithm designed to predict protein functions based on structural relations within Protein-Protein Interaction (PPI) networks across various human tissues. Instead of treating tissues as isolated graphs, OhmNet leverages a hierarchical biological ontology to link them.
+
+\subsubsection{Data Structure and Hierarchical Scaffolding}
+\label{subsubsec:ohmnet_data_structure}
+
+OhmNet operates on a highly structured dataset:
+\begin{enumerate}
+    \item \textbf{Common Scaffold:} A massive baseline human PPI network comprising over $21,000$ proteins and $340,000$ links.
+    \item \textbf{Tissue-Specific Layers ($G_i$):} For each specific tissue, a unique layer is constructed. Links from the common scaffold are selected or weighted based on the specific \textit{coexpression} of those proteins within that exact tissue (derived from public omics data).
+    \item \textbf{Layer Hierarchy ($\mathcal{M}$):} The layers are not independent; they are connected via inter-layer links dictated by a tissue ontology Directed Acyclic Graph (DAG), such as the BRENDA database. This hierarchy defines parent-child relationships between broader tissue categories and highly specific cell types.
+\end{enumerate}
+
+\TODO{Insert the schematic diagram of the OhmNet multilayer structure. The image should display multiple network layers ($G_i, G_j, G_k, G_l$) stacked in a 3D isometric view, connected by dashed inter-layer links representing the overarching ontology $M$.}
+
+\subsubsection{The Cost Function and Biased Random Walks}
+\label{subsubsec:ohmnet_cost_function}
+
+To learn the multidimensional embedding of a node $u$, OhmNet utilizes biased random walks (analogous to the node2vec algorithm) performed independently \textit{within each layer}. This process generates an embedding function $f_i(u)$ for node $u$ in layer $i$.
+
+However, to enforce the multilayer biological hierarchy, the algorithm introduces a dependency constraint: the learned functional embedding of a protein in a specific tissue layer should be mathematically similar to its embedding in its parent tissue layer, denoted as $\pi(i)$. The regularization cost for this hierarchical similarity for a node $u$ is defined as:
+\[
+    c_i(u) = \frac{1}{2} || f_i(u) - f_{\pi(i)}(u) ||_2^2
+\]
+
+The ultimate goal of the machine learning model is to find the set of embedding functions $\{f_1, f_2, \dots, f_{|\mathcal{M}|}\}$ that maximizes the structural neighborhood likelihoods (denoted by the objective $\Omega_i$) while minimizing the hierarchical penalties across all layers. The global optimization function is written as:
+\[
+    \max_{f_1, f_2, \dots, f_{|\mathcal{M}|}} \sum_{i \in T} \Omega_i - \lambda \sum_{j \in \mathcal{M}} c_j
+\]
+where $T$ represents the set of terminal (leaf) tissue layers, $\mathcal{M}$ represents all layers in the hierarchy, and $\lambda$ is a tuning parameter controlling the strength of the inter-layer ontological constraint.
+
+\TODO{Insert the diagram illustrating the OhmNet cost function hierarchy. The diagram should show a tree-like structure mapping the parent-child relationships ($f_1, f_2, f_i, f_j$, etc.) down to the specific functional network layers ($G_i, G_j$).}
+
+\subsubsection{Generalizing the OhmNet Approach}
+\label{subsubsec:generalizing_ohmnet}
+
+The hierarchical embedding architecture of OhmNet is not restricted to human tissues. A highly promising avenue for future research (and potential thesis projects) involves generalizing this approach to cross-species interactomes. By utilizing known protein networks from various organisms (bacteria and/or eukaryotes) that share a common subset of homologous proteins, one can define the inter-layer relationships based on \textbf{taxonomical proximity}. This evolutionary tree would serve the exact same regularizing function as the BRENDA tissue ontology.
+
+\subsection{Knowledge Graphs and FAIRomics}
+\label{subsec:knowledge_graphs_fairomics}
+
+Multilayer network theory is also fundamental to the construction and analysis of \textbf{Knowledge Graphs}. A prime example is the EU-funded \textbf{FAIRomics} project, which aims at the "FAIRification" (Findable, Accessible, Interoperable, and Reusable) of multiOmics data to create extensive knowledge graphs for plant-based fermented foods.
+
+\TODO{Insert the knowledge graph visualization from the FAIRomics project. The image should display a network of interconnected colored nodes, explicitly highlighting central hubs labeled 'Fermented food', 'Multi omics', and 'FAIR'.}
+
+\subsubsection{Multiplex Generation via Bipartite Contraction}
+\label{subsubsec:bipartite_contraction}
+
+Knowledge graphs represent complex, heterogeneous relationships between disparate entities. In the FAIRomics case study focusing on organisms (bacteria, yeast) involved in food processing, we can extract structured relationships from literature and databases. For a given organism, we might establish three distinct bipartite relations:
+\begin{enumerate}
+    \item Organism \textbf{lives in} Habitat.
+    \item Organism \textbf{is studied for} Use.
+    \item Organism \textbf{exhibits} Phenotype.
+\end{enumerate}
+
+Rather than analyzing this massive, heterogeneous graph directly, we can perform a mathematical \textbf{bipartite graph contraction} on the non-organism nodes. By projecting these bipartite relations onto the organism nodes, we inherently generate a \textbf{three-layer multiplex network} of organism-organism relationships. Layer 1 connects organisms sharing a habitat; Layer 2 connects organisms sharing a usage; Layer 3 connects organisms sharing a phenotype. This cleanly transforms a tangled knowledge graph into a tractable multilayer ensemble.
+
+\subsection{Network-of-Networks (NoN)}
+\label{subsec:network_of_networks}
+
+A step beyond multiplexes is the broader paradigm of a \textbf{Network-of-Networks (NoN)}. In this formulation, we accommodate nodes of fundamentally different types, organized into a block-matrix topology.
+
+The diagonal blocks of the super-matrix represent \textit{homogeneous node-type networks} (standard unipartite graphs connecting nodes of the same type). The off-diagonal blocks represent the relational networks \textit{between} nodes of different types (bipartite graphs). Standard bipartite networks are simply a highly restricted special case of a NoN containing exactly two node types with empty diagonal blocks.
+
+\TODO{Insert the block matrix diagram illustrating the Bipartite Metabolite-Gene Network-of-Networks (NoN). The matrix should show four distinct colored quadrants labeled MxM, MxG, MxG, and GxG.}
+
+\subsubsection{Example: Metabolite-Gene NoN}
+\label{subsubsec:metabolite_gene_non}
+
+Consider a cellular biological system containing both Metabolites ($M$) and Genes/Proteins ($G$). The complete system is a super-matrix composed of four distinct interconnected partitions:
+\begin{itemize}
+    \item \textbf{$M \times M$ Block:} The metabolite-metabolite network, representing purely metabolic biochemical reactions.
+    \item \textbf{$G \times G$ Block:} The gene-gene network, representing protein interactions or co-expression profiles.
+    \item \textbf{$G \times M$ Block:} The gene-metabolite bipartite network, mapping enzymes to the specific metabolic reactions they trigger or catalyze.
+    \item \textbf{$M \times G$ Block:} The reverse metabolite-gene bipartite network, mapping how specific metabolites (e.g., hormones, signaling molecules) affect Gene Expression Profiling (GEP).
+\end{itemize}
+This framework captures the true, closed-loop feedback dynamics of cellular life, seamlessly integrating metabolomics and transcriptomics.
+
+\subsection{Epidemiological Forecasting: The VEO Observatory}
+\label{subsec:veo_observatory}
+
+The modeling of global pandemics requires integrating data streams that are vastly different in scale, type, and source. The \textbf{Versatile Emerging infectious disease Observatory (VEO)} aims to forecast, nowcast, and track infectious diseases in a rapidly changing world by moving beyond traditional single-variable models.
+
+\TODO{Insert the VEO conceptual diagrams. The left panel (A) should show the 'VEO approach' integrating wild/domestic animal vectors and human spillover. The right panel (B) should show the reporting pyramid (diagnosed, hospitalized, reported) driven by global factors.}
+
+To achieve this, VEO utilizes a massive \textbf{multiplex network embedding} to synthesize data analytics and modeling tools. A comprehensive global model is constructed by stacking the following distinct layers:
+\begin{itemize}
+    \item \textbf{Geographic Data:} Spatial distances and geolocalization networks.
+    \item \textbf{Genomic Data:} Networks defining bacterial or viral strain similarities and mutational pathways.
+    \item \textbf{Social and Mobility Data:} Real-time human movement networks extracted from telecommunications, Twitter, Facebook, or airline traffic.
+    \item \textbf{Climatologic and Demographic Data:} Environmental conditions that drive vector habitats.
+    \item \textbf{Global Epidemic Databases:} Verified case reporting from entities like the World Bank, WHO, and ECDC.
+\end{itemize}
+
+\TODO{Insert the visual representation of the VEO multiplex data layers. Show the 3D stack of interconnected geographical and social network layers next to a satellite map overlaid with dense blue mobility network traces over a geographic region (e.g., Northern Italy).}
+
+By embedding these diverse variables into a unified mathematical structure, public health officials can track how a genomic mutation combined with specific climate conditions and human mobility vectors might trigger a transnational outbreak, allowing for highly predictive and robust crisis management.
+
+\subsection{Open Problems in Multilayer Network Research}
+\label{subsec:open_problems_multilayer}
+
+While multilayer networks offer unprecedented descriptive power, the field is still maturing, presenting several open methodological challenges:
+\begin{itemize}
+    \item \textbf{Network Reconstruction and Taxonomy:} Integrating information across different taxonomic levels (e.g., mixing species-level data with genus or class-level data) requires rigorous topological rules to avoid analytical bias.
+    \item \textbf{Quality Control of Edges:} When multiplex layers are extracted via automatic literature analysis (Natural Language Processing), sophisticated quality control algorithms are desperately needed to identify and prune false or spurious relations.
+    \item \textbf{Cross-Layer Relationship Inference:} Developing statistically sound methods to infer properties in one layer strictly based on the topology of another layer remains computationally difficult.
+    \item \textbf{Direct vs. Mediated Relationships:} Distinguishing between a true direct interaction and an interaction that only appears mathematically significant because it is mediated by hidden variables or intermediate layers is an ongoing subject of intense research and Ph.D. study.
+\end{itemize}

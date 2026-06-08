@@ -85,7 +85,7 @@ In a weighted network, the adjacency matrix contains values that represent the s
 \]
 This can be interpreted in various ways depending on the context, such as the number of interactions, the intensity of relationships, or the capacity of links.
 
-It can be seen as a representation of a \textbf{multigraph} with N multi-edges: \(w_{ij} = N\). If all weights are positive, we have useful theorems for matrices with positive values (Perron-Frobenius theorem) and we can connect to ``physical'' situations (transition probabilities of diffusion processes)
+It can be seen as a representation of a \textbf{multigraph} with N multi-edges: \(w_{ij} = N\). If all weights are positive, we have useful theorems for matrices with positive values (Perron-Frobenius theorem) and we can connect to ``physical'' situations (transition probabilities of diffusion processes).
 Negative weights can be meaningful too: in \textbf{signed networks} the sign of the weight can represent different types of relationships or interactions, such as:
 \begin{itemize}
     \item \textbf{Friend-enemy}: in social networks, positive weights can represent friendships while negative weights can represent enmity.
@@ -119,10 +119,8 @@ The incidence matrix can be interpreted as a generalized derivative on the graph
 
 Given a vector of values \(\mathbf{f}_i\) for each node, the incidence matrix \(I\) applied on the vector gives:
 \[
-    \begin{aligned}
-        \sum_{j} I_{ij} \cdot \mathbf{f}_j & = \Delta_i,                                                  \\
-        \Delta_i                           & = \mathbf{f}_i - \mathbf{f}_j \forall \text{adjacent nodes},
-    \end{aligned}
+    \sum_{j} I_{ij} \cdot \mathbf{f}_j  = \Delta_i,                                                  \quad
+    \Delta_i                            = \mathbf{f}_i - \mathbf{f}_j \forall \text{ adjacent nodes},
 \]
 where \(\Delta_i\) represents the net flow into or out of node \(i\) based on the values of its neighbors. This interpretation is crucial for analyzing diffusion processes, random walks, and other dynamic phenomena on networks.
 
@@ -186,7 +184,7 @@ To emulate a \textbf{random walk on a graph}, we can use the adjacency list to q
 \end{enumerate}
 This method allows us to efficiently simulate random walks and diffusion processes on large, sparse networks, which is essential for understanding the dynamics of complex systems.
 
-\section{Graph Isomorphism and Permutation}
+\subsection{Graph Isomorphism and Permutation}
 
 We are now going to discuss the concept of graph isomorphism, which is a fundamental notion in graph theory that describes when two graphs are essentially the same, even if they are represented differently.
 
@@ -222,6 +220,12 @@ These re-indexing strategies can help us to better understand the structure of t
     Spatial closeness acts as an ``intrinsic'' metric for the graph. One can use the re-indexing in order to exploit different properties of the graph, such as symmetry or centrality measures, study spatial closeness, revealing the backbone of the network, or identify communities.
 
     DNA 3D structure can also be represented as a similar network, where nodes represent nucleotides and links represent spatial proximity or interactions between them. Re-indexing based on spatial proximity can help to reveal patterns in the contact map and provide insights into the structure and function of the DNA molecule (the hi-c technique is used to obtain such contact maps).
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/protein_dna_contact_maps.png}
+        \caption{Protein and DNA contact maps. \textbf{(a)} A continuous 3D distance matrix represented as a heatmap. The prominent main diagonal corresponds to the structural backbone, clearly illustrating the "intrinsic" 1D metric of the amino acid or nucleotide sequence. \textbf{(b, c)} Discretized network representations derived from the 3D distance matrix. These symmetric adjacency matrices highlight spatial closeness, demonstrating how physical 3D structural data (such as folded peptide bonds or DNA Hi-C technique data) can be mathematically mapped and analyzed as complex networks.}
+    \end{figure}
 \end{example}
 
 \section{Connectedness}
@@ -511,16 +515,16 @@ With multiple tree networks, it is possible to create a more complex structure, 
 
 \subsection{Directed Acyclic Graph (DAG)}
 
-\begin{minipage}{0.55\textwidth}
+\begin{minipage}{0.5\textwidth}
     A directed acyclic graph (DAG) is a type of graph that consists of nodes connected by directed edges, where there are no cycles. In a DAG, each edge has a direction, indicating the flow of information or dependencies between nodes. DAGs are commonly used in various applications, such as scheduling tasks, representing dependencies in software development, and modeling hierarchical relationships. It can be used to represent complex systems where there are multiple levels of dependencies, without the risk of creating cycles that can lead to infinite loops or deadlocks.
 
     With DAGs we can represent more complex relationships than trees, as they allow for multiple paths between nodes, establishing an effective hierarchy. However, they can also be more difficult to manage and navigate, especially as the number of nodes and edges increases. DAGs are often used in scenarios where there are multiple dependencies or relationships between entities, such as in project management, data processing pipelines, and knowledge representation.
 \end{minipage}
 \hfill
-\begin{minipage}{0.4\textwidth}
+\begin{minipage}{0.45\textwidth}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{img/GOTM_analysis_DAG_example.png}
+        \includegraphics[width=\textwidth]{img/GOTM_analysis_DAG_example.png}
         \caption{An example of a directed acyclic graph (DAG) on the GOTM analysis (which demonstrated that more specific biological processes, such as immune response, regulation of hydrolase activity, peptide transport and JAK-STAT cascade, were significantly modulated by the microbiota; the number of observed genes in a particular biological process is indicated by ``n''). The edges have a direction and there are no cycles. The DAG structure allows for multiple paths between nodes, establishing an effective hierarchy.}
     \end{figure}
 \end{minipage}
