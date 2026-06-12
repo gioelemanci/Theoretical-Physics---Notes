@@ -1,0 +1,276 @@
+\section{The Ising Conformal Field Theory}
+
+The Ising model at criticality is the simplest non-trivial example of a two-dimensional conformal field theory. It is of paramount importance because it provides a complete, concrete realization of all the abstract structures we introduced in the previous chapters: primary fields, Virasoro representations, null vectors, fusion rules, and the operator product expansion.
+
+As we have seen, it corresponds precisely to the unitary minimal model with parameter \(m = 3\), giving a central charge of:
+\[
+    c = \frac{1}{2}.
+\]
+
+\subsection{Primary Fields and Physical Interpretation}
+
+For \(m=3\), the Kac table dictates that the holomorphic sector possesses exactly three allowed conformal weights: \(h = 0, 1/16, 1/2\). To build the full physical Hilbert space of the theory on the complex plane, we must combine the holomorphic and anti-holomorphic sectors.
+
+The Ising conformal field theory contains exactly three \textbf{scalar primary fields} (fields where \(h = \bar{h}\), meaning their conformal spin is \(s = h - \bar{h} = 0\)). We can summarize them in the following exact table:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ccc}
+        \toprule
+        \textbf{Field}                   & \textbf{Kac Labels} \((r,s)\) & \textbf{Weights} \((h, \bar{h})\)           \\
+        \midrule
+        \(\mathbb{I}\) (Identity)        & \((1,1)\)                     & \((0, 0)\)                                  \\
+        \(\sigma\) (Magnetization)       & \((1,2)\)                     & \(\left(\frac{1}{16}, \frac{1}{16}\right)\) \\
+        \(\varepsilon\) (Energy Density) & \((2,1)\)                     & \(\left(\frac{1}{2}, \frac{1}{2}\right)\)   \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+The total scaling dimensions (\(\Delta = h + \bar{h}\)) of the non-trivial scalar fields are therefore:
+\[
+    \Delta_\sigma = \frac{1}{8}, \quad \Delta_\varepsilon = 1.
+\]
+
+These fields correspond directly to the macroscopic, physically meaningful observables in the lattice Ising model at its critical point:
+\begin{itemize}
+    \item \(\sigma(x, y)\) corresponds to the local spin variable (the order parameter). The result \(\Delta_\sigma = 1/8\) is precisely the famous exact critical exponent derived by Lars Onsager.
+    \item \(\varepsilon(x, y)\) corresponds to the local energy density (the interaction between neighboring spins).
+    \item \(\mathbb{I}\) is the trivial identity operator.
+\end{itemize}
+Thus, the \(c=1/2\) conformal field theory provides the exact, rigorously defined continuum limit description of the critical Ising model.
+
+\subsubsection{Fermionic and Bosonic Descriptions}
+
+The \(c=1/2\) theory is incredibly rich because it admits multiple dual Lagrangian descriptions. It can be formulated as a bosonic theory (via a \(\phi^4\) scalar field theory tuned to its critical Wilson-Fisher fixed point) or, famously, as a fermionic theory described by a \textbf{free Majorana fermion} Lagrangian. These two descriptions are mathematically equivalent.
+
+Within the fermionic picture, we can identify fields that have asymmetric weights (\(h \neq \bar{h}\)). Specifically, we have the two chiral components of the Majorana fermion field:
+\[
+    \psi = \phi_{\frac{1}{2}, 0}, \quad \bar{\psi} = \phi_{0, \frac{1}{2}}.
+\]
+These fields have a scaling dimension of \(\Delta = 1/2\) and a half-integer conformal spin of \(s = \pm 1/2\). Because their spin is half-integer, these fermionic fields are anti-periodic under a \(2\pi\) rotation.
+
+\begin{remark}
+    Fields that result in having fractional spins (spins that are neither integers nor half-integers, which would occur if we mixed asymmetric Kac labels arbitrarily) are \uline{non-local}. This means that placing them inside correlation functions introduces branch cuts in the complex plane. While non-local fields are not part of the standard observable spectrum of the macroscopic lattice model, they are essential mathematical tools to derive deeper structural information about the theory.
+\end{remark}
+
+\subsection{Fusion Rules and Kramers-Wannier Duality}
+
+The operator algebra of the Ising model is completely determined by its fusion rules. Based on the minimal model fusion formula we discussed previously, the core fusion rules for the scalar primary fields are:
+\[
+    \begin{aligned}
+        \sigma \times \sigma           & = \mathbb{I} + \varepsilon, \\
+        \sigma \times \varepsilon      & = \sigma,                   \\
+        \varepsilon \times \varepsilon & = \mathbb{I}.
+    \end{aligned}
+\]
+Coupled with the trivial rule \(\mathbb{I} \times \phi = \phi\) for any field \(\phi\), these rules are associative, commutative, and completely close the algebra.
+
+If we shift to the free Majorana fermion description, we can interpret these interactions through the chiral fermion fields. The OPE of two holomorphic Majorana fermions yields the identity family (since \(\psi(z)\psi(w) \sim 1/(z-w)\)), giving the chiral fusion rule:
+\[
+    \psi \times \psi = \mathbb{I}, \quad \text{and similarly} \quad \bar{\psi} \times \bar{\psi} = \mathbb{I}.
+\]
+Furthermore, the scalar energy density operator \(\varepsilon\) is constructed precisely from the mass term of the fermions, mixing the two chiral sectors:
+\[
+    \psi \times \bar{\psi} = \varepsilon.
+\]
+
+\subsubsection{The Dual Field and Self-Duality}
+
+By exploiting the fusion rules and the non-local properties of the fields, we can mathematically define a new field, the \textbf{disorder operator} \(\mu\), through the fusion of the free fermion with the spin operator:
+\[
+    \psi \times \sigma = \mu.
+\]
+In the statistical mechanics of the Ising model, we have dual descriptions valid at high temperature and low temperature. The field \(\sigma\) acts as the order parameter (acquiring a vacuum expectation value at low \(T\)). The field \(\mu\) is its exact dual, acting as the order parameter for the high-temperature phase. Both \(\sigma\) and \(\mu\) are locally defined with respect to themselves, but they are \textbf{mutually non-local}. Their mutual Operator Product Expansion contains a branch cut, meaning you cannot physically observe both simultaneously at the same point.
+
+The existence of this duality in the continuum CFT is a profound consequence of the macroscopic \textbf{Kramers-Wannier duality} of the lattice Ising model. This fundamental symmetry relates the high-temperature phase to the low-temperature phase.
+
+Because the critical temperature \(T_c\) is exactly the fixed point of this transformation, \uline{the theory at criticality is perfectly self-dual}. This fundamental \(\mathbb{Z}_2\) symmetry dictates that the order parameter \(\sigma\) and the dual disorder parameter \(\mu\) must behave identically at the critical point. Consequently, they must possess the exact same scaling dimension:
+\[
+    \Delta_\mu = \Delta_\sigma = \frac{1}{8}.
+\]
+
+In conclusion, with \(c = 1/2\) we are describing both the critical Ising model and the massless free Majorana fermion theory. Because they share the exact same central charge, the exact same spectrum of primary fields (when organized into local and non-local sectors), and the exact same fusion rules, they are fundamentally the same conformal field theory viewed through two different physical lenses.
+
+\subsection{Operator Product Expansions}
+
+As we established, the fusion rules completely determine the leading structure of the Operator Product Expansions (OPEs). Let us write down the explicit form of the OPEs for the primary fields of the Ising model, utilizing their known scaling dimensions to fix the coordinate dependence.
+
+For the fusion of the magnetization field \(\sigma\) with itself, \(\sigma \times \sigma = \mathbb{I} + \varepsilon\), the OPE must contain contributions from both the identity family and the energy density family:
+\[
+    \sigma(z, \bar{z})\sigma(0,0) \sim \frac{C_{\sigma\sigma}^{\mathbb{I}}}{|z|^{1/4}} \left[ \mathbb{I} + \dots \right] + C_{\sigma\sigma}^\varepsilon |z|^{3/4} \left[ \varepsilon(0,0) + \dots \right].
+\]
+Let us dissect the powers of \(|z|\). The general formula dictates a dependence of \(z^{h_k - 2h_i} \bar{z}^{\bar{h}_k - 2\bar{h}_i}\). Since \(\sigma\) is a scalar, \(h_\sigma = \bar{h}_\sigma = 1/16\).
+\begin{itemize}
+    \item For the identity contribution (\(h_k = 0\)), the power is \(-2(1/16) = -1/8\) for both \(z\) and \(\bar{z}\). Since \(|z| = (z\bar{z})^{1/2}\), this precisely yields \(|z|^{-1/4}\).
+    \item For the \(\varepsilon\) contribution (\(h_\varepsilon = 1/2\)), the power is \(1/2 - 1/8 = 3/8\) for both chiralities, yielding \(|z|^{3/4}\) in the expression.
+\end{itemize}
+\begin{remark}
+    By properly renormalizing the field \(\sigma\), we can usually set the first structure constant \(C_{\sigma\sigma}^{\mathbb{I}}\) to 1, but the others encode deep dynamical information.
+\end{remark}
+
+For the fusion of the energy density with itself, \(\varepsilon \times \varepsilon = \mathbb{I}\):
+\[
+    \varepsilon(z, \bar{z})\varepsilon(0,0) \sim \frac{1}{|z|^2} \left[ \mathbb{I} + \dots \right].
+\]
+
+Finally, for the mixed fusion \(\sigma \times \varepsilon = \sigma\):
+\[
+    \sigma(z, \bar{z})\varepsilon(0,0) \sim \frac{C_{\sigma\varepsilon}^\sigma}{|z|} \left[ \sigma(0,0) + \beta \partial\bar{\partial}\sigma + \dots \right].
+\]
+Notice a crucial detail in this last OPE: the first derivative terms (\(\partial\sigma\) and \(\bar{\partial}\sigma\), corresponding to \(L_{-1}\sigma\) and \(\bar{L}_{-1}\sigma\)) are strictly absent. Why? Because the fields on the left-hand side both have spin 0. To conserve angular momentum (rotational invariance on the plane), the fields appearing on the right-hand side must also be scalars. Since \(L_{-1}\sigma\) has spin 1 and \(\bar{L}_{-1}\sigma\) has spin \(-1\), their coefficients must vanish. The series proceeds directly to the first scalar descendant \(L_{-1}\bar{L}_{-1}\sigma \propto \partial\bar{\partial}\sigma\), with some proportionality constant \(\beta\).
+
+When computing correlation functions, we use conformal symmetry to fix the overall spatial forms, and the OPE to enforce algebraic consistency. This imposes rigid constraints on the structure constants \(C_{ij}^k\), generating the \textbf{conformal bootstrap equations}. In minimal models, because the operator algebra is finite, this system of equations can be solved exactly.
+
+However, the fractional negative powers (like \(-1/4\)) in the OPEs represent singularities. Geometrically, fractional powers imply the existence of \textbf{branch points} and branch cuts. If left untreated, these would lead to multivalued correlation functions, which is physically unacceptable for local macroscopic observables. We must handle these singularities carefully to define composite fields.
+
+\subsection{Link with the Landau-Ginzburg Lagrangian}
+
+To define a composite local field like \(\sigma^2(w, \bar{w})\) starting from the OPE, one generally subtracts the singular part and takes the limit \(z \to w\). However, because of the fractional power \(|z-w|^{3/4}\) in the regular part of the \(\sigma \times \sigma\) OPE, simply subtracting the divergence is not enough: the remaining fractional branch would still make the limit multivalued.
+
+Therefore, the definition of the normal ordered product must be generalized by multiplying by a compensating fractional power \(\delta\):
+\[
+    :\sigma^2(w, \bar{w}): \;\equiv \lim_{z,\bar{z} \to w} |z-w|^\delta \left( \sigma(z,\bar{z})\sigma(w,\bar{w}) - \text{singular part} \right).
+\]
+In our specific case, the singular part is \(C_{\sigma\sigma}^{\mathbb{I}} |z-w|^{-1/4}\). Once subtracted, we are left with \(C_{\sigma\sigma}^\varepsilon |z-w|^{3/4} \varepsilon(w, \bar{w})\). To exactly cancel the fractional branch and ensure a single-valued, well-defined right-hand side, we must elegantly choose \(\delta = -3/4\). The limit then immediately yields:
+\[
+    :\sigma^2(w, \bar{w}): \; = \varepsilon(w, \bar{w}).
+\]
+This proves a profound result: in the Ising CFT, the energy density operator is literally the normal-ordered square of the magnetization.
+
+We can proceed analogously to mathematically define \(:\sigma^3(w, \bar{w}):\) by considering the OPE of \(\sigma\) with \(:\sigma^2:\) (which is \(\varepsilon\)). We subtract the singular term \(|z-w|^{-1}\), compensate for the branch cut of the next leading term, and take the limit. The remaining field is precisely the scalar descendant we noted earlier:
+\[
+    \square_w \sigma = g :\sigma^3(w, \bar{w}):
+\]
+where \(\square_w = \partial_w \bar{\partial}_w\) is the d'Alembertian/Laplacian in complex coordinates, and \(g = (\beta C_{\sigma\sigma}^\varepsilon)^{-1}\).
+
+\uline{This is an extraordinary result:} the equation above is a non-linear equation of motion for the scalar field \(\sigma\). It can be obtained directly, via the Euler-Lagrange equations, from a macroscopic Lagrangian density:
+\[
+    \mathcal{L} = \frac{1}{2}\partial\sigma \bar{\partial}\sigma + \frac{g}{4}:\sigma^4:.
+\]
+This is exactly the \(\phi^4\) continuous field theory! We have successfully derived the \textbf{Landau-Ginzburg Lagrangian} for the Ising universality class starting purely from abstract Virasoro algebra and OPEs. The \(\sigma^3\) term inside the fusion simply got ``eaten'' by the equation of motion to generate the \(\sigma^4\) interaction term in the action.
+
+\subsubsection{Perturbed Conformal Field Theory and Universality}
+
+Why does the critical Lagrangian only contain this specific power of four? Where are all the other powers of \(\sigma\)? The reason is that exactly at criticality (\(T = T_c\)), their coefficients strictly vanish.
+
+However, we can study the theory slightly away from criticality. This framework is known as \textbf{Perturbed Conformal Field Theory (PCFT)}. The total action is given by the critical CFT action plus some perturbations driven by the \textbf{relevant fields} of the theory.
+
+A field is considered a relevant perturbation if its total scaling dimension is strictly less than the spacetime dimension (\(\Delta < 2\)). Because it has dimension less than 2, its coupling constant has a positive mass dimension, meaning it grows in the infrared (IR) and aggressively drives the theory away from the critical fixed point, triggering crossovers or phase transitions. Furthermore, to be added to the Lagrangian without breaking Euclidean rotational invariance, the perturbing field must be a true scalar, meaning it must have spin zero (\(h = \bar{h}\)).
+
+By inspecting the Kac table for the Ising model, the only relevant scalar fields are exactly \(\sigma\) (\(\Delta = 1/8\)) and \(\varepsilon = :\sigma^2:\) (\(\Delta = 1\)). Therefore, the most general off-critical Landau-Ginzburg Lagrangian is:
+\[
+    \mathcal{L} = \frac{1}{2}\partial\sigma \bar{\partial}\sigma + b\sigma + t:\sigma^2: + \frac{g}{4}:\sigma^4:
+\]
+where \(b\) is the external magnetic field, and \(t \propto (T - T_c)/T_c\) is a mass term for the boson (in QFT language) or the deviation from the critical temperature (in statistical mechanics).
+
+This elegant logic generalizes to all unitary minimal models. The relevant fields driving the Lagrangian are always found in the first two diagonals of the Kac table. If we define \(\phi\) as the scalar field with the lowest scaling dimension in a generic model \(\mathcal{M}_m\) (typically the \((r,s) = (2,2)\) field), the higher normal-ordered powers of \(\phi\) populate the diagonals. The critical Lagrangian takes the universal form:
+\[
+    \mathcal{L} = \frac{1}{2}\partial\phi \bar{\partial}\phi + \frac{g}{4} :\phi^{2m-2}:
+\]
+Thus:
+\begin{itemize}
+    \item For \(m=3\) (Ising), we get a \(\phi^4\) theory.
+    \item For \(m=4\) (Tricritical Ising), we get a \(\phi^6\) theory.
+    \item For \(m=5\) (Tetracritical), we get a \(\phi^8\) theory, and so on.
+\end{itemize}
+
+Every minimal model provides the exact continuum description for a distinct universality class of 2D critical phenomena. The primary fields correspond directly to the order parameters and energy densities, while the fusion rules and structure constants allow us to analytically compute the critical exponents and correlation functions of the statistical system.
+
+\subsection{Correlation Functions, Characters and Conformal Blocks}
+
+Once we have derived the primary fields and their fusion rules, the next step in solving the conformal field theory is to compute its exact correlation functions. The constraints of global conformal symmetry strictly fix the spatial dependence of two-point and three-point functions, leaving only the overall numerical constants to be determined.
+
+\subsubsection{Two-Point Functions}
+
+From global conformal invariance, the two-point functions of the primary fields in the Ising model are entirely fixed by their scaling dimensions. For the spin and energy density fields, we have:
+\[
+    \langle \sigma(z, \bar{z}) \sigma(0, 0) \rangle = \frac{1}{|z|^{2\Delta_\sigma}} = \frac{1}{|z|^{1/4}},
+\]
+\[
+    \langle \varepsilon(z, \bar{z}) \varepsilon(0, 0) \rangle = \frac{1}{|z|^{2\Delta_\varepsilon}} = \frac{1}{|z|^{2}},
+\]
+where \(|z|\) represents the modulus of the vector in the complex plane, \(|z| = \sqrt{z\bar{z}}\).
+
+\begin{remark}
+    These exact power-law solutions are strictly valid at the critical conformal fixed point, which is an interacting theory. If we move away from criticality, we can use these exact functions as the unperturbed basis to compute corrections via conformal perturbation theory. This allows us to analytically describe the critical behavior of the system and its crossovers in the vicinity of the critical point.
+\end{remark}
+
+\subsubsection{Three-Point Functions}
+
+Global conformal symmetry also perfectly dictates the coordinate dependence of the three-point functions. For a generic correlator of three primary fields, the spatial form is:
+\[
+    \langle \phi_1(z_1) \phi_2(z_2) \phi_3(z_3) \rangle = \frac{C_{123}}{|z_{12}|^{\Delta_1 + \Delta_2 - \Delta_3} |z_{13}|^{\Delta_1 + \Delta_3 - \Delta_2} |z_{23}|^{\Delta_2 + \Delta_3 - \Delta_1}},
+\]
+where \(z_{ij} = z_i - z_j\).
+
+Let us fix the exponents for the mixed correlator involving two spin operators and one energy operator \(\langle \sigma(z_1, \bar{z}_1) \sigma(z_2, \bar{z}_2) \varepsilon(z_3, \bar{z}_3) \rangle\) (\(\Delta_1 = \Delta_2 = 1/8\), and \(\Delta_3 = 1\)):
+\begin{itemize}
+    \item Exponent for \(|z_{12}|\): \(\frac{1}{8} + \frac{1}{8} - 1 = -\frac{3}{4}\)
+    \item Exponent for \(|z_{13}|\): \(\frac{1}{8} + 1 - \frac{1}{8} = 1\)
+    \item Exponent for \(|z_{23}|\): \(\frac{1}{8} + 1 - \frac{1}{8} = 1\)
+\end{itemize}
+Substituting these into the formula, the exact three-point function is:\TODO{i think exponents are wrong}
+\[
+    \langle \sigma(z_1, \bar{z}_1) \sigma(z_2, \bar{z}_2) \varepsilon(z_3, \bar{z}_3) \rangle = \frac{C_{\sigma \sigma \varepsilon}}{|z_{12}|^{-3/4} |z_{13}|^{1} |z_{23}|^{1}}.
+\]
+Here, \(C_{\sigma \sigma \varepsilon}\) is the dynamical structure constant of the theory. In generic CFTs, this constant must be found numerically, but in minimal models, it can be computed analytically by solving the conformal bootstrap equations.
+
+\subsubsection{Null Vectors in the Ising Model}
+
+The primary fields of the Ising model correspond to degenerate representations of the Virasoro algebra. This means their Verma modules possess null vectors at specific finite levels:
+\begin{itemize}
+    \item The \(\sigma\) field has a null vector exactly at \textbf{level 2}.
+    \item The \(\varepsilon\) field has a null vector exactly at \textbf{level 3}.
+\end{itemize}
+The existence of these null vectors is the magical ingredient that makes the theory solvable, because inserting a null state into any correlation function identically yields zero, generating exact differential equations.
+
+\subsubsection{Four-Point Functions and Differential Equations}
+
+Consider the four-point correlation function of the spin operator:
+\[
+    \langle \sigma(z_1) \sigma(z_2) \sigma(z_3) \sigma(z_4) \rangle.
+\]
+Using global conformal invariance, this function cannot be strictly determined as a simple power law, but it is heavily constrained. It must factorize into a kinematic prefactor times an unknown dynamical function \(\mathcal{F}\) depending solely on the conformally invariant \textbf{cross-ratios}:
+\[
+    \langle \sigma \sigma \sigma \sigma \rangle = \frac{1}{|z_{12} z_{34}|^{1/4}} \mathcal{F}(x, \bar{x}), \quad \text{where} \quad x = \frac{z_{12} z_{34}}{z_{13} z_{24}}, \quad \bar{x} = \frac{\bar{z}_{12} \bar{z}_{34}}{\bar{z}_{13} \bar{z}_{24}}.
+\]
+
+To compute \(\mathcal{F}(x, \bar{x})\), we use the symmetry of the theory. By applying a global Möbius transformation, we can map three of the coordinates to fixed points: \(z_1 \to \infty\), \(z_2 \to 1\), and \(z_4 \to 0\). The fourth point \(z_3\) naturally maps directly to the cross-ratio \(x\). The correlation function dramatically simplifies to:
+\[
+    \mathcal{F}(x, \bar{x}) \propto \langle \sigma(\infty) \sigma(1) \sigma(x) \sigma(0) \rangle.
+\]
+
+Now, we exploit the degeneracy of the \(\sigma\) field. We know that the specific linear combination \((L_{-2} + \alpha L_{-1}^2) \ket{\sigma}\) is a null vector. If we insert this specific operator combination acting on the field \(\sigma(x)\) inside the four-point function, the result must be zero:
+\[
+    \langle \sigma(\infty) \sigma(1) \left[ (L_{-2} + \alpha L_{-1}^2) \sigma(x) \right] \sigma(0) \rangle = 0.
+\]
+Through the \textbf{Conformal Ward Identities}, the abstract Virasoro generators \(L_{-n}\) acting on local fields inside a correlator are translated into actual differential operators \(\mathcal{L}_{-n}\) acting on the coordinate \(x\). Specifically, \(L_{-1}\) translates simply to the spatial derivative \(\partial_x\), meaning \(L_{-1}^2\) becomes \(\partial_x^2\). The generator \(L_{-2}\) becomes a first-order differential operator in \(x\).
+
+Thus, the abstract null vector condition translates perfectly into a \textbf{second-order partial differential equation} (often called the BPZ equation, after Belavin, Polyakov, and Zamolodchikov):
+\[
+    \left( \mathcal{L}_{-2} + \alpha \partial_x^2 \right) \langle \sigma(\infty) \sigma(1) \sigma(x) \sigma(0) \rangle = 0.
+\]
+This second-order differential equation for \(\mathcal{F}(x, \bar{x})\) is a known variant of the Riemann hypergeometric differential equation.
+
+Because it is a second-order equation, it mathematically admits exactly two linearly independent solutions. \uline{These two mathematical solutions physically correspond directly to the two allowed fusion channels} for \(\sigma \times \sigma\):
+\[
+    \sigma \times \sigma \to \mathbb{I} \quad \text{and} \quad \sigma \times \sigma \to \varepsilon.
+\]
+
+\subsubsection{Conformal Blocks and Structure Constants}
+
+The full physical four-point function \(\mathcal{F}(x, \bar{x})\) must be single-valued and is constructed by gluing together the holomorphic and anti-holomorphic solutions. It decomposes exactly as a sum of \textbf{conformal blocks}:
+\[
+    \mathcal{F}(x, \bar{x}) = |F_{\mathbb{I}}(x)|^2 + C_{\sigma\sigma\varepsilon}^2 |F_{\varepsilon}(x)|^2.
+\]
+Here, \(F_{\mathbb{I}}(x)\) and \(F_{\varepsilon}(x)\) are the purely holomorphic hypergeometric solutions representing the intermediate exchange of the identity family and the energy family, respectively.
+
+By writing down the exact solutions for these hypergeometric functions, we have effectively solved the four-point function. Furthermore, to extract the unknown structure constants (like \(C_{\sigma\sigma\varepsilon}\)), we can expand our exact hypergeometric solutions in the short-distance limit \(x \to 0\) (which physically corresponds to bringing two \(\sigma\) fields close together) and enforce that this expansion perfectly matches the known terms of the Operator Product Expansion. This bootstrap consistency condition precisely yields the exact analytical value for the structure constants!
+
+\subsubsection{Characters}
+
+Finally, to cleanly encode the entire spectrum of states residing within each of these conformal families, we compute their characters. For the Ising model, there are only three such functions:
+\[
+    \chi_{\mathbb{I}}(q), \quad \chi_\sigma(q), \quad \chi_\varepsilon(q).
+\]
+Their explicit expressions are evaluated using the Rocha-Caridi formula. Because the null-state subtractions in the Ising model are highly structured, these characters can be written elegantly in terms of classical \textbf{Jacobi Theta functions} and the \textbf{Dedekind eta function}. For our purposes, it is sufficient to note that these three functions perfectly and completely catalog the infinite hierarchy of descendant states available in the Ising universality class.
