@@ -6,39 +6,38 @@ We will not solve exactly the 2D Ising model, but we will give some arguments ab
 
 Consider the 2D Ising model on a square lattice, where each spin interacts with its four nearest neighbors. Take the limit for a very low temperature \(T \to 0\), and suppose that there is a region in the first 1D raw where the system is in a fully magnetized state, with all \(l\) spins aligned (e.g., \(m = +1\)). We focus for a moment only on this 1D raw, and we ask what is the energy cost of creating a droplet of flipped spins in this region, which corresponds to a local change in the magnetization. We can consider:
 \begin{itemize}
-    \item Case A: \(\uparrow\,\uparrow\,\dots \,\uparrow \), where we have \uline{no domain walls}, since all the \(l\) spins are aligned. The energy cost is zero, since there are no domain walls and the system is in a fully magnetized state.
-    \item Case B: \(\uparrow\,\dots \,\uparrow \,\downarrow\,\dots \,\downarrow \), where we have \uline{one domain wall} separating \(k\) up spins and \(l-k\) down spins. The energy cost of creating this domain wall is proportional to the length of the domain wall, which is given by the only two nearest neighbor pairs that are affected by the change in configuration, thus we have
-          \[
-              \Delta E = 2 J,
-          \]
-          where \(J\) is the coupling constant of the Ising model: the hamiltonian of the model depends on the interaction between nearest neighbor spins, and the energy cost of creating a domain wall is proportional to the number of nearest neighbor pairs that are affected by the change in configuration, which in this case is two (the pair of spins at the boundary of the droplet).
-    \item Case C: \(\uparrow\,\dots\,\uparrow\,\downarrow\,\dots\,\downarrow\,\uparrow\,\dots\,\uparrow\) where we have \uline{two domain walls} separating three regions of spins. Since the energy cost of creating a domain wall is proportional to the number of nearest neighbor pairs that are affected by the change in configuration, which in this case is four (the pairs of spins at the boundaries of the droplet), we have
-          \[
-              \Delta E = 4 J,
-          \]
-          which is twice the energy cost of creating a single domain wall, since we have two domain walls in this case.
+  \item Case A: \(\uparrow\,\uparrow\,\dots \,\uparrow \), where we have \uline{no domain walls}, since all the \(l\) spins are aligned. The energy cost is zero, since there are no domain walls and the system is in a fully magnetized state, no change in configuration is needed.
+  \item Case B: \(\uparrow\,\dots \,\uparrow \,\downarrow\,\dots \,\downarrow \), where we have \uline{one domain wall} separating \(k\) up spins and \(l-k\) down spins. The energy cost of creating this domain wall is proportional to the length of the domain wall, which is given by the only two nearest neighbor pairs that are affected by the change in configuration, thus we have
+        \[
+          \Delta E = 2 J,
+        \]
+        where \(J\) is the coupling constant of the Ising model: the hamiltonian of the model depends on the interaction between nearest neighbor spins, and the energy cost of creating a domain wall is proportional to the number of nearest neighbor pairs that are affected by the change in configuration, which in this case is two (the pair of spins at the boundary of the droplet).
+  \item Case C: \(\uparrow\,\dots\,\uparrow\,\downarrow\,\dots\,\downarrow\,\uparrow\,\dots\,\uparrow\) where we have \uline{two domain walls} separating three regions of spins. Since the energy cost of creating a domain wall is proportional to the number of nearest neighbor pairs that are affected by the change in configuration, which in this case is four (the pairs of spins at the boundaries of the droplet), we have
+        \[
+          \Delta E = 4 J,
+        \]
+        which is twice the energy cost of creating a single domain wall (we have two).
 \end{itemize}
-Thus the configurations with the least energy cost are those with a single domain wall (with respect to Case A in which there are no domain walls), which corresponds to the case.
+Thus the configurations with the least energy cost are those with a single domain wall (with respect to Case A in which there are no domain walls), which corresponds to the case where we have a droplet of flipped spins in the region of aligned spins. The energy cost of creating such a droplet is positive, which means that it is energetically unfavorable to create it.
 
 \begin{remark}[Entropy of domains]
-    Since the entropy is related to the number of configurations, we can estimate the entropy gain associated with the formation of the domain wall by counting the number of ways to arrange such wall. In a string with \(l\) spins, we can choose the position of the domain wall in \(l-1\) ways (since we cannot place the domain wall at the very beginning or at the very end of the string), thus we can estimate the entropy gain as
-    \[
-        \Delta S = k_B \log(l-1).
-    \]
-    In more dimensions, the number of ways to arrange a domain wall of length \(l\) can be approximated as the path we can take to create the domain wall, which is given by three choices of direction at each step (since we cannot go back), but we will see this in a moment.
+  Since the entropy is related to the number of configurations, we can estimate the entropy gain associated with the formation of the domain wall by counting the number of ways to arrange such wall. In a string with \(l\) spins, we can choose the position of the domain wall in \(l-1\) ways (since we cannot place the domain wall at the very beginning or at the very end of the string), thus we can estimate the entropy gain as
+  \[
+    \Delta S = k_B \log(l-1).
+  \]
+  In more dimensions, the number of ways to arrange a domain wall of length \(l\) can be approximated as the path we can take to create the domain wall, which is given by three choices of direction at each step (since we cannot go back), but we will see this in a moment.
 \end{remark}
 If we now compute the free energy cost of creating such a droplet, we need to take into account both the energy cost and the entropy gain associated with the formation of the droplet. The free energy cost can be then expressed as
 \[
-    \Delta F = \Delta E - T \Delta S = 2 J - k_B T \log(l-1),
+  \Delta F = \Delta E - T \Delta S = 2 J - k_B T \log(l-1),
 \]
-since the energy cost of creating the droplet in case B is \(2 J\) and the entropy gain is proportional to the logarithm of the number of ways to arrange the droplet, which is approximately \(\log(l-1)\). As \(l\) increases, the energy cost dominates over the entropy gain, and the free energy cost becomes positive, which means that it is energetically unfavorable to create such a droplet
+since the energy cost of creating the droplet in case B is \(2 J\) and the entropy gain is proportional to the logarithm of the number of ways to arrange the droplet, which is approximately \(\log(l-1)\). As \(l\) increases, the energy cost gets dominated by the entropy gain, and the free energy cost becomes negative, which means that it is energetically unfavorable to create such a droplet
 \[
-    \lim_{l \to \infty} \Delta F = - \infty.
+  \lim_{l \to \infty} \Delta F = - \infty.
 \]
-
-It seems that breaking a domain wall is energetically unfavorable, but there is a maximum value of \(l\) for which the entropy does not make unfavorable the creation of the droplet, and this maximum value of \(l\) can be estimated by setting the free energy cost to zero:
+Thus even large domains of magnetized spins are not favorable, but there is a maximum value of \(l\) for which the entropy does not make unfavorable the creation of the droplet, and this maximum value of \(l\) can be estimated by setting the free energy cost to zero:
 \[
-    \Delta F = 0 \implies 2 J - k_B T \log(l-1) = 0 \implies l \sim e^{\frac{2 J}{k_B T}} = \xi,
+  \Delta F = 0 \implies 2 J - k_B T \log(l-1) = 0 \implies l \sim e^{\frac{2 J}{k_B T}} = \xi,
 \]
 which indicates that there is a \textit{characteristic length scale} \(l\) above which the domain wall are not favorable anymore, and this length scale can be identified with the \textbf{correlation length} \(\xi\) of the system (the expression is indeed the same we found in the previous section, when we solved it exactely). As the temperature approaches the critical temperature \(T_c\) from below, the correlation length diverges, indicating that the system exhibits long-range correlations and critical behavior at the phase transition.
 
@@ -50,79 +49,79 @@ Euristic arguments in statistical physics can provide valuable insights into the
 
 Let us compare the free energy of the two configurations:
 \begin{figure}[H]
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{img/ising_2d_plus_grid.png}
-        \caption{Configuration A: no domain walls, fully magnetized.}
-    \end{minipage}\hfill
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{img/ising_2d_minus_domain.png}
-        \caption{Configuration B: one domain wall, with a droplet of flipped spins.}
-    \end{minipage}
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/ising_2d_plus_grid.png}
+    \caption{Configuration A: no domain walls, fully magnetized.}
+  \end{minipage}\hfill
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/ising_2d_minus_domain.png}
+    \caption{Configuration B: one domain wall, with a droplet of flipped spins.}
+  \end{minipage}
 \end{figure}
 We ask what is the difference in energy of the two 2D configurations described. Each set of nearest neighbours of the subdomain considered in the configuration contributes to the change in energy from one configuration to the other. In particular
 \[
-    \Delta U = U_B - U_A = 2 J l,
+  \Delta U = U_B - U_A = 2 J l,
 \]
 where now in 2D, \(l\) represents the lenght of the perimeter of the flipped subdomain, which is proportional to the number of nearest neighbor pairs that are affected by the change in configuration. The energy cost of creating a droplet of flipped spins is proportional to the length of the domain wall, which is \(2 J l\) in this case. This energy cost is positive, which means that it is energetically unfavorable to create such a droplet, and it suggests that the system will tend to remain in a magnetized state with non-zero magnetization, indicating the presence of a phase transition at finite temperature.
 
-But we have always to take into account the entropy gain associated with the formation of the droplet, which can be estimated after counting the number of ways to arrange the droplet of flipped spins.
+But we have always to take into account the entropy gain associated with the formation of the droplet, which can be estimated counting the number of ways to arrange a droplet of flipped spins.
 \begin{figure}[H]
-    \begin{minipage}{0.65\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{img/ising_2d_different_domain_walls.png}
-    \end{minipage}\hfill
-    \begin{minipage}{0.3\textwidth}
-        \caption{Three different configurations of domain walls of the same length \(l=4\).}
-    \end{minipage}
+  \begin{minipage}{0.65\textwidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/ising_2d_different_domain_walls.png}
+  \end{minipage}\hfill
+  \begin{minipage}{0.3\textwidth}
+    \caption{Three different configurations of domain walls of the same length \(l=4\).}
+  \end{minipage}
 \end{figure}
 The number of ways to arrange a droplet of perimeter \(l\) can be approximated as the path we can take to create the domain wall, which is given by three choices of direction at each step (since we cannot go back),\footnote{Extimating like this is exagerated, since we are counting also ``snakes'' that do not close on a region, but let us do this anyway and then reason on it.} thus we can estimate the number of possible domain walls (i.e. the number of configurations) as
 \[
-    N_D \sim 3^l,
+  N_D \sim 3^l,
 \]
 thus if the number of domains wall of length \(l\) is given by \(N_D\), then the entropy gain associated with the formation of the droplet can be estimated as
 \[
-    \Delta S = k_B \log(N_D) = k_B l \log(3),
+  \Delta S = k_B \log(N_D) = k_B l \log(3),
 \]
 which is proportional to the length of the domain wall.
 
 Thus in the end, the free energy cost of creating such a droplet can then be expressed as
 \[
-    \Delta F = \Delta U - T \Delta S = 2 J l - T k_B l \log(3) = (2 J - T k_B \log(3)) l,
+  \Delta F = \Delta U - T \Delta S = 2 J l - T k_B l \log(3) = (2 J - T k_B \log(3)) l,
 \]
 which indicates that there is a critical temperature \(T_c\) at finite temperature, at which we observe a phase transition.
 
 \begin{remark}
-    Contrary to the one dimensional case, energy and entropy scale both with the same power of \(l\) (i.e., linearly), thus there is a critical temperature at which the two contributions balance each other, and we observe a phase transition. In the one dimensional case, energy scales with \(l\) while entropy scales with \(\log(l)\), thus energy dominates over entropy for large \(l\), and there is no phase transition at finite temperature.
+  Contrary to the one dimensional case, energy and entropy scale both with the same power of \(l\) (i.e., linearly), thus there is a critical temperature at which the two contributions balance each other, and we observe a phase transition. In the one dimensional case, energy scales with \(l\) while entropy scales with \(\log(l)\), thus energy dominates over entropy for large \(l\), and there is no phase transition at finite temperature.
 \end{remark}
 
 In 2D, for a sufficiently low temperature, the energy cost of creating a droplet of flipped spins dominates over the entropy gain (it is not convenient to ``break'' large domains of magnetization), and the system tends to remain in a spontaneous magnetized state with non-zero magnetization, indicating the presence of a phase transition at finite temperature. As the temperature increases, the entropy gain becomes more significant, and at the critical temperature \(T_c\), the two contributions balance each other, leading to a phase transition from a more ordered phase to a disordered phase.
 
-\subsection{Peierls's argument}\TODO{Add reference to 14.3 Huang's book stat mech.}
+\subsection{Peierls argument}\TODO{Add reference to 14.3 Huang's book stat mech.}
 
 Let us consider a system with \textbf{fixed open boundary conditions}, where we have an Ising model defined on a square lattice of size \(N = A \times B\) (we are not interested in the specific values of \(A\) and \(B\)), and we fix the spins on the boundary to be all up (i.e., \(s_i = +1\) for all spins on the boundary). We want to show that there is a phase transition at finite temperature, which can be done by comparing the free energy of two configurations: one with all spins up (the ordered phase) and one with a droplet of flipped spins (the disordered phase).
 
 \begin{figure}[H]
-    \begin{minipage}{0.55\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{img/ising_2d_oriented_domain_walls.png}
-        \caption{Example of configuration with fixed open boundary conditions, where the spins on the boundary are all up (red), and three droplets of flipped spins inside the (blue) oriented domain walls.}
-    \end{minipage}\hfill
-    \begin{minipage}{0.4\textwidth}
-        Let us consider configurations with all the boundary spins fixed to be up; then it will be uniquely determined by the set of ``oriented domain walls'' that separate the up spins from the down spins. An \textbf{oriented domain wall} is a closed loop of nearest neighbor pairs of spins that are different (i.e., one spin is up and the other is down), where the orientation of the loop is defined by the direction of the spins: we define it as the one which keeps the up spins on the left and the down spins on the right.
-    \end{minipage}
+  \begin{minipage}{0.55\textwidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/ising_2d_oriented_domain_walls.png}
+    \caption{Example of configuration with fixed open boundary conditions, where the spins on the boundary are all up (red), and three droplets of flipped spins inside the (blue) oriented domain walls.}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\textwidth}
+    Let us consider configurations with all the boundary spins fixed to be up; then it will be uniquely determined by the set of ``oriented domain walls'' that separate the up spins from the down spins. An \textbf{oriented domain wall} is a closed loop of nearest neighbor pairs of spins that are different (i.e., one spin is up and the other is down), where the orientation of the loop is defined by the direction of the spins: we define it as the one which keeps the up spins on the left and the down spins on the right.
+  \end{minipage}
 \end{figure}
 The hamiltonian of the system is unchanged, and it is given by
 \[
-    H = -J \sum_{\langle i,j \rangle} s_i s_j - h \sum_{i} s_i,
+  H = -J \sum_{\langle i,j \rangle} s_i s_j - h \sum_{i} s_i,
 \]
 where the first sum is taken over nearest neighbor pairs of spins, and the second sum is taken over all spins in the lattice.
 
 We can fix the temperature and compute the partition function and magnetization for the configuration. Taking the thermodynamic limit \(N \to \infty\) and studying the number of flipped spins \(N_{-}\), we can distinguish two cases:
 \begin{itemize}
-    \item \(\lim_{N \to \infty} \frac{N_-}{N} = \frac{1}{2}\): in this case the system is in a disordered phase with zero magnetization, since the number of up spins and down spins are equal in the thermodynamic limit.
-    \item \(\lim_{N \to \infty} \frac{N_-}{N} < \frac{1}{2}\): in this case the system is in an ordered phase with non-zero magnetization, since the number of up spins is greater than the number of down spins in the thermodynamic limit.
+  \item \(\lim_{N \to \infty} \frac{N_-}{N} = \frac{1}{2}\): in this case the system is in a disordered phase with zero magnetization, since the number of up spins and down spins are equal in the thermodynamic limit.
+  \item \(\lim_{N \to \infty} \frac{N_-}{N} < \frac{1}{2}\): in this case the system is in an ordered phase with non-zero magnetization, since we have more up spins than down spins in the thermodynamic limit.
 \end{itemize}
 We used a preferred direction setting the boundary conditions, but we could have done the same analysis with all spins down at the boundary, and we would have found the same result. Exact numbers will fluctuate, but these ratios will converge to the same value, and in the TD limit we will have a well defined phase transition at finite temperature. In this case, fixing the boundary to be up spins is enough to align the majority of the spins in the system along ``+'' in the ordered phase; with down spin boundaries the same results would hold, but the majority of the spins would be aligned along ``-'' in the ordered phase.
 
@@ -134,101 +133,101 @@ For any boundary condition, the domain walls are closed loops of nearest neighbo
 
 Then let us define:
 \begin{itemize}
-    \item The \textbf{area} \(A(l,i)\) of a domain wall \((l,i)\) as the number of flipped spins that are enclosed by the domain wall. The area is a measure of the size of the droplet of flipped spins, and it is easy to show that at it has to be surely smaller than the area of a square of side \(l\), thus we have
-          \[
-              A(l,i) < l^2.
-          \]
-    \item The \textbf{number} \(M(l)\) of domain walls with the same length \(l\) as the number of different configurations of domain walls with length \(l\). The number of domain walls with length \(l\) can be estimated as the number of paths we can take to create a closed loop of length \(l\), which is given by three choices of direction at each step, except for the first step where we have four choices of direction; furthermore, the number of starting point has to be less than the number of sites \(N\). In the end we can estimate
-          \[
-              M(l) < 4 N 3^{l-1}.
-          \]
-    \item The \textbf{caracteristic function} for the lattice configurations. Let us consider a set of configurations of the system \(\{C\}\), then for each of those we can define
-          \[
-              \chi_c(l,i) = \begin{cases}
-                  1 & \text{if } C \text{ contains the DW } (l,i), \\
-                  0 & \text{otherwise}.
-              \end{cases}
-          \]
+  \item The \textbf{area} \(A(l,i)\) of a domain wall \((l,i)\) as the number of flipped spins that are enclosed by the domain wall. The area is a measure of the size of the droplet of flipped spins, and it is easy to show that at it has to be surely smaller than the area of a square of side \(l\), thus we have
+        \[
+          A(l,i) < l^2.
+        \]
+  \item The \textbf{number} \(M(l)\) of domain walls with the same length \(l\) as the number of different configurations of domain walls with length \(l\). The number of domain walls with length \(l\) can be estimated as the number of paths we can take to create a closed loop of length \(l\), which is given by three choices of direction at each step, except for the first step where we have four choices of direction; furthermore, the number of starting point has to be less than the number of sites \(N\). In the end we can estimate
+        \[
+          M(l) < 4 N 3^{l-1}.
+        \]
+  \item The \textbf{caracteristic function} for the lattice configurations. Let us consider a set of configurations of the system \(\{C\}\), then for each of those we can define
+        \[
+          \chi_c(l,i) = \begin{cases}
+            1 & \text{if } C \text{ contains the DW } (l,i), \\
+            0 & \text{otherwise}.
+          \end{cases}
+        \]
 \end{itemize}
 
 \subsubsection{Statistics of Domain Walls}
 
-We can now use the classification of domain walls to compute the average number of flipped spins in the system. With our choice of boundary conditions, we know that every flipped spin is enclosed by at least one domain wall, thus we can write the number of flipped spins \(N_-\) for a configuration \(C\) as
+We can now use the classification of domain walls to compute the average number of flipped spins in the system. With our choice of boundary conditions, we know that every flipped spin is enclosed by at least one domain wall: we can write the number of flipped spins \(N_-\) for a configuration \(C\) as
 \[
-    N_{-}(C) \leq \sum_{(l,i)} A(l,i) \chi_c(l,i),
+  N_{-}(C) \leq \sum_{(l,i)} A(l,i) \chi_c(l,i),
 \]
 where the sum is taken over all possible domain walls \((l,i)\), and we are maximizing the number of flipped spins with the area of a domain wall multiplied by the function checking if such domain wall is present in the configuration. To see this more clearly, we can write
 \[
-    N_{-}(C) = \sum_{j:s_j=\downarrow} 1 \leq \sum_{j:s_j=\downarrow} \sum^{\prime}_{(l,i)} \chi_c(l,i),
+  N_{-}(C) = \sum_{j:s_j=\downarrow} 1 \leq \sum_{j:s_j=\downarrow} \sum^{\prime}_{(l,i)} \chi_c(l,i),
 \]
 where the second sum is taken over all the domain walls \((l,i)\) in the configuration \(C\) that enclose the flipped spin \(s_j\) (i.e., the domain walls for which \(\chi_c(l,i) = 1\)). Now we can exchange the order of the sums as follows
 \[
-    \sum_{j:s_j=\downarrow} \sum^{\prime}_{(l,i)} \chi_c(l,i) = \sum^{\prime}_{(l,i)} \chi_c(l,i) \sum_{j \in (l,i)} = \sum_{(l,i)} A(l,i) \chi_c(l,i),
+  \sum_{j:s_j=\downarrow} \sum^{\prime}_{(l,i)} \chi_c(l,i) = \sum^{\prime}_{(l,i)} \chi_c(l,i) \sum_{j \in (l,i)} = \sum_{(l,i)} A(l,i) \chi_c(l,i),
 \]
 where in the first step the change of order is allowed by the fact that we are counting on both sides the number of flipped spins in \(C\) by the number of domain walls that enclose them; we then used the fact that the number of flipped spins enclosed by a domain wall \((l,i)\) is exactely the definition its area \(A(l,i)\).
 
 Thus using the previously shown inequalities, we can maximise the number of flipped spins as
 \[
-    N_{-}(C) \leq \sum_{(l,i)} A(l,i) \chi_c(l,i) < \sum_{(l,i)} l^2 \chi_c(l,i) = \sum_{l} l^2 \sum_{i=1}^{M(l)} \chi_c(l,i),
+  N_{-}(C) \leq \sum_{(l,i)} A(l,i) \chi_c(l,i) < \sum_{(l,i)} l^2 \chi_c(l,i) = \sum_{l} l^2 \sum_{i=1}^{M(l)} \chi_c(l,i),
 \]
 where we used the fact that the area of a domain wall is smaller than \(l^2\) to get the first inequality, and then we grouped the sum over domain walls by their length \(l\) to get the second equality.
 
 Now we can take the \textbf{thermal average} over all configurations of the system, on both sides, in order to obtain an upper bound for the average number of flipped spins and thus getting our proof of the existence of a phase transition at finite temperature. The first term we are considering is the thermal average of the caracteristic function, which can be computed as
 \[
-    \left\langle \chi_c(l,i) \right\rangle = \frac{\sum_{C}^{\prime} e^{-\beta E_c}}{\sum_{C} e^{-\beta E_c}},
+  \left\langle \chi_c(l,i) \right\rangle = \frac{\sum_{C}^{\prime} e^{-\beta E_c}}{\sum_{C} e^{-\beta E_c}},
 \]
 where the sum in the numerator is taken over all configurations \(C\) that contain the domain wall \((l,i)\), while the sum in the denominator is taken over all configurations of the system. In order to understand how to compute the energy of such configurations, we can compare the energy of a configuration \(C\) that contains the domain wall \((l,i)\) with the energy of a configuration \(\tilde{C}\) that is identical to \(C\) except for the fact that it does not contain the domain wall \((l,i)\) (i.e., the spins enclosed by the domain wall \((l,i)\) are flipped in \(\tilde{C}\) with respect to \(C\)).
 \begin{figure}[H]
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{img/ising_2d_energy_conf1.png}
-        \caption{Configuration C: a set of domain walls, including the domain wall \((l,i)\) which we are considering.}
-    \end{minipage}\hfill
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{img/ising_2d_energy_conf2.png}
-        \caption{Configuration \(\tilde{C}\): the same configuration without the domain wall \((l,i)\): the spins inside of it are flipped.}
-    \end{minipage}
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/ising_2d_energy_conf1.png}
+    \caption{Configuration C: a set of domain walls, including the domain wall \((l,i)\) which we are considering.}
+  \end{minipage}\hfill
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/ising_2d_energy_conf2.png}
+    \caption{Configuration \(\tilde{C}\): the same configuration without the domain wall \((l,i)\): the spins inside of it are flipped.}
+  \end{minipage}
 \end{figure}
 The energy of the two configurations are related by
 \[
-    E_c = E_{\tilde{c}} + 2Jl,
+  E_c = E_{\tilde{c}} + 2Jl,
 \]
 so that now we can rewrite the sum over the configurations that contain the domain wall \((l,i)\) as a sum over the configurations \(\tilde{C}\) that do not contain the domain wall \((l,i)\) (but which are built from a certain \(C\) containing it) as follows
 \[
-    \sum_{C}^{\prime} e^{-\beta E_c} = \sum_{\tilde{C}} e^{-\beta (E_{\tilde{c}} + 2Jl)} = e^{-2 \beta J l} \sum_{\tilde{C}} e^{-\beta E_{\tilde{c}}}.
+  \sum_{C}^{\prime} e^{-\beta E_c} = \sum_{\tilde{C}} e^{-\beta (E_{\tilde{c}} + 2Jl)} = e^{-2 \beta J l} \sum_{\tilde{C}} e^{-\beta E_{\tilde{c}}}.
 \]
 Now we can be sure of the fact that the sum over all configurations \(C\) in the denominator is greater than the sum over the configurations \(\tilde{C}\) (since the latter is a subset of the former), thus we can write
 \[
-    \left\langle \chi_c(l,i) \right\rangle = \frac{\sum_{C}^{\prime} e^{-\beta E_c}}{\sum_{C} e^{-\beta E_c}} \leq \frac{e^{-2 \beta J l} \sum_{\tilde{C}} e^{-\beta E_{\tilde{c}}}}{\sum_{\tilde{C}} e^{-\beta E_{\tilde{c}}}} = e^{-2 \beta J l}.
+  \left\langle \chi_c(l,i) \right\rangle = \frac{\sum_{C}^{\prime} e^{-\beta E_c}}{\sum_{C} e^{-\beta E_c}} \leq \frac{e^{-2 \beta J l} \sum_{\tilde{C}} e^{-\beta E_{\tilde{c}}}}{\sum_{\tilde{C}} e^{-\beta E_{\tilde{c}}}} = e^{-2 \beta J l}.
 \]
 Thus we have shown that the thermal average of the caracteristic function is upper bounded by an exponentially decaying function of the length of the domain wall, which means that the probability of finding a domain wall of length \(l\) in the system decreases exponentially with \(l\).
 
 Now we can use this result to compute the thermal average of the number of flipped spins as follows
 \[
-    \left\langle N_{-}(C) \right\rangle \leq \sum_{l} l^2 \sum_{i=1}^{M(l)} e^{-2 \beta J l} = \sum_{l} l^2 M(l) e^{-2 \beta J l} \leq 4 N \sum_{l} l^2 3^{l-1} e^{-2 \beta J l},
+  \left\langle N_{-}(C) \right\rangle \leq \sum_{l} l^2 \sum_{i=1}^{M(l)} e^{-2 \beta J l} = \sum_{l} l^2 M(l) e^{-2 \beta J l} \leq 4 N \sum_{l} l^2 3^{l-1} e^{-2 \beta J l},
 \]
 such that the fraction of flipped spins can be estimated as
 \[
-    \frac{\left\langle N_{-}(C) \right\rangle}{N} \leq \frac{4}{3} \sum_{l} l^2 3^{l} e^{-2 \beta J l} = \frac{4}{3} \sum_{l} l^2 e^{-(2 \beta J - \log(3)) l}.
+  \frac{\left\langle N_{-}(C) \right\rangle}{N} \leq \frac{4}{3} \sum_{l} l^2 3^{l} e^{-2 \beta J l} = \frac{4}{3} \sum_{l} l^2 e^{-(2 \beta J - \log(3)) l}.
 \]
 We can study the convergence of the series on the right hand side, which is a power series in \(l\) with an exponential decay factor. The series converges if the exponential decay factor dominates over the polynomial growth of \(l^2\), which happens if the exponent is negative, i.e., if
 \[
-    2 \beta J - \log(3) > 0 \implies T < \frac{2 J}{k_B \log(3)} = T_c.
+  2 \beta J - \log(3) > 0 \implies T < \frac{2 J}{k_B \log(3)} = T_c.
 \]
 Thus we have shown that for temperatures below the critical temperature \(T_c\), the average fraction of flipped spins is less than \(\frac{1}{2}\), which means that the system is in an ordered phase with non-zero magnetization, and thus there is a phase transition at finite temperature.
 
 We can also compute the sum explicitly to further convice ourselves: the allowed values of \(l\) are even numbers, since we need to have an even number of steps to create a closed loop in the lattice, thus we can write
 \[
-    l = 2,4,8\dots = 2k+2, \quad k = 0,1,2\dots, +\infty,
+  l = 4,8\dots = 2k+2, \quad k = 1,2\dots, +\infty,
 \]
 and by taking the thermodinamic limit \(N \to \infty\) after having inserted this expression for \(l\) in the sum, we can obtain
 \[
-    \lim_{N \to \infty} \frac{\left\langle N_{-}(C) \right\rangle}{N} \leq \frac{4}{3} \sum_{k=1}^{\infty} (2k+2)^2 e^{-(2 \beta J - \log(3)) (2k+2)} = \frac{64}{3} \frac{x^2}{(1-x)^3}\left(1 - \frac{3}{4}x + \frac{1}{4}x^2\right),
+  \lim_{N \to \infty} \frac{\left\langle N_{-}(C) \right\rangle}{N} \leq \frac{4}{3} \sum_{k=1}^{\infty} (2k+2)^2 e^{-(2 \beta J - \log(3)) (2k+2)} = \frac{64}{3} \frac{x^2}{(1-x)^3}\left(1 - \frac{3}{4}x + \frac{1}{4}x^2\right),
 \]
 where we have defined \(x = 9 e^{-4 \beta J}\). Looking at the expression on the right hand side, it is easy to convince ourselves that there exists a critical temperature \(T_c\) such that
 \[
-    \lim_{N \to \infty} \frac{\left\langle N_{-}(C) \right\rangle}{N} \leq \frac{1}{2} \quad \text{for } T < T_c,
+  \lim_{N \to \infty} \frac{\left\langle N_{-}(C) \right\rangle}{N} \leq \frac{1}{2} \quad \text{for } T < T_c,
 \]
 which means that the system is in an ordered phase with non-zero magnetization for temperatures below \(T_c\), and thus there is a phase transition at finite temperature. This completes our proof of the existence of a phase transition in the 2D Ising model at finite temperature. The Peierls's argument is a powerful tool in statistical physics that allows us to establish the existence of phase transitions in systems with discrete symmetries, such as the Ising model, by analyzing the energetics and statistics of domain walls. It provides a rigorous way to show that the system can exhibit long-range order and spontaneous symmetry breaking at finite temperatures, which is a fundamental aspect of phase transitions in statistical mechanics.
 
@@ -240,26 +239,26 @@ The fundamental idea behind the \textbf{dual lattice approach} in the two-dimens
 
 By equating the statistical weight of a domain wall segment, \(e^{2 \beta^* J}\), to the weight of a high-temperature bond, \(\tanh(\beta J)\), one establishes a direct mathematical mapping between the low-temperature regime \(\beta^*\) and the high-temperature regime \(\beta\). This symmetry ultimately leads to the Kramers-Wannier duality condition:
 \[
-    \frac{1}{N} \log(Z_N(\beta)) = \frac{1}{N} \log(Z_N(\beta^*)) - \log(\sinh(2 \beta^* J)),
+  \frac{1}{N} \log(\mathcal{Z}_N(\beta)) = \frac{1}{N} \log(\mathcal{Z}_N(\beta^*)) - \log(\sinh(2 \beta^* J)),
 \]
 where \(\beta^* = \beta^*(\beta)\) is a monotonically decreasing function of \(\beta\) defined by the relation
 \[
-    \sinh(2 \beta J) \sinh(2 \beta^* J) = 1.
+  \sinh(2 \beta J) \sinh(2 \beta^* J) = 1.
 \]
 
-The Kramers-Wannier duality relates the high-temperature phase of the model (where \(\beta\) is small) to the low-temperature phase of the dual model (where \(\beta^*\) is large), and vice versa. In particular if \(\log(Z_N)\) is analytic for some value of \(\beta\), then it must also be analytic for the corresponding value of \(\beta^*\). Similarly, if there is a non-analyticity in \(\log(Z_N)\) at some value of \(\beta\), then there must also be a non-analyticity at the corresponding value of \(\beta^*\) (thus a phase transition).
+The Kramers-Wannier duality relates the high-temperature phase of the model (where \(\beta\) is small) to the low-temperature phase of the dual model (where \(\beta^*\) is large), and vice versa. In particular if \(\log(\mathcal{Z}_N)\) is analytic for some value of \(\beta\), then it must also be analytic for the corresponding value of \(\beta^*\). Similarly, if there is a non-analyticity in \(\log(\mathcal{Z}_N)\) at some value of \(\beta\), then there must also be a non-analyticity at the corresponding value of \(\beta^*\) (thus a phase transition).
 
 This implies that, assuming there to be only one single phase transition, it must coincide with the \textit{self-dual point} \(\beta_c=\beta^*_c\), then the critical temperature \(T_c\) of the phase transition must satisfy the condition
 \[
-    \sinh^2(2 \beta_c J) = 1 \implies \sinh(2 \beta_c J) = 1.
+  \sinh^2(2 \beta_c J) = 1 \implies \sinh(2 \beta_c J) = 1.
 \]
 If we know define a variable \(x = e^{2 \beta J}\), we can rewrite the condition for the critical temperature as
 \[
-    \frac{1}{2}(x - \frac{1}{x}) = 1 \implies x^2 - 2 x - 1 = 0 \implies x = 1 + \sqrt{2},
+  \frac{1}{2}(x - \frac{1}{x}) = 1 \implies x^2 - 2 x - 1 = 0 \implies x = 1 + \sqrt{2},
 \]
 and by substituting back the definition of \(x\), we can obtain the exact expression for the critical temperature \(T_c\) as
 \[
-    T_c = \frac{2}{\log(1 + \sqrt{2})} \frac{J}{k_B}.
+  T_c = \frac{2}{\log(1 + \sqrt{2})} \frac{J}{k_B}.
 \]
 This is a remarkable result, since it provides an exact expression for the critical temperature of the phase transition in the 2D Ising model, which is a non-trivial result that highlights the power of duality transformations in statistical physics. The Kramers-Wannier duality is a fundamental symmetry of the 2D Ising model that allows us to relate the behavior of the system at different temperatures and to derive exact results about its critical properties.
 
@@ -269,18 +268,20 @@ Finally let us mention that the 2D Ising model was solved exactly by \textbf{Lar
 
 The \textbf{Onsager's partition function} for the 2D Ising model can be expressed as
 \[
-    Z_N = \left[\sqrt{2} \cosh(2 \beta J)\right]^N e^{\frac{N}{\pi} \int_0^{\pi / 2} \mathrm{d} \varphi \log(1 + \sqrt{1 - \kappa^2 \sin^2 \varphi})},
+  \mathcal{Z}_N = \left[\sqrt{2} \cosh(2 \beta J)\right]^N e^{\frac{N}{\pi} \int_0^{\pi / 2} \mathrm{d} \varphi \log(1 + \sqrt{1 - \kappa^2 \sin^2 \varphi})},
 \]
 where
 \[
-    \kappa = \frac{2 \sinh(2 \beta J)}{\cosh^2(2 \beta J)}.
+  \kappa = \frac{2 \sinh(2 \beta J)}{\cosh^2(2 \beta J)}.
 \]
 
 From this expression, we can derive the value of the \textbf{critical exponents} of the phase transition in the 2D Ising model, which are given by
-\begin{align*}
-     & \beta=\frac{1}{8}, & \nu = 1,            & \gamma = \frac{7}{4}, \\
-     & \alpha = 0,        & \eta = \frac{1}{4}, & \delta = 15.
-\end{align*}
+\[
+  \begin{aligned}
+    \beta = \frac{1}{8},\qquad \quad & \nu = 1, \quad            & \gamma = \frac{7}{4}, \\
+    \alpha = 0, \qquad \quad         & \eta = \frac{1}{4}, \quad & \delta = 15.
+  \end{aligned}
+\]
 These exponents have a simple rational form, which is a consequence of the integrability of the model, but they are substantially different from the mean-field exponents, which highlights the importance of fluctuations and correlations in determining the critical behavior of the system.
 
 The exact solution of the 2D Ising model has been a source of inspiration for many developments in statistical physics, including the study of conformal field theories and the renormalization group, and it continues to be an active area of research in theoretical physics.

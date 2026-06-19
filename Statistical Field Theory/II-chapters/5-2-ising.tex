@@ -119,6 +119,8 @@ Finally, for the mixed fusion \(\sigma \times \varepsilon = \sigma\):
 \]
 Notice a crucial detail in this last OPE: the first derivative terms (\(\partial\sigma\) and \(\bar{\partial}\sigma\), corresponding to \(L_{-1}\sigma\) and \(\bar{L}_{-1}\sigma\)) are strictly absent. Why? Because the fields on the left-hand side both have spin 0. To conserve angular momentum (rotational invariance on the plane), the fields appearing on the right-hand side must also be scalars. Since \(L_{-1}\sigma\) has spin 1 and \(\bar{L}_{-1}\sigma\) has spin \(-1\), their coefficients must vanish. The series proceeds directly to the first scalar descendant \(L_{-1}\bar{L}_{-1}\sigma \propto \partial\bar{\partial}\sigma\), with some proportionality constant \(\beta\).
 
+Furthermore the last term in the OPE is a descendant of \(\sigma\) at level 2, and it is a regular term: after dimensional anlysis, we understand that the derivatives \(\partial\bar{\partial}\sigma\) do not have the same scaling dimension as \(\sigma\) itself, so the coefficient of this term must be proportional to \(\beta \propto \tilde{\beta} \vert z \vert^2 \) to ensure the correct overall scaling dimension of the OPE.
+
 When computing correlation functions, we use conformal symmetry to fix the overall spatial forms, and the OPE to enforce algebraic consistency. This imposes rigid constraints on the structure constants \(C_{ij}^k\), generating the \textbf{conformal bootstrap equations}. In minimal models, because the operator algebra is finite, this system of equations can be solved exactly.
 
 However, the fractional negative powers (like \(-1/4\)) in the OPEs represent singularities. Geometrically, fractional powers imply the existence of \textbf{branch points} and branch cuts. If left untreated, these would lead to multivalued correlation functions, which is physically unacceptable for local macroscopic observables. We must handle these singularities carefully to define composite fields.
@@ -129,19 +131,23 @@ To define a composite local field like \(\sigma^2(w, \bar{w})\) starting from th
 
 Therefore, the definition of the normal ordered product must be generalized by multiplying by a compensating fractional power \(\delta\):
 \[
-    :\sigma^2(w, \bar{w}): \;\equiv \lim_{z,\bar{z} \to w} |z-w|^\delta \left( \sigma(z,\bar{z})\sigma(w,\bar{w}) - \text{singular part} \right).
+    :\sigma^2(w, \bar{w}): \;\equiv \lim_{(z,\bar{z}) \to (w,\bar{w})} |z-w|^\delta \left( \sigma(z,\bar{z})\sigma(w,\bar{w}) - \text{singular part} \right).
 \]
-In our specific case, the singular part is \(C_{\sigma\sigma}^{\mathbb{I}} |z-w|^{-1/4}\). Once subtracted, we are left with \(C_{\sigma\sigma}^\varepsilon |z-w|^{3/4} \varepsilon(w, \bar{w})\). To exactly cancel the fractional branch and ensure a single-valued, well-defined right-hand side, we must elegantly choose \(\delta = -3/4\). The limit then immediately yields:
+In our specific case, the singular part is \(C_{\sigma\sigma}^{\mathbb{I}} |z-w|^{-1/4}\). Once subtracted, we are left with \(C_{\sigma\sigma}^\varepsilon |z-w|^{3/4} \varepsilon(w, \bar{w})\):
 \[
-    :\sigma^2(w, \bar{w}): \; = \varepsilon(w, \bar{w}).
+    :\sigma^2(w, \bar{w}): \;\equiv \lim_{(z,\bar{z}) \to (w,\bar{w})} |z-w|^\delta C_{\sigma\sigma}^\varepsilon |z-w|^{3/4} \left( \varepsilon(w, \bar{w}) + \mathcal{O}(|z-w|^{7/4}) \right).
+\]
+To exactly cancel the fractional branch and ensure a single-valued, well-defined right-hand side, we must elegantly choose \(\delta = -3/4\). The limit then immediately yields:
+\[
+    :\sigma^2(w, \bar{w}): \; = C_{\sigma\sigma}^\varepsilon \varepsilon(w, \bar{w}).
 \]
 This proves a profound result: in the Ising CFT, the energy density operator is literally the normal-ordered square of the magnetization.
 
-We can proceed analogously to mathematically define \(:\sigma^3(w, \bar{w}):\) by considering the OPE of \(\sigma\) with \(:\sigma^2:\) (which is \(\varepsilon\)). We subtract the singular term \(|z-w|^{-1}\), compensate for the branch cut of the next leading term, and take the limit. The remaining field is precisely the scalar descendant we noted earlier:
+We can proceed analogously to mathematically define \(:\sigma^3(w, \bar{w}):\) by considering the OPE of \(\sigma\) with \(:\sigma^2:\) (we would have something like \(\sigma(z, \bar{z}):\sigma^2(w, \bar{w}): = \sigma(z, \bar{z})\epsilon(w, \bar{w})\)). We subtract the singular term \(|z-w|^{-1}\), compensate for the branch cut of the next leading term, and take the limit. The remaining field is precisely the scalar descendant we noted earlier:
 \[
     \square_w \sigma = g :\sigma^3(w, \bar{w}):
 \]
-where \(\square_w = \partial_w \bar{\partial}_w\) is the d'Alembertian/Laplacian in complex coordinates, and \(g = (\beta C_{\sigma\sigma}^\varepsilon)^{-1}\).
+where \(\square_w = \partial_w \bar{\partial}_w\) is the d'Alembertian/Laplacian in complex coordinates, and \(g = (\tilde{\beta} C_{\sigma\sigma}^\varepsilon C_{\sigma \varepsilon}^{\sigma})^{-1}\).
 
 \uline{This is an extraordinary result:} the equation above is a non-linear equation of motion for the scalar field \(\sigma\). It can be obtained directly, via the Euler-Lagrange equations, from a macroscopic Lagrangian density:
 \[
@@ -209,7 +215,7 @@ Let us fix the exponents for the mixed correlator involving two spin operators a
     \item Exponent for \(|z_{13}|\): \(\frac{1}{8} + 1 - \frac{1}{8} = 1\)
     \item Exponent for \(|z_{23}|\): \(\frac{1}{8} + 1 - \frac{1}{8} = 1\)
 \end{itemize}
-Substituting these into the formula, the exact three-point function is:\TODO{i think exponents are wrong}
+Substituting these into the formula, the exact three-point function is:
 \[
     \langle \sigma(z_1, \bar{z}_1) \sigma(z_2, \bar{z}_2) \varepsilon(z_3, \bar{z}_3) \rangle = \frac{C_{\sigma \sigma \varepsilon}}{|z_{12}|^{-3/4} |z_{13}|^{1} |z_{23}|^{1}}.
 \]
@@ -269,7 +275,7 @@ By writing down the exact solutions for these hypergeometric functions, we have 
 
 \subsubsection{Characters}
 
-Finally, to cleanly encode the entire spectrum of states residing within each of these conformal families, we compute their characters. For the Ising model, there are only three such functions:
+Finally, to cleanly encode the entire spectrum of states residing within each of these conformal families, we need their characters. For the Ising model, there are only three such functions:
 \[
     \chi_{\mathbb{I}}(q), \quad \chi_\sigma(q), \quad \chi_\varepsilon(q).
 \]

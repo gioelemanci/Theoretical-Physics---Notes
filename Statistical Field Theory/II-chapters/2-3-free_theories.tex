@@ -103,7 +103,7 @@ Inserting this expansion back into our result, the \((z-w)\) factor cancels one 
 \[
     T(z)J(w) = \frac{J(w) + (z-w)\partial_w J(w)}{(z-w)^2} + \text{reg.} = \frac{J(w)}{(z-w)^2} + \frac{\partial_w J(w)}{z-w} + \text{reg.}
 \]
-This is a very important result: as we will see in the next section, it explicitly proves that the chiral current \(J(w) = i\partial\phi(w)\) is indeed a primary field of conformal dimensions \((h, \bar{h}) = (1, 0)\).
+This is a very important result: it explicitly proves that the chiral current \(J(w) = i\partial\phi(w)\) is indeed a primary field of conformal dimensions \((h, \bar{h}) = (1, 0)\), as we have seen from the classification of primary fields from the OPE with the stress-energy tensor.
 
 The same calculation can be repeated for the anti-holomorphic sector for \(\bar{T}\) and \(\bar{J}\), showing that \(\bar{J}(\bar{w}) = i\bar{\partial}\bar{\phi}(\bar{w})\) is a primary field of conformal dimensions \((0, 1)\).
 
@@ -117,7 +117,7 @@ Applying Wick's theorem, we must sum over all possible cross-contractions betwee
 \[
     \begin{aligned}
         T(z)T(w) & = \frac{1}{4} :J(z)J(z)J(w)J(w):                                                                                             & (0) \\
-                 & \, + :\contraction{}{J(z)}{J(z):}{J(w)} J(z) J(z): J(w)J(w) :                                                                & (1) \\
+                 & \, + :\contraction{}{J(z)}{J(z)::}{J(w)} J(z) J(z):: J(w)J(w) :                                                              & (1) \\
                  & \, + \frac{1}{2} : \contraction{}{J(z)}{J(z) :: }{J(w)} \contraction[2ex]{J(z)}{J(z)}{ :: J(w)}{J(w)} J(z)J(z) :: J(w)J(w) : & (2)
     \end{aligned}
 \]
@@ -163,13 +163,13 @@ A primary goal of two-dimensional Conformal Field Theory is the exact classifica
 
 Another fundamental model in two-dimensional conformal field theory is the free massless Majorana fermion. Its Euclidean action is defined using a two-component spinor \(\Psi\) and the standard Dirac matrices:
 \[
-    \mathcal{S} = \frac{1}{4\pi} \int d^2x \Psi^\dagger \gamma^0 \gamma^\mu \partial_\mu \Psi,
+    \mathcal{S} = \frac{1}{4\pi} \int \mathrm{d}^2x \Psi^\dagger \gamma^0 \gamma^\mu \partial_\mu \Psi,
 \]
 where we can choose the representation \(\gamma^0 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}\) and \(\gamma^1 = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}\).
 
 Writing the two-component spinor explicitly as \(\Psi = \begin{pmatrix} \psi \\ \bar{\psi} \end{pmatrix}\), the action decouples:
 \[
-    \mathcal{S} = \frac{1}{4\pi} \int d^2x (\bar{\psi} \partial_z \bar{\psi} + \psi \partial_{\bar{z}} \psi),
+    \mathcal{S} = \frac{1}{4\pi} \int \mathrm{d}^2x (\bar{\psi} \partial_z \bar{\psi} + \psi \partial_{\bar{z}} \psi),
 \]
 which are two independent free fermionic actions for the holomorphic field \(\psi(z)\) and the anti-holomorphic field \(\bar{\psi}(\bar{z})\) (by direct computation).
 Varying this action yields the classical equations of motion:
@@ -219,7 +219,7 @@ To understand the conformal properties of \(\psi(z)\), we must compute its OPE w
 \[
     \begin{aligned}
         T(z)\psi(w) & = -\frac{1}{2} : \psi(z) \contraction{}{\partial \psi(z)}{:}{\psi(w)} \partial \psi(z) : \psi(w) - \frac{1}{2} :\contraction{}{\psi(z)}{\partial \psi(z):}{\psi(w)} \psi(z) \partial \psi(z): \psi(w) \\
-                    & = \frac{\frac{1}{2}\psi(z)}{(z-w)^2} + \frac{\frac{1}{2}\partial\psi(w)}{z-w} + \text{regular terms},
+                    & = \frac{\frac{1}{2}\psi(z)}{(z-w)^2} + \frac{\frac{1}{2}\partial\psi(z)}{z-w} + \text{regular terms},
     \end{aligned}
 \]
 where the second term is positive since we must anti-commute the uncontracted \(\partial \psi(z)\) past the contracted \(\psi(w)\) to bring it next to \(\psi(z)\).
@@ -228,11 +228,13 @@ Because we need the right-hand side expressed entirely at the target point \(w\)
 \[
     \psi(z) = \psi(w) + (z-w)\partial\psi(w) + \dots
 \]
-Substituting this expansion into the first term of the contraction gives:
+and we can do the same for \(\partial\psi(z)\): in this case the leading term is already a derivative, so the next term in the expansion would be a second derivative multiplied by \((z-w)\), which simplifies the denominator and produces a regular term that can be ignored in the OPE.
+
+Substituting the expansion into the first term of the contraction gives:
 \[
     \frac{\frac{1}{2} [\psi(w) + (z-w)\partial\psi(w)]}{(z-w)^2} = \frac{\frac{1}{2}\psi(w)}{(z-w)^2} + \frac{\frac{1}{2}\partial\psi(w)}{z-w}
 \]
-Combining this result with the second term of the original contraction, the two halves sum to a whole derivative:
+Combining this result with the second term of the original contraction (where as we said we can directly express it as a function of \(w\)), the two halves sum to a whole derivative:
 \[
     T(z)\psi(w) = \frac{\frac{1}{2}\psi(w)}{(z-w)^2} + \frac{\partial\psi(w)}{z-w} + \text{regular terms.}
 \]

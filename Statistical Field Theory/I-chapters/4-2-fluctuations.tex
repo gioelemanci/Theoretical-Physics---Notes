@@ -2,7 +2,7 @@
 
 We now want to study the path integral going beyond the saddle-point approximation and understand the impact of fluctuations. We start from the LG partition function\TODO{Add reference to Kardar book (Ch. 3) and the notes statistical field theory by D. Tong.}
 \[
-    Z = \int \mathcal{D}m(\mathbf{x}) e^{-\int \mathrm{d}^d \mathbf{x} \left[ \frac{t}{2}m^2(\mathbf{x}) + u m^4(\mathbf{x}) + \frac{\kappa}{3}(\nabla m)^2 \right]}.
+    \mathcal{Z} = \int \mathcal{D}m(\mathbf{x}) e^{-\int \mathrm{d}^d \mathbf{x} \left[ \frac{t}{2}m^2(\mathbf{x}) + u m^4(\mathbf{x}) + \frac{\kappa}{2}(\nabla m)^2 \right]}.
 \]
 We have already saw that the saddle-point approximation to this partition function gives a good description of the phase transition, and allows us to compute the critical exponents. However, it is not clear whether the saddle-point approximation is reliable, and whether the critical exponents obtained from it are correct. To answer these questions, we need to study the fluctuations around the saddle-point solution.
 
@@ -21,7 +21,7 @@ Since we want to examine the fluctuations around the saddle-point solution, we w
 Substituting this expression into the LG free energy, we can expand to the 2nd order in \( \phi(\mathbf{x}) \) the powers of \(m(\mathbf{x})\) and its derivatives, to obtain
 \[
     \begin{dcases}
-        (\nabla m)^2 = \nabla\phi(\mathbf{x})^2,                                            \\
+        (\nabla m)^2 = (\nabla\phi(\mathbf{x}))^2,                                          \\
         m^2          = \overline{m}^2 + 2\overline{m}\phi(\mathbf{x}) + \phi(\mathbf{x})^2, \\
         m^4          = \overline{m}^4 + 4\overline{m}^3\phi(\mathbf{x}) + 6\overline{m}^2\phi^2(\mathbf{x}) + \mathcal{O}(\phi(\mathbf{x})^3).
     \end{dcases}
@@ -39,7 +39,7 @@ where \(V = \int \mathrm{d}^d \mathbf{x} \) is just the volume of the system, an
 \]
 Note that there are no linear terms in \( \phi \), which follows from the fact that we are expanding around the minimum of the free energy (where \( \tfrac{\partial F}{\partial m} = 0 \)).
 
-Since we have defined \(m(\mathbf{x}) = \overline{m} + \phi(\mathbf{x})\), we can perform explicitly the functional integral over \( \phi(\mathbf{x}) \)
+Since we have defined \(m(\mathbf{x}) = \overline{m} + \phi(\mathbf{x})\), we can perform the functional integral over \( \phi(\mathbf{x}) \)
 \[
     \mathcal{D} m(\mathbf{x}) \mapsto \mathcal{D}\phi(\mathbf{x}),
 \]
@@ -47,13 +47,13 @@ to compute the partition function, and thus the free energy. This will allow us 
 
 In order to rewrite the free energy in a more convenient form, let us remember that in general
 \[
-    Z = \int \mathcal{D} m(\mathbf{x}) e^{-F[m(\mathbf{x})]},
+    \mathcal{Z} = \int \mathcal{D} m(\mathbf{x}) e^{-F[m(\mathbf{x})]},
 \]
 which is a functional integral over all possible field configurations \( m(\mathbf{x}) \). We have moved onto an integration over the fluctuations \( \phi(\mathbf{x}) \), and now it is useful to consider the Fourier transform of the field \( \phi(\mathbf{x}) \) with the idea of diagonalizing the free energy in momentum space:
 \[
-    \phi_{\mathbf{q}} = \int \mathrm{d}^d \mathbf{x} \, e^{-i\mathbf{q} \cdot \mathbf{x}} \phi(\mathbf{x}) \implies \phi(\mathbf{x}) = \int \frac{\mathrm{d}^d \mathbf{q}}{(2\pi)^d} \, e^{i\mathbf{q} \cdot \mathbf{x}} \phi_{\mathbf{q}}.
+    \phi_{\mathbf{q}} = \int \mathrm{d}^d \mathbf{x} \, e^{-i\mathbf{q} \cdot \mathbf{x}} \phi(\mathbf{x}) \implies \phi(\mathbf{x}) = \int \frac{\mathrm{d}^d \mathbf{q}}{(2\pi)^d} \, e^{i\mathbf{q} \cdot \mathbf{x}} \phi_{\mathbf{q}},
 \]
-where \( \phi(\mathbf{x}) \in \mathbb{R} \) has to remain a real field, so that we need to impose \( \phi_{\mathbf{q}}^* = \phi_{-\mathbf{q}} \), and \( \mathbf{q} \) are the momenta of the field. Remember that \( \phi(\mathbf{x}) \) was obtained by \textbf{coarse-graining}\footnote{With \textit{coarse-graining} we mean the process of averaging over short-distance fluctuations, which is exactely what we have been doing in the Landau-Ginzburg theory to obtain a mesoscopic description of the system.} a microscopic spin configuration. Therefore, we can assume that \( \phi(\mathbf{x}) \) does not vary over length scales that are smaller than the spin-spin distance \( a \) (the lattice spacing). In turn, it means we can introduce a cutoff \( \Lambda \) in momentum space, and require
+where \( \phi(\mathbf{x}) \in \mathbb{R} \) has to remain a real field, so that we need to impose \( \phi_{\mathbf{q}}^* = \phi_{-\mathbf{q}} \), and \( \mathbf{q} \) are the momenta of the field. Remember that \( \phi(\mathbf{x}) \) was obtained by \textbf{coarse-graining}\footnote{With \textit{coarse-graining} we mean the process of averaging over short-distance fluctuations, which is exactely what we have been doing in the Landau-Ginzburg theory to obtain a mesoscopic description of the system.} a microscopic spin configuration (we derived in this way \(m(\mathbf{x})\) and \(\phi(\mathbf{x})\) are the fluctuations around the mean field \(\overline{m}\), so they have the same nature). Therefore, we can assume that \( \phi(\mathbf{x}) \) does not vary over length scales that are smaller than the spin-spin distance \( a \) (the lattice spacing). In turn, it means we can introduce a cutoff \( \Lambda \) in momentum space, and require
 \[
     \phi_{\mathbf{q}} = 0 \text{ if } |\mathbf{q}| > \Lambda = 1/a.
 \]
@@ -79,7 +79,7 @@ To compute explicitly the partition function, we need to change variables in the
 \]
 where we need to impose the additional reality constraint \( \phi_{\mathbf{q}}^* = \phi_{-\mathbf{q}} \). Finally, we get
 \[
-    Z = \left( \prod_{\mathbf{q}} \int \mathrm{d}\phi_{\mathbf{q}} \right) e^{- \int \frac{\mathrm{d}^d \mathbf{q}}{(2\pi)^d} (c_2 q^2 + c_1) |\phi_{\mathbf{q}}|^2},
+    \mathcal{Z} = \left( \prod_{\mathbf{q}} \int \mathrm{d}\phi_{\mathbf{q}} \right) e^{- \int \frac{\mathrm{d}^d \mathbf{q}}{(2\pi)^d} (c_2 q^2 + c_1) |\phi_{\mathbf{q}}|^2},
 \]
 where we neglected possible overall normalization constants, which may appear as the Jacobian of the change of variable \((*)\). At this point, it is useful to adopt a further simplification and imagine that we are working in a finite volume \( V = L^d \), such that the integral over \( \mathbf{q} \) is then replaced by a sum over the quantized momenta \( \mathbf{q} = \frac{2\pi}{L} \mathbf{n} \), with \(\mathbf{n} \in \mathbb{Z}^d \):
 \[
@@ -87,7 +87,7 @@ where we neglected possible overall normalization constants, which may appear as
 \]
 which in some way is equivalent to a sort of spatial cutoff. Making this substitution we arrive at
 \[
-    Z = \prod_{\mathbf{q}}' \left[ \int \mathrm{d}\phi_{\mathbf{q}} \, e^{- \frac{1}{V} (c_2 q^2 + c_1) |\phi_{\mathbf{q}}|^2} \right]
+    \mathcal{Z} = \prod_{\mathbf{q}}' \left[ \int \mathrm{d}\phi_{\mathbf{q}} \, e^{- \frac{1}{V} (c_2 q^2 + c_1) |\phi_{\mathbf{q}}|^2} \right]
 \]
 Here, \( \prod\limits_{\mathbf{q}}' \) means that we are taking the product over \( \mathbf{q} = (q_1, \dots, q_d) \) such that \( q_1 > 0 \).
 Since the original real-space field is real-valued, its Fourier components are constrained by \(\phi_{-\mathbf{q}} = \phi_{\mathbf{q}}^*\), which implies that \(\phi_{\mathbf{q}}\) and \(\phi_{-\mathbf{q}}\) are not independent degrees of freedom. To avoid double-counting when computing the partition function, the product must be restricted to half of the momentum space, which is denoted by the primed product \(\prod_{\mathbf{q}}'\) (e.g., considering only \(q_1 > 0\), choice which allows us to consider only positive frequencies). Furthermore, because the integrand depends only on \(q^2\) and \(|\phi_{\mathbf{q}}|^2\), it is entirely symmetric under the exchange \(\mathbf{q} \to -\mathbf{q}\). Therefore, evaluating the product over the restricted half-space is mathematically equivalent to taking the square root of the product over the entire momentum space:
@@ -97,7 +97,7 @@ Since the original real-space field is real-valued, its Fourier components are c
 
 So finally we can use these results to rewrite the partition function as
 \[
-    Z = \sqrt{\prod_{\mathbf{q}} \left[ \int \mathrm{d}\phi_{\mathbf{q}} \, e^{- \frac{1}{V} (c_2 q^2 + c_1) |\phi_{\mathbf{q}}|^2} \right]},
+    \mathcal{Z} = \sqrt{\prod_{\mathbf{q}} \left[ \int \mathrm{d}\phi_{\mathbf{q}} \, e^{- \frac{1}{V} (c_2 q^2 + c_1) |\phi_{\mathbf{q}}|^2} \right]},
 \]
 which is now an easy product of decoupled gaussian integrals over complex variables. Using
 \[
@@ -105,7 +105,7 @@ which is now an easy product of decoupled gaussian integrals over complex variab
 \]
 we arrive at the final expression for the partition function
 \[
-    Z = \prod_{\mathbf{q}} \sqrt{\frac{\pi V}{c_2 q^2 + c_1}}.
+    \mathcal{Z} = \prod_{\mathbf{q}} \sqrt{\frac{\pi V}{c_2 q^2 + c_1}}.
 \]
 Therefore, neglecting irrelevant overall constants and using
 \[
@@ -140,13 +140,13 @@ since we needed \( t \) to vanish at the critical temperature \( T_c \) and chan
 \]
 We can thus rewrite the heat capacity as
 \[
-    C \simeq T a^2 \frac{\partial^2}{\partial t^2} \left[ \frac{1}{\beta} \log Z \right] \simeq T_c a^2 \frac{\partial^2}{\partial t^2} \left[ T_c \log Z(t) \right].
+    C \simeq T a^2 \frac{\partial^2}{\partial t^2} \left[ \frac{1}{\beta} \log \mathcal{Z} \right] \simeq T_c a^2 \frac{\partial^2}{\partial t^2} \left[ T_c \log \mathcal{Z}(t) \right].
 \]
 
 The idea is now to compute the heat capacity using the partition function obtained by including the fluctuations, and compare it with the saddle-point prediction. This will allow us to understand whether the saddle-point approximation is reliable, and whether the critical exponents obtained from it are correct.
 
 \begin{itemize}
-    \item First, let us recall the \textbf{saddle-point approximation} for \( Z_{LG} \) at \( h=0 \), given by
+    \item First, let us recall the \textbf{saddle-point approximation} for \( \mathcal{Z}_{LG} \) at \( h=0 \), given by
           \[
               \overline{m} = \begin{dcases}
                   0                    & t > 0, \\
@@ -155,7 +155,7 @@ The idea is now to compute the heat capacity using the partition function obtain
           \]
           which was derived in the previous section. Substituting this solution into the LG free energy,
           \[
-              \log Z_{LG} \simeq -V \left( \frac{t}{2}\overline{m}^2 + u \overline{m}^4 \right) = \begin{dcases}
+              \log \mathcal{Z}_{LG} \simeq -V \left( \frac{t}{2}\overline{m}^2 + u \overline{m}^4 \right) = \begin{dcases}
                   0                  & \text{for } t > 0, \\
                   +V \frac{t^2}{16u} & \text{for } t < 0,
               \end{dcases}
@@ -166,7 +166,7 @@ The idea is now to compute the heat capacity using the partition function obtain
                   C_0 + V a^2 T_c^2 \frac{1}{8u} & \text{for } t < 0.
               \end{dcases}
           \]
-          Here \( C_0 \) is a constant which comes from the regular part of the partition function (namely, \( \log Z = \log Z_0 + \log Z_{LG} \), where \( \log Z_0 \) contains all the \( m \)-independent terms that we neglected in the LG free energy, since they do not contribute to the critical behavior).
+          Here \( C_0 \) is a constant which comes from the regular part of the partition function (namely, \( \log \mathcal{Z} = \log \mathcal{Z}_0 + \log \mathcal{Z}_{LG} \), where \( \log \mathcal{Z}_0 \) contains all the \( m \)-independent terms that we neglected in the LG free energy, since they do not contribute to the critical behavior).
 
           Therefore, the saddle-point (or mean-field) prediction is
           \begin{figure}[H]
@@ -181,13 +181,13 @@ The idea is now to compute the heat capacity using the partition function obtain
           \end{figure}
           Recall that the \( \alpha \)-exponent is defined by
           \[
-              C_\pm(T, h=0) \sim A_\pm |t|^{-\alpha},
+              C_\pm(t(T), h=0) \sim A_\pm |t|^{-\alpha},
           \]
           since it describes the divergence of the heat capacity at the critical temperature \( T_c \). The saddle-point approximation predicts \( \alpha = 0 \): we do not have an expression depending on \( t \) in the heat capacity, but just a step discontinuity at \( t=0 \).
 
-    \item Next, let us compute how the prediction is modified using the partition function obtained by including the \textbf{fluctuations} up to second order, where again we now include the regular part \( Z_0 \) of the partition function, the saddle-point contribution, and the fluctuation contribution:
+    \item Next, let us compute how the prediction is modified using the partition function obtained by including the \textbf{fluctuations} up to second order, where again we now include the regular part \( \mathcal{Z}_0 \) of the partition function, the saddle-point contribution, and the fluctuation contribution:
           \[
-              -\log Z = -\log Z_0 + V\left( \frac{t}{2}\overline{m}^2 + u \overline{m}^4 \right) + \frac{V}{2} \int \frac{\mathrm{d}^d \mathbf{q}}{(2\pi)^d} \log(c_2 q^2 + c_1),
+              \log \mathcal{Z} = \log \mathcal{Z}_0 - V\left( \frac{t}{2}\overline{m}^2 + u \overline{m}^4 \right) - \frac{V}{2} \int \frac{\mathrm{d}^d \mathbf{q}}{(2\pi)^d} \log(c_2 q^2 + c_1),
           \]
           where we had
           \[
@@ -199,7 +199,7 @@ The idea is now to compute the heat capacity using the partition function obtain
           recalling the SPA solution for \( \overline{m}(t) \).
           Therefore, the new contribution to the heat capacity is given by the second derivative with respect to \( t \) of the fluctuation contribution to the free energy:
           \[
-              \frac{V}{2} \frac{\partial^2}{\partial t^2} \int \frac{\mathrm{d}^d \mathbf{q}}{(2\pi)^d} \log(c_2 q^2 + c_1) = \begin{dcases}
+              -\frac{V}{2} \frac{\partial^2}{\partial t^2} \int \frac{\mathrm{d}^d \mathbf{q}}{(2\pi)^d} \log(c_2 q^2 + c_1) = \begin{dcases}
                   \frac{V}{2} \int \frac{\mathrm{d}^d \mathbf{q}}{(2\pi)^d} \frac{1}{(\kappa q^2 + t)^2} & \text{for } t > 0, \\
                   2V \int \frac{\mathrm{d}^d \mathbf{q}}{(2\pi)^d} \frac{1}{(\kappa q^2 - 2t)^2}         & \text{for } t < 0.
               \end{dcases}
@@ -213,12 +213,12 @@ The idea is now to compute the heat capacity using the partition function obtain
           \]
           we can rewrite the previous expression as
           \[
-              \frac{V}{2} \frac{\partial^2}{\partial t^2} \int \frac{\mathrm{d}^d \mathbf{q}}{(2\pi)^d} \log(c_2 q^2 + c_1) \sim \frac{1}{\kappa^2} \int \frac{\mathrm{d}^d \mathbf{q}}{(2\pi)^d} \frac{1}{(q^2 + \xi^{-2})^2}
+              -\frac{V}{2} \frac{\partial^2}{\partial t^2} \int \frac{\mathrm{d}^d \mathbf{q}}{(2\pi)^d} \log(c_2 q^2 + c_1) \sim \frac{1}{\kappa^2} \int \frac{\mathrm{d}^d \mathbf{q}}{(2\pi)^d} \frac{1}{(q^2 + \xi^{-2})^2}
           \]
           where we did not keep track of the numerical prefactors. We now have to explicit some considerations from dimensional analysis:
           \begin{itemize}
               \item The integral now has dimension \(\sim L^{4-d}\). In fact, the integration measure \(\mathrm{d}^d \mathbf{q}\) has dimension \(\sim L^{-d}\), while the integrand has dimension \(\sim L^4\) (since \(q^2\) and \(\xi^{-2}\) have dimension \(\sim L^{-2}\)).
-              \item For \(d \geq 4\) the integral diverges at large \(q\), and is dominated by the momentum cutoff \(\Lambda\): we would have an integrand behaving as \(q^{-4}\) at large \(q\), and thus the integral would diverge as \(\Lambda^{d-4}\).
+              \item For \(d \geq 4\) the integral diverges at large \(q\) (going to zero), and is dominated by the momentum cutoff \(\Lambda\): we would have an integrand behaving as \(q^{-4}\) at large \(q\), and thus the integral would behave as \(\Lambda^{d-4}\).
               \item For \(d < 4\) the integral is convergent. It can be made dimensionless by rescaling \(q \mapsto q' = q \xi^{-1}\), since we saw that in the momentum space \([q_i] \sim L^{-1}\) (keeping in mind the example of spherical coordinates, where \(\mathrm{d} \mathbf{q} = q^{d-1} \, \mathrm{d} q\, \mathrm{d} \Omega\)). After the rescaling, the integral becomes
                     \[
                         \xi^{4-d}\int \frac{\mathrm{d}^d \textbf{q}'}{(2\pi)^d} \frac{1}{(q'^2 + 1)^2},
@@ -227,7 +227,7 @@ The idea is now to compute the heat capacity using the partition function obtain
           \end{itemize}
           Therefore we have:
           \[
-              \frac{\partial^2}{\partial t^2} \frac{V}{2} \int \frac{\mathrm{d}^d \mathbf{q}}{(2\pi)^d} \log(c_2 q^2 + c_1) \sim \frac{1}{\kappa^2} \begin{dcases}
+              -\frac{\partial^2}{\partial t^2} \frac{V}{2} \int \frac{\mathrm{d}^d \mathbf{q}}{(2\pi)^d} \log(c_2 q^2 + c_1) \sim \frac{1}{\kappa^2} \begin{dcases}
                   \Lambda^{d-4} & \text{for } d \geq 4, \\
                   \xi^{4-d}     & \text{for } d < 4,
               \end{dcases}
@@ -250,7 +250,7 @@ The exponent \( \alpha = \frac{4 - d}{2} \) is not exact because it only takes i
 
 \subsection{Correlation Functions}
 
-The same machinery can be used to compute \uline{correlation functions} and in particular the connected correlator
+The same machinery can be used to compute \uline{correlation functions} and in particular the \textbf{connected correlator}
 \[
     G^c(\mathbf{x}, \mathbf{y}) = \langle (m(\mathbf{x}) - \overline{m})(m(\mathbf{y}) - \overline{m}) \rangle = \langle \phi(\mathbf{x}) \phi(\mathbf{y}) \rangle,
 \]
@@ -301,12 +301,12 @@ Fluctuations are important if their contribution to the heat capacity is larger 
 \]
 Recalling that, for \( d \leq 4 \), we have found a contribution to the heat capacity from fluctuations which behaves as
 \[
-    C_{corr} \sim \frac{1}{\kappa} \xi^{4-d} \sim \frac{1}{\kappa} |t|^{-\frac{4-d}{2}},
+    C_{corr} \sim \frac{1}{\kappa^2} \xi^{4-d} \sim \frac{1}{\kappa^2} |t|^{-\frac{4-d}{2}},
 \]
 where we used the definition of the length scale \( \xi \) introduced above (without considering numerical factors depending on the sign of \( t \)). On the other hand, the jump predicted by the saddle-point approximation, as we computed, is proportional to \(\tfrac{1}{u}\).
 
 Therefore, the condition \( C_{corr} \ll \Delta C_{SP} \) can be rewritten as
 \[
-    \implies \quad |t|^{\frac{d-4}{2}} \ll \frac{\kappa}{u} \qquad \Rightarrow \qquad |t| \gg t_G \simeq \left( \frac{u}{\kappa} \right)^{\frac{2}{4-d}}.
+    \implies \quad |t|^{\frac{d-4}{2}} \ll \frac{\kappa^2}{u} \qquad \Rightarrow \qquad |t| \gg t_G \simeq \left( \frac{u}{\kappa^2} \right)^{\frac{2}{4-d}}.
 \]
 This is Ginzburg's criterion. We see that, as we expected, for \( |t| \) sufficiently low the fluctuations are important. However, it gives a temperature \( t_G \) above which fluctuations become less important, thus the saddle-point approximation becomes reliable in that regime. In some experiments we may not get below \( t_G \), so we may see a critical behaviour which is similar to the mean-field result. This is just an artifact due to the fact that we are not sufficiently close to \( T_c \), and thus we are not able to see the true critical behavior of the system.

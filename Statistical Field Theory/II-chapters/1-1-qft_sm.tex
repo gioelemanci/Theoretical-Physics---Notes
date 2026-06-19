@@ -2,17 +2,22 @@
 
 A deep connection exists between quantum field theory (QFT) and statistical mechanics.
 This relation becomes particularly powerful in the study of critical phenomena, as one can see from the \textbf{Landau-Ginzburg formulation} and by the observation that systems at phase transitions are described by field theories with scale invariance.
-\uline{At criticality the theory is invariant under dilatations of coordinates}
+
+Indeed, at criticality, the correlation length of the system diverges
+\[
+    \xi \to \infty,
+\]
+and as a consequence \uline{the theory becomes invariant under dilatations of coordinates}
 \[
     x_{\mu}\rightarrow\lambda x_{\mu}.
 \]
 Order parameters (fields) transform as
 \[
-    \Phi_{i}\rightarrow\lambda^{\Delta_{i}}\Phi_{i},
+    \phi_{i}\rightarrow\lambda^{\Delta_{i}}\phi_{i},
 \]
 where the \(\Delta_i\) determine critical exponents, so their calculation is crucial. This implies power-law behavior for correlation functions at criticality:
 \[
-    \langle\Phi_{i}(x)\Phi_{i}(0)\rangle\sim\frac{1}{|x|^{2\Delta_{i}}},
+    \langle\phi_{i}(x)\phi_{i}(0)\rangle\sim\frac{1}{|x|^{2\Delta_{i}}},
 \]
 so that the \(\Delta_{i}\) can be extracted if one is able to compute the correlation functions exactly.
 
@@ -20,10 +25,10 @@ This suggested Polyakov to formulate a strategy to solve scale invariant QFT kno
 \begin{enumerate}
     \item show that scale invariance implies, under very general assumptions, a larger \textbf{conformal invariance};
     \item conformal invariance and operator product expansions of local fields lead to \textbf{conformal bootstrap}, which is a set of conditions to be satisfied by the 4-point correlation functions;
-    \item conformal bootstrap constraints the correlation functions and in some cases is able to determine them exactly: we can extract the critical exponents from the obtained conformal blocks;
+    \item conformal bootstrap constraints the correlation functions and in some cases is able to determine them exactly: we can then extract the critical exponents from the obtained conformal blocks and structure constants;
     \item correlation functions allow to compute \(\beta\)-functions, renormalization group eigenvalues, scale dimensions and ultimately critical exponents.
 \end{enumerate}
-The classification of fixed points of Renormalization Group, in practice of the critical points and therefore the possible universality classes is thus equivalent to classify all the conformal field theories (CFT).
+The classification of fixed points of Renormalization Group, which consists in classifying the critical points and the possible universality classes, is thus equivalent to classify all the conformal field theories (CFT).
 
 A fundamental theorem states that, unless a theory is particularly pathologically defined, the combination of Poincar\'e and scale invariance automatically implies a larger symmetry: \textbf{conformal symmetry}. This symmetry enhancement is the cornerstone of the whole approach.
 
@@ -113,7 +118,7 @@ The \textbf{conjugated momentum density} \(\pi=\dot{\phi}\) (through the Legendr
 \[
     \mathcal{H}(\pi,\phi)=\frac{1}{2}\dot{\phi}^{2}+\frac{1}{2}(\nabla\phi)^{2}+V(\phi).
 \]
-Notice that the kinetic and spatial gradient terms are strictly positive, being sums of squares. Provided that the potential \(V(\phi)\) is also bounded from below (which is guaranteed if we only include even higher powers of the field, such as the \(\phi^4\) term in the Ising model, making it the simplest physically viable non-trivial theory), the total Hamiltonian—the spatial integral of this density—is bounded from below. This implies that the operator whose eigenvalues represent the total energy of the system has a well-defined lower bound, meaning the theory is mathematically and physically sensible.
+Notice that the kinetic and spatial gradient terms are strictly positive, being sums of squares. Provided that the potential \(V(\phi)\) is also bounded from below (which is guaranteed if we only include even higher powers of the field, such as the \(\phi^4\) term in the Ising model, making it the simplest physically viable non-trivial theory), the total Hamiltonian (the spatial integral of this density) is bounded from below. This implies that the operator whose eigenvalues represent the total energy of the system has a well-defined lower bound, meaning the theory is mathematically and physically sensible.
 
 With analogy of what is done in the quantum mechanics case, one obtains
 \[
@@ -143,7 +148,7 @@ Once this setup is generalized, we can express any \(n\)-point correlation funct
 
 The oscillatory nature of the path integral makes it difficult to define rigorously. For this reason, it is usual to perform a Wick rotation:
 \begin{equation}
-    t \to -i\tau, \implies \begin{dcases}
+    t \to -i\tau \implies \begin{dcases}
         \mathrm{d} t \to -i\mathrm{d}\tau, \\
         \partial_{t} \to i\partial_{\tau}.
     \end{dcases}
@@ -208,9 +213,9 @@ Thus the analytic continuation of the Green function to imaginary times builds c
 \[
     G(x_1, \dots, x_n) \to G(\xi t_1, \mathbf{x}_1, \dots, \xi t_n, \mathbf{x}_n), \quad \xi = \rho e^{i \theta},
 \]
-given by the usual Green's function of the Euclidean theory, with \(\rho > 0\) and \(\theta \in [0, \pi]\) and all the times \(t_i\) replaced by \(\rho t_i\). This function is analytical in the half plane \(\Im(\rho) < 0\) and the original Green functions are recovered for \(\rho \to 1\). Introducing the new integration variables \(p^0_i \to \tfrac{p^0_i}{\rho}\) in the particular case of \(\rho = -1\) we get
+given by the usual Green's function of the Euclidean theory, with \(\rho > 0\) and \(\theta \in [0, \pi]\) and all the times \(t_i\) replaced by \(\xi t_i\). This function is analytical in the half plane \(\Im(\xi) < 0\) and the original Green functions are recovered for \(\xi \to 1\). Introducing the new integration variables \(p^0_i \to \tfrac{p^0_i}{\xi}\) in the particular case of \(\xi = -i\) we get
 \[
-    G(-i t_1, \mathbf{x}_1, \dots, -i t_n, \mathbf{x}_n) \propto \int \prod_{i=1}^n \frac{\mathrm{d}^D p_i}{(2 \pi)^D} e^{- \sum_{i=1}^n p_i \cdot x_i} \tilde{G}(p_1, \dots, p_n),
+    G(-i t_1, \mathbf{x}_1, \dots, -i t_n, \mathbf{x}_n) \propto \int \prod_{i=1}^n \frac{\mathrm{d}^D p_i}{(2 \pi)^D} e^{- \sum_{i=1}^n p_i \cdot x_i} \tilde{G}(\frac{p_1^0}{-i}\mathbf{p}_1, \dots,\frac{p_n^0}{-i}\mathbf{p}_n),
 \]
 Therefore, \uline{in the perturbative expansion the results of the euclidean theory are analytically connected to those in the Minkowski spacetime}. Practically, in many cases the results obtained in the euclidean space can be directly used to extract physical information and it is pointless to explicitly continue analytically to the Minkowski spacetime.
 
@@ -306,7 +311,7 @@ To do so, one must examine higher-order quantum corrections by computing the \(\
 
 However, in some special cases, the \(\beta\)-function continues to vanish exactly at all orders in perturbation theory. Such fields are called \textit{truly} (or \textit{exactly}) \textit{marginal} operators. When a theory possesses a truly marginal operator, varying its continuous coupling does not destroy conformal invariance but rather smoothly deforms the theory into a new, physically distinct CFT. In this scenario, instead of an isolated critical point, one finds a continuous manifold (a line or surface) of fixed points, continuously parameterized by the marginal coupling.
 
-\uline{The "good" theories are the renormalizable ones}, where the dominating field in the potential is relevant, driving the theory out of the fixed point of RG (which corresponds to a critical point) towards a RG flow to some \textit{"infrared" destiny} (critical or trivial).
+\uline{The ``good'' theories are the renormalizable ones}, where the dominating field in the potential is relevant, driving the theory out of the fixed point of RG (which corresponds to a critical point) towards a RG flow to some \textit{"infrared" destiny} (critical or trivial).
 So what field theorists call renormalizability of a theory corresponds, in Statistical Mechanics, adopting the RG language, to relevant perturbations.
 
 If \(V(\phi)\) is a polynomial whose term with maximal power is \(\phi^{n}\), there exists a space-time dimension
@@ -336,6 +341,6 @@ As an example we cite the celebrated \textit{Sine-Gordon theory}
 \]
 a very important theory in many aspects, ranging from soliton theory to being the prototypical example of integrable QFT. It is called Sine-Gordon because of the cosine potential: the equations of motion are very similar to Klein-Gordon equation, but with a sine non-linearity
 \[
-    \box \phi \propto \sin\phi.
+    \Box \phi \propto \sin\phi.
 \]
 The Sine-Gordon theory is renormalizable in two dimensions, but it becomes non-renormalizable in higher dimensions due to the presence of the cosine potential, which can be expanded into an infinite series of powers of \(\phi\).

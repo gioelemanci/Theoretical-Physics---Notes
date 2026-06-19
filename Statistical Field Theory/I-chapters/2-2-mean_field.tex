@@ -1,6 +1,6 @@
 \section{Mean Field Theory}\TODO{reference: D. Tong - statistical field theory, 1 | D. Tong - statistical physics, 5}
 
-Mean field theory is a powerful approximation method used to study phase transitions and critical phenomena in many-body systems. The basic idea behind mean field theory is to replace the complex interactions between particles in the system with an average or "mean" field that each particle experiences. This simplification allows us to derive self-consistent equations for the order parameter and analyze the behavior of the system near the critical point.
+Mean field theory is a powerful approximation method used to study phase transitions and critical phenomena in many-body systems. The basic idea behind mean field theory is to replace the complex interactions between particles in the system with an average or ``mean'' field that each particle experiences. This simplification allows us to derive self-consistent equations for the order parameter and analyze the behavior of the system near the critical point.
 
 Let us concentrate on a classical model, the Ising model, which is a prototypical model for studying ferromagnetic phase transitions.
 
@@ -20,11 +20,11 @@ Our aim is to study the equilibrium properties (where observables can effectivel
 
 Each configuration of the system is specified by the set of spin values \(\{s_i\}_{i=1}^N\), and it is associated to a probability given by the Boltzmann distribution:
 \[
-    P(\{s_i\}) = \frac{1}{Z} e^{-\beta H(\{s_i\})},
+    P(\{s_i\}) = \frac{1}{\mathcal{Z}} e^{-\beta H(\{s_i\})},
 \]
-where \(Z\) is the \textbf{partition function}, defined as the sum over all possible configurations:
+where \(\mathcal{Z}\) is the \textbf{partition function}, defined as the sum over all possible configurations:
 \[
-    Z = \sum_{\{s_i\}} e^{-\beta H(\{s_i\})}.
+    \mathcal{Z} = \sum_{\{s_i\}} e^{-\beta H(\{s_i\})}.
 \]
 
 \begin{example}[Pair of spins]
@@ -41,12 +41,12 @@ where \(Z\) is the \textbf{partition function}, defined as the sum over all poss
     \end{itemize}
     The partition function is then given by:
     \[
-        Z = e^{\beta J + 2\beta h} + 2 e^{-\beta J} + e^{\beta J - 2\beta h}.
+        \mathcal{Z} = e^{\beta J + 2\beta h} + 2 e^{-\beta J} + e^{\beta J - 2\beta h}.
     \]
 
     If we now wanted to compute the probability of finding the system in the configuration \(s_1 = +1,\, s_2 = +1\), we would use the Boltzmann distribution:
     \[
-        P(s_1 = +1,\, s_2 = +1) = \frac{e^{\beta J + 2\beta h}}{Z}.
+        P(s_1 = +1,\, s_2 = +1) = \frac{e^{\beta J + 2\beta h}}{\mathcal{Z}}.
     \]
 
     For the magnetization, we can compute the average spin per site:
@@ -64,7 +64,7 @@ If we were now to consider a system with \(N=100\), we would have \(2^{100}\) po
 
 \subsection{Mean Field Approach - Euristic}
 
-Let us now apply the mean field approximation to the Ising model. The key idea is to replace the interaction term in the Hamiltonian with an average or "mean" field that each spin experiences. This allows us to derive a self-consistent equation for the magnetization.
+Let us now apply the mean field approximation to the Ising model. The key idea is to replace the interaction term in the Hamiltonian with an average or ``mean'' field that each spin experiences. This allows us to derive a self-consistent equation for the magnetization.
 
 It is a \textit{euristic} approach, which is not exact but provides a good approximation, remaining not systematic, not rigorous and hard to fully justify. We will see how it can be derived from a more rigorous approach, which is the \textbf{Landau-Ginzburg effective field theory}.
 
@@ -82,7 +82,7 @@ In this case the system exhibits a phase transition at a critical temperature \(
 
 Being interested in the behavior of the magnetization, we can express it as a thermal average in the canonical ensemble:
 \[
-    \left\langle \frac{1}{N} \sum_{i} s_i \right\rangle_c = \frac{1}{N} \sum_{\{s_i\}} \left( \sum_{i} s_i \right) \frac{e^{-\beta H(\{s_i\})}}{Z},
+    \left\langle \frac{1}{N} \sum_{i} s_i \right\rangle_c = \frac{1}{N} \sum_{\{s_i\}} \left( \sum_{i} s_i \right) \frac{e^{-\beta H(\{s_i\})}}{\mathcal{Z}},
 \]
 where the sum runs over all possible configurations of the spins. The mean field approximation consists in building a term which encodes the average effect of the neighboring spins on a given spin: it is natural to think about building this average field from the magnetization, so let us analyze it in more detail. The magnetization can assume the following values:
 \[
@@ -111,7 +111,7 @@ where we have introduced a delta function to enforce the constraint that the sum
 
     Let us analyze the contribution of each configuration to the partition function: starting from a sum over all configurations, we get
     \[
-        Z = \sum_{\{s_i\}} e^{-\beta H(\{s_i\})} = e^{- \beta H(A)} + e^{-\beta H(B)} + e^{-\beta H(C)} + e^{-\beta H(D)},
+        \mathcal{Z} = \sum_{\{s_i\}} e^{-\beta H(\{s_i\})} = e^{- \beta H(A)} + e^{-\beta H(B)} + e^{-\beta H(C)} + e^{-\beta H(D)},
     \]
     where \(H(A)\), \(H(B)\), \(H(C)\), and \(H(D)\) are the Hamiltonian evaluated at each configuration: considering the case \(h=0\) for simplicity, we have
     \[
@@ -119,21 +119,21 @@ where we have introduced a delta function to enforce the constraint that the sum
     \]
     Thus the partition function can be rewritten as
     \[
-        Z = 2 (e^{\beta J} + e^{-\beta J}).
+        \mathcal{Z} = 2 (e^{\beta J} + e^{-\beta J}).
     \]
 
     We now want to get the same result using the sum over magnetization, which is given by
     \[
-        Z = \sum_{M = -2}^2 \sum_{\{s_i\}} \delta\left(\sum_{i} s_i - M\right) e^{-\beta H(\{s_i\})} = \sum_{M = -2}^2 e^{-\beta H(M)} \sum_{\{s_i\}} \delta\left(\sum_{i} s_i - M\right) = 2 (e^{\beta J} + e^{-\beta J}),
+        \mathcal{Z} = \sum_{M = -2}^2 \sum_{\{s_i\}} \delta\left(\sum_{i} s_i - M\right) e^{-\beta H(\{s_i\})} = \sum_{M = -2}^2 e^{-\beta H(M)} \sum_{\{s_i\}} \delta\left(\sum_{i} s_i - M\right) = 2 (e^{\beta J} + e^{-\beta J}),
     \]
     where we have used the fact that the Hamiltonian depends only on the magnetization \(M\) and not on the specific configuration of the spins, and that the sum over configurations for each magnetization value is just the number of configurations with that value of magnetization. This example illustrates how the sum over configurations can be rewritten as a sum over magnetization, with the delta function ensuring that we only consider configurations that correspond to a specific magnetization.
 \end{example}
 
-Now we can implement the mean field approximation by replacing the interaction term in the Hamiltonian with an average field that each spin experiences. This average field is proportional to the magnetization \(m\), which serves as a measure of the degree of order in the system: in a fixed magnetization sector (m-sector) we can replace the interaction term with an effective field that depends on the magnetization (reinserting the external magnetic field \(h\)):
+Now we can implement the mean field approximation by replacing the interaction term in the Hamiltonian with an average field that each spin experiences. This average field is proportional to the magnetization \(m\), which serves as a measure of the degree of order in the system: in a fixed magnetization sector (\(m\)-sector) we can replace the interaction term with an effective field that depends on the magnetization (reinserting the external magnetic field \(h\)):
 \[
     H_{mf} (\{s_i\}, m) = -J \sum_{\langle i, j \rangle} s_i \, m - h \sum_i s_i,
 \]
-where we are summing over single sites (only \(s_i\) appears in the sum), but we kept the notation of the sum over nearest neighbors to indicate that the effective field is proportional to the number of nearest neighbors (coordination number \(z\)) and the magnetization \(m\). This is the point where we have to accept that this method works even if it is hard to justify: there exist some ad-hoc argument, but it would be meaningless to use those since we will anyway present the Landau-Ginzburg effective field theory in the following sections, which then will make us able to justify this approximation in a systematic way.
+where we are summing over single sites (only \(s_i\) appears in the sum), but we kept the notation of the sum over nearest neighbors to indicate that the effective field is proportional to the number of nearest neighbors (coordination number \(z\)) and the magnetization \(m\). This substitution corresponds to the intuition that each spins feels an average magnetization from the surrounding neighbors, and the crucial point is that now the spin variable enters linearly in the effective Hamiltonian. This is the point where we have to accept that this method works even if it is hard to justify: there exist some ad-hoc argument, but it would be meaningless to use those since we will anyway present the Landau-Ginzburg effective field theory in the following sections, which then will make us able to justify this approximation in a systematic way.
 
 \begin{remark}
     The hamiltonian \(H_{mf}\) is independent of the specific configuration of the spins \(\{s_i\}\), as long as
@@ -145,18 +145,18 @@ where we are summing over single sites (only \(s_i\) appears in the sum), but we
 
 If we continue the computation of the mean field hamiltonian  we get
 \[
-    H_{mf} (\{s_i\}, m) = -J m \sum_{\langle i, j \rangle} s_i - h \sum_i s_i = - (J z m + h) \sum_i s_i = - (J z m + h) Nm,
+    H_{mf} (\{s_i\}, m) = -J m \sum_{\langle i, j \rangle} s_i - h \sum_i s_i = - (J \frac{z}{2} m + h) \sum_i s_i = - (\frac{J z m}{2} + h) Nm,
 \]
 where we have used the fact that the sum over the spins is equal to the magnetization \(M = Nm\) and the sum over the nearest neighbors gives a factor of the coordination number \(\frac{Nz}{2}\).\footnote{When we count the same site for each of its n.n., we are counting each \(s_i\) a number of \(z\) times, but we have to divide by 2 to avoid double-counting. Thus the total is \(N\cdot \frac{z}{2}\).} This mean field Hamiltonian describes a system of non-interacting spins in an \textit{effective magnetic field} that depends on the magnetization \(m\) and the external field \(h\).
 
 The average magnetization per spin in the canonical ensamble can now be performed easily applying the mean field approximation:
 \[
     \begin{aligned}
-        \left\langle \frac{1}{N} \sum_{i} s_i \right\rangle_c & = \sum_{m \in [-1, \ldots, +1]} m \sum_{\{s_i\}} \delta\left(\sum_{i} s_i - Nm\right) \frac{e^{-\beta H_{mf}(m)}}{Z} \\
-                                                              & = \frac{1}{Z} \sum_{m} m e^{-\beta H_{mf}(m)} \left[ \sum_{\{s_i\}} \delta\left(\sum_{i} s_i - Nm\right) \right],    \\
+        \left\langle \frac{1}{N} \sum_{i} s_i \right\rangle_c & = \sum_{m \in [-1, \ldots, +1]} m \sum_{\{s_i\}} \delta\left(\sum_{i} s_i - Nm\right) \frac{e^{-\beta H_{mf}(m)}}{\mathcal{Z}} \\
+                                                              & = \frac{1}{\mathcal{Z}} \sum_{m} m e^{-\beta H_{mf}(m)} \left[ \sum_{\{s_i\}} \delta\left(\sum_{i} s_i - Nm\right) \right],    \\
     \end{aligned}
 \]
-where the last term identifieas a sum over all the configurations of the spins that correspond to a given magnetization \(m\). Note that a configuration of \(N_{\uparrow}\) of up spins and \(N_{\downarrow}\) of down spins corresponds to a magnetization
+where the last term identifies a sum over all the configurations of the spins that correspond to a given magnetization \(m\). Note that a configuration of \(N_{\uparrow}\) of up spins and \(N_{\downarrow}\) of down spins corresponds to a magnetization
 \[
     m = \frac{N_{\uparrow} - N_{\downarrow}}{N} = \frac{2 N_{\uparrow} - N}{N} = 2 \frac{N_{\uparrow}}{N} - 1.
 \]
@@ -174,19 +174,19 @@ which after some algebraic manipulations can be rewritten as
 \]
 Thus we have found an expression for the number of configurations that correspond to a given magnetization \(m\), which can be used to compute the final form of the magnetization:
 \[
-    \left\langle \frac{1}{N} \sum_{i} s_i \right\rangle_c = \frac{1}{Z} \sum_{m} m e^{-\beta N f(m)} = \frac{1}{Z} \sum_{m} m e^{-\beta H_{mf}(m)} \Omega(m),
+    \left\langle \frac{1}{N} \sum_{i} s_i \right\rangle_c = \frac{1}{\mathcal{Z}} \sum_{m} m e^{-\beta H_{mf}(m)} \Omega(m) = \frac{1}{\mathcal{Z}} \sum_{m} m e^{-\beta N f(m)},
 \]
 where we have defined the function \(f(m)\) as
 \[
-    f(m) = - hm - \frac{Jzm^2}{2} - T \left[ \log(2) - \frac{(1+m)}{2}\log (1+m) - \frac{(1-m)}{2}\log (1-m) \right],
+    f(m) = - hm - \frac{Jzm^2}{2} - \frac{1}{\beta} \left[ \log(2) - \frac{(1+m)}{2}\log (1+m) - \frac{(1-m)}{2}\log (1-m) \right],
 \]
 which can be interpreted as a \textbf{free energy density} (per site) that depends on the magnetization \(m\). Indeed we have the last sum over the magnetization \(m\) getting dominated by the minimum of the function \(f(m)\) in the thermodynamic limit \(N \to \infty\), while the other terms get suppressed by the factor \(e^{-\beta N f(m)}\).\footnote{Since we always have to consider an enormously large \(N\) (the real world is at the thermodynamic limit), even small variations in \(f(m)\) will be exponentially suppressed.} Thus the average magnetization can be approximated as
 \[
     \left\langle \frac{1}{N} \sum_{i} s_i \right\rangle_c \approx \frac{1}{e^{-\beta N f(m^*)}} \left( m^* e^{-\beta N f(m^*)} \right) = m^*, \qquad \frac{\partial f(m)}{\partial m}\bigg|_{m^*} = 0,
 \]
-where \(m^*\) is the value of \(m\) that minimizes the function \(f(m)\).\TODO{Add a figure of a parabula with the minimum at m-star.} This is known as a \textit{saddle point approximation}, which is a common technique used in statistical mechanics to evaluate integrals or sums that are dominated by the contribution of a single point (the minimum of the free energy in this case). We can use the same approximation to compute the partition function \(Z\) as well, which is given by
+where \(m^*\) is the value of \(m\) that minimizes the function \(f(m)\).\TODO{Add a figure of a parabula with the minimum at m-star.} This is known as a \textbf{saddle point approximation}, which is a common technique used in statistical mechanics to evaluate integrals or sums that are dominated by the contribution of a single point (the minimum of the free energy in this case). We have used the same approximation to compute the partition function \(\mathcal{Z}\) in the denominator as well, which is given by
 \[
-    Z = \sum_{m} e^{-\beta N f(m)} \approx e^{-\beta N f(m^*)}.
+    \mathcal{Z} = \sum_{m} e^{-\beta N f(m)} \approx e^{-\beta N f(m^*)}.
 \]
 
 \paragraph{Self-consistency relation.}
@@ -194,7 +194,7 @@ Now computing the derivative of \(f(m)\) with respect to \(m\) and setting it to
 \[
     \beta(h + J z m) = \frac{1}{2} \log\left( \frac{1+m}{1-m} \right) = \tanh^{-1}(m),
 \]
-where the last step is obtaines after some algebraic manipulations. This equation can be rewritten as
+where the last step is obtained after algebraic manipulations. This equation can be rewritten as
 \[
     m = \tanh\left( \beta h_{eff} \right), \quad h_{eff} = h + J z m,
 \]
@@ -249,42 +249,46 @@ The critical temperature \(T_c\) is determined by the condition that the slope o
 \[
     \beta_c J z = 1 \quad \Rightarrow \quad T_c = \frac{J z}{k_B},
 \]
-where \(k_B\) is the Boltzmann constant. Thus the condition on the critical temperature can be expressed as \(\beta_c J z = 1\).
+where \(k_B\) is the Boltzmann constant.
 
 We can now study the beaviour of the magnetization as a function of temperature.\TODO{add plot of m vs T}
 As we decreas the temperature \(T\) below \(T_c\), the magnetization \(m\) increases continuously from zero, indicating the onset of ferromagnetic order. We got two symmetric solutions for the magnetization, which correspond to the two possible orientations of the spins in the ferromagnetic phase. The magnetization \(m\) serves as an order parameter that characterizes the phase transition: it is zero in the paramagnetic phase and becomes non-zero in the ferromagnetic phase, indicating the spontaneous breaking of symmetry.
 
-We can obtain the plot of the free energy as a function of the magnetization \(m\) for different temperatures to visualize the phase transition. For \(T > T_c\), the free energy has a single minimum at \(m = 0\), corresponding to the stable paramagnetic phase. As we decrease the temperature below \(T_c\), the free energy develops two symmetric minima at \(m = \pm m^*\), corresponding to the stable ferromagnetic phases, while the minimum at \(m = 0\) becomes a local maximum, indicating that it is no longer a stable solution. This can be seen studying the expression for the free energy density \(f(m)\) that we derived earlier as \(h=0\):
+We can obtain the plot of the free energy as a function of the magnetization \(m\) for different temperatures to visualize the phase transition. This can be done numerically by studying the expression for the free energy density \(f(m)\) close to the critical temperature \(T_c\), i.e. expanding it in a power series around \(m = 0\) to analyze the behavior near the critical point:
 \[
-    f(m) = \dots
+    \begin{aligned}
+        f(m) & = Jz \left[\frac{m^2}{2} - \frac{1}{\beta J z}\left( \frac{(\beta h_{eff})^2}{2} - \frac{(\beta h_{eff})^4}{12} \right)\right] - \frac{\log 2}{\beta} \\
+             & = \frac{Jz}{2 \left(1 - Jz \beta\right)} m^2 + (\beta J z)^3 \frac{Jz m^4}{12} - \frac{\log 2}{\beta}                                                 \\
+             & = Jz \left[ \frac{m^2}{2} \left(1 - \frac{T_c}{T}\right) + \frac{m^4}{12}\left(\frac{T_c}{T}\right)^3 \right] - \frac{\log 2}{\beta},
+    \end{aligned}
 \]
 and we get then two different expressions for \(T > T_c\) and \(T < T_c\):\TODO{add plot of f(m) vs m for different T}
 \begin{itemize}
     \item For \(T > T_c\), the free energy has a single minimum at \(m = 0\), which corresponds to the stable paramagnetic phase: we have a parabula with a minimum at the origin, which is the only stable solution in this regime.
     \item For \(T < T_c\), the free energy develops two symmetric minima at \(m = \pm m^*\), which correspond to the stable ferromagnetic phases, while the minimum at \(m = 0\) becomes a local maximum, indicating that it is no longer a stable solution: we have a double-well potential with two minima at \(m = \pm m^*\) and a local maximum at \(m = 0\). As the temperature decreases further below \(T_c\), the minima at \(m = \pm m^*\) become deeper, indicating that the ferromagnetic phases become more stable.
 \end{itemize}
-If we were to plot the free energy as a function of the magnetization \(m\) for different temperatures, we would see how the shape of the free energy changes across the phase transition, with the emergence of two minima below \(T_c\) and the disappearance of the minimum at \(m = 0\). This visualization helps to understand the nature of the phase transition and the role of the magnetization as an order parameter.
+If we were to plot the free energy as a function of the magnetization \(m\) for different temperatures, we would see how the shape of the free energy changes across the phase transition, with the emergence of two minima below \(T_c\) and the disappearance of the minimum at \(m = 0\). This visualization helps to understand the nature of the phase transition and the role of the magnetization in the process.
 
-If we now imagine to ``turn on'' the external magnetic field \(h\), we would see that the symmetry between the two minima at \(m = \pm m^*\) is broken, and one of the minima becomes deeper than the other, depending on the sign of \(h\). The easier way is to consider an external field which is positive but very small in comparison to the coupling constant \(J\), so that we can treat it as a perturbation.\TODO{add plot of f(m) vs m for different h}
+If we now imagine to ``turn on'' the external magnetic field \(h\), we would see that the symmetry between the two minima at \(m = \pm m^*\) is broken, and one of the minima becomes deeper than the other, depending on the sign of \(h\). The easier way is to consider an external field which is positive but very small in comparison to the coupling constant \(J\), so that we can treat it as a perturbation.\TODO{add plot of f(m) vs m for different T at fixed h different from zero}
 \begin{itemize}
     \item For \(h > 0\), the minimum at \(m = +m^*\) becomes deeper than the minimum at \(m = -m^*\), indicating that the ferromagnetic phase with positive magnetization is more stable than the one with negative magnetization. The system will preferentially align its spins in the direction of the external field, leading to a net positive magnetization.
     \item For \(h < 0\), the minimum at \(m = -m^*\) becomes deeper than the minimum at \(m = +m^*\), indicating that the ferromagnetic phase with negative magnetization is more stable than the one with positive magnetization. The system will preferentially align its spins in the opposite direction of the external field, leading to a net negative magnetization.
+    \item Above the critical temperature \(T_c\), the external field \(h\) will induce a non-zero magnetization even in the paramagnetic phase, breaking the symmetry and leading to a smooth crossover rather than a sharp phase transition. The magnetization will increase continuously as the external field is increased, and there will be no spontaneous symmetry breaking in this regime.
 \end{itemize}
-This means that the external magnetic field \(h\) breaks the \(\mathbb{Z}_2\) symmetry between the two ferromagnetic phases and selects one of them as the stable phase, depending on the sign of \(h\). This is a manifestation of the fact that the external field acts as a symmetry-breaking field, which can influence the behavior of the system near the critical point and affect the nature of the phase transition, especially in the presence of a small external field where the system can exhibit critical behavior and scaling properties.
+This means that the external magnetic field \(h\) breaks the \(\mathbb{Z}_2\) symmetry between the two ferromagnetic phases and selects one of them as the stable phase, depending on the sign of \(h\). This is a manifestation of the fact that the external field acts as a symmetry-breaking field, which can influence the behavior of the system near the critical point and affect the nature of the phase transition, especially in the presence of a small external field where the system can exhibit critical behavior and scaling properties.\TODO{add plot of m vs T for h different from zero and comment on function}
 
-\begin{remark}[On Symmetries and Spontaneous Symmetry Breaking]
-    A symmetry of a system is a transformation that leaves the Hamiltonian (and so the physical properties and evolution of the system) invariant.
+\subsubsection{Symmetries and Spontaneous Symmetry Breaking}
+A symmetry of a system is a transformation that leaves the Hamiltonian (and so the physical properties and evolution of the system) invariant.
 
-    In the case of the Ising model with \(h=0\), there is a \(\mathbb{Z}_2\) symmetry corresponding to the transformation \(s_i \to -s_i\) for all spins, which leaves the Hamiltonian unchanged:
-    \[
-        H(\{s_1, s_2, \ldots, s_n\}) = H(\{-s_1, -s_2, \ldots, -s_n\}).
-    \]
-    When we flip all spins, is like changing the sign of the magnetization \(m\), but the Hamiltonian remains the same; in the graph of the free energy, this corresponds to the symmetry of the double-well potential around \(m=0\). This symmetry is a fundamental property of the system and plays a crucial role in determining the nature of the phase transition and the behavior of the system near the critical point.
+In the case of the Ising model with \(h=0\), there is a \(\mathbb{Z}_2\) symmetry corresponding to the transformation \(s_i \to -s_i\) for all spins, which leaves the Hamiltonian unchanged:
+\[
+    H(\{s_1, s_2, \ldots, s_n\}) = H(\{-s_1, -s_2, \ldots, -s_n\}).
+\]
+When we flip all spins, is like changing the sign of the magnetization \(m\), but the Hamiltonian remains the same; in the graph of the free energy, this corresponds to the symmetry of the double-well potential around \(m=0\). This symmetry is a fundamental property of the system and plays a crucial role in determining the nature of the phase transition and the behavior of the system near the critical point.
 
-    This symmetry is \textbf{spontaneously broken} as \(T > T_c\), since ...
+This symmetry is \textbf{spontaneously broken} as \(T > T_c\), since the system chooses one of the two minima of the free energy (either \(m = +m^*\) or \(m = -m^*\)) as the stable phase, even though both minima are energetically equivalent. The system spontaneously breaks the \(\mathbb{Z}_2\) symmetry by selecting one of the two ferromagnetic phases, leading to a non-zero magnetization and an ordered state below the critical temperature. This spontaneous symmetry breaking is a hallmark of second-order phase transitions and is associated with the emergence of long-range order in the system.
 
-    Once the system is in one of the two ferromagnetic phases (with \(m = +m^*\) or \(m = -m^*\)), we could expect the system to be able to transition between these two phases by flipping all the spins, since the states are completely symmetric: same energy, entropy etc. However, in the thermodynamic limit \(N \to \infty\), the system becomes trapped in one of the two minima of the free energy, and it cannot transition to the other minimum due to the presence of an infinite energy barrier between them: the transition probability between the two minima approches zero as a power law, and the system remains in one of the two ferromagnetic phases.
-\end{remark}
+Once the system is in one of the two ferromagnetic phases (with \(m = +m^*\) or \(m = -m^*\)), we could expect the system to be able to transition between these two phases by flipping all the spins, since the states are completely symmetric: same energy, entropy etc. However, in the thermodynamic limit \(N \to \infty\), the system becomes trapped in one of the two minima of the free energy, and it cannot transition to the other minimum due to the presence of an infinite energy barrier between them: the transition probability between the two minima approches zero as a power law, and the system remains in one of the two ferromagnetic phases.
 
 \subsection{Critical Exponents}
 
@@ -292,7 +296,7 @@ The mean field theory allows us to compute the critical exponents that character
 
 We start from the analysis of the \textbf{free energy} \(f(m)\) and the magnetization \(m\) as a function of temperature \(T\) near the critical point \(T_c\). We can expand the the free energy in a Taylor series around \(m = 0\) to analyze the behavior of the system near the critical point. The expansion takes the form:\TODO{correct the expansion}
 \[
-    f(m) \sim T \left[ \frac{m^2}{2}\left(1-\frac{T}{T_c}\right) + \frac{m^4}{12} T_c^3 + O(m^6) \right],
+    f(m) \sim \frac{1}{\beta} \left[ \frac{m^2}{2}\left(1-\frac{T}{T_c}\right) + \frac{m^4}{12} T_c^3 + O(m^6) \right],
 \]
 where the interesting feature is that the coefficient of the \(m^2\) term changes sign at \(T = T_c\), which indicates the onset of the phase transition. We can now find an analytic expression for the derivative of the free energy with respect to \(m\) and set it to zero to find the equilibrium magnetization \(m\) as a function of temperature \(T\):
 \[

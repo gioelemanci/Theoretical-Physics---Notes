@@ -30,14 +30,14 @@ General coordinate transformations \(x\rightarrow x^{\prime}\) change the metric
 \]
 Conformal transformations are coordinate transformations of type
 \[
-    \frac{\partial x^{\prime\lambda}}{\partial x^{\mu}}=\Omega(x)g^{\lambda\mu},
+    \frac{\partial x^{\prime\lambda}}{\partial x^{\mu}}=\Omega(x)g^{\lambda}_\mu,
 \]
-preserving the metric up to a local rescaling:
+preserving the metric up to a local rescaling \(\mathrm{d}s^{\prime 2} = \Omega^{2}(x)\mathrm{d}s^2 \):
 \[
     g_{\mu\nu}^{\prime}(x^{\prime})=\Omega^{2}(x)g_{\mu\nu}(x), \quad \Omega^{2}(x)=e^{f(x)}>0.
 \]
 
-Physically, this represents a strictly \textit{local} rescaling of the coordinates. Unlike a global scale transformation that stretches the entire space uniformly, a conformal transformation allows the scale factor \(\Omega(x)\) to vary from point to point. Geometrically, if one imagines a coordinate grid, this operation allows you to fix a point and locally "inflate" or "deflate" the grid around it. The coordinates change scale in different ways at different positions in space, but without arbitrarily mixing the coordinate axes in a way that would alter the angles between intersecting lines.
+Physically, this represents a strictly \textit{local} rescaling of the coordinates. Unlike a global scale transformation that stretches the entire space uniformly, a conformal transformation allows the scale factor \(\Omega(x)\) to vary from point to point. Geometrically, if one imagines a coordinate grid, this operation allows you to fix a point and locally ``inflate'' or ``deflate'' the grid around it. The coordinates change scale in different ways at different positions in space, but without arbitrarily mixing the coordinate axes in a way that would alter the angles between intersecting lines.
 
 \begin{figure}[H]
     \centering
@@ -89,7 +89,7 @@ Physically, this represents a strictly \textit{local} rescaling of the coordinat
             % Central point after transformation
             \fill[red] (2.925, 0.625) circle (1.5pt);
         \end{tikzpicture}
-        \caption{Local conformal transformation: the grid undergoes a local "inflation" determined by the position-dependent factor $\Omega(x)$.}
+        \caption{Local conformal transformation: the grid undergoes a local ``inflation'' determined by the position-dependent factor $\Omega(x)$.}
         \label{fig:local_scale}
     \end{minipage}
 
@@ -113,15 +113,15 @@ Thus if we have already Wick rotated to Euclidean signature, we will be working 
 
 Since we are interested in finding the Lie algebra of this transformations group, thus it is convenient to consider infinitesimal transformations. For an infinitesimal transformation we can write
 \[
-    x^{\prime\mu}=x^{\mu}+\epsilon^{\mu}(x), \quad \Omega^{2}(x)=1+f(x)+\dots
+    x^{\prime\mu}=x^{\mu}+\epsilon^{\mu}(x),
 \]
-and, since \(\Omega^{2}(x)\) is a positive function, we chose to write it as the exponential of another function \(f(x)\) (this is just a convenient parametrization, not a restriction). Thus we can write
+and, since \(\Omega^{2}(x)\) is a positive function, we choose to write it as the exponential of another function \(f(x)\) (this is just a convenient parametrization, not a restriction):
 \[
     \Omega^{2}(x)=e^{f(x)}\simeq 1+f(x)+\dots
 \]
-Taking the conformal condition \eqref{eq:conformal_condition} and inserting the infinitesimal transformation (recognizing that the r.h.s. is the metric in the new coordinates, i.e. \(g_{\mu\nu}^{\prime}\)), we get
+Taking the conformal condition \eqref{eq:conformal_condition} and inserting the infinitesimal transformation (recognizing that the l.h.s. is the metric in the new coordinates, i.e. \(g_{\mu\nu}^{\prime}\)), we get
 \[
-    g_{\mu\nu}^{\prime}=g_{\mu\nu}-(\partial_{\mu}\epsilon_{\nu}+\partial_{\nu}\epsilon_{\mu}),
+    g_{\mu\nu}^{\prime}=g_{\mu\nu}+(\partial_{\mu}\epsilon_{\nu}+\partial_{\nu}\epsilon_{\mu}),
 \]
 and now expanding \(g_{\mu\nu}^{\prime} = e^{f(x)}g_{\mu\nu}\) to first order in \(\epsilon\), we get
 \[
@@ -277,7 +277,7 @@ which in turn implies the conservation of the corresponding charge
     Q=\int j^{0}d^{D-1}x.
 \]
 
-In the case of space-time translation invariance, we define the canonical \textbf{stress-energy tensor}. It carries two indices: one (\(\mu\)) acting as the standard current index, and a second (\(\nu\)) acting as a sort of internal index labeling the specific translation parameter. The canonical tensor is defined as:
+In the case of \textit{space-time translation invariance}, we define the canonical \textbf{stress-energy tensor}. It carries two indices: one (\(\mu\)) acting as the standard current index, and a second (\(\nu\)) acting as a sort of internal index labeling the specific translation parameter. The canonical tensor is defined as:
 \[
     T_{\mu\nu}=\frac{\partial\mathcal{L}}{\partial(\partial_{\mu}\phi_{a})}\partial_{\nu}\phi_{a}-\delta_{\mu\nu}\mathcal{L}.
 \]
@@ -300,7 +300,7 @@ The associated Noether current is the \textbf{dilatation current} (\(j_{\mu}\) o
 \]
 where \(V_{\mu}\) is the so-called \textbf{virial current}. Its divergence is
 \[
-    \partial^{\mu}D_{\mu}=T_{\mu}^{\mu}-\partial^{\mu}V_{\mu}.
+    \partial^{\mu}D_{\mu}=T_{\ \mu}^{\mu}-\partial^{\mu}V_{\mu}.
 \]
 Therefore, requiring scale invariance (\(\partial^{\mu}D_{\mu} = 0\)) implies:
 \begin{equation}
@@ -346,7 +346,7 @@ Suppose that the virial current is itself a divergence,
 or, more specifically, that it can be written in a form allowing an improvement term.
 Then one can define an improved (Belinfante) energy-momentum tensor
 \begin{equation}
-    T_{\mu\nu}^{Bel}=T_{\mu\nu}+\partial^{\rho}B_{\rho\mu\nu},
+    T_{\mu\nu}^{Bel} = \Theta_{\mu\nu} = T_{\mu\nu}+\partial^{\rho}B_{\rho\mu\nu},
     \label{eq:Belinfante_energy_momentum_tensor}
 \end{equation}
 where \(B_{\rho\mu\nu}\) is antisymmetric in the first two indices,
@@ -416,7 +416,7 @@ Local fields \(A(x)\in\mathcal{A}\) are operators in a QFT depending on only one
     \item Local fields add up and can be multiplied by scalars, so \(\mathcal{A}\) has the structure of a vector space. We can select a preferred basis \(\{\varphi_n(x)\}\) for this space, such that all fields can be expressed as a linear combination of this basis.
     \item Usually, we choose a basis of local fields that diagonalizes two commuting operators (since they commute, they can be simultaneously diagonalized):
           \begin{itemize}
-              \item \textbf{Dilatation}: \(\tilde{D}\varphi_{n}(0)=\lambda^{d_{n}}\varphi_{n}(0)\). The eigenvalue \(d_{n}\) (or \(\Delta_n\)) is the scale dimension. This is the crucial number we are interested in, as it dictates how the field rescales and ultimately determines the critical exponents that characterize specific universality classes.
+              \item \textbf{Dilatation}: \(\tilde{D}\varphi_{n}(0)=\lambda^{d_{n}}\varphi_{n}(0)\). The eigenvalue \(d_{n}\) (or \(\Delta_n\)) is the scale dimension. This is the crucial number we are interested in, as it dictates how the field rescales and ultimately determines the critical exponents that characterize universality classes.
               \item \textbf{Spin}: \(S\varphi_{n}(0)=e^{is_{n}\theta}\varphi_{n}(0)\). Local fields can have various spins (\(s_n = 0, \tfrac{1}{2}, 1, \tfrac{3}{2}, \dots\)).
           \end{itemize}
     \item \(\varphi_{n}(x)\) is therefore uniquely characterized by this pair of numbers \(\{d_{n},s_{n}\}\).
@@ -433,7 +433,7 @@ Local fields \(A(x)\in\mathcal{A}\) are operators in a QFT depending on only one
 \[
     \mathcal{D}_{ij}(x_{1}-x_{2})=\langle\varphi_{i}(x_{1})\varphi_{j}(x_{2})\rangle=\frac{A_{ij}}{|x_{1}-x_{2}|^{d_{i}+d_{j}}},
 \]
-where \(A_{ij}=A\delta_{ij}\). So they are all zero if \(\phi_{j}\ne\phi_{i}\). The constant \(A\) can be fixed by normalizing the field \(\phi_{i}\):
+where \(A_{ij}=A\delta_{ij}\). So they are all zero if \(\varphi_{j} \neq \varphi_{i}\). The constant \(A\) can be fixed by normalizing the field \(\varphi_{i}\):
 \[
     \mathcal{D}_{ij}(x_{1}-x_{2})=\langle\varphi_{i}(x_{1})\varphi_{j}(x_{2})\rangle=\frac{\delta_{ij}}{|x_{1}-x_{2}|^{2d_{i}}}.
 \]
@@ -443,7 +443,7 @@ Near criticality we have a mass scale \(m\sim\xi^{-1},\) i.e. the inverse of the
 \]
 At criticality, i.e. in presence of scale invariance and \(\xi\rightarrow\infty\):
 \[
-    \langle\phi_{0}\rangle=\langle\mathbb{I}\rangle=1, \quad \langle\phi_{i}(x)\rangle=0 \quad (i=1,2,\dots).
+    \langle\varphi_{0}(0)\rangle=\langle\mathbb{I}\rangle=1, \quad \langle\varphi_{i}(x)\rangle=0 \quad (i=1,2,\dots).
 \]
 
 \subsection{Operator Product Expansion}
@@ -477,4 +477,4 @@ The set of all scaling dimensions \(d_n\) (the spectrum of the theory) together 
 
 However, in a generic conformal field theory, these structure constants and scaling dimensions are not known \textit{a priori}. One must rely on sophisticated non-perturbative methods (such as the conformal bootstrap mentioned in the previous chapter) to constrain and compute these numbers.
 
-Furthermore, the physical importance of the OPE is most evident in the short-distance limit, when two fields are brought arbitrarily close to each other (\(x_1 \to x_2\)). In this limit, the expansion typically exhibits a divergence dictated by the power-law denominator \(|x_{12}|^{d_{p}+d_{q}-d_{r}}\). While the OPE naturally contains both regular and singular terms, it is precisely this \textit{singular part} that encodes the most vital algebraic information about the correlation functions and the symmetries of the theory. To fully appreciate how these short-distance singularities dictate the entire structure of the theory, it is highly advantageous to restrict our attention to the incredibly rich case of two dimensions.
+Furthermore, the physical importance of the OPE is most evident in the short-distance limit, when two fields are brought arbitrarily close to each other (\(x_1 \to x_2\)). In this limit, the expansion typically exhibits a divergence dictated by the power-law denominator \(|x_{12}|^{d_{p}+d_{q}-d_{r}}\). While the OPE naturally contains both regular and singular terms, it is precisely this \textit{singular part} that encodes the most vital algebraic information about the correlation functions and the symmetries of the theory. To fully appreciate how these short-distance singularities dictate the entire structure of the theory, it is highly advantageous to restrict our attention to the incredibly rich case of two dimensions: from now on we will focus on \(D=2\) CFTs until the end of this notes, where the OPE and its consequences can be explored in full detail.

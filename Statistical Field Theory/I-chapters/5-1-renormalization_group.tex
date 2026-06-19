@@ -66,7 +66,7 @@ where the delta function enforces the definition of the new degrees of freedom \
 
 This last identity is not trivial, thus we are going to show it explicitly.
 \begin{proof}
-    Let us start from a simple case: we have a system with \(N = 4\) spins with periodic boundary conditions, and we want to define the new degrees of freedom as \(s_1^{\prime} = s_1\) and \(s_2^{\prime} = s_3\). The total number of configurations is \(2^4 = 16\)
+    Let us start from a simple case: we have a system with \(N = 4\) spins with periodic boundary conditions, and we want to define the new degrees of freedom as \(s_0^{\prime} = s_1\) and \(s_1^{\prime} = s_3\). The total number of configurations is \(2^4 = 16\)
     \[
         \{s_i\}_{i=1}^4 = \{(1,1,1,1),\,(1,1,1,-1),\,\dots,\, (1,1,-1,-1),\,\dots,\,(-1,-1,-1,-1)\}.
     \]
@@ -120,17 +120,17 @@ This last identity is not trivial, thus we are going to show it explicitly.
 After this statistical digression, we can now proceed with the computation of the partition function in terms of the new degrees of freedom. We can write
 \[
     \begin{aligned}
-        \mathcal{Z} & = \sum_{\{s^{\prime}_i\}_{i=0}^{n'}} \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_{i}, s_{i+1})} \prod_{i=0}^{n'} \delta(s_i^{\prime}, s_{2i+1})                                                                                    \\
-                    & = \sum_{\{s^{\prime}_i\}_{i=0}^{n'}} \prod_{i=0}^{n'} e^{ \sum_{i=1}^{N/2} \left( B(s_{2i+1}, s_{2i+2}) + B(s_{2i+2}, s_{2i+3}) \right) } \prod_{i=0}^{n'} \delta(s_i^{\prime}, s_{2i+1})                                     \\
-                    & = \sum_{\{s^{\prime}_i\}_{i=0}^{n'}} \sum_{\{s_{2i+2}\}_{i=1}^{N/2}} e^{\sum_i^{N/2} B(s_i^{\prime}, s_{2i+2}) + B(s_{2i+2}, s_{i+1}^{\prime})} = \sum_{\{s^{\prime}_i\}_{i=0}^{n'}} e^{-\beta H^{\prime}[\{s_i^{\prime}\}]},
+        \mathcal{Z} & = \sum_{\{s^{\prime}_i\}_{i=0}^{n'}} \sum_{\{s_i\}_{i=1}^N} e^{\sum_{i} B(s_{i}, s_{i+1})} \prod_{i=0}^{n'} \delta(s_i^{\prime}, s_{2i+1})                                                                                                      \\
+                    & = \sum_{\{s^{\prime}_i\}_{i=0}^{n'}} \sum_{\{s_i\}_{i=1}^N} e^{ \sum_{i=1}^{N/2} \left( B(s_{2i+1}, s_{2i+2}) + B(s_{2i+2}, s_{2i+3}) \right) } \prod_{i=0}^{n'} \delta(s_i^{\prime}, s_{2i+1})                                                 \\
+                    & = \sum_{\{s^{\prime}_i\}_{i=0}^{n'}} \sum_{\{s_{2i+2}\}_{i=0}^{n^{\prime}}} e^{\sum_{i=0}^{n^{\prime}} B(s_i^{\prime}, s_{2i+2}) + B(s_{2i+2}, s_{i+1}^{\prime})} = \sum_{\{s^{\prime}_i\}_{i=0}^{n'}} e^{-\beta H^{\prime}[\{s_i^{\prime}\}]},
     \end{aligned}
 \]
 where we have defined \(H^{\prime}\) as a new Hamiltonian that depends on the new degrees of freedom; now we can further simplify the expression as follows:
 \[
     \begin{aligned}
-        e^{-\beta H^{\prime}[\{s_i^{\prime}\}]} & = \sum_{\{s_{2i+2}\}_{i=1}^{N/2}} e^{\sum_i^{N/2} B(s_i^{\prime}, s_{2i+2}) + B(s_{2i+2}, s_{i+1}^{\prime})}             \\
-                                                & = \prod_{i=1}^{N/2} \left[ \sum_{s_{2i+2} = \pm 1} e^{B(s_i^{\prime}, s_{2i+2}) + B(s_{2i+2}, s_{i+1}^{\prime})} \right] \\
-                                                & = e^{\sum_{i=1}^{N/2} B^{\prime} (s_i^{\prime}, s_{i+1}^{\prime})},
+        e^{-\beta H^{\prime}[\{s_i^{\prime}\}]} & = \sum_{\{s_{2i+2}\}_{i=0}^{n^{\prime}}} e^{\sum_{i=0}^{n^{\prime}} B(s_i^{\prime}, s_{2i+2}) + B(s_{2i+2}, s_{i+1}^{\prime})}  \\
+                                                & = \prod_{i=0}^{n^{\prime}} \left[ \sum_{s_{2i+2} = \pm 1} e^{B(s_i^{\prime}, s_{2i+2}) + B(s_{2i+2}, s_{i+1}^{\prime})} \right] \\
+                                                & = e^{\sum_{i=0}^{n^{\prime}} B^{\prime} (s_i^{\prime}, s_{i+1}^{\prime})},
     \end{aligned}
 \]
 where we have defined the new \(B^{\prime}\) as the function satisfying the following identity:
@@ -214,7 +214,7 @@ where \(\delta g\), \(\delta h\) and \(k^{\prime} (k, h)\) are implicitly define
 \begin{remark}
     When we write the Hamiltonian, if we assume directly that \(N \to \infty\), the system has an infinite number of degrees of freedom, and the RG transformation is from an infinite-dimensional space to itself, which is not very useful. Instead, we can consider a finite system with \(N\) sites, and then take the limit \(N \to \infty\) at the end of the calculation.
 
-    We are speaking about a space of parameters, not a space of configurations, so the RG transformation is from a finite-dimensional space to itself, which is more manageable. \TODO{check if this is correct}
+    We are speaking about a space of parameters, not a space of configurations, so the RG transformation is from a finite-dimensional space to itself, which is more manageable.
 \end{remark}
 
 Notice how during the RG transformation, lenghts in the system are actually rescaled: in the original microscopic description, the distance between two neighboring spins is one, while in the new description, the distance between two neighboring can be two (as an example, \(s_1\) and \(s_3\) are not neighbors, but the new spins \(s_0^{\prime}\) and \(s_2^{\prime}\), defined by the previous ones, are neighbors). Thus, spins which where separated by a distance \(R\) in the original lattice are now effevtively separated by a distance \(R/2\) in the new lattice, and thus the RG transformation is also a \textbf{length rescaling} transformation.
@@ -260,7 +260,7 @@ The first one is unstable, while the second one is stable:
           which means that the flow is pushing towards \(k = 0\): the system is driven towards the infinite temperature limit, where it is disordered. This is also called \textbf{sink} or \textbf{attractor}.
     \item At \(k = \infty\), we have \(\beta \to \infty\), and thus a zero temperature \(T \to 0\): it is an \textbf{unstable} fixed point. If we perturb it slightly, for a large \(k\), we have
           \[
-              k^{\prime} = \frac{1}{2} \ln \left(\cosh(2k)\right) \approx \frac{1}{2} \ln \left(\frac{2^{2k}}{2}\right) = k - \ln 2 < k,
+              k^{\prime} = \frac{1}{2} \ln \left(\cosh(2k)\right) \approx \frac{1}{2} \ln \left(\frac{e^{2k}}{2}\right) = k - \ln 2 < k,
           \]
           which means that the flow is pushing towards \(k = 0\) and an infinite temperature: indeed, a perturbation to the large coupling constant \(k\) will make it smaller, effectively driving away the system from the zero temperature limit, where it is ordered.
 \end{itemize}
@@ -375,7 +375,7 @@ which after \(\ell\) RG iterations becomes
 \]
 Now if we chose \(\ell\) such that
 \[
-    2^{\ell/2}e^{-k} = 1 \quad \implies \quad \ell = 2k,
+    2^{\ell/2}e^{-k} = 1 \quad \implies \quad 2^\ell = e^{2k},
 \]
 since we are interested in the behavior near \(k \to \infty\) (or \(T \to 0\)) and we want to keep the first argument of the correlation length fixed, we obtain the \textbf{scaling form} of the correlation length:
 \[

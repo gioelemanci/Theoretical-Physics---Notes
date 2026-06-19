@@ -10,9 +10,9 @@ where \(m(\mathbf{x})\) is the order parameter field, and \(F[m(\mathbf{x})]\) i
 
 Each RG transformation is composed the following three steps:
 \begin{enumerate}
-    \item \textbf{Coarse-Grain}: we ``decrease the resolution'' of each configuration, changing the description of the system defining a new order parameter field \(m^{\prime}(\mathbf{x}^{\prime})\) as the average of the original order parameter field \(m(\mathbf{x})\) over mesoscopic regions of some lenght scale \(b\):
+    \item \textbf{Coarse-Grain}: we ``decrease the resolution'' of each configuration, changing the description of the system defining a new order parameter field \(m^{\prime}(\mathbf{x})\) as the average of the original order parameter field \(m(\mathbf{x})\) over mesoscopic regions of some lenght scale \(b\):
           \[
-              m^{\prime}(\mathbf{x}) = \frac{1}{b^d} \int_{\mathcal{C}_b(\mathbf{x})} m(\mathbf{x}^{\prime}) \mathrm{d} \mathbf{x}^{\prime},
+              m^{\prime}(\mathbf{x}) = \frac{1}{b^d} \int_{\mathcal{C}_b(\mathbf{x})} m(\mathbf{x}^{\prime}) \mathrm{d}^d \mathbf{x}^{\prime},
           \]
           where the integral is performed over a cell \(\mathcal{C}\) of size \(b\) centered around \(\mathbf{x}\).
     \item \textbf{Rescale}: this step consists in rescaling all the lenghts by a factor \(b\) in order to preserve the original domain of the system, which is equivalent to a variable change
@@ -33,7 +33,7 @@ Over all, these three steps are equivalent to the following variable change:
 \]
 where \(\mathcal{C}\) is the cell, now centered around \(b \mathbf{x}^*\) (which is the original position of \(\mathbf{x}\) before the rescaling). This can be read as a mapping from one set of rendom variables (\(m(\mathbf{x})\)) to another set of random variables (\(m^{*}(\mathbf{x}^*)\)), which is a change of variables in the partition function, and thus it does not change its value. Indeed, we can re-express the partition function as a weighted sum over the new field variables \(m^{*}(\mathbf{x}^*)\):
 \[
-    \mathcal{Z} = \int \mathcal{D} m^{*} e^{-F^*[m^{*}(\mathbf{x}^*)]},
+    \mathcal{Z} = \int \mathcal{D} m^{*}(\mathbf{x}^*) e^{-F^*[m^{*}(\mathbf{x}^*)]},
 \]
 where the functional form of the free energy is preserved, but the parameters are changed. The RG transformation is thus a mapping in the space of parameters, which allows us to understand how the system behaves at different scales.
 
@@ -43,7 +43,7 @@ Let us assume than that close to the critical temperature \(T_c\) we can neglect
 \[
     F[m(\mathbf{x})] = F[m(\mathbf{x}); t, h].
 \]
-Saying that the configurations of the renormalized field \(m^*(\mathbf{x}^*)\) have the same weights as the original field \(m(\mathbf{x})\) means that the free energy functional form \(F[m(\mathbf{x})]\) has to be preserved under the RG transformation \(F^*[m^*(\mathbf{x}^*)]\), but the parameters \(t\) and \(h\) will change to new values \(t^*\) and \(h^*\).
+Saying that the configurations of the renormalized field \(m^*(\mathbf{x}^*)\) have the same weights as the original field \(m(\mathbf{x})\) means that the free energy functional form \(F[m(\mathbf{x})]\) has to be preserved under the RG transformation \(F^*[m^*(\mathbf{x}^*)]\); the parameters \(t\) and \(h\) will change to new values \(t^*\) and \(h^*\).
 
 As we coarse-grain and rescale the system, the RG step moves us a bit further away from criticality, since the correlation length gets divided by \(b\), meaning that consequently the parameters \(t\) and \(h\) have increased, and thus we are looking at a less critical system.
 
@@ -105,8 +105,8 @@ Since after an RG step the correlation length gets divided by \(b\), it seems th
 Thus the parameters \(t\) and \(h\) transforms under the flow equations near criticality as
 \[
     \begin{dcases}
-        t^{\prime} = t^* = b^{y_t} t, \\
-        h^{\prime} = h^* = b^{y_h} h,
+        t^* = b^{y_t} t, \\
+        h^* = b^{y_h} h,
     \end{dcases}
 \]
 which means that the flow is pushing the system away from the critical point, which is thus an unstable fixed point.
@@ -177,6 +177,18 @@ Now we can identify the critical exponent \(\nu\) that describes the divergence 
 \]
 since at \(h=0\) we can treat \(\Gamma(1,0)\) as a constant, and thus the correlation length behaves as \(\xi \sim t^{-1/y_t} = t^{-\nu}\) near the critical point. This is the scaling relation for the correlation length, which we now derived from the RG framework, and it is consistent with the scaling relation obtained from the scaling hypothesis.
 
+Furthermore, if we combine with the previous result for the free energy, we can derive the hyperscaling relation:
+\[
+    2 - \alpha = \frac{d}{y_t} = d \nu,
+\]
+which is the same result that we obtained from the hyperscaling hypothesis, relating critical exponents and the spatial dimension of the system. This relation is valid for systems below the upper critical dimension, where the mean-field theory breaks down and fluctuations become important.
+
+One could also proceed similarly with the magnetization to obtain in the end
+\[
+    \beta = \frac{y_h - d}{y_t},
+\]
+and so on for all the other critical exponents, which can be expressed in terms of the anomalous dimensions \(y_t\) and \(y_h\) that we obtained from the RG flow equations. This shows that the RG framework is able to explain the scaling and hyperscaling hypothesis and the emergence of the critical exponents, which are related to the uniquely determined \(y_t\) and \(y_h\) that we obtained from the RG flow equations.
+
 The fact that the functional form of the correlation length is preserved under the RG transformation does not mean that this procedure is valid only for simple cases, but we assumed it for simplicity in the derivation of the scaling relations; we will see the general implications.
 
 In summary, even taking a simplicistic approach, the RG framework is able to explain the scaling hypothesis and the emergence of the critical exponents, which are related to the uniquely determined \(y_t\) and \(y_h\) that we obtained from the RG flow equations: these coefficients are of paramount importance, since they determine how \(t\) and \(h\) scale under RG near the critical point and all the critical exponents can be expressed in terms of them.
@@ -188,8 +200,8 @@ Our goal is now to rephrase the previous discussion in a more formal way and est
 In order to make the discussion as general as possible, we have to take into account all the parameters that can appear in the LG free energy; thus we consider the full expansion of the LG free energy (which we derived) as a functional of the order parameter \(m(\mathbf{x})\) and the set of all its parameters \(\mathbf{s} = (t, u, v_1, v_2, \dots, k, L, h, \dots)\):
 \[
     \begin{aligned}
-        F[m] & = \int \mathrm{d}^d \mathbf{x} \left[ \frac{t}{2} m^2 + u m^4 + v_1 m^6 + v_2 m^8 \right.                          \\
-             & \left. + \cdots + \frac{k}{2} (\nabla m)^2 + \frac{L}{2} (\nabla m)^2 + \cdots + hm + h m^{5 / 7}+ \cdots \right],
+        F[m] & = \int \mathrm{d}^d \mathbf{x} \left[ \frac{t}{2} m^2 + u m^4 + v_1 m^6 + v_2 m^8 \right.               \\
+             & \left. + \cdots + \frac{k}{2} (\nabla m)^2 + \frac{L}{2} (\nabla^2 m)^2 + \cdots + hm + \cdots \right],
     \end{aligned}
 \]
 where this functional form is the most general one that we can write, and the RG transformation will give us the flow equations for all the parameters \(t\), \(u\), \(v_1\), \(v_2\), \(\dots\), \(k\), \(L\) and \(h\).
@@ -198,13 +210,13 @@ A given system is fully characterized by a point \(\mathbf{s}\) in the infinite-
 
 When we apply an RG iteration through coarse-graining, we are basically performing a change of variables of the form
 \[
-    m^{*}(\mathbf{x}^{*}) = \frac{1}{\zeta b^d} \int_{\mathcal{C}} \mathrm{d}^d m(\mathbf{x}^{\prime}),
+    m^{*}(\mathbf{x}^{*}) = \frac{1}{\zeta b^d} \int_{\mathcal{C}} \mathrm{d}^d \mathbf{x}^{\prime} \, m(\mathbf{x}^{\prime}),
 \]
 which does not change the value of the free energy. Indeed this new field will be iself desciribed by a free energy functional of the same form as the original one, but with different parameters:
 \[
     \begin{aligned}
-        F[m] & = \int \mathrm{d}^d \mathbf{x} \left[ \frac{t^*}{2} m^2 + u^* m^4 + v^*_{1} m^6 + v^*_{2} m^8 \right.                       \\
-             & \left. + \cdots + \frac{k^*}{2} (\nabla m)^2 + \frac{L^*}{2} (\nabla m)^2 + \cdots + h^* m + h^* m^{5 / 7}+ \cdots \right],
+        F[m] & = \int \mathrm{d}^d \mathbf{x} \left[ \frac{t^*}{2} m^2 + u^* m^4 + v^*_{1} m^6 + v^*_{2} m^8 \right.          \\
+             & \left. + \cdots + \frac{k^*}{2} (\nabla m)^2 + \frac{L^*}{2} (\nabla^2 m)^2 + \cdots + h^* m + \cdots \right],
     \end{aligned}
 \]
 which is certainly true, since we also chose the most general functional form for the free energy, including all the possible terms that we can write, and thus it is closed under the RG transformation. Thus the functional form do not change after a parameter change
@@ -236,7 +248,10 @@ We can then linearize by Taylor expanding its image under the RG transformation 
 \[
     \mathbf{s}^* = \mathcal{R}_b[\mathbf{s}] = \mathcal{R}_b[\overline{\mathbf{s}}] + \mathcal{R}_b^L \delta \mathbf{s} + \mathcal{O} (\vert \delta \mathbf{s} \vert^2 ),
 \]
-where we have denoted the Jacobian matrix of the map \(\mathcal{R}_b\) at the fixed point as \( \mathcal{R}_b^L = \left. \frac{\partial \mathcal{R}_b}{\partial \mathbf{s}} \right|_{\overline{\mathbf{s}}}\).
+where we have denoted the Jacobian matrix of the map \(\mathcal{R}_b\) at the fixed point as
+\[
+    \mathcal{R}_b^L = \left. \frac{\partial \mathcal{R}_b}{\partial \mathbf{s}} \right|_{\overline{\mathbf{s}}}, \quad (\mathcal{R}_b^L)_{\alpha \beta} = \left. \frac{\partial \mathbf{s}^{\prime}_{\alpha}}{\partial \mathbf{s}_{\beta}} \right|_{\overline{\mathbf{s}}}.
+\]
 
 If we now ignore the mathematical subtleties of working with an infinite-dimensional matrix as \(\mathcal{R}_b^L\), we can treat it as a linear operator, and thus try to diagonalize it. With this in mind, we start by noting that by our choice of RG procedure, the composition of two RG steps with parameters \(b\) and \(b^{\prime}\) is equivalent to a single RG step with parameter \(bb^{\prime}\):
 \[
@@ -269,7 +284,7 @@ which let us understand:
         y_i \text{ are called \textbf{anomalous dimensions}.}
     \end{dcases}
 \]
-Since the eigenvectors \(O_i\) form a complete basis, we can write any Hamiltonian in the vicinity of \(\overline{\mathbf{s}}\) as
+Since the eigenvectors \(O_i\) form a complete basis, any Hamiltonian in the vicinity of the critical point \(\overline{\mathbf{s}}\) corresponds to a point in the action space that can be expressed as a linear combination of the eigenvectors \(O_i\):
 \[
     \mathbf{s} = \overline{\mathbf{s}} + \sum_{i} g_i O_i,
 \]

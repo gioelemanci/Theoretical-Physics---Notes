@@ -16,31 +16,39 @@ The hamiltonian of the 1D Ising model is given by
 \]
 where we have periodic boundary conditions \(s_{N+1} = s_1\). The partition function depends upon the temperature \(T\), the external magnetic field \(h\) and the number of spins \(N\), and it can be written as
 \[
-    Z_N(\beta, h) = \sum_{\{s_i\}} e^{-\beta H(\{s_i\})}.
+    \mathcal{Z}_N(\beta, h) = \sum_{\{s_i\}} e^{-\beta H(\{s_i\})}.
 \]
 It is important since we can derive an expression for the ensemble average of the magnetization per site as a function of the partition function:
 \[
-    \left\langle \frac{1}{N} \sum_{i=1}^{N} s_i \right\rangle_c = - \frac{1}{N\beta} \frac{\partial \log Z_N}{\partial h}.
+    \left\langle \frac{1}{N} \sum_{i=1}^{N} s_i \right\rangle_c = \frac{1}{N\beta} \frac{\partial}{\partial h} (-\log \mathcal{Z}_N).
 \]
-If we manipulate the expression of the hamiltonian, to express two symmetric sums, we get
+For a small value of \(N\) one can compute the partition function ``manually'' by counting the configurations. For larger values it becomes of paramount importance an alternative way to solve the problem. We start by manipulating the expression of the hamiltonian, expressing it as two symmetric sums, which lead us to
 \[
-    H = -J \sum_{i=1}^{N} s_i s_{i+1} - \frac{h}{2} \sum_{i=1}^{N} s_i s_{i+1}
+    H = -J \sum_{i=1}^{N} s_i s_{i+1} - \frac{h}{2} \sum_{i=1}^{N} (s_i + s_{i+1}),
 \]
+where we have used the periodic boundary conditions to rewrite the second sum in a symmetric way. This manipulation allows us to express the partition function as a product of terms that depend on pairs of neighboring spins:
 \[
-    Z = \sum_{\{s_i\}} \prod_{i=1}^{N} (e^{\beta J s_i s_{i+1} + \frac{\beta h}{2} s_i s_{i+1}})\dots
+    \begin{aligned}
+        \mathcal{Z} & = \sum_{\{s_i\}} \prod_{i=1}^{N} e^{\beta J s_i s_{i+1} + \frac{\beta h}{2} (s_i + s_{i+1})}                                                   \\
+                    & = \sum_{s_1 = \pm 1} \sum_{s_2 = \pm 1} \cdots \sum_{s_N = \pm 1} \prod_{i=1}^{N} e^{\beta J s_i s_{i+1} + \frac{\beta h}{2} (s_i + s_{i+1})}.
+    \end{aligned}
 \]
-
-Now we can introduce the \textbf{transfer matrix} \(T\), which is a \(2 \times 2\) matrix that encodes the interactions between neighboring spins and the effect of the external magnetic field. The transfer matrix is defined as
+Now we are going to introduce the \textbf{transfer matrix} \(T\), which is a \(2 \times 2\) matrix that encodes the interactions between neighboring spins and the effect of the external magnetic field. The transfer matrix is defined as
 \[
     T_{s_i, s_{i+1}} = e^{\beta J s_i s_{i+1} + \frac{\beta h}{2} (s_i + s_{i+1})},
 \]
 where \(s_i\) and \(s_{i+1}\) can take values of \(\pm 1\). The partition function can then be expressed as a product of transfer matrices:
 \[
-    Z = \sum_{\{s_i\}} T_{s_1, s_2} T_{s_2, s_3} \cdots T_{s_N, s_1} = \text{Tr}(T^N),
+    \begin{aligned}
+        \mathcal{Z} & = \sum_{\{s_i\}} T_{s_1, s_2} T_{s_2, s_3} \cdots T_{s_N, s_1}                                                                    \\
+                    & = \sum_{s_1 = \pm 1} \sum_{s_2 = \pm 1} \cdots \sum_{s_N = \pm 1} T_{s_1, s_2} T_{s_2, s_3} \cdots T_{s_N, s_1} = \text{Tr}(T^N),
+    \end{aligned}
 \]
-where the trace is taken over the possible spin states. The transfer matrix method allows us to compute the partition function and other thermodynamic quantities by diagonalizing the transfer matrix and finding its eigenvalues. The largest eigenvalue of the transfer matrix dominates the behavior of the partition function in the thermodynamic limit, and it can be used to derive expressions for the free energy, magnetization, and other physical quantities of interest. This method is particularly powerful for solving one-dimensional models like the 1D Ising model, where it provides an exact solution for the partition function and allows us to analyze the behavior of the system at different temperatures and external fields.
+where the trace is taken over the possible spin states.
 
 \subsubsection{Transfer Matrix}
+
+The transfer matrix method allows us to compute the partition function and other thermodynamic quantities by diagonalizing the transfer matrix and finding its eigenvalues. The largest eigenvalue of the transfer matrix dominates the behavior of the partition function in the thermodynamic limit, and it can be used to derive expressions for the free energy, magnetization, and other physical quantities of interest. This method is particularly powerful for solving one-dimensional models like the 1D Ising model, where it provides an exact solution for the partition function and allows us to analyze the behavior of the system at different temperatures and external fields.
 
 Expressing the partition function in terms of the transfer matrix, we can notice how the computational complexity of the problem is reduced from summing over \(2^N\) configurations to diagonalizing a \(2 \times 2\) matrix multiplied \(N\) times with itself, which is a much more tractable problem. The eigenvalues of the transfer matrix can be computed explicitly, and they determine the thermodynamic properties of the system. We can write the transfer matrix explicitly as
 \[
@@ -60,9 +68,9 @@ and we can compute the the \(N\)th power of the transfer matrix as
 \[
     T^N = (ODO^T)^N = (ODO^T)(ODO^T)\cdots(ODO^T) = O D^N O^T,
 \]
-where we have used the fact that \(O^T O = I\) to simplify the expression. The partition function can then be expressed as
+where we have used the fact that \(O^T O = \mathbb{I}\) to simplify the expression. The partition function can then be expressed as
 \[
-    Z = \text{Tr}(T^N) = \text{Tr}(O D^N O^T) = \text{Tr}(D^N) = \lambda_+^N + \lambda_-^N,
+    \mathcal{Z} = \text{Tr}(T^N) = \text{Tr}(O D^N O^T) = \text{Tr}(D^N) = \lambda_+^N + \lambda_-^N,
 \]
 where \(\lambda_+\) and \(\lambda_-\) are the eigenvalues of the transfer matrix \(T\) and we have used the cyclic property of the trace.
 
@@ -72,7 +80,7 @@ Now we can also compute the determinant of the transfer matrix, which is given b
 \]
 while for the trace we had
 \[
-    \text{Tr}(T) = \lambda_+ + \lambda_- = e^{\beta J + \beta h} + e^{\beta J - \beta h} + 2 e^{-\beta J} = 2 e^{\beta J} \cosh(\beta h) + 2 e^{-\beta J}.
+    \text{Tr}(T) = \lambda_+ + \lambda_- = e^{\beta J + \beta h} + e^{\beta J - \beta h} = 2 e^{\beta J} \cosh(\beta h).
 \]
 The eigenvalues of the transfer matrix can be computed using the characteristic polynomial, which is given by
 \[
@@ -80,7 +88,7 @@ The eigenvalues of the transfer matrix can be computed using the characteristic 
 \]
 which, inserting the expressions for the trace and determinant, can be rewritten as
 \[
-    \dots
+    x^2 - 2 e^{\beta J} \cosh(\beta h) x + 2 \sinh(2\beta J) = 0,
 \]
 and in the end we get the eigenvalues as
 \[
@@ -90,36 +98,40 @@ which gives
 \[
     \vert \frac{\lambda_-}{\lambda_+} \vert <1 , \quad \vert \frac{\lambda_-}{\lambda_+} \vert^N \ll 1.
 \]
-thus we can write the partition function in the thermodynamic limit as
+We can thus write the partition function in the thermodynamic limit as
 \[
-    Z = \lambda_+^N + \lambda_-^N = \lambda_+^N \left(1 + \left(\frac{\lambda_-}{\lambda_+}\right)^N\right) \approx \lambda_+^N,
+    \mathcal{Z} = \lambda_+^N + \lambda_-^N = \lambda_+^N \left(1 + \left(\frac{\lambda_-}{\lambda_+}\right)^N\right) \approx \lambda_+^N,
 \]
 which allows us to compute the free energy per site as
 \[
-    f = -\frac{1}{\beta} \lim_{N \to \infty} \frac{1}{N} \log Z,
+    f = -\frac{1}{\beta} \lim_{N \to \infty} \frac{1}{N} \log \mathcal{Z},
 \]
 where \(f = \lim_{N \to \infty} \frac{F}{N}\); thus we have
 \[
-    f = -\frac{1}{\beta} \log \lambda_+ = -J - \frac{1}{\beta} \log\left( \cosh(\beta h) + \sqrt{\sinh^2(\beta h) + e^{-4\beta J}} \right).
+    f = -\frac{1}{\beta} \log \lambda_+ = -J - \frac{1}{\beta} \log\left( \cosh(\beta h) + \sqrt{\sinh^2(\beta h) + e^{-4\beta J}} \right),
 \]
-from this we can understand that there are no singularities in the free energy as a function of temperature \(T\) and external field \(h\), which indicates that there is no phase transition in the 1D Ising model at finite temperature. This is consistent with the known result that the 1D Ising model does not exhibit a phase transition at finite temperature, and it highlights the importance of dimensionality and fluctuations in determining the behavior of the system near critical points.
+from which we can understand that there are no singularities in the free energy as a function of temperature \(T\) and external field \(h\), which indicates that there is no phase transition in the 1D Ising model at finite temperature. This is consistent with the known result that the 1D Ising model does not exhibit a phase transition at finite temperature, and it highlights the importance of dimensionality and fluctuations in determining the behavior of the system near critical points.
 
 \subsection{Magnetization}
 
 Let us now compute the magnetization per site as a function of temperature \(T\) and external field \(h\). We can use the expression for the partition function to compute the magnetization as
 \[
-    \left\langle s_i \right\rangle_c = m = -\frac{1}{N} \frac{\partial}{\partial h} \log Z = -\frac{1}{\beta} \frac{\partial}{\partial h} (\frac{F}{N}).
+    \left\langle \frac{1}{N} \sum_{i} s_i \right\rangle_c = m = -\frac{1}{\beta N} \frac{\partial}{\partial h} \log \mathcal{Z} = - \frac{\partial}{\partial h} \left(\frac{F}{N}\right).
 \]
 Inserting the expression for the free energy per site, we get
 \[
-    m = \frac{\sinh(\beta h)}{\sqrt{\sinh^2(\beta h) + e^{-4\beta J}}}.
+    m = \frac{\sinh(\beta h) + \frac{\cosh(\beta h) \sinh(\beta h)}{\sqrt{\sinh^2(\beta h) + e^{-4\beta J}} }}{\cosh(\beta h) + \sqrt{\sinh^2(\beta h) + e^{-4\beta J}} } = \frac{\sinh(\beta h)}{\sqrt{\sinh^2(\beta h) + e^{-4\beta J}}}.
 \]
 This expression shows that the magnetization \(m\) is a smooth function of temperature \(T\) and external field \(h\), and it does not exhibit any singularities or discontinuities, which is consistent with the absence of a phase transition in the 1D Ising model at finite temperature.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\textwidth]{img/ising_1d_m-h_plot.png}
-    \caption{Magnetization per site \(m\) as a function of the external field \(h\) at different values of temperature \(T\).}
+    \begin{minipage}{0.6\textwidth}
+        \includegraphics[width=0.9\textwidth]{img/ising_1d_m-h_plot.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.35\textwidth}
+        \caption{Magnetization per site \(m\) as a function of the external field \(h\) at different values of temperature \(T\).}
+    \end{minipage}
 \end{figure}
 
 As \(T\) increases, the curve becomes more steep, but it never exihibit a discontinuity or a singularity, which confirms that there is no phase transition in the 1D Ising model at finite temperature. Only in the limit \(T \to 0\) we have a discontinuity in the magnetization at \(h = 0\), where the system transitions from a fully magnetized state with \(m = +1\) for \(h > 0\) to a fully magnetized state with \(m = -1\) for \(h < 0\):
@@ -136,7 +148,7 @@ As \(T\) increases, the curve becomes more steep, but it never exihibit a discon
     \begin{minipage}{0.55\textwidth}
         We could repeat the computation for \(\chi\) the \textbf{magnetic susceptibility}, which is given by
         \[
-            \chi = \frac{\partial}{\partial h} m(T,h) = \dots
+            \chi = \frac{\partial}{\partial h} m(T,h) \bigg\vert_{h=0},
         \]
         and it can be shown that \(\chi\) does not diverge at any finite temperature, which is consistent with the absence of a phase transition in the 1D Ising model at finite temperature. Only in the limit \(T \to 0\) we have a divergence in the magnetic susceptibility at \(h = 0\), which indicates a critical point at zero temperature.
     \end{minipage}
@@ -150,72 +162,112 @@ The exact solution of the 1D Ising model using the transfer matrix method allows
 
 It is now time to compute the two-point correlation function for the 1D Ising model: the correlation function is defined as
 \[
-    \left\langle s_i s_{i+r} \right\rangle = \frac{1}{Z} \sum_{\{s_k\}} s_i s_{i+r} e^{-\beta H(\{s_k\})},
+    \left\langle s_i s_{i+r} \right\rangle = \frac{1}{\mathcal{Z}} \sum_{\{s_k\}} s_i s_{i+r} e^{-\beta H(\{s_k\})},
 \]
 which can become a connected correlation function if we subtract the product of the magnetizations:
 \[
-    \left\langle s_i s_{i+r} \right\rangle - \left\langle s_i \right\rangle \left\langle s_{i+r} \right\rangle = \frac{1}{Z} \sum_{\{s_k\}} s_i s_{i+r} e^{-\beta H(\{s_k\})} - m^2.
+    \left\langle s_i s_{i+r} \right\rangle - \left\langle s_i \right\rangle \left\langle s_{i+r} \right\rangle = \frac{1}{\mathcal{Z}} \sum_{\{s_k\}} s_i s_{i+r} e^{-\beta H(\{s_k\})} - m^2.
 \]
 To compute the correlation function, we can use the transfer matrix method again. We can express the correlation function in terms of the transfer matrix as follows:
 \[
-    \left\langle s_i s_{i+r} \right\rangle = \frac{1}{Z} \sum_{\alpha_1=1}^2 \sum_{\alpha_2=1}^2 \dots \sum_{\alpha_N=1}^2 \sigma_{\alpha_j} \sigma_{\alpha_{j+r}} T_{\alpha_1, \alpha_2} T_{\alpha_2, \alpha_3} \cdots T_{\alpha_N, \alpha_1},
+    \left\langle s_i s_{i+r} \right\rangle = \frac{1}{\mathcal{Z}} \sum_{\alpha_1=1}^2 \sum_{\alpha_2=1}^2 \dots \sum_{\alpha_N=1}^2 \sigma_{\alpha_j} \sigma_{\alpha_{j+r}} T_{\alpha_1, \alpha_2} T_{\alpha_2, \alpha_3} \cdots T_{\alpha_N, \alpha_1},
 \]
 where \(\sigma_{\alpha_j}\) is the spin value corresponding to the state \(\alpha_j\) (i.e., \(\sigma_1 = +1\) and \(\sigma_2 = -1\)). We can rewrite this expression in a more compact form using matrix notation. Let us define a diagonal matrix \(D\) such that
 \[
     D = \begin{pmatrix}
         1 & 0  \\
         0 & -1
-    \end{pmatrix}, \text{ and } D_{\alpha,\beta} = \delta_{\alpha,\beta} \cdot \sigma_{\alpha},
+    \end{pmatrix} \quad \text{and} \quad D_{\alpha,\beta} = \delta_{\alpha,\beta} \cdot \sigma_{\alpha},
 \]
 meaning that \(D\) is a diagonal matrix with entries corresponding to the spin values. Then we can express the correlation function as
 \[
-    \left\langle s_j s_{j+r} \right\rangle = \frac{1}{Z} \sum_{\alpha_1=1}^2 \sum_{\alpha_2=1}^2 \dots \sum_{\alpha_N=1}^2 T_{\alpha_1, \alpha_2} T_{\alpha_2, \alpha_3} \cdots T_{\alpha_{j-1}, \alpha_j} D_{\alpha_j, \beta_1} T_{\beta_1, \alpha_{j+1}} \cdots T_{\alpha_{j+r-1}, \alpha_{j+r}} D_{\alpha_{j+r}, \beta_2} T_{\beta_2, \alpha_{j+r+1}} \cdots T_{\alpha_N, \alpha_1},
+    \begin{aligned}
+        \left\langle s_j s_{j+r} \right\rangle & = \frac{1}{\mathcal{Z}} \sum_{\alpha_1=1}^2 \sum_{\alpha_2=1}^2 \dots \sum_{\alpha_N=1}^2 T_{\alpha_1, \alpha_2} T_{\alpha_2, \alpha_3} \cdots T_{\alpha_{j-1}, \alpha_j} D_{\alpha_j, \beta_1} T_{\beta_1, \alpha_{j+1}} \cdots \\
+                                               & \cdots T_{\alpha_{j+r-1}, \alpha_{j+r}} D_{\alpha_{j+r}, \beta_2} T_{\beta_2, \alpha_{j+r+1}} \cdots T_{\alpha_N, \alpha_1},
+    \end{aligned}
 \]
 where we have inserted the diagonal matrices \(D\) at the positions corresponding to the spins \(s_j\) and \(s_{j+r}\). This expression can be further simplified by recognizing that the sums over the indices \(\alpha_k\) correspond to matrix multiplications, and we can express
 \[
-    \left\langle s_j s_{j+r} \right\rangle = \frac{1}{Z} \text{Tr}(T^{j-1} D T^{r} D T^{N-r+1-j}),
+    \left\langle s_j s_{j+r} \right\rangle = \frac{1}{\mathcal{Z}} \text{Tr}(T^{j-1} D T^{r} D T^{N-r+1-j}),
 \]
-where we have used the cyclic property of the trace to rearrange the order of the matrices. This expression allows us to compute the two-point correlation function in terms of the transfer matrix and the diagonal matrix \(D\), which encodes the spin values. By diagonalizing the transfer matrix with a unitary matrix \(U\):
+where we have counted the number of terms multiplied. This expression allows us to compute the two-point correlation function in terms of the transfer matrix and the diagonal matrix \(D\), which encodes the spin values. By diagonalizing the transfer matrix with a unitary matrix \(U\):
 \[
     T = U \begin{pmatrix}
         \lambda_+ & 0         \\
         0         & \lambda_-
     \end{pmatrix} U^{\dagger},
 \]
-where \(U\) can be computed explicitly, we can express the correlation function in terms of the eigenvalues and eigenvectors of the transfer matrix, which allows us to analyze its behavior as a function of the distance \(r\) and the temperature \(T\). Let us focus on the case without external field: the unitary transformation becomes
+where \(U\) can be computed explicitly, we can express the correlation function in terms of the eigenvalues and eigenvectors of the transfer matrix, which allows us to analyze its behavior as a function of the distance \(r\) and the temperature \(T\). Let us focus on the case without external field: the unitary transformation simply becomes
 \[
-    \dots
+    U(h=0) = \frac{1}{\sqrt{2}} \begin{pmatrix}
+        1 & 1  \\
+        1 & -1
+    \end{pmatrix},
 \]
-and so we can write the transfer matrix in the diagonal basis as
+and so we can write the transfer matrix in the diagonal basis, and all the \(U\) matrices contribuiting can be used to develop the expression for the previous spin values matrix as
 \[
-    \dots
+    U^{\dagger}(h=0) D U(h=0) = \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{pmatrix}.
 \]
-Now putting everything together, we can express the correlation function as
+Now putting everything together and simplifying, we can express the correlation function at zero external field as
 \[
     \begin{aligned}
-        \dots
+        \left\langle s_j s_{j+r} \right\rangle_{h=0} & = \frac{1}{\mathcal{Z}} \text{Tr}(D T^{r} D T^{N-r})                                                                   \\
+                                                     & = \frac{1}{\mathcal{Z}} \text{Tr}\left(U^{\dagger} D U \begin{pmatrix}
+                                                                                                                  \lambda_+^r & 0           \\
+                                                                                                                  0           & \lambda_-^r
+                                                                                                              \end{pmatrix} U^{\dagger} D U \begin{pmatrix}
+                                                                                                                                                \lambda_+^{N-r} & 0               \\
+                                                                                                                                                0               & \lambda_-^{N-r}
+                                                                                                                                            \end{pmatrix}\right) \\
+                                                     & = \frac{1}{\mathcal{Z}} \text{Tr}\left(\begin{pmatrix}
+                                                                                                      0 & 1 \\
+                                                                                                      1 & 0
+                                                                                                  \end{pmatrix} \begin{pmatrix}
+                                                                                                                    \lambda_+^r & 0           \\
+                                                                                                                    0           & \lambda_-^r
+                                                                                                                \end{pmatrix} \begin{pmatrix}
+                                                                                                                                  0 & 1 \\
+                                                                                                                                  1 & 0
+                                                                                                                              \end{pmatrix} \begin{pmatrix}
+                                                                                                                                                \lambda_+^{N-r} & 0               \\
+                                                                                                                                                0               & \lambda_-^{N-r}
+                                                                                                                                            \end{pmatrix}\right),
     \end{aligned}
 \]
-In the end we find a close analytical form for the correlation function, which can be expressed as
+where in the first line we used the cyclicity of the trace, in the second line we used the fact that \(U^\dagger T^r U\) is diagonal with eigenvalues \(\lambda_+^r\) and \(\lambda_-^r\) and in the third line we used the fact that \(U^\dagger D U\) is the matrix with off-diagonal elements equal to 1.
+In the end, remembering that \(\mathcal{Z} = \lambda_+^N + \lambda_-^N\), we find a close analytical form for the correlation function, which can be expressed as
 \[
     \left\langle s_j s_{j+r} \right\rangle_{h=0} = \frac{\lambda_+^{N-r}\lambda_-^r + \lambda_-^{N-r}\lambda_+^r}{\lambda_+^N + \lambda_-^N},
 \]
-and again if we use tha fact that \(\vert \frac{\lambda_-}{\lambda_+} \vert < 1\), we can simplify this expression in the thermodynamic limit as
+and again if we use the fact that \(\vert \frac{\lambda_-}{\lambda_+} \vert < 1\), we can simplify this expression in the thermodynamic limit \(N \to \infty\) as
 \[
-    \left\langle s_j s_{j+r} \right\rangle_{h=0} =\dots \sim e^{-\tfrac{r}{\xi}},
+    \left\langle s_j s_{j+r} \right\rangle_{h=0} = \frac{\left(\frac{\lambda_-}{\lambda_+}\right)^r + \left(\frac{\lambda_-}{\lambda_+}\right)^{N}\left(\frac{\lambda_+}{\lambda_-}\right)^r}{1 + \left(\frac{\lambda_-}{\lambda_+}\right)^N} \simeq \left(\frac{\lambda_-}{\lambda_+}\right)^r,
+\]
+where now, if we exponentiate the expression, we can write the correlation function as
+\[
+    \left\langle s_j s_{j+r} \right\rangle_{h=0} = e^{- r \log \left(\frac{\lambda_+}{\lambda_-}\right)} = e^{-r/\xi},
 \]
 effectively defining the correlation length \(\xi\) as
 \[
     \xi^{-1} = \log(\frac{\lambda_+}{\lambda_-}) > 0,
 \]
 which is a measure of how far correlations between spins extend in the system.
-Now considering the absence of an external field, we can express the eigenvalues of the transfer matrix as
-...
 
-and in the end we get the correlation length in the \(T \to 0\) limit without external field as
+Since we are considering the absence of an external field, we can express the eigenvalues of the transfer matrix as
 \[
-    \xi \sim e^{2\beta J},
+    \xi^{-1} = \log \left( \frac{e^{\beta J}(1 + e^{-2\beta J})}{e^{\beta J}(1 - e^{-2\beta J})} \right) = \log \left( \frac{\cosh(\beta J)}{\sinh(\beta J)} \right)
 \]
-so that it diveres exponentially as \(T \to 0\), which indicates that the system exhibits long-range correlations at low temperatures, and it confirms the presence of a critical point at zero temperature in the 1D Ising model. This behavior of the correlation length is consistent with the absence of a phase transition at finite temperature, as the correlation length remains finite for all \(T > 0\) and only diverges as \(T \to 0\).
+and in the end we get the correlation length in the absence of an external field as
+\[
+    \xi = \frac{1}{\log \left( \coth(\beta J) \right)}.
+\]
+In the low temperature limit \(T \to 0\), the correlation length diverges exponentially as \(T \to 0\)
+\[
+    T \to 0 \quad \Rightarrow \quad \xi \sim e^{2\beta J} \sim e^{2J/T},
+\]
+which indicates that the system exhibits long-range correlations at low temperatures, and it confirms the presence of a critical point at zero temperature in the 1D Ising model. This behavior of the correlation length is consistent with the absence of a phase transition at finite temperature, as the correlation length remains finite for all \(T > 0\) and only diverges as \(T \to 0\).
 
-The correlation lenght correspond to the distance after which we can consider the spins as independent, since the correlation function decays exponentially with distance \(r\) as \(e^{-r/\xi}\). As the temperature approaches zero, the correlation length diverges, indicating that the spins become correlated over longer distances, which is a signature of critical behavior at zero temperature. This analysis of the two-point correlation function and the correlation length provides insights into the nature of correlations in the 1D Ising model and helps to understand the absence of a phase transition at finite temperature. But since this divergence occur at \(T=0\) then everything is in accord to the fact that there is no phase transition at finite temperature, and the critical point is located at zero temperature.
+The correlation length corresponds to the distance after which we can consider the spins as independent, since the correlation function decays exponentially with distance \(r\) as \(e^{-r/\xi}\). This analysis of the two-point correlation function and the correlation length provides insights into the nature of correlations in the 1D Ising model and helps to understand the absence of a phase transition at finite temperature. But since this divergence occurs at \(T=0\) then everything is in accord to the fact that there is no phase transition at finite temperature, and the critical point is located at zero temperature.

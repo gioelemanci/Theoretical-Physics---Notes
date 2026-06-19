@@ -43,17 +43,17 @@ Assuming analyticity of the fields for \(z\) near \(w\), we can express the righ
 \[
     J(z) = J(w) + (z-w)\partial_w J(w) + \frac{1}{2}(z-w)^2 \partial_w^2 J(w) + \dots
 \]
-Substituting these expansions into the reversed OPE, we get:
+Substituting these expansions into the reversed OPE, paying attention to the sign changes from the denominators, we get:
 \[
-    T(w)T(z) = \frac{c/2}{(z-w)^4} - \frac{J(w)}{(z-w)^3} + \frac{Q(w) + \partial_w J(w)}{(z-w)^2} - \frac{\partial_w Q(w) + \frac{1}{2}\partial_w^2 J(w) - R(w)}{z-w} + \text{regular terms}.
+    T(w)T(z) = \frac{c/2}{(z-w)^4} - \frac{J(w)}{(z-w)^3} + \frac{Q(w) + \partial_w J(w)}{(z-w)^2} + \frac{\partial_w Q(w) + \frac{1}{2}\partial_w^2 J(w) - R(w)}{z-w} + \text{regular terms}.
 \]
-By matching the singularities term by term with the original \(T(z)T(w)\) expansion, we find strict algebraic constraints on the unknown fields:
+By matching the singularities term by term with the original \(T(z)T(w)\) expansion (since the OPE is symmetric), we find strict algebraic constraints on the unknown fields:
 \[
     J(w) \equiv 0 \;, \quad R(w) = \frac{1}{2}\partial_w Q(w),
 \]
 which means that \(J(w)\) along with its derivatives must vanish, and \(R(w)\) is not an independent operator but is determined by \(Q(w)\).
 
-If we now make the highly reasonable physical hypothesis that \uline{\(T(z)\) is the \textit{only} conformal field of spin and dimension 2 in the algebra of local fields}, then \(Q(w)\) must be proportional to \(T(w)\) itself. Indeed, we know that \([Q(w)]=2\) and it must be holomorphic thus chiral:
+If we now make the highly reasonable physical hypothesis that \uline{\(T(z)\) is the \textit{only} conformal field of spin and dimension 2 in the algebra of local fields},\footnote{This is a very reasonable assumption, since if another conformal field \(Q(z)\) had \(h=2\) such that its 2-point correlation function enforced \(\langle Q(w)Q(z)\rangle = \frac{c^{\prime} / 2}{(z-w)^4}\) then we could add it to \(T\) to create from \(T+Q\) a larger algebra with central charge \(c + c'\).} then \(Q(w)\) must be proportional to \(T(w)\) itself. Indeed, we know that \(h_Q=2\) and it must be holomorphic thus chiral:
 \[
     \partial_{\bar{w}} Q(w) = 0, \quad \partial_w \bar{Q}(\bar{w}) = 0,
 \]
@@ -99,7 +99,7 @@ An entirely analogous \(\bar{T}\bar{T}\) OPE defines an anti-holomorphic central
 
 To understand how the energy-momentum tensor transforms, we first recall the Cauchy integral formula and its generalization for derivatives:
 \[
-    f(z) = \oint_z \frac{\mathrm{d} w}{2\pi i} \frac{f(w)}{w - z} \;, \quad \frac{d^n f(z)}{dz^n} = n! \oint_z \frac{\mathrm{d} w}{2\pi i} \frac{f(w)}{(w - z)^{n+1}},
+    f(z) = \oint_z \frac{\mathrm{d} w}{2\pi i} \frac{f(w)}{w - z} \;, \quad \frac{\mathrm{d}^n f(z)}{\mathrm{d}z^n} = n! \oint_z \frac{\mathrm{d} w}{2\pi i} \frac{f(w)}{(w - z)^{n+1}},
 \]
 where the contour integral is taken over a path in the complex \(w\)-plane encircling the point \(z\).
 
@@ -121,7 +121,7 @@ Using the Cauchy derivative formulas on the test function \(\epsilon(w)\), we ca
 \]
 This represents the infinitesimal conformal transformation of \(T(z)\). The first two terms perfectly match the expected transformation law for a primary field of conformal weight \(h = 2\). However, the third term is an inhomogeneous anomaly proportional to the central charge \(c\), explicitly demonstrating that the stress-energy tensor is only a quasi-primary field, not a primary one.
 
-By an exponentiation procedure, one can integrate this infinitesimal variation to obtain the exact finite transformation law under a macroscopic conformal map \(z \mapsto w(z)\):
+By an exponentiation procedure which we will not report here, one can integrate this infinitesimal variation to obtain the exact finite transformation law under a macroscopic conformal map \(z \mapsto w(z)\):
 \[
     T(z) = \left(\frac{\partial w}{\partial z}\right)^2 T(w) + \frac{c}{12} \{w, z\}_S,
 \]
@@ -130,7 +130,7 @@ where the symbol \(\{w, z\}_S\) denotes the \textbf{Schwarzian derivative}, defi
     \{w, z\}_S = \frac{\partial_z^3 w}{\partial_z w} - \frac{3}{2} \left( \frac{\partial_z^2 w}{\partial_z w} \right)^2.
 \]
 
-\begin{example}[Infinitesimal Limit of the Schwarzian Transformation]\TODO{check everything.}
+\begin{example}[Infinitesimal Limit of the Schwarzian Transformation]
     We want to expand the finite transformation law for a small coordinate change \(w = z + \epsilon(z)\) to reproduce the infinitesimal variation \(\delta_\epsilon T(z)\).
 
     First, we compute the derivatives of \(w\) with respect to \(z\):
@@ -138,28 +138,28 @@ where the symbol \(\{w, z\}_S\) denotes the \textbf{Schwarzian derivative}, defi
 
     For the Jacobian prefactor, we expand to first order in \(\epsilon\):
     \[
-        \left(\frac{\partial w}{\partial z}\right)^2 = (1 + \partial_z \epsilon)^2 \approx 1 + 2\partial_z \epsilon
+        \left(\frac{\partial w}{\partial z}\right)^2 = (1 + \partial_z \epsilon)^2 \approx 1 + 2\partial_z \epsilon.
     \]
     For the Schwarzian derivative, the denominator is \(1 + \partial_z \epsilon \approx 1\), so to first order:
     \[
-        \{w, z\}_S \approx \frac{\partial_z^3 \epsilon}{1} - \frac{3}{2} (\partial_z^2 \epsilon)^2 \approx \partial_z^3 \epsilon
+        \{w, z\}_S \approx \frac{\partial_z^3 \epsilon}{1} - \frac{3}{2} (\partial_z^2 \epsilon)^2 \approx \partial_z^3 \epsilon.
     \]
     (The squared term \((\partial_z^2 \epsilon)^2\) is second-order in \(\epsilon\) and thus vanishes).
 
     Now, substituting these into the finite transformation law \(T(z) = (\partial_z w)^2 T(w) + \frac{c}{12} \{w, z\}_S\):
     \[
-        T(z) \approx (1 + 2\partial_z \epsilon) T(z + \epsilon) + \frac{c}{12} \partial_z^3 \epsilon
+        T(z) \approx (1 + 2\partial_z \epsilon) T(z + \epsilon) + \frac{c}{12} \partial_z^3 \epsilon.
     \]
     Taylor expanding \(T(z + \epsilon) \approx T(z) + \epsilon \partial_z T(z)\) and keeping only first-order terms:
     \[
-        T(z) \approx (1 + 2\partial_z \epsilon) (T(z) + \epsilon \partial_z T(z)) + \frac{c}{12} \partial_z^3 \epsilon
+        T(z) \approx (1 + 2\partial_z \epsilon) (T(z) + \epsilon \partial_z T(z)) + \frac{c}{12} \partial_z^3 \epsilon,
     \]
     \[
-        T(z) \approx T(z) + \epsilon \partial_z T(z) + 2(\partial_z \epsilon)T(z) + \frac{c}{12} \partial_z^3 \epsilon
+        T(z) \approx T(z) + \epsilon \partial_z T(z) + 2(\partial_z \epsilon)T(z) + \frac{c}{12} \partial_z^3 \epsilon.
     \]
     Subtracting \(T(z)\) from both sides isolates the variation \(\delta_\epsilon T(z)\):
     \[
-        \delta_\epsilon T(z) = \epsilon(z) \partial_z T(z) + 2(\partial_z \epsilon(z)) T(z) + \frac{c}{12} \partial_z^3 \epsilon(z)
+        \delta_\epsilon T(z) = \epsilon(z) \partial_z T(z) + 2(\partial_z \epsilon(z)) T(z) + \frac{c}{12} \partial_z^3 \epsilon(z).
     \]
     This exactly matches the result derived from the contour integral of the \(TT\) OPE.
 \end{example}
@@ -168,29 +168,29 @@ where the symbol \(\{w, z\}_S\) denotes the \textbf{Schwarzian derivative}, defi
 
 To fully grasp the physical significance of the central charge \(c\), we investigate how the vacuum of the theory behaves when we move from the infinite flat plane to a space with a finite geometry. We do this by mapping the complex \(z\)-plane to a cylinder of circumference \(L\) using the standard conformal transformation:
 \[
-    z = e^{\frac{2\pi}{L}w} \quad \text{or equivalently} \quad w = \frac{L}{2\pi} \log z
+    z = e^{\frac{2\pi}{L}w} \quad \text{or equivalently} \quad w = \frac{L}{2\pi} \log z,
 \]
 where \(w = \tau + i\sigma\) is the coordinate on the cylinder.
 
-To see how the stress-energy tensor transforms under this map, we first compute the necessary derivatives. The first derivative is simply \(\partial_z w = \frac{L}{2\pi z}\). The Schwarzian derivative \(\{w, z\}_S\) measures the ``non-Möbius'' nature of the transformation. By plugging the derivatives of the logarithm into the definition of the Schwarzian, the scale factor \(L/2\pi\) neatly cancels out, leaving:
+To see how the stress-energy tensor transforms under this map, we first compute the necessary derivatives: \(\partial_z w = \frac{L}{2\pi z}\), \(\partial_z^2 w = \frac{-L}{2 \pi z^2}\) and finally \(\partial_z^3 w = \frac{L}{\pi z^3}\). The Schwarzian derivative \(\{w, z\}_S\) measures the ``non-Möbius'' nature of the transformation, and by plugging the derivatives of the logarithm into its definition, the scale factor \(L/2\pi\) neatly cancels out, leaving the following expression for the cylinder:
 \[
-    \{w, z\}_S = \frac{1}{2z^2}
+    \{w, z\}_S = \frac{1}{2z^2}.
 \]
 Substituting these ingredients into the finite transformation law for the stress-energy tensor, we obtain the exact form of the tensor on the cylinder:
 \[
-    T_{\text{cyl}}(w) = \left(\frac{2\pi}{L}\right)^2 \left\{ T_{\text{pl}}(z)z^2 - \frac{c}{24} \right\}
+    T_{\text{cyl}}(w) = \left(\frac{2\pi}{L}\right)^2 \left\{ T_{\text{pl}}(z)z^2 - \frac{c}{24} \right\}.
 \]
 We can now evaluate the vacuum expectation value of this operator. On the infinite plane, global conformal invariance dictates that the one-point function of any quasi-primary field with non-zero dimension must vanish. Therefore, \(\langle T_{\text{pl}}(z) \rangle = 0\).
 
 However, inserting this vanishing value into our transformation yields a strictly non-zero expectation value on the cylinder:
 \[
-    \langle T_{\text{cyl}}(w) \rangle = -\frac{\pi^2 c}{6L^2}
+    \langle T_{\text{cyl}}(w) \rangle = -\frac{\pi^2 c}{6L^2}.
 \]
 This is a profound physical result. The expectation value of the diagonal component \(T + \bar{T} = T_{11}\) is directly proportional to the vacuum energy density. While the vacuum energy is exactly zero on the infinite plane, the periodic boundary conditions of the cylindrical geometry induce a macroscopic shift in the zero-point energy.
 
 This non-zero vacuum energy density is the conformal field theory realization of the \textbf{Casimir energy}, caused entirely by finite-size boundary effects. Including both the holomorphic and anti-holomorphic sectors, the total Casimir energy density is given by:
 \[
-    \langle T_{11} \rangle = \frac{1}{2\pi} \{ \langle T \rangle + \langle \bar{T} \rangle \} = -\frac{\pi c}{6L^2}
+    \langle T_{11} \rangle = \frac{1}{2\pi} \{ \langle T \rangle + \langle \bar{T} \rangle \} = -\frac{\pi c}{6L^2}.
 \]
 This explicitly demonstrates that the central charge \(c\) is not just an abstract algebraic parameter governing the Virasoro anomaly, but a measurable physical quantity that dictates the finite-size scaling behavior of the theory's ground state.
 
@@ -198,16 +198,16 @@ This explicitly demonstrates that the central charge \(c\) is not just an abstra
 
 We now derive the conformal Ward identities. Consider a correlation function of local fields:
 \[
-    \langle \Phi_1(z_1, \bar{z}_1) \cdots \Phi_n(z_n, \bar{z}_n) \rangle
+    \langle \Phi_1(z_1, \bar{z}_1) \cdots \Phi_n(z_n, \bar{z}_n) \rangle.
 \]
 Inserting the stress tensor \(T(z)\) into the correlator, and using its role as the generator of conformal transformations, one finds the local Ward identity:
 \[
-    \langle T(z) \Phi_1(z_1, \bar{z}_1) \cdots \Phi_n(z_n, \bar{z}_n) \rangle = \sum_{i=1}^n \left[ \frac{h_i}{(z - z_i)^2} + \frac{1}{z - z_i} \partial_{z_i} \right] \langle \Phi_1(z_1, \bar{z}_1) \cdots \Phi_n(z_n, \bar{z}_n) \rangle
+    \langle T(z) \Phi_1(z_1, \bar{z}_1) \cdots \Phi_n(z_n, \bar{z}_n) \rangle = \sum_{i=1}^n \left[ \frac{h_i}{(z - z_i)^2} + \frac{1}{z - z_i} \partial_{z_i} \right] \langle \Phi_1(z_1, \bar{z}_1) \cdots \Phi_n(z_n, \bar{z}_n) \rangle,
 \]
 provided that all the fields \(\Phi_i\) are primary fields.
 Similarly, in the anti-holomorphic sector:
 \[
-    \langle \bar{T}(\bar{z}) \Phi_1(z_1, \bar{z}_1) \cdots \Phi_n(z_n, \bar{z}_n) \rangle = \sum_{i=1}^n \left[ \frac{\bar{h}_i}{(\bar{z} - \bar{z}_i)^2} + \frac{1}{\bar{z} - \bar{z}_i} \partial_{\bar{z}_i} \right] \langle \Phi_1(z_1, \bar{z}_1) \cdots \Phi_n(z_n, \bar{z}_n) \rangle
+    \langle \bar{T}(\bar{z}) \Phi_1(z_1, \bar{z}_1) \cdots \Phi_n(z_n, \bar{z}_n) \rangle = \sum_{i=1}^n \left[ \frac{\bar{h}_i}{(\bar{z} - \bar{z}_i)^2} + \frac{1}{\bar{z} - \bar{z}_i} \partial_{\bar{z}_i} \right] \langle \Phi_1(z_1, \bar{z}_1) \cdots \Phi_n(z_n, \bar{z}_n) \rangle.
 \]
 These fundamental relations are known as the local conformal Ward identities.
 
@@ -219,58 +219,81 @@ These fundamental relations are known as the local conformal Ward identities.
 
 If we restrict our attention to the three globally defined holomorphic conformal transformations (the Möbius transformations), which correspond to the choices \(\epsilon(z) = 1\), \(\epsilon(z) = z\), and \(\epsilon(z) = z^2\), the local Ward identities reduce to a set of global constraints:
 \[
-    \sum_{i=1}^n \partial_{z_i} \langle \Phi_1(z_1, \bar{z}_1) \cdots \Phi_n(z_n, \bar{z}_n) \rangle = 0
+    \sum_{i=1}^n \partial_{z_i} \langle \Phi_1(z_1, \bar{z}_1) \cdots \Phi_n(z_n, \bar{z}_n) \rangle = 0,
 \]
 \[
-    \sum_{i=1}^n (z_i \partial_{z_i} + h_i) \langle \Phi_1(z_1, \bar{z}_1) \cdots \Phi_n(z_n, \bar{z}_n) \rangle = 0
+    \sum_{i=1}^n (z_i \partial_{z_i} + h_i) \langle \Phi_1(z_1, \bar{z}_1) \cdots \Phi_n(z_n, \bar{z}_n) \rangle = 0,
 \]
 \[
-    \sum_{i=1}^n (z_i^2 \partial_{z_i} + 2 h_i z_i) \langle \Phi_1(z_1, \bar{z}_1) \cdots \Phi_n(z_n, \bar{z}_n) \rangle = 0
+    \sum_{i=1}^n (z_i^2 \partial_{z_i} + 2 h_i z_i) \langle \Phi_1(z_1, \bar{z}_1) \cdots \Phi_n(z_n, \bar{z}_n) \rangle = 0.
 \]
-
 There are perfectly analogous equations governing the anti-holomorphic sector.
 
 These relations constitute the Ward identities for the global conformal group in two dimensions. They impose stringent differential constraints on the correlation functions of primary fields, strictly reflecting how these fields must transform under global conformal mappings. Physically, each identity enforces the invariance of the theory under a specific subgroup: the first equation guarantees translation invariance, the second enforces invariance under dilations and rotations, and the third corresponds to special conformal transformations. Solving this set of differential equations is a crucial step in understanding the structure of two-dimensional Conformal Field Theories, as it allows us to completely determine the exact analytical form of two- and three-point correlation functions up to overall multiplicative constants.
 
 \subsection{Correlation Functions from Ward Identities}
 
-We can start from the two-point function of primary fields, which is constrained by conformal symmetry to take the form:
+Let us derive the exact spatial dependence of the two-point function of primary fields using the global conformal Ward identities. Consider the general two-point correlation function:
 \[
-    \begin{aligned}
-        G(z_1,\bar{z}_1; z_2,\bar{z}_2)                 & = \langle \phi_1(z_1,\bar{z}_1) \phi_2(z_2,\bar{z}_2) \rangle = \frac{C_{12}}{(z_1 - z_2)^{2h} (\bar{z}_1 - \bar{z}_2)^{2\bar{h}}}, \\
-        G(\vert z_{12} \vert, \vert \bar{z}_{12} \vert) & = \frac{C}{\vert z_{12} \vert^{h_1 + h_2} \vert \bar{z}_{12} \vert^{\bar{h}_1 + \bar{h}_2}}, \quad z_{ij} = z_i - z_j,
-    \end{aligned}
+    G(z_1, \bar{z}_1; z_2, \bar{z}_2) = \langle \Phi_1(z_1, \bar{z}_1) \Phi_2(z_2, \bar{z}_2) \rangle.
 \]
-where from the first line we see that the two-point function is non-zero only if the conformal weights of the two fields are equal, i.e., $h_1 = h_2$ and $\bar{h}_1 = \bar{h}_2$. This is a consequence of the Ward identities, which require that the correlation function be invariant under conformal transformations. If the weights were different, the correlation function would not be invariant under dilations or special conformal transformations, leading to a contradiction.
+We systematically apply the constraints imposed by the unbroken global conformal subgroup (translations, dilatations, and special conformal transformations) to restrict the form of this function.
 
-So the only two points correlation functions which can be different from zero are those in which the fields enter with the same weight; it may even be the same kind of operator, or a multiplet of operators with the same conformal weights. In this case, the two-point function is fixed up to a constant $C$. Indeed now, we can rewrite the constant as
+\paragraph{1. Translational Invariance:}
+Invariance under rigid spatial translations implies that the correlation function can only depend on the relative coordinate differences:
 \[
-    C = \delta_{h_1, h_2} \delta_{\bar{h}_1, \bar{h}_2},
+    z_{12} = z_1 - z_2, \quad \bar{z}_{12} = \bar{z}_1 - \bar{z}_2.
 \]
-which leads us to the final form of the two-point function:
+Thus, the function reduces to \( G(z_1, \bar{z}_1; z_2, \bar{z}_2) = G(z_{12}, \bar{z}_{12}) \).
+
+\paragraph{2. Dilatation Invariance:}
+Invariance under global scale transformations imposes a first-order differential equation on the correlator. From the dilatation Ward identity, we obtain:
 \[
-    G(\vert z_{12} \vert, \vert \bar{z}_{12} \vert) = \frac{\delta_{h_1, h_2} \delta_{\bar{h}_1, \bar{h}_2}}{\vert z_{12} \vert^{h_1 + h_2} \vert \bar{z}_{12} \vert^{\bar{h}_1 + \bar{h}_2}} \simeq \frac{1}{(x_1-x_2)^{2\Delta}},
+    (z_{12}\partial_{z_{12}} + h_1 + h_2)G(z_{12}, \bar{z}_{12}) = 0.
 \]
-where in the last step we have used the fact that the two-point function depends only on the distance between the two points, and we have defined $\Delta = h + \bar{h}$ as the scaling dimension of the field. This form of the two-point function is a direct consequence of conformal invariance and is a fundamental result in two-dimensional conformal field theory. It shows that the correlation functions of primary fields are highly constrained by symmetry, and it provides a starting point for understanding more complex correlation functions in these theories.
-
-If we now insert the stress energy tensor $T(z)$ into the correlation function, we can derive the operator product expansion (OPE) between $T(z)$ and a primary field $\phi(w,\bar{w})$. The OPE takes the form:
+The general solution to this differential equation fixes the holomorphic coordinate dependence up to an arbitrary function of the anti-holomorphic coordinate:
 \[
-    \left\langle T(z) \phi(z_1,\bar{z}_1) \cdots \phi(z_n,\bar{z}_n) \right\rangle =\dots
+    G(z_{12}, \bar{z}_{12}) = \frac{f(\bar{z}_{12})}{z_{12}^{h_1 + h_2}}.
 \]
-where we used the fact that the OPE of $T(z)$ with a primary field $\phi(w,\bar{w})$ is given by:
+Applying the exact same logic to the anti-holomorphic sector tightly restricts \( f(\bar{z}_{12}) \), leaving us with a single undetermined overall constant \( C_{12} \):
 \[
-    T(z) \phi(w,\bar{w}) \sim \frac{h}{(z-w)^2} \phi(w,\bar{w}) + \frac{1}{z-w} \partial_w \phi(w,\bar{w}) + \text{regular terms},
+    G(z_{12}, \bar{z}_{12}) = \frac{C_{12}}{z_{12}^{h_1 + h_2} \bar{z}_{12}^{\bar{h}_1 + \bar{h}_2}}.
 \]
-where $h$ is the conformal weight of the primary field $\phi$. This OPE encodes how the stress energy tensor acts on the primary field, and it is a key ingredient in understanding the structure of conformal field theories. The first term in the OPE represents the scaling dimension of the primary field, while the second term represents the action of the Virasoro algebra on the primary field. Then we have a method to compute the correlation functions of primary fields by using the OPE with the stress energy tensor, which allows us to derive the Ward identities and ultimately determine the form of the correlation functions in two-dimensional conformal field theories.
 
-We need correlation function to be invariant under the global conformal transformations, which are generated by the modes of the stress energy tensor. This leads to the Ward identities, which impose constraints on the correlation functions of primary fields.
-
-For the three-point function, the Ward identities imply that it must take the form:
+\paragraph{3. Special Conformal Invariance:}
+Finally, the Ward identity for special conformal transformations imposes an incredibly restrictive algebraic condition. It dictates that the constant \( C_{12} \) must vanish identically unless the conformal weights of the two fields are strictly equal:
 \[
-    \left\langle \phi_1(z_1,\bar{z}_1) \phi_2(z_2,\bar{z}_2) \phi_3(z_3,\bar{z}_3) \right\rangle = \frac{C_{123}}{(z_{12})^{h_1 + h_2 - h_3} (z_{23})^{h_2 + h_3 - h_1}  (\bar{z}_{31})^{\bar{h}_1 + \bar{h}_3 - \bar{h}_2} (\bar{z} \setminus  \setminus )},
+    h_1 = h_2, \quad \text{and} \quad \bar{h}_1 = \bar{h}_2.
 \]
-where now the three-point function is fixed up to a constant $C_{123}$, which is known as the structure constant of the theory. The form of the three-point function is determined by conformal symmetry, and holds for all quasi-primary fields. The structure constant $C_{123}$ encodes the interactions between the three fields and is a fundamental quantity in conformal field theory: we need a method to find it.
+By absorbing this mathematical requirement into Kronecker deltas, we arrive at the final, exact form of the two-point function for primary fields:
+\[
+    \langle \Phi_1(z_1, \bar{z}_1) \Phi_2(z_2, \bar{z}_2) \rangle = \frac{C_{12} \delta_{h_1, h_2} \delta_{\bar{h}_1, \bar{h}_2}}{z_{12}^{2h_1} \bar{z}_{12}^{2\bar{h}_1}}.
+\]
+If the fields are purely scalar (\( h = \bar{h} = \Delta/2 \)), this beautifully simplifies to the familiar physical form \( C_{12}/|z_{12}|^{2\Delta} \). This proves that two-point functions are non-zero \uline{only} if the fields share the exact same scaling dimension and conformal spin.
 
-Since solving a theory means solving or finding a way to compute all the correlation functions, we need to find a method to compute the structure constants. This is where the operator product expansion (OPE) comes into play. The OPE allows us to express the product of two fields as a sum over all possible fields in the theory, with coefficients that depend on the positions of the fields. By using the OPE, we can relate the three-point function to the two-point function and extract the structure constant $C_{123}$. It is not guaranteed that the OPE will still work in the same way as in higher dimensions, but in two-dimensional conformal field theories, the OPE is a powerful tool that allows us to compute correlation functions and determine the structure constants of the theory. This is a key step in solving two-dimensional conformal field theories and understanding their properties.
+\subsubsection{Connection to the Stress-Energy Tensor OPE}
 
+As we established in earlier chapters, these global geometric constraints are actually a direct, macroscopic consequence of the fundamental Operator Product Expansion (OPE) between the stress-energy tensor \( T(z) \) and the primary fields.
 
+Inserting \( T(z) \) into a general \( n \)-point correlator yields the fundamental Conformal Ward Identity:
+\[
+    \langle T(z) \Phi_1(z_1, \bar{z}_1) \cdots \Phi_n(z_n, \bar{z}_n) \rangle = \sum_{i=1}^n \left[ \frac{h_i}{(z-z_i)^2} + \frac{1}{z-z_i} \partial_{z_i} \right] \langle \Phi_1(z_1, \bar{z}_1) \cdots \Phi_n(z_n, \bar{z}_n) \rangle.
+\]
+The differential operators generating translations (\( \partial_z \)), dilatations (\( z\partial_z + h \)), and special conformal transformations natively emerge by expanding this identity and integrating over closed contours surrounding the field insertions. This elegantly unifies the local algebraic structure of the Virasoro modes with the macroscopic macroscopic symmetries of the correlation functions we just derived.
+
+\subsubsection{Three-Point Function from Ward Identities}
+
+A similar, albeit slightly more tedious, application of the exact same global Ward identities completely fixes the coordinate dependence of the three-point function. For three generic primary fields, conformal invariance strictly requires the highly symmetric form:
+\[
+    \langle \Phi_1(z_1, \bar{z}_1) \Phi_2(z_2, \bar{z}_2) \Phi_3(z_3, \bar{z}_3) \rangle = \frac{C_{123}}{z_{12}^{h_1 + h_2 - h_3} z_{23}^{h_2 + h_3 - h_1} z_{31}^{h_3 + h_1 - h_2} \bar{z}_{12}^{\bar{h}_1 + \bar{h}_2 - \bar{h}_3} \bar{z}_{23}^{\bar{h}_2 + \bar{h}_3 - \bar{h}_1} \bar{z}_{31}^{\bar{h}_3 + \bar{h}_1 - \bar{h}_2}},
+\]
+where we define \( z_{ij} = z_i - z_j \) and \( \bar{z}_{ij} = \bar{z}_i - \bar{z}_j \).
+
+Notice that the entire spatial dependence is perfectly and exclusively determined by the conformal weights of the operators. The only remaining unknown in this equation is the overall multiplicative factor \( C_{123} \), which is known as the \textbf{structure constant} (or OPE coefficient).
+
+Because global conformal symmetry strictly fixes all two- and three-point functions up to these constants, \uline{solving a conformal field theory formally reduces to finding two discrete sets of data}:
+\begin{enumerate}
+    \item The \textbf{spectrum} of the theory: identifying all allowed primary fields and their conformal weights \( (h_i, \bar{h}_i) \).
+    \item The \textbf{structure constants} \( C_{ijk} \): calculating the numbers that govern the exact interaction strengths in the Operator Product Expansion.
+\end{enumerate}
+Once the spectrum and the structure constants are known, any higher-order correlation function (like the four-point functions) can, in principle, be systematically reduced to these fundamental building blocks by recursively applying the OPE.

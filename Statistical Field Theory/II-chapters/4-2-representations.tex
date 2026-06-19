@@ -37,7 +37,7 @@ we can evaluate how \(L_0\) acts on a generic state by systematically commuting 
 \]
 is a simultaneous eigenstate of \(L_0\) with eigenvalue:
 \[
-    L_0 \left( L_{-n_1} \cdots L_{-n_k} \ket{h} \right) = (h + N)\ket{h}, \quad \text{where } N = n_1 + n_2 + \dots + n_k.
+    L_0 \left( L_{-n_1} \cdots L_{-n_k} \ket{h} \right) = (h + N)\left( L_{-n_1} \cdots L_{-n_k} \ket{h} \right), \quad \text{where } N = n_1 + \dots + n_k.
 \]
 The non-negative integer \(N\) is defined as the \textbf{level} of the descendant state. Consequently, the entire representation space decomposes into an infinite direct sum of finite-dimensional vector subspaces of fixed level:
 \[
@@ -171,7 +171,7 @@ The determinant of this matrix, \(\det G^{(N)}\), contains crucial, structural i
     \item \textbf{If \(\det G^{(N)} = 0\):} The matrix has a non-trivial kernel. This implies that there exists at least one linear combination of descendant states (a state \(\ket{\chi}\)) whose inner product with \textit{every} state in the subspace (including itself) vanishes identically.
 \end{itemize}
 
-Such a state is a \textbf{null state} (or singular vector), satisfying \(\|\chi\|^2 = 0\). The study of Gram determinants is therefore the central mathematical engine used to classify Virasoro representations, discover singular vectors, and chart out the landscape of unitary conformal field theories.
+Such a state is a \textbf{null state} (or singular vector), satisfying \(\|\ket{\chi}\|^2 = 0\). The study of Gram determinants is therefore the central mathematical engine used to classify Virasoro representations, discover singular vectors, and chart out the landscape of unitary conformal field theories.
 
 \subsubsection{Level 1 Subspace: The First Conformal Descendant}
 
@@ -242,17 +242,17 @@ Taking the inner product with \(\bra{h}\), we obtain the off-diagonal element:
 \paragraph{Second Diagonal Element \(\bra{2}\ket{2}\):}
 This is the norm of the state \(L_{-1}^2\ket{h}\), which maps to the matrix element \(\bra{h}L_1^2 L_{-1}^2\ket{h}\). We evaluate this by unpacking the modes sequentially:
 \[
-    L_1 \left( L_1 L_{-1}^2 \ket{h} \right) = L_1 \left( 6h L_{-1}\ket{h} \right),
+    L_1^2 L_{-1}^2 = (L_1 L_{-1})^2 + 2 L_1 L_0 L_{-1},
 \]
-where we utilized our previous intermediate result \(L_1 L_{-1}^2\ket{h} = [L_1, L_{-1}^2]\ket{h} = 2L_{-1}L_1\ket{h} + 2L_0 L_{-1}\ket{h} = 2(h+1)L_{-1}\ket{h}\)? Let us check carefully via the Leibniz rule: \([L_1, L_{-1}^2] = [L_1, L_{-1}]L_{-1} + L_{-1}[L_1, L_{-1}] = 2L_0 L_{-1} + 2L_{-1}L_0\). Acting on \(\ket{h}\), this yields \(2(h+1)L_{-1}\ket{h} + 2hL_{-1}\ket{h} = (4h+2)L_{-1}\ket{h}\).
-Thus, applying the final \(L_1\) operator from the left gives:\TODO{check the algebraic steps here}
+where we used the commutation relation \([L_1, L_{-1}] = 2L_0\) to express the product in terms of \(L_1 L_{-1}\) and \(L_0\). Acting on \(\ket{h}\), we have:
 \[
-    L_1^2 L_{-1}^2 \ket{h} = L_1 \left( (4h+2)L_{-1}\ket{h} \right) = (4h+2) [L_1, L_{-1}]\ket{h} = (4h+2)(2h)\ket{h} = 4h(2h+1)\ket{h}.
+    \bra{h} \left[ (L_1 L_{-1})\left(L_1 L_{-1} + 2h + 2\right) \right] \ket{h},
 \]
-Contracting with \(\bra{h}\) yields the final diagonal entry:
+where we used \(L_0\ket{h} = h\ket{h}\), but in order to move \(L_0\) to the right we had to add the commutator \([L_0, L_{-1}] = L_{-1}\), which is responsible for the last \(2\). Putting everything together and using again the commutation relations between the modes \(L_1\) and \(L_{-1}\), we find:
 \[
-    \bra{2}\ket{2} = 4h(2h+1).
+    \bra{2}\ket{2} = \left(4h\right) \cdot 2h(4h+2) = 4h(2h+1),
 \]
+which yields the final diagonal entry of the level-2 Gram matrix.
 
 \paragraph{The Full Level-2 Matrix and its Determinant:}
 Gathering these three results, the complete level-2 Gram matrix is written explicitly as:
@@ -334,7 +334,7 @@ To find more generic null states at level 2, we must look beyond the vacuum repr
 \[
     \ket{\chi} = (L_{-2} + a L_{-1}^2) \ket{h},
 \]
-where \(a\) is an unknown complex coefficient. We want to mathematically determine the conditions under which this specific state becomes null. A necessary and sufficient condition for a state to be null is that it behaves as a highest-weight state; therefore, it must be annihilated by both \(L_1\) and \(L_2\).
+where \(a\) is an unknown complex coefficient. We want to mathematically determine the conditions under which this specific state becomes null. A necessary and sufficient condition for a state to be null is that it behaves as a highest-weight state; therefore, it has to be annihilated by both the application of \(L_1\) and \(L_2\).
 
 \paragraph{Condition from \(L_1\):}
 Applying \(L_1\) to our state, and using the previously derived commutators
@@ -357,7 +357,7 @@ For \(\ket{\chi}\) to be annihilated by \(L_1\), the coefficient must vanish:
 \paragraph{Condition from \(L_2\):}
 Similarly, applying \(L_2\), using
 \[
-    [L_2, L_{-2}] = 4L_0 + \frac{c}{2}, \quad [L_2, L_{-1}^2] = 6L_{-1}L_1 + 12L_0,
+    [L_2, L_{-2}] = 4L_0 + \frac{c}{2}, \quad [L_2, L_{-1}^2] = 6L_{-1}L_1 + 6L_0,
 \]
 yielding an action on \(\ket{h}\) equivalent to \(6h\):
 \[
@@ -480,9 +480,9 @@ In summary, null vectors:
 
 Up to this point, our structural analysis has focused entirely on a single chiral sector (the holomorphic Virasoro algebra). However, a physical two-dimensional conformal field theory lives on the complex plane (or a cylinder/torus) and depends on both $z$ and $\bar{z}$.
 
-To construct the full, physical representation space of the theory, we must combine the holomorphic and anti-holomorphic sectors. The complete Hilbert space $\mathcal{H}$ is obtained by taking the direct sum of the tensor products of the physically allowed irreducible representations (where all null submodules have been completely quotiented out):
+To construct the full, physical representation space of the theory, we must combine the holomorphic and anti-holomorphic sectors. The complete Hilbert space $\mathcal{H}_c$ is obtained by taking the direct sum of the tensor products of the physically allowed irreducible representations (where all null submodules have been completely quotiented out):
 \[
-    \mathcal{H} = \bigoplus_{(h, \bar{h})} N_{h, \bar{h}} \mathcal{L}_{c,h} \otimes \bar{\mathcal{L}}_{c, \bar{h}}.
+    \mathcal{H}_c = \bigoplus_{(h, \bar{h})} N_{h, \bar{h}} \mathcal{L}_{c,h} \otimes \bar{\mathcal{L}}_{c, \bar{h}}.
 \]
 
 Here, $\mathcal{L}_{c,h} = \mathcal{V}_{c,h} / \mathcal{N}_{c,h}$ represents the irreducible highest-weight representation of the holomorphic sector, and $\bar{\mathcal{L}}_{c, \bar{h}}$ is its anti-holomorphic counterpart. Each distinct local primary field in the CFT corresponds to one such pair $(h, \bar{h})$, and its full conformal family encompasses the tensor product of the two respective chiral towers.
