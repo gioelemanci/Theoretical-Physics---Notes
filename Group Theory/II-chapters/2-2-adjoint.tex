@@ -82,43 +82,44 @@ We are going to express a corollary which helps us to understand the meaning of 
         \implies \dots
     \]
     and any \(g\) spits out an endomorphism \(\mathrm{Ad} \,:\, G \mapsto \mathrm{GL}(\mathfrak{g}) \).
+
+    In order to compute the adjoint representation of the lie algebra we need to take the push forward and ...
+    \[
+        \mathrm{ad}_X = (\mathrm{Ad})_* (X) = (\mathrm{Ad}_*)\dot{\sigma}_X(0) = \frac{\mathrm{d}}{\mathrm{d} s} (\mathrm{Ad} \circ \sigma_X(s))_{s=0}
+    \]
+    \[
+        \implies \mathrm{ad}_X (Y) = \frac{\mathrm{d}}{\mathrm{d} s} (\mathrm{Ad}_{\exp(sX)}(Y))_{s=0} = \frac{\partial}{\partial s}\left[ \frac{\partial}{\partial t} \exp(sX)\exp(tY)\exp(-sX)\big|_{t=0}\right]_{s=0},
+    \]
+    and using the Baker-Campbell-Hausdorff formula we have that
+    \[
+        \begin{aligned}
+            BCH \implies \exp(sX)\exp(tY)\exp(-sX) = \exp\left( tY + s[X, Y] + \dots \right) \\
+            =  \exp(\dots )
+        \end{aligned}
+    \]
+    and by deriving with respect to \(t\) (it is not difficult to believe that it is the same as deriving the usual exponential) we have that
+    \[
+        \left(Y + \frac{s}{2} ([X, Y] - [Y, X]) + s^2 (\dots) + st(\dots) + \mathcal{O}(s^2t)\right) \exp(\dots),
+    \]
+    which needs to be evaluated at \(t=0\) and then derived with respect to \(s\) at \(s=0\), thus we have that
+    \[
+        \xrightarrow{t=0} \left(Y + s[X,Y] + \mathcal{O}(s^2)\right) \xrightarrow{\partial / \partial s} [X, Y] + \mathcal{O}(s) \xrightarrow{s=0} [X, Y].
+    \]
+
+    Pick basis ... applying the adjoint representation of one of the elements of the basis element for the lie algebra on another of such besis elemnts
+    \[
+        \mathrm{ad}_{T_i}T_j = [T_i, T_j] = C_{ij}^{\ \ k} T_k,
+    \]
+    then we know how the representation of the basis elements acts ...
+    \[
+        E(b_j) = E^i_{\ j} b_i = E(v^j b_j) = (E^i_{\ j}v^j)b_i,
+    \]
+    which means that the matrix elements of the representation of the basis elements are given by the structure constants of the lie algebra
+    \[
+        \implies (\mathrm{ad}_{T_i})^k_{\ j} = C_{ij}^{\ \ k}.
+    \]
 \end{proof}
 
-In order to compute the adjoint representation of the lie algebra we need to take the push forward and ...
-\[
-    \mathrm{ad}_X = (\mathrm{Ad})_* (X) = (\mathrm{Ad}_*)\dot{\sigma}_X(0) = \frac{\mathrm{d}}{\mathrm{d} s} (\mathrm{Ad} \circ \sigma_X(s))_{s=0}
-\]
-\[
-    \implies \mathrm{ad}_X (Y) = \frac{\mathrm{d}}{\mathrm{d} s} (\mathrm{Ad}_{\exp(sX)}(Y))_{s=0} = \frac{\partial}{\partial s}\left[ \frac{\partial}{\partial t} \exp(sX)\exp(tY)\exp(-sX)\big|_{t=0}\right]_{s=0},
-\]
-and using the Baker-Campbell-Hausdorff formula we have that
-\[
-    \begin{aligned}
-        BCH \implies \exp(sX)\exp(tY)\exp(-sX) = \exp\left( tY + s[X, Y] + \dots \right) \\
-        =  \exp(\dots )
-    \end{aligned}
-\]
-and by deriving with respect to \(t\) (it is not difficult to believe that it is the same as deriving the usual exponential) we have that
-\[
-    \left(Y + \frac{s}{2} ([X, Y] - [Y, X]) + s^2 (\dots) + st(\dots) + \mathcal{O}(s^2t)\right) \exp(\dots),
-\]
-which needs to be evaluated at \(t=0\) and then derived with respect to \(s\) at \(s=0\), thus we have that
-\[
-    \xrightarrow{t=0} \left(Y + s[X,Y] + \mathcal{O}(s^2)\right) \xrightarrow{\partial / \partial s} [X, Y] + \mathcal{O}(s) \xrightarrow{s=0} [X, Y].
-\]
-
-Pick basis ... applying the adjoint representation of one of the elements of the basis element for the lie algebra on another of such besis elemnts
-\[
-    \mathrm{ad}_{T_i}T_j = [T_i, T_j] = C_{ij}^{\ \ k} T_k,
-\]
-then we know how the representation of the basis elements acts ...
-\[
-    E(b_j) = E^i_{\ j} b_i = E(v^j b_j) = (E^i_{\ j}v^j)b_i,
-\]
-which means that the matrix elements of the representation of the basis elements are given by the structure constants of the lie algebra
-\[
-    \implies (\mathrm{ad}_{T_i})^k_{\ j} = C_{ij}^{\ \ k}.
-\]
 We now have a very complete picture of the tools we have at our disposal to study the representations of lie groups and lie algebras...
 
 \begin{example}
@@ -206,7 +207,9 @@ If \(G\) is connected then its Lie algebra is abelian if and only if \(G\) is ab
 
     [...]
 
-\begin{theorem}[Schwarz's lemma]
+\subsection{Schur's Lemma and Complex Representations of Abelian Groups}
+
+\begin{theorem}[Schur's lemma]
     Let \((D_1, V_1)\) and \((D_{2}, V_2 )\) be irreducible representations of a lie group \(G\) or a Lie algebra \(\mathfrak{g}\). If we have an homomorphism of representations \(A \in \text{Hom}(V_1, V_2) \,:\, V_1 \mapsto V_2\) such that \(A \circ D_1(g) = D_2(g) \circ A\) for any \(g \in G\) (or \(A \circ d_1(X) = d_2(X) \circ A\) for any \(X \in \mathfrak{g}\)), then either \(A = 0\) or \(A\) is invertible, i.e. it is an isomorphism of representations. In particular, if it is invertible then the two representations are isomorphic, and if \(V_1 = V_2\) then \(A\) is a scalar multiple of the identity.
 \end{theorem}
 \begin{proof}
@@ -223,23 +226,19 @@ If \(G\) is connected then its Lie algebra is abelian if and only if \(G\) is ab
     thus \(\text{im}(A)\) is an ariant subspace of \(D_2\) and since \(D_2\) is irreducible, then either \(\text{im}(A) = \{0\}\) or \(\text{im}(A) = V_2\). In the first case, \(A = 0\), and in the second case \(A\) is \textit{surjective}. Thus, if \(A \neq 0\), then it is both injective and surjective, thus it is an isomorphism of representations.
 \end{proof}
 
+[...]
 
-
-
-
-
+\subsection{(Semi-)Simple and Reductive Lie Algebras}
 
 [...]
 
+\section{Lie Groups vs Lie Algebras: Representations}
 
-[...]
+ [...]
 
+ [...]
 
-[...]
-
-
-
-
+ [...]
 
 \section{Complexification of Lie Algebras}
 
