@@ -1,1 +1,285 @@
 \section{Symmetries in Quantum Field Theory}
+
+The path integral formulation provides an exceptionally powerful and elegant framework for investigating symmetries in Quantum Field Theory. From the perspective of the path integral, any transformation of the fields $\phi(x)$ fundamentally corresponds to a mathematical change of variables within the integration measure $\int \mathcal{D}\phi$. By demanding that physical observables (and the path integral itself) remain invariant under specific changes of variables, we can systematically derive non-trivial identities for Green's functions and generating functionals.
+
+\textit{Notation:} In the following sections, we will frequently use the shorthand notation for correlation functions:
+\[
+    \langle \phi(x_1) \cdots \phi(x_n) \rangle \equiv \langle \Omega | T \{ \hat{\phi}(x_1) \cdots \hat{\phi}(x_n) \} | \Omega \rangle,
+\]
+where it is strictly understood that any classical spacetime derivatives appearing on the left-hand side act \textit{outside} the time-ordered Green's function. As we previously established for path integrals, placing a derivative inside the expectation value is mathematically equivalent to pulling it outside the time-ordered product:
+\[
+    \langle (\partial_\mu \phi(x_1)) \phi(x_2) \cdots \phi(x_n) \rangle \equiv \partial_\mu^{(x_1)} \langle \Omega | T \{ \hat{\phi}(x_1) \cdots \hat{\phi}(x_n) \} | \Omega \rangle.
+\]
+
+\subsection{Equations of Motion}
+
+Let us investigate what happens when we perform the simplest possible change of variables: an infinitesimal local translation of the field itself.
+
+The classical equations of motion (Euler-Lagrange equations) for a single scalar field are given by:
+\[
+    \frac{\partial \mathcal{L}}{\partial \phi} - \partial_\mu \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} = 0.
+\]
+This can be written much more compactly using functional derivatives as $\frac{\delta S}{\delta \phi(x)} = 0$. Classically, this is derived by minimizing the action, imposing $\delta S = 0$ at first order for a small, arbitrary field variation $\phi(x) \to \phi(x) + \epsilon(x)$.
+
+We can apply a directly analogous argument to the quantum generating functional:
+\[
+    Z[J] = \int \mathcal{D}\phi \, \exp\left[ iS[\phi] + i\int \mathrm{d}^4x \, J(x)\phi(x) \right].
+\]
+Perform a change of variables in the path integral corresponding to a local shift: $\phi(x) \to \phi(x) + \epsilon(x)$. Because we are integrating over all possible field configurations from $-\infty$ to $+\infty$, a simple shift is merely a translation of the integration variable. Therefore, the path integral measure is perfectly invariant ($\mathcal{D}\phi \to \mathcal{D}\phi$, just as $\mathrm{d}x_i \to \mathrm{d}x_i$ for standard integrals), and the total value of $Z[J]$ must remain unchanged.
+
+Assuming $\epsilon(x)$ is infinitesimal, we can Taylor-expand the exponential to first order:
+\[
+    \begin{aligned}
+        Z[J] & = \int \mathcal{D}\phi \, \exp\left[ iS[\phi + \epsilon] + i\int \mathrm{d}^4x \, J(x)(\phi(x) + \epsilon(x)) \right]                                                                                                                     \\
+             & = \int \mathcal{D}\phi \, \exp\left[ iS[\phi] + i\int \mathrm{d}^4x \, J(x)\phi(x) \right] \times \left( 1 + i \int \mathrm{d}^4x \, \epsilon(x) \left[ \frac{\delta S}{\delta \phi(x)} + J(x) \right] + \mathcal{O}(\epsilon^2) \right).
+    \end{aligned}
+\]
+Since the unshifted integral is identically equal to $Z[J]$, the $\mathcal{O}(\epsilon)$ variation term must strictly vanish. Because $\epsilon(x)$ is a completely arbitrary function, the integral must vanish locally for the integrand:
+\[
+    \int \mathcal{D}\phi \, \exp\left[ iS[\phi] + i\int \mathrm{d}^4y \, J(y)\phi(y) \right] \left( \frac{\delta S}{\delta \phi(x)} + J(x) \right) = 0.
+\]
+To extract relations for the physical Green's functions, we apply functional derivatives with respect to the sources. Apply the operator $\left(-i \frac{\delta}{\delta J(x_1)}\right) \cdots \left(-i \frac{\delta}{\delta J(x_n)}\right)$ to the equation above, and then set the source $J=0$.
+
+When the derivatives hit the exponential, they bring down field insertions $\phi(x_i)$. However, by the product rule, the derivatives can also hit the isolated $J(x)$ term. Specifically, differentiating $J(x)$ with respect to $J(x_j)$ yields a Dirac delta function $\delta^{(4)}(x - x_j)$. When we subsequently set $J=0$, any term where $J(x)$ was not differentiated will vanish.
+
+This procedure naturally generates the \textbf{Schwinger-Dyson Equations}:
+\[
+    \left\langle \frac{\delta S}{\delta \phi(x)} \phi(x_1) \cdots \phi(x_n) \right\rangle = i \sum_{j=1}^n \delta^{(4)}(x - x_j) \langle \phi(x_1) \cdots \phi(x_{j-1}) \phi(x_{j+1}) \cdots \phi(x_n) \rangle.
+\]
+
+\subsubsection{Observations}
+
+The Schwinger-Dyson equations reveal profound connections between classical dynamics and quantum correlation functions:
+\begin{itemize}
+    \item \textbf{Quantum Equations of Motion:} The classical equations of motion ($\delta S/\delta \phi = 0$) are strictly valid for quantum Green's functions \textit{up to contact terms}. These contact terms are the Dirac delta functions on the right-hand side, which are non-vanishing only when the field coordinate $x$ exactly coincides with one of the operator insertion points $x_j$.
+    \item \textbf{The Classical Limit:} We can verify this is a purely quantum phenomenon via dimensional analysis. The action $[S]$ has the dimensions of $\hbar$. If we explicitly restore $\hbar$ in the path integral weight ($e^{iS/\hbar}$), the right-hand side of the equation gains a factor of $\hbar$: $i\hbar \delta^{(4)}(x-x_j)$. Taking the classical limit $\hbar \to 0$ forces the contact terms to vanish, perfectly recovering the classical Euler-Lagrange equations.
+    \item \textbf{Operator Formalism Consistency:} In the canonical operator formalism, we expect quantum operators in the Heisenberg picture to strictly obey the classical equations of motion: $\frac{\delta S}{\delta \hat{\phi}(x)} = 0$. This seems to contradict the Schwinger-Dyson equations where the expectation value is non-zero. However, remember our path integral notation: the derivative operator $\frac{\delta S}{\delta \phi(x)}$ generates derivatives that are mathematically pulled \textit{outside} the time-ordering operator $T$. The contact terms are exactly the commutators that arise when time derivatives are pushed through the Heaviside step functions hidden inside the $T$-product (as we proved in the previous note on field derivatives).
+    \item \textbf{Defining the Theory:} These equations are so fundamental that they can be used as the foundational definition of the quantum theory itself. For example, one can systematically derive all Feynman rules directly from the Schwinger-Dyson equations without ever referencing canonical quantization (see e.g., Schwartz 7.1).
+\end{itemize}
+
+\begin{example}[Real scalar field]
+    Consider an interacting real scalar field described by the Lagrangian density:
+    \[
+        \mathcal{L} = \frac{1}{2}(\partial_\mu \phi)^2 - \frac{1}{2}m^2 \phi^2 + \mathcal{L}_{\text{int}}(\phi).
+    \]
+    The classical variation of the action with respect to $\phi$ yields:
+    \[
+        \frac{\delta S}{\delta \phi(x)} = -(\square_x + m^2)\phi(x) + \frac{\partial \mathcal{L}_{\text{int}}}{\partial \phi(x)}.
+    \]
+    Let us apply the Schwinger-Dyson equation for a 2-point function ($n=1$, with an insertion at $y$). Substituting the variation into the general formula, we obtain:
+    \[
+        (\square_x + m^2) \langle \phi(x) \phi(y) \rangle = \left\langle \frac{\partial \mathcal{L}_{\text{int}}(x)}{\partial \phi(x)} \phi(y) \right\rangle - i \delta^{(4)}(x - y).
+    \]
+    For a \textbf{free theory} ($\mathcal{L}_{\text{int}} = 0$), the first term on the right vanishes, and we perfectly recover the well-known differential equation that defines the Feynman propagator:
+    \[
+        (\square_x + m^2) \langle \phi(x) \phi(y) \rangle = -i \delta^{(4)}(x - y).
+    \]
+    For an \textbf{interacting theory}, the equation yields a highly non-trivial relationship linking the exact 2-point Green's function to a higher-order Green's function (contained within the $\mathcal{L}_{\text{int}}'$ term). \uline{This recursion relation is exact and valid at ALL orders in perturbation theory.}
+\end{example}
+
+Finally, this entire formalism generalizes naturally to theories with multiple field types. If $\mathcal{L} = \mathcal{L}(\phi_k, \partial_\mu \phi_k)$, where $\phi_k$ can be any generic field (scalar, spinor, vector), the generalized Schwinger-Dyson equation is:
+\[
+    \left\langle \frac{\delta S}{\delta \phi_k(x)} \phi_{k_1}(x_1) \cdots \phi_{k_N}(x_N) \right\rangle = i \sum_{j=1}^N \delta_{k k_j} \delta^{(4)}(x - x_j) \langle \phi_{k_1}(x_1) \cdots \phi_{k_{j-1}}(x_{j-1}) \phi_{k_{j+1}}(x_{j+1}) \cdots \rangle,
+\]
+where the Kronecker delta $\delta_{k k_j}$ ensures that contact terms are generated only when the varying field $k$ is identical to the inserted field $k_j$.
+
+\subsection{Internal Symmetries}
+
+An \textbf{internal symmetry} is a \textit{global redefinition of the fields}:
+\[
+    \phi_j(x) \to \phi_j(x) + \epsilon \Delta\phi_j(x) + \mathcal{O}(\epsilon^2),
+\]
+where $\Delta\phi_j$ is a function of the fields only, with no explicit dependence on the spacetime coordinate $x$, and the transformation parameter $\epsilon$ is also independent of $x$. We assume that the classical action $S$ is perfectly invariant under such a transformation.
+
+To investigate the quantum implications, we consider the generating functional containing all the fields $\vec{\phi}$ present in the Lagrangian:
+\[
+    Z[\vec{J}] = \int \mathcal{D}\vec{\phi} \, \exp\left[ iS[\vec{\phi}] + i \int \mathrm{d}^4x \sum_j \phi_j(x) J_j(x) \right].
+\]
+When performing this change of variables inside the path integral, we must carefully consider the integration measure $\mathcal{D}\vec{\phi}$. There are two fundamental cases:
+\begin{itemize}
+    \item \textbf{The measure is NOT invariant ($\mathcal{D}\vec{\phi}' \neq \mathcal{D}\vec{\phi}$):} The symmetry is said to be \textbf{anomalous}. Anomalies are symmetries of the classical theory that are strictly broken at the quantum level due to the non-invariance of the path integral measure. By computing the determinant of the transformation (the Jacobian), one can derive identities valid at all orders in perturbation theory that explicitly control how the symmetry is broken. We will not focus on this phenomenon in the current lectures, though it plays a critical role in theories like QCD.
+    \item \textbf{The measure IS invariant ($\mathcal{D}\vec{\phi}' = \mathcal{D}\vec{\phi}$):} The symmetry holds exactly at the quantum level. It mathematically translates into exact identities relating different Green's functions or scattering amplitudes. These relations are broadly known as \textbf{Ward-Takahashi Identities}.
+\end{itemize}
+
+From now on, unless explicitly stated otherwise, we will solely consider non-anomalous symmetries. Since the measure and the action are invariant, the change of variables leaves the integral unchanged, but the source term in the exponential shifts:
+\[
+    \begin{aligned}
+        Z[\vec{J}] & = \int \mathcal{D}\vec{\phi} \, \exp\left[ iS + i \int \mathrm{d}^4x \sum_j (\phi_j + \epsilon \Delta\phi_j) J_j \right]                                                                                   \\
+                   & = \int \mathcal{D}\vec{\phi} \, \exp\left[ iS + i \int \mathrm{d}^4x \sum_j \phi_j J_j \right] \left( 1 + i\epsilon \sum_j \int \mathrm{d}^4x \, \Delta\phi_j(x) J_j(x) + \mathcal{O}(\epsilon^2) \right).
+    \end{aligned}
+\]
+Because the integral must equal the original $Z[\vec{J}]$, the $\mathcal{O}(\epsilon)$ term must identically vanish:
+\[
+    \int \mathcal{D}\vec{\phi} \, \exp\left[ iS + i \int \mathrm{d}^4x \sum_j \phi_j J_j \right] \sum_j i \int \mathrm{d}^4x \, \Delta\phi_j(x) J_j(x) = 0.
+\]
+To extract physical relations for Green's functions, we apply functional derivatives $\left(-i \frac{\delta}{\delta J_{k_1}(x_1)}\right) \cdots$ $\cdots\left(-i \frac{\delta}{\delta J_{k_N}(x_N)}\right)$ to this equation and subsequently set all sources $J=0$. The derivative operator hits the source term $J_j(x)$, picking up a delta function $\delta^{(4)}(x - x_i)$ for each insertion point, leading to the \textbf{global Ward-Takahashi identity}:
+\[
+    \sum_{i=1}^N \langle \phi_{k_1}(x_1) \cdots \phi_{k_{i-1}}(x_{i-1}) \Delta\phi_{k_i}(x_i) \phi_{k_{i+1}}(x_{i+1}) \cdots \phi_{k_N}(x_N) \rangle = 0.
+\]
+
+\begin{example}[Global $U(1)$ Symmetry for a Complex Scalar]
+    Consider a complex scalar field whose Lagrangian is invariant under a global $U(1)$ phase rotation:
+    \[
+        \begin{dcases}
+            \phi \to e^{i\epsilon}\phi \simeq \phi + i\epsilon\phi \\
+            \phi^* \to e^{-i\epsilon}\phi^* \simeq \phi^* - i\epsilon\phi^*
+        \end{dcases}
+        \implies
+        \begin{dcases}
+            \Delta\phi = i\phi \\
+            \Delta\phi^* = -i\phi^*
+        \end{dcases}
+    \]
+    Let us apply the global Ward-Takahashi identity to a general Green's function containing $N$ fields $\phi$ and $M$ conjugated fields $\phi^*$: $\langle \phi(x_1) \cdots \phi(x_N) \phi^*(y_1) \cdots \phi^*(y_M) \rangle$.
+    Inserting $\Delta\phi$ replaces each $\phi(x_i)$ with $i\phi(x_i)$, giving $N$ factors of $i$. Inserting $\Delta\phi^*$ replaces each $\phi^*(y_j)$ with $-i\phi^*(y_j)$, giving $M$ factors of $-i$. The identity yields:
+    \[
+        i(N - M) \langle \phi(x_1) \cdots \phi(x_N) \phi^*(y_1) \cdots \phi^*(y_M) \rangle = 0.
+    \]
+    This profoundly implies that the Green's function is strictly zero unless $N = M$. Therefore, non-vanishing correlation functions must contain an exactly equal number of $\phi$ and $\phi^*$ fields. This is the mathematical manifestation of the \textbf{conservation of charge} at the quantum level.
+\end{example}
+
+\subsubsection{QFT Noether's Theorem}
+
+A much stronger result can be derived, representing the complete quantum field theory formulation of Noether's Theorem.
+
+Classically, Noether's Theorem states that for every continuous global symmetry of the action, there exists a conserved current $J^\mu$ satisfying $\partial_\mu J^\mu = 0$. More precisely, if the action is invariant under the global shift $\phi_j \to \phi_j + \epsilon \Delta\phi_j$, the corresponding change in the Lagrangian density must be a total derivative:
+\[
+    \Delta\mathcal{L} = \sum_j \left( \frac{\partial \mathcal{L}}{\partial \phi_j} \Delta\phi_j + \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi_j)} \partial_\mu(\Delta\phi_j) \right) \epsilon \equiv \epsilon \partial_\mu K^\mu,
+\]
+for some vector function $K^\mu$. The classically conserved Noether current is then elegantly defined as:
+\[
+    J^\mu = \sum_j \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi_j)} \Delta\phi_j - K^\mu.
+\]
+
+To elevate this to a quantum theorem, we employ a powerful formal trick: we promote the constant parameter $\epsilon$ to be an arbitrary function of spacetime, $\epsilon = \epsilon(x)$. Under this local transformation, the action is \textit{no longer} invariant! Recomputing the variation of the Lagrangian, the derivative operator now acts on the local $\epsilon(x)$ via the product rule, generating an extra term:
+\[
+    \Delta\mathcal{L} = \epsilon(x) \partial_\mu K^\mu + \sum_j \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi_j)} \Delta\phi_j \partial_\mu \epsilon(x).
+\]
+Consequently, the functional derivative of the shifted action $S = \int \mathrm{d}^4x' \, \mathcal{L}(\phi + \epsilon(x)\Delta\phi)$ with respect to the local parameter $\epsilon(x)$ directly exposes the divergence of the Noether current:
+\[
+    \frac{\delta S}{\delta \epsilon(x)} = \partial_\mu K^\mu - \partial_\mu \left( \sum_j \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi_j)} \Delta\phi_j \right) = - \partial_\mu J^\mu(x).
+\]
+We now insert this specific change of variables $\phi_j \to \phi_j + \epsilon(x)\Delta\phi_j$ into the path integral generating functional $Z[\vec{J}]$ and repeat the standard expansion steps. Because the measure is assumed invariant, the variation of the integral must be zero:
+\[
+    \int \mathcal{D}\vec{\phi} \, \exp\left[ iS + i \int \mathrm{d}^4x \sum_j J_j \phi_j \right] \left( - \partial_\mu J^\mu(x) + \sum_j J_j(x) \Delta\phi_j(x) \right) = 0.
+\]
+Notice carefully that $J^\mu(x)$ here represents the composite operator defining the Noether current, while $J_j(x)$ are the classical external sources used to generate the correlation functions.
+
+By taking functional derivatives with respect to the sources $J_{k_i}(x_i)$ and evaluating at $\vec{J}=0$ as before, we obtain the fundamental QFT Ward-Takahashi identity in its local form:
+\[
+    \begin{aligned}
+        \partial_\mu \langle J^\mu(x) \phi_{k_1}(x_1) \cdots \phi_{k_N}(x_N) \rangle = -i \sum_{i=1}^N \delta^{(4)}(x - x_i) \langle \phi_{k_1}(x_1) \cdots \\
+        \cdots \phi_{k_{i-1}}(x_{i-1}) \Delta\phi_{k_i}(x_i) \phi_{k_{i+1}}(x_{i+1}) \cdots \phi_{k_N}(x_N) \rangle.
+    \end{aligned}
+\]
+This profound equation tells us that the classical conservation law $\partial_\mu J^\mu = 0$ holds strictly true for Green's functions, \textit{up to contact terms}. These contact terms (represented by the Dirac delta functions on the right-hand side) only contribute when the spacetime point $x$ of the current operator $J^\mu(x)$ exactly coincides with the position $x_i$ of one of the other fundamental fields inside the correlation function.
+
+\subsection{Ward-Takahashi Identities in QED}
+
+Let us apply the powerful result of the quantum Noether's theorem to Quantum Electrodynamics (QED). Consider the global $U(1)$ symmetry corresponding to phase rotations of the Dirac fermion fields:
+\[
+    \begin{dcases}
+        \psi \to e^{i\epsilon} \psi \simeq \psi + i\epsilon\psi \\
+        \bar{\psi} \to e^{-i\epsilon} \bar{\psi} \simeq \bar{\psi} - i\epsilon\bar{\psi}
+    \end{dcases}
+    \implies
+    \begin{dcases}
+        \Delta\psi = i\psi \\
+        \Delta\bar{\psi} = -i\bar{\psi}
+    \end{dcases} .
+\]
+Because we are considering a strictly \textit{global} symmetry, the gauge field $A_\mu$ does not transform ($\Delta A_\mu = 0$).
+The Noether current associated with this global symmetry is the standard Dirac vector current:
+\[
+    J^\mu = -\bar{\psi} \gamma^\mu \psi.
+\]
+Consider a general Green's function containing one incoming fermion field $\psi(x_2)$ and one outgoing anti-fermion field $\bar{\psi}(x_1)$. Applying the generalized Ward-Takahashi identity derived in the previous section:
+\[
+    \begin{aligned}
+        \partial_\mu \langle J^\mu(x) \bar{\psi}(x_1) \psi(x_2) \rangle                          & = -i \left[ \delta^{(4)}(x - x_1) \langle \Delta\bar{\psi}(x_1) \psi(x_2) \rangle + \delta^{(4)}(x - x_2) \langle \bar{\psi}(x_1) \Delta\psi(x_2) \rangle \right] \\
+        i\partial_\mu \langle \bar{\psi}(x) \gamma^\mu \psi(x) \bar{\psi}(x_1) \psi(x_2) \rangle & = \left[ i\delta^{(4)}(x - x_1) - i\delta^{(4)}(x - x_2) \right] \langle \bar{\psi}(x_1) \psi(x_2) \rangle.
+    \end{aligned}
+\]
+
+What are the profound physical implications of this equation?
+First, consider the term $\bar{\psi}(x)\gamma^\mu\psi(x)$ inside the Green's function. This is the insertion of a vector current. Diagrammatically, we can represent this 3-point Green's function as a vertex where a momentum $q$ is injected via the current:
+
+\TODO{add diagram: 3-point Green's function with current insertion J and external points }
+
+From our perturbative Feynman rules, the rule for a simple vector current insertion is simply $\gamma^\mu$. Notice that this is exactly proportional (up to a factor of $iQ_e$) to the rule for a standard photon interaction vertex:
+
+\TODO{add diagram}
+
+This is not surprising at all, since photons strictly couple to conserved currents.
+
+Let us Fourier transform the Ward-Takahashi identity to momentum space, assigning incoming momentum $p_1$ to the fermion, outgoing momentum $p_2$, and incoming momentum $q$ to the current insertion:
+\TODO{add diagram: Momentum space assignments for the 3-point function}
+\[
+    = iQ_e \int \mathrm{d}^4x \, \mathrm{d}^4x_1 \, \mathrm{d}^4x_2 \, e^{i(p_2 \cdot x_2 - p_1 \cdot x_1 - q \cdot x)} (\dots)
+\]
+We define the Fourier-transformed Green's functions. Let $\mathcal{M}^\mu(q; p_1, p_2)$ be the 3-point Green's function with the external photon propagator stripped off (but including external fermion propagators). Let $\mathcal{M}_0(p, k)$ represent the full 2-point fermion Green's function (the exact interacting fermion propagator) carrying momentum from $p$ to $k$.
+
+\TODO{add diagram: Definitions}
+
+\textit{Crucial Note:} These are full \textbf{Green's functions}, not physical scattering amplitudes! This means the external momenta are generally \textbf{off-shell} ($p_i^2 \neq m^2$), there are no external polarization vectors $\epsilon_\mu$, and the external fermion propagators are strictly included.
+
+The spacetime derivative $i\partial_\mu$ acting on the coordinate $x$ brings down the momentum $q_\mu$. The Ward-Takahashi identity in momentum space beautifully simplifies to:
+\[
+    q_\mu \mathcal{M}^\mu(q; p_1, p_2) = -Q_e \Big( \mathcal{M}_0(p_1, p_2 - q) - \mathcal{M}_0(p_1 + q, p_2) \Big)
+\]
+\TODO{add diagram: visual representation of the Ward-Takahashi identity in momentum space showing the contraction equal to the difference of two 2-point functions}
+
+This elegant relation, connecting a 3-point function to a difference of 2-point functions, is easily generalized to an arbitrary Green's function with any number of external legs. By following the exact same steps for a Green's function with $N$ incoming fermions and $N$ outgoing fermions:
+\[
+    q_\mu \mathcal{M}^\mu(q; p_1 \dots, k_1 \dots) = -Q_e \sum_i \left( \mathcal{M}_0(\dots, k_i - q, \dots) - \mathcal{M}_0(\dots, p_i + q, \dots) \right)
+\]
+\TODO{add diagram: General WT identity with a blob of N legs}
+\textit{(Note: In Peskin and Schroeder section 7.4, there is a very nice diagrammatic proof of this identity by explicitly summing insertion points on Feynman diagrams. Here, we have proved it much more rigorously and generally via the functional path integral formalism).}\TODO{add ref}
+
+\subsubsection{From Green's Functions to Scattering Amplitudes: The Ward Identity}
+
+What happens when we transition from these off-shell Green's functions to actual on-shell \textbf{scattering amplitudes}?
+To compute an S-matrix element, the LSZ reduction formula instructs us to put all external fermions on-shell ($p^2 = m^2$) and multiply the Green's function by the inverse free propagators $\prod_{p=p_j , k_j} \left(\frac{-i}{\slashed{p} - m}\right)$ to amputate the external legs.
+
+Look at the right-hand side of the Ward-Takahashi identity. It consists of differences of Green's functions where the momentum of one leg is shifted by $q$. If we apply the LSZ amputation procedure, the shifted leg (e.g., $p_i + q$) will \textit{not} have the correct on-shell singularity pole $\frac{i}{\slashed{p}_i + \slashed{q} - m}$ to cancel the specific amputation factor $\slashed{p}_i - m$.
+Consequently, when we take the strict on-shell limit prescribed by LSZ, the right-hand side identically vanishes!
+
+Therefore, for physical scattering amplitudes $\mathcal{M}$, we rigorously recover the \textbf{Ward Identity}:
+\[
+    i\mathcal{M} = i\epsilon_\mu(q)\mathcal{M}^\mu \implies q_\mu \mathcal{M}^\mu = 0.
+\]
+Remarkably, our functional derivation proved something even stronger: the Ward identity
+\[
+    q_\mu \mathcal{M}^{\mu \nu_1 \dots \nu_n} = 0,
+\]
+is valid even if the external photons are strictly off-shell, and even if they are NOT contracted with their respective polarization vectors!
+Among other things, this formally justifies the replacement $\sum \epsilon_{s\mu} \epsilon_{s\nu}^* \to -g_{\mu\nu}$ in polarization sums, even for processes with an arbitrary number of external photons.
+
+\subsubsection{Gauge Invariance of the S-Matrix}
+
+One more crucial object that heavily depends on our somewhat arbitrary choice of gauge is the photon propagator itself. Recall from the Faddeev-Popov quantization that the general photon propagator depends on a gauge parameter $\xi$:
+\[
+    \Pi^{\mu\nu}(k) = \frac{i}{k^2 + i\epsilon} \left( -g^{\mu\nu} + (1-\xi) \frac{k^\mu k^\nu}{k^2} \right).
+\]
+We can use the generalized Ward-Takahashi identity to rigorously prove that the second term (proportional to $k^\mu k^\nu$) does not contribute to any physical scattering amplitude.
+
+We just showed that $k_\mu \mathcal{M}^{\mu \nu_1 \dots \nu_n} = 0$, where $\mathcal{M}$ is an ``amplitude'' containing $N+1$ external photons (which may be off-shell and uncontracted with polarization vectors) plus any number of strictly \textit{on-shell} external fermions.
+Consider the calculation of an amplitude $i\mathcal{M}$ at a specific perturbative order containing $N$ internal photon lines. We can write the mathematical expression for this amplitude as an integral over the internal photon momenta, connecting the photon propagators to a large fermion sub-amplitude:
+\[
+    \int \frac{\mathrm{d}^4k_1}{(2\pi)^4} \Pi^{\mu_1 \nu_1}(k_1) \cdots \int \frac{\mathrm{d}^4k_N}{(2\pi)^4} \Pi^{\mu_N \nu_N}(k_N) \times \mathcal{M}_{\mu_1 \dots \mu_N \nu_1 \dots \nu_N},
+\]
+where $\mathcal{M}_{\mu_1 \dots \nu_N}$ represents the rest of the diagram (including external on-shell fermions).
+If we focus on just one internal photon $k_i$, the longitudinal part of its propagator is proportional to $k_i^{\mu_i} k_i^{\nu_i}$. By the exact Ward identity we just proved, contracting $k_i^{\mu_i}$ with the sub-amplitude $\mathcal{M}_{\dots \mu_i \dots}$ yields strictly zero.
+
+Therefore, the $(1-\xi) \frac{k^\mu k^\nu}{k^2}$ part of every single internal photon propagator vanishes identically. This proves that the physical scattering amplitude $i\mathcal{M}$ is fundamentally \uline{gauge invariant and completely independent of the arbitrary gauge parameter $\xi$}.
+
+\subsubsection{Multi-Flavor QED}
+
+Finally, assume we have a theory with more than one flavor of Dirac fermion, for example, an electron with charge $Q_e e$ and a muon with charge $Q_\mu e$.
+Because the $U(1)$ global symmetries for electrons and muons are independent, we can obtain two separate Ward-Takahashi identities: one where the derivative acts on photons attached ONLY to electron currents, and one for muon currents. By linearly combining these two identities, we obtain a master Ward-Takahashi identity that is completely valid for ANY arbitrary value of the charges $Q_e$ and $Q_\mu$.
+
+This implies a very deep result: current conservation and the Ward-Takahashi identity in QED hold absolutely with an arbitrary number of Dirac fields coupling to the photon, regardless of their specific electric charges.
+
+\begin{remark}
+    This is a highly specific property of Abelian theories like QED. It is NOT generally valid for non-Abelian gauge theories such as QCD, where the gauge bosons self-interact and flavor symmetries are more complexly intertwined.
+\end{remark}

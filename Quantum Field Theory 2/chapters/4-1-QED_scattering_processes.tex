@@ -43,22 +43,36 @@ where thus the conjugate process should describe the same diagram but flipped ho
 \paragraph{Polarization of the states.}
 Now we could specify the polarization of the incoming and outgoing states, since most of the times we do not have control over the polarization of the particles in the initial state (they are not prepared in any specific spin state, which is therefore random), and we can assume to not measure the polarization of the particles in the final state. This leads us to the definition of an \textbf{unpolarized cross section}, which is obtained by \uline{averaging over the initial spins and summing over the final spins}. In this case, this is obtained by integrating over the phase space the \textbf{unpolarized squared scattering amplitude}:
 \[
-    \vert \mathcal{M} \vert^2_{\text{unpol}} = \frac{1}{2} \sum_{s_1} \frac{1}{2} \sum_{s_2} \sum_{s_3} \sum_{s_4} \left| \mathcal{M}_{s_1\,s_2 \to s_3\,s_4} \right|^2,
+    \vert \mathcal{M} \vert^2_{\text{unpol}} = \frac{1}{2} \sum_{s_1} \frac{1}{2} \sum_{s_2} \sum_{s_3} \sum_{s_4} \left| \mathcal{M}_{s_1\,s_2 \to s_3\,s_4} \right|^2.
 \]
-[... computations ...]
 
-So the square of a fermion line, summed over polarizations, can be expressed as a trace of gamma matrices: it is a powerful result, since it allows us to compute the squared amplitude without having to worry about the spinor structure of the states, but only applying a trace. This is a consequence of the completeness relations for the spinors, which allow us to express the sum over polarizations in terms of traces of gamma matrices.
+To compute this efficiently, we recall the completeness relations for Dirac spinors:
+\[
+    \sum_s u_s(p)_\alpha \bar{u}_s(p)_\beta = (\slashed{p} + m)_{\alpha\beta}, \quad \sum_s v_s(p)_\alpha \bar{v}_s(p)_\beta = (\slashed{p} - m)_{\alpha\beta}.
+\]
+Using these relations, the spin sums turn into traces of gamma matrices. Let us see an example for a single fermion line. If we take the squared modulus of a fermion current, we get a term from \(\mathcal{M}^*\) and one from \(\mathcal{M}\), and we explicitly write the spinor indices:
+\[
+    \sum_{s_1, s_2} \underbrace{(\bar{u}_{1\,\alpha} \gamma^\nu_{\alpha\beta} v_{2\,\beta})}_{\text{from } \mathcal{M}^*} \underbrace{(\bar{v}_{2\,\alpha'} \gamma^\mu_{\alpha'\beta'} u_{1\,\beta'})}_{\text{from } \mathcal{M}}.
+\]
+Since these are now just numbers (components), we can rearrange them to bring the spinors corresponding to the same particle next to each other:
+\[
+    = \sum_{s_1, s_2} u_{1\,\beta'} \bar{u}_{1\,\alpha} \gamma^\nu_{\alpha\beta} v_{2\,\beta} \bar{v}_{2\,\alpha'} \gamma^\mu_{\alpha'\beta'}.
+\]
+Now we recognize the completeness relations in the sums over \(s_1\) and \(s_2\). Substituting them, we close the index loop, which is exactly the definition of a matrix trace:
+\[
+    = \Tr \left[ (\slashed{p}_1 + m) \gamma^\nu (\slashed{p}_2 - m) \gamma^\mu \right].
+\]
+So the square of a fermion line, summed over polarizations, can be expressed as a trace of gamma matrices: it is a powerful result, since it allows us to compute the squared amplitude without having to worry about the spinor structure of the states, but only applying a trace. This is a consequence of the completeness relations for the spinors, which allow us to express the sum over polarizations in terms of traces of gamma matrices. \TODO{Insert diagram of the squared amplitude here}
 
-    [... computations ... diagram ...]
-
-Thus we
+Thus we:
 \begin{itemize}
     \item Follow the fermion lines backwards to write down the amplitude.
-    \item Replace ``cut lines'' with a sum over polarizations, which can be expressed as a trace of gamma matrices.
+    \item Replace ``cut lines'' with a sum over polarizations (e.g., \(\sum u\bar{u} \to \slashed{p}+m\), \(\sum v\bar{v} \to \slashed{p}-m\)), which naturally close into a trace of gamma matrices.
 \end{itemize}
 
+Applying this to our full \(e^- e^+ \to \mu^- \mu^+\) process (including both the electron and muon lines, the photon propagators, and the \(1/4\) spin-averaging factor), we get:\TODO{add the Feynman diagram for the total squared amplitude here.}
 \[
-    \vert \mathcal{M} \vert_{\text{unpol}}^2 = \frac{e^4}{4 s^2} \Tr \left[ (\slashed{p}_1 + m_e) \gamma^\rho (\slashed{p}_2 + m_e) \gamma^\sigma \right] \Tr \left[ (\slashed{p}_3 + m_\mu) \gamma_\sigma (\slashed{p}_4 - m_\mu) \gamma_\rho \right].
+    \vert \mathcal{M} \vert_{\text{unpol}}^2 = \frac{e^4}{4 s^2} \Tr \left[ (\slashed{p}_1 + m_e) \gamma^\nu (\slashed{p}_2 - m_e) \gamma^\mu \right] \Tr \left[ (\slashed{p}_3 + m_\mu) \gamma_\nu (\slashed{p}_4 - m_\mu) \gamma_\mu \right].
 \]
 
 But we need to understand how to compute traces of gamma matrices, which is the topic of the next section, in which we will review some properties of the gamma matrices and of the Dirac algebra in general.
@@ -117,23 +131,132 @@ We are not going to prove the followig traces, but they are very useful in the c
 \]
 where \(\epsilon^{\mu \nu \rho \sigma}\) is the Levi-Civita symbol.
 
+
+\subsection{Dirac Algebra}
+
+We list some important identities regarding the Dirac matrices and their proofs. All these properties stem from the fundamental anticommutation relations of the Clifford algebra:
+\[
+    \{\gamma^\mu, \gamma^\nu\} = 2g^{\mu\nu}\mathbb{I}_{4\times4}, \qquad \{\gamma^5, \gamma^\mu\} = 0, \qquad (\gamma^5)^2 = \mathbb{I}_{4\times4}.
+\]
+The first relation implies that we can always swap two adjacent gamma matrices at the cost of a minus sign and a metric tensor term: $\gamma^\mu \gamma^\nu = -\gamma^\nu \gamma^\mu + 2g^{\mu\nu}$.
+
+A very useful preliminary identity is the contraction of a gamma matrix with itself:
+\[
+    \gamma^\mu \gamma_\mu = 4 \mathbb{I}_{4\times4}.
+\]
+\begin{proof}
+    We can split the product into its symmetric and antisymmetric parts:
+    \[
+        \gamma^\mu \gamma_\mu = \frac{1}{2}\{\gamma^\mu, \gamma_\mu\} + \frac{1}{2}[\gamma^\mu, \gamma_\mu].
+    \]
+    The commutator vanishes because we are contracting the same index, while the anticommutator yields $2g^\mu_\mu = 2(4) = 8$. Thus, $\frac{1}{2}(8) = 4\mathbb{I}$.
+\end{proof}
+
+Remember that we are tracing with respect to the spinor indices, thus we are tracing over \(4 \times 4\) matrices. The following fundamental identities hold for the traces:
+\[
+    \Tr [\mathbb{I}_4] = 4,
+\]
+\[
+    \Tr [\gamma^{\mu_1} \dots \gamma^{\mu_N}] = 0 \quad \text{for } N \text{ odd}.
+\]
+\begin{proof}
+    Let us prove it for a generic odd number \(N\) of gamma matrices. We insert the identity in the form of $(\gamma^5)^2 = \mathbb{I}$ inside the trace:
+    \[
+        \Tr [\gamma^{\mu_1} \dots \gamma^{\mu_N}] = \Tr [\gamma^{\mu_1} \dots \gamma^{\mu_N} \gamma^5 \gamma^5].
+    \]
+    Using the cyclic property of the trace, we move the last $\gamma^5$ to the front:
+    \[
+        = \Tr [\gamma^5 \gamma^{\mu_1} \dots \gamma^{\mu_N} \gamma^5].
+    \]
+    Now we anti-commute the first $\gamma^5$ to the right, passing it through all the $N$ gamma matrices. Since $\{\gamma^5, \gamma^\mu\} = 0$, each swap generates a minus sign. After $N$ swaps, it recombines with the other $\gamma^5$:
+    \[
+        = (-1)^N \Tr [\gamma^{\mu_1} \dots \gamma^{\mu_N} (\gamma^5)^2] = (-1)^N \Tr [\gamma^{\mu_1} \dots \gamma^{\mu_N}].
+    \]
+    If $N$ is odd, $(-1)^N = -1$. An object equal to minus itself must be zero, hence the identity is proven.
+\end{proof}
+
+For even numbers of gamma matrices, we iteratively use the cyclic property and the anticommutation relation to reduce the trace of $N$ matrices to traces of $N-2$ matrices.
+For $N=2$:
+\[
+    \Tr [\gamma^\mu \gamma^\nu] = 4 g^{\mu \nu}.
+\]
+\begin{proof}
+    Using the cyclic property of the trace, we can write:
+    \[
+        \Tr [\gamma^\mu \gamma^\nu] = \Tr [\gamma^\nu \gamma^\mu].
+    \]
+    Now we anti-commute the two matrices on the right-hand side using $\gamma^\nu \gamma^\mu = -\gamma^\mu \gamma^\nu + 2g^{\mu\nu}$:
+    \[
+        \Tr [\gamma^\mu \gamma^\nu] = - \Tr [\gamma^\mu \gamma^\nu] + 2 g^{\mu \nu} \Tr [\mathbb{I}_4].
+    \]
+    Bringing the trace to the left side and recalling that $\Tr[\mathbb{I}_4] = 4$, we get:
+    \[
+        2 \Tr [\gamma^\mu \gamma^\nu] = 8 g^{\mu \nu} \implies \Tr [\gamma^\mu \gamma^\nu] = 4 g^{\mu \nu}.
+    \]
+\end{proof}
+
+For $N=4$, let us use a simplified notation, in which \(\Tr [\mu \nu \rho \sigma] \equiv \Tr [\gamma^{\mu} \gamma^{\nu} \gamma^{\rho} \gamma^{\sigma}]\). Then we can prove the following identity:
+\[
+    \Tr [\gamma^{\mu} \gamma^\nu \gamma^\rho \gamma^\sigma] = 4 \left( g^{\mu \nu} g^{\rho \sigma} - g^{\mu \rho} g^{\nu \sigma} + g^{\mu \sigma} g^{\nu \rho} \right).
+\]
+\begin{proof}
+    We start by using the cyclic property to move $\mu$ to the right end:
+    \[
+        \Tr [\mu \nu \rho \sigma] = \Tr [\nu \rho \sigma \mu].
+    \]
+    Now, we systematically anti-commute $\mu$ back to the left, step by step.
+    First, we swap $\mu$ with $\sigma$ ($\sigma \mu = -\mu \sigma + 2g^{\mu\sigma}$):
+    \[
+        = - \Tr [\nu \rho \mu \sigma] + 2 g^{\mu \sigma} \Tr [\nu \rho].
+    \]
+    Next, we swap $\mu$ with $\rho$ inside the first trace:
+    \[
+        = + \Tr [\nu \mu \rho \sigma] - 2 g^{\mu \rho} \Tr [\nu \sigma] + 2 g^{\mu \sigma} \Tr [\nu \rho].
+    \]
+    Finally, we swap $\mu$ with $\nu$:
+    \[
+        = - \Tr [\mu \nu \rho \sigma] + 2 g^{\mu \nu} \Tr [\rho \sigma] - 2 g^{\mu \rho} \Tr [\nu \sigma] + 2 g^{\mu \sigma} \Tr [\nu \rho].
+    \]
+    Notice that the first term on the right-hand side is exactly minus our original trace. Bringing it to the left side, we get:
+    \[
+        2 \Tr [\mu \nu \rho \sigma] = 2 g^{\mu \nu} \Tr [\rho \sigma] - 2 g^{\mu \rho} \Tr [\nu \sigma] + 2 g^{\mu \sigma} \Tr [\nu \rho].
+    \]
+    Dividing by 2 and substituting the 2-gamma traces (e.g., $\Tr[\rho\sigma] = 4g^{\rho\sigma}$) yields the final result.
+\end{proof}
+
+We are not going to prove the following traces, but they are very useful in computations involving polarized cross-sections or chiral theories. Recalling the definition \(\gamma^5 = i \gamma^0 \gamma^1 \gamma^2 \gamma^3\), we have the following identities:
+\[
+    \begin{dcases}
+        \Tr [\gamma^5] = 0,                                                                      \\
+        \Tr [\gamma^{\mu_1} \cdots \gamma^{\mu_N} \gamma^5] = 0 \quad \text{for } N \text{ odd}, \\
+        \Tr [\gamma^\mu \gamma^\nu \gamma^5] = 0,                                                \\
+        \Tr [\gamma^{\mu} \gamma^\nu \gamma^\rho \gamma^\sigma \gamma^5] = -4 i \epsilon^{\mu \nu \rho \sigma},
+    \end{dcases}
+\]
+where \(\epsilon^{\mu \nu \rho \sigma}\) is the totally antisymmetric Levi-Civita symbol.
+
+As a final useful exercise, one can also show that contracting a string of gamma matrices with the same index reverses their order (useful for simplifying amplitudes before taking the trace):
+\[
+    \gamma^\mu \gamma^\nu \gamma^\rho \gamma^\sigma \gamma_\mu = -2 \gamma^\sigma \gamma^\rho \gamma^\nu.
+\]
+
 \subsection{Back to Electron - Muon Scattering}
 
 Let us rewrite the unpolarized squared amplitude for the electron-muon scattering process:
 \[
-    \vert \mathcal{M} \vert_{\text{unpol}}^2 = \frac{e^4}{4 s^2} \Tr \left[ (\slashed{p}_1 + m_e) \gamma^\rho (\slashed{p}_2 + m_e) \gamma^\sigma \right] \Tr \left[ (\slashed{p}_3 + m_\mu) \gamma_\sigma (\slashed{p}_4 - m_\mu) \gamma_\rho \right].
+    \vert \mathcal{M} \vert_{\text{unpol}}^2 = \frac{e^4}{4 s^2} \Tr \left[ (\slashed{p}_1 + m_e) \gamma^\rho (\slashed{p}_2 - m_e) \gamma^\sigma \right] \Tr \left[ (\slashed{p}_3 + m_\mu) \gamma_\sigma (\slashed{p}_4 - m_\mu) \gamma_\rho \right].
 \]
 Then let us apply the identities for the traces of gamma matrices to compute the traces in the expression above. From the first trace we get
 \[
-    \Tr \left[ (\slashed{p}_1 + m_e) \gamma^\rho (\slashed{p}_2 + m_e) \gamma^\sigma \right]
+    \Tr \left[ (\slashed{p}_1 + m_e) \gamma^\rho (\slashed{p}_2 - m_e) \gamma^\sigma \right]
 \]
 where computing the products inside the trace we can ignore all the terms that contain an odd number of gamma matrices, since their trace is zero. Thus we are left with
 \[
-    \Tr \left[ (\slashed{p}_1 + m_e) \gamma^\rho (\slashed{p}_2 + m_e) \gamma^\sigma \right] = \Tr [\slashed{p}_1 \gamma^\rho \slashed{p}_2 \gamma^\sigma] - m_e^2 \Tr [\gamma^\rho \gamma^\sigma],
+    \Tr \left[ (\slashed{p}_1 + m_e) \gamma^\rho (\slashed{p}_2 - m_e) \gamma^\sigma \right] = \Tr [\slashed{p}_1 \gamma^\rho \slashed{p}_2 \gamma^\sigma] - m_e^2 \Tr [\gamma^\rho \gamma^\sigma],
 \]
 but the last one is a result we already know, while for the first we can take out the four-momentum from the trace, since it is just a number, and get\TODO{check computations}
 \[
-    \Tr \left[ (\slashed{p}_1 + m_e) \gamma^\rho (\slashed{p}_2 + m_e) \gamma^\sigma \right] = 4 \left( p_1^\rho p_2^\sigma + p_1^\sigma p_2^\rho - g^{\rho \sigma} (p_1 \cdot p_2 - m_e^2) \right).
+    \Tr \left[ (\slashed{p}_1 + m_e) \gamma^\rho (\slashed{p}_2 - m_e) \gamma^\sigma \right] = 4 \left( p_1^\rho p_2^\sigma + p_1^\sigma p_2^\rho - g^{\rho \sigma} (p_1 \cdot p_2 - m_e^2) \right).
 \]
 Thus in the end we get
 \[
@@ -360,21 +483,28 @@ If we chose \(\eta^\mu = (1, 0, 0, -1)\), then we can check that the completenes
 
 [...] [...]
 
-However
+To compute the unpolarized squared amplitude, we need to sum over the physical polarization states of the external photon:
 \[
-    \vert \mathcal{M} \vert^2 = \sum_{s} \epsilon_s^{\mu} \epsilon_{s}^{*\nu} \mathcal{M}_\mu \mathcal{M}^*_\nu,
+    \vert \mathcal{M} \vert^2 = \mathcal{M}_\mu \mathcal{M}^*_\nu \sum_{s} \epsilon_s^{\mu} \epsilon_{s}^{*\nu}.
 \]
-where for the Ward identity to hold we need to have
+As we have seen, the exact sum over the physical transverse polarizations involves an arbitrary gauge vector \(\eta\):
 \[
-    \begin{dcases}
-        p_\mu \mathcal{M}^\mu = 0, \\
-        p_\nu \mathcal{M}^{*\nu} = 0,
-    \end{dcases}
+    \sum_{s} \epsilon_s^{\mu} \epsilon_{s}^{*\nu} = - g^{\mu \nu} + \frac{1}{p \cdot \eta} (p^\mu \eta^\nu + p^\nu \eta^\mu).
 \]
-son in practice we are allowed to replace the sum over the polarizations of the photon with \(- g^{\mu \nu}\) without changing the value of the amplitude, since the terms proportional to \(p^\mu\) and \(p^\nu\) will vanish when contracted with \(\mathcal{M}_\mu\) and \(\mathcal{M}^*_\nu\), respectively. Thus we can write
+If we plug this expression back into the squared amplitude, we can distribute the contraction over the two terms:
 \[
-    \sum_{s} \epsilon_s^{\mu} \epsilon_{s}^{*\nu} \to - g^{\mu \nu}.
+    \vert \mathcal{M} \vert^2 = - \mathcal{M}_\mu \mathcal{M}^*_\nu g^{\mu \nu} + \frac{1}{p \cdot \eta} \Big[ (p^\mu \mathcal{M}_\mu) (\eta^\nu \mathcal{M}^*_\nu) + (\eta^\mu \mathcal{M}_\mu) (p^\nu \mathcal{M}^*_\nu) \Big].
 \]
+At this point, the \textbf{Ward Identity} comes to our rescue. It dictates that replacing the polarization vector of an external photon with its four-momentum exactly annihilates the QED amplitude:
+\[
+    p^\mu \mathcal{M}_\mu = 0 \quad \text{and} \quad p^\nu \mathcal{M}^*_\nu = 0.
+\]
+Because of this, both terms inside the square brackets strictly vanish, entirely removing the dependence on the unphysical gauge vector \(\eta\). Therefore, in practical calculations, whenever we sum over the polarizations of an external photon contracted with a conserved amplitude, we are allowed to make the effective replacement:
+\[
+    \sum_{s} \epsilon_s^{\mu} \epsilon_{s}^{*\nu} \longrightarrow - g^{\mu \nu},
+\]
+since the extra terms do not contribute to the physical result.
+
 This derivation is a consequence of Ward Identity in the particular case of just one external photon, but it can be generalized to the case of multiple external photons; indeed we know a stronger version of the Ward identity, which states that if we replace the polarization vector of any external photon with its momentum, we get a vanishing amplitude:
 \[
     p_\mu \mathcal{M}^{\mu\,\nu_1 \cdots \nu_n} = 0,
@@ -417,8 +547,183 @@ and we now want to verify the general Ward identity in this process for \(\epsil
     The single diagram is not gauge invariant indeed, but their sum is, and this is a consequence of the fact that the gauge invariance of the theory is a global property that is not manifest in the individual diagrams, but only in their sum.
 \end{remark}
 
-\subsection{Notes on Convergence}
+\begin{example}[Compton Scattering in QED with $m_e = 0$]\TODO{check examples and add diagrams}
+    Let us compute the unpolarized squared amplitude $\vert \mathcal{M} \vert^2_{\text{unpol}}$ and the differential cross-section $\frac{d\sigma}{d\Omega}$ in the center of mass (CM) frame for Compton scattering ($e^-(p_1) + \gamma(p_2) \to e^-(p_3) + \gamma(p_4)$) at tree-level. For simplicity, we will work in the massless limit $m_e = 0$, which implies the Mandelstam variables satisfy $s + t + u = 0$.
+
+    The amplitude is the sum of the $s$-channel and $u$-channel diagrams: $\mathcal{M} = \mathcal{M}_s + \mathcal{M}_u$. To find the unpolarized squared amplitude, we average over the initial spins and sum over the final spins, replacing the photon polarizations with $-g^{\mu\nu}$ via the Ward identity:
+    \[
+        \vert \mathcal{M} \vert^2_{\text{unpol}} = \frac{1}{4} \sum_{\text{spins}} \vert \mathcal{M}_s \vert^2 + \frac{1}{4} \sum_{\text{spins}} \vert \mathcal{M}_u \vert^2 + \frac{1}{2} \text{Re} \sum_{\text{spins}} (\mathcal{M}_s \mathcal{M}_u^*).
+    \]
+
+    \textbf{1. The $s$-channel contribution:}
+    Using the Feynman rules, the squared amplitude for the $s$-channel becomes a trace:
+    \[
+        \frac{1}{4} \sum \vert \mathcal{M}_s \vert^2 = \frac{e^4}{4s^2} \Tr\left[ \slashed{p}_3 \gamma^\nu (\slashed{p}_1 + \slashed{p}_2) \gamma^\mu \slashed{p}_1 \gamma_\mu (\slashed{p}_1 + \slashed{p}_2) \gamma_\nu \right].
+    \]
+    Applying the contraction identities $\gamma^\mu \slashed{a} \gamma_\mu = -2\slashed{a}$, we can simplify the trace from the inside out. First, $\gamma^\mu \slashed{p}_1 \gamma_\mu = -2\slashed{p}_1$. The central block becomes $(\slashed{p}_1 + \slashed{p}_2)(-2\slashed{p}_1)(\slashed{p}_1 + \slashed{p}_2)$. Since $\slashed{p}_1^2 = 0$, this reduces to $-2\slashed{p}_2\slashed{p}_1\slashed{p}_2 = -2(2p_1\cdot p_2)\slashed{p}_2 = -2s\slashed{p}_2$. Finally, contracting the outer indices gives $\gamma^\nu (-2s\slashed{p}_2) \gamma_\nu = 4s\slashed{p}_2$. The trace is now much simpler:
+    \[
+        \frac{1}{4} \sum \vert \mathcal{M}_s \vert^2 = \frac{e^4}{4s^2} \Tr\left[ \slashed{p}_3 (4s\slashed{p}_2) \right] = \frac{e^4}{s} 4(p_2 \cdot p_3) = \frac{e^4}{s} 4\left(-\frac{u}{2}\right) = - 2e^4 \frac{u}{s}.
+    \]
+
+    \textbf{2. The $u$-channel and interference:}
+    By crossing symmetry ($s \leftrightarrow u$), the $u$-channel contribution is immediately:
+    \[
+        \frac{1}{4} \sum \vert \mathcal{M}_u \vert^2 = - 2e^4 \frac{s}{u}.
+    \]
+    The interference term $\mathcal{M}_s \mathcal{M}_u^*$ involves a trace that is proportional to the scalar product $(p_1+p_2)\cdot (p_1-p_4)$. In massless kinematics, $(p_1+p_2)\cdot (p_1-p_4) = \frac{s+u+t}{2} = 0$. Thus, the interference term identically vanishes in the massless limit. The total unpolarized amplitude is:
+    \[
+        \vert \mathcal{M} \vert^2_{\text{unpol}} = 2e^4 \left( -\frac{u}{s} - \frac{s}{u} \right).
+    \]
+
+    \textbf{3. Differential cross-section in the CM frame:}
+    In the center of mass frame, the kinematics yield $t = -s(1-\cos\theta)/2$ and $u = -s(1+\cos\theta)/2$, where $\theta$ is the scattering angle. Substituting $u$ into our amplitude:
+    \[
+        \vert \mathcal{M} \vert^2_{\text{unpol}} = 2e^4 \left( \frac{1+\cos\theta}{2} + \frac{2}{1+\cos\theta} \right).
+    \]
+    Using the standard massless 2-body cross-section formula $\frac{d\sigma}{d\Omega} = \frac{\vert \mathcal{M} \vert^2}{64\pi^2 s}$ and defining $\alpha = \frac{e^2}{4\pi}$, we obtain:
+    \[
+        \frac{d\sigma}{d\Omega} = \frac{\alpha^2}{2s} \left( \frac{1+\cos\theta}{2} + \frac{2}{1+\cos\theta} \right).
+    \]
+\end{example}
 
 
+\begin{example}[Ward Identity in Scalar QED Compton Scattering]
+    Let us verify the Ward identity explicitly for Compton scattering in scalar QED (sQED) at tree-level. The process involves a photon and a charged scalar particle. In sQED, there are three tree-level diagrams: the $s$-channel, the $u$-channel, and a 4-point contact (seagull) vertex arising from the $A_\mu A^\mu \vert \phi \vert^2$ term in the Lagrangian.
 
-\subsection{Ward Identity and Lorentz Transformations}
+    We write the sub-amplitudes stripped of their polarization vectors and factor out the common coupling components. We want to show that contracting the total amplitude with the incoming photon momentum $p_{2\mu}$ yields zero. The three contributions $i\mathcal{M}^{\mu\nu}$ are:
+    \begin{align*}
+        i\mathcal{M}_s^{\mu\nu} & = (-ie)^2 \frac{i}{(p_1+p_2)^2 - m^2} (2p_1+p_2)^\mu (p_1+p_2+p_3)^\nu \\
+        i\mathcal{M}_u^{\mu\nu} & = (-ie)^2 \frac{i}{(p_1-p_4)^2 - m^2} (2p_1-p_4)^\nu (p_1-p_4+p_3)^\mu \\
+        i\mathcal{M}_c^{\mu\nu} & = 2ie^2 g^{\mu\nu}
+    \end{align*}
+
+    Now, we contract each term with $p_{2\mu}$:
+    \begin{itemize}
+        \item \textbf{$s$-channel:} The contracted numerator is $p_2 \cdot (2p_1+p_2) = 2p_1\cdot p_2 + p_2^2$. Since the photon is massless ($p_2^2 = 0$), this is $2p_1 \cdot p_2$, which exactly matches the on-shell sQED denominator $(p_1+p_2)^2 - m^2$. Thus, they cancel out:
+              \[
+                  p_{2\mu} (i\mathcal{M}_s^{\mu\nu}) = -ie^2 (p_1+p_2+p_3)^\nu.
+              \]
+
+        \item \textbf{$u$-channel:} To simplify the contraction, we use momentum conservation $p_2 = p_3 - (p_1-p_4)$. The contracted numerator becomes $p_2 \cdot (p_3 + p_1 - p_4) = p_3^2 - (p_1-p_4)^2 = m^2 - (p_1-p_4)^2$. This is exactly the negative of the $u$-channel denominator. Canceling them introduces a minus sign:
+              \[
+                  p_{2\mu} (i\mathcal{M}_u^{\mu\nu}) = +ie^2 (2p_1-p_4)^\nu.
+              \]
+
+        \item \textbf{Contact channel:} The metric tensor simply lowers the index of the momentum:
+              \[
+                  p_{2\mu} (i\mathcal{M}_c^{\mu\nu}) = 2ie^2 p_2^\nu.
+              \]
+    \end{itemize}
+
+    Summing the three contracted pieces together, we can factor out $ie^2$:
+    \[
+        p_{2\mu} (i\mathcal{M}^{\mu\nu}_{\text{tot}}) = ie^2 \left[ -(p_1+p_2+p_3)^\nu + (2p_1-p_4)^\nu + 2p_2^\nu \right].
+    \]
+    Combining the momentum terms inside the bracket yields:
+    \[
+        -p_1 - p_2 - p_3 + 2p_1 - p_4 + 2p_2 = p_1 + p_2 - p_3 - p_4.
+    \]
+    By global energy-momentum conservation ($p_1+p_2 = p_3+p_4$), this expression is identically zero. Therefore, $p_{2\mu} \mathcal{M}^{\mu\nu} = 0$, explicitly verifying the Ward identity for tree-level scalar QED.
+\end{example}
+
+\subsection{A Note on Convergence (or lack thereof)}
+
+Throughout our study of Quantum Electrodynamics (QED), we compute amplitudes and Green's functions using perturbative expansions (the Dyson series). These observables are expanded as power series in the fine-structure constant \(\alpha = \frac{e^2}{4\pi}\). A fundamental mathematical question arises: \textit{are these series expansions actually convergent, and if so, what is their radius of convergence?}
+
+Surprisingly, Freeman Dyson famously showed in 1952 that the perturbative series in QED is strictly \textbf{divergent for any non-zero value of \(\alpha\)}.
+
+His beautiful physical argument works as follows:
+\begin{itemize}
+    \item Let us assume that an observable \(\mathcal{O}(\alpha) = \sum_{n=0}^\infty \mathcal{O}_n \alpha^n\) is a convergent series for some physical, positive value of \(\alpha \neq 0\).
+    \item By the standard theorems of complex analysis, if a power series converges for some \(\alpha\), it must have a finite, non-zero radius of convergence \(R\). Consequently, the series must converge for any value of \(\alpha\) within the interval \((-R, R)\).
+    \item This implies the series must also converge for some small negative value \(\alpha < 0\) such that \(-R < \alpha < 0\). Let us consider the physical meaning of a ``QED with negative \(\alpha\)''.
+    \item Since \(\alpha \propto e^2\), making \(\alpha\) negative effectively flips the overall sign of the Coulomb force. In this hypothetical universe, \textbf{like charges attract and opposite charges repel}.
+    \item In such a universe, the vacuum would be catastrophically unstable. A spontaneous quantum fluctuation creating an \(e^- e^+\) pair would not annihilate back into the vacuum. Instead, the electron and positron would repel each other. Furthermore, electrons would attract other electrons, and positrons would attract other positrons, forming infinitely large, separate clusters of pure negative and pure positive charge to lower the energy of the system.
+    \item Because the vacuum state is entirely unstable for \(\alpha < 0\), the physical observables cannot be analytically continued to negative couplings. Therefore, the radius of convergence must be exactly zero (\(R=0\)), meaning the series \textbf{cannot be convergent} for any \(\alpha \neq 0\).
+\end{itemize}
+
+If the series diverges, why does perturbation theory work so incredibly well in QED? The answer is that the perturbative expansion is an \textbf{asymptotic series}.
+
+Asymptotic convergence is a weaker form of convergence. It means that if we truncate the series at a fixed order \(N\),
+\[
+    \mathcal{O}(\alpha, N) = \sum_{n=0}^N \mathcal{O}_n \alpha^n,
+\]
+this partial sum provides an approximation of the true observable \(\mathcal{O}\) that is valid up to \(\mathcal{O}(\alpha^{N+1})\) errors \textit{strictly in the mathematical limit} as \(\alpha \to 0\).
+
+However, for our universe where \(\alpha\) is fixed to a finite value (\(\approx 1/137\)), the behavior is different. Adding the first few ``\(M\)'' terms of the series yields a better and better approximation of the true physical result. But eventually, there is an optimal truncation order (roughly \(N \sim 1/\alpha \sim 137\) for QED). If you continue adding more terms beyond this point, the coefficients \(\mathcal{O}_n\) grow so rapidly (typically factorially, \(\sim n!\)) that the series starts to violently diverge.
+
+In practice, this is completely fine. The computational complexity of Feynman diagrams grows so fast that we are typically only able to compute a very small number of terms in the series (usually up to 2, 4, or 5 loops at most, depending on the observable). At these low orders, the series behaves beautifully and yields spectacularly precise predictions. The divergence only becomes a practical issue in specific theoretical frameworks where certain classes of diagrams must be considered at all orders simultaneously, requiring dedicated mathematical techniques known as \textbf{resummation}.
+
+\subsection{Ward Identity and Lorentz Transformations}\TODO{check}
+
+We have seen that if the amplitude for a process involving an external photon of momentum $p^\mu$ is written as $i\mathcal{M} = \epsilon_\mu(p) i\mathcal{M}^\mu$, the \textbf{Ward Identity} requires that $p_\mu \mathcal{M}^\mu = 0$.
+
+Another profound way to understand the necessity of this identity is by analyzing how the photon's polarization states transform under the Lorentz group. Specifically, we can look at the \textit{Little Group} of the photon: the subgroup of Lorentz transformations that leaves the photon's momentum vector invariant.
+
+Let us construct such a transformation, $T$, as a sequence of three operations: a boost along the $y$-axis, a rotation around the $x$-axis, and a compensating boost along the $z$-axis:
+\[
+    T = \Lambda_z R_x \Lambda_y.
+\]
+Without loss of generality, choose the photon momentum along the $z$-axis: $p^\mu = (E, 0, 0, E)$.
+
+\textbf{Step 1: Boost along the $y$-axis} \\
+We define the boost $\Lambda_y$ with velocity parameter $\beta$ (where $0 \leq \beta < 1$ and $\gamma = 1/\sqrt{1-\beta^2}$):
+\[
+    \Lambda_y = \begin{pmatrix}
+        \gamma       & 0 & -\beta\gamma & 0 \\
+        0            & 1 & 0            & 0 \\
+        -\beta\gamma & 0 & \gamma       & 0 \\
+        0            & 0 & 0            & 1
+    \end{pmatrix}.
+\]
+Applying this to the momentum, we get a vector that has acquired a transverse component:
+\[
+    \Lambda_y \cdot p = (E\gamma, 0, -\beta E\gamma, E).
+\]
+
+\textbf{Step 2: Rotation around the $x$-axis} \\
+We want to remove the new transverse momentum. We define a rotation $R_x$ such that the resulting momentum is once again parallel to the $z$-axis:
+\[
+    R_x = \begin{pmatrix}
+        1 & 0 & 0          & 0           \\
+        0 & 1 & 0          & 0           \\
+        0 & 0 & \cos\theta & -\sin\theta \\
+        0 & 0 & \sin\theta & \cos\theta
+    \end{pmatrix},
+\]
+by carefully choosing the angle such that $\cos\theta = 1/\gamma$ and $\sin\theta = -\beta$. Applying this to our boosted momentum eliminates the $y$-component and boosts the overall energy/z-momentum:
+\[
+    R_x \cdot \Lambda_y \cdot p = (E\gamma, 0, 0, E\gamma).
+\]
+
+\textbf{Step 3: Boost along the $z$-axis} \\
+Finally, we ask for a boost $\Lambda_z$ that scales the momentum back down to its original value, requiring $\Lambda_z \cdot R_x \cdot \Lambda_y \cdot p = p = (E, 0, 0, E)$. This requires:
+\[
+    \Lambda_z = \begin{pmatrix}
+        \gamma'        & 0 & 0 & -\beta'\gamma' \\
+        0              & 1 & 0 & 0              \\
+        0              & 0 & 1 & 0              \\
+        -\beta'\gamma' & 0 & 0 & \gamma'
+    \end{pmatrix}
+    \quad \text{with} \quad
+    \beta' = \frac{\beta^2}{2-\beta^2} \quad \text{and} \quad \gamma' = \frac{1}{\sqrt{1-\beta'^2}}.
+\]
+By construction, one can check that the combined transformation $T$ leaves the momentum strictly invariant:
+\[
+    T^\mu_{\phantom{\mu}\nu} p^\nu = p^\mu = (E, 0, 0, E).
+\]
+
+\textbf{The Effect on Polarization} \\
+However, if we apply this exact same transformation $T$ to the physical circular polarization vectors $\epsilon_\pm^\mu = \frac{1}{\sqrt{2}}(0, 1, \pm i, 0)$, one finds that they do \textit{not} remain invariant. Instead, a direct calculation shows they transform as:
+\[
+    T^\mu_{\phantom{\mu}\nu} \epsilon_\pm^\nu = \epsilon_\pm^\mu \mp \frac{i\beta}{E} p^\mu.
+\]
+This reveals a striking property of massless spin-1 particles: \textbf{after a Lorentz transformation that leaves $p^\mu$ invariant, the polarization vector is shifted by a term proportional to the momentum $p^\mu$}.
+
+This shifted polarization vector no longer belongs strictly to our standard Hilbert space of independent, purely transverse polarizations. We can mathematically ``fix'' this by performing a gauge transformation ($\epsilon^\mu \to \epsilon^\mu + \alpha p^\mu$), which we know removes the longitudinal part.
+
+However, nature does not care about our coordinate choices. If the scattering amplitude $i\mathcal{M}$ is to be genuinely \textbf{Lorentz invariant}, and if the space of physical polarization states must remain closed under Lorentz transformations, the physical observables must be completely insensitive to this momentum shift. This strictly implies that the amplitude dotted into the momentum must vanish:
+\[
+    p_\mu \mathcal{M}^\mu = 0.
+\]
+Thus, the Ward identity is deeply rooted in the fundamental requirement of Lorentz invariance for massless vector fields. (This identity will be formally and systematically proven when we study symmetries in QFT through the path integral and Noether's theorem).

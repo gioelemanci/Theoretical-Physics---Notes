@@ -1,0 +1,778 @@
+\section*{Sheet 2}
+
+\subsection*{2. Feynman Rules for Scalar QED (sQED)}
+
+\begin{center}
+    \textit{Derive the Feynman rules of scalar QED (sQED). In order to do that, start from the Lagrangian}
+    \[
+        \mathcal{L} = -\frac{1}{4}(F_{\mu\nu})^2 + |D_\mu\phi|^2 - m^2|\phi|^2
+    \]
+    \textit{where the covariant derivative } $D_\mu \equiv \partial_\mu + i e A_\mu$. \textit{Show that this is equal to}
+    \[
+        \mathcal{L} = -\frac{1}{4}(F_{\mu\nu})^2 + |\partial_\mu\phi|^2 - m^2|\phi|^2 + \mathcal{L}_{\text{int}}
+    \]
+    \[
+        \mathcal{L}_{\text{int}} = -ieA^\mu \left( \phi^*(\partial_\mu\phi) - (\partial_\mu\phi^*)\phi \right) + e^2 A^2 |\phi|^2
+    \]
+    \textit{The interaction Lagrangian is therefore a sum of two terms with different couplings and field contents, hence you should find Feynman rules for two vertexes, i.e. one for each term in} $\mathcal{L}_{\text{int}}$.
+\end{center}
+
+To find the interaction terms, we explicitly expand the kinetic term for the scalar field, $|D_\mu\phi|^2$. We compute the complex conjugate of the covariant derivative:
+\[
+    (D_\mu\phi)^* = (\partial_\mu + ieA_\mu\phi)^* = \partial_\mu\phi^* - ieA_\mu\phi^*
+\]
+Now, we multiply the covariant derivative by its complex conjugate (using the Einstein summation convention for the Lorentz index $\mu$):
+\[
+    \begin{aligned}
+        |D_\mu\phi|^2 & = (D_\mu\phi)^* (D^\mu\phi) = (\partial_\mu\phi^* - ieA_\mu\phi^*)(\partial^\mu\phi + ieA^\mu\phi)                                         \\
+                      & = \partial_\mu\phi^* \partial^\mu\phi + \partial_\mu\phi^* (ieA^\mu\phi) - (ieA_\mu\phi^*) \partial^\mu\phi - (ieA_\mu\phi^*)(ieA^\mu\phi)
+    \end{aligned}
+\]
+Recognizing that $\partial_\mu\phi^* \partial^\mu\phi = |\partial_\mu\phi|^2$ and that $-i^2 = 1$, we can simplify the expression:
+\[
+    \begin{aligned}
+        |D_\mu\phi|^2 & = |\partial_\mu\phi|^2 + ieA^\mu\phi(\partial_\mu\phi^*) - ieA^\mu\phi^*(\partial_\mu\phi) + e^2 A_\mu A^\mu \phi^* \phi \\
+                      & = |\partial_\mu\phi|^2 - ieA^\mu \left[ \phi^*(\partial_\mu\phi) - (\partial_\mu\phi^*)\phi \right] + e^2 A^2 |\phi|^2
+    \end{aligned}
+\]
+Substituting this expansion back into the full Lagrangian, we can perfectly separate the free (kinetic and mass) terms from the interaction terms:
+\[
+    \mathcal{L} = -\frac{1}{4}(F_{\mu\nu})^2 + |\partial_\mu\phi|^2 - m^2|\phi|^2 + \mathcal{L}_{\text{int}}
+\]
+where the interaction Lagrangian $\mathcal{L}_{\text{int}}$ naturally splits into two distinct terms:
+\[
+    \mathcal{L}_{\text{int}} = -ieA^\mu \left( \phi^*(\partial_\mu\phi) - (\partial_\mu\phi^*)\phi \right) + e^2 A^2 |\phi|^2
+\]
+
+The interaction Lagrangian contains two distinct terms with different field contents (a cubic term and a quartic term). Each term will independently generate a unique Feynman rule for a specific vertex. To derive the rules in momentum space, we consider the action $i \int d^4x \mathcal{L}_{\text{int}}$ and apply the standard Fourier transform substitutions for incoming/outgoing fields.
+
+\begin{itemize}
+    \item \textbf{The 3-Point Vertex (Cubic Interaction):}
+
+          \TODO{add diagram: A vertex with one incoming solid line (scalar, momentum p), one outgoing solid line (scalar, momentum p'), and one incoming squiggly line (photon, momentum q, index $\mu$).}
+
+          The cubic interaction term is $\mathcal{L}_3 = -ieA^\mu \left( \phi^*(\partial_\mu\phi) - (\partial_\mu\phi^*)\phi \right)$.
+          Let $p$ be the momentum of the incoming scalar particle (associated with the field $\phi \sim e^{-ip \cdot x}$), and $p'$ be the momentum of the outgoing scalar particle (associated with the conjugate field $\phi^* \sim e^{ip' \cdot x}$).
+          When we transform the derivatives into momentum space, they pull down factors of the corresponding momenta:
+          \begin{itemize}
+              \item $\partial_\mu \phi \to -i p_\mu \phi$
+              \item $\partial_\mu \phi^* \to +i p'_\mu \phi^*$
+          \end{itemize}
+          Substituting these into the action term $i\mathcal{L}_3$:
+          \[
+              \begin{aligned}
+                  i \mathcal{L}_3 & \to i (-ieA^\mu) \left[ \phi^* (-ip_\mu) \phi - (ip'_\mu \phi^*) \phi \right] \\
+                                  & = i (-ie) A^\mu \phi^* \phi \left[ -i(p_\mu + p'_\mu) \right]                 \\
+                                  & = -ie (p_\mu + p'_\mu) A^\mu \phi^* \phi
+              \end{aligned}
+          \]
+          Stripping away the fields leaves the Feynman rule for the vertex. Note that unlike standard spinor QED, the vertex in scalar QED intrinsically depends on the momenta of the interacting particles due to the derivative coupling.
+          \begin{center}
+              \textbf{Vertex Rule}: $-ie(p_\mu  + p'_\mu)$
+          \end{center}
+
+    \item \textbf{The 4-Point ``Seagull'' Vertex (Quartic Interaction):}
+
+          \TODO{add diagram: A vertex with one incoming solid line, one outgoing solid line, and two squiggly photon lines attaching at the same point, with indices $\mu$ and $\nu$.}
+
+          The quartic interaction term is $\mathcal{L}_4 = e^2 A^2 |\phi|^2 = e^2 g_{\mu\nu} A^\mu A^\nu \phi^* \phi$.
+          This vertex involves two scalar particles and two photons. The vertex rule is obtained by multiplying the coefficient in $i\mathcal{L}_4$ by the appropriate symmetry factor.
+          Because there are two identical photon fields $A^\mu$ and $A^\nu$ in the interaction term, there are $2! = 2$ identical ways to contract them with two external photon lines. This yields a combinatoric symmetry factor of 2.
+
+          \begin{center}
+              \textbf{Vertex Rule}: $i (e^2 g_{\mu\nu}) \times 2 = 2ie^2 g_{\mu\nu}$
+          \end{center}
+\end{itemize}
+
+
+\subsection*{3. Scattering Amplitude in sQED}
+
+\begin{center}
+    \textit{In sQED, compute the scattering amplitude } $i\mathcal{M}$ \textit{ for the process } $\phi(p_1)+\phi(p_2) \to \phi(p_3)+\phi(p_4)$ \textit{ at tree level, as a function of the Mandelstam invariants } $s$, $t$ \textit{ and } $u$ \textit{ (and the mass } $m$ \textit{ of the field).} \\
+    \textit{Solution: } $i\mathcal{M} = ie^2((s-u)/t + (s-t)/u)$ \textit{ with } $s+t+u = 4m^2$.
+\end{center}
+
+To compute the tree-level scattering amplitude for the elastic scattering of two identical charged scalars, $\phi(p_1)+\phi(p_2) \to \phi(p_3)+\phi(p_4)$, we must first systematically identify all allowed Feynman diagrams for this process.
+
+In scalar QED, the interaction Lagrangian contains a 3-point vertex coupling two scalars to one photon ($\sim A^\mu \phi^* \partial_\mu \phi$) and a 4-point ``seagull'' vertex coupling two scalars to two photons ($\sim A^2 |\phi|^2$). Because our specific scattering process involves strictly four external scalars and zero external photons, the 4-point seagull vertex physically cannot contribute at tree level.
+
+Furthermore, since the colliding incoming particles are identical (both are exactly $\phi$, not a particle-antiparticle pair $\phi \phi^*$), they cannot annihilate into a single virtual photon. Thus, there is absolutely no $s$-channel annihilation diagram. The process is purely mediated by the exchange of a virtual photon in the $t$-channel and the $u$-channel.
+
+\TODO{add diagram: Two Feynman diagrams. 1) t-channel: p1 and p3 connected by a vertical photon line to p2 and p4. 2) u-channel: p1 and p4 connected by a crossed photon line to p2 and p3.}
+
+Because the $\phi$ fields represent bosons, the total quantum scattering amplitude must be perfectly symmetric under the exchange of the identical final state particles ($p_3 \leftrightarrow p_4$). Therefore, the relative sign between the $t$-channel and $u$-channel diagrams is strictly positive (unlike fermions, which would incur a relative minus sign).
+
+Using the Feynman rules for scalar QED derived previously, where the 3-point vertex is $-ie(p_{\text{in}} + p_{\text{out}})_\mu$ and the photon propagator is $-ig_{\mu\nu}/q^2$, we can directly evaluate the two contributing diagrams.
+
+\subsubsection*{1. The $t$-channel amplitude:}
+The transferred momentum is $q = p_1 - p_3 = p_4 - p_2$, meaning $q^2 = t$.
+\[
+    \begin{aligned}
+        i\mathcal{M}_t & = \left[ -ie(p_1 + p_3)^\mu \right] \left( \frac{-ig_{\mu\nu}}{t} \right) \left[ -ie(p_2 + p_4)^\nu \right] \\
+                       & = i\frac{e^2}{t} (p_1 + p_3) \cdot (p_2 + p_4)
+    \end{aligned}
+\]
+
+\subsubsection*{2. The $u$-channel amplitude:}
+We obtain this by physically exchanging the final state particles $p_3 \leftrightarrow p_4$. The transferred momentum is now $q = p_1 - p_4 = p_3 - p_2$, meaning $q^2 = u$.
+\[
+    \begin{aligned}
+        i\mathcal{M}_u & = \left[ -ie(p_1 + p_4)^\mu \right] \left( \frac{-ig_{\mu\nu}}{u} \right) \left[ -ie(p_2 + p_3)^\nu \right] \\
+                       & = i\frac{e^2}{u} (p_1 + p_4) \cdot (p_2 + p_3)
+    \end{aligned}
+\]
+
+\subsubsection*{3. Expressing the Amplitude in Mandelstam Invariants:}
+To match the requested solution, we need to simplify the kinematic dot products present in the numerators. Recall the standard definitions of the Mandelstam variables for a process with equal masses ($m_1 = m_2 = m_3 = m_4 = m$):
+\[
+    \begin{aligned}
+        s & = (p_1 + p_2)^2 = 2m^2 + 2p_1 \cdot p_2 = 2m^2 + 2p_3 \cdot p_4 \\
+        t & = (p_1 - p_3)^2 = 2m^2 - 2p_1 \cdot p_3 = 2m^2 - 2p_2 \cdot p_4 \\
+        u & = (p_1 - p_4)^2 = 2m^2 - 2p_1 \cdot p_4 = 2m^2 - 2p_2 \cdot p_3
+    \end{aligned}
+\]
+which rigorously obey the kinematic constraint $s + t + u = 4m^2$.
+
+Let us expand the numerator of the $t$-channel amplitude:
+\[
+    (p_1 + p_3) \cdot (p_2 + p_4) = p_1 \cdot p_2 + p_1 \cdot p_4 + p_3 \cdot p_2 + p_3 \cdot p_4
+\]
+We can directly substitute the dot products extracted algebraically from the Mandelstam definitions above:
+\begin{itemize}
+    \item $p_1 \cdot p_2 = p_3 \cdot p_4 = \frac{1}{2}(s - 2m^2)$
+    \item $p_1 \cdot p_4 = p_2 \cdot p_3 = \frac{1}{2}(2m^2 - u)$
+\end{itemize}
+Summing these individual components together gives:
+\[
+    \begin{aligned}
+        (p_1 + p_3) \cdot (p_2 + p_4) & = \frac{1}{2}(s - 2m^2) + \frac{1}{2}(2m^2 - u) + \frac{1}{2}(2m^2 - u) + \frac{1}{2}(s - 2m^2) \\
+                                      & = (s - 2m^2) + (2m^2 - u) = s - u.
+    \end{aligned}
+\]
+
+By exact physical symmetry ($p_3 \leftrightarrow p_4$, which mathematically translates to swapping $t \leftrightarrow u$), the numerator of the $u$-channel amplitude evaluates to:
+\[
+    (p_1 + p_4) \cdot (p_2 + p_3) = s - t
+\]
+
+\subsubsection*{4. Final Amplitude:}
+Summing the $t$-channel and $u$-channel contributions, we arrive at the total tree-level scattering amplitude:
+\[
+    i\mathcal{M} = i\mathcal{M}_t + i\mathcal{M}_u = i\frac{e^2}{t}(s - u) + i\frac{e^2}{u}(s - t)
+\]
+Factoring out the common $ie^2$ term, we perfectly recover the required expression:
+\[
+    i\mathcal{M} = ie^2 \left( \frac{s - u}{t} + \frac{s - t}{u} \right)
+\]
+
+
+\subsection*{4. Crossing Symmetry in sQED}
+
+\begin{center}
+    \textit{Using the result of the previous exercise and } crossing symmetry\textit{, compute the tree-level scattering amplitude } $i\mathcal{M}$ \textit{ for the process } $\phi(p_1) + \bar{\phi}(p_2) \to \phi(p_3) + \bar{\phi}(p_4)$ \textit{ in sQED.} \\
+    \textit{Solution: } $i\mathcal{M} = -ie^2((s-u)/t + (t-u)/s)$.
+\end{center}
+
+Crossing symmetry is a powerful and elegant principle in Quantum Field Theory. It states that the $S$-matrix amplitude for any process involving a particle with momentum $p$ in the initial (or final) state is analytically related to the amplitude of a process where that particle is moved to the final (or initial) state as its corresponding \textit{antiparticle}, with its four-momentum analytically continued to $-p$.
+
+Let us start from the result of the previous exercise for the elastic scattering of two identical particles:
+\[
+    \phi(p'_1) + \phi(p'_2) \to \phi(p'_3) + \phi(p'_4)
+\]
+whose amplitude, expressed in terms of its own Mandelstam variables $s', t', u'$, was found to be:
+\[
+    i\mathcal{M}_{\phi\phi \to \phi\phi}(s', t', u') = ie^2 \left( \frac{s' - u'}{t'} + \frac{s' - t'}{u'} \right)
+\]
+
+We want to compute the amplitude for the particle-antiparticle scattering process:
+\[
+    \phi(p_1) + \bar{\phi}(p_2) \to \phi(p_3) + \bar{\phi}(p_4)
+\]
+To map the original process to this new process using crossing symmetry, we must:
+\begin{enumerate}
+    \item Cross the incoming particle $\phi(p'_2)$ to the final state, where it becomes the outgoing antiparticle $\bar{\phi}(p_4)$. This implies substituting $p'_2 \to -p_4$.
+    \item Cross the outgoing particle $\phi(p'_4)$ to the initial state, where it becomes the incoming antiparticle $\bar{\phi}(p_2)$. This implies substituting $p'_4 \to -p_2$.
+\end{enumerate}
+The other two particles remain in their original positions, so $p'_1 = p_1$ and $p'_3 = p_3$.
+
+Now, let us analyze how the original Mandelstam variables transform under this specific momentum crossing. The new process has its standard Mandelstam invariants defined as $s = (p_1+p_2)^2$, $t = (p_1-p_3)^2$, and $u = (p_1-p_4)^2$.
+Evaluating the old invariants with the substituted momenta:
+\[
+    \begin{aligned}
+        s' & = (p'_1 + p'_2)^2 \xrightarrow{\text{crossing}} (p_1 - p_4)^2 = u \\
+        t' & = (p'_1 - p'_3)^2 \xrightarrow{\text{crossing}} (p_1 - p_3)^2 = t \\
+        u' & = (p'_1 - p'_4)^2 \xrightarrow{\text{crossing}} (p_1 + p_2)^2 = s
+    \end{aligned}
+\]
+The crossing transformation therefore corresponds perfectly to a simple algebraic swap of the variables $s$ and $u$, while $t$ remains invariant ($s' \to u$, $u' \to s$, $t' \to t$).
+
+Physically, this means the $t$-channel exchange diagram from the original process remains a $t$-channel exchange in the new process. However, the original $u$-channel exchange is transformed into an $s$-channel annihilation diagram ($\phi \bar{\phi} \to \gamma^* \to \phi \bar{\phi}$).
+
+To find the new amplitude, we simply take the old amplitude and apply the $s \leftrightarrow u$ swap:
+\[
+    i\mathcal{M}_{\phi\bar{\phi} \to \phi\bar{\phi}}(s, t, u) = i\mathcal{M}_{\phi\phi \to \phi\phi}(u, t, s) = ie^2 \left( \frac{u - s}{t} + \frac{u - t}{s} \right)
+\]
+
+To match the requested format of the solution, we can elegantly factor out a global minus sign from the numerators:
+\[
+    \frac{u - s}{t} = -\frac{s - u}{t} \quad \text{and} \quad \frac{u - t}{s} = -\frac{t - u}{s}
+\]
+Substituting these back into our expression, we arrive exactly at the required tree-level amplitude:
+\[
+    i\mathcal{M} = -ie^2 \left( \frac{s - u}{t} + \frac{t - u}{s} \right)
+\]
+
+
+\subsection*{5. Gamma Matrix Identity in 4D}
+
+\begin{center}
+    \textit{Prove the following identity, in four space-time dimensions (note the reversed order of the gamma matrices on the right-hand side)}
+    \[
+        \gamma^\mu \gamma^\nu \gamma^\rho \gamma^\sigma \gamma_\mu = -2 \gamma^\sigma \gamma^\rho \gamma^\nu.
+    \]
+\end{center}
+
+To prove this identity, we systematically use the fundamental Clifford algebra anticommutation relation for Dirac gamma matrices:
+\[
+    \{ \gamma^\mu, \gamma^\nu \} = \gamma^\mu \gamma^\nu + \gamma^\nu \gamma^\mu = 2\eta^{\mu\nu}\mathbb{I}
+\]
+which allows us to swap adjacent gamma matrices by paying a penalty term: $\gamma^\mu \gamma^\nu = 2\eta^{\mu\nu} - \gamma^\nu \gamma^\mu$. We also rely on the explicit trace of the metric tensor in exactly $D=4$ dimensions, which gives the fundamental contraction:
+\[
+    \gamma^\mu \gamma_\mu = \eta_{\mu\nu} \gamma^\mu \gamma^\nu = \frac{1}{2} \eta_{\mu\nu} \{ \gamma^\mu, \gamma^\nu \} = \eta_{\mu\nu} \eta^{\mu\nu} = \delta^\mu_\mu = 4\mathbb{I}
+\]
+
+Instead of tackling the full five-matrix string at once, it is much easier and more instructive to build up to it by recursively computing the contractions of shorter strings. We do this by continuously anti-commuting the rightmost $\gamma_\mu$ to the left until it meets its contracted partner $\gamma^\mu$.
+
+\textbf{Step 1: Simplify } $\gamma^\mu \gamma^\nu \gamma_\mu$
+Anti-commuting the $\gamma_\mu$ past the $\gamma^\nu$:
+\[
+    \begin{aligned}
+        \gamma^\mu \gamma^\nu \gamma_\mu & = \gamma^\mu (2\delta^\nu_\mu - \gamma_\mu \gamma^\nu) \\
+                                         & = 2\gamma^\nu - \gamma^\mu \gamma_\mu \gamma^\nu
+    \end{aligned}
+\]
+Using our 4D identity $\gamma^\mu \gamma_\mu = 4$, we get:
+\[
+    \gamma^\mu \gamma^\nu \gamma_\mu = 2\gamma^\nu - 4\gamma^\nu = -2\gamma^\nu
+\]
+
+\textbf{Step 2: Simplify } $\gamma^\mu \gamma^\nu \gamma^\rho \gamma_\mu$
+Anti-commuting the $\gamma_\mu$ past the $\gamma^\rho$:
+\[
+    \begin{aligned}
+        \gamma^\mu \gamma^\nu \gamma^\rho \gamma_\mu & = \gamma^\mu \gamma^\nu (2\delta^\rho_\mu - \gamma_\mu \gamma^\rho)        \\
+                                                     & = 2\gamma^\rho \gamma^\nu - (\gamma^\mu \gamma^\nu \gamma_\mu) \gamma^\rho
+    \end{aligned}
+\]
+Now substitute the result from Step 1 for the bracketed term:
+\[
+    \begin{aligned}
+        \gamma^\mu \gamma^\nu \gamma^\rho \gamma_\mu & = 2\gamma^\rho \gamma^\nu - (-2\gamma^\nu) \gamma^\rho \\
+                                                     & = 2(\gamma^\rho \gamma^\nu + \gamma^\nu \gamma^\rho)
+    \end{aligned}
+\]
+Recognizing the anticommutator $\{ \gamma^\rho, \gamma^\nu \} = 2\eta^{\rho\nu}$, this elegantly collapses to a simple scalar multiple of the identity matrix:
+\[
+    \gamma^\mu \gamma^\nu \gamma^\rho \gamma_\mu = 2(2\eta^{\rho\nu}) = 4\eta^{\nu\rho}
+\]
+
+\textbf{Step 3: Simplify the full expression } $\gamma^\mu \gamma^\nu \gamma^\rho \gamma^\sigma \gamma_\mu$
+We apply the exact same logic one final time, moving the $\gamma_\mu$ past the $\gamma^\sigma$:
+\[
+    \begin{aligned}
+        \gamma^\mu \gamma^\nu \gamma^\rho \gamma^\sigma \gamma_\mu & = \gamma^\mu \gamma^\nu \gamma^\rho (2\delta^\sigma_\mu - \gamma_\mu \gamma^\sigma)                    \\
+                                                                   & = 2\gamma^\sigma \gamma^\nu \gamma^\rho - (\gamma^\mu \gamma^\nu \gamma^\rho \gamma_\mu) \gamma^\sigma
+    \end{aligned}
+\]
+Substituting our highly simplified scalar result from Step 2 for the bracketed term:
+\[
+    \gamma^\mu \gamma^\nu \gamma^\rho \gamma^\sigma \gamma_\mu = 2\gamma^\sigma \gamma^\nu \gamma^\rho - 4\eta^{\nu\rho} \gamma^\sigma
+\]
+
+\textbf{Step 4: Reorder the matrices to match the target identity}
+Our result from Step 3 is correct, but it does not match the reversed order required by the problem statement ($-2\gamma^\sigma \gamma^\rho \gamma^\nu$). We need to swap the adjacent $\gamma^\nu \gamma^\rho$ in the first term:
+\[
+    \gamma^\nu \gamma^\rho = 2\eta^{\nu\rho} - \gamma^\rho \gamma^\nu
+\]
+Substitute this back into our expression:
+\[
+    \begin{aligned}
+        2\gamma^\sigma (\gamma^\nu \gamma^\rho) - 4\eta^{\nu\rho} \gamma^\sigma & = 2\gamma^\sigma (2\eta^{\nu\rho} - \gamma^\rho \gamma^\nu) - 4\eta^{\nu\rho} \gamma^\sigma             \\
+                                                                                & = 4\eta^{\nu\rho} \gamma^\sigma - 2\gamma^\sigma \gamma^\rho \gamma^\nu - 4\eta^{\nu\rho} \gamma^\sigma
+    \end{aligned}
+\]
+The $4\eta^{\nu\rho} \gamma^\sigma$ terms perfectly cancel each other out, leaving only the desired term with the completely reversed matrix order:
+\[
+    \gamma^\mu \gamma^\nu \gamma^\rho \gamma^\sigma \gamma_\mu = -2\gamma^\sigma \gamma^\rho \gamma^\nu
+\]
+This mathematically proves the requested identity.
+
+
+\subsection*{6. Unpolarized scattering of fermions in the Yukawa theory}
+
+\begin{center}
+    \textit{Compute the unpolarized (i.e. averaged over initial and summed over final polarization states) squared tree-level scattering amplitude} \(\vert \mathcal{M} \vert^2_{\text{unpol.}}\) \textit{for elastic scattering of two identical massless Dirac fermions (e.g.} \(e^- e^- \to e^- e^-\) \textit{for} \(m_e \to 0\)\textit{) in the Yukawa theory, as a functions of the Mandelstam invariants and the mass} \(M\) \textit{of the scalar.}
+\end{center}
+
+For the Yukawa theory, the interaction Lagrangian is given by
+\[
+    \mathcal{L}_{\text{int}} = -g \phi \bar{\psi} \psi,
+\]
+and the vertices are represented by a factor of \(-ig\). The tree-level scattering amplitude for the process
+\[
+    e^-(p_1) e^-(p_2) \to e^-(p_3) e^-(p_4),
+\]
+can be computed using the Feynman rules for the Yukawa theory, which involve the exchange of a scalar particle in the \(t\)-channel and \(u\)-channel:
+\[
+    i \mathcal{M} = \text{\TODO{add diagram: t-channel and u-channel Feynman diagrams for identical fermion scattering}},
+\]
+where using Feynman rules, we have
+\[
+    i \mathcal{M} = (-ig)^2 \left[ \bar{u}_3 u_1 \frac{i}{t - M^2} \bar{u}_4 u_2 - \bar{u}_4 u_1 \frac{i}{u - M^2} \bar{u}_3 u_2 \right] = \mathcal{M}_1 + \mathcal{M}_2,
+\]
+with \(t = (p_1 - p_3)^2\) and \(u = (p_1 - p_4)^2\), and the minus sign arises due to the fact that the u-channel is obtained by exchanging the two identical fermions in the final state w.r.t. the t-channel, which introduces a minus sign (see extra rules for fermions).
+
+To compute the unpolarized squared amplitude, we must average over the 4 possible initial spin configurations (yielding a factor of \(1/4\)) and sum over all final spin states:
+\[
+    \vert \mathcal{M}_{\text{unpol.}} \vert^2 = \frac{1}{4} \sum_{s} \vert \mathcal{M}_1 + \mathcal{M}_2 \vert^2 = \frac{1}{4} \sum_{s} \left( \vert \mathcal{M}_1 \vert^2 + \vert \mathcal{M}_2 \vert^2 + 2\text{Re}[\mathcal{M}_1 \mathcal{M}_2^*] \right)
+\]
+Expanding the squared terms and the interference term, and applying the completeness relation \(\sum_s u(p)\bar{u}(p) = \slashed{p} + m \to \slashed{p}\) for massless fermions, we can express the spin sums entirely as Dirac traces:
+\[
+    \vert \mathcal{M}_{\text{unpol.}} \vert^2 = \frac{g^4}{4} \sum_s \left[ \frac{(\bar{u}_3 u_1 \bar{u}_1 u_3)(\bar{u}_4 u_2 \bar{u}_2 u_4)}{(t - M^2)^2} + \frac{(\bar{u}_4 u_1 \bar{u}_1 u_4)(\bar{u}_3 u_2 \bar{u}_2 u_3)}{(u - M^2)^2} - \frac{2 (\bar{u}_3 u_1 \bar{u}_1 u_4 \bar{u}_4 u_2 \bar{u}_2 u_3)}{(t - M^2)(u - M^2)} \right]
+\]
+Evaluating the traces for each individual fermionic line gives:
+\[
+    \begin{aligned}
+        \sum_{s} (\bar{u}_3 u_1 \bar{u}_1 u_3) & = \text{Tr}[\slashed{p}_1 \slashed{p}_3] = 4(p_1 \cdot p_3) \\
+        \sum_{s} (\bar{u}_4 u_2 \bar{u}_2 u_4) & = \text{Tr}[\slashed{p}_2 \slashed{p}_4] = 4(p_2 \cdot p_4) \\
+        \sum_{s} (\bar{u}_4 u_1 \bar{u}_1 u_4) & = \text{Tr}[\slashed{p}_1 \slashed{p}_4] = 4(p_1 \cdot p_4) \\
+        \sum_{s} (\bar{u}_3 u_2 \bar{u}_2 u_3) & = \text{Tr}[\slashed{p}_2 \slashed{p}_3] = 4(p_2 \cdot p_3)
+    \end{aligned}
+\]
+and the final, more difficult interference trace is given by
+\[
+    \begin{aligned}
+        \sum_{s} (\bar{u}_3 u_1 \bar{u}_1 u_4 \bar{u}_4 u_2 \bar{u}_2 u_3) & = \text{Tr}[\slashed{p}_1 \slashed{p}_4 \slashed{p}_2 \slashed{p}_3]                                                 \\
+                                                                           & = 4 \left( (p_1 \cdot p_4)(p_2 \cdot p_3) - (p_1 \cdot p_2)(p_3 \cdot p_4) + (p_1 \cdot p_3)(p_2 \cdot p_4) \right).
+    \end{aligned}
+\]
+
+If we now use the limit for \(m_e \to 0\) we can compute the scalar products using the Mandelstam invariants:
+\[
+    \begin{aligned}
+        s & = (p_1 + p_2)^2 = (p_3 + p_4)^2 = 2(p_1 \cdot p_2) = 2(p_3 \cdot p_4) \implies p_1 \cdot p_2 = p_3 \cdot p_4 = \frac{s}{2}    \\
+        t & = (p_1 - p_3)^2 = (p_2 - p_4)^2 = -2(p_1 \cdot p_3) = -2(p_2 \cdot p_4) \implies p_1 \cdot p_3 = p_2 \cdot p_4 = -\frac{t}{2} \\
+        u & = (p_1 - p_4)^2 = (p_2 - p_3)^2 = -2(p_1 \cdot p_4) = -2(p_2 \cdot p_3) \implies p_1 \cdot p_4 = p_2 \cdot p_3 = -\frac{u}{2}
+    \end{aligned}
+\]
+and now, using the properties of the Mandelstam invariants, we can write the final result as a function of \(t\) and \(u\), by eliminating \(s\) since \(s + t + u = 0\) for massless particles. Substituting the scalar products back into the traces, we find:
+\[
+    \vert \mathcal{M}_{\text{unpol.}} \vert^2 = \frac{g^4}{4} \left[ \frac{16 (-t/2)(-t/2)}{(t-M^2)^2} + \frac{16 (-u/2)(-u/2)}{(u-M^2)^2} - \frac{8 \left( (-u/2)(-u/2) - (s/2)(s/2) + (-t/2)(-t/2) \right)}{(t-M^2)(u-M^2)} \right]
+\]
+Simplifying the fractions and algebraic terms:
+\[
+    \vert \mathcal{M}_{\text{unpol.}} \vert^2 = g^4 \left[ \frac{t^2}{(t-M^2)^2} + \frac{u^2}{(u-M^2)^2} - \frac{1}{2} \frac{u^2 - s^2 + t^2}{(t-M^2)(u-M^2)} \right]
+\]
+
+Using the mass-shell relation \(s + t + u = 0 \implies s^2 = (t+u)^2 = t^2 + u^2 + 2tu\), the numerator of the interference term cleanly simplifies to \(u^2 - (t^2 + u^2 + 2tu) + t^2 = -2tu\). Thus we have the final compact form:
+\[
+    \vert \mathcal{M}_{\text{unpol.}} \vert^2 = g^4 \left[ \frac{t^2}{(t-M^2)^2} + \frac{u^2}{(u-M^2)^2} + \frac{tu}{(t-M^2)(u-M^2)} \right]
+\]
+
+\begin{remark}
+    When the scalar mass approaches zero, i.e. \(M \to 0\), we get a constant matrix element for the unpolarized scattering amplitude, which is given by \(\vert \mathcal{M}_{\text{unpol.}} \vert^2 \to 3 g^4\). This is a consequence of the fact that the propagator of the scalar particle becomes massless, so that it behaves as \(1/t\) or \(1/u\), and since \(t\) and \(u\) are negative, we get a constant contribution to the scattering amplitude.
+\end{remark}
+
+
+\subsection*{7. Decay of a scalar into a fermion-antifermion pair}
+
+\begin{center}
+    \textit{In the Yukawa theory, compute the total decay rate} \( \Gamma \) \textit{of a scalar into a fermion antifermion pair, as a function of the masses} \(M\) \textit{of the scalar and} \(m\) \textit{of the Dirac fermion. Which condition must} \(M\) \textit{and} \(m\) \textit{satisfy for this decay to be possible?}
+\end{center}
+
+The vertex for the decay process \( \phi(P) \to f(p_1) + \bar{f}(p_2) \) is given directly by the Feynman rule for the Yukawa interaction \( \mathcal{L}_{\text{int}} = -g \phi \bar{\psi} \psi \):
+\[
+    i \mathcal{M} = \text{\TODO{add diagram: incoming dashed scalar line splitting into two outgoing solid fermion lines}} = -(ig) \bar{u}(p_1) v(p_2).
+\]
+To compute the unpolarized decay rate, we must square the amplitude and sum over the final state spins of both the fermion and the antifermion. Note that because there is only one initial state particle (which is a scalar, spin-0), there is no initial spin averaging required:
+\[
+    \vert \mathcal{M}_{\text{unpol.}} \vert^2 = \sum_{s_1, s_2} \vert \mathcal{M} \vert^2 = g^2 \sum_{s_1, s_2} (\bar{u}_1 v_2)(\bar{v}_2 u_1)
+\]
+Applying the standard completeness relations for massive Dirac spinors, \( \sum_{s} u(p)\bar{u}(p) = \slashed{p} + m \) and \( \sum_{s} v(p)\bar{v}(p) = \slashed{p} - m \), we convert the spin sums into a Dirac trace:
+\[
+    \begin{aligned}
+        \vert \mathcal{M}_{\text{unpol.}} \vert^2 & = g^2 \text{Tr}\left[ (\slashed{p}_1 + m)(\slashed{p}_2 - m) \right]                                                                                                    \\
+                                                  & = g^2 \left( \text{Tr}[\slashed{p}_1 \slashed{p}_2] - m^2 \text{Tr}[\mathbb{1}] \right) \quad (\text{since traces of an odd number of } \gamma \text{ matrices vanish}) \\
+                                                  & = g^2 (4 p_1 \cdot p_2 - 4m^2)
+    \end{aligned}
+\]
+
+To express the scalar product \( p_1 \cdot p_2 \) in terms of the fundamental masses of the theory, we use the physical constraint of 4-momentum conservation, \( P = p_1 + p_2 \). Squaring both sides of this equation yields:
+\[
+    M^2 = P^2 = (p_1 + p_2)^2 = m^2 + m^2 + 2 p_1 \cdot p_2 \implies 2 p_1 \cdot p_2 = M^2 - 2m^2,
+\]
+which allows us to rewrite the unpolarized squared amplitude entirely in terms of masses:
+\[
+    \vert \mathcal{M}_{\text{unpol.}} \vert^2 = 2 g^2 (M^2 - 4 m^2).
+\]
+
+Now, we utilize the master formula for the differential decay rate of a particle of mass \(M\) decaying into a two-body final state:
+\[
+    \mathrm{d} \Gamma = \frac{1}{2M} \vert \mathcal{M}_{\text{unpol.}} \vert^2 \mathrm{d} \Pi_2,
+\]
+where \( \mathrm{d} \Pi_2 \) is the Lorentz-invariant two-particle phase space measure. It is most convenient to evaluate this measure in the center of mass (CM) frame of the decaying particle, where it takes the simplified form (as explicitly computed in lecture notes 2.2):
+\[
+    \mathrm{d} \Pi_2 = \mathrm{d} \Omega \frac{1}{16 \pi^2} \frac{\vert \vec{p}_f \vert}{E_{c.m.}}.
+\]
+In this CM frame, the kinematics are strictly defined as:
+\[
+    \begin{dcases}
+        E_{c.m.} = M,                                                                               \\
+        \vert \vec{p}_f \vert = \vert \vec{p}_1 \vert = \vert \vec{p}_2 \vert = \sqrt{E_1^2 - m^2}, \\
+        P = \begin{pmatrix} M \\ \vec{0} \end{pmatrix}, \quad p_1 = \begin{pmatrix} E_1 \\ \vec{p}_f \end{pmatrix}.
+    \end{dcases}
+\]
+
+We must now compute explicit expressions for the final state energy \( E_1 \) and the final state 3-momentum magnitude \( \vert \vec{p}_f \vert \) strictly as a function of the masses \( M \) and \( m \). We can elegantly extract the energy \(E_1\) by evaluating the Lorentz-invariant scalar product \( P \cdot p_1 \) in the CM frame:
+\[
+    P \cdot p_1 = M E_1 - \vec{0} \cdot \vec{p}_f = M E_1.
+\]
+We can also evaluate this same invariant product by substituting \( P = p_1 + p_2 \) before evaluating:
+\[
+    P \cdot p_1 = (p_1 + p_2) \cdot p_1 = p_1^2 + p_1 \cdot p_2 = m^2 + \frac{1}{2}(M^2 - 2m^2) = \frac{1}{2}M^2.
+\]
+Equating the two results for \( P \cdot p_1 \), we find the final state energy:
+\[
+    E_1 = \frac{M}{2}.
+\]
+\textit{(Note: This result is physically intuitive; since the final state particles have identical masses $m$, they must equally share the total available rest energy $M$ in the CM frame.)}
+
+With \( E_1 \) determined, we can immediately compute the magnitude of the final state spatial momentum:
+\[
+    \vert \vec{p}_f \vert = \sqrt{E_1^2 - m^2} = \sqrt{\frac{M^2}{4} - m^2} = \frac{M}{2} \sqrt{1 - \frac{4m^2}{M^2}}.
+\]
+
+With all kinematic variables explicitly resolved, we substitute them back into the phase space measure and the master decay formula to obtain the differential decay rate with respect to the solid angle:
+\[
+    \frac{\mathrm{d} \Gamma}{\mathrm{d} \Omega} = \frac{1}{2M} \left( \frac{1}{16\pi^2} \frac{\frac{M}{2} \sqrt{1 - 4m^2/M^2}}{M} \right) \left[ 2g^2 M^2 \left( 1 - \frac{4m^2}{M^2} \right) \right].
+\]
+Simplifying the extensive algebraic factors, the dependence on the solid angle \(\Omega\) completely drops out (which is expected, as a scalar particle has no spin orientation to break spatial isotropy):
+\[
+    \frac{\mathrm{d} \Gamma}{\mathrm{d} \Omega} = \frac{g^2 M}{32\pi^2} \left( 1 - \frac{4m^2}{M^2} \right)^{3/2}.
+\]
+Because the differential rate is perfectly isotropic, integrating over the full solid angle simply multiplies the result by \( \int \mathrm{d} \Omega = 4\pi \):
+\[
+    \Gamma = \int \frac{\mathrm{d} \Gamma}{\mathrm{d} \Omega} \mathrm{d} \Omega = 4\pi \left( \frac{g^2 M}{32\pi^2} \left( 1 - \frac{4m^2}{M^2} \right)^{3/2} \right) = \frac{g^2 M}{8\pi} \left( 1 - \frac{4m^2}{M^2} \right)^{3/2}.
+\]
+
+\begin{remark}
+    The physical condition for the decay to be kinematically possible is strictly given by the requirement that the total available energy of the initial state particle must be strictly greater than or equal to the total rest mass of the final state particles. Therefore, we must have \(M \geq 2m\).
+    When we approach the extreme threshold limit, \(M \to 2m\), the total decay rate vanishes: \(\Gamma \to 0\). This occurs because the phase space volume for the decay shrinks to zero; the final state particles would be produced perfectly at rest with zero spatial momentum, leaving no available kinematic phase space for the transition to occur.
+\end{remark}
+
+
+\subsection*{8. Compton scattering in QED}
+
+% Long exercise, it is instructive but in the exam we will not find something like this
+
+\begin{center}
+    \textit{In QED, compute the unpolarized squared tree-level scattering amplitude for elastic scattering of a massless electron and a photon, as a function of the Mandelstam invariants. Use this result to compute the differential cross section} \(\tfrac{\mathrm{d}\sigma}{\mathrm{d}\Omega}\) \textit{for this process in the centre of mass.}
+    \textit{Solution: } \( |\mathcal{M}|_{\text{unpol.}}^2 = -2e^4(s/u + u/s) \), \( d\sigma/d\Omega = \alpha^2 \left( \frac{\cos\theta + 1}{2} + \frac{2}{\cos\theta + 1} \right) / (2E_{\text{cm}}^2) \).
+\end{center}
+
+The scattering process is $e^-(p_1) + \gamma(p_2) \to e^-(p_3) + \gamma(p_4)$. At tree level, this is mediated by the $s$-channel and $u$-channel exchange of a virtual electron. Using the Feynman rules for QED, the total amplitude is:
+\[
+    \begin{aligned}
+        i \mathcal{M} & = \text{\TODO{add diagram: s-channel and u-channel Feynman diagrams for Compton scattering}}                                                                                                                                 \\
+                      & = (-ie)^2 \left[ \bar{u}_3 \gamma^{\nu} \frac{\slashed{p}_1 + \slashed{p}_2}{s} \gamma^{\mu} u_1 + \bar{u}_3 \gamma^{\mu} \frac{\slashed{p}_1 - \slashed{p}_4}{u} \gamma^{\nu} u_1 \right] \epsilon_{2\mu} \epsilon_{4\nu}^* \\
+                      & = i \mathcal{M}_1 + i \mathcal{M}_2,
+    \end{aligned}
+\]
+where we used the massless momentum invariants $s = (p_1+p_2)^2$ and $u = (p_1-p_4)^2$ for the denominators of the fermion propagators.
+
+To find the unpolarized squared amplitude, we average over the 4 initial spin/polarization states (2 for the electron, 2 for the photon) and sum over all final states:
+\[
+    \vert \mathcal{M}_{\text{unpol.}} \vert^2 = \frac{1}{4} \sum_{s, \lambda} \vert \mathcal{M}_1 + \mathcal{M}_2 \vert^2 = \frac{1}{4} \sum_{s, \lambda} \left( \vert \mathcal{M}_1 \vert^2 + \vert \mathcal{M}_2 \vert^2 + 2\text{Re}[\mathcal{M}_1^* \mathcal{M}_2] \right) \equiv A + B + C.
+\]
+where now we have to compute the \(A\), \(B\) and \(C\) terms. Starting from the interference term \(C\) we have
+\[
+    \begin{aligned}
+        C & = \frac{1}{4} \sum_{s, \lambda} 2\text{Re}[\mathcal{M}_1^* \mathcal{M}_2]                                                                                                                                                                                                \\
+          & = \frac{e^4}{2 s u} \text{Tr}\left[ \slashed{p}_1 \gamma^\mu (\slashed{p}_1 + \slashed{p}_2) \gamma^\nu \slashed{p}_3 \gamma^\rho (\slashed{p}_1 - \slashed{p}_4) \gamma^\sigma \right] \times (\epsilon_{2\mu}^* \epsilon_{4\nu}^* \epsilon_{2\rho} \epsilon_{4\sigma})
+    \end{aligned}
+\]
+where the last term is the photon polarization sum. Using the unpolarized completeness relation $\sum \epsilon_\alpha \epsilon_\beta^* = -g_{\alpha\beta}$, this becomes \( (-g_{\mu \rho}) (-g_{\nu \sigma}) = g_{\mu \rho} g_{\nu \sigma} \), enforcing the contraction of the Lorentz indices within the trace:
+\[
+    C = \frac{e^4}{2 s u} \text{Tr}\left[ \slashed{p}_1 \gamma^\mu (\slashed{p}_1 + \slashed{p}_2) \gamma^\nu \slashed{p}_3 \gamma_\mu (\slashed{p}_1 - \slashed{p}_4) \gamma_\nu \right].
+\]
+
+If we now use the result computed in exercise 5, in which we demonstrated that
+\[
+    \gamma^{\mu} \gamma^{\alpha} \gamma^{\beta} \gamma^{\delta} \gamma_{\mu} = - 2 \gamma^{\delta} \gamma^{\beta} \gamma^{\alpha},
+\]
+it easy to see that applying this to the inner segment of our trace implies
+\[
+    \implies \gamma^\mu (\slashed{p}_1 + \slashed{p}_2) \gamma^\nu \slashed{p}_3 \gamma_\mu = -2 \slashed{p}_3 \gamma^\nu (\slashed{p}_1 + \slashed{p}_2).
+\]
+Thus we can further simplify the expression for \(C\) as
+\[
+    C = - \frac{e^4}{s u} \text{Tr}\left[ \slashed{p}_1 \slashed{p}_3 \gamma^\nu (\slashed{p}_1 + \slashed{p}_2) (\slashed{p}_1 - \slashed{p}_4) \gamma_\nu \right].
+\]
+To evaluate this, we need to show that \(\gamma^{\nu} \gamma^{\alpha} \gamma^{\beta} \gamma_{\nu} = 4 g^{\alpha \beta} \mathbb{I}\).
+\begin{proof}
+    We can start by defining the contraction using the Clifford algebra $\{ \gamma^\mu, \gamma^\nu \} = 2g^{\mu\nu}\mathbb{I}$:
+    \[
+        \begin{aligned}
+            \gamma^\nu \gamma^\alpha \gamma^\beta \gamma_\nu & = \gamma^\nu \gamma^\alpha (2g^\beta_\nu - \gamma_\nu \gamma^\beta)              \\
+                                                             & = 2\gamma^\beta \gamma^\alpha - \gamma^\nu \gamma^\alpha \gamma_\nu \gamma^\beta
+        \end{aligned}
+    \]
+    We already know the 3-matrix contraction $\gamma^\nu \gamma^\alpha \gamma_\nu = -2\gamma^\alpha$. Substituting this in gives:
+    \[
+        \gamma^\nu \gamma^\alpha \gamma^\beta \gamma_\nu = 2\gamma^\beta \gamma^\alpha - (-2\gamma^\alpha)\gamma^\beta = 2(\gamma^\beta \gamma^\alpha + \gamma^\alpha \gamma^\beta) = 2(2g^{\alpha\beta}\mathbb{I}) = 4g^{\alpha\beta}\mathbb{I}.
+    \]
+\end{proof}
+
+Applying this identity to our trace, the term $\gamma^\nu (\slashed{p}_1 + \slashed{p}_2) (\slashed{p}_1 - \slashed{p}_4) \gamma_\nu$ simply becomes $4 (p_1 + p_2) \cdot (p_1 - p_4) \mathbb{I}$.
+Thus now we have all the ingredients to compute the final value for the \(C\)-term, which is given by
+\[
+    \begin{aligned}
+        C & = - \frac{4 e^4}{su} \big( (p_1 + p_2) \cdot (p_1 - p_4) \big) \text{Tr}[\slashed{p}_1 \slashed{p}_3] \\
+          & = - \frac{16 e^4}{su} (-p_1 \cdot p_4 + p_1 \cdot p_2 - p_2 \cdot p_4) (p_1 \cdot p_3)                \\
+          & = - \frac{4 e^4}{su} (u + s + t) (-t) = 0,
+    \end{aligned}
+\]
+since we are in the massless limit, where the Mandelstam invariant relation dictates \(s + t + u = 0\). Thus we have that the interference term between the two diagrams identically vanishes.
+
+We can now move on to the computation of the \(A\)-term, which is given by
+\[
+    \begin{aligned}
+        A & = \frac{1}{4} \sum_{s, \lambda} \vert \mathcal{M}_1 \vert^2                                                                                                                         \\
+          & = \frac{e^4}{4 s^2} \text{Tr}\left[ (\slashed{p}_1 + \slashed{p}_2) \gamma^\nu \slashed{p}_1 \gamma^\mu (\slashed{p}_1 + \slashed{p}_2) \gamma_\mu \slashed{p}_3 \gamma_\nu \right]
+    \end{aligned}
+\]
+where now we need to compute the internal product of gamma matrices:
+\[
+    \gamma^{\mu} (\slashed{p}_1 + \slashed{p}_2) \gamma_\mu = -2(\slashed{p}_1 + \slashed{p}_2)
+\]
+which will enforce a simplification of the trace:
+\[
+    \begin{aligned}
+        A & = \frac{e^4}{4 s^2} \text{Tr}\left[ (\slashed{p}_1 + \slashed{p}_2) \gamma^\nu \slashed{p}_1 (-2)(\slashed{p}_1 + \slashed{p}_2) \slashed{p}_3 \gamma_\nu \right]                                    \\
+          & = -\frac{2e^4}{4 s^2} \text{Tr}\left[ \slashed{p}_1 (\slashed{p}_1 + \slashed{p}_2) \slashed{p}_3 \gamma_\nu (\slashed{p}_1 + \slashed{p}_2) \gamma^\nu \right] \quad (\text{using cyclic property}) \\
+          & = -\frac{2e^4}{4 s^2} \text{Tr}\left[ \slashed{p}_1 (\slashed{p}_1 + \slashed{p}_2) \slashed{p}_3 (-2)(\slashed{p}_1 + \slashed{p}_2) \right]                                                        \\
+          & = +\frac{4 e^4}{4 s^2} \text{Tr}\left[ (\slashed{p}_1 + \slashed{p}_2) \slashed{p}_1 (\slashed{p}_1 + \slashed{p}_2) \slashed{p}_3 \right]
+    \end{aligned}
+\]
+Using the fact that $\slashed{p}_1 \slashed{p}_1 = p_1^2 = 0$ for a massless electron, we can expand the terms adjacent to $\slashed{p}_1$:
+\[
+    \begin{aligned}
+        (\slashed{p}_1 + \slashed{p}_2) \slashed{p}_1 (\slashed{p}_1 + \slashed{p}_2) & = \slashed{p}_1 \slashed{p}_1 \slashed{p}_1 + \slashed{p}_2 \slashed{p}_1 \slashed{p}_1 + \slashed{p}_1 \slashed{p}_1 \slashed{p}_2 + \slashed{p}_2 \slashed{p}_1 \slashed{p}_2 \\
+                                                                                      & = 0 + 0 + 0 + \slashed{p}_2 \slashed{p}_1 \slashed{p}_2                                                                                                                         \\
+                                                                                      & = 2(p_1 \cdot p_2)\slashed{p}_2 - \slashed{p}_1 \slashed{p}_2 \slashed{p}_2 = 2(p_1 \cdot p_2)\slashed{p}_2
+    \end{aligned}
+\]
+Substituting this back, we evaluate the remaining trace:
+\[
+    \begin{aligned}
+        A & = \frac{e^4}{s^2} \text{Tr}\left[ \slashed{p}_2 \slashed{p}_1 \slashed{p}_2 \slashed{p}_3 \right]                                                           \\
+          & = \frac{4 e^4}{s^2} \big( (p_2 \cdot p_1)(p_2 \cdot p_3) - (p_2 \cdot p_2)(p_1 \cdot p_3) + (p_2 \cdot p_3)(p_1 \cdot p_2) \big)                            \\
+          & = \frac{4 e^4}{s^2} \big( 2(p_1 \cdot p_2)(p_2 \cdot p_3) \big) = \frac{8 e^4}{s^2} \left(\frac{s}{2}\right)\left(-\frac{u}{2}\right) = -2 e^4 \frac{u}{s},
+    \end{aligned}
+\]
+where we used $p_2^2 = 0$, $2 p_1 \cdot p_2 = s$, and $2 p_2 \cdot p_3 = -u$.
+
+The \(B\)-term can be computed directly via crossing symmetry, since it is given by the exact same expression as \(A\) but with the initial and final photons exchanged ($p_2 \leftrightarrow -p_4$). Under this crossing transformation, the Mandelstam invariants transform as:
+\[
+    s = (p_1 + p_2)^2 \to (p_1 - p_4)^2 = u
+\]
+\[
+    u = (p_1 - p_4)^2 \to (p_1 + p_2)^2 = s
+\]
+Applying this swap $s \leftrightarrow u$ directly to the result for $A$ yields:
+\[
+    B = \frac{1}{4} \sum_{s, \lambda} \vert \mathcal{M}_2 \vert^2 = -2 e^4 \frac{s}{u}
+\]
+
+Thus we can compute the total unpolarized squared amplitude as
+\[
+    \vert \mathcal{M}_{\text{unpol.}} \vert^2 = A + B + C = -2 e^4 \left( \frac{u}{s} + \frac{s}{u} \right).
+\]
+
+To express this in terms of the scattering angle, we evaluate the kinematics in the center of mass frame. Since all particles are treated as massless, the energies are uniformly:
+\[
+    E_1 = E_2 = E_3 = E_4 = \frac{E_{\text{cm}}}{2} \equiv E,
+\]
+so that we can write the momentum four-vectors aligned along the z-axis for the initial state, and scattered by an angle $\theta$ for the final state:
+\[
+    p_1 = \begin{pmatrix} E \\ 0 \\ 0 \\ E \end{pmatrix}, \quad p_2 = \begin{pmatrix} E \\ 0 \\ 0 \\ -E \end{pmatrix}, \quad p_3 = \begin{pmatrix} E \\ 0 \\ E \sin \theta \\ E \cos \theta \end{pmatrix}, \quad p_4 = \begin{pmatrix} E \\ 0 \\ -E \sin \theta \\ -E \cos \theta \end{pmatrix}.
+\]
+Using these explicit vectors, the Mandelstam invariants read
+\[
+    \begin{aligned}
+        u           & = (p_4 - p_1)^2 = - 2 p_1 \cdot p_4 = -2 (E^2 - (-E^2 \cos \theta)) = -2 E^2 (1 + \cos \theta), \\
+        s           & = (p_1 + p_2)^2 = 4 E^2 = E_{\text{cm}}^2,                                                      \\
+        \frac{u}{s} & = - \frac{2E^2(1 + \cos \theta)}{4E^2} = - \frac{1 + \cos \theta}{2}.
+    \end{aligned}
+\]
+So that we can write the unpolarized squared amplitude strictly as a function of the scattering angle \(\theta\) as
+\[
+    \vert \mathcal{M}_{\text{unpol.}} \vert^2 = -2 e^4 \left( - \frac{1 + \cos \theta}{2} - \frac{2}{1 + \cos \theta} \right) = 2 e^4 \left( \frac{1 + \cos \theta}{2} + \frac{2}{1 + \cos \theta} \right).
+\]
+Finally, we can compute the differential cross section for this process in the center of mass frame. Using the standard flux formula for 2-to-2 massless scattering where the initial and final momentum magnitudes cancel ($|\vec{p}_f| / |\vec{p}_i| = E/E = 1$):
+\[
+    \begin{aligned}
+        \frac{\mathrm{d} \sigma}{\mathrm{d} \Omega} & = \frac{1}{64 \pi^2 s} \vert \mathcal{M}_{\text{unpol.}} \vert^2                                                               \\
+                                                    & = \frac{1}{64 \pi^2 E_{\text{cm}}^2} \left[ 2 e^4 \left( \frac{1 + \cos \theta}{2} + \frac{2}{1 + \cos \theta} \right) \right] \\
+                                                    & = \frac{e^4}{32 \pi^2 E_{\text{cm}}^2} \left( \frac{1 + \cos \theta}{2} + \frac{2}{1 + \cos \theta} \right).
+    \end{aligned}
+\]
+Recognizing the fine-structure constant definition $\alpha = e^2 / (4\pi)$, we can elegantly substitute $e^4 = 16\pi^2 \alpha^2$ to obtain the final physical result:
+\[
+    \frac{\mathrm{d} \sigma}{\mathrm{d} \Omega} = \frac{16 \pi^2 \alpha^2}{32 \pi^2 E_{\text{cm}}^2} \left( \frac{1 + \cos \theta}{2} + \frac{2}{1 + \cos \theta} \right) = \frac{\alpha^2}{2 E_{\text{cm}}^2} \left( \frac{1 + \cos \theta}{2} + \frac{2}{1 + \cos \theta} \right).
+\]
+
+
+\subsection*{9. Ward identity in sQED}
+
+\begin{center}
+    \textit{In sQED, explicitly show that the Ward identity is valid for an amplitude of Compton scattering (i.e. the same we did in the lecture but replacing the fermion with a scalar). Note that the amplitude is a sum of three diagrams.}
+\end{center}
+
+First, let us recall the relevant Feynman rules for scalar QED (sQED) vertices in momentum space:
+\[
+    \text{\TODO{add diagram} 3-point vertex with incoming scalar p, outgoing scalar p', and photon $\mu$} = -ie(p + p')^\mu
+\]
+\[
+    \text{\TODO{add diagram} 4-point seagull vertex with two scalars and two photons $\mu, \nu$} = 2ie^2 g^{\mu\nu}
+\]
+
+For the Compton scattering process $\phi(p_1) + \gamma(p_2) \to \phi(p_3) + \gamma(p_4)$, the total amplitude can be written by factoring out the photon polarization vectors:
+\[
+    i\mathcal{M} = i \mathcal{M}^{\mu \nu} \epsilon_{2\mu} \epsilon_{4\nu}^*
+\]
+where $i\mathcal{M}^{\mu\nu}$ is the sum of three distinct tree-level Feynman diagrams: the $s$-channel, the $u$-channel, and the 4-point seagull interaction.
+\[
+    i\mathcal{M}^{\mu\nu} = \text{\TODO{add diagram: s-channel + u-channel + seagull diagram}}
+\]
+
+We want to show that \((p_2)_\mu i \mathcal{M}^{\mu \nu} = 0\) at tree level, where \(p_2\) is the momentum of the incoming photon. We can do this by explicitly computing the tensorial amplitude for each diagram and then contracting them with the momentum $p_2$:
+\[
+    \begin{aligned}
+        (p_2)_\mu i \mathcal{M}^{\mu \nu} & = (p_2)_\mu \left( i\mathcal{M}^{\mu\nu}_{\text{s-chan}} + i\mathcal{M}^{\mu\nu}_{\text{u-chan}} + i\mathcal{M}^{\mu\nu}_{\text{seagull}} \right) \\
+                                          & = (p_2)_\mu e^2 \Bigg[ \frac{i}{s-m^2} (2p_1^\mu + p_2^\mu)(p_1^\nu + p_2^\nu + p_3^\nu)(-1)                                                      \\
+                                          & \qquad \qquad + \frac{i}{u-m^2} (p_1^\mu - p_4^\mu + p_3^\mu)(2p_1^\nu - p_4^\nu)(-1) + 2i g^{\mu\nu} \Bigg]
+    \end{aligned}
+\]
+Notice that the factor of $(-1)$ in the first two terms comes from the product of the two vertex factors $(-i)^2$.
+
+To perform the contraction, we need to compute the following scalar products using the standard Mandelstam invariants for massless photons ($p_2^2 = p_4^2 = 0$) and massive scalars ($p_1^2 = p_3^2 = m^2$):
+\[
+    p_1 \cdot p_2 = \frac{s - m^2}{2}, \quad p_2 \cdot p_4 = -\frac{t}{2}, \quad p_2 \cdot p_3 = - \frac{u - m^2}{2},
+\]
+With these expressions, we can compute the contraction of $p_2$ with the momentum factors in the numerators of the $s$- and $u$-channel diagrams:
+\[
+    \begin{aligned}
+        (p_2)_\mu [2p_1^{\mu} + p_2^{\mu}]            & = 2(p_1 \cdot p_2) + p_2^2 = s - m^2 + 0 = s - m^2,   \\
+        (p_2)_\mu [p_1^{\mu} - p_4^{\mu} + p_3^{\mu}] & = p_1 \cdot p_2 - p_2 \cdot p_4 + p_2 \cdot p_3       \\
+                                                      & = \frac{s - m^2}{2} + \frac{t}{2} - \frac{u - m^2}{2} \\
+                                                      & = \frac{1}{2} (s - m^2 + t - u + m^2) = - (u - m^2),
+    \end{aligned}
+\]
+where for the last equality we used the kinematic constraint \(s + t + u = 2 m^2\) (since two particles are massless and two have mass $m$, the sum of squared masses is $2m^2$). Substituting $s+t = 2m^2 - u$ into the numerator gives $\frac{1}{2}(2m^2 - u - u) = m^2 - u = -(u - m^2)$.
+
+Substituting these contracted scalars back into our amplitude expression, the denominators beautifully cancel out:
+\[
+    \begin{aligned}
+        (p_2)_\mu i \mathcal{M}^{\mu \nu} & = e^2 \left[ \frac{i(s-m^2)}{s-m^2} (p_1^{\nu} + p_2^{\nu} + p_3^{\nu})(-1) + \frac{i(-(u-m^2))}{u-m^2} (2 p_1^{\nu} - p_4^{\nu})(-1) + 2i p_2^{\nu} \right] \\
+                                          & = e^2 \left[ -i (p_1^{\nu} + p_2^{\nu} + p_3^{\nu}) + i (2 p_1^{\nu} - p_4^{\nu}) + 2i p_2^{\nu} \right]                                                     \\
+                                          & = ie^2 (p_1^{\nu} + p_2^{\nu} - p_3^{\nu} - p_4^{\nu}) = 0,
+    \end{aligned}
+\]
+where the last equality follows strictly from the global conservation of 4-momentum for the process, which implies that \(p_1 + p_2 = p_3 + p_4\), or \(p_1 + p_2 - p_3 - p_4 = 0\).
+
+\begin{remark}
+    All of the three diagrams are strictly necessary to satisfy the Ward identity and thus for the exact cancellation to happen. If we were to consider only the $s$- and $u$-channel diagrams (as one might incorrectly do by simply copying spinor QED where there is no seagull vertex), we would get a non-zero, residual contribution proportional to $2i p_2^\nu$, which would grossly violate the Ward identity. In sQED, the seagull diagram is required to ensure that the $S$-matrix remains invariant under $U(1)$ gauge transformations. The Ward identity is a direct macroscopic consequence of this fundamental gauge invariance, and thus must be satisfied by all physical observables.
+\end{remark}
+
+
+\subsection*{10. Scaling Green functions and scattering amplitudes}
+
+\begin{center}
+    \textit{Show that, under a transformation of the fields of the form}
+    \[
+        \phi(x) \to c \phi(x),
+    \]
+    \textit{where} \(c\) \textit{is a constant, then:}
+    \begin{enumerate}[label=(\alph*)]
+        \item \textit{The Greeen functions of the theory scale as}
+              \[
+                  \bra{\Omega} T \phi(x_1) \cdots \phi(x_N) \ket{\Omega} \to c^N \bra{\Omega} T \phi(x_1) \cdots \phi(x_N) \ket{\Omega}
+              \]
+        \item \textit{The amputated Green functions of the theory scale as}
+              \[
+                  G_N \big|_{\text{amputated}} \to \frac{1}{c^N} G_N \big|_{\text{amputated}}
+              \]
+        \item \textit{Scattering matrix elements are invariant under such transformation.}
+    \end{enumerate}
+    Hint: \textit{Use the LSZ formula and recall that} \(\sqrt{Z} \equiv \bra{\Omega} \phi(0) \ket{\mathbf{p}} \big|_{\mathbf{p} = \mathbf{0}}\).
+\end{center}
+
+Defining the $N$-point Green function of the interacting theory as the vacuum expectation value of the time-ordered product of fields:
+\[
+    G_N (x_1, \dots, x_N) = \bra{\Omega} T \{ \phi(x_1) \cdots \phi(x_N) \} \ket{\Omega},
+\]
+we can compute exactly how it scales under the global field redefinition $\phi(x) \to c\phi(x)$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Scaling of full Green functions:}
+          Since the time-ordering operator $T$ is linear and $c$ is a pure, time-independent $c$-number constant, it trivially factors out of the expectation value. Because the $N$-point function contains exactly $N$ field insertions, each contributing one factor of $c$, the full Green function scales linearly as $c^N$:
+          \[
+              \begin{aligned}
+                  G_N (x_1, \dots, x_N) & \to \bra{\Omega} T \{ (c\phi(x_1)) \cdots (c\phi(x_N)) \} \ket{\Omega} \\
+                                        & = c^N \bra{\Omega} T \{ \phi(x_1) \cdots \phi(x_N) \} \ket{\Omega}     \\
+                                        & = c^N G_N (x_1, \dots, x_N).
+              \end{aligned}
+          \]
+
+    \item \textbf{Scaling of amputated Green functions:}
+          To understand the amputated Green functions, we must recall their structural definition in terms of Feynman diagrams. A full, connected $N$-point Green function $G_N$ can be factorized into a central, strictly amputated core ($G_N|_{\text{amp}}$) attached to $N$ external exact 2-point propagators ($G_2$). Symbolically:
+          \[
+              G_N \sim (G_2)^N \times \left( G_N \big|_{\text{amputated}} \right)
+          \]
+          From part (a), we definitively know the scaling behavior of both the full $N$-point function and the full 2-point function:
+          \[
+              G_N \to c^N G_N \quad \text{and} \quad G_2 \to c^2 G_2
+          \]
+          Substituting these known scalings into our factorization relation gives:
+          \[
+              c^N G_N \sim (c^2 G_2)^N \times \left( G_N \big|_{\text{amputated}} \right)'
+          \]
+          \[
+              c^N G_N \sim c^{2N} (G_2)^N \times \left( G_N \big|_{\text{amputated}} \right)'
+          \]
+          To preserve the original defining equality $G_N \sim (G_2)^N G_N|_{\text{amp}}$, the transformed amputated Green function must absorb the excess factors of $c$. Dividing both sides by $c^{2N}$, we find:
+          \[
+              \left( G_N \big|_{\text{amputated}} \right)' = \frac{c^N}{c^{2N}} \left( G_N \big|_{\text{amputated}} \right) = \left( \frac{1}{c} \right)^N G_N \big|_{\text{amputated}}
+          \]
+          Thus, amputated Green functions scale inversely with $c^N$.
+
+    \item \textbf{Invariance of Scattering Matrix Elements:}
+          For the scattering matrix elements, we recall the foundational LSZ reduction formula. The LSZ formula mathematically extracts the physical $S$-matrix element $\langle f | S | i \rangle$ from the full interacting Green function by amputating the external legs and dividing out the appropriate field-strength renormalization factors ($\sqrt{Z}$) for each of the $N$ external particles:
+          \[
+              \langle f | S | i \rangle \sim \left( \frac{1}{\sqrt{Z}} \right)^N G_N
+          \]
+          We must determine how the renormalization constant $Z$ scales. The hint provides the non-perturbative definition of $Z$:
+          \[
+              \sqrt{Z} \equiv \bra{\Omega} \phi(0) \ket{\mathbf{p}} \big|_{\mathbf{p} = \mathbf{0}}
+          \]
+          Under the field redefinition $\phi \to c\phi$, this matrix element clearly scales linearly:
+          \[
+              \sqrt{Z} \to \bra{\Omega} c\phi(0) \ket{\mathbf{p}} = c \bra{\Omega} \phi(0) \ket{\mathbf{p}} = c\sqrt{Z}
+          \]
+          Now, we apply both the scaling of $\sqrt{Z}$ and the scaling of the full $G_N$ (from part a) to the LSZ formula:
+          \[
+              \langle f | S | i \rangle \to \left( \frac{1}{c\sqrt{Z}} \right)^N (c^N G_N) = \frac{c^N}{c^N} \left( \frac{1}{\sqrt{Z}} \right)^N G_N = \left( \frac{1}{\sqrt{Z}} \right)^N G_N
+          \]
+          The factors of $c$ perfectly cancel. Therefore, physical scattering observables (the $S$-matrix elements) are strictly invariant under arbitrary constant rescalings of the quantum fields. This reflects the deep physical principle that the specific choice of normalization for the unobservable internal quantum fields has absolutely no effect on measurable physical cross-sections.
+\end{enumerate}

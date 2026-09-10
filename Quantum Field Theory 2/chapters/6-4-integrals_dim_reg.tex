@@ -1,77 +1,181 @@
 \section{Integrals in Dimensional Regularization}
 
- [...]
+Integrals in dimensional regularization are mathematically defined by assuming that the spacetime dimension $D$ is such that the integral strictly converges. The result is then analytically continued to an arbitrary real (or even complex) $D$, excluding some isolated poles corresponding to the physical divergences.
 
+One of the most important foundational properties of dimensional regularization is the assumption that integrands vanish at the boundary of momentum space:
 \[
-    I = \int \mathrm{d}^D k f(k) \implies \mathrm{d}^D k f(k) \big|_{k^{\mu} \to \pm \infty} = 0.
+    I = \int \mathrm{d}^D k \, f(k) \implies \mathrm{d}^D k \, f(k) \Big|_{k^{\mu} \to \pm \infty} = 0.
 \]
-
-This has some consequences.
+This single defining assumption has profound operational consequences:
 \begin{itemize}
-    \item loop integrals...
-    \item integration by parts...
-    \item scaleless integrals vanish.
-          Let us say that we have \([f(k)] = \Delta_f\) an integer, which means that any dimensional quantity must be set to zer, except for the loop momentum \(k\). Then, we have
+    \item \textbf{Shift Invariance:} Loop integrals are invariant under arbitrary translations of the loop momentum ($k^\mu \to k^\mu + v^\mu$). This is always allowed in dimensional regularization, which crucially preserves Ward identities and gauge invariance.
+    \item \textbf{Integration by Parts (IBP):} The integral of a total derivative evaluates exactly to zero:
           \[
-              \int \mathrm{d}^D k f(k) = \lambda^{D + \Delta_f} \int \mathrm{d}^D k f(k),
+              \int \mathrm{d}^D k \frac{\partial}{\partial k^\mu} \left[ v^\mu(k) f(k) \right] = 0.
           \]
-          as we scale \(k \to \lambda k\). This can only be satisfied if the integral vanishes, since \(\lambda^{D + \Delta_f} = 1\) only if \(D + \Delta_f = 0\), such that in general it is not the case.
+          This generates powerful algebraic identities (IBP identities) that can reduce complex tensor integrals into simpler scalar master integrals.
+    \item \textbf{Scaleless Integrals Vanish:} Any integral that is entirely independent of a dimensional scale evaluates strictly to zero.
+          To prove this via dimensional analysis, let us say that the integrand has a mass dimension $[f(k)] \equiv \Delta_f$, which must be an integer. Because there are no other dimensionful parameters (like a mass $M$), under a scale transformation $k \to \lambda k$, the integral transforms homogeneously:
+          \[
+              \int \mathrm{d}^D k \, f(k) = \lambda^{D + \Delta_f} \int \mathrm{d}^D k \, f(k).
+          \]
+          This equation must hold for any arbitrary generic choice of $D$ and $\lambda$. Because $\lambda^{D + \Delta_f} \neq 1$ in general, the only way this equality can be satisfied is if the integral itself is exactly zero.
 \end{itemize}
+
 \begin{example}
+    Consider the following scaleless integral:
     \[
-        \int \mathrm{d}^D k \frac{1}{(k^2)^{\alpha} } = 0,
+        \int \mathrm{d}^D k \frac{1}{(k^2)^{\alpha}} = 0,
     \]
-    for any \(\alpha\), since the integrand is scaleless. Thus from integration by parts we have
+    which must vanish for any generic power $\alpha$ because it lacks any dimensionful scale (like a mass).
+    We can also explicitly prove this result using Integration by Parts (IBP). We start by writing the integral of a total derivative:
     \[
-        \begin{aligned}
-            \dots \dots
-        \end{aligned}
+        0 = \int \mathrm{d}^D k \frac{\partial}{\partial k^\mu} \left( \frac{k^\mu}{(k^2)^\alpha} \right) = \int \mathrm{d}^D k \left[ \frac{\partial_\mu k^\mu}{(k^2)^\alpha} + k^\mu \frac{\partial}{\partial k^\mu} (k^2)^{-\alpha} \right].
     \]
-    By analytic continuation...
+    In $D$ dimensions, $\partial_\mu k^\mu = D$. For the second term, applying the chain rule gives $\frac{\partial}{\partial k^\mu} (k^2)^{-\alpha} = -\alpha (k^2)^{-\alpha-1} (2k_\mu)$. Contracting $k^\mu (2k_\mu) = 2k^2$, we find:
+    \[
+        0 = \int \mathrm{d}^D k \left[ \frac{D}{(k^2)^\alpha} - \alpha \frac{2k^2}{(k^2)^{\alpha+1}} \right] = (D - 2\alpha) \int \mathrm{d}^D k \frac{1}{(k^2)^\alpha}.
+    \]
+    Since this must hold for generic values of $D$, the integral must evaluate to zero for all $\alpha$. By the principle of analytic continuation in the complex variable $\alpha$, it is mathematically consistent to assume this identity remains valid even for $\alpha \leq 0$!
 \end{example}
 
 \begin{example}
+    Using the previous principle, we can evaluate integrals that initially appear to have a scale, but whose structure dictates they must vanish under analytic continuation:
     \[
-        \int \mathrm{d}^D k \frac{1}{(k^2 - M^2)^{\alpha}} = 0,
+        \int \mathrm{d}^D k \frac{1}{(k^2 - M^2)^{\alpha}} = 0 \quad \text{if} \quad \alpha \leq 0.
     \]
-    but only if \(\alpha \leq 0\):
+    Let us look at two specific cases:
     \begin{itemize}
-        \item (\(\alpha=0\)): ...
-        \item (\(\alpha = -1\)): ...
+        \item (\(\alpha = 0\)): The integral becomes $\int \mathrm{d}^D k \cdot 1$. Since the integrand $1$ has no dependence on the scale $M$, it is a scaleless integral and thus trivially evaluates to zero.
+        \item (\(\alpha = -1\)): The integral becomes $\int \mathrm{d}^D k (k^2 - M^2)$. We can split this by linearity into $\int \mathrm{d}^D k \cdot k^2 - M^2 \int \mathrm{d}^D k \cdot 1$. Both of these resulting integrals are purely scaleless ($k^2$ has no external scale, and $1$ has no scale), so they both evaluate to zero. Thus, $0 - 0 = 0$.
     \end{itemize}
+    Alternatively, this can be proven through explicit calculation by manipulating the integrand. For instance, we can write $1 = \frac{k^2}{k^2 - M^2} - M^2 \frac{1}{k^2 - M^2}$. Therefore:
+    \[
+        \int \mathrm{d}^D k \cdot 1 = \int \mathrm{d}^D k \frac{k^2}{k^2 - M^2} - M^2 \int \mathrm{d}^D k \frac{1}{k^2 - M^2} = 0.
+    \]
+    This evaluates to exactly zero when calculated explicitly using the standard formulas for dimensionally regulated scalar integrals (and employing the methods for dealing with numerator momentum $k^2$ discussed in the following section).
 \end{example}
-Thus dimensional regularization defines how we treat scaleless integrals, which is a very convenient feature. If the integral diverges, we can consistently ..........
+Thus, dimensional regularization elegantly and consistently defines how we treat scaleless integrals, which is an extremely convenient computational feature. It automatically regularizes both UV and IR divergences simultaneously while rigorously maintaining shift and gauge invariance.
 
 \subsection{Integrals with Numerators}
 
-In most theories, momenta and loop moemnta can appear in the numerator of the integrand, and we need to know how to deal with them.
+In most physically realistic theories, including QED and QCD, loop momenta frequently appear in the numerators of the integrand. This occurs naturally due to fermion propagators (which contain a $\slashed{k}$ term) and derivative couplings at interaction vertices. For example, a fermion line carries a factor of $\frac{i(\slashed{k} + m)}{k^2 - m^2}$, and a scalar QED vertex introduces a factor like $-ie(p_1^\mu + p_2^\mu)$. We must systematically know how to evaluate loop integrals containing these tensor numerators.
 
-    [...]
+\TODO{add diagram: Fermion propagator line with momentum k}
+\TODO{add diagram: sQED vertex with incoming p1, outgoing p2, and photon line}
 
-\subsubsection{Dirac Algebra in \(D\) Dimensions}
+There are many advanced techniques for dealing with tensor integrals (such as Passarino-Veltman reduction, extensively used in QCD), but here we will focus on the most direct and intuitive method based on Lorentz covariance.
 
-In dimensional regularization, we need to define the Dirac algebra in \(D\) dimensions.
+The standard procedure is to first combine all denominator factors using Feynman parameters, and then perform a shift in the integration variable $k^\mu \to k^\mu + v^\mu$ to complete the square in the denominator. This ensures the denominator takes the standard spherically symmetric form:
+\[
+    \frac{1}{\text{denominator}} = \frac{1}{(k^2 - M^2)^\alpha}.
+\]
+Crucially, when we perform this shift $k \to k+v$, the numerator also changes, generating a polynomial in the new loop momentum $k$. We can then expand this polynomial. Any terms that do not contain the integration variable $k$ (e.g., external momenta $v^\mu$) can be factored entirely outside the integral.
 
-We can consistently restrict the fermions to have only two polarizations (plus two for antifermions), ...
+Hence, to solve the full problem, we only ever need to understand how to compute fundamental "tadpole" (or vacuum) integrals where the loop momentum $k$ appears exclusively in the numerator and the denominator depends only on $k^2$.
 
-    [\dots]
+Suppose, for example, our expansion yields a term like:
+\[
+    \text{Numerator} = (k \cdot v_1)(k \cdot v_2) \cdot k^2.
+\]
+We rewrite this by explicitly extracting the loop momentum vectors:
+\[
+    \text{Numerator} = \left( v_{1\rho} v_{2\sigma} g_{\alpha\beta}\right) \left( k^\rho k^\sigma k^\alpha k^\beta \right),
+\]
+where the first term is independent of the loop momentum and can be factored out of the integral, while the second factor is a pure loop momentum tensor.
+This demonstrates that we only strictly need to consider and evaluate integrals of the general tensor form:
+\[
+    \int \frac{\mathrm{d}^D k}{(2\pi)^D} \frac{k^\mu k^\nu k^\rho \cdots}{(k^2 - M^2)^\alpha}.
+\]
 
-Anticommutation relations are almost the same, but now we are considering a \(D\)-dimensional \(g^{\mu \nu}\):
+The key observation is that after the momentum shift, this integral is a pure Lorentz tensor, but it \textbf{does not explicitly depend on any external vector}. Because Lorentz covariance must be maintained, the result can only be constructed using the invariant metric tensor $g^{\mu\nu}$.
+
+\begin{example}[Rank-2 Tensor Integral]
+    Consider an integral with two loop momenta in the numerator:
+    \[
+        I^{\mu\nu} \equiv \int \mathrm{d}^D k \frac{k^\mu k^\nu}{(k^2 - M^2)^\alpha}.
+    \]
+    Since the result must be a rank-2 symmetric tensor built only from the metric, it must be proportional to $g^{\mu\nu}$:
+    \[
+        I^{\mu\nu} = g^{\mu\nu} F(M^2),
+    \]
+    where $F(M^2)$ is an unknown scalar function. To find $F(M^2)$, we contract both sides of the equation with $\frac{1}{D} g_{\mu\nu}$. Remembering that in $D$ dimensions $g_{\mu\nu} g^{\mu\nu} = D$, we get:
+    \[
+        \begin{aligned}
+            F(M^2) & = \frac{1}{D} \int \mathrm{d}^D k \frac{k^2}{(k^2 - M^2)^\alpha}                                                                     \\
+                   & = \frac{1}{D} \int \mathrm{d}^D k \frac{k^2 - M^2 + M^2}{(k^2 - M^2)^\alpha}                                                         \\
+                   & = \frac{1}{D} \int \mathrm{d}^D k \frac{1}{(k^2 - M^2)^{\alpha-1}} + \frac{M^2}{D} \int \mathrm{d}^D k \frac{1}{(k^2 - M^2)^\alpha}.
+        \end{aligned}
+    \]
+    Notice that on the right-hand side, we have successfully reduced the tensor integral into a sum of purely scalar integrals of the exact same type we already know how to compute.
+
+    \textit{Exercise:} Using the standard result for scalar integrals and the Gamma function property $z\Gamma(z) = \Gamma(z+1)$, you can show that:
+    \[
+        F(M^2) = \frac{i}{(-1)^{\alpha-1}} \frac{1}{(4\pi)^{D/2}} \frac{\Gamma\left(\alpha - \frac{D}{2} - 1\right)}{\Gamma(\alpha)} \frac{1}{2} (M^2)^{\frac{D}{2} - \alpha + 1}.
+    \]
+\end{example}
+
+\begin{example}[Rank-1 Tensor Integral (Odd powers)]
+    Consider an integral with a single loop momentum in the numerator:
+    \[
+        I^\mu = \int \mathrm{d}^D k \frac{k^\mu}{(k^2 - M^2)^\alpha}.
+    \]
+    This integral is identically zero:
+    \[
+        I^\mu = 0.
+    \]
+    We can prove this in two ways:
+    \begin{enumerate}
+        \item \textbf{Lorentz Covariance:} The result must be a rank-1 vector. However, it is mathematically impossible to build a vector out of only the metric tensor $g^{\mu\nu}$ (which is rank-2). Therefore, the coefficient must be zero.
+        \item \textbf{Symmetry:} The integration domain is symmetric from $-\infty$ to $+\infty$. If we perform the change of variables $k^\mu \to -k^\mu$, the measure $\mathrm{d}^D k$ and the denominator $(k^2 - M^2)^\alpha$ remain unchanged, but the numerator flips sign. This implies $I^\mu = -I^\mu$, which can only be true if $I^\mu = 0$.
+    \end{enumerate}
+    By logical extension, any tensor integral containing an \textbf{odd} number of loop momenta in the numerator (e.g., $k^\mu k^\nu k^\rho$) will always integrate to zero.
+\end{example}
+
+With these specific methods—Feynman parameterization, momentum shifting, and Lorentz covariant tensor reduction—you should be able to systematically handle \textit{any} one-loop integral, reducing the entire problem down to the final integration over the Feynman parameters. We will apply these tools to concrete examples when computing quantum corrections in QED.
+
+\subsection{Dirac Algebra in \(D\) Dimensions}
+
+In dimensional regularization, we need to upgrade the Dirac \(\gamma\) matrices to \(D\) dimensions, meaning the Lorentz index now runs over \(\mu = 0, \dots, D-1\).
+
+However, we can consistently restrict Dirac fermions to have exactly two independent polarizations (plus two for antifermions), regardless of the spacetime dimension. Therefore, the identity matrix in spinor space remains a \(4 \times 4\) matrix, and its trace is strictly fixed:
+\[
+    \Tr[\mathbb{I}_4] = 4.
+\]
+\textit{(Note: This is in stark contrast to the photon gauge field \(A^\mu\), which, being a true spacetime vector, possesses \(D-2\) independent physical polarizations in \(D\) dimensions).}
+
+The fundamental Clifford algebra anticommutation relations remain structurally almost the same, but we must explicitly consider the \(D\)-dimensional metric tensor \(g^{\mu \nu}\):
 \[
     \{\gamma^{\mu}, \gamma^{\nu}\} = 2 g^{\mu \nu} \times \mathbb{I}_4.
 \]
-where the identity is still \(4 \times 4\) because we are keeping the number of polarizations fixed. We can also define the trace of two gamma matrices as
+where the identity is still \(4 \times 4\) because we are keeping the number of polarizations fixed. We can also define the trace of two gamma matrices exactly as before, yielding:
 \[
-    \dots
+    \Tr[\gamma^\mu \gamma^\nu] = 4 g^{\mu\nu}.
 \]
 
-All trace identities we found are still valid up to the promotion of the metric to \(D\) dimensions, and the fact that the trace of the identity is still 4. However we have
+All trace identities we found previously are still valid up to the promotion of the metric \(g^{\mu\nu}\) to \(D\) dimensions, and the fact that the trace of the identity is still 4. However, contraction identities change because the trace of the metric tensor is now \(g_\mu^\mu = D\). For instance, contracting a single gamma matrix with itself yields:
 \[
-    \gamma_\mu \gamma^\mu = \frac{1}{2} \dots = g_\mu^{\mu} \times \mathbb{I}_4 = D \times \mathbb{I}_4,
+    \begin{aligned}
+        \gamma^\mu \gamma_\mu & = \frac{1}{2} g_{\mu\nu} ( \gamma^\mu \gamma^\nu + \gamma^\nu \gamma^\mu ) + \frac{1}{2} g_{\mu\nu} ( \gamma^\mu \gamma^\nu - \gamma^\nu \gamma^\mu )         \\
+                              & = \frac{1}{2} g_{\mu\nu} \{ \gamma^\mu, \gamma^\nu \} + \frac{1}{2} \underbrace{g_{\mu\nu} [\gamma^\mu, \gamma^\nu]}_{=0 \text{ (sym} \times \text{antisym)}} \\
+                              & = g_{\mu\nu} g^{\mu\nu} \mathbb{I}_4 = D \times \mathbb{I}_4.
+    \end{aligned}
 \]
-\begin{example}[exercise]
-    We already computed it in four dimensions, but we can also compute it in \(D\) dimensions:
+
+\begin{example}[Exercise]
+    We already computed the contraction of a gamma matrix around three others in four dimensions, but we can also compute it in \(D\) dimensions using the anticommutation relations repeatedly to commute \(\gamma_\mu\) to the left:
     \[
-        \gamma^{\mu} \gamma^{\nu} \gamma^{\rho} \gamma^{\sigma} \gamma_{\mu} = \dots
+        \gamma^{\mu} \gamma^{\nu} \gamma^{\rho} \gamma^{\sigma} \gamma_{\mu} = -2\gamma^\sigma \gamma^\rho \gamma^\nu + (4-D)\gamma^\nu \gamma^\rho \gamma^\sigma.
     \]
+    \textit{(Hint: You can systematically derive this by applying \(\gamma^\sigma \gamma_\mu = 2g^\sigma_\mu - \gamma_\mu \gamma^\sigma\) and using the intermediate identity \(\gamma^\mu \gamma^\nu \gamma_\mu = (2-D)\gamma^\nu\). Notice how setting \(D=4\) neatly recovers the familiar 4D result \(-2\gamma^\sigma \gamma^\rho \gamma^\nu\)).}
 \end{example}
+
+\subsection{Infrared Divergences}
+
+Up to this point, dimensional regularization has been used to treat Ultraviolet (U.V.) divergences occurring at infinite momentum (\(k \to \infty\)). However, we must briefly mention that loop integrals and phase-space integrals in theories containing \textbf{massless particles} (like photons in QED) can exhibit a completely different kind of divergence.
+
+These divergences arise from integration regions where the momentum of the massless particle approaches zero (\(k \to 0\), known as "soft" divergences) or becomes perfectly parallel to another massless particle ("collinear" divergences). In these specific kinematic regimes, the denominators of the propagators strictly vanish, causing the integral to blow up. These are collectively called \textbf{Infrared (I.R.) Divergences}.
+
+I.R. divergences must be regulated to perform intermediate calculations. This can be done by adding a fictitious small mass to the massless particles (e.g., \(m_\gamma \neq 0\)), or more commonly and elegantly, by continuing to use Dimensional Regularization (where I.R. poles also manifest as \(\frac{1}{\epsilon}\) factors).
+
+Crucially, unlike U.V. divergences, I.R. divergences are \textbf{NOT renormalized}. We do not absorb them into local Lagrangian counterterms. Instead, according to fundamental theorems in QFT (such as the Bloch-Nordsieck or KLN theorems), these divergences will \textbf{cancel out by themselves} when we sum over all indistinguishable physical processes to compute properly defined, inclusive observables (for example, summing the cross-sections of virtual loop corrections and the emission of real, undetectable soft photons).

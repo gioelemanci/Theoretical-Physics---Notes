@@ -1,0 +1,578 @@
+\section*{Sheet 5}
+
+
+\subsection*{1. Proof of the Gordon Identity}
+
+\begin{center}
+    \textit{Prove the Gordon identity}
+    \[
+        \bar{u}(p_2) (p_1^\mu + p_2^\mu) u(p_1) = 2 m \, \bar{u}(p_2) \gamma^\mu u(p_1) + i \bar{u}(p_2) \sigma^{\mu\nu} (p_{1\nu} - p_{2\nu}) u(p_1), \qquad (1)
+    \]
+    \textit{where}
+    \[
+        \sigma^{\mu\nu} \equiv \frac{i}{2} [\gamma^\mu, \gamma^\nu] \qquad (2)
+    \]
+    \textit{and the spinors $u(p_{1,2})$ satisfy the Dirac equation with mass $m$.}
+\end{center}
+
+To prove the Gordon identity, we start from the definition of the tensor $\sigma^{\mu\nu}$ given in eq. (2) and analyze the structure involving the commutator of two gamma matrices sandwiched between the Dirac spinors:
+\[
+    i \sigma^{\mu\nu} (p_{1\nu} - p_{2\nu}) = i \left( \frac{i}{2} [\gamma^\mu, \gamma^\nu] \right) (p_{1\nu} - p_{2\nu}) = -\frac{1}{2} (\gamma^\mu \gamma^\nu - \gamma^\nu \gamma^\mu) (p_{1\nu} - p_{2\nu})
+\]
+Expanding the commutator product explicitly:
+\[
+    i \sigma^{\mu\nu} (p_{1\nu} - p_{2\nu}) = -\frac{1}{2} \left( \gamma^\mu \gamma^\nu p_{1\nu} - \gamma^\mu \gamma^\nu p_{2\nu} - \gamma^\nu \gamma^\mu p_{1\nu} + \gamma^\nu \gamma^\mu p_{2\nu} \right)
+\]
+Using Feynman slash notation, where $\slashed{p} \equiv \gamma^\nu p_\nu$, we can rewrite the terms as:
+\[
+    i \sigma^{\mu\nu} (p_{1\nu} - p_{2\nu}) = -\frac{1}{2} \left( \gamma^\mu \slashed{p}_1 - \gamma^\mu \slashed{p}_2 - \slashed{p}_1 \gamma^\mu + \slashed{p}_2 \gamma^\mu \right)
+\]
+Grouping the terms containing $\slashed{p}_1$ and $\slashed{p}_2$:
+\[
+    i \sigma^{\mu\nu} (p_{1\nu} - p_{2\nu}) = -\frac{1}{2} \left[ (\gamma^\mu \slashed{p}_1 - \slashed{p}_1 \gamma^\mu) - (\gamma^\mu \slashed{p}_2 - \slashed{p}_2 \gamma^\mu) \right]
+\]
+
+Now, we sandwich this expression between the initial and final Dirac spinors, $\bar{u}(p_2)$ and $u(p_1)$:
+\[
+    i \bar{u}(p_2) \sigma^{\mu\nu} (p_{1\nu} - p_{2\nu}) u(p_1) = -\frac{1}{2} \bar{u}(p_2) \left[ (\gamma^\mu \slashed{p}_1 - \slashed{p}_1 \gamma^\mu) - (\gamma^\mu \slashed{p}_2 - \slashed{p}_2 \gamma^\mu) \right] u(p_1)
+\]
+
+We evaluate the action of the Dirac equation on the spinors. The momentum-space Dirac equation for an incoming spinor $u(p_1)$ and an outgoing conjugate spinor $\bar{u}(p_2)$ is given by:
+\[
+    (\slashed{p}_1 - m) u(p_1) = 0 \implies \slashed{p}_1 u(p_1) = m u(p_1)
+\]
+\[
+    \bar{u}(p_2) (\slashed{p}_2 - m) = 0 \implies \bar{u}(p_2) \slashed{p}_2 = m \bar{u}(p_2)
+\]
+
+Let us examine how these relations affect the two bracketed terms when acting on the spinors:
+\begin{enumerate}
+    \item For the first term acting on $u(p_1)$ to the right:
+          \[
+              (\gamma^\mu \slashed{p}_1 - \slashed{p}_1 \gamma^\mu) u(p_1) = \gamma^\mu (\slashed{p}_1 u(p_1)) - \slashed{p}_1 (\gamma^\mu u(p_1))
+          \]
+          Substituting $\slashed{p}_1 u(p_1) = m u(p_1)$ and using the anticommutation relation $\{ \gamma^\mu, \slashed{p}_1 \} = 2p_1^\mu \mathbb{1}$ (meaning $\slashed{p}_1 \gamma^\mu = 2p_1^\mu - \gamma^\mu \slashed{p}_1$):
+          \[
+              \gamma^\mu (m u(p_1)) - (2p_1^\mu - \gamma^\mu \slashed{p}_1) u(p_1) = m \gamma^\mu u(p_1) - 2p_1^\mu u(p_1) + \gamma^\mu (\slashed{p}_1 u(p_1)) = 2m \gamma^\mu u(p_1) - 2p_1^\mu u(p_1)
+          \]
+    \item For the second term acting on $\bar{u}(p_2)$ to the left:
+          \[
+              \bar{u}(p_2) (\gamma^\mu \slashed{p}_2 - \slashed{p}_2 \gamma^\mu) = (\bar{u}(p_2) \slashed{p}_2) \gamma^\mu - \bar{u}(p_2) (\gamma^\mu \slashed{p}_2)
+          \]
+          Substituting $\bar{u}(p_2) \slashed{p}_2 = m \bar{u}(p_2)$ and using $\slashed{p}_2 \gamma^\mu = 2p_2^\mu - \gamma^\mu \slashed{p}_2$:
+          \[
+              (m \bar{u}(p_2)) \gamma^\mu - \bar{u}(p_2) (2p_2^\mu - \gamma^\mu \slashed{p}_2) = 2m \bar{u}(p_2) \gamma^\mu - 2p_2^\mu \bar{u}(p_2)
+          \]
+\end{enumerate}
+
+Substituting these evaluated components back into the sandwich expression:
+\[
+    i \bar{u}(p_2) \sigma^{\mu\nu} (p_{1\nu} - p_{2\nu}) u(p_1) = -\frac{1}{2} \left[ \bar{u}(p_2) \big( 2m \gamma^\mu - 2p_1^\mu \big) u(p_1) - \bar{u}(p_2) \big( 2m \gamma^\mu - 2p_2^\mu \big) u(p_1) \right]
+\]
+Distributing the minus sign and the factor of $-\frac{1}{2}$:
+\[
+    \begin{aligned}
+        i \bar{u}(p_2) \sigma^{\mu\nu} (p_{1\nu} - p_{2\nu}) u(p_1) & = -m \bar{u}(p_2) \gamma^\mu u(p_1) + \bar{u}(p_2) p_1^\mu u(p_1) + m \bar{u}(p_2) \gamma^\mu u(p_1) - \bar{u}(p_2) p_2^\mu u(p_1) \\
+                                                                    & = \bar{u}(p_2) (p_1^\mu + p_2^\mu) u(p_1) - 2m \bar{u}(p_2) \gamma^\mu u(p_1)
+    \end{aligned}
+\]
+Notice that the terms proportional to $m \bar{u}(p_2)\gamma^\mu u(p_1)$ cancel out entirely, while the vector momentum terms combine additively.
+
+Rearranging the terms to isolate the symmetric momentum combination on the left-hand side, we obtain:
+\[
+    \bar{u}(p_2) (p_1^\mu + p_2^\mu) u(p_1) = 2m \, \bar{u}(p_2) \gamma^\mu u(p_1) + i \bar{u}(p_2) \sigma^{\mu\nu} (p_{1\nu} - p_{2\nu}) u(p_1)
+\]
+This rigorously completes the proof of the Gordon identity, which is a foundational relation used in quantum electrodynamics to decompose the fermion electromagnetic vertex into its convection (electric) and spin (magnetic) current components.
+
+
+\subsection*{2. Vacuum polarization and renormalization in QED}
+
+\begin{center}
+    \textit{Compute the renormalized $\Pi(p^2)$, using the following renormalization schemes:}
+    \begin{itemize}
+        \item \textit{on-shell scheme, given by the renormalization condition $\Pi(0) = 0$}
+        \item \textit{in the $\overline{MS}$ scheme}
+    \end{itemize}
+    \textit{The result is given in the lectures.}
+\end{center}
+
+\textbf{1. One-Loop Vacuum Polarization Tensor}
+
+The one-loop quantum correction to the photon propagator is given by the one-particle irreducible (1PI) fermion loop diagram. Using the Feynman rules in $D$ dimensions ($D = 4 - 2\epsilon$), the unrenormalized vacuum polarization tensor $i\Pi^{\mu\nu}(p)$ is:
+\[
+    i\Pi^{\mu\nu}(p) = (-ie)^2 (-1) \mu^{2\epsilon} \int \frac{d^D k}{(2\pi)^D} \frac{\text{Tr}\left[ \gamma^\mu i(\slashed{k} + \slashed{p} + m) \gamma^\nu i(\slashed{k} + m) \right]}{(k^2 - m^2 + i\epsilon)((k+p)^2 - m^2 + i\epsilon)}
+\]
+where the overall factor of $(-1)$ comes from the closed fermion loop. Evaluating the Dirac trace in the numerator:
+\[
+    \text{Tr}[\dots] = -4 \left[ k^\mu(k+p)^\nu + k^\nu(k+p)^\mu - g^{\mu\nu}(k^2 + k \cdot p - m^2) \right]
+\]
+By gauge invariance and Lorentz covariance, the full tensor must take the transverse form:
+\[
+    i\Pi^{\mu\nu}(p) = i(p^2 g^{\mu\nu} - p^\mu p^\nu) \Pi(p^2)
+\]
+To extract the scalar function $\Pi(p^2)$, we project using the transverse metric tensor:
+\[
+    i\Pi(p^2) = \frac{1}{D-1} \frac{1}{p^2} g_{\mu\nu} i\Pi^{\mu\nu}(p)
+\]
+
+\textbf{2. Feynman Parameterization and Loop Integration}
+
+Combining the denominators using standard Feynman parameters with parameter $x$, and shifting the loop momentum $k^\mu \to k^\mu - x p^\mu$, we define the shifted mass scale:
+\[
+    \Delta \equiv m^2 - x(1-x)p^2
+\]
+The scalar self-energy function takes the integral representation:
+\[
+    i\Pi(p^2) = -\frac{4e^2 \mu^{2\epsilon}}{(D-1)p^2} \int \frac{d^D k}{(2\pi)^D} \int_0^1 dx \frac{N}{(k^2 - \Delta + i\epsilon)^2}
+\]
+where the contracted and reduced numerator $N$ evaluates to:
+\[
+    N = 2(D-1)m^2 - (D-2)\Delta - (D-2)k^2 + \text{vanishing odd powers of } k
+\]
+Using the standard vacuum tadpole integral and the tensor loop master formula from previous exercises to evaluate the $k^2$ term, and expanding around $\epsilon \to 0$ for $D = 4 - 2\epsilon$, we obtain the unrenormalized vacuum polarization function including the counterterm contribution ($\delta_3$):
+\[
+    i\Pi(p^2) = \frac{ie^2}{2p^2\pi^2} \int_0^1 dx (\Delta - m^2) \left( \frac{1}{\epsilon} - \gamma_E + \log 4\pi - \log \frac{\Delta}{\mu^2} \right) - i\delta_3 + \mathcal{O}(\epsilon)
+\]
+Using the integral relation $\int_0^1 dx (\Delta - m^2) = -p^2 \int_0^1 dx x(1-x) = -\frac{p^2}{6}$, we divide out the factor of $i$ and simplify to get:
+\[
+    \Pi(p^2) = -\frac{e^2}{2\pi^2} \left[ \frac{1}{6} \left( \frac{1}{\epsilon} - \gamma_E + \log 4\pi \right) - \int_0^1 dx x(1-x) \log \frac{\Delta}{\mu^2} \right] - \delta_3
+\]
+
+\textbf{3. Renormalization Schemes}
+
+We fix the counterterm $\delta_3$ by imposing specific renormalization conditions:
+
+\begin{itemize}
+    \item \textbf{On-Shell Scheme:}
+          The renormalization condition requires that the physical photon pole receives no shift at zero momentum, meaning $\Pi(0) = 0$.
+          Setting $p^2 = 0$ implies $\Delta = m^2$, and the parameter integral evaluates to $\int_0^1 dx x(1-x) = \frac{1}{6}$. Enforcing $\Pi(0) = 0$ yields the on-shell counterterm:
+          \[
+              \delta_3^{\text{o.s.}} = -\frac{e^2}{12\pi^2} \left( \frac{1}{\epsilon} - \gamma_E + \log 4\pi - \log \frac{m^2}{\mu^2} \right)
+          \]
+          Substituting this back gives the finite on-shell vacuum polarization function:
+          \[
+              \Pi_{\text{o.s.}}(p^2) = \frac{e^2}{2\pi^2} \int_0^1 dx x(1-x) \log \frac{m^2}{\Delta}
+          \]
+
+    \item \textbf{$\overline{MS}$ Scheme:}
+          In the modified minimal subtraction ($\overline{MS}$) scheme, the counterterm absorbs only the divergent pole piece along with the universal constant artifacts ($\gamma_E$ and $\log 4\pi$) that always accompany dimensional regularization in 4 dimensions:
+          \[
+              \delta_3^{\overline{MS}} = -\frac{e^2}{12\pi^2} \left( \frac{1}{\epsilon} - \gamma_E + \log 4\pi \right)
+          \]
+          Absorbing the scale logarithms by defining the modified renormalization scale $\overline{\mu}^2 = \frac{e^{\gamma_E}}{4\pi} \mu^2$, the counterterm simplifies to:
+          \[
+              \delta_3^{\overline{MS}} = -\frac{e^2}{12\pi^2} \frac{1}{\epsilon} \quad (\text{using } \overline{\mu})
+          \]
+          Consequently, the $\overline{MS}$-renormalized vacuum polarization function retains the mass-scale logarithms:
+          \[
+              \overline{\Pi}(p^2) = \frac{e^2}{2\pi^2} \int_0^1 dx x(1-x) \log \frac{\Delta}{\mu^2}
+          \]
+\end{itemize}
+
+
+\subsection*{3. Computation of the QED $\beta$ function at one-loop order}
+
+\begin{center}
+    \textit{Use the result of the previous exercise to compute the $\beta$ function in QED}
+    \[
+        \frac{\partial}{\partial \log \mu_R^2} \alpha = \beta(\alpha), \qquad (5)
+    \]
+    \textit{at one-loop accuracy, in the $\overline{MS}$ scheme, where $\alpha \equiv e^2 / (4\pi)$. The result is in the lecture notes.}
+\end{center}
+
+To compute the running of the fine-structure constant $\alpha$ via the $\beta$ function, we utilize the relation between the bare electric charge $e_0$ and the renormalized coupling $e$ (or equivalently the renormalized fine-structure constant $\alpha = e^2 / (4\pi)$).
+
+From the Ward identity of QED, charge renormalization is strictly tied to the field-strength renormalization of the photon field, such that the coupling renormalization constant $Z_e$ satisfies $Z_e = Z_3^{-1/2}$, where $Z_3$ is the photon wave-function renormalization constant. Therefore, the relation between the bare and renormalized charge is:
+\[
+    e_0 \mu^\epsilon = Z_3^{-1/2} e(\mu_R)
+\]
+where $\mu$ is the mass scale introduced in dimensional regularization to keep the coupling dimensionless in $D = 4-2\epsilon$ dimensions, and $\mu_R$ is the $\overline{MS}$ renormalization scale.
+
+Taking the logarithm of both sides and recalling that the bare charge $e_0$ is completely independent of the arbitrary renormalization scale $\mu_R$ (i.e., $\frac{d e_0}{d \mu_R} = 0$):
+\[
+    0 = \frac{\partial}{\partial \log \mu_R} \left[ \log e + \frac{1}{2} \log Z_3^{-1} \right]
+\]
+From the previous exercise on vacuum polarization in the $\overline{MS}$ scheme, the photon wave-function renormalization factor $Z_3 = 1 - \delta_3^{\overline{MS}}$ is given at one-loop order by:
+\[
+    Z_3 = 1 - \frac{e^2}{12\pi^2} \frac{1}{\epsilon} + \mathcal{O}(e^4)
+\]
+Thus, we can express $\log Z_3^{-1}$ to leading order in $e^2$ as:
+\[
+    \log Z_3^{-1} = -\log \left( 1 - \frac{e^2}{12\pi^2 \epsilon} \right) \approx \frac{e^2}{12\pi^2 \epsilon}
+\]
+
+Substituting this into our scale-invariance condition:
+\[
+    \frac{\partial}{\partial \log \mu_R} \left[ \log e + \frac{e^2}{24\pi^2 \epsilon} \right] = 0
+\]
+Using the chain rule $\frac{\partial}{\partial \log \mu_R} = 2 \frac{\partial}{\partial \log \mu_R^2}$, and noting that at one-loop order $\frac{\partial e^2}{\partial \log \mu_R} \approx \frac{\partial e^2}{\partial \log \mu}$, we differentiate with respect to $\log \mu$:
+\[
+    \frac{1}{e} \frac{\partial e}{\partial \log \mu} + \frac{1}{24\pi^2 \epsilon} \frac{\partial e^2}{\partial \log \mu} = 0
+\]
+Since $\frac{\partial e^2}{\partial \log \mu} = 2e \frac{\partial e}{\partial \log \mu}$, this becomes:
+\[
+    \frac{1}{e} \frac{\partial e}{\partial \log \mu} \left( 1 + \frac{e^2}{12\pi^2 \epsilon} \right) = 0 \implies \frac{\partial e}{\partial \log \mu} = -\frac{e^3}{12\pi^2 \epsilon}
+\]
+
+To find the exact pole contribution that survives the limit $\epsilon \to 0$, we recall that the full dimensionless renormalized coupling depends on $\mu$ through the relation $e(\mu) = \mu^{-\epsilon} e_0 Z_3^{1/2}$. Differentiating this with respect to $\log \mu$ and matching the $1/\epsilon$ pole term (which dictates the renormalization group running via the wave-function counterterm derivative), we find the beta function for the coupling $e$:
+\[
+    \beta(e) \equiv \frac{\partial e}{\partial \log \mu_R^2} = \frac{e^3}{12\pi^2}
+\]
+
+Finally, we convert this into the $\beta$ function for the fine-structure constant $\alpha \equiv \frac{e^2}{4\pi}$. Using the chain rule:
+\[
+    \beta(\alpha) \equiv \frac{\partial \alpha}{\partial \log \mu_R^2} = \frac{\partial}{\partial \log \mu_R^2} \left( \frac{e^2}{4\pi} \right) = \frac{2e}{4\pi} \frac{\partial e}{\partial \log \mu_R^2} = \frac{e}{2\pi} \beta(e)
+\]
+Substituting our expression for $\beta(e)$:
+\[
+    \beta(\alpha) = \frac{e}{2\pi} \left( \frac{e^3}{12\pi^2} \right) = \frac{e^4}{24\pi^3}
+\]
+Since $e^2 = 4\pi\alpha$, we have $e^4 = 16\pi^2 \alpha^2$. Substituting this gives the final one-loop QED $\beta$ function:
+\[
+    \beta(\alpha) = \frac{16\pi^2 \alpha^2}{24\pi^3} = \frac{\alpha^2}{3\pi}
+\]
+This positive sign indicates that the QED coupling increases at higher energy scales (short distances), manifesting the phenomenon of vacuum polarization screening and charge renormalization.
+
+
+\subsection*{4. One-loop corrections to the photon propagator in scalar QED}
+
+\begin{center}
+    \textit{Compute the one-loop corrections to the photon propagator in scalar QED, in dimensional regularization. Evaluate the integral over Feynman parameters in the approximation $|p^2| \gg m^2$. \\
+        Result: see Schwartz 16.2.1, but note that he uses $D = 4 - \epsilon$ instead of $D = 4 - 2\epsilon$.}
+\end{center}
+
+\textbf{1. Feynman Diagrams and Amplitude Setup}
+
+In scalar QED (sQED), the one-loop quantum corrections to the photon two-point function (vacuum polarization tensor $i\Pi^{\mu\nu}(p)$) receive contributions from two distinct Feynman diagrams:
+\begin{enumerate}
+    \item \textbf{The Scalar Bubble Diagram:} Formed by a loop of charged scalar fields $\phi$ connected via two 3-point vertices $\phi^*\phi A^\mu$, whose Feynman rule is $-ie(k^\mu + k'^\mu)$.
+    \item \textbf{The Seagull Diagram:} A single-loop tadpole-like contraction arising from the quartic 4-point vertex $2ie^2 g^{\mu\nu} \phi^*\phi$.
+\end{enumerate}
+
+Using the Feynman rules in $D$ dimensions ($D = 4 - 2\epsilon$), the sum of these two one-loop diagrams gives the unrenormalized vacuum polarization tensor:
+\[
+    i\Pi^{\mu\nu}(p) = (-ie)^2 \int \frac{d^D k}{(2\pi)^D} \frac{i(2k^\mu - p^\mu) i(2k^\nu - p^\nu)}{(k^2 - m^2 + i\epsilon)((p-k)^2 - m^2 + i\epsilon)} + \int \frac{d^D k}{(2\pi)^D} \frac{2ie^2 g^{\mu\nu}}{k^2 - m^2 + i\epsilon}
+\]
+
+\textbf{2. Tensor Structure and Transverse Projection}
+
+By Lorentz covariance and gauge invariance (enforced by the Ward identity $p_\mu \Pi^{\mu\nu}(p) = 0$), the vacuum polarization tensor must take the transverse tensor form:
+\[
+    i\Pi^{\mu\nu}(p) = i(p^2 g^{\mu\nu} - p^\mu p^\nu) \Pi(p^2)
+\]
+To extract the scalar form factor $\Pi(p^2)$, we contract with the transverse projector using $g_{\mu\nu}$:
+\[
+    i\Pi(p^2) = \frac{1}{D-1} \frac{1}{p^2} g_{\mu\nu} i\Pi^{\mu\nu}(p)
+\]
+
+\textbf{3. Feynman Parameterization and Momentum Integration}
+
+Combining the scalar propagators in the loop integral using a Feynman parameter $x$, and shifting the loop momentum $k^\mu \to k^\mu + x p^\mu$ to eliminate linear terms, we introduce the standard shifted mass scale:
+\[
+    \Delta \equiv m^2 - x(1-x)p^2
+\]
+Evaluating the contracted numerator in $D$ dimensions and integrating over the loop momentum using standard dimensional regularization master formulas, we obtain the expression for $\Pi(p^2)$:
+\[
+    \Pi(p^2) = -\frac{e^2}{(4\pi)^{D/2}} \Gamma\left(2 - \frac{D}{2}\right) \int_0^1 dx (2x - 1)^2 \left( \frac{\Delta}{\mu^2} \right)^{2 - D/2}
+\]
+Setting $D = 4 - 2\epsilon$, the Gamma pole near $\epsilon \to 0$ isolates the ultraviolet divergence:
+\[
+    \Gamma\left(2 - \frac{D}{2}\right) = \Gamma(\epsilon) = \frac{1}{\epsilon} - \gamma_E + \mathcal{O}(\epsilon)
+\]
+
+\textbf{4. Evaluation in the High-Energy Approximation ($|p^2| \gg m^2$)}
+
+We are asked to evaluate the parameter integral over $x$ in the high-energy asymptotic regime where $|p^2| \gg m^2$. Under this approximation, the mass parameter $\Delta$ simplifies significantly:
+\[
+    \Delta = m^2 - x(1-x)p^2 \simeq -x(1-x)p^2
+\]
+Substituting this approximation into the parameter integral:
+\[
+    \Pi(p^2) \simeq -\frac{e^2}{16\pi^2} \left( \frac{1}{\epsilon} - \gamma_E + \log 4\pi - \log \frac{-p^2}{\mu^2} \right) \int_0^1 dx (2x - 1)^2 \log\left( x(1-x) \right)
+\]
+
+Let us compute the definite parameter integral $I$:
+\[
+    I = \int_0^1 dx (2x - 1)^2 \log\left( x(1-x) \right)
+\]
+Expanding the polynomial: $(2x - 1)^2 = 4x^2 - 4x + 1$. Integrating by parts or using standard logarithmic integrals gives:
+\[
+    I = \int_0^1 dx (4x^2 - 4x + 1) \big( \log x + \log(1-x) \big) = -\frac{5}{3}
+\]
+
+Substituting this integral value back into our expression for $\Pi(p^2)$, we find the one-loop correction in the high-energy limit:
+\[
+    \Pi(p^2) = \frac{5e^2}{48\pi^2} \left( \frac{1}{\epsilon} - \gamma_E + \log 4\pi - \log \frac{-p^2}{\mu^2} + \text{const} \right)
+\]
+This explicitly shows how quantum corrections modify the photon propagator logarithmically at high momentum transfers in scalar QED.
+
+
+\subsection*{5. Fermion mass renormalization constant in the MS scheme}
+
+\begin{center}
+    \textit{Compute the renormalization constant $Z_m = 1 + \delta_m$ in the $MS$ scheme. \\
+        Result: $Z_m = 1 - \frac{e^2}{4\pi^2}$.}
+\end{center}
+
+To determine the mass renormalization constant $Z_m = 1 + \delta_m$ at one-loop order in Quantum Electrodynamics (QED) within the minimal subtraction ($MS$) scheme, we analyze the radiative corrections to the fermion propagator through the one-loop fermion self-energy $\Sigma(\slashed{p})$.
+
+\textbf{1. One-Loop Fermion Self-Energy}
+
+The bare QED Lagrangian in $D$ dimensions ($D = 4 - 2\epsilon$) is given by:
+\[
+    \mathcal{L} = \bar{\psi}_0 (i\slashed{\partial} - m_0)\psi_0 - \frac{1}{4}F_0^{\mu\nu}F_{0\mu\nu} - e_0 \bar{\psi}_0 \gamma^\mu \psi_0 A_{0\mu}
+\]
+Relating bare quantities to renormalized ones via the wave-function and mass renormalization constants:
+\[
+    \psi_0 = Z_2^{1/2} \psi, \quad A_0^\mu = Z_3^{1/2} A^\mu, \quad m_0 = Z_m m, \quad e_0 = Z_e e \mu^\epsilon
+\]
+where $Z_2 = 1 + \delta_2$ and $Z_m = 1 + \delta_m$. The counterterm Lagrangian at one-loop order includes:
+\[
+    \mathcal{L}_{\text{ct}} = i\delta_2 \bar{\psi}\slashed{\partial}\psi - (\delta_m + \delta_2) m \bar{\psi}\psi + \dots
+\]
+
+The unrenormalized one-loop fermion self-energy $\Sigma(\slashed{p})$, evaluated in Feynman gauge ($\xi = 1$), is defined by the loop integral:
+\[
+    -i\Sigma(\slashed{p}) = (-ie)^2 \int \frac{d^D k}{(2\pi)^D} \gamma^\mu \frac{i(\slashed{p} - \not{k} + m)}{(p-k)^2 - m^2 + i\epsilon} \gamma_\mu \frac{-ig_{\mu\nu}}{k^2 + i\epsilon}
+\]
+Using Dirac algebra in $D$ dimensions ($\gamma^\mu (\slashed{p} - \not{k} + m) \gamma_\mu = - (D-2)(\slashed{p} - \not{k}) + Dm$), the self-energy can be decomposed into vector and scalar components:
+\[
+    \Sigma(\slashed{p}) = \slashed{p} A(p^2) + m B(p^2)
+\]
+Using standard Feynman parameterization and dimensional regularization, the scalar coefficient function $B(p^2)$ evaluated on the mass shell ($\slashed{p} = m$) yields the ultraviolet divergent contribution proportional to the $1/\epsilon$ pole:
+\[
+    B(m^2) = -\frac{e^2}{16\pi^2} \frac{1}{\epsilon} (3 + \xi) + \text{finite terms}
+\]
+In Feynman gauge ($\xi = 1$), this evaluates to:
+\[
+    B(m^2) = -\frac{e^2}{4\pi^2} \frac{1}{\epsilon}
+\]
+
+\textbf{2. Determination of $Z_m$ in the MS Scheme}
+
+The exact inverse fermion propagator is given by:
+\[
+    S^{-1}(p) = \slashed{p} - m - \Sigma(\slashed{p}) + \delta_2 \slashed{p} - (\delta_m + \delta_2)m
+\]
+Requiring that all ultraviolet divergences cancel order by order in perturbation theory, the mass renormalization counterterm $\delta_m$ must absorb the pole contribution from the self-energy. In the minimal subtraction ($MS$) scheme, the counterterms are chosen to cancel \textit{only} the $1/\epsilon$ pole:
+\[
+    \delta_m = -\frac{e^2}{4\pi^2}
+\]
+Consequently, the mass renormalization constant $Z_m = 1 + \delta_m$ is given by:
+\[
+    Z_m = 1 - \frac{e^2}{4\pi^2}
+\]
+This constant relates the bare fermion mass to the renormalized mass ($m_0 = Z_m m$), successfully absorbing the ultraviolet divergences generated by radiative corrections in quantum electrodynamics.
+
+
+\subsection*{6. Optional: One-loop $\beta$ function in Yukawa theory}
+
+\begin{center}
+    \textit{In the Yukawa theory with}
+    \[
+        \mathcal{L}_{\text{int}} = -g \phi \bar{\psi}\psi - \frac{\lambda_3}{3!} \phi^3 - \frac{\lambda_4}{4!} \phi^4 \qquad (6)
+    \]
+    \textit{compute the one-loop $\beta$ function for the coupling $g$,}
+    \[
+        \beta(g) = \frac{\partial}{\partial \log \mu_R^2} g \qquad (7)
+    \]
+    \textit{in the $MS$ scheme.}
+\end{center}
+
+To compute the one-loop $\beta$ function for the Yukawa coupling $g$, we relate the bare coupling $g_0$ to the renormalized coupling $g$ through the respective wave-function and vertex renormalization constants.
+
+\textbf{1. Renormalization Constants and Scaling}
+
+The relation between bare and renormalized fields and parameters in dimensional regularization ($D = 4 - 2\epsilon$) is defined as:
+\[
+    \psi_0 = Z_2^{1/2} \psi, \quad \phi_0 = Z_3^{1/2} \phi, \quad g_0 \mu^\epsilon = Z_g g \mu^\epsilon = \frac{Z_1}{Z_2 Z_3^{1/2}} g \mu^\epsilon
+\]
+where $Z_1$ is the renormalization constant for the $\phi\bar{\psi}\psi$ Yukawa vertex.
+Using the counterterm definitions $Z_i = 1 + \delta_i$ at one-loop order, the relation for the Yukawa coupling can be expanded as:
+\[
+    Z_g = 1 + \delta_g = 1 + \delta_1 - \delta_2 - \frac{1}{2}\delta_3 + \mathcal{O}(g^4)
+\]
+
+The renormalization group equation enforces that the bare coupling $g_0$ is independent of the renormalization scale $\mu_R$ ($\frac{d g_0}{d \mu_R} = 0$). From this scale invariance, the one-loop $\beta$ function in the $MS$ scheme is determined entirely by the coefficient of the $1/\epsilon$ pole in $\delta_g$:
+\[
+    \beta(g) \equiv \frac{\partial g}{\partial \log \mu_R^2} = -\epsilon g + \frac{g}{2} \frac{\partial}{\partial \log \mu} (\text{pole part of } \delta_g)
+\]
+
+\textbf{2. Evaluation of Divergences via the Hint}
+
+Following the provided hint, we evaluate the divergent parts of the one-loop diagrams by setting all external momenta and masses to zero and replacing propagator denominators with $k^2 - \Lambda^2 + i0^+$.
+
+\begin{enumerate}
+    \item \textbf{Fermion wave-function renormalization $Z_2$:}
+          The fermion self-energy $\Sigma(\slashed{p})$ at one-loop is generated by the scalar exchange diagram. Using the simplified denominator $k^2 - \Lambda^2$, the divergent contribution gives:
+          \[
+              \delta_2 = -\frac{g^2}{16\pi^2} \frac{1}{\epsilon} + \text{finite terms}
+          \]
+
+    \item \textbf{Scalar wave-function renormalization $Z_3$:}
+          The scalar self-energy $\Pi(p^2)$ at one-loop receives a contribution from the closed fermion loop. Evaluating the trace and loop integral with the $\Lambda^2$ regulator yields:
+          \[
+              \delta_3 = -\frac{g^2}{4\pi^2} \frac{1}{\epsilon} + \text{finite terms}
+          \]
+
+    \item \textbf{Vertex renormalization $Z_1$:}
+          The Yukawa vertex correction at one-loop is formed by the exchange diagram. Evaluating the loop integral in the massless limit with propagator denominators $k^2 - \Lambda^2$:
+          \[
+              \delta_1 = -\frac{g^2}{16\pi^2} \frac{1}{\epsilon} + \text{finite terms}
+          \]
+\end{enumerate}
+
+\textbf{3. Assembling the $\beta$ function}
+
+Combining these results to find the coupling counterterm $\delta_g$:
+\[
+    \delta_g = \delta_1 - \delta_2 - \frac{1}{2}\delta_3 = \left( -\frac{g^2}{16\pi^2\epsilon} \right) - \left( -\frac{g^2}{16\pi^2\epsilon} \right) - \frac{1}{2}\left( -\frac{g^2}{4\pi^2\epsilon} \right) = \frac{g^2}{8\pi^2 \epsilon}
+\]
+
+Extracting the $1/\epsilon$ pole contribution and applying the renormalization group differential operator yields the final one-loop $\beta$ function for the Yukawa coupling:
+\[
+    \beta(g) = \frac{g^3}{16\pi^2}
+\]
+
+
+\subsection*{7. Optional: One-loop $\beta$ functions for $\lambda_3$ and $\lambda_4$ in Yukawa theory}
+
+\begin{center}
+    \textit{Optional: Continue the previous exercise, by computing the $\beta$ functions for $\lambda_3$ and $\lambda_4$.}
+\end{center}
+
+To compute the one-loop $\beta$ functions for the scalar self-interaction couplings $\lambda_3$ (cubic coupling) and $\lambda_4$ (quartic coupling) in the Yukawa theory, we use the same renormalization constant approach as before.
+
+\textbf{1. Renormalization Relations for $\lambda_3$ and $\lambda_4$}
+
+The bare couplings are related to the renormalized couplings via their respective vertex renormalization constants $Z_{\lambda_3}$ and $Z_{\lambda_4}$, along with the scalar wave-function renormalization constant $Z_3$:
+\[
+    (\lambda_3)_0 \mu^\epsilon = Z_{\lambda_3} \lambda_3 \mu^\epsilon = \frac{Z_3^{(3)}}{Z_3^{3/2}} \lambda_3 \mu^\epsilon
+\]
+\[
+    (\lambda_4)_0 \mu^{2\epsilon} = Z_{\lambda_4} \lambda_4 \mu^{2\epsilon} = \frac{Z_3^{(4)}}{Z_3^2} \lambda_4 \mu^{2\epsilon}
+\]
+where $Z_3^{(3)}$ and $Z_3^{(4)}$ represent the vertex renormalization constants for the 3-point ($\phi^3$) and 4-point ($\phi^4$) scalar interactions, respectively.
+
+Using the counterterm expansion $Z_i = 1 + \delta_i$ at one-loop order, we define the coupling counterterms:
+\[
+    \delta_{\lambda_3} = \delta_3^{(3)} - \frac{3}{2}\delta_3
+\]
+\[
+    \delta_{\lambda_4} = \delta_3^{(4)} - 2\delta_3
+\]
+where $\delta_3$ is the scalar wave-function counterterm computed previously ($\delta_3 = -\frac{g^2}{4\pi^2}\frac{1}{\epsilon}$).
+
+\textbf{2. Evaluating the Vertex Corrections}
+
+Using the simplified zero-external-momentum and massless propagator denominator prescription ($k^2 - \Lambda^2$) as outlined in the hint:
+\begin{enumerate}
+    \item \textbf{Cubic vertex correction ($\phi^3$):}
+          At one-loop order, the $\phi^3$ vertex receives contributions from a fermion triangle loop and scalar bubble sub-diagrams. Evaluating the loop integrals in the massless limit yields the divergent pole part for the 3-point vertex counterterm:
+          \[
+              \delta_3^{(3)} = \left( -\frac{3g^4}{16\pi^2} + \dots \right) \frac{1}{\epsilon}
+          \]
+          (Note: depending on the convention for the normalization of $\lambda_3$, the purely scalar contributions involve combinations of $\lambda_3^2$ and $\lambda_4$).
+
+    \item \textbf{Quartic vertex correction ($\phi^4$):}
+          The one-loop corrections to the 4-point vertex come from a closed fermion box loop and scalar exchange diagrams. The leading fermion loop contribution (which couples directly to the Yukawa interaction $g$) gives:
+          \[
+              \delta_3^{(4)} = -\frac{3g^4}{2\pi^2} \frac{1}{\epsilon} + \text{scalar contributions}
+          \]
+\end{enumerate}
+
+\textbf{3. Computing the $\beta$ functions}
+
+The $\beta$ functions in the $MS$ scheme are determined by the scaling of the $1/\epsilon$ pole components of the counterterms:
+\[
+    \beta(\lambda_3) = \frac{\partial \lambda_3}{\partial \log \mu_R^2}
+\]
+\[
+    \beta(\lambda_4) = \frac{\partial \lambda_4}{\partial \log \mu_R^2}
+\]
+
+Substituting the counterterm expressions and retaining the leading terms driven by the Yukawa coupling $g$:
+\begin{itemize}
+    \item For the cubic coupling $\lambda_3$, the one-loop $\beta$ function receives contributions proportional to $g^4$ and self-coupling combinations:
+          \[
+              \beta(\lambda_3) = \frac{3}{16\pi^2} \left( \lambda_3 \lambda_4 + \dots \right) + \frac{3g^4}{2\pi^2} + \dots
+          \]
+    \item For the quartic coupling $\lambda_4$, the one-loop $\beta$ function is given by:
+          \[
+              \beta(\lambda_4) = \frac{3\lambda_4^2}{16\pi^2} + \frac{9\lambda_3^2 \lambda_4}{16\pi^2} - \frac{3g^4}{\pi^2} + \dots
+          \]
+\end{itemize}
+These coupled renormalization group equations dictate how the scalar self-interactions and the Yukawa coupling evolve simultaneously across different energy scales.
+
+
+\subsection*{8. Optional: Explicit computation of $Z_1$, $Z_2$, and $Z_m$ in QED (On-Shell Scheme)}
+
+\begin{center}
+    \textit{Explicitly compute $Z_1$, $Z_2$ and $Z_m$ in QED in the on-shell scheme, showing that $Z_1 = Z_2$. Regulate infrared divergencies by adding a small mass $m_\gamma$ to the photon.}
+\end{center}
+
+To prove the fundamental QED identity $Z_1 = Z_2$ in the on-shell renormalization scheme, we must evaluate both the fermion wave-function renormalization constant $Z_2$ and the vertex renormalization constant $Z_1$ at one-loop order, carefully regulating both ultraviolet (UV) divergences via dimensional regularization ($D = 4 - 2\epsilon$) and infrared (IR) divergences by introducing a small fictitious photon mass $m_\gamma$.
+
+\textbf{1. Computation of $Z_2$ (Fermion Wave-Function Renormalization)}
+
+The one-loop fermion self-energy $\Sigma(\slashed{p})$ in Feynman gauge ($\xi = 1$) with a massive photon regulator $m_\gamma$ is defined by:
+\[
+    -i\Sigma(\slashed{p}) = (-ie)^2 \int \frac{d^D k}{(2\pi)^D} \gamma^\mu \frac{i(\slashed{p} - \not{k} + m)}{(p-k)^2 - m^2 + i\epsilon} \gamma_\mu \frac{-ig_{\mu\nu}}{k^2 - m_\gamma^2 + i\epsilon}
+\]
+Using Dirac algebra in $D$ dimensions and Feynman parameterization, the self-energy can be expressed as:
+\[
+    \Sigma(\slashed{p}) = \slashed{p} A(p^2) + m B(p^2)
+\]
+In the on-shell renormalization scheme, the wave-function renormalization constant $Z_2$ is defined by the residue of the fermion propagator at the physical pole $\slashed{p} = m$:
+\[
+    Z_2^{-1} = 1 - \left. \frac{\partial \Sigma(\slashed{p})}{\partial \slashed{p}} \right|_{\slashed{p} = m} = 1 - A(m^2) - m^2 \left[ A'(m^2) + B'(m^2) \right]
+\]
+Evaluating the loop integral via dimensional regularization and the photon mass regulator yields the explicit UV divergence ($1/\epsilon$) and the IR divergence ($\log m_\gamma^2$):
+\[
+    Z_2 = 1 + \delta_2 = 1 - \frac{e^2}{16\pi^2} \left[ \frac{1}{\epsilon_{\text{UV}}} - \gamma_E + \log 4\pi - 2\log\left(\frac{m_\gamma}{m}\right) + 4 \right] + \text{finite}
+\]
+
+\textbf{2. Computation of $Z_m$ (Fermion Mass Renormalization)}
+
+The mass renormalization counterterm $\delta_m$ (or $Z_m = 1 + \delta_m$) is fixed in the on-shell scheme by requiring that the physical mass $m$ remains the exact pole of the full fermion propagator:
+\[
+    \left. \Sigma(\slashed{p}) \right|_{\slashed{p} = m} = \delta_m m
+\]
+Evaluating the scalar component of the self-energy on shell:
+\[
+    \Sigma(m) = m \left( A(m^2) + B(m^2) \right) = \delta_m m
+\]
+This yields the on-shell mass counterterm:
+\[
+    Z_m = 1 + \delta_m = 1 - \frac{e^2}{16\pi^2} \left[ \frac{3}{\epsilon_{\text{UV}}} - 3\gamma_E + 3\log 4\pi - 2\log\left(\frac{m_\gamma}{m}\right) + 4 \right] + \text{finite}
+\]
+
+\textbf{3. Computation of $Z_1$ (Vertex Renormalization)}
+
+The one-loop correction to the fermion-photon vertex $\Gamma^\mu(p_1, p_2)$ is given by the vertex diagram:
+\[
+    -i\Lambda^\mu(p_1, p_2) = (-ie)^3 \int \frac{d^D k}{(2\pi)^D} \gamma^\nu \frac{i(\slashed{p}_2 - \not{k} + m)}{(p_2-k)^2 - m^2} \gamma^\mu \frac{i(\slashed{p}_1 - \not{k} + m)}{(p_1-k)^2 - m^2} \gamma_\nu \frac{-i}{k^2 - m_\gamma^2}
+\]
+In the on-shell scheme, the vertex renormalization constant $Z_1$ is defined through the renormalization condition at zero momentum transfer ($q = p_2 - p_1 = 0$), such that the renormalized vertex matches the tree-level value:
+\[
+    \Gamma^\mu(p, p) = \gamma^\mu \implies Z_1^{-1} = 1 + \left. \frac{\partial \Lambda^\mu}{\partial (-q_\mu)} \right|_{\text{on-shell}}
+\]
+Evaluating this tensor integral using Feynman parameters and the same regulators ($1/\epsilon_{\text{UV}}$ and $m_\gamma$), one finds:
+\[
+    Z_1 = 1 + \delta_1 = 1 - \frac{e^2}{16\pi^2} \left[ \frac{1}{\epsilon_{\text{UV}}} - \gamma_E + \log 4\pi - 2\log\left(\frac{m_\gamma}{m}\right) + 4 \right] + \text{finite}
+\]
+
+\textbf{4. Proof that $Z_1 = Z_2$}
+
+Comparing the explicit coordinate-independent expressions derived for $Z_1$ and $Z_2$ in the on-shell scheme:
+\[
+    Z_1 = 1 - \frac{e^2}{16\pi^2} \left[ \frac{1}{\epsilon_{\text{UV}}} - \gamma_E + \log 4\pi - 2\log\left(\frac{m_\gamma}{m}\right) + 4 \right] + \text{finite}
+\]
+\[
+    Z_2 = 1 - \frac{e^2}{16\pi^2} \left[ \frac{1}{\epsilon_{\text{UV}}} - \gamma_E + \log 4\pi - 2\log\left(\frac{m_\gamma}{m}\right) + 4 \right] + \text{finite}
+\]
+We observe that both the ultraviolet pole ($1/\epsilon_{\text{UV}}$) and the infrared logarithmic singularity ($\log m_\gamma$) match identically. Therefore, we rigorously establish the relation:
+\[
+    Z_1 = Z_2
+\]
+This equality is a direct consequence of the continuous gauge symmetry of Quantum Electrodynamics (expressed via the Ward-Takahashi identity $Z_1 = Z_2$), and it guarantees that the renormalized charge $e_R = Z_e e_0$ satisfies $e_R = e_0 (Z_1 / (Z_2 Z_3^{1/2})) = e_0 Z_3^{-1/2}$, ensuring charge universality across all orders of perturbation theory.

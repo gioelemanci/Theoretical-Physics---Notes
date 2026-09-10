@@ -1,0 +1,682 @@
+\section*{Sheet 3}
+
+\subsection*{1. Euler-Lagrange equations and Functional Derivatives}
+
+\begin{center}
+    \textit{Consider a Lagrangian } $\mathcal{L} = \mathcal{L}(\varphi_k, \partial_\mu \varphi_k)$ \textit{ depending on any number of fields and their derivatives. Show that the Euler Lagrange equations of motion can be written using a functional derivative as}
+    \[
+        \frac{\delta}{\delta \varphi_k} S = 0, \qquad (1)
+    \]
+    \textit{where } $S = \int d^4x \mathcal{L}$ \textit{ is the action.}
+\end{center}
+
+The fundamental principle of stationary action (Hamilton's Principle) dictates that the physical trajectory of a classical field system is the one for which the action $S$ is stationary under small, arbitrary variations of the fields. We denote these infinitesimal field variations as $\delta \varphi_k(x)$, and we impose the physical boundary condition that these variations strictly vanish at the boundary of our integration volume (i.e., at infinity).
+
+We start by computing the total first-order variation of the action $S$ due to the field transformation $\varphi_k(x) \to \varphi_k(x) + \delta\varphi_k(x)$. Because the Lagrangian density $\mathcal{L}$ is a local function depending only on the fields and their first spacetime derivatives, its variation is determined via the chain rule:
+\[
+    \delta S = \delta \int d^4x \, \mathcal{L}(\varphi_k, \partial_\mu \varphi_k) = \int d^4x \, \delta \mathcal{L}
+\]
+\[
+    \delta S = \int d^4x \sum_k \left( \frac{\partial \mathcal{L}}{\partial \varphi_k} \delta\varphi_k + \frac{\partial \mathcal{L}}{\partial (\partial_\mu \varphi_k)} \delta(\partial_\mu \varphi_k) \right)
+\]
+
+A crucial property of the variation operator $\delta$ is that it commutes with the spacetime derivative $\partial_\mu$. Mathematically, the variation of the derivative is identical to the derivative of the variation: $\delta(\partial_\mu \varphi_k) = \partial_\mu (\delta\varphi_k)$. Substituting this into our expression yields:
+\[
+    \delta S = \int d^4x \sum_k \left( \frac{\partial \mathcal{L}}{\partial \varphi_k} \delta\varphi_k + \frac{\partial \mathcal{L}}{\partial (\partial_\mu \varphi_k)} \partial_\mu (\delta\varphi_k) \right)
+\]
+
+In order to isolate the arbitrary variation $\delta\varphi_k(x)$ in the second term, we apply the rule of integration by parts (or equivalently, the product rule for derivatives $\partial_\mu(AB) = (\partial_\mu A)B + A(\partial_\mu B)$):
+\[
+    \frac{\partial \mathcal{L}}{\partial (\partial_\mu \varphi_k)} \partial_\mu (\delta\varphi_k) = \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \varphi_k)} \delta\varphi_k \right) - \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \varphi_k)} \right) \delta\varphi_k
+\]
+Substituting this expanded term back into the variation of the action, we can split the integral:
+\[
+    \delta S = \int d^4x \sum_k \left[ \frac{\partial \mathcal{L}}{\partial \varphi_k} - \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \varphi_k)} \right) \right] \delta\varphi_k + \int d^4x \sum_k \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \varphi_k)} \delta\varphi_k \right)
+\]
+
+By applying the 4-dimensional divergence theorem (Gauss's theorem), the second integral—which is a total four-divergence—can be transformed into a surface integral evaluated over the boundary $\partial V$ of the spacetime region:
+\[
+    \int d^4x \, \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \varphi_k)} \delta\varphi_k \right) = \oint_{\partial V} d^3\sigma_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \varphi_k)} \delta\varphi_k \right)
+\]
+Since the physical field variations $\delta\varphi_k$ are strictly defined to vanish at the boundaries of spacetime ($\delta\varphi_k |_{\partial V} = 0$), this surface term evaluates exactly to zero. We are left with:
+\[
+    \delta S = \int d^4x \sum_k \left[ \frac{\partial \mathcal{L}}{\partial \varphi_k} - \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \varphi_k)} \right) \right] \delta\varphi_k(x)
+\]
+
+By the formal mathematical definition of the functional derivative, the first-order variation of a generic functional $S[\varphi_k]$ with respect to an arbitrary function $\varphi_k(x)$ is defined by the integral kernel:
+\[
+    \delta S = \int d^4x \sum_k \frac{\delta S}{\delta \varphi_k(x)} \delta\varphi_k(x)
+\]
+By directly comparing the integrands of our derived expression and the formal definition, we can uniquely identify the functional derivative of the action with respect to the field $\varphi_k$:
+\[
+    \frac{\delta S}{\delta \varphi_k} = \frac{\partial \mathcal{L}}{\partial \varphi_k} - \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \varphi_k)} \right)
+\]
+
+Hamilton's principle demands that the action is stationary, meaning $\delta S = 0$ for \textit{any} arbitrary variation $\delta\varphi_k(x)$. For the integral to vanish for an arbitrary $\delta\varphi_k(x)$, the term inside the square brackets must identically vanish for each field species $k$. This enforces:
+\[
+    \frac{\delta S}{\delta \varphi_k} = 0
+\]
+which explicitly translates to:
+\[
+    \frac{\partial \mathcal{L}}{\partial \varphi_k} - \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \varphi_k)} \right) = 0
+\]
+These are precisely the classical Euler-Lagrange equations of motion. Therefore, writing the equations of motion as $\frac{\delta S}{\delta \varphi_k} = 0$ is rigorously equivalent to the standard Euler-Lagrange formulation.
+
+
+\subsection*{2. Deriving Feynman rules of sQED via functional derivatives}
+
+\begin{center}
+    \textit{Derive the Feynman rules of sQED using the method functional derivatives (you should get the same result as in the similar exercise of sheet 2).}
+\end{center}
+
+In the path integral formulation of Quantum Field Theory, the Feynman rules for the interaction vertices in momentum space can be directly and rigorously derived by taking the functional derivatives of the interaction action $iS_{\text{int}}$ with respect to the momentum-space fields, and then stripping away the overall momentum-conserving Dirac delta function.
+
+From the previous exercise on scalar QED, we identified the interaction Lagrangian:
+\[
+    \mathcal{L}_{\text{int}} = -ieA^\mu \left( \phi^*(\partial_\mu\phi) - (\partial_\mu\phi^*)\phi \right) + e^2 A_\mu A^\mu \phi^* \phi
+\]
+The corresponding interaction action is $S_{\text{int}} = \int d^4x \, \mathcal{L}_{\text{int}}$. To apply the functional derivative method, we first express the fields in terms of their Fourier transforms in momentum space. We adopt the convention where incoming fields carry momentum into the vertex (e.g., $e^{-ip\cdot x}$) and outgoing conjugate fields carry momentum out of the vertex (e.g., $e^{ip'\cdot x}$):
+\[
+    \phi(x) = \int \frac{d^4p}{(2\pi)^4} \tilde{\phi}(p) e^{-ip\cdot x}, \qquad \phi^*(x) = \int \frac{d^4p'}{(2\pi)^4} \tilde{\phi}^*(p') e^{ip'\cdot x}, \qquad A^\mu(x) = \int \frac{d^4q}{(2\pi)^4} \tilde{A}^\mu(q) e^{-iq\cdot x}
+\]
+
+\textbf{1. The 3-Point Vertex (Cubic Interaction)}
+
+We isolate the cubic part of the interaction action, $iS_3 = i \int d^4x \left[ -ieA^\mu ( \phi^* \partial_\mu \phi - \phi \partial_\mu \phi^* ) \right]$. Substituting the Fourier expansions, the spacetime derivatives pull down factors of momentum: $\partial_\mu \phi \to -i p_\mu \tilde{\phi}$ and $\partial_\mu \phi^* \to i p'_\mu \tilde{\phi}^*$.
+\[
+    \begin{aligned}
+        iS_3 & = i \int d^4x \int \frac{d^4q}{(2\pi)^4} \frac{d^4p'}{(2\pi)^4} \frac{d^4p}{(2\pi)^4} (-ie) \tilde{A}^\mu(q) \left[ \tilde{\phi}^*(p')(-ip_\mu)\tilde{\phi}(p) - (ip'_\mu)\tilde{\phi}^*(p')\tilde{\phi}(p) \right] e^{-i(p + q - p')\cdot x} \\
+             & = \int \frac{d^4q}{(2\pi)^4} \frac{d^4p'}{(2\pi)^4} \frac{d^4p}{(2\pi)^4} \tilde{A}^\mu(q) \tilde{\phi}^*(p') \tilde{\phi}(p) \left[ -ie (p_\mu + p'_\mu) \right] (2\pi)^4 \delta^{(4)}(p + q - p')
+    \end{aligned}
+\]
+The Feynman rule for the vertex $V_3^\mu(p, p', q)$ is obtained by taking the functional derivatives with respect to the momentum-space fields $\tilde{A}^\mu(q)$, $\tilde{\phi}^*(p')$, and $\tilde{\phi}(p)$:
+\[
+    V_3^\mu = \frac{\delta^3 (iS_3)}{\delta \tilde{A}_\mu(q) \delta \tilde{\phi}^*(p') \delta \tilde{\phi}(p)} \Bigg|_{\text{stripped of } (2\pi)^4\delta}
+\]
+Performing this functional differentiation trivially isolates the coefficient bracket, yielding:
+\TODO{add diagram: A vertex with one incoming solid line (p), one outgoing solid line (p'), and one incoming squiggly photon line (q, index $\mu$)}
+\[
+    V_3^\mu = -ie(p^\mu + p'^\mu)
+\]
+This perfectly matches the rule $-ie(p + p')_\mu$ derived previously.
+
+\textbf{2. The 4-Point "Seagull" Vertex (Quartic Interaction)}
+
+We now isolate the quartic part of the action, $iS_4 = i \int d^4x \left[ e^2 g_{\mu\nu} A^\mu A^\nu \phi^* \phi \right]$.
+Substituting the Fourier expansions for two photon fields (with momenta $q_1, q_2$), one incoming scalar ($p$), and one outgoing scalar ($p'$):
+\[
+    iS_4 = i \int \left( \prod_{i=1}^4 \frac{d^4k_i}{(2\pi)^4} \right) e^2 g_{\alpha\beta} \tilde{A}^\alpha(q_1) \tilde{A}^\beta(q_2) \tilde{\phi}^*(p') \tilde{\phi}(p) (2\pi)^4 \delta^{(4)}(p + q_1 + q_2 - p')
+\]
+To find the vertex rule $V_4^{\mu\nu}$, we take the functional derivative with respect to $\tilde{\phi}(p)$, $\tilde{\phi}^*(p')$, and the two photon fields $\tilde{A}_\mu(q_1)$ and $\tilde{A}_\nu(q_2)$. Because the action is quadratic in the field $A$, the product rule for functional derivatives applies:
+\[
+    \frac{\delta}{\delta \tilde{A}_\mu(k_1)} \frac{\delta}{\delta \tilde{A}_\nu(k_2)} \left[ \tilde{A}^\alpha(q_1) \tilde{A}^\beta(q_2) \right] = \delta^{\alpha\mu} \delta^{\beta\nu} + \delta^{\alpha\nu} \delta^{\beta\mu}
+\]
+Contracting this symmetric result with the metric tensor $g_{\alpha\beta}$ from the action coefficient yields:
+\[
+    g_{\alpha\beta} (\delta^{\alpha\mu} \delta^{\beta\nu} + \delta^{\alpha\nu} \delta^{\beta\mu}) = g^{\mu\nu} + g^{\nu\mu} = 2g^{\mu\nu}
+\]
+Substituting this back, we find the final vertex rule:
+\TODO{add diagram: A vertex with one incoming solid line, one outgoing solid line, and two squiggly photon lines $\mu, \nu$ attaching at the same point}
+\[
+    V_4^{\mu\nu} = i e^2 (2g^{\mu\nu}) = 2ie^2 g^{\mu\nu}
+\]
+This rigorously demonstrates how the functional derivative naturally generates the required combinatoric symmetry factor of 2, reproducing the exact same result as our previous derivation.
+
+
+\subsection*{3. Generating functional for the free Dirac field}
+
+\begin{center}
+    \textit{Compute the generating functional } $Z[\eta, \bar{\eta}]$ \textit{ for the path integral of a free Dirac field. The solution is in the lecture notes.}
+\end{center}
+
+The generating functional for a free Dirac field is defined by the path integral over the Grassmann-valued fields $\psi$ and $\bar{\psi}$, coupled to external Grassmann sources $\eta$ and $\bar{\eta}$:
+\[
+    Z[\eta, \bar{\eta}] = \int \mathcal{D}\bar{\psi} \mathcal{D}\psi \, \exp\left( i \int d^4x \left[ \mathcal{L}_0 + \bar{\eta}(x)\psi(x) + \bar{\psi}(x)\eta(x) \right] \right)
+\]
+where the free Dirac Lagrangian (including the Feynman $i\epsilon$ prescription necessary for mathematical convergence) is:
+\[
+    \mathcal{L}_0 = \bar{\psi}(x) (i\slashed{\partial} - m + i\epsilon) \psi(x)
+\]
+
+To analytically compute this integral, we systematically "complete the square" for the fermion fields, directly mirroring the procedure used for Gaussian integrals of real or complex scalar fields.
+Let us recall that the Feynman propagator for the Dirac field, $S_F(x-y)$, is precisely defined as the Green's function for the Dirac differential operator:
+\[
+    (i\slashed{\partial}_x - m + i\epsilon) S_F(x-y) = i \delta^{(4)}(x-y)
+\]
+We now introduce a shift in our integration variables to perfectly absorb the linear source terms $\eta$ and $\bar{\eta}$. We define new shifted Grassmann fields $\psi'$ and $\bar{\psi}'$:
+\[
+    \psi(x) = \psi'(x) + \int d^4y \, i S_F(x-y) \eta(y)
+\]
+\[
+    \bar{\psi}(x) = \bar{\psi}'(x) + \int d^4y \, \bar{\eta}(y) i S_F(y-x)
+\]
+Because this is a simple linear shift by terms that are independent of the fields $\psi$ and $\bar{\psi}$, the Jacobian of the transformation is strictly unity, meaning the path integral measure is perfectly invariant: $\mathcal{D}\bar{\psi}\mathcal{D}\psi = \mathcal{D}\bar{\psi}'\mathcal{D}\psi'$.
+
+Let us substitute this shift back into the action. Applying the Dirac operator to the shifted field $\psi(x)$ yields:
+\[
+    \begin{aligned}
+        (i\slashed{\partial}_x - m + i\epsilon)\psi(x) & = (i\slashed{\partial}_x - m + i\epsilon)\psi'(x) + \int d^4y \, i \big[ (i\slashed{\partial}_x - m + i\epsilon) S_F(x-y) \big] \eta(y) \\
+                                                       & = (i\slashed{\partial}_x - m + i\epsilon)\psi'(x) + \int d^4y \, i \big[ i\delta^{(4)}(x-y) \big] \eta(y)                               \\
+                                                       & = (i\slashed{\partial}_x - m + i\epsilon)\psi'(x) - \eta(x)
+    \end{aligned}
+\]
+Now we reconstruct the full expression inside the exponent. The total action $S$ becomes:
+\[
+    \begin{aligned}
+        S & = \int d^4x \left[ \bar{\psi}(x) (i\slashed{\partial}_x - m + i\epsilon) \psi(x) + \bar{\eta}(x)\psi(x) + \bar{\psi}(x)\eta(x) \right]                                 \\
+          & = \int d^4x \left[ \left( \bar{\psi}'(x) + \int d^4y \, \bar{\eta}(y) i S_F(y-x) \right) \big( (i\slashed{\partial}_x - m + i\epsilon)\psi'(x) - \eta(x) \big) \right] \\
+          & \quad + \int d^4x \, \bar{\eta}(x) \left( \psi'(x) + \int d^4y \, i S_F(x-y) \eta(y) \right)                                                                           \\
+          & \quad + \int d^4x \left( \bar{\psi}'(x) + \int d^4y \, \bar{\eta}(y) i S_F(y-x) \right) \eta(x)
+    \end{aligned}
+\]
+Expanding these terms out carefully, most of the cross-terms involving $\psi'$ and $\bar{\psi}'$ precisely cancel each other out. After integrating by parts for the adjoint operator, the purely kinetic term remains structurally identical:
+\[
+    S = \int d^4x \, \bar{\psi}'(x)(i\slashed{\partial} - m + i\epsilon)\psi'(x) + i \int d^4x d^4y \, \bar{\eta}(x) S_F(x-y) \eta(y)
+\]
+We now multiply the total action by $i$ to return to the path integral exponent. Note that $i \times (i) = -1$:
+\[
+    iS = i \int d^4x \, \bar{\psi}'(x)(i\slashed{\partial} - m + i\epsilon)\psi'(x) - \int d^4x d^4y \, \bar{\eta}(x) S_F(x-y) \eta(y)
+\]
+Because the action now flawlessly separates into a part depending exclusively on the quantum fields $\psi', \bar{\psi}'$ and a part depending exclusively on the classical sources $\eta, \bar{\eta}$, the source-dependent exponential completely factors out of the path integral:
+\[
+    Z[\eta, \bar{\eta}] = \left( \int \mathcal{D}\bar{\psi}' \mathcal{D}\psi' \, \exp\left[ i \int d^4x \, \bar{\psi}'(i\slashed{\partial} - m + i\epsilon)\psi' \right] \right) \times \exp\left[ - \int d^4x d^4y \, \bar{\eta}(x) S_F(x-y) \eta(y) \right]
+\]
+The integral over the primed fields evaluates simply to the zero-source generating functional $Z[0,0]$, which is a constant normalization factor. Our final, rigorous result is thus:
+\[
+    Z[\eta, \bar{\eta}] = Z_0 \exp\left( - \int d^4x d^4y \, \bar{\eta}(x) S_F(x-y) \eta(y) \right)
+\]
+where $Z_0 = Z[0,0] = \det(i\slashed{\partial} - m + i\epsilon)$.
+
+
+\subsection*{4. Feynman propagator for a massive spin-1 particle}
+
+\begin{center}
+    \textit{Compute the Feynman propagator for a } massive spin 1 \textit{ particle in momentum space. \\
+        Hint: Based on Lorentz covariance, argue that the result must take the form}
+    \[
+        \Pi^{\mu\nu}(p^2) = A(p^2) g^{\mu\nu} + B(p^2) p^\mu p^\nu \qquad (2)
+    \]
+    \textit{and use the equation obeyed by } $\Pi^{\mu\nu}$ \textit{ (which is the Fourier transform of the differential equation for } $D^{\mu\nu}_F$\textit{) to fix A and B.}
+\end{center}
+
+The Feynman propagator is defined as the Green's function for the free equations of motion. For a massive spin-1 field $V^\mu$ (such as the Z or W bosons), the free Proca Lagrangian is:
+\[
+    \mathcal{L} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} + \frac{1}{2} m^2 V_\mu V^\mu
+\]
+where $F_{\mu\nu} = \partial_\mu V_\nu - \partial_\nu V_\mu$. The classical Euler-Lagrange equations of motion are the Proca equations:
+\[
+    \partial_\mu F^{\mu\nu} + m^2 V^\nu = 0 \implies (\square + m^2)V^\nu - \partial^\nu(\partial_\mu V^\mu) = 0
+\]
+The Feynman propagator in coordinate space, $D_F^{\mu\nu}(x-y)$, satisfies the corresponding inhomogeneous differential equation with a delta function source:
+\[
+    \left[ (\square_x + m^2)g_{\mu\rho} - \partial^x_\mu \partial^x_\rho \right] D_F^{\rho\nu}(x-y) = i \delta_\mu^\nu \delta^{(4)}(x-y)
+\]
+To solve this, we move to momentum space by taking the Fourier transform. Derivatives map to momenta via $\partial_\mu \to -ip_\mu$, and $\square \to -p^2$. The differential operator becomes an algebraic matrix equation for the momentum-space propagator $\Pi^{\rho\nu}(p)$:
+\[
+    \left[ (-p^2 + m^2)g_{\mu\rho} - (-ip_\mu)(-ip_\rho) \right] \Pi^{\rho\nu}(p) = i \delta_\mu^\nu
+\]
+\[
+    -i \left[ (-p^2 + m^2)g_{\mu\rho} + p_\mu p_\rho \right] \Pi^{\rho\nu}(p) = \delta_\mu^\nu
+\]
+
+To invert this matrix, we use the hint provided. Because the propagator must be a Lorentz covariant rank-2 tensor constructed solely from the metric tensor $g^{\mu\nu}$ and the available four-momentum $p^\mu$, its most general possible structure is:
+\[
+    \Pi^{\rho\nu}(p) = A(p^2) g^{\rho\nu} + B(p^2) p^\rho p^\nu
+\]
+We substitute this \textit{Ansatz} directly into our momentum-space equation:
+\[
+    -i \left[ (-p^2 + m^2)g_{\mu\rho} + p_\mu p_\rho \right] \left( A g^{\rho\nu} + B p^\rho p^\nu \right) = \delta_\mu^\nu
+\]
+We expand the product by distributing the terms and carefully contracting the Lorentz indices. Remember that $g_{\mu\rho} g^{\rho\nu} = \delta_\mu^\nu$, $g_{\mu\rho} p^\rho = p_\mu$, and $p_\rho p^\rho = p^2$:
+\[
+    (-p^2 + m^2)(A \delta_\mu^\nu + B p_\mu p^\nu) + A p_\mu p^\nu + B p^2 p_\mu p^\nu = i \delta_\mu^\nu
+\]
+Now, we group the terms proportional to the tensor structures $\delta_\mu^\nu$ and $p_\mu p^\nu$:
+\[
+    (-p^2 + m^2)A \delta_\mu^\nu + \left[ (-p^2 + m^2)B + A + B p^2 \right] p_\mu p^\nu = i \delta_\mu^\nu
+\]
+\[
+    (-p^2 + m^2)A \delta_\mu^\nu + \left( m^2 B + A \right) p_\mu p^\nu = i \delta_\mu^\nu
+\]
+For this equation to hold true for any arbitrary momentum $p^\mu$, the coefficients of each independent tensor structure on the left side must equal their corresponding coefficients on the right side. This yields a simple system of two linear equations for $A$ and $B$:
+\[
+    \begin{cases}
+        (-p^2 + m^2)A = i \\
+        m^2 B + A = 0
+    \end{cases}
+\]
+
+Solving the first equation trivially gives $A$:
+\[
+    A = \frac{-i}{p^2 - m^2}
+\]
+Substituting this $A$ into the second equation allows us to solve for $B$:
+\[
+    B = -\frac{A}{m^2} = \frac{i}{m^2 (p^2 - m^2)}
+\]
+
+Finally, we substitute the solutions for $A$ and $B$ back into our original \textit{Ansatz} to construct the full massive spin-1 propagator:
+\[
+    \begin{aligned}
+        \Pi^{\mu\nu}(p) & = \frac{-i}{p^2 - m^2} g^{\mu\nu} + \frac{i}{m^2(p^2 - m^2)} p^\mu p^\nu   \\
+                        & = \frac{-i \left( g^{\mu\nu} - \frac{p^\mu p^\nu}{m^2} \right)}{p^2 - m^2}
+    \end{aligned}
+\]
+To strictly ensure the correct analytic structure (causality) and avoid singularities exactly on the mass shell $p^2 = m^2$, we must append the standard Feynman prescription $+i\epsilon$ to the denominator. The final rigorous result is:
+\[
+    \Pi^{\mu\nu}(p) = i \frac{-g^{\mu\nu} + p^\mu p^\nu / m^2}{p^2 - m^2 + i\epsilon}
+\]
+
+\begin{remark}
+    It is critically important to note the behavior of this propagator in the massless limit ($m \to 0$). Looking at our system of equations, if $m=0$, the second equation becomes $A = 0$, which violently contradicts the first equation $(-p^2)A = i$. Therefore, the matrix operator for a massless spin-1 field (a photon) is strictly non-invertible. This mathematical singularity physically reflects the presence of gauge invariance. To define a photon propagator, one is forced to break the symmetry by explicitly choosing a gauge (adding a gauge-fixing term like $-\frac{1}{2\xi}(\partial_\mu A^\mu)^2$ to the Lagrangian).
+\end{remark}
+
+
+\subsection*{5. Photon Propagator and Gauge Fixing}
+
+\begin{center}
+    \textit{Add a } gauge fixing term \textit{ to the QED Lagrangian}
+    \[
+        \mathcal{L}_{\text{g.f.}} = -\frac{1}{2\xi} (\partial_\mu A^\mu)^2, \qquad (3)
+    \]
+    \textit{which was motivated in the lectures (see notes 3.2) and compute the photon propagator. \\
+        Hint: Follow the same method as the previous exercise.}
+\end{center}
+
+As discussed in the previous exercise, the free massless vector Lagrangian $\mathcal{L} = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu}$ yields a non-invertible differential operator because of the underlying $U(1)$ gauge invariance ($A^\mu \to A^\mu + \partial^\mu \alpha$). To define a unique propagator, we must break this gauge redundancy by adding the gauge-fixing term $\mathcal{L}_{\text{g.f.}}$.
+
+The total Lagrangian is:
+\[
+    \mathcal{L} = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu} - \frac{1}{2\xi}(\partial_\mu A^\mu)^2
+\]
+To isolate the quadratic operator, we integrate the action by parts (assuming the fields vanish at spacetime boundaries). For the Maxwell term:
+\[
+    -\frac{1}{4} \int d^4x \, (\partial_\mu A_\nu - \partial_\nu A_\mu)(\partial^\mu A^\nu - \partial^\nu A^\mu) = \frac{1}{2} \int d^4x \, A_\mu \big( \square g^{\mu\nu} - \partial^\mu \partial^\nu \big) A_\nu
+\]
+For the gauge-fixing term:
+\[
+    -\frac{1}{2\xi} \int d^4x \, (\partial_\mu A^\mu)(\partial_\nu A^\nu) = \frac{1}{2} \int d^4x \, A_\mu \left( \frac{1}{\xi} \partial^\mu \partial^\nu \right) A_\nu
+\]
+Combining these, the total effective Lagrangian can be written as a quadratic form $\mathcal{L} = \frac{1}{2} A_\mu \mathcal{O}^{\mu\nu} A_\nu$:
+\[
+    \mathcal{L} = \frac{1}{2} A_\mu \left[ \square g^{\mu\nu} - \left( 1 - \frac{1}{\xi} \right) \partial^\mu \partial^\nu \right] A_\nu
+\]
+The equation of motion is simply $\mathcal{O}^{\mu\nu} A_\nu = 0$. The Feynman propagator in coordinate space, $D_F^{\rho\nu}(x-y)$, is the Green's function of this operator:
+\[
+    \left[ \square_x g_{\mu\rho} - \left( 1 - \frac{1}{\xi} \right) \partial^x_\mu \partial^x_\rho \right] D_F^{\rho\nu}(x-y) = i \delta_\mu^\nu \delta^{(4)}(x-y)
+\]
+We transition to momentum space by taking the Fourier transform. With the substitutions $\partial_\mu \to -ip_\mu$ and $\square \to -p^2$, the differential operator becomes an algebraic matrix $M_{\mu\rho}(p)$:
+\[
+    \left[ -p^2 g_{\mu\rho} + \left( 1 - \frac{1}{\xi} \right) p_\mu p_\rho \right] \Pi^{\rho\nu}(p) = i \delta_\mu^\nu
+\]
+
+Following the hint and exploiting Lorentz covariance, we use the same general \textit{Ansatz} for the propagator $\Pi^{\rho\nu}(p)$ as in the previous exercise:
+\[
+    \Pi^{\rho\nu}(p) = A(p^2) g^{\rho\nu} + B(p^2) p^\rho p^\nu
+\]
+Substituting this \textit{Ansatz} into our algebraic equation yields:
+\[
+    \left[ -p^2 g_{\mu\rho} + \left( 1 - \frac{1}{\xi} \right) p_\mu p_\rho \right] \left( A g^{\rho\nu} + B p^\rho p^\nu \right) = i \delta_\mu^\nu
+\]
+Expanding the product by distributing the terms and carefully contracting the Lorentz indices ($g_{\mu\rho} g^{\rho\nu} = \delta_\mu^\nu$, $g_{\mu\rho} p^\rho = p_\mu$, $p_\rho p^\rho = p^2$):
+\[
+    -p^2 A \delta_\mu^\nu - p^2 B p_\mu p^\nu + A \left( 1 - \frac{1}{\xi} \right) p_\mu p^\nu + B p^2 \left( 1 - \frac{1}{\xi} \right) p_\mu p^\nu = i \delta_\mu^\nu
+\]
+Grouping the coefficients of the linearly independent tensor structures $\delta_\mu^\nu$ and $p_\mu p^\nu$:
+\[
+    (-p^2 A) \delta_\mu^\nu + \left[ -p^2 B + A \left( 1 - \frac{1}{\xi} \right) + B p^2 - \frac{B p^2}{\xi} \right] p_\mu p^\nu = i \delta_\mu^\nu
+\]
+\[
+    (-p^2 A) \delta_\mu^\nu + \left[ A \left( 1 - \frac{1}{\xi} \right) - \frac{p^2 B}{\xi} \right] p_\mu p^\nu = i \delta_\mu^\nu
+\]
+Equating the coefficients on both sides provides a simple linear system for $A$ and $B$:
+\[
+    \begin{cases}
+        -p^2 A = i \\
+        A \left( 1 - \frac{1}{\xi} \right) - \frac{p^2 B}{\xi} = 0
+    \end{cases}
+\]
+
+From the first equation, we immediately find $A$:
+\[
+    A = \frac{-i}{p^2}
+\]
+Substituting $A$ into the second equation allows us to solve for $B$:
+\[
+    \frac{p^2 B}{\xi} = A \left( \frac{\xi - 1}{\xi} \right) \implies p^2 B = A(\xi - 1) \implies B = \frac{-i(\xi - 1)}{p^4}
+\]
+
+Finally, we substitute the solutions for $A$ and $B$ back into our original \textit{Ansatz} to construct the full photon propagator. To ensure the correct boundary conditions (time-ordering) and avoid the poles on the real axis at $p^2=0$, we insert the standard Feynman $+i\epsilon$ prescription into the denominators:
+\[
+    \begin{aligned}
+        \Pi^{\mu\nu}(p) & = \frac{-i}{p^2 + i\epsilon} g^{\mu\nu} - \frac{i(\xi - 1)}{(p^2 + i\epsilon)^2} p^\mu p^\nu           \\
+                        & = \frac{-i}{p^2 + i\epsilon} \left[ g^{\mu\nu} + (\xi - 1) \frac{p^\mu p^\nu}{p^2 + i\epsilon} \right] \\
+                        & = \frac{-i}{p^2 + i\epsilon} \left[ g^{\mu\nu} - (1 - \xi) \frac{p^\mu p^\nu}{p^2 + i\epsilon} \right]
+    \end{aligned}
+\]
+
+\begin{remark}
+    The arbitrary parameter $\xi$ strictly parametrizes a family of covariant gauges (specifically, $R_\xi$ gauges in the massless limit). Because it is an unphysical artifact introduced merely to invert the differential operator, physical scattering amplitudes ($\mathcal{M}$) are guaranteed by the Ward identity to be independent of the choice of $\xi$. Two choices are particularly ubiquitous in the literature:
+    \begin{itemize}
+        \item \textbf{Feynman gauge ($\xi = 1$):} The momentum-dependent tensor structure vanishes entirely, simplifying the propagator to merely $\frac{-i g^{\mu\nu}}{p^2 + i\epsilon}$. This is the standard choice for practical loop and tree-level computations.
+        \item \textbf{Landau gauge ($\xi = 0$):} The propagator is strictly transverse to the four-momentum, $p_\mu \Pi^{\mu\nu} = 0$, taking the form $\frac{-i}{p^2 + i\epsilon} \left( g^{\mu\nu} - \frac{p^\mu p^\nu}{p^2} \right)$.
+    \end{itemize}
+\end{remark}
+
+
+\subsection*{6. Furry's theorem in sQED}
+
+\begin{center}
+    \textit{Furry's theorem in sQED.} In scalar QED consider the \textit{charge conjugation} transformation, which for the scalar field corresponds to
+    \[
+        \phi \to \phi^*, \qquad \phi^* \to \phi. \qquad (4)
+    \]
+    \begin{itemize}
+        \item \textit{How should the photon field} $A^\mu$ \textit{transform to leave the Lagrangian invariant?}
+        \item \textit{Consider this transformation (including the one of} $A^\mu$\textit{) in the path integral, for a Green function with} $N$ \textit{photon fields}
+              \[
+                  \langle \Omega | T A^{\mu_1}(x_1) \cdots A^{\mu_N}(x_N) | \Omega \rangle \qquad (5)
+              \]
+              \textit{Show that if} $N$ \textit{is odd, then the Green function is zero.}
+        \item \textit{Argue, based on the previous result, that an amplitude with} $N$ \textit{external photons (i.e. } $\gamma + \gamma \to (N-2)\gamma$\textit{) vanishes if } $N$ \textit{ is odd.}
+        \item \textit{Is the previous point still true if any external photon is off-shell (i.e. } $p^2 \neq 0$ \textit{ and no polarization vector)?}
+    \end{itemize}
+\end{center}
+
+\textbf{1. Transformation of the photon field $A^\mu$}
+
+To determine the transformation properties of the photon field under charge conjugation, we inspect the explicit expression of the full scalar QED Lagrangian:
+\[
+    \mathcal{L} = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu} + \partial_\mu \phi^* \partial^\mu \phi - m^2 \phi^* \phi - ie A^\mu (\phi^* \partial_\mu \phi - \phi \partial_\mu \phi^*) + e^2 A_\mu A^\mu \phi^* \phi
+\]
+Applying the transformation $\phi \to \phi^*$ and $\phi^* \to \phi$, the free scalar terms and the quartic interaction term ($e^2 A^2 \phi^* \phi$) are trivially symmetric and remain unchanged. However, we must carefully analyze the cubic interaction term, which couples the photon field to the scalar current $J_\mu = i(\phi^* \partial_\mu \phi - \phi \partial_\mu \phi^*)$. Under the scalar transformation:
+\[
+    J_\mu \to i(\phi \partial_\mu \phi^* - \phi^* \partial_\mu \phi) = -i(\phi^* \partial_\mu \phi - \phi \partial_\mu \phi^*) = -J_\mu
+\]
+The current is odd under charge conjugation. In order for the entire interaction term $-e A^\mu J_\mu$ (and therefore the full action $S$) to remain strictly invariant under charge conjugation, the photon field must simultaneously absorb this minus sign. Therefore, the photon field must transform as:
+\[
+    A^\mu \to -A^\mu
+\]
+
+\textbf{2. Vanishing of the $N$-photon Green function for odd $N$}
+
+We can rigorously prove this using the path integral formulation. The $N$-point Green function for the photon field is defined as:
+\[
+    G_N(x_1, \dots, x_N) \equiv \langle \Omega | T A^{\mu_1}(x_1) \cdots A^{\mu_N}(x_N) | \Omega \rangle = \frac{1}{Z_0} \int \mathcal{D}A \mathcal{D}\phi \mathcal{D}\phi^* e^{iS[A, \phi, \phi^*]} A^{\mu_1}(x_1) \cdots A^{\mu_N}(x_N)
+\]
+We now perform a formal change of integration variables inside the path integral, corresponding exactly to the charge conjugation symmetry we just established:
+\[
+    \phi \to \phi^*, \qquad \phi^* \to \phi, \qquad A^\mu \to -A^\mu
+\]
+Because this is a fundamental symmetry of the theory, the classical action is completely invariant ($S[A, \phi, \phi^*] \to S[A, \phi, \phi^*]$). Furthermore, this is a simple linear field redefinition with unit Jacobian, meaning the functional integration measure is also invariant ($\mathcal{D}A \mathcal{D}\phi \mathcal{D}\phi^* \to \mathcal{D}A \mathcal{D}\phi \mathcal{D}\phi^*$).
+
+However, the field insertions $A^{\mu_k}(x_k)$ in the integrand explicitly pick up a minus sign. With $N$ such fields, we extract a global factor of $(-1)^N$:
+\[
+    \begin{aligned}
+        G_N(x_1, \dots, x_N) & = \frac{1}{Z_0} \int \mathcal{D}A \mathcal{D}\phi \mathcal{D}\phi^* e^{iS} (-A^{\mu_1}(x_1)) \cdots (-A^{\mu_N}(x_N))  \\
+                             & = (-1)^N \frac{1}{Z_0} \int \mathcal{D}A \mathcal{D}\phi \mathcal{D}\phi^* e^{iS} A^{\mu_1}(x_1) \cdots A^{\mu_N}(x_N) \\
+                             & = (-1)^N G_N(x_1, \dots, x_N)
+    \end{aligned}
+\]
+For this equation, $G_N = (-1)^N G_N$, to hold mathematically true, it trivially forces the condition:
+\[
+    G_N(x_1, \dots, x_N) = 0 \quad \text{for any odd } N.
+\]
+
+\textbf{3. Vanishing of the scattering amplitude for odd $N$}
+
+Physical scattering amplitudes, such as $i\mathcal{M}(2\gamma \to (N-2)\gamma)$, are obtained directly from the full connected $N$-point Green functions via the LSZ reduction formula. The LSZ procedure involves taking the Fourier transform of $G_N$ into momentum space, amputating the external propagators, and placing the external momenta exactly on the mass shell ($p^2 = 0$ for photons).
+
+Since we established in the previous point that the underlying position-space Green function $G_N$ is identically zero everywhere for an odd number of photons, its Fourier transform is identically zero, and applying the LSZ truncation simply yields zero. Thus, any $S$-matrix element involving a total odd number of external photons is strictly zero.
+
+\textbf{4. Validity for off-shell photons}
+
+Yes, the statement remains completely true even if the external photons are off-shell ($p^2 \neq 0$) and lack physical polarization vectors.
+
+The previous proof relying on the path integral demonstrates that $G_N = 0$ is an exact algebraic consequence of the fundamental charge conjugation symmetry of the quantum integration measure and the action. This vanishing occurs at the level of the fundamental Green functions (correlators), \textit{before} any LSZ reduction, \textit{before} taking the mass-shell limit $p^2 \to m^2$, and \textit{before} contracting with transverse polarization vectors $\epsilon_\mu(p)$. Therefore, any Green function in momentum space with an odd number of photon legs vanishes identically, regardless of the kinematic state of those photons.
+
+\begin{remark}
+    Furry's theorem powerfully restricts the allowed processes in QED and sQED. For instance, it immediately forbids processes like the decay of a single off-shell photon into three photons, or a 3-photon vertex correction. This vastly simplifies the computation of higher-order Feynman diagrams, as any sub-diagram containing a closed fermion (or scalar) loop with an odd number of attached photon lines identically cancels out.
+\end{remark}
+
+
+\subsection*{7. Furry's theorem (in QED)}
+
+\begin{center}
+    \textit{Furry's theorem (in QED).} This is similar to the previous exercise but for spinor QED. Charge conjugation for a Dirac fermion is defined by:
+    \[
+        \psi \to -i(\bar{\psi}\gamma^0\gamma^2)^T, \qquad \bar{\psi} \to (-i\gamma^0\gamma^2\psi)^T. \qquad (6)
+    \]
+    If you don't know or don't remember this, take these formulas as a \textit{definition} of charge conjugation for a Dirac fermion.
+    \begin{itemize}
+        \item \textit{Show that under such transformation}
+              \[
+                  \bar{\psi}\psi \to \bar{\psi}\psi, \qquad \bar{\psi}\gamma^\mu\psi \to -\bar{\psi}\gamma^\mu\psi \qquad (7)
+              \]
+              \textit{and that the QED action is invariant under such transformation if the photon field $A^\mu$ also transforms as in the previous exercise.}
+        \item \textit{Consider this transformation (including the one of $A^\mu$) in the path integral. Argue that the integration measure of the path integral is invariant under such transformation.}
+        \item \textit{Consider a Green function with $N$ photon fields, as in eq. (5). Show that if $N$ is odd, then the Green function is zero.}
+        \item \textit{Argue, based on the previous result, that an amplitude with $N$ external photons vanishes if $N$ is odd. Discuss the case where the external photons, or some of them, are off-shell (i.e. $p^2 \neq 0$ and no polarization vector).}
+        \item \textit{Using the previous results, show that fermion loops with an odd number of vertexes do not contribute to amplitudes.}
+    \end{itemize}
+\end{center}
+
+\textbf{1. Transformation of Fermion Bilinears}
+
+Let us define the charge conjugation matrix $C \equiv -i\gamma^0\gamma^2$. Using the standard Dirac algebra properties $\{\gamma^0, \gamma^2\} = 0$, $(\gamma^0)^2 = \mathbb{1}$, and $(\gamma^2)^2 = -\mathbb{1}$, we can deduce the properties of $C$:
+\[
+    C^2 = (-i\gamma^0\gamma^2)(-i\gamma^0\gamma^2) = -\gamma^0\gamma^2\gamma^0\gamma^2 = \gamma^0\gamma^0\gamma^2\gamma^2 = (+\mathbb{1})(-\mathbb{1}) = -\mathbb{1}
+\]
+Thus, the inverse is simply $C^{-1} = -C$. Furthermore, checking the commutation relations with the gamma matrices reveals that $[C, \gamma^\mu] = 0$ for $\mu = 1, 3$ and $\{C, \gamma^\mu\} = 0$ for $\mu = 0, 2$.
+
+Using this matrix $C$, we can elegantly rewrite the charge conjugation transformations given in eq. (6) in component notation. The transformations correspond to $\psi_\alpha \to \bar{\psi}_\beta C_{\beta\alpha}$ and $\bar{\psi}_\alpha \to C_{\alpha\beta}\psi_\beta$.
+
+Let us apply this to the scalar bilinear $\bar{\psi}\psi$:
+\[
+    \bar{\psi}\psi = \bar{\psi}_\alpha \psi_\alpha \to (C_{\alpha\beta}\psi_\beta)(\bar{\psi}_\delta C_{\delta\alpha})
+\]
+Because $\psi$ and $\bar{\psi}$ are Grassmann variables, swapping their order incurs a minus sign:
+\[
+    (C_{\alpha\beta}\psi_\beta)(\bar{\psi}_\delta C_{\delta\alpha}) = - \bar{\psi}_\delta C_{\delta\alpha} C_{\alpha\beta} \psi_\beta = -\bar{\psi} (C^2) \psi
+\]
+Since $C^2 = -\mathbb{1}$, we find:
+\[
+    -\bar{\psi} (-\mathbb{1}) \psi = \bar{\psi}\psi
+\]
+Thus, the scalar bilinear is strictly invariant: $\bar{\psi}\psi \to \bar{\psi}\psi$.
+
+Now let us analyze the vector bilinear $\bar{\psi}\gamma^\mu\psi$:
+\[
+    \bar{\psi}\gamma^\mu\psi = \bar{\psi}_\alpha \gamma^\mu_{\alpha\beta} \psi_\beta \to (C_{\alpha\delta}\psi_\delta) \gamma^\mu_{\alpha\beta} (\bar{\psi}_\epsilon C_{\epsilon\beta})
+\]
+Rearranging the Grassmann variables again yields a minus sign:
+\[
+    - \bar{\psi}_\epsilon C_{\epsilon\beta} \gamma^\mu_{\alpha\beta} C_{\alpha\delta} \psi_\delta = - \bar{\psi} C \gamma^{\mu T} C \psi
+\]
+We must evaluate the matrix structure $-C \gamma^{\mu T} C$. In the standard Weyl representation, the transposed gamma matrices are $(\gamma^0)^T = \gamma^0$, $(\gamma^1)^T = -\gamma^1$, $(\gamma^2)^T = \gamma^2$, and $(\gamma^3)^T = -\gamma^3$. We check each component utilizing the (anti)commutation relations derived earlier:
+\begin{itemize}
+    \item For $\mu = 0$: $-C (\gamma^0)^T C = -C \gamma^0 C = +C^2 \gamma^0 = -\gamma^0$ (using $\{C, \gamma^0\} = 0$)
+    \item For $\mu = 1$: $-C (\gamma^1)^T C = -C (-\gamma^1) C = C^2 \gamma^1 = -\gamma^1$ (using $[C, \gamma^1] = 0$)
+    \item For $\mu = 2$: $-C (\gamma^2)^T C = -C \gamma^2 C = +C^2 \gamma^2 = -\gamma^2$ (using $\{C, \gamma^2\} = 0$)
+    \item For $\mu = 3$: $-C (\gamma^3)^T C = -C (-\gamma^3) C = C^2 \gamma^3 = -\gamma^3$ (using $[C, \gamma^3] = 0$)
+\end{itemize}
+In all cases, $-C \gamma^{\mu T} C = -\gamma^\mu$. Therefore, the vector current transforms with a minus sign:
+\[
+    \bar{\psi}\gamma^\mu\psi \to -\bar{\psi}\gamma^\mu\psi
+\]
+
+\textbf{2. Invariance of the QED Action}
+
+The full QED Lagrangian is $\mathcal{L} = \bar{\psi}(i\slashed{\partial} - m)\psi - ieA_\mu \bar{\psi}\gamma^\mu\psi$. We evaluate the transformation of each term:
+\begin{itemize}
+    \item \textbf{Mass term:} $-m\bar{\psi}\psi \to -m\bar{\psi}\psi$ (Invariant, based on our proof above).
+    \item \textbf{Interaction term:} $-ieA_\mu \bar{\psi}\gamma^\mu\psi$. If we enforce that the photon field transforms exactly as in sQED ($A_\mu \to -A_\mu$), then $-ie(-A_\mu)(-\bar{\psi}\gamma^\mu\psi) = -ieA_\mu \bar{\psi}\gamma^\mu\psi$. The term is strictly invariant.
+    \item \textbf{Kinetic term:} $\bar{\psi}i\gamma^\mu\partial_\mu\psi$. Applying the transformation mapping yields $-i(\partial_\mu \bar{\psi}) \gamma^\mu \psi$. While the Lagrangian density itself is not manifestly identical, its integral (the physical action $S$) is invariant. We integrate by parts over spacetime:
+          \[
+              \int d^4x \left( -i (\partial_\mu \bar{\psi}) \gamma^\mu \psi \right) = \int d^4x \left( i \bar{\psi} \gamma^\mu \partial_\mu \psi \right)
+          \]
+          assuming the field configurations vanish at the spacetime boundary.
+\end{itemize}
+Thus, the total QED action $S$ is flawlessly invariant under charge conjugation.
+
+\textbf{3. Invariance of the Path Integral Measure}
+
+The functional measure for the Dirac fields is the discretized infinite product $\int \mathcal{D}\bar{\psi}\mathcal{D}\psi \sim \int \prod_x \prod_{\alpha=1}^4 d\bar{\psi}_\alpha(x) d\psi_\alpha(x)$. The charge conjugation transformation acts as a local change of basis at every spacetime point $x$, represented by the block matrix:
+\[
+    \begin{pmatrix} \psi' \\ \bar{\psi}' \end{pmatrix} = \begin{pmatrix} 0 & C^T \\ C & 0 \end{pmatrix} \begin{pmatrix} \psi \\ \bar{\psi} \end{pmatrix}
+\]
+The Jacobian for this transformation on Grassmann variables requires calculating the local determinant. Because $C = -i\gamma^0\gamma^2$, the determinant is:
+\[
+    |\det C|^2 = |\det(-i\mathbb{I}_{4\times 4}) \det(\gamma^0) \det(\gamma^2)|^2 = |(-i)^4 (-1) (1)|^2 = |-1|^2 = 1
+\]
+Since the Jacobian determinant is strictly unity, the path integral measure is perfectly invariant. The photon measure $\mathcal{D}A$ is also trivially invariant under the reflection $A^\mu \to -A^\mu$.
+
+\textbf{4. Vanishing of $N$-Photon Green Functions and Amplitudes for Odd $N$}
+
+Because the action and the measure are exactly invariant, we can perform this change of variables directly inside the defining path integral for the $N$-photon Green function:
+\[
+    \begin{aligned}
+        G_N(x_1, \dots, x_N) & = \langle \Omega | T A^{\mu_1}(x_1) \cdots A^{\mu_N}(x_N) | \Omega \rangle                                             \\
+                             & = \frac{1}{Z} \int \mathcal{D}A \mathcal{D}\bar{\psi}\mathcal{D}\psi e^{iS} (-A^{\mu_1}(x_1)) \cdots (-A^{\mu_N}(x_N)) \\
+                             & = (-1)^N G_N(x_1, \dots, x_N)
+    \end{aligned}
+\]
+For this equality $G_N = (-1)^N G_N$ to hold algebraically, the Green function must identically vanish whenever $N$ is odd.
+
+By direct extension via the LSZ reduction formula, physical scattering amplitudes are extracted by applying linear differential operators to these Green functions and taking the Fourier transform. Since the underlying position-space Green function $G_N$ is identically zero everywhere for odd $N$, its corresponding amplitude is also exactly zero.
+Crucially, this logic does not depend on the kinematic state of the external photons. Because the cancellation occurs strictly at the level of the quantum correlator in the path integral integrand, the result holds regardless of whether the external photons are on-shell or off-shell ($p^2 \neq 0$).
+
+\textbf{5. Non-Contribution of Odd Fermion Loops}
+
+Consider any arbitrary Feynman diagram containing a closed internal fermion loop attached to $N$ external photon lines (or internal photon propagators connected to other parts of a larger diagram). This isolated fermion loop mathematically represents the perturbative evaluation of an $N$-photon correlator sub-diagram.
+
+When evaluating the total amplitude, we must inherently sum over all possible Wick contractions. For a closed loop, this summation naturally includes both possible orientations of the momentum routing around the loop (corresponding physically to a virtual electron circulating clockwise versus a virtual positron circulating counter-clockwise). Applying the charge conjugation transformation exactly maps one loop orientation into the other, whilst simultaneously introducing a factor of $(-1)^N$ due to the transformation of the $N$ interaction vertices (since each vertex $\bar{\psi}\gamma^\mu\psi \to -\bar{\psi}\gamma^\mu\psi$).
+
+If $N$ is odd, the two orientations contribute with exactly opposite signs and perfectly cancel each other out. Therefore, as a generalized corollary of Furry's theorem, any fermion loop with an odd number of vertices in QED evaluates to zero and can always be safely neglected from amplitude calculations.
+
+\subsection*{8. Lightcone axial gauge in QED}
+
+\begin{center}
+    \textit{In the Faddeev-Popov procedure for the quantization of QED, had we used the alternative gauge condition}
+    \[
+        G(A) = \eta_\mu A^\mu - \omega, \qquad (8)
+    \]
+    \textit{where} $\eta^\mu$ \textit{is an arbitrary massless four-vector} $\eta^2 = 0$ \textit{(and} $G$ \textit{is defined as in lecture notes 3.2), we would have found the gauge fixing Lagrangian}
+    \[
+        \mathcal{L}_{\text{g.f.}} = -\frac{1}{2\xi} (\eta_\mu A^\mu)^2. \qquad (9)
+    \]
+    \textit{Show that the photon propagator with this gauge choice, in the limit } $\xi \to 0$ \textit{ is equal to}
+    \[
+        \Pi^{\mu\nu}(p) = \frac{i}{p^2 + i0^+} \left( -g^{\mu\nu} + \frac{p^\mu \eta^\nu + \eta^\mu p^\nu}{\eta \cdot p} \right). \qquad (10)
+    \]
+\end{center}
+
+To find the propagator, we first write down the total effective Lagrangian including the Maxwell term and the new gauge-fixing term:
+\[
+    \mathcal{L} = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu} - \frac{1}{2\xi}(\eta_\mu A^\mu)^2
+\]
+We integrate the action by parts to express it as a quadratic differential operator acting on the fields, $\mathcal{L} = \frac{1}{2} A_\mu \mathcal{O}^{\mu\nu} A_\nu$. For the Maxwell part, we have $\frac{1}{2} A_\mu (\square g^{\mu\nu} - \partial^\mu \partial^\nu) A_\nu$. The gauge-fixing term can be written directly as $-\frac{1}{2\xi} A_\mu (\eta^\mu \eta^\nu) A_\nu$.
+Transforming into momentum space via $\partial_\mu \to -ip_\mu$ and $\square \to -p^2$, the differential operator matrix $M_{\mu\rho}(p)$ becomes:
+\[
+    M_{\mu\rho}(p) = -p^2 g_{\mu\rho} + p_\mu p_\rho - \frac{1}{\xi} \eta_\mu \eta_\rho
+\]
+The Feynman propagator $\Pi^{\rho\nu}(p)$ is defined as the inverse of this matrix, satisfying:
+\[
+    M_{\mu\rho}(p) \Pi^{\rho\nu}(p) = i \delta_\mu^\nu
+\]
+
+To invert this operator, we construct the most general possible rank-2 tensor Ansatz using the available invariant structures: the metric $g^{\rho\nu}$ and the vectors $p^\rho, \eta^\rho$. The Ansatz is:
+\[
+    \Pi^{\rho\nu}(p) = A(p^2) g^{\rho\nu} + B(p^2) p^\rho p^\nu + C(p^2) \eta^\rho \eta^\nu + D(p^2) (p^\rho \eta^\nu + \eta^\rho p^\nu)
+\]
+We substitute this Ansatz into our defining equation:
+\[
+    \left( -p^2 g_{\mu\rho} + p_\mu p_\rho - \frac{1}{\xi} \eta_\mu \eta_\rho \right) \left( A g^{\rho\nu} + B p^\rho p^\nu + C \eta^\rho \eta^\nu + D (p^\rho \eta^\nu + \eta^\rho p^\nu) \right) = i \delta_\mu^\nu
+\]
+Expanding the product by distributing and carefully contracting the Lorentz index $\rho$, we evaluate each of the three terms from the operator block:
+\begin{enumerate}
+    \item $(-p^2 g_{\mu\rho}) \times (\dots) = -p^2 A \delta_\mu^\nu - p^2 B p_\mu p^\nu - p^2 C \eta_\mu \eta^\nu - p^2 D (p_\mu \eta^\nu + \eta_\mu p^\nu)$
+    \item $(p_\mu p_\rho) \times (\dots) = A p_\mu p^\nu + B p^2 p_\mu p^\nu + C (p \cdot \eta) p_\mu \eta^\nu + D p^2 p_\mu \eta^\nu + D (p \cdot \eta) p_\mu p^\nu$
+    \item $\left( -\frac{1}{\xi} \eta_\mu \eta_\rho \right) \times (\dots) = -\frac{A}{\xi} \eta_\mu \eta^\nu - \frac{B}{\xi} (p \cdot \eta) \eta_\mu p^\nu - \frac{C}{\xi} \eta^2 \eta_\mu \eta^\nu - \frac{D}{\xi} (p \cdot \eta) \eta_\mu \eta^\nu - \frac{D}{\xi} \eta^2 \eta_\mu p^\nu$
+\end{enumerate}
+Since $\eta^\mu$ is explicitly defined as a \textit{massless} vector, we strictly enforce $\eta^2 = 0$. This eliminates the $C$ and $D$ terms proportional to $\eta^2$ in the third line.
+
+Summing all the expanded terms, we group them by their linear tensor structures:
+\begin{itemize}
+    \item \textbf{Term $\delta_\mu^\nu$:} $-p^2 A = i \implies A = -\frac{i}{p^2}$
+    \item \textbf{Term $p_\mu p^\nu$:} $-p^2 B + A + B p^2 + D(p \cdot \eta) = 0 \implies A + D(p \cdot \eta) = 0 \implies D = -\frac{A}{p \cdot \eta} = \frac{i}{p^2 (p \cdot \eta)}$
+    \item \textbf{Term $p_\mu \eta^\nu$:} $-p^2 D + C(p \cdot \eta) + D p^2 = 0 \implies C(p \cdot \eta) = 0 \implies C = 0$
+    \item \textbf{Term $\eta_\mu p^\nu$:} $-p^2 D - \frac{B}{\xi}(p \cdot \eta) = 0 \implies B = -\frac{\xi p^2 D}{p \cdot \eta} = -\frac{i \xi}{(p \cdot \eta)^2}$
+    \item \textbf{Term $\eta_\mu \eta^\nu$:} $-p^2 C - \frac{A}{\xi} - \frac{D}{\xi}(p \cdot \eta) = 0 \implies -\frac{1}{\xi} \big( A + D(p \cdot \eta) \big) = 0$. This provides a consistency check, seamlessly matching the relation derived from the $p_\mu p^\nu$ term.
+\end{itemize}
+
+Having determined the scalar coefficients, the full propagator for an arbitrary $\xi$ is:
+\[
+    \Pi^{\mu\nu}(p) = -\frac{i}{p^2} g^{\mu\nu} - \frac{i\xi}{(p \cdot \eta)^2} p^\mu p^\nu + \frac{i}{p^2(p \cdot \eta)} (p^\mu \eta^\nu + \eta^\mu p^\nu)
+\]
+We are requested to find the propagator in the strict limit $\xi \to 0$ (which physically corresponds to strictly enforcing the gauge condition $\eta_\mu A^\mu = 0$ in the path integral). In this limit, the $B$ term proportional to $\xi$ completely vanishes:
+\[
+    \lim_{\xi \to 0} \Pi^{\mu\nu}(p) = \frac{i}{p^2} \left( -g^{\mu\nu} + \frac{p^\mu \eta^\nu + \eta^\mu p^\nu}{p \cdot \eta} \right)
+\]
+Finally, to rigorously define the integration contour for the time-ordered Feynman propagator, we implement the standard pole-shifting prescription by substituting $p^2 \to p^2 + i0^+$ in the overall denominator. Thus, we beautifully recover the required expression:
+\[
+    \Pi^{\mu\nu}(p) = \frac{i}{p^2 + i0^+} \left( -g^{\mu\nu} + \frac{p^\mu \eta^\nu + \eta^\mu p^\nu}{\eta \cdot p} \right)
+\]
+
+\begin{remark}
+    The term in parentheses represents the polarization sum $\sum_{\lambda} \epsilon_{(\lambda)}^\mu(p) \epsilon_{(\lambda)}^{\nu *}(p)$ for a strictly physical (transverse) photon, where the unphysical longitudinal and time-like degrees of freedom have been completely decoupled by the gauge choice.
+\end{remark}
+
+
+\subsection*{9. QED Ward-Takahashi identity}
+
+\begin{center}
+    \textit{We proved the QED Ward-Takahashi identity}
+    \[
+        q_\mu \mathcal{M}^\mu(q; p_1, p_2) = -Q e \Big( \mathcal{M}_0(p_1, p_2 - q) - \mathcal{M}_0(p_1 + q, p_2) \Big), \qquad (11)
+    \]
+    \textit{where} $p_i$ \textit{are generic off-shell momenta,} $q = p_2 - p_1$ \textit{and} $\mathcal{M}^\mu, \mathcal{M}_0$ \textit{defined as in lecture 3.3. Check this, at tree-level, via an explicit calculation with Feynman diagrams.}
+\end{center}
+
+To verify the Ward-Takahashi identity at tree-level, we evaluate the left-hand side of equation (11) directly from the Feynman rules. The amplitude $\mathcal{M}^\mu(q; p_1, p_2)$ represents the interaction vertex where a photon with momentum $q$ attaches to a fermion line with incoming momentum $p_1$ and outgoing momentum $p_2$. Because the fermion momenta $p_1$ and $p_2$ are generic and off-shell, this amplitude must be un-amputated; it explicitly includes the full incoming and outgoing fermion propagators, while the external photon line remains amputated (stripped of its polarization vector).
+
+\TODO{add diagram: Left hand side shows a photon line with momentum q attaching to a fermion line with incoming momentum p1 and outgoing momentum p2. Right hand side shows the difference of two bare un-amputated fermion lines.}
+
+Applying standard QED Feynman rules, the un-amputated vertex amplitude is given by the product of the final state propagator, the interaction vertex, and the initial state propagator:
+\[
+    \mathcal{M}^\mu(q; p_1, p_2) = \frac{i(\slashed{p}_2 + m)}{p_2^2 - m^2} (iQe\gamma^\mu) \frac{i(\slashed{p}_1 + m)}{p_1^2 - m^2}
+\]
+We now contract this amplitude with the incoming photon four-momentum $q_\mu$:
+\[
+    q_\mu \mathcal{M}^\mu(q; p_1, p_2) = q_\mu \left( \frac{i(\slashed{p}_2 + m)}{p_2^2 - m^2} (iQe\gamma^\mu) \frac{i(\slashed{p}_1 + m)}{p_1^2 - m^2} \right)
+\]
+The contraction $q_\mu \gamma^\mu$ yields the Feynman slash vector $\slashed{q}$. Global momentum conservation at the vertex dictates that $q = p_2 - p_1$, allowing us to rewrite $\slashed{q} = \slashed{p}_2 - \slashed{p}_1$. Substituting this geometric identity into the numerator gives:
+\[
+    q_\mu \mathcal{M}^\mu(q; p_1, p_2) = \frac{(-iQe) (\slashed{p}_2 + m)(\slashed{p}_2 - \slashed{p}_1)(\slashed{p}_1 + m)}{(p_2^2 - m^2)(p_1^2 - m^2)}
+\]
+To factorize and simplify the numerator, we employ an algebraic trick to express the momentum difference $\slashed{p}_2 - \slashed{p}_1$ in terms of the inverse Dirac propagators. We do this by adding and subtracting the fermion mass $m$:
+\[
+    \slashed{p}_2 - \slashed{p}_1 = (\slashed{p}_2 - m) - (\slashed{p}_1 - m)
+\]
+We distribute this modified expression into the adjacent spinor matrix factors $(\slashed{p}_2 + m)$ and $(\slashed{p}_1 + m)$, which naturally splits the numerator into two distinct terms:
+\[
+    (\slashed{p}_2 + m) \big[ (\slashed{p}_2 - m) - (\slashed{p}_1 - m) \big] (\slashed{p}_1 + m) = (\slashed{p}_2 + m)(\slashed{p}_2 - m)(\slashed{p}_1 + m) - (\slashed{p}_2 + m)(\slashed{p}_1 - m)(\slashed{p}_1 + m)
+\]
+Using the fundamental Clifford algebra property $\slashed{p}\slashed{p} = p^2 \mathbb{1}$, we can perfectly reduce the adjacent conjugate pairs: $(\slashed{p} + m)(\slashed{p} - m) = \slashed{p}\slashed{p} - m^2 = p^2 - m^2$. The expanded numerator thus simplifies entirely to scalars multiplying single slash matrices:
+\[
+    (p_2^2 - m^2)(\slashed{p}_1 + m) - (\slashed{p}_2 + m)(p_1^2 - m^2)
+\]
+Substituting this evaluated numerator back into the full contracted amplitude, the scalar terms gracefully cancel with the corresponding kinematic factors in the denominator:
+\[
+    \begin{aligned}
+        q_\mu \mathcal{M}^\mu(q; p_1, p_2) & = \frac{-iQe \big[ (p_2^2 - m^2)(\slashed{p}_1 + m) - (\slashed{p}_2 + m)(p_1^2 - m^2) \big]}{(p_1^2 - m^2)(p_2^2 - m^2)} \\
+                                           & = -Qe \left[ \frac{i(\slashed{p}_1 + m)}{p_1^2 - m^2} - \frac{i(\slashed{p}_2 + m)}{p_2^2 - m^2} \right]
+    \end{aligned}
+\]
+The two terms remaining inside the brackets are exactly the expressions for the bare, un-amputated free fermion propagators, denoted as $\mathcal{M}_0(p)$. The first term represents the propagator evaluated at momentum $p_1$, while the second term is the propagator evaluated at momentum $p_2$.
+
+By utilizing the initial vertex constraint $q = p_2 - p_1$, we can equivalently map these momenta as $p_1 = p_2 - q$ and $p_2 = p_1 + q$. Substituting these definitions into the arguments of $\mathcal{M}_0$, we extract the final required relation:
+\[
+    q_\mu \mathcal{M}^\mu(q; p_1, p_2) = -Qe \Big( \mathcal{M}_0(p_1, p_2 - q) - \mathcal{M}_0(p_1 + q, p_2) \Big)
+\]
+This explicit derivation strictly confirms the validity of the Ward-Takahashi identity at tree-level, demonstrating how gauge invariance forces a specific structural relationship between interaction vertices and propagators.

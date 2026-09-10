@@ -1,0 +1,557 @@
+\section*{Sheet 4}
+
+
+\subsection*{1. The $D$-dimensional solid angle}
+
+\begin{center}
+    \textit{Show that the $D$-dimensional solid angle is}
+    \[
+        \Omega_D = \int d\Omega_D = \frac{2\pi^{D/2}}{\Gamma(D/2)}. \qquad (1)
+    \]
+    \textit{Hint: Compute a $D$-dimensional gaussian integral in both cartesian and polar coordinates, using the definition of the Gamma function for the latter.}
+\end{center}
+
+To prove this identity, we evaluate a standard $D$-dimensional Gaussian integral over the entire Euclidean space $\mathbb{R}^D$ in two different coordinate systems. Let us define the integral $I_D$ as:
+\[
+    I_D = \int_{\mathbb{R}^D} d^Dx \, \exp\left(-\sum_{i=1}^D x_i^2\right).
+\]
+
+\textbf{1. Evaluation in Cartesian Coordinates}
+
+In Cartesian coordinates, the integration measure is simply $d^Dx = dx_1 dx_2 \dots dx_D$. Because the exponential of a sum factors into a product of exponentials, the $D$-dimensional integral completely factorizes into $D$ independent one-dimensional Gaussian integrals:
+\[
+    \begin{aligned}
+        I_D & = \prod_{i=1}^D \left( \int_{-\infty}^{+\infty} dx_i \, e^{-x_i^2} \right) \\
+            & = \left( \int_{-\infty}^{+\infty} dx \, e^{-x^2} \right)^D.
+    \end{aligned}
+\]
+Using the standard result for the 1D Gaussian integral, $\int_{-\infty}^{+\infty} e^{-x^2} dx = \sqrt{\pi}$, we obtain:
+\[
+    I_D = (\sqrt{\pi})^D = \pi^{D/2}.
+\]
+
+\textbf{2. Evaluation in $D$-dimensional Spherical Coordinates}
+
+Alternatively, we can transition to $D$-dimensional spherical (hyper-polar) coordinates. In this system, the volume element is expressed as the product of a radial component and an angular component: $d^Dx = r^{D-1} dr \, d\Omega_D$, where $r = \sqrt{\sum x_i^2}$ is the radial distance and $d\Omega_D$ is the differential solid angle. The integral then separates into a radial integral and an angular integral:
+\[
+    I_D = \int d\Omega_D \int_0^\infty dr \, r^{D-1} e^{-r^2} = \Omega_D \int_0^\infty dr \, r^{D-1} e^{-r^2}.
+\]
+To evaluate the radial integral, we perform a change of variables, setting $t = r^2$ (or $x = r^2$ as in the professor's notes). This implies $dt = 2r \, dr$, or equivalently $dr = \frac{1}{2\sqrt{t}} dt = \frac{1}{2} t^{-1/2} dt$. The integration limits trivially remain from $0$ to $\infty$. Substituting this into the radial integral yields:
+\[
+    \begin{aligned}
+        \int_0^\infty dr \, r^{D-1} e^{-r^2} & = \int_0^\infty \left( \frac{1}{2} t^{-1/2} dt \right) (t^{1/2})^{D-1} e^{-t} \\
+                                             & = \frac{1}{2} \int_0^\infty dt \, t^{(D-1)/2} t^{-1/2} e^{-t}                 \\
+                                             & = \frac{1}{2} \int_0^\infty dt \, t^{D/2 - 1} e^{-t}.
+    \end{aligned}
+\]
+We now perfectly recognize this integral as the formal definition of the Euler Gamma function, $\Gamma(z) = \int_0^\infty dt \, t^{z-1} e^{-t}$, evaluated at $z = D/2$. Therefore, the radial integral evaluates precisely to $\frac{1}{2}\Gamma(D/2)$.
+
+Combining this back with the angular part, we get:
+\[
+    I_D = \frac{1}{2} \Omega_D \Gamma(D/2).
+\]
+
+\textbf{3. Synthesis}
+
+Equating the results obtained from both coordinate systems:
+\[
+    \pi^{D/2} = \frac{1}{2} \Omega_D \Gamma(D/2).
+\]
+Solving for the total solid angle $\Omega_D$, we rigorously recover the requested formula:
+\[
+    \Omega_D = \frac{2\pi^{D/2}}{\Gamma(D/2)}.
+\]
+
+\begin{remark}
+    This elegant derivation is a cornerstone of dimensional regularization in Quantum Field Theory. By expressing the solid angle entirely in terms of the Gamma function, which can be analytically continued to complex values, we can mathematically define loop integrals in an arbitrary, non-integer dimension $D = 4 - \epsilon$.
+\end{remark}
+
+
+\subsection*{2. Potential of an infinite wire in dimensional regularization}
+
+\begin{center}
+    \textit{Compute the potential of an infinite wire in dimensional regularization and show that in the limit } $D \to 1$ \textit{ it is equal to}
+    \[
+        V(R) \equiv \frac{\lambda}{4\pi} \mu^{D-1} \int_{-\infty}^\infty d^Dx \frac{1}{(|\vec{x}|^2 + R^2)^{1/2}}
+    \]
+    \[
+        = \frac{\lambda}{4\pi} \left( -\frac{2}{D-1} - \log(\mu R)^2 + \text{const} + \mathcal{O}(D-1) \right) \qquad (2)
+    \]
+    \textit{with ``const'' independent of $R$.} \\
+    \textit{Hint: Reuse the result for one-loop tadpole integrals without the } $i/(-1)^\alpha$ \textit{ prefactor, that was due to Wick's rotation into Euclidean space, and adjust for the missing } $1/(2\pi)^D$.
+\end{center}
+
+To evaluate the integral defining the potential $V(R)$, we note that it takes the exact mathematical form of a vacuum (tadpole) loop integral in a $D$-dimensional Euclidean space. By following the hint, we can adapt the master formula for dimensionally regularized 1-loop integrals.
+
+We strip the purely Minkowskian prefactor $\frac{i}{(-1)^\alpha}$ and multiply by the momentum-space measure factor $(2\pi)^D$ to isolate the pure spatial integral. The resulting generic Euclidean master formula is:
+\[
+    \int d^Dx \frac{1}{(|\vec{x}|^2 + \Delta)^\alpha} = \pi^{D/2} \frac{\Gamma(\alpha - D/2)}{\Gamma(\alpha)} \Delta^{D/2 - \alpha}
+\]
+
+For our specific potential integral, we identify the parameters $\Delta = R^2$ and $\alpha = 1/2$. First, we compute the Gamma function in the denominator, $\Gamma(1/2)$. Using its integral definition:
+\[
+    \Gamma(1/2) = \int_0^\infty dt \, t^{-1/2} e^{-t}
+\]
+We perform the change of variables $t = z^2$, which implies $dt = 2z \, dz$. The integration limits remain $0$ to $\infty$:
+\[
+    \Gamma(1/2) = \int_0^\infty (2z \, dz) (z^2)^{-1/2} e^{-z^2} = 2 \int_0^\infty dz \, e^{-z^2}
+\]
+By symmetry of the Gaussian function, this is exactly equal to the full integral over the real line, which evaluates to $\sqrt{\pi}$:
+\[
+    \Gamma(1/2) = \int_{-\infty}^{+\infty} dz \, e^{-z^2} = \sqrt{\pi}
+\]
+
+Substituting $\alpha = 1/2$, $\Delta = R^2$, and $\Gamma(1/2) = \sqrt{\pi}$ into the master formula, the potential $V(R)$ evaluates to:
+\[
+    \begin{aligned}
+        V(R) & = \frac{\lambda}{4\pi} \mu^{D-1} \left[ \pi^{D/2} \frac{\Gamma(1/2 - D/2)}{\sqrt{\pi}} (R^2)^{D/2 - 1/2} \right] \\
+             & = \frac{\lambda}{4\pi} \mu^{D-1} \pi^{\frac{D-1}{2}} \Gamma\left(\frac{1-D}{2}\right) R^{D-1}                    \\
+             & = \frac{\lambda}{4\pi} (\mu R)^{D-1} \pi^{\frac{D-1}{2}} \Gamma\left(\frac{1-D}{2}\right)
+    \end{aligned}
+\]
+
+We are interested in the physical limit where $D \to 1$. To systematically expand the expression, we define the small parameter $\varepsilon \equiv \frac{1-D}{2}$. This implies $D = 1 - 2\varepsilon$, and the limit $D \to 1$ corresponds directly to $\varepsilon \to 0$. Rewriting the potential in terms of $\varepsilon$:
+\[
+    V(R) = \frac{\lambda}{4\pi} (\mu R)^{-2\varepsilon} \pi^{-\varepsilon} \Gamma(\varepsilon)
+\]
+
+We now Taylor expand each of the three $\varepsilon$-dependent factors around $\varepsilon = 0$:
+\begin{enumerate}
+    \item Using $a^x = e^{x \log a} \approx 1 + x \log a$, we expand the radius-dependent term:
+          \[ (\mu R)^{-2\varepsilon} = 1 - 2\varepsilon \log(\mu R) + \mathcal{O}(\varepsilon^2) = 1 - \varepsilon \log((\mu R)^2) + \mathcal{O}(\varepsilon^2) \]
+    \item Similarly, for the numerical factor:
+          \[ \pi^{-\varepsilon} = 1 - \varepsilon \log\pi + \mathcal{O}(\varepsilon^2) \]
+    \item For the Gamma function, we use its well-known Laurent expansion near its pole at zero:
+          \[ \Gamma(\varepsilon) = \frac{1}{\varepsilon} - \gamma_E + \mathcal{O}(\varepsilon) \]
+          where $\gamma_E$ is the Euler-Mascheroni constant.
+\end{enumerate}
+
+Multiplying these expansions together, keeping terms up to $\mathcal{O}(\varepsilon^0)$:
+\[
+    \begin{aligned}
+        V(R) & = \frac{\lambda}{4\pi} \Big( 1 - \varepsilon \log((\mu R)^2) \Big) \Big( 1 - \varepsilon \log\pi \Big) \left( \frac{1}{\varepsilon} - \gamma_E \right)                \\
+             & = \frac{\lambda}{4\pi} \Big( 1 - \varepsilon \log((\mu R)^2) - \varepsilon \log\pi + \mathcal{O}(\varepsilon^2) \Big) \left( \frac{1}{\varepsilon} - \gamma_E \right) \\
+             & = \frac{\lambda}{4\pi} \left[ \frac{1}{\varepsilon} - \gamma_E - \log((\mu R)^2) - \log\pi + \mathcal{O}(\varepsilon) \right]
+    \end{aligned}
+\]
+
+We can group all the terms that are completely independent of the distance scale $R$ (i.e., $-\gamma_E$ and $-\log\pi$) into a single generic constant, denoted as ``const''.
+\[
+    V(R) = \frac{\lambda}{4\pi} \left[ \frac{1}{\varepsilon} - \log(\mu R)^2 + \text{const} + \mathcal{O}(\varepsilon) \right]
+\]
+
+Finally, we revert from the regularization parameter $\varepsilon$ back to the spatial dimension $D$. Since $\varepsilon = \frac{1-D}{2}$, it trivially follows that $\frac{1}{\varepsilon} = \frac{2}{1-D} = -\frac{2}{D-1}$. Furthermore, the $\mathcal{O}(\varepsilon)$ remainder is strictly equivalent to $\mathcal{O}(D-1)$. Substituting this back, we perfectly recover the requested expression:
+\[
+    V(R) = \frac{\lambda}{4\pi} \left( -\frac{2}{D-1} - \log(\mu R)^2 + \text{const} + \mathcal{O}(D-1) \right)
+\]
+
+
+\subsection*{3. Tensor Loop Integral in $D$-dimensions}
+
+\begin{center}
+    \textit{Show that}
+    \[
+        \int \frac{d^D k}{(2\pi)^D} \frac{k^\mu k^\nu}{(k^2 - M^2)^\alpha} = g^{\mu\nu} F(M^2) \qquad (3)
+    \]
+    \textit{with}
+    \[
+        F(M^2) = \frac{i}{(-1)^{\alpha-1}} \frac{1}{(4\pi)^{D/2}} \frac{\Gamma(\alpha - D/2 - 1)}{\Gamma(\alpha)} \frac{1}{2} (M^2)^{D/2 - \alpha + 1}. \qquad (4)
+    \]
+\end{center}
+
+\textbf{1. Tensor Structure by Lorentz Invariance}
+
+The integral to be evaluated, $I^{\mu\nu} = \int \frac{d^D k}{(2\pi)^D} \frac{k^\mu k^\nu}{(k^2 - M^2)^\alpha}$, is a symmetric rank-2 tensor. Since there are no external fixed four-momenta to provide a preferred direction in spacetime, the result must be constructed entirely from the only available invariant rank-2 tensor: the metric tensor $g^{\mu\nu}$.
+Therefore, the integral must be strictly proportional to the metric:
+\[
+    \int \frac{d^D k}{(2\pi)^D} \frac{k^\mu k^\nu}{(k^2 - M^2)^\alpha} = A \cdot g^{\mu\nu}
+\]
+where $A$ is a scalar function representing $F(M^2)$.
+
+To determine the scalar factor $A$, we contract both sides of the equation with the metric tensor $g_{\mu\nu}$. In $D$ dimensions, the trace of the metric is $g_{\mu\nu} g^{\mu\nu} = D$:
+\[
+    \int \frac{d^D k}{(2\pi)^D} \frac{k_\mu k^\mu}{(k^2 - M^2)^\alpha} = A \cdot D
+\]
+\[
+    A = \frac{1}{D} \int \frac{d^D k}{(2\pi)^D} \frac{k^2}{(k^2 - M^2)^\alpha}
+\]
+
+\textbf{2. Algebraic Reduction of the Integrand}
+
+We manipulate the numerator of the new scalar integral to express it in terms of the denominator. We add and subtract the mass squared $M^2$:
+\[
+    \frac{k^2}{(k^2 - M^2)^\alpha} = \frac{(k^2 - M^2) + M^2}{(k^2 - M^2)^\alpha} = \frac{1}{(k^2 - M^2)^{\alpha - 1}} + \frac{M^2}{(k^2 - M^2)^\alpha}
+\]
+Substituting this back into the expression for $A$, the integral splits into a sum of two standard scalar integrals with different powers in the denominator:
+\[
+    A = \frac{1}{D} \left[ \int \frac{d^D k}{(2\pi)^D} \frac{1}{(k^2 - M^2)^{\alpha - 1}} + M^2 \int \frac{d^D k}{(2\pi)^D} \frac{1}{(k^2 - M^2)^\alpha} \right]
+\]
+
+\textbf{3. Evaluation using the Master Integral}
+
+We utilize the standard master formula for a $D$-dimensional Minkowski space scalar integral (derived via Wick rotation to Euclidean space, where $k^2 - M^2 \to -(k_E^2 + M^2)$, giving the overall factor of $i/(-1)^n$):
+\[
+    \int \frac{d^D k}{(2\pi)^D} \frac{1}{(k^2 - M^2)^n} = \frac{i}{(-1)^n} \frac{1}{(4\pi)^{D/2}} \frac{\Gamma(n - D/2)}{\Gamma(n)} (M^2)^{D/2 - n}
+\]
+Applying this master formula to both integrals in our expression for $A$:
+\begin{itemize}
+    \item For the first term ($n = \alpha - 1$):
+          \[ I_1 = \frac{i}{(-1)^{\alpha-1}} \frac{1}{(4\pi)^{D/2}} \frac{\Gamma(\alpha - 1 - D/2)}{\Gamma(\alpha - 1)} (M^2)^{D/2 - \alpha + 1} \]
+    \item For the second term ($n = \alpha$):
+          \[ I_2 = \frac{i}{(-1)^\alpha} \frac{1}{(4\pi)^{D/2}} \frac{\Gamma(\alpha - D/2)}{\Gamma(\alpha)} (M^2)^{D/2 - \alpha} \]
+\end{itemize}
+Multiplying $I_2$ by $M^2$ raises the mass exponent to match the first term: $M^2 \cdot (M^2)^{D/2 - \alpha} = (M^2)^{D/2 - \alpha + 1}$.
+We can now combine the terms. Note that $\frac{1}{(-1)^\alpha} = -\frac{1}{(-1)^{\alpha-1}}$. Factoring out the common terms:
+\[
+    A = \frac{1}{D} \frac{i}{(-1)^{\alpha-1}} \frac{(M^2)^{D/2 - \alpha + 1}}{(4\pi)^{D/2}} \left[ \frac{\Gamma(\alpha - D/2 - 1)}{\Gamma(\alpha - 1)} - \frac{\Gamma(\alpha - D/2)}{\Gamma(\alpha)} \right]
+\]
+
+\textbf{4. Simplification via Gamma Function Properties}
+
+To simplify the term in the square brackets, we use the fundamental property of the Gamma function: $\Gamma(z+1) = z\Gamma(z)$.
+This gives us $\Gamma(\alpha) = (\alpha - 1)\Gamma(\alpha - 1)$ and $\Gamma(\alpha - D/2) = (\alpha - D/2 - 1)\Gamma(\alpha - D/2 - 1)$.
+Substituting these into the bracket:
+\[
+    \begin{aligned}
+        \text{Bracket} & = \frac{\Gamma(\alpha - D/2 - 1)}{\Gamma(\alpha - 1)} - \frac{(\alpha - D/2 - 1)\Gamma(\alpha - D/2 - 1)}{(\alpha - 1)\Gamma(\alpha - 1)} \\
+                       & = \frac{\Gamma(\alpha - D/2 - 1)}{(\alpha - 1)\Gamma(\alpha - 1)} \Big[ (\alpha - 1) - (\alpha - D/2 - 1) \Big]                           \\
+                       & = \frac{\Gamma(\alpha - D/2 - 1)}{\Gamma(\alpha)} \left[ \frac{D}{2} \right]
+    \end{aligned}
+\]
+
+Finally, we substitute this highly simplified bracket back into the expression for $A$. The generic dimension factor $D$ in the numerator perfectly cancels the $\frac{1}{D}$ prefactor we obtained from the initial tensor trace:
+\[
+    A = \frac{1}{D} \frac{i}{(-1)^{\alpha-1}} \frac{1}{(4\pi)^{D/2}} (M^2)^{D/2 - \alpha + 1} \left( \frac{D}{2} \frac{\Gamma(\alpha - D/2 - 1)}{\Gamma(\alpha)} \right)
+\]
+\[
+    A = \frac{i}{(-1)^{\alpha-1}} \frac{1}{(4\pi)^{D/2}} \frac{\Gamma(\alpha - D/2 - 1)}{\Gamma(\alpha)} \frac{1}{2} (M^2)^{D/2 - \alpha + 1}
+\]
+Since $I^{\mu\nu} = A \cdot g^{\mu\nu} \equiv F(M^2) g^{\mu\nu}$, we have rigorously proven that $A = F(M^2)$, perfectly reproducing the targeted identity.
+
+
+\subsection*{4. Gamma Matrix Identity in $D$ dimensions}
+
+\begin{center}
+    \textit{Prove the following identity in $D$ space-time dimensions}
+    \[
+        \gamma^\mu \gamma^\nu \gamma^\rho \gamma^\sigma \gamma_\mu = -2 \gamma^\sigma \gamma^\rho \gamma^\nu - (D - 4) \gamma^\nu \gamma^\rho \gamma^\sigma. \qquad (5)
+    \]
+\end{center}
+
+To rigorously prove this identity, we rely on the fundamental Clifford algebra anticommutation relation for Dirac gamma matrices:
+\[
+    \{ \gamma^\mu, \gamma^\nu \} = \gamma^\mu \gamma^\nu + \gamma^\nu \gamma^\mu = 2g^{\mu\nu}\mathbb{1}
+\]
+which allows us to swap adjacent gamma matrices by paying a penalty term: $\gamma^\mu \gamma^\nu = 2g^{\mu\nu} - \gamma^\nu \gamma^\mu$. Furthermore, in exactly $D$ dimensions, the full contraction of a gamma matrix with itself yields the trace of the metric tensor:
+\[
+    \gamma^\mu \gamma_\mu = g_{\mu\nu} \gamma^\mu \gamma^\nu = \frac{1}{2} g_{\mu\nu} \{ \gamma^\mu, \gamma^\nu \} = g_{\mu\nu} g^{\mu\nu} \mathbb{1} = \delta^\mu_\mu \mathbb{1} = D\mathbb{1}
+\]
+
+As we did for the specific 4-dimensional case, it is mathematically most efficient to build up to the full five-matrix string by recursively computing the contractions of shorter strings. We do this by continuously anti-commuting the rightmost $\gamma_\mu$ to the left until it meets its contracted partner $\gamma^\mu$.
+
+\textbf{Step 1: Simplify } $\gamma^\mu \gamma^\nu \gamma_\mu$
+
+Anti-commuting the $\gamma_\mu$ past the $\gamma^\nu$:
+\[
+    \begin{aligned}
+        \gamma^\mu \gamma^\nu \gamma_\mu & = \gamma^\mu (2\delta^\nu_\mu - \gamma_\mu \gamma^\nu) \\
+                                         & = 2\gamma^\nu - \gamma^\mu \gamma_\mu \gamma^\nu
+    \end{aligned}
+\]
+Using our $D$-dimensional identity $\gamma^\mu \gamma_\mu = D$, we get:
+\[
+    \gamma^\mu \gamma^\nu \gamma_\mu = 2\gamma^\nu - D\gamma^\nu = (2 - D)\gamma^\nu
+\]
+
+\textbf{Step 2: Simplify } $\gamma^\mu \gamma^\nu \gamma^\rho \gamma_\mu$
+
+Anti-commuting the $\gamma_\mu$ past the $\gamma^\rho$:
+\[
+    \begin{aligned}
+        \gamma^\mu \gamma^\nu \gamma^\rho \gamma_\mu & = \gamma^\mu \gamma^\nu (2\delta^\rho_\mu - \gamma_\mu \gamma^\rho)        \\
+                                                     & = 2\gamma^\rho \gamma^\nu - (\gamma^\mu \gamma^\nu \gamma_\mu) \gamma^\rho
+    \end{aligned}
+\]
+Now substitute the result from Step 1 for the bracketed term:
+\[
+    \gamma^\mu \gamma^\nu \gamma^\rho \gamma_\mu = 2\gamma^\rho \gamma^\nu - (2 - D)\gamma^\nu \gamma^\rho
+\]
+
+\textbf{Step 3: Simplify the full expression } $\gamma^\mu \gamma^\nu \gamma^\rho \gamma^\sigma \gamma_\mu$
+
+We apply the exact same logic one final time, moving the $\gamma_\mu$ past the $\gamma^\sigma$:
+\[
+    \begin{aligned}
+        \gamma^\mu \gamma^\nu \gamma^\rho \gamma^\sigma \gamma_\mu & = \gamma^\mu \gamma^\nu \gamma^\rho (2\delta^\sigma_\mu - \gamma_\mu \gamma^\sigma)                    \\
+                                                                   & = 2\gamma^\sigma \gamma^\nu \gamma^\rho - (\gamma^\mu \gamma^\nu \gamma^\rho \gamma_\mu) \gamma^\sigma
+    \end{aligned}
+\]
+Substituting our result from Step 2 for the bracketed term:
+\[
+    \begin{aligned}
+        \gamma^\mu \gamma^\nu \gamma^\rho \gamma^\sigma \gamma_\mu & = 2\gamma^\sigma \gamma^\nu \gamma^\rho - \left[ 2\gamma^\rho \gamma^\nu - (2 - D)\gamma^\nu \gamma^\rho \right] \gamma^\sigma \\
+                                                                   & = 2\gamma^\sigma \gamma^\nu \gamma^\rho - 2\gamma^\rho \gamma^\nu \gamma^\sigma + (2 - D)\gamma^\nu \gamma^\rho \gamma^\sigma
+    \end{aligned}
+\]
+
+\textbf{Step 4: Reorder the matrices to match the target identity}
+
+Our expression from Step 3 is correct, but the first two terms do not match the specific ordering required by the problem statement. We must systematically swap the adjacent matrices using $\gamma^\alpha \gamma^\beta = 2g^{\alpha\beta} - \gamma^\beta \gamma^\alpha$:
+\begin{itemize}
+    \item For the first term, we swap $\gamma^\nu \gamma^\rho$:
+          \[
+              2\gamma^\sigma (\gamma^\nu \gamma^\rho) = 2\gamma^\sigma (2g^{\nu\rho} - \gamma^\rho \gamma^\nu) = 4g^{\nu\rho}\gamma^\sigma - 2\gamma^\sigma \gamma^\rho \gamma^\nu
+          \]
+    \item For the second term, we swap $\gamma^\rho \gamma^\nu$:
+          \[
+              -2(\gamma^\rho \gamma^\nu) \gamma^\sigma = -2(2g^{\nu\rho} - \gamma^\nu \gamma^\rho) \gamma^\sigma = -4g^{\nu\rho}\gamma^\sigma + 2\gamma^\nu \gamma^\rho \gamma^\sigma
+          \]
+\end{itemize}
+Substituting these structurally expanded terms back into our full expression gives:
+\[
+    \gamma^\mu \gamma^\nu \gamma^\rho \gamma^\sigma \gamma_\mu = \left[ 4g^{\nu\rho}\gamma^\sigma - 2\gamma^\sigma \gamma^\rho \gamma^\nu \right] + \left[ -4g^{\nu\rho}\gamma^\sigma + 2\gamma^\nu \gamma^\rho \gamma^\sigma \right] + (2 - D)\gamma^\nu \gamma^\rho \gamma^\sigma
+\]
+The algebraic $4g^{\nu\rho}\gamma^\sigma$ terms perfectly cancel each other out, leaving only terms with the desired matrix orderings:
+\[
+    \begin{aligned}
+        \gamma^\mu \gamma^\nu \gamma^\rho \gamma^\sigma \gamma_\mu & = - 2\gamma^\sigma \gamma^\rho \gamma^\nu + 2\gamma^\nu \gamma^\rho \gamma^\sigma + (2 - D)\gamma^\nu \gamma^\rho \gamma^\sigma \\
+                                                                   & = -2\gamma^\sigma \gamma^\rho \gamma^\nu + \left( 2 + 2 - D \right) \gamma^\nu \gamma^\rho \gamma^\sigma                        \\
+                                                                   & = -2\gamma^\sigma \gamma^\rho \gamma^\nu - (D - 4) \gamma^\nu \gamma^\rho \gamma^\sigma
+    \end{aligned}
+\]
+This mathematically proves the requested identity in arbitrary $D$ dimensions. Note that in the specific physical limit $D \to 4$, the second term identically vanishes, and we perfectly recover the 4-dimensional identity proven in Exercise 5.
+
+
+\subsection*{5. Effective Field Theory and Renormalizability}
+
+\textbf{1. Power Counting and Renormalizability}
+
+To determine the renormalizability of the theory, we must analyze the mass dimension of the couplings. In a natural system of units ($\hbar = c = 1$), the action $S = \int d^4x \mathcal{L}$ must be strictly dimensionless. Since the integration measure $d^4x$ has mass dimension $-4$, the Lagrangian density must have mass dimension $[\mathcal{L}] = 4$.
+
+From the canonical free kinetic terms $\frac{1}{2}(\partial_\mu \phi)^2$ and $\frac{1}{2}(\partial_\mu \eta)^2$, we deduce that the scalar fields both have mass dimension $[\phi] = [\eta] = 1$.
+
+Analyzing the interaction Lagrangian:
+\[
+    \mathcal{L}_{\text{int}} = -\frac{g_1 M}{2!} \phi^2 \eta - \frac{g_2}{3!} M \eta^3
+\]
+The field operators have dimensions $[\phi^2 \eta] = 3$ and $[\eta^3] = 3$. Therefore, for the Lagrangian terms to reach dimension 4, the dimensionful coefficients must satisfy:
+\[
+    [g_1 M] = [g_2 M] = 1
+\]
+Since $M$ is a mass scale ($[M] = 1$), the couplings $g_1$ and $g_2$ must be strictly dimensionless. More importantly, the full coupling constants associated with the interaction vertices are precisely $(g_1 M)$ and $(g_2 M)$, both of which have a strictly positive mass dimension of $+1$.
+
+Because all interaction vertices in this theory possess coupling constants with positive mass dimension, the theory is mathematically bounded in the ultraviolet and requires only a finite number of divergent diagrams to be renormalized. Therefore, the theory is \textbf{super-renormalizable}.
+
+\textbf{2. Symmetries and the Effective Field Theory (EFT) Basis}
+
+At energy scales $E \ll M$, the heavy particle $\eta$ cannot be produced on-shell. It can only propagate as a virtual state over short distances, meaning its dynamical degrees of freedom can be formally integrated out of the path integral. The resulting low-energy physics is described by an Effective Field Theory (EFT) containing only local operators of the light field $\phi$.
+
+To construct the most general EFT Lagrangian, we must respect the underlying symmetries of the UV completion. The original Lagrangian is manifestly invariant under the discrete $\mathbb{Z}_2$ transformation:
+\[
+    \phi \to -\phi, \qquad \eta \to \eta
+\]
+Because this is an exact symmetry of the fundamental theory, the EFT must inherit it. Consequently, the EFT Lagrangian can only contain \textit{even} powers of the field $\phi$. Terms like $\phi^3$ or $\phi^5$ are strictly forbidden.
+
+Expanding up to mass dimension 6, the allowed non-derivative local operators are $\phi^4$ (dimension 4) and $\phi^6$ (dimension 6).
+One might also consider the dimension-6 derivative operator $\mathcal{O}_6 = \phi^2 (\partial_\mu \phi)^2$. However, utilizing integration by parts inside the action, we can shift the derivative:
+\[
+    \phi^2 (\partial_\mu \phi) (\partial^\mu \phi) = \frac{1}{3} \partial_\mu (\phi^3 \partial^\mu \phi) - \frac{1}{3} \phi^3 \square \phi \implies \phi^2 (\partial_\mu \phi)^2 \cong -\frac{1}{3} \phi^3 \square \phi
+\]
+Using the lowest-order classical equations of motion for the free field, $\square \phi = -m^2 \phi$, this operator reduces to:
+\[
+    -\frac{1}{3} \phi^3 (-m^2 \phi) = \frac{m^2}{3} \phi^4
+\]
+This demonstrates that the operator $\phi^2 (\partial_\mu \phi)^2$ is physically redundant; it simply shifts the Wilson coefficient of the $\phi^4$ operator (and the $\phi^6$ operator if we include interaction terms in the equations of motion). This redundancy can be formally removed by a local field redefinition $\phi \to \phi + \frac{c}{M^2}\phi^3$.
+
+Thus, the minimal, non-redundant EFT Lagrangian compatible with the $\mathbb{Z}_2$ symmetry up to dimension 6 is exactly:
+\[
+    \mathcal{L}_{\text{EFT,int}} = -\frac{\lambda_4}{4!} \phi^4 - \frac{\lambda_6}{6!} \frac{1}{M^2} \phi^6 + \mathcal{O}(M^{-8})
+\]
+
+\textbf{3. Matching the Effective Coupling $\lambda_4$}
+
+To compute the Wilson coefficient $\lambda_4$, we require that the physical observables computed in the full UV theory precisely match those computed in the EFT at low energies. We enforce this matching condition on the tree-level $2 \to 2$ scattering amplitude $\phi(p_1) + \phi(p_2) \to \phi(p_3) + \phi(p_4)$.
+
+In the \textbf{EFT}, the interaction term is strictly local. Using the Feynman rule for the $-\frac{\lambda_4}{4!}\phi^4$ operator, the tree-level amplitude is simply the constant vertex factor:
+\[
+    i\mathcal{M}_{\text{EFT}} = -i\lambda_4
+\]
+
+In the \textbf{UV theory}, the $2 \to 2$ scattering is mediated by the exchange of the heavy $\eta$ particle. From the interaction $-\frac{g_1 M}{2!} \phi^2 \eta$, the Feynman rule for the $\phi$-$\phi$-$\eta$ vertex is $-i(g_1 M)$. The tree-level amplitude is the sum of the $s$, $t$, and $u$ channels:
+\[
+    \begin{aligned}
+        i\mathcal{M}_{\text{UV}} & = \text{\TODO{add diagram: s-channel + t-channel + u-channel tree diagrams with intermediate $\eta$ exchange}}                                                       \\
+                                 & = (-ig_1 M) \left[ \frac{i}{s - M^2} \right] (-ig_1 M) + (-ig_1 M) \left[ \frac{i}{t - M^2} \right] (-ig_1 M) + (-ig_1 M) \left[ \frac{i}{u - M^2} \right] (-ig_1 M) \\
+                                 & = -i g_1^2 M^2 \left( \frac{1}{s - M^2} + \frac{1}{t - M^2} + \frac{1}{u - M^2} \right)
+    \end{aligned}
+\]
+Since we are evaluating the amplitude at energy scales $E \ll M$, the Mandelstam variables obey $s, t, u \sim m^2 \ll M^2$. We can systematically Taylor expand the heavy propagators in inverse powers of $M^2$:
+\[
+    \frac{1}{x - M^2} = -\frac{1}{M^2} \left( 1 - \frac{x}{M^2} \right)^{-1} = -\frac{1}{M^2} \left( 1 + \frac{x}{M^2} + \mathcal{O}(M^{-4}) \right)
+\]
+Applying this expansion to the amplitude yields:
+\[
+    \begin{aligned}
+        i\mathcal{M}_{\text{UV}} & = -i g_1^2 M^2 \left[ -\frac{1}{M^2}\left(1 + \frac{s}{M^2}\right) - \frac{1}{M^2}\left(1 + \frac{t}{M^2}\right) - \frac{1}{M^2}\left(1 + \frac{u}{M^2}\right) \right] \\
+                                 & = i g_1^2 \left( 3 + \frac{s + t + u}{M^2} + \mathcal{O}(M^{-4}) \right)
+    \end{aligned}
+\]
+By rigorous momentum conservation for identical particles of mass $m$, the Mandelstam variables satisfy the kinematic constraint $s + t + u = \sum_{i=1}^4 m^2 = 4m^2$. Substituting this into the expanded amplitude gives the low-energy limit of the UV theory:
+\[
+    i\mathcal{M}_{\text{UV}} = i g_1^2 \left( 3 + 4\frac{m^2}{M^2} \right) + \mathcal{O}(M^{-4})
+\]
+
+Finally, we enforce the matching condition $i\mathcal{M}_{\text{EFT}} = i\mathcal{M}_{\text{UV}}$:
+\[
+    -i\lambda_4 = i g_1^2 \left( 3 + 4\frac{m^2}{M^2} \right)
+\]
+Dividing both sides by $-i$, we isolate the effective coupling $\lambda_4$ at tree-level accuracy:
+\[
+    \lambda_4 = -3g_1^2 - 4g_1^2 \frac{m^2}{M^2} + \mathcal{O}(g_i^4) + \mathcal{O}(1/M^4)
+\]
+
+
+\subsection*{6. One-loop self-energy in Yukawa theory}
+
+The relevant interaction Lagrangian for the scalar field in Yukawa theory is extended with scalar self-interactions, $\mathcal{L}_{\text{int}} = -g\phi\bar{\psi}\psi - \frac{\lambda_3}{3!}\phi^3 - \frac{\lambda_4}{4!}\phi^4$. The one-loop corrections to the scalar propagator (self-energy) receive contributions from three distinct diagrams:
+\begin{enumerate}[label=\alph*)]
+    \item A fermion loop mediated by the Yukawa coupling $g$.
+    \item A scalar tadpole loop from the quartic coupling $\lambda_4$.
+    \item A scalar bubble loop from the cubic coupling $\lambda_3$.
+\end{enumerate}
+Diagrams (b) and (c) correspond to standard scalar integrals computed in previous lectures, leaving the fermion loop (a) as the only new correction to evaluate.
+
+\textbf{1. Setting up the amplitude}
+
+Using the dimensional regularization Feynman rule $-ig\mu^{\frac{4-D}{2}}$ for the Yukawa vertex (where $D = 4-2\epsilon$), the amplitude for the fermion loop is:
+\[
+    i\mathcal{M}_a = (-ig)^2 (-1) i^2 \mu^{2\epsilon} \int \frac{d^D k}{(2\pi)^D} \frac{\text{Tr}[(\slashed{k} + \slashed{p} + m)(\slashed{k} + m)]}{((k+p)^2 - m^2)(k^2 - m^2)} \text{}
+\]
+where the overall $(-1)$ factor strictly arises because it is a closed fermion loop.
+Evaluating the Dirac trace:
+\[
+    \text{Tr}[(\slashed{k} + \slashed{p} + m)(\slashed{k} + m)] = \text{Tr}[\slashed{k}\slashed{k} + \slashed{p}\slashed{k}] + m^2\text{Tr}[\mathbb{1}] = 4(k^2 + k \cdot p + m^2) \text{}
+\]
+Substituting this trace back into the integral, we have:
+\[
+    i\mathcal{M}_a = -4g^2 \mu^{2\epsilon} \int \frac{d^D k}{(2\pi)^D} \frac{k^2 + k \cdot p + m^2}{(k^2 - m^2)((k+p)^2 - m^2)} \text{}
+\]
+
+\textbf{2. Feynman parameters and momentum shift}
+
+We combine the propagators in the denominator using standard Feynman parameters:
+\[
+    \frac{1}{D_1 D_2} = \int_0^1 dx \frac{1}{[k^2 + 2x k \cdot p + x p^2 - m^2]^2} \text{}
+\]
+To complete the square in the denominator and restore spherical symmetry in momentum space, we shift the loop momentum $k^\mu \to k^\mu - x p^\mu$. The numerator transforms as:
+\[
+    (k - xp)^2 + (k - xp) \cdot p + m^2 = k^2 - k \cdot p(2x - 1) + m^2 - x(1-x)p^2 \text{}
+\]
+Defining the effective mass parameter $\Delta \equiv m^2 - x(1-x)p^2$, the shifted integral becomes:
+\[
+    i\mathcal{M}_a = -4g^2 \mu^{2\epsilon} \int_0^1 dx \int \frac{d^D k}{(2\pi)^D} \frac{k^2 - k \cdot p(2x - 1) + \Delta}{(k^2 - \Delta)^2} \text{}
+\]
+The term linear in the loop momentum $k$ is an odd function over a symmetric integration domain, hence it identically vanishes. This leaves two distinct integrals to evaluate:
+\[
+    i\mathcal{M}_a = -4g^2 \mu^{2\epsilon} \int_0^1 dx \left[ \int \frac{d^D k}{(2\pi)^D} \frac{k^2}{(k^2 - \Delta)^2} + \Delta \int \frac{d^D k}{(2\pi)^D} \frac{1}{(k^2 - \Delta)^2} \right] \text{}
+\]
+
+\textbf{3. Dimensional Regularization Evaluation}
+
+Using the result from Exercise 3 for the first integral and the standard one-loop vacuum (tadpole) integral for the second term, we obtain:
+\begin{align*}
+    \int \frac{d^D k}{(2\pi)^D} \frac{k^2}{(k^2 - \Delta)^2}      & = -\frac{iD}{2} \frac{1}{(4\pi)^{D/2}} \Gamma(1 - D/2) \Delta^{D/2 - 1} \\
+    \Delta \int \frac{d^D k}{(2\pi)^D} \frac{1}{(k^2 - \Delta)^2} & = i \frac{1}{(4\pi)^{D/2}} \Gamma(2 - D/2) \Delta^{D/2 - 1}
+\end{align*}
+Summing these two terms and factoring out common terms by utilizing the Gamma function property $\Gamma(2 - D/2) = (1 - D/2)\Gamma(1 - D/2)$, we find:
+\[
+    i\mathcal{M}_a = -4g^2 \frac{i}{(4\pi)^{D/2}} \mu^{2\epsilon} \Gamma(1 - D/2) (1 - D) \int_0^1 dx (\Delta)^{D/2 - 1} \text{}
+\]
+
+\textbf{4. Expansion in $\epsilon$ and Finite Part}
+
+We expand this expression near four physical dimensions, setting $D = 4 - 2\epsilon$ and taking the limit $\epsilon \to 0$. The purely dimensional prefactor expansion requires care:
+\[
+    \Gamma(1 - D/2)(1 - D) = \Gamma(\epsilon - 1)(2\epsilon - 3) = \frac{\Gamma(\epsilon)}{\epsilon - 1}(2\epsilon - 3)
+\]
+Taylor expanding the non-singular part for small $\epsilon$:
+\[
+    \left( \frac{1}{\epsilon} - \gamma_E \right) \frac{-3 + 2\epsilon}{-1 + \epsilon} \approx \left( \frac{1}{\epsilon} - \gamma_E \right) (3 + \epsilon) = \frac{3}{\epsilon} + 1 - 3\gamma_E + \mathcal{O}(\epsilon)
+\]
+Including the remaining measure terms $\mu^{2\epsilon} (4\pi)^{\epsilon-2} \Delta^{1-\epsilon} = \frac{\Delta}{16\pi^2} \left[1 + \epsilon \log\left(\frac{4\pi \mu^2}{\Delta}\right)\right]$, the full divergent expansion takes the form:
+\[
+    i\mathcal{M}_a = -\frac{ig^2}{4\pi^2} \int_0^1 dx \left[ \Delta + 3\Delta \left( \frac{1}{\epsilon} - \gamma_E + \log 4\pi - \log \frac{\Delta}{\mu^2} \right) + \mathcal{O}(\epsilon) \right] \text{}
+\]
+The integration of the polynomial part yields $\int_0^1 dx \Delta = m^2 - p^2/6$. For the non-trivial logarithmic term $\int dx \Delta \log \frac{\Delta}{\mu^2}$, one directly substitutes the provided identity (8) to extract the exact analytic form of the finite radiative corrections to the propagator.
+
+
+\subsection*{7. Field-strength renormalization and the K\"all\"en-Lehmann spectral representation}
+
+\begin{center}
+    \textit{We showed that the full propagator of a scalar theory, in any renormalization scheme, can be written as}
+    \[
+        P = \frac{i}{p^2 - m^2 - \Pi(p^2) + i0^+}, \qquad (9)
+    \]
+    \textit{where $-i\Pi(p^2)$ is the two-point 1PI Green function. We also previously argued that the full propagator has a pole at the physical mass $m_{\text{phys}}^2$ that is the value of $p^2$ for a physical one-particle state}
+    \[
+        P = \frac{i Z}{p^2 - m_{\text{phys}}^2 + i0^+} + \text{regular at } p^2 \simeq m_{\text{phys}}^2. \qquad (10)
+    \]
+    \textit{Show that}
+    \[
+        Z = \frac{1}{1 - \Pi'(m_{\text{phys}}^2)}. \qquad (11)
+    \]
+    \textit{Note: in a generic renormalization scheme we may have $m \neq m_{\text{phys}}$.}
+\end{center}
+
+To relate the full exact propagator $P$ to the residue $Z$ at the physical pole, we start from the exact Dyson-Schwinger resummation formula for the two-point connected Green function in momentum space:
+\[
+    P(p^2) = \frac{i}{p^2 - m^2 - \Pi(p^2) + i0^+}
+\]
+By definition, the physical mass squared $m_{\text{phys}}^2$ corresponds precisely to the exact pole of the full propagator, which means it is the root of the inverse propagator denominator:
+\[
+    \left. p^2 - m^2 - \Pi(p^2) \right|_{p^2 = m_{\text{phys}}^2} = 0
+\]
+This establishes a rigorous relation between the bare (or Lagrangian) mass parameter $m^2$ and the physical pole mass:
+\[
+    \Pi(m_{\text{phys}}^2) = m_{\text{phys}}^2 - m^2
+\]
+
+To analyze the analytic structure of the propagator near the physical mass shell, we perform a Taylor expansion of the self-energy function $\Pi(p^2)$ around the pole $p^2 = m_{\text{phys}}^2$:
+\[
+    \Pi(p^2) = \Pi(m_{\text{phys}}^2) + \Pi'(m_{\text{phys}}^2)(p^2 - m_{\text{phys}}^2) + \mathcal{O}\left((p^2 - m_{\text{phys}}^2)^2\right)
+\]
+where $\Pi'(m_{\text{phys}}^2) \equiv \left. \frac{d\Pi(p^2)}{dp^2} \right|_{p^2 = m_{\text{phys}}^2}$.
+
+Substituting our expression for $\Pi(m_{\text{phys}}^2)$ into this expansion yields:
+\[
+    \Pi(p^2) = (m_{\text{phys}}^2 - m^2) + \Pi'(m_{\text{phys}}^2)(p^2 - m_{\text{phys}}^2) + \mathcal{O}\left((p^2 - m_{\text{phys}}^2)^2\right)
+\]
+
+Now, we substitute this expanded form of $\Pi(p^2)$ back into the denominator of the full propagator (9). For convenience, let us define the shifted momentum variable $x \equiv p^2 - m_{\text{phys}}^2$:
+\[
+    \begin{aligned}
+        p^2 - m^2 - \Pi(p^2) & = (p^2 - m_{\text{phys}}^2) + (m_{\text{phys}}^2 - m^2) - \Pi(p^2)                                                    \\
+                             & = x + (m_{\text{phys}}^2 - m^2) - \Big[ (m_{\text{phys}}^2 - m^2) + \Pi'(m_{\text{phys}}^2)x + \mathcal{O}(x^2) \Big] \\
+                             & = x - \Pi'(m_{\text{phys}}^2)x + \mathcal{O}(x^2)                                                                     \\
+                             & = x \left( 1 - \Pi'(m_{\text{phys}}^2) \right) + \mathcal{O}(x^2)
+    \end{aligned}
+\]
+
+Substituting this result back into the full propagator expression, we obtain:
+\[
+    P = \frac{i}{x \left( 1 - \Pi'(m_{\text{phys}}^2) \right) + \mathcal{O}(x^2)}
+\]
+We factor out the constant term from the denominator to isolate the simple pole at $x = 0$ (i.e., $p^2 = m_{\text{phys}}^2$):
+\[
+    P = \frac{i}{x \left( 1 - \Pi'(m_{\text{phys}}^2) \right)} \left( 1 + \frac{\mathcal{O}(x^2)}{x(1 - \Pi'(m_{\text{phys}}^2))} \right)^{-1}
+\]
+Expanding the bracketed term for small $x$, the higher-order contributions become regular (analytic) terms at $p^2 \simeq m_{\text{phys}}^2$:
+\[
+    P = \frac{i}{p^2 - m_{\text{phys}}^2} \left( \frac{1}{1 - \Pi'(m_{\text{phys}}^2)} \right) + \text{regular terms at } p^2 \simeq m_{\text{phys}}^2
+\]
+
+By directly comparing this derived Laurent expansion with the general spectral definition of the physical pole given in eq. (10), $P = \frac{iZ}{p^2 - m_{\text{phys}}^2 + i0^+} + \text{regular}$, we can identify the residue $Z$ exactly:
+\[
+    Z = \frac{1}{1 - \Pi'(m_{\text{phys}}^2)}
+\]
+This completes the formal proof, demonstrating how the field-strength renormalization constant $Z$ is directly determined by the slope of the 1PI two-point proper self-energy evaluated at the physical mass shell.

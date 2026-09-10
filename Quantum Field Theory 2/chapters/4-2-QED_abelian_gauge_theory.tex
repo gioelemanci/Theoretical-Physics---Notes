@@ -1,80 +1,274 @@
 \section{QED as an Abelian Gauge Theory}
 
-
-
-\section{Born Approximation and Non-Relativistic Scattering}
-
- [...]
-
-If
-\[
-    V(\mathbf{x}) = - \int \frac{d^3 \mathbf{q}}{(2\pi)^3} \tilde{M}(\mathbf{q})e^{i \mathbf{q} \cdot \mathbf{x}},
-\]
-then ...
-
-Considering the same process in Yukawa theory, we have at tree level
-    [\textit{diagram} \(= -i g \mathbb{I}\)]\TODO{draw the Feynman diagram}
-\[
-    i \mathcal{M} = (-ig)^2 \overline{u}_3 u_1 \frac{i}{(p_3 - p_1)^2 - m_{\phi}^2} \overline{u}_4 u_2,
-\]
-where \((p_1 - p_3)^2 \sim - \vert \mathbf{q} \vert^2\), while for the [...] we have
-\[
-    \overline{u}_s u_{s^{\prime}} = u_s^{\dagger} \gamma^0 u_{s^{\prime}} \sim 2 \begin{pmatrix}
-        \xi_s^{\dagger} \\
-        \xi_s^{\dagger}
-    \end{pmatrix} \begin{pmatrix}
-        0          & \mathbb{I} \\
-        \mathbb{I} & 0
-    \end{pmatrix} \begin{pmatrix}
-        \xi_{s^{\prime}} \\
-        \xi_{s^{\prime}}
-    \end{pmatrix} = 2m \delta_{s s^{\prime}}.
-\]
-Then the matrix element is
-\[
-    i \mathcal{M} = i g^2 2m_e 2m_p \frac{1}{\vert \mathbf{q} \vert^2 + m_{\phi}^2} \text{ for } \begin{dcases}
-        s_3 = s_1, \\
-        s_4 = s_2,
-    \end{dcases}
-\]
-and then
-\[
-    \tilde{\mathcal{M}} = \frac{g^2}{\vert \mathbf{q} \vert^2 + m_{\phi}^2}.
-\]
-
-Then let us recover the formula for the potential:
+Up to this point, we have never actually derived the Lagrangian of Quantum Electrodynamics (QED) from fundamental quantum principles. Instead, we borrowed the interaction structure from classical electromagnetism (letting Maxwell do the heavy lifting) and only verified \textit{a posteriori} that the resulting theory was invariant under the gauge transformations:
 \[
     \begin{aligned}
-        V(\mathbf{x}) & = - \int \frac{d^3 \mathbf{q}}{(2\pi)^3} \tilde{\mathcal{M}}(\mathbf{q}) e^{i \mathbf{q} \cdot \mathbf{x}}                                    \\
-                      & = - \frac{g^2}{(2\pi)^2} \int_0^{\infty} \mathrm{d} q \frac{q^2}{q^2 + m_{\phi}^2} \int_{-1}^1 \mathrm{d}(\cos \theta) e^{i q r \cos \theta},
+        \psi       & \to e^{i\alpha(x)}\psi                        \\
+        \bar{\psi} & \to \bar{\psi} e^{-i\alpha(x)}                \\
+        A_\mu      & \to A_\mu - \frac{1}{e}\partial_\mu \alpha(x)
     \end{aligned}
 \]
-where we have switched to spherical coordinates and \(r = \vert \mathbf{x} \vert\) (note that the integral over the azimuthal angle \(\phi\) gives \(2\pi\) and we already simplified it). Then
+Let us take a step back, pretend we know absolutely nothing about Maxwell's equations, and see if we can derive QED entirely from a fundamental symmetry principle.
+
+\subsection{Promoting a Global Symmetry to a Local Symmetry}
+Consider the free Dirac Lagrangian:
+\[
+    \mathcal{L}_{\text{Dirac}} = \bar{\psi}(i\slashed{\partial} - m)\psi
+\]
+It is immediately obvious that this Lagrangian is invariant under a \textbf{global $U(1)$ transformation}, where we shift the phase of the fields by a constant amount $\alpha$: $\psi \to e^{i\alpha}\psi$ and $\bar{\psi} \to \bar{\psi}e^{-i\alpha}$.
+
+However, in special relativity, Lagrangians and equations of motion are strictly local. It is philosophically unsatisfying to demand that the phase of a field must be rotated by the exact same amount simultaneously everywhere in the universe. It makes sense to ask if this symmetry can also be made \textbf{local}. In other words, can we promote the constant $\alpha$ to a spacetime-dependent function $\alpha(x)$?
+
+Let us test the Dirac Lagrangian under the local transformation $\psi(x) \to e^{i\alpha(x)}\psi(x)$.
+The mass term remains perfectly invariant:
+\[
+    -m\bar{\psi}\psi \to -m\left(\bar{\psi}e^{-i\alpha(x)}\right)\left(e^{i\alpha(x)}\psi\right) = -m\bar{\psi}\psi.
+\]
+The derivative term, however, breaks the invariance because the derivative acts on the new local phase:
 \[
     \begin{aligned}
-        V(\mathbf{x}) & = - \frac{g^2}{(2\pi)^2} \int_0^{\infty} \mathrm{d} q \frac{q^2}{q^2 + m_{\phi}^2} \frac{e^{i q r} - e^{-i q r}}{i q r} \\
-                      & = - \frac{g^2}{(2\pi)^2 i r} \int_{-\infty}^{\infty} \mathrm{d} q \frac{q e^{i q r}}{q^2 + m_{\phi}^2},
+        i\bar{\psi}\slashed{\partial}\psi & \to i\bar{\psi}e^{-i\alpha(x)} \gamma^\mu \partial_\mu \left(e^{i\alpha(x)}\psi\right)                                                 \\
+                                          & = i\bar{\psi}e^{-i\alpha(x)} \gamma^\mu \left[ e^{i\alpha(x)}(\partial_\mu \psi) + i(\partial_\mu \alpha(x))e^{i\alpha(x)}\psi \right] \\
+                                          & = i\bar{\psi}\slashed{\partial}\psi - (\partial_\mu \alpha(x))\bar{\psi}\gamma^\mu\psi.
     \end{aligned}
 \]
-where we have extended the integral to negative \(q\) since the integrand is an odd function of \(q\) (in the second integral perform \(q \to -q\)). Then we can evaluate the integral using the residue theorem, and we find
-
-    [\textit{draw of complex plane with upper circle and the two residues at} \(\pm imq\)] \TODO{draw the complex plane}
-
+This failure is not surprising. A standard derivative is defined by comparing the field at two infinitesimally close, but distinct, points:
 \[
-    V(\mathbf{x}) = - \frac{g^2}{4\pi} \frac{e^{-m_{\phi} r}}{r},
+    v^\mu \partial_\mu \psi = \lim_{\epsilon \to 0} \frac{1}{\epsilon} [\psi(x+\epsilon v) - \psi(x)].
 \]
-which is the Yukawa potential. In the limit \(m_{\phi} \to 0\), we recover the Coulomb potential \(V(\mathbf{x}) = - \frac{g^2}{4\pi r}\).
+Under a local transformation, $\psi(x+\epsilon v)$ and $\psi(x)$ pick up completely different phase shifts, rendering their direct subtraction physically meaningless (akin to subtracting vectors from different tangent spaces in General Relativity).
 
-Characteristics of the potential:
+\subsection{The Covariant Derivative and the Gauge Field}
+To fix this, we must replace the standard derivative $\partial_\mu$ with a \textbf{covariant derivative} $D_\mu$ that possesses "better" transformation properties. We need a way to transport the phase transformation from $x$ to $x+\epsilon v$.
+
+We define the covariant derivative using a comparator $U(y,x)$, which is a scalar function defined such that if $\psi(x) \to e^{i\alpha(x)}\psi(x)$, then $U(y,x)\psi(x)$ transforms precisely like $\psi(y)$:
+\[
+    U(y,x)\psi(x) \to e^{i\alpha(y)}U(y,x)\psi(x).
+\]
+This implies the comparator itself must transform as:
+\[
+    U(y,x) \to e^{i\alpha(y)}U(y,x)e^{-i\alpha(x)}.
+\]
+We also require $U(x,x) = 1$. Since a $U(1)$ transformation is purely a phase redefinition, we can parameterize $U(y,x)$ as a phase: $U(y,x) = \exp(i\phi(y,x))$, with $\phi(x,x)=0$.
+We can now define a new vector field $A_\mu(x)$ based on the infinitesimal behavior of this phase. Taking the derivative with respect to $y^\mu$ and evaluating at $x=y$:
+\[
+    \left. \frac{\partial}{\partial y^\mu} \phi(y,x) \right|_{x=y} \equiv g A_\mu(x),
+\]
+where $g$ is a constant added for later convenience (the coupling strength). For points infinitesimally close together, we can expand the comparator:
+\[
+    U(x+\epsilon v, x) = 1 + ig\epsilon v^\mu A_\mu(x) + \mathcal{O}(\epsilon^2).
+\]
+Let us see how this new field $A_\mu$ must transform to keep $U(y,x)$ consistent with our rules. Applying the local $U(1)$ transformation to the expansion:
+\[
+    1 + ig\epsilon v^\mu A_\mu \to e^{i\alpha(x+\epsilon v)} (1 + ig\epsilon v^\mu A_\mu) e^{-i\alpha(x)}.
+\]
+Expanding $e^{i\alpha(x+\epsilon v)} \approx e^{i\alpha(x)} (1 + i\epsilon v^\mu \partial_\mu \alpha)$ and keeping terms up to $\mathcal{O}(\epsilon)$, we find:
+\[
+    ig\epsilon v^\mu A_\mu \to ig\epsilon v^\mu A_\mu + i\epsilon v^\mu \partial_\mu \alpha \quad \implies \quad A_\mu(x) \xrightarrow{\text{local U(1)}} A_\mu(x) + \frac{1}{g}\partial_\mu \alpha(x).
+\]
+Using this newly constructed field, the modified limit definition of the derivative yields the explicit form of the covariant derivative:
+\[
+    D_\mu = \partial_\mu - ig A_\mu
+\]
+By construction, $D_\mu \psi$ transforms neatly: $D_\mu \psi \to e^{i\alpha(x)}D_\mu \psi$. Consequently, if we replace $\partial_\mu$ with $D_\mu$ in the Dirac Lagrangian, the entire Lagrangian becomes invariant under local $U(1)$ transformations:
+\[
+    \mathcal{L} = \bar{\psi}(i\slashed{D} - m)\psi = \bar{\psi}(i\slashed{\partial} - m)\psi + g A_\mu \bar{\psi}\gamma^\mu\psi.
+\]
+We have just uniquely derived the interaction term of QED!
+
+\subsection{The Field Strength Tensor}
+In order to define $D_\mu$, we were forced to introduce a new dynamical vector field $A_\mu$. For this field to be physical, it must have its own kinetic term in the Lagrangian, and this kinetic term must also be locally gauge invariant.
+
+We know that $D_\mu \psi$ transforms exactly like $\psi$. Therefore, applying the covariant derivative twice, $D_\mu D_\nu \psi$, also transforms like $\psi$. The commutator $[D_\mu, D_\nu]\psi$ must do the same. However, $[D_\mu, D_\nu]$ is fundamentally different: it is \textit{not} a derivative operator, but merely a multiplicative function. Let us check this explicitly:
+\[
+    \begin{aligned}
+        [D_\mu, D_\nu]\psi & = [\partial_\mu - igA_\mu, \partial_\nu - igA_\nu]\psi                                                                                                                           \\
+                           & = \underbrace{[\partial_\mu, \partial_\nu]\psi}_{=0} - \underbrace{g^2[A_\mu, A_\nu]\psi}_{=0} - ig([\partial_\mu, A_\nu] + [A_\mu, \partial_\nu])\psi                           \\
+                           & = -ig \left( \partial_\mu(A_\nu \psi) - A_\nu \partial_\mu \psi + A_\mu \partial_\nu \psi - \partial_\nu(A_\mu \psi) \right)                                                     \\
+                           & = -ig \left( (\partial_\mu A_\nu)\psi + A_\nu \partial_\mu \psi - A_\nu \partial_\mu \psi + A_\mu \partial_\nu \psi - (\partial_\nu A_\mu)\psi - A_\mu \partial_\nu \psi \right) \\
+                           & = -ig(\partial_\mu A_\nu - \partial_\nu A_\mu)\psi.
+    \end{aligned}
+\]
+Notice that the first commutator vanishes because partial derivatives commute on smooth functions ($[\partial_\mu, \partial_\nu] = 0$), and the second commutator vanishes because the gauge fields $A_\mu$ are simply commuting functions in an Abelian theory ($[A_\mu, A_\nu] = 0$). The rest of the calculation is a straightforward application of the Leibniz product rule (e.g., $\partial_\mu(A_\nu \psi) = (\partial_\mu A_\nu)\psi + A_\nu \partial_\mu \psi$), which causes all the terms where the derivative acts directly on $\psi$ to perfectly cancel out.
+
+We define the final term in the parentheses as the field strength tensor:
+\[
+    F_{\mu\nu} \equiv \partial_\mu A_\nu - \partial_\nu A_\mu
+\]
+Since $[D_\mu, D_\nu]\psi = -ig F_{\mu\nu} \psi$ must transform as $e^{i\alpha(x)} (-ig F_{\mu\nu} \psi)$, and $\psi$ already absorbs the phase factor, the function $F_{\mu\nu}$ itself must be strictly \textbf{gauge invariant}.
+
+To build a Lorentz invariant kinetic term, we simply square this tensor. Adding it to the Lagrangian with the standard normalization factor $-1/4$ yields:
+\[
+    \mathcal{L} = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu} + \bar{\psi}(i\slashed{D} - m)\psi
+\]
+If we identify the arbitrary coupling constant as the electron charge ($g = -e$), this is precisely the full QED Lagrangian. We derived QED without ever looking at Maxwell's equations, relying \textit{only} on the principle of local symmetry.
+
+\subsection{Final Symmetries and Restrictions}
+Could we have added other terms to the Lagrangian? Let us review the constraints:
 \begin{itemize}
-    \item \textbf{Short range}: the potential decays exponentially at large distances, with a characteristic length scale \(r \sim 1/m_{\phi}\) (the Compton wavelength of the mediator).
-    \item \textbf{Universally attractive}: the potential is always negative, regardless of the signs of the charges (since the coupling \(g\) appears squared); thus exchanging particles with antiparticles does not change the sign of \(i\mathcal{M}\) and therefore the potential \(V(\mathbf{x})\).
+    \item \textbf{Parity and Time-Reversal:} We could technically add a gauge-invariant term like $\epsilon^{\mu\nu\rho\sigma}F_{\mu\nu}F_{\rho\sigma}$. However, this term is not invariant under Parity (P) and Time-reversal (T). Since the electromagnetic interaction is empirically observed to respect P and T, we exclude this term based on physical symmetry arguments.
+    \item \textbf{Renormalizability:} We could build higher-order gauge invariant terms like $\bar{\psi}\gamma^\mu\gamma^\nu\psi F_{\mu\nu}$ or $(\bar{\psi}\psi)^2$. However, these operators have a mass dimension strictly greater than 4, which would render the theory non-renormalizable. We exclude them by demanding that no operators with mass dimension $>4$ appear in the Lagrangian.
+    \item \textbf{Universality of the Gauge Principle:} Starting from a Dirac field was almost irrelevant. The entire procedure was just about defining a covariant derivative that transforms properly under a $U(1)$ symmetry. If we had started with a complex scalar field instead, we would have identically derived Scalar QED (sQED). Furthermore, repeating this exact procedure for a \textit{non-Abelian} symmetry group (like $SU(3)$) naturally yields non-Abelian gauge theories, such as Quantum Chromodynamics (QCD) or the electroweak sector of the Standard Model.
+    \item \textbf{Uniqueness:} It can be rigorously shown that $\mathcal{L} = -1/4 F^2$ is the most general free Lagrangian for a massless spin-1 field, and that $F^2$ is the only gauge invariant term one can write up to dimension 4 as a function of $A_\mu$. Therefore, $\mathcal{L}_{\text{QED}}$ is the most general Lorentz, gauge, and P/T invariant Lagrangian we can construct for these fields up to dimension 4 (justifying the claims we made when we first introduced this lagrangian a priori in section ...).\TODO{add ref}
 \end{itemize}
 
-Instead for the Coulomb potential, we have
-\begin{itemize}
-    \item \textbf{Long range}: the potential decays as \(1/r\) at large distances, and thus it has an infinite range.
-    \item \textbf{Attractive or repulsive}: the potential can be either negative (attractive) or positive (repulsive) depending on the signs of the charges (since the coupling \(g\) appears squared, but the charges can be positive or negative); thus exchanging particles with antiparticles changes the sign of \(i\mathcal{M}\) and therefore the potential \(V(\mathbf{x})\).
-\end{itemize}
+\section{Born Approximation and Non-Relativistic Scattering} \TODO{check everything in this section}
 
-Thus QFT yields results that are consistent with the phenomenological potentials used in non-relativistic quantum mechanics, and it also provides a deeper understanding of the underlying physics, such as the role of virtual particles and the nature of the interactions.
+We consider the elastic scattering of two particles in the non-relativistic limit, where the magnitude of the three-momentum is much smaller than the rest mass: $|\mathbf{p}_i| \ll m_i$. In this limit, quantum field theory must reproduce the familiar results of non-relativistic quantum mechanics scattering theory, where interactions are described by a static potential $V(\mathbf{x})$.
+
+Let us first review the main results from standard quantum mechanics textbooks. The differential cross-section is given by:
+\[
+    \frac{\mathrm{d} \sigma}{\mathrm{d} \Omega} = |f(\mathbf{q})|^2
+\]
+where the transferred momentum is defined as $\mathbf{q} \equiv \mathbf{p}_{\text{out}} - \mathbf{p}_{\text{in}}$, and $f(\mathbf{q})$ is the non-relativistic scattering amplitude (which must not be confused with the relativistic invariant amplitude $\mathcal{M}$). For weak potentials, $f(\mathbf{q})$ can be computed using the \textbf{Born approximation}:
+\[
+    f(\mathbf{q}) = -\frac{m}{2\pi} \int \mathrm{d}^3\mathbf{x} \, e^{-i\mathbf{q}\cdot\mathbf{x}} V(\mathbf{x}).
+\]
+
+\TODO{add diagram: scattering angle}
+
+We introduce the scattering angle $\theta$ between the incoming and outgoing momenta:
+\[
+    \cos\theta = \frac{\mathbf{p}_{\text{out}} \cdot \mathbf{p}_{\text{in}}}{p^2},
+\]
+where, for elastic scattering, $p \equiv |\mathbf{p}_{\text{in}}| = |\mathbf{p}_{\text{out}}|$. Using simple trigonometry, the magnitude of the transferred momentum is:
+\[
+    q \equiv |\mathbf{q}| = 2p \sin\frac{\theta}{2}.
+\]
+For a spherically symmetric central potential $V(\mathbf{x}) = V(r)$ with $r \equiv |\mathbf{x}|$, the angular integration in the Born approximation simplifies, yielding:
+\[
+    f(\mathbf{q}) = -\frac{2m}{q} \int_0^\infty \mathrm{d}r \, V(r) \sin(qr).
+\]
+
+\subsubsection{Connecting Relativistic QFT to the Non-Relativistic Potential}
+To reproduce this classical scattering picture within QFT, we consider the scattering of a light particle of mass $m$ off a very heavy target of mass $M_T$, such that $M_T \gg m$. In this limit, we can neglect the recoil of the target, treating it essentially as a source for a static potential $V(\mathbf{x})$. Furthermore, as $M_T \to \infty$, the Center of Mass (C.M.) frame and the rest frame of the target coincide.
+
+In the C.M. frame, the relativistic differential cross-section for $2 \to 2$ scattering reduces to:
+\[
+    \frac{\mathrm{d}\sigma}{\mathrm{d}\Omega} = \frac{1}{64\pi^2} \frac{1}{E_{\text{C.M.}}^2} |\mathcal{M}|^2 \simeq \frac{1}{64\pi^2} \frac{1}{M_T^2} |\mathcal{M}|^2.
+\]
+We can rewrite this expression to match the form of the non-relativistic cross-section:
+\[
+    \frac{\mathrm{d}\sigma}{\mathrm{d}\Omega} \simeq \left(\frac{m}{2\pi}\right)^2 |\tilde{\mathcal{M}}|^2,
+\]
+by defining a \textit{rescaled amplitude}:
+\[
+    \tilde{\mathcal{M}} \equiv \frac{\mathcal{M}}{2m \, 2M_T}.
+\]
+Comparing this result with the non-relativistic quantum mechanics formula ($\mathrm{d}\sigma/\mathrm{d}\Omega = |f(\mathbf{q})|^2$), we can identify the rescaled amplitude with the Fourier transform of the potential:
+\[
+    \tilde{\mathcal{M}} = -\int \mathrm{d}^3\mathbf{x} \, e^{-i\mathbf{q}\cdot\mathbf{x}} V(\mathbf{x}).
+\]
+Inverting the Fourier transform allows us to directly compute the effective non-relativistic potential from a QFT Feynman diagram:
+\[
+    V(\mathbf{x}) = -\int \frac{\mathrm{d}^3\mathbf{q}}{(2\pi)^3} \tilde{\mathcal{M}}(\mathbf{q}) \, e^{i\mathbf{q}\cdot\mathbf{x}}.
+\]
+
+\subsection{Example 1: Coulomb Potential from QED}
+Consider the elastic scattering of an electron off a proton: $e^-(p_1) + p(p_2) \to e^-(p_3) + p(p_4)$.
+\begin{remark}
+    The proton is not an elementary particle, but at low energies we are not sensitive to its internal structure, so we can treat it as a point-like Dirac fermion.
+\end{remark}
+
+\TODO{add diagram: t-channel Feynman diagram for $e^- p \to e^- p$}
+
+The tree-level amplitude, mediated by photon exchange (t-channel), is given by the Feynman rules:
+\[
+    i\mathcal{M} = (iQ_e e)(iQ_p e) \left[ \bar{u}_3 \gamma^\mu u_1 \right] \frac{-ig_{\mu\nu}}{(p_3 - p_1)^2} \left[ \bar{u}_4 \gamma^\nu u_2 \right].
+\]
+In the non-relativistic limit, the energies are conserved ($E_3 \simeq E_1$), meaning the energy transfer is zero. The four-momentum squared of the exchanged photon reduces purely to the three-momentum transfer:
+\[
+    (p_3 - p_1)^2 \simeq -(\mathbf{p}_3 - \mathbf{p}_1)^2 = -|\mathbf{q}|^2.
+\]
+We also need to evaluate the spinor currents in the non-relativistic limit ($\mathbf{p} \to 0$). The Dirac spinors take the form:
+\[
+    u_s \simeq \sqrt{m} \begin{pmatrix} \xi_s \\ \xi_s \end{pmatrix},
+\]
+where $\xi_s$ is a two-component Weyl spinor. The temporal component of the vector current ($\mu=0$) survives and conserves spin:
+\[
+    \bar{u}_{s'} \gamma^0 u_s = u_{s'}^\dagger \gamma^0 \gamma^0 u_s \simeq 2m \, \xi_{s'}^\dagger \xi_s = 2m \, \delta_{s's}.
+\]
+Conversely, the spatial components ($\mu=i$) vanish in the strict non-relativistic limit because they involve off-diagonal Pauli matrices connecting upper and lower components, resulting in a cancellation:
+\[
+    \begin{aligned}
+        \bar{u}_{s'} \gamma^i u_s & = u_{s'}^\dagger \gamma^0 \gamma^i u_s = u_{s'}^\dagger \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} 0 & \sigma^i \\ -\sigma^i & 0 \end{pmatrix} u_s \\
+                                  & = u_{s'}^\dagger \begin{pmatrix} -\sigma^i & 0 \\ 0 & \sigma^i \end{pmatrix} u_s \simeq m(-\xi_{s'}^\dagger \sigma^i \xi_s + \xi_{s'}^\dagger \sigma^i \xi_s) = 0.
+    \end{aligned}
+\]
+Substituting these non-relativistic currents back into the amplitude, only the $g_{00} = 1$ term of the photon propagator contributes. The amplitude becomes heavily simplified and exhibits strict \textbf{spin conservation}:
+\[
+    i\mathcal{M} \simeq -i \frac{Q_e Q_p e^2}{|\mathbf{q}|^2} (2m_e) (2m_p) \delta_{s_3 s_1} \delta_{s_4 s_2}.
+\]
+For matching initial and final spins, the rescaled amplitude is:
+\[
+    \tilde{\mathcal{M}} = -\frac{Q_e Q_p e^2}{|\mathbf{q}|^2}.
+\]
+To find the effective potential, we perform the inverse Fourier transform. Switching to spherical coordinates and aligning $\mathbf{q}$ with the z-axis to integrate over angles:
+\[
+    \begin{aligned}
+        V(\mathbf{x}) & = \int \frac{\mathrm{d}^3\mathbf{q}}{(2\pi)^3} \frac{Q_e Q_p e^2}{|\mathbf{q}|^2} e^{i\mathbf{q}\cdot\mathbf{x}}                                                                   \\
+                      & = \frac{Q_e Q_p e^2}{(2\pi)^3} \int_0^\infty \mathrm{d} q \, q^2 \int_0^{2\pi} \mathrm{d} \phi \int_{-1}^1 \mathrm{d}(\cos\theta) \frac{1}{q^2} e^{iqr\cos\theta}                  \\
+                      & = \frac{Q_e Q_p e^2}{(2\pi)^2} \int_0^\infty \mathrm{d} q \left[ \frac{e^{iqr\cos\theta}}{iqr} \right]_{-1}^1                                                                      \\
+                      & = \frac{Q_e Q_p e^2}{(2\pi)^2} \int_0^\infty \mathrm{d} q \frac{e^{iqr} - e^{-iqr}}{iqr} = \frac{Q_e Q_p e^2}{(2\pi)^2} \frac{2}{r} \int_0^\infty \mathrm{d} q \frac{\sin(qr)}{q}.
+    \end{aligned}
+\]
+Using the standard Dirichlet integral $\int_0^\infty \frac{\sin x}{x} dx = \frac{\pi}{2}$, we obtain the final result:
+\[
+    V(r) = \frac{Q_e Q_p e^2}{4\pi r}.
+\]
+Remarkably, QFT correctly reproduces the classical Coulomb potential!
+
+\subsection{Example 2: Yukawa Potential from Scalar Exchange}
+Now consider the same scattering process, but mediated by a massive scalar field $\phi$ (with mass $m_\phi$) interacting via a Yukawa coupling $\mathcal{L}_{\text{int}} = -g \bar{\psi} \psi \phi$.
+
+\TODO{add diagram: t-channel Feynman diagram for scalar exchange}
+
+The Feynman rule for the scalar vertex is simply $-ig$. The tree-level amplitude is:
+\[
+    i\mathcal{M} = \bar{u}_3 u_1 \frac{i}{(p_3 - p_1)^2 - m_\phi^2} \bar{u}_4 u_2 (-ig)^2.
+\]
+In the non-relativistic limit, the scalar current (which lacks the $\gamma^{\mu}$ matrix compared to the vector case) still conserves spin. We can see this explicitly by using the chiral (Weyl) representation for the gamma matrices, where $\gamma^0 = \begin{pmatrix} 0 & \mathbb{I} \\ \mathbb{I} & 0 \end{pmatrix}$, and the non-relativistic spinors are $u_s \simeq \sqrt{m} \begin{pmatrix} \xi_s \\ \xi_s \end{pmatrix}$:
+\[
+    \bar{u}_{s'} u_s = u_{s'}^\dagger \gamma^0 u_s \simeq m \begin{pmatrix} \xi_{s'}^\dagger & \xi_{s'}^\dagger \end{pmatrix} \begin{pmatrix} 0 & \mathbb{I} \\ \mathbb{I} & 0 \end{pmatrix} \begin{pmatrix} \xi_s \\ \xi_s \end{pmatrix} = m (\xi_{s'}^\dagger \xi_s + \xi_{s'}^\dagger \xi_s) = 2m \delta_{s's}.
+\]
+The amplitude (implicitly considering spin conservation, thus omitting the spin sum over the deltas) becomes:
+\[
+    i\mathcal{M} \simeq -i g^2 \frac{(2m_e)(2m_p)}{-|\mathbf{q}|^2 - m_\phi^2} \quad \implies \quad \tilde{\mathcal{M}} = \frac{g^2}{|\mathbf{q}|^2 + m_\phi^2}.
+\]
+The corresponding potential is given by the Fourier transform:
+\[
+    \begin{aligned}
+        V(\mathbf{x}) & = -\int \frac{\mathrm{d}^3\mathbf{q}}{(2\pi)^3} \frac{g^2}{|\mathbf{q}|^2 + m_\phi^2} e^{i\mathbf{q}\cdot\mathbf{x}}                   \\
+                      & = -\frac{g^2}{(2\pi)^2} \int_0^\infty \mathrm{d}q \, q^2 \frac{1}{q^2 + m_\phi^2} \int_{-1}^1 \mathrm{d}(\cos\theta) e^{iqr\cos\theta} \\
+                      & = -\frac{g^2}{(2\pi)^2} \int_0^\infty \mathrm{d}q \frac{q}{q^2 + m_\phi^2} \frac{e^{iqr} - e^{-iqr}}{ir}.
+    \end{aligned}
+\]
+We can extend the integration range to $-\infty$ by changing variables $q \to -q$ in the second term ($e^{-iqr}$), which allows us to combine everything into a single integral over the entire real axis:
+\[
+    V(\mathbf{x}) = -\frac{g^2}{(2\pi)^2 r i} \int_{-\infty}^\infty \mathrm{d}q \frac{q \, e^{iqr}}{q^2 + m_\phi^2}.
+\]
+To evaluate this integral, we use Cauchy's residue theorem.
+
+\TODO{add diagram: Complex contour integration in the upper half-plane}
+
+We close the integration contour in the upper half of the complex $q$-plane, where $e^{iqr}$ decays exponentially. The integrand has simple poles at $q = \pm i m_\phi$. We pick up the residue from the pole enclosed by our contour, at $q = +im_\phi$:
+\[
+    V(r) = -\frac{g^2}{4\pi r} e^{-m_\phi r}.
+\]
+This is the famous \textbf{Yukawa potential}. Notice that in the limit $m_\phi \to 0$ (a massless mediator), the exponential factor disappears and we perfectly recover the form of the Coulomb potential $V(r) \propto 1/r$.
+
+\subsubsection{Comparing Coulomb and Yukawa Potentials}
+Analyzing the two potentials reveals fundamental differences depending on the spin and mass of the mediating particle:
+\begin{itemize}
+    \item \textbf{Yukawa Potential (Spin-0 exchange):}
+          \begin{itemize}
+              \item \textit{Short Range:} The exponential factor $e^{-m_\phi r}$ sharply cuts off the interaction at distances $r \sim 1/m_\phi$.
+              \item \textit{Universally Attractive:} The overall sign is negative. You can explicitly check that replacing the incoming electron ($e^-$) with a positron ($e^+$) alters the Feynman rules but does \textit{not} change the overall sign of $i\mathcal{M}$ (because scalar vertices do not involve $\gamma^0$ matrices that flip signs for antiparticles). Therefore, scalar exchange always produces an attractive force, regardless of the interacting particles.
+          \end{itemize}
+    \item \textbf{Coulomb Potential (Spin-1 exchange):}
+          \begin{itemize}
+              \item \textit{Long Range:} The photon is strictly massless ($m_\gamma = 0$). If it had a mass, an extra suppression factor $e^{-m_\gamma r}$ would have appeared, mirroring the Yukawa case.
+              \item \textit{Repulsive/Attractive depending on charge:} The potential is repulsive for like-charges and attractive for opposite charges. Replacing an $e^-$ with an $e^+$ fundamentally flips the sign of the vector current in the amplitude, changing the sign of the potential $V(r)$.
+          \end{itemize}
+\end{itemize}
+In conclusion, QFT successfully and rigorously yields interaction potentials that are perfectly compatible with our classical and non-relativistic expectations.
