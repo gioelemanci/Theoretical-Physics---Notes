@@ -1,1 +1,156 @@
 \section{Computations and further developments} \label{app:computations}
+
+\subsection*{Notes on group theory}
+
+\subsubsection{Lie groups and algebras}
+
+Given a simple and compact Lie group \(G\), we conventionally indicate its elements using the exponential parametrization \(U(\alpha) = \exp(i\alpha_a T^a)\), where the parameters \(\alpha_a\) are continuous and \(T^a\) are the infinitesimal hermitian generators that fundamentally satisfy the Lie algebra:
+\begin{equation} \label{eq:lie_algebra}
+    [T^a, T^b] = i f^{ab}_{\phantom{ab}c} T^c \, .
+\end{equation}
+In general, considering an irreducible unitary representation \(R\) of the group \(G\), we automatically obtain a corresponding irreducible representation of its Lie algebra formulated with traceless hermitian matrices \(T_R^a\):
+\begin{equation} \label{eq:lie_algebra_rep}
+    [T_R^a, T_R^b] = i f^{ab}_{\phantom{ab}c} T_R^c \, .
+\end{equation}
+
+The representative matrices \(T_R^a\) act linearly on a vector space of dimensions \(D(R)\), and thus they are explicitly \(D(R) \times D(R)\) square matrices. The integer \(D(R)\) is technically called the dimension of the representation. Throughout our discussions, we will mostly consider the special unitary group \(SU(N)\), whose main fundamental representations are:
+\begin{itemize}
+    \item the fundamental (or defining) representation \(N\), which has a dimension \(D(N) = N\)
+    \item its complex conjugate representation \(\overline{N}\), which also has a dimension \(D(\overline{N}) = N\)
+    \item the adjoint representation \(\text{Adj}\), which possesses a dimension \(D(\text{Adj}) = N^2 - 1\).
+\end{itemize}
+
+Given a general representation \(R\) populated with generators \(T_R^a\), the generators of its complex conjugate representation \(\overline{R}\) are mathematically given by
+\begin{equation} \label{eq:conjugate_generators}
+    T_{\overline{R}}^a = -T_R^{a \, *}
+\end{equation}
+as can be directly seen from taking the complex conjugate of the original representation's group elements:
+\[
+    (\exp(i\alpha_a T_R^a))^* = \exp(-i\alpha_a T_R^{a \, *}) \equiv \exp(i\alpha_a T_{\overline{R}}^a) \, .
+\]
+
+\subsubsection{Killing Metric and Structure Constants}
+
+The generators are usually normalized by convention so that in the fundamental representation one explicitly has
+\begin{equation} \label{eq:fundamental_normalization}
+    \mathrm{tr}(T^a T^b) = \frac{1}{2}\delta^{ab}
+\end{equation}
+which structurally fixes the Killing metric, defined generally as \(\gamma^{ab} \equiv 2\,\mathrm{tr}(T^a T^b)\), to simply be \(\gamma^{ab} = \delta^{ab}\). This metric fundamentally defines scalar products within the algebra and is utilized to seamlessly raise or lower the indices that logically label the generators (which strictly correspond to the indices of the adjoint representation). In particular, it is widely used to formally define the structure constants with purely upper indices:
+\begin{equation} \label{eq:structure_upper}
+    f^{abc} = f^{ab}_{\phantom{ab}d} \delta^{dc}
+\end{equation}
+(or more generally expressed as \(f^{abc} = f^{ab}_{\phantom{ab}d}\gamma^{dc}\)). This fully raised tensor is proven to be totally antisymmetric. The antisymmetry of \(f^{abc}\) is immediately obvious on the first two indices, precisely as seen from the definition of the Lie algebra itself. Then, by carefully using Eq. (\ref{eq:lie_algebra}) and the normalization Eq. (\ref{eq:fundamental_normalization}), one can explicitly compute the following intermediate steps:
+\[
+    \begin{aligned}
+        \mathrm{tr}([T^a, T^b]T^c) & = i f^{ab}_{\phantom{ab}d} \,\mathrm{tr}(T^d T^c) = \frac{i}{2} f^{abc} = \mathrm{tr}(T^a T^b T^c) - \mathrm{tr}(T^b T^a T^c) \\
+                                   & = \mathrm{tr}(T^c T^a T^b) - \mathrm{tr}(T^a T^c T^b) = -\mathrm{tr}([T^a, T^c]T^b) = -\frac{i}{2} f^{acb}
+    \end{aligned}
+\]
+so that we find \(f^{abc} = -f^{acb}\), which elegantly implies complete antisymmetry across all indices. Note that in the above algebraic manipulations, we have critically used the cyclic property of the trace operation.
+
+The structure constants themselves can be uniquely used to define the adjoint representation `Adj' by setting the matrix elements as
+\begin{equation} \label{eq:adjoint_def}
+    (T_{\mathrm{Adj}}^a)^b_{\phantom{b}c} = -i f^{ab}_{\phantom{ab}c}
+\end{equation}
+since the fundamental Lie algebra relation
+\begin{equation} \label{eq:adjoint_algebra}
+    [T_{\mathrm{Adj}}^a, T_{\mathrm{Adj}}^b] = i f^{ab}_{\phantom{ab}c} T_{\mathrm{Adj}}^c
+\end{equation}
+is identically satisfied because of the foundational Jacobi identity.
+
+\subsubsection{Representation Indices and Casimir Operators}
+
+One mathematically defines the \textit{index} \(T(R)\) of an arbitrary representation \(R\) by the trace relation
+\begin{equation} \label{eq:index_def}
+    \mathrm{tr}(T_R^a T_R^b) = T(R) \delta^{ab} \, .
+\end{equation}
+The specific index of the fundamental representation \(N\) is usually normalized by convention to \(T(N) = \frac{1}{2}\), clearly seen in Eq. (\ref{eq:fundamental_normalization}). Once this is fixed, the values of the indices corresponding to other representations are determined unambiguously.
+
+\textit{Casimir operators} are specialized operators built structurally from the generators which commute cleanly with all the generators of the entire group. In particular, the quadratic Casimir operator that is systematically constructed using the Killing metric
+\begin{equation} \label{eq:casimir_def}
+    C_2 = T^a T^b \gamma_{ab} = T^a T^a
+\end{equation}
+is precisely such an operator. The proof of its commutation is straightforward and simple:
+\[
+    \begin{aligned}
+        [C_2, T^b] & = [T^a T^a, T^b] = T^a[T^a, T^b] + [T^a, T^b]T^a = T^a i f^{abc} T^c + i f^{abc} T^c T^a \\
+                   & = i f^{abc} (T^a T^c + T^c T^a) = 0
+    \end{aligned}
+\]
+where the final equality holds directly because the structure constants are completely antisymmetric, while the term in parentheses is symmetric\footnote{We have explicitly used the operator identity \([AB, C] = A[B, C] + [A, C]B\) which holds for arbitrary operators.}. Since \(C_2\) commutes with all the generators, it fundamentally must be proportional to the identity operator in any given irreducible representation (this is a direct consequence of Schur's lemma). This property mathematically defines the specific number \(C(R)\), representing the quadratic Casimir evaluated in the irrep \(R\), by
+\begin{equation} \label{eq:casimir_eigenvalue}
+    T_R^a T_R^a = C(R) \mathbf{1} \, .
+\end{equation}
+By cleverly setting \(a = b\) in Eq. (\ref{eq:index_def}) and summing over the indices (i.e., taking the full scalar product utilizing the Killing metric) gives the profound relation
+\begin{equation} \label{eq:index_casimir_relation}
+    C(R)D(R) = T(R)D(\mathrm{Adj}) \, .
+\end{equation}
+For the absolute simplest representations, one analytically finds
+\begin{align}
+    D(N)            & = D(\overline{N}) = N & T(N)            & = T(\overline{N}) = \frac{1}{2} & C(N)            & = C(\overline{N}) = \frac{N^2 - 1}{2N} \label{eq:fundamental_vals} \\
+    D(\mathrm{Adj}) & = N^2 - 1             & T(\mathrm{Adj}) & = N                             & C(\mathrm{Adj}) & = N \, . \label{eq:adjoint_vals}
+\end{align}
+
+\subsubsection{Invariant Tensors and Clebsch-Gordan Coefficients}
+
+Finally, it is immensely useful to recall the concept of \textit{invariant tensors}. They are rigorously defined as tensors that remain completely invariant after group transformations are applied. For example, denoting by \(\psi^i\) the vectors transforming structurally in the defining representation of \(SU(N)\), so that the specific upper index \(i\) is dynamically transformed by the defining matrices \(U^i_{\phantom{i}j}\) of \(SU(N)\), then the familiar Kronecker symbol \(\delta^i_j\) inherently acts as an invariant tensor:
+\[
+    \delta^i_j \;\rightarrow\; \delta'^i_j = U^i_{\phantom{i}k} (U^{-1, T})_j^{\phantom{j}l} \delta^k_l = U^i_{\phantom{i}k} (U^*)_j^{\phantom{j}l} \delta^k_l = U^i_{\phantom{i}k} (U^\dagger)_j^{\phantom{j}k} = \delta^i_j \, .
+\]
+It geometrically tells us that in combining the representation \(N\) with \(\overline{N}\) there mathematically must appear a scalar
+\begin{equation} \label{eq:n_nbar_scalar}
+    N \otimes \overline{N} = \mathbf{1} \otimes \cdots
+\end{equation}
+i.e., one can form the invariant scalar \(\psi^i \chi_i\) directly out of \(\psi^i\) and \(\chi_i\). Similarly, the completely antisymmetric tensor carrying \(N\) upper indices, \(\epsilon^{i_1 i_2 \dots i_N}\), carefully normalized to \(\epsilon^{1 2 \dots N} = 1\), is a fundamental invariant tensor known also as the Levi-Civita symbol[cite: 15, 16]. Indeed, one verifies algebraically that
+\[
+    \epsilon^{i_1 i_2 \dots i_N} \;\rightarrow\; \epsilon'^{i_1 i_2 \dots i_N} = U^{i_1}_{\phantom{i_1}j_1} U^{i_2}_{\phantom{i_2}j_2} \dots U^{i_N}_{\phantom{i_N}j_N} \epsilon^{j_1 j_2 \dots j_N} = (\det U) \epsilon^{i_1 i_2 \dots i_N}
+\]
+but since \(\det U = 1\) specifically for \(SU(N)\), the invariant property cleanly follows. The exact same logic applies for the lower-index version \(\epsilon_{i_1 i_2 \dots i_N}\).
+
+Other vital invariant tensors are the generators themselves evaluated in any given nontrivial representation \(R\), which we explicitly write as \((T_R^a)^\alpha_{\phantom{\alpha}\beta}\), where the upper index \(\alpha\) is properly associated with the representation \(R\) and the lower index \(\beta\) mathematically corresponds to the conjugate representation \(\overline{R}\)\footnote{One may recall from linear algebra that given a representation \(R\), one definitively finds that \(R^{-1,T}\), \(R^*\), and \(R^{-1,\dagger}\) are also formally representations. These four mathematically distinct representations acts linearly on vectors \(v^\alpha, v_\alpha, v^{\dot{\alpha}}, v_{\dot{\alpha}}\) belonging respectively to the appropriate vector spaces (the original vector space, its rigorous dual, its complex conjugate, and finally the dual complex conjugate). For strict unitary representations, one naturally has \(v^{\dot{\alpha}} \sim v_\alpha\) and \(v_{\dot{\alpha}} \sim v^\alpha\).}. This profound statement follows strictly from the Lie algebra Eq. (\ref{eq:lie_algebra_rep}) by recognizing that the specific structure constants \(f^{ab}_{\phantom{ab}c}\) directly give rise to the generators operating in the adjoint representation that effectively transforms the index \(a\) of \((T_R^a)^\alpha_{\phantom{\alpha}\beta}\). This structurally also means that
+\begin{equation} \label{eq:r_rbar_adj}
+    R \otimes \overline{R} \otimes \mathrm{Adj} = \mathbf{1} \oplus \cdots \, .
+\end{equation}
+Moreover, since the adjoint is physically a real representation (the \(f^{ab}_{\phantom{ab}c}\) are completely real numbers and thus the group elements \(e^{i\alpha_a T_{\mathrm{Adj}}^a}\) are strictly real), one dynamically understands that
+\begin{equation} \label{eq:adj_adj}
+    \mathrm{Adj} \otimes \mathrm{Adj} = \mathbf{1} \oplus \cdots
+\end{equation}
+which perfectly matches with the fact that the established Killing metric \(\delta^{ab}\) is an invariant tensor critically used to construct scalar products (more generally, the tensor \(\delta^\alpha_\beta\) for the arbitrary representations \(R\) and \(\overline{R}\) is similarly an invariant tensor). Then combining Eq. (\ref{eq:r_rbar_adj}) and Eq. (\ref{eq:adj_adj}) logically implies
+\begin{equation} \label{eq:r_rbar_clebsch}
+    R \otimes \overline{R} = \mathrm{Adj} \oplus \cdots
+\end{equation}
+which is physically interpreted by saying that \((T_R^a)^\alpha_{\phantom{\alpha}\beta}\) strictly act as Clebsch-Gordan coefficients: they systematically combine the tensors residing in the representation \(R\) with those located in the representation \(\overline{R}\) in order to cleanly extract a tensor structurally transforming in the adjoint. Said differently, Clebsch-Gordan coefficients are fundamentally invariant tensors.
+
+Finally, let us meticulously define another important invariant tensor, the totally symmetric \(d^{abc}\) tensor, cleanly introduced together with the defining anomaly coefficients \(A(R)\) by
+\begin{equation} \label{eq:anomaly_d_tensor}
+    A(R) d^{abc} = \frac{1}{2} \mathrm{tr} \left( T_R^a \{T_R^b, T_R^c\} \right)
+\end{equation}
+where the overall constant normalization may be conventionally fixed by setting \(A = 1\) exclusively for the fundamental representation. It is proven to be totally symmetric and prominently appears in the advanced study of chiral anomalies. The absolute only simple groups that fundamentally have a non-vanishing \(d^{abc}\) tensor, and therefore dynamically permit a cubic Casimir operator structurally given by \(C_3 \sim d^{abc} T^a T^b T^c\), are \(SU(N)\) specifically for \(N \ge 3\) and the group \(SO(6)\).
+
+\subsubsection{Cartan-Weyl basis}
+
+It is mathematically often very useful to strategically rewrite the generators characterizing a Lie algebra in the specialized Cartan-Weyl basis. This basis is cleanly defined by first finding the maximal allowable number of generators (or rather, independent linear combinations of said generators) denoted as \(H_i\) that strictly commute between themselves:
+\begin{equation} \label{eq:cartan_commute}
+    [H_i, H_j] = 0 \, .
+\end{equation}
+This important maximal number is definitively called the \textit{rank} of the group. They are canonically taken to be hermitian operators, and they rigidly define the Cartan subalgebra of the entire Lie algebra. Since they strictly commute, quantum mechanics dictates they can be diagonalized simultaneously in any given matrix representation, and the resulting eigenvalues are mathematically called the \textit{weights}. This specific definition successfully generalizes the familiar angular momentum generator \(J_3\) characteristic of \(SU(2)\), which represents a group possessing a rank of exactly 1. \(J_3\) is precisely the designated generator that is usually diagonalized in standard quantum mechanics\footnote{Recall the foundational SU(2) algebra: \([J_3, J_\pm] = \pm J_\pm\) and \([J_+, J_-] = 2J_3\).}. The particular eigenvalues (weights) calculated specifically for the adjoint representation are uniquely called \textit{roots}.
+
+The remaining generic generators are smartly combined into complex combinations so that they logically correspond one-to-one to the roots \(\alpha_i\):
+\begin{equation} \label{eq:root_eigenvalue}
+    [H_i, E_\alpha] = \alpha_i E_\alpha
+\end{equation}
+which can be cleanly interpreted by physically saying that \(\alpha_i\) strictly serve as eigenvalues while the operators \(E_\alpha\) structurally act as eigenvectors (the root \(\alpha\) acts as a geometric vector possessing components \(\alpha_i\)). The specialized generators \(E_\alpha\) inherently cannot be hermitian, but rather one can mathematically show that \(E_\alpha^\dagger = E_{-\alpha}\), meaning that if \(\alpha\) represents a valid root then necessarily \(-\alpha\) is logically also a valid root. They perfectly generalize the \(J_\pm\) angular momentum step operators traditionally found in \(SU(2)\). Finally, one possesses the remaining set of structure constants that logically appear when explicitly calculating:
+\begin{equation} \label{eq:e_alpha_beta}
+    [E_\alpha, E_\beta] \, .
+\end{equation}
+The underlying Jacobi identity can be systematically used to rigorously study them, and, in particular, one fundamentally finds that
+\begin{equation} \label{eq:e_alpha_minus_alpha}
+    [E_\alpha, E_{-\alpha}] = \alpha_i H_i \, .
+\end{equation}
+which beautifully also generalizes the standard \(SU(2)\) case.
+
+This highly structured basis (along with a closely related one technically called the Chevalley basis) proves to be very useful in cleanly deriving the most general properties defining Lie algebras, existing in a close and beautiful analogy with the established theory governing angular momentum in quantum mechanics. In particular, it significantly helps in rigorously constructing the complete mathematical classification enumerating all simple Lie algebras, a towering achievement which is largely due to Killing and Cartan. This elegant classification is visually encoded in the schematic Dynkin diagrams illustrated in fig. 1.
+
+\TODO{add image of Dynkin diagrams}
+
+The specific algebras explicitly depicted there logically correspond to the following continuous compact groups: \(A_n = SU(n+1)\), \(B_n = SO(2n+1)\), \(C_n = Sp(2n)\), and \(D_n = SO(2n)\), where the integer parameter \(n\) precisely denotes the rank. The remaining isolated algebras denoted \(G_2, F_4, E_6, E_7, E_8\) physically correspond to the so-called exceptional groups.

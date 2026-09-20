@@ -1,0 +1,500 @@
+\chapter{Gauge Theories}
+
+Gauge theories are building blocks of the Standard Model of particle physics. They arise from the requirement that massless spin-one particles, which mediate some of the fundamental forces of nature, should carry only two independent polarizations\footnote{As implied by Wigner's classification of the irreducible unitary representations of the Poincaré group.} even when described in terms of equations of motion that are manifestly Lorentz invariant: the photon is conveniently described by the vector field \(A_\mu(x)\), which has four independent components as any four-vector, though the expected physical degrees of freedom are only two. The other two degrees of freedom are redundant because of the gauge symmetry: one can eliminate them by performing gauge transformations to reach a unitary gauge, such as the Coulomb gauge used in electrodynamics. However, in such a gauge, the Lorentz symmetry is not manifest, and it becomes difficult to exploit its consequences in a useful manner. It is sometimes more convenient to keep some redundancy associated with the gauge symmetry and maintain the Lorentz invariance as man- ifest as possible. Then, the principle of gauge invariance can be used to fix in a simple way all possible interactions mediated by massless particles of spin one in a way that is consistent with Lorentz invariance. Here, we introduce the principle of gauge invariance and use it to streamline the construction of the QED and QCD lagrangians, the main examples of abelian and non-abelian gauge theories, respectively.
+
+\section{Abelian gauge theories and QED}
+
+\subsection{The Free Dirac Field and Global Symmetry}
+
+Let us first review how, starting from the theory of free electrons described by the free Dirac equation, one elegantly deduces the complete Quantum Electrodynamics (QED) lagrangian. This derivation relies heavily on the principle of gauge invariance and the fundamental requirement of Lorentz invariance. We begin by considering the lagrangian of a free Dirac field of mass \(m\):
+\begin{equation} \label{eq:dirac_free}
+    \mathcal{L}_{Dirac} = -\overline{\psi}\gamma^\mu\partial_\mu\psi - m\overline{\psi}\psi
+\end{equation}
+which is explicitly constructed to be Lorentz invariant, and thus perfectly consistent with special relativity.
+
+Throughout this text, we employ a mostly plus metric convention, denoting the Minkowski metric by \(\eta_{\mu\nu}\). The gamma matrices are taken to satisfy the fundamental Clifford algebra relation:
+\begin{equation} \label{eq:clifford}
+    \{\gamma^\mu, \gamma^\nu\} = 2\eta^{\mu\nu} \, ,
+\end{equation}
+while the conjugate Dirac spinor \(\overline{\psi}\) is formally defined by:
+\begin{equation} \label{eq:conjugate_spinor}
+    \overline{\psi} = \psi^\dagger\beta \, , \qquad \beta = i\gamma^0 \, , \qquad (\gamma^\mu)^\dagger = -\beta\gamma^\mu\beta \, .
+\end{equation}
+
+One may straightforwardly check that the Dirac lagrangian is formally real up to total derivatives and, of course, Lorentz invariant. Crucially, it is also invariant under global internal symmetry transformations belonging to the Abelian group \(U(1)\):
+\begin{equation} \label{eq:global_u1}
+    \begin{aligned}
+        \psi(x) \quad            & \rightarrow \quad \psi'(x) = \mathrm{e}^{i\alpha}\psi(x) \, , \qquad \mathrm{e}^{i\alpha} \in U(1) \\
+        \overline{\psi}(x) \quad & \rightarrow \quad \overline{\psi}'(x) = \mathrm{e}^{-i\alpha}\overline{\psi}(x) \, .
+    \end{aligned}
+\end{equation}
+This is classified as a global symmetry because the parameter \(\alpha\) is a constant, entirely independent of spacetime coordinates.
+
+\subsection{Local Gauge Invariance and the Covariant Derivative}
+
+Let us now explore how to extend this symmetry to a local one by introducing arbitrary spacetime-dependent functions \(\alpha(x)\):
+\begin{eqnarray}
+    \psi(x) \quad &\rightarrow \quad \psi'(x) = \mathrm{e}^{i\alpha(x)}\psi(x) \label{eq:local_u1_psi} \\
+    \overline{\psi}(x) \quad &\rightarrow \quad \overline{\psi}'(x) = \mathrm{e}^{-i\alpha(x)}\overline{\psi}(x) \, . \label{eq:local_u1_psibar}
+\end{eqnarray}
+The mass term in the lagrangian is trivially invariant since the opposite phases cancel out perfectly:
+\begin{equation} \label{eq:mass_invariance}
+    m\overline{\psi}\psi \quad \rightarrow \quad m\overline{\psi}'\psi' = m\overline{\psi}\mathrm{e}^{-i\alpha(x)}\mathrm{e}^{i\alpha(x)}\psi = m\overline{\psi}\psi \, ,
+\end{equation}
+however, the term containing the partial derivative is not invariant:
+\begin{equation} \label{eq:derivative_noninvariance}
+    \overline{\psi}\gamma^\mu\partial_\mu\psi \quad \rightarrow \quad \overline{\psi}'\gamma^\mu\partial_\mu\psi' = \overline{\psi}\mathrm{e}^{-i\alpha(x)}\gamma^\mu\partial_\mu(\mathrm{e}^{i\alpha(x)}\psi) = \overline{\psi}\gamma^\mu\partial_\mu\psi + i\overline{\psi}\gamma^\mu\psi\partial_\mu\alpha(x) \, .
+\end{equation}
+The local transformation produces an extra term that vanishes only for a constant \(\alpha(x)\). Consequently, the free lagrangian is not invariant, and it must be modified to achieve gauge invariance—that is, invariance for arbitrary functions \(\alpha(x)\). Incidentally, one may note that the term multiplying the derivative of \(\alpha(x)\) is directly proportional to the Noether current \(J^\mu = i\overline{\psi}\gamma^\mu\psi\) associated with the global symmetry discussed in Eq. (\ref{eq:global_u1}).
+
+To rigorously construct gauge invariant actions, it is extremely useful to introduce a formalism based on the definition of \textit{tensors} of the gauge group and their corresponding \textit{covariant derivatives}. The latter are constructed specifically to produce tensors out of tensors, preserving the transformation properties.
+
+To start with, we define \(\psi(x)\) as a tensor under the gauge group \(U(1) = \{\mathrm{e}^{i\alpha(x)}\}\) if it transforms exactly as in Eq. (\ref{eq:local_u1_psi}). It follows that \(\partial_\mu\psi(x)\) is not a tensor, as its transformation rule is more complicated (as seen above). The covariant derivative acting on \(\psi\) is obtained by introducing a new gauge field \(A_\mu\) (often referred to in differential geometry as a ``connection''). It is defined by:
+\begin{equation} \label{eq:covariant_derivative}
+    D_\mu = \partial_\mu - iA_\mu(x) \, .
+\end{equation}
+To ensure the derivative behaves properly, one requires \(A_\mu(x)\) to transform in a specific way so that the ``tensorial'' transformation rule remains valid for the derivative:
+\begin{equation} \label{eq:tensor_transform}
+    D_\mu\psi(x) \quad \rightarrow \quad D'_\mu\psi'(x) = \mathrm{e}^{i\alpha(x)}D_\mu\psi(x)
+\end{equation}
+where \(D'_\mu = \partial_\mu - iA'_\mu(x)\). A short algebraic calculation demonstrates that the following transformation rule for the gauge field must hold to satisfy this requirement:
+\begin{equation} \label{eq:gauge_field_transform}
+    A_\mu(x) \quad \rightarrow \quad A'_\mu(x) = A_\mu(x) + \partial_\mu\alpha(x) \, .
+\end{equation}
+
+Armed with covariant derivatives, it becomes simple to obtain a fully gauge invariant lagrangian from our starting point in Eq. (\ref{eq:dirac_free}):
+\begin{equation} \label{eq:lagrangian_gauged}
+    \boxed{\mathcal{L} = -\overline{\psi}\gamma^\mu D_\mu\psi - m\overline{\psi}\psi} \, .
+\end{equation}
+
+\textit{Comment: a ``tensor'' for the gauge group \(U(1)\) is more generally defined as a field \(\psi_q(x)\) that transforms as}
+\begin{equation} \label{eq:general_tensor}
+    \psi_q(x) \rightarrow \psi'_q(x) = \mathrm{e}^{iq\alpha(x)}\psi_q(x)
+\end{equation}
+where the integer \(q \in \mathbb{Z}\) is called the ``charge'' of \(\psi_q(x)\). Thus, \(\psi_q(x)\) is considered a tensor of charge \(q\): in more formal mathematical terms, \(q\) identifies a specific irreducible representation of the group \(U(1)\). The general definition of the covariant derivative is then naturally extended to:
+\begin{equation} \label{eq:covariant_general}
+    D_\mu = \partial_\mu - iA_\mu(x)Q
+\end{equation}
+where \(Q\) is an operator that measures the charge of the tensor on which it acts, meaning it functions as the generator of the \(U(1)\) group in the representation of the target tensor. We can now easily recognize that the transformation of the conjugate spinor in Eq. (\ref{eq:local_u1_psibar}) corresponds precisely to that of a tensor of charge \(-1\), meaning the covariant derivative of \(\overline{\psi}\) reads:
+\begin{equation} \label{eq:covariant_conjugate}
+    D_\mu\overline{\psi} = (\partial_\mu + iA_\mu(x))\overline{\psi} \, ,
+\end{equation}
+which is completely consistent with taking the Dirac conjugate of \(D_\mu\psi\). The covariant derivative possesses the essential property that it does not destroy the tensorial character of the object on which it acts: \textit{it generates tensors out of tensors}. Indeed, one can verify that
+\begin{equation} \label{eq:tensor_verification}
+    D_\mu\psi_q(x) = \partial_\mu\psi_q(x) - iqA_\mu(x)\psi_q(x)
+\end{equation}
+is once again a tensor of charge \(q\). Another highly useful property of this definition is the validity of the Leibniz rule for covariant derivatives: because products of tensors are also tensors, one can systematically check that
+\begin{equation} \label{eq:leibniz_rule}
+    D_\mu(\psi_{q_1}\psi_{q_2}) = (D_\mu\psi_{q_1})\psi_{q_2} + \psi_{q_1}(D_\mu\psi_{q_2}) \, .
+\end{equation}
+
+\subsection{The Electromagnetic Field Tensor and Maxwell Lagrangian}
+
+We have demonstrated that local gauge invariance is successfully achieved by introducing the gauge field \(A_\mu(x)\), which is readily interpreted physically as the potential of the electromagnetic field. However, having introduced a new dynamical field into the theory, one must grant it suitable dynamics by adding a kinetic term for \(A_\mu(x)\) to the lagrangian. This new kinetic term must independently be gauge invariant because the rest of the Lagrangian already is: gauge symmetry remains the guiding principle for building the action.
+
+It is conceptually useful to proceed using our established tensor formalism. We start by calculating the commutator of two covariant derivatives acting on the tensor \(\psi\) of charge \(1\):
+\begin{equation} \label{eq:commutator}
+    [D_\mu, D_\nu]\psi = -iF_{\mu\nu}\psi
+\end{equation}
+This relation defines the essential quantity \(F_{\mu\nu}\). Since we have strictly tensorial quantities on the left-hand side, the right-hand side must mathematically also be built exclusively out of tensors. In this way, we deduce that \(F_{\mu\nu}\) is a tensor of charge \(q = 0\), meaning it is a quantity that is strictly invariant under gauge transformations (i.e., it satisfies a transformation with \(q = 0\) in Eq. (\ref{eq:general_tensor})). Computing the left-hand side of Eq. (\ref{eq:commutator}) explicitly, one finds
+\begin{equation} \label{eq:field_strength}
+    F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu
+\end{equation}
+which is readily recognized and interpreted as the electromagnetic field tensor. One can manually verify that it is indeed completely gauge invariant under the specific gauge transformation given in Eq. (\ref{eq:gauge_field_transform}).
+
+Now, it is mathematically straightforward to construct a gauge invariant lagrangian containing at most two derivatives on \(A_\mu\). It is sufficient to use as a basic building block the field strength \(F_{\mu\nu}\), which being gauge invariant itself makes it incredibly easy to construct further gauge invariant quantities. One must concurrently require Lorentz invariance to maintain a relativistic theory, which ultimately leads to the free Maxwell lagrangian. In a standard normalization, this reads:
+\begin{equation} \label{eq:maxwell_lagrangian}
+    \mathcal{L}_{Maxwell} = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu} \, .
+\end{equation}
+
+\subsection{The Complete QED Lagrangian and Feynman Rules}
+
+Summing together all the individual pieces that are separately gauge invariant (i.e., combining Eqs. (\ref{eq:lagrangian_gauged}) and (\ref{eq:maxwell_lagrangian})), one finally finds the full QED lagrangian:
+\begin{equation} \label{eq:qed_lagrangian}
+    \boxed{\mathcal{L}_{QED} = -\frac{1}{4e^2}F_{\mu\nu}F^{\mu\nu} - \overline{\psi}\gamma^\mu D_\mu\psi - m\overline{\psi}\psi}
+\end{equation}
+where a free multiplicative parameter \(1/e^2\) is introduced to account for a relative weight between the different terms that are separately gauge invariant.
+
+Let us thoroughly analyze the various terms contained in Eq. (\ref{eq:qed_lagrangian}). It is highly useful to redefine the gauge field via \(A_\mu \rightarrow eA_\mu\) (doing so recovers the standard normalization of the free Maxwell action) and recognize that \(e\) is the physical coupling constant. Note that \(e\) now appears inside the covariant derivative \(D_\mu = \partial_\mu - ieA_\mu(x)\), taking \(e < 0\) for the electron. Expanding this, we obtain:
+\begin{eqnarray}
+    \mathcal{L}_{QED} &=& -\frac{1}{4}F_{\mu\nu}F^{\mu\nu} - \overline{\psi}(\gamma^\mu D_\mu + m)\psi \nonumber \\
+    &=& -\frac{1}{4}F_{\mu\nu}F^{\mu\nu} - \overline{\psi}(\gamma^\mu\partial_\mu + m)\psi + ieA_\mu\overline{\psi}\gamma^\mu\psi \label{eq:qed_expanded}
+\end{eqnarray}
+
+\TODO{add image of Feynman rules for QED lagrangian terms}
+
+The first term distinctly describes the free propagation of photons, the second one accounts for the free propagation of electrons, and the crucial third one dictates the elementary interaction between photons and electrons. The constant \(e\) is the coupling constant, appropriately identified with the elementary charge of the electron. Thus, the guiding gauge principle has powerfully allowed us to discover the exact interaction mechanism between fields of spin 1/2 and 1. Let us summarize once again the precise rules of gauge transformations for the lagrangian in Eq. (\ref{eq:qed_expanded}): by rescaling for simplicity also the phase angle \(\alpha(x) \rightarrow e\alpha(x)\), we have
+\begin{equation} \label{eq:rescaled_transformations}
+    \begin{aligned}
+        \psi \quad            & \rightarrow \quad \psi' = \mathrm{e}^{ie\alpha}\psi                        \\
+        \overline{\psi} \quad & \rightarrow \quad \overline{\psi}' = \mathrm{e}^{-ie\alpha}\overline{\psi} \\
+        A_\mu \quad           & \rightarrow \quad A'_\mu = A_\mu + \partial_\mu\alpha \, .
+    \end{aligned}
+\end{equation}
+
+\subsection{Feynman Diagrams for Basic Scattering Processes}
+
+If the fundamental coupling constant \(e\) is sufficiently small, the theory can be successfully treated perturbatively, and the theoretical amplitudes for the various physical processes in QED can be systematically associated to Feynman diagrams constructed with the elementary interaction vertex found in Eq. (\ref{eq:qed_expanded}). For example, the fundamental electron-electron scattering process (known as M\"{o}ller scattering) at the lowest perturbative order is represented by:
+
+\TODO{add image of Moller scattering Feynman diagrams}
+
+where, by our adopted convention, time runs along the horizontal axis in our Feynman diagrams.
+
+Other significant processes include electron-positron scattering (Bhabha scattering):
+
+\TODO{add image of Bhabha scattering Feynman diagrams}
+
+and the scattering of electrons and photons (Compton scattering):
+
+\TODO{add image of Compton scattering Feynman diagrams}
+
+Fascinatingly, pure photon-photon scattering is also dynamically possible. Because there is absolutely no elementary vertex coupling four photons directly, the first perturbative term that one calculates is given by the one-loop box graph:
+
+\TODO{add image of photon-photon scattering box diagram}
+
+together with topologically similar graphs where the external photon lines are logically attached to the internal vertices with completely different orderings. In general quantum field theories, loop corrections can be severely divergent and must be rigorously cured by the procedure of renormalization. However, quite remarkably, for photon-photon scattering, the total sum of the one-loop Feynman diagrams indicated above is ultraviolet finite, and strictly no four-photon counterterm is needed in the lagrangian. This elegant finiteness is a direct and beautiful consequence of the underlying gauge invariance of the theory.
+
+\section{Non-abelian gauge theories and QCD}
+
+The theoretical framework used for the construction of gauge invariant actions can be elegantly extended to accommodate compact non-abelian groups. To accomplish this, we must first review the principal mathematical properties of Lie groups, leaving more detailed foundational considerations for a dedicated appendix.
+
+\subsection{Lie groups}
+
+Before constructing non-abelian gauge theories, let us briefly review the characteristics of simple and compact Lie groups\footnote{A \textit{compact group} is defined as a group that is compact as a topological space. Intuitively, it can be conceptualized as a group possessing finite "size" or "volume". More precisely, a compact group has a finite volume with respect to a translation-invariant group theoretical measure known as the "Haar measure". A \textit{simple Lie group} is, roughly speaking, a Lie group whose corresponding Lie algebra \(\mathfrak{g}\) is simple. This condition indicates that \(\mathfrak{g}\) is non-abelian and possesses no nontrivial ideals. An ideal \(\mathfrak{i}\) is a subalgebra satisfying \([\mathfrak{g}, \mathfrak{i}] \subseteq \mathfrak{i}\). Thus, the only ideals of a simple Lie algebra are \(0\) and \(\mathfrak{g}\) itself.}, keeping the special unitary group \(SU(N)\) in mind as our primary illustrative example. An arbitrary element \(U\) of a compact, non-abelian Lie group \(G\) can be parameterized by continuous coordinates \(\alpha_a\) (the group parameters), which are formally associated with hermitian generators \(T^a\). A comprehensive list of the main definitions and properties is as follows:
+
+\begin{itemize}
+    \item[(i)] \(U = U(\alpha) = \exp(i\alpha_a T^a) \in G \qquad a = 1, .., \dim G\)
+    \item[(ii)] \([T^a, T^b] = i f^{ab}_{\phantom{ab}c} T^c\)
+    \item[(iii)] \(\mathrm{tr}(T_F^a T_F^b) = \frac{1}{2}\delta^{ab}\)
+    \item[(iv)] \(f^{abc} = f^{ab}_{\phantom{ab}d} \delta^{dc} \qquad\) is totally antisymmetric
+    \item[(v)] \([[T^a, T^b], T^c] + [[T^b, T^c], T^a] + [[T^c, T^a], T^b] = 0 \\ \implies f^{ab}_{\phantom{ab}d} f^{dc}_{\phantom{dc}e} + f^{bc}_{\phantom{bc}d} f^{da}_{\phantom{da}e} + f^{ca}_{\phantom{ca}d} f^{db}_{\phantom{db}e} = 0\)
+    \item[(vi)] \((T_{\mathrm{Adj}}^a)^b_{\phantom{b}c} = -if^{ab}_{\phantom{ab}c}\)
+\end{itemize}
+
+To elaborate on these defining properties:
+Point (i) describes the exponential representation of an arbitrary element \(U\) of the group \(G\) that is continuously connected to the identity operator. This structure is verified by considering the defining representation, i.e., the specific matrix representation used to define the group. For \(SU(N)\), this representation is given by unitary \(N \times N\) matrices with a unit determinant. The index \(a\) takes as many values as the total dimension of the group. Therefore, an element of the group is parameterized by the continuous "angles" \(\alpha_a\) that multiply the generators \(T^a\). Matrices in the defining (also called fundamental) representation are explicitly written as \(T_F^a\), but they are then interpreted as abstract generators \(T^a\) that may possess other representations.
+
+Point (ii) provides the fundamental Lie algebra satisfied by the hermitian generators \(T^a\). The constants \(f^{ab}_{\phantom{ab}c}\) are strictly real and are known as the structure constants of the group. They uniquely characterize the group \(G\) and are manifestly antisymmetric in the initial indices \(a\) and \(b\).
+
+Point (iii) defines a standard convention for the normalization of the generators in the fundamental representation \(T_F^a\). It formally identifies the so-called "Killing metric". More generally, one could have defined the Killing metric \(\gamma^{ab}\) by the trace relation \(\mathrm{tr}(T_F^a T_F^b) = \frac{1}{2}\gamma^{ab}\), and rigorously prove that the Killing metric must be positive definite for all compact Lie groups, such as \(SU(N)\). The normalized basis chosen above for the generators \(T_F^a\) yields the Kronecker delta \(\delta^{ab}\) as the Killing metric for the compact group \(G\).
+
+Point (iv) utilizes the established Killing metric to systematically raise the lower index of the structure constants. Following this operation, one can show that the resulting symbols \(f^{abc}\) are completely antisymmetric: antisymmetry on the indices \(a\) and \(b\) is intrinsically obvious from property (ii); antisymmetry on the indices \(b\) and \(c\) is systematically deduced by multiplying the Lie algebra with an additional generator, taking the trace, and subsequently using point (iii) in conjunction with the cyclic property of the trace operation.
+
+Point (v) explicitly provides the Jacobi identities inherently satisfied by the structure constants.
+
+Point (vi) defines the adjoint representation. It is formally proven to be a valid mathematical representation by utilizing the Jacobi identities. Note that the indices in \((T_{\mathrm{Adj}}^a)^b_{\phantom{b}c}\) all run from \(1\) to \(\dim G\), so that the dimension of the adjoint representation naturally coincides with the dimension of the group itself, i.e. \(\dim G\). In the specific case of \(SU(N)\), these indices run from \(1\) to \(N^2 - 1\), and the dimension of the adjoint representation is thus \(N^2 - 1\).
+
+\subsection{Action with rigid \(SU(N)\) symmetry}
+
+Let us now introduce physical fields by considering \(N\) free Dirac fields, assembled structurally into column and row vectors as follows:
+\begin{equation} \label{eq:dirac_multiplets}
+    \psi = \begin{pmatrix} \psi^1 \\ \psi^2 \\ \cdot \\ \cdot \\ \psi^N \end{pmatrix} , \qquad \overline{\psi} = (\overline{\psi}_1, \overline{\psi}_2, \ldots, \overline{\psi}_N)
+\end{equation}
+structured so that the corresponding scalar product
+\begin{equation} \label{eq:scalar_product}
+    \overline{\psi}\psi = \overline{\psi}_1\psi^1 + \overline{\psi}_2\psi^2 + \cdots + \overline{\psi}_N\psi^N
+\end{equation}
+is manifestly \(SU(N)\) invariant. If these defined fields possess identical masses \(m\), then there exists a global continuous symmetry. The free lagrangian is straightforwardly given by
+\begin{equation} \label{eq:free_lagrangian}
+    \mathcal{L}_{Dirac} = -\overline{\psi}\gamma^\mu\partial_\mu\psi - m\overline{\psi}\psi
+\end{equation}
+and is invariant under the rigid \(SU(N)\) symmetry transformations provided by
+\begin{equation} \label{eq:global_transform}
+    \begin{aligned}
+        \psi(x) \quad            & \rightarrow \quad \psi'(x) = U\psi(x)                                                          \\
+        \overline{\psi}(x) \quad & \rightarrow \quad \overline{\psi}'(x) = \overline{\psi}(x)U^\dagger = \overline{\psi}(x)U^{-1}
+    \end{aligned}
+\end{equation}
+where \(U \in SU(N)\), and \(U^\dagger = U^{-1}\) inherently holds since \(U\) is a unitary matrix. These are classified as global transformations, as the group parameters \(\alpha^a\) contained within \(U = U(\alpha) = \exp(i\alpha^a T^a)\) are strictly constant across spacetime (note that indices in \(\alpha^a\) are raised and lowered with the Killing metric, which coincides with the identity matrix in our chosen conventions). It is critical to note that all the fermion masses must be strictly identical; otherwise, the mass term would dynamically break the \(SU(N)\) symmetry. There is also an independent abelian \(U(1)\) symmetry present, but the procedure for its gauging proceeds exactly as described previously.
+
+\subsection{Covariant derivative}
+
+To introduce gauge interactions, we would like to mathematically extend the theory to achieve a local \(SU(N)\) symmetry. For this purpose, it is once again convenient to introduce the powerful concept of covariant derivatives. By formal definition, the covariant derivative successfully produces new tensors when applied to existing tensors. To begin, we recall that a tensor \(\psi(x)\) residing in the fundamental representation of the gauge group \(SU(N)\), i.e., the representation usually indicated by its dimension \(\mathbf{N}\), is a field defined by the transformation:
+\begin{equation} \label{eq:tensor_fundamental}
+    \psi(x) \quad \rightarrow \quad \psi'(x) = U(x)\psi(x)
+\end{equation}
+where \(U(x)\) is an \(N \times N\) matrix of \(SU(N)\) that can vary for any spacetime point \(x\). More generally, fields transforming in any given mathematical representation \(R(U(x))\) of the original matrices \(U(x)\) are formally said to be tensors in the representation \(R\). For example, the conjugate field \(\overline{\psi}(x)\) is a tensor in the anti-fundamental representation, which is usually indicated by \(\overline{\mathbf{N}}\) as it corresponds to the complex conjugate of the representation \(\mathbf{N}\), and its transformation rule is written as follows:
+\begin{equation} \label{eq:tensor_antifundamental}
+    \overline{\psi}(x) \quad \rightarrow \quad \overline{\psi}'(x) = \overline{\psi}(x)U^{-1}(x) \, .
+\end{equation}
+Evidently, the bilinear term \(\overline{\psi}(x)\psi(x)\) acts as a scalar under this local gauge transformation.
+
+The covariant derivative acting on tensors produces new tensors. It is defined by the following operator:
+\begin{equation} \label{eq:cov_derivative_def}
+    D_\mu = \partial_\mu + W_\mu(x)
+\end{equation}
+where \(W_\mu(x)\) is a matrix-valued gauge field, which is also commonly known as the connection (geometrically, it strictly defines a notion of parallel transport in a certain mathematical space, known formally as a fiber bundle). When applied to the specific tensor \(\psi(x)\), the term containing the gauge field \(W_\mu\) inherently mixes the \(N\) Dirac fermions contained within \(\psi\), and thus \(W_\mu\) is represented by \(N \times N\) matrices (specifically, one matrix for any given value of the spacetime index \(\mu\)). It performs infinitesimal group transformations and defines a specific sort of parallel transport. It can be conveniently expanded in terms of the group generators as follows:
+\begin{equation} \label{eq:gauge_field_expansion}
+    W_\mu(x) = -iW_\mu^a(x)T^a \, .
+\end{equation}
+This relation explicitly defines the component gauge fields \(W_\mu^a(x)\), and there are exactly \(N^2 - 1\) of them for the gauge group \(SU(N)\). From the fundamental physical requirement of covariance:
+\begin{equation} \label{eq:covariance_requirement}
+    \begin{aligned}
+        \psi(x) \quad      & \rightarrow \quad \psi'(x) = U(x)\psi(x)            \\
+        D_\mu\psi(x) \quad & \rightarrow \quad D'_\mu\psi'(x) = U(x)D_\mu\psi(x)
+    \end{aligned}
+\end{equation}
+one systematically obtains the following necessary transformation rule for the gauge potential itself:
+\begin{equation} \label{eq:gauge_potential_transform}
+    W_\mu(x) \quad \rightarrow \quad W'_\mu(x) = U(x)W_\mu(x)U^{-1}(x) + U(x)\partial_\mu U^{-1}(x) \, .
+\end{equation}
+Let us explicitly prove this relation. By rigorously requiring that \(D'_\mu\psi' = U D_\mu\psi\), one computes:
+\begin{equation} \label{eq:proof_gauge_transform}
+    \begin{aligned}
+        D'_\mu\psi' & \equiv (\partial_\mu + W'_\mu)\psi'                                                               \\
+                    & = U D_\mu\psi = U\partial_\mu\psi + U W_\mu\psi = U\partial_\mu(U^{-1}U\psi) + UW_\mu U^{-1}U\psi \\
+                    & = (U\partial_\mu U^{-1})\psi' + \partial_\mu\psi' + UW_\mu U^{-1}\psi'                            \\
+                    & = [\partial_\mu + (UW_\mu U^{-1} + U\partial_\mu U^{-1})]\psi'
+    \end{aligned}
+\end{equation}
+which definitively proves the above transformation rule for \(W_\mu\). An important clarifying comment: as \(\psi\) transforms specifically in the fundamental representation of \(SU(N)\), the generators \(T^a\) contained within the \(W_\mu\) of Eqs. (\ref{eq:gauge_field_expansion}) and (\ref{eq:proof_gauge_transform}) are inherently the generators in the fundamental representation. In general application, one must always use the generators corresponding to the representation of the specific tensors on which the covariant derivative acts.
+
+Covariant derivatives do not commute. This profound geometric fact allows us to systematically define the "curvature" tensor (or physical "field strength") in the following way:
+\begin{equation} \label{eq:curvature_def}
+    [D_\mu, D_\nu]\psi = F_{\mu\nu}\psi
+\end{equation}
+so that, upon expansion, we find:
+\begin{equation} \label{eq:field_strength_tensor}
+    F_{\mu\nu} = \partial_\mu W_\nu - \partial_\nu W_\mu + [W_\mu, W_\nu] \, .
+\end{equation}
+It is mathematically immediate to check that the resulting field strength transforms covariantly as:
+\begin{equation} \label{eq:field_strength_transform}
+    F_{\mu\nu} \quad \rightarrow \quad F'_{\mu\nu} = U F_{\mu\nu} U^{-1}
+\end{equation}
+which follows logically from the foundational covariance of Eq. (\ref{eq:curvature_def}). This specific transformation rule corresponds identically to the adjoint representation (the representation of total dimension \(N^2 - 1\)).
+
+\subsection{Gauge invariant action}
+
+It is now remarkably simple to construct a globally and locally gauge invariant lagrangian starting from Eq. (\ref{eq:free_lagrangian}): it is enough to formally substitute standard derivatives with gauge covariant derivatives (this general procedure is also classically called "minimal coupling"). One immediately finds:
+\begin{equation} \label{eq:lagrangian_minimal}
+    \mathcal{L}_1 = -\overline{\psi}(\gamma^\mu D_\mu + m)\psi
+\end{equation}
+that dynamically depends on the new physical field \(W_\mu\) contained inherently in the covariant derivative \(D_\mu\). Now, one must necessarily introduce proper dynamics for \(W_\mu\) as well. By considering the absolute simplest gauge and Lorentz invariant lagrangian term containing at most two derivatives, one is logically led to:
+\begin{equation} \label{eq:lagrangian_kinetic}
+    \mathcal{L}_2 = \frac{1}{2}\mathrm{tr}(F_{\mu\nu}F^{\mu\nu}) = -\frac{1}{4}F_{\mu\nu}^a F^{\mu\nu a}
+\end{equation}
+where we have explicitly used the generators in the fundamental representation properly normalized by \(\mathrm{tr}\,T^a T^b = \frac{1}{2}\delta^{ab}\). We have chosen here a specific canonical normalization. More generally, one should realistically consider a relative mathematical weight between the different gauge-invariant pieces, so that by formally introducing a physical coupling constant \(g\), one writes the final complete lagrangian as:
+\begin{equation} \label{eq:lagrangian_complete}
+    \boxed{\mathcal{L} = \frac{1}{2g^2}\mathrm{tr}(F_{\mu\nu}F^{\mu\nu}) - \overline{\psi}(\gamma^\mu D_\mu + m)\psi}
+\end{equation}
+which is completely gauge invariant under the following comprehensive transformation rules:
+\begin{equation} \label{eq:full_transformations}
+    \begin{aligned}
+        \psi(x) \quad            & \rightarrow \quad \psi'(x) = U(x)\psi(x)                                         \\
+        \overline{\psi}(x) \quad & \rightarrow \quad \overline{\psi}'(x) = \overline{\psi}(x)U^{-1}(x)              \\
+        W_\mu(x) \quad           & \rightarrow \quad W'_\mu(x) = U(x)W_\mu(x)U^{-1}(x) + U(x)\partial_\mu U^{-1}(x)
+    \end{aligned}
+\end{equation}
+with the very last one logically implying:
+\begin{equation} \label{eq:f_transform_implied}
+    F_{\mu\nu}(x) \quad \rightarrow \quad F'_{\mu\nu}(x) = U(x)F_{\mu\nu}(x)U^{-1}(x) \, .
+\end{equation}
+
+Let us rigorously report the \textit{infinitesimal transformations} as well. By defining the matrix \(\alpha \equiv -i\alpha_a T^a\) with Lie parameters \(\alpha_a \ll 1\), one concisely describes an infinitesimal transformation in the form:
+\begin{equation} \label{eq:infinitesimal_U}
+    U = e^{i\alpha_a T^a} = e^{-\alpha} = 1 - \alpha + O(\alpha^2)
+\end{equation}
+so that for the corresponding infinitesimal variations of the fields (\(\delta\psi(x) \equiv \psi'(x) - \psi(x)\)) one systematically finds:
+\begin{equation} \label{eq:infinitesimal_variations}
+    \begin{aligned}
+        \delta\psi            & = -\alpha\psi                                        \\
+        \delta\overline{\psi} & = \overline{\psi}\alpha                              \\
+        \delta W_\mu          & = \partial_\mu\alpha + [W_\mu, \alpha] = D_\mu\alpha \\
+        \delta F_{\mu\nu}     & = [F_{\mu\nu}, \alpha]
+    \end{aligned}
+\end{equation}
+where in the last-but-one line, we clearly recognize the covariant derivative acting specifically on the adjoint representation. The explicit infinitesimal form of the gauge transformations is fundamentally needed when studying the required gauge-fixing procedure to properly quantize the theory.
+
+Now, let us rewrite the total lagrangian by considering a helpful field redefinition defined by the simple rescaling \(W_\mu \rightarrow g W_\mu\). It is primarily used to get a canonical kinetic normalization for the gauge field, which practically amounts to pushing the explicit coupling constant directly in front of the interaction vertices. The shift naturally induces a corresponding redefinition of the field strength \(F_{\mu\nu} \rightarrow g F_{\mu\nu}\), with the new modified field strength given by:
+\begin{equation} \label{eq:field_strength_rescaled}
+    F_{\mu\nu} = \partial_\mu W_\nu - \partial_\nu W_\mu + g [W_\mu, W_\nu] \, .
+\end{equation}
+In terms of their isolated components,
+\begin{equation} \label{eq:components_w_f}
+    \begin{aligned}
+        W_\mu(x)      & = -iW_\mu^a(x)T^a      \\
+        F_{\mu\nu}(x) & = -iF_{\mu\nu}^a(x)T^a
+    \end{aligned}
+\end{equation}
+and
+\begin{equation} \label{eq:f_components_explicit}
+    F_{\mu\nu}^a = \partial_\mu W_\nu^a - \partial_\nu W_\mu^a + g f^{abc}W_\mu^b W_\nu^c
+\end{equation}
+and the total lagrangian ultimately takes the more explicit physical form:
+\begin{equation} \label{eq:lagrangian_explicit}
+    \boxed{\mathcal{L} = -\frac{1}{4}F_{\mu\nu}^a F^{\mu\nu a} - \overline{\psi}[\gamma^\mu(\partial_\mu - ig W_\mu^a T^a) + m]\psi} \, .
+\end{equation}
+The physical coupling constant now visibly appears directly in front of the fundamental interaction vertices. The infinitesimal gauge transformations, after systematically redefining the parameters \(\alpha^a \rightarrow g\alpha^a\), read explicitly:
+\begin{equation} \label{eq:infinitesimal_rescaled}
+    \begin{aligned}
+        \delta\psi(x)            & = ig\alpha^a(x)T^a\psi(x)                                                     \\
+        \delta\overline{\psi}(x) & = -ig\alpha^a(x)\overline{\psi}(x)T^a                                         \\
+        \delta W_\mu^a(x)        & = \partial_\mu\alpha^a(x) + g f^{abc}W_\mu^b(x)\alpha^c(x) = D_\mu\alpha^a(x)
+    \end{aligned}
+\end{equation}
+where \(T^a\) are, as always, the generators in the fundamental representation.
+
+The very first term in the explicit action (\ref{eq:lagrangian_explicit}) elegantly describes the free space propagation of the fields \(W_\mu^a\) (the fundamental non-abelian spin 1 particle) along with associated cubic and quartic self-interactions inherently governed by coupling constants \(g\) and \(g^2\), respectively. A non positive-definite Killing metric would drastically result in a term with kinetic energy that is definitively not positive-definite, and this would structurally not be acceptable: it is physically necessary to consider only compact groups to successfully satisfy this stability request. The crucial second term describes the free propagation of the \(\psi\) fields (spin 1/2 particles endowed with non-abelian charges, i.e., "color" charges) working intimately together with an elementary interaction with the gauge field \(W_\mu^a\) possessing a strength dynamically measured by the coupling constant \(g\). It can be effectively treated perturbatively if \(g\) is sufficiently small enough. The conceptual "non-abelian" or "color" charge strictly corresponds to the mathematical representation of the gauge group chosen for the matter fields \(\psi\) (in our specific case we have cleanly taken the fundamental representation, but logically any other representation could have been validly chosen as well). Thus, we have explicitly seen how the fundamental principle of local gauge invariance has powerfully allowed us to systematically derive all the interaction vertices between diverse fields of spin 1/2 and 1 directly in terms of the single universal coupling constant \(g\).
+
+It is highly useful to analytically examine in more precise detail the algebraic structure of the infinitesimal transformation laws that we have been rigorously deriving. Introducing explicit matrix indices, the infinitesimal transformation of the fermion field \(\psi(x)\) from Eq. (\ref{eq:infinitesimal_rescaled}) is formally written as:
+\begin{equation} \label{eq:infinitesimal_psi_indices}
+    \delta\psi^i(x) = ig\alpha^a(x)(T_F^a)^i_{\phantom{i}j}\psi^j(x)
+\end{equation}
+with indices \(i, j = 1, ..., N\), and where by \((T_F^a)^i_{\phantom{i}j}\) we now clearly indicate the individual matrix elements of the generators in the fundamental representation (\(N \times N\) matrices, exactly one for each value of the group index \(a\)). Similarly, the transformation of the Dirac conjugate field (morally acting as the complex conjugate field\footnote{We logically recall here that upper dotted indices are mathematically equivalent to lower undotted indices for the defining \(SU(N)\) group.}) is rigorously written as:
+\begin{equation} \label{eq:infinitesimal_psibar_indices}
+    \delta\overline{\psi}_i(x) = -ig\alpha^a(x)(T_F^{a*})_{\phantom{j}i}^{\phantom{*}j} \overline{\psi}_j(x) = ig\alpha^a(x)(T_{\overline{F}}^a)_{i}^{\phantom{i}j} \overline{\psi}_j(x)
+\end{equation}
+where \(T_{\overline{F}}^a = -T_F^{a*}\) strictly are the generators residing in the complex conjugate of the fundamental representation \(T_F^a\). Also, we may meticulously check that the non-abelian field strength \(F_{\mu\nu}^a\) correctly transforms strictly in the adjoint representation:
+\begin{equation} \label{eq:f_adjoint_transform}
+    \delta F_{\mu\nu}^a = g f^{abc}F_{\mu\nu}^b \alpha^c = ig\alpha^c(T_{\mathrm{Adj}}^c)^{ab}F_{\mu\nu}^b
+\end{equation}
+precisely as the generators in the defined adjoint representation are rigorously given by:
+\begin{equation} \label{eq:adjoint_generators}
+    (T_{\mathrm{Adj}}^c)^{ab} = -if^{abc} \, .
+\end{equation}
+Let us also verify explicitly and algebraically that the established transformation law of \(W_\mu^a\) can be completely expressed exactly in terms of the covariant derivative acting dynamically on a tensor situated in the adjoint representation:
+\begin{equation} \label{eq:w_transform_adjoint}
+    \delta W_\mu^a = \partial_\mu\alpha^a + g f^{abc}W_\mu^b \alpha^c = \partial_\mu\alpha^a - ig W_\mu^b (T_{\mathrm{Adj}}^b)^{ac}\alpha^c = D_\mu\alpha^a \, .
+\end{equation}
+Note critically also that the isolated non-derivative part of this specific transformation can be formally written equivalently as:
+\begin{equation} \label{eq:w_nonderivative_transform}
+    \delta W_\mu^a = ig\alpha^c(T_{\mathrm{Adj}}^c)^{ab}W_\mu^b + \cdots
+\end{equation}
+which prominently highlights the underlying tensorial character of this specific part of the transformation, perfectly matching Eq. (\ref{eq:f_adjoint_transform}).
+
+Finally, let us formally recall that the continuous Jacobi identities for completely arbitrary operators, once carefully applied directly to the covariant derivative operator \(D_\mu = \partial_\mu + g W_\mu\)
+\begin{equation} \label{eq:jacobi_covariant}
+    [D_\mu, [D_\nu, D_\lambda]] + [D_\nu, [D_\lambda, D_\mu]] + [D_\lambda, [D_\mu, D_\nu]] = 0 \, ,
+\end{equation}
+give geometric rise directly to the so-called mathematical Bianchi identities strictly governing the field strength \(F_{\mu\nu}\):
+\begin{equation} \label{eq:bianchi_identity}
+    D_\mu F_{\nu\lambda} + D_\nu F_{\lambda\mu} + D_\lambda F_{\mu\nu} = 0 \, ,
+\end{equation}
+where the relevant covariant derivative strictly evaluated in the adjoint representation is analytically written as:
+\begin{equation} \label{eq:cov_derivative_adjoint}
+    D_\mu F_{\nu\lambda} = \partial_\mu F_{\nu\lambda} + g[W_\mu, F_{\nu\lambda}]
+\end{equation}
+that, when broken down in explicit components, structurally takes the complete form:
+\begin{equation} \label{eq:bianchi_components}
+    D_\mu F_{\nu\lambda}^a = \partial_\mu F_{\nu\lambda}^a + g f^{abc} W_\mu^b F_{\nu\lambda}^c \, .
+\end{equation}
+
+\subsection{The action of quantum chromodynamics (QCD)}
+
+\subsubsection{The Gauge Group and Gluons}
+
+The fundamental action of quantum chromodynamics (QCD) is built upon the non-abelian gauge group \(SU(3)\). In addition to the gluons—the eight spin-1 particles associated with the gauge field \(W_\mu^a\), which inherently possess an index in the adjoint representation and thus belong to the \(\mathbf{8}\) representation of \(SU(3)\)—the total lagrangian contains six distinct fermion fields \(\psi_f\) corresponding to the six known flavors of quarks, denoted by \(f = (u, d, c, s, t, b)\). These correspond to the up, down, charm, strange, top, and bottom quarks, respectively.
+
+Each individual quark flavor is degenerate in the sense that it transforms in the fundamental \(\mathbf{3}\) representation of the \(SU(3)\) gauge group: the quark is physically said to be "colored" (typically denoted with colors red, green, and blue, following the usual convention). The absence of color geometrically indicates a scalar under the gauge group, much like the total lagrangian itself (a scalar quantity rigorously corresponds to the trivial representation \(\mathbf{1}\) of \(SU(3)\)).
+
+Naturally, the corresponding antiparticles, the antiquarks \((\bar{u}, \bar{d}, \bar{c}, \bar{s}, \bar{t}, \bar{b})\), transform in the complex conjugate representation, the \(\overline{\mathbf{3}}\) of \(SU(3)\), which mathematically corresponds to the representation of \(\overline{\psi}_f\), the Dirac conjugate of \(\psi_f\)\footnote{Given the defining matrices in the fundamental representation \(U = e^{i\alpha^a T_F^a}\), the complex conjugate matrices also elegantly furnish a valid representation \(U^* = e^{-i\alpha^a T_F^{a*}} = e^{i\alpha^a(-T_F^{a*})} \equiv e^{i\alpha^a T_{\overline{F}}^a}\) so that \(T_{\overline{F}}^a = -T_F^{a*} = -T_F^{aT}\), where the last relation follows directly because the established generators are hermitian.}.
+
+\subsubsection{Gell-Mann Matrices and the QCD Lagrangian}
+
+The eight infinitesimal generators of \(SU(3)\) evaluated in the fundamental representation are explicitly given by the Gell-Mann matrices \(\lambda^a\), which systematically generalize the well-known Pauli matrices \(\sigma^i\) of \(SU(2)\) to the higher-dimensional \(SU(3)\) case:
+\begin{equation} \label{eq:gell_mann_def}
+    T^a = \frac{\lambda^a}{2} \qquad a = 1, \dots, 8
+\end{equation}
+where these matrices are defined as:
+\begin{equation} \label{eq:gell_mann_matrices}
+    \begin{aligned}
+        \lambda^1 & = \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix} , \qquad \lambda^2 = \begin{pmatrix} 0 & -i & 0 \\ i & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix} , \qquad \lambda^3 = \begin{pmatrix} 1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 0 \end{pmatrix}                         \\
+        \lambda^4 & = \begin{pmatrix} 0 & 0 & 1 \\ 0 & 0 & 0 \\ 1 & 0 & 0 \end{pmatrix} , \qquad \lambda^5 = \begin{pmatrix} 0 & 0 & -i \\ 0 & 0 & 0 \\ i & 0 & 0 \end{pmatrix}                                                                                                                 \\
+        \lambda^6 & = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 1 & 0 \end{pmatrix} , \qquad \lambda^7 = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & -i \\ 0 & i & 0 \end{pmatrix} , \qquad \lambda^8 = \frac{1}{\sqrt{3}} \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & -2 \end{pmatrix} \, .
+    \end{aligned}
+\end{equation}
+These specific generators are mathematically normalized so that they satisfy \(\mathrm{tr}(T^a T^b) = \frac{1}{2}\delta^{ab}\).
+
+An arbitrary element of the \(SU(3)\) group residing in the fundamental representation is therefore formally given by \(3 \times 3\) matrices taking the form \(U = \exp(i\alpha_a \frac{\lambda^a}{2})\). By explicitly calculating the Lie algebra relations \([T^a, T^b] = i f^{abc} T^c\), one systematically finds the explicit values of the structure constants \(f^{abc}\) belonging to the \(SU(3)\) group. They are totally antisymmetric under any permutation of indices and are given by:
+\[
+    \begin{aligned}
+        f^{123}                                & = 1                                \\
+        f^{147} = -f^{156} = f^{246} = f^{257} & = f^{345} = -f^{367} = \frac{1}{2} \\
+        f^{458} = f^{678}                      & = \frac{\sqrt{3}}{2}
+    \end{aligned}
+\]
+while all other \(f^{abc}\) strictly not related to these by permuting the indices are identically zero. As an instructive exercise, one may try to explicitly verify some of these numbers.
+
+The complete QCD lagrangian is therefore constructed as:
+\begin{equation} \label{eq:qcd_lagrangian}
+    \begin{aligned}
+        \mathcal{L}_{QCD} & = -\frac{1}{4} F_{\mu\nu}^a F^{\mu\nu a} - \sum_{f=1}^6 \overline{\psi}_f \Big(\gamma^\mu D_\mu + m_f\Big) \psi_f                                                                                            \\
+                          & = -\frac{1}{4} F_{\mu\nu}^a F^{\mu\nu a} - \sum_{f=1}^6 \overline{\psi}_f \Big(\gamma^\mu \partial_\mu + m_f\Big) \psi_f + i\frac{g_s}{2} W_\mu^a \sum_{f=1}^6 \overline{\psi}_f \gamma^\mu \lambda^a \psi_f
+    \end{aligned}
+\end{equation}
+
+\TODO{add image of Feynman diagrams representing the terms in the QCD lagrangian}
+
+where the strong coupling constant is conventionally denoted by \(g_s\), and the sum index \(f \in (1, 2, \dots, 6) = (u, d, c, s, t, b)\) specifically indicates the distinct flavor of the quark. Different flavors of quarks physically possess different masses \(m_f\). Note carefully that to obtain the valid mathematical propagator of the gauge field from the very first term, as indicated conceptually in the corresponding figure, one must first rigorously implement a formal gauge-fixing procedure.
+
+\subsubsection{Flavor Symmetries and Symmetries of the Action}
+
+The QCD lagrangian dynamically possesses additional rigid global symmetries. A well-known rigid symmetry is the \(U(1)\) symmetry which uniformly rotates all fields of the quarks by the exact same overall phase (\(\psi_f \rightarrow \psi'_f = e^{i\alpha/3}\psi_f\) for all \(f\), where the factor of \(\frac{1}{3}\) is strictly conventional): the associated conserved physical charge is the \textit{baryon number} \(B\). It is a robust symmetry that is faithfully preserved also by the other fundamental interactions evaluated at the perturbative level (nonperturbative electroweak transitions dynamically violate \(B+L\) while strictly preserving \(B-L\) with \(L\) denoting the lepton number).
+
+Other independent \(U(1)\) symmetries rotate the various fermionic fields entirely separately. They logically give rise to precise conservation laws of the respective \textit{fermion numbers} (e.g. strangeness \(\mathcal{S}\), charm \(\mathcal{C}\), etc.). These distinct flavor symmetries are exactly preserved for QCD (and QED), but the weak force structurally violates them. There are exactly six \(U(1)\) independent conserved charges, one for each specific quark flavor, and the global baryon number \(B\) is mathematically a particular linear combination of these six independent initial charges. Also, the physical \textit{electric charge} \(Q\) is a specific linear combination of them, and it is precisely the one which is eventually locally gauged to correctly obtain the electromagnetic couplings.
+
+A comprehensive summary of these \(U(1)\) symmetries is explicitly given in the following table, which rigorously reports the various \(U(1)\) charges with a widely accepted standard normalization:
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|c|c|c|c|c|c||c|c|}
+        \hline
+        Quarks & \(\mathcal{U}\) & \(\mathcal{D}\) & \(\mathcal{C}\) & \(\mathcal{S}\) & \(\mathcal{T}\) & \(\mathcal{B}\) & \(B\)           & \(Q\)                      \\
+        \hline\hline
+        \(u\)  & 1               & 0               & 0               & 0               & 0               & 0               & \(\frac{1}{3}\) & \(\phantom{-}\frac{2}{3}\) \\ \hline
+        \(d\)  & 0               & \(-1\)          & 0               & 0               & 0               & 0               & \(\frac{1}{3}\) & \(-\frac{1}{3}\)           \\ \hline\hline
+        \(c\)  & 0               & 0               & 1               & 0               & 0               & 0               & \(\frac{1}{3}\) & \(\phantom{-}\frac{2}{3}\) \\ \hline
+        \(s\)  & 0               & 0               & 0               & \(-1\)          & 0               & 0               & \(\frac{1}{3}\) & \(-\frac{1}{3}\)           \\ \hline\hline
+        \(t\)  & 0               & 0               & 0               & 0               & 1               & 0               & \(\frac{1}{3}\) & \(\phantom{-}\frac{2}{3}\) \\ \hline
+        \(b\)  & 0               & 0               & 0               & 0               & 0               & \(-1\)          & \(\frac{1}{3}\) & \(-\frac{1}{3}\)           \\ \hline
+    \end{tabular}
+\end{center}
+
+Note critically that we have indicated the baryon number explicitly by \(B\), and the bottom (or beauty) quantum number by \(\mathcal{B}\). For each continuous symmetry, each quark flavor formally transforms with the specific charge indicated in the table. For example, for the physical electric charge \(Q\) we have the transformation:
+\begin{equation} \label{eq:electric_transform}
+    \psi_f \rightarrow \psi'_f = e^{i\alpha Q_f} \psi_f \, .
+\end{equation}
+By carefully looking at the generated table, one immediately recognizes the following algebraic relations:
+\begin{equation} \label{eq:charge_relations}
+    \begin{aligned}
+        B & = \frac{1}{3}(\mathcal{U} + \mathcal{C} + \mathcal{T}) - \frac{1}{3}(\mathcal{D} + \mathcal{S} + \mathcal{B})      \\
+        Q & = \frac{2}{3}(\mathcal{U} + \mathcal{C} + \mathcal{T}) + \frac{1}{3}(\mathcal{D} + \mathcal{S} + \mathcal{B}) \, .
+    \end{aligned}
+\end{equation}
+
+\subsubsection{Isospin and the Eightfold Way}
+
+There are also highly useful approximate symmetries characterizing the QCD lagrangian. In the theoretical limit in which some of the quark masses are mathematically taken to be strictly identical, there emerges a rigid additional non-abelian symmetry. For example, assuming identically matched masses for the up and down quarks, \(m_u = m_d\), one can continuously mix the specific fields \(\psi_u\) and \(\psi_d\) with a \(SU(2)\) matrix to effectively redefine what is physically meant by "up" and "down":
+\begin{equation} \label{eq:isospin_su2}
+    \begin{pmatrix} \psi_u \\ \psi_d \end{pmatrix} \rightarrow \begin{pmatrix} \psi'_u \\ \psi'_d \end{pmatrix} = U \begin{pmatrix} \psi_u \\ \psi_d \end{pmatrix} \qquad U \in SU(2) \, .
+\end{equation}
+This rigid \(SU(2)\) symmetry directly corresponds to the \textit{strong isospin} \(\vec{I}\), successfully used to properly group hadrons into distinct families or multiplets. From physical phenomenology, one knows that the strong force tightly binds states of quarks together and clearly shows the profound phenomenon of color confinement: physically bound states of quarks are always color singlets and directly correspond to the observable mesons and baryons. Key examples of these families are: (i) the isospin doublet of the core nucleons (proton and neutron) structurally composed of three confined up and down quarks; (ii) the triplet of \(\pi\) mesons, the pions \(\pi^\pm\) and \(\pi^0\), fundamentally composed of a quark and an antiquark entirely of the up and down types.
+
+Considering structurally identical masses for the quarks up, down, and strange, \(m_u = m_d = m_s\), one logically finds an even larger symmetry group, the \textit{\(SU(3)\) flavor group}, that continuously mixes the three flavors up, down, and strange:
+\begin{equation} \label{eq:flavor_su3}
+    \begin{pmatrix} \psi_u \\ \psi_d \\ \psi_s \end{pmatrix} \rightarrow \begin{pmatrix} \psi'_u \\ \psi'_d \\ \psi'_s \end{pmatrix} = U \begin{pmatrix} \psi_u \\ \psi_d \\ \psi_s \end{pmatrix} \qquad U \in SU(3) \, .
+\end{equation}
+This \(SU(3)\) flavor group is precisely the one that is heavily used in the static quark model (the famous "eightfold way" of Gell-Mann) to neatly take care of the numerous similarities observationally observed between the various hadrons. It should strictly not be confused with the foundational color group, which is dynamically also an \(SU(3)\) group. As already emphatically said, color is expected to tightly confine inside the hadrons and thus leaves only composite colorless states physically observable. Key examples of observable multiplets of hadronic particles successfully described by the \(SU(3)\) flavor group are:
+\begin{itemize}
+    \item the meson octet (\(\pi^\pm, \pi^0, K^\pm, K^0, \bar{K}^0, \eta_8\)),
+    \item the baryon octet (\(p, n, \Sigma^\pm, \Sigma^0, \Xi^0, \Xi^-, \Lambda\)),
+    \item the baryon decuplet (\(\Delta^-, \Delta^0, \Delta^+, \Delta^{++}, \Sigma^{*\pm}, \Sigma^{*0}, \Xi^{*0}, \Xi^{*-}, \Omega^-\)).
+\end{itemize}
+
+The physical existence of these structured families is entirely compatible with formal group theory: the \(\mathbf{8}\) and the \(\mathbf{10}\) are well-known representations of \(SU(3)\). Let us logically consider the mesons in more precise detail. They phenomenologically consist of a quark-antiquark pair \((q\bar{q})\). The quarks \(q\) transform dynamically in the \(\mathbf{3}\) of \(SU(3)\), with \(\mathbf{3} \sim (u, d, s)\), while the antiquarks \(\bar{q}\) transform mathematically in the \(\overline{\mathbf{3}}\) of \(SU(3)\), with \(\overline{\mathbf{3}} \sim (\bar{u}, \bar{d}, \bar{s})\). From this, it logically follows that possible physically bound states \((q\bar{q})\) must transform in the tensor product space:
+\[
+    \mathbf{3} \otimes \overline{\mathbf{3}} = \mathbf{1} \oplus \mathbf{8}
+\]
+and therefore both singlet and octets could, in theoretical principle, exist physically for the mesons.
+
+Baryons are tightly bound states of three quarks \((qqq)\), and since \(SU(3)\) group theory mathematically tells us that
+\[
+    \mathbf{3} \otimes \mathbf{3} \otimes \mathbf{3} = (\mathbf{6} \oplus \overline{\mathbf{3}}) \otimes \mathbf{3} = \mathbf{10} \oplus \mathbf{8} \oplus \mathbf{8} \oplus \mathbf{1}
+\]
+we intuitively understand that octets and decuplets are formally allowed structural possibilities for multiplets of baryons.
+
+It is also theoretically useful to consider a noticeably simpler version of QCD strictly containing only three massless flavours of fermions. This can often provide a highly good approximation, since the actual physical masses of the three lightest quarks can often be reasonably neglected in many high-energy regimes. In this idealized limit, the full global internal symmetry is:
+\begin{equation} \label{eq:chiral_symmetry}
+    U(3)_L \times U(3)_R = U(3)_V \times U(3)_A = U(1)_V \times SU(3)_V \times U(1)_A \times SU(3)_A \, .
+\end{equation}
+The axial symmetry \(SU(3)_A\) is dynamically spontaneously broken, logically giving rise to eight purely massless Goldstone bosons, which are phenomenologically identified with the meson octet explicitly described above. By contrast, the \(U(1)_A\) symmetry is fundamentally broken by the quantum axial anomaly and therefore does not survive as a true symmetry at the fully quantum level. Consequently, strictly no corresponding physical Goldstone boson is expected.
