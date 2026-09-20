@@ -1,0 +1,298 @@
+\section{Spin 1/2}
+
+\subsection{Dirac Equation and Gamma Matrices}
+
+Fermions of spin-1/2 are mathematically described by a 4-component complex object known as a Dirac spinor, $\psi(x)$. The classical field equation governing the dynamics of this free spinor is the \textbf{Dirac equation}:
+\[
+    (i\slashed{\partial} - m)\psi = 0
+\]
+where we introduce the Feynman slash notation defined as $\slashed{\partial} \equiv \gamma^\mu \partial_\mu$. The fundamental structural elements here are the \textbf{$\gamma$ matrices} ($\gamma^\mu$, with $\mu = 0, 1, 2, 3$). These are $4 \times 4$ matrices that strictly obey the fundamental Clifford algebra anticommutation relation:
+\[
+    \{ \gamma^\mu, \gamma^\nu \} = 2g^{\mu\nu}\mathbb{1}_{4\times 4}
+\]
+\begin{remark}
+    The $4 \times 4$ identity matrix $\mathbb{1}_{4\times 4}$ on the right-hand side is very often left implicit in QFT literature. Furthermore, by squaring the Dirac equation operator $(i\slashed{\partial} - m)(-i\slashed{\partial} - m) = \square + m^2$, one can show that every component of the Dirac spinor individually satisfies the Klein-Gordon equation $(\square + m^2)\psi = 0$, ensuring the correct relativistic energy-momentum dispersion relation $p^2 = m^2$.
+\end{remark}
+
+While the physics is independent of the chosen matrix representation, an explicit and highly convenient choice for relativistic physics is the \textbf{Weyl (or Chiral) representation}. Using $2 \times 2$ block matrices:
+\[
+    \gamma^\mu = \begin{pmatrix} 0 & \sigma^\mu \\ \bar{\sigma}^\mu & 0 \end{pmatrix}
+\]
+where $\sigma^\mu = (\mathbb{1}_{2\times 2}, \vec{\sigma})$ and $\bar{\sigma}^\mu = (\mathbb{1}_{2\times 2}, -\vec{\sigma})$. The spatial components $\vec{\sigma}$ are the standard $2 \times 2$ Pauli matrices:
+\[
+    \sigma_1 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \quad \sigma_2 = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}, \quad \sigma_3 = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}
+\]
+
+
+\subsection{Free Spinor Solutions and Helicity}
+
+We search for plane-wave solutions to the Dirac equation of the form:
+\[
+    \psi(x) = \begin{cases} u_s(p) e^{-ip \cdot x} \quad (\text{positive frequency}) \\ v_s(p) e^{+ip \cdot x} \quad (\text{negative frequency}) \end{cases}
+\]
+where $u_s(p)$ is a spinor representing a particle, and $v_s(p)$ is an anti-spinor representing an anti-particle. The 4-momentum must satisfy $p^2 = m^2$ and $p^0 > 0$. Substituting these into the Dirac equation yields momentum-space algebraic constraints:
+\[
+    (\slashed{p} - m)u_s = 0, \qquad (\slashed{p} + m)v_s = 0
+\]
+For a given momentum $p^\mu$, there are two linearly independent solutions for both $u$ and $v$, labeled by an internal index $s = \pm$, which corresponds to the spin state.
+
+To find explicit forms, let us take the momentum $\vec{p}$ to be aligned parallel to the $z$-axis (which is always possible via spatial rotation). The solutions take the form:
+\[
+    u_s = \begin{pmatrix} \sqrt{E - p_z} \, \eta_s \\ \sqrt{E + p_z} \, \eta_s \end{pmatrix}, \qquad v_s = \begin{pmatrix} \sqrt{E - p_z} \, \eta_s \\ -\sqrt{E + p_z} \, \eta_s \end{pmatrix}
+\]
+where $\eta_s$ are two-component basis vectors. We can explicitly choose the basis of \textbf{helicity eigenstates}, where helicity is defined as the projection of the spin vector along the direction of the momentum $\vec{p}$:
+\[
+    \eta_+ = \begin{pmatrix} 1 \\ 0 \end{pmatrix} \quad (\text{spin parallel to } z\text{-axis} \to \text{positive helicity } +)
+\]
+\[
+    \eta_- = \begin{pmatrix} 0 \\ 1 \end{pmatrix} \quad (\text{spin anti-parallel to } z\text{-axis} \to \text{negative helicity } -)
+\]
+
+\begin{remark}
+    Alternatively, one could construct solutions by first defining eigenstates of spin along an arbitrary axis in the particle's rest frame ($E=m, \vec{p}=0$), and then applying a Lorentz boost to reach the desired momentum $\vec{p}$. However, defining spin along an arbitrary fixed axis requires the particle to be massive ($m \neq 0$) so that a rest frame exists. Helicity states, conversely, remain well-defined even for strictly massless particles ($m = 0$). Note also that spin is fundamentally a quantum observable and is properly defined only after quantization.
+\end{remark}
+
+
+\subsection{Lorentz Transformation of Spinors and Chirality}
+
+Under a Lorentz transformation, a Dirac spinor transforms according to a specific representation of the Lorentz group. The generators of Lorentz transformations for a Dirac spinor are given by the commutators of the gamma matrices:
+\[
+    S^{\mu\nu} = \frac{i}{4} [\gamma^\mu, \gamma^\nu]
+\]
+In the Weyl representation, these generators are explicitly \textit{block-diagonal}:
+\[
+    S^{\mu\nu} = \begin{pmatrix} (\text{non-zero})_{2\times 2} & 0 \\ 0 & (\text{non-zero})_{2\times 2} \end{pmatrix}
+\]
+This block-diagonal structure implies that the 4-component Dirac representation is mathematically \textit{reducible}. It decomposes into two distinct, independent 2-component representations. We decompose the Dirac spinor $\psi$ into two objects:
+\[
+    \psi = \begin{pmatrix} \psi_L \\ \psi_R \end{pmatrix}
+\]
+where $\psi_L$ represents a \textbf{Left-Chirality} Weyl spinor, and $\psi_R$ represents a \textbf{Right-Chirality} Weyl spinor. Under Lorentz transformations, $\psi_L$ and $\psi_R$ transform independently of each other.
+
+To formalize this mathematically without referencing a specific basis, we introduce the fifth gamma matrix, $\gamma^5$ (or $\gamma_5$):
+\[
+    \gamma^5 = i\gamma^0 \gamma^1 \gamma^2 \gamma^3
+\]
+In the Weyl representation, it takes a simple diagonal form:
+\[
+    \gamma^5 = \begin{pmatrix} -\mathbb{1}_{2\times 2} & 0 \\ 0 & \mathbb{1}_{2\times 2} \end{pmatrix}
+\]
+A critical property of $\gamma^5$ is that it exactly anti-commutes with all the other four gamma matrices: $\{ \gamma^\mu, \gamma^5 \} = 0$.
+
+Using $\gamma^5$, we can define Lorentz-invariant \textbf{Chirality Projectors}:
+\[
+    P_R = \frac{\mathbb{1} + \gamma^5}{2} = \begin{pmatrix} 0 & 0 \\ 0 & \mathbb{1} \end{pmatrix}, \qquad P_L = \frac{\mathbb{1} - \gamma^5}{2} = \begin{pmatrix} \mathbb{1} & 0 \\ 0 & 0 \end{pmatrix}
+\]
+These operators project out the right-handed ($P_R \psi = \psi_R$) and left-handed ($P_L \psi = \psi_L$) chiral components of any generic Dirac spinor.
+
+\begin{remark}
+    For the special case of strictly massless fermions ($m=0$), chirality and helicity are intimately connected but fundamentally distinct concepts:
+    \begin{itemize}
+        \item For massless \textbf{particles}: Chirality perfectly coincides with Helicity.
+        \item For massless \textbf{anti-particles}: Chirality is exactly opposite to Helicity.
+    \end{itemize}
+\end{remark}
+
+\subsubsection{Bilinears and Spinor Sums}
+To construct Lorentz invariant quantities (like Lagrangians) from spinors, we must define the \textbf{Dirac adjoint spinor}:
+\[
+    \bar{\psi} \equiv \psi^\dagger \gamma^0
+\]
+This is necessary because the naive hermitian inner product $\psi^\dagger \psi$ is \textit{not} Lorentz invariant. However, utilizing the adjoint spinor, we can construct various objects with definite Lorentz transformation properties:
+\begin{itemize}
+    \item $\bar{\psi} \psi$ transforms as a \textbf{Lorentz Scalar} (invariant).
+    \item $\bar{\psi} \gamma^\mu \psi$ transforms as a \textbf{Lorentz Vector}.
+    \item $\bar{\psi} \gamma^\mu \gamma^\nu \dots \psi$ transforms as a \textbf{Lorentz Tensor}.
+\end{itemize}
+
+When calculating cross-sections and decay rates later, we will heavily rely on the \textbf{spinor sum completeness relations}:
+\[
+    \sum_s u_s(p) \bar{u}_s(p) = \slashed{p} + m
+\]
+\[
+    \sum_s v_s(p) \bar{v}_s(p) = \slashed{p} - m
+\]
+These relations mathematically sum over the unobserved spin states of external fermions, converting spinor products into trace operations over gamma matrices.
+
+
+\subsection{Quantization of the Dirac Field}
+
+The classical Lagrangian density for the free Dirac field is:
+\[
+    \mathcal{L} = \bar{\psi}(i\slashed{\partial} - m)\psi
+\]
+This Lagrangian is invariant under a global $U(1)$ phase transformation $\psi \to e^{i\alpha}\psi$, $\bar{\psi} \to e^{-i\alpha}\bar{\psi}$. By Noether's theorem, this yields the conserved vector current:
+\[
+    J^\mu = \bar{\psi} \gamma^\mu \psi
+\]
+
+To quantize the theory, we promote the classical field $\psi(x)$ and its adjoint $\bar{\psi}(x)$ to operators. Following the \textbf{Spin-Statistics Theorem}, fermions (particles with half-integer spin) must obey Fermi-Dirac statistics, which requires that their corresponding quantum operators satisfy \textbf{anti-commutation relations}, unlike bosons (integer spin) which obey commutation relations.
+
+The Fourier expansion of the quantum field operators is:
+\[
+    \hat{\psi}(x) = \int \frac{d^3k}{(2\pi)^3} \frac{1}{\sqrt{2E_{\vec{k}}}} \sum_s \left( \hat{a}_{\vec{k}}^s u_s(k) e^{-ik \cdot x} + \hat{b}_{\vec{k}}^{s\dagger} v_s(k) e^{ik \cdot x} \right)
+\]
+\[
+    \hat{\bar{\psi}}(x) = \int \frac{d^3k}{(2\pi)^3} \frac{1}{\sqrt{2E_{\vec{k}}}} \sum_s \left( \hat{b}_{\vec{k}}^s \bar{v}_s(k) e^{-ik \cdot x} + \hat{a}_{\vec{k}}^{s\dagger} \bar{u}_s(k) e^{ik \cdot x} \right)
+\]
+where the creation and annihilation operators satisfy the fundamental anti-commutation algebra:
+\[
+    \{ \hat{a}_{\vec{k}}^r, \hat{a}_{\vec{k}'}^{s\dagger} \} = \{ \hat{b}_{\vec{k}}^r, \hat{b}_{\vec{k}'}^{s\dagger} \} = (2\pi)^3 \delta^{(3)}(\vec{k} - \vec{k}') \delta^{rs}
+\]
+All other anti-commutators strictly vanish. The use of anti-commutators naturally enforces the Pauli Exclusion Principle, guaranteeing that two identical fermions cannot occupy the exact same quantum state.
+
+\subsubsection{The Dirac Propagator}
+The causal propagation of a spin-1/2 fermion is described by the Feynman propagator, defined as the time-ordered expectation value of the field operators:
+\[
+    S_F(x, y) = S_F(x - y) = \langle 0 | T \{ \hat{\psi}(x) \hat{\bar{\psi}}(y) \} | 0 \rangle
+\]
+Evaluating this using the mode expansion and the anti-commutation relations, one obtains the momentum-space representation:
+\[
+    S_F(x, y) = \int \frac{d^4k}{(2\pi)^4} \frac{i(\slashed{k} + m)}{k^2 - m^2 + i0^+} e^{-ik \cdot (x - y)}
+\]
+\begin{remark}
+    Algebraically, notice the relation $(\slashed{k} + m)(\slashed{k} - m) = k^2 - m^2$. This allows us to formally rewrite the momentum-space propagator as the exact inverse matrix of the Dirac differential operator:
+    \[
+        \frac{i(\slashed{k} + m)}{k^2 - m^2} = \frac{i}{\slashed{k} - m}
+    \]
+\end{remark}
+
+\section{Spin 1}
+
+\subsection{The Massless Vector Field (Electromagnetism)}
+
+A rigorous derivation of the Lagrangian for a vector field \(A^\mu\) from first principles (group theory and Lorentz representations) can be done, but for now, we simply "copy" it from classical electromagnetism. The classical Lagrangian density for a massless vector field coupled to an external source is:
+\[
+    \mathcal{L} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} - A_\mu J^\mu
+\]
+where \(F_{\mu\nu} \equiv \partial_\mu A_\nu - \partial_\nu A_\mu\) is the electromagnetic field strength tensor, and \(J^\mu = (\rho, \vec{J})\) is the 4-current density (with \(\rho\) being the charge density and \(\vec{J}\) the current density). In the vacuum, we simply set \(J^\mu = 0\). The 4-potential is defined as \(A^\mu = (\phi, \vec{A})\), containing the scalar electric potential \(\phi\) and the vector magnetic potential \(\vec{A}\).
+
+The classical equations of motion, derived from the Euler-Lagrange equations, are the covariant Maxwell equations:
+\[
+    \partial_\mu F^{\mu\nu} = J^\nu \implies \square A^\nu - \partial^\nu (\partial_\mu A^\mu) = J^\nu
+\]
+
+\subsubsection*{Gauge Invariance and Current Conservation}
+
+A fundamental property of this Lagrangian is its behavior under a \textbf{gauge transformation}:
+\[
+    A_\mu \to A_\mu + \partial_\mu \alpha(x)
+\]
+for any arbitrary scalar function \(\alpha(x)\). The field strength tensor \(F_{\mu\nu}\) is identically invariant under this transformation (since mixed partial derivatives commute: \(\partial_\mu \partial_\nu \alpha = \partial_\nu \partial_\mu \alpha\)). Consequently, the free equations of motion are also invariant. This means the field \(A^\mu\) is physically defined only up to a gauge transformation, creating a redundancy that allows us to remove 2 unphysical degrees of freedom from the 4 components of \(A^\mu\).
+
+Common gauge choices include:
+\begin{itemize}
+    \item \textbf{Coulomb Gauge:} \(\partial_i A^i = \nabla \cdot \vec{A} = 0\) (useful but breaks manifest Lorentz covariance).
+    \item \textbf{Lorenz Gauge:} \(\partial_\mu A^\mu = 0\) (manifestly covariant, heavily used in QFT).
+\end{itemize}
+
+\begin{remark}
+    There is a profound connection between gauge invariance and the conservation of the 4-current. If we apply the transformation \(A_\mu \to A_\mu + \partial_\mu \alpha\) to the interaction term of the Lagrangian, the variation is:
+    \[
+        \delta \mathcal{L} = -(\partial_\mu \alpha) J^\mu = -\partial_\mu (\alpha J^\mu) + \alpha (\partial_\mu J^\mu)
+    \]
+    The first term is a total derivative. In the action \(S = \int d^4x \, \mathcal{L}\), total derivatives integrate to zero (assuming fields vanish at infinity). Thus, for the total action to be completely gauge invariant (\(\delta S = 0\)), the second term must vanish for any \(\alpha(x)\), which strictly requires \textbf{current conservation}:
+    \[
+        \partial_\mu J^\mu = 0 \iff \frac{\partial \rho}{\partial t} + \nabla \cdot \vec{J} = 0
+    \]
+\end{remark}
+
+\subsection{Classical Solutions and Degrees of Freedom}
+
+Consider the free theory in the vacuum (\(J^\mu = 0\)). We impose the Lorenz gauge condition \(\partial_\mu A^\mu = 0\). Using a plane-wave ansatz (representing a Fourier component of the field):
+\[
+    A^\mu(x) = \varepsilon^\mu e^{-i k \cdot x}
+\]
+Plugging this into the equations of motion in the Lorenz gauge (\(\square A^\mu = 0\)) gives:
+\[
+    -k^2 \varepsilon^\mu e^{-i k \cdot x} = 0 \implies k^2 = 0
+\]
+This implies that the field \(A^\mu\) describes a \textbf{massless} particle (the photon), as its 4-momentum satisfies \(E^2 = |\vec{k}|^2\).
+Furthermore, the Lorenz gauge condition requires:
+\[
+    \partial_\mu A^\mu = 0 \implies -i k_\mu \varepsilon^\mu e^{-i k \cdot x} = 0 \implies k_\mu \varepsilon^\mu = 0
+\]
+This orthogonality condition removes 1 degree of freedom from the 4 components of the polarization vector \(\varepsilon^\mu\).
+
+However, \(\partial_\mu A^\mu = 0\) does \textit{not} completely fix the gauge. We can perform a residual gauge transformation \(A^\mu \to A^\mu + \partial^\mu \alpha\) provided that \(\square \alpha = 0\). Choosing \(\alpha(x) = i C e^{-i k \cdot x}\) yields:
+\[
+    A^\mu \to (\varepsilon^\mu + C k^\mu) e^{-i k \cdot x}
+\]
+This corresponds to a shift of the polarization vector \(\varepsilon^\mu \to \varepsilon^\mu + C k^\mu\). By choosing the constant \(C = -\varepsilon^0 / k^0\), we can explicitly set the temporal component \(\varepsilon^0 = 0\).
+
+If we align the momentum along the \(z\)-axis, \(\vec{k} = (0, 0, k^0)\), the 4-momentum is \(k^\mu = (k^0, 0, 0, k^0)^T\). The condition \(k_\mu \varepsilon^\mu = 0\) with \(\varepsilon^0 = 0\) forces:
+\[
+    0 - k^0 \varepsilon^3 = 0 \implies \varepsilon^3 = 0
+\]
+Thus, the physical polarization vector takes the form \(\varepsilon^\mu = (0, \varepsilon^1, \varepsilon^2, 0)^T\). There are \textbf{only 2 physical degrees of freedom}, representing transverse polarizations.
+
+\subsection{Helicity States}
+
+As a basis for the transverse polarization vectors, we usually define the circular polarization states:
+\[
+    \varepsilon^\mu_\pm = \frac{1}{\sqrt{2}} \begin{pmatrix} 0 \\ 1 \\ \pm i \\ 0 \end{pmatrix}
+\]
+These vectors are eigenvectors of a rotation matrix around the direction of motion (the \(z\)-axis).
+\TODO{add diagram showing a rotation around the z-axis and the associated right-handed and left-handed helicity vectors}
+Applying the rotation matrix \(R(\theta)\):
+\[
+    R(\theta)^\mu_{~\nu} \varepsilon^\nu_\pm = e^{\pm i\theta} \varepsilon^\mu_\pm
+\]
+The eigenvalues \(e^{ih\theta}\) reveal the \textbf{helicity} \(h = \pm 1\). After quantization, these become the helicity states (eigenstates of spin parallel to the direction of propagation). A vector field therefore physically corresponds to a particle with \textbf{Spin-1}.
+
+\subsection{The Massive Spin-1 Field (Proca Lagrangian)}
+
+To describe a massive vector boson, we explicitly add a mass term to the Lagrangian:
+\[
+    \mathcal{L} = \mathcal{L}_{\text{massless}} + \frac{1}{2} m^2 A_\mu A^\mu
+\]
+\begin{remark}
+    Unlike the massless case, this mass term is strictly \textbf{not gauge invariant}. Gauge symmetry is explicitly broken by the mass of the vector field.
+\end{remark}
+
+The equation of motion (for \(J^\mu = 0\)) becomes the Proca equation:
+\[
+    \square A^\mu - \partial^\mu(\partial_\nu A^\nu) + m^2 A^\mu = 0
+\]
+If we take the 4-divergence (\(\partial_\mu\)) of both sides, the first two terms cancel out (\(\partial_\mu \square A^\mu - \square \partial_\mu A^\mu = 0\)), leaving:
+\[
+    m^2 \partial_\mu A^\mu = 0 \implies \partial_\mu A^\mu = 0 \quad (\text{since } m \neq 0)
+\]
+Here, \(\partial_\mu A^\mu = 0\) is \textit{not} an arbitrary gauge choice, but a strict dynamical constraint forced by the equations of motion.
+
+For a plane wave solution \(A^\mu(x) = \varepsilon^\mu e^{-i k \cdot x}\), we still have \(k_\mu \varepsilon^\mu = 0\). However, because \(k^2 = m^2\) (not zero), we cannot use residual gauge freedom to eliminate a third degree of freedom. Thus, a massive spin-1 field has \textbf{3 independent polarization states}.
+If \(\vec{k} \parallel \hat{z}\), we have \(k^\mu = (k^0, 0, 0, k^3)^T\). Besides the two transverse states \(\varepsilon^\mu_\pm\), we now have a physical longitudinal polarization state:
+\[
+    \varepsilon^\mu_0 = \frac{1}{m} \begin{pmatrix} k^3 \\ 0 \\ 0 \\ k^0 \end{pmatrix}
+\]
+which satisfies \(k_\mu \varepsilon^\mu_0 = 0\) and is properly normalized to \(\varepsilon_0^2 = -1\).
+
+\begin{remark}
+    Massive vector bosons present severe theoretical problems at high energies, largely due to the longitudinal polarization state \(\varepsilon^\mu_0\) whose components grow with energy (\(\propto k/m\)), leading to unitarity violations in scattering amplitudes. In the Standard Model, the fundamental vector bosons (W and Z) are originally massless (preserving gauge invariance) and acquire mass dynamically via the \textbf{Higgs Mechanism}, neatly avoiding this issue.
+\end{remark}
+
+\subsection{Quantization and Propagators}
+
+The canonical quantization of the electromagnetic field is notoriously difficult precisely because of gauge invariance: infinitely many field configurations correspond to just one physical state, making the canonical momentum ill-defined. We will rigorously address this later using the Path Integral formalism (via Faddeev-Popov quantization).
+
+For now, by analogy with scalar fields, we write the free field operator expansion as:
+\[
+    \hat{A}^\mu(x) = \int \frac{d^3k}{(2\pi)^3} \frac{1}{\sqrt{2E_{\vec{k}}}} \sum_s \left( \varepsilon^\mu_s(\vec{k}) \hat{a}_{\vec{k},s} e^{-i k \cdot x} + \varepsilon^{\mu *}_s(\vec{k}) \hat{a}^\dagger_{\vec{k},s} e^{i k \cdot x} \right)
+\]
+The Feynman propagator is defined as the time-ordered expectation value:
+\[
+    \langle 0 | T \{ \hat{A}^\mu(x) \hat{A}^\nu(y) \} | 0 \rangle = \int \frac{d^4k}{(2\pi)^4} e^{-i k \cdot (x-y)} \Pi^{\mu\nu}(k)
+\]
+where \(\Pi^{\mu\nu}(k)\) is the propagator in momentum space.
+
+\begin{itemize}
+    \item \textbf{For a massive field (\(m \neq 0\))}, the propagator is uniquely determined as the Green function of the Proca equation:
+          \[
+              \Pi^{\mu\nu}(k) = \frac{i}{k^2 - m^2 + i0^+} \left( -g^{\mu\nu} + \frac{k^\mu k^\nu}{m^2} \right)
+          \]
+    \item \textbf{For a massless field (\(m = 0\))}, the operator \((\square g^{\mu\nu} - \partial^\mu \partial^\nu)\) is not invertible due to gauge invariance. We must explicitly "fix the gauge". The propagator takes the general form:
+          \[
+              \Pi^{\mu\nu}(k) = \frac{-i g^{\mu\nu}}{k^2 + i0^+} + \text{gauge-dependent terms}
+          \]
+          A convenient and widely used choice is the \textbf{Feynman gauge}, where the gauge-dependent terms exactly vanish, leaving just \(\Pi^{\mu\nu}(k) = -i g^{\mu\nu} / (k^2 + i0^+)\). While intermediate calculations depend on this choice, all physical observables (like scattering cross-sections) remain strictly gauge-independent.
+\end{itemize}
