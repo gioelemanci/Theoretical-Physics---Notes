@@ -1,62 +1,351 @@
 \section{Condensate Depletion and Excitations}
 
-We now want to compute the non condensate fraction of the weakly interacting Bose gas, which is given by the expectation value of the number operator for non-zero momentum states:
+In the previous section, we established that the approximate Hamiltonian of a weakly interacting Bose gas can be rewritten in a diagonal form using the Bogoliubov transformation. The ground state \( |\psi_0\rangle \) of this diagonalized Hamiltonian is defined precisely as the vacuum of the new Bogoliubov annihilation operators \( \alpha_{\mathbf{k}} \), meaning \( \alpha_{\mathbf{k}} |\psi_0\rangle = 0 \) for all \( \mathbf{k} \neq 0 \).
+
+In terms of the original bare particle creation and annihilation operators, we can compute the momentum distribution function in this interacting ground state for both the zero-momentum (\( \mathbf{k} = 0 \)) and non-zero-momentum (\( \mathbf{k} \neq 0 \)) states:
 \[
-    N - N_0 = \sum_{\mathbf{k}}^{\prime} \langle a_{\mathbf{k}}^\dagger a_{\mathbf{k}} \rangle,
+    \langle \psi_0 | a_0^\dagger a_0 | \psi_0 \rangle = N_0 \sim N,
 \]
-recalling that the expectation value of \(n_{\mathbf{k}} \) (number operator of the Bogoliubov quasiparticles) is \(v_{\mathbf{k}}^2\), which in the non interacting limit goes to zero:
 \[
-    v_{\mathbf{k}}^2 = \frac{1}{2}\left(\frac{\epsilon_k + nU_0}{E_k} - 1\right) \xrightarrow{U_0 \to 0} 0.
+    \langle \psi_0 | a_{\mathbf{k}}^\dagger a_{\mathbf{k}} | \psi_0 \rangle = v_k^2 \neq 0, \quad \mathbf{k} \neq 0.
 \]
+While in the non-interacting case all \( N \) particles condense into the single-particle state with \( \mathbf{k} = 0 \), the presence of interactions induces a partial quantum depletion of the condensate even at absolute zero.
 
-[...]
-
-sum to integrals
-
-    [...]
-
-We will just check the convergence of the integral in the ultraviolet limit (\(k \to \infty\) ), and in the infrared limit (\(k \to 0\)).
-
-    [...]
-
-dimensionless variables and occupation
+We now want to calculate the total number of these non-condensed bosons, denoted as \( N' \). This non-condensate fraction is evaluated by summing the expectation value of the bare number operator over all non-zero momentum states:
 \[
-    n^{\prime} = \dots
+    N' = N - N_0 = \sum_{\mathbf{k}}' \langle \psi_0 | a_{\mathbf{k}}^\dagger a_{\mathbf{k}} | \psi_0 \rangle = \sum_{\mathbf{k}}' v_k^2,
 \]
-[...]
+where the primed sum indicates summation over all \( \mathbf{k} \neq 0 \). As a consistency check, we recall the explicit form of \( v_k^2 \) derived earlier; in the strictly non-interacting limit, this excited occupation correctly vanishes:
+\[
+    v_k^2 = \frac{1}{2}\left(\frac{\epsilon_k + nU_0}{E_k} - 1\right) \xrightarrow{U_0 \to 0} 0.
+\]
+However, for interacting bosons, there is a fundamental partial depletion of the condensate even at zero temperature. Let us calculate the total number of non-condensed bosons $N'$. To evaluate this macroscopic quantity, we transition to the thermodynamic limit—taking $V \to \infty$ and $N \to \infty$ while keeping the density $n = N/V$ constant—which allows us to replace the discrete momentum sum with a continuous integral over $k$-space:
+\[
+    N' = \sum_{\mathbf{k}} v_k^2 \xrightarrow[\text{TD limit}]{N, V \to \infty, \ n \text{ const.}} V \int \frac{\mathrm{d}^3\mathbf{k}}{(2\pi)^3} v_k^2.
+\]
+Dividing both sides by the volume $V$, the density of non-condensed bosons $n'$ is given by:
+\begin{equation} \label{eq:depletion_density_integral}
+    n' = \frac{N'}{V} = \int \frac{\mathrm{d}^3\mathbf{k}}{(2\pi)^3} v_k^2.
+\end{equation}
 
-\TODO{add graph of ground state occupation number}
+Before explicitly calculating this integral, we will verify its mathematical convergence in both the infrared (long-wavelength, $k \to 0$) and ultraviolet (short-wavelength, $k \to \infty$) limits.
+When $k \to 0$, the Bogoliubov excitation energy $E_k \to 0$, which simplifies the occupation number to:
+\[
+    v_k^2 \sim \frac{nU_0}{2E_k} \quad (k \to 0).
+\]
 
-We can thus interact with the condensate by operating on the density, the only free parameter in \(c = \sqrt{\frac{n U_0}{m}} \).
+\paragraph{Infrared limit.}
+To analyze exactly how $E_k$ scales towards zero, we substitute the free particle dispersion $\epsilon_k = \hbar^2 k^2 / 2m$:
+\[
+    E_k \sim \sqrt{2nU_0\epsilon_k} = c\hbar k \quad (k \to 0),
+\]
+where we have conveniently defined the parameter $c$ as:
+\begin{equation} \label{eq:sound_velocity}
+    c = \sqrt{\frac{nU_0}{m}}.
+\end{equation}
+This quantity $c$ possesses the dimensions of a velocity and physically corresponds to the \textit{speed of sound} propagating through the weakly interacting Bose gas. Combining these small-$k$ expressions, the ground state occupation number diverges near the origin as:
+\[
+    v_k^2 \sim \frac{mc}{2\hbar k} \quad (k \to 0).
+\]
+Despite this $1/k$ divergence in the integrand, the integration measure $\mathrm{d}^3\mathbf{k}$ in spherical coordinates introduces a geometric factor of $k^2$, ensuring that the integral \eqref{eq:depletion_density_integral} is safely convergent for $k \to 0$.
+
+\paragraph{Ultraviolet limit.}
+Let us now examine the ultraviolet behavior as $k \to \infty$. By Taylor expanding the square root definition of $E_k$ in the limit where kinetic energy dominates the interaction ($\epsilon_k \gg nU_0$), we have:
+\[
+    E_k = \epsilon_k \sqrt{1 + \frac{2nU_0}{\epsilon_k}} \sim \epsilon_k \left[ 1 + \frac{nU_0}{\epsilon_k} - \frac{1}{2} \left(\frac{nU_0}{\epsilon_k}\right)^2 \right].
+\]
+Substituting this expansion back into the full expression for $v_k^2$, the leading-order terms cancel, leaving a rapid decay:
+\[
+    v_k^2 \sim \frac{1}{2} \left[ \frac{\epsilon_k + nU_0}{\epsilon_k \left( 1 + \frac{nU_0}{\epsilon_k} - \frac{1}{2} \left(\frac{nU_0}{\epsilon_k}\right)^2 \right)} - 1 \right] \sim \frac{(nU_0)^2}{4\epsilon_k^2} = \left(\frac{mc}{\hbar k}\right)^4.
+\]
+Because the occupation number decays as $1/k^4$ at large momenta, the integral converges absolutely at the $k \to \infty$ upper bound as well.
+
+To formally evaluate the integral, we introduce a natural dimensionless momentum variable $\tilde{k}$ defined as:
+\[
+    \tilde{k} = \frac{\hbar k}{mc},
+\]
+such that the occupation number can be elegantly rewritten as a universal function of $\tilde{k}$:
+\[
+    v_k^2 = v_{\tilde{k}}^2 = \frac{1}{2} \left( \frac{\tilde{k}^2/2 + 1}{\sqrt{\tilde{k}^4/4 + \tilde{k}^2}} - 1 \right).
+\]
+This final expression is considered universal in the sense that all system-specific dependencies, such as the particle density $n$ or the interaction potential strength $U_0$, have been completely absorbed into the definition of the dimensionless coordinate $\tilde{k}$.
+
+\begin{figure}[H]
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{img/1-gs_occupation_number.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.35\textwidth}
+        \caption{Occupation numbers of the ground state $v_{\tilde{k}}^2$. Notice that for small $\tilde{k}$ one has $v_{\tilde{k}}^2 \sim 1/(2\tilde{k})$, while for large $\tilde{k}$ one has $v_{\tilde{k}}^2 \sim 1/\tilde{k}^4$.}
+        \label{fig:gs_occupation_number}
+    \end{minipage}
+\end{figure}
+
+Having established its convergence and universality, we can explicitly compute the non-condensed density $n'$ by executing the change of variables from $k$ to $\tilde{k}$ inside the integral:
+\[
+    n' = \left(\frac{mc}{\hbar}\right)^3 \int \frac{\mathrm{d}^3\tilde{k}}{(2\pi)^3} \frac{1}{2} \left( \frac{\tilde{k}^2/2 + 1}{\sqrt{\tilde{k}^4/4 + \tilde{k}^2}} - 1 \right) = \left(\frac{mc}{\hbar}\right)^3 \frac{1}{4\pi^2} \int_0^\infty \tilde{k}^2 \left( \frac{\tilde{k}^2/2 + 1}{\sqrt{\tilde{k}^4/4 + \tilde{k}^2}} - 1 \right) \mathrm{d}\tilde{k}.
+\]
+This remaining one-dimensional integral over $\tilde{k}$ can be solved exactly, yielding a factor of $4/3$:
+\[
+    \int_0^\infty \tilde{k}^2 \left( \frac{\tilde{k}^2/2 + 1}{\sqrt{\tilde{k}^4/4 + \tilde{k}^2}} - 1 \right) \mathrm{d}\tilde{k} = \frac{4}{3}.
+\]
+Applying this result, the density of depleted bosons elegantly simplifies to:
+\[
+    n' = \frac{1}{3\pi^2} \left(\frac{mc}{\hbar}\right)^3.
+\]
+The fundamental fractional depletion of the condensate, given by the ratio $N'/N = n'/n$, is therefore:
+\begin{equation} \label{eq:condensate_depletion_fraction}
+    \frac{N'}{N} = \frac{1}{3\pi^2 n} \left(\frac{mc}{\hbar}\right)^3.
+\end{equation}
+
+We can thus interpret and manipulate the condensate depletion by operating strictly on the macroscopic density $n$ and the characteristic sound velocity $c = \sqrt{n U_0 / m}$. Because $c$ entirely encapsulates the underlying interaction strength $U_0$, it effectively acts as the single defining free parameter for the weakly interacting system's thermodynamic properties.
 
 \begin{example}[Scattering Length]
     The scattering length \(a\) is a measure of the strength of the interaction between two particles. It is defined as the distance at which the wave function of two interacting particles goes to zero. In the context of Bose-Einstein condensates, the scattering length plays a crucial role in determining the properties of the condensate, including its stability and the nature of its excitations.
 
-    For weakly interacting Bose gases, the scattering length can be related to the interaction potential \(U_0\) through the relation:
+    \begin{figure}[H]
+        \begin{minipage}{0.55\textwidth}
+            \caption{Scattering process with incoming momentum \( \mathbf{p} \) and outgoing momentum \( \mathbf{p}' \). If the scattering is elastic, momentum conservation ensures that \( |\mathbf{p}'| = |\mathbf{p}| \).}
+            \label{fig:scattering}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.4\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{img/1-scattering_pp.png}
+        \end{minipage}
+    \end{figure}
+
+    To rigorously justify this parameterization, recall that within the Born approximation—which is formally valid for weak interactions—the scattering amplitude \( f(\mathbf{p}' \leftarrow \mathbf{p}) \) is directly related to the Fourier transform of the interaction potential \( U(\mathbf{q}) \) evaluated at the momentum transfer \( \mathbf{q} = \mathbf{p}' - \mathbf{p} \):
     \[
-        U_0 = \frac{4\pi \hbar^2 a}{m},
+        f(\mathbf{p}' \leftarrow \mathbf{p}) = -\frac{m_r}{2\pi\hbar^2} U(\mathbf{q}),
     \]
-    where \(m\) is the mass of the particles. This relation allows us to express various physical quantities in terms of the scattering length, providing a more intuitive understanding of how interactions affect the condensate.
+    where \( m_r \) is the reduced mass of the two-body collision. Because we are considering identical bosons of mass \( m \), the reduced mass simplifies to \( m_r = m/2 \).
 
-        [...]
+    At very low collision energies, the momentum transfer approaches zero, and the scattering becomes completely isotropic, entirely losing its angular dependence. In this fundamental low-energy limit, the scattering length \( a \) is mathematically defined as the negative asymptotic limit of the scattering amplitude:
+    \[
+        a = - \lim_{\mathbf{p}, \mathbf{p}' \to 0} f(\mathbf{p}' \leftarrow \mathbf{p}).
+    \]
+    Because the scattering is isotropic, this single parameter is sufficient to completely control both the differential cross-section, \( \frac{\mathrm{d} \sigma}{\mathrm{d}\Omega} = |a|^2 \), and the total cross-section, \( \sigma_{\text{tot}} = 4\pi a^2 \).
 
+    By substituting the zero-momentum limit of the Born approximation into this definition, we obtain \( a = \frac{m}{4\pi\hbar^2} U_0 \). Consequently, for weakly interacting Bose gases, the scattering length can be inverted to define the effective interaction potential \( U_0 \) through the relation:
+    \begin{equation} \label{eq:u0_scattering_length}
+        U_0 = \frac{4\pi \hbar^2 a}{m},
+    \end{equation}
+    where \( m \) is the mass of the particles. This relation allows us to express various physical quantities in terms of the scattering length, providing a more intuitive understanding of how interactions affect the condensate.
 \end{example}
 
-condensate depletion computation with na
+\subsection{Condensate Depletion in Terms of the Gas Parameter}
 
-comment for which the result does not have any hbar term or terms we can expand to any classical or semiclassical limit. This is a consequence of the fact that the depletion and BEC in general are purely quantum effects, arising from the interactions between particles in the condensate.
+With the effective interaction parameterized strictly by the geometric scattering length \( a \), we can recast our thermodynamic results into a universal form. We first substitute the expression for \( U_0 \) into our previous definition of the sound velocity, \( c = \sqrt{n U_0 / m} \):
+\[
+    c = \frac{1}{m} \sqrt{4\pi\hbar^2 n a}.
+\]
+Rearranging these terms to isolate the specific velocity-momentum ratio used in our depletion integral yields:
+\[
+    \frac{mc}{\hbar} = 2\sqrt{\pi n a}.
+\]
+We can now insert this expression back into the previously derived equation for the fraction of non-condensed bosons, \( \frac{N'}{N} = \frac{1}{3\pi^2 n} \left(\frac{mc}{\hbar}\right)^3 \). Performing this substitution directly provides the final analytic result for the condensate depletion:
+\begin{equation} \label{eq:depletion_gas_parameter}
+    \frac{N'}{N} = \frac{8}{3\sqrt{\pi}} \sqrt{n a^3}.
+\end{equation}
 
-    [...]
+A profound observation regarding Equation \ref{eq:depletion_gas_parameter} is the complete absence of the reduced Planck constant, \( \hbar \). Because the final result does not contain any \( \hbar \) term, there is no mathematical pathway to expand the expression or take a limit to recover a classical or semiclassical analog. This is a direct consequence of the underlying physics: quantum depletion—and Bose-Einstein condensation in general—are purely quantum mechanical effects, fundamentally arising from the zero-point energy and non-commuting nature of the interactions between particles in the condensate.
+
+The quantity \( N'/N \) physically represents the fraction of bosons that are pushed out of the condensate ground state. Crucially, Equation \ref{eq:depletion_gas_parameter} reveals that this depletion depends entirely on a dimensionless quantity called the \textbf{gas parameter}, \( n a^3 \), which scales as the density multiplied by the characteristic scattering volume. Alternatively, we can interpret this parameter as the cube of the ratio between the scattering length \( a \) and the average inter-particle distance \( n^{-1/3} \).
+
+For the initial Bogoliubov mean-field treatment to be mathematically valid, we explicitly required the depleted fraction \( N'/N \) to be small. Consequently, our theory requires the gas parameter to satisfy the strict condition \( n a^3 \ll 1 \). The real physical meaning of this approximation is that it can be satisfied in two distinct ways: the parameter can be small either because the scattering length \( a \) is intrinsically small (representing a genuinely weak interaction), or because the particle density \( n \) is exceedingly low (representing a dilute gas).
+
+Because of this density dependence, it can be proven that the Bogoliubov theory remains highly accurate even for infinitely strong interactions, provided the gas is sufficiently dilute. Consider, for instance, a hard-sphere core potential parameterized by a radius \( r_0 \):
+\[
+    V(r) = \begin{cases}
+        +\infty & r < r_0, \\
+        0       & r > r_0.
+    \end{cases}
+\]
+For such an impenetrable hard-sphere potential, the scattering length is simply equal to the core radius, \( a = r_0 \). Even in this highly non-perturbative scenario, the established theory remains perfectly valid as long as \( n r_0^3 \ll 1 \). This specific condition of ultra-low density is universally realized in experimental systems of ultracold atomic gases.
 
 \section{Ground State Energy}
 
- [...]
+Let us now study the macroscopic ground state energy \( \mathcal{E}_0 \) of the interacting system. Recall that for an ideal, non-interacting Bose gas, the ground state energy is trivially zero because all particles occupy the zero-momentum state without any kinetic or potential cost. However, the introduction of a weak interparticle potential fundamentally alters this scenario. By taking the thermodynamic limit, the discrete sum over the momentum modes transforms into a continuous integral over all possible wave vectors, yielding the energy density:
+\[
+    \frac{\mathcal{E}_0}{V} = \frac{1}{2}U_0 n^2 - \frac{1}{2} \int \frac{d^3k}{(2\pi)^3} (\epsilon_k + nU_0 - E_k).
+\]
+
+An immediate problem arises when we inspect the behavior of this integral at large momenta (the ultraviolet limit). Based on our earlier asymptotic expansion, the Bogoliubov spectrum \( E_k \) approaches the free-particle energy with a leading-order correction, meaning the term in the integrand, \( \epsilon_k + nU_0 - E_k \), decays asymptotically as \( 1/k^2 \). Because the three-dimensional integration measure \( d^3k \) introduces a \( k^2 \) factor, the integral diverges linearly.
+
+The physical origin of this unphysical ultraviolet divergence lies in the strict short-range approximation we previously adopted, namely replacing the momentum-dependent potential \( U(\mathbf{k}) \) with a constant \( U(\mathbf{k} = 0) = U_0 \) for all \( \mathbf{k} \). In reality, only a mathematically pathological Dirac delta potential possesses a Fourier transform that remains constant for arbitrarily large momenta. For any realistic physical potential, the Fourier transform must eventually decay to zero at large wave vectors.
+
+\begin{figure}[H]
+    \begin{minipage}{0.55\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/1-physical_potential_FT.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.4\textwidth}
+        \caption{Fourier transform of a generic physical potential \( U(\mathbf{r}) \) in momentum space, \( U(\mathbf{k}) \). The Fourier transform is a smooth function that decays to zero at large wave vectors. In contrast, the delta-function approximation for the interaction potential is represented by a constant horizontal line, which is valid only for low-momentum scattering processes.}
+        \label{fig:physical_potential_FT}
+    \end{minipage}
+\end{figure}
+
+\subsection{Renormalization and the Lee-Huang-Yang Correction}
+
+Fortunately, the assumption of a strictly constant potential is not strictly necessary for the theory's structural integrity. If one repeats the rigorous diagonalization procedure while retaining the full momentum dependence of the potential, the Bogoliubov transformation coefficients become:
+\[
+    v_{\mathbf{k}}^2 = \frac{1}{2} \left( \frac{\epsilon_k + nU(\mathbf{k})}{E_{\mathbf{k}}} - 1 \right),
+\]
+and the quasiparticle dispersion takes the generalized form:
+\[
+    E_{\mathbf{k}} = \left[ (\epsilon_k + nU(\mathbf{k}))^2 - (nU(\mathbf{k}))^2 \right]^{1/2}.
+\]
+With these generalized expressions, the corrected ground state energy density becomes:
+\begin{equation} \label{eq:energy_density_momentum_dependent}
+    \frac{\mathcal{E}_0}{V} = \frac{1}{2}U_0 n^2 - \frac{1}{2} \int \frac{d^3k}{(2\pi)^3} (\epsilon_k + nU(\mathbf{k}) - E_{\mathbf{k}}).
+\end{equation}
+By evaluating the large momentum limit of this refined integrand, we find:
+\[
+    \epsilon_k + nU(\mathbf{k}) - E_{\mathbf{k}} \sim \frac{(nU(\mathbf{k}))^2}{2\epsilon_k}.
+\]
+Therefore, to guarantee the convergence of the energy integral, it is entirely sufficient that the Fourier transform of the potential, \( U(\mathbf{k}) \), vanishes faster than \( 1/\sqrt{k} \) at large \( k \). This is a remarkably mild assumption, naturally verified by any real-space potential \( U(r) \) that does not diverge faster than \( 1/r^{5/2} \) as \( r \to 0 \).
+
+Although this resolves the mathematical divergence, it introduces an interpretational challenge: the ground state energy now explicitly depends on the high-energy microscopic details of the interaction potential \( U(\mathbf{k}) \) rather than on a single, universally measurable macroscopic parameter like the scattering length \( a \). To eliminate this unpleasant feature and express the energy purely in terms of physical observables, we employ a standard procedure analogous to classical renormalization. We add and subtract the problematic asymptotic ultraviolet behavior from our integral expression:
+\[
+    \frac{\mathcal{E}_0}{V} = \frac{U_0 n^2}{2} - \frac{1}{2} \int \frac{d^3k}{(2\pi)^3} \left[ \epsilon_k + nU(\mathbf{k}) - E_{\mathbf{k}} - \frac{(nU(\mathbf{k}))^2}{2\epsilon_k} + \frac{(nU(\mathbf{k}))^2}{2\epsilon_k} \right].
+\]
+By splitting the integral and factoring out the density, we obtain:
+\[
+    \frac{\mathcal{E}_0}{V} = \frac{n^2}{2} \left( U_0 - \int \frac{d^3k}{(2\pi)^3} \frac{U(\mathbf{k})^2}{2\epsilon_k} \right) - \frac{1}{2} \int \frac{d^3k}{(2\pi)^3} \left[ \epsilon_k + nU(\mathbf{k}) - E_{\mathbf{k}} - \frac{(nU(\mathbf{k}))^2}{2\epsilon_k} \right].
+\]
+
+The bracketed prefactor of the first term can be elegantly linked to the physically observable scattering length \( a \) by moving beyond the first-order Born approximation and utilizing the second-order Born approximation for the scattering amplitude \( f(\mathbf{p}' \leftarrow \mathbf{p}) \):
+\[
+    f(\mathbf{p}' \leftarrow \mathbf{p}) = -\frac{m_r}{2\pi\hbar^2} \left[ U(\mathbf{p}' - \mathbf{p}) + \int \frac{d^3p''}{(2\pi)^3} \frac{U(\mathbf{p}' - \mathbf{p}'')U(\mathbf{p}'' - \mathbf{p})}{\frac{p^2}{2m_r} - \frac{p''^2}{2m_r} + i0^+} \right],
+\]
+where \( 0^+ \) denotes an infinitesimal positive regulator. Recalling the definition of the scattering length in the low-energy limit, the expression simplifies to:
+\[
+    a = \frac{m}{4\pi\hbar^2} \left( U_0 - \int \frac{d^3p''}{(2\pi)^3} \frac{U(\mathbf{p}'')^2}{\frac{p''^2}{m} - i0^+} \right).
+\]
+Because the integrand naturally vanishes for \( p'' = 0 \), the \( i0^+ \) regulator becomes irrelevant. By changing the integration variable to the wave vector \( \mathbf{k} \) and identifying \( \epsilon_k = \hbar^2 k^2 / 2m \), we uncover the crucial identity:
+\[
+    a = \frac{m}{4\pi\hbar^2} \left( U_0 - \int \frac{d^3k}{(2\pi)^3} \frac{U(\mathbf{k})^2}{2\epsilon_k} \right).
+\]
+
+By successfully replacing the bare coupling constant \( U_0 \) with the physical scattering length \( a \), the ground state energy is renormalized:
+\[
+    \frac{\mathcal{E}_0}{V} = \frac{2\pi\hbar^2 n^2 a}{m} - \frac{1}{2} \int \frac{d^3k}{(2\pi)^3} \left( \epsilon_k + nU(\mathbf{k}) - E_{\mathbf{k}} - \frac{(nU(\mathbf{k}))^2}{2\epsilon_k} \right).
+\]
+Because the remaining integral is now manifestly convergent in the ultraviolet regime, we can safely reapply the low-energy approximation \( U(\mathbf{k}) \approx U_0 \) inside the integral without generating any infinities. The integral then becomes:
+\[
+    \int \frac{d^3k}{(2\pi)^3} \left( \epsilon_k + nU_0 - E_k - \frac{(nU_0)^2}{2\epsilon_k} \right).
+\]
+By rewriting this in terms of our previously defined dimensionless momentum variable \( \tilde{k} \), the integral scales out as:
+\[
+    \left(\frac{mc}{\hbar}\right)^3 mc^2 \frac{1}{2\pi^2} \int_0^\infty \tilde{k}^2 \left( \frac{\tilde{k}^2}{2} + 1 - \sqrt{\frac{\tilde{k}^4}{4} + \tilde{k}^2} - \frac{1}{\tilde{k}^2} \right) d\tilde{k}.
+\]
+This dimensionless integral can be evaluated analytically and yields an exact value of \( -32/15 \). Inserting this numerical result alongside the definition of the sound velocity \( c \), we arrive at the celebrated final expression for the ground state energy of a dilute Bose gas:
+\begin{equation} \label{eq:lhy_energy}
+    \frac{\mathcal{E}_0}{V} = \frac{2\pi\hbar^2 n^2 a}{m} \left[ 1 + \frac{128}{15\sqrt{\pi}} \sqrt{n a^3} \right].
+\end{equation}
+
+The leading term in Equation \ref{eq:lhy_energy} represents the standard mean-field energy, \( \frac{1}{2} n^2 U_0 \), which precisely matches the expectation value of the Hamiltonian if all quantum field operators were simply replaced by their classical expectation value \( \sqrt{n} \). The subsequent correction, proportional to the gas parameter \( \sqrt{na^3} \), is the renowned Lee-Huang-Yang (LHY) term. This pivotal term specifically accounts for the zero-point quantum fluctuations of the interacting field around its classical mean-field value.
+
+The macroscopic stability of the gas is dictated by these energy contributions. For a repulsive interaction (\( a > 0 \)), the energy increases quadratically with density, meaning the macroscopic compressibility is positive and the gas will homogenously fill the confining volume to minimize its energy. Conversely, if the effective potential is attractive (\( a < 0 \)), the scattering length is negative, and the energy is minimized by allowing the density to approach infinity. Because bosons are not protected by the Pauli exclusion principle, an attractive Bose gas is mechanically unstable and will spontaneously undergo spatial collapse.
+
+\begin{remark}
+    The interplay between the mean-field energy and the LHY quantum fluctuations can yield fascinating new phases of matter. In 2015, D. S. Petrov theoretically demonstrated the stabilization of a collapsing binary Bose-Bose mixture. Consider a mixture of two bosonic species with intra-species repulsion (\( a_{11}, a_{22} > 0 \)) but a sufficiently strong inter-species attraction (\( a_{12} < 0 \)) such that the total mean-field compressibility becomes negative, triggering a collapse. Because the attractive mean-field term scales as \( \propto n^2 \) while the repulsive LHY fluctuation term scales as \( \propto n^{5/2} \), the repulsive quantum fluctuations dominate at higher densities. This delicate competition creates an optimal finite density that minimizes the energy, halting the collapse. The resulting state is a self-bound quantum droplet that remains in equilibrium with the vacuum even without external trapping potentials, a phenomenon successfully observed in experiments in 2018.
+\end{remark}
 
 \subsubsection{Pressure and Speed of Sound}
 
-[...]
+Returning to a single-component Bose gas, we observe that the macroscopic pressure at absolute zero, \( T = 0 \), is derived from the standard thermodynamic energy-volume relation:
+\[
+    P = -\left( \frac{\partial E}{\partial V} \right)_N = -\frac{E}{V} + n\frac{\partial (E/V)}{\partial n}.
+\]
+By substituting the Lee-Huang-Yang expression for the ground state energy density, we obtain the corrected pressure:
+\[
+    P = \frac{2\pi\hbar^2 n^2 a}{m} \left[ 1 + \frac{64}{5\sqrt{\pi}} \sqrt{na^3} \right].
+\]
+
+From this thermodynamic equation of state, the macroscopic speed of sound, \( c_s \), in the interacting gas is given by the density derivative of the pressure:
+\[
+    c_s^2 = \frac{1}{m} \frac{\partial P}{\partial n} = \frac{4\pi\hbar^2 na}{m^2} \left[ 1 + \frac{16}{\sqrt{\pi}} \sqrt{na^3} \right].
+\]
+We immediately see that to leading order in the gas parameter, the thermodynamic speed of sound \( c_s \) agrees exactly with the microscopic velocity \( c \) extracted from the linear slope of the single-particle Bogoliubov dispersion \( E_k \) in the long-wavelength limit (\( k \to 0 \)) introduced previously. It can be formally proven that the fundamental identity \( c = c_s \) should hold exactly in any fully consistent many-body theory\footnote{C.R. Cabrera, L. Tanzi, J. Sanz, B. Naylor, P. Thomas, P. Cheiney, and L. Tarruell, \textit{Quantum liquid droplets in a mixture of Bose-Einstein condensates}, Science \textbf{359}, 301 (2018).}\footnote{P. C. Hohenberg and P. C. Martin, Annals of Physics \textbf{34}, 291 (1965).}. However, maintaining strict consistency with the perturbative result for the speed of sound to next-to-leading order requires extending calculations beyond the present Bogoliubov mean-field approximation when computing the quasiparticle spectrum \( E_k \)\footnote{S.T. Beliaev, Soviet Phys. JETP \textbf{7}, 299 (1958).}.
 
 \subsection{Ground State Wave Function}
 
-[...]
+We established that the exact ground state \( |\psi_0\rangle \) of the diagonalized effective Hamiltonian must be the vacuum state for the Bogoliubov quasiparticle excitations. Mathematically, this mandates that for all non-zero wave vectors \( \mathbf{k} \neq 0 \), the annihilation operator yields \( \alpha_{\mathbf{k}} |\psi_0\rangle = 0 \). If we substitute the defining Bogoliubov transformation—which expresses the quasiparticle operator \( \alpha_{\mathbf{k}} \) as a linear combination of the original bare bosonic creation and destruction operators—into this vacuum condition, we obtain:
+\begin{equation} \label{eq:bogoliubov_vacuum_condition}
+    u_k a_{\mathbf{k}} |\psi_0\rangle = -v_k a_{-\mathbf{k}}^\dagger |\psi_0\rangle,
+\end{equation}
+for \( \mathbf{k} \neq 0 \).
 
+The physical implications of this constraint are profound. On the left-hand side of Equation \ref{eq:bogoliubov_vacuum_condition}, the bare annihilation operator \( a_{\mathbf{k}} \) acts on the ground state, explicitly removing a boson of momentum \( \mathbf{k} \). Simultaneously, on the right-hand side, a creation operator \( a_{-\mathbf{k}}^\dagger \) acts on the same ground state, creating a particle with the exact opposite momentum \( -\mathbf{k} \). This dynamic equality makes it abundantly clear that the true interacting ground state \( |\psi_0\rangle \) cannot be a simple eigenvector of the total particle number operator \( \hat{N} \). If it were an eigenstate, the left-hand side of the equation would project onto a subspace with \( N - 1 \) particles, whereas the right-hand side would project onto a subspace with \( N + 1 \) particles, creating an irreconcilable contradiction.
+
+Instead, the structural property demanded by Equation \ref{eq:bogoliubov_vacuum_condition} is satisfied by a state heavily featuring coherent superpositions of correlated particle pairs. We propose the following ansatz for the non-condensate portion of the state:
+\[
+    \exp\left( -\frac{1}{2} \sum_{\mathbf{p}}' \frac{v_p}{u_p} a_{\mathbf{p}}^\dagger a_{-\mathbf{p}}^\dagger \right) |0\rangle.
+\]
+To rigorously verify that this state satisfies our requirement, we act upon it with the operator \( u_k a_{\mathbf{k}} \):
+\[
+    u_k a_{\mathbf{k}} \exp\left( -\frac{1}{2} \sum_{\mathbf{p}}' \frac{v_p}{u_p} a_{\mathbf{p}}^\dagger a_{-\mathbf{p}}^\dagger \right) |0\rangle = u_k \exp\left( -\frac{1}{2} \sum_{\mathbf{p}}' \frac{v_p}{u_p} a_{\mathbf{p}}^\dagger a_{-\mathbf{p}}^\dagger \right) a_{\mathbf{k}} |0\rangle
+\]
+\[
+    + u_k \left[ a_{\mathbf{k}}, \exp\left( -\frac{1}{2} \sum_{\mathbf{p}}' \frac{v_p}{u_p} a_{\mathbf{p}}^\dagger a_{-\mathbf{p}}^\dagger \right) \right] |0\rangle.
+\]
+The first term trivially vanishes because the bare destruction operator \( a_{\mathbf{k}} \) acts directly on the absolute vacuum \( |0\rangle \). The second term can be explicitly evaluated by expanding the exponential function as a Taylor series. Recalling the fundamental commutator identity \( [A, BC] = [A, B]C + B[A, C] \), we evaluate the commutator of a single annihilation operator with a pair creation operator:
+\[
+    [a_{\mathbf{k}}, a_{\mathbf{p}}^\dagger a_{-\mathbf{p}}^\dagger] = [a_{\mathbf{k}}, a_{\mathbf{p}}^\dagger] a_{-\mathbf{p}}^\dagger + a_{\mathbf{p}}^\dagger [a_{\mathbf{k}}, a_{-\mathbf{p}}^\dagger]
+\]
+\[
+    = a_{-\mathbf{p}}^\dagger \delta_{\mathbf{k}, \mathbf{p}} + a_{\mathbf{p}}^\dagger \delta_{\mathbf{k}, -\mathbf{p}}.
+\]
+More generally, this can be easily verified by mathematical induction for arbitrary powers of the pair operator:
+\[
+    [a_{\mathbf{k}}, (a_{\mathbf{p}}^\dagger)^n (a_{-\mathbf{p}}^\dagger)^n] = [a_{\mathbf{k}}, (a_{\mathbf{p}}^\dagger)^n] (a_{-\mathbf{p}}^\dagger)^n + (a_{\mathbf{p}}^\dagger)^n [a_{\mathbf{k}}, (a_{-\mathbf{p}}^\dagger)^n]
+\]
+\[
+    = n(a_{\mathbf{p}}^\dagger)^{n-1} \delta_{\mathbf{k}, \mathbf{p}} (a_{-\mathbf{p}}^\dagger)^n + (a_{\mathbf{p}}^\dagger)^n n(a_{-\mathbf{p}}^\dagger)^{n-1} \delta_{\mathbf{k}, -\mathbf{p}}
+\]
+\[
+    = \frac{\partial}{\partial a_{\mathbf{k}}^\dagger} \left( (a_{\mathbf{p}}^\dagger)^n (a_{-\mathbf{p}}^\dagger)^n \right).
+\]
+In this way, one can see that the operational action of the commutator is completely mathematically analogous to a formal differentiation with respect to the conjugate creation operator \( a_{\mathbf{k}}^\dagger \). Leveraging this powerful result, we evaluate the commutator with the full exponential:
+\[
+    \left[ a_{\mathbf{k}}, \exp\left( -\frac{1}{2} \sum_{\mathbf{p}}' \frac{v_p}{u_p} a_{\mathbf{p}}^\dagger a_{-\mathbf{p}}^\dagger \right) \right] = \frac{\partial}{\partial a_{\mathbf{k}}^\dagger} \exp\left( -\frac{1}{2} \sum_{\mathbf{p}}' \frac{v_p}{u_p} a_{\mathbf{p}}^\dagger a_{-\mathbf{p}}^\dagger \right)
+\]
+\[
+    = -\frac{1}{2} \sum_{\mathbf{p}}' \frac{v_p}{u_p} (\delta_{\mathbf{k}, \mathbf{p}} a_{-\mathbf{p}}^\dagger + \delta_{\mathbf{k}, -\mathbf{p}} a_{\mathbf{p}}^\dagger) \exp\left( -\frac{1}{2} \sum_{\mathbf{p}}' \frac{v_p}{u_p} a_{\mathbf{p}}^\dagger a_{-\mathbf{p}}^\dagger \right)
+\]
+\[
+    = -\frac{v_k}{u_k} a_{-\mathbf{k}}^\dagger \exp\left( -\frac{1}{2} \sum_{\mathbf{p}}' \frac{v_p}{u_p} a_{\mathbf{p}}^\dagger a_{-\mathbf{p}}^\dagger \right).
+\]
+By substituting this evaluated commutator back into our initial expression, we obtain the exact relation:
+\[
+    u_k a_{\mathbf{k}} \exp\left( -\frac{1}{2} \sum_{\mathbf{p}}' \frac{v_p}{u_p} a_{\mathbf{p}}^\dagger a_{-\mathbf{p}}^\dagger \right) |0\rangle = -v_k a_{-\mathbf{k}}^\dagger \exp\left( -\frac{1}{2} \sum_{\mathbf{p}}' \frac{v_p}{u_p} a_{\mathbf{p}}^\dagger a_{-\mathbf{p}}^\dagger \right) |0\rangle,
+\]
+which rigorously proves that our proposed exponential pair-state possesses exactly the property demanded by Equation \ref{eq:bogoliubov_vacuum_condition}. Note that the exponential operator acting on the vacuum creates an infinite superposition of bosonic pairs with equal and opposite non-zero momenta, serving as the formal quantum mechanical description of the condensate depletion.
+
+Finally, let us address the macroscopic component corresponding to \( \mathbf{k} = 0 \). Recalling the mean-field substitution utilized to diagonalize the Hamiltonian (\( a_0 \to \sqrt{N_0} \) and \( a_0^\dagger \to \sqrt{N_0} \)), we physically require that the expectation values of the macroscopic creation and annihilation operators over the true ground state equal this condensed value:
+\[
+    \langle \psi_0 | a_0 | \psi_0 \rangle = \sqrt{N_0},
+\]
+\[
+    \langle \psi_0 | a_0^\dagger | \psi_0 \rangle = \sqrt{N_0}.
+\]
+These two expectation value equations are simultaneously satisfied by enforcing the eigenvalue relation:
+\[
+    a_0 |\psi_0\rangle = \sqrt{N_0} |\psi_0\rangle.
+\]
+This defining equation is universally satisfied by Glauber coherent states, which are mathematically structured as:
+\[
+    e^{-N_0/2} e^{\sqrt{N_0} a_0^\dagger} |0\rangle.
+\]
+Because the zero-momentum operators completely commute with the pair-creation operators at finite momenta (\( \mathbf{p} \neq 0 \)), both the mean-field condensate requirement and the Bogoliubov pair-correlation requirement can be satisfied simultaneously. Collecting these distinct physical contributions, we arrive at the complete, unified expression for the interacting many-body ground state:
+\begin{equation} \label{eq:interacting_ground_state}
+    |\psi_0\rangle = \frac{1}{\mathcal{N}} e^{\sqrt{N_0} a_0^\dagger} \exp\left( -\frac{1}{2} \sum_{\mathbf{p}}' \frac{v_p}{u_p} a_{\mathbf{p}}^\dagger a_{-\mathbf{p}}^\dagger \right) |0\rangle,
+\end{equation}
+where \( \mathcal{N} \) is an overall normalization constant that ensures \( \langle \psi_0 | \psi_0 \rangle = 1 \). By explicitly computing the norm of this state, this constant can be analytically proven to be:
+\[
+    \mathcal{N} = e^{N_0/2} \left( \prod_{\mathbf{k}} u_k^2 \right)^{1/2}.
+\]

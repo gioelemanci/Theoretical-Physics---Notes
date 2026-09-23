@@ -3,7 +3,7 @@
 \section{The Weak Interaction Assumption}
 
 The weakly interacting Bose gas serves as a foundational paradigm in quantum many-body theory. We consider a system of \( N \) identical bosons of mass \( m \) confined to a box of volume \( V = L^3 \) with periodic boundary conditions.
-\TODO{Add a figure of the box with periodic boundary conditions}
+
 The interparticle interaction is characterized by a two-body potential \( U(\mathbf{r}) \), which we assume to be weak. The constituents of this gas obey Bose-Einstein statistics and are treated as non-relativistic elementary particles, meaning that their internal degrees of freedom are not activated at the relevant energy scales, and the total particle number is strictly fixed (precluding, for example, a gas of photons).
 
 \begin{figure}[H]
@@ -108,25 +108,27 @@ where the primed summation specifically denotes a sum over all allowed momenta e
 
 Through this procedure, we successfully reduce the pure zero-momentum interaction into a quadratic form that couples the macroscopic total number \( N \) with the single-particle excitations.
 
+
 \subsubsection{Quadratic Interaction Terms and the Short-Range Assumption}
 
-Besides the dominant term where all operators are in the condensate state, we retain six terms from the interaction Hamiltonian that contain exactly two operators with momentum different from zero:
+Besides the dominant term where all operators are in the condensate state, we must evaluate the terms from the interaction Hamiltonian that contain exactly two operators with momentum different from zero. Before explicitly listing them, we introduce a crucial physical approximation: we replace the momentum-dependent interaction potential \( U(\mathbf{q}) \) with a simple constant, \( U(0) \).
+
+This approximation is mathematically justified if the real-space potential is effectively ``short-ranged''. For the Fourier transform \( U(\mathbf{q}) = \int \mathrm{d}^3\mathbf{r} U(\mathbf{r}) e^{-i\mathbf{q}\cdot\mathbf{r}} \) to be well-behaved and approximately constant for small momenta, its zero-momentum limit \( U(0) = \int \mathrm{d}^3\mathbf{r} U(\mathbf{r}) \) must be finite. In three spatial dimensions, the spherical integration measure introduces a factor of \( r^2 \). Consequently, for the integral \( \int dr r^2 U(r) \) to converge at large interparticle distances, the potential \( U(r) \) must decay strictly faster than \( 1/r^3 \).
+
+This convergence criterion dictates which physical systems can be described by this simplified model. In dilute atomic gases, van der Waals forces serve as an excellent example of a valid short-ranged potential. In the standard Lennard-Jones model, the long-range attractive tail scales as \( 1/r^6 \). Since \( 6 > 3 \), it comfortably satisfies the convergence requirement. In contrast, dipole-dipole interactions scale exactly as \( 1/r^3 \). This is a tricky marginal case where the spatial integral diverges logarithmically, meaning dipole interactions are mathematically long-ranged in 3D and cannot be treated with this simple approximation. Assuming our potential decays fast enough, we can safely set \( U(\mathbf{q}) \approx U(\mathbf{q}=0) \equiv U_0 \), making all subsequent calculations significantly simpler.
+
+\begin{remark}
+    As an analogous example of effective short-range interactions from high-energy physics, the strong nuclear force is also effectively short-ranged (decaying exponentially, much faster than \( 1/r^3 \)) because its mediators, pions, are massive.
+\end{remark}
+
+With the assumption \( U(\mathbf{q}) \approx U_0 \) established, we retain the following six terms containing exactly two non-zero momentum operators:
 
 \begin{enumerate}
     \item If \( \mathbf{k} + \mathbf{q} = 0 \) and \( \mathbf{k}' - \mathbf{q} = 0 \), we have that \( \mathbf{k} = -\mathbf{q} \) and \( \mathbf{k}' = \mathbf{q} \), and so we remain with
           \[
-              \frac{1}{2V} a_0^\dagger a_0^\dagger \sum_{\mathbf{q}}' U(\mathbf{q}) a_{\mathbf{q}} a_{-\mathbf{q}},
+              \frac{1}{2V} U_0 a_0^\dagger a_0^\dagger \sum_{\mathbf{q}}' a_{\mathbf{q}} a_{-\mathbf{q}},
           \]
           where the sum \( \sum_{\mathbf{q}}' \) is over all possible momenta \( \mathbf{q} \neq 0 \) because the zero case has been already taken into account in the previous purely macroscopic term.
-
-          At this stage, we introduce a crucial physical approximation to replace the interaction potential \( U(\mathbf{q}) \) with a simpler constant, \( U(0) \). If we assume that the potential is sufficiently smooth, monotonic, and effectively short-ranged, its Fourier transform will be approximately constant for small momenta. Consequently, the main contribution to the interaction term comes from the zero-momentum component of the potential. In the context of two-body interactions, van der Waals forces serve as an excellent example of a short-ranged potential. In the standard Lennard-Jones potential, the attractive part is proportional to \( 1/r^6 \) and the repulsive part to \( 1/r^{12} \). We could also consider dipole interactions, which scale as \( 1/r^3 \); this represents a tricky marginal case for the short-range assumption. However, since we are primarily dealing with dilute atomic gases, van der Waals interactions are effectively short-ranged because the typical interparticle distance is much larger than the atomic radius. With this assumption, we can set \( U(\mathbf{q}) \approx U(\mathbf{q}=0) \equiv U_0 \), making calculations significantly simpler. The first term thus becomes:\TODO{change: before the first bullet point, we should introduce the short-range assumption and explain why it is reasonable, and the result is that it has to decay faster than 1 over r cube.}
-          \[
-              \frac{1}{2V} U_0 a_0^\dagger a_0^\dagger \sum_{\mathbf{q}}' a_{\mathbf{q}} a_{-\mathbf{q}}.
-          \]
-
-          \begin{remark}
-              As an analogous example of effective short-range interactions from high-energy physics, the strong nuclear force is also effectively short-ranged because its mediators, pions, are massive.
-          \end{remark}
 
     \item If \( \mathbf{k} + \mathbf{q} = 0 \) and \( \mathbf{k}' = 0 \), using again the short-range assumption, the term takes the following form:
           \[
@@ -182,7 +184,25 @@ As a final remark, we note that if one were to carry out this derivation without
 \[
     H = \sum_{\mathbf{k}}' (\epsilon_k + nU(k)) a_{\mathbf{k}}^\dagger a_{\mathbf{k}} + \frac{n}{2} \sum_{\mathbf{k}}' U(k) (a_{-\mathbf{k}}^\dagger a_{\mathbf{k}}^\dagger + a_{\mathbf{k}} a_{-\mathbf{k}}) + \frac{1}{2}V n^2 U_0.
 \]
-\TODO{add summary of assumptions: massive, weakly interacting, short-range, etc.}
+
+\subsubsection{Summary of Assumptions and Approximations}
+
+Before proceeding to diagonalize the Hamiltonian, it is instructive to summarize the hierarchy of physical assumptions and mathematical approximations that have systematically reduced the complex many-body problem to the quadratic Bogoliubov Hamiltonian \eqref{eq:bogoliubov_hamiltonian}:
+
+\begin{itemize}
+    \item \textbf{Non-Relativistic Elementary Bosons:} We assume the particles are massive, non-relativistic, and constrained to energy scales where internal degrees of freedom are completely frozen.
+          \textit{Consequence:} The total particle number \( N \) is strictly conserved (unlike in a photon gas), and the system is well-described by standard Galilean kinetic energy and a static scalar two-body potential.
+
+    \item \textbf{Weak Interaction Hypothesis:} The interparticle potential is assumed to be sufficiently weak such that the true interacting ground state is only a modest perturbation of the ideal Bose-Einstein condensate.
+          \textit{Consequence:} The fraction of depleted particles is vanishingly small (\( (N-N_0)/N \ll 1 \)). This justifies truncating the interaction Hamiltonian to discard all terms containing more than two out-of-condensate operators (\( \mathbf{k} \neq 0 \)).
+
+    \item \textbf{Short-Range Potential:} The two-body interaction \( U(\mathbf{r}) \) is assumed to decay strictly faster than \( 1/r^3 \) at large interparticle distances.
+          \textit{Consequence:} The Fourier transform of the potential converges and varies slowly at small momenta, allowing us to approximate \( U(\mathbf{q}) \approx U(\mathbf{q}=0) \equiv U_0 \). This dramatically simplifies the scattering amplitudes in the dilute gas regime.
+
+    \item \textbf{Macroscopic Condensate Occupation (Mean-Field Limit):} The zero-momentum state is macroscopically occupied (\( N_0 \approx N \gg 1 \)), meaning the fundamental commutator \( [\hat{a}_0, \hat{a}_0^\dagger] = 1 \) is negligible compared to the absolute particle number.
+          \textit{Consequence:} The macroscopic creation and annihilation operators \( \hat{a}_0^\dagger \) and \( \hat{a}_0 \) can be treated as commuting c-numbers and replaced by \( \sqrt{N} \). This breaks the \( U(1) \) phase symmetry of the Hamiltonian and reduces the complicated quartic interaction term into a tractable quadratic form featuring anomalous pairing terms.
+\end{itemize}
+
 \subsection{Bogoliubov Transformations}
 
 We wish to diagonalize the Hamiltonian of the weakly interacting Bose gas by introducing new bosonic annihilation and creation operators, \( \alpha_{\mathbf{k}} \) and \( \alpha_{\mathbf{k}}^\dagger \), known as Bogoliubov operators. We need to construct a Hamiltonian which, in the end, depends only on a diagonal number operator of the form \( \alpha_{\mathbf{k}}^\dagger \alpha_{\mathbf{k}} \), yielding a target structure like:
@@ -281,9 +301,31 @@ where \( \mathcal{E}_0 \) is a macroscopic constant energy shift defined by:
 \]
 The quantity \( E_k = [(\epsilon_k + nU_0)^2 - (nU_0)^2]^{1/2} > 0 \) represents the fundamental quasiparticle excitation spectrum of the system.
 
-\subsubsection{Non Interacting Limit}
+\subsubsection{The Non-Interacting Limit}
 
-In the limit of vanishing interactions, \( U_0 \to 0 \), the Bogoliubov spectrum reduces to the free-particle dispersion: ...\TODO{add E and Eps in non interacting limit.}
+In the non-interacting limit, characterized by a vanishing interaction strength \( U_0 \to 0 \), it is instructive to verify that our diagonalized theory smoothly recovers the foundational physics of the ideal Bose gas.
+
+First, we examine the Bogoliubov quasiparticle excitation spectrum \( E_k \). By taking the limit of the dispersion relation, we find:
+\[
+    E_k = \lim_{U_0 \to 0} \sqrt{(\epsilon_k + nU_0)^2 - (nU_0)^2} = \sqrt{\epsilon_k^2} = \epsilon_k.
+\]
+As physically expected, the quasiparticle spectrum trivially reduces to the free-particle kinetic energy \( \epsilon_k = \hbar^2 k^2 / (2m) \).
+
+Next, we evaluate the asymptotic behavior of the Bogoliubov transformation coefficients \( v_k^2 \) and \( u_k^2 \). Substituting \( E_k \to \epsilon_k \) and \( U_0 \to 0 \), we obtain:
+\[
+    v_k^2 = \lim_{U_0 \to 0} \frac{1}{2} \left( \frac{\epsilon_k + nU_0}{E_k} - 1 \right) = \frac{1}{2}(1 - 1) = 0,
+\]
+and correspondingly,
+\[
+    u_k^2 = \lim_{U_0 \to 0} \frac{1}{2} \left( \frac{\epsilon_k + nU_0}{E_k} + 1 \right) = \frac{1}{2}(1 + 1) = 1.
+\]
+This implies that \( u_k \to 1 \) and \( v_k \to 0 \). Consequently, the Bogoliubov quasiparticle operators \( \alpha_{\mathbf{k}} = u_k a_{\mathbf{k}} + v_k a_{-\mathbf{k}}^\dagger \) reduce identically to the bare particle operators \( a_{\mathbf{k}} \). In the absence of interactions, the elementary excitations of the system are simply the original non-interacting bosons themselves, and the quantum depletion of the condensate drops to zero.
+
+Finally, we analyze the macroscopic constant energy shift \( \mathcal{E}_0 \). The purely classical mean-field contribution \( \frac{1}{2}Vn^2U_0 \) obviously vanishes. For the quantum fluctuation sum, we note that \( E_k \approx \epsilon_k + nU_0 - \frac{(nU_0)^2}{2\epsilon_k} \) for small \( U_0 \), meaning the summand \( (\epsilon_k + nU_0 - E_k) \sim \mathcal{O}(U_0^2) \). Therefore, the entire shift vanishes:
+\[
+    \lim_{U_0 \to 0} \mathcal{E}_0 = 0.
+\]
+The ground state energy of the system correctly defaults to zero, recovering the trivial result for an ideal Bose-Einstein condensate where all particles occupy the lowest available energy level with zero kinetic energy.
 
 \subsubsection{Ground State}
 
