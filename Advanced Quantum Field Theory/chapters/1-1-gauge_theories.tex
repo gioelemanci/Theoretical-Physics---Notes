@@ -117,11 +117,10 @@ where a free multiplicative parameter \(1/e^2\) is introduced to account for a r
 
 Let us thoroughly analyze the various terms contained in \eqref{eq:qed_lagrangian}. It is highly useful to redefine the gauge field via \(A_\mu \rightarrow eA_\mu\) (doing so recovers the standard normalization of the free Maxwell action) and recognize that \(e\) is the physical coupling constant. Note that \(e\) now appears inside the covariant derivative \(D_\mu = \partial_\mu - ieA_\mu(x)\), taking \(e < 0\) for the electron. Expanding this, we obtain:
 \begin{eqnarray}
-    \mathcal{L}_{QED} &=& -\frac{1}{4}F_{\mu\nu}F^{\mu\nu} - \overline{\psi}(\gamma^\mu D_\mu + m)\psi \nonumber \\
-    &=& -\frac{1}{4}F_{\mu\nu}F^{\mu\nu} - \overline{\psi}(\gamma^\mu\partial_\mu + m)\psi + ieA_\mu\overline{\psi}\gamma^\mu\psi \label{eq:qed_expanded}
+    \mathcal{L}_{QED} &= -\frac{1}{4}F_{\mu\nu}F^{\mu\nu} - \overline{\psi}(\gamma^\mu D_\mu + m)\psi \nonumber \\
+    &= -\frac{1}{4}F_{\mu\nu}F^{\mu\nu} - \overline{\psi}(\gamma^\mu\partial_\mu + m)\psi + ieA_\mu\overline{\psi}\gamma^\mu\psi \\
+    &= \feynQedPhoton + \feynQedFermion + \feynQedVertex \label{eq:qed_expanded}
 \end{eqnarray}
-
-\TODO{add image of Feynman rules for QED lagrangian terms}
 
 The first term distinctly describes the free propagation of photons, the second one accounts for the free propagation of electrons, and the crucial third one dictates the elementary interaction between photons and electrons. The constant \(e\) is the coupling constant, appropriately identified with the elementary charge of the electron. Thus, the guiding gauge principle has powerfully allowed us to discover the exact interaction mechanism between fields of spin 1/2 and 1. Let us summarize once again the precise rules of gauge transformations for the lagrangian in \eqref{eq:qed_expanded}: by rescaling for simplicity also the phase angle \(\alpha(x) \rightarrow e\alpha(x)\), we have
 \begin{equation} \label{eq:rescaled_transformations}
@@ -451,15 +450,14 @@ An arbitrary element of the \(SU(3)\) group residing in the fundamental represen
 \]
 while all other \(f^{abc}\) strictly not related to these by permuting the indices are identically zero. As an instructive exercise, one may try to explicitly verify some of these numbers.
 
-The complete QCD lagrangian is therefore constructed as:
+The complete \textbf{QCD lagrangian} is therefore constructed as:
 \begin{equation} \label{eq:qcd_lagrangian}
     \begin{aligned}
         \mathcal{L}_{QCD} & = -\frac{1}{4} F_{\mu\nu}^a F^{\mu\nu a} - \sum_{f=1}^6 \overline{\psi}_f \Big(\gamma^\mu D_\mu + m_f\Big) \psi_f                                                                                            \\
-                          & = -\frac{1}{4} F_{\mu\nu}^a F^{\mu\nu a} - \sum_{f=1}^6 \overline{\psi}_f \Big(\gamma^\mu \partial_\mu + m_f\Big) \psi_f + i\frac{g_s}{2} W_\mu^a \sum_{f=1}^6 \overline{\psi}_f \gamma^\mu \lambda^a \psi_f
+                          & = -\frac{1}{4} F_{\mu\nu}^a F^{\mu\nu a} - \sum_{f=1}^6 \overline{\psi}_f \Big(\gamma^\mu \partial_\mu + m_f\Big) \psi_f + i\frac{g_s}{2} W_\mu^a \sum_{f=1}^6 \overline{\psi}_f \gamma^\mu \lambda^a \psi_f \\
+                          & = \feynQcdGluon + \feynQcdThreeGluon + \feynQcdFourGluon + \sum_{f=1}^6 \feynQcdQuark + \sum_{f=1}^6 \feynQcdQuarkGluon,
     \end{aligned}
-\end{equation}
-
-\TODO{add image of Feynman diagrams representing the terms in the QCD lagrangian}
+\end{equation}\TODO{think about removing or not labels since the legend is already there}
 
 where the strong coupling constant is conventionally denoted by \(g_s\), and the sum index \(f \in (1, 2, \dots, 6) = (u, d, c, s, t, b)\) specifically indicates the distinct flavor of the quark. Different flavors of quarks physically possess different masses \(m_f\). Note carefully that to obtain the valid mathematical propagator of the gauge field from the very first term, as indicated conceptually in the corresponding figure, one must first rigorously implement a formal gauge-fixing procedure.
 
@@ -500,17 +498,17 @@ By carefully looking at the generated table, one immediately recognizes the foll
 
 \subsubsection{Isospin and the Eightfold Way}
 
-There are also highly useful approximate symmetries characterizing the QCD lagrangian. In the theoretical limit in which some of the quark masses are mathematically taken to be strictly identical, there emerges a rigid additional non-abelian symmetry. For example, assuming identically matched masses for the up and down quarks, \(m_u = m_d\), one can continuously mix the specific fields \(\psi_u\) and \(\psi_d\) with a \(SU(2)\) matrix to effectively redefine what is physically meant by "up" and "down":
+There are also highly useful approximate symmetries characterizing the QCD lagrangian. In the theoretical limit in which some of the quark masses are mathematically taken to be strictly identical, there emerges a rigid additional non-abelian symmetry. For example, assuming identically matched masses for the up and down quarks, \(m_u = m_d\), one can continuously mix the specific fields \(\psi_u\) and \(\psi_d\) with a \(SU(2)\) matrix to effectively redefine what is physically meant by ``up'' and ``down'':
 \begin{equation} \label{eq:isospin_su2}
     \begin{pmatrix} \psi_u \\ \psi_d \end{pmatrix} \rightarrow \begin{pmatrix} \psi'_u \\ \psi'_d \end{pmatrix} = U \begin{pmatrix} \psi_u \\ \psi_d \end{pmatrix} \qquad U \in SU(2) \, .
 \end{equation}
-This rigid \(SU(2)\) symmetry directly corresponds to the \textit{strong isospin} \(\vec{I}\), successfully used to properly group hadrons into distinct families or multiplets. From physical phenomenology, one knows that the strong force tightly binds states of quarks together and clearly shows the profound phenomenon of color confinement: physically bound states of quarks are always color singlets and directly correspond to the observable mesons and baryons. Key examples of these families are: (i) the isospin doublet of the core nucleons (proton and neutron) structurally composed of three confined up and down quarks; (ii) the triplet of \(\pi\) mesons, the pions \(\pi^\pm\) and \(\pi^0\), fundamentally composed of a quark and an antiquark entirely of the up and down types.
+This rigid \(SU(2)\) symmetry directly corresponds to the \textbf{strong isospin} \(\vec{I}\), successfully used to properly group hadrons into distinct families or multiplets. From physical phenomenology, one knows that the strong force tightly binds states of quarks together and clearly shows the profound phenomenon of \uline{\textit{color confinement}}: physically bound states of quarks are always color singlets and directly correspond to the observable mesons and baryons. Key examples of these families are: (i) the isospin doublet of the core nucleons (proton and neutron) structurally composed of three confined up and down quarks; (ii) the triplet of \(\pi\) mesons, the pions \(\pi^\pm\) and \(\pi^0\), fundamentally composed of a quark and an antiquark entirely of the up and down types.
 
-Considering structurally identical masses for the quarks up, down, and strange, \(m_u = m_d = m_s\), one logically finds an even larger symmetry group, the \textit{\(SU(3)\) flavor group}, that continuously mixes the three flavors up, down, and strange:
+Considering structurally identical masses for the quarks up, down, and strange, \(m_u = m_d = m_s\), one logically finds an \textit{even larger symmetry group}, the \uline{\(SU(3)\) flavor group}, that continuously mixes the three flavors up, down, and strange:
 \begin{equation} \label{eq:flavor_su3}
     \begin{pmatrix} \psi_u \\ \psi_d \\ \psi_s \end{pmatrix} \rightarrow \begin{pmatrix} \psi'_u \\ \psi'_d \\ \psi'_s \end{pmatrix} = U \begin{pmatrix} \psi_u \\ \psi_d \\ \psi_s \end{pmatrix} \qquad U \in SU(3) \, .
 \end{equation}
-This \(SU(3)\) flavor group is precisely the one that is heavily used in the static quark model (the famous "eightfold way" of Gell-Mann) to neatly take care of the numerous similarities observationally observed between the various hadrons. It should strictly not be confused with the foundational color group, which is dynamically also an \(SU(3)\) group. As already emphatically said, color is expected to tightly confine inside the hadrons and thus leaves only composite colorless states physically observable. Key examples of observable multiplets of hadronic particles successfully described by the \(SU(3)\) flavor group are:
+This \(SU(3)\) flavor group is precisely the one that is heavily used in the static quark model (the famous ``\textbf{eightfold way}'' of Gell-Mann) to neatly take care of the numerous similarities observationally observed between the various hadrons. It should strictly not be confused with the foundational color group, which is dynamically also an \(SU(3)\) group. As already emphatically said, color is expected to tightly confine inside the hadrons and thus leaves only composite colorless states physically observable. Key examples of observable multiplets of hadronic particles successfully described by the \(SU(3)\) flavor group are:
 \begin{itemize}
     \item the meson octet (\(\pi^\pm, \pi^0, K^\pm, K^0, \bar{K}^0, \eta_8\)),
     \item the baryon octet (\(p, n, \Sigma^\pm, \Sigma^0, \Xi^0, \Xi^-, \Lambda\)),
