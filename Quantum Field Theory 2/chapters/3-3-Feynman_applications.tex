@@ -264,14 +264,105 @@ For example, the generalization to a \(\phi^n\) theory is basically trivial:
 \[
     \mathcal{L}_\text{int} = - \frac{\lambda}{n!} \phi^n,
 \]
-we just have to take into account the fact that each interaction vertex will now involve \(n\) lines instead of 3, and the Feynman rule for the vertex will be given by \(-i \lambda\) times a combinatorial factor that takes into account the number of ways to connect the lines to the vertex. For example, for a \(2 \to 2\) process in a \(\phi^4\) theory, since the vertexes come from the integrals \(\int \mathrm{d}^4 x \mathcal{L}_{\text{int}}\) after contracting all the fields, at the tree level we have only one diagram:
+we just have to take into account the fact that each interaction vertex will now involve \(n\) lines instead of 3, and the Feynman rule for the vertex will be given by \(-i \lambda\) times a combinatorial factor that takes into account the number of ways to connect the lines to the vertex.
+
+\begin{remark}
+    Remember that the Feynman rules for vertices are rigorously derived from the action integral $\int d^4x \, i\mathcal{L}_{\text{int}}(x)$ after performing all possible Wick contractions between the fields in the interaction Lagrangian and the external states (or internal propagators).
+\end{remark}
+
+For example, for a \(2 \to 2\) process in a \(\phi^4\) theory, since the vertexes come from the integrals \(\int \mathrm{d}^4 x \mathcal{L}_{\text{int}}\) after contracting all the fields, at the tree level we have only one diagram:
 \[
     i \mathcal{M} = \feynFourTree + \mathcal{O}(\lambda^2) = -i \lambda + \mathcal{O}(\lambda^2),
 \]
 which is the one with a single vertex, and the Feynman rule for the vertex will be given by \(-i \lambda\).
 
+\subsubsection{Interactions Involving Derivatives}
+
+A physically richer and mathematically more subtle case arises when the interaction Lagrangian contains derivatives of the fields. To illustrate this, let us consider a toy model with the following interaction term:
+\[
+    \mathcal{L}_{\text{int}} = -\frac{\lambda}{2!} \phi (\partial_\mu \phi)(\partial^\mu \phi)
+\]
+Note the symmetry factor $\frac{1}{2!}$: permuting the two identical $(\partial_\mu \phi)$ terms leaves the operator unchanged, but the plain field $\phi$ without derivatives plays a distinct mathematical role.
+
+To derive the momentum-space Feynman rule for this vertex, we recall that the spacetime integrals $\int d^4x$ yield the overall momentum conservation delta functions. When we evaluate the Wick contractions, the fields $\phi(x)$ are replaced by their Fourier modes. The spacetime derivative $\partial_\mu$ acting on a plane wave $e^{\pm ip \cdot x}$ pulls down a factor of momentum.
+
+Specifically, the general prescription for translating spacetime derivatives into momentum space is:
+\[
+    \partial_\mu \to
+    \begin{cases}
+        +i p_\mu & \text{for OUTGOING momenta} \\
+        -i p_\mu & \text{for INCOMING momenta}
+    \end{cases}
+\]
+
+\begin{remark}
+    In this simplified derivation, we are conveniently ignoring subtle issues regarding the strict time-ordering ($T$-product) of derivative operators inside the path integral or Dyson series. While a completely rigorous derivation requires more care (often involving the Hamiltonian formalism or path integral subtleties), the resulting momentum-space Feynman rule obtained via this simple substitution is indeed correct.
+\end{remark}
+
+Let us apply this to our toy model to find the vertex rule for a $1 \to 2$ process, with one incoming momentum $p_1$ and two outgoing momenta $p_2, p_3$.
+\TODO{add diagram showing a 3-point vertex with one incoming line p1 and two outgoing lines p2, p3}
+
+The fully contracted term in the amplitude involves the integral:
+\[
+    \approx i \int d^4x \, \mathcal{L}_{\text{int}} = \frac{-i\lambda}{2!} \int d^4x \, e^{-ip_1 \cdot x} \left( \partial_\mu e^{+ip_2 \cdot x} \right) \left( \partial^\mu e^{+ip_3 \cdot x} \right) + \text{permutations}
+\]
+When the derivatives act on the outgoing plane waves, they pull down factors of $(+ip_2)$ and $(+ip_3)$. We must also sum over all possible ways to contract the external momenta $(p_1, p_2, p_3)$ with the specific fields in the Lagrangian $(\phi, \partial_\mu \phi, \partial^\mu \phi)$.
+
+Evaluating the sum over permutations:
+\begin{align*}
+     & \frac{-i\lambda}{2!} \Big[
+    (ip_{2\mu})(ip_3^\mu) \times 2 \quad (\text{from permuting } p_2 \leftrightarrow p_3 \text{ on the derivative fields})  \\
+     & + (-ip_{1\mu})(ip_2^\mu) \times 2 \quad (\text{from contracting } p_1 \text{ and } p_2 \text{ with the derivatives}) \\
+     & + (-ip_{1\mu})(ip_3^\mu) \times 2 \quad (\text{from contracting } p_1 \text{ and } p_3 \text{ with the derivatives})
+        \Big] \times (2\pi)^4 \delta^{(4)}(p_1 - p_2 - p_3)
+\end{align*}
+Simplifying the algebra, the explicit Feynman rule for this derivative vertex is:
+\[
+    \text{Vertex}(p_1, p_2, p_3) = (-i\lambda) \big[ -(p_2 \cdot p_3) + (p_1 \cdot p_2) + (p_1 \cdot p_3) \big]
+\]
+
+\subsubsection{Crossing Symmetry}
+Notice that in the momentum space rules, swapping an incoming particle with an outgoing particle is mathematically equivalent to flipping the overall sign of its momentum vector ($p \to -p$). This is a specific manifestation of a very deep and important principle in QFT known as \textbf{Crossing Symmetry}:
+\begin{quote}
+    An incoming particle with momentum $p$ and polarization $s$ is mathematically equivalent to an outgoing anti-particle with momentum $-p$ and polarization $-s$ in the evaluation of scattering matrix elements.
+\end{quote}
+
+
 \section{General Approach for Feynman Rules}
 
+As a more general and robust approach for finding Feynman rules, we should analyze the direct effect of the interaction operator $i \mathcal{L}_{\text{int}}$ on the quantum states. This approach is powerful because it applies equally well to virtual particles where $p^2 \neq m^2$.
+
+Let us explicitly recall the operator action for a complex scalar field:
+\begin{itemize}
+    \item $\hat{\phi} = \hat{\phi}(\hat{a}, \hat{b}^\dagger) \implies$ DESTROYS incoming particles OR CREATES outgoing anti-particles.
+    \item $\hat{\phi}^\dagger = \hat{\phi}(\hat{a}^\dagger, \hat{b}) \implies$ DESTROYS incoming anti-particles OR CREATES outgoing particles.
+\end{itemize}
+(For a real scalar field, particles and anti-particles coincide, so $\hat{\phi} = \hat{\phi}^\dagger$).
+
+We can formally define contractions directly between the field operators in the Lagrangian and the physical external states:
+\[
+    \contraction{}{\hat{\phi}}{| p^{\phi} }{\rangle} \hat{\phi} | p^{\phi} \rangle, \quad \contraction{\langle p^{\bar{\phi}} |}{\hat{\phi}}{}{} \langle p^{\bar{\phi}} | \hat{\phi}
+\]
+\[
+    \contraction{}{\hat{\phi}^\dagger}{| p^{\bar{\phi}} }{\rangle} \hat{\phi}^\dagger | p^{\bar{\phi}} \rangle, \quad \contraction{\langle p^{\phi} |}{\hat{\phi}^\dagger}{}{} \langle p^{\phi} | \hat{\phi}^\dagger
+\]
+Here, $|p^{\phi}\rangle$ denotes a state containing a particle, and $|p^{\bar{\phi}}\rangle$ denotes a state containing an anti-particle. Importantly, when applying this technique to derive vertex rules, these states do not strictly need to be on-shell; we are merely extracting the algebraic effect of the operators $\hat{\phi}, \hat{\phi}^\dagger$ inside the Feynman diagrams.
+
+To find the vertex rule, one computes the matrix element of the interaction Hamiltonian density between the desired external states and sums over all possible allowed non-zero Wick contractions.
+
+Returning to our previous derivative toy model $\mathcal{L}_{\text{int}} = -\frac{\lambda}{2!} \phi (\partial_\mu \phi)(\partial^\mu \phi)$ (where $\phi$ is real, so $\phi = \phi^\dagger$), we evaluate the matrix element:
+\[
+    \langle p_2, p_3 | \frac{-i\lambda}{2!} \hat{\phi} (\partial_\mu \hat{\phi})(\partial^\mu \hat{\phi}) | p_1 \rangle
+\]
+Applying Wick's theorem, we contract the operators with the states. For example, one specific contraction pairing is:
+\[
+    \frac{-i\lambda}{2!} \bcontraction[0.5ex]{\langle p_2, p_3 |}{\hat{\phi}}{(\partial_\mu \hat{\phi})(\partial^\mu \hat{\phi}) |}{p_1} \bcontraction[1ex]{\langle}{p_2}{, p_3 | \hat{\phi} (\partial_\mu}{\hat{\phi}} \contraction[1.5ex]{\langle p_2,}{p_3}{| \hat{\phi} (\partial_\mu \hat{\phi})(\partial^\mu}{\hat{\phi}} \langle p_2, p_3 | \hat{\phi} (\partial_\mu \hat{\phi})(\partial^\mu \hat{\phi}) | p_1 \rangle
+\]
+This specific contraction yields:
+\[
+    = \left(\frac{-i\lambda}{2!}\right) (i p_{2\mu}) (i p_3^\mu) \times 2!
+\]
+The $2!$ symmetry factor arises because permuting the two final states $p_2 \leftrightarrow p_3$ into the two indistinguishable derivative operators $(\partial_\mu \phi)(\partial^\mu \phi)$ gives an identical mathematical result. Summing this result with all other valid permutations of the momenta into the different field operators reproduces the exact same vertex rule derived previously.
 
 \subsection{Complex Scalar Field}
 
