@@ -82,7 +82,7 @@ For high-energy modes where \( E_k \gtrsim k_B T \), the integrand is exponentia
 \begin{figure}[H]
     \begin{minipage}{0.6\textwidth}
         \centering
-        \TODO{add image of a graph showing the quasiparticle dispersion energy curve plotted against momentum, with a highlighted circle near the origin emphasizing the linear regime at low energies comparable to thermal fluctuations}
+        \includegraphics[width=0.8\linewidth]{img/1-dispersion_lowT.png}
     \end{minipage}
     \hfill
     \begin{minipage}{0.35\textwidth}
@@ -116,7 +116,7 @@ From this energy density, we directly compute the isochoric heat capacity, \( C_
     \hfill
     \begin{minipage}{0.6\textwidth}
         \centering
-        \TODO{add image of a graph comparing two curves of specific heat against temperature, showing a cubic blue curve for the interacting gas and a three halves power red curve for the ideal gas}
+        \includegraphics[width=0.8\linewidth]{img/1-specific_heat.png}
     \end{minipage}
 \end{figure}
 
@@ -124,65 +124,165 @@ This final expression reveals that the low-temperature specific heat of the weak
 
 \section{Landau Criterion for Superfluidity}
 
- [...]
+In a normal fluid flowing through a pipe, friction between the fluid and the pipe boundaries leads to a continuous dissipation of energy and a corresponding macroscopic pressure drop along the direction of flow. Conversely, superfluidity (a remarkable quantum phenomenon famously discovered in liquid helium by Pyotr Kapitza) is characterized by the ability of certain fluids to flow without any friction. In a perfectly superfluid state, even at a finite macroscopic flow velocity \( \mathbf{v} > 0 \), the pressure remains exactly constant along the fluid, such that \( \nabla p = 0 \).
 
-Kapitza's experiment cited
+\begin{figure}[H]
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{img/1-superfluid_pipe.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.35\textwidth}
+        \caption{A fluid flows in a pipe at a velocity \( \mathbf{v} \) and along the flow the pressure decreases due to viscosity, generating a gradient of pressure \( \nabla p \).}
+        \label{fig:pressure_drop}
+    \end{minipage}
+\end{figure}
+Our primary goal is to leverage the spectral properties of the many-body Hamiltonian and the associated elementary excitation dispersion relation to rigorously derive a fundamental condition known as the Landau criterion for superfluidity.
 
-Our goal is to use spectral proerties of hamiltonian and the dispersion relation to derive a criterion for superfluidity.
+To understand the microscopic origin of friction, consider a classical many-body fluid, such as water, flowing through a pipe. If we assume the system is initially prepared in a state devoid of internal excitations, physical friction with the pipe boundaries will eventually induce their formation. Consequently, the total internal energy of the macroscopic system increases by the cumulative energy of these newly generated thermal excitations. For instance, if the initial state follows a classical Maxwell-Boltzmann momentum distribution, the dissipation of macroscopic forward momentum into random thermal excitations will eventually cause the distribution to narrow and shift toward lower net momenta. This physical picture implies that by examining the energy spectrum and the quasiparticle dispersion relation, we can determine precisely when adding energy to the system through such thermal or frictional processes is kinematically allowed.
 
-Friction is where you have thermal excitations...
-imagine water as a many body physics system flowing through a pipe. if we assume to start in a state without excitations, then after some flow there will be excitations formed by the friction with the pipe, and the energy of the system will be increased by the energy of the excitations. For example if teh initial distribution is a maxwell-boltzmann distribution, then after some time the distribution will be a maxwell-boltzmann narrowed near lower momenta (the low momentum modes, since we have lost momenta to produce thermal excitations), and the energy of the system will comsider the energy of the excitations too. This means that looking at the dispersion relation, we can also add energy to the system through thermal means and processes.
+Lev Landau proposed an elegant kinematic criterion to establish whether a zero-temperature (\( T = 0 \)) system behaves as a superfluid, specifically allowing one to predict the critical velocity at which the frictionless superfluid flow breaks down. Landau's derivation relies on comparing the energetics of the system in two distinct inertial reference frames: the laboratory frame \( K \), where the fluid moves with a macroscopic velocity \( \mathbf{v} \) and the pipe is perfectly at rest, and the co-moving frame \( K' \), where the fluid is strictly at rest and the pipe moves backwards with a velocity \( -\mathbf{v} \). The frame \( K' \) thus translates with a velocity \( \mathbf{v} \) with respect to the laboratory frame \( K \).
 
-The two reference frames by landau... \TODO{add draw of fluid moving in pipe and pipe moving with stationary fluid}
+In the co-moving frame \( K' \), the fluid is statically at rest. If the system experiences absolutely no friction with the pipe walls, it remains in its pristine many-body ground state, characterized by the complete absence of thermal excitations (\( \langle \alpha_{\mathbf{k}}^\dagger \alpha_{\mathbf{k}} \rangle = 0 \) for all \( \mathbf{k} \)). In this unperturbed scenario, the total energy of the fluid is simply its zero-point ground state energy, \( E'_{(0)} = \mathcal{E}_0 \).
 
-Frame K', fluid is static, if without friction there is no thermal excitations \(\langle \alpha_k^\dagger, \alpha_k \rangle = 0 \forall k\).
-If there is friction, then we have to add excitations, and the energy of the system is increased by \(E = \sum_k E_k \langle \alpha_k^\dagger, \alpha_k \rangle\), with \(\langle \alpha_k^\dagger, \alpha_k \rangle \in \mathbb{N}\) (in general \(\neq 0\) is sufficient, think about ensambles).
+If, however, friction were to occur, the interaction with the moving pipe walls would perturb the fluid, doing work to create elementary excitations. The system's internal energy would consequently increase by \( \sum_{\mathbf{k}} E_k \langle \alpha_{\mathbf{k}}^\dagger \alpha_{\mathbf{k}} \rangle \), where the expectation values \( \langle \alpha_{\mathbf{k}}^\dagger \alpha_{\mathbf{k}} \rangle \) are positive integers (or strictly non-zero for finite-temperature statistical ensembles). To analyze the threshold of this dissipative process, let us consider the creation of a single elementary excitation with momentum \( \mathbf{p} \). The total energy of the perturbed fluid in frame \( K' \) then becomes \( E'_{(\text{exc})} = \mathcal{E}_0 + E_p \).
 
-Galilean transformation to frame K, where the fluid is moving...
-We need to be careful about momenta, because if there is a gauge field (like EM field) the momentum will be shifted and won't corrispond to mass times velocity.
+We now transform this energy back to the laboratory frame \( K \) using the standard \textbf{Galilean transformation} for the total energy of a many-particle system:
+\[
+    E = E' + \frac{MV^2}{2} + \mathbf{P}' \cdot \mathbf{V},
+\]
+where \( E \) is the energy in frame \( K \), \( E' \) and \( \mathbf{P}' \) are the total internal energy and total internal momentum in frame \( K' \), \( M \) is the total macroscopic mass of the fluid, and \( \mathbf{V} \) is the relative velocity of \( K' \) with respect to \( K \). In our setup, this relative frame velocity is exactly \( \mathbf{V} = \mathbf{v} \).
 
-    [...]
+\begin{remark}
+    When performing this Galilean boost, one must be exceedingly careful regarding the definition of momentum if the system is coupled to an external gauge field (such as an electromagnetic field for charged superfluids like superconductors). In such cases, the canonical momentum is shifted by the vector potential and does not simply correspond to the inertial mass times the velocity. For our neutral bosonic superfluid, however, this complication does not arise.
+\end{remark}
 
-Friction: \(E_{exc} < E_0\). Superfluidity: \(E_{exc} > E_0\). The critical velocity is the minimum velocity for which the energy of the system is increased by adding excitations. This is basically telling when it is convenient to create excitations, and when it is not.
-Imposing the equality \(E_{exc} = E_0\) we get conditions for the critical velocity \(v_c\), separating the two regimes: a phase transition to superfluidity.
+For the fluid hosting a single elementary excitation, its internal energy in \( K' \) is \( E' = E'_{(\text{exc})} = \mathcal{E}_0 + E_p \). Because the macroscopic fluid is at rest in \( K' \), the only contribution to the total internal momentum comes from the newly created excitation itself, so \( \mathbf{P}' = \mathbf{p} \). Substituting these into the transformation yields the total energy of the excited fluid in the laboratory frame \( K \):
+\[
+    E_{(\text{exc})} = \mathcal{E}_0 + E_p + \frac{Mv^2}{2} + \mathbf{p} \cdot \mathbf{v}.
+\]
 
-\(E_p + pv < 0\) ...
+Conversely, if the fluid remains in the unperturbed ground state, its internal energy in \( K' \) is merely \( E' = E'_{(0)} = \mathcal{E}_0 \), and its total internal momentum is identically zero (\( \mathbf{P}' = 0 \)). Substituting these into the Galilean transformation, the energy of the frictionless flowing fluid in frame \( K \) is simply:
+\[
+    E_{(0)} = \mathcal{E}_0 + \frac{Mv^2}{2}.
+\]
 
-    [...]
+Combining the last two expressions, we determine the energy cost to create the elementary excitation in the laboratory frame:
+\[
+    E_{(\text{exc})} - E_{(0)} = E_p + \mathbf{p} \cdot \mathbf{v}.
+\]
 
-\begin{example}[No Superfluidity for BEC]
-    BEC...
+To definitively establish whether the system behaves as a superfluid, we must examine the sign of this energy difference. Friction fundamentally occurs when the creation of an excitation is energetically favorable, which happens when the perturbed state has a lower total energy than the unperturbed flow (\( E_{(\text{exc})} < E_{(0)} \)). In contrast, robust superfluidity is maintained whenever the spontaneous creation of excitations is kinematically forbidden because it costs energy (\( E_{(\text{exc})} > E_{(0)} \)).
 
-    \(E_p \sim p^2\)...
+The critical velocity \( v_c \) is defined as the minimum macroscopic flow velocity at which the system's total energy can be spontaneously lowered (or kept equal) by the addition of elementary excitations. This threshold dictates exactly when it becomes thermodynamically convenient to dissipate kinetic energy. By imposing the boundary equality \( E_{(\text{exc})} = E_{(0)} \), we will obtain the precise conditions for the critical velocity \( v_c \), which sharply separates the dissipative friction regime from the stable frictionless regime, thereby marking a dynamical phase transition to superfluidity.
 
-    since \(\frac{vp}{p^2}\xrightarrow{\to 0} \infty\), so its always convenient to create excitations, so \uline{no superfluidity for BEC}.
+In order for the spontaneous creation of an excitation to be kinematically possible in the laboratory reference frame \( K \), the energy difference \( E_{(\text{exc})} - E_{(0)} \) must be negative. This is because friction physically transfers kinetic energy from the moving fluid to the stationary pipe; consequently, the macroscopic fluid must decrease its total energy in this dissipative process. Friction will thus occur only if, for some values of the excitation momentum \( \mathbf{p} \), the following inequality holds:
+\[
+    E_p + \mathbf{p} \cdot \mathbf{v} < 0.
+\]
+The above condition is most easily satisfied if the created momentum \( \mathbf{p} \) is aligned exactly anti-parallel (opposite) to the flow velocity \( \mathbf{v} \). In this optimal dissipative configuration, the vector dot product becomes \( -pv \), resulting in the simplified scalar condition:
+\[
+    \frac{E_p}{p} < v.
+\]
+So, for a given macroscopic flow velocity \( v \), friction will be physically possible if and only if the above condition is satisfied by some value of the excitation momentum \( p \).
+
+To find the absolute threshold for dissipation, we must consider the global minimum value of the ratio \( E_p/p \) as the momentum \( p \) is varied over all possible accessible states:
+\begin{equation} \label{eq:critical_velocity_definition}
+    v_c \equiv \min_p \frac{E_p}{p}.
+\end{equation}
+According to our kinematic inequality, only if the velocity \( v \) of the fluid strictly exceeds this critical threshold \( v_c \) is the creation of excitations (and thus friction) possible. We therefore conclude the fundamental Landau criterion: if \( v_c \) is strictly greater than zero, then the fluid will flow without any friction for all velocities \( v < v_c \), behaving as a true superfluid. Mathematically, at a local minimum of the ratio \( E_p/p \), simple calculus dictates that its derivative must vanish:
+\[
+    \frac{d}{dp} \left( \frac{E_p}{p} \right) = 0,
+\]
+yielding the geometric condition:
+\[
+    \frac{dE_p}{dp} = \frac{E_p}{p}.
+\]
+
+\begin{figure}[H]
+    \begin{minipage}{0.45\textwidth}
+        \caption{Plot of the dispersion \( E_p \) as a function of the momentum \( p \) (the blue line). For a given generic point \( P \) of coordinates \( (p, E_p) \), the two red lines represent respectively the tangent to the curve in \( P \) (with slope \( \frac{dE_p}{dp} \)) and the straight line connecting the origin to \( P \), with slope \( E_p/p \).}
+        \label{fig:landau_geometric}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{img/1-superfluid_frac.png}
+    \end{minipage}
+\end{figure}
+
+Note that this derivative equation has a highly intuitive geometric interpretation: if one plots the excitation energy \( E_p \) as a function of the momentum \( p \), the derivative \( dE_p/dp \) represents the local slope of the tangent to the curve at the point \( (p, E_p) \), while the ratio \( E_p/p \) represents the overall slope of the secant line joining the origin directly to that same point \( (p, E_p) \) (see Figure \ref{fig:landau_geometric}). When these two distinct slopes perfectly coincide, the secant line from the origin becomes tangent to the dispersion curve. It is exactly at this point of tangency that a minimum of \( E_p/p \) occurs, and the numerical value of this tangent slope identically defines the critical velocity \( v_c \).
+
+\begin{example}[No Superfluidity for Ideal BEC]
+    Let us apply the Landau criterion to an ideal, non-interacting Bose-Einstein condensate. For a free particle, the energy dispersion is purely kinetic, meaning \( E_p = \frac{p^2}{2m} \sim p^2 \). When evaluating the critical velocity ratio, we find \( \frac{E_p}{p} \propto \frac{p^2}{p} = p \). Taking the limit to find the minimum over all accessible momenta, \( \min_p \left( \frac{E_p}{p} \right) \xrightarrow{p \to 0} 0 \). Because \( v_c = 0 \), any arbitrarily small flow velocity \( v > 0 \) satisfies the condition for dissipation. It is therefore always kinematically convenient to create excitations, meaning an ideal BEC strictly exhibits \uline{no superfluidity}.
+
+    \begin{figure}[H]
+        \begin{minipage}{0.5\textwidth}
+            \centering
+            \includegraphics[width=0.8\linewidth]{img/1-superfluid_ideal.png}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.45\textwidth}
+            \caption{Dispersion \( E_p \) of elementary excitations in an ideal Bose gas as a function of the momentum \( p \) (blue line). The point in which the Landau criterion is satisfied is exactly at the origin, and the slope of the tangent in this point (horizontal red line) gives the critical velocity \( v_c = 0 \).}
+            \label{fig:ideal_bec_dispersion}
+        \end{minipage}
+    \end{figure}
 \end{example}
 
-For the Bogoliubov dispersion, we have \(E_p \sim p\) for \(p \to 0\), so \(\frac{vp}{p} = v\), so if \(v < v_c\) it is not convenient to create excitations, and can have superfluidity.
+For the weakly interacting dilute Bose gas analyzed previously via Bogoliubov theory, recalling the behavior of \( E_p \) for small \( p \), the dispersion is linear: \( E_p \sim cp \). Consequently, the ratio \( E_p/p \) is a constant \( c \) near the origin. The global minimum condition is realized precisely as \( p \to 0 \) (see Figure \ref{fig:interacting_dispersion}):
+\[
+    v_c = \min_p \frac{E_p}{p} = c.
+\]
+This profound result means that the weakly interacting Bose gas is a true superfluid for any flow velocity \( v < c \). Only for supersonic flows \( v > c \) are Bogoliubov quasiparticle excitations created, and macroscopic dissipation becomes possible.
 
-Superfluifity is not true in general, there will always be a critical parameter (velocity, temperature, ...) for which the system will start to create excitations and lose superfluidity.
+\begin{figure}[H]
+    \begin{minipage}{0.45\textwidth}
+        \caption{Dispersion \( E_p \) of elementary excitations in a dilute Bose gas as a function of the momentum \( p \) (blue line). The point in which the Landau criterion is satisfied is the origin, and the slope of the tangent in this point (red line) gives the critical velocity: \( v_c = \min_p E_p/p \). For \( v \ge v_c \) there is friction, while for \( v < v_c \) the gas is superfluid.}
+        \label{fig:interacting_dispersion}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{img/1-superfluid_dilute.png}
+    \end{minipage}
+\end{figure}
 
-    [...]
+Superfluidity is not a universal guarantee; there will always be some critical parameter (such as a threshold velocity or a critical temperature) beyond which the system will spontaneously start to generate excitations and subsequently lose its superfluid properties.
 
 \begin{example}[Helium-4]
-    Even in strongly interacting Bose systems, like Helium-4, there can be a superfluid behavior at low temperature. The critical velocity is \(v_c \sim 60 m/s\).
+    Even in strongly interacting Bose systems that defy simple perturbative treatment, like liquid Helium-4, robust superfluid behavior emerges at sufficiently low temperatures. Finally, let us consider the measured spectrum of elementary excitations for liquid \( ^4\text{He} \) (as determined directly from neutron scattering experiments). We see that in this complex strongly-correlated case, there are actually two distinct geometric solutions (points of tangency) satisfying the Landau condition.
 
-        [...]
+    \begin{figure}[H]
+        \begin{minipage}{0.5\textwidth}
+            \centering
+            \includegraphics[width=0.8\linewidth]{img/1-superfluid_He4.png}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.45\textwidth}
+            \caption{Dispersion \( E_p \) of elementary excitations in \( ^4\text{He} \) as a function of the momentum \( p \) (blue line). The points in which the Landau criterion is satisfied are two (straight red lines tangent to the curve). The one with the lowest slope determines the true critical velocity \( v_c \approx 60 \text{ m/s} \) (while the initial sound velocity is much higher at \( c = 240 \text{ m/s} \)). The gas is a superfluid for \( v < v_c \).}
+            \label{fig:he4_dispersion}
+        \end{minipage}
+    \end{figure}
 
+    The tangent line with the absolute lowest slope geometrically corresponds to the true global minimum of \( E_p/p \). In Helium-4, this absolute minimum is reached not at the origin, but at a finite momentum close to the famous "roton minimum" of the dispersion curve \( E_p \). The slope of this tangent gives the corresponding critical velocity for Helium-4: \( v_c \approx 60 \text{ m/s} \). Notice that this critical threshold for creating rotons is significantly lower than the speed of sound determined by the initial linear slope at the origin, which is \( c = 240 \text{ m/s} \).
+
+    The energy gap at this local minimum is called the roton gap, denoted \( \Delta \), and is experimentally measured such that \( \Delta/k_B = 8.7 \text{ K} \). The elementary excitations grouped close to this finite-momentum minimum acquire a distinctly quadratic, particle-like effective form:
+    \[
+        E_p = \Delta + \frac{(p - p_0)^2}{2m^*}
+    \]
+    with an effective mass \( m^* = 0.16m \) (where \( m \) is the bare mass of a \( ^4\text{He} \) atom) and a characteristic momentum \( p_0/\hbar = 1.9 \text{ \AA}^{-1} \). These specific high-momentum elementary excitations are called rotons (while the low-momentum excitations corresponding to the initial linear part of the spectrum are standard acoustic phonons). We thus see that when the macroscopic superfluid velocity \( v \) exceeds \( v_c \approx 60 \text{ m/s} \), the spontaneous kinematic excitation of rotons completely destroys the superfluid behavior, even though the flow remains highly subsonic relative to \( c \).
 \end{example}
 
-All of this was at zero temperature, but if we consider a finite temperature, we have to take into account the thermal excitations that are already present in the system (indeed iven if the \(pv\) line is below the dispersion, we have to consider the thermal contributions from excitations, which can effectively turn off the superfluidity, by crossing the dispersion). The critical velocity will be lower than at zero temperature, and it will depend on the temperature of the system. Also there will always be a part of the fluid experiencing friction, but there is a fraction of the fluid that is superfluid, and the fraction of the fluid that is superfluid scale with the number of particle, so it is a sizeable portion.
+It is crucial to note that the entire Landau derivation presented above assumes absolute zero temperature. If we consider a finite temperature \( T > 0 \), we must take into account the pre-existing gas of thermal excitations that are statistically present in the system. Indeed, even if the kinematic line \( pv \) sits safely below the zero-temperature critical dispersion threshold, we must consider the energy contributions and collisions from these thermal excitations, which can effectively transfer momentum and turn off the macroscopic superfluidity by traversing the dispersion gap. Consequently, the true critical velocity will be strictly lower than at zero temperature, and it will exhibit a strong dependence on the ambient temperature of the system.
 
-    [...]
+Furthermore, at finite temperatures, there will always be a "normal" fraction of the fluid comprised of these thermal excitations that experiences ordinary friction. However, there concurrently exists a remaining fraction of the fluid that remains perfectly superfluid. According to the two-fluid model, the fraction of the fluid that is superfluid scales directly with the total number of particles, ensuring it remains a macroscopically sizable and observable portion of the system up until the critical transition temperature is reached.
 
-\subsection{conclusions (boh)}
+\section*{Concluding Remarks: The Physics of Emergence}
 
-we went from a to alpha, we recasted the problem in terms of new operators, new degrees of freedom, which are linear combinations of the original ones. The new operators create and destroy new excitations, which are not the original bare bosons, but rather hybridized modes. These new excitations are called \uline{quasiparticles}, and they are the elementary excitations of our new description.
+Through the mathematical machinery of the Bogoliubov transformation, we systematically mapped the bare bosonic degrees of freedom, \( a_{\mathbf{k}} \), to a new set of operators, \( \alpha_{\mathbf{k}} \). This was not merely a convenient mathematical change of basis, but a profound physical restructuring of the system. The new operators create and destroy collective, hybridized modes that intermix particles and holes. These emergent entities are defined as \textbf{quasiparticles}, and they—rather than the original bare bosons—constitute the true elementary excitations of our interacting many-body description.
 
-``MORE IS DIFFERENT'' - Aderson... QMBT is different from single particle physics, and sticking pieces together is not enough to understand the whole system. As the system grows in size, new emergent phenomena appear, which are not present in the single particle physics.
+This conceptual shift perfectly illustrates the celebrated paradigm articulated by P. W. Anderson: \emph{"More is Different."} Quantum Many-Body Theory (QMBT) demonstrates that macroscopic physics is fundamentally distinct from single-particle quantum mechanics. Merely sticking individual constituent pieces together is entirely insufficient to understand the whole. As the system grows to the thermodynamic limit, non-trivial interactions generate entirely new emergent phenomena that simply do not exist at the level of isolated single particles.
 
-Another emerging phenomenon is \uline{spontaneous symmetry breaking}, which is a fundamental concept in QMBT. The original Hamiltonian has a symmetry, but the ground state does not respect that symmetry. This leads to the emergence of new excitations, the Goldstone bosons, which are massless and have a linear dispersion relation at low momenta.
+A quintessential example of this macroscopic emergence is \textbf{spontaneous symmetry breaking}, which serves as a foundational pillar of modern QMBT. As we have seen, while the original Hamiltonian inherently respects a continuous global \( \text{U}(1) \) phase symmetry, the macroscopic interacting ground state spontaneously breaks it by developing a definite coherent phase. According to Goldstone's theorem, this broken continuous symmetry mathematically necessitates the emergence of massless Goldstone bosons. In the context of the interacting Bose gas, these Goldstone modes physically manifest as the acoustic phonons characterized by the linear dispersion relation, \( E_k \sim c\hbar k \), at low momenta.
 
-So in the end we went through the study of experimental observations about the weakly interacting Bose gas...
-
-\uline{Weak interactions can do a lot}: we didn't need to put strong interactions to see the emergence of new phenomena, and we saw that even weak interactions can lead to a rich phenomenology, like superfluidity, spontaneous symmetry breaking, and the emergence of quasiparticles.
+Ultimately, by closely analyzing the experimental observables and the low-energy spectrum of this system, we arrive at a powerful concluding lesson: \textbf{weak interactions can do a lot}. It is tempting to assume that exotic phenomena require strong, non-perturbative couplings. However, we have demonstrated that even an arbitrarily weak interaction is sufficient to completely rewire the vacuum state of the system. A profoundly rich phenomenology—encompassing quantum condensate depletion at absolute zero, the formation of a well-defined sound velocity, spontaneous symmetry breaking, and the onset of macroscopic superfluidity governed by the Landau criterion—emerges not from strong forces, but from the collective many-body nature of weakly interacting quasiparticles.
