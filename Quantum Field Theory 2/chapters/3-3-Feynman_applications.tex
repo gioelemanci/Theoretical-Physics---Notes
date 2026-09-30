@@ -256,7 +256,7 @@ Now we have what we need to compute the scattering amplitude for the \(2 \to 2\)
     This is the final result for the differential cross section for the \(2 \to 2\) scattering process in \(\phi^3\) theory at tree level, as a function of the total center of mass energy \(E\) and the scattering angle \(\theta\).
 \end{example}
 
-\subsection{Feynman Rules for Other Theories}
+\subsection{Feynman Rules for Other Theories}\TODO{check below}
 
 We can generalize some of the Feynman rules we have found for the real scalar field to other theories, such as for different types of fields (complex scalar fields, Dirac fermion fields, vector boson fields) and for different interactions (Yukawa interactions, gauge interactions).
 
@@ -341,10 +341,10 @@ Let us explicitly recall the operator action for a complex scalar field:
 
 We can formally define contractions directly between the field operators in the Lagrangian and the physical external states:
 \[
-    \contraction{}{\hat{\phi}}{| p^{\phi} }{\rangle} \hat{\phi} | p^{\phi} \rangle, \quad \contraction{\langle p^{\bar{\phi}} |}{\hat{\phi}}{}{} \langle p^{\bar{\phi}} | \hat{\phi}
+    \contraction{}{\hat{\phi}}{}{| p^{\phi}\rangle} \hat{\phi} | p^{\phi} \rangle, \quad \contraction{}{\langle p^{\bar{\phi}} |}{}{\hat{\phi}} \langle p^{\bar{\phi}} | \hat{\phi},
 \]
 \[
-    \contraction{}{\hat{\phi}^\dagger}{| p^{\bar{\phi}} }{\rangle} \hat{\phi}^\dagger | p^{\bar{\phi}} \rangle, \quad \contraction{\langle p^{\phi} |}{\hat{\phi}^\dagger}{}{} \langle p^{\phi} | \hat{\phi}^\dagger
+    \contraction{}{\hat{\phi}^\dagger}{}{| p^{\bar{\phi}}\rangle} \hat{\phi}^\dagger | p^{\bar{\phi}} \rangle, \quad \contraction{}{\langle p^{\phi} |}{}{\hat{\phi}^\dagger} \langle p^{\phi} | \hat{\phi}^\dagger,
 \]
 Here, $|p^{\phi}\rangle$ denotes a state containing a particle, and $|p^{\bar{\phi}}\rangle$ denotes a state containing an anti-particle. Importantly, when applying this technique to derive vertex rules, these states do not strictly need to be on-shell; we are merely extracting the algebraic effect of the operators $\hat{\phi}, \hat{\phi}^\dagger$ inside the Feynman diagrams.
 
@@ -352,11 +352,11 @@ To find the vertex rule, one computes the matrix element of the interaction Hami
 
 Returning to our previous derivative toy model $\mathcal{L}_{\text{int}} = -\frac{\lambda}{2!} \phi (\partial_\mu \phi)(\partial^\mu \phi)$ (where $\phi$ is real, so $\phi = \phi^\dagger$), we evaluate the matrix element:
 \[
-    \langle p_2, p_3 | \frac{-i\lambda}{2!} \hat{\phi} (\partial_\mu \hat{\phi})(\partial^\mu \hat{\phi}) | p_1 \rangle
+    \langle p_2, p_3 | \frac{-i\lambda}{2!} \hat{\phi} (\partial_\mu \hat{\phi})(\partial^\mu \hat{\phi}) | p_1 \rangle.
 \]
 Applying Wick's theorem, we contract the operators with the states. For example, one specific contraction pairing is:
 \[
-    \frac{-i\lambda}{2!} \bcontraction[0.5ex]{\langle p_2, p_3 |}{\hat{\phi}}{(\partial_\mu \hat{\phi})(\partial^\mu \hat{\phi}) |}{p_1} \bcontraction[1ex]{\langle}{p_2}{, p_3 | \hat{\phi} (\partial_\mu}{\hat{\phi}} \contraction[1.5ex]{\langle p_2,}{p_3}{| \hat{\phi} (\partial_\mu \hat{\phi})(\partial^\mu}{\hat{\phi}} \langle p_2, p_3 | \hat{\phi} (\partial_\mu \hat{\phi})(\partial^\mu \hat{\phi}) | p_1 \rangle
+    \frac{-i\lambda}{2!} \bcontraction[0.5ex]{\langle p_2, p_3 |}{\hat{\phi}}{(\partial_\mu \hat{\phi})(\partial^\mu \hat{\phi}) |}{p_1} \bcontraction[1ex]{\langle}{p_2}{, p_3 | \hat{\phi} (\partial_\mu}{\hat{\phi}} \contraction{\langle p_2,}{p_3}{| \hat{\phi} (\partial_\mu \hat{\phi})(\partial^\mu}{\hat{\phi}} \langle p_2, p_3 | \hat{\phi} (\partial_\mu \hat{\phi})(\partial^\mu \hat{\phi}) | p_1 \rangle.
 \]
 This specific contraction yields:
 \[
@@ -366,30 +366,296 @@ The $2!$ symmetry factor arises because permuting the two final states $p_2 \lef
 
 \subsection{Complex Scalar Field}
 
+For a complex scalar field, the total Lagrangian is given by \(\mathcal{L} = \mathcal{L}_{\text{free}} + \mathcal{L}_{\text{int}}\). Unlike the real scalar field, the field operator \(\phi\) and its conjugate \(\phi^*\) (or \(\phi^\dagger\)) are distinct. We recall their effects on quantum states:
+\begin{itemize}
+    \item \(\phi = \phi(a, b^\dagger)\) destroys incoming particles or creates outgoing anti-particles.
+    \item \(\phi^* = \phi(a^\dagger, b)\) destroys incoming anti-particles or creates outgoing particles.
+\end{itemize}
+
+The Feynman propagator is defined as the time-ordered product:
+\[
+    D_F(x_1, x_2) = \langle 0 | T \{ \phi^*(x_1) \phi(x_2) \} | 0 \rangle
+\]
+Because \(x_1\) and \(x_2\) are not equivalent in this expectation value, we must place an \textbf{arrow} on the propagator line from \(x_1\) to \(x_2\).
+\TODO{add diagram: solid line from x1 to x2 with an arrow pointing towards x2}
+
+By writing \(\phi\) and \(\phi^*\) in terms of creation and annihilation operators (\(a, a^\dagger, b, b^\dagger\)), one can physically interpret this propagator as either a particle propagating from \(x_1\) to \(x_2\), or an anti-particle propagating backward from \(x_2\) to \(x_1\).
+
+\begin{remark}
+    This leads to a fundamental convention in Feynman diagrams (consistently with crossing symmetry):
+    An \textbf{INCOMING ARROW} towards a vertex can represent either an \textit{incoming particle} or an \textit{outgoing anti-particle}. Conversely, an \textbf{OUTGOING ARROW} from a vertex represents either an \textit{outgoing particle} or an \textit{incoming anti-particle}.
+\end{remark}
+
+Consider the quartic interaction for a complex scalar field:
+\[
+    \mathcal{L}_{\text{int}} = -\frac{\lambda}{4} |\phi|^4 = -\lambda \left( \frac{\phi^2}{2!} \frac{\phi^{*2}}{2!} \right)
+\]
+Note that there is no \(4!\) factorial in the denominator, but rather a factor of 4 (which can be split into \(2! \times 2!\) to account for the symmetries of \(\phi\) and \(\phi^*\) independently).
+The corresponding Feynman rule is simply \(-i\lambda\) for a vertex with exactly 2 incoming arrows and 2 outgoing arrows.
+\TODO{add diagram: a 4-point vertex with 2 arrows pointing inwards and 2 arrows pointing outwards, labeled with -i lambda}
+
+Because every vertex must have an equal number of incoming and outgoing arrows, it strictly follows that the charge \(Q \equiv N_{\text{particles}} - N_{\text{anti-particles}}\) is conserved in this theory.
+
+\textit{Notation Note:} In theories containing both scalars and Dirac fermions, we use different line styles to distinguish them:
+\begin{itemize}
+    \item \textbf{Real scalar:} Plain dashed line.
+    \item \textbf{Complex scalar:} Dashed line with an arrow.
+    \item \textbf{Dirac fermion:} Solid line with an arrow.
+\end{itemize}
+
 
 \subsection{Dirac Fermion Field}
 
+For particles with spin, the LSZ reduction formula dictates that the amplitude must be multiplied by specific polarization states (spinors) for external particles. This introduces non-trivial Feynman rules for the external legs of Dirac fermions:
+
+\begin{itemize}
+    \item \textbf{Incoming fermion (\(f\)):} \(u_s(p)_\alpha\).
+          \TODO{add diagram: solid line with arrow pointing towards the vertex}
+    \item \textbf{Outgoing fermion (\(f\)):} \(\bar{u}_s(p)_\alpha\).
+          \TODO{add diagram: solid line with arrow pointing away from the vertex}
+    \item \textbf{Incoming anti-fermion (\(\bar{f}\)):} \(\bar{v}_s(p)_\alpha\).
+          \TODO{add diagram: solid line with arrow pointing away from the vertex (arrow opposes momentum)}
+    \item \textbf{Outgoing anti-fermion (\(\bar{f}\)):} \(v_s(p)_\alpha\).
+          \TODO{add diagram: solid line with arrow pointing towards the vertex (arrow opposes momentum)}
+\end{itemize}
+\textit{Note:} The spinor index \(\alpha\) is often left implicit in standard calculations, adopting a matrix multiplication ordering.
+
+The Feynman propagator for a Dirac fermion in momentum space is given by:
+\[
+    \frac{i(\slashed{p} + m)}{p^2 - m^2} \quad \text{or with explicit spinor indices:} \quad \frac{i(\slashed{p} + m)_{\alpha\beta}}{p^2 - m^2}
+\]
+\TODO{add diagram: solid line with an arrow in the direction of momentum p}
+
 \subsubsection{Additional Feynman Rules for Fermions}
 
-\begin{example}[Yukawa theory]
+Because fermions obey \textbf{anti-commutation relations} (due to the spin-statistics theorem), there are crucial additional rules when evaluating Feynman diagrams:
 
+\begin{enumerate}
+    \item \textbf{Relative Minus Sign for Exchange:} Diagrams that can be mapped into each other by explicitly exchanging two external identical fermions (such as in \(t\)-channel vs \(u\)-channel scattering) must have a \textbf{relative minus sign}.
+          \TODO{add diagram: showing two interaction diagrams mapping to each other via exchanging two fermion lines, with a "multiply this by (-1)" note}
+
+    \item \textbf{Fermion Loops:} Any closed fermion loop inside a Feynman diagram must be multiplied by an overall factor of \((-1)\). (For a detailed theoretical justification, one can refer to Schwartz 13.1.1).
+          \TODO{add diagram: a circular solid line with an arrow representing a closed fermion loop, labeled "multiplied by (-1)"}
+\end{enumerate}
+
+\begin{example}[Yukawa theory]
+    The interaction Lagrangian for the Yukawa theory is given by:
+    \[
+        \mathcal{L}_{\text{int}} = -g \phi \bar{\psi}\psi
+    \]
+    The total Lagrangian is $\mathcal{L} = \mathcal{L}_{\text{Dirac}} + \mathcal{L}_{\text{Klein-Gordon}} + \mathcal{L}_{\text{int}}$. The Feynman rule for this interaction vertex is simply:
+    \[
+        \text{Vertex} = -ig
+    \]
+    \textit{Note:} Strictly speaking, this rule should be multiplied by the $4 \times 4$ identity matrix in Dirac space, as the vertex connects two spinors and a scalar field.
+    \TODO{add diagram: a 3-point vertex with one dashed scalar line and two solid fermion lines, labeled -ig}
 \end{example}
 
-\begin{example}
+\begin{example}[Fermion-Fermion Scattering in Yukawa Theory]
+    Let us compute the tree-level amplitude for the scattering process of a fermion and an anti-fermion: $f(p_1) \bar{f}(p_2) \to f(p_3) \bar{f}(p_4)$.
 
+    At leading order $\mathcal{O}(g^2)$, there are two Feynman diagrams that contribute: an $s$-channel annihilation diagram and a $t$-channel scattering diagram.
+    \TODO{add diagram: s-channel and t-channel diagrams for fermion-antifermion scattering mediated by a scalar}
+
+    Applying the Feynman rules (including spinors for external legs and the scalar propagator $i/(q^2 - m^2_\phi)$):
+    \[
+        i\mathcal{M} = (-ig)^2 \left[ \frac{i}{s - m^2_\phi} (\bar{v}_2 u_1)(\bar{u}_3 v_4) + \frac{i}{t - m^2_\phi} (\bar{u}_3 u_1)(\bar{v}_2 v_4) \right] + \mathcal{O}(g^4)
+    \]
+    where we used the shorthand notation $u_i \equiv u_{s_i}(p_i)$ and $v_i \equiv v_{s_i}(p_i)$. (Note: a relative minus sign between the diagrams arises from exchanging the identical external fermions, which we will formally justify later).
 \end{example}
 
 \subsection{Vector Bosons}
 
+In Feynman diagrams, vector bosons (spin-1 particles like photons, $W$, or $Z$ bosons) are conventionally drawn as \textbf{wavy lines}.
+\TODO{add diagram: a wavy line representing a vector boson}
+
+Because vector fields $A^\mu$ carry a Lorentz index, we must assign explicit Lorentz indices to each end of a vector boson line in a diagram. Similar to fermions, external vector bosons require specific polarization states:
+\begin{itemize}
+    \item \textbf{Incoming vector boson:} $\varepsilon_\mu^s(p)$
+          \TODO{add diagram: a wavy line with an incoming arrow, labeled with index mu}
+    \item \textbf{Outgoing vector boson:} $\varepsilon_\mu^{s *}(p)$
+          \TODO{add diagram: a wavy line with an outgoing arrow, labeled with index mu}
+\end{itemize}
+
+The momentum-space propagators for vector bosons depend on whether they are massive or massless:
+\begin{itemize}
+    \item \textbf{Massive vector boson ($m \neq 0$):}
+          \[
+              \Pi^{\mu\nu}(p) = \frac{i}{p^2 - m^2 + i0^+} \left( -g^{\mu\nu} + \frac{p^\mu p^\nu}{m^2} \right)
+          \]
+    \item \textbf{Massless vector boson ($m = 0$, e.g., the photon):}
+          \[
+              \Pi^{\mu\nu}(p) = \frac{-i g^{\mu\nu}}{p^2 + i0^+} + \text{"gauge-dependent terms"}
+          \]
+          By choosing the \textbf{Feynman gauge}, the gauge-dependent terms are exactly zero, leaving only the simple $-ig^{\mu\nu}$ numerator.
+          \TODO{add diagram: a wavy line with momentum p and indices mu, nu at the ends}
+\end{itemize}
+
+
 \subsection{Quantum Electrodynamics (QED)}
 
-\begin{example}[Two different types of particles in QED]
+The interaction Lagrangian for QED couples the Dirac fermion current to the electromagnetic field:
+\[
+    \mathcal{L}_{\text{int}} = -e \bar{\psi} \gamma^\mu \psi A_\mu
+\]
+The fundamental QED vertex involves two fermions and one photon. The Feynman rule is:
+\[
+    \text{Vertex}^\mu = -ie \gamma^\mu
+\]
+\TODO{add diagram: a 3-point vertex with two solid fermion lines and one wavy photon line with index mu, labeled -ie gamma}
+\begin{remark}
+    For particles with a generic electric charge $Q$ (e.g., quarks where $Q = -1/3$ or $+2/3$), the rule generalizes to $i Q e \gamma^\mu$. With explicit spinor indices $\alpha, \beta$, the vertex is written as $-ie (\gamma^\mu)_{\alpha\beta}$, emphasizing that it acts as a matrix in Dirac space connecting the incoming and outgoing fermion lines.
+\end{remark}
 
+
+\subsection{Scalar Quantum Electrodynamics (sQED)}
+
+Scalar QED describes the electromagnetic interactions of a charged complex scalar field. The full Lagrangian is generated by substituting the standard derivative with the covariant derivative $D_\mu = \partial_\mu + ieA_\mu$ in the free complex scalar Lagrangian:
+\[
+    \mathcal{L} = \mathcal{L}_{\text{Maxwell}} + \mathcal{L}_{\text{Complex Scalar}} \Big|_{\partial_\mu \to D_\mu}
+\]
+Expanding the $|D_\mu \phi|^2$ term reveals two distinct interaction vertices (an exercise left for the reader, using the derivative prescription derived earlier):
+\begin{enumerate}
+    \item \textbf{The 3-point vertex} (photon-scalar-scalar):
+          \[
+              \text{Vertex}^\mu = -ie(p_1^\mu + p_2^\mu)
+          \]
+          where $p_1$ and $p_2$ are the momenta of the scalar fields, directed according to the arrow convention.
+          \TODO{add diagram: a 3-point vertex with one wavy photon line and two dashed scalar lines with momenta p1, p2}
+
+    \item \textbf{The 4-point "seagull" vertex} (two photons-two scalars):
+          \[
+              \text{Vertex}^{\mu\nu} = 2 i e^2 g^{\mu\nu}
+          \]
+          \TODO{add diagram: a 4-point vertex with two wavy photon lines and two dashed scalar lines}
+\end{enumerate}
+
+
+\begin{example}[Two different types of particles in sQED]
+    Consider an extension of sQED containing two distinct, minimally coupled complex scalar fields, $\phi_A$ and $\phi_B$, with masses $m_A$ and $m_B$ respectively.
+    \[
+        \mathcal{L} = -\frac{1}{4}F_{\mu\nu}^2 + |D_\mu \phi_A|^2 - m_A^2|\phi_A|^2 + |D_\mu \phi_B|^2 - m_B^2|\phi_B|^2
+    \]
+    Let us compute the tree-level amplitude for the annihilation process $\phi_A(p_1) \bar{\phi}_A(p_2) \to \phi_B(p_3) \bar{\phi}_B(p_4)$.
+    Because $\phi_A$ and $\phi_B$ are distinct fields, they only interact through the exchange of a photon. Thus, there is only one $s$-channel diagram contributing at tree-level.
+    \TODO{add diagram: s-channel diagram with incoming A scalars, exchanging a photon, and outgoing B scalars}
+
+    We assign Lorentz indices $\mu$ and $\nu$ to the ends of the internal photon propagator. Applying the sQED 3-point vertex rules:
+    \[
+        i\mathcal{M} = \left[ -ie(p_1^\mu - p_2^\mu) \right] \frac{-i g_{\mu\nu}}{(p_1 + p_2)^2} \left[ -ie(p_3^\nu - p_4^\nu) \right]
+    \]
+    \begin{remark}
+        Notice the crucial \textbf{minus sign} in the momentum factor $(-p_2^\mu)$ for the incoming anti-particle. This is a direct application of the \textbf{Crossing Rule}: the rule for the vertex is $-ie(p_{\text{in}} + p_{\text{out}})$. Since $p_2$ is an incoming anti-particle, we must treat it as an outgoing particle with momentum $-p_2$, hence the minus sign. The same logic applies to the outgoing anti-particle $p_4$, which yields $(-p_4^\nu)$.
+    \end{remark}
+
+    Contracting the indices with the metric tensor and using Mandelstam variables ($s = (p_1+p_2)^2$):
+    \[
+        i\mathcal{M} = \frac{ie^2}{s} (p_1 \cdot p_3 - p_1 \cdot p_4 - p_2 \cdot p_3 + p_2 \cdot p_4)
+    \]
+    Using kinematic identities (e.g., $p_1 \cdot p_3 = p_2 \cdot p_4 = -\frac{1}{2}(t - m_A^2 - m_B^2)$ and $p_1 \cdot p_4 = p_2 \cdot p_3 = -\frac{1}{2}(u - m_A^2 - m_B^2)$), this beautifully simplifies to:
+    \[
+        i\mathcal{M} = ie^2 \frac{u - t}{s} \qquad (\text{with } s+t+u = 2m_A^2 + 2m_B^2)
+    \]
+
+    \textit{Kinematic Note:} Momentum conservation implies that the center-of-mass energy $\sqrt{s} = E_{\text{c.m.}} = E_3 + E_4 \geq 2m_B$. Therefore, if $m_A < m_B$, this reaction is only physically possible if the initial particles $\phi_A, \bar{\phi}_A$ are accelerated to a sufficiently high center-of-mass energy ($\sqrt{s} \geq 2m_B$) to overcome the mass threshold of the heavier $B$ particles.
 \end{example}
 
 \subsection{Observations on Diagrams}
 
+Feynman diagrams are fundamental mathematical tools used to make perturbative predictions in Quantum Field Theory (QFT). Each diagram represents a specific mathematical contribution to a Green function or an element of the scattering matrix ($S$-matrix).
+
+It is crucial to understand that Feynman diagrams are \textbf{not physical objects}. You cannot measure or experimentally observe a single Feynman diagram; only their coherent sum corresponds to a measurable physical probability. Furthermore, a single diagram generally does \textbf{not} respect the fundamental symmetries of the underlying theory (such as gauge invariance or Bose/Fermi symmetry). Only the complete sum of all diagrams at a given perturbative order perfectly restores these physical symmetries.
+
+Despite these strict mathematical realities, it remains extremely common and useful to assign a heuristic physical meaning to the components of these diagrams to guide our physical intuition (provided one keeps the aforementioned caveats in mind). We can classify the components into two distinct categories:
+
+\begin{itemize}
+    \item \textbf{External Lines (Real Particles):} These represent the actual external particles associated with the incoming and outgoing asymptotic states.
+          \begin{itemize}
+              \item Their momenta are strictly \textbf{on-shell}, meaning they satisfy the relativistic energy-momentum relation $p_i^2 = m_i^2$.
+              \item They are considered to live for a \textit{long time} (macroscopic distances) compared to the microscopic time scale of the quantum interaction.
+          \end{itemize}
+
+    \item \textbf{Internal Lines (Virtual Particles):} These mathematically correspond to the propagators bridging the interaction vertices.
+          \begin{itemize}
+              \item They represent intermediate particles that live for a very \textit{short time}.
+              \item Their momenta are strictly \textbf{off-shell}, meaning $p_i^2 \neq m_i^2$.
+              \item In tree-level diagrams, the 4-momentum of a virtual particle is entirely fixed by momentum conservation at the connected vertices.
+              \item In loop diagrams, the internal momenta are not uniquely fixed by conservation laws, meaning we must "sum" (integrate) over all possible momentum states via $\int d^4k$.
+              \item Virtual particles, regardless of whether they appear in trees or loops, only "exist" as intermediate transition states and are \textbf{never directly observed}.
+          \end{itemize}
+\end{itemize}
+
+As an illustrative example, consider the annihilation process $\phi_A \bar{\phi}_A \to \phi_B \bar{\phi}_B$ in scalar Quantum Electrodynamics (sQED).
+
+\TODO{add diagram: s-channel diagram showing prepared incoming states phiA, bar phiA, an internal wavy line representing the virtual photon, and observed outgoing states phiB, bar phiB}
+
+In this specific diagram, the initial $\phi_A$ states are the "prepared incoming states" and the final $\phi_B$ states are the "observed outgoing states". The internal wavy line is the mediating \textbf{virtual photon}. Because it is short-lived and off-shell ($p^2 \neq m_\gamma^2 = 0$), it is inherently unobservable.
+
+\begin{remark}
+    A profound consequence of quantum mechanics is that virtual particles can appear in Feynman diagrams—and thus indirectly, but measurably, affect our observations of a process—even if the system does not possess enough center-of-mass energy to produce them as actual, real particles.
+\end{remark}
+
 \section{Crossing Symmetry}
+
+We have seen that Feynman rules obey a fundamental property known as \textbf{Crossing Symmetry}. Mathematically, this principle states an equivalence in the evaluation of scattering matrix elements:
+\begin{quote}
+    INCOMING $\phi_s(p) \iff$ OUTGOING $\bar{\phi}_{-s}(-p)$
+\end{quote}
+where $\phi_s(p)$ represents a particle with momentum $p$ and polarization state $s$, and $\bar{\phi}$ represents its corresponding anti-particle.
+
+This powerful symmetry allows us to write just \textbf{one} Feynman rule per interaction term, rather than having to define separate rules for every possible combination of incoming and outgoing particles. For example, in scalar QED, the fundamental 3-point vertex rule is $-ie(p_1^\mu + p_2^\mu)$ for two incoming scalars.
+By applying crossing symmetry, this single rule automatically implies the rule for a process with one incoming particle ($p_1$) and one outgoing particle ($p_2$), which simply becomes $-ie(p_1^\mu - p_2^\mu)$, and so on. We only need to write one generic combination, and all others are implicitly derived.
+
+\TODO{add diagram: showing the basic sQED 3-point vertex with two incoming scalars p1, p2, and a second diagram showing the crossed version with p1 incoming and p2 outgoing}
+
+Because full scattering amplitudes $\mathcal{M}$ are constructed purely from these symmetric Feynman rules, it logically follows that the scattering amplitudes themselves strictly obey crossing symmetry.
+
+\begin{remark}
+    This statement is also a direct corollary of the LSZ reduction formula. When applied to a complete amplitude, crossing symmetry must be understood mathematically as an \textbf{Analytic Continuation}. Physical scattering processes only make sense for external particles with strictly positive energy ($p^0 > 0$). However, because the amplitudes are analytic functions of the external momenta, we can mathematically continue these functions into the unphysical region where $p^0 < 0$. This analytic continuation is precisely what validates the transformation $p \to -p$ used in crossing.
+\end{remark}
+
+Thanks to crossing symmetry, once we have computed the analytic expression of an amplitude for a specific process, we can obtain the amplitudes for all related crossed processes essentially "for free".
+
+\begin{example}[Crossing in sQED]
+    Suppose we have already computed the amplitude for the annihilation process $\phi_A \bar{\phi}_A \to \phi_B \bar{\phi}_B$, which we found to be $\mathcal{M} = ie^2 \frac{u-t}{s}$.
+
+    We now want to compute the amplitude for the scattering process $\phi_A(p_1) \phi_B(p_2) \to \phi_A(p_3) \phi_B(p_4)$. We can define the crossed momenta $k_i$ for this new process in terms of the original annihilation momenta:
+    \[
+        k_1 = p_1, \quad k_2 = -p_3, \quad k_3 = p_4, \quad k_4 = -p_2
+    \]
+    Substituting these crossed momenta into the Mandelstam variables of the original process:
+    \begin{align*}
+        s(k_i) & = (k_1 + k_2)^2 = (p_1 - p_3)^2 = t \\
+        t(k_i) & = (k_3 - k_1)^2 = (p_4 - p_1)^2 = u \\
+        u(k_i) & = (k_1 - k_4)^2 = (p_1 + p_2)^2 = s
+    \end{align*}
+    Therefore, the crossing transformation elegantly maps the Mandelstam variables as $s \to t$, $t \to u$, and $u \to s$. Applying this mapping to the original amplitude gives us the new amplitude immediately:
+    \[
+        i\mathcal{M}(\phi_A \phi_B \to \phi_A \phi_B) = \left. i\mathcal{M}(\phi_A \bar{\phi}_A \to \phi_B \bar{\phi}_B) \right|_{\substack{s \to t \\ t \to u \\ u \to s}} = ie^2 \frac{s - u}{t}
+    \]
+    This is the exact same result one would obtain by manually computing the corresponding $t$-channel Feynman diagram for the scattering process.
+    \TODO{add diagram: t-channel Feynman diagram for phiA phiB scattering}
+\end{example}
+
+As a theoretical extreme, one could use crossing symmetry to compute a completely unphysical amplitude where all particles are in the outgoing state, e.g., $0 \to \phi_A \bar{\phi}_A \phi_B \bar{\phi}_B$ (vacuum decaying into particles). While this amplitude describes a physically impossible process (due to energy conservation), valid physical amplitudes can be effortlessly extracted from it by crossing two of the final state particles back into the initial state.
+
 
 \subsection{Crossing Symmetry and Identical Fermions}
 
+We previously established a critical rule: diagrams that differ by the exchange of two external identical fermions must have a relative $(-1)$ sign. We can now rigorously justify this using crossing symmetry.
+
+Consider Bhabha scattering in QED ($e^- e^+ \to e^- e^+$). At tree level, the amplitude is the sum of an $s$-channel (annihilation) and a $t$-channel (scattering) diagram.
+\TODO{add diagram: s-channel and t-channel diagrams for Bhabha scattering e- e+ -> e- e+}
+\[
+    i\mathcal{M}(e^- e^+ \to e^- e^+) = \text{Diagram}_s + \text{Diagram}_t + \mathcal{O}(e^4)
+\]
+These two diagrams must have a relative $(-1)$ sign. To see this clearly without tracking complex spinor indices, we use crossing symmetry to move all particles into the outgoing state, evaluating the fictitious process $0 \to e^+ e^- e^- e^+$.
+\TODO{add diagram: two diagrams for the vacuum decay 0 -> e+ e- e- e+, showing the exchange of the two e- lines}
+\[
+    i\mathcal{M}(0 \to e^+ e^- e^- e^+) = \text{Diagram}_A + \text{Diagram}_B + \mathcal{O}(e^4)
+\]
+In this completely crossed configuration, it becomes immediately visually clear that Diagram A and Diagram B differ only by the explicit exchange of the two identical outgoing electrons ($e^-$), labeled 2 and 3 in the diagrams. Because fermions are identical particles obeying Fermi-Dirac statistics, their final state wavefunction must be totally antisymmetric under particle exchange. This antisymmetry forces the relative minus sign between the two diagrams.
+
+\begin{remark}
+    More generally, to derive the exact signs for complex diagrams, one would need to carefully count the anti-commutations of the fermion field operators during the Wick contractions. While instructive to do by hand once, today this tedious combinatorial information is easily and reliably provided by automated computer programs (e.g., FeynArts or QGRAF).
+\end{remark}

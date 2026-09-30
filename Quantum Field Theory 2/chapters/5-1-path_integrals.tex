@@ -67,160 +67,205 @@ Thus the most important contribution to the path integral comes from the classic
 
 \section{Path Integral Formulation of QFT}
 
-The path integral formulation can be generalized with the use of some handy substitutions:
+The path integral formalism can be generalized to QFT via straightforward substitutions:
 \[
     \begin{dcases}
         q \to \phi(x), \\
-        t, \, \mathrm{d} t \to x^{\mu}, \, \mathrm{d}^4 x,
+        t, \, \mathrm{d} t \to x^{\mu}, \, \mathrm{d}^4 x.
     \end{dcases}
 \]
 
-... green's finctions... \(\ket{i} = \ket{f} = \ket{\Omega}\)...
-
+As we have seen, in QFT we are mostly interested in correlation functions (or Green functions), defined as expectation values of time-ordered products in the vacuum state $\ket{\Omega}$. We thus consider $\ket{i} = \ket{f} = \ket{\Omega}$ and write the QFT version of path integrals as:
 \[
-    \bra{\Omega} \hat{T} \{\hat{\phi}(x_1) \hat{\phi}(x_2) \cdots \hat{\phi} (x_n)\} \ket{\Omega} = N \int \mathcal{D} \phi(x) e^{i S[\phi(x)]} \phi(x_1) \phi(x_2) \cdots \phi(x_n),
+    \bra{\Omega} \hat{T} \{\hat{\phi}(x_1) \hat{\phi}(x_2) \cdots \hat{\phi} (x_n)\} \ket{\Omega} = N \int \mathcal{D} \phi(x) \exp\left[i S(\phi)\right] \phi(x_1) \phi(x_2) \cdots \phi(x_n),
 \]
-where now the action is \(S[\phi(x)] = \int \mathrm{d}^4 x \, \mathcal{L}(\phi(x), \partial_\mu \phi(x))\). The normalization \(N\) can be fixed by requiring that the vacuum-to-vacuum transition amplitude is equal to one \(\bra{\Omega} \ket{\Omega} = 1\):
+where the action is $S = \int \mathrm{d}^4 x \, \mathcal{L}$.
+
+\begin{remark}
+    Remember that everything inside a path integral is a (commuting) function, not an operator.
+\end{remark}
+
+The normalization $N$ can be fixed using the vacuum-to-vacuum transition amplitude $\bra{\Omega} \ket{\Omega} = 1$:
 \[
-    N = \frac{1}{\int \mathcal{D} \phi(x) e^{i S[\phi(x)]}}.
-\]
-
-
-In order to get the discretized version of the last expression, we can discretize spacetime into a lattice of points, \(x_i \to \phi_i \equiv \phi(x_i)\) and
-
-    [\textit{draw of lattice}]\TODO{Add drawing of lattice}
-
-\[
-    \bra{\Omega} \hat{T} \{\hat{\phi}(x_1) \hat{\phi}(x_2) \cdots \hat{\phi} (x_n)\} \ket{\Omega} = N \int \mathrm{d} \phi_1 \cdots \mathrm{d} \phi_N \exp[i \sum_{k=1}^N \Delta^4 x \mathcal{L}(\phi_k)] \phi_1 \phi_2 \cdots \phi_N,
+    N = \left( \int \mathcal{D} \phi(x) \exp\left[i S(\phi)\right] \right)^{-1}.
 \]
 
-where again... and in the limit for \(n \to  \infty\) ...
+We can rewrite the discretized version of the path integral:
+\[
+    \bra{\Omega} \hat{T} \{\hat{\phi}(x_a) \hat{\phi}(x_b) \cdots\} \ket{\Omega} = N \int \mathrm{d} \phi_1 \cdots \mathrm{d} \phi_m \exp\left[i \sum_{M} \Delta^4 x \mathcal{L}(\phi_M)\right] \phi_a \phi_b \cdots,
+\]
+where, again, $\phi_a$ is equal to one of the $\phi_1, \ldots, \phi_m$, namely the one that corresponds to the spacetime point $x = x_a$. The integration measure $\int \mathrm{d}\phi_i$ integrates over all possible values of the field $\phi(x)$ at the specific discrete point $x = x_i$ (after discretizing spacetime).
 
-But how do we evaluate the path integral? In general, it is very difficult to evaluate the path integral exactly, but we have some options based on the context in which we are working:
+\TODO{add diagram showing the discretization of spacetime into a lattice of points}
+
+In the continuum limit, we take $m \to \infty$, which yields the formal replacements:
+\[
+    \mathrm{d}\phi_1 \cdots \mathrm{d}\phi_m \to \mathcal{D}\phi(x), \qquad \sum \Delta^4 x \to \int \mathrm{d}^4 x.
+\]
+
+But how do we evaluate path integrals in practice? We have two main approaches:
 \begin{itemize}
-    \item \textbf{Lattice QFT}: we can evaluate the path integral numerically using Monte Carlo methods, which is particularly useful for studying strongly interacting theories such as quantum chromodynamics (QCD) on the lattice (the idea is to discretize spacetime into a lattice and then evaluate the path integral numerically). In the end we could infere the properties at the continuum limit by taking the limit of the lattice spacing going to zero.
-    \item \textbf{Perturbation Theory}: if the lagrangian of the theory is quadratic in the fields, then we can evaluate the path integral exactly using \textit{gaussian integrals}. If the lagrangian is not quadratic, then we can treat the non-quadratic terms as perturbations and evaluate the path integral perturbatively using Feynman diagrams: we can Taylor expand the exponential of the action around the free theory, and then we can use Wick's theorem to evaluate the resulting correlation functions in terms of the free propagators. This is the standard approach for computing scattering amplitudes in quantum field theory, and it is based on the idea that we can treat interactions as small perturbations to the free theory.
+    \item \textbf{Option 1 (Lattice QFT)}: Discretize spacetime and do the integrals numerically. This approach has limitations and requires a lot of computing power, but it is the only systematic way of doing non-perturbative QFT.
+    \item \textbf{Option 2 (Perturbation Theory)}: For Lagrangians with up to quadratic terms in it (i.e., free QFTs!), the path integral becomes a Gaussian integral which can be analytically computed. Interaction terms in $\mathcal{L}$ with cubic or higher powers can be Taylor expanded, and this also leads to combinations of Gaussian integrals. This is perturbation theory, i.e., the approach that we have been following until now (and will be followed throughout this course).
 \end{itemize}
 
 \subsection{Gaussian Integrals}
 
-One dimensional gaussian integrals are given by
+We remind the following fundamental result for one-dimensional Gaussian integrals:
 \[
-    \int_{-\infty}^{\infty} \mathrm{d} z e^{-\tfrac{a}{2} z^2} = \sqrt{\frac{2\pi}{a}}, \quad a > 0.
+    \int_{-\infty}^{\infty} \mathrm{d} z \exp\left[-\frac{1}{2} a z^2\right] = \sqrt{\frac{2\pi}{a}}, \quad a > 0.
 \]
-Now the generalization to \(n\) dimensions is given by \(\mathbf{z} = (z_1, z_2, \ldots, z_n)\)
+More importantly, its $m$-dimensional generalization (using a vector $\mathbf{z} = (z_1, \ldots, z_m)$) is given by:
 \[
-    \int \mathrm{d} z_1 \cdots \mathrm{d} z_n \; \exp[-\frac{1}{2} \mathbf{z}^T \hat{A} \mathbf{z} + \mathbf{J} \cdot \mathbf{z}] = \sqrt{\frac{(2\pi)^{n/2}}{\sqrt{\det \hat{A}}}} \exp[\frac{1}{2} \mathbf{J}^T \hat{A}^{-1} \mathbf{J}].
-\]
-
-As we said cubic or higher order terms in the lagrangian can be treated as perturbations, and thus we can evaluate the path integral perturbatively using Feynman diagrams: we can Taylor expand the exponential of the action around the free theory
-\[
-    \int_{-\infty}^{\infty} \mathrm{d} z \exp[-\frac{1}{2}] \dots \dots
-\]
-and
-\[
-    \dots
+    \int_{-\infty}^{\infty} \mathrm{d} z_1 \cdots \mathrm{d} z_m \exp\left[-\frac{1}{2} \mathbf{z}^T \hat{A} \mathbf{z} + \mathbf{J} \cdot \mathbf{z}\right] = \frac{(2\pi)^{m/2}}{\sqrt{\det \hat{A}}} \exp\left[\frac{1}{2} \mathbf{J}^T \hat{A}^{-1} \mathbf{J}\right].
 \]
 
+Cubic or higher-order terms in the Lagrangian can instead be treated as perturbations and Taylor expanded. For example, a quartic interaction can be expanded as:
+\[
+    \int_{-\infty}^{\infty} \mathrm{d}z \exp\left[-\frac{1}{2} a z^2 - \frac{\lambda}{4!} z^4\right] = \int_{-\infty}^{\infty} \mathrm{d}z \exp\left[-\frac{1}{2} a z^2\right] \left( 1 - \frac{\lambda}{4!} z^4 + \cdots \right).
+\]
+To evaluate the resulting integrals involving powers of $z^n$, we can introduce a fictitious source term $J$ and use the clever trick of pulling down factors of $z$ via derivatives with respect to $J$:
+\[
+    \int_{-\infty}^{\infty} \mathrm{d}z \exp\left[-\frac{1}{2} a z^2\right] z^n = \left. \frac{\partial^n}{\partial J^n} \int_{-\infty}^{\infty} \mathrm{d}z \exp\left[-\frac{1}{2} a z^2 + J z\right] \right|_{J=0}.
+\]
 
 \subsection{Computing Green's Functions}
 
-Since we are working in a space of functions, we have to define the functional derivative as
+We want to apply the idea of evaluating Gaussian integrals using source terms to path integrals. However, since our integral is over a space of functions, we first need to formally define a \textbf{functional derivative}, denoted as $\frac{\delta}{\delta J(x)}$. We define it through its fundamental action on the source field itself:
 \[
-    \frac{\partial }{\partial J(x)} J(y) = \delta^{(4)}(x-y),
+    \frac{\delta}{\delta J(x)} J(y) = \delta^{(4)}(x-y),
 \]
-which implies
+which immediately implies:
 \[
-    \frac{\partial }{\partial J(x)} \int \mathrm{d}^4 y \, J(y) \phi(y) = \phi(x),
+    \frac{\delta}{\delta J(x)} \int \mathrm{d}^4 y \, J(y) \phi(y) = \phi(x).
 \]
-which is the continuum version of the discrete case \(\frac{\partial }{\partial J_i} \sum_j J_j \phi_j = \phi_i\) (and \(\frac{\partial}{\partial J_i} J_j = \delta_{ij}\)). This functional derivative obeys the same properties as the ordinary derivative, such as linearity and the product rule. We can use this functional derivative to compute correlation functions by introducing a source term \(J(x)\) in the action, and then taking functional derivatives with respect to \(J(x)\) to obtain correlation functions of the fields.
+These relations are the strict continuum limit of the discrete vector derivatives $\frac{\partial J_j}{\partial J_i} = \delta_{ij}$ and $\frac{\partial}{\partial J_i} \sum_j J_j \phi_j = \phi_i$.
 
-Since we can almost treat it as a normal derivative we have
+The functional derivative $\frac{\delta}{\delta J(x)}$ obeys all the usual algebraic rules of ordinary derivatives (linearity, product rule, chain rule, etc.), so in practical calculations, you can treat it almost exactly like a normal derivative. On top of that, it possesses a very useful property when dealing with spacetime derivatives inside integrals. Having integrated by parts (and assuming the fields vanish at infinity to drop the boundary term), we have:
 \[
-    \frac{\partial}{\partial J(x)} \int \mathrm{d}^4 y \, (\partial_\mu J(y)) \phi(y) = - \partial_\mu \phi(x),
+    \frac{\delta}{\delta J(x)} \int \mathrm{d}^4 y \, (\partial_\mu J(y)) \phi(y) = - \partial_\mu \phi(x).
 \]
-having integrated by parts and assuming that the fields vanish at infinity. This is a very useful property, since it allows us to compute correlation functions involving derivatives of the fields by simply taking functional derivatives with respect to the source term.
 
 \begin{example}[Exercise]
-    Consider a lagrangian \(\mathcal{L} = \mathcal{L} (l_k, \partial_\mu l_k)\) show that the equations of motion can ...
+    Consider a generic Lagrangian density depending on fields and their first derivatives: $\mathcal{L} = \mathcal{L} (\phi_k, \partial_\mu \phi_k)$. Show that the classical Euler-Lagrange equations of motion can be compactly derived and written using the functional derivative of the action $S = \int \mathrm{d}^4 x \mathcal{L}$ as:
+    \[
+        \frac{\delta S}{\delta \phi_k(x)} = 0
+    \]
 \end{example}
 
-We can also define the \textbf{generating functional} \(Z[J]\) as
-\[
-    Z[J] \equiv \int \mathcal{D} \phi e^{i S[\phi(x)] + i \int \mathrm{d}^4 x J(x) \phi(x)},
-\]
-where \(J(x)\) can be thought as a classical source that couples to the quantum field \(\phi(x)\). The generating functional \(Z[J]\) is a powerful tool for computing correlation functions, since we can obtain correlation functions by taking functional derivatives of \(Z[J]\) with respect to \(J(x)\) and then setting \(J(x) = 0\):
-\[
-    \bra{\Omega} \hat{T} \{\hat{\phi}(x_1) \hat{\phi}(x_2) \cdots \hat{\phi} (x_n)\} \ket{\Omega} = \frac{1}{Z[0]} \left. \left(-i\frac{\partial}{\partial J(x_1)}\right) \left(-i\frac{\partial}{\partial J(x_2)}\right) \cdots \left(-i\frac{\partial}{\partial J(x_n)}\right) Z[J] \right|_{J=0},
-\]
-where the normalization factor \(1/Z[0]\) is necessary to ensure that the correlation functions are properly normalized. The generating functional \(Z[J]\) can be evaluated exactly for free theories, and it can be evaluated perturbatively for interacting theories using Feynman diagrams.
+\subsubsection{The Generating Functional $Z[J]$}
 
-If we can compute the generating functional \(Z[J]\) for a given theory, then we can compute all correlation functions of the theory by taking functional derivatives with respect to \(J(x)\) and then setting \(J(x) = 0\): we basically know everything about the theory, and thus we can compute all scattering amplitudes and other physical observables. This is why the generating functional \(Z[J]\) is such a powerful tool in quantum field theory.
+We define the \textbf{Generating Functional} $Z[J]$ as:
+\[
+    Z[J] \equiv \int \mathcal{D} \phi \exp\left[i \int \mathrm{d}^4 x \left( \mathcal{L} + J(x) \phi(x) \right)\right].
+\]
+This is simply the standard path integral where we have artificially added a "classical" source term $J(x)$ coupled linearly to the quantum field $\phi(x)$ in the Lagrangian.
 
-In order to compute exactely the generating functional \(Z[J]\) for a free theory, we can use the fact that the action is quadratic in the fields, and thus we can evaluate the path integral exactly using gaussian integrals: rewriting the action as
+The immense power of the generating functional lies in the fact that any $n$-point correlation function (Green's function) can be elegantly expressed by taking functional derivatives of $Z[J]$ with respect to the source $J(x)$, and subsequently setting the source to zero:
 \[
-    i \int \mathrm{d}^4 x \, \left( \mathcal{L} + \phi J \right) = -\frac{i}{2} \int \mathrm{d}^4 x \phi \left( \partial^2 + m^2 - i \epsilon\right) \phi + i \int \mathrm{d}^4 x \, J \phi,
+    \bra{\Omega} \hat{T} \{\hat{\phi}(x_1) \cdots \hat{\phi} (x_n)\} \ket{\Omega} = \frac{1}{Z_0} \left. \left(-i\frac{\delta}{\delta J(x_1)}\right) \cdots \left(-i\frac{\delta}{\delta J(x_n)}\right) Z[J] \right|_{J=0},
 \]
-where we have added a small imaginary part \(i \epsilon\) to the mass term in order to ensure that the path integral converges. Then we can evaluate the path integral using gaussian integrals, and we find
-\[
-    Z[J] = Z[0] \exp\left[i \int \mathrm{d}^4 x \left(-\frac{1}{2} \phi (\partial^2 + m^2 - i \epsilon) \phi + J \phi \right)\right],
-\]
-where we can rename \((\partial^2 + m^2 - i \epsilon) = \hat{A}\) as the matrix used when defining the gaussian integral. We have to note a couple of things:
-\[
-    \begin{dcases}
-        \hat{A} = \partial^2 + m^2 - i \epsilon,                                                     \\
-        \hat{A} D_F(x-y) = \delta^{(4)}(x-y),                                                        \\
-        \sum_j A_{ij} (D_F)_{jk} = \delta_{ik} \to \int \mathrm{d}^4 p \, e^{ip \cdot (x-y)} \Pi(p), \\
-        i (\partial^2 + m^2 - i \epsilon) \Pi(p) = 1 \implies \Pi(p) = \frac{i}{p^2 - m^2 + i \epsilon}.
-    \end{dcases}
-\]
+where $Z_0 \equiv Z[0]$ ensures the proper normalization of the vacuum state. Therefore, if we could compute the exact mathematical form of $Z[J]$, we would have effectively solved the quantum field theory, as we could obtain any correlation function simply by taking functional derivatives.
 
-Thus now we can rewrite the generating functional \(Z[J]\) as
+As anticipated in the previous section, $Z[J]$ can only be computed \textit{exactly} if the Lagrangian $\mathcal{L}$ contains up to quadratic terms in the fields, i.e., for a \textbf{free theory}.
+
+\subsubsection{Evaluating $Z[J]$ for a Free Theory}
+
+Let us evaluate $Z[J]$ for a free real scalar field. We first rewrite the action inside the exponential. We take the standard Klein-Gordon kinetic term, $\frac{1}{2}(\partial_\mu \phi)(\partial^\mu \phi) - \frac{1}{2}m^2\phi^2$, and integrate the derivative term by parts:
 \[
-    Z[J] = Z_0 \exp\left[-\frac{1}{2} \int \mathrm{d}^4 x \int  \mathrm{d}^4 y J(x) D_F(x-y) J(y)\right],
+    i \int \mathrm{d}^4 x \, \left( \mathcal{L} + J\phi \right) = i \int \mathrm{d}^4 x \left[ -\frac{1}{2} \phi (\square + m^2 - i \epsilon) \phi + J \phi \right],
 \]
-which is the exact expression for the generating functional of a free theory. From this expression, we can compute all correlation functions of the free theory by taking functional derivatives with respect to \(J(x)\) and then setting \(J(x) = 0\).
+where we have explicitly added a small convergence factor $i \epsilon$ to the mass. Inside the highly oscillatory complex exponential of the path integral, this $-i\epsilon$ term provides a damping factor that yields a mathematically well-defined, convergent Gaussian integral.
+
+The path integral now takes the exact form of an infinite-dimensional Gaussian integral:
+\[
+    Z[J] = \int \mathcal{D} \phi \exp\left[ i \int \mathrm{d}^4 x \left( -\frac{1}{2} \phi (\square + m^2 - i \epsilon) \phi + J \phi \right) \right]
+\]
+Recalling our $m$-dimensional Gaussian integral master formula $\int \mathrm{d}^m z \exp[-\frac{1}{2} \mathbf{z}^T \hat{A} \mathbf{z} + \mathbf{J} \cdot \mathbf{z}] \propto \exp[\frac{1}{2} \mathbf{J}^T \hat{A}^{-1} \mathbf{J}]$, we can perform the integration over $\mathcal{D}\phi$. The continuous operator acting as the matrix $\hat{A}$ in this functional space is:
+\[
+    \hat{A} = i(\square + m^2 - i \epsilon)
+\]
+To evaluate the result, we need to mathematically compute the inverse of this differential operator, $\hat{A}^{-1}$. The inverse of the operator $i(\square + m^2 - i \epsilon)$ is defined as the function $D_F(x-y)$ that satisfies the Green's function differential equation:
+\[
+    i(\square_x + m^2 - i \epsilon) D_F(x-y) = \delta^{(4)}(x-y)
+\]
+(This is the strict continuum analogue of the discrete matrix inverse definition $\sum_j A_{ij} (A^{-1})_{jk} = \delta_{ik}$). This defines the \textbf{Feynman Propagator} entirely within the path integral formalism.
+
+Calculating $D_F(x-y)$ from this differential equation is straightforward by transforming into momentum space via Fourier transform:
+\[
+    D_F(x-y) = \int \frac{\mathrm{d}^4 p}{(2\pi)^4} e^{-ip \cdot (x-y)} \Pi(p)
+\]
+Substituting this into the differential equation yields:
+\[
+    i(-p^2 + m^2 - i \epsilon) \Pi(p) = 1 \implies \Pi(p) = \frac{i}{p^2 - m^2 + i \epsilon}
+\]
+which is exactly the momentum-space propagator we already derived using the canonical operator formalism.
+\begin{remark}
+    Notice how the mathematically necessary $i\epsilon$ convergence factor we introduced to compute the Gaussian path integral organically ends up being exactly equivalent to the standard \textbf{Feynman prescription} for avoiding the poles in the momentum integral.
+\end{remark}
+
+Substituting the inverse operator $D_F$ back into the result of the Gaussian integral, we obtain the final exact expression for the free theory generating functional:
+\[
+    Z[J] = Z_0 \exp\left[ -\frac{1}{2} \int \mathrm{d}^4 x \mathrm{d}^4 y \, J(x) D_F(x-y) J(y) \right]
+\]
+where we fixed the overall $J$-independent normalization constant prefactor to be $Z_0$ by simply evaluating the expression at $J=0$.
 
 \subsubsection{Green's Functions of a Free Theory}
 
-\begin{example}[Two point green's function]
-    The two point green's function is given by
+We can now use the exact result for the free generating functional \(Z[J]\) to compute Green's functions by taking functional derivatives.
+
+\begin{example}[Two-point Green's function]
+    The two-point Green's function is given by applying two functional derivatives to the generating functional:
     \[
-        \bra{0} \hat{T} \{\hat{\phi}(x_1) \hat{\phi}(x_2)\} \ket{0} = \frac{1}{Z[0]} \left. \left(-i\frac{\partial}{\partial J(x_1)}\right) \left(-i\frac{\partial}{\partial J(x_2)}\right) Z[J] \right|_{J=0}.
+        \bra{\Omega} \hat{T} \{\hat{\phi}(x_1) \hat{\phi}(x_2)\} \ket{\Omega} = \frac{(-i)^2}{Z_0} \left. \frac{\delta}{\delta J(x_1)} \frac{\delta}{\delta J(x_2)} Z[J] \right|_{J=0}.
     \]
-    Then we can compute the functional derivatives and we find
+    Let us evaluate the innermost functional derivative first. Recall that \(Z[J] = Z_0 \exp[-\frac{1}{2} \int \mathrm{d}^4x \mathrm{d}^4y \, J(x)D_F(x-y)J(y)]\). Differentiating the exponent brings down two symmetric terms:
     \[
         \begin{aligned}
-            \bra{0} \hat{T} \{\hat{\phi}(x_1) \hat{\phi}(x_2)\} \ket{0} & = \frac{1}{Z[0]} \left. \left(-i\frac{\partial}{\partial J(x_1)}\right) \left[-\frac{1}{2} \int \mathrm{d}^4 y D_F(x_2-y) J(y) - \frac{1}{2} \int \mathrm{d}^4 x J(x) D_F(x-x_2) \right] \frac{Z[J]}{Z_0}\right|_{J=0} \\
-                                                                        & = \frac{1}{2} D_F(x_2 - x_1) + \frac{1}{2} D_F(x_1 - x_2) = D_F(x_2 - x_1),
+            \bra{\Omega} \hat{T} \{\hat{\phi}(x_1) \hat{\phi}(x_2)\} \ket{\Omega} & = \left. -\frac{\delta}{\delta J(x_1)} \left[ -\frac{1}{2} \int \mathrm{d}^4 y D_F(x_2-y) J(y) - \frac{1}{2} \int \mathrm{d}^4 x J(x) D_F(x-x_2) \right] \frac{Z[J]}{Z_0} \right|_{J=0} \\
+                                                                                  & = \left. -\frac{\delta}{\delta J(x_1)} \left[ -\int \mathrm{d}^4 y D_F(x_2-y) J(y) \right] \frac{Z[J]}{Z_0} \right|_{J=0}
         \end{aligned}
     \]
-    which is the Feynman propagator of the free theory.
+    Now we apply the second functional derivative \(\frac{\delta}{\delta J(x_1)}\). By the product rule, this derivative acts both on the term in the brackets \([\cdots]\) and on the exponential \(Z[J]\). However, its action on \(Z[J]\) brings down another factor proportional to \(J\), which strictly vanishes when we evaluate at \(J=0\). Therefore, we only keep the term where the derivative acts on the bracket:
+    \[
+        \begin{aligned}
+            \bra{\Omega} \hat{T} \{\hat{\phi}(x_1) \hat{\phi}(x_2)\} \ket{\Omega} & = \frac{1}{2} D_F(x_2 - x_1) + \frac{1}{2} D_F(x_1 - x_2) = D_F(x_1 - x_2),
+        \end{aligned}
+    \]
+    which is exactly the familiar Feynman propagator of the free theory.
 \end{example}
 
-\begin{example}[Four point green's function]
-    If we rename for convenience
+\begin{example}[Four-point Green's function]
+    To compute higher-order correlation functions without drowning in integral signs, we introduce a convenient shortcut notation:
     \[
         \begin{dcases}
-            D_F(x-y) = D_{xy},                                                                                       \\
-            J(x) = J_x,                                                                                              \\
-            \int \mathrm{d}^4 x \int \mathrm{d}^4 y J(x) D_F(x-y) J(y) = \sum_{x,y} J_x D_{xy} J_y = J_x D_{xy} J_y, \\
-            \frac{\partial}{\partial J_z} (J_x D_{xy} J_y) = D_{zy} J_y + J_x D_{xz} = 2 J_x D_{xz},
+            D_F(x, y) = D_{xy}, \\
+            J(x) = J_x,         \\
+            \int \mathrm{d}^4 x \int \mathrm{d}^4 y J(x) D_F(x,y) J(y) = J_x D_{xy} J_y.
         \end{dcases}
     \]
-    then we can compute the four point green's function as
+    Here, repeated continuous indices imply integration, acting as a continuum version of Einstein summation. Since the Feynman propagator is symmetric (\(D_{xy} = D_{yx}\)) and \(x, y\) are dummy integration variables, the functional derivative takes the compact form:
+    \[
+        \frac{\delta}{\delta J_z} (J_x D_{xy} J_y) = D_{zy} J_y + J_x D_{xz} = 2 J_x D_{xz}.
+    \]
+    Using this shorthand, we can elegantly compute the four-point Green's function:
     \[
         \begin{aligned}
-            \bra{0} \hat{T} \{\hat{\phi}_1 \hat{\phi}_2 \hat{\phi}_3 \hat{\phi}_4\} \ket{0} & = \left. (-i)^4 \frac{\partial^4}{\partial J_1 \partial J_2 \partial J_3 \partial J_4} \exp[-\frac{1}{2} J_x D_{xy} J_y] \right|_{J=0} \\
-                                                                                            & = \frac{\partial}{\partial J_1} \cdots \frac{\partial}{\partial J_3} (-J_x D_{x4}) \exp[\cdots] \bigg|_{J=0}                           \\
-                                                                                            & = \frac{\partial}{\partial J_1} \frac{\partial}{\partial J_2} \left(-D_{34} + J_x D_{x4} J_y D_{yz} \right)\exp[\cdots] \bigg|_{J=0}   \\
-                                                                                            & =  \cdots = D_{14} D_{23} + D_{24} D_{13} + D_{12} D_{34}                                                                              \\
-                                                                                            & = \sum \text{ full contractions of } \phi_1 \phi_2 \phi_3 \phi_4,
+            \bra{\Omega} \hat{T} \{\hat{\phi}_1 \hat{\phi}_2 \hat{\phi}_3 \hat{\phi}_4\} \ket{\Omega} & = \left. (-i)^4 \frac{\delta^4}{\delta J_1 \delta J_2 \delta J_3 \delta J_4} \exp\left[-\frac{1}{2} J_x D_{xy} J_y\right] \right|_{J=0}                    \\
+                                                                                                      & = \left. \frac{\delta}{\delta J_1} \frac{\delta}{\delta J_2} \frac{\delta}{\delta J_3} (-J_x D_{x4}) \exp[\cdots] \right|_{J=0}                            \\
+                                                                                                      & = \left. \frac{\delta}{\delta J_1} \frac{\delta}{\delta J_2} \left(-D_{34} + J_x D_{x4} J_y D_{y3} \right)\exp[\cdots] \right|_{J=0}                       \\
+                                                                                                      & = \left. \frac{\delta}{\delta J_1} \left( -D_{34}(-J_w D_{w2}) - D_{24}J_y D_{y3} - J_x D_{x4}D_{23} + \mathcal{O}(J^3) \right) \exp[\cdots] \right|_{J=0} \\
+                                                                                                      & = D_{12} D_{34} + D_{13} D_{24} + D_{14} D_{23}.
         \end{aligned}
     \]
-    which is the sum of all possible contractions of the four fields, and thus it is the sum of all possible Feynman diagrams with four external legs.
+    The final result is precisely the sum of all possible \textbf{full contractions} of the four fields \(\phi_1 \cdots \phi_4\).
 \end{example}
 
+\begin{remark}
+    This mathematical pattern holds for a generic \(n\)-point function due to how differentiation works on exponentials. Each derivative \(-i \frac{\delta}{\delta J_i}\) either brings down an extra factor \(i J_x D_{xi}\) from the exponent, or it eliminates a \(i J_k\) factor that is already outside the exponential, yielding a propagator \(D_{ik}\). Because we evaluate at \(J=0\), any terms still containing \(J\) vanish.
+
+    The ultimate outcome is that the \(n\)-point correlation function is equal to the sum over all possible full contractions of \(\phi_1 \cdots \phi_n\), where a "contraction" replaces pairs of fields \(\phi_i, \phi_j\) with their propagator \(D_{ij}\). This is exactly the mathematical derivation of \textbf{Wick's Theorem} within the path integral formalism!
+\end{remark}
 
 \subsection{Perturbation Theory and Feynman Diagrams} \TODO{check}
 
