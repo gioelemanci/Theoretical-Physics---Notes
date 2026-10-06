@@ -1,6 +1,18 @@
 \section{Quantization of Gauge Theories}
 
-\lipsum[1]\TODO{Add introduction to the quantization of gauge theories.}
+The formulation of fundamental interactions through gauge theories presents a profound conceptual challenge when transitioning from classical physics to a consistent quantum field theory. The root of this difficulty lies in \textbf{local gauge invariance}: rather than representing a standard physical symmetry between distinct physical states, gauge invariance signifies an intrinsic mathematical redundancy. Specifically, while a massless spin-1 field propagates only two physical transverse polarization degrees of freedom, manifest Lorentz covariance and spacetime locality require describing the interaction through a four-vector gauge potential $A_\mu$. Reconciling this redundancy with standard quantization schemes is notoriously non-trivial.
+
+In canonical Hamiltonian quantization, this feature manifests as a constrained dynamical system. Because the classical lagrangian contains no time derivative of the temporal component $A_0$, the conjugate momentum $\pi^0$ vanishes identically, leading to primary and secondary constraints (such as Gauss's law) in Dirac's constraint classification. Solving these constraints explicitly prior to quantization spoils manifest Lorentz invariance. Conversely, quantizing first in an enlarged Hilbert space with an indefinite metric and selecting physical states via operator constraints---as in the Gupta--Bleuler method for abelian Quantum Electrodynamics (QED)---fails to generalize cleanly to non-abelian Yang--Mills theories, where non-linear self-couplings prevent the straightforward decoupling of unphysical longitudinal and timelike states.
+
+The Feynman path integral approach provides a natural, manifestly covariant framework, yet the gauge redundancy resurfaces as a severe divergence. The generating functional integrates the phase factor $e^{iS[A]}$ over all field configurations:
+\[
+    Z = \int \mathcal{D}A \, e^{iS[A]} \, .
+\]
+Because the classical action $S[A]$ is constant along continuous, infinite-dimensional \textbf{gauge orbits} (sets of gauge-equivalent configurations), the integration redundantly sums over identical physical states. This multiplies the path integral by the infinite volume of the gauge group, $\mathrm{Vol}(\mathrm{Gauge}) \to \infty$, rendering $Z$ ill-defined. Perturbatively, this pathology reflects the non-invertibility of the quadratic kinetic operator for $A_\mu$, whose zero modes along longitudinal directions prevent the construction of a well-defined free gauge-field propagator.
+
+To obtain a predictive and finite quantum theory, one must constrain the functional domain to intersect each gauge orbit exactly once, a procedure known as \textbf{gauge-fixing}. The systematic implementation of this constraint is achieved via the \textbf{Faddeev--Popov method}: by inserting a functional resolution of identity into the path integral, the infinite gauge volume is factorized out, and the resulting functional determinant (the Faddeev--Popov determinant) is exponentiated through auxiliary, anticommuting scalar fields termed \textit{ghosts}.
+
+Crucially, while the gauge-fixing condition explicitly breaks local gauge invariance, the resulting effective quantum action retains a fundamental, rigid graded symmetry: the \textbf{BRST (Becchi--Rouet--Stora--Tyutin) symmetry}. As developed in the following sections, the nilpotency of the BRST charge and the corresponding cohomology framework ensure that physical states, scattering matrix elements, and quantum unitarity remain strictly independent of the chosen gauge-fixing condition.
 
 \subsection{Faddeev Popov Quantization}
 
@@ -286,20 +298,68 @@ where strict nilpotency is unfortunately achieved only on-shell once again.
 
 \subsection{Non-Abelian Gauge Fields}
 
-[...]
+Let us now apply what we discussed so far regarding gauge-fixing and quantization to the more complex case of non-abelian gauge fields. Consider the purely bosonic Yang-Mills theory, whose classical dynamics are governed by the lagrangian:
+\begin{equation} \label{eq:ym_lagrangian}
+    \mathcal{L} = -\frac{1}{4}F_{\mu\nu}^a F^{a\mu\nu}
+\end{equation}
+where the non-abelian field strength tensor is explicitly defined as \(F_{\mu\nu}^a = \partial_\mu A_\nu^a - \partial_\nu A_\mu^a + g f^{abc} A_\mu^b A_\nu^c\). This action is invariant under the infinitesimal gauge symmetry transformation given by:
+\begin{equation} \label{eq:ym_gauge_sym}
+    \delta A_\mu^a(x) = D_\mu \alpha^a(x) = \partial_\mu \alpha^a(x) + g f^{abc} A_\mu^b(x) \alpha^c(x) \, .
+\end{equation}
 
-\section{BRST Quantization}
+To define a non-singular path integral, one can choose a set of gauge-fixing functions (specifically, one for each generator of the gauge symmetry, indexed by \(a = 1, \dots, \dim G\)):
+\begin{equation} \label{eq:ym_gauge_fixing}
+    f^a(A) = \partial^\mu A_\mu^a
+\end{equation}
+and recognize that, exactly as in the abelian case, the Faddeev-Popov determinant arises directly from its gauge transformation with the local parameter factored out:
+\begin{equation} \label{eq:fp_determinant_variation}
+    \frac{\delta f^a(A(x))}{\delta \alpha^b(y)} = \partial^\mu D_\mu^{ab} \delta^4(x - y)
+\end{equation}
+where the covariant derivative acting in the adjoint representation is mathematically written as \(D_\mu^{ab} = \partial_\mu \delta^{ab} + g f^{acb} A_\mu^c(x)\). Now, by systematically introducing anticommuting ghost fields to exponentiate this determinant and considering the weighted Lorenz gauge (often referred to as the \(R_\xi\) gauge), one finds the complete gauge-fixed action:
+\begin{equation} \label{eq:ym_action_fixed}
+    \mathcal{L}_{tot} = -\frac{1}{4}F_{\mu\nu}^a F^{a\mu\nu} - \partial^\mu \bar{c}^a D_\mu c^a - \frac{1}{2\xi}(\partial^\mu A_\mu^a)^2 \, .
+\end{equation}
 
- [...]
+\subsubsection{Ghost Interactions and Auxiliary Fields}
 
-\subsection{Cohomology}
+A crucial distinction arises here: unlike in QED, the ghosts do not decouple from the physical fields. Because a covariant derivative appears in the ghost kinetic term, there is a non-trivial interaction vertex sitting inside the ghost lagrangian:
+\begin{equation} \label{eq:ghost_lagrangian}
+    \mathcal{L}_{gh} = -\partial^\mu \bar{c}^a D_\mu c^a = -\partial^\mu \bar{c}^a \partial_\mu c^a - g f^{abc} \partial^\mu \bar{c}^a A_\mu^b c^c \, .
+\end{equation}
+Thus, the ghosts actively enter the Feynman diagrams as internal loop lines, and they will perform their essential theoretical job to guarantee the consistency of the final physical result.
 
-[...]
+The gauge-fixed lagrangian constructed above possesses a nilpotent BRST symmetry. To study this symmetry off-shell, it is algebraically simpler to introduce the non-dynamical auxiliary fields \(B^a\) (the Nakanishi-Lautrup fields) and present the gauge-fixed action in the equivalent form:
+\begin{equation} \label{eq:ym_action_auxiliary}
+    \mathcal{L}_{tot} = -\frac{1}{4}F_{\mu\nu}^a F^{a\mu\nu} - \partial^\mu \bar{c}^a D_\mu c^a - B^a \partial^\mu A_\mu^a + \frac{\xi}{2}(B^a)^2 \, .
+\end{equation}
+This extended lagrangian is strictly equivalent to the original one. The algebraic equations of motion for the auxiliary field \(B^a\) can be solved trivially, yielding:
+\begin{equation} \label{eq:auxiliary_eom}
+    B^a = \frac{1}{\xi} \partial^\mu A_\mu^a \, ,
+\end{equation}
+and substituting them back into the lagrangian in Eq. (\ref{eq:ym_action_auxiliary}) exactly reproduces Eq. (\ref{eq:ym_action_fixed}).
 
-\subsection{Application: Gauge-Fixing of Perturbative Quantum Gravity}
+Now, incorporating the auxiliary field, the BRST symmetry takes a much simpler and elegant form:
+\begin{equation} \label{eq:ym_brst_transformations}
+    \begin{cases}
+        \delta_B A_\mu^a = \Lambda D_\mu c^a                \\
+        \delta_B c^a = -\frac{g}{2} f^{abc} c^b c^c \Lambda \\
+        \delta_B \bar{c}^a = \Lambda B^a                    \\
+        \delta_B B^a = 0
+    \end{cases} \, ,
+\end{equation}
+which can be rigorously verified to be nilpotent off-shell. To recognize and systematically derive the specific BRST variation of the ghosts \(c^a\), one could have directly imposed the condition of nilpotency of the BRST rule on the gauge field \(A_\mu^a\):
+\[
+    [\delta(\Lambda_1), \delta(\Lambda_2)] A_\mu^a = 0
+\]
+i.e., expressed in terms of the Slavnov operator \(s\):
+\begin{equation} \label{eq:nilpotency_condition}
+    s^2 A_\mu^a = 0 \, .
+\end{equation}
 
-[...]
+Eliminating the auxiliary field \(B^a\) by substituting its equation of motion (\(B^a = \frac{1}{\xi} \partial^\mu A_\mu^a\)) modifies the BRST transformation rule of the antighost to:
+\begin{equation} \label{eq:antighost_onshell}
+    \delta_B \bar{c}^a = \Lambda \frac{1}{\xi} \partial^\mu A_\mu^a
+\end{equation}
+making the BRST symmetry nilpotent only on-shell (i.e., only when the classical equations of motion are satisfied).
 
-\subsection{Graviton Propagator in Flat Spacetime}
-
-[...]
+Having successfully found a mathematically consistent gauge-fixed action, one can now use it to generate the full perturbative expansion and the corresponding Feynman diagrams. In particular, one can directly deduce the Feynman rules corresponding to the various propagators and interaction vertices. However, before doing that, it is essential to discuss the underlying BRST quantization method and some of its most profound properties. This framework relies heavily on the fact that the BRST symmetry can be utilized to formally show that physical observables do not depend on the specific gauge chosen. This vital physical property fundamentally justifies why one uses BRST symmetry as a guiding principle in gauge theories.
