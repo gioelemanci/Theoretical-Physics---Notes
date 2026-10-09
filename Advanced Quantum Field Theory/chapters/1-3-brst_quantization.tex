@@ -280,7 +280,7 @@ A further compelling application of the BRST method lies in the systematic gauge
     ds^2 = g_{\mu\nu}(x)dx^\mu dx^\nu \, .
 \end{equation}
 
-The classical dynamics of gravity are governed by the Einstein-Hilbert action:
+The classical dynamics of gravity are governed by the \textbf{Einstein-Hilbert action}:
 \begin{equation} \label{eq:einstein_hilbert}
     S_{EH}[g_{\mu\nu}] = \frac{1}{\kappa^2} \int d^4x \sqrt{g} R(g)
 \end{equation}
@@ -300,10 +300,18 @@ known respectively as the Riemann tensor, the Ricci tensor, and the Ricci scalar
 \[
     \begin{aligned}
         R_{\mu\nu}{}^\rho{}_\sigma & = \partial_\mu \Gamma^\rho_{\nu\sigma} - \partial_\nu \Gamma^\rho_{\mu\sigma} + \Gamma^\rho_{\mu\lambda}\Gamma^\lambda_{\nu\sigma} - \Gamma^\rho_{\nu\lambda}\Gamma^\lambda_{\mu\sigma} \\
-                                   & = \hat{\nabla}_\mu \Gamma^\rho_{\nu\sigma} - \hat{\nabla}_\nu \Gamma^\rho_{\mu\sigma}
+                                   & = \hat{\nabla}_\mu \Gamma^\rho_{\nu\sigma} - \hat{\nabla}_\nu \Gamma^\rho_{\mu\sigma},
     \end{aligned}
 \]
-where in the final line, we wrote a highly useful mnemonic notation in which the symbol \(\hat{\nabla}_\mu\) denotes a specialized covariant derivative acting exclusively on the upper index of the associated Christoffel symbols. Using all these geometric relations recursively, one successfully finds the Einstein-Hilbert action as a highly non-trivial functional of the metric, whose stationary variation leads directly to Einstein's field equations in vacuum. Crucially, this action is constructed as a true scalar under any arbitrary change of spacetime coordinates, which thus constitutes the fundamental gauge symmetry of the theory.
+where in the final line, we wrote a highly useful mnemonic notation in which the symbol \(\hat{\nabla}_\mu\) denotes a specialized covariant derivative acting exclusively on the upper index of the associated Christoffel symbols.
+
+If we imagine to send \(\Gamma \to \Gamma + \delta\Gamma\), then the corresponding change in the Riemann tensor is given by:
+\[
+    \delta R_{\mu\nu}{}^\rho{}_\sigma = \hat{\nabla}_\mu \delta\Gamma^\rho_{\nu\sigma} - \hat{\nabla}_\nu \delta\Gamma^\rho_{\mu\sigma},
+\]
+where the covariant derivatives \(\hat{\nabla}_\mu\) are taken with respect to the original connection \(\Gamma\). Let us furthermore remark that the Ricci tensor and Ricci scalar are obtained by contracting the Riemann tensor with the metric, which is a nontrivial operation because the metric itself is a dynamical field.
+
+Using all these geometric relations recursively, one successfully finds the Einstein-Hilbert action as a highly non-trivial functional of the metric, whose stationary variation leads directly to Einstein's field equations in vacuum. Crucially, this action is constructed as a true scalar under any arbitrary change of spacetime coordinates, which thus constitutes the fundamental gauge symmetry of the theory.
 
 \subsubsection{Diffeomorphism Invariance and Perturbative Expansion}
 
@@ -315,7 +323,7 @@ dynamically induces a corresponding change in the metric tensor components given
 \begin{equation} \label{eq:metric_transform_finite}
     g_{\mu\nu}(x) \rightarrow g'_{\mu\nu}(x') = g_{\alpha\beta}(x) \frac{\partial x^\alpha}{\partial x'^\mu} \frac{\partial x^\beta}{\partial x'^\nu} \, .
 \end{equation}
-Under an infinitesimal change of coordinates continuously parametrized by a small vector field \(\xi^\mu(x)\):
+Under an infinitesimal change of coordinates continuously parametrized by a small vector field \(\xi^\mu(x)\) (this will be the gauge parameter of the theory, with four independent components), the coordinates transform as:
 \[
     x^\mu \rightarrow x'^\mu = x^\mu - \xi^\mu(x)
 \]
@@ -409,19 +417,19 @@ with the integrated gauge-fixing fermion \(\Psi = \int d^4x \, \psi\). This tota
 
 The total gauge-fixed gravitational action derived previously is algebraically quite complex, and standard perturbative calculations in quantum gravity are notoriously difficult.
 
-Let us systematically work out some details by carefully keeping only the quadratic approximation in the metric fluctuation \(h_{\mu\nu}\). This approximation directly leads to the perturbative propagator of the graviton (and its corresponding ghosts). Expanding the Einstein-Hilbert action strictly to quadratic order in the fluctuation field \(h_{\mu\nu}\), one explicitly finds\footnote{Detailed mathematical steps for this calculation may be found in Appendix A.}:
+Let us systematically work out some details by carefully keeping only the quadratic approximation in the metric fluctuation \(h_{\mu\nu}\). This approximation directly leads to the perturbative propagator of the graviton (and its corresponding ghosts). Expanding the Einstein-Hilbert action strictly to quadratic order in the fluctuation field \(h_{\mu\nu}\), one explicitly finds\footnote{Detailed mathematical steps for this calculation may be found in Appendix \ref{app:perturbative_gravity}.}:
 \begin{equation} \label{eq:action_quadratic}
-    S_2[h] = \int d^4x \left[ \frac{1}{4} h^{\mu\nu}\partial^2 h_{\mu\nu} - \frac{1}{8} h\partial^2 h + \frac{1}{2} \Big( \partial^\nu h_{\nu\mu} - \frac{1}{2} \partial_\mu h \Big)^2 \right]
+    S_2[h] = \int d^4x \left[ \frac{1}{4} h^{\mu\nu}\partial^2 h_{\mu\nu} - \frac{1}{8} h\partial^2 h + \frac{1}{2} \Big( \partial^\nu h_{\nu\mu} - \frac{1}{2} \partial_\mu h \Big)^2 \right],
 \end{equation}
 with the trace defined as \(h \equiv \eta^{\mu\nu}h_{\mu\nu}\). Here, the raising and lowering of indices is consistently done using only the flat Minkowski background metric \(\eta_{\mu\nu}\). As detailed in the appendix, we have redefined the fluctuation field via \(h_{\mu\nu} \rightarrow \kappa h_{\mu\nu}\) to absorb the coupling constant, and we use a completely similar redefinition for the corresponding ghosts, auxiliary field, and local gauge parameters to ensure canonical kinetic terms.
 
 This quadratic free action dynamically possesses a gauge symmetry under the specifically linearized version of the full diffeomorphism transformation, which at lowest order cleanly reads:
 \begin{equation} \label{eq:linearized_gauge_sym}
-    \delta h_{\mu\nu}(x) = \partial_\mu \xi_\nu + \partial_\nu \xi_\mu
+    \delta h_{\mu\nu}(x) = \partial_\mu \xi_\nu + \partial_\nu \xi_\mu,
 \end{equation}
 with the lowered parameter defined as \(\xi_\mu = \eta_{\mu\nu}\xi^\nu\). The de Donder gauge-fixing function utilized previously smoothly linearizes to the precise condition:
 \begin{equation} \label{eq:linearized_gauge_fix}
-    f^\mu = -\Big( \partial_\nu h^{\nu\mu} - \frac{1}{2} \partial^\mu h \Big)
+    f^\mu = -\Big( \partial_\nu h^{\nu\mu} - \frac{1}{2} \partial^\mu h \Big),
 \end{equation}
 which, once successfully inserted into the definition of the gauge fermion
 \begin{equation} \label{eq:gauge_fermion_linear}
@@ -429,24 +437,24 @@ which, once successfully inserted into the definition of the gauge fermion
 \end{equation}
 systematically gives rise to a BRST variation of the form:
 \begin{equation} \label{eq:brst_variation_linear}
-    s\psi = B_\mu(f^\mu + \alpha B^\mu) + \bar{c}_\mu \partial^2 c^\mu \sim -\frac{1}{4\alpha} f^2 + \bar{c}_\mu \partial^2 c^\mu
+    s\psi = B_\mu(f^\mu + \alpha B^\mu) + \bar{c}_\mu \partial^2 c^\mu \sim -\frac{1}{4\alpha} f^2 + \bar{c}_\mu \partial^2 c^\mu,
 \end{equation}
-where in the very last expression, the algebraic \(B_\mu\) equations of motion have been explicitly used to eliminate the auxiliary field. By smartly setting the gauge parameter to \(\alpha = \frac{1}{2}\), one elegantly obtains the absolute simplest form of the total gauge-fixed action (this specific choice ensures the term containing \(f^2\) will exactly cancel the problematic last term in Eq. (\ref{eq:action_quadratic})), and we cleanly find:
+where in the very last expression, the algebraic \(B_\mu\) equations of motion have been explicitly used to eliminate the auxiliary field. By smartly setting the gauge parameter to \(\alpha = \frac{1}{2}\), one elegantly obtains the absolute simplest form of the total gauge-fixed action (this specific choice ensures the term containing \(f^2\) will exactly cancel the problematic last term in \eqref{eq:action_quadratic}), and we cleanly find:
 \begin{equation} \label{eq:total_quadratic_action}
     S_{2,tot} = S_2[h] + s\Psi = \int d^4x \left( \frac{1}{4} h^{\mu\nu}\partial^2 h_{\mu\nu} - \frac{1}{8} h\partial^2 h + \bar{c}_\mu \partial^2 c^\mu \right) \, .
 \end{equation}
 
 With this vastly simplified action, it is now a simple, straightforward algebraic matter to derive the momentum-space propagators. The quadratic lagrangian specifically for the graviton field \(h_{\mu\nu}\) is elegantly cast as:
 \begin{equation} \label{eq:lagrangian_quadratic_cast}
-    \mathcal{L}_h = \frac{1}{2} h_{\mu\nu} \tilde{P}^{\mu\nu, \alpha\beta} \partial^2 h_{\alpha\beta}
+    \mathcal{L}_h = \frac{1}{2} h_{\mu\nu} \tilde{P}^{\mu\nu, \alpha\beta} \partial^2 h_{\alpha\beta},
 \end{equation}
 in terms of the highly symmetric kinetic tensor:
 \begin{equation} \label{eq:kinetic_tensor}
-    \tilde{P}^{\mu\nu, \alpha\beta} = \frac{1}{4} ( \eta^{\mu\alpha}\eta^{\nu\beta} + \eta^{\mu\beta}\eta^{\nu\alpha} ) - \frac{1}{4} \eta^{\mu\nu}\eta^{\alpha\beta}
+    \tilde{P}^{\mu\nu, \alpha\beta} = \frac{1}{4} ( \eta^{\mu\alpha}\eta^{\nu\beta} + \eta^{\mu\beta}\eta^{\nu\alpha} ) - \frac{1}{4} \eta^{\mu\nu}\eta^{\alpha\beta},
 \end{equation}
 which, when evaluated in an arbitrary spacetime dimension \(D\), mathematically possesses a well-defined inverse given by:
 \begin{equation} \label{eq:kinetic_inverse}
-    P_{\mu\nu, \alpha\beta} = ( \eta_{\mu\alpha}\eta_{\nu\beta} + \eta_{\mu\beta}\eta_{\nu\alpha} ) - \frac{2}{D-2} \eta_{\mu\nu}\eta_{\alpha\beta}
+    P_{\mu\nu, \alpha\beta} = ( \eta_{\mu\alpha}\eta_{\nu\beta} + \eta_{\mu\beta}\eta_{\nu\alpha} ) - \frac{2}{D-2} \eta_{\mu\nu}\eta_{\alpha\beta},
 \end{equation}
 that strictly satisfies the defining inversion relation:
 \begin{equation} \label{eq:inverse_identity}
@@ -456,7 +464,7 @@ that strictly satisfies the defining inversion relation:
 The fundamental physical propagators are then given directly by:
 \begin{equation} \label{eq:propagators_gravity}
     \begin{aligned}
-        \langle h_{\mu\nu}(x) h_{\alpha\beta}(y) \rangle & = \int \frac{d^D p}{i(2\pi)^D} \, e^{ip(x-y)} \frac{P_{\mu\nu, \alpha\beta}}{p^2 - i\epsilon} \\
+        \langle h_{\mu\nu}(x) h_{\alpha\beta}(y) \rangle & = \int \frac{d^D p}{i(2\pi)^D} \, e^{ip(x-y)} \frac{P_{\mu\nu, \alpha\beta}}{p^2 - i\epsilon}, \\
         \langle c_\mu(x) \bar{c}_\nu(y) \rangle          & = \int \frac{d^D p}{i(2\pi)^D} \, e^{ip(x-y)} \frac{\eta_{\mu\nu}}{p^2 - i\epsilon} \, .
     \end{aligned}
 \end{equation}

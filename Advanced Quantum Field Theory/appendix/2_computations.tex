@@ -1,6 +1,6 @@
 \section{Computations and further developments} \label{app:computations}
 
-\subsection*{Notes on group theory}
+\subsection*{Notes on group theory}\label{app:group_theory}
 
 \subsubsection{Lie groups and algebras}
 
@@ -101,7 +101,7 @@ It geometrically tells us that in combining the representation \(N\) with \(\ove
 \begin{equation} \label{eq:n_nbar_scalar}
     N \otimes \overline{N} = \mathbf{1} \otimes \cdots
 \end{equation}
-i.e., one can form the invariant scalar \(\psi^i \chi_i\) directly out of \(\psi^i\) and \(\chi_i\). Similarly, the completely antisymmetric tensor carrying \(N\) upper indices, \(\epsilon^{i_1 i_2 \dots i_N}\), carefully normalized to \(\epsilon^{1 2 \dots N} = 1\), is a fundamental invariant tensor known also as the Levi-Civita symbol[cite: 15, 16]. Indeed, one verifies algebraically that
+i.e., one can form the invariant scalar \(\psi^i \chi_i\) directly out of \(\psi^i\) and \(\chi_i\). Similarly, the completely antisymmetric tensor carrying \(N\) upper indices, \(\epsilon^{i_1 i_2 \dots i_N}\), carefully normalized to \(\epsilon^{1 2 \dots N} = 1\), is a fundamental invariant tensor known also as the Levi-Civita symbol. Indeed, one verifies algebraically that
 \[
     \epsilon^{i_1 i_2 \dots i_N} \;\rightarrow\; \epsilon'^{i_1 i_2 \dots i_N} = U^{i_1}_{\phantom{i_1}j_1} U^{i_2}_{\phantom{i_2}j_2} \dots U^{i_N}_{\phantom{i_N}j_N} \epsilon^{j_1 j_2 \dots j_N} = (\det U) \epsilon^{i_1 i_2 \dots i_N}
 \]
@@ -154,3 +154,60 @@ This highly structured basis (along with a closely related one technically calle
 \TODO{add image of Dynkin diagrams}
 
 The specific algebras explicitly depicted there logically correspond to the following continuous compact groups: \(A_n = SU(n+1)\), \(B_n = SO(2n+1)\), \(C_n = Sp(2n)\), and \(D_n = SO(2n)\), where the integer parameter \(n\) precisely denotes the rank. The remaining isolated algebras denoted \(G_2, F_4, E_6, E_7, E_8\) physically correspond to the so-called exceptional groups.
+
+\newpage
+\subsection*{Perturbative Quantum Gravity} \label{app:perturbative_gravity}
+
+\subsubsection{Quadratic Approximation of Einstein-Hilbert Action}
+
+To rigorously derive the quadratic approximation of the Einstein-Hilbert action, we must systematically expand the metric tensor around the flat Minkowski background spacetime. The metric is expanded as:
+\begin{equation} \label{eq:metric_expansion_app}
+    g_{\mu\nu}(x) = \eta_{\mu\nu} + h_{\mu\nu}(x),
+\end{equation}
+where, for the time being, we have absorbed the perturbative coupling constant \(\kappa\) into the fluctuation field \(h_{\mu\nu}\). Then, carefully keeping only terms up to linear order in the fluctuation, one finds the inverse metric and the determinant measures to be:
+\[
+    g^{\mu\nu}(x) = \eta^{\mu\nu} - h^{\mu\nu}(x) \, , \quad g = |\det g_{\mu\nu}| = |\det \eta_{\mu\lambda}(\delta^\lambda_\nu + h^\lambda_\nu)| = 1 + h \, , \quad \sqrt{g} = 1 + \frac{1}{2}h,
+\]
+where the trace is defined as \(h \equiv \eta^{\mu\nu}h_{\mu\nu}\), and all spacetime indices are henceforth strictly raised and lowered with the flat background metric \(\eta_{\mu\nu}\). The Christoffel symbols linearize directly by substituting \eqref{eq:metric_expansion_app} into their definition:
+\begin{equation} \label{eq:linear_christoffel}
+    \Gamma^{(1)\rho}_{\mu\nu} = \frac{1}{2}\eta^{\rho\sigma}(\partial_\mu h_{\nu\sigma} + \partial_\nu h_{\mu\sigma} - \partial_\sigma h_{\mu\nu}) = \frac{1}{2}(\partial_\mu h_\nu^\rho + \partial_\nu h_\mu^\rho - \partial^\rho h_{\mu\nu}) \, ,
+\end{equation}
+and the various geometric curvatures (the Riemann tensor, Ricci tensor, and Ricci scalar, respectively) linearize as follows:
+\begin{equation} \label{eq:linearized_curvatures}
+    \begin{aligned}
+        R^{(1)\rho}_{\mu\nu\phantom{\rho}\sigma} & = \partial_\mu \Gamma^\rho_{\nu\sigma} - \partial_\nu \Gamma^\rho_{\mu\sigma} + \dots = \frac{1}{2}\partial_\sigma(\partial_\mu h_\nu^{\phantom{\nu}\rho} - \partial_\nu h_\mu^{\phantom{\mu}\rho}) - \frac{1}{2}\partial^\rho(\partial_\mu h_{\nu\sigma} - \partial_\nu h_{\mu\sigma}), \\
+        R^{(1)}_{\nu\sigma}                      & = R_{\mu\nu}{}^\mu{}_\sigma = \frac{1}{2}(\partial_\nu\partial^\mu h_{\sigma\mu} + \partial_\sigma\partial^\mu h_{\nu\mu} - \partial_\nu\partial_\sigma h - \partial^2 h_{\nu\sigma}),                                                                                                   \\
+        R^{(1)}                                  & = \partial^\mu\partial^\nu h_{\mu\nu} - \partial^2 h \, .
+    \end{aligned}
+\end{equation}
+
+To obtain the proper quadratic approximation of the action, let us first conceptually review how one varies the Einstein-Hilbert action to derive the classical equations of motion. The equations of motion emerge entirely from varying the \(\sqrt{g}g^{\mu\nu}\) part within the classical action:
+\begin{equation} \label{eq:eh_action_app}
+    S_{EH}[g] = \frac{1}{\kappa^2} \int d^4x \sqrt{g} g^{\mu\nu} R_{\mu\nu}(g),
+\end{equation}
+producing the first variation:
+\[
+    \delta S_{EH}[g] = \frac{1}{\kappa^2} \int d^4x \sqrt{g} \delta g^{\mu\nu} \Big( R_{\mu\nu}(g) - \frac{1}{2} g_{\mu\nu} R(g) \Big) \, .
+\]
+The additional variation coming from the Ricci tensor \(R_{\mu\nu}(g)\) in \eqref{eq:eh_action_app} produces strictly a total spacetime derivative, as one formally finds:
+\begin{equation} \label{eq:palatini_identity}
+    \delta R_{\mu\nu}(g) = \nabla_\rho \delta \Gamma^\rho_{\mu\nu} - \nabla_\nu \delta \Gamma^\rho_{\mu\rho}.
+\end{equation}
+This profound relation is widely known as the Palatini identity, which emerges geometrically since the variation of the connection, \(\delta \Gamma^\rho_{\mu\nu}\), transforms as a true tensor (even though the affine connection \(\Gamma^\rho_{\mu\nu}\) itself is not a tensor).
+
+To identify the quadratic approximation, we must compute the second variation \(\delta^2 S_{EH}[h]\). In this procedure, only the linear variations of the Ricci scalar \(R\) and Ricci tensor \(R_{\mu\nu}\) are needed, as all other terms involving products of variations will identically vanish when evaluated on the flat Minkowski background, \(g_{\mu\nu}(x) = \eta_{\mu\nu}\). Taking into account the linearized expressions in \ref{eq:linearized_curvatures}, and setting the background to \(g_{\mu\nu} = \eta_{\mu\nu}\) shortly after, one explicitly finds:
+\[
+    \begin{aligned}
+        \delta^2 S_{EH}[h] & = - \frac{1}{\kappa^2} \int d^4x \, h^{\mu\nu} \Big( R^{(1)}_{\mu\nu} - \frac{1}{2} \eta_{\mu\nu} R^{(1)} \Big)                                                                                                              \\
+                           & = \frac{1}{\kappa^2} \int d^4x \, \left( \frac{1}{2} h^{\mu\nu} \partial^2 h_{\mu\nu} - \frac{1}{2} h \partial^2 h - h^{\mu\nu} \partial_\mu \partial^\rho h_{\nu\rho} + h^{\mu\nu} \partial_\mu \partial_\nu h \right) \, .
+    \end{aligned}
+\]
+
+Thus, smoothly inserting the symmetry factor \(\frac{1}{2}\) arising from the formal Taylor expansion \(S[\eta + h] = S[\eta] + \delta S[h] + \frac{1}{2} \delta^2 S[h] + \dots\), we find that the quadratic order terms sit completely in the second-order functional \(S_2 \equiv \frac{1}{2} \delta^2 S_{EH}[h]\):
+\[
+    S_2 = \frac{1}{\kappa^2} \int d^4x \, \left( \frac{1}{4} h^{\mu\nu} \partial^2 h_{\mu\nu} - \frac{1}{4} h \partial^2 h - \frac{1}{2} h^{\mu\nu} \partial_\mu \partial^\rho h_{\nu\rho} + \frac{1}{2} h^{\mu\nu} \partial_\mu \partial_\nu h \right).
+\]
+Finally, systematically redefining the fluctuation field via \(h_{\mu\nu} \to \kappa h_{\mu\nu}\) to restore the standard normalization and absorb the gravitational coupling constant, using some further integration by parts to shift derivatives, and appropriately grouping terms into perfect squares, one exactly finds the quadratic action:
+\begin{equation} \label{eq:s2_final}
+    S_2[h] = \int d^4x \left[ \frac{1}{4} h^{\mu\nu} \partial^2 h_{\mu\nu} - \frac{1}{8} h \partial^2 h + \frac{1}{2} \Big( \partial^\nu h_{\nu\mu} - \frac{1}{2} \partial_\mu h \Big)^2 \right] \, .
+\end{equation}
