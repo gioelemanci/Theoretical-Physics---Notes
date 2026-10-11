@@ -16,7 +16,7 @@ Let us consider a simplified model of a solid consisting of a cubic lattice of p
 
 The electrons interact not only with this periodic ionic potential but also with one another via the standard Coulomb repulsion, \( V_{e-e} \sim e^2/r \). However, the presence of the mobile electron gas embedded in the positively charged background activates the many-body phenomenon of screening. In a metal, the spatial redistribution of conduction electrons around any single negative charge effectively screens that negative charge at a distance from it. This screening effect drastically modifies the long-range Coulomb repulsion into a short-range effective interaction, which decays exponentially as \( \sim e^{-r/\xi} \), where the screening length \( \xi \) is typically on the order of a few lattice spacings \( a \). Although this screened interaction is significantly weaker at macroscopic distances, it remains fundamentally repulsive. To explain the formation of Cooper pairs, we must identify a physical mechanism capable of overcoming this residual repulsion to produce a net effective attraction between the electrons.
 
-\subsection{The Electron-Phonon Interaction and Fröhlich Mechanism}
+\subsubsection{The Electron-Phonon Interaction and Fröhlich Mechanism}
 
 This requisite attraction arises from the interaction between the electrons and the collective vibrations of the ionic lattice, known as phonons. Because the typical Debye temperature characterizing these macroscopic phonon modes is on the order of \( \omega_D \sim 100\,\text{K} \), while superconducting phenomena typically occur at cryogenic temperatures around \( 1\,\text{K} \), the thermal phonons are effectively frozen out. Consequently, we can safely treat the quantized phonon field as a perturbation to the interacting electron system.
 
@@ -24,18 +24,368 @@ As famously demonstrated by H. Fröhlich, in certain metals, the combination of 
 
 A key physical ingredient of this retarded mechanism is the stark difference in dynamical time scales: the heavy distortions of the ionic lattice fade away rather slowly in comparison with the extremely fast time scale over which one electron is replaced by a second one at a certain position due to the rapid motion of the electrons. Ultimately, these two combined effects—electronic screening and virtual phonon exchange—may lead in certain materials to an overall effective attraction between the electrons, provided those electrons belong to a tiny energy shell situated immediately around the Fermi energy \( E_F \).
 
-    [...]
 
-\subsection{Perturbation Theory on...}
+\subsection{Effective Interaction}
 
-[...]
+We aim to describe the behavior of electrons in a solid and understand how they interact with the lattice vibrations. A solid can be modeled as a static lattice of ions, with electrons occupying localized orbitals and tunneling through them. The classical positions of the ions are perturbed by dynamical excitations, which we describe as \textbf{phonons}.
 
-[...]
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1]
+        % Draw the potential wells, energy levels, and positive ions
+        \foreach \x in {0, 3, 6} {
+                % Coulomb-like potential well curves
+                \draw[thick] (\x-1.3, 2.3) .. controls (\x-0.6, 1.6) and (\x-0.1, 0.4) .. (\x, 0)
+                .. controls (\x+0.1, 0.4) and (\x+0.6, 1.6) .. (\x+1.3, 2.3);
 
-\TODO{add whole session 5}
-Summary:
-1 particle problem,
-2 particles problem,
+                % Positive ion marker
+                \node[font=\large] at (\x, -0.3) {$+$};
+
+                % Discrete energy levels inside the localized orbitals
+                \draw[thick] (\x-0.35, 0.7) -- (\x+0.35, 0.7);
+                \draw[thick] (\x-0.9, 1.7) -- (\x+0.9, 1.7);
+            }
+
+        % Electron in the first well
+        \fill[blue!60] (0.1, 0.7) circle (1.5pt);
+        \node[blue!60, above left, inner sep=1pt] at (0.1, 0.7) {$e^-$};
+
+        % Hopping (tunneling) arrow to the second well
+        \draw[-latex, orange!70, thick] (0.2, 0.8) to[out=40, in=140] (2.8, 0.8);
+        \fill[blue!60] (2.9, 0.7) circle (1.5pt);
+        \node[blue!60, above right, inner sep=1pt] at (2.9, 0.7) {$e^-$};
+
+    \end{tikzpicture}
+    \caption{Schematic representation of a solid modeled as a static lattice of positive ions. The electrons occupy localized orbitals within the ionic Coulomb potential wells and can tunnel (hop) to adjacent sites. This baseline periodic structure is subsequently perturbed by dynamical lattice vibrations (phonons), which modulate the effective electron-electron interactions.}
+    \label{fig:lattice_hopping}
+\end{figure}
+
+In the harmonic approximation, the phonon Hamiltonian is constructed as a sum over independent harmonic oscillators:
+\[
+    H_{\text{ion}} = \frac{1}{2} \sum_{\mathbf{q}} \hbar\omega_{\mathbf{q}} a_{\mathbf{q}}^\dagger a_{\mathbf{q}},
+\]
+where \(a_{\mathbf{q}}^\dagger\) and \(a_{\mathbf{q}}\) are the bosonic creation and annihilation operators for a phonon with momentum \(\mathbf{q}\), and \(\omega_{\mathbf{q}}\) is the phonon frequency.
+
+The Hamiltonian for the electrons is composed of an interaction part and a kinetic part:
+\[
+    H_{\text{el}} = H_{\text{int}} + H_{\text{kin}}.
+\]
+
+\paragraph{Interaction Hamiltonian.} Naively, the interaction between electrons is the bare Coulomb repulsion. However, the presence of a background of positive charges screens this interaction. The effective screened potential is often described by the Thomas-Fermi model, which introduces an exponential decay over the distance \(|\mathbf{r}|\):
+\[
+    V(\mathbf{r}) \propto \frac{e^{-|\mathbf{r}|/\xi}}{|\mathbf{r}|} \sim e^{-|\mathbf{r}|/\xi},
+\]
+where \(\xi\) is the Thomas-Fermi screening length.
+
+While the kinetic energy can be formulated on a real-space lattice (yielding the Hubbard model), it is much more convenient to diagonalize it directly in momentum space. Assuming that the kinetic energy is independent of the electron spin \(\sigma\), we have:
+\[
+    H_{\text{kin}} = \sum_{\mathbf{k}, \sigma} \epsilon_{\mathbf{k}} c_{\mathbf{k}, \sigma}^\dagger c_{\mathbf{k}, \sigma},
+\]
+where \(c_{\mathbf{k}, \sigma}^\dagger\) and \(c_{\mathbf{k}, \sigma}\) are the fermionic creation and annihilation operators for an electron with momentum \(\mathbf{k}\) and spin \(\sigma\), and \(\epsilon_{\mathbf{k}} = \frac{\hbar^2 k^2}{2m}\) is the bare electron dispersion.
+
+\paragraph{Total Hamiltonian.} Combining the lattice and electronic components, the total Hamiltonian is:
+\[
+    H = H_{\text{ion}} + H_{\text{int}} + H_{\text{kin}}.
+\]
+Our ultimate goal is to use perturbation theory to trace out the phonon degrees of freedom. This procedure will yield an effective Hamiltonian that only contains the fermionic operators \((c, c^\dagger)\), effectively incorporating the phonons as a mediated interaction between the electrons:
+\[
+    H \to H_{\text{eff}}(c, c^\dagger).
+\]
+
+\subsection{Single Particle Problem}
+
+\paragraph{Electron-Phonon Interaction.} How can an electron interact with a phonon? By traveling through the solid, an electron can kick the ions and excite their physical modes. Based on the principle of Occam's razor, we consider only the simplest fundamental processes: the emission and the absorption of a single phonon.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1, thick]
+        % 1. Free Electron
+        \draw[-latex] (0,0) -- (1.5, 1.5) node[right] {\(\mathbf{k}, \sigma\)};
+        \node[above left] at (0.75, 0.75) {\(e^-\)};
+
+        % 2. Phonon Emission
+        \begin{scope}[xshift=4.5cm, yshift=0.75cm]
+            % Vertex at (0,0)
+            % Incoming electron
+            \draw[-latex] (-1,-1) -- (0,0) node[midway, below right] {\(\mathbf{k}, \sigma\)};
+            % Outgoing electron
+            \draw[-latex] (0,0) -- (-1,1) node[right, xshift=2pt] {\(\mathbf{k} - \mathbf{q}, \sigma\)};
+            % Emitted phonon
+            \draw[-latex, decorate, decoration={snake, amplitude=1.5pt, segment length=5pt, post length=2mm}] (0,0) -- (1.5,0) node[midway, above] {\(\mathbf{q}\)};
+        \end{scope}
+
+        % 3. Phonon Absorption
+        \begin{scope}[xshift=9cm, yshift=0.75cm]
+            % Vertex at (0,0)
+            % Incoming electron
+            \draw[-latex] (-1,-1) -- (0,0) node[midway, below right] {\(\mathbf{k}, \sigma\)};
+            % Outgoing electron
+            \draw[-latex] (0,0) -- (-1,1) node[right, xshift=2pt] {\(\mathbf{k} + \mathbf{q}, \sigma\)};
+            % Absorbed phonon
+            \draw[-latex, decorate, decoration={snake, amplitude=1.5pt, segment length=5pt, post length=2mm}] (1.5,0) -- (0,0) node[midway, above] {\(\mathbf{q}\)};
+        \end{scope}
+    \end{tikzpicture}
+    \caption{Fundamental electron-phonon interaction processes. Left: A free electron propagating with momentum \(\mathbf{k}\) and spin \(\sigma\). Middle: Emission of a single phonon with momentum \(\mathbf{q}\), scattering the electron to a new momentum state \(\mathbf{k}-\mathbf{q}\). Right: Absorption of a single phonon with momentum \(\mathbf{q}\), scattering the electron to momentum \(\mathbf{k}+\mathbf{q}\). In both interactions, the spin \(\sigma\) is conserved.}
+    \label{fig:electron_phonon_processes}
+\end{figure}
+
+The phenomenological interaction potential \(V_1\) describing these scattering processes must contain a sum over all possible electron momenta \(\mathbf{k}\), spins \(\sigma\), and phonon momenta \(\mathbf{q}\):
+\[
+    V_1 = \sum_{\mathbf{k}, \sigma} \sum_{\mathbf{q}} \left( M_{\mathbf{q}, \sigma} a_{\mathbf{q}} c_{\mathbf{k} + \mathbf{q}, \sigma}^\dagger c_{\mathbf{k}, \sigma} + M_{-\mathbf{q}, \sigma} a_{\mathbf{q}}^\dagger c_{\mathbf{k} - \mathbf{q}, \sigma}^\dagger c_{\mathbf{k}, \sigma} \right).
+\]
+The amplitude of this interaction is governed by the matrix element \(M_{\mathbf{q}, \sigma}\), which takes the form:
+\[
+    M_{\mathbf{q}, \sigma} \simeq \frac{|\mathbf{q}|}{\sqrt{M_{\text{ion}} \omega_{\mathbf{q}}}}.
+\]
+Physically, \(M_{\mathbf{q}, \sigma}\) is inversely proportional to the square root of the ion mass \(M_{\text{ion}}\). If the lattice is composed of heavy ions, it is extremely challenging for the electrons to excite the phononic modes, causing the matrix element to vanish rapidly. Conversely, lighter ions allow for an easier transfer of energy from the electrons to the ion chain.
+
+\paragraph{Perturbation Theory in $V_1$.} Our full system is described by:
+\[
+    H = H_{\text{kin}} + H_{\text{ph}} + V_1.
+\]
+We proceed by treating \(V_1\) as a perturbation. To do so, we must first define the unperturbed vacuum (ground state) for both fermions and bosons.
+
+\paragraph{Unperturbed Vacuum.} We evaluate the vacuum in the presence of some initial particle excitations. This state, \(|\phi_{n_e, n_{ph}}\rangle\), is formed by the tensor product of the electron and phonon states:
+\[
+    |\phi_{n_e, n_{ph}}\rangle = \left( \prod_{\substack{\mathbf{k}_j = \mathbf{k}_1, \dots, \mathbf{k}_{n_e} \\ \sigma_j = \sigma_1, \dots, \sigma_{n_e}}} c_{\mathbf{k}_j, \sigma_j}^\dagger \right) \left( \prod_{\mathbf{q}_j = \mathbf{q}_1, \dots, \mathbf{q}_{n_{ph}}} a_{\mathbf{q}_j}^\dagger \right) |0, 0\rangle.
+\]
+Here, the absolute vacuum is defined as \(|0, 0\rangle = |n_e = 0, n_{ph} = 0\rangle\). The phonon vacuum itself is a tensor product over all possible momentum states:
+\[
+    |0, 0\rangle = |0\rangle_{\mathbf{q}_1} \otimes |0\rangle_{\mathbf{q}_2} \otimes \dots
+\]
+Because the system is confined in a box/lattice, the allowed momenta are discrete and defined within the Brillouin zone. For example, along the \(x\)-direction:
+\[
+    q_x^{(J)} = \frac{2\pi J}{L_x}, \quad J \in \mathbb{Z}.
+\]
+For the electrons, this highly populated unperturbed ground state is commonly referred to as the \textbf{Fermi Sea}.
+
+\begin{figure}[H]
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.9, thick]
+            % Fill the narrow shell with a semi-transparent light blue color
+            \fill[blue!20, opacity=0.5] (0,0) circle (2.8);
+            \fill[white] (0,0) circle (2.4);
+
+            % Axes
+            \draw[-latex, very thick] (-3.5, 0) -- (3.5, 0) node[below right] {\(\mathbf{k}_x\)};
+            \draw[-latex, very thick] (0, -3) -- (0, 3) node[above left] {\(\mathbf{k}_y\)};
+
+            % Fermi circle (inner circle)
+            \draw[very thick] (0,0) circle (2.4);
+
+            % Outer boundary of the shell
+            \draw[very thick] (0,0) circle (2.8);
+
+            % Fermi momentum vector
+            \draw[-latex, very thick] (0,0) -- (50:2.4) node[midway, below right] {\(\mathbf{K}_F\)};
+
+        \end{tikzpicture}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \caption{Two-dimensional representation of the momentum space for the unperturbed electron gas. The highly populated ground state forms a Fermi sea, bounded by the Fermi circle of radius \(K_F\). The shaded narrow shell highlights the tiny energy window around the Fermi surface where the effective electron-electron interaction, mediated by phonons, is non-zero and attractive.}
+        \label{fig:fermi_sea_shell}
+    \end{minipage}
+\end{figure}
+
+\subsubsection{First Order Perturbation Theory}
+
+Let us compute the first-order correction to the energy, which fundamentally requires evaluating the expectation value of the perturbation \(V_1\) over the unperturbed vacuum state \(|\phi_0\rangle\):
+\[
+    E_1 = \langle \phi_0 | V_1 | \phi_0 \rangle.
+\]
+If we define our initial state explicitly by its definite number of electrons and phonons, \(|\phi_0\rangle = |n_e, n_{ph}\rangle\), applying the interaction potential \(V_1\) physically yields a new state where the total number of phonons has changed by exactly one (due to the fundamental processes of either a single emission or a single absorption):
+\[
+    V_1 | \phi_0 \rangle = |n_e, n_{ph} \pm 1\rangle.
+\]
+Because the number of phonons strictly changes under the action of \(V_1\), the resulting state is mathematically orthogonal to the initial state. Under the physically motivated assumption that the phonons do not macroscopically condense (which would give them a finite vacuum expectation value), the first-order energy correction strictly vanishes:
+\[
+    \implies \langle n_e, n_{ph} | n_e, n_{ph} \pm 1 \rangle = 0.
+\]
+
+\subsubsection{Second Order Perturbation Theory}
+
+Since the leading first-order term is identically zero, we must evaluate the perturbation to second order to capture the leading interaction effects. The second-order energy correction \(E_2\) is formally given by summing over all possible intermediate states \(|\phi_{n,m}\rangle\):
+\[
+    E_2 = \sum_{n,m} \frac{\langle \phi_0 | V_1 | \phi_{n,m} \rangle \langle \phi_{n,m} | V_1 | \phi_0 \rangle}{E_0^{(\text{unp.})} - E_{n,m}^{(\text{unp.})}}.
+\]
+Out of this seemingly infinite sum over all basis states, only highly specific terms survive the projection. The number of electrons \(n\) in the intermediate state must strictly remain equal to \(n_e\), and the number of phonons \(m\) must be exactly \(n_{ph} + 1\) or \(n_{ph} - 1\). This selection rule allows us to simplify the numerator structure using Kronecker deltas:
+\[
+    E_2 = \sum_{n,m} \frac{\delta_{n,n_e} \left( \delta_{m,n_{ph}+1} + \delta_{m,n_{ph}-1} \right)}{E_0^{(\text{unp.})} - E_{n,m}^{(\text{unp.})}}.
+\]
+
+\begin{example}[Single electron application]
+    To intimately understand the underlying physics, let us perform the explicit calculation for the simplest possible case: a single electron with initial momentum \(\mathbf{p}\) and spin \(\sigma\), and exactly zero initial phonons (\(n_e = 1\), \(n_{ph} = 0\)). The initial state is constructed as \(|\phi_0\rangle = c_{\mathbf{p},\sigma}^\dagger |0\rangle\). Applying the interaction \(V_1\) to this specific state and carefully enforcing both momentum and spin conservation through the resulting delta functions, we obtain:
+    \[
+        V_1 | \phi_0 \rangle = \sum_{\mathbf{q},\sigma'} \sum_{\mathbf{k}'} M_{\mathbf{q}} (a_{\mathbf{q}}^\dagger + a_{-\mathbf{q}}) c_{\mathbf{k}'+\mathbf{q},\sigma'}^\dagger c_{\mathbf{k}',\sigma'} c_{\mathbf{p},\sigma}^\dagger |0\rangle
+    \]
+    \[
+        = \sum_{\mathbf{q},\sigma'} \sum_{\mathbf{k}'} M_{\mathbf{q}} (a_{\mathbf{q}}^\dagger + a_{-\mathbf{q}}) c_{\mathbf{k}'+\mathbf{q},\sigma'}^\dagger \delta_{\sigma,\sigma'} \delta_{\mathbf{k}',\mathbf{p}} |0\rangle
+    \]
+    \[
+        = \sum_{\mathbf{q}} M_{\mathbf{q}} (a_{\mathbf{q}}^\dagger + a_{-\mathbf{q}}) c_{\mathbf{p}+\mathbf{q},\sigma}^\dagger |0\rangle.
+    \]
+    This rigorous evaluation explicitly shows the initial electron's momentum being shifted by \(\mathbf{q}\) due to the interaction with the phonon field.
+
+    Now, we compute the quantum overlap of this resulting state with a generic intermediate state \(|\phi_{n,m}\rangle\). For a non-zero overlap to exist, the intermediate state must contain exactly 1 electron and 1 phonon (\(n = 1\), \(m = 1\)), meaning its bra form is constructed as \(\langle \phi_{n,m} | = \langle 0 | c_{\mathbf{p}+\mathbf{q}',\sigma'} a_{\mathbf{q}'}\). Taking the inner product systematically isolates the exact phonon mode that was emitted:
+    \[
+        \langle \phi_{n,m} | V_1 | \phi_0 \rangle = \left( \sum_{\mathbf{q}',\sigma'} \langle 0 | c_{\mathbf{p}+\mathbf{q}',\sigma'} a_{\mathbf{q}'} \right) \left( \sum_{\mathbf{q}} M_{\mathbf{q}} (a_{\mathbf{q}}^\dagger + a_{-\mathbf{q}}) c_{\mathbf{p}+\mathbf{q},\sigma}^\dagger |0\rangle \right)
+    \]
+    \[
+        = \sum_{\sigma',\mathbf{q}'} \delta_{\sigma,\sigma'} \delta_{\mathbf{q},\mathbf{q}'} M_{\mathbf{q}} = M_{\mathbf{q}}.
+    \]
+
+    Finally, substituting this squared matrix element back into the formal second-order energy formula, we must evaluate the corresponding energy denominator. The initial unperturbed energy is simply the kinetic energy of the single electron, \(E_0^{(\text{unp.})} = \epsilon_{\mathbf{p}}\), and the intermediate unperturbed energy includes both the shifted electron and the newly emitted phonon, \(E_{n,m}^{(\text{unp.})} = \epsilon_{\mathbf{p}+\mathbf{q}} + \hbar\omega_{\mathbf{q}}\). Thus, the second-order correction is:
+    \begin{equation} \label{eq:single_electron_shift}
+        E_2 = \frac{M_{\mathbf{q}}^2}{-\hbar\omega_{\mathbf{q}} + (\epsilon_{\mathbf{p}} - \epsilon_{\mathbf{p}+\mathbf{q}})}.
+    \end{equation}
+    This crucial formula explicitly defines the effective energy shift that the virtual phonon cloud induces on a single isolated fermion.
+\end{example}
+
+\subsection{Two Body Problem}
+
+To rigorously study the effective electron-electron interactions mediated by phonons, we must transition from a single-particle picture to an initial unperturbed state \( |\phi_0\rangle \) containing at least two particles. We define this two-fermion ground state as:
+\[
+    |\phi_0\rangle = c_{\mathbf{p},\alpha}^\dagger c_{\mathbf{p}',\alpha'}^\dagger |0\rangle.
+\]
+
+As established previously, the first-order perturbation theory correction trivially vanishes because the interaction Hamiltonian strictly creates or destroys a single phonon, ensuring orthogonality with the initial phonon-free state. We therefore proceed directly to evaluate the second-order energy correction, which requires computing the transition matrix elements connecting our initial two-particle state to the virtual intermediate states:
+\[
+    \langle \phi_{n,m} | V_1 | \phi_0 \rangle \quad \text{and} \quad \langle \phi_{2,1} | V_1 | \phi_0 \rangle.
+\]
+Applying the electron-phonon interaction operator \( V_1 \) to our initial state allows the fermionic destruction operator \( c_{\mathbf{k},\sigma} \) within \( V_1 \) to contract with either of the two initial electrons (possessing momenta \( \mathbf{p} \) or \( \mathbf{p}' \)):
+\[
+    V_1 |\phi_0\rangle = \sum_{\mathbf{q}} M_{\mathbf{q}} (a_{-\mathbf{q}}^\dagger + a_{\mathbf{q}}) \sum_{\mathbf{k},\sigma} c_{\mathbf{k}+\mathbf{q},\sigma}^\dagger c_{\mathbf{k},\sigma} c_{\mathbf{p},\alpha}^\dagger c_{\mathbf{p}',\alpha'}^\dagger |0\rangle
+\]
+\[
+    = \sum_{\mathbf{q}} M_{\mathbf{q}} (a_{-\mathbf{q}}^\dagger + a_{\mathbf{q}}) \left( c_{\mathbf{p}+\mathbf{q},\alpha}^\dagger c_{\mathbf{p}',\alpha'}^\dagger + c_{\mathbf{p},\alpha}^\dagger c_{\mathbf{p}'+\mathbf{q},\alpha'}^\dagger \right) |0\rangle.
+\]
+This branching leads to two distinct physical scattering processes:
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+            scale=1, thick,
+            mid arrow/.style={postaction={decorate,decoration={
+                                    markings,
+                                    mark=at position 0.5 with {\arrow{latex}}
+                                }}}
+        ]
+        % ================= LEFT TERM =================
+        \begin{scope}[xshift=0cm]
+            % Interacting electron 1 (Top)
+            \draw[mid arrow] (-1.5, 0.5) -- (0,0.5) node[midway, above] {\(\mathbf{p}, \alpha\)};
+            \draw[mid arrow] (0,0.5) -- (1.5, -0.2) node[right] {\(\mathbf{p} + \mathbf{q}, \alpha\)};
+            % Emitted phonon (-q)
+            \draw[decorate, decoration={snake, amplitude=1.5pt, segment length=5pt}] (0,0.5) -- (1.5, 1.2) node[right] {\(-\mathbf{q}\)};
+
+            % Spectator electron 2 (Bottom - Free propagator)
+            \draw[mid arrow] (-1.5,-1.5) -- (1.5,-1.5) node[pos=0.15, below] {\(\mathbf{p}', \alpha'\)} node[pos=0.85, below] {\(\mathbf{p}', \alpha'\)};
+        \end{scope}
+
+        % ================= PLUS SIGN =================
+        \node[font=\Huge] at (3.8, -0.5) {\(+\)};
+
+        % ================= RIGHT TERM =================
+        \begin{scope}[xshift=7cm]
+            % Spectator electron 1 (Top - Free propagator)
+            \draw[mid arrow] (-1.5,0.5) -- (1.5,0.5) node[pos=0.15, above] {\(\mathbf{p}, \alpha\)} node[pos=0.85, above] {\(\mathbf{p}, \alpha\)};
+
+            % Interacting electron 2 (Bottom)
+            \draw[mid arrow] (-1.5,-1.5) -- (0,-1.5) node[midway, below] {\(\mathbf{p}', \alpha'\)};
+            \draw[mid arrow] (0,-1.5) -- (1.5, -2.2) node[right] {\(\mathbf{p}' + \mathbf{q}, \alpha'\)};
+            % Emitted phonon (q)
+            \draw[decorate, decoration={snake, amplitude=1.5pt, segment length=5pt}] (0,-1.5) -- (1.5, -0.8) node[right] {\(-\mathbf{q}\)};
+        \end{scope}
+    \end{tikzpicture}
+    \caption{Visual representation of the intermediate state created by the interaction operator \(V_1\) acting on the two-electron vacuum, with time flowing horizontally from left to right. The state is a coherent quantum superposition (denoted by the \(+\) sign) of two distinct physical processes. Left: The first electron scatters by emitting a phonon \(-\mathbf{q}\), while the second electron propagates freely as a spectator. Right: The first electron acts as the free spectator, while the second electron scatters by emitting a phonon \(\mathbf{q}\).}
+    \label{fig:superposition_intermediate_state}
+\end{figure}
+
+\QUESTION{Coherent quantum superposition?}
+
+These two diagrams correspond precisely to the two possible intermediate states containing exactly one virtual phonon, which can be emitted by either the first electron or the second electron. The bra forms of these specific intermediate states that yield a non-zero overlap are given by:
+\[
+    \langle \phi_{2,1} | = \langle 0 | a_{-\mathbf{q}} c_{\mathbf{p}+\mathbf{q},\alpha} c_{\mathbf{p}',\alpha'},
+\]
+\[
+    \langle \tilde{\phi}_{2,1} | = \langle 0 | a_{\mathbf{q}} c_{\mathbf{p},\alpha} c_{\mathbf{p}'-\mathbf{q},\alpha'}.
+\]
+
+We now substitute these transition matrix elements into the standard second-order perturbation formula. The expectation values of the paired creation and annihilation operators simply trace out to unity, allowing us to factor out the squared electron-phonon matrix element \( M_{\mathbf{q}}^2 \):
+\[
+    E_2' = \left[ \frac{\langle \phi_0 | V_1 | \phi_{2,1} \rangle \langle \phi_{2,1} | V_1 | \phi_0 \rangle}{E_0 - E_{2,1}^{(\text{unp.})}} + \frac{\langle \phi_0 | V_1 | \tilde{\phi}_{2,1} \rangle \langle \tilde{\phi}_{2,1} | V_1 | \phi_0 \rangle}{E_0 - \tilde{E}_{2,1}^{(\text{unp.})}} \right]
+\]
+\[
+    = M_{\mathbf{q}}^2 \left( \frac{1}{E_0 - E_{2,1}^{(\text{unp.})}} + \frac{1}{E_0 - \tilde{E}_{2,1}^{(\text{unp.})}} \right).
+\]
+By evaluating this algebraic sum, we can determine whether the resulting energy shift represents a repulsive or an attractive effective interaction between the electrons, a property completely dictated by the sign of the unperturbed energy denominators.
+
+Defining the initial unperturbed energy and the intermediate unperturbed energies for these two distinct exchange processes, we have:
+\[
+    E_0 = \epsilon_{\mathbf{p}} + \epsilon_{\mathbf{p}'},
+\]
+\[
+    E_{2,1}^{(\text{unp.})} = \epsilon_{\mathbf{p}+\mathbf{q}} + \epsilon_{\mathbf{p}'} + \hbar\omega_{-\mathbf{q}},
+\]
+\[
+    \tilde{E}_{2,1}^{(\text{unp.})} = \epsilon_{\mathbf{p}'-\mathbf{q}} + \epsilon_{\mathbf{p}} + \hbar\omega_{\mathbf{q}}.
+\]
+Substituting these explicit energies into our second-order expression, the energy shift \( E_2' \) becomes:
+\[
+    E_2' = M_{\mathbf{q}}^2 \left( \frac{1}{\epsilon_{\mathbf{p}} - \epsilon_{\mathbf{p}+\mathbf{q}} - \hbar\omega_{\mathbf{q}}} + \frac{1}{\epsilon_{\mathbf{p}'} - \epsilon_{\mathbf{p}'-\mathbf{q}} - \hbar\omega_{\mathbf{q}}} \right).
+\]
+To simplify this result, we apply the physical limit of a small momentum exchange \( \mathbf{q} \). We assume the relevant scattering processes keep the electrons tightly confined close to the Fermi surface (within the heavily populated Fermi sea), which imposes the approximate kinematic relation:
+\[
+    \epsilon_{\mathbf{p}} - \epsilon_{\mathbf{p}+\mathbf{q}} \simeq \epsilon_{\mathbf{p}'-\mathbf{q}} - \epsilon_{\mathbf{p}'}.
+\]
+Applying this small-\( \mathbf{q} \) approximation, the effective energy shift neatly reduces to the Fröhlich interaction form:
+\begin{equation} \label{eq:frohlich_effective_interaction}
+    E_2' \simeq M_{\mathbf{q}}^2 \left( \frac{2\hbar\omega_{\mathbf{q}}}{(\epsilon_{\mathbf{p}+\mathbf{q}} - \epsilon_{\mathbf{p}})^2 - (\hbar\omega_{\mathbf{q}})^2} \right).
+\end{equation}
+This pivotal result reveals that the effective phonon-mediated interaction can dynamically manifest as either attractive or repulsive, depending entirely on the sign of the energy denominator.
+
+\subsubsection{Attractive Interaction and Isotope Effect}
+
+We now restrict our focus to the low-temperature regime, specifically when \( T \ll T_D \), where \( T_D \sim \omega_D \) is the characteristic Debye temperature of the crystal lattice. In this regime, the electrons lack the thermal energy necessary to scatter far from the Fermi surface. Consequently, the kinetic energy difference between the initial and scattered electron states is constrained to be much smaller than the typical phonon energy (the Debye energy):
+\[
+    |\epsilon_{\mathbf{k}+\mathbf{q}} - \epsilon_{\mathbf{k}}| \ll \hbar\omega_D.
+\]
+Under this stringent condition, the denominator in Equation \ref{eq:frohlich_effective_interaction} is overwhelmingly dominated by the phonon energy squared term, \( -(\hbar\omega_{\mathbf{q}})^2 \), ensuring it naturally becomes negative. The effective interaction therefore simplifies to a constant, weakly attractive potential:
+\begin{equation} \label{eq:attractive_potential_approx}
+    E_2' \simeq \frac{-|M_{\mathbf{q}}|^2}{\hbar\omega_D}.
+\end{equation}
+
+Recall from our fundamental coupling definitions that the squared electron-phonon matrix element, \( |M_{\mathbf{q}}|^2 \), is inversely proportional to the mass of the lattice ions (\( M_{\text{ion}} \)). Therefore, the overall strength of the attractive interaction scales directly as:
+\[
+    E_2' \propto \frac{1}{M_{\text{ion}}}.
+\]
+This simple inverse proportionality provides a profound microscopic explanation for the experimentally observed \textbf{isotope effect} in conventional superconductors, where the critical transition temperature is found to vary predictably with the specific mass of the isotopes that comprise the crystal lattice.
+
+Recall from our fundamental coupling definitions that the squared electron-phonon matrix element, \( |M_{\mathbf{q}}|^2 \), is inversely proportional to the mass of the lattice ions (\( M_{\text{ion}} \)). Therefore, the overall strength of the attractive interaction scales directly as:
+\[
+    E_2' \propto \frac{1}{M_{\text{ion}}}.
+\]
+This simple inverse proportionality provides a profound microscopic explanation for the experimentally observed \textbf{isotope effect} in conventional superconductors, where the critical transition temperature is found to vary predictably with the specific mass of the isotopes that comprise the crystal lattice.
+
+\begin{remark}
+    While our derivation treats \( V_1 \) as a small perturbation within a simplified cubic lattice, this is not always universally applicable. Because the matrix element \( M_{\mathbf{q}} \) scales inversely with the ion mass, the effective electron-phonon interaction can become exceedingly strong in materials composed of very light ions. In such strong-coupling regimes, the perturbative approach breaks down, necessitating more advanced non-perturbative methods (such as Eliashberg theory). Furthermore, real materials often possess complex crystal geometries far beyond a simple cubic structure; these specific geometric details fundamentally alter the phonon spectrum and, consequently, the precise structure of the effective electron-electron interaction.
+\end{remark}
+
+\subsubsection{The BCS Effective Potential}
+
+For the specific purposes of successfully developing the macroscopic BCS theory (Step 1 of the paradigm), we treat this phonon-mediated interaction as a separable, strictly attractive potential. We completely drop its explicit momentum dependence in favor of a constant effective coupling strength, phenomenologically denoted as \( -|g_{\text{eff}}|^2 \).
+
+Furthermore, while the complete interaction Hamiltonian realistically includes the residual screened Coulomb repulsion (the Thomas-Fermi term), the fundamental assumption of BCS theory is that the attractive phonon-mediated part robustly dominates for electrons near the Fermi surface. Thus, we neglect the residual electrostatic repulsion and approximate the total effective electron-electron potential as purely attractive:
+\[
+    V_{e-e,\mathbf{k},\mathbf{k}'} \simeq -|g_{\text{eff}}|^2 + \cancel{V_{\text{Thomas-Fermi}}} \simeq -|g_{\text{eff}}|^2.
+\]
+
+It is crucial to emphasize that while this attractive energy shift \( \Delta E = -|g_{\text{eff}}|^2 \) (derived by discarding scattering processes with energy exchanges far beyond the Debye cutoff \( \omega_D \)) is exceedingly small, it is fundamentally sufficient to destabilize the unperturbed Fermi sea and induce the formation of a bound state between two electrons. Having established the scalar amplitude of this attractive potential, the immediate next step is to rigorously construct the full operatorial part of the interaction Hamiltonian to be utilized in solving the macroscopic many-body problem.
+
+
+
+
 
 We are assuming weak interactions, but that is not always the case: the coefficient \(M(\mathbf{q})\) is inversely proportional to the mass of the ions in the lattice, and thus the interaction can be very strong in the case of light ions. In this case, we need to use a non-perturbative approach.
 
@@ -43,7 +393,7 @@ One has to pay attention also to the geometry of the lattice, since our treatmen
 
 We got \(\Delta E = - \vert g_{eff} \vert^2 \) for phonons with \(\omega < \omega_D\) (discarding processes going to far away from the Fermi surface). This is a very small energy, but it is enough to create a bound state of two electrons. Now we have to find the operatorial part of the Hamiltonian, which is the part that will be used in the many-body problem.
 
-\subsection{The Effective Attractive Potential}
+\subsection{Effective Hamiltonian and Two-Body Ground State}
 
 In the second quantization formalism, the interacting part of the many-body Hamiltonian, $H_{\text{int}}$, capturing this fundamental scattering process between pairs of fermions, can be modeled as follows:
 \begin{equation} \label{eq:bcs_interaction_hamiltonian}
@@ -65,27 +415,27 @@ where $V$ is the macroscopic volume of the system, and $c_{\mathbf{k}, \sigma}$ 
         \draw (-1.5,-1) -- (0,0);
         \draw[-latex] (-1.5,-1) -- (-0.75,-0.5);
         \draw[-latex, thin] (-1.3,-1.05) -- (-0.5,-0.5);
-        \node[below right] at (-1.2,-0.8) {\(\mathbf{k} + \frac{\mathbf{q}}{2}\)};
+        \node[below right] at (-1.2,-0.8) {\(\mathbf{k}\)};
 
         % Left outgoing fermion
         \draw (0,0) -- (-1.5,1);
         \draw[-latex] (0,0) -- (-0.75,0.5);
         \draw[-latex, thin] (-0.5,0.5) -- (-1.3,1.05);
-        \node[above right] at (-1.2,0.8) {\(\mathbf{k}' + \frac{\mathbf{q}}{2}\)};
+        \node[above right] at (-1.2,0.8) {\(\mathbf{k} - \mathbf{q}\)};
 
         % Right incoming fermion
         \draw (4.5,-1) -- (3,0);
         \draw[-latex] (4.5,-1) -- (3.75,-0.5);
         \draw[-latex, thin] (4.3,-1.05) -- (3.5,-0.5);
-        \node[below left] at (4.2,-0.8) {\(-\mathbf{k} + \frac{\mathbf{q}}{2}\)};
+        \node[below left] at (4.2,-0.8) {\(\mathbf{k}'\)};
 
         % Right outgoing fermion
         \draw (3,0) -- (4.5,1);
         \draw[-latex] (3,0) -- (3.75,0.5);
         \draw[-latex, thin] (3.5,0.5) -- (4.3,1.05);
-        \node[above left] at (4.2,0.8) {\(-\mathbf{k}' + \frac{\mathbf{q}}{2}\)};
+        \node[above left] at (4.2,0.8) {\(\mathbf{k}' + \mathbf{q}\)};
     \end{tikzpicture}
-    \caption{Feynman diagram representing the effective electron-electron interaction mediated by the virtual exchange of a phonon. Two incoming fermions with momenta \(\mathbf{k} + \frac{\mathbf{q}}{2}\) and \(-\mathbf{k} + \frac{\mathbf{q}}{2}\) scatter into two outgoing fermions with momenta \(\mathbf{k}' + \frac{\mathbf{q}}{2}\) and \(-\mathbf{k}' + \frac{\mathbf{q}}{2}\), preserving the total momentum \(\mathbf{q}\) and their respective spins \(\sigma\) and \(\sigma'\).}
+    \caption{Feynman diagram representing the effective electron-electron interaction mediated by the virtual exchange of a phonon. Two incoming fermions with momenta \(\mathbf{k}\) and \(\mathbf{k}'\) scatter into two outgoing fermions with momenta \(\mathbf{k} - \mathbf{q}\) and \(\mathbf{k}' + \mathbf{q}\), exchanging a momentum \(\mathbf{q}\) and preserving their respective spins \(\sigma\) and \(\sigma'\).}
     \label{fig:bcs_scattering}
 \end{figure}
 
@@ -185,6 +535,9 @@ Let us reason a bit on the temperature scale: the fermi temperature for a typica
     [...]
 
     [...]
+
+
+\subsection{The Effective Attractive Potential}
 
 To capture the essential physics of the Fröhlich mechanism, specifically that the phonon-mediated attraction only overcomes Coulomb repulsion for electrons energetically close to the Fermi surface, the effective attractive potential is explicitly modeled by a piecewise function:
 \begin{equation} \label{eq:bcs_potential}
