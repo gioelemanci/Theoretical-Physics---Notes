@@ -9,7 +9,7 @@
 \tikzset{
     % Fermion (straight line with centered arrow)
     fermion/.style={thick, draw=black, postaction={decorate},
-            decoration={markings, mark=at position 0.65 with {\arrow[scale=1]{Latex}}}
+            decoration={markings, mark=at position 0.6 with {\arrow[scale=1]{Latex}}}
         },
     % Photon (wavy line)
     photon/.style={thick, draw=black, decorate,
@@ -62,7 +62,7 @@
 % 2. 3-Gluon Vertex
 \newcommand{\feynQcdThreeGluon}{%
     \tikz[baseline=-0.6ex, scale=0.7]{
-        \draw[gluon] (0,0) -- (1,0);
+        \draw[gluon] (1,0) -- (0,0);
         \draw[gluon] (1,0) -- (1.8,0.8);
         \draw[gluon] (1,0) -- (1.8,-0.8);
         \node[right=5pt] at (1,0) {\(g_s\)};
@@ -74,8 +74,8 @@
     \tikz[baseline=-0.6ex, scale=0.7]{
         \draw[gluon] (-0.8,0.8) -- (0,0);
         \draw[gluon] (-0.8,-0.8) -- (0,0);
-        \draw[gluon] (0,0) -- (0.8,0.8);
-        \draw[gluon] (0,0) -- (0.8,-0.8);
+        \draw[gluon] (0.8,0.8) -- (0,0);
+        \draw[gluon] (0.8,-0.8) -- (0,0);
         \node[right=6pt] at (0,0) {\(g_s^2\)};
     }%
 }
@@ -94,5 +94,82 @@
         \draw[gluon] (1,0) -- (1.8,0.8);
         \draw[fermion] (1,0) -- (1.8,-0.8);
         \node[right=5pt] at (1,0) {\(g_s\)};
+    }%
+}
+
+% ---------------------------------------------------------
+% CATEGORY 3: QCD ONE-LOOP CORRECTIONS
+% ---------------------------------------------------------
+
+% 1. One-loop quark self-energy
+\newcommand{\feynQcdLoopQuarkSelf}{%
+    \tikz[baseline=-0.6ex, scale=0.7]{
+        \draw[fermion] (-2,0) -- (-0.8,0);
+        \draw[fermion] (-0.8,0) -- (0.8,0);
+        \draw[fermion] (0.8,0) -- (2,0);
+        \draw[gluon] (-0.8,0) arc (180:0:0.8);
+    }%
+}
+
+% 2. One-loop quark-gluon vertex correction (Type A: gluon emission from quark legs)
+\newcommand{\feynQcdLoopVertexA}{%
+    \tikz[baseline=-0.6ex, scale=0.7]{
+        \draw[fermion] (-2,0) -- (-0.8,0);
+        \draw[fermion] (-0.8,0) -- (0.8,0);
+        \draw[fermion] (0.8,0) -- (2,0);
+        \draw[gluon] (0,0) -- (0,-1.5);
+        \draw[gluon] (-0.8,0) arc (180:0:0.8);
+    }%
+}
+
+% 3. One-loop quark-gluon vertex correction (Type B: tri-gluon vertex involving emitted gluon)
+\newcommand{\feynQcdLoopVertexB}{%
+    \tikz[baseline=-0.6ex, scale=0.7]{
+        \draw[fermion] (-2,0) -- (-0.8,0);
+        \draw[fermion] (-0.8,0) -- (0.8,0);
+        \draw[fermion] (0.8,0) -- (2,0);
+        \draw[gluon] (0,-0.8) -- (-0.8,0);
+        \draw[gluon] (0,-0.8) -- (0.8,0);
+        \draw[gluon] (0,-0.8) -- (0,-1.8);
+    }%
+}
+
+% 4. One-loop gluon vacuum polarization (Gluon loop)
+\newcommand{\feynQcdLoopGluonVacA}{%
+    \tikz[baseline=-0.6ex, scale=0.7]{
+        \draw[gluon] (-2,0) -- (-0.8,0);
+        \draw[gluon] (-0.8,0) arc (180:0:0.8);
+        \draw[gluon] (0.8,0) arc (0:-180:0.8);
+        \draw[gluon] (0.8,0) -- (2,0);
+    }%
+}
+
+% 5. One-loop gluon vacuum polarization (Gluon tadpole)
+\newcommand{\feynQcdLoopGluonVacB}{%
+    \tikz[baseline=-0.6ex, scale=0.7]{
+        \draw[gluon] (-2,0) -- (0,0);
+        \draw[gluon] (0,0) -- (2,0);
+        \draw[gluon] (0,0) arc (-90:270:0.8)
+    }%
+}
+
+% 6. One-loop gluon vacuum polarization (Ghost loop)
+\newcommand{\feynQcdLoopGluonVacC}{%
+    \tikz[baseline=-0.6ex, scale=0.7]{
+        \draw[gluon] (-2,0) -- (-0.8,0);
+        \draw[gluon] (0.8,0) -- (2,0);
+        \draw[thick, dashed] (0,0) circle (0.8);
+        \draw[thick, -latex] (-0.1,0.8) -- (0.1,0.8);
+        \draw[thick, -latex] (0.1,-0.8) -- (-0.1,-0.8);
+    }%
+}
+
+% 7. One-loop gluon vacuum polarization (Fermion loop)
+\newcommand{\feynQcdLoopGluonVacD}{%
+    \tikz[baseline=-0.6ex, scale=0.7]{
+        \draw[gluon] (-2,0) -- (-0.8,0);
+        \draw[gluon] (0.8,0) -- (2,0);
+        \draw[fermion] (0.8,0) arc (0:180:0.8);
+        \draw[fermion] (-0.8,0) arc (180:360:0.8);
     }%
 }
