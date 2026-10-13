@@ -161,33 +161,53 @@ Note that these definitions are perfectly consistent because any time-reversal i
 \[
     \hat{K} = \hat{T} - \sum_{\mathbf{k}} \left[ \Delta_{\mathbf{k}} c_{\mathbf{k},\uparrow}^\dagger c_{-\mathbf{k},\downarrow}^\dagger + \Delta_{\mathbf{k}}^* c_{-\mathbf{k},\downarrow} c_{\mathbf{k},\uparrow} \right] + \sum_{\mathbf{k}} A_{\mathbf{k}}^* \Delta_{\mathbf{k}}.
 \]
+Notice that the last term is a constant energy offset that does not depend on the fermionic operators. Usually one discards such terms, but in this case it is important to keep it because it is a function of the gap parameter \( \Delta_{\mathbf{k}} \) and thus it will contribute to the self-consistent equation for the gap. We will assume anyway that the Ground State solution will be independent of such constant term, and we will see that this is indeed the case.
+
+The Gaussian Problem we have obtained is a quadratic Hamiltonian in the fermionic operators, which can be solved exactly. The only unknowns are the gap parameters \( \Delta_{\mathbf{k}} \) and \( \Delta_{\mathbf{k}}^* \), which will be determined self-consistently by solving the gap equation \eqref{eq:gap_definition}.
 
 \subsection{Diagonalization of the Hamiltonian}
 
-To elegantly diagonalize this bilinear Hamiltonian, it is highly convenient to express it in a matrix representation using Nambu spinors. By leveraging the fundamental fermionic anti-commutation relations, we can rewrite the kinetic energy term for the spin-down particles as \( \xi_k c_{\mathbf{k},\downarrow}^\dagger c_{\mathbf{k},\downarrow} = \xi_k - \xi_k c_{\mathbf{k},\downarrow} c_{\mathbf{k},\downarrow}^\dagger \). This algebraic maneuver allows us to recast the operator \( \hat{K} \) into the following compact matrix form:
+To elegantly diagonalize this bilinear Hamiltonian, it is highly convenient to express it in a matrix representation using \textbf{Nambu spinors}. By leveraging the fundamental fermionic anti-commutation relations, we can rewrite the kinetic energy term for the spin-down particles as
+\[
+    \xi_k c_{\mathbf{k},\downarrow}^\dagger c_{\mathbf{k},\downarrow} = \xi_k - \xi_k c_{\mathbf{k},\downarrow} c_{\mathbf{k},\downarrow}^\dagger \, .
+\]
+Now we notice that in the Hamiltonian we have terms proportional to \(cc, cc^\dagger, c^\dagger c, c^\dagger c^\dagger\), and such combinations can be expressed in terms of matrices of the form\TODO{put momentum and spin pedices}
+\[
+    \begin{pmatrix}
+        c^{\dagger} c & c^{\dagger}  c^\dagger \\
+        c c           & c c^\dagger
+    \end{pmatrix}\, .
+\]
+This algebraic maneuver allows us to recast the operator \( \hat{K} \) into the following compact matrix form:
 \begin{equation} \label{eq:nambu_hamiltonian}
     \hat{K} = \sum_{\mathbf{k}} \begin{pmatrix} c_{\mathbf{k},\uparrow}^\dagger & c_{-\mathbf{k},\downarrow} \end{pmatrix} \begin{pmatrix} \xi_k & -\Delta_{\mathbf{k}} \\ -\Delta_{\mathbf{k}}^* & -\xi_k \end{pmatrix} \begin{pmatrix} c_{\mathbf{k},\uparrow} \\ c_{-\mathbf{k},\downarrow}^\dagger \end{pmatrix} + C,
 \end{equation}
-where the constant energy offset \( C \) is explicitly given by:
+where the constant energy offset \( C \) is explicitly given by all the terms which do not depend on the fermionic operators:
 \[
     C = \sum_{\mathbf{k}} \left( \xi_k + A_{\mathbf{k}}^* \Delta_{\mathbf{k}} \right).
 \]
+Notice that the off-diagonal terms in the matrix representation of \( \hat{K} \) are proportional to the gap parameter \( \Delta_{\mathbf{k}} \), which lets operators of opposite momenta couple to each other. This is a direct manifestation of the fundamental pairing mechanism that underlies the BCS theory of superconductivity. The constant term is important, but we want to ``solve the problem'' (diagonalize the Hamiltonian) in order to find the ground state and the quasiparticle excitations, without having to worry about the constant term, which will be added at the end.
+
+\subsubsection{Quasiparticle Transformation}
+
 Let us define the central \( 2 \times 2 \) Hermitian matrix \( M_{\mathbf{k}} \) as:
 \[
     M_{\mathbf{k}} = \begin{pmatrix} \xi_k & -\Delta_{\mathbf{k}} \\ -\Delta_{\mathbf{k}}^* & -\xi_k \end{pmatrix}.
 \]
 
-We now show that the many-body problem of diagonalizing the quadratic form \( \hat{K} \) reduces entirely to the problem of diagonalizing the independent \( 2 \times 2 \) matrix \( M_{\mathbf{k}} \) for every momentum mode \( \mathbf{k} \). In strict analogy to the procedure utilized for the weakly interacting Bose gas, we seek a transformation to a new set of fermionic creation and destruction operators, \( \gamma_{\mathbf{k},\sigma} \) and \( \gamma_{\mathbf{k},\sigma}^\dagger \), that diagonalize \( \hat{K} \). We introduce a transformation matrix \( U_{\mathbf{k}} \) such that:
+We now show that the many-body problem of diagonalizing the quadratic form \( \hat{K} \) reduces entirely to the problem of diagonalizing the independent \( 2 \times 2 \) matrix \( M_{\mathbf{k}} \) for every momentum mode \( \mathbf{k} \). In strict analogy to the procedure utilized for the weakly interacting Bose gas (with the Bogoliubov transformation and quasiparticles), we seek a transformation to a new set of fermionic creation and destruction operators, \( \gamma_{\mathbf{k},\sigma} \) and \( \gamma_{\mathbf{k},\sigma}^\dagger \), that diagonalize \( \hat{K} \). These will become our new \textit{quasiparticle operators}. We introduce a transformation matrix \( U_{\mathbf{k}} \) such that:
 \begin{equation} \label{eq:bogoliubov_transform}
     \begin{pmatrix} c_{\mathbf{k},\uparrow} \\ c_{-\mathbf{k},\downarrow}^\dagger \end{pmatrix} = U_{\mathbf{k}} \begin{pmatrix} \gamma_{\mathbf{k},\uparrow} \\ \gamma_{-\mathbf{k},\downarrow}^\dagger \end{pmatrix}, \quad \begin{pmatrix} c_{\mathbf{k},\uparrow}^\dagger & c_{-\mathbf{k},\downarrow} \end{pmatrix} = \begin{pmatrix} \gamma_{\mathbf{k},\uparrow}^\dagger & \gamma_{-\mathbf{k},\downarrow} \end{pmatrix} U_{\mathbf{k}}^\dagger.
 \end{equation}
+Notice that we are mixing momenta and spins in this transformation, which is a direct consequence of the fundamental pairing mechanism that underlies the BCS theory (the structure of the Hamiltonian encodes this directly).
+
 This transformation must simultaneously satisfy two critical conditions:
 \begin{enumerate}
     \item The terms appearing in the grand canonical Hamiltonian, once expressed in terms of the new operators, must form a diagonal matrix \( D_{\mathbf{k}} \):
           \[
               \begin{pmatrix} c_{\mathbf{k},\uparrow}^\dagger & c_{-\mathbf{k},\downarrow} \end{pmatrix} M_{\mathbf{k}} \begin{pmatrix} c_{\mathbf{k},\uparrow} \\ c_{-\mathbf{k},\downarrow}^\dagger \end{pmatrix} = \begin{pmatrix} \gamma_{\mathbf{k},\uparrow}^\dagger & \gamma_{-\mathbf{k},\downarrow} \end{pmatrix} U_{\mathbf{k}}^\dagger M_{\mathbf{k}} U_{\mathbf{k}} \begin{pmatrix} \gamma_{\mathbf{k},\uparrow} \\ \gamma_{-\mathbf{k},\downarrow}^\dagger \end{pmatrix},
           \]
-          with \( D_{\mathbf{k}} = U_{\mathbf{k}}^\dagger M_{\mathbf{k}} U_{\mathbf{k}} \) being explicitly diagonal.
+          with \( D_{\mathbf{k}} = U_{\mathbf{k}}^\dagger M_{\mathbf{k}} U_{\mathbf{k}} \) being explicitly diagonal: \(U_{\mathbf{k}}\) is a unitary (as we will see in a moment) change of basis that diagonalizes the Hamiltonian.
     \item The fundamental anti-commutation rules must be preserved for the new quasiparticle operators, ensuring in particular that:
           \[
               \{ \gamma_{\mathbf{k},\sigma}, \gamma_{\mathbf{k}',\sigma'}^\dagger \} = \delta_{\mathbf{k},\mathbf{k}'} \delta_{\sigma,\sigma'},
@@ -195,35 +215,44 @@ This transformation must simultaneously satisfy two critical conditions:
           with all remaining anti-commutators identically zero.
 \end{enumerate}
 
-We can readily prove that requiring the transformation \( U_{\mathbf{k}} \) to be unitary guarantees the preservation of these anti-commutation relations on the new operators. Let us parameterize the inverse transformation matrix as:
-\[
-    U_{\mathbf{k}}^{-1} = \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix}.
-\]
-The relation linking the bare \( c \) operators to the quasiparticle \( \gamma \) operators is then:
-\[
-    \begin{pmatrix} \gamma_{\mathbf{k},\uparrow} \\ \gamma_{-\mathbf{k},\downarrow}^\dagger \end{pmatrix} = U_{\mathbf{k}}^{-1} \begin{pmatrix} c_{\mathbf{k},\uparrow} \\ c_{-\mathbf{k},\downarrow}^\dagger \end{pmatrix}.
-\]
-By explicitly substituting this into the anti-commutators and using the known relations for the bare \( c \) operators, it is straightforward to check that:
-\[
-    \{ \gamma_{\mathbf{k},\uparrow}, \gamma_{\mathbf{k}',\uparrow}^\dagger \} = (|a_{11}|^2 + |a_{12}|^2) \delta_{\mathbf{k},\mathbf{k}'},
-\]
-\[
-    \{ \gamma_{-\mathbf{k},\downarrow}, \gamma_{-\mathbf{k}',\downarrow}^\dagger \} = (|a_{21}|^2 + |a_{22}|^2) \delta_{\mathbf{k},\mathbf{k}'},
-\]
-\[
-    \{ \gamma_{\mathbf{k},\uparrow}, \gamma_{-\mathbf{k}',\downarrow} \} = (a_{11} a_{21}^* + a_{12} a_{22}^*) \delta_{\mathbf{k},-\mathbf{k}'}.
-\]
-In order to successfully satisfy the fermionic algebra, the coefficients must obey:
-\[
-    1 = |a_{11}|^2 + |a_{12}|^2,
-\]
-\[
-    1 = |a_{21}|^2 + |a_{22}|^2,
-\]
-\[
-    0 = a_{11} a_{21}^* + a_{12} a_{22}^*.
-\]
-These three constraints are automatically and exactly satisfied by unitary matrices. This implies that \( U_{\mathbf{k}}^\dagger M_{\mathbf{k}} U_{\mathbf{k}} = U_{\mathbf{k}}^{-1} M_{\mathbf{k}} U_{\mathbf{k}} \); thus, finding a unitary matrix that diagonalizes the Hermitian matrix \( M_{\mathbf{k}} \) will successfully diagonalize the entire many-body Hamiltonian \( \hat{K} \).
+We can readily prove that \uline{requiring the transformation \( U_{\mathbf{k}} \) to be unitary guarantees the preservation of these anti-commutation relations} on the new operators.
+\begin{proof}
+    Let us parameterize the inverse transformation matrix as:
+    \[
+        U_{\mathbf{k}}^{-1} = \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix}.
+    \]
+    The relation linking the bare \( c \) operators to the quasiparticle \( \gamma \) operators is then:
+    \[
+        \begin{pmatrix} \gamma_{\mathbf{k},\uparrow} \\ \gamma_{-\mathbf{k},\downarrow}^\dagger \end{pmatrix} = U_{\mathbf{k}}^{-1} \begin{pmatrix} c_{\mathbf{k},\uparrow} \\ c_{-\mathbf{k},\downarrow}^\dagger \end{pmatrix}, \quad \begin{pmatrix} \gamma_{\mathbf{k},\uparrow}^\dagger & \gamma_{-\mathbf{k},\downarrow} \end{pmatrix} = \begin{pmatrix} c_{\mathbf{k},\uparrow}^\dagger & c_{-\mathbf{k},\downarrow} \end{pmatrix} (U_{\mathbf{k}}^{-1})^\dagger,
+    \]
+    where \((U_{\mathbf{k}}^{-1})^\dagger\) is the conjugate transpose of \(U_{\mathbf{k}}^{-1}\):
+    \[
+        (U_{\mathbf{k}}^{-1})^\dagger = \begin{pmatrix} a_{11}^* & a_{21}^* \\ a_{12}^* & a_{22}^* \end{pmatrix}.
+    \]
+    By explicitly substituting this into the anti-commutators and using the known algebraic relations for the bare \( c \) operators, it is straightforward to check that:\TODO{check computations from Di Sante notes (Filippo)}
+    \[
+        \{ \gamma_{\mathbf{k},\uparrow}, \gamma_{\mathbf{k}',\uparrow}^\dagger \} = \left\{ \left(a_{11} c_{\mathbf{k},\uparrow} + a_{12} c_{-\mathbf{k},\downarrow}^\dagger\right), \left(a_{11}^* c_{\mathbf{k}',\uparrow}^* + a_{12}^* c_{-\mathbf{k}',\downarrow}^\dagger\right) \right\}= (|a_{11}|^2 + |a_{12}|^2) \delta_{\mathbf{k},\mathbf{k}'},
+    \]
+    \[
+        \{ \gamma_{-\mathbf{k},\downarrow}, \gamma_{-\mathbf{k}',\downarrow}^\dagger \} = \left\{ \left(a_{21} c_{-\mathbf{k},\downarrow} + a_{22} c_{\mathbf{k},\uparrow}^\dagger\right), \left(a_{21}^* c_{-\mathbf{k}',\downarrow}^* + a_{22}^* c_{\mathbf{k}',\uparrow}^*\right) \right\} = (|a_{21}|^2 + |a_{22}|^2) \delta_{\mathbf{k},\mathbf{k}'},
+    \]
+    \[
+        \{ \gamma_{\mathbf{k},\uparrow}, \gamma_{-\mathbf{k}',\downarrow} \} = \left\{ \left(a_{11} c_{\mathbf{k},\uparrow} + a_{12} c_{-\mathbf{k},\downarrow}^\dagger\right), \left(a_{21}^* c_{-\mathbf{k}',\downarrow}^* + a_{22}^* c_{\mathbf{k}',\uparrow}^*\right) \right\} = (a_{11} a_{21}^* + a_{12} a_{22}^*) \delta_{\mathbf{k},-\mathbf{k}'}.
+    \]
+    In order to successfully satisfy the fermionic algebra, the coefficients must obey:
+    \[
+        1 = |a_{11}|^2 + |a_{12}|^2,
+    \]
+    \[
+        1 = |a_{21}|^2 + |a_{22}|^2,
+    \]
+    \[
+        0 = a_{11} a_{21}^* + a_{12} a_{22}^*.
+    \]
+    These three constraints are automatically and exactly satisfied by unitary matrices. This implies that \( U_{\mathbf{k}}^\dagger M_{\mathbf{k}} U_{\mathbf{k}} = U_{\mathbf{k}}^{-1} M_{\mathbf{k}} U_{\mathbf{k}} \); thus, finding a unitary matrix that diagonalizes the Hermitian matrix \( M_{\mathbf{k}} \) will successfully diagonalize the entire many-body Hamiltonian \( \hat{K} \).
+\end{proof}
+
+\subsubsection{Quasiparticle Dispersion and Coherence Factors}
 
 The eigenvalues \( \lambda \) of \( M_{\mathbf{k}} \) are determined by its characteristic equation:
 \[
@@ -233,16 +262,20 @@ from which we immediately obtain the roots \( \lambda = \pm E_{\mathbf{k}} \), w
 \begin{equation} \label{eq:quasiparticle_dispersion}
     E_{\mathbf{k}} = \sqrt{\xi_k^2 + |\Delta_{\mathbf{k}}|^2} > 0.
 \end{equation}
-This fundamentally important quantity \( E_{\mathbf{k}} \) represents the energy dispersion of the superconducting quasiparticle excitations.
+This fundamentally important quantity \( E_{\mathbf{k}} \) represents the \textit{energy dispersion of the superconducting quasiparticle excitations}. We expected two opposite sign eigenvalues because the Hamiltonian ...
+
+If we let the gap parameter \( \Delta_{\mathbf{k}} \) vanish, the quasiparticle dispersion reduces to the free-particle kinetic energy relative to the chemical potential, \( E_{\mathbf{k}} = |\xi_k| \). In this limit, the quasiparticles are simply the original bare fermions.
 
 The normalized eigenvector of \( M_{\mathbf{k}} \) corresponding to the positive eigenvalue \( E_{\mathbf{k}} \) takes the form:
 \[
-    \begin{pmatrix} u_{\mathbf{k}}^* \\ -v_{\mathbf{k}}^* \end{pmatrix},
+    \begin{pmatrix} u_{\mathbf{k}}^* \\ -v_{\mathbf{k}}^* \end{pmatrix}, \text{ with } \vert u_{\mathbf{k}} \vert^2 + \vert v_{\mathbf{k}} \vert^2 = 1.
 \]
-with the coherence factors defined as:
+Following this definition, the \textbf{coherence factors} can be expressed as:
 \[
-    u_{\mathbf{k}}^* = \frac{\Delta_{\mathbf{k}}}{\sqrt{2E_{\mathbf{k}}(E_{\mathbf{k}} - \xi_k)}}, \quad v_{\mathbf{k}}^* = \frac{E_{\mathbf{k}} - \xi_k}{\sqrt{2E_{\mathbf{k}}(E_{\mathbf{k}} - \xi_k)}} = v_{\mathbf{k}}.
+    u_{\mathbf{k}}^* = \frac{\Delta_{\mathbf{k}}}{\sqrt{2E_{\mathbf{k}}(E_{\mathbf{k}} - \xi_k)}}, \quad v_{\mathbf{k}}^* = \frac{E_{\mathbf{k}} - \xi_k}{\sqrt{2E_{\mathbf{k}}(E_{\mathbf{k}} - \xi_k)}} = v_{\mathbf{k}},
 \]
+such that \(v_{\mathbf{k}} \) will be strictly real and positive, while \(u_{\mathbf{k}}\) can be complex.
+
 Conversely, the normalized eigenvector corresponding to the negative eigenvalue \( -E_{\mathbf{k}} \) is:
 \[
     \begin{pmatrix} v_{\mathbf{k}} \\ u_{\mathbf{k}} \end{pmatrix}.
@@ -259,14 +292,20 @@ with its corresponding inverse:
     U_{\mathbf{k}}^{-1} = U_{\mathbf{k}}^\dagger = \begin{pmatrix} u_{\mathbf{k}} & -v_{\mathbf{k}} \\ v_{\mathbf{k}}^* & u_{\mathbf{k}}^* \end{pmatrix}.
 \]
 
-By applying this inverse transformation, we obtain the explicit mathematical expressions for the new operators in terms of the old ones (the celebrated Bogoliubov transformation):
+\subsubsection{Bogoliubov Transformation and Diagonalized Hamiltonian}
+
+By applying the previously derived inverse transformation, we obtain the explicit mathematical expressions for the new operators in terms of the old ones (the celebrated Bogoliubov transformation):
 \begin{equation} \label{eq:bogoliubov_operators}
     \gamma_{\mathbf{k},\uparrow} = u_{\mathbf{k}} c_{\mathbf{k},\uparrow} - v_{\mathbf{k}} c_{-\mathbf{k},\downarrow}^\dagger,
 \end{equation}
 \[
     \gamma_{-\mathbf{k},\downarrow}^\dagger = v_{\mathbf{k}}^* c_{\mathbf{k},\uparrow} + u_{\mathbf{k}}^* c_{-\mathbf{k},\downarrow}^\dagger.
 \]
-Notice that the new annihilation operator \( \gamma_{\mathbf{k},\uparrow} \) physically mixes the old creation operator \( c_{-\mathbf{k},\downarrow}^\dagger \) and destruction operator \( c_{\mathbf{k},\uparrow} \), specifically entangling particles with opposite spin and momentum. (Equivalently, taking the Hermitian adjoint of the second equation yields \( \gamma_{-\mathbf{k},\downarrow} = u_{\mathbf{k}} c_{-\mathbf{k},\downarrow} + v_{\mathbf{k}} c_{\mathbf{k},\uparrow}^\dagger \)).
+Notice that the new annihilation operator \( \gamma_{\mathbf{k},\uparrow} \) physically mixes the old creation operator \( c_{-\mathbf{k},\downarrow}^\dagger \) and destruction operator \( c_{\mathbf{k},\uparrow} \), specifically entangling particles with opposite spin and momentum.\footnote{Equivalently, taking the Hermitian adjoint of the second equation yields \( \gamma_{-\mathbf{k},\downarrow} = u_{\mathbf{k}} c_{-\mathbf{k},\downarrow} + v_{\mathbf{k}} c_{\mathbf{k},\uparrow}^\dagger \).}
+
+In these transformed variables, spin plays a non trivial role, as the same operator creates a particle with spin up and destroys a particle with spin down. This is a direct consequence of the pairing mechanism, which couples opposite spins and momenta, preserving the \textit{parity symmetry} \(\mathrm{Z}_2\) of the system. The Bogoliubov transformation is a canonical unitary transformation that preserves the fundamental anti-commutation relations.
+
+Thinking about the \textit{Stern-Gerlach experiment}, we can see that the new quasiparticle operators \( \gamma_{\mathbf{k},\sigma} \) and \( \gamma_{\mathbf{k},\sigma}^\dagger \) do not correspond to any physical spin measurement along a given axis. Instead, they represent a superposition of spin-up and spin-down states, which is a direct manifestation of the entanglement between opposite spins induced by the pairing mechanism of BCS theory.
 
 Expressed in terms of these newly defined \( \gamma \) operators, the grand canonical Hamiltonian assumes its fully diagonalized form:
 \[
@@ -280,13 +319,15 @@ By explicitly expanding this matrix product and once again applying the quasipar
 \begin{equation} \label{eq:diagonalized_canonical_hamiltonian}
     \hat{K} = \sum_{\mathbf{k}} \left( E_{\mathbf{k}} \gamma_{\mathbf{k},\uparrow}^\dagger \gamma_{\mathbf{k},\uparrow} - E_{\mathbf{k}} \gamma_{-\mathbf{k},\downarrow} \gamma_{-\mathbf{k},\downarrow}^\dagger \right) + C = \sum_{\mathbf{k},\sigma} E_{\mathbf{k}} \gamma_{\mathbf{k},\sigma}^\dagger \gamma_{\mathbf{k},\sigma} + C',
 \end{equation}
-where the newly defined constant term \( C' \) absorbs the commutation shifts and is explicitly given by:
+where the newly defined constant term \( C' \) absorbs the commutation shifts, assuring that the Hamiltonian is expressed in normal-ordered form:
 \[
     C' = C - \sum_{\mathbf{k}} E_{\mathbf{k}} = \sum_{\mathbf{k}} \left( \xi_k + A_{\mathbf{k}}^* \Delta_{\mathbf{k}} - E_{\mathbf{k}} \right).
 \]
 Because the quasiparticle energy dispersion \( E_{\mathbf{k}} \) is strictly positive, the operator \( \sum_{\mathbf{k},\sigma} E_{\mathbf{k}} \gamma_{\mathbf{k},\sigma}^\dagger \gamma_{\mathbf{k},\sigma} \) is positive semi-definite. Consequently, the constant \( C' \) physically represents the lowest possible eigenvalue of \( \hat{K} \), which corresponds exactly to the ground state grand potential of the superconducting system.
 
 \subsection{Ground State Wave Function}
+
+The structure of the many-body wavefunction will change dramatically in the superconducting phase, considering also that the occupation of the quasiparticle states is now governed by the Fermi-Dirac distribution. But the ground state of the system is still defined as the state with the lowest possible energy, and can be easily obtained.
 
 In the grand-canonical ensemble, the thermodynamic thermal average of any physical operator \( \hat{O} \) is given by the standard statistical mechanics trace formula:
 \[
@@ -298,16 +339,18 @@ where the grand partition function is defined as:
 \]
 Here, \( \hat{K} = \hat{H} - \mu \hat{N} \) represents the grand canonical Hamiltonian. In the absolute zero temperature limit, \( T \to 0 \), the inverse temperature \( \beta \to +\infty \). In this asymptotic regime, the thermal average strictly reduces to a pure quantum mechanical expectation value over the ground state, where the grand-canonical ground state \( |\psi_0(\mu)\rangle \) is defined as the eigenstate of \( \hat{K} \) corresponding to its lowest possible eigenvalue\footnote{We are assuming that the ground state is unique. If this is not the case, a sum over all degenerate ground states would be required to evaluate the expectation values properly.}.
 
-Based on our preceding diagonalization procedure, the lowest energy state corresponds to the configuration devoid of any quasiparticle excitations. Therefore, in the present case, \( |\psi_0(\mu)\rangle \) is precisely the vacuum of the new Bogoliubov operators \( \gamma_{\mathbf{k},\sigma} \), meaning that it must satisfy the annihilation condition:
+Based on our preceding diagonalization procedure, the lowest energy state corresponds to the configuration devoid of any quasiparticle excitations (since the quasiparticle energy is strictly positive). Therefore, in the present case, \( |\psi_0(\mu)\rangle \) is precisely the vacuum of the new Bogoliubov operators \( \gamma_{\mathbf{k},\sigma} \), meaning that it must satisfy the annihilation condition:
 \begin{equation} \label{eq:bcs_vacuum_condition_gamma}
     \gamma_{\mathbf{k},\sigma} |\psi_0\rangle = 0 \quad \forall \mathbf{k}, \sigma.
 \end{equation}
-By explicitly using the Bogoliubov transformation derived earlier to express \( \gamma_{\mathbf{k},\uparrow} \) in terms of the bare particle operators, this vacuum condition for the specific spin-up branch (\( \sigma = \uparrow \)) yields:
+By explicitly using the Bogoliubov transformation derived earlier to express \( \gamma_{\mathbf{k},\uparrow} \) in terms of the bare particle operators,\footnote{For the sake of finding measurable observables, since the quasiparticles are a mathematical construct: we need correlation functions of the old fermionic variables, which can be measured.} this vacuum condition for the specific spin-up branch (\( \sigma = \uparrow \)) yields:
 \begin{equation} \label{eq:bcs_vacuum_condition_bare}
     u_{\mathbf{k}} c_{\mathbf{k},\uparrow} |\psi_0\rangle = v_{\mathbf{k}} c_{-\mathbf{k},\downarrow}^\dagger |\psi_0\rangle.
 \end{equation}
 
-Looking at Equation \ref{eq:bcs_vacuum_condition_bare}, we can observe a profound physical symmetry: the action of destroying a bare fermion with momentum \( \mathbf{k} \) and spin \( \uparrow \) on the ground state is directly proportional to creating a bare fermion with opposite momentum \( -\mathbf{k} \) and opposite spin \( \downarrow \). This entangled behavior is structurally very similar to what we previously found for the correlated ground state of a dilute interacting Bose gas. In that bosonic case, we determined that the ground state wave function was heavily populated by pairs of opposite momenta and could be expressed using an exponential ansatz:
+Looking at \eqref{eq:bcs_vacuum_condition_bare}, we can observe a profound physical symmetry: \uline{the action of destroying a bare fermion with momentum \( \mathbf{k} \) and spin \( \uparrow \) on the ground state is directly proportional to creating a bare fermion with opposite momentum \( -\mathbf{k} \) and opposite spin \( \downarrow \)}. This is a direct manifestation of Spontaneous Symmetry Breaking of the \( U(1) \) gauge symmetry (conservation of particle number, broken in the ground state), which is a fundamental property of the superconducting phase. The ground state is a coherent superposition of states with different particle numbers, and the phase of the order parameter is spontaneously chosen.
+
+This entangled behavior is structurally very similar to what we previously found for the correlated ground state of a dilute interacting Bose gas. In that bosonic case, we determined that the ground state wave function was heavily populated by pairs of opposite momenta and could be expressed using an exponential ansatz:
 \[
     |\psi_0\rangle = A e^{B a_{\mathbf{k}}^\dagger a_{-\mathbf{k}}^\dagger} = A + \left(B a_{\mathbf{k}}^\dagger a_{-\mathbf{k}}^\dagger\right) + \frac{A}{2} \left(B a_{\mathbf{k}}^\dagger a_{-\mathbf{k}}^\dagger\right)^2 + \dots
 \]
