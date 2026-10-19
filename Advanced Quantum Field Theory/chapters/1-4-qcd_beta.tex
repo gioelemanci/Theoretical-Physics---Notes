@@ -1,6 +1,8 @@
 \section{QCD and the $\beta$-function}
 
- [...]
+Quantum Chromodynamics (QCD) stands as the foundational non-abelian gauge theory of the strong interaction, describing the intricate dynamics of quarks and gluons charged under the \(SU(3)\) color group. Having established the rigorous framework of BRST quantization and the Faddeev-Popov gauge-fixing procedure for generic Yang-Mills theories, we now explicitly specialize our discussion to the physical case of QCD.
+
+In this section, we will systematically extract the momentum-space Feynman rules directly from the complete gauge-fixed action, providing the essential building blocks required for high-energy perturbative calculations. Building upon these rules, we will explore the renormalization of the theory at the one-loop level, highlighting how the residual BRST symmetry (encoded mathematically in the Slavnov-Taylor identities) tightly constrains the various renormalization constants. This perturbative analysis ultimately culminates in the computation of the defining QCD \(\beta\)-function, which famously reveals the profound phenomenon of asymptotic freedom, dictating that the strong coupling becomes vanishingly small at asymptotically high energy scales. Furthermore, we will demonstrate how the underlying BRST symmetry continues to enforce critical physical consistency conditions, such as generalized Ward identities, thereby rigorously guaranteeing the transversality and gauge-independence of physical scattering amplitudes.
 
 \subsection{Feynman Rules for Perturbative QCD}
 
@@ -58,7 +60,7 @@ with absolutely no sum over the index $f$ (which strictly denotes the distinct q
 
 \begin{figure}[H]
     \centering
-    \begin{tikzpicture}[scale=1, thick, font=\sffamily]
+    \begin{tikzpicture}[scale=0.8, thick, font=\sffamily]
 
         % Gluon propagator
         \draw[line width=1pt, decorate, decoration={coil, amplitude=4pt, segment length=5pt}] (-2, 1.5) -- (0, 1.5);
@@ -109,7 +111,7 @@ Graphically, these vital correlation functions may be intuitively depicted by:
     \begin{tikzpicture}[scale=1]
 
         % First Diagram
-        \node at (-2.5, 0) {$\Gamma^{(4)}(x_1, \ldots, x_4) = $};
+        \node at (-2.4, 0) {$\Gamma^{(4)}(x_1, \ldots, x_4) = $};
 
         \begin{scope}[shift={(0,0)}]
             \draw[thick, fill=white] (0,0) circle (0.6);
@@ -123,19 +125,19 @@ Graphically, these vital correlation functions may be intuitively depicted by:
         \filldraw[black] (315:0.6) circle (1.5pt) node[below right] {$x_3$};
         \filldraw[black] (45:0.6) circle (1.5pt) node[above right] {$x_4$};
 
-        \node at (1.5, -0.2) {;};
+        \node at (1, 0) {,};
 
         % Second Diagram
         \node at (5, 0) {$\Gamma^{(4)}(p_1, \ldots, p_4) = $};
 
-        \begin{scope}[shift={(8,0)}]
+        \begin{scope}[shift={(7.6,0)}]
             \draw[thick, fill=white] (0,0) circle (0.6);
             \clip (0,0) circle (0.6);
             \foreach \x in {-1,-0.8,...,1}
             \draw[thick] (\x,-1) -- (\x+1,1);
         \end{scope}
 
-        \begin{scope}[shift={(8,0)}]
+        \begin{scope}[shift={(7.6,0)}]
             \draw[thick, -latex] (135:1.2) -- (135:0.6);
             \draw[thick, -latex] (225:1.2) -- (225:0.6);
             \draw[thick, -latex] (315:1.2) -- (315:0.6);
@@ -147,7 +149,8 @@ Graphically, these vital correlation functions may be intuitively depicted by:
             \filldraw[black] (45:0.6) circle (1.5pt) node[right=5pt] {$p_4$};
         \end{scope}
 
-        \node at (11.5, 0) {(12)};
+        \node at (8.6, 0) {,};
+
 
     \end{tikzpicture}
 \end{figure}
@@ -200,7 +203,7 @@ Using the total antisymmetry of the Lie algebra structure constants \(f^{abc}\),
 \[
     \begin{aligned}
         iS^{a_1 a_2 a_3}_{\mu_1 \mu_2 \mu_3} & = -g f^{a_1 a_2 a_3} \big[ (p_1 - p_2)_{\mu_3} \eta_{\mu_1 \mu_2} + (p_2 - p_3)_{\mu_1} \eta_{\mu_2 \mu_3} + (p_3 - p_1)_{\mu_2} \eta_{\mu_3 \mu_1} \big]\, , \\
-                                             & \text{with } p_1 + p_2 + p_3 = 0 \, ,
+                                             & \text{ with } p_1 + p_2 + p_3 = 0 \, ,
     \end{aligned}
 \]
 which is precisely the standard three-gluon Feynman rule presented below. This derivative method logically explains why one must not simply keep only the single term in which the derivative acts on line 1: the original interaction monomial contains three identical gluon fields, and functionally differentiating the quantum action with respect to the three external fields intrinsically generates all six unique slot assignments.
@@ -208,39 +211,165 @@ which is precisely the standard three-gluon Feynman rule presented below. This d
 Thus, for QCD, the trilinear gluon coupling naturally gives rise to the fundamental interaction vertex \(iS^{a_1 a_2 a_3}_{\mu_1 \mu_2 \mu_3}(p_1, p_2, p_3)\):
 \begin{equation} \label{eq:three_gluon_vertex}
     \begin{aligned}
-        iS^{a_1 a_2 a_3}_{\mu_1 \mu_2 \mu_3}(p_1, p_2, p_3) & = g f^{a_1 a_2 a_3} p_{1,\mu_2} \eta_{\mu_1 \mu_3} + \text{permutations of external lines}                                                                \\
-                                                            & = -g f^{a_1 a_2 a_3} \Big( (p_1 - p_2)_{\mu_3} \eta_{\mu_1 \mu_2} + (p_2 - p_3)_{\mu_1} \eta_{\mu_2 \mu_3} + (p_3 - p_1)_{\mu_2} \eta_{\mu_3 \mu_1} \Big) \\
-                                                            & = \feynQcdThreeGluon \, .
+        iS^{a_1 a_2 a_3}_{\mu_1 \mu_2 \mu_3}(p_1, p_2, p_3) & = g f^{a_1 a_2 a_3} p_{1,\mu_2} \eta_{\mu_1 \mu_3} + \text{perm. of ext. lines}                                                                                \\
+                                                            & = -g f^{a_1 a_2 a_3} \Big( (p_1 - p_2)_{\mu_3} \eta_{\mu_1 \mu_2} + (p_2 - p_3)_{\mu_1} \eta_{\mu_2 \mu_3} + (p_3 - p_1)_{\mu_2} \eta_{\mu_3 \mu_1} \Big) \, .
     \end{aligned}
-\end{equation} \TODO{improve feyn diag}
+\end{equation}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=1.1, thick]
+            % Central vertex
+            \filldraw[black] (0,0) circle (1.5pt);
+
+            % Gluon 1 (Top Left)
+            \draw[gluon] (140:2) -- (0,0) node[pos=0, above left] {$\mu_1, a_1, p_1$};
+            % Momentum arrow 1
+            \draw[-latex, line width=1pt] (140:1.3) ++(50:0.3) -- ++(-40:0.5) node[midway, above right] {$p_1$};
+
+            % Gluon 2 (Top Right)
+            \draw[gluon] (40:2) -- (0,0) node[pos=0, above right] {$\mu_2, a_2, p_2$};
+            % Momentum arrow 2
+            \draw[-latex, line width=1pt] (40:1.3) ++(-50:0.3) -- ++(220:0.5) node[midway, below right] {$p_2$};
+
+            % Gluon 3 (Bottom)
+            \draw[gluon] (270:2) -- (0,0) node[pos=0, below] {$\mu_3, a_3, p_3$};
+            % Momentum arrow 3
+            \draw[-latex, line width=1pt] (270:1.3) ++(180:0.4) -- ++(90:0.5) node[midway, left] {$p_3$};
+        \end{tikzpicture}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.5\textwidth}
+        \caption{\textbf{Three-gluon interaction vertex.}
+            Due to the self-interaction of the gauge fields, the vertex intricately couples the spacetime indices (\(\mu_i\)) with the color degrees of freedom (\(a_i\)). The result is governed by the totally antisymmetric structure constant \(f^{a_1 a_2 a_3}\) and features a characteristic derivative coupling, which is a hallmark of non-abelian gauge theories. Note that all external momenta \(p_i\) are conventionally defined as flowing \textit{inward} towards the interaction vertex, enforcing total momentum conservation \(p_1 + p_2 + p_3 = 0\).}
+        \label{fig:three_gluon_vertex_detail}
+
+    \end{minipage}
+\end{figure}
 
 \paragraph{Four-gluon vertex.}
 Similarly, by systematically expanding the quartic gauge field term in the Yang-Mills action and correctly accounting for the \(4! = 24\) permutations of the four identical gluon fields, one obtains the 4-gluon vertex rule:
 \begin{equation} \label{eq:four_gluon_vertex}
     \begin{aligned}
-        iS^{a_1 a_2 a_3 a_4}_{\mu_1 \mu_2 \mu_3 \mu_4}(p_1, p_2, p_3, p_4) & = -ig^2 f^{b a_1 a_2} f^{b a_3 a_4} \eta_{\mu_1 \mu_3} \eta_{\mu_2 \mu_4} + \text{permutations of lines 2 3 4}                  \\
-                                                                           & = -ig^2 \big[ f^{b a_1 a_2} f^{b a_3 a_4} (\eta_{\mu_1 \mu_3} \eta_{\mu_2 \mu_4} - \eta_{\mu_1 \mu_4} \eta_{\mu_2 \mu_3})       \\
-                                                                           & \qquad\quad + f^{b a_1 a_3} f^{b a_4 a_2} (\eta_{\mu_1 \mu_4} \eta_{\mu_3 \mu_2} - \eta_{\mu_1 \mu_2} \eta_{\mu_3 \mu_4})       \\
-                                                                           & \qquad\quad + f^{b a_1 a_4} f^{b a_2 a_3} (\eta_{\mu_1 \mu_2} \eta_{\mu_4 \mu_3} - \eta_{\mu_1 \mu_3} \eta_{\mu_4 \mu_2}) \big] \\
-                                                                           & = \feynQcdFourGluon\, .
+        iS^{a_1 a_2 a_3 a_4}_{\mu_1 \mu_2 \mu_3 \mu_4}(p_1, p_2, p_3, p_4) & = -ig^2 f^{b a_1 a_2} f^{b a_3 a_4} \eta_{\mu_1 \mu_3} \eta_{\mu_2 \mu_4} + \text{permutations of lines 2 3 4}                       \\
+                                                                           & = -ig^2 \big[ f^{b a_1 a_2} f^{b a_3 a_4} (\eta_{\mu_1 \mu_3} \eta_{\mu_2 \mu_4} - \eta_{\mu_1 \mu_4} \eta_{\mu_2 \mu_3})            \\
+                                                                           & \qquad\quad + f^{b a_1 a_3} f^{b a_4 a_2} (\eta_{\mu_1 \mu_4} \eta_{\mu_3 \mu_2} - \eta_{\mu_1 \mu_2} \eta_{\mu_3 \mu_4})            \\
+                                                                           & \qquad\quad + f^{b a_1 a_4} f^{b a_2 a_3} (\eta_{\mu_1 \mu_2} \eta_{\mu_4 \mu_3} - \eta_{\mu_1 \mu_3} \eta_{\mu_4 \mu_2}) \big] \, .
     \end{aligned}
-\end{equation}\TODO{improve feyn diag}
+\end{equation}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \caption{\textbf{Four-gluon interaction vertex.} Unlike the three-gluon vertex, it depends on the square of the strong coupling constant, \(g^2\), and does not involve momentum dependence (i.e. there are no derivative couplings). As conventional, all external momenta \(p_i\) are defined as flowing \textit{inward} towards the vertex, satisfying momentum conservation \(p_1 + p_2 + p_3 + p_4 = 0\).}
+        \label{fig:four_gluon_vertex_detail}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=1.1, thick]
+            % Central vertex
+            \filldraw[black] (0,0) circle (1.5pt);
+
+            % Gluon 1 (Top Left)
+            \draw[gluon] (135:2) -- (0,0) node[pos=0, above left] {$\mu_1, a_1, p_1$};
+            % Momentum arrow 1
+            \draw[-latex, line width=1pt] (135:1.3) ++(45:0.3) -- ++(-45:0.5) node[midway, above right] {$p_1$};
+
+            % Gluon 2 (Top Right)
+            \draw[gluon] (45:2) -- (0,0) node[pos=0, above right] {$\mu_2, a_2, p_2$};
+            % Momentum arrow 2
+            \draw[-latex, line width=1pt] (45:1.3) ++(-45:0.3) -- ++(225:0.5) node[midway, below right] {$p_2$};
+
+            % Gluon 3 (Bottom Right)
+            \draw[gluon] (315:2) -- (0,0) node[pos=0, below right] {$\mu_3, a_3, p_3$};
+            % Momentum arrow 3
+            \draw[-latex, line width=1pt] (315:1.3) ++(-135:0.3) -- ++(135:0.5) node[midway, below left] {$p_3$};
+
+            % Gluon 4 (Bottom Left)
+            \draw[gluon] (225:2) -- (0,0) node[pos=0, below left] {$\mu_4, a_4, p_4$};
+            % Momentum arrow 4
+            \draw[-latex, line width=1pt] (225:1.3) ++(135:0.3) -- ++(45:0.5) node[midway, above left] {$p_4$};
+        \end{tikzpicture}
+    \end{minipage}
+\end{figure}
 
 \paragraph{Ghost-antighost-gluon vertex.}
 The interaction term coupling the Faddeev-Popov ghosts to the gauge field within the gauge-fixed lagrangian yields the required ghost-antighost-gluon vertex:
 \begin{equation} \label{eq:ghost_gluon_vertex}
-    iS^{abc}_\mu(k, p, q) = g f^{abc} k_\mu \, ,
+    iS^{a_1 a_2 a_3}_\mu(k, p, q) = g f^{a_1 a_2 a_3} k_\mu \, ,
 \end{equation}
-
-\TODO{add image of ghost-antighost-gluon vertex Feynman diagram}
-
 where all momenta stringently follow the ingoing convention utilized above, and \(k\) strictly represents the momentum carried by the differentiated antighost field \(\bar{c}^a\). It is crucial to note for practical calculations that reversing the direction of this specific momentum physically reverses the displayed sign in the vertex rule.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=1.1, thick]
+            % Central vertex
+            \filldraw[black] (0,0) circle (1.5pt);
+
+            % Ghost (Top Left) - Incoming
+            \draw[ghost] (135:2) -- (0,0) node[pos=0, above left, align=center] {$a_3, q$\\($c$ ghost)};
+            % Momentum arrow q (inward)
+            \draw[-latex, line width=1pt] (135:1.5) ++(45:0.3) -- ++(-45:0.6) node[midway, above right] {$q$};
+
+            % Antighost (Top Right) - Outgoing field flow, but inward momentum
+            \draw[ghost] (0,0) -- (45:2) node[pos=1, above right, align=center] {$a_1, k$\\($\bar{c}$ anti-ghost)};
+            % Momentum arrow k (inward)
+            \draw[-latex, line width=1pt] (45:1.5) ++(-45:0.3) -- ++(225:0.6) node[midway, below right] {$k$};
+
+            % Gluon (Bottom) - Incoming
+            \draw[gluon] (270:2) -- (0,0) node[pos=0, below] {$\mu, a_2, p$};
+            % Momentum arrow p (inward)
+            \draw[-latex, line width=1pt] (270:1.5) ++(180:0.4) -- ++(90:0.6) node[midway, left] {$p$};
+        \end{tikzpicture}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.5\textwidth}
+        \caption{\textbf{Ghost-antighost-gluon vertex.} The dashed lines represent the Grassmann-valued ghost fields, with the field arrow denoting the flow of ghost number (from $c$ to $\bar{c}$). Again, all external momenta ($q, k, p$) are defined as flowing \textit{inward} towards the vertex. It is important to highlight the explicit momentum dependence in the vertex rule (\(k_\mu\)), which is carried by the differentiated antighost field. Reversing this specific momentum would invert the sign of the amplitude.}
+        \label{fig:ghost_gluon_vertex_detail}
+    \end{minipage}
+\end{figure}
 
 \paragraph{Quark-quark-gluon vertex.}
 Finally, the standard minimal-coupling interaction between the matter fermions and the gauge field provides the fundamental quark-quark-gluon vertex (evaluated for a fixed quark flavour):
 \begin{equation} \label{eq:quark_gluon_vertex}
-    i(S^{\mu a})^i_{\phantom{i}j}(q, p, q') = -g \gamma^\mu (T^a)^i_{\phantom{i}j} = \feynQcdQuarkGluon \, .
-\end{equation} \TODO{improve feyn diag}
+    i(S^{\mu a})^i_{\phantom{i}j}(q, p, q') = -g \gamma^\mu (T^a)^i_{\phantom{i}j} \, .
+\end{equation}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \caption{\textbf{Quark-quark-gluon vertex.} This vertex describes the fundamental interaction between the matter fields (quarks in the fundamental representation) and the gauge field (gluons in the adjoint representation). The vertex rule seamlessly couples the color indices \(i, j\) of the quarks with the gluon color index \(a\) via the \(SU(3)\) generators \((T^a)^i_{\phantom{i}j}\). Simultaneously, the Dirac matrix \(\gamma^\mu\) handles the spinor structure. Again, all associated momenta (\(q', q, p\)) are depicted flowing \textit{inward} to preserve momentum conservation.}
+        \label{fig:quark_gluon_vertex_detail}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=1.2, thick]
+            % Central vertex
+            \filldraw[black] (0,0) circle (1.5pt);
+
+            % Incoming Quark (Top Left)
+            \draw[fermion] (135:2) -- (0,0) node[pos=0, above left] {$j, q'$};
+            % Momentum arrow q' (inward)
+            \draw[-latex, line width=1pt] (135:1.5) ++(45:0.3) -- ++(-45:0.6) node[midway, above right] {$q'$};
+
+            % Outgoing Quark (Top Right) - Arrow points away, but momentum is inward
+            \draw[fermion] (0,0) -- (45:2) node[pos=1, above right] {$i, q$};
+            % Momentum arrow q (inward)
+            \draw[-latex, line width=1pt] (45:1.5) ++(-45:0.3) -- ++(225:0.6) node[midway, below right] {$q$};
+
+            % Gluon (Bottom) - Incoming
+            \draw[gluon] (270:2) -- (0,0) node[pos=0, below] {$\mu, a, p$};
+            % Momentum arrow p (inward)
+            \draw[-latex, line width=1pt] (270:1.5) ++(180:0.4) -- ++(90:0.6) node[midway, left] {$p$};
+        \end{tikzpicture}
+    \end{minipage}
+\end{figure}
 
 These non-abelian Feynman rules are considerably more complex than those found in abelian QED, primarily due to the rich self-interaction structure of the gluons mandated by gauge invariance. Nevertheless, armed with these foundational vertices and their corresponding propagators, one may now confidently start computing perturbatively various high-energy scattering processes, systematically renormalize the theory loopwise by introducing appropriate counterterms, and ultimately compute the critical \(\beta\)-function that governs the scale dependence of the strong coupling.
 
