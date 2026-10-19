@@ -348,7 +348,26 @@ By explicitly using the Bogoliubov transformation derived earlier to express \( 
     u_{\mathbf{k}} c_{\mathbf{k},\uparrow} |\psi_0\rangle = v_{\mathbf{k}} c_{-\mathbf{k},\downarrow}^\dagger |\psi_0\rangle.
 \end{equation}
 
-Looking at \eqref{eq:bcs_vacuum_condition_bare}, we can observe a profound physical symmetry: \uline{the action of destroying a bare fermion with momentum \( \mathbf{k} \) and spin \( \uparrow \) on the ground state is directly proportional to creating a bare fermion with opposite momentum \( -\mathbf{k} \) and opposite spin \( \downarrow \)}. This is a direct manifestation of Spontaneous Symmetry Breaking of the \( U(1) \) gauge symmetry (conservation of particle number, broken in the ground state), which is a fundamental property of the superconducting phase. The ground state is a coherent superposition of states with different particle numbers, and the phase of the order parameter is spontaneously chosen.
+Looking at \eqref{eq:bcs_vacuum_condition_bare}, we can observe a profound physical symmetry: \uline{the action of destroying a bare fermion with momentum \( \mathbf{k} \) and spin \( \uparrow \) on the ground state is directly proportional to creating a bare fermion with opposite momentum \( -\mathbf{k} \) and opposite spin \( \downarrow \)}. This is a direct manifestation of Spontaneous Symmetry Breaking of the \( U(1) \) symmetry (conservation of particle number, broken in the ground state)
+\[
+    N_{\uparrow} + N_{\downarrow} broken
+\]
+\[
+    N_{\uparrow} - N_{\downarrow} conserved
+\]
+commutator with hamiltonian...
+
+U(1) charge and U(1) spin symmetries are preserved, but the U(1) particle number symmetry is spontaneously broken in the superconducting phase... it is not a gauge symmetry: gauge symmetries cannot be broken, there is a theorem.
+
+The gamma operators are a linear combination of the bare fermionic operators, and they do not commute with the parity operator \( P = \prod_{\mathbf{k}, \sigma} (1-2n_{\mathbf{k},\sigma})\). But they preserve parity as a good quantum number, because they always create or destroy pairs of fermions. Indeed we have:\TODO{check computation (erio)}
+\[
+    \begin{aligned}
+        \gamma_{\mathbf{k}, \uparrow} \ket{\psi} & = \left( u_{\mathbf{k}} c_{\mathbf{k},\uparrow} - v_{\mathbf{k}} c_{-\mathbf{k},\downarrow}^\dagger \right) (c_{\mathbf{k},\uparrow}^\dagger + c_{\mathbf{p},\downarrow}^\dagger) \ket{0} \\
+                                                 & = u_{\mathbf{k}} c_{\mathbf{k},\uparrow} c_{\mathbf{k},\uparrow}^\dagger \ket{0} - v_{\mathbf{k}} c_{-\mathbf{k},\downarrow}^\dagger c_{\mathbf{p},\downarrow}^\dagger \ket{0}            \\
+                                                 & = u_{\mathbf{k}} \ket{0} - v_{\mathbf{k}} c_{-\mathbf{k},\downarrow}^\dagger c_{\mathbf{p},\downarrow}^\dagger \ket{0}
+    \end{aligned}
+\]
+Which is an entangled state of parity: maybe parity changed, but the state is still a superposition of only even or only odd parity states, so it is still an eigenstate of parity. The same holds for the other gamma operator.
 
 This entangled behavior is structurally very similar to what we previously found for the correlated ground state of a dilute interacting Bose gas. In that bosonic case, we determined that the ground state wave function was heavily populated by pairs of opposite momenta and could be expressed using an exponential ansatz:
 \[
@@ -356,7 +375,15 @@ This entangled behavior is structurally very similar to what we previously found
 \]
 with \( A \) and \( B \) representing specific coherent coefficients that we determined.
 
-However, in the present scenario, we are strictly dealing with fermions. Fermions are governed by the Pauli exclusion principle, which mathematically enforces that the square of any fermionic creation operator identically vanishes (\( c^\dagger c^\dagger = 0 \)). Consequently, all terms in the previous coherent expansion proportional to \( \left(a_{\mathbf{k}}^\dagger a_{-\mathbf{k}}^\dagger\right)^n \) with \( n > 1 \) must vanish exactly for fermions.
+However, in the present scenario, we are strictly dealing with fermions. Fermions are governed by the Pauli exclusion principle, which mathematically enforces that the square of any fermionic creation operator identically vanishes (\( c^\dagger c^\dagger = 0 \)). Consequently, all terms in the previous coherent expansion proportional to \( \left(a_{\mathbf{k}}^\dagger a_{-\mathbf{k}}^\dagger\right)^n \) with \( n > 1 \) must vanish exactly for fermions. Indeed sometimes we called them bosons a bit improperly, since they just behave like bosons in some limits: they still have to satisfy the Pauli principle and the anti-commutation relations, in fact:
+\[
+    a^\dagger_{\mathbf{k}} a^\dagger_{\mathbf{k}} \ket{0} = \ket{2}, \text{ but } (c^\dagger_{\mathbf{k}} c^\dagger_{-\mathbf{k}})(c^\dagger_{\mathbf{k}} c^\dagger_{-\mathbf{k}}) \ket{0} = 0.
+\]
+We call them \textit{hard-core bosons}, and hey respect the modified commutation relations:
+\[
+    [c_{\mathbf{k},\uparrow}c_{-\mathbf{k},\downarrow}, c_{\mathbf{k}',\uparrow}^\dagger c_{-\mathbf{k}',\downarrow}^\dagger] = \delta_{\mathbf{k},\mathbf{k}'} P_{\mathbf{k}},
+\]
+where the last operator \( P_{\mathbf{k}} \) is the projector onto the subspace ensuring only one pair of fermions can occupy the same momentum mode \( \mathbf{k} \).
 
 Truncating the series to respect the Pauli principle, we thus try the following linear pairing ansatz for the wavefunction of a single momentum mode:
 \[
@@ -380,10 +407,16 @@ By comparing these two results, we immediately see that the proposed state succe
     |\psi_0(\mu)\rangle = \prod_{\mathbf{k}} \left( u_{\mathbf{k}} + v_{\mathbf{k}} c_{\mathbf{k},\uparrow}^\dagger c_{-\mathbf{k},\downarrow}^\dagger \right) |0\rangle.
 \end{equation}
 
-The state described by Equation \ref{eq:bcs_wavefunction} is the celebrated BCS wave function. It was first proposed historically by Bardeen, Cooper, and Schrieffer in 1957 as a brilliant variational wave function to approximate the ground state of a metallic superconductor. The macroscopic state describes a coherent superposition where each momentum pair state \( (\mathbf{k}\uparrow, -\mathbf{k}\downarrow) \) is either empty with probability amplitude \( u_{\mathbf{k}} \), or occupied by a Cooper pair with probability amplitude \( v_{\mathbf{k}} \).
+The state described by \eqref{eq:bcs_wavefunction} is the celebrated BCS wave function. It was first proposed historically by Bardeen, Cooper, and Schrieffer in 1957 as a brilliant variational wave function to approximate the ground state of a metallic superconductor. The macroscopic state describes a coherent superposition where each momentum pair state \( (\mathbf{k}\uparrow, -\mathbf{k}\downarrow) \) is either empty with probability amplitude \( u_{\mathbf{k}} \), or occupied by a Cooper pair with probability amplitude \( v_{\mathbf{k}} \).
 
-Finally, one can easily check that this constructed state is properly normalized to unity. Indeed, because different momentum modes commute, the norm factorizes as:
+Since the coherence factors \( u_{\mathbf{k}} \) and \( v_{\mathbf{k}} \) are momentum-dependent, the BCS wave function is a highly non-trivial entangled state that cannot be factorized into a simple product of single-particle states. Anyway, the BCS wave function is a pure state, and it is not a mixed state. It is a superposition of different particle number states, but it is still a single quantum state, with even parity (since it is a superposition of states with an even number of particles).
+
+Finally, one can easily check that this constructed state is properly normalized to unity. Indeed, because different momentum modes commute, the norm factorizes as: \TODO{complete the computation}
 \[
-    \langle \psi_0 | \psi_0 \rangle = \prod_{\mathbf{k}} \left( |u_{\mathbf{k}}|^2 + |v_{\mathbf{k}}|^2 \right) = 1,
+    \begin{aligned}
+        \langle \psi_0 | \psi_0 \rangle & = \prod_{\mathbf{k}} \left( u_{\mathbf{k}}^* + v_{\mathbf{k}}^* c_{-\mathbf{k},\downarrow} c_{\mathbf{k},\uparrow} \right) \prod_{\mathbf{k}^{\prime}}\left( u_{\mathbf{k}^{\prime}} + v_{\mathbf{k}^{\prime}} c_{\mathbf{k}^{\prime},\uparrow} c_{-\mathbf{k}^{\prime},\downarrow} \right) \\
+                                        & = \prod_{\mathbf{k} \mathbf{k}^{\prime}} \left( u_{\mathbf{k}} u_{\mathbf{k}^{\prime}}^* + v_{\mathbf{k}} v_{\mathbf{k}^{\prime}}^* c_{-\mathbf{k},\downarrow} c_{\mathbf{k},\uparrow} c_{\mathbf{k}^{\prime},\uparrow} c_{-\mathbf{k}^{\prime},\downarrow} \right) \dots                   \\
+                                        & = \prod_{\mathbf{k}} \left( |u_{\mathbf{k}}|^2 + |v_{\mathbf{k}}|^2 \right) = 1,
+    \end{aligned}
 \]
 which is guaranteed to equal \( 1 \) thanks to the fundamental normalization condition on the coherence factors, \( |u_{\mathbf{k}}|^2 + |v_{\mathbf{k}}|^2 = 1 \), that we rigorously enforced during the Bogoliubov unitary transformation.

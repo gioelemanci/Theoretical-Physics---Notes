@@ -1,0 +1,242 @@
+\section{Spectrum of the BCS Hamiltonian}
+
+\subsection{Gap Equation at Zero Temperature}
+
+The elementary excitations over the many-body ground state \( |\psi_0\rangle \) are created by the Bogoliubov quasiparticle operators \( \gamma_{\mathbf{k},\sigma}^\dagger \). These states naturally form the eigenvectors of the diagonalized grand canonical Hamiltonian:
+\[
+    \hat{K}\gamma_{\mathbf{k},\sigma}^\dagger |\psi_0\rangle = (E_{\mathbf{k}} + C')\gamma_{\mathbf{k},\sigma}^\dagger |\psi_0\rangle,
+\]
+with the quasiparticle energy dispersion given by \( E_{\mathbf{k}} = \sqrt{\xi_k^2 + |\Delta_{\mathbf{k}}|^2} \). We are considering single quasiparticle excitations, which are the lowest-lying excited states of the system. The energy of a single quasiparticle excitation is therefore \( E_{\mathbf{k}} \) above the ground state energy \( C' \).
+
+Consider the physical implications of this dispersion relation: whenever the momentum-dependent parameter \( \Delta_{\mathbf{k}} \neq 0 \), the excitation energy satisfies \( E_{\mathbf{k}} > 0 \) for all momenta \( \mathbf{k} \). Consequently, there exists a strictly positive energy gap between the superconducting ground state and the lowest-lying first excited state (which is determined by the global minimum of \( E_{\mathbf{k}} \)). For this fundamental reason, the function \( \Delta_{\mathbf{k}} \) is commonly referred to as the \emph{gap function}.
+
+Recall that the gap function \( \Delta_{\mathbf{k}} \) was originally defined self-consistently through the expectation value of the pair destruction operator, \( A_{\mathbf{k}} = \langle c_{-\mathbf{k},\downarrow} c_{\mathbf{k},\uparrow} \rangle \), which looks like a self-consistency condition for the gap function: we are trying to find a solution for \( \Delta_{\mathbf{k}} \) that is consistent with the expectation value of the pair operator in the BCS ground state. The gap function is therefore determined by the microscopic details of the interaction potential \( V(\mathbf{k}, \mathbf{k}') \) and the underlying Fermi surface. Let us explicitly compute this thermodynamic average at absolute zero temperature (\( T = 0 \)), meaning we evaluate the expectation value strictly over the BCS ground state. Using the inverse Bogoliubov transformations, we express the bare particle operators in terms of the quasiparticle operators:
+\[
+    A_{\mathbf{k}} = \langle c_{-\mathbf{k},\downarrow} c_{\mathbf{k},\uparrow} \rangle = \left\langle \left( -v_{\mathbf{k}} \gamma_{\mathbf{k},\uparrow}^\dagger + u_{\mathbf{k}}^* \gamma_{-\mathbf{k},\downarrow} \right) \left( v_{\mathbf{k}} \gamma_{-\mathbf{k},\downarrow}^\dagger + u_{\mathbf{k}}^* \gamma_{\mathbf{k},\uparrow} \right) \right\rangle = u_{\mathbf{k}}^* v_{\mathbf{k}},
+\]
+where we have used the fact that \( \gamma_{\mathbf{k},\sigma} |\psi_0\rangle = 0 \). One can readily verify from the explicit definitions of the coherence factors \( u_{\mathbf{k}} \) and \( v_{\mathbf{k}} \) that their product yields:
+\[
+    u_{\mathbf{k}}^* v_{\mathbf{k}} = \frac{\Delta_{\mathbf{k}}}{2E_{\mathbf{k}}}.
+\]
+Substituting this relation back into the definition of the gap parameter, we obtain the discrete self-consistency equation:
+\[
+    \Delta_{\mathbf{k}} = -\frac{1}{V} \sum_{\mathbf{k}'} V(\mathbf{k}, \mathbf{k}') \frac{\Delta_{\mathbf{k}'}}{2E_{\mathbf{k}'}}.
+\]
+Taking the thermodynamic limit, the momentum sum transitions into an integral, yielding the celebrated BCS gap equation:
+\begin{equation} \label{eq:bcs_gap_equation}
+    \Delta_{\mathbf{k}} = -\int \frac{\mathrm{d}^3\mathbf{k}'}{(2\pi)^3} \frac{V(\mathbf{k}, \mathbf{k}')}{2E_{\mathbf{k}'}} \Delta_{\mathbf{k}'}.
+\end{equation}
+This is a non-linear integral equation for the gap function \( \Delta_{\mathbf{k}} \). Because \( E_{\mathbf{k}'} \) itself depends on \( \Delta_{\mathbf{k}'} \), it generally requires a numerical solution. However, in the physically relevant limit of weak interactions (which accurately models several conventional metallic superconductors), the gap equation can be solved analytically. This condition is realted to the many-body gap, which is essentially the \uline{energy cost to insert a single quasiparticle} into the system. We are still considering momenta in the vicinity of the Fermi surface, where the gap function is non-zero. The energy cost to insert a single quasiparticle is therefore the minimum of the dispersion \( \min_k E_{\mathbf{k}} = |\Delta_{\mathbf{k}}| \).
+
+\subsubsection{Weak Coupling Solution for BCS Model of Interaction}
+
+Let us first consider the effective phonon-mediated potential characteristic of a conventional superconductor. We approximate it as a separable, attractive well:
+\[
+    V(\mathbf{k}, \mathbf{k}') = -g w_k w_{k'},
+\]
+with a positive, constant coupling strength \( g = g_{e,ph}^2 > 0 \). We are implying that adding a quasiparticle to the system costs energy, and this cost is captured by this very rough mean-field approximation of the potential. The momentum dependence is captured by the step function \( w_k = \Theta(\hbar\omega_D - |\xi_k|) \), which restricts the interaction to a narrow energy shell of width \( 2\hbar\omega_D \) around the Fermi surface. Here, the kinetic energy relative to the chemical potential is \( \xi_k = \epsilon_k - \mu \). Note that the chemical potential \( \mu \) is approximately equal to the non-interacting Fermi energy \( E_F \) (the exact equality is slightly broken by the interaction, but \( \mu \simeq E_F \) holds to leading order).
+
+To solve the integral gap equation \eqref{eq:bcs_gap_equation}, we proceed with a piecewise ansatz for the gap function that mirrors the symmetry of the potential:
+\[
+    \Delta_{\mathbf{k}} = \Delta_k = \Delta w_k.
+\]
+Substituting this ansatz and the explicit form of the interaction potential into \eqref{eq:bcs_gap_equation}, we obtain:
+\[
+    \Delta w_k = g \int \frac{\mathrm{d}^3\mathbf{k}'}{(2\pi)^3} \frac{w_k w_{k'} \Delta w_{k'}}{2E_{\mathbf{k}'}}.
+\]
+Factoring out \( \Delta w_k \) (assuming a non-trivial solution for the many body factor, \( \Delta \neq 0 \)), the self-consistency condition simplifies to:
+\[
+    \frac{1}{g} = \int \frac{\mathrm{d}^3\mathbf{k}}{(2\pi)^3} \frac{\Theta(\hbar\omega_D - |\xi_k|)}{2E_k}.
+\]
+In the relevant region of integration specified by the Heaviside step function \( \Theta \), the quasiparticle dispersion is:
+\[
+    E_{\mathbf{k}} = E_k = \sqrt{\xi_k^2 + |\Delta|^2}.
+\]
+The minimum of this dispersion is \( \min_k E_k = |\Delta| \), which is reached exactly at the Fermi surface where \( \xi_k = 0 \) (corresponding to \( k = \sqrt{2m\mu}/\hbar \simeq k_F \)). Notice that the gap equation only dictates the modulus of the gap \( |\Delta| \), leaving the global phase undetermined. Without loss of generality, we can therefore assume \( \Delta \) to be strictly real and positive.
+
+To evaluate the momentum integral, we transition to an energy integration by introducing the single-particle density of states \( N(\xi) \) per spin component and per unit volume:
+\[
+    N(\xi) = \int \frac{\mathrm{d}^3\mathbf{k}}{(2\pi)^3} \delta(\xi - \xi_k) = \frac{m^{3/2}}{\sqrt{2}\pi^2\hbar^3} \sqrt{\xi + \mu}.
+\]
+Using the density of states, the gap equation transforms into:
+\[
+    \frac{1}{g} = \int_{-\mu}^{+\infty} d\xi \frac{N(\xi)}{2E_{\xi}} \Theta(\hbar\omega_D - |\xi|),
+\]
+where \( E_{\xi} = \sqrt{\xi^2 + |\Delta|^2} \). Because the Debye energy is typically orders of magnitude smaller than the Fermi energy (\( \hbar\omega_D \ll E_F \approx \mu \)), the lower limit of integration \( -\mu \) can be safely replaced by the step function's cutoff \( -\hbar\omega_D \):
+\[
+    \frac{1}{g} = \int_{-\hbar\omega_D}^{\hbar\omega_D} d\xi \frac{N(\xi)}{2E_{\xi}}.
+\]
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/2-bcs_density_of_states_vs_dispersion.png}
+    \caption{Plot of the single-particle density of states \( N(\xi) \) and the inverse of the quasiparticle dispersion \( 1/E_\xi \), where \( E_\xi = \sqrt{\xi^2 + |\Delta|^2} \). The shaded region visually represents the narrow integration shell defined by the Debye energy cutoff \( \pm\hbar\omega_D \). Within this small window around the Fermi surface (\( \xi = 0 \)), \( 1/E_\xi \) is strongly peaked, whereas the density of states varies negligibly and can be robustly approximated by its constant value at the Fermi level, \( N_0 = N(0) \).}
+    \label{fig:density_of_states_vs_dispersion}
+\end{figure}
+
+We must now carefully analyze the weak-coupling limit, where \( g \to 0 \). For the equation to hold, the right-hand side integral must correspondingly diverge towards \( +\infty \). This logarithmic divergence is only possible if the gap parameter itself vanishes, \( \Delta \to 0 \), ensuring the integrand \( 1/E_{\xi} \to \infty \) near the Fermi surface (\( \xi = 0 \)). Under these weak-coupling conditions, the function \( 1/E_{\xi} \) is extremely sharply peaked at \( \xi = 0 \) and varies rapidly over an energy scale defined by \( \Delta \). Conversely, over this exact same narrow energy shell, the density of states \( N(\xi) \) is nearly constant and can be reliably approximated by its value precisely at the Fermi level, \( N_0 \equiv N(\xi=0) \).
+
+Pulling the constant \( N_0 \) out of the integral, we evaluate the remaining expression analytically:
+\[
+    \frac{1}{g} = \frac{N_0}{2} \int_{-\hbar\omega_D}^{\hbar\omega_D} \frac{\mathrm{d} \xi}{\sqrt{\xi^2 + \Delta^2}} = N_0 \int_{0}^{\hbar\omega_D} \frac{1}{\Delta \sqrt{(\frac{\xi}{\Delta})^2 + 1}} \mathrm{d} \xi = N_0 \text{arcsinh}\left(\frac{\hbar\omega_D}{\Delta}\right).
+\]
+Inverting this relation yields:
+\[
+    \frac{\hbar\omega_D}{\Delta} = \sinh\left(\frac{1}{N_0 g}\right) \simeq \frac{1}{2} \exp\left(\frac{1}{N_0 g}\right),
+\]
+where the final asymptotic approximation relies on the behavior of \( \sinh(x) \sim e^x / 2 \) for large arguments \( x = 1/(N_0 g) \). Solving for the physical gap parameter, we obtain the seminal weak-coupling BCS result:
+\begin{equation} \label{eq:bcs_gap_zero_T}
+    \Delta = 2\hbar\omega_D e^{-\frac{1}{N_0 g}}.
+\end{equation}
+
+\begin{remark}
+    The exponential form of \eqref{eq:bcs_gap_zero_T} carries profound physical implications. At \( T=0 \), even an infinitesimally small attractive interaction (\( g > 0 \)) is sufficient to open a finite (albeit exponentially suppressed) energy gap \( \Delta \) at the Fermi surface. Furthermore, the function \( e^{-1/(N_0 g)} \) exhibits an essential singularity at \( g=0 \). This signifies that the superconducting state cannot be reached via standard perturbative expansions starting from the non-interacting Fermi gas; the Cooper instability is a fundamentally non-perturbative phenomenon. The dimensionless parameter \( g N_0 \) acts as the effective coupling strength, which is typically quite small in conventional phonon-mediated superconductors.
+\end{remark}
+
+\subsubsection{Weak Coupling Solution for Ultracold Fermi Gases}
+
+We now shift our focus to ultracold Fermi gases, where the effective interaction is characterized by a short-range contact potential. In momentum space, this is modeled as \( V(\mathbf{k}, \mathbf{k}') = v_0 w_k w_{k'} \), with the cutoff function \( w_k = \Theta(k_0 - k) \). We are physically interested in the limit where the ultraviolet cutoff momentum is taken to infinity, \( k_0 \to \infty \). To ensure physical observables remain well-defined, the bare coupling strength \( v_0 \) must be simultaneously rescaled (renormalized) in order to hold the low-energy \( s \)-wave scattering length \( a \) constant.
+
+Applying the same piecewise ansatz for the gap function, \( \Delta_{\mathbf{k}} = \Delta_k = \Delta w_k \), the generalized gap equation \eqref{eq:bcs_gap_equation} becomes:
+\[
+    \Delta w_k = -v_0 \int \frac{\mathrm{d}^3\mathbf{k}'}{(2\pi)^3} \frac{w_k w_{k'} \Delta w_{k'}}{2E_{k'}}.
+\]
+Dividing by \( \Delta w_k \) yields the bare relation:
+\[
+    -\frac{1}{v_0} = \int \frac{\mathrm{d}^3\mathbf{k}}{(2\pi)^3} \frac{w_k^2}{2E_k}.
+\]
+To eliminate the divergent bare coupling \( v_0 \) in favor of the physical scattering length \( a \), we formally add and subtract an identical free-particle integral containing the bare kinetic energy \( \epsilon_k = \hbar^2 k^2 / (2m) \):
+\[
+    -\frac{1}{v_0} = \int \frac{\mathrm{d}^3\mathbf{k}}{(2\pi)^3} \left( \frac{1}{2E_k} - \frac{1}{2\epsilon_k} \right) w_k^2 + \int \frac{\mathrm{d}^3\mathbf{k}}{(2\pi)^3} \frac{w_k^2}{2\epsilon_k}.
+\]
+We recognize that the bare coupling and the last integral term are exactly related by the Lippmann-Schwinger equation for the \( T \)-matrix at zero energy, which defines the running of \( v_0 \) with the scattering length \( a \):
+\[
+    -\frac{m}{4\pi\hbar^2 a} = \int \frac{\mathrm{d}^3\mathbf{k}}{(2\pi)^3} \left( \frac{1}{2E_k} - \frac{1}{2\epsilon_k} \right) w_k^2.
+\]
+Because the integrand in the parenthesis now scales as \( k^{-4} \) for large momenta, the integral is explicitly ultraviolet convergent. We can therefore safely remove the artificial regularization by taking the limit \( k_0 \to \infty \), yielding the fully regularized gap equation:
+\begin{equation} \label{eq:ultracold_gap_regularized}
+    -\frac{m}{4\pi\hbar^2 a} = \int \frac{\mathrm{d}^3\mathbf{k}}{(2\pi)^3} \left( \frac{1}{2E_k} - \frac{1}{2\epsilon_k} \right).
+\end{equation}
+
+This convergent integral can be evaluated analytically in terms of complete elliptic integrals. Let us consider the specific regime of a weak attractive interaction, characterized by a small and negative scattering length \( a \to 0^- \). In this BCS-like limit, the chemical potential approaches the non-interacting Fermi energy (\( \mu \simeq E_F \)) and the gap is small (\( \Delta \ll \mu \)). The regularized integration yields the explicit asymptotic solution:
+\begin{equation} \label{eq:ultracold_gap_result}
+    \Delta = \frac{8E_F}{e^2} e^{\frac{\pi}{2 k_F a}}.
+\end{equation}
+This profound result explicitly dictates how the pairing gap becomes exponentially suppressed in the limit \( k_F a \to 0^- \).
+
+It is structurally insightful to compare this ultracold gas result with the solid-state BCS expression \eqref{eq:bcs_gap_zero_T}. Recall that the 3D density of states at the Fermi surface is \( N_0 = (m k_F)/(2\pi^2\hbar^2) \). If we identify the effective BCS coupling parameter with the first-order Born approximation of the scattering amplitude, \( g = -4\pi\hbar^2 a / m \), the exponential dependence \( e^{\pi/(2 k_F a)} \) strictly coincides with the BCS term \( e^{-1/(N_0 g)} \). This mapping perfectly reproduces the exponent; however, retaining the full \( 1/(2\epsilon_k) \) counter-term in the integral regularization—rather than relying strictly on the lowest-order Born approximation—is mathematically critical for capturing the exact \( 8/e^2 \) numerical prefactor governing the overall energy scale of the pairing gap.
+
+\subsection{Elementary Excitations and Landau Criterion}
+
+All the excited states of the grand-canonical Hamiltonian \( \hat{K} \) are systematically obtained by acting with the quasiparticle creation operator \( \gamma_{\mathbf{k},\sigma}^\dagger \) on the many-body ground state \( |\psi_0(\mu)\rangle \). The energy dispersion of these elementary excitations in a BCS superconductor or superfluid is thus given by \( E_k = \sqrt{\xi_k^2 + |\Delta|^2} \).
+
+\TODO{add image of a dispersion curve showing excitation energy versus momentum, with a minimum gap at the Fermi momentum, illustrating the Landau criterion geometry}
+
+Applying the Landau criterion for superfluidity to this specific dispersion relation \( E_k \), we look for the minimum of \( E_k/k \). One finds a strictly positive critical velocity \( v_c > 0 \) (where \( v_c \simeq \Delta/(\hbar k_F) \) in the physically relevant regime where \( \Delta \ll E_F \)). We thus conclude that the combination of BCS theory and the Landau kinematic criterion rigorously predicts that a Fermi gas with an attractive interaction fundamentally behaves as a superfluid (if the particles are neutral) or a superconductor (if the particles are charged) at absolute zero temperature \( T = 0 \).
+
+\subsubsection{Momentum Distribution Function}
+
+The average number of fermions with momentum \( \mathbf{k} \) and spin \( \sigma \) in the ground state \( |\psi_0\rangle \) (at \( T = 0 \)) is defined by the expectation value of the bare number operator:
+\[
+    n_{\mathbf{k},\sigma} = \langle c_{\mathbf{k},\sigma}^\dagger c_{\mathbf{k},\sigma} \rangle.
+\]
+To evaluate this, we utilize the inverse Bogoliubov transformations, which explicitly dictate the relations between the bare particle operators \( c_{\mathbf{k},\sigma}, c_{\mathbf{k},\sigma}^\dagger \) and the Bogoliubov quasiparticle operators \( \gamma_{\mathbf{k},\sigma}, \gamma_{\mathbf{k},\sigma}^\dagger \):
+\[
+    c_{\mathbf{k},\uparrow} = u_{\mathbf{k}}^* \gamma_{\mathbf{k},\uparrow} + v_{\mathbf{k}} \gamma_{-\mathbf{k},\downarrow}^\dagger,
+\]
+\[
+    c_{\mathbf{k},\downarrow} = u_{\mathbf{k}}^* \gamma_{\mathbf{k},\downarrow} - v_{\mathbf{k}} \gamma_{-\mathbf{k},\uparrow}^\dagger.
+\]
+Taking the Hermitian conjugate yields the corresponding creation operators:
+\[
+    c_{\mathbf{k},\uparrow}^\dagger = u_{\mathbf{k}} \gamma_{\mathbf{k},\uparrow}^\dagger + v_{\mathbf{k}}^* \gamma_{-\mathbf{k},\downarrow},
+\]
+\[
+    c_{\mathbf{k},\downarrow}^\dagger = u_{\mathbf{k}} \gamma_{\mathbf{k},\downarrow}^\dagger - v_{\mathbf{k}}^* \gamma_{-\mathbf{k},\uparrow}.
+\]
+Because the BCS ground state is defined as the quasiparticle vacuum (\( \gamma_{\mathbf{k},\sigma} |\psi_0\rangle = 0 \)), only the terms involving normal-ordered quasiparticle operators contribute to the expectation value. We thus have:
+\[
+    \langle c_{\mathbf{k},\uparrow}^\dagger c_{\mathbf{k},\uparrow} \rangle = \langle (v_{\mathbf{k}}^* v_{\mathbf{k}} \gamma_{-\mathbf{k},\downarrow} \gamma_{-\mathbf{k},\downarrow}^\dagger) \rangle = |v_{\mathbf{k}}|^2,
+\]
+\[
+    \langle c_{\mathbf{k},\downarrow}^\dagger c_{\mathbf{k},\downarrow} \rangle = \langle (-v_{\mathbf{k}}^*)(-v_{\mathbf{k}}) \gamma_{-\mathbf{k},\uparrow} \gamma_{-\mathbf{k},\uparrow}^\dagger \rangle = |v_{\mathbf{k}}|^2.
+\]
+Recalling the explicit analytical expression for the coherence factor \( v_{\mathbf{k}} \), one obtains the momentum distribution:
+\begin{equation} \label{eq:momentum_distribution}
+    n_{\mathbf{k},\sigma} = |v_{\mathbf{k}}|^2 = \frac{1}{2} \left( 1 - \frac{\xi_k}{E_k} \right).
+\end{equation}
+
+\TODO{add image of a plot showing the momentum distribution function as a function of momentum, displaying a smeared Fermi step near the Fermi momentum}
+
+We now note that in the weak-coupling regime where \( \Delta \ll E_F \), the pairing gap is much smaller than the relative kinetic energy \( |\xi_k| \), except within a very narrow momentum window (of order of a few \( (m\Delta)/(\hbar^2 k_F) \)) centered directly around the Fermi momentum \( k_F \). Outside this specific window, the dispersion smoothly approximates the absolute value of the kinetic energy, \( E_k \approx |\xi_k| \). Consequently, the distribution sharply approaches \( n_{\mathbf{k},\sigma} \simeq 1 \) for states deep inside the Fermi sea, or \( n_{\mathbf{k},\sigma} \simeq 0 \) for states far above it, depending entirely on the sign of \( \xi_k \). One thus naturally recovers a momentum distribution which essentially coincides with the standard Heaviside step distribution of an ideal non-interacting Fermi gas at \( T = 0 \), with the crucial modification of a continuous smearing confined to a small momentum window around \( k_F \).
+
+\subsection{Gap Equation at Finite Temperature}
+
+When calculating the pairing amplitude \( \langle c_{-\mathbf{k},\downarrow} c_{\mathbf{k},\uparrow} \rangle \) (or similar expectation values for the momentum distribution) at absolute zero temperature \( T = 0 \) in the previous section, we heavily utilized the property that the ground state is perfectly annihilated by the quasiparticle destruction operator \( \gamma_{\mathbf{k},\sigma} \), leading to \( \langle \gamma_{\mathbf{k},\sigma}^\dagger \gamma_{\mathbf{k},\sigma} \rangle = 0 \).
+
+At any finite temperature \( T > 0 \), the pure ground state expectation average must be rigorously replaced by the statistical thermal average in the grand-canonical ensemble. In this thermodynamic trace, we can safely drop the constant energy offset term \( C' \) since it identically cancels between the numerator and denominator of the thermal average formula. We are thus left evaluating thermodynamics with the diagonalized grand-canonical Hamiltonian \( \hat{K}' = \sum_{\mathbf{k},\sigma} E_{\mathbf{k}} \gamma_{\mathbf{k},\sigma}^\dagger \gamma_{\mathbf{k},\sigma} \).
+
+\begin{remark}
+    Notice that \( \hat{K}' \) formally coincides with the Hamiltonian of an ideal, non-interacting Fermi gas, with the critical distinction that the non-interacting kinetic energy \( \xi_k = \epsilon_k - \mu \) is replaced by the superconducting quasiparticle dispersion \( E_{\mathbf{k}} \).
+\end{remark}
+
+With this direct structural identification, we conclude immediately that at finite temperature, the average number of thermally excited elementary excitations is governed by the standard Fermi-Dirac distribution:
+\[
+    \langle \gamma_{\mathbf{k},\sigma}^\dagger \gamma_{\mathbf{k},\sigma} \rangle = f(E_{\mathbf{k}}) = \frac{1}{e^{\beta E_{\mathbf{k}}} + 1},
+\]
+where \( \beta = 1/(k_B T) \).
+
+\TODO{add image of a schematic plot showing the typical behavior of the superconducting gap order parameter as a function of temperature, continuously decreasing to zero at the critical temperature}
+
+We thus re-evaluate the anomalous pair expectation value at finite temperature using the Bogoliubov transformations and the Fermi-Dirac statistics:
+\[
+    \langle c_{-\mathbf{k},\downarrow} c_{\mathbf{k},\uparrow} \rangle = \left\langle \left( -v_{\mathbf{k}} \gamma_{\mathbf{k},\uparrow}^\dagger + u_{\mathbf{k}}^* \gamma_{-\mathbf{k},\downarrow} \right) \left( u_{\mathbf{k}}^* \gamma_{\mathbf{k},\uparrow} + v_{\mathbf{k}} \gamma_{-\mathbf{k},\downarrow}^\dagger \right) \right\rangle
+\]
+\[
+    = -v_{\mathbf{k}} u_{\mathbf{k}}^* \langle \gamma_{\mathbf{k},\uparrow}^\dagger \gamma_{\mathbf{k},\uparrow} \rangle + u_{\mathbf{k}}^* v_{\mathbf{k}} \langle \gamma_{-\mathbf{k},\downarrow} \gamma_{-\mathbf{k},\downarrow}^\dagger \rangle
+\]
+\[
+    = -v_{\mathbf{k}} u_{\mathbf{k}}^* f(E_{\mathbf{k}}) + u_{\mathbf{k}}^* v_{\mathbf{k}} [1 - f(E_{\mathbf{k}})]
+\]
+\[
+    = u_{\mathbf{k}}^* v_{\mathbf{k}} [1 - 2f(E_{\mathbf{k}})].
+\]
+Using the algebraic identity \( 1 - 2f(x) = \tanh(x/2) \) for the Fermi-Dirac function, this simplifies elegantly to:
+\[
+    \langle c_{-\mathbf{k},\downarrow} c_{\mathbf{k},\uparrow} \rangle = u_{\mathbf{k}}^* v_{\mathbf{k}} \tanh\left(\frac{\beta E_{\mathbf{k}}}{2}\right).
+\]
+
+By inserting this temperature-dependent expectation value back into the fundamental definition of the gap function and taking the standard thermodynamic limit, we obtain the generalized gap equation at finite temperature:
+\begin{equation} \label{eq:finite_t_gap_equation}
+    \Delta_{\mathbf{k}} = -\int \frac{\mathrm{d}^3\mathbf{k}'}{(2\pi)^3} \frac{V(\mathbf{k}, \mathbf{k}')}{2E_{\mathbf{k}'}} \tanh\left(\frac{\beta E_{\mathbf{k}'}}{2}\right) \Delta_{\mathbf{k}'}.
+\end{equation}
+
+Specifying this to the case of a conventional superconductor utilizing the separable BCS model interaction, and introducing again the density of states \( N(\xi) \), one integrates out the angular dependence to find:
+\[
+    \frac{1}{g} = \int_{-\hbar\omega_D}^{\hbar\omega_D} d\xi \frac{N(\xi)}{2E_{\xi}} \tanh\left(\frac{\beta E_{\xi}}{2}\right).
+\]
+Just as in the zero-temperature derivation, for a weak-coupling superconductor where \( \Delta \ll E_F \), the density of states \( N(\xi) \) can be accurately approximated as a constant equal to its value exactly at the Fermi level, \( N(\xi) \approx N_0 \). In this way, the integral equation further reduces to:
+\[
+    \frac{1}{g} = N_0 \int_{0}^{\hbar\omega_D} d\xi \frac{1}{E_{\xi}} \tanh\left(\frac{\beta E_{\xi}}{2}\right).
+\]
+
+In general, there exists no closed-form analytic solution for this non-linear integral equation (even in the strict limit where \( g \to 0 \)), meaning the full temperature dependence \( \Delta(T) \) must typically be solved numerically. The typical numerical solution exhibits the standard behavior of an order parameter in a second-order phase transition: it monotonically decreases from its zero-temperature value and vanishes continuously at a specific critical temperature \( T_c \).
+
+However, in the weak-coupling limit, powerful analytic asymptotic expressions can be derived for specific temperature regimes. At very low temperatures, \( T \ll T_c \ll T_F \), the gap exponentially approaches its zero-temperature value \( \Delta_0 \equiv \Delta(T=0) \) according to:
+\[
+    \Delta(T) = \Delta_0 \left[ 1 - \left(\frac{2\pi k_B T}{\Delta_0}\right)^{\frac{1}{2}} e^{-\frac{\Delta_0}{k_B T}} \right].
+\]
+Conversely, very close to the critical phase transition, in the Ginzburg-Landau regime where \( (T_c - T)/T_c \ll 1 \), the gap closes with a characteristic square-root scaling:
+\[
+    \Delta(T) = 3.06 k_B T_c \left(1 - \frac{T}{T_c}\right)^{\frac{1}{2}},
+\]
+where the specific universal numerical prefactor is derived from the Riemann zeta function, i.e.
+\[
+    \pi \left( \frac{8}{7\zeta(3)} \right)^{1/2} \simeq 3.06.
+\]
+
+In a completely analogous manner, utilizing the contact interaction regularized by the scattering length \( a \), the finite-temperature gap equation for an ultracold attractive Fermi gas reads:
+\begin{equation} \label{eq:ultracold_finite_t_gap}
+    -\frac{m}{4\pi a} = \int \frac{\mathrm{d}^3\mathbf{k}}{(2\pi)^3} \left[ \frac{\tanh(\beta E_k / 2)}{2E_k} - \frac{1}{2\epsilon_k} \right].
+\end{equation}
+Through rigorous analysis, it can be mathematically shown that the exact same asymptotic expansions—both the exponential correction at low \( T \) and the square-root scaling close to \( T_c \)—are valid for the ultracold gas as well, provided that the appropriate zero-temperature gap value \( \Delta_0 \) characteristic of the contact potential is consistently used.
