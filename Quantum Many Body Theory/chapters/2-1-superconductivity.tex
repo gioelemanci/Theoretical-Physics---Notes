@@ -1,4 +1,4 @@
-\chapter{BCS Theory of Superconductivity}
+\chapter[BCS Theory of Superconductivity]{BCS Theory of\\Superconductivity}
 
 Superconductivity was experimentally observed well before the formal discovery of quantum mechanics, presenting a profound physical mystery that eventually necessitated the development of a comprehensive quantum many-body description. The definitive microscopic explanation of this phenomenon, known as the BCS theory, was developed in 1957 by John Bardeen, Leon Cooper, and John Robert Schrieffer. At its core, the theory explains the superconducting state through the formation of bound states of electrons, known as Cooper pairs.
 
@@ -395,11 +395,15 @@ We got \(\Delta E = - \vert g_{eff} \vert^2 \) for phonons with \(\omega < \omeg
 
 \subsection{Effective Hamiltonian and Two-Body Ground State}
 
-In the second quantization formalism, the interacting part of the many-body Hamiltonian, $H_{\text{int}}$, capturing this fundamental scattering process between pairs of fermions, can be modeled as follows:
-\begin{equation} \label{eq:bcs_interaction_hamiltonian}
-    H_{\text{int}} = \frac{1}{2V} \sum_{\mathbf{k}, \mathbf{k}', \mathbf{q}} \sum_{\sigma, \sigma'} V(\mathbf{k}', \mathbf{k}) c_{\mathbf{k}' + \frac{\mathbf{q}}{2}, \sigma}^\dagger c_{-\mathbf{k}' + \frac{\mathbf{q}}{2}, \sigma'}^\dagger c_{-\mathbf{k} + \frac{\mathbf{q}}{2}, \sigma'} c_{\mathbf{k} + \frac{\mathbf{q}}{2}, \sigma},
-\end{equation}
-where $V$ is the macroscopic volume of the system, and $c_{\mathbf{k}, \sigma}$ and $c_{\mathbf{k}, \sigma}^\dagger$ are respectively the fermionic annihilation and creation operators for an electron possessing momentum $\mathbf{k}$ and spin projection $\sigma$. The scattering amplitude is governed by the matrix element $V(\mathbf{k}', \mathbf{k})$. We are summing over all possible incoming and outgoing momenta (and also over all feasible values of $\mathbf{q}$), as well as over the spin indices $\sigma$ and $\sigma'$. The factor of \(1/2\) is included to avoid double counting of identical scattering processes.
+Our primary objective is to trace out the phononic degrees of freedom completely and construct an effective electronic Hamiltonian \( H^{(2)} \) valid up to second order in perturbation theory:
+\[
+    H^{(2)} = H_0 + H_2.
+\]
+Rigorously, this systematic decoupling of the bosonic modes is achieved through a canonical \textbf{Schrieffer-Wolff transformation}. However, we can intuitively reconstruct the operatorial form of the effective interaction \( H_2 \) (often denoted as \( H_{\text{int}} \)) directly from the second-order transition matrix elements evaluated previously:
+\[
+    \langle \phi_0 | V_1 | \phi_{mn} \rangle \langle \phi_{mn} | V_1 | \phi_0 \rangle.
+\]
+Physically, this second-order process corresponds to two incoming fermions exchanging a virtual phonon of momentum \( \mathbf{q} \), as depicted in the following Feynman diagram:
 
 \begin{figure}[H]
     \centering
@@ -439,100 +443,214 @@ where $V$ is the macroscopic volume of the system, and $c_{\mathbf{k}, \sigma}$ 
     \label{fig:bcs_scattering}
 \end{figure}
 
-Notice how phonons have disappeared from the final expression for the interaction Hamiltonian \eqref{eq:bcs_interaction_hamiltonian}. This is because we have integrated out the phonon degrees of freedom, leaving only an effective interaction between the electrons. The phonons are still present in the system, but they are now treated as virtual excitations that mediate the interaction between the electrons. Our goal is now to ``solve'' the many-body problem of interacting fermions with this effective interaction, which is a highly non-trivial task. Thus we will limit our analysis to the simplest possible model that still captures the essential physics of the problem: the ground state of a system with 2 electrons interacting via the effective potential \( V(\mathbf{k}', \mathbf{k}) \) in the presence of a filled Fermi sea of non-interacting electrons. This is the original problem solved by Cooper, and it is the starting point for the BCS theory.
+In the second quantization formalism, the general interacting part of the many-body Hamiltonian, \( H_{\text{int}} \), capturing this fundamental scattering process between pairs of fermions (parameterized in terms of center-of-mass and relative momenta), can be modeled as follows:
+\begin{equation} \label{eq:bcs_interaction_hamiltonian}
+    H_{\text{int}} = \frac{1}{2V} \sum_{\mathbf{k}, \mathbf{k}', \mathbf{q}} \sum_{\sigma, \sigma'} V(\mathbf{k}', \mathbf{k}) c_{\mathbf{k}' + \frac{\mathbf{q}}{2}, \sigma}^\dagger c_{-\mathbf{k}' + \frac{\mathbf{q}}{2}, \sigma'}^\dagger c_{-\mathbf{k} + \frac{\mathbf{q}}{2}, \sigma'} c_{\mathbf{k} + \frac{\mathbf{q}}{2}, \sigma},
+\end{equation}
+where \( V \) is the macroscopic volume of the system, and \( c_{\mathbf{k}, \sigma} \) and \( c_{\mathbf{k}, \sigma}^\dagger \) are respectively the fermionic annihilation and creation operators for an electron possessing momentum \( \mathbf{k} \) and spin projection \( \sigma \). The scattering amplitude is governed by the matrix element \( V(\mathbf{k}', \mathbf{k}) \). We sum over all possible incoming and outgoing relative momenta (as well as over all feasible values of the center-of-mass momentum \( \mathbf{q} \)), and over the spin indices \( \sigma \) and \( \sigma' \). The prefactor of \( 1/2 \) is explicitly included to avoid double counting of identical two-body scattering processes.
 
-We are then trying to compute the following wavefunction in the center of mass frame:
+Translating our specific phonon-exchange diagram into second quantization operators using the constant attractive BCS coupling \( -|g_{\text{eff}}|^2 \), the effective two-body interaction term \( H_2 \) explicitly takes the form:
 \[
-    \Psi(\mathbf{r}_1, \sigma_1; \mathbf{r}_2, \sigma_2) = e^{i\mathbf{k}_{cm} \cdot \mathbf{R}_{cm}} \varphi(\mathbf{r}_1 - \mathbf{r}_2) \phi(\sigma_1, \sigma_2),
+    H_2 = -|g_{\text{eff}}|^2 \sum_{\substack{\sigma, \sigma' \\ \mathbf{p}, \mathbf{p}' \\ \mathbf{q} \in \text{shell}}} \left[ \left( c_{\mathbf{p}+\mathbf{q}, \sigma}^\dagger c_{\mathbf{p}'-\mathbf{q}, \sigma'}^\dagger \right) \left( c_{\mathbf{p}', \sigma'} c_{\mathbf{p}, \sigma} \right) + \left( c_{\mathbf{p}, \sigma}^\dagger c_{\mathbf{p}', \sigma'}^\dagger \right) \left( c_{\mathbf{p}-\mathbf{q}, \sigma} c_{\mathbf{p}'+\mathbf{q}, \sigma'} \right) \right].
 \]
-where we assumed translational invariance and separated the center of mass motion from the relative motion. We were able to factorize the wavefunction into a plane wave for the center of mass motion, a spatial wavefunction for the relative motion, and a spin wavefunction, since in the hamiltonian the spin and spatial degrees of freedom are decoupled (but there may be cases in which we have some sort of spin-orbit coupling, which would couple the spin and spatial degrees of freedom).
+The summation constraint \( \mathbf{q} \in \text{shell} \) mathematically enforces the crucial physical requirement that the attractive interaction only operates for small energy exchanges bounded by the Debye frequency \( \omega_D \).
 
-Considering the spin wavefunction, we have two possibilities: the singlet state (antisymmetric) and the triplet state (symmetric). The Pauli exclusion principle requires that if we are requiring local pairing in the same state, then we can only accept states like \(\ket{\uparrow\downarrow}\) and \(\ket{\downarrow\uparrow}\) (plus linear combinations). Thus we have
-\[
-    \text{- singlet:}\quad \phi(\sigma_1, \sigma_2) = \frac{1}{\sqrt{2}} (\ket{\uparrow\downarrow} - \ket{\downarrow\uparrow}),
-\]
-\[
-    \text{- triplet:}\quad \phi(\sigma_1, \sigma_2) = \frac{1}{\sqrt{2}} (\ket{\uparrow\downarrow} + \ket{\downarrow\uparrow}),
-\]
-but then the triplet is unfavorable by energy considerations...
+Notice how the phonon operators have completely disappeared from the final expression for the interaction Hamiltonian \eqref{eq:bcs_interaction_hamiltonian}. By casting the Hamiltonian in this form, we have successfully integrated out the bosonic degrees of freedom, reducing the complex coupled electron-phonon problem to a purely fermionic model governed by an effective attractive potential. The phonons are still physically present in the crystal, but they are now treated purely as virtual excitations that mediate the interaction between the electrons.
 
-We now what the function to be antisymmetric for exchange of the two electrons, and the spin part is antisymmetric, so the spatial part must be symmetric. This means that the spatial wavefunction must depend only upon the distance between the two electrons, \(\varphi(\mathbf{r}_1 - \mathbf{r}_2) = \varphi(r)\). Thus the problem now depends only on the relative distance between the two electrons, which is a simpler treatment. Then we can expand in Fourier modes the spatial wavefunction:
+Our goal is now to solve the many-body problem of interacting fermions governed by \( H = H_0 + H_2 \), which remains a highly non-trivial task. Thus, we will initially limit our analysis to the simplest possible model that still captures the essential physics of the instability: finding the ground state of a system containing just two electrons interacting via the effective potential \( V(\mathbf{k}', \mathbf{k}) \) on top of an inert, filled Fermi sea of non-interacting electrons (which blocks states below \( k_F \) via Pauli exclusion). This is the celebrated \textbf{Cooper problem}, and it serves as the foundational starting point for the full macroscopic BCS theory.
+
+\subsubsection{Solving the Two-Electron Ground State: Wavefunction Factorization}
+
+To solve the effective Hamiltonian \( H = H_0 + H_2 \) for the two-electron ground state, we define the general two-particle wavefunction as a function of both the spatial positions and spin projections of the electrons:
 \[
-    \varphi(r) = \sum_{\mathbf{k}} \varphi_{\mathbf{k}} e^{i\mathbf{k} \cdot (\mathbf{r}_1 - \mathbf{r}_2)}.
+    \Psi(\mathbf{r}_1, \sigma_1; \mathbf{r}_2, \sigma_2).
 \]
-and we also need to require that \(\varphi_{\mathbf{k}} = \varphi_{-\mathbf{k}}\) because the spatial wavefunction is symmetric. We can then write the Schrödinger equation for the relative motion of the two electrons in momentum space:
+Assuming spatial translational invariance across the crystal, we can cleanly separate the center-of-mass (CM) motion from the relative motion. The center-of-mass motion is described by a simple plane wave \( e^{i\mathbf{K}_{\text{CM}} \cdot \mathbf{R}_{\text{CM}}} \). Furthermore, because our starting Hamiltonian does not contain terms that explicitly couple spin and momentum (i.e., there is no entanglement between the external positional degrees of freedom and the internal spin degrees of freedom), we can factorize the wavefunction into a spatial part and a spin part:
+\begin{equation} \label{eq:cooper_wavefunction_ansatz}
+    \Psi(\mathbf{r}_1, \sigma_1; \mathbf{r}_2, \sigma_2) = e^{i\mathbf{K}_{\text{CM}} \cdot \mathbf{R}_{\text{CM}}} \varphi(\mathbf{r}_1 - \mathbf{r}_2) \phi^{\text{spin}}(\sigma_1, \sigma_2),
+\end{equation}
+where \( \varphi(\mathbf{r}_1 - \mathbf{r}_2) \) is the external spatial wavefunction governing the relative motion, and \( \phi^{\text{spin}}(\sigma_1, \sigma_2) \) is the internal spin wavefunction. (Note that to maximize the phase space available for scattering near the Fermi surface and achieve the lowest possible ground state energy, one typically sets the center-of-mass momentum to zero, \( \mathbf{K}_{\text{CM}} = 0 \)).
+
+\begin{remark}
+    The clean factorization of the wavefunction into spatial and spin components is strictly valid because the Hamiltonian can be separated into operators acting solely on position and spin, respectively: \( H = \hat{\Lambda}_1^{\mathbf{r}} \hat{\Lambda}_2^{\sigma} \). This separability is a general feature of models that neglect relativistic spin-orbit coupling. A prominent example where local interactions are treated explicitly alongside spin is the \textbf{Hubbard Model}:
+    \[
+        H_{\text{Hubbard}} = U n_{i\uparrow} n_{i\downarrow},
+    \]
+    where \( U > 0 \) represents an on-site Coulomb repulsion energy penalty, which is fundamental for studying strongly correlated phenomena such as the \textbf{Mott Transition}. However, in our current derivation for conventional superconductivity, we utilize the phonon-mediated attractive potential \( H_2 \) and assume spin-orbit effects are negligible.
+\end{remark}
+
+\subsubsection{Spin Wavefunction and Fermionic Antisymmetry}
+
+For a system composed of two spin-\( 1/2 \) particles, the composite spin state can be configured either as a symmetric triplet (\( S=1 \)) or an antisymmetric singlet (\( S=0 \)):
+\begin{itemize}
+    \item \textbf{Triplet (\( S=1 \), symmetric):} \( |\uparrow_1 \uparrow_2\rangle, \quad |\downarrow_1 \downarrow_2\rangle, \quad \frac{1}{\sqrt{2}}(|\uparrow_1 \downarrow_2\rangle + |\downarrow_1 \uparrow_2\rangle) \).
+    \item \textbf{Singlet (\( S=0 \), antisymmetric):} \( \frac{1}{\sqrt{2}}(|\uparrow_1 \downarrow_2\rangle - |\downarrow_1 \uparrow_2\rangle) \).
+\end{itemize}
+The triplet states are energetically unfavorable in this simplified model. To maximally benefit from the localized attractive potential mediated by the phonons, the two electrons must have a finite probability of occupying the exact same local spatial site (i.e., \( \mathbf{r}_1 = \mathbf{r}_2 \)). The Pauli exclusion principle strictly forbids two electrons with parallel spins (triplets) from occupying the same spatial position, forcing their spatial wavefunction to vanish at zero separation. Similarly, a simple magnetic interaction model \( H \propto \mathbf{S}_1 \cdot \mathbf{S}_2 \) naturally selects the singlet as the lowest energy ground state. Therefore, we assume the Cooper pair forms in a spin singlet state:
 \[
-    E \Psi = (H_0 + H_{int}) \Psi, \quad \Psi = \sum_{\mathbf{k}} \varphi_{\mathbf{k}} e^{i\mathbf{k} \cdot (\mathbf{r}_1 - \mathbf{r}_2)} \phi(\sigma_1, \sigma_2),
+    \phi^{\text{spin}}(\sigma_1, \sigma_2) = \frac{1}{\sqrt{2}} \left( |\uparrow_1 \downarrow_2\rangle - |\downarrow_1 \uparrow_2\rangle \right).
 \]
 
-In order to find the functional form of the wavefunction \(\varphi\), we need to compute the following matrix element:
+Because electrons are fundamental fermions, the total many-body wavefunction must be strictly antisymmetric under the simultaneous exchange of both particles' spatial and spin coordinates:
 \[
-    \bra{\Psi_{\mathbf{k}}} H \ket{\Psi},
+    \Psi(\mathbf{r}_1, \sigma_1; \mathbf{r}_2, \sigma_2) = -\Psi(\mathbf{r}_2, \sigma_2; \mathbf{r}_1, \sigma_1).
 \]
-where \(\ket{\Psi} = \sum_{\mathbf{k}} \varphi_{\mathbf{k}} \ket{\Psi_{\mathbf{k}}}\) and
+Substituting our factorized ansatz \eqref{eq:cooper_wavefunction_ansatz} into this condition (and noting that the center-of-mass coordinate \( \mathbf{R}_{\text{CM}} = (\mathbf{r}_1 + \mathbf{r}_2)/2 \) remains invariant upon swapping particles 1 and 2), we obtain:
 \[
-    \ket{\Psi_{\mathbf{k}}} = \frac{1}{\sqrt{2}} \left( c^\dagger_{\mathbf{k} \uparrow} c^\dagger_{-\mathbf{k} \downarrow} -  c^\dagger_{-\mathbf{k} \uparrow} c^\dagger_{\mathbf{k} \downarrow} \right) \ket{0}.
+    \varphi(\mathbf{r}_1 - \mathbf{r}_2) \phi^{\text{spin}}(\sigma_1, \sigma_2) = -\varphi(\mathbf{r}_2 - \mathbf{r}_1) \phi^{\text{spin}}(\sigma_2, \sigma_1).
+\]
+Since we established that the spin component is a singlet, it is explicitly antisymmetric under spin exchange:
+\[
+    \phi^{\text{spin}}(\sigma_2, \sigma_1) = -\phi^{\text{spin}}(\sigma_1, \sigma_2).
+\]
+The negative signs cancel out on the right-hand side, which imposes a strict parity symmetry condition on the spatial part of the wavefunction:
+\[
+    \varphi(\mathbf{r}_1 - \mathbf{r}_2) = +\varphi(\mathbf{r}_2 - \mathbf{r}_1).
+\]
+Defining the relative distance vector as \( \mathbf{r} = \mathbf{r}_1 - \mathbf{r}_2 \), this simplifies to:
+\[
+    \varphi(\mathbf{r}) = +\varphi(-\mathbf{r}).
+\]
+We conclude that for a spin-singlet pair, the relative spatial wavefunction \( \varphi(\mathbf{r}) \) must be an \textbf{even function} of the relative separation (corresponding to \( s \)-wave, \( d \)-wave, etc., orbital symmetries).
+
+\subsubsection{Fourier Expansion and the Eigenvalue Equation}
+
+Our goal is now to determine the explicit functional form of \( \varphi(\mathbf{r}) \). Because the problem depends solely on the relative distance, it is vastly simpler to treat in momentum space. We expand the relative spatial wavefunction into its Fourier modes \( \varphi_{\mathbf{k}} \):
+\[
+    \varphi(\mathbf{r}_1 - \mathbf{r}_2) = \sum_{\mathbf{k}} \varphi_{\mathbf{k}} e^{i\mathbf{k} \cdot (\mathbf{r}_1 - \mathbf{r}_2)}.
+\]
+Applying the spatial even-parity symmetry condition \( \varphi(\mathbf{r}_1 - \mathbf{r}_2) = +\varphi(\mathbf{r}_2 - \mathbf{r}_1) \), we can manipulate the expansion by relabeling the dummy summation index \( \mathbf{k} \to -\mathbf{k} \):
+\[
+    \sum_{\mathbf{k}} \varphi_{\mathbf{k}} e^{i\mathbf{k} \cdot (\mathbf{r}_1 - \mathbf{r}_2)} = \varphi(\mathbf{r}_1 - \mathbf{r}_2) = +\varphi(\mathbf{r}_2 - \mathbf{r}_1) = \sum_{\mathbf{k}} \varphi_{\mathbf{k}} e^{-i\mathbf{k} \cdot (\mathbf{r}_1 - \mathbf{r}_2)} = \sum_{-\mathbf{k}} \varphi_{-\mathbf{k}} e^{+i\mathbf{k} \cdot (\mathbf{r}_1 - \mathbf{r}_2)} = \sum_{\mathbf{k}} \varphi_{-\mathbf{k}} e^{i\mathbf{k} \cdot (\mathbf{r}_1 - \mathbf{r}_2)}.
+\]
+Comparing the first and last expressions, since the sum over all \( \mathbf{k} \) and \( -\mathbf{k} \) spans the exact same momentum space, the Fourier coefficients themselves must be symmetric:
+\[
+    \varphi_{\mathbf{k}} = \varphi_{-\mathbf{k}}.
 \]
 
-Now we split the computation into two parts: the free non interacting part and the interaction part. The kinetic part is straightforward:
+We now wish to solve the time-independent Schrödinger eigenvalue equation for the two-body ground state energy \( E \) in the center-of-mass frame (\( \mathbf{K}_{\text{CM}} = 0 \)):
 \[
-    H_0 \ket{\Psi} = \left( \frac{\hat{p}_1^2}{2m} + \frac{\hat{p}_2^2}{2m} \right) \left( \sum_{\mathbf{k}}^{\prime} \varphi_{\mathbf{k}} e^{i\mathbf{k} \cdot (\mathbf{r}_1 - \mathbf{r}_2)} \phi(\sigma_1, \sigma_2) \right) = 2 \sum_{\mathbf{k}}^{\prime} \epsilon_{\mathbf{k}} \varphi_{\mathbf{k}} e^{i\mathbf{k} \cdot (\mathbf{r}_1 - \mathbf{r}_2)} \phi(\sigma_1, \sigma_2).
+    E \Psi = H \Psi = (H_0 + H_{\text{int}}) \Psi, \quad \text{with} \quad \Psi(\mathbf{r}_1, \sigma_1; \mathbf{r}_2, \sigma_2) = \sum_{\mathbf{k}} \varphi_{\mathbf{k}} e^{i\mathbf{k} \cdot (\mathbf{r}_1 - \mathbf{r}_2)} \phi_{S=0}^{\text{spin}}(\sigma_1, \sigma_2).
 \]
-For the interaction part, we have to compute the following:
+To find the closed equation governing the coefficients \( \varphi_{\mathbf{k}} \), we transition fully to the second quantization representation and project the Schrödinger equation onto a specific basis state \( \langle \Psi_{\mathbf{k}} | \):
 \[
-    H_{int} \ket{\Psi} = - \vert g_{eff} \vert^2 \sum_{\sigma_1, \sigma_2}  \sum_{\mathbf{k}_1, \mathbf{k}_2} \sum_{\mathbf{q}}^{\prime} c^\dagger_{\mathbf{k}_1 + \mathbf{q}, \sigma_1} c^\dagger_{\mathbf{k}_2 - \mathbf{q}, \sigma_2} c_{\mathbf{k}_1, \sigma_1} c_{\mathbf{k}_2, \sigma_2} \left( \sum_{\mathbf{k}}^{\prime} \varphi_{\mathbf{k}} e^{i\mathbf{k} \cdot (\mathbf{r}_1 - \mathbf{r}_2)} \right) \left( c^\dagger_{\mathbf{k} \uparrow} c^\dagger_{-\mathbf{k} \downarrow} -  c^\dagger_{-\mathbf{k} \uparrow} c^\dagger_{\mathbf{k} \downarrow} \right) \ket{0},
+    \langle \Psi_{\mathbf{k}} | E | \Psi \rangle = \langle \Psi_{\mathbf{k}} | H_0 + H_{\text{int}} | \Psi \rangle,
 \]
-which after some algebra and the summations resolved over the deltas, we get:
+where the total two-particle state is expanded as \( |\Psi\rangle = \sum_{\mathbf{k}'}' \varphi_{\mathbf{k}'} |\Psi_{\mathbf{k}'}\rangle \) (the prime on the summation indicates that the momenta are restricted to the narrow attractive energy shell above the filled Fermi sea), and the normalized basis state for a spin-singlet pair with opposite momenta \( (\mathbf{k}, -\mathbf{k}) \) is defined in second quantization as:
+\begin{equation} \label{eq:singlet_basis_state}
+    |\Psi_{\mathbf{k}}\rangle = \frac{1}{\sqrt{2}} \left( c_{\mathbf{k}, \uparrow}^\dagger c_{-\mathbf{k}, \downarrow}^\dagger - c_{-\mathbf{k}, \uparrow}^\dagger c_{\mathbf{k}, \downarrow}^\dagger \right) |0\rangle.
+\end{equation}
+
+We now split the evaluation of \( H |\Psi\rangle \) into two parts: the free non-interacting kinetic part and the interaction part. The action of the kinetic Hamiltonian \( H_0 \) is straightforward:
 \[
-    (\sigma_{1, \uparrow}, \sigma_{2, \downarrow}) = - \vert g_{eff} \vert^2 \sum_{\mathbf{q}}^{\prime} \sum_{\mathbf{k}}^{\prime} \varphi_{\mathbf{k}} \left( c^\dagger_{\mathbf{k} + \mathbf{q}, \uparrow} c^\dagger_{\mathbf{k} - \mathbf{q}, \downarrow} -  c^\dagger_{-\mathbf{k} + \mathbf{q}, \uparrow} c^\dagger_{\mathbf{k} + \mathbf{q}, \downarrow} \right) \ket{0}.
+    H_0 |\Psi\rangle = \left( \frac{\hat{p}_1^2}{2m} + \frac{\hat{p}_2^2}{2m} \right) \left[ \sum_{\mathbf{k}}' \varphi_{\mathbf{k}} e^{i\mathbf{k} \cdot (\mathbf{r}_1 - \mathbf{r}_2)} \phi_{S=0}^{\text{spin}} \right] = (\epsilon_{\mathbf{k}} + \epsilon_{-\mathbf{k}}) \left[ \sum_{\mathbf{k}}' \varphi_{\mathbf{k}} e^{i\mathbf{k} \cdot (\mathbf{r}_1 - \mathbf{r}_2)} \phi_{S=0}^{\text{spin}} \right] = 2 \sum_{\mathbf{k}}' \epsilon_{\mathbf{k}} \varphi_{\mathbf{k}} |\Psi_{\mathbf{k}}\rangle,
 \]
-Now if we compute the complete matrix element, we get the following equation for the coefficients \(\varphi_{\mathbf{k}}\):
+where we used the isotropic dispersion symmetry \( \epsilon_{\mathbf{k}} = \epsilon_{-\mathbf{k}} = \hbar^2 k^2 / (2m) \).
+
+Next, we evaluate the action of the attractive interaction term \( H_{\text{int}} \) (or \( H_2 \)) on the state \( |\Psi\rangle \):
 \[
-    \bra{\Psi_{\mathbf{k}}} E \ket{\Psi} = E \varphi_{\mathbf{k}},
+    H_{\text{int}} |\Psi\rangle = -|g_{\text{eff}}|^2 \sum_{\sigma_1, \sigma_2} \sum_{\mathbf{k}_1, \mathbf{k}_2} \sum_{\mathbf{q}}' c_{\mathbf{k}_1 + \mathbf{q}, \sigma_1}^\dagger c_{\mathbf{k}_2 - \mathbf{q}, \sigma_2}^\dagger c_{\mathbf{k}_1, \sigma_1} c_{\mathbf{k}_2, \sigma_2} \left( \sum_{\mathbf{k}}' \varphi_{\mathbf{k}} e^{i\mathbf{k} \cdot (\mathbf{r}_1 - \mathbf{r}_2)} \right) \left( c_{\mathbf{k}, \uparrow}^\dagger c_{-\mathbf{k}, \downarrow}^\dagger - c_{-\mathbf{k}, \uparrow}^\dagger c_{\mathbf{k}, \downarrow}^\dagger \right) |0\rangle.
 \]
-such that:
+Contracting the annihilation operators \( c_{\mathbf{k}_1, \sigma_1} c_{\mathbf{k}_2, \sigma_2} \) with the creation operators of the singlet state resolves the internal summations over \( \mathbf{k}_1, \mathbf{k}_2 \) and spins (specifically selecting the anti-parallel configurations such as \( \sigma_1 = \uparrow, \sigma_2 = \downarrow \)) via Kronecker deltas. After performing this operator algebra, the scattered state simplifies to:
+\[
+    H_{\text{int}} |\Psi\rangle = -|g_{\text{eff}}|^2 \sum_{\mathbf{q}}' \sum_{\mathbf{k}}' \varphi_{\mathbf{k}} e^{i\mathbf{k} \cdot (\mathbf{r}_1 - \mathbf{r}_2)} \left( c_{\mathbf{k} + \mathbf{q}, \uparrow}^\dagger c_{-\mathbf{k} - \mathbf{q}, \downarrow}^\dagger - c_{-\mathbf{k} + \mathbf{q}, \uparrow}^\dagger c_{\mathbf{k} - \mathbf{q}, \downarrow}^\dagger \right) |0\rangle.
+\]
+
+Now we compute the complete matrix elements by projecting onto the bra \( \langle \Psi_{\mathbf{k}} | \). For the left-hand side of the Schrödinger equation, the orthogonality of the basis states immediately yields:
+\[
+    \langle \Psi_{\mathbf{k}} | E | \Psi \rangle = E \varphi_{\mathbf{k}}.
+\]
+For the right-hand side, we bracket the kinetic and interaction results with \( \langle \Psi_{\mathbf{k}} | \):
 \[
     \begin{aligned}
-        \bra{\Psi_{\mathbf{k}}} H_0 + H_{int} \ket{\Psi} & = 2 \epsilon_{\mathbf{k}} \varphi_{\mathbf{k}} + \dots = \bra{0} \left( c_{-\mathbf{k}, \uparrow} c_{\mathbf{k}, \downarrow} - c_{\mathbf{k}, \downarrow} c_{-\mathbf{k}, \uparrow} \right) \times \sum_{\mathbf{k}^{\prime}}^{\prime} \varphi_{\mathbf{k}^{\prime}} e^{-i \mathbf{k}^{\prime} \cdot (\mathbf{r}_1 - \mathbf{r}_2)} \\
-                                                         & \times \sum_{\mathbf{q}}^{\prime} (- \vert g_{eff}\vert^2 ) \left( c^\dagger_{\mathbf{k}^{\prime} + \mathbf{q}, \uparrow} c^\dagger_{-\mathbf{k}^{\prime} - \mathbf{q}, \downarrow} -  c^\dagger_{-\mathbf{k}^{\prime} + \mathbf{q}, \uparrow} c^\dagger_{\mathbf{k}^{\prime} - \mathbf{q}, \downarrow} \right) \ket{0}.
+        \langle \Psi_{\mathbf{k}} | H_0 + H_{\text{int}} | \Psi \rangle & = 2\epsilon_{\mathbf{k}} \varphi_{\mathbf{k}} + \langle \Psi_{\mathbf{k}} | H_{\text{int}} | \Psi \rangle                                                                                                                                                                              \\
+                                                                        & = 2\epsilon_{\mathbf{k}} \varphi_{\mathbf{k}} + \langle 0 | \left( c_{-\mathbf{k}, \downarrow} c_{\mathbf{k}, \uparrow} - c_{\mathbf{k}, \downarrow} c_{-\mathbf{k}, \uparrow} \right) \sum_{\mathbf{k}'}' \varphi_{\mathbf{k}'} e^{-i\mathbf{k}' \cdot (\mathbf{r}_1 - \mathbf{r}_2)} \\
+                                                                        & \quad \times \sum_{\mathbf{q}}' (-|g_{\text{eff}}|^2) \left( c_{\mathbf{k}' + \mathbf{q}, \uparrow}^\dagger c_{-\mathbf{k}' - \mathbf{q}, \downarrow}^\dagger - c_{-\mathbf{k}' + \mathbf{q}, \uparrow}^\dagger c_{\mathbf{k}' - \mathbf{q}, \downarrow}^\dagger \right) |0\rangle.
     \end{aligned}
 \]
-
-[...]
-
+To obtain a non-zero vacuum overlap in the interaction bracket, the momenta of the fermions created by the ket must precisely match those destroyed by the bra. This conservation requirement establishes strict algebraic constraints on the allowed momentum transfer vectors \( \mathbf{q} \) (for instance, matching the indices in the cross-terms imposes simultaneous relations such as \( \mathbf{q} = -\mathbf{k} - \mathbf{k}' \) and \( \mathbf{q} = +\mathbf{k} - \mathbf{k}' \), or simply forces a direct transition from pair state \( (\mathbf{k}', -\mathbf{k}') \) to pair state \( (\mathbf{k}, -\mathbf{k}) \) via the momentum shift \( \mathbf{q} = \mathbf{k} - \mathbf{k}' \)). Consequently, the sum over \( \mathbf{q} \) collapses, leaving only the single scattering channel that connects \( \mathbf{k}' \) to \( \mathbf{k} \). Evaluating the remaining fermionic contractions reduces the total matrix element to a remarkably simple form:
 \[
-    \implies (E- 2\epsilon_{\mathbf{k}}) \varphi_{\mathbf{k}} = - \vert g_{eff} \vert^2 \sum_{\mathbf{k}^{\prime}}^{\prime} \varphi_{\mathbf{k}^{\prime}},
-\]
-such that now we have a closed equation for the coefficients \(\varphi_{\mathbf{k}}\). We can now sum over \(\mathbf{k}\) to get:
-\[
-    C = \sum_{\mathbf{k}^{\prime}}^{\prime} \varphi_{\mathbf{k}^{\prime}} = - \vert g_{eff} \vert^2 \sum_{\mathbf{k}}^{\prime} \frac{C}{E- 2\epsilon_{\mathbf{k}}} = - \vert g_{eff} \vert^2 C \sum_{\mathbf{k}}^{\prime} \frac{1}{E- 2\epsilon_{\mathbf{k}}}.
+    \langle \Psi_{\mathbf{k}} | H | \Psi \rangle = 2\epsilon_{\mathbf{k}} \varphi_{\mathbf{k}} - |g_{\text{eff}}|^2 \sum_{\mathbf{k}'}' \varphi_{\mathbf{k}'}.
 \]
 
-If we now go to the continuum limit, we can replace the sum over \(\mathbf{k}\) with an integral over the density of states \(g(\epsilon)\):
-\[
-    \sum_{\mathbf{k}} \xrightarrow{cont. lim.} \int_0^{\hbar\omega_D} d\epsilon \, g(\epsilon),
-\]
-then
-\[
-    1 = - \vert g_{eff} \vert^2 \int_0^{\hbar\omega_D} d\epsilon \, \frac{g(\epsilon)}{E- 2\epsilon} \sim - \vert g_{eff} \vert^2 g(E_F) \int_0^{\hbar\omega_D} d\epsilon \, \frac{1}{E- 2\epsilon} = - \vert g_{eff} \vert^2 g(E_F) \frac{1}{2} \ln{\left( \frac{E - 2\hbar\omega_D}{E} \right)},
-\]
-\[
-    \frac{1}{\lambda} = -\frac{1}{2} \frac{1}{\vert g_{eff} \vert^2 g(E_F)} = \ln{\left( \frac{E - 2\hbar\omega_D}{E} \right)} \implies E = - 2\hbar\omega_D e^{-2/\lambda},
-\]
-\[
-    1-e^{\frac{1}{\lambda}} = \frac{2\hbar\omega_D}{E} \implies E = \frac{2\hbar\omega_D}{1 - e^{1 / \lambda}},
-\]
-which means that \(E<0\): the two electrons form a bound state, which is the Cooper pair. The binding energy is exponentially small in the coupling constant \(\lambda\), which is a measure of the strength of the effective interaction. This result shows that even an arbitrarily weak attractive interaction can lead to the formation of bound pairs of electrons, which is the key insight of the BCS theory of superconductivity.
+\subsubsection{The Consistency Condition and the Cooper Bound State}
 
-We can also compute a limit for \(\hbar \omega_D \gg E\) then
+Equating the left and right sides of our projected Schrödinger equation, we obtain the explicit eigenvalue equation for the Fourier coefficients \( \varphi_{\mathbf{k}} \):
 \[
-    \frac{1}{\lambda} \sim \log{\left( \frac{2\hbar\omega_D}{\vert E \vert } \right)} \implies \vert E \vert \sim 2\hbar\omega_D e^{-\vert g_{eff} \vert^2 g(E_F)}.
+    E \varphi_{\mathbf{k}} = 2\epsilon_{\mathbf{k}} \varphi_{\mathbf{k}} - |g_{\text{eff}}|^2 \sum_{\mathbf{k}'}' \varphi_{\mathbf{k}'}.
 \]
-This is the famous result of Cooper, which shows that the binding energy of the Cooper pair is exponentially small in the coupling constant \(\lambda\). This result is crucial for understanding the formation of Cooper pairs and the onset of superconductivity in metals.
+Rearranging the terms to isolate \( \varphi_{\mathbf{k}} \) yields:
+\begin{equation} \label{eq:cooper_eigenvalue_coeff}
+    (E - 2\epsilon_{\mathbf{k}}) \varphi_{\mathbf{k}} = -|g_{\text{eff}}|^2 \sum_{\mathbf{k}'}' \varphi_{\mathbf{k}'}.
+\end{equation}
+Notice that the summation over \( \mathbf{k}' \) on the right-hand side is completely independent of the free index \( \mathbf{k} \); it is simply a constant scalar, which we define as \( C \):
+\[
+    C = \sum_{\mathbf{k}'}' \varphi_{\mathbf{k}'}.
+\]
+Substituting \( C \) back into the rearranged eigenvalue equation \eqref{eq:cooper_eigenvalue_coeff}, we can explicitly solve for the functional form of the Fourier components \( \varphi_{\mathbf{k}} \):
+\[
+    \varphi_{\mathbf{k}} = \frac{-|g_{\text{eff}}|^2 C}{E - 2\epsilon_{\mathbf{k}}}.
+\]
+We now insert this expression for \( \varphi_{\mathbf{k}} \) back into the definition of \( C \) by summing both sides over the allowed states \( \mathbf{k} \) to obtain a closed self-consistency equation:
+\[
+    C = \sum_{\mathbf{k}}' \varphi_{\mathbf{k}} = \sum_{\mathbf{k}}' \left( \frac{-|g_{\text{eff}}|^2 C}{E - 2\epsilon_{\mathbf{k}}} \right) = -|g_{\text{eff}}|^2 C \sum_{\mathbf{k}}' \frac{1}{E - 2\epsilon_{\mathbf{k}}}.
+\]
+Assuming \( C \neq 0 \) (which physically corresponds to finding a non-trivial bound state solution), we divide both sides by \( C \) to arrive at the fundamental Cooper consistency condition:
+\begin{equation} \label{eq:cooper_discrete_sum}
+    1 = -|g_{\text{eff}}|^2 \sum_{\mathbf{k}}' \frac{1}{E - 2\epsilon_{\mathbf{k}}}.
+\end{equation}
 
-Let us reason a bit on the temperature scale: the fermi temperature for a typical metal is on the order of \(T_F \sim 10^4\,\text{K}\), and \(g_{eff} \sim \frac{10^4}{10^2}\sim 10^2 \) thus the energy scale \(E \sim \frac{10^2}{10^2} = 1 K\), since we are at second order in perturbation theory, and this is the typical scale of the critical temperature for superconductivity. This shows that the BCS theory provides a natural explanation for the low critical temperatures observed in conventional superconductors. There may be other bound states with higher energy, but our perturbative analysis does not allow us to access them.
+To evaluate this self-consistency sum analytically, we transition to the continuum limit, replacing the discrete sum over momenta \( \mathbf{k} \) with an integral over the single-particle energy \( \epsilon \) weighted by the density of states \( g(\epsilon) \):
+\[
+    \sum_{\mathbf{k}}' \cdots \xrightarrow{\text{cont. lim.}} \int_0^{\hbar\omega_D} d\epsilon \, g(\epsilon) \cdots
+\]
+Here, \( g(\epsilon) \) represents the number of available electronic states per unit energy window \( [\epsilon, \epsilon + d\epsilon] \). We Measure the single-particle energies relative to the Fermi level (setting \( \epsilon_F = 0 \)) and integrate strictly from \( 0 \) (the Fermi surface, since states below it are Pauli-blocked by the inert Fermi sea) up to the Debye cutoff energy \( \hbar\omega_D \). This upper limit is enforced because, beyond the Debye frequency, there are no phonon modes available in the crystal lattice to mediate the attractive scattering. Applying the continuum limit to Eq. \eqref{eq:cooper_discrete_sum} gives:
+\[
+    1 = -|g_{\text{eff}}|^2 \int_0^{\hbar\omega_D} d\epsilon \, \frac{g(\epsilon)}{E - 2\epsilon}.
+\]
+Because the relevant phonon integration energy scale (\( \hbar\omega_D \)) is typically orders of magnitude smaller than the electronic Fermi energy (\( E_F \)), the density of states varies negligibly over this narrow shell. We can therefore safely approximate \( g(\epsilon) \) as a constant evaluated precisely at the Fermi surface, \( g(\epsilon) \simeq g(E_F) \):
+\[
+    1 \simeq -|g_{\text{eff}}|^2 g(E_F) \int_0^{\hbar\omega_D} d\epsilon \, \frac{1}{E - 2\epsilon}.
+\]
+Evaluating this elementary logarithmic integral yields our implicit algebraic equation for the two-body bound state energy \( E \)\footnote{Note on the integral prefactor: Mathematically, evaluating \( \int_0^{\hbar\omega_D} \frac{d\epsilon}{E - 2\epsilon} \) strictly yields a factor of \( -\frac{1}{2} \ln\left(\frac{E - 2\hbar\omega_D}{E}\right) \), whereas lecture board notes occasionally reflect a coefficient of \( -2 \) (as in \( 1 \simeq -2|g_{\text{eff}}|^2 g(E_F) \ln(\dots) \)). During the lecture, this discrepancy was addressed verbally as an arbitrary algebraic scaling factor (such as spin-degeneracy factors or density-of-states conventions) that is ultimately absorbed directly into the definition of the dimensionless interaction parameter \( \lambda \). Below, we show the exact \( 1/2 \) integration alongside the lecture's \( \lambda \) parameterization.}:
+\[
+    1 = -|g_{\text{eff}}|^2 g(E_F) \left( -\frac{1}{2} \right) \ln\left( \frac{E - 2\hbar\omega_D}{E} \right).
+\]
 
-    [...]
+Following the standard parameterization, we define the dimensionless electron-phonon coupling constant \( \lambda \) (absorbing the numerical prefactors into its definition, e.g., \( \frac{1}{\lambda} = -\frac{1}{2|g_{\text{eff}}|^2 g(E_F)} \) or \( \lambda \equiv |g_{\text{eff}}|^2 g(E_F) \) depending on the chosen convention):
+\[
+    -\frac{1}{\lambda} \simeq \ln\left( \frac{E - 2\hbar\omega_D}{E} \right) \implies e^{-\frac{1}{\lambda}} = 1 - \frac{2\hbar\omega_D}{E},
+\]
+(or equivalently, keeping the negative sign explicit in the exponent definition as written in the notes, \( 1 - e^{\frac{1}{\lambda}} = \frac{2\hbar\omega_D}{E} \)). Solving explicitly for the energy \( E \), we obtain:
+\begin{equation} \label{eq:cooper_exact_energy}
+    E = \frac{2\hbar\omega_D}{1 - e^{\frac{1}{\lambda}}} = 2\hbar\omega_D \underbrace{\left( \frac{1}{1 - e^{\frac{1}{|g_{\text{eff}}|^2 g(E_F)}}} \right)}_{< 0} < 0.
+\end{equation}
+(Note: In the lecture notes, the algebraic rearrangement is also briefly sketched in the simplified product form \( E = 2\hbar\omega_D (1 - e^{1/\lambda}) < 0 \) to immediately highlight the negative sign of the quantity in parentheses).
 
-    [...]
+\subsubsection{Physical Analysis: Weak-Coupling Limit and Temperature Scales}
 
+Let us carefully analyze the physical consequences of Eq. \eqref{eq:cooper_exact_energy}. The dimensionless parameter \( \lambda = |g_{\text{eff}}|^2 g(E_F) \) acts as a strictly positive constant measuring the strength of the effective attraction. Since \( \lambda > 0 \), the exponential term \( e^{1/\lambda} \) is strictly greater than \( 1 \), which guarantees that the denominator \( (1 - e^{1/\lambda}) \) is definitively negative. Because the Debye energy \( \hbar\omega_D \) is positive, this mathematically guarantees that \textbf{\( E < 0 \)} (relative to the Fermi surface \( 2\epsilon_F = 0 \)). This is a profound theoretical result: we have rigorously proven that the two-fermion system lowers its energy below the Fermi sea to form a stable \textbf{bound state}, the \textbf{Cooper pair}.
+
+In the physically realistic weak-coupling limit, where the coupling \( \lambda \ll 1 \) and the Debye energy is much larger than the resulting binding energy (\( \hbar\omega_D \gg |E| \)), we can expand the logarithmic relation for \( |E| = -E \):
+\[
+    \frac{1}{\lambda} \simeq \ln\left( 1 - \frac{2\hbar\omega_D}{E} \right) = \ln\left( 1 + \frac{2\hbar\omega_D}{|E|} \right) \simeq \ln\left( \frac{2\hbar\omega_D}{|E|} \right).
+\]
+Inverting this asymptotic relation yields the celebrated Cooper formula for the absolute magnitude of the pair binding energy:
+\begin{equation} \label{eq:cooper_binding_energy}
+    |E| = \frac{2\hbar\omega_D}{e^{\frac{1}{\lambda}}} = 2\hbar\omega_D e^{-\frac{1}{\lambda}} = 2\hbar\omega_D \exp\left( -\frac{1}{|g_{\text{eff}}|^2 g(E_F)} \right).
+\end{equation}
+(Depending on whether the factor of \( 1/2 \) from the integral is kept explicit rather than absorbed into \( \lambda \), this is equivalently written as \( E = -2\hbar\omega_D e^{-2/\lambda} \)).
+
+This final analytical expression carries two critical physical messages:
+\begin{enumerate}
+    \item \textbf{Cooper Instability} \( E < 0 \): We have successfully formed a stable two-electron bound pair. Crucially, unlike in three-dimensional vacuum where an attractive potential must exceed a finite threshold depth to support a bound state, the presence of the Pauli-blocking Fermi sea reduces the effective dimensionality of the density of states to become constant at the Fermi surface. Consequently, \textit{even an arbitrarily weak attractive interaction} (\( \lambda \to 0^+ \)) \textit{produces a bound state}!
+    \item \textbf{Non-Perturbative Singularity} \( E \propto e^{-\frac{1}{|g_{\text{eff}}|^2 g(E_F)}} \): The binding energy depends exponentially on the \textit{inverse} of the coupling strength. Mathematically, the function \( e^{-1/\lambda} \) possesses an essential singularity at \( \lambda = 0 \); all of its Taylor series derivatives vanish at zero coupling. From a theoretical standpoint, one might initially be unhappy with this feature because it proves that \uline{the superconducting bound state cannot be reached at any finite order in standard perturbation theory} starting from the normal metal. However, it also naturally explains why the superconducting energy scale is so vastly smaller than the bare electronic scales.
+\end{enumerate}
+
+Let us conclude by reasoning about the characteristic temperature and energy scales implied by this hierarchy. The exponential dependence implies that the energy gap created by these bound states is extremely small, meaning the pairs are fragile and can only resist thermal destruction up to very low temperatures. We can roughly estimate the typical order-of-magnitude scales for a conventional metal as follows:
+\begin{itemize}
+    \item \textbf{Fermi Temperature (\( T_F \sim 10^4\text{ K} \)):} This sets the bare kinetic energy scale of the rapid electron motion in the metal.
+    \item \textbf{Effective Phonon Scale (\( g_{\text{eff}} \sim \frac{10^4}{10^2} \sim 10^2\text{ K} \)):} Because the effective attraction arises at second order in electron-phonon perturbation theory (and is bounded by the Debye temperature \( T_D = \hbar\omega_D / k_B \)), the characteristic interaction energy scale drops by roughly two orders of magnitude compared to \( T_F \), landing around \( \sim 100\text{ K} \).
+    \item \textbf{Critical Temperature (\( T_c \sim E / k_B \sim \frac{10^2}{10^2} \sim 1\text{ K} \)):} Finally, the non-perturbative exponential suppression \( e^{-1/\lambda} \) reduces the energy scale by another one to two orders of magnitude.
+\end{itemize}
+Thus, this simple two-body Cooper model provides a completely natural microscopic explanation for why the critical temperatures \( T_c \) observed in conventional metallic superconductors are on the order of \( \sim 1\text{--}10\text{ Kelvin} \), four orders of magnitude smaller than the Fermi temperature. (Note that while there may in principle exist other exotic bound states or excitations at higher energies, our low-energy effective perturbative expansion around the Fermi surface does not allow us to access them).

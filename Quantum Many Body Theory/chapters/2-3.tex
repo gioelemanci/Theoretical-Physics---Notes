@@ -44,7 +44,7 @@ Substituting this ansatz and the explicit form of the interaction potential into
 \[
     \Delta w_k = g \int \frac{\mathrm{d}^3\mathbf{k}'}{(2\pi)^3} \frac{w_k w_{k'} \Delta w_{k'}}{2E_{\mathbf{k}'}}.
 \]
-Factoring out \( \Delta w_k \) (assuming a non-trivial solution for the many body factor, \( \Delta \neq 0 \)), the self-consistency condition simplifies to:
+Factoring out \( \Delta w_k \) (assuming a non-trivial solution for the many body factor, \( \Delta \neq 0 \), and remembering that the dependence on \(\Delta\) is kept inside the energy denominator), the self-consistency condition simplifies to:
 \[
     \frac{1}{g} = \int \frac{\mathrm{d}^3\mathbf{k}}{(2\pi)^3} \frac{\Theta(\hbar\omega_D - |\xi_k|)}{2E_k}.
 \]
@@ -54,15 +54,15 @@ In the relevant region of integration specified by the Heaviside step function \
 \]
 The minimum of this dispersion is \( \min_k E_k = |\Delta| \), which is reached exactly at the Fermi surface where \( \xi_k = 0 \) (corresponding to \( k = \sqrt{2m\mu}/\hbar \simeq k_F \)). Notice that the gap equation only dictates the modulus of the gap \( |\Delta| \), leaving the global phase undetermined. Without loss of generality, we can therefore assume \( \Delta \) to be strictly real and positive.
 
-To evaluate the momentum integral, we transition to an energy integration by introducing the single-particle density of states \( N(\xi) \) per spin component and per unit volume:
-\[
-    N(\xi) = \int \frac{\mathrm{d}^3\mathbf{k}}{(2\pi)^3} \delta(\xi - \xi_k) = \frac{m^{3/2}}{\sqrt{2}\pi^2\hbar^3} \sqrt{\xi + \mu}.
-\]
-Using the density of states, the gap equation transforms into:
+To evaluate the momentum integral, we transition to an energy integration for convenience by introducing the single-particle density of states \( N(\xi) \) \textit{per spin component}\footnote{We are ignoring the spin degeneracy in this discussion.} and per unit volume:
+\begin{equation} \label{eq:density_of_states}
+    N(\xi) = \int \frac{\mathrm{d}^3\mathbf{k}}{(2\pi)^3} \delta(\xi - \xi_k) = \frac{m^{3/2}}{\sqrt{2}\pi^2\hbar^3} \sqrt{\xi + \mu},
+\end{equation}
+where the last equality is obtained by explicitly evaluating the delta function integral in spherical coordinates. Physically, the density of states \( N(\xi) \) counts the number of single-particle states per unit energy interval and per unit volume. Using this definition, the gap equation transforms into:
 \[
     \frac{1}{g} = \int_{-\mu}^{+\infty} d\xi \frac{N(\xi)}{2E_{\xi}} \Theta(\hbar\omega_D - |\xi|),
 \]
-where \( E_{\xi} = \sqrt{\xi^2 + |\Delta|^2} \). Because the Debye energy is typically orders of magnitude smaller than the Fermi energy (\( \hbar\omega_D \ll E_F \approx \mu \)), the lower limit of integration \( -\mu \) can be safely replaced by the step function's cutoff \( -\hbar\omega_D \):
+where \( E_{\xi} = \sqrt{\xi^2 + |\Delta|^2} \), and the integral is still counting the volume of the phase space (in energy, the density of states takes the role of a weight function). Because the Debye energy is typically orders of magnitude smaller than the Fermi energy (\( \hbar\omega_D \ll E_F \approx \mu \)), the lower limit of integration \( -\mu \) can be safely replaced by the step function's cutoff \( -\hbar\omega_D \):
 \[
     \frac{1}{g} = \int_{-\hbar\omega_D}^{\hbar\omega_D} d\xi \frac{N(\xi)}{2E_{\xi}}.
 \]
@@ -74,7 +74,7 @@ where \( E_{\xi} = \sqrt{\xi^2 + |\Delta|^2} \). Because the Debye energy is typ
     \label{fig:density_of_states_vs_dispersion}
 \end{figure}
 
-We must now carefully analyze the weak-coupling limit, where \( g \to 0 \). For the equation to hold, the right-hand side integral must correspondingly diverge towards \( +\infty \). This logarithmic divergence is only possible if the gap parameter itself vanishes, \( \Delta \to 0 \), ensuring the integrand \( 1/E_{\xi} \to \infty \) near the Fermi surface (\( \xi = 0 \)). Under these weak-coupling conditions, the function \( 1/E_{\xi} \) is extremely sharply peaked at \( \xi = 0 \) and varies rapidly over an energy scale defined by \( \Delta \). Conversely, over this exact same narrow energy shell, the density of states \( N(\xi) \) is nearly constant and can be reliably approximated by its value precisely at the Fermi level, \( N_0 \equiv N(\xi=0) \).
+We must now carefully analyze the weak-coupling limit, where \( g \to 0 \). For the equation to hold, the right-hand side integral must correspondingly diverge towards \( +\infty \). This logarithmic divergence is only possible if the gap parameter itself vanishes, \( \Delta \to 0 \), ensuring the integrand \( 1/E_{\xi} \to \infty \) near the Fermi surface (\( \xi = 0 \)). Under these weak-coupling conditions, the function \( 1/E_{\xi} \) is extremely sharply peaked at \( \xi = 0 \) and varies rapidly over an energy scale defined by \( \Delta \) (the peak depends on the value of \( \Delta \)). Conversely, over this exact same narrow energy shell, the density of states \( N(\xi) \) is nearly constant and can be reliably approximated by its value precisely at the Fermi level, \( N_0 \equiv N(\xi=0) \). Notice that when we say \(\Delta, g \to 0\), we mean that both parameters approach zero but never actually reach it. The limit is taken in such a way that the ratio \( \Delta/g \) remains finite and well-defined.
 
 Pulling the constant \( N_0 \) out of the integral, we evaluate the remaining expression analytically:
 \[
@@ -82,7 +82,7 @@ Pulling the constant \( N_0 \) out of the integral, we evaluate the remaining ex
 \]
 Inverting this relation yields:
 \[
-    \frac{\hbar\omega_D}{\Delta} = \sinh\left(\frac{1}{N_0 g}\right) \simeq \frac{1}{2} \exp\left(\frac{1}{N_0 g}\right),
+    \frac{\hbar\omega_D}{\Delta} = \sinh\left(\frac{1}{N_0 g}\right) = \frac{e^{\frac{1}{N_0 g}} - e^{-\frac{1}{N_0 g}}}{2} \sim \frac{1}{2} \exp\left(\frac{1}{N_0 g}\right),
 \]
 where the final asymptotic approximation relies on the behavior of \( \sinh(x) \sim e^x / 2 \) for large arguments \( x = 1/(N_0 g) \). Solving for the physical gap parameter, we obtain the seminal weak-coupling BCS result:
 \begin{equation} \label{eq:bcs_gap_zero_T}
@@ -93,15 +93,17 @@ where the final asymptotic approximation relies on the behavior of \( \sinh(x) \
     The exponential form of \eqref{eq:bcs_gap_zero_T} carries profound physical implications. At \( T=0 \), even an infinitesimally small attractive interaction (\( g > 0 \)) is sufficient to open a finite (albeit exponentially suppressed) energy gap \( \Delta \) at the Fermi surface. Furthermore, the function \( e^{-1/(N_0 g)} \) exhibits an essential singularity at \( g=0 \). This signifies that the superconducting state cannot be reached via standard perturbative expansions starting from the non-interacting Fermi gas; the Cooper instability is a fundamentally non-perturbative phenomenon. The dimensionless parameter \( g N_0 \) acts as the effective coupling strength, which is typically quite small in conventional phonon-mediated superconductors.
 \end{remark}
 
+The fact that now we have the Debye frequency \( \omega_D \) in the prefactor of the gap equation makes this a real many-body effect. The Debye frequency is a material property that is determined by the phonon spectrum of the solid. It is not a property of the electrons themselves, but rather of the lattice vibrations, stiffness, and the speed of sound in the material (everything is then related to the mass of the ions). The fact that the gap depends on this frequency shows that the superconducting state is a collective effect that arises from the interaction between electrons and the lattice vibrations.
+
 \subsubsection{Weak Coupling Solution for Ultracold Fermi Gases}
 
-We now shift our focus to ultracold Fermi gases, where the effective interaction is characterized by a short-range contact potential. In momentum space, this is modeled as \( V(\mathbf{k}, \mathbf{k}') = v_0 w_k w_{k'} \), with the cutoff function \( w_k = \Theta(k_0 - k) \). We are physically interested in the limit where the ultraviolet cutoff momentum is taken to infinity, \( k_0 \to \infty \). To ensure physical observables remain well-defined, the bare coupling strength \( v_0 \) must be simultaneously rescaled (renormalized) in order to hold the low-energy \( s \)-wave scattering length \( a \) constant.
+We now shift our focus to ultracold Fermi gases, where the effective interaction is characterized by a short-range contact potential. In momentum space, this is modeled as \( V(\mathbf{k}, \mathbf{k}') = v_0 w_k w_{k'} \), with the cutoff function \( w_k = \Theta(k_0 - k) \).\TODO{add image of omega as cutoff function} We are physically interested in the limit where the ultraviolet cutoff momentum is taken to infinity, \( k_0 \to \infty \). To ensure physical observables remain well-defined, the bare coupling strength \( v_0 \) must be simultaneously rescaled (renormalized) in order to hold the low-energy \( s \)-wave scattering length \( a \) constant.
 
 Applying the same piecewise ansatz for the gap function, \( \Delta_{\mathbf{k}} = \Delta_k = \Delta w_k \), the generalized gap equation \eqref{eq:bcs_gap_equation} becomes:
 \[
     \Delta w_k = -v_0 \int \frac{\mathrm{d}^3\mathbf{k}'}{(2\pi)^3} \frac{w_k w_{k'} \Delta w_{k'}}{2E_{k'}}.
 \]
-Dividing by \( \Delta w_k \) yields the bare relation:
+From now on we repeat the same computation done for the superconducing case. Dividing by \( \Delta w_k \) yields the bare relation:
 \[
     -\frac{1}{v_0} = \int \frac{\mathrm{d}^3\mathbf{k}}{(2\pi)^3} \frac{w_k^2}{2E_k}.
 \]
@@ -122,13 +124,27 @@ This convergent integral can be evaluated analytically in terms of complete elli
 \begin{equation} \label{eq:ultracold_gap_result}
     \Delta = \frac{8E_F}{e^2} e^{\frac{\pi}{2 k_F a}}.
 \end{equation}
-This profound result explicitly dictates how the pairing gap becomes exponentially suppressed in the limit \( k_F a \to 0^- \).
+This profound result explicitly dictates how the pairing gap becomes exponentially suppressed in the limit \( k_F a \to 0^- \). Physically, adding particles to the system costs energy, and this cost is captured by this very rough mean-field approximation of the potential. The gap is exponentially small in the weak-coupling limit, but it is non-zero for any finite attractive interaction, indicating that the system is unstable.
 
 It is structurally insightful to compare this ultracold gas result with the solid-state BCS expression \eqref{eq:bcs_gap_zero_T}. Recall that the 3D density of states at the Fermi surface is \( N_0 = (m k_F)/(2\pi^2\hbar^2) \). If we identify the effective BCS coupling parameter with the first-order Born approximation of the scattering amplitude, \( g = -4\pi\hbar^2 a / m \), the exponential dependence \( e^{\pi/(2 k_F a)} \) strictly coincides with the BCS term \( e^{-1/(N_0 g)} \). This mapping perfectly reproduces the exponent; however, retaining the full \( 1/(2\epsilon_k) \) counter-term in the integral regularization—rather than relying strictly on the lowest-order Born approximation—is mathematically critical for capturing the exact \( 8/e^2 \) numerical prefactor governing the overall energy scale of the pairing gap.
+
+\subsubsection{Comparison with Spectrum of the Weak Interacting Bose Gas}
+
+In the case of a weakly interacting Bose gas, the spectrum of elementary excitations is determined by the Bogoliubov dispersion relation:...\TODO{complete, graph and compare}
+
+[drawing of ``BCS wavefunction'' as a product of pairs of fermions in momentum space, with arrows indicating the pairing of opposite momenta and spins]
+
+In order to create an excitation, we have to add momenta to an electron inside a cooper pair, but this cannot be done continuously because the two electrons are bound together. The energy cost to break a pair is the gap \( \Delta \). In contrast, in a weakly interacting Bose gas, the Bogoliubov spectrum is gapless, and excitations can be created with arbitrarily small energy by adding small momenta to the condensate. This fundamental difference in the excitation spectrum leads to distinct physical properties between fermionic superfluids and bosonic condensates.
+
+the cooper pairs can be broke releasing energy or absorbing energy interacting with the phonons (we have ignored them for a while but they are still in the description).
+
+transition to the landau criterion...
 
 \subsection{Elementary Excitations and Landau Criterion}
 
 All the excited states of the grand-canonical Hamiltonian \( \hat{K} \) are systematically obtained by acting with the quasiparticle creation operator \( \gamma_{\mathbf{k},\sigma}^\dagger \) on the many-body ground state \( |\psi_0(\mu)\rangle \). The energy dispersion of these elementary excitations in a BCS superconductor or superfluid is thus given by \( E_k = \sqrt{\xi_k^2 + |\Delta|^2} \).
+
+resistivity in superconductors (zero and then \(T^3\), \(\rho\) vs \(T\) graph), graph and analogy with superfluid \TODO{complete paragraph}
 
 \TODO{add image of a dispersion curve showing excitation energy versus momentum, with a minimum gap at the Fermi momentum, illustrating the Landau criterion geometry}
 
@@ -140,6 +156,10 @@ The average number of fermions with momentum \( \mathbf{k} \) and spin \( \sigma
 \[
     n_{\mathbf{k},\sigma} = \langle c_{\mathbf{k},\sigma}^\dagger c_{\mathbf{k},\sigma} \rangle.
 \]
+Cite time of flight experiments: release an ultracold Fermi gas from the trap and let it expand freely, if particles are independent their final position is proportional to their initial momentum, and the density of particles in the final position is proportional to the momentum distribution function. This is a direct measurement of the momentum distribution function...
+
+show now graph of the momentum distribution function, as a theta function for a non-interacting Fermi gas, and say tht we should obtain the same result out of the small window around the Fermi surface, where we will see the true effect of the emergent many-body physics of the BCS state. \TODO{add graph and explain}
+
 To evaluate this, we utilize the inverse Bogoliubov transformations, which explicitly dictate the relations between the bare particle operators \( c_{\mathbf{k},\sigma}, c_{\mathbf{k},\sigma}^\dagger \) and the Bogoliubov quasiparticle operators \( \gamma_{\mathbf{k},\sigma}, \gamma_{\mathbf{k},\sigma}^\dagger \):
 \[
     c_{\mathbf{k},\uparrow} = u_{\mathbf{k}}^* \gamma_{\mathbf{k},\uparrow} + v_{\mathbf{k}} \gamma_{-\mathbf{k},\downarrow}^\dagger,
@@ -169,6 +189,8 @@ Recalling the explicit analytical expression for the coherence factor \( v_{\mat
 \TODO{add image of a plot showing the momentum distribution function as a function of momentum, displaying a smeared Fermi step near the Fermi momentum}
 
 We now note that in the weak-coupling regime where \( \Delta \ll E_F \), the pairing gap is much smaller than the relative kinetic energy \( |\xi_k| \), except within a very narrow momentum window (of order of a few \( (m\Delta)/(\hbar^2 k_F) \)) centered directly around the Fermi momentum \( k_F \). Outside this specific window, the dispersion smoothly approximates the absolute value of the kinetic energy, \( E_k \approx |\xi_k| \). Consequently, the distribution sharply approaches \( n_{\mathbf{k},\sigma} \simeq 1 \) for states deep inside the Fermi sea, or \( n_{\mathbf{k},\sigma} \simeq 0 \) for states far above it, depending entirely on the sign of \( \xi_k \). One thus naturally recovers a momentum distribution which essentially coincides with the standard Heaviside step distribution of an ideal non-interacting Fermi gas at \( T = 0 \), with the crucial modification of a continuous smearing confined to a small momentum window around \( k_F \).
+
+We did not show why this expression results in a smearing around the small energy window around \(k_F\), but this can be seen by explicitly giving a functional form to \(\Delta\), since it is the crucial parameter that determines the width of the smearing.
 
 \subsection{Gap Equation at Finite Temperature}
 
