@@ -496,6 +496,48 @@ Differentiating this normal-state excitation energy with respect to temperature 
 
 \section{Spontaneous Symmetry Breaking and Collective Excitations}
 
+\subsection{\(O(2)\) Model}
+
+The \(O(2)\) model is a simple model of spontaneous symmetry breaking, where the continuous symmetry is broken to a discrete subgroup. In the context of superconductivity, this model helps to understand the emergence of a condensate and the associated Goldstone mode.
+
+In antiferromagnets, the spins are ordered in a way that creates a pattern of alternating magnetic moments, leading to a breaking of the continuous rotational symmetry. This results in the appearance of magnons, which are the quantized spin waves.
+
+The \( U(1) \) gauge group is associated with the phase of the complex scalar field. In the context of superconductivity, this gauge group is responsible for the electromagnetic interactions and the emergence of the Meissner effect.
+
+We consider a complex scalar field \(\varphi(x)\) and the lagrangian density \(\mathcal{L} = \frac{1}{2} \partial_\mu \varphi^* \partial^\mu \varphi - V(\varphi)\), where \(V(\varphi)\) is a potential that has a minimum at some non-zero value of \(\varphi\):
+\[
+    V(\varphi) = - \vert \mu \vert^2 \vert \varphi \vert^2 + \lambda \vert \varphi \vert^4.
+\]
+The potential has a "Mexican hat" shape, with a circle of minima at \(\vert \varphi \vert = \sqrt{\frac{\vert \mu \vert^2}{2\lambda}}\): \TODO{add image of a mexican hat potential }
+\[
+    4 \lambda \vert \varphi \vert^2 - 2 \vert \mu \vert^2 = 0 \implies \vert \varphi \vert = \sqrt{\frac{\vert \mu \vert^2}{2\lambda}}.
+\]
+The lagrangian is invariant under global \(U(1)\) phase rotations of the field \(\varphi \to e^{i\theta} \varphi\).
+
+When particles condense into the ground state, they choose a specific phase, breaking the continuous symmetry. In the circle of minima, the system can choose any point, but once a point is chosen, the symmetry is broken. So we have a portion of particles condensing into the ground state, costituing the lowest energy \textbf{manifold}, and are called gapless modes: their spectrum is gapless, meaning thtey can be excited with arbitrarily low energy. These gapless modes are the Goldstone modes, massive excitations that arise due to the spontaneous breaking of continuous symmetries. In the case of superconductivity, these Goldstone modes correspond to phase fluctuations of the order parameter.\TODO{check comments}
+
+So initially we had a U(1) symmetric system, but after the condensation, we have a discrete symmetry. The Goldstone modes are associated with the broken continuous symmetry and are responsible for the low-energy excitations in the system.
+
+\begin{example}[Ising Field Theory]
+
+    \(\varphi \in \mathbb{R}\)
+
+    The Ising model is a simple model of ferromagnetism, where the spins can take on two values, up or down. The ising field theory describes the behavior of the system near the critical point, where the symmetry is spontaneously broken. In this model, the order parameter is a scalar field that takes on a non-zero value in the ordered phase, breaking the \(Z_2\) symmetry of the system.
+
+    It can be seen as a limiting case of the \(O(2)\) model, where the continuous symmetry is broken to a discrete subgroup: the phase space of the order parameter is reduced from a circle to two points and the potential is a section of the Mexican hat potential. The Ising model is a simple example of spontaneous symmetry breaking, where the system chooses one of the two possible ground states, breaking the symmetry of the system.\TODO{add image of a double well potential as a section of the mexican hat potential}
+
+    There are no gapless modes in the Ising model, as the excitations are massive and require a finite amount of energy to be excited. The Ising model is a simple example of spontaneous symmetry breaking, where the system chooses one of the two possible ground states, breaking the symmetry of the system.\TODO{check}
+\end{example}
+
+\begin{example}[\(\mathbb{Z}_3\) Field Theory]
+
+    \(\varphi \in \mathbb{R}^+\)
+
+    The \(\mathbb{Z}_3\) model is a simple model of ferromagnetism, where the spins can take on three values, up, down or zero. The \(\mathbb{Z}_3\) field theory describes the behavior of the system near the critical point, where the symmetry is spontaneously broken. In this model, the order parameter is a complex scalar field that takes on a non-zero value in the ordered phase, breaking the \(\mathbb{Z}_3\) symmetry of the system.
+    It can be seen as a limiting case of the \(O(2)\) model, where the continuous symmetry is broken to a discrete subgroup: the phase space of the order parameter is reduced from a circle to three points.
+
+\end{example}
+
 \subsection{The \( U(1) \) Gauge Group and Phase Rotation}
 
 The original many-body Hamiltonian \( H \) for the interacting Fermi gas is fundamentally invariant under global \( U(1) \) phase transformations. This continuous symmetry corresponds to the strict conservation of the total particle number \( \hat{N} = \sum_{\mathbf{k},\sigma} c_{\mathbf{k},\sigma}^\dagger c_{\mathbf{k},\sigma} \). We can define the unitary phase rotation operator as \( \hat{U}(\varphi) = e^{i\varphi \hat{N}} \), under which the Hamiltonian remains invariant: \( \hat{U}^\dagger(\varphi) H \hat{U}(\varphi) = H \).
@@ -533,9 +575,67 @@ The dispersion relation of the Goldstone mode in the long-wavelength limit (\( k
 \]
 The sound velocity \( c \) for this mode in a Fermi gas is extremely large, explicitly given by \( c = v_F / \sqrt{3} \), where \( v_F \) is the Fermi velocity. Because this collective velocity is so high, it requires a substantial amount of energy to excite these modes at any finite momentum. Consequently, they are exceedingly difficult to thermally excite, even compared to the gapped pair-breaking excitations when the pairing gap \( \Delta \) is small.
 
+\subsubsection{Why Goldstone Modes?}
+
+The charge \(Q^a\) is associated with the number of particles conserved by the \(U(1)\) symmetry and it can be written as the integral of the time component of the Noether current \(J_0^a\):
+\[
+    Q^a = \int \mathrm{d}^3x \, J_0^a(x), \quad \partial_\mu J^\mu_a = 0.
+\]
+
+If \(\varphi\) rotations are broken, then the vacuum is not invariant under the action of \(Q^a\):
+\[
+    \bra{0} \left[\mathcal{O}, Q^a\right] \ket{0} \neq 0,
+\]
+where \(\mathcal{O}\) is a generic operator: this expression indicates that the vacuum is not invariant under the symmetry transformation generated by \(Q^a\). This implies that the vacuum is not invariant under the symmetry transformation generated by \(Q^a\):
+\[
+    \begin{aligned}
+        Q^a \ket{0} & \neq \alpha \ket{0},                  \\
+        Q^a \ket{0} & = \alpha \ket{0} + \beta \ket{\pi_p},
+    \end{aligned}
+\]
+where \(\ket{\pi_p}\) is a single-particle state of the Goldstone boson. This means that the vacuum is not invariant under the symmetry transformation generated by \(Q^a\), and there must exist a massless excitation (the Goldstone boson) associated with this broken symmetry.
+
+The current \(J^\mu_a\) is associated with the broken symmetry, and:
+\[
+    \bra{0} J^{\mu} (?)\ket{\pi_p} = i F p^\mu e^{-ipx},
+\]
+which implies current conservation:
+\[
+    p_\mu p^\mu = 0 \implies p^2 = 0 \implies m_{\pi} = 0,
+\]
+such that the Goldstone boson is massless, and the dispersion relation is linear in momentum.
+
+\subsubsection{Goldstone Modes in BCS Superconductors}
+
+The grand-canonical BCS Hamiltonian is invariant under global \(U(1)\) phase rotations, which correspond to the conservation of the total particle number:
+\[
+    \hat{K} = \sum_{\mathbf{k},\sigma} \xi_{\mathbf{k}} c_{\mathbf{k},\sigma}^\dagger c_{\mathbf{k},\sigma} - g \sum_{\mathbf{k},\mathbf{k'}} c_{\mathbf{k},\uparrow}^\dagger c_{-\mathbf{k},\downarrow}^\dagger c_{-\mathbf{k'},\downarrow} c_{\mathbf{k'},\uparrow}.
+\]
+If we apply the \(U(1)\) transformation to the fermionic operators, we find that the Hamiltonian remains invariant:
+\[
+    \begin{dcases}
+        c_{\mathbf{k},\sigma} \to e^{i\varphi} c_{\mathbf{k},\sigma}, \\
+        \hat{K} \to \hat{K}.
+    \end{dcases}
+\]
+Since the \(U(1)\) symmetry is global, \(\varphi\) is a constant and the Hamiltonian commutes with the total particle number operator \(\hat{N} = \hat{N}_\uparrow + \hat{N}_\downarrow = \sum_{\mathbf{k},\sigma} c_{\mathbf{k},\sigma}^\dagger c_{\mathbf{k},\sigma}\):
+\[
+    [\hat{K}, \hat{N}] = 0.
+\]
+
+Now considering the BCS wavefunction, we see that it is not invariant under the \(U(1)\) transformation:
+\[
+    \ket{\psi_{BCS}} = \prod_{\mathbf{k}} \left( u_{\mathbf{k}} + v_{\mathbf{k}} c_{\mathbf{k},\uparrow}^\dagger c_{-\mathbf{k},\downarrow}^\dagger \right) \ket{0} \to \prod_{\mathbf{k}} \left( u_{\mathbf{k}} + e^{2i\varphi} v_{\mathbf{k}} c_{\mathbf{k},\uparrow}^\dagger c_{-\mathbf{k},\downarrow}^\dagger \right) \ket{0},
+\]
+where \(u_{\mathbf{k}}\) and \(v_{\mathbf{k}}\) are the BCS coherence factors. This indicates that the BCS ground state spontaneously breaks the global \(U(1)\) symmetry, since the ground state is not invariant under the transformation, but only under a \(\mathbb{Z}_2\) transformation:
+\[
+    \varphi^{\prime} = n \pi, \quad n \in \mathbb{Z}.
+\]
+This spontaneous symmetry breaking leads to the emergence of a gapless Goldstone mode, which corresponds to the phase fluctuations of the order parameter.
+
 \subsubsection{Thermodynamics and Specific Heat Competition}
 
-To determine the thermodynamic relevance of the Goldstone modes, we compare their contribution to the specific heat capacity at constant volume (\( C_{\text{Gold}} \)) against the contribution from the gapped pair-breaking excitations (\( C_{\text{pair}} \)).
+To determine the thermodynamic relevance of the Goldstone modes, we compare their contribution to the specific heat capacity at constant volume (\( C_{\text{Gold}} \)) against the contribution from the gapped pair-breaking excitations (\( C_{\text{pair}} \), the excitations breaking Cooper pairs). Our goal is to understand the temperature regime where the gapless Goldstone modes dominate the thermodynamics of the system.
 
 The specific heat of the acoustic Goldstone modes is computed using the exact same standard Debye formalism utilized for phonons or a weakly interacting Bose gas, yielding a \( T^3 \) dependence:
 \[
@@ -546,14 +646,26 @@ Conversely, the specific heat stemming from the pair-breaking excitations is exp
     \frac{C_{\text{pair}}}{V} = 2k_B N_0 \sqrt{2\pi} |\Delta| \left( \frac{|\Delta|}{k_B T} \right)^{3/2} e^{-\frac{|\Delta|}{k_B T}}.
 \]
 
-To identify the temperature regime where the collective modes dominate, we equate the two specific heats, \( C_{\text{Gold}} = C_{\text{pair}} \). We substitute the Fermi surface density of states \( N_0 = m k_F / (2\pi^2 \hbar^2) \) and use the low-temperature limit for the gap, \( \Delta \simeq \Delta_0 \approx 1.76 k_B T_c \equiv \alpha \). Defining the reduced temperature \( \tilde{T} = T/T_c \), the equality reduces after algebraic simplification to the following dimensionless constraint:
+To identify the temperature regime where the collective modes dominate, we equate the two specific heats, \( C_{\text{Gold}} = C_{\text{pair}} \):
+\[
+    \begin{aligned}
+        \frac{\pi^2}{15} \left( \frac{k_B T}{\hbar c} \right)^3 = N_0 \sqrt{2\pi} |\Delta| \left( \frac{|\Delta|}{k_B T} \right)^{3/2} e^{-\frac{|\Delta|}{k_B T}}, \quad \text{now } \tilde{\Delta} = \frac{\Delta}{k_B T}, \text{ and } \tilde{c} = \frac{c}{k_B T}, \\
+        \frac{\pi^2}{15} \left( \frac{k_B T}{\hbar c} \right)^3 = N_0 \sqrt{2\pi} |\Delta| \left( \frac{|\Delta|}{k_B T} \right)^{3/2} e^{-\frac{|\Delta|}{k_B T}}
+    \end{aligned}
+\]\TODO{check and complete computation}
+We substitute the Fermi surface density of states \( N_0 = m k_F / (2\pi^2 \hbar^2) \) and use the low-temperature limit for the gap, \( \Delta \simeq \Delta_0 \approx 1.76 k_B T_c \equiv \alpha \). Defining the reduced temperature \( \tilde{T} = T/T_c \), we can expand the left-hand side of the equation in terms of \( T_c/T_F \) and \( \tilde{T} \):
+\[
+    \frac{C_{\text{Gold}}}{V} = \frac{2\pi^2}{15} k_B \left( \frac{k_B T}{\hbar c} \right)^3 = \frac{2\pi^2}{15} k_B \left( \frac{k_B T_c}{\hbar c} \right)^3 \tilde{T}^3 = \frac{2\pi^2}{15} k_B \left( \frac{k_B T_c}{\hbar v_F / \sqrt{3}} \right)^3 \tilde{T}^3 = \frac{2\pi^2}{15} k_B \left( \frac{\sqrt{3} k_B T_c}{\hbar v_F} \right)^3 \tilde{T}^3,
+\]\TODO{check and complete computation}
+since \( v_F = \hbar k_F / m \), we can write \( \hbar v_F = \hbar^2 k_F / m \) and \(c = v_F / \sqrt{3} \). In the end we have:
+
 \begin{equation} \label{eq:specific_heat_intersection}
     \tilde{T}^{9/2} \left( \frac{T_c}{T_F} \right)^2 \frac{\sqrt{6}\pi^{7/2}}{20 \alpha^{5/2}} = e^{-\frac{\alpha}{\tilde{T}}} \implies \tilde{T}^{9/2} \left( \frac{T_c}{T_F} \right)^2 1.6 \simeq e^{-\frac{1.76}{\tilde{T}}}.
 \end{equation}
 
 In standard weak-coupling superfluids, the critical temperature is orders of magnitude smaller than the Fermi temperature, \( T_c \ll T_F \). Using the BCS relation \( T_c/T_F = (8e^\gamma/\pi e^2) e^{-\pi/(2k_F a)} \ll 1 \), a typical experimental parameter for a weak-coupling Fermi gas is \( T_c/T_F \sim 10^{-3} \).
 
-\TODO{add image of two plots showing the theoretical specific heat contributions as a function of temperature intersecting at a highly suppressed temperature ratio}
+\TODO{add image of plots showing the theoretical specific heat contributions as a function of temperature intersecting at a highly suppressed temperature ratio, noticing that y axis is really zoomed in to show the intersection}
 
 By numerically plotting the two sides of Eq. \eqref{eq:specific_heat_intersection} as functions \( f(\tilde{T}) \) (the power-law Goldstone contribution scaled by the small prefactor) and \( g(\tilde{T}) \) (the exponential pair-breaking contribution), we observe that the gapped single-particle excitations completely dominate the thermodynamics for \( \tilde{T} \gtrsim 0.1 \). The curves intersect at a severely suppressed critical threshold of \( T \simeq 0.11 T_c \).
 
