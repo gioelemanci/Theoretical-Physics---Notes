@@ -1,0 +1,127 @@
+\chapter{boh}
+
+ [...]
+
+\section{The Ising Model}
+
+lattice, spins, hamiltonian, external coupling term, internal coupling term (interaction), energy configuations\TODO{arrows on a lattice}
+
+The partition function is defined by
+\[
+    \dots
+\]
+
+We are now interested to study strongly correlated systems, where the interaction term is not negligible. In particular, are interested in the \textbf{critical behavior} of the system, which is characterized by a phase transition (second order) at a critical temperature $T_c$. The critical behavior is characterized by the divergence of the correlation length $\xi$ and the susceptibility $\chi$ as $T \to T_c$. We are not interested in first order phase transitions, which are characterized by a discontinuity in the first derivative of the free energy (latent heat) and a finite correlation length at the transition. We will be interested in second and infinite order phase transitions.
+
+\begin{remark}[Lattice QCD]
+    The natural way to regularize QFT is to put it on a lattice, which is the basis of lattice QCD. The Ising model is a toy model for lattice QCD, where the spins are replaced by quarks and the interaction term is replaced by the gauge field. The Ising model is a classical model, while lattice QCD is a quantum model. The lattice naturally introduces a cutoff, which is the lattice spacing. The continuum limit is obtained by taking the lattice spacing to zero, which corresponds to taking the cutoff to infinity.
+\end{remark}
+
+There is spontaneous symmetry breaking in the Ising model, which is characterized by a non-zero magnetization below the critical temperature. The hamiltonian is invariant under a global $\mathbb{Z}_2$ symmetry (if we neglect the external field), which is spontaneously broken below the critical temperature. The order parameter is the magnetization, which is zero above the critical temperature and non-zero below the critical temperature, where the system chooses one of the two degenerate ground states. The critical exponents characterize the behavior of the order parameter and the correlation length near the critical temperature.
+
+There is no local order parameter in the Ising model, only global information about the system.\footnote{An order parameter is an observable that is zero in one phase and non-zero in another phase, which characterizes the phase transition. A local order parameter is an order parameter that is defined at each point in space, while a global order parameter is an order parameter that is defined for the whole system. The magnetization is a global order parameter, and if we have to build a local one we have to seek for a finite supported operator (it does not need information from the whole system to be defined) that is non-zero in one phase and zero in another phase.}
+
+Using a topological description of the system, we can arrive to a lattice gauge theory, which is a quantum model. The Ising model is a classical model, while the lattice gauge theory is a quantum model. The lattice gauge theory is a generalization of the Ising model, where the spins are replaced by qubits and the interaction term is replaced by a gauge field. (Kitaev's toric code is a lattice gauge theory, which is a quantum model that exhibits topological order.) The topological order is characterized by a ground state degeneracy that depends on the topology of the system, and by the presence of anyons, which are quasiparticles that obey fractional statistics. The topological order is a global property of the system, which is not captured by local order parameters.
+
+Integer quantum Hall effect, topological response of the system: robust to perturbations... topological information is preserved under continuous deformations of the system. The topological information is encoded in the ground state wavefunction, which is a global property of the system. The topological information is robust to perturbations, which is a consequence of the gap in the spectrum of the system. Topological quantum computing is a way to encode information in the topological properties of the system, which is robust to perturbations.
+
+We are going tostudy the Ising model in different regimes, theoretically and numerically. after studying the classical Ising model, we will study its quantized version, and in order to do that we will need to use and understand different methods (mean field theory, renormalization group, Monte Carlo simulations, etc.) to study the Ising model in different regimes. We will also study the Ising model in different dimensions, and we will see that the critical behavior is different in different dimensions. We will study the duality of the Ising model, which is a powerful tool to study the critical behavior of the system.
+
+\subsection{1D Ising Model}
+
+We are going to study the free energy and its discontinuities, given by the partition function, which is defined in \TODO{add label}.
+
+So the free energy is given by
+\[
+    F = - \lim_{N \to \infty} \frac{k_B T}{N} \log \mathcal{Z},
+\]
+where \(k_B = 1.38 \times 10^{-23} \, \text{J/K}\) is the Boltzmann constant, \(T\) is the temperature, \(N\) is the number of spins, and \(\mathcal{Z}\) is the partition function. The free energy is a thermodynamic potential that characterizes the equilibrium properties of the system. The discontinuities in the free energy correspond to phase transitions, which are characterized by a change in the order parameter.
+
+\subsubsection{Transfer Matrix Method}
+
+We can rewrite the partition function in terms of a transfer matrix, which is a matrix that encodes the interactions between neighboring spins:
+\[
+    \begin{aligned}
+        \mathcal{Z} & = \sum_{\sigma_N = \pm 1} \sum_{\sigma_{N-1} = \pm 1} \dots \sum_{\sigma_1 = \pm 1} e^{-\beta H(\sigma_1, \sigma_2, \dots, \sigma_N)}                                       \\
+                    & = \sum_{\sigma_N = \pm 1} \sum_{\sigma_{N-1} = \pm 1} \dots \sum_{\sigma_1 = \pm 1} T_{\sigma_N, \sigma_{N-1}} T_{\sigma_{N-1}, \sigma_{N-2}} \dots T_{\sigma_2, \sigma_1},
+    \end{aligned}
+\]
+where \(T\) is the \(2\times 2\) transfer matrix, which is defined by
+\[
+    T_{\sigma_i, \sigma_{i-1}} = e^{-\beta H(\sigma_i, \sigma_{i-1})}, \quad \begin{pmatrix}
+        e^{\beta J}   & e^{- \beta J} \\
+        e^{- \beta J} & e^{\beta J}
+    \end{pmatrix}.
+\]
+Using this formalism, we can write the partition function as a product of transfer matrices and then take the trace to obtain
+\[
+    \mathcal{Z} = \text{Tr}(T^N).
+\]
+So the whole problem reduces to finding the eigenvalues of the transfer matrix \(T\). The eigenvalues of \(T\) are given by its diagonalization, which is a standard linear algebra problem. We can compute them as follows:
+\[
+    \begin{aligned}
+        \det(T - \lambda I) = 0, \\
+        (e^{\beta J} - \lambda)^2 - (e^{- \beta J})^2 = 0,
+    \end{aligned}
+\]
+which implies that the eigenvalues are
+\[
+    \begin{cases}
+        \lambda_+ = e^{\beta J} + e^{- \beta J} = 2 \cosh(\beta J), \\
+        \lambda_- = e^{\beta J} - e^{- \beta J} = 2 \sinh(\beta J).
+    \end{cases}
+\]
+So in the end we have that the partition function is given by
+\[
+    \mathcal{Z} = \lambda_+^N + \lambda_-^N,
+\]
+such that the free energy is given by
+\[
+    F = - k_B T \lim_{N \to \infty} \frac{1}{N} \log(\lambda_+^N + \lambda_-^N) = - k_B T \log \lambda_+ = - k_B T \log(2 \cosh(\beta J)),
+\]
+since the term \(\lambda_-^N\) is negligible in the thermodynamic limit \(N \to \infty\). The free energy is a smooth function of the temperature, in the form of a logarithm of a positive and continuous function, so it is continuous and differentiable. Therefore, there is no phase transition in the 1D Ising model, which is consistent with the fact that there is no spontaneous symmetry breaking in one dimension.
+
+\subsubsection{Correlation Functions}
+
+If we consider the connected correlation function between spins, we can compute it using the transfer matrix formalism. A simple computation shows that
+\[
+    \langle \sigma_1 \sigma_N \rangle = \left(\frac{\lambda_-}{\lambda_+}\right)^{N} = \left(\tanh(\beta J)\right)^{N} \sim e^{-N/\xi},
+\]
+where \(\xi\) is the correlation length, which is given by
+\[
+    \xi = -\frac{1}{\log(\tanh(\beta J))}.
+\]
+The correlation length is finite for any finite temperature, which implies that there is no long-range order in the 1D Ising model. The correlation length diverges only in the limit \(T \to 0\), which corresponds to the ground state of the system. Therefore, there is no phase transition in the 1D Ising model, which is consistent with the fact that there is no spontaneous symmetry breaking in one dimension.
+
+So in the 1D Ising model, the correlation length is finite for any finite temperature: the system does not exhibit a phase transition, and there it remains in a paramagnetic phase for any finite temperature. The system only exhibits a phase transition in the limit \(T \to 0\), where the correlation length diverges and the system becomes ordered. \TODO{add plot of correlation length vs temperature}
+\TODO{add plot of correlation function vs distance for different temperatures (log log)}
+
+\subsection{2D Ising Model}
+
+Different definitions of the 2D Ising model: square lattice, triangular lattice, Kagome lattice, etc.\TODO{image of ising on different lattices} The 2D Ising model exhibits a phase transition at a finite temperature \(T_c\), which is characterized by a divergence of the correlation length and the susceptibility. But does the lattice matter? If we imagine the spacing \(J\) of the lattices to be the same, then the critical temperature \(T_c\) is different for different lattices, but we wont go into that.
+
+Instead, let us imagine the triangular lattice, given two different spins in the bottom angles of the triangle, we can see that the spin in the top angle is \textit{frustrated}, since it cannot satisfy both interactions with the bottom spins. This is an example of \textbf{frustration}, which is a phenomenon that occurs in systems with competing interactions: the system cannot satisfy all interactions simultaneously, which leads to a degenerate ground state and a complex energy landscape. Frustration can lead to interesting phenomena, such as spin glasses, which are disordered magnetic systems with a complex energy landscape and slow dynamics. For now we are sticking to the square lattice, which is the simplest case, but we will see that on a triangular lattice the connection with QFT is more direct...
+
+\subsubsection{Exact Onsager Solution}
+
+The 2D Ising model on a square lattice was solved exactly by Lars Onsager in 1944, using the transfer matrix method and the theory of Toeplitz determinants. The exact solution shows that the 2D Ising model exhibits a phase transition at a finite temperature \(T_c\), which is characterized by a divergence of the correlation length and the susceptibility.\TODO{add drawing of correlation length vs temperature} It is a second order phase transition, which is characterized by a continuous change in the order parameter and a divergence of the correlation length.
+
+Below the critical temperature, the system exhibits spontaneous symmetry breaking, which is characterized by a non-zero magnetization. The order parameter is the magnetization, which is zero above the critical temperature and non-zero below the critical temperature, where the system chooses one of the two degenerate ground states.
+
+\subsubsection{Peierl's Argument}
+
+Imagine to put a domain wall in the system, which is a line that separates two regions with different magnetization: in 1D imagine a line that separates two regions with different magnetization, one of all \(\uparrow\) and the other of all \(\downarrow\). The energy cost of creating a domain wall is proportional to its length, which is given by \(E \sim J \ell\), where \(\ell\) is the length of the domain wall. The entropy associated with the domain wall is proportional to its length, which is given by \(S \sim k_B \ell\). So the domain wall gives a contribution to the free energy and one to the entropy:\TODO{wrong computations, check}
+\[
+    \Delta F = \Delta E - T \Delta S \sim J \ell - k_B T \ell = \ell (J - k_B T).
+\]
+As we take the TD limit in 1D we will have
+\[
+    \Delta F \sim \ell (J - k_B T) \to -\infty,
+\]
+which implies that the domain wall is favorable and the system will be always disordered: no phase transition and always in a paramagnetic phase.
+
+If we try to promote the argument to 2D, we will have an energy cost of creating a domain wall that is proportional to its length, which is given by \(E \sim J \ell\), where \(\ell\) is the length of the domain wall. The entropy associated with the domain wall is proportional to its area, which is given by \(S \sim k_B \ell^2\). So the domain wall gives a contribution to the free energy and one to the entropy:
+\[
+    \Delta F = \Delta E - T \Delta S \sim J \ell - k_B T \ell^2 = \ell (J - k_B T \ell).
+\]
+As we take the TD limit in 2D we will have a region in which the domain wall is not favorable, which implies that the system can be ordered and exhibit a phase transition at a finite temperature \(T_c\). The Peierl's argument shows that the 2D Ising model exhibits a phase transition at a finite temperature \(T_c\), which is characterized by a divergence of the correlation length and the susceptibility. It is a second order phase transition, which is characterized by a continuous change in the order parameter and a divergence of the correlation length.\TODO{check computations of the whole subsubsection, add drawing of domain wall in 1D and 2D}
