@@ -1,4 +1,4 @@
-\chapter{boh}
+\chapter{Monte carlo and boh}
 
  [...]
 
@@ -125,3 +125,99 @@ If we try to promote the argument to 2D, we will have an energy cost of creating
     \Delta F = \Delta E - T \Delta S \sim J \ell - k_B T \ell^2 = \ell (J - k_B T \ell).
 \]
 As we take the TD limit in 2D we will have a region in which the domain wall is not favorable, which implies that the system can be ordered and exhibit a phase transition at a finite temperature \(T_c\). The Peierl's argument shows that the 2D Ising model exhibits a phase transition at a finite temperature \(T_c\), which is characterized by a divergence of the correlation length and the susceptibility. It is a second order phase transition, which is characterized by a continuous change in the order parameter and a divergence of the correlation length.\TODO{check computations of the whole subsubsection, add drawing of domain wall in 1D and 2D}
+
+
+
+
+
+
+
+\section{Motivation for Monte Carlo Methods}
+
+Speaking about the ising model, we have seen that the 1D case is exactly solvable, while the 2D case is exactly solvable only in the absence of an external field. In general, the Ising model is not exactly solvable in higher dimensions or in the presence of an external field. Therefore, we need to use numerical methods to study the Ising model in these cases.
+
+Even if the ising model is ideal and simple, its universal behavior is shared by many other systems, and therefore it is a good model to study the critical behavior of strongly correlated systems. The famous bootstrap program was developed with the aim of solving the 3D Ising model, which is not exactly solvable.
+
+In the ising model, studying its partition function we can notice that the number of configurations grows exponentially with the number of spins
+\[
+    \mathcal{Z} = \sum_{\{\sigma_i\}} e^{-\beta H(\{\sigma_i\})} \sim 2^N,
+\]
+where \(N\) is the number of spins. Even if we don't consider the simulation of the system but only the computation of the partition function, we can see that the number of configurations reaches astronomical numbers for a relatively small number of spins. For example, for \(N = 100\) spins, the number of configurations is \(2^{100} \sim 10^{30}\), which is larger than the number of atoms in the observable universe, orders of magnitude more data than what we can store in a computer. Therefore, we need to use numerical methods to study the Ising model in these cases.
+
+Speaking about \(P \neq NP\) problems, we can see that the Ising model is a \(NP\) problem, since we can verify a solution in polynomial time, but we cannot find a solution in polynomial time. The Ising model is a combinatorial optimization problem, which is a class of problems that are hard to solve but easy to verify.
+
+An attempt to address these problems was made by Metropolis et al. in 1953, who developed the Metropolis algorithm, which is a Monte Carlo method that allows to sample configurations of the system according to the Boltzmann distribution. The Metropolis algorithm is a Markov chain Monte Carlo method, which means that it generates a sequence of configurations that are correlated with each other, but the correlation decays exponentially with the number of steps.
+
+It was a revolution in how peaple conceaved mathematics: machine started to be used to solve problems that were not solvable analytically, and the Monte Carlo method was a way to use random numbers to solve problems that were not solvable deterministically.
+
+computing partition function in low temperature limit... organizing principle... probability theory...
+
+\subsection{Sampling a Probability Distribution}
+
+Mean and variance, finite number of samples
+
+good estimator of the mean is the average
+
+a good estimator of the variance is the ``error'', final formula... we can trust the error iff the \(A_i\) are uncorrelated.
+
+\subsection{Hit or Miss: Evaluating the Area of a Circle}
+
+[...]\TODO{draw unit circle inscribed in a square, with random points inside the square, some in the circle and some outside the circle.}
+
+\subsubsection{Estimator for the Average}
+
+[...]
+
+\subsubsection{Confidence Interval for the Average}
+
+computation, check professor and notes
+
+the distribution may not be gaussian, but the central limit theorem guarantees that the distribution of the average is gaussian, and therefore we can use the standard deviation to compute the confidence interval for the average.
+
+independence of observations is eady to achive in laboratory experiments, but in numerical simulations it is not easy to achieve, since the configurations are correlated with each other. The problem of how to generate uncorrelated configurations is a central problem in Monte Carlo simulations, and it is addressed by using Markov chain Monte Carlo methods, which generate a sequence of configurations that are correlated with each other, but the correlation decays exponentially with the number of steps.
+
+\subsection{Direct Sampling}
+
+integral...
+
+probability distribution...
+
+sampled function...
+
+simpson method... error of this methods scales as a power of the number of chunks in which we divide the integration domain, and the exponent depends on the dimensionality...
+
+integrals and sums are basically the same thing in this context, and we need to compute the partition function, which is a sum over an exponential number of configurations.
+
+for the case of the circle...
+
+this was an example of direct or homogeneus sampling, where we sample the whole domain of integration uniformly.
+
+\subsubsection{Failure of homogeneous sampling}
+
+[...]
+
+the choice of the sampling distribution is crucial for the efficiency of the Monte Carlo method, and it is a central problem in Monte Carlo simulations. The choice of the sampling distribution is a trade-off between the ease of sampling and the efficiency of the method. The ideal sampling distribution is the one that is proportional to the integrand, which minimizes the variance of the estimator, but it may be difficult to sample from this distribution.
+
+we can choose a pd which is similar to the integrand, but less explosive, and we can use importance sampling to correct for the difference between the sampling distribution and the integrand...
+
+A smart choice of the sampling distribution is one that makes the sample function as smooth as possible, which minimizes the variance of the estimator. This means we want to transfer as much of the complexity of the integrand to the sampling distribution, which is a trade-off between the ease of sampling and the efficiency of the method.
+
+\subsubsection{Motivation for Markov Chain Monte Carlo}
+
+We can imagine to substitute the distribution with program sampling a sequence of configurations that are correlated with each other, by letting him move to the points in which the function is larger, and therefore the sampling distribution is similar to the integrand. This is the idea behind Markov chain Monte Carlo methods, but the correlation between the configurations is a problem, since it introduces a bias in the estimator.
+
+We need to find a way to select a chain which is representative of the distribution, and we need to find a way to decorrelate the configurations, which is a central problem in Monte Carlo simulations. The problem of how to generate uncorrelated configurations is addressed by using Markov chain Monte Carlo methods, which generate a sequence of configurations that are correlated with each other, but the correlation decays exponentially with the number of steps.
+
+\section{Markov Chain Monte Carlo}
+
+One possibility to sample a probability distribution is to engineer a chain of events spanning the L-dimensional configuration target space: ...
+
+    [...]
+
+We need to find an algorithm that implements these ideas in a practical way, and we need to find a way to decorrelate the configurations, which is a central problem in Monte Carlo simulations.
+
+\subsection{Transition Matrix}
+
+[...]
+
+rewriting the probability as products of transition matrices does not guarantee that each step have memory only of the previous step, since the transition matrix may depend on the whole history of the chain. We need to find a way to construct a transition matrix that depends only on the current configuration, which is a central problem in Markov chain Monte Carlo methods.
