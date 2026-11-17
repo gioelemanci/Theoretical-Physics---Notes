@@ -1,8 +1,8 @@
-\chapter{Monte carlo and boh}
+\chapter{Monte Carlo Methods}
 
  [...]
 
-\section{The Ising Model}
+\section{The Ising Model as a Toy Model}
 
 lattice, spins, hamiltonian, external coupling term, internal coupling term (interaction), energy configuations\TODO{arrows on a lattice}
 
@@ -221,3 +221,99 @@ We need to find an algorithm that implements these ideas in a practical way, and
 [...]
 
 rewriting the probability as products of transition matrices does not guarantee that each step have memory only of the previous step, since the transition matrix may depend on the whole history of the chain. We need to find a way to construct a transition matrix that depends only on the current configuration, which is a central problem in Markov chain Monte Carlo methods.
+
+    [...]
+
+\subsection{Markov Chains and Correlations}
+
+[...]
+
+\subsection{Master Equation}
+
+[...]
+
+\subsection{Proposal/Rejection Methods}
+
+[...]
+
+
+
+\section{MC Methods and Ising Model}
+
+ [...]
+
+ [...]
+
+\subsection{Monte Carlo Step and Algorithm}
+
+[...]
+
+\subsection{Correlations and Autocorrelation Time}
+
+[...]
+
+Is the series of event something we can consider stochastically independent or not? This is the main question we have to ask even before looking at the results of the simulation.
+
+    [...]
+
+    [--- Jupiter notebook with code and plots ---]
+
+\subsubsection{Critical Slowing Down}
+
+[...]
+
+figure 4...
+
+simulating low temperature: the minimal energy configurations... simulating high temperature: all the configurations are equally probable... simulating near the critical temperature: the system is critical and the correlation length diverges, which implies that the system is correlated over long distances and the configurations are correlated with each other... self similarity...
+
+\begin{example}[Magnetization Domains]
+
+    At the critical point, domains appear of any size, and the system is self-similar. The correlation length diverges, and the system exhibits long-range correlations.
+
+        [...]
+
+\end{example}
+
+[Wolff algorithm jupyter notebook with code and plots, different temperatures and configurations...]
+
+\section{Advanced Monte Carlo Methods}
+
+introduction, processors invention and first scientist use, overcoming the limitations of the Metropolis algorithm and critical slowing down, we want something that scales as \(L^z\) where \(z\) is as small as possible, and we want to decorrelate the configurations as much as possible, which is a central problem in Monte Carlo simulations.
+
+two papers: Swendsen-Wang and Wolff, which are cluster algorithms that overcome the limitations of the Metropolis algorithm and critical slowing down. The Swendsen-Wang algorithm is a cluster algorithm that updates clusters of spins simultaneously, while the Wolff algorithm is a cluster algorithm that updates a single cluster of spins at a time.
+
+\subsection{Cluster Algorithms}
+
+self similarity was known, we want to recognize clusters of spins that are correlated with each other, and we want to update them simultaneously, which is the idea behind cluster algorithms.
+
+Cluster algorithms updates has to respect detailed balance (fraction of probabilities equal to fraction of reverse transitions) and ergodicity (the ability to reach all possible states), which are the two conditions that guarantee that the Markov chain converges to the target distribution.
+
+    [...]
+
+\subsubsection{Swendsen-Wang Algorithm}
+
+brief review of the algorithm, fortuin-kasteleyn bond percolation, potts model, very brief professor skipped it
+
+\subsection{Wolff Algorithm}
+
+intro and steps... \TODO{add image of the algorithm}
+
+ergodicity from the fact that single spin flips are the building blocks of the algorithm, and we can reach any configuration by flipping single spins...
+
+\subsubsection{Detailed Balance}
+
+[...]
+
+energy difference between two configurations is how much we have deformed the boundary of the cluster... boundary energy, proportional to \(\beta J\)...
+
+at high temperature, \(p_{add} =0\) it becomes single spin flip, at low temperature \(p_{add} = 1\) it becomes a global flip, and in between it is a cluster flip, which is the idea behind the Wolff algorithm. furthermore it is very efficient, the cost is proportional to the size of the cluster.
+
+We want to show if it is able to decorrelate the configurations, and we want to show that it is able to overcome critical slowing down, which is a central problem in Monte Carlo simulations.
+
+Jupiter notebook with code and plots... at low temperature, the system is ordered and the clusters are large, flipping at every step globally and as the temperaturs decreases the residual clusters inside the ferromagnetic domains are flipped, and they become all aligned with the rest of the domain... at the critical point cluster of any size appear, and the system is self-similar, and the clusters are flipped at every step, and the system decorrelates very fast... at high temperature, the system is disordered and the clusters are small, flipping at every step locally and as the temperature increases the residual clusters inside the paramagnetic domains are flipped, and they become all random uncorrelated spins...
+
+\subsubsection{Autocorrelation Time}
+
+for both energy and magnetization, as function of system size, it grows as \(L^{\sim 0.25}\), so we have improvenment over the Metropolis algorithm, which grows as \(L^{\sim 2.1}\), and we have overcome critical slowing down, which is a central problem in Monte Carlo simulations. our goal is \(L \gg \xi \gg 1\).
+
+This is not only a computational tool, this is a way of thinking about physical systems, and it is a way to understand the critical behavior of strongly correlated systems.
