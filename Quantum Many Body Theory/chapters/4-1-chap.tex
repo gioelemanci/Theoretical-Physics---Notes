@@ -1,3 +1,109 @@
-\chapter{Boh}
+\section{structure of the second part of the course}
 
  [...]
+
+ising landscape as a mother theory of the second part of the course
+
+- MCMC as a methodology to explore the landscape
+
+- path integrals - partition functions as quantum D and classical D+1 equivalence
+
+- we are going to solve the 1D quantum Ising model using fermionization and look into phase transitions
+
+- kramers-wannier duality
+
+    [...]
+
+useful exercise is to compute the full partition function for a 2 site ising model in 1D and then again in the slice reference frame
+
+
+\chapter{1D Quantum Ising Model}
+
+hamiltonian and spins on the 1D line drawing
+
+be careful that in the classical 2D analogy the coupliings are strong in the time direction and weak in the space direction, strongly anisotropic
+
+we set h=0 and J>1 ferromagnetic, the minimum energy configuration is all spins up or all spins down, then there is a manifold of states at -J(l-4) with 2 domain walls (1 spin flipped = 3 contiguous spin flips)
+
+the step in between is with 1 domain wall, which has only one contribution to energy from one stressed bond
+
+if we add a small h, then there is some exponentially suppressed degeneracy in energy among configurations which were equivalent at h=0
+
+in the case in which we have J=0 and h>0, then the minimum energy configuration is all spins left (right depending on the sign of h), and the first excited state is a single spin flip, which has an energy cost of 2h, but now it does not matter how we spin the flips, each flip we add contributes 2h to the energy
+
+the interesting feature is the competition between the two terms in the Hamiltonian, which leads to a phase transition at some critical value of h/J. we want a diagram for the ground state which shows this interplay between the two terms
+
+option 1: everithing is trivial.
+option 2: these two are the only possible phases.
+option 3: there are many more phases non appearing in the perturbative treatment.
+so we want to undesrtand how many phases and transitions there are, and what is the nature of the transitions.
+
+\subsection{Symetries}
+
+the model is spin inversion symmetric (the \(\sigma^x\) does not care, but \(\sigma^z\) does)
+
+there is a generalized symmetry which is the kramers-wannier duality (born for the classical 2d model, but naturally extends to the quantum case), which is a mapping between the strong and weak coupling regimes of the model.
+
+we define new operators:
+\[
+    \mu^x_{i+1/2} = \sigma^z_i \sigma^z_{i+1}, \quad \mu^z_{i+1/2} = \prod_{j\leq i} \sigma^x_j
+\]
+while \(\mu^x\) is a local operator, \(\mu^z\) is non-local, but it is still a valid operator in the Hilbert space of the model. The new operators satisfy the same algebra as the original spin operators, and we can rewrite the Hamiltonian in terms of these new operators.
+
+both of the spectrum of the new operators are \(\{\pm 1\}\)
+
+both mu operators square to the identity (computation), a property satisfied also by the original spin operators.
+this property is satisfied also by the parity operator, which is the product of all \(\sigma^x\) operators:
+\[
+    P = \prod_i \sigma^x_i = \mu^z_{L+1/2}
+\]
+if we consider PBC.
+
+We want to know if these new operators respects the same commutation and anticommutation relations as the original spin operators (pauli matrices).
+
+\[
+    \left\{\mu^x_{i+1/2}, \mu^z_{i+1/2}\right\} = \left\{\sigma^z_i \sigma^z_{i+1}, \prod_{j\leq i} \sigma^x_j\right\} = \dots  = 0
+\]
+\[
+    \left[ \mu^x_{i+1/2}, \mu^z_{i+1/2} \right] = \left[ \sigma^z_i \sigma^z_{i+1}, \prod_{j\leq i} \sigma^x_j \right] = \dots
+\]
+This implies that in the space of the mus they act as Pauli matrices, and we can rewrite the Hamiltonian in terms of these new operators.
+
+the mu hilbert space is strange, i+1/2 is overlapping with i-1/2, but they still commute... computation ... another anticommutator...
+
+lets try to investigate the physical meaning of the mu operators.
+\[
+    \mu^z_{i+1/2} \ket{\uparrow \uparrow \cdots \uparrow} = \ket{\downarrow \downarrow \cdots \downarrow \uparrow \uparrow \cdots \uparrow}
+\]
+it is a domain wall operator, it flips all the spins to the left of site i. instead
+\[
+    \mu^x_{i+1/2} \ket{\uparrow \uparrow \cdots \uparrow} = (+1)\ket{\uparrow \uparrow \cdots \uparrow} \quad \forall i
+\]
+but
+\[
+    \mu^x_{i+1/2} \ket{\uparrow \cdots \uparrow \downarrow \downarrow \cdots \downarrow} = (-1)\ket{\uparrow \cdots \uparrow \downarrow \downarrow \cdots \downarrow}
+\]
+domain wall operator, it measures the presence of a domain wall between sites i and i+1. we can thus define a counting operator for the number of domain walls in a given configuration:
+\[
+    N_{DW} = \sum_i \frac{1 - \mu^x_{i+1/2}}{2}
+\]
+
+Now we are going to rewrite H in terms of the mu operators. we need to find the correspondig term in mu for the two terms in sigma inside the hamiltonian
+\[
+    \sigma^z_i \sigma^z_{i+1} = \mu^x_{i+1/2},
+\]
+we already now this, is trivial. Now we need to find the corresponding term for the transverse field term: how can we docouple the \(\mu^z\) operator in order to remove all the products of \(\sigma^x\) operators? we can use the following identity:
+\[
+    \mu^z_{i-1/2} \mu^z_{i+1/2} = \prod_{j\leq i-1} \sigma^x_j \prod_{j\leq i} \sigma^x_j = \sigma^x_i
+\]
+such that the hamiltonian can be rewritten as:
+\[
+    H = -J \sum_{i} \mu^x_{i+1/2} - h \sum_i \mu^z_{i-1/2} \mu^z_{i+1/2}
+\]
+but the hamiltonian is the same as before, but with the couplings exchanged, and the mu operators instead of the sigma operators. This is the kramers-wannier duality, which maps the strong coupling regime of the model to the weak coupling regime, and vice versa. This is a self-duality for the point in which the couplings are equal, and it is a strong indication that there is a phase transition at this point.
+
+at small h the excitations (DW) are betters described in terms of the mu operators, while at small J the excitations (spin flips) are better described in terms of the sigma operators. The duality allows us to map the two regimes to each other, and to understand the nature of the phase transition. since the J=h self dual point is the only point which is mapped to itself, it is a strong indication that the phase transition occurs at this point.
+
+this duality transfomation is non invertible, since the mu operators are non local in terms of the sigma operators, and vice versa. with open boundary conditions, the duality transformation is invertible, but with periodic boundary conditions it is not. This is a consequence of the fact that the mu operators are defined on the bonds between the sites, and with periodic boundary conditions there is an ambiguity in the definition of the mu operators at the boundary.
+
+the hilbert space of the ising model is bipartite for parity, since the hamiltonian commutes with the parity operator, and the parity operator has eigenvalues \(\pm 1\). The hilbert space can be decomposed into two subspaces, one with even parity and one with odd parity. if we compare the two rings for a 1d pbc system, the product of first and last \(\mu^z\) is equal to the product of all \(\sigma^x\), which is the parity operator. This means that the hamiltonian contains the parity operator, and thus the two subspaces are not independent, but they are coupled by the hamiltonian. with careful computation one can show tha the even parity sector fro sigma is mapped into the even parity sector for mu with pbc, and the odd parity sector for sigma is mapped into the odd parity sector for mu BUT with apbc.
